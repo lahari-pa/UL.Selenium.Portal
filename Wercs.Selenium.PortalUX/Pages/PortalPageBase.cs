@@ -18,5 +18,9 @@ namespace Wercs.Selenium.PortalUX.Pages
 		{
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether the page is presently locked by a popup.
+		/// </summary>
+		public bool IsLockedByPopup { get; set; }
 	}
 }

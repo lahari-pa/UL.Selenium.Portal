@@ -15,5 +15,16 @@ namespace Wercs.Selenium.PortalUX.Tests.Account
 			var loginPage = Driver.GoTo<LoginPage>(LoginPage.GetUrl());
 			Assert.AreEqual(expectedText, loginPage.WercSmartLogoText.Text);
 		}
+
+		[TestMethod]
+		public void VerifyCanClickButton()
+		{
+			var loginPage = Driver.GoTo<LoginPage>(LoginPage.GetUrl());
+			Assert.IsNotNull(loginPage.LoginButton);
+
+			var result = loginPage.LoginButton.Click();
+
+			Assert.IsNotNull(result);
+		}
 	}
 }
