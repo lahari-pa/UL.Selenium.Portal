@@ -1,0 +1,46 @@
+﻿@LandingPage
+@Signup
+@wercsmart
+@Homepage
+@run_LandingPage
+
+Feature: Landing Page
+
+Scenario: [50769] Navigation
+#Given I navigate to the URL: https://50.59.136.185/ThirdPartyLanding/
+Then I should see the following menu options in the header:
+| Option        |
+| Manufacturers |
+| Retailers     |
+| Subscription  |
+Given I select the Manufacturers link 
+Then I confirm I am taken to the Manufacturers page
+Given I select the Retailers link 
+Then I confirm I am taken to the Retailers page
+Given I select the Subscription link 
+Then I confirm I am taken to the Subscription page
+
+Scenario: [50770] Sign Up Link
+Given I select the Sign Up link
+Then the signup page should appear
+
+Scenario: [50771] Login Button
+Given I go to the WERCSmart Log in
+Then the login page should appear
+When I click outside of the login popup
+Then the login page should dissappear
+
+Scenario: [59830] TimeOut Feature
+Given I login as the administrator
+Then the WERCSmart homepage should load
+Given I stay on the homepage with no activity until the inactivity popup appears
+# are you still active message appears
+Then Click Yes on the inactivity popup
+# popup goes away
+And the WERCSmart homepage should be loaded
+Given I stay on the homepage with no activity until the inactivity popup appears
+# are you still active message appears
+Then Click No on the inactivity popup
+# You are logged out of the site
+And the landing page should load
+
