@@ -197,29 +197,68 @@ testRunner.When("I click on the link I should see the WERCSmart new account page
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[50835] Forgot Password - Email Validation")]
+        public virtual void _50835ForgotPassword_EmailValidation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50835] Forgot Password - Email Validation", ((string[])(null)));
+#line 52
+this.ScenarioSetup(scenarioInfo);
+#line 12
+this.FeatureBackground();
+#line 53
+testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
+testRunner.When("I click the continue button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 55
+testRunner.Then("In the Forgotten Password window I should see the following error messages: Email" +
+                    " address is required", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 56
+testRunner.Given("I generate a new email address for user saved as EmailValidation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
+testRunner.And("I enter the email address for user saved as: EmailValidation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+testRunner.When("I click the continue button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 59
+testRunner.Then("there should not be a new email for user: EmailValidation from: WERCSmartCustomer" +
+                    "@ul.com with the title: WERCSmart Password Reset", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 60
+testRunner.Then("In the Forgotten Password window I should see the following error messages: Email" +
+                    " not updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 61
+testRunner.Given("I enter a email address: badlyformatted@nopostext", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 62
+testRunner.When("I click the continue button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 63
+testRunner.Then("In the Forgotten Password window I should see the following error messages: Forma" +
+                    "t validation error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Forgot Password - Registered Email")]
         public virtual void ForgotPassword_RegisteredEmail()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Forgot Password - Registered Email", ((string[])(null)));
-#line 54
+#line 67
 this.ScenarioSetup(scenarioInfo);
 #line 12
 this.FeatureBackground();
-#line 55
+#line 68
 testRunner.Given("I login as the administrator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 56
+#line 69
 testRunner.Given("I logout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 58
+#line 70
 testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 59
+#line 71
 testRunner.And("I click the next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
+#line 72
 testRunner.Then("I should remain on the Forgotten Password dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 61
+#line 73
 testRunner.Given("I enter a email address: Thisemail@email.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 62
-testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 74
+testRunner.And("I click the continue button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
 testRunner.Then("I should see a confirmation message saying: Please check your email to get instru" +
                     "ctions on how to reset your password.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -231,17 +270,17 @@ testRunner.Then("I should see a confirmation message saying: Please check your e
         public virtual void ForgotPassword_UnregisteredEmail()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Forgot Password - Unregistered Email", ((string[])(null)));
-#line 65
+#line 77
 this.ScenarioSetup(scenarioInfo);
 #line 12
 this.FeatureBackground();
-#line 66
+#line 78
 testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 67
+#line 79
 testRunner.Given("I enter a unregistered email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 68
-testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
+#line 80
+testRunner.And("I click the continue button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 81
 testRunner.Then("I should see a error message saying: Your username or password is either missing " +
                     "or entered correctly. Please correct your entries and try again.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -253,17 +292,17 @@ testRunner.Then("I should see a error message saying: Your username or password 
         public virtual void ForgotPassword_BadlyFormattedEmail()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Forgot Password - Badly Formatted Email", ((string[])(null)));
-#line 71
+#line 83
 this.ScenarioSetup(scenarioInfo);
 #line 12
 this.FeatureBackground();
-#line 72
+#line 84
 testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 73
+#line 85
 testRunner.Given("I enter a invalid email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 74
-testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
+#line 86
+testRunner.And("I click the continue button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 87
 testRunner.Then("I should see a error message saying: Email is not valid.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -274,21 +313,21 @@ testRunner.Then("I should see a error message saying: Email is not valid.", ((st
         public virtual void ForgotPassword_ResetPassword()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Forgot Password - Reset Password", ((string[])(null)));
-#line 77
+#line 89
 this.ScenarioSetup(scenarioInfo);
 #line 12
 this.FeatureBackground();
-#line 78
+#line 90
 testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 79
+#line 91
 testRunner.Given("I enter a registered email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 80
-testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
+#line 92
+testRunner.And("I click the continue button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 93
 testRunner.Then("in the recieved email I should see the title: WERCSmart Password Reset", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 82
+#line 94
 testRunner.And(@"the body of the email should show: Dear WERCSmart User, You recently requested to reset the password associated with your account. Please click on the link to reset your password. This link will expire in 30 minutes. If you did not request to have your password reset, immediately contact Support at +1 (877) 642-6753. Thank you. WERCSmart Support", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 95
 testRunner.When("I click the link in the email I get directed to security questions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
