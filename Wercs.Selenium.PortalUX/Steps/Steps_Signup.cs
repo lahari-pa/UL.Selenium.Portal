@@ -64,12 +64,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I enter signup email for user: (.*)")]
-		public void GivenIEnterSignupEmail(string SavedAs)
+		public void GivenIEnterSignupEmail(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter sign up email for user: " + SavedAs);
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter sign up email for user: " + savedAs);
 			try
 			{
-				var User = (User)Context.GetFromContext(SavedAs);
+				var User = (User)Context.GetFromContext(savedAs);
 				Report.Info("Entering email: '" + User.Email + "'");
 				var Sel_Signup = new Signup();
 				Sel_Signup.Enter_Email(User.Email);
@@ -83,12 +83,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I confirm signup email for user: (.*)")]
-		public void GivenIConfirmSignupEmail(string SavedAs)
+		public void GivenIConfirmSignupEmail(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter confirm sign up email for user: " + SavedAs);
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter confirm sign up email for user: " + savedAs);
 			try
 			{
-				var User = (User)Context.GetFromContext(SavedAs);
+				var User = (User)Context.GetFromContext(savedAs);
 				Report.Info("Entering email: '" + User.Email + "'");
 				var Sel_Signup = new Signup();
 				Sel_Signup.Enter_ConfirmEmail(User.Email);
@@ -153,12 +153,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I save the current emails in the inbox for user saved as: (.*)")]
-		public void GivenISaveTheCurrentEmailsInTheInboxFor(string SavedAs)
+		public void GivenISaveTheCurrentEmailsInTheInboxFor(string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I save the current emails in this inbox so I can locate the new one when it arrives");
 			try
 			{
-				var User = (User)Context.GetFromContext(SavedAs);
+				var User = (User)Context.GetFromContext(savedAs);
 				Report.Info("Storing inbox for address: " + User.Email);
 				EmailFunctions.StoreCurrentInbox(User.Email);
 				Report.Success("Inbox stored successfully!");
@@ -171,16 +171,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"there (should|should not) be a new email for user: (.*) from: (.*) with the title: (.*)")]
-		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string ShouldOrNot, string SavedAs, string EmailFrom, string Title)
+		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + SavedAs + " from " + EmailFrom + " with title: " + Title);
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
-				var User = (User)Context.GetFromContext(SavedAs);
+				var User = (User)Context.GetFromContext(savedAs);
 				if (EmailFunctions.WaitForInboxDifferences(User.Email))
 				{
 					var Differences = EmailFunctions.GetInboxDifferences(User.Email);
-					var MatchingEmail = Differences.FirstOrDefault(x => x.From.FirstOrDefault().Address == EmailFrom && x.Subject == Title);
+					var MatchingEmail = Differences.FirstOrDefault(x => x.From.FirstOrDefault().Address == emailFrom && x.Subject == title);
 
 					using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
 					{
@@ -191,7 +191,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 					Context.AddToContext("Matching", MatchingEmail);
 
-					if (ShouldOrNot == "should")
+					if (shouldOrNot == "should")
 					{
 						Report.IsTrue(MatchingEmail != null, "A matching email has not been found.", "Email with subject: " + MatchingEmail.Subject + " and body: " + MatchingEmail.Text + " has been found.");
 					}
@@ -203,7 +203,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 				else
 				{
-					if (ShouldOrNot == "should not")
+					if (shouldOrNot == "should not")
 					{
 						Report.Success("As expected, no email has been received");
 					}
