@@ -387,6 +387,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I click on Login")]
+		public void WhenIClickOnLogin()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I Click Login");
+			try
+			{
+				var selSignUp = new Signup();
+				selSignUp.Click_Login_On_Sign_Up_Thank_You_Page();
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 		[StepDefinition(@"I create a user account with the following parameters saved as: (.*)")]
 		public void CreateNewStandardAccount(string savedAs, Table parameters)
 		{

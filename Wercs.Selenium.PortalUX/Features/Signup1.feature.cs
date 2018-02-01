@@ -207,6 +207,10 @@ testRunner.And("I enter the following into the Security Questions window for use
 testRunner.And("I enter the pin: for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 58
 testRunner.When("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 59
+testRunner.And("I click on Login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 60
+testRunner.And("I login into the WERCSmart Portal - userSavedAs:SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

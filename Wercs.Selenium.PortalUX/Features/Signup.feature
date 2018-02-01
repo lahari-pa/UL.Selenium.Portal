@@ -56,5 +56,8 @@ Then I should be on the Security questions page of the form
 And I enter the following into the Security Questions window for user saved as: SignupUser
 And I enter the pin: for user saved as: SignupUser
 When In the new user form I click on continue
+And I click on Login
+And I login into the WERCSmart Portal - userSavedAs:SignupUser
+
 
 
