@@ -2,11 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Wercs.Selenium.PortalUX.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="BaseURL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://50.59.136.185/dbSplit/DEV/Wercs.SHA.MVCWebV1/</Value>
-    </Setting>
     <Setting Name="Browser" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Chrome</Value>
+    </Setting>
+    <Setting Name="BaseURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/</Value>
     </Setting>
   </Settings>
 </SettingsFile>

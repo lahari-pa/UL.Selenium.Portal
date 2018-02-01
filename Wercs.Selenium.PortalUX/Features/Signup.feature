@@ -25,9 +25,8 @@ Given I define the user: SignupUser with the following parameters:
 | State                | Florida        |
 | Zip                  | 999            |
 | CompanyName          | Company 1      |
-| CompanyPhone         | 123456789      |
-| CountryCode          | 0078           |
-| EmergencyPhoneNumber | 123456789      |
+| CompanyPhone         | 123-456-7889   |
+| EmergencyPhoneNumber | 123-456-7789   |
 | SupplierType         | Manufacturer   |
 | CityQuestion         | CityQuestion   |
 | CityHint             | CityHint       |

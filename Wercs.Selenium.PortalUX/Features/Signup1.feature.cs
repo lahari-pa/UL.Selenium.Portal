@@ -131,13 +131,10 @@ this.FeatureBackground();
                         "Company 1"});
             table1.AddRow(new string[] {
                         "CompanyPhone",
-                        "123456789"});
-            table1.AddRow(new string[] {
-                        "CountryCode",
-                        "0078"});
+                        "123-456-7889"});
             table1.AddRow(new string[] {
                         "EmergencyPhoneNumber",
-                        "123456789"});
+                        "123-456-7789"});
             table1.AddRow(new string[] {
                         "SupplierType",
                         "Manufacturer"});
@@ -176,39 +173,39 @@ this.FeatureBackground();
                         "1234"});
 #line 15
 testRunner.Given("I define the user: SignupUser with the following parameters:", ((string)(null)), table1, "Given ");
-#line 44
+#line 43
 testRunner.Given("I save the current emails in the inbox for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 45
+#line 44
 testRunner.Given("I click on the New to WERCSmart Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
+#line 45
 testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 47
+#line 46
 testRunner.Given("I enter signup email for user: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 48
+#line 47
 testRunner.And("I confirm signup email for user: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 48
 testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
+#line 49
 testRunner.Then("the signup thank you page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 51
+#line 50
 testRunner.Then("there should be a new email for user: SignupUser from: WERCSmartCustomer@ul.com w" +
                     "ith the title: Link to create WERCSmart Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 52
+#line 51
 testRunner.Then("the email should contain a link to set up the WERCSmart account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 53
+#line 52
 testRunner.When("I click on the link I should see the WERCSmart new account page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 54
+#line 53
 testRunner.And("I enter the information into the new user form for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 54
 testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 55
 testRunner.Then("I should be on the Security questions page of the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 57
+#line 56
 testRunner.And("I enter the following into the Security Questions window for user saved as: Signu" +
                     "pUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
+#line 57
 testRunner.And("I enter the pin: for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 59
+#line 58
 testRunner.When("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();

@@ -11,79 +11,79 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-    class Signup : BaseObject
-    {
-        public const string BasePath = "//div[@class='login-wrapper']";
-        [FindsBy(How = How.XPath, Using = BasePath)]
-        protected override IWebElement containerElement { get; set; }
+	class Signup : BaseObject
+	{
+		public const string BasePath = "//div[@class='login-wrapper']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
 
-        public void Enter_Email(string Email)
-        {
-            containerElement.FindElement(By.XPath("//input[@id='txtEmail']")).EnterText(Email, true,0.05);
-        }
+		public void Enter_Email(string email)
+		{
+			containerElement.FindElement(By.XPath("//input[@id='txtEmail']")).EnterText(email, true, 0.05);
+		}
 
-        public void Enter_ConfirmEmail(string Email)
-        {
-            containerElement.FindElement(By.XPath("//input[@id='txtConfirm']")).EnterText(Email, true,0.05);
-        }
+		public void Enter_ConfirmEmail(string email)
+		{
+			containerElement.FindElement(By.XPath("//input[@id='txtConfirm']")).EnterText(email, true, 0.05);
+		}
 
-        public bool Click_Submit()
-        {
-            try
-            {
-                containerElement.FindElements(By.XPath("//a")).FirstOrDefault(x => x.Text == "Submit").Click();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            
-        }
+		public bool Click_Submit()
+		{
+			try
+			{
+				containerElement.FindElements(By.XPath("//a")).FirstOrDefault(x => x.Text == "Submit").Click();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
 
-        public void Click_Cancel()
-        {
-            containerElement.FindElements(By.XPath("//a")).FirstOrDefault(x => x.Text == "Cancel").Click();
-        }
+		}
 
-        public bool Enter_Email_Error_Exists()
-        {
-            return (containerElement.FindElements(By.XPath("//p[@id='txtEmail_error']/span")).Count > 0);
-        }
+		public void Click_Cancel()
+		{
+			containerElement.FindElements(By.XPath("//a")).FirstOrDefault(x => x.Text == "Cancel").Click();
+		}
 
-        public string Get_Email_Error()
-        {
-            return containerElement.FindElements(By.XPath("//p[@id='txtEmail_error']/span"))[0].Text;
-        }
+		public bool Enter_Email_Error_Exists()
+		{
+			return (containerElement.FindElements(By.XPath("//p[@id='txtEmail_error']/span")).Count > 0);
+		}
 
-        public bool Confirm_Email_Error_Exists()
-        {
-            return (containerElement.FindElements(By.XPath("//p[@id='confirmEmail_error']/span")).Count > 0);
-        }
+		public string Get_Email_Error()
+		{
+			return containerElement.FindElements(By.XPath("//p[@id='txtEmail_error']/span"))[0].Text;
+		}
 
-        public string Get_Confirm_Email_Error()
-        {
-            return containerElement.FindElements(By.XPath("//p[@id='confirmEmail_error']/span"))[0].Text;
-        }
+		public bool Confirm_Email_Error_Exists()
+		{
+			return (containerElement.FindElements(By.XPath("//p[@id='confirmEmail_error']/span")).Count > 0);
+		}
 
-        public bool Sign_Up_Thank_You_Page_Exists(int SecondsToWait=30)
-        {
-            IWebElement element = element = containerElement.FindElement(By.XPath(".//div[@class='item active']//a[@class= 'btnL btn btn-success']"), 2);
+		public string Get_Confirm_Email_Error()
+		{
+			return containerElement.FindElements(By.XPath("//p[@id='confirmEmail_error']/span"))[0].Text;
+		}
 
-            int i = 0;
-            while (element == null && i < SecondsToWait)
-            {
-                Delay.Seconds(Delay.SpeedFactor * 1);
-                element = containerElement.FindElement(By.XPath(".//div[@class='item active']//a[@class= 'btnL btn btn-success']"), 2);
-                i++;
-            }
+		public bool Sign_Up_Thank_You_Page_Exists(int secondsToWait = 30)
+		{
+			IWebElement element = element = containerElement.FindElement(By.XPath(".//div[@class='item active']//a[@class= 'btnL btn btn-success']"), 2);
 
-            return element != null && element.Displayed;
-        }
+			int i = 0;
+			while (element == null && i < secondsToWait)
+			{
+				Delay.Seconds(Delay.SpeedFactor * 1);
+				element = containerElement.FindElement(By.XPath(".//div[@class='item active']//a[@class= 'btnL btn btn-success']"), 2);
+				i++;
+			}
 
-        public void Click_Login_On_Sign_Up_Thank_You_Page()
-        {
-            containerElement.FindElement(By.XPath("//div[@class='item active']//a[@class= 'btnL btn btn-success']")).Click();
-        }
-    }
+			return element != null && element.Displayed;
+		}
+
+		public void Click_Login_On_Sign_Up_Thank_You_Page()
+		{
+			containerElement.FindElement(By.XPath("//div[@class='item active']//a[@class= 'btnL btn btn-success']")).Click();
+		}
+	}
 }

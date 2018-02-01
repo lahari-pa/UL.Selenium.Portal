@@ -119,7 +119,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			set
 			{
-				Delay.Seconds(1);
+				Delay.Seconds(5);
 				Select_Country(value);
 				Report.Success("Entered country: " + value);
 			}

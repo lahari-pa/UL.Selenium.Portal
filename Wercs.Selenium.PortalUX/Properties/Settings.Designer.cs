@@ -25,19 +25,19 @@ namespace Wercs.Selenium.PortalUX.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://50.59.136.185/dbSplit/DEV/Wercs.SHA.MVCWebV1/")]
-        public string BaseURL {
+        [global::System.Configuration.DefaultSettingValueAttribute("Chrome")]
+        public string Browser {
             get {
-                return ((string)(this["BaseURL"]));
+                return ((string)(this["Browser"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Chrome")]
-        public string Browser {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/")]
+        public string BaseURL {
             get {
-                return ((string)(this["Browser"]));
+                return ((string)(this["BaseURL"]));
             }
         }
     }
