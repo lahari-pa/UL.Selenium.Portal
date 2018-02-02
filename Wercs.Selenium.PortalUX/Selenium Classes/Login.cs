@@ -19,91 +19,91 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	    public void ClickOutside()
 	    {
-		    var el = containerElement.FindElement(By.XPath(".//div[contains(@class,'login-body')]"), 2);
-		    var ActionClass = new Actions(GlobalParameters.Browser.WebBrowser);
-		    ActionClass.MoveToElement(el,-100,-100).Click().Perform();
+		    var el = this.containerElement.FindElement(By.XPath("//div[contains(@class,'panel-body')]"), 2);
+		    var actionClass = new Actions(GlobalParameters.Browser.WebBrowser);
+		    actionClass.MoveToElement(el,-100,-100).Click().Perform();
 		}
 
-        public void Change_Language(string Language)
+        public void Change_Language(string language)
         {
 
-            var LanguageDropDown = containerElement.FindElement(By.XPath(".//div[@class='btn-group btn-language']"), 2);
-            if (LanguageDropDown == null)
+            var languageDropDown = this.containerElement.FindElement(By.XPath("//div[@class='btn-group btn-language']"), 2);
+            if (languageDropDown == null)
                 throw new Exception("Language Button container could not be found!");
-            var Button = LanguageDropDown.FindElement(By.XPath(".//button"), 2);
-            if (Button.Text.Trim() == Language)
+            var button = languageDropDown.FindElement(By.XPath(".//button"), 2);
+            if (button.Text.Trim() == language)
                 return;
 
-            Button.Click();
-            var SelectElement = LanguageDropDown.FindElements(By.XPath(".//ul//a"), 2).FirstOrDefault(x => x.Text == Language);
-            if(SelectElement==null)
+            button.Click();
+            var selectElement = languageDropDown.FindElements(By.XPath("//ul//a"), 2).FirstOrDefault(x => x.Text == language);
+            if(selectElement==null)
                 throw new Exception("Language not present in container!");
 
-            SelectElement.Click();
+            selectElement.Click();
         }
 
         public string Form_Header_Text()
         {
-            return containerElement.FindElement(By.XPath("//div[@id='loginModal']//div[@class='panel-body']/h3"), 2).Text;
+            return this.containerElement.FindElement(By.XPath("//div[@id='loginModal']//div[@class='panel-body']/h3"), 2).Text;
         }
 
         public string Email_Header_Text()
         {
-            return containerElement.FindElement(By.XPath(".//label[@for='loginEmail']"), 2).Text;
+            return this.containerElement.FindElement(By.XPath("//label[@for='loginEmail']"), 2).Text;
         }
 
         public string Password_Header_Text()
         {
-            return containerElement.FindElement(By.XPath(".//label[@for='loginPassword']"), 2).Text;
+            return this.containerElement.FindElement(By.XPath("//label[@for='loginPassword']"), 2).Text;
         }
 
         public string Forgotten_Password_Text()
         {
-            return containerElement.FindElement(By.XPath(".//a[@id='btnForgotPassword']"), 2).Text;
+            return this.containerElement.FindElement(By.XPath("//a[@id='btnForgotPassword']"), 2).Text;
         }
 
         public string Login_Button_Text()
         {
-            return containerElement.FindElement(By.XPath(".//form[@class='login-form']//button"), 2).Text;
+            return this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 2).Text;
         }
 
-        public string Email_Field
+        public string EmailField
         {
-            get { return containerElement.FindElement(By.XPath(".//input[@name='loginEmail']"), 2).Text; }
-            set { containerElement.FindElement(By.XPath(".//input[@name='loginEmail']"), 2).EnterText(value); }
+            get { return this.containerElement.FindElement(By.XPath("//input[@name='loginEmail']"), 2).Text; }
+            set { this.containerElement.FindElement(By.XPath("//input[@name='loginEmail']"), 2).EnterText(value); }
         }
 
-        public string Password_Field
+        public string PasswordField
         {
-            get { return containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2).Text; }
-            set { containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2).EnterText(value); }
+            get { return this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).Text; }
+            set { this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).EnterText(value); }
         }
 
         public void Click_Login()
         {
-            containerElement.FindElement(By.XPath(".//form[@class='login-form']//button"), 2).Click();
+			this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 2).Click();
         }
 
         public void Click_Forgotten_Password()
         {
-            IList<IWebElement> ListOfATags = containerElement.FindElements(By.XPath(".//form[@class='login-form']//a"));
-            ListOfATags.FirstOrDefault(x => x.Text == "Forgot your Password?").Click();
+            IList<IWebElement> listOfATags = this.containerElement.FindElements(By.XPath("//form[@class='login-form']//a"));
+            listOfATags.FirstOrDefault(x => x.Text == "Forgot your Password?").Click();
         }
 
         public void Click_New_To_Wercsmart()
         {
-            IList<IWebElement> ListOfATags = containerElement.FindElements(By.XPath(".//form[@class='login-form']//a"));
-            ListOfATags.FirstOrDefault(x => x.Text == "New to WERCSmart? Sign Up").Click();
+            IList<IWebElement> listOfATags = this.containerElement.FindElements(By.XPath("//form[@class='login-form']//a"));
+            listOfATags.FirstOrDefault(x => x.Text == "New to WERCSmart? Sign Up").Click();
         }
 
         public string Email_Validation()
         {
-            return containerElement.FindElement(By.XPath(".//p[@id='loginEmail_error']//span"), 2).Text;
+            return this.containerElement.FindElement(By.XPath("//p[@id='loginEmail_error']//span"), 2).Text;
         }
 
         public string Password_Validation()
         {
-            return containerElement.FindElement(By.XPath(".//p[@id='loginPassword_error']//span"), 2).Text;
+            return this.containerElement.FindElement(By.XPath("//p[@id='loginPassword_error']//span"), 2).Text;
         }
 
     }

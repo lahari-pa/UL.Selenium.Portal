@@ -16,11 +16,11 @@ namespace MySDS.SeleniumClasses
 {
 	public class Mailosaur
 	{
-		public bool Switch_Mailboxes(string mailbox_name)
+		public bool Switch_Mailboxes(string mailboxName)
 		{
-			Report.Info("Beginning Switch_Mailboxes, to " + mailbox_name);
+			Report.Info("Beginning Switch_Mailboxes, to " + mailboxName);
 
-			var myNav = new Mailosaur_Navigation();
+			var myNav = new MailosaurNavigation();
 
 			if (!myNav.Mailboxes_Click())
 			{
@@ -31,16 +31,16 @@ namespace MySDS.SeleniumClasses
 
 			Delay.Seconds(1 * Delay.SpeedFactor);
 
-			var myMail = new Mailosaur_Mailboxes();
+			var myMail = new MailosaurMailboxes();
 
-			if (!myMail.Go_To_Mailbox(mailbox_name))
+			if (!myMail.Go_To_Mailbox(mailboxName))
 			{
-				Report.Info("Failed to Navigate to Mailbox: " + mailbox_name);
+				Report.Info("Failed to Navigate to Mailbox: " + mailboxName);
 				Report.Screenshot();
 				return false;
 			}
 			Delay.Seconds(2 * Delay.SpeedFactor);
-			Report.Success(mailbox_name + " Opened");
+			Report.Success(mailboxName + " Opened");
 			Report.Screenshot();
 			return true;
 
@@ -48,12 +48,12 @@ namespace MySDS.SeleniumClasses
 		}
 
 
-		public bool Mailosaur_Expected_Links(string order, string expected_products)
+		public bool Mailosaur_Expected_Links(string order, string expectedProducts)
 		{
 			Report.Info("Beginning Gmail_Expected_Links");
-			Report.Info("Searching in Order: " + order + " for Products(s): " + expected_products);
+			Report.Info("Searching in Order: " + order + " for Products(s): " + expectedProducts);
 
-			var myInbox = new Mailosaur_Inbox();
+			var myInbox = new MailosaurInbox();
 
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
@@ -65,12 +65,12 @@ namespace MySDS.SeleniumClasses
 				return false;
 			}
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
-			var myEmail = new Mailosaur_Email();
+			var myEmail = new MailosaurEmail();
 			Report.Info("Email Opened, Searching for Links");
-			List<string> ListOfProducts = expected_products.Split(',').ToList().Select(X => X.Trim()).ToList();
-			foreach (string Prod in ListOfProducts)
+			List<string> listOfProducts = expectedProducts.Split(',').ToList().Select(x => x.Trim()).ToList();
+			foreach (string prod in listOfProducts)
 			{
-				if (!myEmail.Link_Sent(Prod))
+				if (!myEmail.Link_Sent(prod))
 				{
 					Report.Error("Link Does Not Exist");
 					return false;
@@ -87,11 +87,11 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Delete_Email");
 
-			var myDelete = new Mailosaur_Email();
+			var myDelete = new MailosaurEmail();
 
 			if (!myDelete.Delete_Exists())
 			{
-				var myInbox = new Mailosaur_Inbox();
+				var myInbox = new MailosaurInbox();
 
 				if (!myInbox.Open_Email(prefix))
 				{
@@ -110,7 +110,7 @@ namespace MySDS.SeleniumClasses
 				return false;
 			}
 			Delay.Seconds(15 * Delay.SpeedFactor);
-			var myConfirm = new Mailosaur_Delete_Dlg();
+			var myConfirm = new MailosaurDeleteDlg();
 			if (myConfirm.Exists)
 			{
 				if (!myConfirm.ConfirmDeleteClick())
@@ -121,7 +121,7 @@ namespace MySDS.SeleniumClasses
 				}
 				Report.Info("Deletion Confirmed");
 				Delay.Seconds(15 * Delay.SpeedFactor);
-				var myInbox = new Mailosaur_Inbox();
+				var myInbox = new MailosaurInbox();
 
 				if (myInbox.Email_Exists(prefix))
 				{
@@ -140,7 +140,7 @@ namespace MySDS.SeleniumClasses
 
 		public bool Mail_Email_Delete(string prefix)
 		{
-			var myInbox = new Mailosaur_Inbox();
+			var myInbox = new MailosaurInbox();
 
 			Report.Info("Beginning Mail_Email_Delete, for Email with Prefix:" + prefix);
 
@@ -162,13 +162,13 @@ namespace MySDS.SeleniumClasses
 
 		}
 
-		public bool Expected_Attachments_Exist(string order, string expected_products)
+		public bool Expected_Attachments_Exist(string order, string expectedProducts)
 		{
 			Report.Info("Beginning Expected_Attachments_Exist");
-			Report.Info("Searching in Order: " + order + " for Products(s): " + expected_products);
+			Report.Info("Searching in Order: " + order + " for Products(s): " + expectedProducts);
 
-			var myInbox = new Mailosaur_Inbox();
-			var myEmail = new Mailosaur_Email();
+			var myInbox = new MailosaurInbox();
+			var myEmail = new MailosaurEmail();
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
@@ -179,10 +179,10 @@ namespace MySDS.SeleniumClasses
 				return false;
 			}
 			Report.Info("Email Opened, Searching for Links");
-			List<string> ListOfProducts = expected_products.Split(',').ToList().Select(X => X.Trim()).ToList();
-			foreach (string Prod in ListOfProducts)
+			List<string> listOfProducts = expectedProducts.Split(',').ToList().Select(x => x.Trim()).ToList();
+			foreach (string prod in listOfProducts)
 			{
-				if (!myEmail.Does_Attachment_Exist(Prod))
+				if (!myEmail.Does_Attachment_Exist(prod))
 				{
 					Report.Error("Link Does Not Exist");
 					return false;
@@ -194,13 +194,13 @@ namespace MySDS.SeleniumClasses
 			return true;
 		}
 
-		public bool Expected_Products(string order, string expected_products)
+		public bool Expected_Products(string order, string expectedProducts)
 		{
 			Report.Info("Beginning Expected_Products");
-			Report.Info("Searching in Order: " + order + " for Products(s): " + expected_products);
+			Report.Info("Searching in Order: " + order + " for Products(s): " + expectedProducts);
 
-			var myInbox = new Mailosaur_Inbox();
-			var myEmail = new Mailosaur_Email();
+			var myInbox = new MailosaurInbox();
+			var myEmail = new MailosaurEmail();
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
@@ -211,10 +211,10 @@ namespace MySDS.SeleniumClasses
 				return false;
 			}
 			Report.Info("Email Opened, Searching for Product in Body Text");
-			List<string> ListOfProducts = expected_products.Split(',').ToList().Select(X => X.Trim()).ToList();
-			foreach (string Prod in ListOfProducts)
+			List<string> listOfProducts = expectedProducts.Split(',').ToList().Select(x => x.Trim()).ToList();
+			foreach (string prod in listOfProducts)
 			{
-				if (!myEmail.Correct_Product_Recieved(Prod))
+				if (!myEmail.Correct_Product_Recieved(prod))
 				{
 					Report.Error("Correct Product Does Not Exist");
 					return false;
@@ -228,33 +228,33 @@ namespace MySDS.SeleniumClasses
 
 
 
-		public bool Save_PDF_As(string sds_name)
+		public bool Save_PDF_As(string sdsName)
 		{
 			Report.Info("Beginning Save_PDF_As");
-			Report.Info("Saving " + sds_name);
+			Report.Info("Saving " + sdsName);
 
-			var myEmail = new Mailosaur_Email();
-			var myPDF = new Email_PDF();
+			var myEmail = new MailosaurEmail();
+			var myPdf = new EmailPdf();
 
-			if (!myEmail.Email_PDF_Open(sds_name))
+			if (!myEmail.Email_PDF_Open(sdsName))
 			{
 				Report.Info("Failed to Click Link");
 				Report.Screenshot();
 				return false;
 			}
-			if (!myPDF.Exists)
+			if (!myPdf.Exists)
 			{
 				Report.Info("Failed to Open Link");
 				Report.Screenshot();
 				return false;
 			}
-			if (!myPDF.Click_Save_As())
+			if (!myPdf.Click_Save_As())
 			{
 				Report.Info("Click_Save_Link Unsuccessful");
 				Report.Screenshot();
 				return false;
 			}
-			if (!myPDF.Close_PDF_Click())
+			if (!myPdf.Close_PDF_Click())
 			{
 				Report.Info("Failed to Close PDF");
 				Report.Screenshot();
@@ -269,7 +269,7 @@ namespace MySDS.SeleniumClasses
 				return false;
 			}
 
-			Report.Success("PDF (" + sds_name + ") Saved");
+			Report.Success("PDF (" + sdsName + ") Saved");
 			Report.Screenshot();
 			return true;
 		}
@@ -277,7 +277,7 @@ namespace MySDS.SeleniumClasses
 
 	}
 
-	public class Mailosaur_Prog
+	public class MailosaurProg
 	{
 		public string GetMailboxFromEmail(string email, bool bReport = true)
 		{
@@ -324,21 +324,21 @@ namespace MySDS.SeleniumClasses
 
 		public bool HasEmailArrived(string emailTo, string emailFrom, string title)
 		{
-			List<Email> ListOfEmails = GetAllEmailsForEmailAddress((emailTo));
+			List<Email> listOfEmails = GetAllEmailsForEmailAddress((emailTo));
 
-			var MatchingEmails = ListOfEmails.Where(x => x.From[0].Address == emailFrom && x.Subject == title).ToList();
+			var matchingEmails = listOfEmails.Where(x => x.From[0].Address == emailFrom && x.Subject == title).ToList();
 
-			if (MatchingEmails.Count == 0)
+			if (matchingEmails.Count == 0)
 			{
 				Report.Info("There are no matching emails.");
 				return false;
 			}
-			if (MatchingEmails.Count == 1)
+			if (matchingEmails.Count == 1)
 			{
 				Report.Info("There is one matching email.");
 				return true;
 			}
-			if (MatchingEmails.Count > 1)
+			if (matchingEmails.Count > 1)
 			{
 				Report.Info("There are multiple matching emails. ");
 				return true;
@@ -349,33 +349,33 @@ namespace MySDS.SeleniumClasses
 		public Email GetMostRecentMatchingEmail(string emailTo, string emailFrom, string title)
 		{
 
-			List<Email> ListOfEmails = GetAllEmailsForEmailAddress((emailTo));
-			var MostRecentEmail = ListOfEmails.OrderBy(x => x.CreationDate);
+			List<Email> listOfEmails = GetAllEmailsForEmailAddress((emailTo));
+			var mostRecentEmail = listOfEmails.OrderBy(x => x.CreationDate);
 
-			List<Email> Matching = ListOfEmails.Where(x => x.From[0].Address == emailFrom).ToList();
-			List<Email> Matching2 = Matching.Where(x => x.Subject == title).ToList();
-			return Matching2.OrderByDescending(x => x.CreationDate).FirstOrDefault();
+			List<Email> matching = listOfEmails.Where(x => x.From[0].Address == emailFrom).ToList();
+			List<Email> matching2 = matching.Where(x => x.Subject == title).ToList();
+			return matching2.OrderByDescending(x => x.CreationDate).FirstOrDefault();
 
 		}
 
 		public bool WaitForNewEmailToArrive(string email, int emailCountBefore = 0, int secondsToWait = 30)
 		{
 			Report.Info("Beginning Wait for new email to arrive. Email address: " + email + " Previous count: " + emailCountBefore.ToString());
-			List<Email> ListOfEmails = GetAllEmailsForEmailAddress(email);
+			List<Email> listOfEmails = GetAllEmailsForEmailAddress(email);
 
-			Report.Info("Found " + ListOfEmails.Count.ToString() + " emails.");
+			Report.Info("Found " + listOfEmails.Count.ToString() + " emails.");
 
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				if (ListOfEmails.Count == emailCountBefore)
+				if (listOfEmails.Count == emailCountBefore)
 				{
 					Delay.Seconds(1 * Delay.SpeedFactor);
 					i++;
-					ListOfEmails = GetAllEmailsForEmailAddress(email);
+					listOfEmails = GetAllEmailsForEmailAddress(email);
 				}
 				else
 				{
-					if (ListOfEmails.Count > emailCountBefore)
+					if (listOfEmails.Count > emailCountBefore)
 					{
 						return true;
 					}
@@ -476,16 +476,16 @@ namespace MySDS.SeleniumClasses
 
 			var myEmail = myEmails.FirstOrDefault(x => x.Subject == prefix);
 
-			List<string> ListOfProducts = links.Split(',').ToList().Select(X => X.Trim()).ToList();
-			foreach (string Prod in ListOfProducts)
+			List<string> listOfProducts = links.Split(',').ToList().Select(x => x.Trim()).ToList();
+			foreach (string prod in listOfProducts)
 			{
-				Report.Info("Link = " + Prod);
-				if (!myEmail.Html.Body.Contains(Prod))
+				Report.Info("Link = " + prod);
+				if (!myEmail.Html.Body.Contains(prod))
 				{
-					Report.Error(Prod + " Does Not Exist");
+					Report.Error(prod + " Does Not Exist");
 					return false;
 				}
-				Report.Info(Prod + " Exists");
+				Report.Info(prod + " Exists");
 				Delay.Seconds(0.25 * Delay.SpeedFactor);
 			}
 			Report.Success("Link(s) Exists");
@@ -555,15 +555,15 @@ namespace MySDS.SeleniumClasses
 
 				var myLink = myEmail.Html.Links.ToList();
 
-				foreach (var Link in myLink)
+				foreach (var link in myLink)
 				{
-					Report.Info("Link = " + Link);
-					if (Link.Href.Contains("ClientRegistration"))
+					Report.Info("Link = " + link);
+					if (link.Href.Contains("ClientRegistration"))
 					{
 						Report.Info("Link Found");
 						return true;
 					}
-					Report.Info("Incorrect Link: " + Link);
+					Report.Info("Incorrect Link: " + link);
 					Delay.Seconds(0.25 * Delay.SpeedFactor);
 				}
 				Report.Info("Client Link Not Found");
@@ -581,7 +581,7 @@ namespace MySDS.SeleniumClasses
 	}
 
 
-	public class Mailosaur_Log_In : BaseObject
+	public class MailosaurLogIn : BaseObject
 	{
 		//Find Manage Company Form container by using Css Selector path.
 		[FindsBy(How = How.XPath, Using = "//*[@id='mailosaur-content']/div/div[@class='login-wrapper']")]
@@ -591,10 +591,10 @@ namespace MySDS.SeleniumClasses
 		[FindsBy(How = How.Id, Using = "email")]
 		private IWebElement _emailaddressInput;
 
-		public bool EnterEmailAddress(string email_address)
+		public bool EnterEmailAddress(string emailAddress)
 		{
-			Report.Info("Entering Email Address: " + email_address);
-			ExtensionMethods.EnterText(_emailaddressInput, email_address);
+			Report.Info("Entering Email Address: " + emailAddress);
+			ExtensionMethods.EnterText(this._emailaddressInput, emailAddress);
 			return true;
 		}
 
@@ -605,7 +605,7 @@ namespace MySDS.SeleniumClasses
 		public bool EnterPassword(string password)
 		{
 			Report.Info("Entering Password: " + password);
-			ExtensionMethods.EnterText(_passwordInput, password);
+			ExtensionMethods.EnterText(this._passwordInput, password);
 			return true;
 		}
 
@@ -616,7 +616,7 @@ namespace MySDS.SeleniumClasses
 		public bool LogInClick()
 		{
 			Report.Info("Attempting to click Log In Button");
-			_loginClick.Click();
+			this._loginClick.Click();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			return true;
 		}
@@ -627,7 +627,7 @@ namespace MySDS.SeleniumClasses
 
 			Delay.Seconds(1 * Delay.SpeedFactor);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Mailosaur Log In Page");
 				Report.Screenshot();
@@ -655,7 +655,7 @@ namespace MySDS.SeleniumClasses
 			}
 			Delay.Seconds(2.5 * Delay.SpeedFactor);
 
-			var myMailbox = new Mailosaur_Mailboxes();
+			var myMailbox = new MailosaurMailboxes();
 
 			if (myMailbox.Exists)
 			{
@@ -672,24 +672,24 @@ namespace MySDS.SeleniumClasses
 
 	}
 
-	public class Mailosaur_Navigation : BaseObject
+	public class MailosaurNavigation : BaseObject
 	{
 		//Find Manage Company Form container by using Css Selector path.
 		[FindsBy(How = How.Id, Using = "ms-navbar")]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Log_Out(string account_name)
+		public bool Log_Out(string accountName)
 		{
 			Report.Info("Beginning Log_Out");
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Navigation Bar Unavailable");
 				Report.Screenshot();
 				return false;
 			}
 
-			var myAccount = ExtensionMethods.FindElements(containerElement, By.XPath(".//ul/li/a[text()='" + account_name + " ']"), 10).FirstOrDefault();
+			var myAccount = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//ul/li/a[text()='" + accountName + " ']"), 10).FirstOrDefault();
 
 			if (myAccount == null)
 			{
@@ -697,12 +697,12 @@ namespace MySDS.SeleniumClasses
 				Report.Screenshot();
 				return false;
 			}
-			Report.Success(account_name + " Account Found - Attempting to Click");
+			Report.Success(accountName + " Account Found - Attempting to Click");
 
 			ExtensionMethods.ClickWithScroll(myAccount);
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 
-			var myLogOut = ExtensionMethods.FindElements(containerElement, By.XPath(".//ul/li/a[text()='Log out']"), 10).FirstOrDefault();
+			var myLogOut = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//ul/li/a[text()='Log out']"), 10).FirstOrDefault();
 
 			if (myLogOut == null)
 			{
@@ -715,7 +715,7 @@ namespace MySDS.SeleniumClasses
 			ExtensionMethods.ClickWithScroll(myLogOut);
 			Delay.Seconds(2.5 * Delay.SpeedFactor);
 
-			var myLogin = new Mailosaur_Log_In();
+			var myLogin = new MailosaurLogIn();
 
 			if (myLogin.Exists)
 			{
@@ -736,7 +736,7 @@ namespace MySDS.SeleniumClasses
 		public bool Mailboxes_Click()
 		{
 			Report.Info("Attempting to click Mailboxes Link");
-			_mailboxesClick.Click();
+			this._mailboxesClick.Click();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			return true;
 		}
@@ -745,7 +745,7 @@ namespace MySDS.SeleniumClasses
 	}
 
 
-	public class Mailosaur_Mailboxes : BaseObject
+	public class MailosaurMailboxes : BaseObject
 	{
 		//Find Manage Company Form container by using Css Selector path.
 		[FindsBy(How = How.XPath, Using = "//*[@id='mailosaur-content']/div/div[@class='paper']")]
@@ -758,44 +758,44 @@ namespace MySDS.SeleniumClasses
 		public bool New_Mailbox_Click()
 		{
 			Report.Info("Attempting to click New Mailbox Button");
-			_newmailboxClick.Click();
+			this._newmailboxClick.Click();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			return true;
 		}
 
-		public bool Go_To_Mailbox(string mailbox_name)
+		public bool Go_To_Mailbox(string mailboxName)
 		{
-			Report.Info("Beginning Go_To_Mailbox: " + mailbox_name);
+			Report.Info("Beginning Go_To_Mailbox: " + mailboxName);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Mailboxes Page");
 				Report.Screenshot();
 				return false;
 			}
 
-			var myMailbox = ExtensionMethods.FindElements(containerElement, By.XPath(".//div/a[text()='" + mailbox_name + "']"), 10).FirstOrDefault();
+			var myMailbox = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/a[text()='" + mailboxName + "']"), 10).FirstOrDefault();
 
 			if (myMailbox == null)
 			{
-				Report.Info("Failed to Find Mailbox: " + mailbox_name);
+				Report.Info("Failed to Find Mailbox: " + mailboxName);
 				Report.Screenshot();
 				return false;
 			}
-			Report.Success(mailbox_name + " Mailbox Found - Attempting to Click");
+			Report.Success(mailboxName + " Mailbox Found - Attempting to Click");
 
 			ExtensionMethods.ClickWithScroll(myMailbox);
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 
-			var myInbox = new Mailosaur_Inbox();
+			var myInbox = new MailosaurInbox();
 
 			if (myInbox.Exists)
 			{
-				Report.Success("Mailbox Open for " + mailbox_name);
+				Report.Success("Mailbox Open for " + mailboxName);
 				Report.Screenshot();
 				return true;
 			}
-			Report.Info("Failed to Open Mailbox for " + mailbox_name);
+			Report.Info("Failed to Open Mailbox for " + mailboxName);
 			Report.Screenshot();
 			return false;
 		}
@@ -803,7 +803,7 @@ namespace MySDS.SeleniumClasses
 
 	}
 
-	public class Mailosaur_Inbox : BaseObject
+	public class MailosaurInbox : BaseObject
 	{
 		//Find Manage Company Form container by using Css Selector path.
 		[FindsBy(How = How.XPath, Using = "//div[@class='mailbox-viewer']")]
@@ -813,9 +813,9 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Email_Exists for Prefix: " + prefix);
 
-			if (Exists)
+			if (this.Exists)
 			{
-				IWebElement tableInbox = containerElement.FindElement(By.XPath(".//div[@class='email-list']"));
+				IWebElement tableInbox = this.containerElement.FindElement(By.XPath(".//div[@class='email-list']"));
 
 				IWebElement rowEmail = ExtensionMethods.FindElements(tableInbox, By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains(prefix));
 
@@ -839,11 +839,11 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Open_Email with Prefix: " + prefix);
 
-			if (Exists)
+			if (this.Exists)
 			{
 				Delay.Seconds(2 * Delay.SpeedFactor);
 
-				IWebElement tableInbox = containerElement.FindElement(By.XPath(".//div[@class='email-list']"));
+				IWebElement tableInbox = this.containerElement.FindElement(By.XPath(".//div[@class='email-list']"));
 
 				IWebElement rowEmail = ExtensionMethods.FindElements(tableInbox, By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains(prefix));
 
@@ -880,7 +880,7 @@ namespace MySDS.SeleniumClasses
 				return false;
 			}
 			Delay.Seconds(1 * Delay.SpeedFactor);
-			var myConfirm = new Mailosaur_Delete_Dlg();
+			var myConfirm = new MailosaurDeleteDlg();
 			if (myConfirm.Exists)
 			{
 				if (!myConfirm.ConfirmEmptyClick())
@@ -901,12 +901,12 @@ namespace MySDS.SeleniumClasses
 
 		//Delete Button
 		[FindsBy(How = How.XPath, Using = ".//button[@class='js-empty btn btn-link btn-viewer']/i")]
-		private IWebElement _delete_allClick;
+		private IWebElement _deleteAllClick;
 
 		public bool DeleteAllClick()
 		{
 			Report.Info("Attempting to click Empty Inbox Button");
-			_delete_allClick.Click();
+			this._deleteAllClick.Click();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			return true;
 		}
@@ -919,7 +919,7 @@ namespace MySDS.SeleniumClasses
 
 			Report.Info("Checking That Email with Prefix: " + order + " Does Not Exist");
 
-			IWebElement rowEmail = ExtensionMethods.FindElements(containerElement, By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains(order));
+			IWebElement rowEmail = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains(order));
 
 			Delay.Seconds(1.5 * Delay.SpeedFactor);
 			if (rowEmail == null)
@@ -937,7 +937,7 @@ namespace MySDS.SeleniumClasses
 
 	}
 
-	public class Mailosaur_Email : BaseObject
+	public class MailosaurEmail : BaseObject
 	{
 		//Find Manage Company Form container by using Css Selector path.
 		[FindsBy(How = How.XPath, Using = "//div[@class='workspace-inner']")]
@@ -950,16 +950,16 @@ namespace MySDS.SeleniumClasses
 		public bool Delete_Click()
 		{
 			Report.Info("Attempting to click Delete Button");
-			_deleteClick.Click();
+			this._deleteClick.Click();
 			return true;
 		}
 
 		public bool Mailosaur_Delete()
 		{
 			Report.Info("Attempting to click Delete Button");
-			_deleteClick.Click();
+			this._deleteClick.Click();
 			Delay.Seconds(6 * Delay.SpeedFactor);
-			var myConfirm = new Mailosaur_Delete_Dlg();
+			var myConfirm = new MailosaurDeleteDlg();
 			if (myConfirm.Exists)
 			{
 				if (!myConfirm.ConfirmDeleteClick())
@@ -987,7 +987,7 @@ namespace MySDS.SeleniumClasses
 		public bool Links_Click()
 		{
 			Report.Info("Attempting to click Links Tab");
-			_linksClick.Click();
+			this._linksClick.Click();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			return true;
 		}
@@ -996,7 +996,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Delete_Exists");
 
-			IWebElement fLink = ExtensionMethods.FindElements(containerElement, By.XPath(".//button[@class='btn btn-link js-delete']/i"), 10).FirstOrDefault();
+			IWebElement fLink = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//button[@class='btn btn-link js-delete']/i"), 10).FirstOrDefault();
 
 			if (fLink == null)
 			{
@@ -1012,7 +1012,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Link_Sent");
 
-			IWebElement fLink = containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[contains(text(), '" + link + "')]"));
+			IWebElement fLink = this.containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[contains(text(), '" + link + "')]"));
 
 			if (fLink == null)
 			{
@@ -1029,7 +1029,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Does_Attachment_Exist");
 
-			IWebElement fLink = containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[contains(text(), '" + sds + "')]"));
+			IWebElement fLink = this.containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[contains(text(), '" + sds + "')]"));
 
 			if (fLink == null)
 			{
@@ -1047,7 +1047,7 @@ namespace MySDS.SeleniumClasses
 			Report.Info("Beginning Correct_Product_Recieved");
 			Report.Info("Checking for " + product);
 
-			IWebElement fLink = containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[contains(text(), '" + product + "')]"));
+			IWebElement fLink = this.containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[contains(text(), '" + product + "')]"));
 
 			if (fLink == null)
 			{
@@ -1063,7 +1063,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Email_Forgot_Password_Link");
 
-			IWebElement fLink = ExtensionMethods.FindElements(containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a[contains(@href, 'ResetPassword.aspx')]"), 10).FirstOrDefault();
+			IWebElement fLink = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a[contains(@href, 'ResetPassword.aspx')]"), 10).FirstOrDefault();
 
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1075,7 +1075,7 @@ namespace MySDS.SeleniumClasses
 					return false;
 				}
 				Delay.Seconds(2 * Delay.SpeedFactor);
-				IWebElement myForgot = ExtensionMethods.FindElements(containerElement, By.XPath(".//td/a[contains(@href, 'ResetPassword.aspx')]"), 10).FirstOrDefault();
+				IWebElement myForgot = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//td/a[contains(@href, 'ResetPassword.aspx')]"), 10).FirstOrDefault();
 				if (myForgot == null)
 				{
 					Report.Error("Failed to find Reset Password Link");
@@ -1096,11 +1096,11 @@ namespace MySDS.SeleniumClasses
 
 		}
 
-		public bool Mailosaur_SDS_Link(string sds_name)
+		public bool Mailosaur_SDS_Link(string sdsName)
 		{
 			Report.Info("Beginning Mailosaur_SDS_Link");
 
-			IWebElement fLink = containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[text()= '" + sds_name + "']"));
+			IWebElement fLink = this.containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[text()= '" + sdsName + "']"));
 
 			Delay.Seconds(2 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1119,11 +1119,11 @@ namespace MySDS.SeleniumClasses
 			}
 		}
 
-		public bool Email_PDF_Open(string sds_name)
+		public bool Email_PDF_Open(string sdsName)
 		{
 			Report.Info("Beginning Email_PDF_Open");
 
-			IWebElement fLink = containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[@role= 'link']"));
+			IWebElement fLink = this.containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix']/a[@role= 'link']"));
 
 			Delay.Seconds(1);
 			if (fLink == null)
@@ -1146,7 +1146,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Email_Body_Text");
 
-			IWebElement fLink = containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix'][contains(text(), '" + bodytext + "')]"));
+			IWebElement fLink = this.containerElement.FindElement(By.XPath(".//div/div[@class='email-content clearfix'][contains(text(), '" + bodytext + "')]"));
 
 			Delay.Seconds(15);
 			if (fLink == null)
@@ -1162,12 +1162,12 @@ namespace MySDS.SeleniumClasses
 
 		//Download All Button
 		[FindsBy(How = How.XPath, Using = "/.//div[@aria-label='Download all attachments']")]
-		private IWebElement _download_allClick;
+		private IWebElement _downloadAllClick;
 
 		public bool Download_All_Click()
 		{
 			Report.Info("Attempting to click Download All Button");
-			_download_allClick.Click();
+			this._downloadAllClick.Click();
 			return true;
 		}
 
@@ -1225,7 +1225,7 @@ namespace MySDS.SeleniumClasses
 			Report.Info("Beginning Client_Create_Link_Exists");
 
 			IWebElement fLink =
-				ExtensionMethods.FindElements(containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains("Simply click this link to create"));
+				ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains("Simply click this link to create"));
 
 			Delay.Seconds(2 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1245,7 +1245,7 @@ namespace MySDS.SeleniumClasses
 			Report.Info("Beginning Client_Create_Link");
 
 			IWebElement fLink =
-				ExtensionMethods.FindElements(containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains("link"));
+				ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains("link"));
 
 			Delay.Seconds(1 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1268,7 +1268,7 @@ namespace MySDS.SeleniumClasses
 			Report.Info("Beginning Client_Login_Link");
 
 			IWebElement fLink =
-				ExtensionMethods.FindElements(containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains("Here"));
+				ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains("Here"));
 
 			Delay.Seconds(5 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1290,7 +1290,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Email_Reset_Password_Link");
 
-			IWebElement fLink = ExtensionMethods.FindElements(containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a[contains(@href, 'RecipientPasswordReset')]"), 10).FirstOrDefault();
+			IWebElement fLink = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a[contains(@href, 'RecipientPasswordReset')]"), 10).FirstOrDefault();
 
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1303,7 +1303,7 @@ namespace MySDS.SeleniumClasses
 				}
 				Delay.Seconds(2 * Delay.SpeedFactor);
 				Report.Info("On Links Page");
-				IWebElement myReset = ExtensionMethods.FindElements(containerElement, By.XPath(".//td/a[contains(@href, 'RecipientPasswordReset')]"), 10).FirstOrDefault();
+				IWebElement myReset = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//td/a[contains(@href, 'RecipientPasswordReset')]"), 10).FirstOrDefault();
 
 				if (myReset == null)
 				{
@@ -1328,7 +1328,7 @@ namespace MySDS.SeleniumClasses
 
 	}
 
-	public class Mailosaur_Delete_Dlg : BaseObject
+	public class MailosaurDeleteDlg : BaseObject
 	{
 		//Find Manage Company Form container by using Css Selector path.
 		[FindsBy(How = How.XPath, Using = "//div[@class='modal-content']")]
@@ -1341,7 +1341,7 @@ namespace MySDS.SeleniumClasses
 		public bool ConfirmDeleteClick()
 		{
 			Report.Info("Attempting to click Confirm Delete Button");
-			_confirmClick.Click();
+			this._confirmClick.Click();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			return true;
 		}
@@ -1353,7 +1353,7 @@ namespace MySDS.SeleniumClasses
 		public bool ConfirmEmptyClick()
 		{
 			Report.Info("Attempting to click Confirm Empty Button");
-			_emptyClick.Click();
+			this._emptyClick.Click();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			return true;
 		}
@@ -1365,7 +1365,7 @@ namespace MySDS.SeleniumClasses
 		public bool CancelDeleteClick()
 		{
 			Report.Info("Attempting to click Cancel Delete Button");
-			_cancelClick.Click();
+			this._cancelClick.Click();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			return true;
 		}
@@ -1376,7 +1376,7 @@ namespace MySDS.SeleniumClasses
 
 	}
 
-	public class Email_Link : BaseObject
+	public class EmailLink : BaseObject
 	{
 		public const string BasePath = ".//embed[@id='plugin']";
 
@@ -1390,7 +1390,7 @@ namespace MySDS.SeleniumClasses
 
 		public void Save_As()
 		{
-			ExtensionMethods.SaveAs(Plugin);
+			ExtensionMethods.SaveAs(this.Plugin);
 		}
 
 		public bool Click_Save_As()
@@ -1405,7 +1405,7 @@ namespace MySDS.SeleniumClasses
 
 	}
 
-	public class Email_PDF : BaseObject
+	public class EmailPdf : BaseObject
 	{
 		public const string BasePath = "//div[@class='aLF-aPX-aPF aLF-aPX-bhI']";
 
@@ -1417,7 +1417,7 @@ namespace MySDS.SeleniumClasses
 
 		public void Save_As()
 		{
-			ExtensionMethods.SaveAs(Plugin);
+			ExtensionMethods.SaveAs(this.Plugin);
 		}
 
 		public bool Click_Save_As()
@@ -1433,12 +1433,12 @@ namespace MySDS.SeleniumClasses
 
 		//Back Button
 		[FindsBy(How = How.CssSelector, Using = ".//div[@aria-label='Close']")]
-		private IWebElement _close_pdfClick;
+		private IWebElement _closePdfClick;
 
 		public bool Close_PDF_Click()
 		{
 			Report.Info("Attempting to Close PDF");
-			_close_pdfClick.Click();
+			this._closePdfClick.Click();
 			return true;
 		}
 

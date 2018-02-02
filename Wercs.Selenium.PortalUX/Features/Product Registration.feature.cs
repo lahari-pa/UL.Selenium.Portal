@@ -25,6 +25,7 @@ namespace Wercs.Selenium.PortalUX.Features
     [NUnit.Framework.CategoryAttribute("Signup")]
     [NUnit.Framework.CategoryAttribute("wercsmart")]
     [NUnit.Framework.CategoryAttribute("NewProduct")]
+    [NUnit.Framework.CategoryAttribute("wercsmart")]
     [NUnit.Framework.CategoryAttribute("run_ProductRegistration")]
     public partial class ProductRegistrationFeature
     {
@@ -45,6 +46,7 @@ namespace Wercs.Selenium.PortalUX.Features
                         "Signup",
                         "wercsmart",
                         "NewProduct",
+                        "wercsmart",
                         "run_ProductRegistration"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -79,8 +81,8 @@ namespace Wercs.Selenium.PortalUX.Features
         
         public virtual void FeatureBackground()
         {
-#line 11
 #line 12
+#line 13
 testRunner.Given("I login into the WERCSmart Portal - Administrator Role", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
@@ -90,13 +92,13 @@ testRunner.Given("I login into the WERCSmart Portal - Administrator Role", ((str
         public virtual void _31343NewProductScreenNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31343] New Product screen navigation", ((string[])(null)));
-#line 14
-this.ScenarioSetup(scenarioInfo);
-#line 11
-this.FeatureBackground();
 #line 15
-testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
+#line 12
+this.FeatureBackground();
 #line 16
+testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 17
 testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -107,7 +109,7 @@ testRunner.And("I should see the header New Product", ((string)(null)), ((TechTa
                         "No, copy an existing product"});
             table1.AddRow(new string[] {
                         "No, copy from ULSC service"});
-#line 17
+#line 18
 testRunner.And("I should see the following radio buttons:", ((string)(null)), table1, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -118,15 +120,15 @@ testRunner.And("I should see the following radio buttons:", ((string)(null)), ta
         public virtual void _31344NewProductScreenValidation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31344] New Product Screen validation", ((string[])(null)));
-#line 23
-this.ScenarioSetup(scenarioInfo);
-#line 11
-this.FeatureBackground();
 #line 24
-testRunner.Given("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
+#line 12
+this.FeatureBackground();
 #line 25
-testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 26
+testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 27
 testRunner.Then("I should see an error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

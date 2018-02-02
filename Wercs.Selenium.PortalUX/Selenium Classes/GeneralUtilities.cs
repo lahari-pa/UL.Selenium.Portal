@@ -16,13 +16,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
         public static bool Wait_for_load_finish()
         {
             Delay.Seconds(Delay.SpeedFactor * 1);
-            var BodyElement = GlobalParameters.Browser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2);
-            if (BodyElement == null)
+            var bodyElement = GlobalParameters.Browser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2);
+            if (bodyElement == null)
                 return true;
-            while(BodyElement.GetAttribute("class").Contains("pace-running"))
+            while(bodyElement.GetAttribute("class").Contains("pace-running"))
             {
                Delay.Seconds(Delay.SpeedFactor*1);
-               BodyElement = GlobalParameters.Browser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2);
+               bodyElement = GlobalParameters.Browser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2);
             }
 
             return true;

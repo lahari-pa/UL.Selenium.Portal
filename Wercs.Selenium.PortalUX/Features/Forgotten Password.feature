@@ -2,6 +2,7 @@
 @Login
 @Homepage
 @ForgottenPassword
+@wercsmart
 @run_ForgottenPassword
 
 Feature: Forgotten Password

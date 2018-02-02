@@ -13,7 +13,7 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 namespace Wercs.Selenium.PortalUX.Steps
 {
     [Binding, Scope(Tag = "NewProduct")]
-    class Steps_NewProduct
+    class StepsNewProduct
     {
         [StepDefinition(@"the Product Type page should be loaded")]
         [StepDefinition(@"the Product Editor page should be loaded")]
@@ -23,8 +23,8 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Product Type page should be loaded");
-                var Sel_NewProduct = new NewProduct();
-                Report.IsTrue(Sel_NewProduct.Wait_for_load(10), "Product Type page did not load!", "Product Type page loaded successfully!");
+                var selNewProduct = new NewProduct();
+                Report.IsTrue(selNewProduct.Wait_for_load(10), "Product Type page did not load!", "Product Type page loaded successfully!");
                Report.Screenshot();
             }
             catch (Exception ex)
@@ -37,20 +37,20 @@ namespace Wercs.Selenium.PortalUX.Steps
        
 
         [StepDefinition(@"the product saved as: (.*) should be visible in editor")]
-        public void CorrectProductVisibleInEditor(string SavedAs)
+        public void CorrectProductVisibleInEditor(string savedAs)
         {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Product saved as " + SavedAs + " is visible in editor");
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Product saved as " + savedAs + " is visible in editor");
             try
             {
-                Report.Info("Checking that the product saved as " + SavedAs + " is visible in editor");
-                var Product = (ProductGridItem) Context.GetFromContext(SavedAs);
-                Report.Info("Checking that Product with ID: '" + Product.ProductID + "' is visible!");
-                var ExpectingToFind = Product.ProductName + " (" + Product.ProductID + ")";
-                Report.Info("Expecting to find string: '" + ExpectingToFind + "'");
-                var Sel_NewProduct = new NewProduct();
-                var CurrentlyShowing = Sel_NewProduct.GetCurrentProduct();
-                Report.Info("Found: '" + CurrentlyShowing + "'");
-                Report.IsTrue(ExpectingToFind.Trim() == CurrentlyShowing.Trim(), "Value was not as expected!", "Product was showing correctly in the editor!");
+                Report.Info("Checking that the product saved as " + savedAs + " is visible in editor");
+                var product = (ProductGridItem) Context.GetFromContext(savedAs);
+                Report.Info("Checking that Product with ID: '" + product.ProductId + "' is visible!");
+                var expectingToFind = product.ProductName + " (" + product.ProductId + ")";
+                Report.Info("Expecting to find string: '" + expectingToFind + "'");
+                var selNewProduct = new NewProduct();
+                var currentlyShowing = selNewProduct.GetCurrentProduct();
+                Report.Info("Found: '" + currentlyShowing + "'");
+                Report.IsTrue(expectingToFind.Trim() == currentlyShowing.Trim(), "Value was not as expected!", "Product was showing correctly in the editor!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -61,45 +61,45 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
 
         [StepDefinition(@"I create a shell product with name (.*) saved as (.*)")]
-        public void CreateShellProduct(string Name, string SavedAs)
+        public void CreateShellProduct(string name, string savedAs)
         {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Creating shell product with name " + Name + ", saved as " + SavedAs);
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Creating shell product with name " + name + ", saved as " + savedAs);
             try
             {
-                Report.Info("Creating shell product with name " + Name + ", saved as " + SavedAs);
-                var Sel_NewProduct = new NewProduct();
+                Report.Info("Creating shell product with name " + name + ", saved as " + savedAs);
+                var selNewProduct = new NewProduct();
 
-                if (!Sel_NewProduct.Wait_for_load(10))
+                if (!selNewProduct.Wait_for_load(10))
                     throw new Exception("Page failed to load!");
 
                 Report.Info("Selecting 'Yes, create a new product'");
                 // Creates a New Product
-                Sel_NewProduct.CreateNewProductOrCopy(true);
+                selNewProduct.CreateNewProductOrCopy(true);
                 Report.Screenshot();
 
                 Report.Info("Clicking continue");
-                Report.IsTrue(Sel_NewProduct.ClickContinue(), "Failed to click 'Continue'!");
+                Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!");
 
-                Report.Info("Inputting Name: '" + Name + "'");
-                Sel_NewProduct.ProductName = Name;
+                Report.Info("Inputting Name: '" + name + "'");
+                selNewProduct.ProductName = name;
                 Report.Info("Setting Product Type to be: 'Game System w/Battery'");
-                Sel_NewProduct.ProductType = "Game System w/Battery";
+                selNewProduct.ProductType = "Game System w/Battery";
                 Report.Screenshot();
 
                 Report.Info("Clicking continue");
-                Report.IsTrue(Sel_NewProduct.ClickContinue(), "Failed to click 'Continue'!");
+                Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!");
 
                 Report.Info("Getting Product ID");
-                var FullProductName = Sel_NewProduct.GetHeader();
+                var fullProductName = selNewProduct.GetHeader();
                 // Product Name made out of the name + the Id - so if we remove the Name from the product we should be left with an ID!
-                var ProductID = FullProductName.Replace(Name, "").Replace("(", "").Replace(")", "").Trim();
+                var productId = fullProductName.Replace(name, "").Replace("(", "").Replace(")", "").Trim();
 
-                Report.Info("ProductID was: '" + ProductID + "'");
+                Report.Info("ProductID was: '" + productId + "'");
 
-                var ProductEntry = new ProductGridItem();
-                ProductEntry.ProductID = ProductID;
-                ProductEntry.ProductName = Name.Trim();
-                Context.AddToContext(SavedAs,ProductEntry);
+                var productEntry = new ProductGridItem();
+                productEntry.ProductId = productId;
+                productEntry.ProductName = name.Trim();
+                Context.AddToContext(savedAs,productEntry);
 
                 Report.Success("Product created successfully!");
                 Report.Screenshot();
@@ -118,8 +118,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		    try
 		    {
 				Report.Info("Clicking continue");
-			    var Sel_NewProduct = new NewProduct();
-				Report.IsTrue(Sel_NewProduct.ClickContinue(), "Failed to click 'Continue'!","Clicked continue successfully!");
+			    var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!","Clicked continue successfully!");
 				Report.Screenshot();
 			}
 		    catch (Exception ex)
@@ -130,18 +130,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 	    }
 
 	    [StepDefinition(@"I should see an error message: (.*)")]
-	    public void ErrorMessage(string Message)
+	    public void ErrorMessage(string message)
 	    {
-		    TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the error message: " + Message);
+		    TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the error message: " + message);
 		    try
 		    {
 			    Report.Info("Checking error message");
-			    var Sel_NewProduct = new NewProduct();
-			    var Found = Sel_NewProduct.ErrorMessage();
+			    var selNewProduct = new NewProduct();
+			    var found = selNewProduct.ErrorMessage();
 
-				Report.IsTrue(Found.Trim()==Message.Trim(), 
-					"Error message was not as expected! Expected: " + Message + ", but found: " + Found + "!", 
-					"Error message was showing: " + Message + ", as expected!");
+				Report.IsTrue(found.Trim()==message.Trim(), 
+					"Error message was not as expected! Expected: " + message + ", but found: " + found + "!", 
+					"Error message was showing: " + message + ", as expected!");
 			    Report.Screenshot();
 		    }
 		    catch (Exception ex)
@@ -155,21 +155,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 		//
 
 		[StepDefinition(@"I should see the header (.*)")]
-        public void CorrectHeaderShouldBeShowing(string Header)
+        public void CorrectHeaderShouldBeShowing(string header)
         {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that the header is showing " + Header);
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that the header is showing " + header);
             try
             {
-                Report.Info("Checking that the header is showing " + Header);
-                var Sel_NewProduct = new NewProduct();
+                Report.Info("Checking that the header is showing " + header);
+                var selNewProduct = new NewProduct();
 
-                if (!Sel_NewProduct.Wait_for_load(10))
+                if (!selNewProduct.Wait_for_load(10))
                     throw new Exception("Page failed to load!");
 
-                var HeaderShowing = Sel_NewProduct.GetHeader();
-                Report.IsTrue(HeaderShowing.Trim() == Header.Trim(),
-                    "Header was not showing as expected! Expected: '" + Header + "', but found: '" + HeaderShowing + "'!",
-                    "Header was showing: '" + Header + "', as expected!");
+                var headerShowing = selNewProduct.GetHeader();
+                Report.IsTrue(headerShowing.Trim() == header.Trim(),
+                    "Header was not showing as expected! Expected: '" + header + "', but found: '" + headerShowing + "'!",
+                    "Header was showing: '" + header + "', as expected!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -186,10 +186,10 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Checking that I see the statement '" + statement + "'");
-                var Sel_NewProduct = new NewProduct();
-                var StatementShowing = Sel_NewProduct.GetInitialStatement();
-                Report.IsTrue(StatementShowing.Trim() == statement.Trim(),
-                    "Statement was not showing as expected! Expected: '" + statement + "', but found: '" + StatementShowing + "'!",
+                var selNewProduct = new NewProduct();
+                var statementShowing = selNewProduct.GetInitialStatement();
+                Report.IsTrue(statementShowing.Trim() == statement.Trim(),
+                    "Statement was not showing as expected! Expected: '" + statement + "', but found: '" + statementShowing + "'!",
                     "Statement was showing: '" + statement + "', as expected!");
                 Report.Screenshot();
             }
@@ -201,17 +201,17 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
 
         [StepDefinition(@"I should see the radio button: (.*)")]
-        public void IShouldSeeTheRadioButton(string Button)
+        public void ShouldSeeTheRadioButton(string button)
         {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the radio button " + Button);
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the radio button " + button);
             try
             {
-                Report.Info("Checking that I see the radio button '" + Button + "'");
-                var Sel_NewProduct = new NewProduct();
-                var RadioButtonsShowing = Sel_NewProduct.RadioButtons();
-                Report.IsTrue(RadioButtonsShowing.Contains(Button.Trim()),
-                    "Radio Button was not showing as expected! Expected: '" + Button + "', but found: '" + String.Join("', '",RadioButtonsShowing) + "'!",
-                    "Radio Button was showing: '" + Button + "', as expected!");
+                Report.Info("Checking that I see the radio button '" + button + "'");
+                var selNewProduct = new NewProduct();
+                var radioButtonsShowing = selNewProduct.RadioButtons();
+                Report.IsTrue(radioButtonsShowing.Contains(button.Trim()),
+                    "Radio Button was not showing as expected! Expected: '" + button + "', but found: '" + String.Join("', '",radioButtonsShowing) + "'!",
+                    "Radio Button was showing: '" + button + "', as expected!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -222,21 +222,21 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
 
 	    [StepDefinition(@"I should see the following radio buttons:")]
-	    public void IShouldSeeTheRadioButton(Table Expected)
+	    public void ShouldSeeTheRadioButton(Table expected)
 	    {
 		    TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the correct Radio buttons");
 		    try
 		    {
-			    var Sel_NewProduct = new NewProduct();
-			    var RadioButtonsShowing = Sel_NewProduct.RadioButtons();
+			    var selNewProduct = new NewProduct();
+			    var radioButtonsShowing = selNewProduct.RadioButtons();
 
-				foreach (var Row in Expected.Rows)
+				foreach (var row in expected.Rows)
 			    {
-				    var ButtonText = Row["Button"];
-				    Report.Info("Checking that I see the radio button '" + ButtonText + "'");
-					Report.IsTrue(RadioButtonsShowing.Contains(ButtonText.Trim()),
-					    "Radio Button was not showing as expected! Expected: '" + ButtonText + "', but found: '" + String.Join("', '", RadioButtonsShowing) + "'!",
-					    "Radio Button was showing: '" + ButtonText + "', as expected!");
+				    var buttonText = row["Button"];
+				    Report.Info("Checking that I see the radio button '" + buttonText + "'");
+					Report.IsTrue(radioButtonsShowing.Contains(buttonText.Trim()),
+					    "Radio Button was not showing as expected! Expected: '" + buttonText + "', but found: '" + String.Join("', '", radioButtonsShowing) + "'!",
+					    "Radio Button was showing: '" + buttonText + "', as expected!");
 				}
 			    Report.Screenshot();
 		    }

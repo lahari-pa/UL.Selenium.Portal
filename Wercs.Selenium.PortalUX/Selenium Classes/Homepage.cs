@@ -18,48 +18,48 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
         [FindsBy(How = How.XPath, Using = BasePath)]
         protected override IWebElement containerElement { get; set; }
 
-        public bool QuickLinkButtonShowing(string Button)
+        public bool QuickLinkButtonShowing(string button)
         {
             // Specific XPath used as the elements in the 'Bulk Actions' window also seem to appear in the general search...
-            var MainBodyQuickLinks = containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2);
-            var SpecificQuickLink = MainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(Button));
-            return SpecificQuickLink != null;
+            var mainBodyQuickLinks = this.containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2);
+            var specificQuickLink = mainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(button));
+            return specificQuickLink != null;
         }
 
-        public bool ClickQuickLink(string Button)
+        public bool ClickQuickLink(string button)
         {
-            var ButtonEL = containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2).FirstOrDefault(x=>x.Text.Contains(Button.Trim()));
-            if (ButtonEL == null)
+            var buttonEl = this.containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2).FirstOrDefault(x=>x.Text.Contains(button.Trim()));
+            if (buttonEl == null)
                 return false;
-            ButtonEL.Click();
+            buttonEl.Click();
             return true;
         }
 
-        public bool QuickLinkHoveringChangeColour(string Button)
+        public bool QuickLinkHoveringChangeColour(string button)
         {
-            var MainBodyQuickLinks = containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2);
-            var SpecificQuickLink = MainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(Button));
-            var ParentElement = SpecificQuickLink.FindElement(By.XPath(".."), 2);
-            return ParentElement.HoveringChangesColour();
+            var mainBodyQuickLinks = this.containerElement.FindElements(By.XPath("./div/div[not(@id='products-grid')]//a/div[@class='btn-text']"), 2);
+            var specificQuickLink = mainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(button));
+            var parentElement = specificQuickLink.FindElement(By.XPath(".."), 2);
+            return parentElement.HoveringChangesColour();
         }
 
-        public bool TopGridHeaderPresent(string Header)
+        public bool TopGridHeaderPresent(string header)
         {
-            var Headers = containerElement.FindElements(By.XPath(".//div[@class='row collapse-headings']//h3"), 2);
-            return Headers.FirstOrDefault(x => x.Text.Trim().Contains(Header.Trim())) != null;
+            var headers = this.containerElement.FindElements(By.XPath(".//div[@class='row collapse-headings']//h3"), 2);
+            return headers.FirstOrDefault(x => x.Text.Trim().Contains(header.Trim())) != null;
         }
 
-        public bool TopGridMoreOptionShowing(string Header)
+        public bool TopGridMoreOptionShowing(string header)
         {
-            return containerElement.FindElement(By.XPath(".//h3[@class='sr-only' and contains(text(),'" + Header + "')]/..//a[contains(@class,'small-link')]"), 2) != null;
+            return this.containerElement.FindElement(By.XPath(".//h3[@class='sr-only' and contains(text(),'" + header + "')]/..//a[contains(@class,'small-link')]"), 2) != null;
         }
 
-        public bool ClickMoreForPanel(string Panel)
+        public bool ClickMoreForPanel(string panel)
         {
             try
             {
-                var Button = containerElement.FindElement(By.XPath(".//h3[@class='sr-only' and contains(text(),'" + Panel + "')]/..//a[contains(@class,'small-link')]"), 2);
-                Button.Click();
+                var button = this.containerElement.FindElement(By.XPath(".//h3[@class='sr-only' and contains(text(),'" + panel + "')]/..//a[contains(@class,'small-link')]"), 2);
+                button.Click();
                 return true;
             }
             catch (Exception)
@@ -68,20 +68,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
             }
         }
 
-        public bool NotificationsExistInPanel(string Panel)
+        public bool NotificationsExistInPanel(string panel)
         {
-            var AlertsPanel = containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'" + Panel + "')]/.."), 2);
-            var Rows = AlertsPanel.FindElements(By.XPath(".//table//tr"), 2);
-            return(Rows.Count != 0);
+            var alertsPanel = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'" + panel + "')]/.."), 2);
+            var rows = alertsPanel.FindElements(By.XPath(".//table//tr"), 2);
+            return(rows.Count != 0);
         }
 
-        public bool ClickOnFirst(string Panel)
+        public bool ClickOnFirst(string panel)
         {
             try
             {
-                var PanelContainer = containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'" + Panel + "')]/.."), 2);
-                var Rows = PanelContainer.FindElements(By.XPath(".//table//tr"), 2);
-                Rows.FirstOrDefault().Click();
+                var panelContainer = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'" + panel + "')]/.."), 2);
+                var rows = panelContainer.FindElements(By.XPath(".//table//tr"), 2);
+                rows.FirstOrDefault().Click();
                 return true;
             }
             catch (Exception)
@@ -93,71 +93,71 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
         public void ClickRedArrowNextToProductInformation(bool expand)
         {
-            var Element = containerElement.FindElement(By.XPath(".//a[contains(@class,'collapse-panels') and @href='#at-a-glance']"), 2);
-            var Expanded = Element.GetAttribute("aria-expanded")==null?true: Convert.ToBoolean(Element.GetAttribute("aria-expanded"));
-            if (!Expanded && expand || (Expanded && !expand))
-                Element.Click();
+            var element = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'collapse-panels') and @href='#at-a-glance']"), 2);
+            var expanded = element.GetAttribute("aria-expanded")==null?true: Convert.ToBoolean(element.GetAttribute("aria-expanded"));
+            if (!expanded && expand || (expanded && !expand))
+                element.Click();
         }
 
         public bool PieChartShowingInProductInformation()
         {
-            var PieChart = containerElement.FindElement(By.XPath(".//div[@id='products-information']//*[contains(@class,'highcharts-pie-series') and contains(@class,'highcharts-tracker')]"), 2);
-            return PieChart != null;
+            var pieChart = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']//*[contains(@class,'highcharts-pie-series') and contains(@class,'highcharts-tracker')]"), 2);
+            return pieChart != null;
         }
 
         public bool PieChartLegendShowingInProductInformation()
         {
-            var PieChartLegend = containerElement.FindElement(By.XPath(".//div[@id='products-information']//ul[@class='status-list']"), 2);
-            return PieChartLegend != null;
+            var pieChartLegend = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']//ul[@class='status-list']"), 2);
+            return pieChartLegend != null;
         }
 
-        public bool EntryShowingInPieChartLegend(string Text, string Colour)
+        public bool EntryShowingInPieChartLegend(string text, string colour)
         {
-            var PieChartLegend = containerElement.FindElement(By.XPath(".//div[@id='products-information']//ul[@class='status-list']"), 2);
-            var LegendEntry = PieChartLegend.FindElements(By.XPath(".//span[text()='" + Text + "']"), 2);
-            if (LegendEntry.FirstOrDefault() == null)
+            var pieChartLegend = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']//ul[@class='status-list']"), 2);
+            var legendEntry = pieChartLegend.FindElements(By.XPath(".//span[text()='" + text + "']"), 2);
+            if (legendEntry.FirstOrDefault() == null)
                 return false;
             // Element exists, so now we need to check the colour
-            var ColourShowingRaw = LegendEntry.FirstOrDefault().FindElement(By.XPath("../div"), 2).GetCssValue("background-color");
+            var colourShowingRaw = legendEntry.FirstOrDefault().FindElement(By.XPath("../div"), 2).GetCssValue("background-color");
 
-            var ColourShowing = "";
-            switch (ColourShowingRaw)
+            var colourShowing = "";
+            switch (colourShowingRaw)
             {
                 case ("rgba(237, 185, 46, 1)"):
-                    ColourShowing = "Yellow";
+                    colourShowing = "Yellow";
                     break;
                 case ("rgba(0, 152, 255, 1)"):
-                    ColourShowing = "Blue";
+                    colourShowing = "Blue";
                     break;
                 case ("rgba(30, 143, 31, 1)"):
-                    ColourShowing = "Green";
+                    colourShowing = "Green";
                     break;
                 case ("rgba(75, 82, 87, 1)"):
-                    ColourShowing = "Grey";
+                    colourShowing = "Grey";
                     break;
                 case ("rgba(207, 58, 83, 1)"):
-                    ColourShowing = "Red";
+                    colourShowing = "Red";
                     break;
             }
 
-            return ColourShowing==Colour;
+            return colourShowing==colour;
         }
 
         public bool ProductInformationSectionVisible()
         {
-            return containerElement.FindElement(By.XPath(".//div[@id='products-information']"), 2).Displayed;
+            return this.containerElement.FindElement(By.XPath(".//div[@id='products-information']"), 2).Displayed;
             //return Convert.ToBoolean(containerElement.FindElement(By.XPath(".//div[@id='at-a-glance']"), 2).GetAttribute("aria-expanded"));
         }
 
         public bool AlertsSectionVisible()
         {
-            return containerElement.FindElement(By.XPath(".//div[@id='at-a-glance']//h3[contains(text(),'Alerts')]/../div"), 2).Displayed;
+            return this.containerElement.FindElement(By.XPath(".//div[@id='at-a-glance']//h3[contains(text(),'Alerts')]/../div"), 2).Displayed;
             //return Convert.ToBoolean(containerElement.FindElement(By.XPath(".//div[@id='at-a-glance']"), 2).GetAttribute("aria-expanded"));
         }
 
         public bool AnnouncementsSectionVisible()
         {
-            return containerElement.FindElement(By.XPath(".//div[@id='at-a-glance']//h3[contains(text(),'Announcements')]/../div"), 2).Displayed;
+            return this.containerElement.FindElement(By.XPath(".//div[@id='at-a-glance']//h3[contains(text(),'Announcements')]/../div"), 2).Displayed;
             //return Convert.ToBoolean(containerElement.FindElement(By.XPath(".//div[@id='at-a-glance']"), 2).GetAttribute("aria-expanded"));
         }
     }
@@ -170,14 +170,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
         public bool NavigationIconShowing()
         {
-            return containerElement.FindElement(By.XPath(".//div[contains(@class,'hamburger')]"), 2) != null;
+            return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'hamburger')]"), 2) != null;
         }
 
         public bool NavigationIconClick(bool expand = true)
         {
             try
             {
-                var element = containerElement.FindElement(By.XPath(".//div[contains(@class,'hamburger')]"), 2);
+                var element = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'hamburger')]"), 2);
                 var elementClosed =  !element.GetAttribute("class").Contains("closed");
                 if (elementClosed && expand || !elementClosed && !expand)
                     element.Click();
@@ -189,35 +189,35 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
             }
         }
 
-        public bool ItemShowingInNavigationPanel(string item, bool IconOnly = false)
+        public bool ItemShowingInNavigationPanel(string item, bool iconOnly = false)
         {
-            var SideIcons = containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a"), 2);
-            var IconPresent = SideIcons.FirstOrDefault(x => x.GetAttribute("title").Contains(item));
-            if (IconPresent == null || !IconPresent.Displayed)
+            var sideIcons = this.containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a"), 2);
+            var iconPresent = sideIcons.FirstOrDefault(x => x.GetAttribute("title").Contains(item));
+            if (iconPresent == null || !iconPresent.Displayed)
                 return false;
 
             // Icon is present!
 
-            if (containerElement.FindElement(By.XPath(".//div[contains(@class,'sidemenu-links')]"), 2).GetAttribute("class").Contains("closed"))
+            if (this.containerElement.FindElement(By.XPath(".//div[contains(@class,'sidemenu-links')]"), 2).GetAttribute("class").Contains("closed"))
             {
                 // Navigation Panel is not expanded!
-                return IconOnly;
+                return iconOnly;
             }
 
-            var ExpandedIcons = containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-links')]//a"), 2);
+            var expandedIcons = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-links')]//a"), 2);
 
-            var ExpandedOption = ExpandedIcons.FirstOrDefault(x => x.Text.Contains(item));
+            var expandedOption = expandedIcons.FirstOrDefault(x => x.Text.Contains(item));
 
-            return (ExpandedOption != null && ExpandedOption.Displayed);
+            return (expandedOption != null && expandedOption.Displayed);
         }
 
-        public bool Click_Icon(string Destination)
+        public bool Click_Icon(string destination)
         {
-            var AllIcons = containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a//span"), 2);
-            var Icon = AllIcons.FirstOrDefault(x => x.Text.Trim().Contains(Destination));
-            if (Icon == null)
+            var allIcons = this.containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a//span"), 2);
+            var icon = allIcons.FirstOrDefault(x => x.Text.Trim().Contains(destination));
+            if (icon == null)
                 return false;
-            Icon.FindElement(By.XPath(".."),2).Click();
+            icon.FindElement(By.XPath(".."),2).Click();
             GeneralUtilities.Wait_for_load_finish();
             return true;
         }
@@ -231,17 +231,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool IsVisible()
 		{
-			return containerElement.GetAttribute("class") != "modal fade";
+			this.containerElement = GlobalParameters.Browser.WebBrowser.FindElement(By.XPath(BasePath),2);
+			return this.containerElement.GetAttribute("class") != "modal fade";
 		}
 
 		public bool ClickYes()
 		{
-			var Btn = containerElement.FindElement(By.XPath(".//button[text()='Yes']"));
-			if (Btn == null)
+			var btn = this.containerElement.FindElement(By.XPath(".//button[text()='Yes']"));
+			if (btn == null)
 				return false;
 			try
 			{
-				Btn.Click();
+				btn.Click();
 				return true;
 			}
 			catch (Exception)
@@ -252,12 +253,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickNo()
 		{
-			var Btn = containerElement.FindElement(By.XPath(".//a[text()='No']"));
-			if (Btn == null)
+			var btn = this.containerElement.FindElement(By.XPath(".//a[text()='No']"));
+			if (btn == null)
 				return false;
 			try
 			{
-				Btn.Click();
+				btn.Click();
 				return true;
 			}
 			catch (Exception)
@@ -274,11 +275,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
         [FindsBy(How = How.XPath, Using = BasePath)]
         protected override IWebElement containerElement { get; set; }
 
-        public bool QuickLinkButtonShowing(string Button)
+        public bool QuickLinkButtonShowing(string button)
         {
-            var MainBodyQuickLinks = containerElement.FindElements(By.XPath("//a"), 2);
-            var SpecificQuickLink = MainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(Button));
-            return SpecificQuickLink != null;
+            var mainBodyQuickLinks = this.containerElement.FindElements(By.XPath("//a"), 2);
+            var specificQuickLink = mainBodyQuickLinks.FirstOrDefault(x => x.Text.Contains(button));
+            return specificQuickLink != null;
         }
     }
 }

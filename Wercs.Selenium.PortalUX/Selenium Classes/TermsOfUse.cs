@@ -18,13 +18,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public void Accept()
 		{
-			var CheckBox = containerElement.FindElement(By.XPath(".//input[@id='Accepted']"), 2);
-			if (CheckBox == null)
+			var checkBox = this.containerElement.FindElement(By.XPath(".//input[@id='Accepted']"), 2);
+			if (checkBox == null)
 				return;
-			CheckBox.Check(true);
+            checkBox.ScrollElementIntoView();
+			checkBox.Check(true);
 
-			var AcceptBtn = containerElement.FindElement(By.XPath(".//button[@value='Continue' and @type='submit']"), 2);
-			AcceptBtn.Click();
+			var acceptBtn = this.containerElement.FindElement(By.XPath(".//button[@value='Continue' and @type='submit']"), 2);
+			acceptBtn.Click();
 		}
 
 	}

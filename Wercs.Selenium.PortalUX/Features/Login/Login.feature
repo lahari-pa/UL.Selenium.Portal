@@ -73,5 +73,5 @@ When I select the Login button
 Then the WERCSmart homepage should load
 Then I should see username: SeleniumTest01 in the right corner
 Given I navigate to the MyAccount page
-Then I should see company username: ABC Company 
+Then I should see company username: ABC Company
 And I click on Sign Out

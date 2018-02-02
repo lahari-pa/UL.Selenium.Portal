@@ -14,20 +14,20 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 namespace Wercs.Selenium.PortalUX.Steps
 {
     [Binding, Scope(Tag = "Homepage")]
-    class Steps_Homepage
+    class StepsHomepage
     {
         [StepDefinition(@"the WERCSmart homepage should load")]
         [StepDefinition(@"the WERCSmart homepage should be loaded")]
-		public void ThenTheWERCSmartHomepageShouldLoad()
+		public void ThenTheWercSmartHomepageShouldLoad()
         {
             TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
             try
             {
                 Report.Info("Making sure that the WERCSmart homepage is loaded");
-                var Sel_Homepage = new Homepage();
+                var selHomepage = new Homepage();
 				
 
-                Report.IsTrue(Sel_Homepage.Wait_for_load(),"WERCSmart Homepage failed to load!", "WERCSmart homepage loaded successfully!");
+                Report.IsTrue(selHomepage.Wait_for_load(),"WERCSmart Homepage failed to load!", "WERCSmart homepage loaded successfully!");
                 GeneralUtilities.Wait_for_load_finish();
                 Report.Screenshot();
             }
@@ -48,9 +48,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				// In order to do this we have to keep the SeleniumWebDriver Busy - cannot let it be idle for 10 minutes otherwise we will hit an error when we attempt to do something!
 
 			    Report.Info("Staying on the homepage with no activity until the inactivity popup appears");
-			    var Sel_InactivityPopup = new InactivityPopup();
+			    var selInactivityPopup = new InactivityPopup();
 
-				while (!Sel_InactivityPopup.IsVisible())
+				while (!selInactivityPopup.IsVisible())
 			    {
 					Delay.Seconds(Delay.SpeedFactor * 1);
 				}
@@ -65,25 +65,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 	    [StepDefinition(@"Click (Yes|No) on the inactivity popup")]
-	    public void GivenClickOnInactivityPopup(string Button)
+	    public void GivenClickOnInactivityPopup(string button)
 	    {
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click " + Button + " on inactivity popup");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click " + button + " on inactivity popup");
 		    try
 		    {
-			   Report.Info("Clicking " + Button + " on inactivity popup");
-			    var Sel_InactivityPopup = new InactivityPopup();
+			   Report.Info("Clicking " + button + " on inactivity popup");
+			    var selInactivityPopup = new InactivityPopup();
 
-			    switch (Button)
+			    switch (button)
 			    {
 					case ("Yes"):
-						Sel_InactivityPopup.ClickYes();
+						selInactivityPopup.ClickYes();
 						break;
 					default:
-						Sel_InactivityPopup.ClickNo();
+						selInactivityPopup.ClickNo();
 						break;
 			    }
 
-			    Report.Success(Button + " was clicked successfully!");
+			    Report.Success(button + " was clicked successfully!");
 			    Report.Screenshot();
 		    }
 		    catch (Exception ex)
@@ -97,7 +97,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		[StepDefinition(@"I should see the (.*) in the (header bar|user dropdown|navigation bar|main window|home page header|products grid)")]
         [StepDefinition(@"I should see (.*) in the (header bar|user dropdown|navigation bar|main window|home page header|products grid)")]
-        public void ThenIShouldSeeTheULWERCSmartLogoInTheHeaderBar(string item, string area)
+        public void ThenIShouldSeeTheUlwercSmartLogoInTheHeaderBar(string item, string area)
         {
             TestReport.BeginTestModule(GlobalParameters.StepCount + " - " + item + " should be showing in the " + area);
             try
@@ -106,43 +106,43 @@ namespace Wercs.Selenium.PortalUX.Steps
                 {
                     case ("header bar"):
                     {
-                        var Sel_TopMenuBar = new TopMenuBar();
+                        var selTopMenuBar = new TopMenuBar();
                         switch (item.ToLower())
                         {
                             case ("user icon"):
-                                Report.IsTrue(Sel_TopMenuBar.UserIconShowing(), item + " was not present in the " + area + "!",item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selTopMenuBar.UserIconShowing(), item + " was not present in the " + area + "!",item + " was present in the " + area + ", as expected");
                                 break;
                             case ("notification icon"):
-                                Report.IsTrue(Sel_TopMenuBar.NotificationIconShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selTopMenuBar.NotificationIconShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                             case ("ul/wercsmart logo"):
-                                Report.IsTrue(Sel_TopMenuBar.WERCSmartLogoShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selTopMenuBar.WercSmartLogoShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                         }
                         break;
                     }
                     case ("user dropdown"):
                     {
-                        var Sel_TopMenuBar = new TopMenuBar();
+                        var selTopMenuBar = new TopMenuBar();
                         switch (item.ToLower())
                         {
                             case ("my account"):
-                                Report.IsTrue(Sel_TopMenuBar.MyAccountOptionPresent(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selTopMenuBar.MyAccountOptionPresent(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                             case ("sign out"):
-                                Report.IsTrue(Sel_TopMenuBar.SignOutOptionPresent(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selTopMenuBar.SignOutOptionPresent(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                         }
                         break;
                     }
                     case ("navigation bar"):
                     {
-                        var Sel_Nav = new NavigationBar();
+                        var selNav = new NavigationBar();
                         switch (item.ToLower())
                         {
                             case ("navigation menu icon"):
                             {
-                                Report.IsTrue(Sel_Nav.NavigationIconShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selNav.NavigationIconShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                             }
                         }
@@ -150,66 +150,66 @@ namespace Wercs.Selenium.PortalUX.Steps
                     }
                     case ("main window"):
                     {
-                        var Sel_Homepage = new Homepage();
+                        var selHomepage = new Homepage();
                         switch (item.ToLower())
                         {
                             case ("register product hyperlink"):
-                                Report.IsTrue(Sel_Homepage.QuickLinkButtonShowing("Register Product"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-                                Report.IsTrue(Sel_Homepage.QuickLinkHoveringChangeColour("Register Product"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
+                                Report.IsTrue(selHomepage.QuickLinkButtonShowing("Register Product"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomepage.QuickLinkHoveringChangeColour("Register Product"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
                                 break;
                             case ("register goodguide hyperlink"):
-                                Report.IsTrue(Sel_Homepage.QuickLinkButtonShowing("Register GoodGuide"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-                                Report.IsTrue(Sel_Homepage.QuickLinkHoveringChangeColour("Register GoodGuide"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
+                                Report.IsTrue(selHomepage.QuickLinkButtonShowing("Register GoodGuide"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomepage.QuickLinkHoveringChangeColour("Register GoodGuide"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
                                 break;
                             case ("register purview hyperlink"):
-                                Report.IsTrue(Sel_Homepage.QuickLinkButtonShowing("Register PurView"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-                                Report.IsTrue(Sel_Homepage.QuickLinkHoveringChangeColour("Register PurView"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
+                                Report.IsTrue(selHomepage.QuickLinkButtonShowing("Register PurView"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomepage.QuickLinkHoveringChangeColour("Register PurView"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
                                 break;
                             case ("wercslink hyperlink"):
-                                Report.IsTrue(Sel_Homepage.QuickLinkButtonShowing("WERCSLink"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-                                Report.IsTrue(Sel_Homepage.QuickLinkHoveringChangeColour("WERCSLink"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
+                                Report.IsTrue(selHomepage.QuickLinkButtonShowing("WERCSLink"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomepage.QuickLinkHoveringChangeColour("WERCSLink"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
                                 break;
                             case ("subheading product information"):
-                                Report.IsTrue(Sel_Homepage.TopGridHeaderPresent("PRODUCT INFORMATION"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomepage.TopGridHeaderPresent("PRODUCT INFORMATION"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                             case ("subheading alerts"):
-                                Report.IsTrue(Sel_Homepage.TopGridHeaderPresent("ALERTS"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-                                Report.IsTrue(Sel_Homepage.TopGridMoreOptionShowing("Alerts"), item + " was not displaying the 'MORE...' option!", item + " was correctly displaying the 'MORE...' option!");
+                                Report.IsTrue(selHomepage.TopGridHeaderPresent("ALERTS"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomepage.TopGridMoreOptionShowing("Alerts"), item + " was not displaying the 'MORE...' option!", item + " was correctly displaying the 'MORE...' option!");
                                 break;
                             case ("subheading announcements"):
-                                Report.IsTrue(Sel_Homepage.TopGridHeaderPresent("ANNOUNCEMENTS"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-                                Report.IsTrue(Sel_Homepage.TopGridMoreOptionShowing("Announcements"), item + " was not displaying the 'MORE...' option!", item + " was correctly displaying the 'MORE...' option!");
+                                Report.IsTrue(selHomepage.TopGridHeaderPresent("ANNOUNCEMENTS"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomepage.TopGridMoreOptionShowing("Announcements"), item + " was not displaying the 'MORE...' option!", item + " was correctly displaying the 'MORE...' option!");
                                 break;
                             }
                         break;
                     }
                     case ("home page header"):
                     {
-                        var Sel_HomePageHeader = new HomePageHeader();
+                        var selHomePageHeader = new HomePageHeader();
                         switch (item.ToLower())
                         {
                             case ("register product hyperlink"):
-                                Report.IsTrue(Sel_HomePageHeader.QuickLinkButtonShowing("Register Product"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomePageHeader.QuickLinkButtonShowing("Register Product"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                             case ("register goodguide hyperlink"):
-                                Report.IsTrue(Sel_HomePageHeader.QuickLinkButtonShowing("Register GoodGuide"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomePageHeader.QuickLinkButtonShowing("Register GoodGuide"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                             case ("register purview hyperlink"):
-                                Report.IsTrue(Sel_HomePageHeader.QuickLinkButtonShowing("Register PurView"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomePageHeader.QuickLinkButtonShowing("Register PurView"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                             case ("wercslink hyperlink"):
-                                Report.IsTrue(Sel_HomePageHeader.QuickLinkButtonShowing("WERCSLink"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selHomePageHeader.QuickLinkButtonShowing("WERCSLink"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                         }
                         break;
                     }
                     case ("products grid"):
                     {
-                        var Sel_ProdGrid = new ProductsGrid();
+                        var selProdGrid = new ProductsGrid();
                         switch (item.ToLower())
                         {
                             case ("subheading your products"):
-                                Report.IsTrue(Sel_ProdGrid.HeaderShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+                                Report.IsTrue(selProdGrid.HeaderShowing(), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
                                 break;
                         }
                         break;
@@ -225,14 +225,14 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
 
         [StepDefinition(@"I click on the red triangle next to Product Information to (expand|collapse) the section")]
-        public void WhenIClickOnTheRedTraingleNextToProductInformation(string ExpandCollapse)
+        public void WhenIClickOnTheRedTraingleNextToProductInformation(string expandCollapse)
         {
             TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking on Red Triangle next to Product Information");
             try
             {
-                Report.Info("Clicking on Red Triangle next to Product Information to " + ExpandCollapse + " the section");
-                var Sel_Homepage = new Homepage();
-                Sel_Homepage.ClickRedArrowNextToProductInformation(ExpandCollapse=="expand");
+                Report.Info("Clicking on Red Triangle next to Product Information to " + expandCollapse + " the section");
+                var selHomepage = new Homepage();
+                selHomepage.ClickRedArrowNextToProductInformation(expandCollapse=="expand");
                 GeneralUtilities.Wait_for_load_finish();
                 Delay.Seconds(Delay.SpeedFactor*2);
                 Report.Screenshot();
@@ -252,22 +252,22 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Checking if " + dialog + " dialog is visible");
-                var Sel_Homepage = new Homepage();
-                var Showing = false;
+                var selHomepage = new Homepage();
+                var showing = false;
                 switch (dialog)
                 {
                     case ("Product Information"):
-                        Showing = Sel_Homepage.ProductInformationSectionVisible();
+                        showing = selHomepage.ProductInformationSectionVisible();
                         break;
                     case ("Alerts"):
-                        Showing = Sel_Homepage.AlertsSectionVisible();
+                        showing = selHomepage.AlertsSectionVisible();
                         break;
                     case ("Announcements"):
-                        Showing = Sel_Homepage.AnnouncementsSectionVisible();
+                        showing = selHomepage.AnnouncementsSectionVisible();
                         break;
                 }
 
-                Report.IsTrue((visibility=="visible")== Showing,
+                Report.IsTrue((visibility=="visible")== showing,
                     dialog + " dialog was not " + visibility  + "!",
                     dialog + " dialog was " + visibility + ", as expected!");
                 Report.Screenshot();
@@ -286,9 +286,9 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Checking if Pie Chart and Legend are visible");
-                var Sel_Homepage = new Homepage();
-                Report.IsTrue(Sel_Homepage.PieChartShowingInProductInformation(), "Pie Chart was not showing!", "Pie Chart was showing as expected!");
-                Report.IsTrue(Sel_Homepage.PieChartLegendShowingInProductInformation(), "Pie Chart legend was not showing!", "Pie Chart legend was showing as expected!");
+                var selHomepage = new Homepage();
+                Report.IsTrue(selHomepage.PieChartShowingInProductInformation(), "Pie Chart was not showing!", "Pie Chart was showing as expected!");
+                Report.IsTrue(selHomepage.PieChartLegendShowingInProductInformation(), "Pie Chart legend was not showing!", "Pie Chart legend was showing as expected!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -305,10 +305,10 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Checking contents of Pie Chart Legend");
-                var Sel_Homepage = new Homepage();
-                foreach (var Row in table.Rows)
+                var selHomepage = new Homepage();
+                foreach (var row in table.Rows)
                 {
-                    Report.IsTrue(Sel_Homepage.EntryShowingInPieChartLegend(Row["State"], Row["Colour"]), "Legend entry was not showing correctly!", "Entry was showing correctly in the legend!");
+                    Report.IsTrue(selHomepage.EntryShowingInPieChartLegend(row["State"], row["Colour"]), "Legend entry was not showing correctly!", "Entry was showing correctly in the legend!");
                 }
                Report.Screenshot();
             }
@@ -320,14 +320,14 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
 
         [StepDefinition(@"I see notifications in the (Alerts|Announcement) Panel")]
-        public void GivenISeeNotificationsInThePanel(string Panel)
+        public void GivenISeeNotificationsInThePanel(string panel)
         {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that notifications exist in the " + Panel + " Panel");
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that notifications exist in the " + panel + " Panel");
             try
             {
-                Report.Info("Checking that notifications exist in the " + Panel + " Panel");
-                var Sel_Homepage = new Homepage();
-                Report.IsTrue(Sel_Homepage.NotificationsExistInPanel(Panel), "No notifications were found in " + Panel + " Panel!", "Notifications were found in the " + Panel + " Panel!");
+                Report.Info("Checking that notifications exist in the " + panel + " Panel");
+                var selHomepage = new Homepage();
+                Report.IsTrue(selHomepage.NotificationsExistInPanel(panel), "No notifications were found in " + panel + " Panel!", "Notifications were found in the " + panel + " Panel!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -338,14 +338,14 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
 
         [StepDefinition(@"clicking on the top (Alert|Announcement) should direct me to the My Messages page")]
-        public void ThenClickingOnTheTopShouldDirectMeToTheMyMessagesPage(string Panel)
+        public void ThenClickingOnTheTopShouldDirectMeToTheMyMessagesPage(string panel)
         {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Selecting top " + Panel);
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Selecting top " + panel);
             try
             {
                 Report.Info("Clicking on the top Alert");
-                var Sel_Homepage = new Homepage();
-                Report.IsTrue(Sel_Homepage.ClickOnFirst(Panel), "Could not click on the top " + Panel.ToLower() + "!", "Clicked on the top " + Panel.ToLower() + " successfully!");
+                var selHomepage = new Homepage();
+                Report.IsTrue(selHomepage.ClickOnFirst(panel), "Could not click on the top " + panel.ToLower() + "!", "Clicked on the top " + panel.ToLower() + " successfully!");
                 GeneralUtilities.Wait_for_load_finish();
                 Report.Screenshot();
 
@@ -361,9 +361,9 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
 
         [StepDefinition(@"I confirm that I am taken to the My Messages (Alerts|Announcements) page")]
-        public void ThenIConfirmThatIAmTakenToTheMyMessagesAlertsPage(string Page)
+        public void ThenIConfirmThatIAmTakenToTheMyMessagesAlertsPage(string page)
         {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - My Messages " + Page + " Page should load");
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - My Messages " + page + " Page should load");
             try
             {
                 // ===== NEED TO KNOW WHERE THIS GOES BEFORE DOING THE NEXT PART ===== //
@@ -383,9 +383,9 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Navigating to the Home Page");
-                var Sel_Nav = new NavigationBar();
+                var selNav = new NavigationBar();
                 GeneralUtilities.Wait_for_load_finish();
-                Report.IsTrue(Sel_Nav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
+                Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -402,9 +402,9 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Checking 'Your Products' Filter Options");
-                var Sel_ProdGrid = new ProductsGrid();
-                foreach (var Row in table.Rows)
-                    Report.IsTrue(Sel_ProdGrid.FilterOptionShowingCorrectly(Row["Options"], Row["Colour"]), "Filter option: '" + Row["Options"] + "' was not showing correctly!", "Filter option: '" + Row["Options"] + "' was showing correctly!");
+                var selProdGrid = new ProductsGrid();
+                foreach (var row in table.Rows)
+                    Report.IsTrue(selProdGrid.FilterOptionShowingCorrectly(row["Options"], row["Colour"]), "Filter option: '" + row["Options"] + "' was not showing correctly!", "Filter option: '" + row["Options"] + "' was showing correctly!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -415,15 +415,15 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
         
         [StepDefinition(@"I click More below the (Alerts|Announcements) Panel")]
-        public void ThenIClickBelowTheALERTSPanel(string Panel)
+        public void ThenIClickBelowTheAlertsPanel(string panel)
         {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking More below the " + Panel + " Panel");
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking More below the " + panel + " Panel");
             try
             {
-                Report.Info("Clicking More below the " + Panel + " Panel");
-                var Sel_Home = new Homepage();
+                Report.Info("Clicking More below the " + panel + " Panel");
+                var selHome = new Homepage();
                 GeneralUtilities.Wait_for_load_finish();
-                Report.IsTrue(Sel_Home.ClickMoreForPanel(Panel), "Failed to click 'More' below the " + Panel + " panel!", "Successfully clicked 'More' below the " + Panel + " panel!");
+                Report.IsTrue(selHome.ClickMoreForPanel(panel), "Failed to click 'More' below the " + panel + " panel!", "Successfully clicked 'More' below the " + panel + " panel!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -440,9 +440,9 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Attempting to click the Navigation Menu Icon");
-                var Sel_Nav = new NavigationBar();
+                var selNav = new NavigationBar();
                 GeneralUtilities.Wait_for_load_finish();
-                Report.IsTrue(Sel_Nav.NavigationIconClick(expand=="expand"),"Failed to " + expand + " the Navigation Menu Icon!","Successfully " + (expand == "expand" ? "expanded" : "collapsed") + " the Navigation Menu Icon!");
+                Report.IsTrue(selNav.NavigationIconClick(expand=="expand"),"Failed to " + expand + " the Navigation Menu Icon!","Successfully " + (expand == "expand" ? "expanded" : "collapsed") + " the Navigation Menu Icon!");
                 GeneralUtilities.Wait_for_load_finish();
                 Report.Screenshot();
             }
@@ -454,22 +454,22 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
 
         [StepDefinition(@"I following should be found in the (header bar|user dropdown|navigation bar)")]
-        public void TheFollowingAreShowingInThe(string Area, TechTalk.SpecFlow.Table Expected)
+        public void TheFollowingAreShowingInThe(string area, TechTalk.SpecFlow.Table expected)
         {
-           TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking correct elements are found in " + Area);
+           TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking correct elements are found in " + area);
             try
             {
-                Report.Info("Checking that the correct elements are presebt in the " + Area);
-                foreach (var Row in Expected.Rows)
+                Report.Info("Checking that the correct elements are presebt in the " + area);
+                foreach (var row in expected.Rows)
                 {
-                    switch (Area)
+                    switch (area)
                     {
                         case ("navigation bar"):
                         {
-                            var Sel_Nav = new NavigationBar();
-                            Report.IsTrue(Sel_Nav.ItemShowingInNavigationPanel(Row["Item"]), 
-                                Row["Item"] + " was not found in the Navigation Bar!", 
-                                Row["Item"] + " was successfully found in the Navigation Bar!");
+                            var selNav = new NavigationBar();
+                            Report.IsTrue(selNav.ItemShowingInNavigationPanel(row["Item"]), 
+                                row["Item"] + " was not found in the Navigation Bar!", 
+                                row["Item"] + " was successfully found in the Navigation Bar!");
                             break;
                         }
                     }
@@ -490,8 +490,8 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Clicking the User Icon");
-                var Sel_TopHeader = new TopMenuBar();
-                Sel_TopHeader.ClickOnUserTopRight();
+                var selTopHeader = new TopMenuBar();
+                selTopHeader.ClickOnUserTopRight();
                 Report.Success("Clicked on the User Icon!");
             }
             catch (Exception ex)
@@ -502,25 +502,25 @@ namespace Wercs.Selenium.PortalUX.Steps
         }
 
         [StepDefinition(@"I click on (My Account|Sign Out)")]
-        public void ThenIClickOnUserItem(string UserItem)
+        public void ThenIClickOnUserItem(string userItem)
         {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking user item " + UserItem);
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking user item " + userItem);
             try
             {
-                Report.Info("Clicking user item " + UserItem);
-                var Sel_TopHeader = new TopMenuBar();
-                switch (UserItem)
+                Report.Info("Clicking user item " + userItem);
+                var selTopHeader = new TopMenuBar();
+                switch (userItem)
                 {
                     case ("My Account"):
-                        Sel_TopHeader.ClickMyAccount();
+                        selTopHeader.ClickMyAccount();
                         break;
                     case ("Sign Out"):
-                        Sel_TopHeader.ClickSignOut();
+                        selTopHeader.ClickSignOut();
                         break;
                 }
 
                 GeneralUtilities.Wait_for_load_finish();
-                Report.Success("Clicked on user item " + UserItem + "!");
+                Report.Success("Clicked on user item " + userItem + "!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -537,8 +537,8 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Checking that there are products available in the Products Grid");
-                var Sel_ProdGrid = new ProductsGrid();
-                Report.IsTrue(Sel_ProdGrid.ProductsPresent(),"Products were not present in the grid!","There were products present in the grid, as expected!");
+                var selProdGrid = new ProductsGrid();
+                Report.IsTrue(selProdGrid.ProductsPresent(),"Products were not present in the grid!","There were products present in the grid, as expected!");
                 Report.Screenshot();
             }
             catch (Exception ex)
@@ -555,8 +555,8 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Clicking on Notification Icon");
-                var Sel_TopMenuBar = new TopMenuBar();
-                Sel_TopMenuBar.ClickNotificationIcon();
+                var selTopMenuBar = new TopMenuBar();
+                selTopMenuBar.ClickNotificationIcon();
                 Report.Success("Successfully clicked on the Notification Icon!");
                 Report.Screenshot();
             }
@@ -593,8 +593,8 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Selecting " + item + " in the Navigation Pane");
-                var Sel_Nav = new NavigationBar();
-                Sel_Nav.Click_Icon(item);
+                var selNav = new NavigationBar();
+                selNav.Click_Icon(item);
                 Report.Success("Successfully clicked item " + item);
                 GeneralUtilities.Wait_for_load_finish();
                 Report.Screenshot();
@@ -613,8 +613,8 @@ namespace Wercs.Selenium.PortalUX.Steps
             try
             {
                 Report.Info("Selecting " + item + " in the Navigation Pane");
-                var Sel_HomePage = new Homepage();
-                Report.IsTrue(Sel_HomePage.ClickQuickLink(item),"Failed to click item: '" + item + "'!", "Successfully clicked item: '" + item + "'!");
+                var selHomePage = new Homepage();
+                Report.IsTrue(selHomePage.ClickQuickLink(item),"Failed to click item: '" + item + "'!", "Successfully clicked item: '" + item + "'!");
                 GeneralUtilities.Wait_for_load_finish();
                 Report.Screenshot();
             }

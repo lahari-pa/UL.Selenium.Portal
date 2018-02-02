@@ -20,22 +20,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
         public bool AccountOptionsVisible()
         {
-            return containerElement.FindElement(By.XPath("//ul[@class='dropdown-menu']"), 2).Displayed;
+            return this.containerElement.FindElement(By.XPath("//ul[@class='dropdown-menu']"), 2).Displayed;
         }
 
         public bool MyAccountOptionPresent()
         {
-            return containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='My Account']"), 2) != null;
+            return this.containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='My Account']"), 2) != null;
         }
 
         public bool SignOutOptionPresent()
         {
-            return containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='Sign Out']"), 2) != null;
+            return this.containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='Sign Out']"), 2) != null;
         }
 
         public void ClickOnUserTopRight()
         {
-            containerElement.FindElement(By.XPath("//a[@class='dropdown-toggle']"), 2).Click();
+			this.containerElement.FindElement(By.XPath("//a[@class='dropdown-toggle']"), 2).Click();
         }
 
         public bool ClickSignOut()
@@ -49,7 +49,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
         }
 
         //Valid options: "My Account", "Sign Out"
-        public bool SelectAccountOption(string Option)
+        public bool SelectAccountOption(string option)
         {
             try
             {
@@ -63,42 +63,45 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
                 {
                     throw new Exception("Account options are not visible as expected");
                 }
-                IList<IWebElement> ATags = containerElement.FindElements(By.XPath("//ul[@class='dropdown-menu']/li/a"));
-                ATags.FirstOrDefault(x => x.Text == Option.Trim()).Click();
+                IList<IWebElement> aTags = this.containerElement.FindElements(By.XPath("//ul[@class='dropdown-menu']/li/a"));
+                aTags.FirstOrDefault(x => x.Text == option.Trim()).Click();
                 Delay.Seconds(5);
                 return true;
             }
             catch (Exception)
             {
-                Report.Info("There was a problem with the SelectAccountOption function for option: " + Option);
+                Report.Info("There was a problem with the SelectAccountOption function for option: " + option);
                 return false;
             }
            
         }
 
-        public bool WERCSmartLogoShowing()
+        public bool WercSmartLogoShowing()
         {
-            return containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2) != null;
+            return this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2) != null;
         }
 
         public bool NotificationIconShowing()
         {
-            return containerElement.FindElement(By.XPath(".//i[@class='fa fa-bell']"), 2) != null;
+            return this.containerElement.FindElement(By.XPath(".//i[@class='fa fa-bell']"), 2) != null;
         }
 
         public void ClickNotificationIcon()
         {
-            containerElement.FindElement(By.XPath("..//i[@class='fa fa-bell']/.."), 2).Click();
+			this.containerElement.FindElement(By.XPath("..//i[@class='fa fa-bell']/.."), 2).Click();
         }
 
         public bool UserIconShowing()
         {
-            return containerElement.FindElement(By.XPath(".//i[@class='fa fa-user']"), 2) != null;
+            return this.containerElement.FindElement(By.XPath(".//i[@class='fa fa-user']"), 2) != null;
         }
 
         public string GetCurrentUser()
         {
-            return containerElement.FindElement(By.XPath("//a[@class='dropdown-toggle']"), 2).GetValue();
+            Report.Info("Beginning get current user");
+            var ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
+            ddt.ScrollElementIntoView();
+            return ddt.GetValue();
 
         }
     }

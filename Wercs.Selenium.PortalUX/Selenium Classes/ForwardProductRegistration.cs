@@ -19,20 +19,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
         public List<string> ListOfRetailers()
         {
-            var Els = containerElement.FindElements(By.XPath(".//div[contains(@class,'wizard-step-panel')]/div[@role='tabpanel']/div//input[@type='checkbox']/../span"), 2);
-            if (Els.Count == 0)
+            var els = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'wizard-step-panel')]/div[@role='tabpanel']/div//input[@type='checkbox']/../span"), 2);
+            if (els.Count == 0)
                 return null;
-            return Els.Select(x => x.Text.Trim()).ToList();
+            return els.Select(x => x.Text.Trim()).ToList();
         }
 
         public string HeaderShowing()
         {
-            return containerElement.FindElement(By.XPath(".//h2"), 2).Text.Trim();
+            return this.containerElement.FindElement(By.XPath(".//h2"), 2).Text.Trim();
         }
 
         public List<string> SubHeadingsShowing()
         {
-            return containerElement.FindElements(By.XPath(".//h3"), 2).Select(x => x.Text.Trim()).ToList();
+            return this.containerElement.FindElements(By.XPath(".//h3"), 2).Select(x => x.Text.Trim()).ToList();
         }
 
     }

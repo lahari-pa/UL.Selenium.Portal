@@ -5,7 +5,7 @@
 @run_LandingPage
 
 Feature: Landing Page
-
+@singlerun
 Scenario: [50769] Navigation
 #Given I navigate to the URL: https://50.59.136.185/ThirdPartyLanding/
 Then I should see the following menu options in the header:
@@ -23,6 +23,7 @@ Then I confirm I am taken to the Subscription page
 Scenario: [50770] Sign Up Link
 Given I select the Sign Up link
 Then the signup page should appear
+And I click Cancel on the Sign Up screen
 
 Scenario: [50771] Login Button
 Given I go to the WERCSmart Log in

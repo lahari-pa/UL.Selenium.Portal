@@ -14,27 +14,27 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 namespace Wercs.Selenium.PortalUX.Steps
 {
 	[Binding, Scope(Tag = "LandingPage")]
-	class Steps_LandingPage
+	class StepsLandingPage
 	{
 
 		[Given(@"I go to the WERCSmart Log in")]
 		[StepDefinition(@"I go to the WERCSmart Log in")]
 		[StepDefinition(@"I click the login button")]
-		public void IClickTheLoginButton()
+		public void ClickTheLoginButton()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click the WERCSmart login button");
 			try
 			{
 				Report.Info("Beginning to click the Login button");
-				var Sel_Homepage = new LandingPage();
-				if (!Sel_Homepage.Wait_for_load(1))
+				var selHomepage = new LandingPage();
+				if (!selHomepage.Wait_for_load(1))
 				{
 					Report.Info("Not on the Homepage, navigating...");
 					GlobalParameters.Browser.WebBrowser.Navigate().GoToUrl(GlobalParameters.TestUrl);
-					Report.IsTrue(Sel_Homepage.Wait_for_load(30), "Homepage failed to load!", "Homepage loaded successfully!");
+					Report.IsTrue(selHomepage.Wait_for_load(30), "Homepage failed to load!", "Homepage loaded successfully!");
 				}
 
-				Sel_Homepage.Click_Login();
+				selHomepage.Click_Login();
 				Report.Screenshot();
 				Report.Success("Login button clicked!");
 			}
@@ -46,14 +46,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I select the Sign Up link")]
-		public void IClickSignUpLink()
+		public void ClickSignUpLink()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
 			try
 			{
 				Report.Info("Beginning to click the Login button");
-				var Sel_Homepage = new LandingPage();
-				Sel_Homepage.Click_Signup();
+				var selHomepage = new LandingPage();
+				selHomepage.Click_Signup();
 				Report.Screenshot();
 				Report.Success("Signup button clicked!");
 			}
@@ -71,9 +71,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Checking that the login page has " + appear + "ed.");
-				var Sel_Login = new Login();
+				var selLogin = new Login();
 				Report.Screenshot();
-				Report.IsTrue(Sel_Login.Wait_for_load(1) == (appear == "appear"), "Login page did not " + appear + "!", "Login page " + appear + "ed successfully!");
+				Report.IsTrue(selLogin.Wait_for_load(1) == (appear == "appear"), "Login page did not " + appear + "!", "Login page " + appear + "ed successfully!");
 			}
 			catch (Exception ex)
 			{
@@ -89,8 +89,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Clicking outside of the login popup");
-				var Sel_Login = new Login();
-				Sel_Login.ClickOutside();
+				var selLogin = new Login();
+				selLogin.ClickOutside();
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -106,14 +106,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the following menu options in the header");
 			try
 			{
-				var Sel_Homepage = new LandingPage();
-				var OptionsAvailable = Sel_Homepage.NavigationOptionsAvailable();
+				var selHomepage = new LandingPage();
+				var optionsAvailable = selHomepage.NavigationOptionsAvailable();
 
-				foreach (var Row in expected.Rows)
+				foreach (var row in expected.Rows)
 				{
-					string option = Row["Option"];
+					string option = row["Option"];
 					Report.Info("Expecting to see menu option: '" + option + "' available on the landing page");
-					Report.IsTrue(OptionsAvailable.Contains(option),
+					Report.IsTrue(optionsAvailable.Contains(option),
 						"Option: '" + option + "' was not available in the list of navigation options!",
 						"Option: '" + option + "' was showing in the list of navigation options");
 				}
@@ -134,8 +134,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Selecting option: " + option);
-				var Sel_Homepage = new LandingPage();
-				Report.IsTrue(Sel_Homepage.SelectOption(option),
+				var selHomepage = new LandingPage();
+				Report.IsTrue(selHomepage.SelectOption(option),
 					"Failed to select option: " + option + "!",
 					"Succesfully selected option: " + option + "!");
 				Report.Screenshot();
@@ -154,21 +154,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Checking that the correct page has loaded successfully");
-				bool Result = false;
+				bool result = false;
 				switch (option)
 				{
 					case ("Manufacturers"):
-						Result = new ManufacturersInfo().Wait_for_load();
+						result = new ManufacturersInfo().Wait_for_load();
 						break;
 					case ("Retailers"):
-						Result = new RetailersInfo().Wait_for_load();
+						result = new RetailersInfo().Wait_for_load();
 						break;
 					case ("Subscription"):
-						Result = new SubscriptionInfo().Wait_for_load();
+						result = new SubscriptionInfo().Wait_for_load();
 						break;
 				}
 
-				Report.IsTrue(Result, "Failed to navigate to the " + option + " page!", "Successfully navigated to the " + option + " page!");
+				Report.IsTrue(result, "Failed to navigate to the " + option + " page!", "Successfully navigated to the " + option + " page!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -185,8 +185,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Expecting the Landing Page to load");
-				var Sel_Homepage = new LandingPage();
-				Report.IsTrue(Sel_Homepage.Wait_for_load(), "Landing page did not load!", "Landing page loaded successfully!");
+				var selHomepage = new LandingPage();
+				Report.IsTrue(selHomepage.Wait_for_load(), "Landing page did not load!", "Landing page loaded successfully!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)

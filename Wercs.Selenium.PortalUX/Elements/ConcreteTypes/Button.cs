@@ -43,7 +43,7 @@ namespace Wercs.Selenium.PortalUX.Elements.ConcreteTypes
 		/// </param>
 		public void Click(object eventArguments = null)
 		{
-			WrappedElement.Click(SeleniumHelper.WebDriver);
+			this.WrappedElement.Click(SeleniumHelper.WebDriver);
 
 			FireEvent(OnClick, eventArguments);
 		}

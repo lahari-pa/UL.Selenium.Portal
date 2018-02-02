@@ -4,6 +4,7 @@
 @Signup
 @wercsmart
 @NewProduct
+@wercsmart
 @run_ProductRegistration
 
 Feature: Product Registration

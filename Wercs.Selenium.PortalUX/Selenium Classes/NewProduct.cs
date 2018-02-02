@@ -21,42 +21,42 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
         public string GetHeader()
         {
-            return containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2).Text;
+            return this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2).Text;
         }
 
         public string GetInitialStatement()
         {
-            return containerElement.FindElement(By.XPath(".//form//label[@class='control-label']"), 2).Text;
+            return this.containerElement.FindElement(By.XPath(".//form//label[@class='control-label']"), 2).Text;
         }
 
         public List<string> RadioButtons()
         {
-            return containerElement.FindElements(By.XPath(".//form//input[@type='radio']/../span"), 2).Select(x => x.Text.Trim()).ToList();
+            return this.containerElement.FindElements(By.XPath(".//form//input[@type='radio']/../span"), 2).Select(x => x.Text.Trim()).ToList();
         }
 
 	    public string ErrorMessage()
 	    {
-		    return containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2).Text;
+		    return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2).Text;
 	    }
 
         public string GetCurrentProduct()
         {
-            return containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2).Text.Trim();
+            return this.containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2).Text.Trim();
         }
 
-        public void CreateNewProductOrCopy(bool NewProduct = true)
+        public void CreateNewProductOrCopy(bool newProduct = true)
         {
-            var Option = containerElement.FindElements(By.XPath(".//form//label[@class='radio']"), 2).FirstOrDefault(x => x.Text.StartsWith((NewProduct ? "Yes" : "No")));
-            if (Option == null)
+            var option = this.containerElement.FindElements(By.XPath(".//form//label[@class='radio']"), 2).FirstOrDefault(x => x.Text.StartsWith((newProduct ? "Yes" : "No")));
+            if (option == null)
                 return;
-            Option.Click();
+            option.Click();
         }
 
         public bool ClickContinue()
         {
             try
             {
-                var el = containerElement.FindElement(By.XPath(".//a[contains(@class,'continue-button')]"), 2);
+                var el = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'continue-button')]"), 2);
                 if (el == null)
                     return false;
                 el.Click();
@@ -71,22 +71,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
         public string ProductName
         {
-            get { return containerElement.FindElement(By.XPath(".//label[contains(text(),'Product name')]/../following-sibling::div/input"), 2).Text.Trim(); }
-            set { containerElement.FindElement(By.XPath(".//label[contains(text(),'Product name')]/../following-sibling::div/input"), 2).EnterText(value); }
+            get { return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product name')]/../following-sibling::div/input"), 2).Text.Trim(); }
+            set { this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product name')]/../following-sibling::div/input"), 2).EnterText(value); }
         }
 
         public string ProductType
         {
             set
             {
-                var el = containerElement.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 2);
+                var el = this.containerElement.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 2);
                 el.Click();
-                var InputField = containerElement.FindElement(By.XPath("//span[contains(@class,'select2-container')]//input"), 2);
-                InputField.EnterText(value);
+                var inputField = this.containerElement.FindElement(By.XPath("//span[contains(@class,'select2-container')]//input"), 2);
+                inputField.EnterText(value);
                 GeneralUtilities.Wait_for_load_finish();
 
-                var DropDownResults = containerElement.FindElements(By.XPath("//span[contains(@class,'select2-container')]//ul/li"), 2);
-                var ddlEl = DropDownResults.FirstOrDefault(x => x.Text.Trim() == value);
+                var dropDownResults = this.containerElement.FindElements(By.XPath("//span[contains(@class,'select2-container')]//ul/li"), 2);
+                var ddlEl = dropDownResults.FirstOrDefault(x => x.Text.Trim() == value);
                 if (ddlEl == null)
                     return;
                 ddlEl.Click();

@@ -47,7 +47,7 @@ namespace Wercs.Selenium.PortalUX.Elements.ConcreteTypes
 		{
 			eventArguments = eventArguments ?? new EventArgs<TClickReturn>();
 
-			WrappedElement.Click(SeleniumHelper.WebDriver);
+			this.WrappedElement.Click(SeleniumHelper.WebDriver);
 
 			OnClick?.Invoke(this, eventArguments);
 

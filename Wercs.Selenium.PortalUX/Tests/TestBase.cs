@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Selenium.Core.Tests;
 using Wercs.Selenium.PortalUX.Properties;
+using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;
 
 namespace Wercs.Selenium.PortalUX.Tests
 {
@@ -39,7 +41,7 @@ namespace Wercs.Selenium.PortalUX.Tests
 		[TestInitialize]
 		public override void InitTest()
 		{
-			TestContext.Properties.Add(nameof(Settings.Default.Browser), Settings.Default.Browser);
+			this.TestContext.Properties.Add(nameof(Settings.Default.Browser), Settings.Default.Browser);
 			base.InitTest();
 		}
 

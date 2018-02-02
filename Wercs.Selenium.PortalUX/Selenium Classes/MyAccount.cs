@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -18,17 +19,28 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
         public string HeaderShowing()
         {
-            return containerElement.FindElement(By.XPath("../div[contains(@class,'page-inner-header')]/h2"), 2).Text;
+            return this.containerElement.FindElement(By.XPath("../div[contains(@class,'page-inner-header')]/h2"), 2).Text;
         }
 
         public List<string> Subheadings()
         {
-            return containerElement.FindElements(By.XPath(".//h2"), 2).Select(x => x.GetValue().Trim()).ToList();
+            return this.containerElement.FindElements(By.XPath(".//h2"), 2).Select(x => x.GetValue().Trim()).ToList();
         }
 
         public string GetCompanyName()
         {
-            return containerElement.FindElement(By.XPath("//div[@class='col-sm-3 basic-info']/h3"), 2).Text;
+            var companyNameH3 = this.containerElement.FindElement(By.XPath("//div[@class='col-sm-3 basic-info']/h3"), 2);
+            if (companyNameH3 != null)
+            {
+                string innerText = companyNameH3.GetInnerHTML();
+                string regExPattern = @"\<.*\>.*\<\/.*\>";
+                Regex rgx = new Regex(regExPattern);
+                return rgx.Replace(innerText, "").Trim();
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }

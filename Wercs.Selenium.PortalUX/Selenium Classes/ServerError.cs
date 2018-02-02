@@ -20,15 +20,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
         public void Click_Close()
         {
-            containerElement.FindElement(By.XPath("..//button"), 2).Click();
+			this.containerElement.FindElement(By.XPath("..//button"), 2).Click();
         }
 
         public string GetErrorMessage()
         {
-            var ErrorMessageContainer = containerElement.FindElement(By.XPath("../..//div[@class='modal-body']"), 2);
-            if (ErrorMessageContainer != null)
+            var errorMessageContainer = this.containerElement.FindElement(By.XPath("../..//div[@class='modal-body']"), 2);
+            if (errorMessageContainer != null)
             {
-                return ErrorMessageContainer.GetValue();
+                return errorMessageContainer.GetValue();
             }
             else
             {

@@ -54,16 +54,16 @@ namespace Wercs.Selenium.PortalUX.Pages.Account
 		private void LoginButton_Click(object sender, EventArgs<IPage> e)
 		{
 			// Pause to let the page start doing its thing
-			Driver.WaitForAHalfSecondEvenThoughItIsABadIdea();
+			this.Driver.WaitForAHalfSecondEvenThoughItIsABadIdea();
 
 			// Wait for that navigation to be complete
-			Driver.WaitForPageReady();
-			Driver.WaitForAjaxComplete();
+			this.Driver.WaitForPageReady();
+			this.Driver.WaitForAjaxComplete();
 
 			// Once navigation is complete, either we're on a different page URL or we are still on the same page.
-			if (Driver.Url.Contains(_url))
+			if (this.Driver.Url.Contains(_url))
 			{
-				e.EventReturn = new LoginPage(Driver);
+				e.EventReturn = new LoginPage(this.Driver);
 			}
 			else
 			{

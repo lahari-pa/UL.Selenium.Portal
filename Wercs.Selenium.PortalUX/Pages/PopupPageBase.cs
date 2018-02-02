@@ -34,12 +34,12 @@ namespace Wercs.Selenium.PortalUX.Pages
 			GenerateElementsBehavior generateElements = GenerateElementsBehavior.Immediate)
 			: base(driver, generateElements)
 		{
-			ContainerPage = openingPageBase;
-			ContainerPage.IsLockedByPopup = true;
+			this.ContainerPage = openingPageBase;
+			this.ContainerPage.IsLockedByPopup = true;
 
 			if (!string.IsNullOrEmpty(closeButtonCssSelector))
 			{
-				_closeButtonSelector = closeButtonCssSelector;
+				this._closeButtonSelector = closeButtonCssSelector;
 			}
 		}
 
@@ -54,15 +54,15 @@ namespace Wercs.Selenium.PortalUX.Pages
 		public void Close()
 		{
 			// Locate the close element button for this modal dialog.
-			var button = Driver.FindElementSafely(By.CssSelector(_closeButtonSelector));
+			var button = this.Driver.FindElementSafely(By.CssSelector(this._closeButtonSelector));
 			if (button == null)
 			{
 				throw new NotFoundException("Unable to locate appropriate button to close this modal dialog.");
 			}
 
-			button.Click(Driver);
+			button.Click(this.Driver);
 
-			ContainerPage.IsLockedByPopup = false;
+			this.ContainerPage.IsLockedByPopup = false;
 		}
 	}
 }

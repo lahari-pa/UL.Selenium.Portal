@@ -21,6 +21,7 @@ namespace Wercs.Selenium.PortalUX.Features
     [NUnit.Framework.DescriptionAttribute("Data Consent Tiers")]
     [NUnit.Framework.CategoryAttribute("RetailPartners")]
     [NUnit.Framework.CategoryAttribute("Homepage")]
+    [NUnit.Framework.CategoryAttribute("wercsmart")]
     [NUnit.Framework.CategoryAttribute("run_DataConsentTiers")]
     public partial class DataConsentTiersFeature
     {
@@ -37,6 +38,7 @@ namespace Wercs.Selenium.PortalUX.Features
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Data Consent Tiers", null, ProgrammingLanguage.CSharp, new string[] {
                         "RetailPartners",
                         "Homepage",
+                        "wercsmart",
                         "run_DataConsentTiers"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -69,41 +71,140 @@ namespace Wercs.Selenium.PortalUX.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 8
+#line 9
+testRunner.Given("Login into WERCSmart Portal - Administrator Role - WERCs Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 10
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[56942] Data Consent Tiers - Walmart")]
         public virtual void _56942DataConsentTiers_Walmart()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56942] Data Consent Tiers - Walmart", ((string[])(null)));
-#line 7
+#line 12
 this.ScenarioSetup(scenarioInfo);
 #line 8
-testRunner.Given("I login into the WERCSmart Portal - Administrator Role", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 9
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 10
-testRunner.When("I select the retailer: Wal-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
-testRunner.Then("I should see the Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 12
-testRunner.And("the Tier 1 Data Usage Tier should not be editable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.FeatureBackground();
 #line 13
-testRunner.And("the Tier 2.1 Data Usage Tier should be editable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I select the retailer: Wal-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 14
-testRunner.And("the Tier 2.2 Data Usage Tier should be editable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
-testRunner.And("the Tier 4.2 Data Usage Tier should be editable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Tier",
+                        "State"});
+            table1.AddRow(new string[] {
+                        "2.1",
+                        "Off"});
+            table1.AddRow(new string[] {
+                        "2.2",
+                        "Off"});
+            table1.AddRow(new string[] {
+                        "4.2",
+                        "Off"});
 #line 16
-testRunner.And("the Save Changes button should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
-testRunner.Given("I set the Tier 2.1 slider to be active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 18
-testRunner.And("I set the Tier 2.2 slider to be inactive", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
-testRunner.And("I set the Tier 4.2 slider to be inactive", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
-testRunner.Then("I click on the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 21
-testRunner.And("I close the Saved Message popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table1, "Given ");
+#line 22
+testRunner.Then("I should not be able to edit Tier 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 23
+testRunner.And("I should be able to edit Tier 2.1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 24
+testRunner.And("I should be able to edit Tier 2.2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+testRunner.And("I should be able to edit Tier 4.2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 26
+testRunner.And("the save changes button is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Tier",
+                        "State"});
+            table2.AddRow(new string[] {
+                        "2.1",
+                        "On"});
+#line 28
+testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table2, "Given ");
+#line 32
+testRunner.Then("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 33
+testRunner.And("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 34
+testRunner.And(@"the following warning message should be showing: NOTE: Your selection does not meet this retailer's request. Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. Wal-Mart/SAM'S CLUB will be notified of your Data Tier selections", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 35
+testRunner.And("the save changes button is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Tier",
+                        "State"});
+            table3.AddRow(new string[] {
+                        "2.1",
+                        "Off"});
+            table3.AddRow(new string[] {
+                        "2.2",
+                        "On"});
+#line 39
+testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table3, "Given ");
+#line 44
+testRunner.Then("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 45
+testRunner.And("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 46
+testRunner.And(@"the following warning message should be showing: NOTE: Your selection does not meet this retailer's request. Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. Wal-Mart/SAM'S CLUB will be notified of your Data Tier selections", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
+testRunner.And("the save changes button is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Tier",
+                        "State"});
+            table4.AddRow(new string[] {
+                        "4.1",
+                        "On"});
+#line 51
+testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table4, "Given ");
+#line 55
+testRunner.Then("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 56
+testRunner.And("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 57
+testRunner.And(@"the following warning message should be showing: NOTE: Your selection does not meet this retailer's request. Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. Wal-Mart/SAM'S CLUB will be notified of your Data Tier selections", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+testRunner.And("the save changes button is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Tier",
+                        "State"});
+            table5.AddRow(new string[] {
+                        "2.1",
+                        "On"});
+#line 62
+testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table5, "Given ");
+#line 66
+testRunner.Then("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 67
+testRunner.And("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 69
+testRunner.And("Confirm the NOTE: message below the Data Consent Tiers Heading is NOT shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 70
+testRunner.And("the save changes button is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Tier",
+                        "State"});
+            table6.AddRow(new string[] {
+                        "2.1",
+                        "Off"});
+            table6.AddRow(new string[] {
+                        "2.2",
+                        "Off"});
+            table6.AddRow(new string[] {
+                        "4.2",
+                        "Off"});
+#line 74
+testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table6, "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
