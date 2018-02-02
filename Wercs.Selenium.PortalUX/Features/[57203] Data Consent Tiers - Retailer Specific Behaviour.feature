@@ -6,7 +6,7 @@
 @wercsmart
 @run_DataConsentTiers_RetailerSpecific
 
-Feature: [57203] Data Consent Tiers - Retailer Specific Behaviour
+Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
 
 Background:
 Given Login into WERCSmart Portal - Administrator Role - WERCs Account
@@ -14,11 +14,11 @@ Then I click the Retail Partners icon in the Navigation Pane
 
 Scenario: [57206] Retailer specific - CVS
 When I select the retailer: CVS
-Then I confirm that there is a section labeled: CVS & You 
+Then I confirm that there is a section labeled: CVS & You
 And I confirm that under the pie chart I see the label: % of your product portfolio is associated with CVS
 And I confirm that: CVS requires suppliers of all store branded products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
 
-When I click the More Infomation hyperlink
+When I click the More Information hyperlink
 Then I check that the current URL contains: https://login.ulscm.com/RPUI/cvsportal
 And I close the window that opened
 
@@ -36,7 +36,7 @@ Scenario: [57211] Retailer specific - Costco
 When I select the retailer: Costco
 And I confirm that: Costco requires suppliers of all store branded products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
 
-When I click the More Infomation hyperlink
+When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.costco.com/sustainability-environment.html
 And I close the window that opened
 
@@ -56,7 +56,7 @@ Scenario: [57221] Retailer specific - Target
 When I select the retailer: Target
 And I confirm that: Target requests suppliers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under the Data Consent Tiers heading
 
-When I click the More Infomation hyperlink
+When I click the More Information hyperlink
 Then I check that the current URL contains: https://corporate.target.com/corporate-responsibility/sustainability/sustainable-products
 And I close the window that opened
 
@@ -68,7 +68,7 @@ Scenario: [57223] Retailer specific - Walgreens
 When I select the retailer: Walgreens
 And I confirm that: Walgreens requests suppliers of Cleaning and Health & Beauty products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
 
-When I click the More Infomation hyperlink
+When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.walgreens.com/topic/sr/sr_product_integrity_home.jsp
 And I close the window that opened
 
@@ -80,7 +80,7 @@ Scenario: [57225] Retailer specific - Walmart
 When I select the retailer: Wal-Mart
 And I confirm that: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. is showing under the Data Consent Tiers heading
 
-When I click the More Infomation hyperlink
+When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.walmartsustainabilityhub.com/sustainable-chemistry
 And I close the window that opened
 

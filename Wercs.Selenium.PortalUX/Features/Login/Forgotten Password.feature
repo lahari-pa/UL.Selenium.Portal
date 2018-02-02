@@ -26,9 +26,8 @@ Given I create a user account with the following parameters saved as: ForgotPass
 | State                | Florida        |
 | Zip                  | 999            |
 | CompanyName          | Company 1      |
-| CompanyPhone         | 123456789      |
-| CountryCode          | 0078           |
-| EmergencyPhoneNumber | 123456789      |
+| CompanyPhone         | 123-456-5789   |
+| EmergencyPhoneNumber | 123-456-5789   |
 | SupplierType         | Manufacturer   |
 | CityQuestion         | CityQuestion   |
 | CityHint             | CityHint       |
@@ -74,7 +73,7 @@ Given I enter a email address: Thisemail@email.com
 And I click the continue button in the Forgotten Password window
 Then I should see a confirmation message saying: Please check your email to get instructions on how to reset your password.
 
-Scenario: Forgot Password - Unregistered Email 
+Scenario: Forgot Password - Unregistered Email
 Given I click on the Forgot Your Password Link
 Given I enter a unregistered email address
 And I click the continue button in the Forgotten Password window

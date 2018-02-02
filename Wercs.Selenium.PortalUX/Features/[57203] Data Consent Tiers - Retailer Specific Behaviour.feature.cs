@@ -18,7 +18,7 @@ namespace Wercs.Selenium.PortalUX.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("[57203] Data Consent Tiers - Retailer Specific Behaviour")]
+    [NUnit.Framework.DescriptionAttribute("[57203] Data Consent Tiers - Retailer Specific Behavior")]
     [NUnit.Framework.CategoryAttribute("RetailPartners")]
     [NUnit.Framework.CategoryAttribute("Homepage")]
     [NUnit.Framework.CategoryAttribute("LandingPage")]
@@ -26,7 +26,7 @@ namespace Wercs.Selenium.PortalUX.Features
     [NUnit.Framework.CategoryAttribute("ForgottenPassword")]
     [NUnit.Framework.CategoryAttribute("wercsmart")]
     [NUnit.Framework.CategoryAttribute("run_DataConsentTiers_RetailerSpecific")]
-    public partial class _57203DataConsentTiers_RetailerSpecificBehaviourFeature
+    public partial class _57203DataConsentTiers_RetailerSpecificBehaviorFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -38,7 +38,7 @@ namespace Wercs.Selenium.PortalUX.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "[57203] Data Consent Tiers - Retailer Specific Behaviour", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "[57203] Data Consent Tiers - Retailer Specific Behavior", null, ProgrammingLanguage.CSharp, new string[] {
                         "RetailPartners",
                         "Homepage",
                         "LandingPage",
@@ -107,7 +107,7 @@ testRunner.And("I confirm that under the pie chart I see the label: % of your pr
 testRunner.And("I confirm that: CVS requires suppliers of all store branded products to grant Tie" +
                     "r 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
-testRunner.When("I click the More Infomation hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 22
 testRunner.Then("I check that the current URL contains: https://login.ulscm.com/RPUI/cvsportal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 23
@@ -138,7 +138,7 @@ testRunner.When("I select the retailer: Costco", ((string)(null)), ((TechTalk.Sp
 testRunner.And("I confirm that: Costco requires suppliers of all store branded products to grant " +
                     "Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
-testRunner.When("I click the More Infomation hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 40
 testRunner.Then("I check that the current URL contains: https://www.costco.com/sustainability-envi" +
                     "ronment.html", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -201,7 +201,7 @@ testRunner.And("I confirm that: Target requests suppliers of Cleaning and Health
                     "s to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under th" +
                     "e Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 59
-testRunner.When("I click the More Infomation hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 60
 testRunner.Then("I check that the current URL contains: https://corporate.target.com/corporate-res" +
                     "ponsibility/sustainability/sustainable-products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -235,7 +235,7 @@ testRunner.And("I confirm that: Walgreens requests suppliers of Cleaning and Hea
                     "ucts to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent T" +
                     "iers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 71
-testRunner.When("I click the More Infomation hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 72
 testRunner.Then("I check that the current URL contains: https://www.walgreens.com/topic/sr/sr_prod" +
                     "uct_integrity_home.jsp", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -267,7 +267,7 @@ testRunner.When("I select the retailer: Wal-Mart", ((string)(null)), ((TechTalk.
 #line 81
 testRunner.And(@"I confirm that: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. is showing under the Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 83
-testRunner.When("I click the More Infomation hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 84
 testRunner.Then("I check that the current URL contains: https://www.walmartsustainabilityhub.com/s" +
                     "ustainable-chemistry", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

@@ -185,7 +185,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the More Infomation hyperlink")]
+		[StepDefinition(@"I click the More Information hyperlink")]
 		public void ClickMoreInformation()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking 'More Information' Hyperlink");
@@ -210,7 +210,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var windowHandles = GlobalParameters.Browser.WebBrowser.WindowHandles;
 				var newTab = windowHandles.FirstOrDefault(x => x != GlobalParameters.Browser.WebBrowser.CurrentWindowHandle);
 				GlobalParameters.Browser.WebBrowser.SwitchTo().Window(newTab);
-				Report.Success("Window switched succesfully!");
+				Report.Success("Window switched successfully!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
