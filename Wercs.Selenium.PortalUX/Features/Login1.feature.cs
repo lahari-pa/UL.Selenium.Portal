@@ -22,7 +22,6 @@ namespace Wercs.Selenium.PortalUX.Features
     [NUnit.Framework.CategoryAttribute("LandingPage")]
     [NUnit.Framework.CategoryAttribute("Login")]
     [NUnit.Framework.CategoryAttribute("Homepage")]
-    [NUnit.Framework.CategoryAttribute("wercsmart")]
     [NUnit.Framework.CategoryAttribute("run_Login")]
     public partial class LoginFeature
     {
@@ -40,7 +39,6 @@ namespace Wercs.Selenium.PortalUX.Features
                         "LandingPage",
                         "Login",
                         "Homepage",
-                        "wercsmart",
                         "run_Login"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -75,7 +73,7 @@ namespace Wercs.Selenium.PortalUX.Features
         
         public virtual void FeatureBackground()
         {
-#line 9
+#line 8
 #line 10
 testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -88,7 +86,7 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50820] Language Selector - Japanese", ((string[])(null)));
 #line 12
 this.ScenarioSetup(scenarioInfo);
-#line 9
+#line 8
 this.FeatureBackground();
 #line 14
 testRunner.When("From the Language drop down I select Japanese", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -125,7 +123,7 @@ testRunner.And("I should see for the login button: Login", ((string)(null)), ((T
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50828] Language Selector - Chinese", ((string[])(null)));
 #line 27
 this.ScenarioSetup(scenarioInfo);
-#line 9
+#line 8
 this.FeatureBackground();
 #line 29
 testRunner.When("From the Language drop down I select Chinese", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -162,7 +160,7 @@ testRunner.And("I should see for the login button: Login", ((string)(null)), ((T
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50830] Validation - Error Messages", ((string[])(null)));
 #line 42
 this.ScenarioSetup(scenarioInfo);
-#line 9
+#line 8
 this.FeatureBackground();
 #line 44
 testRunner.Then("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -205,7 +203,7 @@ testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTa
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50831] Account Lockout", ((string[])(null)));
 #line 61
 this.ScenarioSetup(scenarioInfo);
-#line 9
+#line 8
 this.FeatureBackground();
 #line 63
 testRunner.Given("I populate the email input field with: a@a.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -235,7 +233,7 @@ testRunner.Then("I should see a server error with message: Your account is locke
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52978] Log Into Account", ((string[])(null)));
 #line 72
 this.ScenarioSetup(scenarioInfo);
-#line 9
+#line 8
 this.FeatureBackground();
 #line 74
 testRunner.Given("I populate the email input field with: SeleniumAdmin01@thewercs.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

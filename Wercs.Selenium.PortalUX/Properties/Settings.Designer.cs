@@ -34,7 +34,7 @@ namespace Wercs.Selenium.PortalUX.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://staging.thewercs.com/Wercs.SHA.MVCWebV1/")]
         public string BaseURL {
             get {
                 return ((string)(this["BaseURL"]));

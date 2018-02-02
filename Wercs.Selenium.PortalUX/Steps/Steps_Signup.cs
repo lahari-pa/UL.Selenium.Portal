@@ -580,7 +580,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				thisNewUser.Zip = user.Zip;
 				thisNewUser.CompanyName = user.CompanyName;
 				thisNewUser.CompanyPhone = user.CompanyPhone;
-				thisNewUser.CountryCode = user.CountryCode;
 				thisNewUser.EmergencyPhoneNumber = user.EmergencyPhoneNumber;
 				thisNewUser.SelectSupplierType(user.SupplierType);
 				Report.Screenshot();

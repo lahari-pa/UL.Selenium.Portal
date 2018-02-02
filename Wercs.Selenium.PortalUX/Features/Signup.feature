@@ -68,16 +68,16 @@ Then the signup page should appear
 And I click on submit
 Then Under the Enter Email text box the following errors should appear
 | Error text                |
-| This is a required field. |  
+| This is a required field. |
 Then Under the Confirm Email text box the following errors should appear
 | Error text                |
-| This is a required field. |  
+| This is a required field. |
 Given I enter signup email: AnyOldUser@fake.com
 And I confirm signup email: Different@fake.com
 And I click on submit
 Then Under the Enter Email text box the following errors should appear
 | Error text                                  |
-| Email and confirm email fields do not match |  
+| Email and confirm email fields do not match |
 
 Scenario: [53000] Signup - Copy and Paste Email Address
 Given I click on the New to WERCSmart Link
@@ -102,9 +102,8 @@ Given I define the user: SignupUser2 with the following parameters:
 | State                | Florida        |
 | Zip                  | 999            |
 | CompanyName          | Company 1      |
-| CompanyPhone         | 123456789      |
-| CountryCode          | 0078           |
-| EmergencyPhoneNumber | 123456789      |
+| CompanyPhone         | 123-456-4789   |
+| EmergencyPhoneNumber | 123-456-4789   |
 | SupplierType         | Manufacturer   |
 | CityQuestion         | CityQuestion   |
 | CityHint             | CityHint       |
