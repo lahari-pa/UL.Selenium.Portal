@@ -193,11 +193,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Product Registration.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\RetailerPartners.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RetailerPartners.feature</DependentUpon>
-    </Compile>
+    <Compile Include="Features\RetailerPartners.feature.cs" />
     <Compile Include="Features\Signup1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -289,10 +285,6 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Signup1.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\RetailerPartners.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>RetailerPartners.feature.cs</LastGenOutput>
-    </None>
     <None Include="Features\[57203] Data Consent Tiers - Retailer Specific Behaviour.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>[57203] Data Consent Tiers - Retailer Specific Behaviour.feature.cs</LastGenOutput>
@@ -302,140 +294,15 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Selenium Classes\TopMenuBar.cs.orig" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="chromedriver.exe" />
-    <Content Include="geckodriver.exe" />
-    <Content Include="IEDriverServer.exe" />
-    <Content Include="Mono.Cecil.dll" />
-    <Content Include="Mono.Cecil.Mdb.dll" />
-    <Content Include="Mono.Cecil.Pdb.dll" />
-    <Content Include="Mono.Cecil.Rocks.dll" />
-    <Content Include="nunit.engine.api.dll" />
-    <Content Include="nunit.engine.dll" />
-    <Content Include="NUnit3.TestAdapter.dll" />
     <Content Include="Resources\chromedriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\IEDriverServer.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\RanorexForm2.jpg" />
-    <Content Include="Resources\uBlock\1p-filters.html" />
-    <Content Include="Resources\uBlock\3p-filters.html" />
-    <Content Include="Resources\uBlock\about.html" />
-    <Content Include="Resources\uBlock\advanced-settings.html" />
-    <Content Include="Resources\uBlock\asset-viewer.html" />
-    <Content Include="Resources\uBlock\assets\thirdparties\easylist-downloads.adblockplus.org\easylist.txt" />
-    <Content Include="Resources\uBlock\assets\thirdparties\easylist-downloads.adblockplus.org\easyprivacy.txt" />
-    <Content Include="Resources\uBlock\assets\thirdparties\www.malwaredomainlist.com\hostslist\hosts.txt" />
-    <Content Include="Resources\uBlock\assets\ublock\badware.txt" />
-    <Content Include="Resources\uBlock\assets\ublock\experimental.txt" />
-    <Content Include="Resources\uBlock\assets\ublock\filters.txt" />
-    <Content Include="Resources\uBlock\assets\ublock\privacy.txt" />
-    <Content Include="Resources\uBlock\assets\ublock\resource-abuse.txt" />
-    <Content Include="Resources\uBlock\assets\ublock\resources.txt" />
-    <Content Include="Resources\uBlock\assets\ublock\unbreak.txt" />
-    <Content Include="Resources\uBlock\background.html" />
-    <Content Include="Resources\uBlock\cloud-ui.html" />
-    <Content Include="Resources\uBlock\css\1p-filters.css" />
-    <Content Include="Resources\uBlock\css\3p-filters.css" />
-    <Content Include="Resources\uBlock\css\advanced-settings.css" />
-    <Content Include="Resources\uBlock\css\cloud-ui.css" />
-    <Content Include="Resources\uBlock\css\common.css" />
-    <Content Include="Resources\uBlock\css\dashboard-common.css" />
-    <Content Include="Resources\uBlock\css\dashboard.css" />
-    <Content Include="Resources\uBlock\css\dyna-rules.css" />
-    <Content Include="Resources\uBlock\css\fonts\OFL.txt" />
-    <Content Include="Resources\uBlock\css\logger-ui-inspector.css" />
-    <Content Include="Resources\uBlock\css\logger-ui.css" />
-    <Content Include="Resources\uBlock\css\popup.css" />
-    <Content Include="Resources\uBlock\css\settings.css" />
-    <Content Include="Resources\uBlock\css\whitelist.css" />
-    <Content Include="Resources\uBlock\dashboard.html" />
-    <Content Include="Resources\uBlock\document-blocked.html" />
-    <Content Include="Resources\uBlock\dyna-rules.html" />
-    <Content Include="Resources\uBlock\epicker.html" />
-    <Content Include="Resources\uBlock\img\browsericons\icon19-off.png" />
-    <Content Include="Resources\uBlock\img\browsericons\icon19.png" />
-    <Content Include="Resources\uBlock\img\browsericons\icon38-off.png" />
-    <Content Include="Resources\uBlock\img\browsericons\icon38.png" />
-    <Content Include="Resources\uBlock\img\cloud.png" />
-    <Content Include="Resources\uBlock\img\help16.png" />
-    <Content Include="Resources\uBlock\img\icon_128.png" />
-    <Content Include="Resources\uBlock\img\icon_16.png" />
-    <Content Include="Resources\uBlock\img\ublock.svg" />
-    <Content Include="Resources\uBlock\is-webrtc-supported.html" />
-    <Content Include="Resources\uBlock\js\1p-filters.js" />
-    <Content Include="Resources\uBlock\js\3p-filters.js" />
-    <Content Include="Resources\uBlock\js\about.js" />
-    <Content Include="Resources\uBlock\js\advanced-settings.js" />
-    <Content Include="Resources\uBlock\js\asset-viewer.js" />
-    <Content Include="Resources\uBlock\js\assets.js" />
-    <Content Include="Resources\uBlock\js\background.js" />
-    <Content Include="Resources\uBlock\js\cloud-ui.js" />
-    <Content Include="Resources\uBlock\js\commands.js" />
-    <Content Include="Resources\uBlock\js\contentscript.js" />
-    <Content Include="Resources\uBlock\js\contextmenu.js" />
-    <Content Include="Resources\uBlock\js\cosmetic-filtering.js" />
-    <Content Include="Resources\uBlock\js\dashboard-common.js" />
-    <Content Include="Resources\uBlock\js\dashboard.js" />
-    <Content Include="Resources\uBlock\js\document-blocked.js" />
-    <Content Include="Resources\uBlock\js\dyna-rules.js" />
-    <Content Include="Resources\uBlock\js\dynamic-net-filtering.js" />
-    <Content Include="Resources\uBlock\js\hnswitches.js" />
-    <Content Include="Resources\uBlock\js\hntrie.js" />
-    <Content Include="Resources\uBlock\js\i18n.js" />
-    <Content Include="Resources\uBlock\js\is-webrtc-supported.js" />
-    <Content Include="Resources\uBlock\js\logger-ui-inspector.js" />
-    <Content Include="Resources\uBlock\js\logger-ui.js" />
-    <Content Include="Resources\uBlock\js\logger.js" />
-    <Content Include="Resources\uBlock\js\messaging.js" />
-    <Content Include="Resources\uBlock\js\options_ui.js" />
-    <Content Include="Resources\uBlock\js\pagestore.js" />
-    <Content Include="Resources\uBlock\js\polyfill.js" />
-    <Content Include="Resources\uBlock\js\popup.js" />
-    <Content Include="Resources\uBlock\js\redirect-engine.js" />
-    <Content Include="Resources\uBlock\js\reverselookup-worker.js" />
-    <Content Include="Resources\uBlock\js\reverselookup.js" />
-    <Content Include="Resources\uBlock\js\rpcreceiver.js" />
-    <Content Include="Resources\uBlock\js\scriptlets\cosmetic-logger.js" />
-    <Content Include="Resources\uBlock\js\scriptlets\cosmetic-off.js" />
-    <Content Include="Resources\uBlock\js\scriptlets\cosmetic-on.js" />
-    <Content Include="Resources\uBlock\js\scriptlets\cosmetic-survey.js" />
-    <Content Include="Resources\uBlock\js\scriptlets\dom-inspector.js" />
-    <Content Include="Resources\uBlock\js\scriptlets\element-picker.js" />
-    <Content Include="Resources\uBlock\js\scriptlets\load-large-media-all.js" />
-    <Content Include="Resources\uBlock\js\scriptlets\load-large-media-interactive.js" />
-    <Content Include="Resources\uBlock\js\scriptlets\subscriber.js" />
-    <Content Include="Resources\uBlock\js\settings.js" />
-    <Content Include="Resources\uBlock\js\start.js" />
-    <Content Include="Resources\uBlock\js\static-net-filtering.js" />
-    <Content Include="Resources\uBlock\js\storage.js" />
-    <Content Include="Resources\uBlock\js\tab.js" />
-    <Content Include="Resources\uBlock\js\traffic.js" />
-    <Content Include="Resources\uBlock\js\ublock.js" />
-    <Content Include="Resources\uBlock\js\udom.js" />
-    <Content Include="Resources\uBlock\js\uritools.js" />
-    <Content Include="Resources\uBlock\js\url-net-filtering.js" />
-    <Content Include="Resources\uBlock\js\utils.js" />
-    <Content Include="Resources\uBlock\js\vapi-background.js" />
-    <Content Include="Resources\uBlock\js\vapi-client.js" />
-    <Content Include="Resources\uBlock\js\vapi-common.js" />
-    <Content Include="Resources\uBlock\js\vapi-webrequest.js" />
-    <Content Include="Resources\uBlock\js\vapi.js" />
-    <Content Include="Resources\uBlock\js\whitelist.js" />
-    <Content Include="Resources\uBlock\lib\publicsuffixlist.js" />
-    <Content Include="Resources\uBlock\lib\punycode.js" />
-    <Content Include="Resources\uBlock\lib\yamd5.js" />
-    <Content Include="Resources\uBlock\LICENSE.txt" />
-    <Content Include="Resources\uBlock\logger-ui.html" />
-    <Content Include="Resources\uBlock\options_ui.html" />
-    <Content Include="Resources\uBlock\popup.html" />
-    <Content Include="Resources\uBlock\settings.html" />
-    <Content Include="Resources\uBlock\whitelist.html" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
