@@ -10,8 +10,6 @@ namespace Wercs.Selenium.PortalUX.Tests
 	/// Base lass for test classes to inherit.
 	/// </summary>
 	[TestClass]
-	[DeploymentItem(@"Resources\chromedriver.exe", "Resources")]
-	[DeploymentItem(@"Resources\IEDriverServer.exe", "Resources")]
 	public class TestBase : CoreTestBase
 	{
 		/// <summary>

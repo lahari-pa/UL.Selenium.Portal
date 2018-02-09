@@ -289,21 +289,15 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>[57203] Data Consent Tiers - Retailer Specific Behaviour.feature.cs</LastGenOutput>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="Resources\chromedriver.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\IEDriverServer.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -311,6 +305,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Wercs.Selenium.Core.3.0.1-build20171027-004\build\Wercs.Selenium.Core.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Wercs.Selenium.Core.3.0.1-build20171027-004\build\Wercs.Selenium.Core.props'))" />
+    <Error Condition="!Exists('packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets'))" />
+    <Error Condition="!Exists('packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
@@ -324,4 +320,6 @@ IF EXIST "\\TRVSERVER.safeware.local\c drive\dlls" copy "$(TargetDir)SafewareRep
 IF EXIST "\\TRVSERVER.safeware.local\c drive\dlls" copy "$(TargetDir)TReVor.dll" "\\TRVSERVER.safeware.local\C drive\dlls\%25username%25\$(ProjectName)"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
+  <Import Project="packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets')" />
+  <Import Project="packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
 </Project>
