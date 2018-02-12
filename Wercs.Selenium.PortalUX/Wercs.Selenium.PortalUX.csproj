@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="packages\Wercs.Selenium.Core.3.0.1-build20171027-004\build\Wercs.Selenium.Core.props" Condition="Exists('packages\Wercs.Selenium.Core.3.0.1-build20171027-004\build\Wercs.Selenium.Core.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -297,7 +298,19 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="chromedriver.exe" />
+    <Content Include="geckodriver.exe" />
+    <Content Include="IEDriverServer.exe" />
+    <Content Include="Mono.Cecil.dll" />
+    <Content Include="Mono.Cecil.Mdb.dll" />
+    <Content Include="Mono.Cecil.Pdb.dll" />
+    <Content Include="Mono.Cecil.Rocks.dll" />
+    <Content Include="nunit.engine.api.dll" />
+    <Content Include="nunit.engine.dll" />
+    <Content Include="NUnit3.TestAdapter.dll" />
+    <Content Include="Resources\RanorexForm2.jpg" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -307,6 +320,7 @@
     <Error Condition="!Exists('packages\Wercs.Selenium.Core.3.0.1-build20171027-004\build\Wercs.Selenium.Core.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Wercs.Selenium.Core.3.0.1-build20171027-004\build\Wercs.Selenium.Core.props'))" />
     <Error Condition="!Exists('packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets'))" />
     <Error Condition="!Exists('packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
