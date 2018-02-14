@@ -109,11 +109,18 @@
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="ResourcePool, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Safeware.SeleniumUtilities.1.4.2\lib\net45\ResourcePool.dll</HintPath>
+    </Reference>
     <Reference Include="SafewareReportingPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.Debug.1.1.2\lib\net45\SafewareReportingPlugin.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.4.2\lib\net45\SafewareReportingPlugin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SafewareSeleniumUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.Debug.1.1.2\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.4.2\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Selenium.Core, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Wercs.Selenium.Core.3.0.1-build20171027-004\lib\net45\Selenium.Core.dll</HintPath>
@@ -124,6 +131,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="TechTalk.SpecFlow, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
@@ -135,7 +143,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.Debug.1.1.2\lib\net45\TReVor.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.4.2\lib\net45\TReVor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>packages\Selenium.WebDriver.3.5.2\lib\net40\WebDriver.dll</HintPath>
@@ -250,6 +260,8 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="bin\Debug\nunit_random_seed.tmp" />
+    <None Include="bin\Debug\Wercs.Selenium.PortalUX.dll.config" />
     <None Include="Features\Data Consent Tiers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Data Consent Tiers.feature.cs</LastGenOutput>
@@ -299,9 +311,55 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="chromedriver.exe" />
-    <Content Include="geckodriver.exe" />
-    <Content Include="IEDriverServer.exe" />
+    <Folder Include="bin\Debug\Resources\Users\" />
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Castle.Core.dll" />
+    <Content Include="bin\Debug\Castle.Core.xml" />
+    <Content Include="bin\Debug\chromedriver.exe" />
+    <Content Include="bin\Debug\geckodriver.exe" />
+    <Content Include="bin\Debug\HtmlAgilityPack.dll" />
+    <Content Include="bin\Debug\HtmlAgilityPack.xml" />
+    <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\Debug\IEDriverServer.exe" />
+    <Content Include="bin\Debug\itextsharp.dll" />
+    <Content Include="bin\Debug\itextsharp.xml" />
+    <Content Include="bin\Debug\Mailosaur.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.xml" />
+    <Content Include="bin\Debug\Microsoft.Web.Administration.dll" />
+    <Content Include="bin\Debug\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\NPOI.dll" />
+    <Content Include="bin\Debug\NPOI.OOXML.dll" />
+    <Content Include="bin\Debug\NPOI.OpenXml4Net.dll" />
+    <Content Include="bin\Debug\NPOI.OpenXmlFormats.dll" />
+    <Content Include="bin\Debug\NPOI.xml" />
+    <Content Include="bin\Debug\nunit.framework.dll" />
+    <Content Include="bin\Debug\nunit.framework.xml" />
+    <Content Include="bin\Debug\ResourceManager.exe" />
+    <Content Include="bin\Debug\Resources\chromedriver.exe" />
+    <Content Include="bin\Debug\Resources\IEDriverServer.exe" />
+    <Content Include="bin\Debug\SafewareReportingPlugin.dll" />
+    <Content Include="bin\Debug\SafewareSeleniumUtilities.dll" />
+    <Content Include="bin\Debug\Selenium.Core.dll" />
+    <Content Include="bin\Debug\Selenium.Core.xml" />
+    <Content Include="bin\Debug\TechTalk.SpecFlow.dll" />
+    <Content Include="bin\Debug\TestStack.White.dll" />
+    <Content Include="bin\Debug\TestStack.White.xml" />
+    <Content Include="bin\Debug\TReVor.dll" />
+    <Content Include="bin\Debug\WebDriver.dll" />
+    <Content Include="bin\Debug\WebDriver.Support.dll" />
+    <Content Include="bin\Debug\WebDriver.Support.xml" />
+    <Content Include="bin\Debug\WebDriver.xml" />
+    <Content Include="bin\Debug\Wercs.Selenium.PortalUX.dll" />
+    <Content Include="bin\Debug\Wercs.Selenium.PortalUX.pdb" />
     <Content Include="Mono.Cecil.dll" />
     <Content Include="Mono.Cecil.Mdb.dll" />
     <Content Include="Mono.Cecil.Pdb.dll" />
@@ -323,15 +381,9 @@
     <Error Condition="!Exists('packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>
-rem ##### TRVSERVER.safeware.local BACKUP DIRECTORY (CORE FILES) #####
-
-IF EXIST "\\TRVSERVER.safeware.local\c drive\dlls" md  "\\TRVSERVER.safeware.local\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.safeware.local\c drive\dlls" copy "$(TargetDir)$(TargetName)$(TargetExt).config" "\\TRVSERVER.safeware.local\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.safeware.local\c drive\dlls" copy "$(TargetDir)$(TargetName)$(TargetExt)" "\\TRVSERVER.safeware.local\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.safeware.local\c drive\dlls" copy "$(TargetDir)SafewareSeleniumUtilities.dll" "\\TRVSERVER.safeware.local\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.safeware.local\c drive\dlls" copy "$(TargetDir)SafewareReportingPlugin.dll" "\\TRVSERVER.safeware.local\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.safeware.local\c drive\dlls" copy "$(TargetDir)TReVor.dll" "\\TRVSERVER.safeware.local\C drive\dlls\%25username%25\$(ProjectName)"</PostBuildEvent>
+    <PostBuildEvent>IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" IF NOT EXIST "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)\Resources\Users" md  "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)\Resources\Users"
+IF NOT EXIST "$(TargetDir)\Resources\Users" md "$(TargetDir)\Resources\Users"
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" IF EXIST "$(TargetDir)\Resources\Users\*" xcopy "$(TargetDir)\Resources\Users" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)\Resources\Users"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets')" />

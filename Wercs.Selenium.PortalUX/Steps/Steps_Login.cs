@@ -61,6 +61,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
 			try
 			{
+
+
 				Report.Info("Attempting to select " + language + " from the Language Select drop down");
 				var selLogin = new Login();
 				selLogin.Change_Language(language);
@@ -221,7 +223,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				var selLogin = new Login();
 				if (text.Contains("<GUID>"))
-				{ text = text.Replace("<GUID>", Guid.NewGuid().ToString().Substring(0, 6)); }
+				{
+					text = text.Replace("<GUID>", Guid.NewGuid().ToString().Substring(0, 6));
+				}
 
 				Report.Info("Inputting '" + text + "' into the " + inputField + " input field");
 

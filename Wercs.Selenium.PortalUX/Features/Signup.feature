@@ -47,7 +47,7 @@ Given I enter signup email for user: SignupUser
 And I confirm signup email for user: SignupUser
 And I click on submit
 Then the signup thank you page should appear
-Then there should be a new email for user: SignupUser from: WERCSmartCustomer@ul.com with the title: Link to create WERCSmart Account
+Then there should be a new email for user: SignupUser from: <SiteNotification> with the title: Link to create WERCSmart Account
 Then the email should contain a link to set up the WERCSmart account
 When I click on the link I should see the WERCSmart new account page
 And I enter the information into the new user form for user saved as: SignupUser
@@ -124,7 +124,7 @@ Given I enter signup email for user: SignupUser2
 And I confirm signup email for user: SignupUser2
 And I click on submit
 Then the signup thank you page should appear
-Then there should be a new email for user: SignupUser2 from: WERCSmartCustomer@ul.com with the title: Link to create WERCSmart Account
+Then there should be a new email for user: SignupUser2 from: <SiteNotification> with the title: Link to create WERCSmart Account
 Then the email should contain a link to set up the WERCSmart account
 When I click on the link I should see the WERCSmart new account page
 And In the new user form I click on continue

@@ -45,7 +45,7 @@ Then I navigate to the landing page
 When I click on the Forgot Your Password Link
 And I enter the email address for user saved as: ForgotPasswordUser
 And I click the continue button in the Forgotten Password window
-Then there should be a new email for user: ForgotPasswordUser from: WERCSmartCustomer@ul.com with the title: WERCSmart Password Reset
+Then there should be a new email for user: ForgotPasswordUser from: <SiteNotification> with the title: WERCSmart Password Reset
 When I click on the link I should see the WERCSmart new account page
 
 Scenario: [50835] Forgot Password - Email Validation
@@ -55,7 +55,7 @@ Then In the Forgotten Password window I should see the following error messages:
 Given I generate a new email address for user saved as EmailValidation
 And I enter the email address for user saved as: EmailValidation
 When I click the continue button in the Forgotten Password window
-Then there should not be a new email for user: EmailValidation from: WERCSmartCustomer@ul.com with the title: WERCSmart Password Reset
+Then there should not be a new email for user: EmailValidation from: <SiteNotification> with the title: WERCSmart Password Reset
 Then In the Forgotten Password window I should see the following error messages: Email not updated
 Given I enter a email address: badlyformatted@nopostext
 When I click the continue button in the Forgotten Password window

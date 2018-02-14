@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using EnvDTE;
 using Mailosaur;
 using MySDS.SeleniumClasses;
 using NUnit.Framework;
@@ -424,20 +425,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
+				if (emailFrom.ToLower() == "<sitenotification>")
+				{
+					if (System.Configuration.ConfigurationManager.AppSettings.AllKeys.Contains("SiteType"))
+					{
+						var SiteType = System.Configuration.ConfigurationManager.AppSettings["SiteType"];
+						switch (SiteType.ToLower())
+						{
+							case ("staging"):
+								emailFrom = "ulscn.notifications@ulnotification.com";
+								break;
+							case ("production"):
+								emailFrom = "wercsmart.notifications@ulnotification.com";
+								break;
+							default: //Local
+								emailFrom = "wercsmartcustomer@ul.com";
+								break;
+						}
+					}
+					else
+					{
+						emailFrom = "wercsmartcustomer@ul.com";
+					}
+				}
 				var user = (User)Context.GetFromContext(savedAs);
 				if (EmailFunctions.WaitForInboxDifferences(user.Email))
 				{
 					var differences = EmailFunctions.GetInboxDifferences(user.Email);
 					var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address == emailFrom && x.Subject == title);
-
-					using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
-					{
-						sw.Write(matchingEmail.Html.Body);
-						sw.Flush();
-						sw.Close();
-					}
-
-					Context.AddToContext("Matching", matchingEmail);
 
 					if (shouldOrNot == "should")
 					{
@@ -448,6 +463,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 						Report.IsTrue(matchingEmail == null, "A matching email has been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has not been found.");
 					}
 
+					if (matchingEmail != null)
+					{
+						using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
+						{
+							sw.Write(matchingEmail.Html.Body);
+							sw.Flush();
+							sw.Close();
+						}
+					}
+
+					Context.AddToContext("Matching", matchingEmail);
 				}
 				else
 				{

@@ -9,7 +9,7 @@ Background:
 
 Given I go to the WERCSmart Log in
 
-Scenario: [50820] Language Selector - Japanese 
+Scenario: [50820] Language Selector - Japanese
 
 When From the Language drop down I select Japanese
 Then I should see for the sign in: ログイン
@@ -24,7 +24,7 @@ And I should see for the password label: Password
 And I should see for the forgotten password: Forgot your Password?
 And I should see for the login button: Login
 
-Scenario: [50828] Language Selector - Chinese 
+Scenario: [50828] Language Selector - Chinese
 
 When From the Language drop down I select Chinese
 Then I should see for the sign in: 注册

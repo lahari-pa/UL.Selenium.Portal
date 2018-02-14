@@ -25,6 +25,24 @@ using Wercs.Selenium.PortalUX.Classes;
 
 namespace WERCSmart
 {
+
+	[Binding]
+	public class WERCSmart_Setup_Steps
+	{
+		[BeforeTestRun(Order = -1)]
+		public static void BeforeTestRun()
+		{
+			var Dummy = "Variable";
+		}
+
+		[BeforeFeature(Order = -1)]
+		public static void BeforeFeature()
+		{
+			var Dummy = "Variable";
+			EventFunctions.BeforeFeature();
+		}
+	}
+
 	[Binding]
 	public class GlobalSteps
 	{

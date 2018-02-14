@@ -25,6 +25,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click the WERCSmart login button");
 			try
 			{
+				var blah = ResourcePool.UserPool.WERCSmart.WERCSmartUsers;
 				Report.Info("Beginning to click the Login button");
 				var selHomepage = new LandingPage();
 				if (!selHomepage.Wait_for_load(1))
