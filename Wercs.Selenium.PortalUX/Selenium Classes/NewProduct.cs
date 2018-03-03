@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
@@ -10,87 +8,94 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-    class NewProduct : BaseObject
-    {
-        // Again a pretty poor/generic ID AND CLASHES WITH FORWARD PRODUCT REGISTRATION!!!
-        // but it's the best we have....
-        public const string BasePath = "//div[@id='dataentry']";
+	class NewProduct : BaseObject
+	{
+		// Again a pretty poor/generic ID AND CLASHES WITH FORWARD PRODUCT REGISTRATION!!!
+		// but it's the best we have....
+		public const string BasePath = "//div[@id='dataentry']";
 
-        [FindsBy(How = How.XPath, Using = BasePath)]
-        protected override IWebElement containerElement { get; set; }
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
 
-        public string GetHeader()
-        {
-            return this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2).Text;
-        }
+		public string GetHeader()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2).Text;
+		}
 
-        public string GetInitialStatement()
-        {
-            return this.containerElement.FindElement(By.XPath(".//form//label[@class='control-label']"), 2).Text;
-        }
+		public string GetInitialStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//form//label[@class='control-label']"), 2).Text;
+		}
 
-        public List<string> RadioButtons()
-        {
-            return this.containerElement.FindElements(By.XPath(".//form//input[@type='radio']/../span"), 2).Select(x => x.Text.Trim()).ToList();
-        }
+		public List<string> RadioButtons()
+		{
+			return this.containerElement.FindElements(By.XPath(".//form//input[@type='radio']/../span"), 2).Select(x => x.Text.Trim()).ToList();
+		}
 
-	    public string ErrorMessage()
-	    {
-		    return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2).Text;
-	    }
+		public string ErrorMessage()
+		{
+			return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2).Text;
+		}
 
-        public string GetCurrentProduct()
-        {
-            return this.containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2).Text.Trim();
-        }
+		public string GetCurrentProduct()
+		{
+			return this.containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2).Text.Trim();
+		}
 
-        public void CreateNewProductOrCopy(bool newProduct = true)
-        {
-            var option = this.containerElement.FindElements(By.XPath(".//form//label[@class='radio']"), 2).FirstOrDefault(x => x.Text.StartsWith((newProduct ? "Yes" : "No")));
-            if (option == null)
-                return;
-            option.Click();
-        }
+		public void CreateNewProductOrCopy(bool newProduct = true)
+		{
+			var option = this.containerElement.FindElements(By.XPath(".//form//label[@class='radio']"), 2).FirstOrDefault(x => x.Text.StartsWith((newProduct ? "Yes" : "No")));
+			if (option == null)
+			{
+				return;
+			}
 
-        public bool ClickContinue()
-        {
-            try
-            {
-                var el = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'continue-button')]"), 2);
-                if (el == null)
-                    return false;
-                el.Click();
-                GeneralUtilities.Wait_for_load_finish();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+			option.Click();
+		}
 
-        public string ProductName
-        {
-            get { return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product name')]/../following-sibling::div/input"), 2).Text.Trim(); }
-            set { this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product name')]/../following-sibling::div/input"), 2).EnterText(value); }
-        }
+		public bool ClickContinue()
+		{
+			try
+			{
+				var el = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'continue-button')]"), 2);
+				if (el == null)
+				{
+					return false;
+				}
 
-        public string ProductType
-        {
-            set
-            {
-                var el = this.containerElement.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 2);
-                el.Click();
-                var inputField = this.containerElement.FindElement(By.XPath("//span[contains(@class,'select2-container')]//input"), 2);
-                inputField.EnterText(value);
-                GeneralUtilities.Wait_for_load_finish();
+				el.Click();
+				GeneralUtilities.Wait_for_load_finish();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
 
-                var dropDownResults = this.containerElement.FindElements(By.XPath("//span[contains(@class,'select2-container')]//ul/li"), 2);
-                var ddlEl = dropDownResults.FirstOrDefault(x => x.Text.Trim() == value);
-                if (ddlEl == null)
-                    return;
-                ddlEl.Click();
-            }
-        }
-    }
+		public string ProductName {
+			get { return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product name')]/../following-sibling::div/input"), 2).Text.Trim(); }
+			set { this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product name')]/../following-sibling::div/input"), 2).EnterText(value); }
+		}
+
+		public string ProductType {
+			set
+			{
+				var el = this.containerElement.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 2);
+				el.Click();
+				var inputField = this.containerElement.FindElement(By.XPath("//span[contains(@class,'select2-container')]//input"), 2);
+				inputField.EnterText(value);
+				GeneralUtilities.Wait_for_load_finish();
+
+				var dropDownResults = this.containerElement.FindElements(By.XPath("//span[contains(@class,'select2-container')]//ul/li"), 2);
+				var ddlEl = dropDownResults.FirstOrDefault(x => x.Text.Trim() == value);
+				if (ddlEl == null)
+				{
+					return;
+				}
+
+				ddlEl.Click();
+			}
+		}
+	}
 }

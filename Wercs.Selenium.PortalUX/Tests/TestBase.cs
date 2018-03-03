@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
 using Selenium.Core.Tests;
 using Wercs.Selenium.PortalUX.Properties;
 using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;

@@ -1,47 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-
 using SafewareReporting;
 using TechTalk.SpecFlow;
-using TestStack.White.Factory;
-using TestStack.White.UIItems.Finders;
-
 using NUnit.Framework;
+using ResourcePool;
 using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Steps;
-using Wercs.Selenium.PortalUX.Classes;
 
 [assembly: Apartment(ApartmentState.STA)]
 
 namespace WERCSmart
 {
-
-	[Binding]
-	public class WERCSmart_Setup_Steps
-	{
-		[BeforeTestRun(Order = -1)]
-		public static void BeforeTestRun()
-		{
-			var Dummy = "Variable";
-		}
-
-		[BeforeFeature(Order = -1)]
-		public static void BeforeFeature()
-		{
-			var Dummy = "Variable";
-			EventFunctions.BeforeFeature();
-		}
-	}
 
 	[Binding]
 	public class GlobalSteps
@@ -167,7 +137,7 @@ namespace WERCSmart
 			try
 			{
 				Report.Info("Navigating to the landing page");
-				GlobalParameters.Browser.WebBrowser.Navigate().GoToUrl(GlobalParameters.TestUrl);
+				SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
 				Report.Success("Successfully navigated to the landing page!");
 			}
 			catch (Exception ex)
@@ -184,7 +154,7 @@ namespace WERCSmart
 			try
 			{
 				Report.Info("Navigating to the URL: " + url);
-				GlobalParameters.Browser.WebBrowser.Navigate().GoToUrl(url);
+				SeleniumBrowser.WebBrowser.Navigate().GoToUrl(url);
 				Report.Success("Successfully navigated to the URL: " + url + "!");
 				Report.Screenshot();
 			}
@@ -202,7 +172,7 @@ namespace WERCSmart
 			try
 			{
 				Report.Info("Checking that the current URL contains: " + url);
-				var currentUrl = GlobalParameters.Browser.WebBrowser.Url;
+				var currentUrl = SeleniumBrowser.WebBrowser.Url;
 				Report.Info("Current URL is: " + currentUrl);
 				Report.IsTrue(currentUrl.Contains(url),
 					"Current URL was: " + currentUrl + ", which did not contain: " + url + "!",
@@ -222,13 +192,13 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Closing current window");
 			try
 			{
-				var mainWindowHandle = SafewareSeleniumUtilities.Context.GetFromContext("MainWindowHandle");
+				var mainWindowHandle = SeleniumUtilities.Context.GetFromContext("MainWindowHandle");
 				if (mainWindowHandle == null)
 				{ Report.Error("No Main Window Handle found!"); }
 				Report.Info("Attempting to close the current window");
-				GlobalParameters.Browser.WebBrowser.Close();
+				SeleniumBrowser.WebBrowser.Close();
 				Report.Info("Current window closed, switching to the MainWindowHandle");
-				GlobalParameters.Browser.WebBrowser.SwitchTo().Window(mainWindowHandle.ToString());
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(mainWindowHandle.ToString());
 				Report.Success("Browser window switched successfully!");
 				Report.Screenshot();
 			}

@@ -1,20 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using EnvDTE;
 using Mailosaur;
-using MySDS.SeleniumClasses;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
+using ResourcePool;
 using SafewareReporting;
-using SafewareSeleniumUtilities;
 using SeleniumUtilities;
 
 using TechTalk.SpecFlow;
@@ -564,7 +554,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var mylink = Context.GetFromContext("EmailLink").ToString();
 				Report.Info("Found a signup link of: '" + mylink + "'");
 				Report.Info("Attempting to navigate to the link...");
-				GlobalParameters.Browser.Navigate(mylink);
+				SeleniumBrowser.Navigate(mylink);
 				Report.Success("Navigated to the link!");
 				NewUser userCreatonPage = new NewUser();
 				Report.IsTrue(userCreatonPage.Wait_for_load(30), "New User Creation page did not load!", "User creation page loaded as expected!");

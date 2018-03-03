@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
@@ -12,97 +10,97 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-    class TopMenuBar : BaseObject
-    {
-        public const string BasePath = "//div[@class='navbar navbar-inverse navbar-fixed-top']";
-        [FindsBy(How = How.XPath, Using = BasePath)]
-        protected override IWebElement containerElement { get; set; }
+	class TopMenuBar : BaseObject
+	{
+		public const string BasePath = "//div[@class='navbar navbar-inverse navbar-fixed-top']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
 
-        public bool AccountOptionsVisible()
-        {
-            return this.containerElement.FindElement(By.XPath("//ul[@class='dropdown-menu']"), 2).Displayed;
-        }
+		public bool AccountOptionsVisible()
+		{
+			return this.containerElement.FindElement(By.XPath("//ul[@class='dropdown-menu']"), 2).Displayed;
+		}
 
-        public bool MyAccountOptionPresent()
-        {
-            return this.containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='My Account']"), 2) != null;
-        }
+		public bool MyAccountOptionPresent()
+		{
+			return this.containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='My Account']"), 2) != null;
+		}
 
-        public bool SignOutOptionPresent()
-        {
-            return this.containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='Sign Out']"), 2) != null;
-        }
+		public bool SignOutOptionPresent()
+		{
+			return this.containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[text()='Sign Out']"), 2) != null;
+		}
 
-        public void ClickOnUserTopRight()
-        {
+		public void ClickOnUserTopRight()
+		{
 			this.containerElement.FindElement(By.XPath("//a[@class='dropdown-toggle']"), 2).Click();
-        }
+		}
 
-        public bool ClickSignOut()
-        {
-            return SelectAccountOption("Sign Out");
-        }
+		public bool ClickSignOut()
+		{
+			return SelectAccountOption("Sign Out");
+		}
 
-        public bool ClickMyAccount()
-        {
-            return SelectAccountOption("My Account");
-        }
+		public bool ClickMyAccount()
+		{
+			return SelectAccountOption("My Account");
+		}
 
-        //Valid options: "My Account", "Sign Out"
-        public bool SelectAccountOption(string option)
-        {
-            try
-            {
-                //show account options
-                if (!AccountOptionsVisible())
-                {
-                    ClickOnUserTopRight();
-                    Delay.Seconds(10);
-                }
-                if (!AccountOptionsVisible())
-                {
-                    throw new Exception("Account options are not visible as expected");
-                }
-                IList<IWebElement> aTags = this.containerElement.FindElements(By.XPath("//ul[@class='dropdown-menu']/li/a"));
-                aTags.FirstOrDefault(x => x.Text == option.Trim()).Click();
-                Delay.Seconds(5);
-                return true;
-            }
-            catch (Exception)
-            {
-                Report.Info("There was a problem with the SelectAccountOption function for option: " + option);
-                return false;
-            }
-           
-        }
+		//Valid options: "My Account", "Sign Out"
+		public bool SelectAccountOption(string option)
+		{
+			try
+			{
+				//show account options
+				if (!AccountOptionsVisible())
+				{
+					ClickOnUserTopRight();
+					Delay.Seconds(10);
+				}
+				if (!AccountOptionsVisible())
+				{
+					throw new Exception("Account options are not visible as expected");
+				}
+				IList<IWebElement> aTags = this.containerElement.FindElements(By.XPath("//ul[@class='dropdown-menu']/li/a"));
+				aTags.FirstOrDefault(x => x.Text == option.Trim()).Click();
+				Delay.Seconds(5);
+				return true;
+			}
+			catch (Exception)
+			{
+				Report.Info("There was a problem with the SelectAccountOption function for option: " + option);
+				return false;
+			}
 
-        public bool WercSmartLogoShowing()
-        {
-            return this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2) != null;
-        }
+		}
 
-        public bool NotificationIconShowing()
-        {
-            return this.containerElement.FindElement(By.XPath(".//i[@class='fa fa-bell']"), 2) != null;
-        }
+		public bool WercSmartLogoShowing()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2) != null;
+		}
 
-        public void ClickNotificationIcon()
-        {
+		public bool NotificationIconShowing()
+		{
+			return this.containerElement.FindElement(By.XPath(".//i[@class='fa fa-bell']"), 2) != null;
+		}
+
+		public void ClickNotificationIcon()
+		{
 			this.containerElement.FindElement(By.XPath("..//i[@class='fa fa-bell']/.."), 2).Click();
-        }
+		}
 
-        public bool UserIconShowing()
-        {
-            return this.containerElement.FindElement(By.XPath(".//i[@class='fa fa-user']"), 2) != null;
-        }
+		public bool UserIconShowing()
+		{
+			return this.containerElement.FindElement(By.XPath(".//i[@class='fa fa-user']"), 2) != null;
+		}
 
-        public string GetCurrentUser()
-        {
-            Report.Info("Beginning get current user");
-            var ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
-            ddt.ScrollElementIntoView();
-            return ddt.GetValue();
+		public string GetCurrentUser()
+		{
+			Report.Info("Beginning get current user");
+			var ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
+			ddt.ScrollElementIntoView();
+			return ddt.GetValue();
 
-        }
-    }
+		}
+	}
 }

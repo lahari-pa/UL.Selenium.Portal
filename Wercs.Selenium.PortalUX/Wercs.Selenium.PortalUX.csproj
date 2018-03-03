@@ -68,8 +68,9 @@
       <HintPath>packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mailosaur, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Mailosaur.3.0.1\lib\Mailosaur.dll</HintPath>
+    <Reference Include="Mailosaur, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Mailosaur.3.0.2\lib\Mailosaur.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework">
@@ -110,17 +111,13 @@
       <HintPath>packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ResourcePool, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.1.4.2\lib\net45\ResourcePool.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.5.2\lib\net45\ResourcePool.dll</HintPath>
     </Reference>
     <Reference Include="SafewareReportingPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Safeware.SeleniumUtilities.1.4.2\lib\net45\SafewareReportingPlugin.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.5.2\lib\net45\SafewareReportingPlugin.dll</HintPath>
     </Reference>
     <Reference Include="SafewareSeleniumUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Safeware.SeleniumUtilities.1.4.2\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.5.2\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
     </Reference>
     <Reference Include="Selenium.Core, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Wercs.Selenium.Core.3.0.1-build20171027-004\lib\net45\Selenium.Core.dll</HintPath>
@@ -143,9 +140,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Safeware.SeleniumUtilities.1.4.2\lib\net45\TReVor.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.5.2\lib\net45\TReVor.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>packages\Selenium.WebDriver.3.5.2\lib\net40\WebDriver.dll</HintPath>
@@ -381,9 +376,15 @@
     <Error Condition="!Exists('packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" IF NOT EXIST "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)\Resources\Users" md  "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)\Resources\Users"
-IF NOT EXIST "$(TargetDir)\Resources\Users" md "$(TargetDir)\Resources\Users"
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" IF EXIST "$(TargetDir)\Resources\Users\*" xcopy "$(TargetDir)\Resources\Users" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)\Resources\Users"</PostBuildEvent>
+    <PostBuildEvent>rem ##### TRVSERVER BACKUP DIRECTORY (CORE FILES) #####
+
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" md  "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)$(TargetName)$(TargetExt).config" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)$(TargetName)$(TargetExt)" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)SafewareSeleniumUtilities.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)SafewareReportingPlugin.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)TReVor.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)ResourcePool.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets')" />

@@ -10,7 +10,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
 using SeleniumUtilities;
-using TechTalk.SpecFlow;
 
 namespace MySDS.SeleniumClasses
 {

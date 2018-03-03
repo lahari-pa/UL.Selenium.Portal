@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ResourcePool;
 using SafewareReporting;
-using SafewareSeleniumUtilities;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 
@@ -205,11 +202,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Success("More Information link clicked!");
 				Report.Info("Switching to new window");
 
-				Context.AddToContext("MainWindowHandle", GlobalParameters.Browser.WebBrowser.CurrentWindowHandle);
+				Context.AddToContext("MainWindowHandle", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
 
-				var windowHandles = GlobalParameters.Browser.WebBrowser.WindowHandles;
-				var newTab = windowHandles.FirstOrDefault(x => x != GlobalParameters.Browser.WebBrowser.CurrentWindowHandle);
-				GlobalParameters.Browser.WebBrowser.SwitchTo().Window(newTab);
+				var windowHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				var newTab = windowHandles.FirstOrDefault(x => x != SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(newTab);
 				Report.Success("Window switched successfully!");
 				Report.Screenshot();
 			}

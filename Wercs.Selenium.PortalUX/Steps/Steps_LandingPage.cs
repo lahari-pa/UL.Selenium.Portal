@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -31,7 +27,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				if (!selHomepage.Wait_for_load(1))
 				{
 					Report.Info("Not on the Homepage, navigating...");
-					GlobalParameters.Browser.WebBrowser.Navigate().GoToUrl(GlobalParameters.TestUrl);
+					SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
 					Report.IsTrue(selHomepage.Wait_for_load(30), "Homepage failed to load!", "Homepage loaded successfully!");
 				}
 

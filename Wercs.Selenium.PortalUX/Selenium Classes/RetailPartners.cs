@@ -1,57 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-    class RetailPartners : BaseObject
-    {
-        public const string BasePath = "//div[@id='retailPartners']";
-        [FindsBy(How = How.XPath, Using = BasePath)]
-        protected override IWebElement containerElement { get; set; }
+	class RetailPartners : BaseObject
+	{
+		public const string BasePath = "//div[@id='retailPartners']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
 
-        public string HeaderShowing()
-        {
-            return this.containerElement.FindElement(By.XPath("..//h2"), 2).Text;
-        }
+		public string HeaderShowing()
+		{
+			return this.containerElement.FindElement(By.XPath("..//h2"), 2).Text;
+		}
 
-        public List<string> SubHeadingsShowing()
-        {
-            return this.containerElement.FindElements(By.XPath(".//h3"), 2).Select(x => x.Text.Trim()).ToList();
-        }
+		public List<string> SubHeadingsShowing()
+		{
+			return this.containerElement.FindElements(By.XPath(".//h3"), 2).Select(x => x.Text.Trim()).ToList();
+		}
 
-	    public bool ClickRetailer(string retailer, bool exact = false)
-	    {
-		    // Finds all the most recent retail partners
-		    var recentPartners = this.containerElement.FindElements(By.XPath(".//div[@class='most-recent']//span[@class='sr-only']"), 2);
+		public bool ClickRetailer(string retailer, bool exact = false)
+		{
+			// Finds all the most recent retail partners
+			var recentPartners = this.containerElement.FindElements(By.XPath(".//div[@class='most-recent']//span[@class='sr-only']"), 2);
 
-		    if (recentPartners.Any(x => x.Text.Contains(retailer)))
-		    {
+			if (recentPartners.Any(x => x.Text.Contains(retailer)))
+			{
 				// Retailer was found in the most recent retailer portion of the screen!
-			    recentPartners.FirstOrDefault(x => x.Text.Contains(retailer)).FindElement(By.XPath("../.."),2).Click();
-			    return true;
-		    }
+				recentPartners.FirstOrDefault(x => x.Text.Contains(retailer)).FindElement(By.XPath("../.."), 2).Click();
+				return true;
+			}
 
 			// Retailer not found in the most recent retailers portion, so checking the rest of the retailers
-		    var allPartners = this.containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//span[@class='sr-only']"), 2);
+			var allPartners = this.containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//span[@class='sr-only']"), 2);
 
-		    if (allPartners.Any(x => x.Text.Contains(retailer)))
-		    {
+			if (allPartners.Any(x => x.Text.Contains(retailer)))
+			{
 				// Retailer was found in the most recent retailer portion of the screen!
-			    allPartners.FirstOrDefault(x => x.Text.Contains(retailer)).FindElement(By.XPath("../.."), 2).Click();
-			    return true;
-		    }
+				allPartners.FirstOrDefault(x => x.Text.Contains(retailer)).FindElement(By.XPath("../.."), 2).Click();
+				return true;
+			}
 
 			// Retailer not found!
 
-		    return false;
-	    }
-    }
+			return false;
+		}
+	}
 
 	class RetailParntersDetails : BaseObject
 	{
@@ -100,7 +98,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var checkbox = correctRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2);
 				var Checked = checkbox.Selected;
 				if (Checked != trueFalse)
+				{
 					correctRow.FindElement(By.XPath(".//label[@class='switch']"), 2).Click();
+				}
+
 				return true;
 			}
 			return false;
@@ -129,7 +130,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var el = this.containerElement.FindElement(By.XPath(".//p/a[contains(@class,'btn')]"), 2);
 			if (el == null)
+			{
 				return false;
+			}
 
 			try
 			{

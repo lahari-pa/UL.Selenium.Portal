@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
@@ -10,251 +8,275 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-    class ProductsGrid : BaseObject
-    {
-        public const string BasePath = "//div[@id='products-grid']";
+	class ProductsGrid : BaseObject
+	{
+		public const string BasePath = "//div[@id='products-grid']";
 
-        [FindsBy(How = How.XPath, Using = BasePath)]
-        protected override IWebElement containerElement { get; set; }
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
 
-        public bool HeaderShowing()
-        {
-            var el = this.containerElement.FindElements(By.XPath("./h3"), 2);
-            return el.FirstOrDefault(x => x.Text.Trim() == "YOUR PRODUCTS") != null;
-        }
+		public bool HeaderShowing()
+		{
+			var el = this.containerElement.FindElements(By.XPath("./h3"), 2);
+			return el.FirstOrDefault(x => x.Text.Trim() == "YOUR PRODUCTS") != null;
+		}
 
-        public bool ProductsPresent()
-        {
-            var productsGrid = this.containerElement.FindElement(By.XPath(".//table"), 2);
-            if (productsGrid == null)
-                return false;
-            return productsGrid.FindElements(By.XPath(".//tbody/tr"), 2).Count != 0;
-        }
+		public bool ProductsPresent()
+		{
+			var productsGrid = this.containerElement.FindElement(By.XPath(".//table"), 2);
+			if (productsGrid == null)
+			{
+				return false;
+			}
 
-        public int ProductsCount()
-        {
-            var productsGrid = this.containerElement.FindElement(By.XPath(".//table"), 2);
-            if (productsGrid == null)
-                return 0;
-            return productsGrid.FindElements(By.XPath(".//tbody/tr"), 2).Count;
-        }
+			return productsGrid.FindElements(By.XPath(".//tbody/tr"), 2).Count != 0;
+		}
 
-        public bool FilterOptionShowingCorrectly(string option, string colourExpected)
-        {
-            var allFilters = this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2);
-            var requiredFilter = allFilters.FirstOrDefault(x => x.Text.Contains(option));
-            if (requiredFilter == null)
-                return false;
-            // So the filter exists, now we check the colour
+		public int ProductsCount()
+		{
+			var productsGrid = this.containerElement.FindElement(By.XPath(".//table"), 2);
+			if (productsGrid == null)
+			{
+				return 0;
+			}
 
-            var colourShowingRaw = requiredFilter.GetCssValue("border-bottom-color");
-            var colourShowing = "";
+			return productsGrid.FindElements(By.XPath(".//tbody/tr"), 2).Count;
+		}
 
-            switch (colourShowingRaw)
-            {
-                case ("rgba(192, 203, 209, 1)"):
-                    colourShowing = "Light Grey";
-                    break;
-                case ("rgba(237, 185, 46, 1)"):
-                    colourShowing = "Yellow";
-                    break;
-                case ("rgba(0, 152, 255, 1)"):
-                    colourShowing = "Blue";
-                    break;
-                case ("rgba(30, 143, 31, 1)"):
-                    colourShowing = "Green";
-                    break;
-                case ("rgba(75, 82, 87, 1)"):
-                    colourShowing = "Dark Grey";
-                    break;
-                case ("rgba(207, 58, 83, 1)"):
-                    colourShowing = "Red";
-                    break;
-            }
+		public bool FilterOptionShowingCorrectly(string option, string colourExpected)
+		{
+			var allFilters = this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2);
+			var requiredFilter = allFilters.FirstOrDefault(x => x.Text.Contains(option));
+			if (requiredFilter == null)
+			{
+				return false;
+			}
+			// So the filter exists, now we check the colour
 
-            return (colourShowing == colourExpected);
+			var colourShowingRaw = requiredFilter.GetCssValue("border-bottom-color");
+			var colourShowing = "";
 
-        }
+			switch (colourShowingRaw)
+			{
+				case ("rgba(192, 203, 209, 1)"):
+					colourShowing = "Light Grey";
+					break;
+				case ("rgba(237, 185, 46, 1)"):
+					colourShowing = "Yellow";
+					break;
+				case ("rgba(0, 152, 255, 1)"):
+					colourShowing = "Blue";
+					break;
+				case ("rgba(30, 143, 31, 1)"):
+					colourShowing = "Green";
+					break;
+				case ("rgba(75, 82, 87, 1)"):
+					colourShowing = "Dark Grey";
+					break;
+				case ("rgba(207, 58, 83, 1)"):
+					colourShowing = "Red";
+					break;
+			}
 
-        public bool ClickFilterOption(string option)
-        {
-            try
-            {
-                var allFilters = this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2);
-                var requiredFilter = allFilters.FirstOrDefault(x => x.Text.Contains(option));
-                if (requiredFilter == null)
-                    return false;
-                requiredFilter.Click();
-                GeneralUtilities.Wait_for_load_finish();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+			return (colourShowing == colourExpected);
 
-        public bool MoreFiltersOptionPresent()
-        {
-            return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2) != null;
-        }
+		}
 
-        public bool ProductIdNameFieldPresent()
-        {
-            return this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2) != null;
-        }
+		public bool ClickFilterOption(string option)
+		{
+			try
+			{
+				var allFilters = this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2);
+				var requiredFilter = allFilters.FirstOrDefault(x => x.Text.Contains(option));
+				if (requiredFilter == null)
+				{
+					return false;
+				}
 
-        public bool BulkActionsOptionPresent()
-        {
-            return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'Bulk Actions')]"), 2) != null;
-        }
+				requiredFilter.Click();
+				GeneralUtilities.Wait_for_load_finish();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
 
-        public void Click_BulkActions()
-        {
+		public bool MoreFiltersOptionPresent()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2) != null;
+		}
+
+		public bool ProductIdNameFieldPresent()
+		{
+			return this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2) != null;
+		}
+
+		public bool BulkActionsOptionPresent()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'Bulk Actions')]"), 2) != null;
+		}
+
+		public void Click_BulkActions()
+		{
 			this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'Bulk Actions')]"), 2).Click();
-        }
+		}
 
-        public bool GridHeaderShowing(string header)
-        {
-            var allGridHeaders = this.containerElement.FindElements(By.XPath(".//table//th"), 2);
-            return allGridHeaders.Select(x => x.Text.Trim()).Contains(header);
-        }
+		public bool GridHeaderShowing(string header)
+		{
+			var allGridHeaders = this.containerElement.FindElements(By.XPath(".//table//th"), 2);
+			return allGridHeaders.Select(x => x.Text.Trim()).Contains(header);
+		}
 
-        public string GetIdInFirstGridRow()
-        {
-            return this.containerElement.FindElement(By.XPath(".//tbody//tr/td[1]//small"), 2).Text;
-        }
+		public string GetIdInFirstGridRow()
+		{
+			return this.containerElement.FindElement(By.XPath(".//tbody//tr/td[1]//small"), 2).Text;
+		}
 
-        public bool NavigateToNextPage()
-        {
-            var el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'panel-footer')]//li/a[contains(@class,'next')]"), 2);
-            if (el == null)
-                return false;
-            el.Click();
-            return true;
-        }
+		public bool NavigateToNextPage()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'panel-footer')]//li/a[contains(@class,'next')]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
 
-        public string ProductIdField
-        {
-            get { return this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2).Text; }
-            set
-            {
-                var el = this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2);
-                el.EnterText(value);
-                el.SendKeys(Keys.Return);
-            }
-        }
+			el.Click();
+			return true;
+		}
 
-        public bool ClickActionsForFirstResultInGrid()
-        {
-            try
-            {
-                var button = this.containerElement.FindElement(By.XPath(".//table//tbody//tr[1]//button[contains(@class,'ellipsis-button')]"), 2);
-                button.Click();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+		public string ProductIdField {
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2).Text; }
+			set
+			{
+				var el = this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2);
+				el.EnterText(value);
+				el.SendKeys(Keys.Return);
+			}
+		}
 
-        }
+		public bool ClickActionsForFirstResultInGrid()
+		{
+			try
+			{
+				var button = this.containerElement.FindElement(By.XPath(".//table//tbody//tr[1]//button[contains(@class,'ellipsis-button')]"), 2);
+				button.Click();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
 
-        public List<string> ActionsAvailableInDropDown()
-        {
-            var dropDownContents = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a"), 2);
-            if (dropDownContents.Count == 0)
-                return null;
-            return dropDownContents.Select(x => x.Text.Trim()).ToList();
-        }
+		}
 
-        public bool ClickRowAction(string action)
-        {
-            var dropDownContents = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a"), 2);
-            if (dropDownContents.Count == 0)
-                return false;
+		public List<string> ActionsAvailableInDropDown()
+		{
+			var dropDownContents = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a"), 2);
+			if (dropDownContents.Count == 0)
+			{
+				return null;
+			}
 
-            var el = dropDownContents.FirstOrDefault(x => x.Text.Trim() == action);
-            if (el == null)
-                return false;
-            el.Click();
-            return true;
-        }
+			return dropDownContents.Select(x => x.Text.Trim()).ToList();
+		}
 
-        public ProductGridItem FirstProductInGrid()
-        {
-            var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
+		public bool ClickRowAction(string action)
+		{
+			var dropDownContents = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a"), 2);
+			if (dropDownContents.Count == 0)
+			{
+				return false;
+			}
 
-            var productElement = new ProductGridItem();
-            productElement.ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
-            productElement.ProductName = productRow.FindElement(By.XPath(".//div[@data-bind='text:Name']"), 2).Text.Trim();
-            productElement.DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
-            return productElement;
-        }
-    }
+			var el = dropDownContents.FirstOrDefault(x => x.Text.Trim() == action);
+			if (el == null)
+			{
+				return false;
+			}
 
-    public class ProductGridItem
-    {
-        public string ProductId { get; set; }
-        public string ProductName { get; set; }
-        public string DateCreated { get; set; }
-    }
+			el.Click();
+			return true;
+		}
 
-    class BulkActions : BaseObject
-    {
-        // Really rubbish identifier - but it's the best we have at the moment!
-        public const string BasePath = "//h3[text()='Bulk Actions']/../..";
+		public ProductGridItem FirstProductInGrid()
+		{
+			var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
 
-        [FindsBy(How = How.XPath, Using = BasePath)]
-        protected override IWebElement containerElement { get; set; }
+			var productElement = new ProductGridItem();
+			productElement.ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
+			productElement.ProductName = productRow.FindElement(By.XPath(".//div[@data-bind='text:Name']"), 2).Text.Trim();
+			productElement.DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
+			return productElement;
+		}
+	}
 
-        public List<string> OptionsAvailable()
-        {
-            return this.containerElement.FindElements(By.XPath(".//a//div[contains(@class,'btn-text')]"),2).Select(x=>x.Text.Trim().Replace("\r\n"," ")).ToList();
-        }
+	public class ProductGridItem
+	{
+		public string ProductId { get; set; }
+		public string ProductName { get; set; }
+		public string DateCreated { get; set; }
+	}
 
-        public bool OptionChangesOnHover(string option)
-        {
-            var el = this.containerElement.FindElements(By.XPath(".//a//div[contains(@class,'btn-text')]"), 2).FirstOrDefault(x => x.Text.Trim().Replace("\r\n", " ") == option);
-            return el.HoveringChangesColour();
-        }
+	class BulkActions : BaseObject
+	{
+		// Really rubbish identifier - but it's the best we have at the moment!
+		public const string BasePath = "//h3[text()='Bulk Actions']/../..";
 
-        public bool ClickOption(string option)
-        {
-            try
-            {
-                var el = this.containerElement.FindElements(By.XPath(".//a//div[contains(@class,'btn-text')]"), 2).FirstOrDefault(x => x.Text.Trim().Replace("\r\n", " ") == option);
-                if (el == null)
-                    return false;
-                el.Click();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
 
-        public void ClickClose()
-        {
-			this.containerElement.FindElement(By.XPath(".//button[@class='close']"),2).Click();
-        }
-    }
+		public List<string> OptionsAvailable()
+		{
+			return this.containerElement.FindElements(By.XPath(".//a//div[contains(@class,'btn-text')]"), 2).Select(x => x.Text.Trim().Replace("\r\n", " ")).ToList();
+		}
 
-    class DeleteDialog : BaseObject
-    {
-        public const string BasePath = "//h3[text()='Delete Product']/../..";
-        [FindsBy(How = How.XPath, Using = BasePath)]
-        protected override IWebElement containerElement { get; set; }
+		public bool OptionChangesOnHover(string option)
+		{
+			var el = this.containerElement.FindElements(By.XPath(".//a//div[contains(@class,'btn-text')]"), 2).FirstOrDefault(x => x.Text.Trim().Replace("\r\n", " ") == option);
+			return el.HoveringChangesColour();
+		}
 
-        public void ClickDelete()
-        {
+		public bool ClickOption(string option)
+		{
+			try
+			{
+				var el = this.containerElement.FindElements(By.XPath(".//a//div[contains(@class,'btn-text')]"), 2).FirstOrDefault(x => x.Text.Trim().Replace("\r\n", " ") == option);
+				if (el == null)
+				{
+					return false;
+				}
+
+				el.Click();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public void ClickClose()
+		{
+			this.containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).Click();
+		}
+	}
+
+	class DeleteDialog : BaseObject
+	{
+		public const string BasePath = "//h3[text()='Delete Product']/../..";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public void ClickDelete()
+		{
 			this.containerElement.FindElement(By.XPath(".//button[text()='Delete']"), 2).Click();
-        }
+		}
 
-        public void ClickCancel()
-        {
+		public void ClickCancel()
+		{
 			this.containerElement.FindElement(By.XPath(".//button[text()='Cancel']"), 2).Click();
-        }
-    }
+		}
+	}
 }
