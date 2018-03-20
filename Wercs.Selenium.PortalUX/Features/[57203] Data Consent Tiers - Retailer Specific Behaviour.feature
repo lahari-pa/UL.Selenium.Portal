@@ -14,7 +14,7 @@ Then I click the Retail Partners icon in the Navigation Pane
 
 Scenario: [57206] Retailer specific - CVS
 When I select the retailer: CVS
-Then I confirm that there is a section labeled: CVS & You
+Then I confirm that there is a section labeled: CVS
 And I confirm that under the pie chart I see the label: % of your product portfolio is associated with CVS
 And I confirm that: CVS requires suppliers of all store branded products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
 

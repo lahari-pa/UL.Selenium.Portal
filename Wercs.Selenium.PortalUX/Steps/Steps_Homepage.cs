@@ -154,28 +154,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 									Report.IsTrue(selHomepage.QuickLinkButtonShowing("Register Product"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
 									Report.IsTrue(selHomepage.QuickLinkHoveringChangeColour("Register Product"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
 									break;
-								case ("register goodguide hyperlink"):
-									Report.IsTrue(selHomepage.QuickLinkButtonShowing("Register GoodGuide"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-									Report.IsTrue(selHomepage.QuickLinkHoveringChangeColour("Register GoodGuide"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
-									break;
-								case ("register purview hyperlink"):
-									Report.IsTrue(selHomepage.QuickLinkButtonShowing("Register PurView"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-									Report.IsTrue(selHomepage.QuickLinkHoveringChangeColour("Register PurView"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
-									break;
 								case ("wercslink hyperlink"):
 									Report.IsTrue(selHomepage.QuickLinkButtonShowing("WERCSLink"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
 									Report.IsTrue(selHomepage.QuickLinkHoveringChangeColour("WERCSLink"), item + " did not change colour when hovering!", item + " changed colour when hovering!");
 									break;
 								case ("subheading product information"):
-									Report.IsTrue(selHomepage.TopGridHeaderPresent("PRODUCT INFORMATION"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+									Report.IsTrue(selHomepage.TopGridHeaderPresent("Product Information"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
 									break;
 								case ("subheading alerts"):
-									Report.IsTrue(selHomepage.TopGridHeaderPresent("ALERTS"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-									Report.IsTrue(selHomepage.TopGridMoreOptionShowing("Alerts"), item + " was not displaying the 'MORE...' option!", item + " was correctly displaying the 'MORE...' option!");
+									Report.IsTrue(selHomepage.TopGridHeaderPresent("Alerts"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
 									break;
 								case ("subheading announcements"):
-									Report.IsTrue(selHomepage.TopGridHeaderPresent("ANNOUNCEMENTS"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
-									Report.IsTrue(selHomepage.TopGridMoreOptionShowing("Announcements"), item + " was not displaying the 'MORE...' option!", item + " was correctly displaying the 'MORE...' option!");
+									Report.IsTrue(selHomepage.TopGridHeaderPresent("Announcements"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+									break;
+								case ("subheading product information expanded"):
+									Report.IsTrue(selHomepage.TopGridHeaderPresent("Product Information"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+									break;
+								case ("subheading alerts expanded"):
+									Report.IsTrue(selHomepage.TopGridHeaderPresent("Alerts"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
+									Report.IsTrue(selHomepage.TopGridMoreOptionShowing("Alerts"), item + " was not displaying the 'MORE...' option!", item + " was correctly displaying the 'MORE...' option!");
+									break;
+								case ("subheading announcements expanded"):
+									Report.IsTrue(selHomepage.TopGridHeaderPresent("Announcements"), item + " was not present in the " + area + "!", item + " was present in the " + area + ", as expected");
 									break;
 							}
 							break;
@@ -221,19 +221,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on the red triangle next to Product Information to (expand|collapse) the section")]
-		public void WhenIClickOnTheRedTraingleNextToProductInformation(string expandCollapse)
+		[StepDefinition(@"I click on the triangle next to Product Information to (expand|collapse) the section")]
+		public void WhenIClickOnTheTraingleNextToProductInformation(string expandCollapse)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking on Red Triangle next to Product Information");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking on Triangle next to Product Information");
 			try
 			{
-				Report.Info("Clicking on Red Triangle next to Product Information to " + expandCollapse + " the section");
+				Report.Info("Clicking on Triangle next to Product Information to " + expandCollapse + " the section");
 				var selHomepage = new Homepage();
-				selHomepage.ClickRedArrowNextToProductInformation(expandCollapse == "expand");
+				selHomepage.ClickArrowNextToProductInformation(expandCollapse == "expand");
 				GeneralUtilities.Wait_for_load_finish();
 				Delay.Seconds(Delay.SpeedFactor * 2);
 				Report.Screenshot();
-				Report.Success("Red Triangle clicked successfully!");
+				Report.Success("Triangle clicked successfully!");
 			}
 			catch (Exception ex)
 			{
@@ -453,13 +453,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I following should be found in the (header bar|user dropdown|navigation bar)")]
-		public void TheFollowingAreShowingInThe(string area, TechTalk.SpecFlow.Table expected)
+		[StepDefinition(@"the following (icons|icons and labels) should be found in the (header bar|user dropdown|navigation bar)")]
+
+		public void TheFollowingAreShowingInThe(string lookingfor, string area, TechTalk.SpecFlow.Table expected)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking correct elements are found in " + area);
 			try
 			{
-				Report.Info("Checking that the correct elements are presebt in the " + area);
+				Report.Info("Checking that the correct elements are present in the " + area);
+				bool iconsOnly = lookingfor != "icons and labels";
 				foreach (var row in expected.Rows)
 				{
 					switch (area)
@@ -467,7 +469,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						case ("navigation bar"):
 							{
 								var selNav = new NavigationBar();
-								Report.IsTrue(selNav.ItemShowingInNavigationPanel(row["Item"]),
+								Report.IsTrue(selNav.ItemShowingInNavigationPanel(row["Item"], iconsOnly),
 									row["Item"] + " was not found in the Navigation Bar!",
 									row["Item"] + " was successfully found in the Navigation Bar!");
 								break;

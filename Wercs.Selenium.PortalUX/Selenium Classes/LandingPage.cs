@@ -17,6 +17,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public void Click_Login()
 		{
 			var loginButton = this.containerElement.FindElement(By.XPath(".//a[@id='loginButton']"), 2);
+			if (loginButton == null)
+			{ loginButton = this.containerElement.FindElement(By.XPath(".//a[contains (@href, 'ssologin')]"), 2); };
 			loginButton.Click();
 			var selLogin = new Login();
 			selLogin.Wait_for_load();

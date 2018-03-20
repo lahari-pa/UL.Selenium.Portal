@@ -45,7 +45,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool TopGridHeaderPresent(string header)
 		{
-			var headers = this.containerElement.FindElements(By.XPath(".//div[@class='row collapse-headings']//h3"), 2);
+			var headers = this.containerElement.FindElements(By.XPath(".//div[@id='homeHeader']//h3"), 2);
 			return headers.FirstOrDefault(x => x.Text.Trim().Contains(header.Trim())) != null;
 		}
 
@@ -91,9 +91,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-		public void ClickRedArrowNextToProductInformation(bool expand)
+		public void ClickArrowNextToProductInformation(bool expand)
 		{
-			var element = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'collapse-panels') and @href='#at-a-glance']"), 2);
+			var element = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'collapse-control') and @href='#at-a-glance']"), 2);
 			var expanded = element.GetAttribute("aria-expanded") == null ? true : Convert.ToBoolean(element.GetAttribute("aria-expanded"));
 			if (!expanded && expand || (expanded && !expand))
 			{

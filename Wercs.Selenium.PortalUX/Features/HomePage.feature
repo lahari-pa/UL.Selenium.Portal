@@ -12,12 +12,11 @@
 Feature: Home Page
 
 Background:
-Given I login as the administrator
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 
 Scenario: [55796] Navigate to Home Page
 Then I should see the UL/WERCSmart Logo in the header bar
-And I should see the Notification Icon in the header bar
 And I should see the User Icon in the header bar
 # And I should see the Supplier Name Dropdown in the header bar
 Then I click the User Icon
@@ -26,31 +25,43 @@ And I should see Sign Out in the user dropdown
 Then I should see the Navigation Menu Icon in the navigation bar
 Then I expand the Navigation Menu
 
-And I following should be found in the navigation bar
+And the following icons and labels should be found in the navigation bar
 | Item                 |
 | Home                 |
 | Register New Product |
 | My Messages          |
 | Retail Partners      |
+| Supplier Reports     |
 | UL Solution Center   |
 | Shopping Cart        |
 | Support              |
 
-Then I should see the Register Product Hyperlink in the main window
-And I should see the Register GoodGuide Hyperlink in the main window
-And I should see the Register PurView Hyperlink in the main window
-And I should see the WERCSLink Hyperlink in the main window
-And I scroll to the bottom of the page
-Then I should see the Register Product Hyperlink in the home page header
-And I should see the Register GoodGuide Hyperlink in the home page header
-And I should see the Register PurView Hyperlink in the home page header
-And I should see the WERCSLink Hyperlink in the home page header
+Then I collapse the Navigation Menu
+
+And the following icons should be found in the navigation bar
+| Item                 |
+| Home                 |
+| Register New Product |
+| My Messages          |
+| Retail Partners      |
+| Supplier Reports     |
+| UL Solution Center   |
+| Shopping Cart        |
+| Support              |
+
+Then I click on the triangle next to Product Information to collapse the section
 And I scroll to the top of the page
 And I should see the Subheading Product Information in the main window
 And I should see the Subheading Alerts in the main window
 And I should see the Subheading Announcements in the main window
-And I should see the Subheading Your Products in the products grid
-Then there should be products available in the Products Grid
+And I should see the Subheading My Products in the products grid
+Then I click on the triangle next to Product Information to expand the section
+
+And I should see the Subheading Product Information expanded in the main window
+And I should see the Subheading Alerts expanded in the main window
+And I should see the Subheading Announcements expanded in the main window
+
+
 
 Scenario: [55817] Product Information Panel
 When I click on the red triangle next to Product Information to collapse the section
@@ -113,7 +124,7 @@ And the Product Grid should have the following headers:
 | ID / Product Name |
 | Date Created      |
 | Retailers         |
-| Actions           |  
+| Actions           |
 
 And I can navigate between pages using the pagniation buttons at the bottom of the grid
 Given I search for the first product in the table
@@ -338,4 +349,4 @@ And UNDER DEVELOPMENT
 
 Scenario: [56285] Product Information - Announcements - click More
 Then I click More below the Announcements Panel
-And UNDER DEVELOPMENT 
+And UNDER DEVELOPMENT
