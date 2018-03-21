@@ -141,11 +141,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		[StepDefinition(@"I enter a email address: (.*)")]
+		[StepDefinition(@"I enter an email address: (.*)")]
 		public void GivenIEnterAEmailAddress(string email)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I enter email address: " + email);
 			try
 			{
+				if (email.Contains("savedas"))
+				{
+					email = email.Replace("savedas", "").Trim();
+					email = Context.GetFromContext(email).ToString();
+				}
+
 				int i = 0;
 				while (i < 10)
 				{
@@ -216,6 +223,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			try
 			{
+				Delay.Seconds(5);
 				Report.Info("Expecting confirmation message " + confirmMessage);
 				var sel_forgotpasswordconfirm = new ForgottenPassword();
 				var showing = sel_forgotpasswordconfirm.ForgotPasswordSuccessMessage();

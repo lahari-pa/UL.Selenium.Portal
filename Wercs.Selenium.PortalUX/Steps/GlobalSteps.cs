@@ -7,6 +7,8 @@ using NUnit.Framework;
 using ResourcePool;
 using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using System.IO;
+using System.Linq;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -271,6 +273,143 @@ namespace WERCSmart
 			}
 		}
 
+		[StepDefinition(@"I save the current emails in the inbox for address saved as: (.*)")]
+		public void GivenISaveTheCurrentEmailsInTheInboxForRandom(string savedas)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I save the current emails in this inbox so I can locate the new one when it arrives");
+			try
+			{
+				var emailAddress = Context.GetFromContext(savedas).ToString();
+				Report.Info("Storing inbox for address: " + emailAddress);
+				EmailFunctions.StoreCurrentInbox(emailAddress);
+				Report.Success("Inbox stored successfully!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Creating and saving an email address to be used in other steps within a test case
+		/// </summary>
+		/// <param name="createdEmail"></param>
+		/// <param name="savedAs"></param>
+		[StepDefinition(@"I create an email (.*) and save it as (.*)")]
+		public void CreateAndSaveNewEmailAddress(string createdEmail, string savedAs)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I created an email and saved to use in other locations");
+			try
+			{
+				var email = EmailFunctions.CreateEmail(createdEmail);
+				Context.AddToContext(savedAs, email);
+				Report.Info("Email address created: " + email);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+		}
+
+		[StepDefinition(@"there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
+		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
+			try
+			{
+				if (emailFrom.ToLower() == "<sitenotification>")
+				{
+					if (System.Configuration.ConfigurationManager.AppSettings.AllKeys.Contains("SiteType"))
+					{
+						var SiteType = System.Configuration.ConfigurationManager.AppSettings["SiteType"];
+						switch (SiteType.ToLower())
+						{
+							case ("staging"):
+								emailFrom = "ulscn.notifications@ulnotification.com";
+								break;
+							case ("production"):
+								emailFrom = "wercsmart.notifications@ulnotification.com";
+								break;
+							default: //Local
+								emailFrom = "wercsmartcustomer@ul.com";
+								break;
+						}
+					}
+					else
+					{
+						emailFrom = "wercsmartcustomer@ul.com";
+					}
+				}
+				var Email = Context.GetFromContext(savedAs).ToString();
+				if (EmailFunctions.WaitForInboxDifferences(Email))
+				{
+					var differences = EmailFunctions.GetInboxDifferences(Email);
+					var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
+
+					if (shouldOrNot == "should")
+					{
+						Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has been found.");
+					}
+					else
+					{
+						Report.IsTrue(matchingEmail == null, "A matching email has been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has not been found.");
+					}
+
+					if (matchingEmail != null)
+					{
+						using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
+						{
+							sw.Write(matchingEmail.Html.Body);
+							sw.Flush();
+							sw.Close();
+						}
+					}
+
+					Context.AddToContext("Matching", matchingEmail);
+				}
+				else
+				{
+					if (shouldOrNot == "should not")
+					{
+						Report.Success("As expected, no email has been received");
+					}
+					else
+					{
+						throw new Exception("Expected email did not arrive");
+					}
+
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Asserting text in body of email
+		/// </summary>
+		/// <param name="bodyText"></param>
+		[StepDefinition(@"the body of the email should show: (.*)")]
+		public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
+			try
+			{
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				Report.Info("Body of the Email " + email.Text.Body);
+				Report.IsTrue(email.Text.Body == bodyText, "Body text did not match correctly", "Body text matched correctly");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 
 	}

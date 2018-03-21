@@ -3,6 +3,7 @@
 @Homepage
 @ForgottenPassword
 @wercsmart
+@Signup
 @run_ForgottenPassword
 
 Feature: Forgotten Password
@@ -18,20 +19,24 @@ Given I click on the Forgot Your Password Link
 And I click the continue button
 Then In the Forgotten Password window I should see the following error messages: This is a required field.
 Then I should remain on the Forgotten Password dialog
-Given I enter a email address: Thisemail@email.com
+Given I enter a email address: automatedcompany1@gmail.com
 And I click the continue button
 Then the message should contain Please check your email to get instructions on how to reset your password.
 Then I click the login button in the Forgotten Password window
 
-Scenario: Forgot Password - Unregistered Email
+Scenario: [52969] Forgot Password - Unregistered Email
+Given I create an email myunregisteredaccount and save it as myunregisteredaccount
+Given I save the current emails in the inbox for address saved as: myunregisteredaccount
 Given I click on the Forgot Your Password Link
-Given I enter a unregistered email address
+Given I enter an email address: savedas myunregisteredaccount
 And I click the continue button
-Then I should see a error message saying: Your username or password is either missing or entered correctly. Please correct your entries and try again.
+Then the message should contain Please check your email to get instructions on how to reset your password.
+Then there should be a new email for email Address saved as: myunregisteredaccount from: <SiteNotification> with the title: WERCSmart Account Information
+And the body of the email should show: Dear Future WERCSmart User: Recently you attempted to access WERCSmart and indicated you forgot your password. Our records do not show your email to be registered as a User of WERCSmart at this time. We recommend you create an account.Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient: (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL Information and Insights Inc. (“UL”) at WERCSmartCustomer@ul.com, and then delete this message and its attachment(s). UL and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachments.
 
-Scenario: Forgot Password - Badly Formatted Email
+Scenario: [53035] Forgot Password - Badly Formatted Email
 Given I click on the Forgot Your Password Link
-Given I enter a invalid email address
+Given I enter a email address: test@test.cm
 And I click the continue button
 Then I should see a error message saying: Email is not valid.
 
