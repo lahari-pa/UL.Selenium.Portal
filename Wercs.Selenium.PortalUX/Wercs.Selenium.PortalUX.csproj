@@ -114,14 +114,10 @@
       <HintPath>packages\Safeware.SeleniumUtilities.1.7.2\lib\net45\ResourcePool.dll</HintPath>
     </Reference>
     <Reference Include="SafewareReportingPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Safeware.SeleniumUtilities.1.7.2\lib\net45\SafewareReportingPlugin.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="SafewareSeleniumUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Safeware.SeleniumUtilities.1.7.2\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Selenium.Core, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Wercs.Selenium.Core.3.0.1-build20171027-004\lib\net45\Selenium.Core.dll</HintPath>
@@ -144,9 +140,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Safeware.SeleniumUtilities.1.7.2\lib\net45\TReVor.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>packages\Selenium.WebDriver.3.5.2\lib\net40\WebDriver.dll</HintPath>
