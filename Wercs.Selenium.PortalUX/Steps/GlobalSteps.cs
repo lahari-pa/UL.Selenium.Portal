@@ -401,8 +401,9 @@ namespace WERCSmart
 			try
 			{
 				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
-				Report.Info("Body of the Email " + email.Text.Body);
-				Report.IsTrue(email.Text.Body == bodyText, "Body text did not match correctly", "Body text matched correctly");
+				var emailBody = EmailFunctions.getEmailBody(email);
+				Report.Info("Body of the Email was: " + emailBody);
+				Report.IsTrue(emailBody == bodyText, "Body text did not match correctly!", "Body text matched correctly!");
 			}
 			catch (Exception ex)
 			{
