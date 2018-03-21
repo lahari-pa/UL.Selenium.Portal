@@ -10,15 +10,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
 	class ForgottenPassword : BaseObject
 	{
-		public const string BasePath = "//div[@id='loginModal']";
+		public const string BasePath = "//div[@class='login-wrapper']";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-
+		/// <summary>
+		/// Click Continue button
+		/// </summary>
 		public void Click_Continue()
 		{
-			this.containerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2).Click();
+			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselContinue']"), 2);
+			btn.Click();
 		}
 
 		public void Click_Cancel()
@@ -55,6 +58,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath("//a[@id='btnLogin']"), 2).Displayed;
 		}
 
+		///<summary>
+		/// Clicking the login button that is found on the forget password screen (after you enter email)
+		///</summary>
 		public void Click_Login_Button()
 		{
 			this.containerElement.FindElement(By.XPath("//a[@id='btnLogin']"), 2).Click();
@@ -72,6 +78,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 
+		}
+
+		///<summary>
+		/// this is for the success message when a user submits a valid email
+		///</summary>
+		public string ForgotPasswordSuccessMessage()
+		{
+			return this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
 		}
 	}
 }

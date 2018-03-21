@@ -15,14 +15,31 @@ namespace Wercs.Selenium.PortalUX.Steps
 	class StepsForgottenPassword
 	{
 
-		[StepDefinition(@"I click the next button")]
-		public void GivenIClickTheNextButton()
+		[StepDefinition(@"I click the continue button")]
+		public void GivenIClickTheContinueButton()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the next button");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the continue button");
 			try
 			{
 				var selForgotten = new ForgottenPassword();
-				selForgotten.Click_Continue();
+				int i = 0;
+				while (i < 10)
+				{
+					try
+					{
+						selForgotten.Click_Continue();
+						break;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
+
+
+				}
+				Report.Screenshot();
+				Report.Success("continue button clicked!");
 			}
 			catch (Exception ex)
 			{
@@ -37,7 +54,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should remain on the Forgotten password dialog");
 			try
 			{
-				Delay.Seconds(10);
+				Delay.Seconds(5);
 				var selForgotten = new ForgottenPassword();
 				Assert.That(selForgotten.Exists, "Forgotten password page should be showing.");
 			}
@@ -92,16 +109,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Forgotten Password window I should see the following error messages:" + errorMessages);
 			try
 			{
-				Delay.Seconds(10);
-				var selForgotten = new ForgottenPassword();
-				var expectedErrorMessages = errorMessages.Split(',');
-				var actualErrorMessages = selForgotten.GetErrors();
-
-				foreach (string expectedErrorMessage in expectedErrorMessages)
+				int i = 0;
+				while (i < 10)
 				{
-					Report.IsTrue(actualErrorMessages.Contains(expectedErrorMessage), "Expected Error message: " + expectedErrorMessage + " is not showing.", "Expected error message: " + expectedErrorMessage + " is showing.");
-				}
+					try
+					{
+						var selForgotten = new ForgottenPassword();
+						var expectedErrorMessages = errorMessages.Split(',');
+						var actualErrorMessages = selForgotten.GetErrors();
+						foreach (string expectedErrorMessage in expectedErrorMessages)
+						{
+							Report.IsTrue(actualErrorMessages.Contains(expectedErrorMessage), "Expected Error message: " + expectedErrorMessage + " is not showing.", "Expected error message: " + expectedErrorMessage + " is showing.");
+						}
+						break;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
 
+
+				}
 			}
 			catch (Exception ex)
 			{
@@ -117,9 +146,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I enter email address: " + email);
 			try
 			{
-				Delay.Seconds(10);
-				var selForgotten = new ForgottenPassword();
-				selForgotten.Enter_Email(email);
+				int i = 0;
+				while (i < 10)
+				{
+					try
+					{
+						var selForgotten = new ForgottenPassword();
+						selForgotten.Enter_Email(email);
+						break;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
+				}
 			}
 			catch (Exception ex)
 			{
@@ -149,43 +190,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the continue button in the Forgotten Password window")]
-		public void GivenIClickTheContinueButton()
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking the continue button in the Forgotten Password window");
-			try
-			{
-				Report.Info("Attempting to click the continue button...");
-				var selForgotten = new ForgottenPassword();
-				Report.IsTrue(selForgotten.Wait_for_load(60), "Forgotten password screen has not opened. ");
-				selForgotten.Click_Continue();
-				Report.Success("Continue clicked successfully");
-				Delay.Seconds(10);
-
-				try
-				{
-					ServerError thisServerError = new ServerError();
-					if (thisServerError.Wait_for_load())
-					{
-						Report.Error("Server error is showing: " + thisServerError.GetErrorMessage());
-						thisServerError.Click_Close();
-					}
-
-				}
-				catch (Exception)
-				{
-					//just catch...
-				}
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
 		[StepDefinition(@"the email should contain a link to reset a WERCSmart Account Password")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount()
 		{
@@ -204,6 +208,56 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"the message should contain (.*)")]
+		public void ThenInTheForgottenPasswordWindowIShouldSeeTheFollowingConfirmationMessage(string confirmMessage)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Forgotten Password window I should see the following confirmation message:" + confirmMessage);
+
+			try
+			{
+				Report.Info("Expecting confirmation message " + confirmMessage);
+				var sel_forgotpasswordconfirm = new ForgottenPassword();
+				var showing = sel_forgotpasswordconfirm.ForgotPasswordSuccessMessage();
+				Report.IsTrue(confirmMessage == showing, "Success message showing " + showing, "Success message was showing correctly");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+
+		}
+		/// <summary>
+		/// click the login button that shows on the forget password page
+		/// </summary>
+		[StepDefinition(@"I click the login button in the Forgotten Password window")]
+		public void ClickTheLoginButton()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click the WERCSmart login button");
+			try
+			{
+				var blah = ResourcePool.UserPool.WERCSmart.WERCSmartUsers;
+				Report.Info("Beginning to click the Login button");
+				var selForgotPasswordpage = new ForgottenPassword();
+				if (!selForgotPasswordpage.Wait_for_load(1))
+				{
+					Report.Info("Not on the Homepage, navigating...");
+					SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
+					Report.IsTrue(selForgotPasswordpage.Wait_for_load(30), "Homepage failed to load!", "Homepage loaded successfully!");
+				}
+
+				selForgotPasswordpage.Click_Login_Button();
+				Report.Screenshot();
+				Report.Success("Login button clicked!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 	}
 }

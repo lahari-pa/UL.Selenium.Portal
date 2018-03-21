@@ -12,18 +12,18 @@ Feature: Forgotten Password
 Background:
 Given I go to the WERCSmart Log in
 
-Scenario: Forgot Password - Registered Email
-Given I login as the administrator
-Given I logout
+Scenario: [52962] Forgot Password - Registered Email
 
 Given I click on the Forgot Your Password Link
-And I click the next button
+And I click the continue button
+Then In the Forgotten Password window I should see the following error messages: This is a required field.
 Then I should remain on the Forgotten Password dialog
 Given I enter a email address: Thisemail@email.com
 And I click the continue button
-Then I should see a confirmation message saying: Please check your email to get instructions on how to reset your password.
+Then the message should contain Please check your email to get instructions on how to reset your password.
+Then I click the login button in the Forgotten Password window
 
-Scenario: Forgot Password - Unregistered Email 
+Scenario: Forgot Password - Unregistered Email
 Given I click on the Forgot Your Password Link
 Given I enter a unregistered email address
 And I click the continue button

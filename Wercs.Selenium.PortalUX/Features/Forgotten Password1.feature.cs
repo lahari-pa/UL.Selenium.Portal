@@ -85,31 +85,32 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Forgot Password - Registered Email")]
-        public virtual void ForgotPassword_RegisteredEmail()
+        [NUnit.Framework.DescriptionAttribute("[52962] Forgot Password - Registered Email")]
+        public virtual void _52962ForgotPassword_RegisteredEmail()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Forgot Password - Registered Email", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52962] Forgot Password - Registered Email", ((string[])(null)));
 #line 15
 this.ScenarioSetup(scenarioInfo);
 #line 12
 this.FeatureBackground();
-#line 16
-testRunner.Given("I login as the administrator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 17
-testRunner.Given("I logout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 19
 testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 20
-testRunner.And("I click the next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
-testRunner.Then("I should remain on the Forgotten Password dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 22
-testRunner.Given("I enter a email address: Thisemail@email.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 23
+#line 18
 testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 19
+testRunner.Then("In the Forgotten Password window I should see the following error messages: This " +
+                    "is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 20
+testRunner.Then("I should remain on the Forgotten Password dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 21
+testRunner.Given("I enter a email address: Thisemail@email.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 22
+testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
+testRunner.Then("the message should contain Please check your email to get instructions on how to " +
+                    "reset your password.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 24
-testRunner.Then("I should see a confirmation message saying: Please check your email to get instru" +
-                    "ctions on how to reset your password.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the login button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
