@@ -266,6 +266,41 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		/// <summary>
+		/// Clicking the Cancel button on the forgot password screen
+		/// </summary>
+		[StepDefinition(@"I click the cancel button")]
+		public void GivenIClickTheCancelButton()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the cancel button");
+			try
+			{
+				var selForgotten = new ForgottenPassword();
+				int i = 0;
+				while (i < 10)
+				{
+					try
+					{
+						selForgotten.Click_Cancel();
+						break;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
+
+
+				}
+				Report.Screenshot();
+				Report.Success("cancel button clicked!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 	}
 }

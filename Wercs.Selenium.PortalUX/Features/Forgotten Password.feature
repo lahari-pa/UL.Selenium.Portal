@@ -36,15 +36,19 @@ And the body of the email should show: Dear Future WERCSmart User: Recently you 
 
 Scenario: [53035] Forgot Password - Badly Formatted Email
 Given I click on the Forgot Your Password Link
-Given I enter a email address: test@test.cm
+Given I enter a email address: abc123.tt@j
 And I click the continue button
-Then I should see a error message saying: Email is not valid.
+Then In the Forgotten Password window I should see the following error messages: Email is not valid.
+And I click the cancel button
+Then I should see for the forgotten password: Forgot your Password?
 
-Scenario: Forgot Password - Reset Password
+Scenario: [53048] Forgot Password - Reset Password
+Given I create an email registeredaccount and save it as registeredaccount
 Given I click on the Forgot Your Password Link
-Given I enter a registered email address
+Given I enter a email address: automatedcompany1@gmail.com
 And I click the continue button
 Then in the recieved email I should see the title: WERCSmart Password Reset
+Then there should be a new email for email Address saved as: myunregisteredaccount from: <SiteNotification> with the title: WERCSmart Account Information
 And the body of the email should show: Dear WERCSmart User, You recently requested to reset the password associated with your account. Please click on the link to reset your password. This link will expire in 30 minutes. If you did not request to have your password reset, immediately contact Support at +1 (877) 642-6753. Thank you. WERCSmart Support
 When I click the link in the email I get directed to security questions
 

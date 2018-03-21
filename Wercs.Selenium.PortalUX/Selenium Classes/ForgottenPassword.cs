@@ -16,7 +16,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		protected override IWebElement containerElement { get; set; }
 
 		/// <summary>
-		/// Click Continue button
+		/// Gets the Continue button
 		/// </summary>
 		public void Click_Continue()
 		{
@@ -24,12 +24,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			btn.Click();
 		}
 
+		/// <summary>
+		/// Gets the cancel button on the forgot password page
+		/// </summary>
 		public void Click_Cancel()
 		{
-			IList<IWebElement> listOfAElements =
-				this.containerElement.FindElements(By.XPath(".//div[@class='carousel slide carousel-wizard'//a]"), 2);
-
-			listOfAElements.FirstOrDefault(x => x.Text == "Cancel").Click();
+			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
+			btn.Click();
 		}
 
 		public void Enter_Email(string email)
