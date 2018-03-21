@@ -204,6 +204,26 @@ testRunner.When("I click the link in the email I get directed to security questi
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[50835] Forgot Password - Email Validation")]
+        public virtual void _50835ForgotPassword_EmailValidation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50835] Forgot Password - Email Validation", ((string[])(null)));
+#line 55
+this.ScenarioSetup(scenarioInfo);
+#line 13
+this.FeatureBackground();
+#line 56
+testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
+testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+testRunner.Then("In the Forgotten Password window I should see the following error messages: Email" +
+                    " Address is required.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

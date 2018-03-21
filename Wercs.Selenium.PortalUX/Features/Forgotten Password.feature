@@ -52,3 +52,10 @@ Then there should be a new email for email Address saved as: myunregisteredaccou
 And the body of the email should show: Dear WERCSmart User, You recently requested to reset the password associated with your account. Please click on the link to reset your password. This link will expire in 30 minutes. If you did not request to have your password reset, immediately contact Support at +1 (877) 642-6753. Thank you. WERCSmart Support
 When I click the link in the email I get directed to security questions
 
+Scenario: [50835] Forgot Password - Email Validation
+Given I click on the Forgot Your Password Link
+And I click the continue button
+Then In the Forgotten Password window I should see the following error messages: Email Address is required.
+
+
+
