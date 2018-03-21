@@ -65,7 +65,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public void Click_Cancel()
 		{
-			this.containerElement.FindElements(By.XPath("//a")).FirstOrDefault(x => x.Text == "Cancel").Click();
+			var btn = this.containerElement.FindElement(By.XPath(".//a[@id='carouselCancel']"), 2);
+			btn.Click();
 		}
 
 		public bool Enter_Email_Error_Exists()

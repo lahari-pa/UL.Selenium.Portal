@@ -13,32 +13,27 @@ Then I should see the following menu options in the header:
 | Manufacturers |
 | Retailers     |
 | Subscription  |
-Given I select the Manufacturers link 
+Given I select the Manufacturers link
 Then I confirm I am taken to the Manufacturers page
-Given I select the Retailers link 
+Given I select the Retailers link
 Then I confirm I am taken to the Retailers page
-Given I select the Subscription link 
+Given I select the Subscription link
 Then I confirm I am taken to the Subscription page
 
 Scenario: [50770] Sign Up Link
 Given I select the Sign Up link
 Then the signup page should appear
-And I click Cancel on the Sign Up screen
-
-Scenario: [50771] Login Button
-Given I go to the WERCSmart Log in
-Then the login page should appear
-When I click outside of the login popup
-Then the login page should dissappear
+And I click the back button in the browser
+And the landing page should load
 
 Scenario: [59830] TimeOut Feature
-Given I login as the administrator
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Given I stay on the homepage with no activity until the inactivity popup appears
 # are you still active message appears
 Then Click Yes on the inactivity popup
 # popup goes away
-And the WERCSmart homepage should be loaded
+And the WERCSmart homepage should load
 Given I stay on the homepage with no activity until the inactivity popup appears
 # are you still active message appears
 Then Click No on the inactivity popup

@@ -412,7 +412,23 @@ namespace WERCSmart
 			}
 		}
 
-
+		/// <summary>
+		/// Back button click in the browser
+		/// </summary>
+		[StepDefinition(@"I click the back button in the browser")]
+		public void GivenIClickOnBackButtonInBrowser()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
+			try
+			{
+				SeleniumBrowser.WebBrowser.Navigate().Back();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 	}
 
 
