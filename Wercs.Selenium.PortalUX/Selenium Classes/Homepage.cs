@@ -198,7 +198,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ItemShowingInNavigationPanel(string item, bool iconOnly = false)
 		{
-			var sideIcons = this.containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a"), 2);
+			var sideIcons = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-icons')]"), 2);
 			var iconPresent = sideIcons.FirstOrDefault(x => x.GetAttribute("title").Contains(item));
 			if (iconPresent == null || !iconPresent.Displayed)
 			{
@@ -207,23 +207,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			// Icon is present!
 
-			if (this.containerElement.FindElement(By.XPath(".//div[contains(@class,'sidemenu-links')]"), 2).GetAttribute("class").Contains("closed"))
+			if (this.containerElement.FindElement(By.XPath(".//div[contains(@class,'sidemenu-icons')]"), 2).GetAttribute("class").Contains("closed"))
 			{
 				// Navigation Panel is not expanded!
 				return iconOnly;
 			}
 
-			var expandedIcons = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-links')]//a"), 2);
+			var expandedIcons = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-icons')]//a"), 2);
 
 			var expandedOption = expandedIcons.FirstOrDefault(x => x.Text.Contains(item));
 
 			return (expandedOption != null && expandedOption.Displayed);
 		}
 
-		public bool Click_Icon(string destination)
+		public bool Click_Icon(string item)
 		{
-			var allIcons = this.containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a//span"), 2);
-			var icon = allIcons.FirstOrDefault(x => x.Text.Trim().Contains(destination));
+			var allIcons = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-icons')]//a"), 2);
+			var icon = allIcons.FirstOrDefault(x => x.GetAttribute("title").Contains(item));
 			if (icon == null)
 			{
 				return false;

@@ -608,15 +608,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the (Register Product|Register PurView|UL Solution Center|WERCSLink) icon in the QuickLinks Pane")]
+		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support) icon in the QuickLinks Pane")]
 		public void ClickItemInQuickLinks(string item)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Selecting " + item + " in the Navigation Pane");
 			try
 			{
 				Report.Info("Selecting " + item + " in the Navigation Pane");
-				var selHomePage = new Homepage();
-				Report.IsTrue(selHomePage.ClickQuickLink(item), "Failed to click item: '" + item + "'!", "Successfully clicked item: '" + item + "'!");
+				var selHomePageNavBar = new NavigationBar();
+				Report.IsTrue(selHomePageNavBar.Click_Icon(item), "Failed to click item: '" + item + "'!", "Successfully clicked item: '" + item + "'!");
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
 			}

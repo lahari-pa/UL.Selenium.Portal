@@ -129,23 +129,12 @@ And I should see the following options available in the Bulk Actions window
 And I click on the close button on Bulk Actions
 Then I should see the Subheading My Products in the products grid
 
-Scenario: [56054] Navigate to Notifications (Bell Icon)
-Given I click on the Notification Icon
-Then the Notification page should appear
-
 Scenario: [56149] Click Register Product button from home page - Navigation
-Then I click the Register Product icon in the QuickLinks Pane
+Then I click the Register New Product icon in the QuickLinks Pane
 And I should see the header New Product
-And I should see the statement Would you like to Create a New Product?
-And I should see the radio button: Yes, create a new product
-And I should see the radio button: No, copy an existing product
-# Scenario: [56174] Register Product top menu navigation
-Scenario: [56151] Register New Product from menu navigation
-Then I click the Register New Product icon in the Navigation Pane
-And I should see the header New Product
-And I should see the statement Would you like to Create a New Product?
-And I should see the radio button: Yes, create a new product
-And I should see the radio button: No, copy an existing product
+And I should see the statement Select the type of product to create:
+And I should see the radio button: Create a New Registration
+And I should see the radio button: Copy from an Existing Registration
 
 Scenario: [56158] Retail Partners navigation
 Then I click the Retail Partners icon in the Navigation Pane
@@ -160,15 +149,7 @@ And UNDER DEVELOPMENT
 Scenario: [56163] Shopping Cart navigation
 Then I click the Shopping Cart icon in the Navigation Pane
 And UNDER DEVELOPMENT
-# Scenario: [56179] Register PurView top menu navigation
-Scenario: [56165] Register PurView navigation
-Then I click the Register PurView icon in the QuickLinks Pane
-And UNDER DEVELOPMENT
-# Scenario: [56181] UL Solution Center top menu navigation
-Scenario: [56167] UL Solution Center button - navigation
-Then I click the UL Solution Center icon in the QuickLinks Pane
-And UNDER DEVELOPMENT
-# Scenario: [56184] WERCSLink top menu navigation
+
 Scenario: [56170] WERCSLink button navigation
 Then I click the WERCSLink icon in the QuickLinks Pane
 And UNDER DEVELOPMENT
@@ -177,11 +158,6 @@ Scenario: [56188] Support navigation
 Then I click the Support icon in the Navigation Pane
 And UNDER DEVELOPMENT
 
-Scenario: [32590] My Account navigation
-Then I click the User Icon
-And I click on My Account
-And I should see the heading: My Account on the My Account page
-And I should see the subheading: Your Company User Accounts on the My Account page
 
 Scenario: [56206] Sign Out
 Then I click the User Icon
