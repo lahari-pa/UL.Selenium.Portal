@@ -45,6 +45,7 @@ Then I should see for the forgotten password: Forgot your Password?
 Scenario: [53048] Forgot Password - Reset Password
 Given I create an email registeredaccount and save it as registeredaccount
 Given I click on the Forgot Your Password Link
+#need to use company with no security questions answered
 Given I enter a email address: automatedcompany1@gmail.com
 And I click the continue button
 Then in the recieved email I should see the title: WERCSmart Password Reset
@@ -55,7 +56,7 @@ When I click the link in the email I get directed to security questions
 Scenario: [50835] Forgot Password - Email Validation
 Given I click on the Forgot Your Password Link
 And I click the continue button
-Then In the Forgotten Password window I should see the following error messages: Email Address is required.
+Then In the Forgotten Password window I should see the following error messages: This is a required field.
 
 
 

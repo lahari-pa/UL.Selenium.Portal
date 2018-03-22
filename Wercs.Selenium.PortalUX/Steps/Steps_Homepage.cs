@@ -392,13 +392,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the following filter options below Your Products")]
-		public void GivenIShouldSeeTheFollowingFilterOptionsBelowYourProducts(Table table)
+		[StepDefinition(@"I should see the following filter options below My Products")]
+		public void GivenIShouldSeeTheFollowingFilterOptionsBelowMyProducts(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking 'Your Products' Filter Options");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking 'My Products' Filter Options");
 			try
 			{
-				Report.Info("Checking 'Your Products' Filter Options");
+				Report.Info("Checking 'My Products' Filter Options");
 				var selProdGrid = new ProductsGrid();
 				foreach (var row in table.Rows)
 				{

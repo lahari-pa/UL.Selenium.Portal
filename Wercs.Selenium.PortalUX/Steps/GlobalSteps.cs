@@ -68,7 +68,7 @@ namespace WERCSmart
 
 				var selLogin = new Login();
 				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
-				var username = @"ALCProduction@sharklasers.com";
+				var username = @"automatedcompany1.kxxyxunf@mailosaur.io";
 				var password = "Welcome1!";
 
 				Report.Info("Entering Email: '" + username + "'");
@@ -333,6 +333,9 @@ namespace WERCSmart
 							case ("production"):
 								emailFrom = "wercsmart.notifications@ulnotification.com";
 								break;
+							case ("local prod"):
+								emailFrom = "WERCSmartCustomer@ul.com";
+								break;
 							default: //Local
 								emailFrom = "wercsmartcustomer@ul.com";
 								break;
@@ -347,7 +350,10 @@ namespace WERCSmart
 				if (EmailFunctions.WaitForInboxDifferences(Email))
 				{
 					var differences = EmailFunctions.GetInboxDifferences(Email);
+					Report.Info("Found " + differences.Count() + " emails");
+
 					var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
+
 
 					if (shouldOrNot == "should")
 					{

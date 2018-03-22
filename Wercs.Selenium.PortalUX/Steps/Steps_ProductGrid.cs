@@ -181,10 +181,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I cancel the Delete Dialog")]
 		public void CancelDeleteDialog()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Cancelling the delete dialog");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Canceling the delete dialog");
 			try
 			{
-				Report.Info("Cancelling the delete dialog");
+				Report.Info("Canceling the delete dialog");
 				var selDeleteConfirm = new DeleteDialog();
 				if (!selDeleteConfirm.Wait_for_load())
 				{ throw new Exception("Delete Dialog did not load!"); }
@@ -435,6 +435,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		/// <summary>
+		/// Clicking the x to close the Bulk Actions popup
+		/// </summary>
+		[StepDefinition(@"I click on the close button on Bulk Actions")]
+		public void ClickCloseOnBulkActions()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the close button");
+			var selBulkActions = new BulkActions();
+			selBulkActions.ClickClose();
+
+			Report.Success("close button clicked! on the homepage");
 		}
 	}
 }

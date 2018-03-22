@@ -64,24 +64,24 @@ And I should see the Subheading Announcements expanded in the main window
 
 
 Scenario: [55817] Product Information Panel
-When I click on the red triangle next to Product Information to collapse the section
+When I click on the triangle next to Product Information to collapse the section
 Then the Product Information dialog should be hidden
 And the Alerts dialog should be hidden
 And the Announcements dialog should be hidden
 
-When I click on the red triangle next to Product Information to expand the section
+When I click on the triangle next to Product Information to expand the section
 Then the Product Information dialog should be visible
 And the Alerts dialog should be visible
 And the Announcements dialog should be visible
 
 And I should see a Pie Chart and Legend under Product Information
 And I should see the following states in the Legend:
-| State                  | Colour |
+| State             | Colour |
+| Not Yet Submitted | Grey   |
 | Assessment in Progress | Yellow |
 | Sending to Retailers   | Blue   |
 | Accepted by Retailers  | Green  |
-| Not Yet Submitted      | Grey   |
-| Product Update         | Red    |
+| Needs Your Attention   | Red    |
 
 # Then wants to check that the Pie Chart contains some of the above colours....
 # Not sure how to automate these - but putting the steps in anyway
@@ -92,28 +92,19 @@ And I should see the following states in the Legend:
 # ==================================================================================================
 
 Given I see notifications in the Alerts Panel
-Then clicking on the top Alert should direct me to the My Messages page
-Then I navigate to the home page
-And I click More below the Alerts Panel
-And I confirm that I am taken to the My Messages Alerts page
-
-Then I navigate to the home page
 Given I see notifications in the Announcement Panel
-Then clicking on the top Announcement should direct me to the My Messages page
 
-Then I navigate to the home page
-And I click More below the Announcements Panel
-And I confirm that I am taken to the My Messages Announcements page
 
-Scenario: [55938] Your Products grid
-Given I should see the following filter options below Your Products
-| Options                | Colour     |
-| All                    | Light Grey |
-| Not Yet Submitted      | Dark Grey  |
-| Assessment in Progress | Yellow     |
-| Sending to Retailers   | Blue       |
-| Accepted by Retailers  | Green      |
-| Needs Your Attention   | Red        |
+Scenario: [55938] My Products grid
+Given I should see the following filter options below My Products
+| Options                | Colour       |
+| All                    | Light Purple |
+| Not Yet Submitted      | Dark Grey    |
+| Assessment in Progress | Yellow       |
+| Sending to Retailers   | Blue         |
+| Accepted by Retailers  | Green        |
+| Needs Your Attention   | Red          |
+| Canceled               |              |
 
 And I should see an option for More Filters
 And I should see an option for Product ID/Name
@@ -126,57 +117,6 @@ And the Product Grid should have the following headers:
 | Retailers         |
 | Actions           |
 
-And I can navigate between pages using the pagniation buttons at the bottom of the grid
-Given I search for the first product in the table
-Then I should see the product returned in the search results
-And I clear the Search Criteria
-
-# Not sure how to test this - but then wants to check each Product Filter filters correctly....
-When I filter the products by: Not Yet Submitted
-And I click Row Actions for the first product returned
-Then I should see the following options
-| Option |
-| Edit   |
-| Submit |
-| Delete |
-
-When I filter the products by: Assessment in Progress
-And I click Row Actions for the first product returned
-Then I should see the following options
-| Option    |
-| View      |
-| Documents |
-
-When I filter the products by: Sending to Retailers
-And I click Row Actions for the first product returned
-Then I should see the following options
-| Option             |
-| View               |
-| Documents          |
-| UPC Update         |
-| Retailer ID Update |
-| Resend to Retailer |
-
-When I filter the products by: Accepted by Retailers
-And I click Row Actions for the first product returned
-Then I should see the following options
-| Option                          |
-| Edit                            |
-| UPC Update                      |
-| View                            |
-| Documents                       |
-# Displays if within the parameter of 1 year or more last activity by supplier/customer
-| Delete                          |
-| Resend to Existing Customer     |
-| Forward To Additional Retailers |
-
-When I filter the products by: Needs Your Attention
-And I click Row Actions for the first product returned
-Then I should see the following options
-| Option    |
-| Edit      |
-| Documents |
-| Submit    |
 
 Scenario: [56020] Bulk Actions
 Given I click Bulk Actions in the Products Grid
@@ -184,10 +124,10 @@ Then I should see a popup with header Bulk Actions
 And I should see the following options available in the Bulk Actions window
 | Options                      |
 | Forward Product Registration |
-| Sync Products to WERCSlink   |
 | Accept Documents             |
-| Download Reports             |
 | Delete Products              |
+And I click on the close button on Bulk Actions
+Then I should see the Subheading My Products in the products grid
 
 Scenario: [56054] Navigate to Notifications (Bell Icon)
 Given I click on the Notification Icon

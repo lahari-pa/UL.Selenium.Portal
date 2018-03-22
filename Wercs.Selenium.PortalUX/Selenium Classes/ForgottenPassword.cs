@@ -86,7 +86,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		///</summary>
 		public string ForgotPasswordSuccessMessage()
 		{
-			return this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
+			var text = this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
+			int i = 0;
+			while (text == "" && i < 10)
+			{
+				text = this.containerElement.FindElement(By.XPath("//*[@id='wizardCarousel']/div[1]/div[2]/p"), 2).GetValue();
+				i++;
+				Delay.Seconds(1);
+			}
+			return text;
 		}
 	}
 }
