@@ -11,7 +11,7 @@ Background:
 
 Given I go to the WERCSmart Log in
 
-Scenario: [50820] Language Selector - Japanese 
+Scenario: [50820] Language Selector - Japanese
 
 When From the Language drop down I select Japanese
 Then I should see for the sign in: ログイン
@@ -26,7 +26,7 @@ And I should see for the password label: Password
 And I should see for the forgotten password: Forgot your Password?
 And I should see for the login button: Login
 
-Scenario: [50828] Language Selector - Chinese 
+Scenario: [50828] Language Selector - Chinese
 
 When From the Language drop down I select Chinese
 Then I should see for the sign in: 注册
@@ -67,11 +67,11 @@ When I select the Login button
 Then I should see a server error with message: Your account is locked and will unlock after 30 minutes.
 
 Scenario: [52978] Log Into Account
-Given I populate the email input field with: SeleniumAdmin01@thewercs.com
-And I populate the password input field with: Selenium1!
+Given I populate the email input field with: automatedcompany1.kxxyxunf@mailosaur.io
+And I populate the password input field with: Welcome1!
 When I select the Login button
 Then the WERCSmart homepage should load
-Then I should see username: SeleniumTest01 in the right corner
+Then I should see username: automated, visual company in the right corner
 Given I navigate to the MyAccount page
-Then I should see company username: ABC Company
+Then I should see company username: visual
 And I click on Sign Out

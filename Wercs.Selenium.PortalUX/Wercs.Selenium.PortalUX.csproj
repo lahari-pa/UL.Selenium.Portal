@@ -229,6 +229,8 @@
     <Compile Include="Selenium Classes\NewProduct.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
+    <Compile Include="Selenium Classes\ShoppingCart.cs" />
+    <Compile Include="Selenium Classes\UlSolutionCenter.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />
@@ -244,6 +246,8 @@
     <Compile Include="Steps\Steps_MyAccount.cs" />
     <Compile Include="Steps\Steps_NewProduct.cs" />
     <Compile Include="Steps\Steps_ProductGrid.cs" />
+    <Compile Include="Steps\Steps_ShoppingCart.cs" />
+    <Compile Include="Steps\Steps_UlSolutionCenter.cs" />
     <Compile Include="Steps\Steps_RetailPartners.cs" />
     <Compile Include="Steps\Steps_Signup.cs" />
     <Compile Include="Tests\Account\LoginTests.cs" />
@@ -391,6 +395,8 @@ IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)ResourcePoo
   <Import Project="packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <PropertyGroup>
     <PreBuildEvent>cd $(TargetDir)
-del *.dll</PreBuildEvent>
+del *.dll
+taskkill /f /im chromedriver.exe /fi "memusage gt 40" 2&gt;NUL
+taskkill /f /im IEDriverServer.exe /fi "memusage gt 40" 2&gt;NUL</PreBuildEvent>
   </PropertyGroup>
 </Project>

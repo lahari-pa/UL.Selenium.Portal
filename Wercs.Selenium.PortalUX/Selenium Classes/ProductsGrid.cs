@@ -58,10 +58,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			switch (colourShowingRaw)
 			{
-				case ("rgba(192, 203, 209, 1)"):
-					colourShowing = "Light Grey";
+				case ("rgba(160, 137, 179, 1)"):
+					colourShowing = "Light Purple";
 					break;
-				case ("rgba(237, 185, 46, 1)"):
+				case ("rgba(239, 157, 14, 1)"):
 					colourShowing = "Yellow";
 					break;
 				case ("rgba(0, 152, 255, 1)"):

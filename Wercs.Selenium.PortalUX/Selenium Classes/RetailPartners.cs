@@ -20,7 +20,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> SubHeadingsShowing()
 		{
-			return this.containerElement.FindElements(By.XPath(".//h3"), 2).Select(x => x.Text.Trim()).ToList();
+			return this.containerElement.FindElements(By.XPath(".//h2"), 2).Where(x => x.Displayed).Select(x => x.Text.Trim()).ToList();
 		}
 
 		public bool ClickRetailer(string retailer, bool exact = false)

@@ -13,13 +13,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 	[Binding, Scope(Tag = "RetailPartners")]
 	class StepsRetailPartners
 	{
-		[StepDefinition(@"I should see the following subheading (.*)")]
-		public void ThenIShouldSeeTheFollowingSubheading(string subheading)
+		[StepDefinition(@"I (should|should not) see the following subheading (.*)")]
+		public void ThenIShouldSeeTheFollowingSubheading(string should, string subheading)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that the subheading " + subheading + " is showing");
+
+			TestReport.BeginTestModule(GlobalParameters.StepCount, "Checking that the subheading " + subheading + " " + should + " be showing");
 			try
 			{
-				Report.Info("Checking that the subheading " + subheading + " is showing");
+				var expected = should == "should";
+
 				var selRetailPartners = new RetailPartners();
 
 				if (!selRetailPartners.Wait_for_load(10))
@@ -28,9 +30,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 
 				var subHeadingsShowing = selRetailPartners.SubHeadingsShowing();
-				Report.IsTrue(subHeadingsShowing.Contains(subheading.Trim()),
-					"Subheading was not showing as expected! Expected: '" + subheading + "', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
-					"Subheading was showing: '" + subheading + "', as expected!");
+				Report.IsTrue(subHeadingsShowing.Contains(subheading.Trim()) == expected,
+					"Subheading " + (expected ? "was not" : "was") + " showing as expected! Expected: '" + subheading + "', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
+					"Subheading " + (expected ? "was" : "was not") + " showing: '" + subheading + "', as expected!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)

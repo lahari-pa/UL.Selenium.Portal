@@ -1,4 +1,5 @@
 ﻿@Login
+@UlSolutionCenter
 @Homepage
 @ProductGrid
 @ForwardProductRegistration
@@ -7,6 +8,7 @@
 @MyAccount
 @LandingPage
 @wercsmart
+
 @run_Homepage
 
 Feature: Home Page
@@ -63,7 +65,7 @@ And I should see the Subheading Announcements expanded in the main window
 
 
 
-Scenario: [55817] Product Information Panel
+Scenario: [55817] Product Information Panel - No Alerts/No Products
 When I click on the triangle next to Product Information to collapse the section
 Then the Product Information dialog should be hidden
 And the Alerts dialog should be hidden
@@ -83,15 +85,6 @@ And I should see the following states in the Legend:
 | Accepted by Retailers  | Green  |
 | Needs Your Attention   | Red    |
 
-# Then wants to check that the Pie Chart contains some of the above colours....
-# Not sure how to automate these - but putting the steps in anyway
-# ==================================================================================================
-# And I the pie chart should contain some of the above colours
-# And I should see the total number of products in the center of the Pie Chart
-# And hovering over sections of the Pie Chart displays percecntage count and state of the products
-# ==================================================================================================
-
-Given I see notifications in the Alerts Panel
 Given I see notifications in the Announcement Panel
 
 
@@ -136,17 +129,23 @@ And I should see the statement Select the type of product to create:
 And I should see the radio button: Create a New Registration
 And I should see the radio button: Copy from an Existing Registration
 
-Scenario: [56158] Retail Partners navigation
+Scenario: [56158] Retail Partners navigation No Products
 Then I click the Retail Partners icon in the Navigation Pane
 Then I should see the following heading Retail Partners
-And I should see the following subheading Most Recent Retailers
 And I should see the following subheading All Retailers
+And I should not see the following subheading Most Recent Retailers
+
 
 Scenario: [56161] UL Solution Center navigation
 Then I click the UL Solution Center icon in the Navigation Pane
-And UNDER DEVELOPMENT
+Then I should see the following option ECOLogo
+Then I should see the following option Prospector
+Then I should see the following subheading GoodGuide for Consumers
+Then I should see the following subheading GoodGuide for Suppliers
+Then I should see the following subheading UL Secure Connect (ULSC)
+Then I should see the following subheading ULGHS
 
-Scenario: [56163] Shopping Cart navigation
+Scenario: [56163] Left hand navigation - Shopping Cart - No Products
 Then I click the Shopping Cart icon in the Navigation Pane
 And UNDER DEVELOPMENT
 
@@ -239,11 +238,6 @@ And UNDER DEVELOPMENT
 Scenario: [56225] Bulk Actions - Accept Documents navigation
 Given I click Bulk Actions in the Products Grid
 And I click Accept Documents in the Bulk Actions window
-And UNDER DEVELOPMENT
-
-Scenario: [56226] Bulk Actions - Download Reports navigation
-Given I click Bulk Actions in the Products Grid
-And I click Download Reports in the Bulk Actions window
 And UNDER DEVELOPMENT
 
 Scenario: [56227] Bulk Actions - Delete Products navigation
