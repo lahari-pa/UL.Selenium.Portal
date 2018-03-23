@@ -419,7 +419,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I click (Forward Product Registration|Sync Products to WERCSlink|Accept Documents|Download Reports|Delete Products) in the Bulk Actions window")]
+		[StepDefinition(@"I click (Forward Product Registration|Sync Products|Accept Documents|Download Reports|Delete Products) in the Bulk Actions window")]
 		public void GivenIClickForwardProductRegistrationInTheBulkActionsWindow(string option)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking " + option + " in the Bulk Actions window");
@@ -448,6 +448,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selBulkActions.ClickClose();
 
 			Report.Success("close button clicked! on the homepage");
+		}
+
+		/// <summary>
+		/// Clicking the cancel on the uslc sync popup
+		/// </summary>
+		[StepDefinition(@"I click on the cancel button on the ULSC Sync popup")]
+		public void ClickCancelUlscSyncPopup()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the cancel button");
+			var selUlscSyncPopup = new SyncULSCProductsDialog();
+			selUlscSyncPopup.ClickCancel();
+
+			Report.Success("cancel button clicked! on the homepage");
+		}
+
+		/// <summary>
+		/// This is to verify the title of the page
+		/// </summary>
+		/// <param name="headerExpected"></param>
+		[StepDefinition(@"I should see the header: (.*) on the Sync Products to ULSC window")]
+		public void CorrectHeaderShowing(string headerExpected)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Sync Products to ULSC window should appear");
+			try
+			{
+				GeneralUtilities.Wait_for_load_finish();
+				Report.Info("Checking that Sync Products to ULSC window appears");
+				var selUlscSyncPopup = new SyncULSCProductsDialog();
+				var showing = selUlscSyncPopup.HeaderShowing();
+				Report.IsTrue(showing == headerExpected.Trim(),
+					"Sync Products to ULSC header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
+					"Sync Products to ULSC header was showing '" + headerExpected + "', as expected!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
 	}
 }

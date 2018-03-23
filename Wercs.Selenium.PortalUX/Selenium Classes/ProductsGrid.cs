@@ -242,7 +242,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				var el = this.containerElement.FindElements(By.XPath(".//a//div[contains(@class,'btn-text')]"), 2).FirstOrDefault(x => x.Text.Trim().Replace("\r\n", " ") == option);
+				var el = this.containerElement.FindElements(By.XPath(".//a//div[contains(@class,'btn-text')]"), 2).FirstOrDefault(x => x.Text.Trim().Replace("\r\n", " ").Contains(option));
 				if (el == null)
 				{
 					return false;
@@ -274,6 +274,38 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			this.containerElement.FindElement(By.XPath(".//button[text()='Delete']"), 2).Click();
 		}
 
+		public void ClickCancel()
+		{
+			this.containerElement.FindElement(By.XPath(".//button[text()='Cancel']"), 2).Click();
+		}
+	}
+
+	class SyncULSCProductsDialog : BaseObject
+	{
+		public const string BasePath = "//h3[text()='Sync Products to ULSC']/../..";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		/// <summary>
+		/// this is the title of the dialog Sync Products to ULSC
+		/// </summary>
+		/// <returns></returns>
+		public string HeaderShowing()
+		{
+			return this.containerElement.FindElement(By.XPath(".//h3"), 2).Text.Trim();
+		}
+
+		/// <summary>
+		/// clicks the sync all button on the ulsc sync popup
+		/// </summary>
+		public void ClickSyncAll()
+		{
+			this.containerElement.FindElement(By.XPath(".//button[text()='Sync All']"), 2).Click();
+		}
+
+		/// <summary>
+		/// clicks the cancel button on the ulsc sync popup
+		/// </summary>
 		public void ClickCancel()
 		{
 			this.containerElement.FindElement(By.XPath(".//button[text()='Cancel']"), 2).Click();

@@ -250,14 +250,6 @@ And I click Row Actions for the most recent product returned
 Then I click on the Row Action: UPC Update
 And UNDER DEVELOPMENT
 
-Scenario: [56221] My Products grid Actions - Retailer ID Update navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then the WERCSmart homepage should load
-When I filter the products by: Sending to Retailers
-And I click Row Actions for the most recent product returned
-Then I click on the Row Action: Retailer ID Update
-And UNDER DEVELOPMENT
-
 Scenario: [56222] My Products grid Actions - Resend to Retailer navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -281,8 +273,10 @@ Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
 Then the WERCSmart homepage should load
 Given I click Bulk Actions in the Products Grid
-And I click Sync Products to WERCSlink in the Bulk Actions window
-And UNDER DEVELOPMENT
+And I click Sync Products in the Bulk Actions window
+And I should see the header: Sync Products to ULSC on the Sync Products to ULSC window
+Then I click on the cancel button on the ULSC Sync popup
+And I should see the Subheading Alerts in the main window
 
 Scenario: [56225] Bulk Actions - Accept Documents navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
