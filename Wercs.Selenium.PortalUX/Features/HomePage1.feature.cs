@@ -355,23 +355,23 @@ testRunner.Then("I should see the Subheading My Products in the products grid", 
         public virtual void _56149ClickRegisterProductButtonFromHomePage_Navigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56149] Click Register Product button from home page - Navigation", ((string[])(null)));
-#line 135
+#line 136
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 136
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 137
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 138
-testRunner.Then("I click the Register New Product icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 139
-testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I click the Register New Product icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 140
-testRunner.And("I should see the statement Select the type of product to create:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 141
-testRunner.And("I should see the radio button: Create a New Registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the statement Select the type of product to create:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 142
+testRunner.And("I should see the radio button: Create a New Registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 143
 testRunner.And("I should see the radio button: Copy from an Existing Registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -382,21 +382,21 @@ testRunner.And("I should see the radio button: Copy from an Existing Registratio
         public virtual void _56158RetailPartnersNavigationNoProducts()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56158] Retail Partners navigation No Products", ((string[])(null)));
-#line 144
+#line 146
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 145
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 146
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 147
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 148
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 149
-testRunner.And("I should see the following subheading All Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 150
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 151
+testRunner.And("I should see the following subheading All Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 152
 testRunner.And("I should not see the following subheading Most Recent Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -407,27 +407,27 @@ testRunner.And("I should not see the following subheading Most Recent Retailers"
         public virtual void _56161ULSolutionCenterNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56161] UL Solution Center navigation", ((string[])(null)));
-#line 153
+#line 155
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 154
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 155
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 156
-testRunner.Then("I click the UL Solution Center icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 157
-testRunner.Then("I should see the following option ECOLogo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 158
-testRunner.Then("I should see the following option Prospector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the UL Solution Center icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 159
-testRunner.Then("I should see the following option GoodGuide for Consumers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the following option ECOLogo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 160
-testRunner.Then("I should see the following option GoodGuide for Suppliers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the following option Prospector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 161
-testRunner.Then("I should see the following option UL Secure Connect (ULSC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the following option GoodGuide for Consumers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 162
+testRunner.Then("I should see the following option GoodGuide for Suppliers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 163
+testRunner.Then("I should see the following option UL Secure Connect (ULSC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 164
 testRunner.Then("I should see the following option ULGHS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -438,18 +438,22 @@ testRunner.Then("I should see the following option ULGHS", ((string)(null)), ((T
         public virtual void _56163LeftHandNavigation_ShoppingCart_NoProducts()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56163] Left hand navigation - Shopping Cart - No Products", ((string[])(null)));
-#line 164
+#line 167
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 165
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 166
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 167
-testRunner.Then("I click the Shopping Cart icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 168
-testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 169
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 170
+testRunner.Then("I click the Shopping Cart icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 171
+testRunner.And("I should see the header: Cart is Empty on the Cart is Empty window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 172
+testRunner.And("I click on the close button on Cart is Empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 173
+testRunner.Then("I should see the Subheading Announcements in the main window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -459,17 +463,19 @@ testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _56170WERCSLinkButtonNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56170] WERCSLink button navigation", ((string[])(null)));
-#line 171
+#line 176
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 172
+#line 177
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 173
+#line 178
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 174
-testRunner.Then("I click the WERCSLink icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 175
+#line 179
+testRunner.Then("I click the ULSC - Data Management icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 180
+testRunner.And("I switch to the tab: (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 181
 testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -480,20 +486,18 @@ testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _56188SupportNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56188] Support navigation", ((string[])(null)));
-#line 177
+#line 184
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 178
+#line 185
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 179
+#line 186
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 180
+#line 187
 testRunner.Then("I click the Support icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 181
+#line 188
 testRunner.And("I switch to the tab: https://wercsmart.freshdesk.com/en/support/solutions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 182
-testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -503,19 +507,19 @@ testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _56206SignOut()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56206] Sign Out", ((string[])(null)));
-#line 185
+#line 191
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 186
+#line 192
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 187
+#line 193
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 188
+#line 194
 testRunner.Then("I click the User Icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 189
+#line 195
 testRunner.And("I click on Sign Out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 190
+#line 196
 testRunner.And("the landing page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -526,25 +530,25 @@ testRunner.And("the landing page should load", ((string)(null)), ((TechTalk.Spec
         public virtual void _56212MyProductsGridActions_EditNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56212] My Products grid Actions - Edit Navigation", ((string[])(null)));
-#line 192
+#line 199
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 193
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 194
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 195
-testRunner.When("I filter the products by: Not Yet Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 196
-testRunner.Given("I save the ProductID and Name of the first Product in the grid as: FirstProduct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 197
-testRunner.When("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 198
-testRunner.Then("I click on the Row Action: Edit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 199
-testRunner.Then("the Product Type page should be loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 200
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 201
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 202
+testRunner.When("I filter the products by: Not Yet Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 203
+testRunner.Given("I save the ProductID and Name of the first Product in the grid as: FirstProduct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 204
+testRunner.When("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 205
+testRunner.Then("I click on the Row Action: Edit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 206
+testRunner.Then("the Product Type page should be loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 207
 testRunner.And("the product saved as: FirstProduct should be visible in editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -555,23 +559,23 @@ testRunner.And("the product saved as: FirstProduct should be visible in editor",
         public virtual void _56214MyProductsGridActions_SubmitNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56214] My Products grid Actions - Submit Navigation", ((string[])(null)));
-#line 202
+#line 209
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 203
+#line 210
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 204
+#line 211
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 205
+#line 212
 testRunner.When("I filter the products by: Not Yet Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 206
+#line 213
 testRunner.Given("I save the ProductID and Name of the first Product in the grid as: FirstProduct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 207
+#line 214
 testRunner.When("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 208
+#line 215
 testRunner.Then("I click on the Row Action: Submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 209
+#line 216
 testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -582,41 +586,41 @@ testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _56216MyProductsGridActions_DeleteNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56216] My Products grid Actions - Delete Navigation", ((string[])(null)));
-#line 211
+#line 218
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 212
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 213
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 214
-testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 215
-testRunner.And("the Product Editor page should be loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 216
-testRunner.Then("I create a shell product with name TestProduct saved as TestProduct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 217
-testRunner.Then("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 218
-testRunner.Given("I search for the product saved as: TestProduct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 219
-testRunner.When("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 220
-testRunner.Then("I click on the Row Action: Delete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 221
-testRunner.And("I cancel the Delete Dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 222
-testRunner.Then("I should see products in the Product Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("the Product Editor page should be loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 223
-testRunner.When("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("I create a shell product with name TestProduct saved as TestProduct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 224
-testRunner.Then("I click on the Row Action: Delete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 225
-testRunner.And("I confirm the Delete Dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I search for the product saved as: TestProduct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 226
-testRunner.Then("I should not see products in the Product Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 227
+testRunner.Then("I click on the Row Action: Delete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 228
+testRunner.And("I cancel the Delete Dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 229
+testRunner.Then("I should see products in the Product Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 230
+testRunner.When("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 231
+testRunner.Then("I click on the Row Action: Delete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 232
+testRunner.And("I confirm the Delete Dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 233
+testRunner.Then("I should not see products in the Product Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 234
 testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -627,21 +631,21 @@ testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _56218MyProductsGridActions_ViewNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56218] My Products grid Actions - View Navigation", ((string[])(null)));
-#line 229
+#line 236
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 230
+#line 237
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 231
+#line 238
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 232
+#line 239
 testRunner.When("I filter the products by: Assessment in Progress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 233
+#line 240
 testRunner.And("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 234
+#line 241
 testRunner.Then("I click on the Row Action: View", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 235
+#line 242
 testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -652,21 +656,21 @@ testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _56219MyProductsGridActions_DocumentsNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56219] My Products grid Actions - Documents navigation", ((string[])(null)));
-#line 237
+#line 244
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 238
+#line 245
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 239
+#line 246
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 240
+#line 247
 testRunner.When("I filter the products by: Assessment in Progress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 241
+#line 248
 testRunner.And("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 242
+#line 249
 testRunner.Then("I click on the Row Action: Documents", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 243
+#line 250
 testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -677,23 +681,23 @@ testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _56220MyProductsGridActions_EditUPCs()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56220] My Products grid Actions - Edit UPCs", ((string[])(null)));
-#line 245
+#line 252
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 246
+#line 253
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 247
+#line 254
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 248
+#line 255
 testRunner.When("I filter the products by: Sending to Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 249
+#line 256
 testRunner.Given("I save the ProductID and Name of the first Product in the grid as: FirstProduct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 250
+#line 257
 testRunner.And("I click Row Actions for the most recent product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 251
+#line 258
 testRunner.Then("I click on the Row Action: UPC Update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 252
+#line 259
 testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -704,25 +708,25 @@ testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _56223BulkActions_ForwardProductRegistrationNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56223] Bulk Actions - Forward Product Registration navigation", ((string[])(null)));
-#line 254
+#line 261
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 255
+#line 262
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 256
+#line 263
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 257
+#line 264
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 258
+#line 265
 testRunner.And("I click Forward Product Registration in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 259
+#line 266
 testRunner.Then("I should see the header: Forward Product Registration on the Forward Product Regi" +
                     "stration window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 260
+#line 267
 testRunner.And("I should see the subheading 3: Select Retailers on the Forward Product Registrati" +
                     "on window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 261
+#line 268
 testRunner.And("I should see the subheading 4: You most recently did business with... on the Forw" +
                     "ard Product Registration window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -734,24 +738,24 @@ testRunner.And("I should see the subheading 4: You most recently did business wi
         public virtual void _56224BulkActions_SyncProductsToWERCSLinkNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56224] Bulk Actions - Sync Products to WERCSLink navigation", ((string[])(null)));
-#line 265
+#line 272
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 266
+#line 273
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 267
+#line 274
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 268
+#line 275
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 269
+#line 276
 testRunner.And("I click Sync Products in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 270
+#line 277
 testRunner.And("I should see the header: Sync Products to ULSC on the Sync Products to ULSC windo" +
                     "w", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 271
+#line 278
 testRunner.Then("I click on the cancel button on the ULSC Sync popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 272
+#line 279
 testRunner.And("I should see the Subheading Alerts in the main window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -762,19 +766,19 @@ testRunner.And("I should see the Subheading Alerts in the main window", ((string
         public virtual void _56225BulkActions_AcceptDocumentsNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56225] Bulk Actions - Accept Documents navigation", ((string[])(null)));
-#line 274
+#line 281
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 275
+#line 282
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 276
+#line 283
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 277
+#line 284
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 278
+#line 285
 testRunner.And("I click Accept Documents in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 279
+#line 286
 testRunner.And("I should see the header: Document Acceptance on the Document Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -785,19 +789,19 @@ testRunner.And("I should see the header: Document Acceptance on the Document Acc
         public virtual void _56227BulkActions_DeleteProductsNavigation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56227] Bulk Actions - Delete Products navigation", ((string[])(null)));
-#line 282
+#line 289
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 283
+#line 290
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 284
+#line 291
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 285
+#line 292
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 286
+#line 293
 testRunner.And("I click Delete Products in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 287
+#line 294
 testRunner.And("I should see the header: Delete Active Products on the Delete Active Product wind" +
                     "ow", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -809,13 +813,13 @@ testRunner.And("I should see the header: Delete Active Products on the Delete Ac
         public virtual void _56280ProductInformation_Alerts_ClickOnAnyNotification()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56280] Product Information - Alerts - click on any notification", ((string[])(null)));
-#line 289
+#line 296
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 290
+#line 297
 testRunner.Then("clicking on the top Alert should direct me to the My Messages page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 291
+#line 298
 testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -826,17 +830,17 @@ testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _56281ProductInformation_Alerts_ClickMore()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56281] Product Information - Alerts - click More", ((string[])(null)));
-#line 293
+#line 300
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
-#line 294
+#line 301
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 295
+#line 302
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 296
+#line 303
 testRunner.Then("I click More below the Alerts Panel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 297
+#line 304
 testRunner.And("I should see the header: Message Center on the Message Center window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

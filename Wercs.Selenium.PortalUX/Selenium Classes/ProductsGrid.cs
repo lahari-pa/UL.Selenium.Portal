@@ -280,6 +280,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 	}
 
+	/// <summary>
+	/// Bulk Actions - Sync ULSC Products dialog
+	/// </summary>
 	class SyncULSCProductsDialog : BaseObject
 	{
 		public const string BasePath = "//h3[text()='Sync Products to ULSC']/../..";

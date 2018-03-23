@@ -300,4 +300,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return specificQuickLink != null;
 		}
 	}
+
+	/// <summary>
+	/// Shoppimg Cart - Cart is Empty dialog
+	/// </summary>
+	class CartIsEmptyDialog : BaseObject
+	{
+		public const string BasePath = "//h4[@id='myModalLabel']/../..";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		/// <summary>
+		/// this is the title of the dialog Cart is Empty
+		/// </summary>
+		/// <returns></returns>
+		public string HeaderShowing()
+		{
+			return this.containerElement.FindElement(By.XPath(".//h4[@id='myModalLabel']"), 2).Text.Trim();
+		}
+
+		/// <summary>
+		/// clicks the close button
+		/// </summary>
+		public void ClickClose()
+		{
+			this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).Click();
+		}
+	}
 }

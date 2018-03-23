@@ -18,7 +18,7 @@ Feature: Home Page
 
 Background:
 
-
+#pass
 Scenario: [55796] Navigate to Home Page
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -68,7 +68,7 @@ And I should see the Subheading Alerts expanded in the main window
 And I should see the Subheading Announcements expanded in the main window
 
 
-
+#pass
 Scenario: [55817] Product Information Panel - No Alerts/No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -93,7 +93,7 @@ And I should see the following states in the Legend:
 
 Given I see notifications in the Announcement Panel
 
-
+#pass
 Scenario: [55938] My Products grid
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -118,7 +118,7 @@ And the Product Grid should have the following headers:
 | Retailers         |
 | Actions           |
 
-
+#pass
 Scenario: [56020] Bulk Actions
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -132,6 +132,7 @@ And I should see the following options available in the Bulk Actions window
 And I click on the close button on Bulk Actions
 Then I should see the Subheading My Products in the products grid
 
+#pass
 Scenario: [56149] Click Register Product button from home page - Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -141,6 +142,7 @@ And I should see the statement Select the type of product to create:
 And I should see the radio button: Create a New Registration
 And I should see the radio button: Copy from an Existing Registration
 
+#pass
 Scenario: [56158] Retail Partners navigation No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -149,7 +151,7 @@ Then I should see the following heading Retail Partners
 And I should see the following subheading All Retailers
 And I should not see the following subheading Most Recent Retailers
 
-
+#pass
 Scenario: [56161] UL Solution Center navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -161,27 +163,31 @@ Then I should see the following option GoodGuide for Suppliers
 Then I should see the following option UL Secure Connect (ULSC)
 Then I should see the following option ULGHS
 
+#pass
 Scenario: [56163] Left hand navigation - Shopping Cart - No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Then I click the Shopping Cart icon in the Navigation Pane
-And UNDER DEVELOPMENT
+And I should see the header: Cart is Empty on the Cart is Empty window
+And I click on the close button on Cart is Empty
+Then I should see the Subheading Announcements in the main window
 
 #This test cases uses the ULSC account
 Scenario: [56170] WERCSLink button navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
 Then the WERCSmart homepage should load
-Then I click the WERCSLink icon in the QuickLinks Pane
+Then I click the ULSC - Data Management icon in the QuickLinks Pane
+And I switch to the tab: (.*)
 And UNDER DEVELOPMENT
 
+#pass
 Scenario: [56188] Support navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Then I click the Support icon in the Navigation Pane
 And I switch to the tab: https://wercsmart.freshdesk.com/en/support/solutions
-And UNDER DEVELOPMENT
 
-
+#pass
 Scenario: [56206] Sign Out
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -189,6 +195,7 @@ Then I click the User Icon
 And I click on Sign Out
 And the landing page should load
 
+#pass
 Scenario: [56212] My Products grid Actions - Edit Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load

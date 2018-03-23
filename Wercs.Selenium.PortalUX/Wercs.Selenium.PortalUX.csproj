@@ -184,16 +184,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Login.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Login\Forgotten Password1.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Forgotten Password.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Login\Login1.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Login.feature</DependentUpon>
-    </Compile>
     <Compile Include="Features\Product Registration.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -284,14 +274,6 @@
       <LastGenOutput>LandingPage1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Login.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Login1.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Login\Forgotten Password.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Forgotten Password1.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Login\Login.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Login1.feature.cs</LastGenOutput>
     </None>

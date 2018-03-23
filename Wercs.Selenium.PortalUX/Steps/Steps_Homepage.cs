@@ -608,7 +608,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support) icon in the QuickLinks Pane")]
+		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
 		public void ClickItemInQuickLinks(string item)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Selecting " + item + " in the Navigation Pane");
@@ -618,6 +618,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var selHomePageNavBar = new NavigationBar();
 				Report.IsTrue(selHomePageNavBar.Click_Icon(item), "Failed to click item: '" + item + "'!", "Successfully clicked item: '" + item + "'!");
 				GeneralUtilities.Wait_for_load_finish();
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Clicking the close button on cart is empty popup
+		/// </summary>
+		[StepDefinition(@"I click on the close button on Cart is Empty")]
+		public void ClickCloseOnCartisEmpty()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the close button");
+			var selCartEmpty = new CartIsEmptyDialog();
+			selCartEmpty.ClickClose();
+
+			Report.Success("close button clicked! on the homepage");
+		}
+
+		/// <summary>
+		/// This is to verify the title of the page
+		/// </summary>
+		/// <param name="headerExpected"></param>
+		[StepDefinition(@"I should see the header: (.*) on the Cart is Empty window")]
+		public void CorrectHeaderShowing(string headerExpected)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Cart is Empty window should appear");
+			try
+			{
+				GeneralUtilities.Wait_for_load_finish();
+				Report.Info("Checking that Cart is Empty window appears");
+				var selCartEmpty = new CartIsEmptyDialog();
+				var showing = selCartEmpty.HeaderShowing();
+				Report.IsTrue(showing == headerExpected.Trim(),
+					"Cart is Empty header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
+					"Cart is Empty header was showing '" + headerExpected + "', as expected!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
