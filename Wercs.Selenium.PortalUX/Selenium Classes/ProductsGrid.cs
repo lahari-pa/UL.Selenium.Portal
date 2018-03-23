@@ -206,7 +206,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			var productElement = new ProductGridItem();
 			productElement.ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
-			productElement.ProductName = productRow.FindElement(By.XPath(".//div[@data-bind='text:Name']"), 2).Text.Trim();
+			productElement.ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim();
 			productElement.DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
 			return productElement;
 		}

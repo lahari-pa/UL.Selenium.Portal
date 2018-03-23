@@ -242,20 +242,13 @@ And I click Row Actions for the most recent product returned
 Then I click on the Row Action: Documents
 And UNDER DEVELOPMENT
 
-Scenario: [56220] My Products grid Actions - UPC Update navigation
+Scenario: [56220] My Products grid Actions - Edit UPCs
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
 When I filter the products by: Sending to Retailers
+Given I save the ProductID and Name of the first Product in the grid as: FirstProduct
 And I click Row Actions for the most recent product returned
 Then I click on the Row Action: UPC Update
-And UNDER DEVELOPMENT
-
-Scenario: [56222] My Products grid Actions - Resend to Retailer navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then the WERCSmart homepage should load
-When I filter the products by: Sending to Retailers
-And I click Row Actions for the most recent product returned
-Then I click on the Row Action: Resend to Retailer
 And UNDER DEVELOPMENT
 
 Scenario: [56223] Bulk Actions - Forward Product Registration navigation
