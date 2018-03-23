@@ -5,6 +5,7 @@
 @ForwardProductRegistration
 @NewProduct
 @RetailPartners
+@MessageCenter
 @MyAccount
 @LandingPage
 @DocumentAcceptance
@@ -303,13 +304,9 @@ Then clicking on the top Alert should direct me to the My Messages page
 And UNDER DEVELOPMENT
 
 Scenario: [56281] Product Information - Alerts - click More
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Then the WERCSmart homepage should load
 Then I click More below the Alerts Panel
-And UNDER DEVELOPMENT
+And I should see the header: Message Center on the Message Center window
 
-Scenario: [56282] Product Information - Announcements - click on any notification
-Then clicking on the top Announcement should direct me to the My Messages page
-And UNDER DEVELOPMENT
 
-Scenario: [56285] Product Information - Announcements - click More
-Then I click More below the Announcements Panel
-And UNDER DEVELOPMENT

@@ -231,6 +231,7 @@
     <Compile Include="Selenium Classes\NewProduct.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
+    <Compile Include="Selenium Classes\MessageCenter.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\UlSolutionCenter.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Steps\Steps_MyAccount.cs" />
     <Compile Include="Steps\Steps_NewProduct.cs" />
     <Compile Include="Steps\Steps_ProductGrid.cs" />
+    <Compile Include="Steps\Steps_MessageCenter.cs" />
     <Compile Include="Steps\Steps_ShoppingCart.cs" />
     <Compile Include="Steps\Steps_UlSolutionCenter.cs" />
     <Compile Include="Steps\Steps_RetailPartners.cs" />
