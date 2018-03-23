@@ -25,12 +25,29 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return els.Select(x => x.Text.Trim()).ToList();
 		}
 
+		/// <summary>
+		/// this is the title of the page Forward Product Registration
+		/// </summary>
+		/// <returns></returns>
 		public string HeaderShowing()
 		{
 			return this.containerElement.FindElement(By.XPath(".//h2"), 2).Text.Trim();
 		}
 
-		public List<string> SubHeadingsShowing()
+		/// <summary>
+		/// This is the fourth area on the page You most recently did business with
+		/// </summary>
+		/// <returns></returns>
+		public List<string> SubHeadings4Showing()
+		{
+			return this.containerElement.FindElements(By.XPath(".//h4"), 2).Select(x => x.Text.Trim()).ToList();
+		}
+
+		/// <summary>
+		/// this is the third area on the page sub heading Select Retailers
+		/// </summary>
+		/// <returns></returns>
+		public List<string> SubHeadings3Showing()
 		{
 			return this.containerElement.FindElements(By.XPath(".//h3"), 2).Select(x => x.Text.Trim()).ToList();
 		}

@@ -71,7 +71,8 @@ Given I populate the email input field with: automatedcompany1.kxxyxunf@mailosau
 And I populate the password input field with: Welcome1!
 When I select the Login button
 Then the WERCSmart homepage should load
-Then I should see username: automated, visual company in the right corner
+Then I should see username: Automated, Visual Company in the right corner
 Given I navigate to the MyAccount page
-Then I should see company username: visual
+# need to add to click my account to ?
+Then I should see company username: Visual
 And I click on Sign Out

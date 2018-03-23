@@ -242,12 +242,12 @@ testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFl
 #line 73
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 74
-testRunner.Then("I should see username: automated, visual company in the right corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see username: Automated, Visual Company in the right corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 75
 testRunner.Given("I navigate to the MyAccount page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 76
-testRunner.Then("I should see company username: visual", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 77
+testRunner.Then("I should see company username: Visual", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 78
 testRunner.And("I click on Sign Out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

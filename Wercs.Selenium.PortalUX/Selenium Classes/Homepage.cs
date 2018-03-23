@@ -213,7 +213,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return iconOnly;
 			}
 
-			var expandedIcons = this.containerElement.FindElements(By.XPath(".//a[@id='SideMenu']/div[2]/ul"), 2);
+			var expandedIcons = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-links slideInLeft animated')]//a"), 2);
 
 			var expandedOption = expandedIcons.FirstOrDefault(x => x.Text.Contains(item));
 

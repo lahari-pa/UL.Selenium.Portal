@@ -105,8 +105,8 @@ namespace WERCSmart
 
 				var selLogin = new Login();
 				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
-				var username = @"Automatedcompany1@gmail.com";
-				var password = "Thewercs1!";
+				var username = @"AllRetailersProductsCompany.kxxyxunf@mailosaur.io";
+				var password = "Welcome1!";
 
 				Report.Info("Entering Email: '" + username + "'");
 				selLogin.EmailField = username;
@@ -130,6 +130,42 @@ namespace WERCSmart
 			}
 		}
 
+		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account")]
+		public void GivenLoginIntoWERCSmartPortal_AdminUlscRole()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator into the WERCs ULSC Account");
+			try
+			{
+				Report.Info("Clicking 'Log In' on the Landing Page");
+				var selLandingPage = new LandingPage();
+				selLandingPage.Click_Login();
+
+				var selLogin = new Login();
+				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
+				var username = @"automatedULSC.kxxyxunf@mailosaur.io ";
+				var password = "Welcome1!";
+
+				Report.Info("Entering Email: '" + username + "'");
+				selLogin.EmailField = username;
+				Report.Info("Entering Password: '" + password + "'");
+				selLogin.PasswordField = password;
+				Report.Info("Clicking login");
+				selLogin.Click_Login();
+
+				//var Sel_TOU = new TermsOfUse();
+				//if (Sel_TOU.Wait_for_load(10))
+				// Sel_TOU.Accept();
+
+				var selHomepage = new Homepage();
+				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 		[StepDefinition(@"I logout")]
 		public void GivenILogout()
@@ -428,6 +464,41 @@ namespace WERCSmart
 			try
 			{
 				SeleniumBrowser.WebBrowser.Navigate().Back();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Switching to a new tab in the chrome browser
+		/// </summary>
+		/// <param name="url"></param>
+		[StepDefinition(@"I switch to the tab: (.*)")]
+		public void SwitchToTheTab(string url)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Switch to Tab: " + url);
+			try
+			{
+				Report.Info("Switch to Tab: " + url);
+				var CurrentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", CurrentHandle);
+				var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				foreach (var handle in allHandles)
+				{
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.Url != url)
+					{
+						Report.Success("Successfully Switch to Tab: " + url + "!");
+						Report.Screenshot();
+						return;
+					}
+				}
+
+				Report.Failure("Failed to find tab with url: " + url);
+				Report.Screenshot();
 			}
 			catch (Exception ex)
 			{
