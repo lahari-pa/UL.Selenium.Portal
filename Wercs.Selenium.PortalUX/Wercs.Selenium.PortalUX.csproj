@@ -255,8 +255,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="bin\Debug\nunit_random_seed.tmp" />
-    <None Include="bin\Debug\Wercs.Selenium.PortalUX.dll.config" />
     <None Include="Features\Data Consent Tiers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Data Consent Tiers.feature.cs</LastGenOutput>
@@ -297,63 +295,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="bin\Debug\Resources\Users\" />
-    <Folder Include="bin\Release\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\Debug\Castle.Core.dll" />
-    <Content Include="bin\Debug\Castle.Core.xml" />
-    <Content Include="bin\Debug\chromedriver.exe" />
-    <Content Include="bin\Debug\geckodriver.exe" />
-    <Content Include="bin\Debug\HtmlAgilityPack.dll" />
-    <Content Include="bin\Debug\HtmlAgilityPack.xml" />
-    <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
-    <Content Include="bin\Debug\IEDriverServer.exe" />
-    <Content Include="bin\Debug\itextsharp.dll" />
-    <Content Include="bin\Debug\itextsharp.xml" />
-    <Content Include="bin\Debug\Mailosaur.dll" />
-    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll" />
-    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll" />
-    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml" />
-    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml" />
-    <Content Include="bin\Debug\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll" />
-    <Content Include="bin\Debug\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.xml" />
-    <Content Include="bin\Debug\Microsoft.Web.Administration.dll" />
-    <Content Include="bin\Debug\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
-    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
-    <Content Include="bin\Debug\NPOI.dll" />
-    <Content Include="bin\Debug\NPOI.OOXML.dll" />
-    <Content Include="bin\Debug\NPOI.OpenXml4Net.dll" />
-    <Content Include="bin\Debug\NPOI.OpenXmlFormats.dll" />
-    <Content Include="bin\Debug\NPOI.xml" />
-    <Content Include="bin\Debug\nunit.framework.dll" />
-    <Content Include="bin\Debug\nunit.framework.xml" />
-    <Content Include="bin\Debug\ResourceManager.exe" />
-    <Content Include="bin\Debug\Resources\chromedriver.exe" />
-    <Content Include="bin\Debug\Resources\IEDriverServer.exe" />
-    <Content Include="bin\Debug\SafewareReportingPlugin.dll" />
-    <Content Include="bin\Debug\SafewareSeleniumUtilities.dll" />
-    <Content Include="bin\Debug\Selenium.Core.dll" />
-    <Content Include="bin\Debug\Selenium.Core.xml" />
-    <Content Include="bin\Debug\TechTalk.SpecFlow.dll" />
-    <Content Include="bin\Debug\TestStack.White.dll" />
-    <Content Include="bin\Debug\TestStack.White.xml" />
-    <Content Include="bin\Debug\TReVor.dll" />
-    <Content Include="bin\Debug\WebDriver.dll" />
-    <Content Include="bin\Debug\WebDriver.Support.dll" />
-    <Content Include="bin\Debug\WebDriver.Support.xml" />
-    <Content Include="bin\Debug\WebDriver.xml" />
-    <Content Include="bin\Debug\Wercs.Selenium.PortalUX.dll" />
-    <Content Include="bin\Debug\Wercs.Selenium.PortalUX.pdb" />
-    <Content Include="Mono.Cecil.dll" />
-    <Content Include="Mono.Cecil.Mdb.dll" />
-    <Content Include="Mono.Cecil.Pdb.dll" />
-    <Content Include="Mono.Cecil.Rocks.dll" />
-    <Content Include="nunit.engine.api.dll" />
-    <Content Include="nunit.engine.dll" />
-    <Content Include="NUnit3.TestAdapter.dll" />
     <Content Include="Resources\RanorexForm2.jpg" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
