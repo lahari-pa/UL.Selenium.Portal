@@ -10,8 +10,8 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
-	[Binding, Scope(Tag = "UlSolutionCenter")]
-	class StepsUlSolutionCenter
+	[Binding, Scope(Tag = "ULSC")]
+	class StepsULSC
 	{
 
 		[StepDefinition(@"I should see the following option (.*)")]
@@ -21,7 +21,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Checking that the option " + option + " is showing");
-				var selUlSolutionCenter = new UlSolutionCenter();
+				var selUlSolutionCenter = new ULSC();
 
 				if (!selUlSolutionCenter.Wait_for_load(10))
 				{

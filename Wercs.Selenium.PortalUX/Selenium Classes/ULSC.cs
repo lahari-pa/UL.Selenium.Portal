@@ -7,7 +7,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class UlSolutionCenter : BaseObject
+	class ULSC : BaseObject
 	{
 		public const string BasePath = "//div[@id='solutionCenterContainer']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
