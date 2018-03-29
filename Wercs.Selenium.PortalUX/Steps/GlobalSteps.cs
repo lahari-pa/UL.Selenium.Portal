@@ -8,6 +8,7 @@ using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using System.IO;
 using System.Linq;
+using ResourcePool;
 
 [assembly: Apartment(ApartmentState.STA)]
 

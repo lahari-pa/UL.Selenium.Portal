@@ -111,17 +111,13 @@
       <HintPath>packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ResourcePool, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.0.1.0\lib\net45\ResourcePool.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.8.0\lib\net45\ResourcePool.dll</HintPath>
     </Reference>
     <Reference Include="SafewareReportingPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Safeware.SeleniumUtilities.0.1.0\lib\net45\SafewareReportingPlugin.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.8.0\lib\net45\SafewareReportingPlugin.dll</HintPath>
     </Reference>
     <Reference Include="SafewareSeleniumUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Safeware.SeleniumUtilities.0.1.0\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.8.0\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
     </Reference>
     <Reference Include="Selenium.Core, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Wercs.Selenium.Core.3.0.1-build20171027-004\lib\net45\Selenium.Core.dll</HintPath>
@@ -144,9 +140,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Safeware.SeleniumUtilities.0.1.0\lib\net45\TReVor.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.8.0\lib\net45\TReVor.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>packages\Selenium.WebDriver.3.5.2\lib\net40\WebDriver.dll</HintPath>
@@ -205,22 +199,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Product Registration.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\RetailerPartners.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RetailerPartners.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\RetailerPartners1.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RetailerPartners.feature</DependentUpon>
-    </Compile>
     <Compile Include="Features\Signup1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Signup.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ULSC.feature.cs">
+    <Compile Include="Features\ULSC1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ULSC.feature</DependentUpon>
@@ -251,13 +235,15 @@
     <Compile Include="Selenium Classes\NewProduct.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
+    <Compile Include="Selenium Classes\MessageCenter.cs" />
+    <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />
     <Compile Include="Selenium Classes\TermsOfUse.cs" />
     <Compile Include="Selenium Classes\TopMenuBar.cs" />
-    <Compile Include="Selenium Classes\ULSolutionCenter.cs" />
+    <Compile Include="Selenium Classes\ULSC.cs" />
     <Compile Include="Selenium Classes\UserDetails.cs" />
     <Compile Include="SeleniumHelper.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
@@ -323,7 +309,7 @@
     </None>
     <None Include="Features\ULSC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ULSC.feature.cs</LastGenOutput>
+      <LastGenOutput>ULSC1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\[57203] Data Consent Tiers - Retailer Specific Behaviour.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -337,10 +323,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\RanorexForm2.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

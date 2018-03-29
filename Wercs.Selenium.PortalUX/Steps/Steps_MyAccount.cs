@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ResourcePool;
 using SafewareReporting;
@@ -35,13 +36,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 	    [Then(@"I should see user name: (.*) in the header next to the user icon")]
-	    public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string Username)
+	    public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string username)
 	    {
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + Username + " in the top right corner");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + username + " in the top right corner");
 		    try
 		    {
 			    TopMenuBar thisTopMenuBar = new TopMenuBar();
-			    string username = Username;
 				Report.Info("Looking for username: " + username);
 			    Report.IsTrue(thisTopMenuBar.GetCurrentUser() == username,
 				    "Username should have been showing as: " + username + " but is: " + thisTopMenuBar.GetCurrentUser(),
@@ -242,15 +242,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 	    [Given(@"In the UserDetails page I click (.*)")]
-	    public void GivenInTheUserDetailsPageIClick(string ButtonToClickText)
+	    public void GivenInTheUserDetailsPageIClick(string buttonToClickText)
 	    {
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails page I click " + ButtonToClickText);
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails page I click " + buttonToClickText);
 			try
 		    {
 			    var MyUserDetails = new UserDetails();
-			    Report.IsTrue(MyUserDetails.ClickButton(ButtonToClickText), "Failed to click " + ButtonToClickText, "Successfully clicked " + ButtonToClickText);
+			    Report.IsTrue(MyUserDetails.ClickButton(buttonToClickText), "Failed to click " + buttonToClickText, "Successfully clicked " + buttonToClickText);
 
-			    if (ButtonToClickText.ToLower() == "save")
+			    if (buttonToClickText.ToLower() == "save")
 			    {
 					MyUserDetails.ClickButtonOnAddUserDialog("close");
 				}

@@ -596,7 +596,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			    switch (pageTitle)
 			    {
 				    case "UL Solution Center":
-						UlSolutionCenter ULSolution = new UlSolutionCenter();
+						ULSC ULSolution = new ULSC();
 					    Report.IsTrue(ULSolution.Exists, "UL Solutions page does not exist as expected.", "UL Solutions page exists as expected.");
 					    break;
 				    default:
@@ -664,7 +664,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		    try
 		    {
 			    ShoppingCart ThisShoppingCart = new ShoppingCart();
-			    ThisShoppingCart.ClickClose();
+				// TODO: Does this function need re-including?
+			    // ThisShoppingCart.ClickClose();
 			    Delay.Seconds(2);
 
 		    }
