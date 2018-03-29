@@ -104,11 +104,11 @@ testRunner.And("I should see the header New Product", ((string)(null)), ((TechTa
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
             table1.AddRow(new string[] {
-                        "Yes, create a new product"});
+                        "Create a New Registration"});
             table1.AddRow(new string[] {
-                        "No, copy an existing product"});
+                        "Copy from an Existing Registration"});
             table1.AddRow(new string[] {
-                        "No, copy from ULSC service"});
+                        "Request a UPC from a Manufacturer"});
 #line 18
 testRunner.And("I should see the following radio buttons:", ((string)(null)), table1, "And ");
 #line hidden
@@ -120,16 +120,37 @@ testRunner.And("I should see the following radio buttons:", ((string)(null)), ta
         public virtual void _31344NewProductScreenValidation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31344] New Product Screen validation", ((string[])(null)));
-#line 24
+#line 29
 this.ScenarioSetup(scenarioInfo);
 #line 12
 this.FeatureBackground();
-#line 25
+#line 30
 testRunner.Given("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
+#line 31
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 27
+#line 32
 testRunner.Then("I should see an error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create a new product")]
+        public virtual void CreateANewProduct()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new product", ((string[])(null)));
+#line 34
+this.ScenarioSetup(scenarioInfo);
+#line 12
+this.FeatureBackground();
+#line 35
+testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 36
+testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 37
+testRunner.Given("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 38
+testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
         }

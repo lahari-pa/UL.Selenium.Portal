@@ -4,6 +4,7 @@ using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
+using TestStack.White.UIItems.WindowItems;
 using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
@@ -33,6 +34,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+	    [Then(@"I should see user name: (.*) in the header next to the user icon")]
+	    public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string Username)
+	    {
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + Username + " in the top right corner");
+		    try
+		    {
+			    TopMenuBar thisTopMenuBar = new TopMenuBar();
+			    string username = Username;
+				Report.Info("Looking for username: " + username);
+			    Report.IsTrue(thisTopMenuBar.GetCurrentUser() == username,
+				    "Username should have been showing as: " + username + " but is: " + thisTopMenuBar.GetCurrentUser(),
+				    "Username correctly showing as: " + username);
+		    }
+		    catch (Exception ex)
+		    {
+			    Report.Failure(ex.Message);
+			    throw;
+		    }
+		}
 
 		[StepDefinition(@"I should see username: (.*) in the right corner")]
 		public void ThenIShouldSeeUsernameInTheRightCorner(string username)
@@ -87,21 +107,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
-
-		[StepDefinition(@"I should see the heading: (.*) on the My Account page")]
-		public void CorrectHeadingShowing(string headingExpected)
+		[Given(@"I save all the users in the User Grid")]
+		public void GivenISaveAllTheUsersInTheUserGrid()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the heading " + headingExpected);
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I save all the users in the User Grid");
 			try
 			{
-				Report.Info("Checking that I see the heading: '" + headingExpected + "'");
 				var selMyAccount = new MyAccount();
-				var headingShowing = selMyAccount.HeaderShowing();
-				Report.IsTrue(headingShowing.Trim() == headingExpected.Trim(),
-					"Heading was not as expected! Expected: " + headingExpected + ", but found " + headingShowing + "!",
-					"Heading was showing: " + headingShowing + ", as expected!");
-				Report.Screenshot();
+				Report.IsTrue(selMyAccount.SaveUserGrid("userGrid"), "Failed to save users in the user Grid", "Successfully saved users in the User grid");
+
 			}
 			catch (Exception ex)
 			{
@@ -109,6 +123,186 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+	    [Then(@"In the User Grid the user saved as: (.*) has been replaced by: (.*)")]
+	    public void ThenInTheUserGridTheSavedUserNameHasBeenReplacedBy(string savedAs, string replacedBy)
+	    {
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the User Grid the saved user name (" + savedAs + ") has been replaced by: " + replacedBy);
+		    try
+		    {
+				Delay.Seconds(20);
+			    var selMyAccount = new MyAccount();
+			    Report.IsTrue(selMyAccount.SaveUserGrid("userGridNew"), "Failed to save users in the user Grid", "Successfully saved users in the User grid");
+			    Delay.Seconds(2);
+				List<User> OriginalGrid = (List<User>)Context.GetFromContext("userGrid");
+				List<User> NewGrid= (List<User>)Context.GetFromContext("userGridNew");
+			    User SavedUser = (User)Context.GetFromContext(savedAs);
+
+			    List<User> Matching = OriginalGrid.Where(y => NewGrid.Any(z => z.Username == y.Username)).ToList();
+
+
+
+				User InOriginalButNotNew = OriginalGrid.Where(y => !NewGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
+			    User InNewButNotOriginal = NewGrid.Where(y => !OriginalGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
+
+				Report.IsTrue(InOriginalButNotNew.Username == SavedUser.Username,
+				    "User: " + SavedUser.Username + " has not been replaced. ",
+				    "As expected, " + SavedUser.Username + " has been replaced");
+			    Report.IsTrue(InNewButNotOriginal.Username == replacedBy,
+				    "User has not been replaced by: " + replacedBy,
+				    "As expected the replacement user is: " + replacedBy);
+			}
+		    catch (Exception ex)
+		    {
+			    Report.Failure(ex.Message);
+			    throw;
+		    }
+		}
+
+
+		[Given(@"I go to (.*) in User Grid for the current user")]
+	    public void GivenIGoToActionInUserGrid(string action)
+	    {
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I go to " + action + " in User Grid");
+		    try
+		    {
+				Delay.Seconds(1);
+				var selMyAccount = new MyAccount();
+			    var selTopMenuBar = new TopMenuBar();
+
+			    //get name of currently signed in
+			    string Username = selTopMenuBar.GetCurrentUser();
+
+			    Report.IsTrue(selMyAccount.ForUserClickAction(Username, action),
+				    "Failed to click action: " + action + " for user: " + Username,
+				    "Successfully clicked action: " + action + " for user: " + Username);
+
+				Delay.Seconds(1);
+		    }
+		    catch (Exception ex)
+		    {
+			    Report.Failure(ex.Message);
+			    throw;
+		    }
+		}
+
+	    [Given(@"In the UserDetails screen I save the current User as: (.*)")]
+	    public void GivenInTheUserDetailsScreenISaveTheCurrentUserAs(string saveAs)
+	    {
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails screen I save the current User as: " + saveAs);
+		    try
+		    {
+			    var MyUserDetails = new UserDetails();
+				User ThisUser = new User();
+
+			    ThisUser.Username = MyUserDetails.Name;
+			    ThisUser.Title = MyUserDetails.Title;
+			    ThisUser.Role = MyUserDetails.UserRole;
+			    ThisUser.Purview = MyUserDetails.Purview;
+			    ThisUser.Email = MyUserDetails.EmailAddress;
+			    ThisUser.Country = MyUserDetails.Country;
+			    ThisUser.CountryCode = MyUserDetails.CountryCode;
+			    ThisUser.PhoneNumber = MyUserDetails.PhoneNumber;
+			    ThisUser.SendNotifications = MyUserDetails.SendNotifications;
+			    Delay.Seconds(1);
+
+			    Context.AddToContext(saveAs, ThisUser);
+		    }
+		    catch (Exception ex)
+		    {
+			    Report.Failure(ex.Message);
+			    throw;
+		    }
+		}
+
+	    [Given(@"In the UserDetails page I set Name to be: (.*)")]
+	    public void GivenInTheUserDetailsPageISetNameToBe(string name)
+	    {
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails page I set Name to be: " + name);
+
+			try
+		    {
+			    var MyUserDetails = new UserDetails();
+				Delay.Seconds(3);
+			    if (name.ToLower().Contains("saved as"))
+			    {
+				    name = ((User)Context.GetFromContext(name.Replace("saved as", "", StringComparison.OrdinalIgnoreCase)))
+					    .Username;
+			    }
+				Report.Info("Inputting name: " + name);
+			    MyUserDetails.Name = name;
+			    Report.IsTrue(MyUserDetails.Name == name, "Failed to set user details name to: " + name,
+				    "Successfully set name to be: " + name);
+		    }
+		    catch (Exception ex)
+		    {
+			    Report.Failure(ex.Message);
+			    throw;
+		    }
+		}
+
+	    [Given(@"In the UserDetails page I click (.*)")]
+	    public void GivenInTheUserDetailsPageIClick(string ButtonToClickText)
+	    {
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails page I click " + ButtonToClickText);
+			try
+		    {
+			    var MyUserDetails = new UserDetails();
+			    Report.IsTrue(MyUserDetails.ClickButton(ButtonToClickText), "Failed to click " + ButtonToClickText, "Successfully clicked " + ButtonToClickText);
+
+			    if (ButtonToClickText.ToLower() == "save")
+			    {
+					MyUserDetails.ClickButtonOnAddUserDialog("close");
+				}
+		    }
+		    catch (Exception ex)
+		    {
+			    Report.Failure(ex.Message);
+			    throw;
+		    }
+		}
+
+
+		[Given(@"I click Save in My Account")]
+	    public void GivenIClickSaveInMyAccount()
+	    {
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Save in My Account");
+
+
+			try
+		    {
+			  
+		    }
+		    catch (Exception ex)
+		    {
+			    Report.Failure(ex.Message);
+			    throw;
+		    }
+		}
+
+
+
+
+		[StepDefinition(@"I should see the heading: (.*) on the My Account page")]
+        public void CorrectHeadingShowing(string headingExpected)
+        {
+            TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the heading " + headingExpected);
+            try
+            {
+                Report.Info("Checking that I see the heading: '" + headingExpected + "'");
+                var selMyAccount = new MyAccount();
+                var headingShowing = selMyAccount.HeaderShowing();
+                Report.IsTrue(headingShowing.Trim() == headingExpected.Trim(),
+                    "Heading was not as expected! Expected: " + headingExpected + ", but found " + headingShowing + "!",
+                    "Heading was showing: " + headingShowing + ", as expected!");
+                Report.Screenshot();
+            }
+            catch (Exception ex)
+            {
+                Report.Failure(ex.Message);
+                throw;
+            }
+        }
 
 		[StepDefinition(@"I should see the subheading: (.*) on the My Account page")]
 		public void CorrectSubHeadingShowing(string subheadingExpected)

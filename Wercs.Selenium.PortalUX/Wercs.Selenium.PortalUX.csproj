@@ -111,13 +111,17 @@
       <HintPath>packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ResourcePool, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.1.7.2\lib\net45\ResourcePool.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.0.1.0\lib\net45\ResourcePool.dll</HintPath>
     </Reference>
     <Reference Include="SafewareReportingPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.1.7.2\lib\net45\SafewareReportingPlugin.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Safeware.SeleniumUtilities.0.1.0\lib\net45\SafewareReportingPlugin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SafewareSeleniumUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.1.7.2\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Safeware.SeleniumUtilities.0.1.0\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Selenium.Core, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Wercs.Selenium.Core.3.0.1-build20171027-004\lib\net45\Selenium.Core.dll</HintPath>
@@ -140,7 +144,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.1.7.2\lib\net45\TReVor.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Safeware.SeleniumUtilities.0.1.0\lib\net45\TReVor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>packages\Selenium.WebDriver.3.5.2\lib\net40\WebDriver.dll</HintPath>
@@ -184,16 +190,40 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Login.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Login\Forgotten Password1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Forgotten Password.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Login\Login1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Product Registration.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\RetailerPartners.feature.cs" />
+    <Compile Include="Features\RetailerPartners.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RetailerPartners.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\RetailerPartners1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RetailerPartners.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Signup1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Signup.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ULSC.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ULSC.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\[57203] Data Consent Tiers - Retailer Specific Behaviour.feature.cs">
       <AutoGen>True</AutoGen>
@@ -209,31 +239,30 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
-    <Compile Include="Selenium Classes\DeleteActiveProducts.cs" />
     <Compile Include="Selenium Classes\ForgottenPassword.cs" />
-    <Compile Include="Selenium Classes\DocumentAcceptance.cs" />
     <Compile Include="Selenium Classes\ForwardProductRegistration.cs" />
     <Compile Include="Selenium Classes\GeneralUtilities.cs" />
     <Compile Include="Selenium Classes\Homepage.cs" />
+    <Compile Include="Selenium Classes\InactivityPopup.cs" />
     <Compile Include="Selenium Classes\LandingPage.cs" />
     <Compile Include="Selenium Classes\Login.cs" />
     <Compile Include="Selenium Classes\MyAccount.cs" />
+    <Compile Include="Selenium Classes\NavigationBar.cs" />
     <Compile Include="Selenium Classes\NewProduct.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
-    <Compile Include="Selenium Classes\MessageCenter.cs" />
-    <Compile Include="Selenium Classes\ShoppingCart.cs" />
-    <Compile Include="Selenium Classes\UlSolutionCenter.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
+    <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />
     <Compile Include="Selenium Classes\TermsOfUse.cs" />
     <Compile Include="Selenium Classes\TopMenuBar.cs" />
+    <Compile Include="Selenium Classes\ULSolutionCenter.cs" />
+    <Compile Include="Selenium Classes\UserDetails.cs" />
     <Compile Include="SeleniumHelper.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
-    <Compile Include="Steps\Steps_DeleteActiveProducts.cs" />
+    <Compile Include="Steps\Steps_Solution.cs" />
     <Compile Include="Steps\Steps_ForgottenPassword.cs" />
-    <Compile Include="Steps\Steps_DocumentAcceptance.cs" />
     <Compile Include="Steps\Steps_ForwardProductRegistration.cs" />
     <Compile Include="Steps\Steps_Homepage.cs" />
     <Compile Include="Steps\Steps_LandingPage.cs" />
@@ -241,9 +270,6 @@
     <Compile Include="Steps\Steps_MyAccount.cs" />
     <Compile Include="Steps\Steps_NewProduct.cs" />
     <Compile Include="Steps\Steps_ProductGrid.cs" />
-    <Compile Include="Steps\Steps_MessageCenter.cs" />
-    <Compile Include="Steps\Steps_ShoppingCart.cs" />
-    <Compile Include="Steps\Steps_UlSolutionCenter.cs" />
     <Compile Include="Steps\Steps_RetailPartners.cs" />
     <Compile Include="Steps\Steps_Signup.cs" />
     <Compile Include="Tests\Account\LoginTests.cs" />
@@ -275,13 +301,29 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Login1.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Login\Forgotten Password.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Forgotten Password1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Login\Login.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Login1.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Product Registration.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Product Registration.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\RetailerPartners.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RetailerPartners1.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Signup.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Signup1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ULSC.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ULSC.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\[57203] Data Consent Tiers - Retailer Specific Behaviour.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -322,12 +364,8 @@ IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)TReVor.dll"
 IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)ResourcePool.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
-  <Import Project="packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets')" />
-  <Import Project="packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <PropertyGroup>
     <PreBuildEvent>cd $(TargetDir)
-del *.dll
-taskkill /f /im chromedriver.exe /fi "memusage gt 40" 2&gt;NUL
-taskkill /f /im IEDriverServer.exe /fi "memusage gt 40" 2&gt;NUL</PreBuildEvent>
+del *.dll</PreBuildEvent>
   </PropertyGroup>
 </Project>

@@ -36,6 +36,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2).Click();
 		}
 
+		public void ClickOnHelpTopRight()
+		{
+			this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle live-help')]"), 2).Click();
+		}
+
 		public bool ClickSignOut()
 		{
 			return SelectAccountOption("Sign Out");

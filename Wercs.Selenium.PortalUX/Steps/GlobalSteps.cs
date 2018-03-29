@@ -4,7 +4,6 @@ using System.Threading;
 using SafewareReporting;
 using TechTalk.SpecFlow;
 using NUnit.Framework;
-using ResourcePool;
 using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using System.IO;
@@ -25,7 +24,7 @@ namespace WERCSmart
 		[Then(@"I login as the administrator")]
 		public void GivenILoginAsTheAdministrator()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator");
+			TestReport.BeginTestModule(ResourcePool.GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator");
 			try
 			{
 				Report.Info("Clicking 'Log In' on the Landing Page");
@@ -182,6 +181,22 @@ namespace WERCSmart
 				throw;
 			}
 		}
+
+		[When(@"I wait for (.*) seconds")]
+		public void WhenIWaitForSeconds(int p0)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " I wait for " + p0.ToString() + " seconds.");
+			try
+			{
+				Delay.Seconds(p0);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 		[StepDefinition(@"I scroll to the (top|bottom) of the page")]
 		public void ThenIScrollToTheOfThePage(string topbottom)

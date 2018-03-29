@@ -11,6 +11,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using WERCSmart;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
@@ -94,6 +95,66 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[Given(@"I create a user from the ResourcePool: (.*)")]
+		public void GivenICreateAUserFromTheResourcePool(string identifier)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I create a user from the ResourcePool: " + identifier);
+			try
+			{
+				var account = ResourcePool.UserPool.WERCSmart.WERCSmartUsers.Find(x => x.Identifier == identifier);
+				account.Email = EmailFunctions.CreateEmail(account.Email);
+				Context.AddToContext(identifier, account);
+				GivenISaveTheCurrentEmailsInTheInboxFor(identifier);
+
+				StepsLogin MyStepsLogin = new StepsLogin();
+				MyStepsLogin.GivenIClickOnTheNewToWercsmartLink();
+
+				StepsSignup MyStepsSignup = new StepsSignup();
+				MyStepsSignup.ThenTheSignupPageShouldAppear();
+
+				MyStepsSignup.GivenIEnterSignupEmailUser(identifier);
+				MyStepsSignup.GivenIConfirmSignupEmailUser(identifier);
+
+				MyStepsSignup.GivenIClickOnSubmit();
+				Delay.Seconds(1);
+				ThenTheSignupThankYouPageShouldAppear();
+				Delay.Seconds(60);
+				ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", identifier, "<SiteNotification>","Link to create WERCSmart Account");
+
+				ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+				WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+
+				WhenIEnterTheFollowingInformationIntoTheNewUserForm(identifier);
+
+				WhenInTheNewUserFormIClickOnContinue();
+
+				ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm();
+
+				EnterTheFollowingIntoSecurityQuestions(identifier);
+				EnterPinForUser(identifier);
+
+				WhenInTheNewUserFormIClickOnContinue();
+
+				StepsLandingPage MyStepsLandingPage = new StepsLandingPage();
+				MyStepsLandingPage.ClickTheLoginButton();
+				MyStepsLogin.GivenILoginAsUser(identifier);
+				GivenIfTermsOfUsePageAppearsIAccept();
+
+				StepsHomepage MyStepsHomepage = new StepsHomepage();
+				MyStepsHomepage.ThenTheWercSmartHomepageShouldLoad();
+
+				GlobalSteps MyGlobalSteps = new GlobalSteps();
+				MyGlobalSteps.GivenILogout();
+
+				Report.Success("Account details saved!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 
 		[StepDefinition(@"I define the user: (.*) with the following parameters:")]
@@ -142,7 +203,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter sign up email for user: " + savedAs);
 			try
 			{
-				var user = (User)Context.GetFromContext(savedAs);
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				Report.Info("Entering email: '" + user.Email + "'");
 				var selSignup = new Signup();
 				selSignup.Enter_Email(user.Email);
@@ -320,7 +381,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter confirm sign up email for user: " + savedAs);
 			try
 			{
-				var user = (User)Context.GetFromContext(savedAs);
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				Report.Info("Entering email: '" + user.Email + "'");
 				var selSignup = new Signup();
 				selSignup.Enter_ConfirmEmail(user.Email);
@@ -397,7 +458,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I save the current emails in this inbox so I can locate the new one when it arrives");
 			try
 			{
-				var user = (User)Context.GetFromContext(savedAs);
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				Report.Info("Storing inbox for address: " + user.Email);
 				EmailFunctions.StoreCurrentInbox(user.Email);
 				Report.Success("Inbox stored successfully!");
@@ -438,11 +499,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 						emailFrom = "wercsmartcustomer@ul.com";
 					}
 				}
-				var user = (User)Context.GetFromContext(savedAs);
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				if (EmailFunctions.WaitForInboxDifferences(user.Email))
 				{
 					var differences = EmailFunctions.GetInboxDifferences(user.Email);
-					var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address == emailFrom && x.Subject == title);
+					var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom && x.Subject == title);
 
 					if (shouldOrNot == "should")
 					{
@@ -572,7 +633,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I enter the data in the table into the new account form.");
 			try
 			{
-				var user = (User)Context.GetFromContext(savedAs);
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				NewUser thisNewUser = new NewUser();
 				thisNewUser.Country = user.Country;
 				thisNewUser.FirstName = user.FirstName;
@@ -672,7 +733,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Beginning entering Security Questions!");
-				var user = (User)Context.GetFromContext(savedAs);
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				var userForm = new NewUser();
 
 				userForm.EnterQuestionAnswer("1", user.CityQuestion);
@@ -702,7 +763,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter Pin: for user: '" + savedAs + "'");
 			try
 			{
-				var user = (User)Context.GetFromContext(savedAs);
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				Report.Info("Beginning to enter pin: '" + user.Pin + "'");
 				NewUser thisNewUser = new NewUser();
 				thisNewUser.Pin = user.Pin;

@@ -10,6 +10,7 @@
 @LandingPage
 @DocumentAcceptance
 @DeleteActiveProducts
+@Solutions
 @wercsmart
 
 @run_Homepage
@@ -156,12 +157,15 @@ Scenario: [56161] UL Solution Center navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Then I click the UL Solution Center icon in the Navigation Pane
-Then I should see the following option ECOLogo
-Then I should see the following option Prospector
-Then I should see the following option GoodGuide for Consumers
-Then I should see the following option GoodGuide for Suppliers
-Then I should see the following option UL Secure Connect (ULSC)
-Then I should see the following option ULGHS
+Then Confirm that you are taken to the UL Solution Center page
+Then Confirm in the UL Solution Center page you see sections for:
+| Sections                 |
+| ECOLOGO                  |
+| Prospector               |
+| GoodGuide for Consumers  |
+| GoodGuide for Suppliers  |
+| UL Secure Connect (ULSC) |
+| ULGHS                    |
 
 #pass
 Scenario: [56163] Left hand navigation - Shopping Cart - No Products
@@ -185,9 +189,33 @@ Scenario: [56188] Support navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Then I click the Support icon in the Navigation Pane
-And I switch to the tab: https://wercsmart.freshdesk.com/en/support/solutions
+Then Confirm that freshdesk opens in another tab
 
-#pass
+Scenario: [32590] My Account navigation
+Then I click the User Icon
+And I click on My Account
+And I should see the heading: My Account on the My Account page
+And I should see the subheading: Your Company User Accounts on the My Account page
+
+
+Scenario: [61796] Account User Name in Header
+#Then I should see username for user saved as: SignupUser in the right corner
+Given I click on My Account
+And I should see the heading: My Account on the My Account page
+Given I save all the users in the User Grid
+Given I go to Details in User Grid for the current user
+Given In the UserDetails screen I save the current User as: ThisUser
+Given In the UserDetails page I set Name to be: Richard Smith
+Given In the UserDetails page I click Save
+#Given I click Save in My Account
+Then In the User Grid the user saved as: ThisUser has been replaced by: Richard Smith
+Then I should see user name: Richard Smith in the header next to the user icon
+Given I click on My Account
+Given I go to Details in User Grid for the current user
+Given In the UserDetails page I set Name to be: saved as ThisUser
+
+
+
 Scenario: [56206] Sign Out
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load

@@ -78,14 +78,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			set { this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product name')]/../following-sibling::div/input"), 2).EnterText(value); }
 		}
 
-		public string ProductType {
-			set
+	    public string ProductLineOrBrand 
+	    {
+		    set
 			{
-				var el = this.containerElement.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 2);
-				el.Click();
-				var inputField = this.containerElement.FindElement(By.XPath("//span[contains(@class,'select2-container')]//input"), 2);
-				inputField.EnterText(value);
-				GeneralUtilities.Wait_for_load_finish();
+				var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Line')]/../following-sibling::div//select"), 2);
+				el.SelectByValue(value);
+		    }
+
+	    }
+
+        public string ProductType
+        {
+            set
+            {
+                var el = this.containerElement.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 2);
+                el.Click();
+                var inputField = this.containerElement.FindElement(By.XPath("//span[contains(@class,'select2-container')]//input"), 2);
+                inputField.EnterText(value);
+                GeneralUtilities.Wait_for_load_finish();
 
 				var dropDownResults = this.containerElement.FindElements(By.XPath("//span[contains(@class,'select2-container')]//ul/li"), 2);
 				var ddlEl = dropDownResults.FirstOrDefault(x => x.Text.Trim() == value);

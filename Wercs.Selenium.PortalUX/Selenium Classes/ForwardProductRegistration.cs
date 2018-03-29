@@ -14,16 +14,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public List<string> ListOfRetailers()
-		{
-			var els = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'wizard-step-panel')]/div[@role='tabpanel']/div//input[@type='checkbox']/../span"), 2);
-			if (els.Count == 0)
+        public List<string> ListOfRetailers()
+        {
+            var els = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'wizard-step-panel')]/div[@role='tabpanel']/div//input[@type='checkbox']/../span"), 2);
+            if (els.Count == 0)
 			{
 				return null;
 			}
 
 			return els.Select(x => x.Text.Trim()).ToList();
-		}
+        }
 
 		/// <summary>
 		/// this is the title of the page Forward Product Registration

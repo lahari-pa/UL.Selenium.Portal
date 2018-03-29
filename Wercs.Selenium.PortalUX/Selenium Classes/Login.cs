@@ -78,15 +78,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			set { this.containerElement.FindElement(By.XPath("//input[@name='loginEmail']"), 2).EnterText(value); }
 		}
 
-		public string PasswordField {
-			get { return this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).Text; }
-			set { this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).EnterText(value); }
-		}
+        public string PasswordField
+        {
+            get { return this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).Text; }
+	        set
+	        {
+				IWebElement PW = this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2);
+		        PW.EnterText(value);
+		        PW.SendKeys(Keys.Tab);
 
-		public void Click_Login()
-		{
-			this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 2).Click();
-		}
+	        }
+        }
+
+        public void Click_Login()
+        {
+	        IWebElement LoginButton =
+		        this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 2);
+
+	        if (LoginButton != null)
+	        {
+		        LoginButton.ClickWithScroll();
+			}
+	        else
+	        {
+		        throw new Exception("Login button was not found");
+	        }
+	        
+        }
 
 		public void Click_Forgotten_Password()
 		{

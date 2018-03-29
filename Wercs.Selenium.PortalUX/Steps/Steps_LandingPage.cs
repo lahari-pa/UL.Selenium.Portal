@@ -23,6 +23,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				var blah = ResourcePool.UserPool.WERCSmart.WERCSmartUsers;
 				Report.Info("Beginning to click the Login button");
+				var test = ResourcePool.UserPool.WERCSmart.WERCSmartUsers;
 				var selHomepage = new LandingPage();
 				if (!selHomepage.Wait_for_load(1))
 				{

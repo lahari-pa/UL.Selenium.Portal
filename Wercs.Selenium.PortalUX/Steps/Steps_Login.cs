@@ -4,7 +4,6 @@ using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -113,7 +112,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I ensure that the (email|password) input field is not populated")]
 		public void ThenIEnsureThatTheInputFieldIsNotPopulated(string inputField)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " I ensure that the " + inputField + " input field is not populated");
 			try
 			{
 				var selLogin = new Login();
@@ -159,7 +158,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the following error message for (email|password): (.*)")]
 		public void ThenIShouldSeeTheFollowingErrorMessageForField(string field, string error)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " I should see the following error message for " + field + ": " + error);
 			try
 			{
 				var selLogin = new Login();
@@ -192,7 +191,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 
-				var user = (User)Context.GetFromContext(username);
+				var user = (WERCSmartUser)Context.GetFromContext(username);
 				GivenIPopulateTheInputFieldWith("email", user.Email);
 				Delay.Seconds(5);
 				GivenIPopulateTheInputFieldWith("password", user.Password);
@@ -219,6 +218,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 				if (text.Contains("<GUID>"))
 				{
 					text = text.Replace("<GUID>", Guid.NewGuid().ToString().Substring(0, 6));
+				}
+
+				if (text.Contains("saved as"))
+				{
+					var SavedAsValue = Context.GetFromContext(text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+
+					if (SavedAsValue == null)
+					{
+						throw new Exception("Expected value: " + text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim() +
+						                    " was not found in context.");
+					}
+
+					var SavedUser = (ResourcePool.WERCSmartUser)SavedAsValue;
+					switch (inputField)
+					{
+						case ("email"):
+							text = SavedUser.Email;
+							break;
+						case ("password"):
+							text = SavedUser.Password;
+							break;
+					}
+					
 				}
 
 				Report.Info("Inputting '" + text + "' into the " + inputField + " input field");

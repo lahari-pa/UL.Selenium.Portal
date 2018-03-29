@@ -535,9 +535,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				throw new Exception("Supplier type control could not be found!");
 			}
 
-			this._ddSupplierType.ScrollElementIntoView();
+			ddSupplierType.ScrollElementIntoView();
 
-			var selectElement = this._ddSupplierType.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == supplierType);
+			var selectElement = ddSupplierType.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == supplierType);
 			if (selectElement == null)
 			{ throw new Exception("Supplier type was not present in container!"); }
 
