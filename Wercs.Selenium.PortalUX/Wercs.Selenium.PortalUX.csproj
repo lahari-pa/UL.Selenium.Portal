@@ -152,8 +152,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Email.cs" />
     <Compile Include="Classes\Mailosaur.cs" />
     <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\UserFactory.cs" />
+    <Compile Include="Classes\UserPool.g.cs" />
+    <Compile Include="Classes\User_WERCs.cs" />
     <Compile Include="Elements\ConcreteTypes\Button.cs" />
     <Compile Include="Elements\ConcreteTypes\Button`1.cs" />
     <Compile Include="Elements\IButton.cs" />
@@ -184,20 +188,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Login.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Login\Forgotten Password1.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Forgotten Password.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Login\Login1.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Login.feature</DependentUpon>
-    </Compile>
     <Compile Include="Features\Product Registration.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Product Registration.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\RetailerPartners.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RetailerPartners.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Signup1.feature.cs">
       <AutoGen>True</AutoGen>
@@ -223,6 +222,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
+    <Compile Include="Selenium Classes\DeleteActiveProducts.cs" />
+    <Compile Include="Selenium Classes\DocumentAcceptance.cs" />
     <Compile Include="Selenium Classes\ForgottenPassword.cs" />
     <Compile Include="Selenium Classes\ForwardProductRegistration.cs" />
     <Compile Include="Selenium Classes\GeneralUtilities.cs" />
@@ -236,7 +237,6 @@
     <Compile Include="Selenium Classes\NewUser.cs" />
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
     <Compile Include="Selenium Classes\MessageCenter.cs" />
-    <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
@@ -244,9 +244,14 @@
     <Compile Include="Selenium Classes\TermsOfUse.cs" />
     <Compile Include="Selenium Classes\TopMenuBar.cs" />
     <Compile Include="Selenium Classes\ULSC.cs" />
+    <Compile Include="Selenium Classes\UlSolutionCenter.cs" />
     <Compile Include="Selenium Classes\UserDetails.cs" />
     <Compile Include="SeleniumHelper.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
+    <Compile Include="Steps\Steps_DeleteActiveProducts.cs" />
+    <Compile Include="Steps\Steps_DocumentAcceptance.cs" />
+    <Compile Include="Steps\Steps_MessageCenter.cs" />
+    <Compile Include="Steps\Steps_ShoppingCart.cs" />
     <Compile Include="Steps\Steps_Solution.cs" />
     <Compile Include="Steps\Steps_ForgottenPassword.cs" />
     <Compile Include="Steps\Steps_ForwardProductRegistration.cs" />
@@ -258,6 +263,7 @@
     <Compile Include="Steps\Steps_ProductGrid.cs" />
     <Compile Include="Steps\Steps_RetailPartners.cs" />
     <Compile Include="Steps\Steps_Signup.cs" />
+    <Compile Include="Steps\Steps_ULSC.cs" />
     <Compile Include="Tests\Account\LoginTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -287,21 +293,13 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Login1.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Login\Forgotten Password.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Forgotten Password1.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Login\Login.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Login1.feature.cs</LastGenOutput>
-    </None>
     <None Include="Features\Product Registration.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Product Registration.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\RetailerPartners.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>RetailerPartners1.feature.cs</LastGenOutput>
+      <LastGenOutput>RetailerPartners.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Signup.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
