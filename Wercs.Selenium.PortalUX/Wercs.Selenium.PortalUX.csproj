@@ -128,8 +128,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="TechTalk.SpecFlow, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>packages\SpecFlow.2.2.1\lib\net45\TechTalk.SpecFlow.dll</HintPath>
@@ -152,12 +154,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Email.cs" />
     <Compile Include="Classes\Mailosaur.cs" />
     <Compile Include="Classes\User.cs" />
-    <Compile Include="Classes\UserFactory.cs" />
-    <Compile Include="Classes\UserPool.g.cs" />
-    <Compile Include="Classes\User_WERCs.cs" />
     <Compile Include="Elements\ConcreteTypes\Button.cs" />
     <Compile Include="Elements\ConcreteTypes\Button`1.cs" />
     <Compile Include="Elements\IButton.cs" />
@@ -222,8 +220,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
-    <Compile Include="Selenium Classes\DeleteActiveProducts.cs" />
-    <Compile Include="Selenium Classes\DocumentAcceptance.cs" />
     <Compile Include="Selenium Classes\ForgottenPassword.cs" />
     <Compile Include="Selenium Classes\ForwardProductRegistration.cs" />
     <Compile Include="Selenium Classes\GeneralUtilities.cs" />
@@ -248,10 +244,6 @@
     <Compile Include="Selenium Classes\UserDetails.cs" />
     <Compile Include="SeleniumHelper.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
-    <Compile Include="Steps\Steps_DeleteActiveProducts.cs" />
-    <Compile Include="Steps\Steps_DocumentAcceptance.cs" />
-    <Compile Include="Steps\Steps_MessageCenter.cs" />
-    <Compile Include="Steps\Steps_ShoppingCart.cs" />
     <Compile Include="Steps\Steps_Solution.cs" />
     <Compile Include="Steps\Steps_ForgottenPassword.cs" />
     <Compile Include="Steps\Steps_ForwardProductRegistration.cs" />

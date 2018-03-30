@@ -21,7 +21,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Checking that the option " + option + " is showing");
-				var selUlSolutionCenter = new ULSC();
+				var selUlSolutionCenter = new UlSolutionCenter();
 
 				if (!selUlSolutionCenter.Wait_for_load(10))
 				{
