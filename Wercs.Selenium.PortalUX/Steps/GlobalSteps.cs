@@ -59,7 +59,7 @@ namespace WERCSmart
 		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs Visual Account")]
 		public void GivenLoginIntoWERCSmartPortal_AdministratorRole()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator into the WERCs Account");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Visual Account into the WERCs Account");
 			try
 			{
 				Report.Info("Clicking 'Log In' on the Landing Page");
