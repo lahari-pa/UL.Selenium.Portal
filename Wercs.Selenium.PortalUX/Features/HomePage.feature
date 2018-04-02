@@ -183,13 +183,6 @@ Then the WERCSmart homepage should load
 Then I click the Support icon in the Navigation Pane
 Then Confirm that freshdesk opens in another tab
 
-Scenario: [32590] My Account navigation
-Then I click the User Icon
-And I click on My Account
-And I should see the heading: My Account on the My Account page
-And I should see the subheading: Your Company User Accounts on the My Account page
-
-
 Scenario: [61796] Account User Name in Header
 #Then I should see username for user saved as: SignupUser in the right corner
 Given I click on My Account
