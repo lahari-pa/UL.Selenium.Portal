@@ -186,6 +186,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Login.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\MyAccount.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyAccount.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -284,6 +289,10 @@
     <None Include="Features\Login.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Login1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\MyAccount.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MyAccount.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

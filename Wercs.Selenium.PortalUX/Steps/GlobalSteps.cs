@@ -78,10 +78,6 @@ namespace WERCSmart
 				Report.Info("Clicking login");
 				selLogin.Click_Login();
 
-				//var Sel_TOU = new TermsOfUse();
-				//if (Sel_TOU.Wait_for_load(10))
-				// Sel_TOU.Accept();
-
 				var selHomepage = new Homepage();
 				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 				GeneralUtilities.Wait_for_load_finish();
@@ -115,10 +111,6 @@ namespace WERCSmart
 				Report.Info("Clicking login");
 				selLogin.Click_Login();
 
-				//var Sel_TOU = new TermsOfUse();
-				//if (Sel_TOU.Wait_for_load(10))
-				// Sel_TOU.Accept();
-
 				var selHomepage = new Homepage();
 				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 				GeneralUtilities.Wait_for_load_finish();
@@ -151,10 +143,6 @@ namespace WERCSmart
 				selLogin.PasswordField = password;
 				Report.Info("Clicking login");
 				selLogin.Click_Login();
-
-				//var Sel_TOU = new TermsOfUse();
-				//if (Sel_TOU.Wait_for_load(10))
-				// Sel_TOU.Accept();
 
 				var selHomepage = new Homepage();
 				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
