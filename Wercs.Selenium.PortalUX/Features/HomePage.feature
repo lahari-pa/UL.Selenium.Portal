@@ -176,14 +176,6 @@ And I should see the header: Cart is Empty on the Cart is Empty window
 And I click on the close button on Cart is Empty
 Then I should see the Subheading Announcements in the main window
 
-#This test cases uses the ULSC account
-Scenario: [56170] WERCSLink button navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
-Then the WERCSmart homepage should load
-Then I click the ULSC - Data Management icon in the QuickLinks Pane
-And I switch to the tab: (.*)
-And UNDER DEVELOPMENT
-
 #pass
 Scenario: [56188] Support navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
