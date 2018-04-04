@@ -119,6 +119,48 @@ testRunner.Given("In the UserDetails page I set Name to be: saved as ThisUser", 
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[63514] Create a New User on the User Grid")]
+        public virtual void _63514CreateANewUserOnTheUserGrid()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63514] Create a New User on the User Grid", ((string[])(null)));
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line 10
+this.FeatureBackground();
+#line 30
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 31
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 32
+testRunner.Then("I create a new email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "User Name",
+                        "Title",
+                        "Role",
+                        "Phone Number",
+                        "Email Address",
+                        "Confirm Email",
+                        "Country Code",
+                        "Country"});
+            table1.AddRow(new string[] {
+                        "User",
+                        "Mr",
+                        "User",
+                        "123-456-7889",
+                        "Saved",
+                        "Saved",
+                        "empty",
+                        "United Kingdom"});
+#line 33
+testRunner.Then("I add a new user with the following information", ((string)(null)), table1, "Then ");
+#line 36
+testRunner.Then("I confirm the new user is Active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

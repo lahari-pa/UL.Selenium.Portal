@@ -77,8 +77,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			set
 			{
-				var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'User Role')]/following-sibling::select"), 2);
-				el.SelectByValue(value);
+				//var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'User Role')]/following-sibling::select"), 2);
+				containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				var el = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind, 'userRole')]"), 2);
+				el.Select(value);
 			}
 		}
 
@@ -129,7 +131,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			set
 			{
 				var el = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"), 2);
-				el.SelectByValue(value);
+				el.Select(value);
 			}
 		}
 
@@ -182,5 +184,101 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return false;
 		}
+
+		//Phone Number Error
+		[FindsBy(How = How.Id, Using = "phone_error")]
+		private IWebElement _error_phone;
+
+		public bool Add_New_User(string username, string title, string role, string phone_no, string email_address,
+			string confirm, string country)
+		{
+			Report.Info("Beginning Add_New_User: " + username);
+
+			Report.Info("Entering User Information");
+			Name = username;
+			Title = title;
+			UserRole = role;
+			PhoneNumber = phone_no;
+			EmailAddress = email_address;
+			ConfirmEmailAddress = confirm;
+			Country = country.ToUpper();
+
+			Report.Info("User Details Entered");
+			Report.Screenshot();
+
+			if (!ClickButton("Create"))
+			{
+				Report.Info("Failed to Click Create Button");
+				Report.Screenshot();
+				return false;
+			}
+			Delay.Seconds(2 * Delay.SpeedFactor);
+
+			var myDlg = new AddUserThankYouDialog();
+
+			if (!myDlg.Add_User_Thank_You())
+			{
+				Report.Info("Failed to Add User");
+				return false;
+			}
+			Report.Success("User Added");
+			return true;
+		}
+
+	}
+
+	class AddUserThankYouDialog : BaseDialog
+	{
+		[FindsBy(How = How.XPath, Using = "//div[@id='add-user-dialog']")]
+		protected override IWebElement containerElement { get; set; }
+
+		//Close Button
+		[FindsBy(How = How.XPath, Using = ".//div/button[text()='Close']")]
+		private IWebElement _btn_close;
+
+		public bool Close_click()
+		{
+			Report.Info("Attempting to Click Close Button");
+			_btn_close.Click();
+			return true;
+		}
+
+		public bool Add_User_Thank_You()
+		{
+			Report.Info("Beginning Add_User_Thank_You");
+			//containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			IWebElement myText = containerElement.FindElements(By.XPath(".//div/p[@class='marBot-20']"), 10).FirstOrDefault();
+
+			if (myText == null)
+			{
+				Report.Info("Failed to Find Thenk You Text");
+				Report.Screenshot();
+				return false;
+			}
+
+			if (myText.Text ==
+				"The user account has been created and the user has been notified via email of their account information.")
+			{
+				Report.Success("Thank You Text Correct - User Has Been Created");
+				Report.Screenshot();
+
+				if (!Close_click())
+				{
+					Report.Info("Failed to Click Close Button");
+					Report.Screenshot();
+					return false;
+				}
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				Report.Success("Close Button Clicked");
+				Report.Screenshot();
+				return true;
+			}
+			Report.Info("Thank You Text Incorrect: " + myText.Text);
+			Report.Screenshot();
+			return false;
+		}
+
+
+
 	}
 }

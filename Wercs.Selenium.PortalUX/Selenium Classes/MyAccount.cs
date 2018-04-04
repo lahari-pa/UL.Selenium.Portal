@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using SafewareReporting;
 using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Classes;
+using Global = SeleniumUtilities.Global;
 
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -85,12 +87,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				SafewareReporting.Report.Error(e.Message);
 				return false;
 			}
-			
-			
+
+
 		}
 
 		//Valid Actions: Details, Desctivate, Reset Password
-		public bool ForUserClickAction(string username, string action) 
+		public bool ForUserClickAction(string username, string action)
 		{
 			var UserAccountsDiv = containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
 
@@ -101,7 +103,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			if (!ListOfUsers.Contains(username))
 			{
 				SafewareReporting.Report.Error("Username: " + username + " does not show in the list. The full list is: " +
-				                              string.Join(",", ListOfUsers));
+											  string.Join(",", ListOfUsers));
 				return false;
 			}
 
@@ -113,7 +115,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			//IWebElement ActionsButton = UserRow.FindElement(By.XPath(".//td[contains(@class, 'actions')]/button"));
 
-				                             
+
 
 			if (ActionsButton != null)
 			{
@@ -147,5 +149,154 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return true;
 		}
+
+		//Add New User link
+		[FindsBy(How = How.XPath, Using = ".//div[@id='user-list-Container']/h2/a")]
+		private IWebElement _link_new_user;
+
+		public bool Add_New_User_click()
+		{
+			Report.Info("Attempting to Click Add New User Link");
+			_link_new_user.Click();
+			return true;
+		}
+
+		public bool User_Added_Check(string user_name, string email_address, string role)
+		{
+			Report.Info("Beginning User_Added_Check");
+
+			int Page_No = 1;
+
+			while (Page_No < 10)
+			{
+				Delay.Seconds(1.5 * Delay.SpeedFactor);
+
+				IWebElement myPageNumber = containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/span[@class='current']"), 10).FirstOrDefault();
+
+				Report.Info("Searching on Page " + myPageNumber.Text + " For User: " + user_name);
+
+				var UserAccountsDiv = containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+				var ListOfUsersRows = UserAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+
+				foreach (var UserRow in ListOfUsersRows)
+				{
+					string myUsername = UserRow.FindElement(By.XPath(".//td[1]")).Text;
+
+					if (myUsername == user_name)
+					{
+						Report.Info("Row Found");
+						string myEmail = UserRow.FindElement(By.XPath(".//td[2]")).Text;
+						if (myEmail != email_address)
+						{
+							Report.Info("Incorrect Email Address for User: " + user_name + ": " + email_address);
+							Report.Screenshot();
+							return false;
+						}
+
+						string myRole = UserRow.FindElement(By.XPath(".//td[3]")).Text;
+						if (myRole != role)
+						{
+							Report.Info("Incorrect Role for User: " + user_name + ": " + role);
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success("User: " + user_name + " Created");
+						return true;
+					}
+
+					Report.Info("Row Not Found");
+				}
+
+				IWebElement myNext = containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='Next']"), 10).FirstOrDefault();
+
+				if (myNext == null)
+				{
+					Report.Info("On Last Page");
+					Report.Screenshot();
+					break;
+				}
+				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
+				myNext.Click();
+				Page_No++;
+			}
+			Report.Info("User: " + user_name + " Has Not Been Created");
+			Report.Screenshot();
+			return false;
+		}
+
+		public bool Is_User_Active(string user_name, string active)
+		{
+			Report.Info("Beginning Is_User_Active");
+
+			IWebElement myFirstPageNo = containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='1']"), 10).FirstOrDefault();
+
+			myFirstPageNo.Click();
+
+			int Page_No = 1;
+
+			while (Page_No < 10)
+			{
+				Delay.Seconds(1.5 * Delay.SpeedFactor);
+
+				IWebElement myPageNumber = containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/span[@class='current']"), 10).FirstOrDefault();
+
+				Report.Info("Searching on Page " + myPageNumber.Text + " For User: " + user_name);
+
+				var UserAccountsDiv = containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
+				var ListOfUsersRows = UserAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
+
+				foreach (var UserRow in ListOfUsersRows)
+				{
+					string myUsername = UserRow.FindElement(By.XPath(".//td[1]")).Text;
+
+					if (myUsername == user_name)
+					{
+						Report.Info("Row Found");
+
+						string myActive = UserRow.FindElement(By.XPath(".//td[4]")).Text;
+
+						string myNewAct = string.Empty;
+
+						if (active == "Active")
+						{
+							myNewAct = "Yes";
+						}
+						if (active == "Not Active")
+						{
+							myNewAct = "No";
+						}
+
+						if (myActive == myNewAct)
+						{
+							Report.Success("User is " + active);
+							return true;
+						}
+						Report.Info("User is " + active);
+						return false;
+					}
+					Report.Info("Row Not Found");
+				}
+
+				IWebElement myNext = containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[text()='Next']"), 10).FirstOrDefault();
+
+				if (myNext == null)
+				{
+					Report.Info("On Last Page");
+					Report.Screenshot();
+					break;
+				}
+				Report.Info("User Not Found On Page " + myPageNumber.Text + ", Navigating to Next Page");
+				myNext.Click();
+				Page_No++;
+			}
+			Report.Info("User: " + user_name + " Has Not Been Created");
+			Report.Screenshot();
+			return false;
+
+
+		}
+
+
 	}
 }

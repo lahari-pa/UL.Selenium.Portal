@@ -363,6 +363,30 @@ namespace WERCSmart
 
 		}
 
+		[StepDefinition(@"I create a new email address")]
+		public void ThenICreateANewEmailAddress()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " I create a new email address");
+			try
+			{
+				string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
+
+				string myEmail = EmailFunctions.CreateEmail(myDate);
+
+				if (myEmail == "")
+				{
+					throw new Exception("Failed to Create a New Email Address");
+				}
+				ScenarioContext.Current.Add("CurrentEmail", myEmail);
+				Report.Success("Email Address Created and Saved in Scenario Context");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
 		{
