@@ -20,7 +20,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see username: " + savedAs + " in the top right corner");
 			try
 			{
-				var user = (User)Context.GetFromContext(savedAs);
+				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				TopMenuBar thisTopMenuBar = new TopMenuBar();
 				string username = user.FirstName + ", " + user.LastName;
 				Report.Info("Looking for username: " + username);

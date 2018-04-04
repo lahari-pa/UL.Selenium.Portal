@@ -8,6 +8,7 @@ namespace Wercs.Selenium.PortalUX.Classes
 	public class User : IEquatable<User>
 	{
 		// ASSIGNED PARAMETERS
+		public string Identifier { get; set; }
 		public string Email { get; set; }
 		public string Password { get; set; }
 

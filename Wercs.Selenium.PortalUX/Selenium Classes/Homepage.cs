@@ -166,7 +166,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 	}
 
-
+	
+	
 	class HomePageHeader : BaseObject
 	{
 		public const string BasePath = "//div[@class='page-inner-header home-header affix']";

@@ -181,7 +181,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LandingPage.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Login1.feature.cs">
+    <Compile Include="Features\Login.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Login.feature</DependentUpon>
@@ -196,7 +196,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Product Registration.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\RetailerPartners.feature.cs">
+    <Compile Include="Features\RetailerPartners1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RetailerPartners.feature</DependentUpon>
@@ -288,7 +288,7 @@
     </None>
     <None Include="Features\Login.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Login1.feature.cs</LastGenOutput>
+      <LastGenOutput>Login.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\MyAccount.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -300,7 +300,7 @@
     </None>
     <None Include="Features\RetailerPartners.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>RetailerPartners.feature.cs</LastGenOutput>
+      <LastGenOutput>RetailerPartners1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Signup.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

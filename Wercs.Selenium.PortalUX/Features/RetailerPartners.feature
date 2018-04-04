@@ -2,6 +2,7 @@
 @Login
 @Homepage
 @Signup
+@RetailPartners
 @wercsmart
 @run_Signup
 
@@ -11,14 +12,13 @@ Background:
 Given I go to the WERCSmart Log in
 
 Scenario: [56881] Retailer Partners - Main Page layout (existing supplier)
-Given In the shared step below login to the site using the main supplier for the environment you are testing in.
 # Note: We will have a separate test case for new suppliers views of this page
-And Login into WERCSmart Portal - Administrator Role
-And Click the Retail Partners icon on the left hand icon list (handshake icon)
+And I login into the WERCSmart Portal - Administrator Role
+And I click the Retail Partners icon in the Navigation Pane
 # You should be on the Retail Partners page
-And Confirm the page title shows "Retail Partners"
-And Confirm that you see a heading of "Most Recent Retailers"
-And Confirm that you see a heading of "All Retailers"
+Then I should see the following heading Retail Partners
+And I should see the following subheading All Retailers
+And I should see the following subheading Most Recent Retailers
 And Confirm that you see Retailer tiles shown under the Most Recent Retails heading
 And Confirm that you see Retailer tiles shown under the All Retailers heading
 And Confirm that the retailers shown under the Most Recent Retailers heading are not repeated under the All Retailers heading

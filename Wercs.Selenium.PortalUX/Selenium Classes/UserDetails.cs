@@ -168,11 +168,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-		public bool ClickButtonOnAddUserDialog(string ButtonToClick)
+		public bool ClickButtonOnAddUserDialog(string buttonToClick)
 		{
 			var AddUserDialog = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='add-user-dialog']"));
 			var Buttons = AddUserDialog.FindElements(By.XPath(".//button"));
-			var MatchingButton = Buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == ButtonToClick.ToLower());
+			var MatchingButton = Buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == buttonToClick.ToLower());
 			if (MatchingButton != null)
 			{
 				MatchingButton.ClickWithScroll();

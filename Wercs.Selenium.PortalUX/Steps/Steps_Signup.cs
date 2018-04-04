@@ -164,8 +164,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Setting up account details for user: '" + savedAs + "'");
-				var account = parameters.CreateInstance<User>();
+				var account = parameters.CreateInstance<WERCSmartUser>();
 				account.Email = EmailFunctions.CreateEmail(account.Email);
+				account.Identifier = savedAs;
 				Context.AddToContext(savedAs, account);
 				Report.Success("Account details saved!");
 			}
@@ -635,6 +636,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				NewUser thisNewUser = new NewUser();
+				Report.IsTrue(thisNewUser.Wait_for_load(), "New user form failed to load", "New user form is loaded as expected.");
+				Report.Screenshot();
+
 				thisNewUser.Country = user.Country;
 				thisNewUser.FirstName = user.FirstName;
 				thisNewUser.LastName = user.LastName;

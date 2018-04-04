@@ -596,7 +596,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			    switch (pageTitle)
 			    {
 				    case "UL Solution Center":
-						ULSC ULSolution = new ULSC();
+					    UlSolutionCenter ULSolution = new UlSolutionCenter();
 					    Report.IsTrue(ULSolution.Exists, "UL Solutions page does not exist as expected.", "UL Solutions page exists as expected.");
 					    break;
 				    default:

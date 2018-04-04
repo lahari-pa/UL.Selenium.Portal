@@ -24,23 +24,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Confirm in the UL Solution Center page you see sections for:");
 			UlSolutionCenter ThisSolutionCenter = new UlSolutionCenter();
-			//List<string> SectionsShowing = ThisSolutionCenter.ListOfSolutions();
-			//Report.Screenshot();
-			//try
-			//{
-			//	foreach (TechTalk.SpecFlow.TableRow thisrow in table.Rows)
-			//	{
-			//		string sectionToFind = thisrow["Sections"];
-			//		Report.IsTrue(SectionsShowing.Contains(sectionToFind),
-			//			"Section: " + sectionToFind + " is not showing. The following are: " + string.Join(",", SectionsShowing),
-			//			"As expected, section: " + sectionToFind + " is showing.");
-			//	}
-			//}
-			//catch (Exception ex)
-			//{
-			//	Report.Failure(ex.Message);
-			//	throw;
-			//}
+			
+			Report.Screenshot();
+			try
+			{
+				List<string> SectionsShowing = ThisSolutionCenter.OptionShowing();
+				foreach (TechTalk.SpecFlow.TableRow thisrow in table.Rows)
+				{
+					string sectionToFind = thisrow["Sections"];
+					Report.IsTrue(SectionsShowing.Contains(sectionToFind),
+						"Section: " + sectionToFind + " is not showing. The following are: " + string.Join(",", SectionsShowing),
+						"As expected, section: " + sectionToFind + " is showing.");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
 
 	}

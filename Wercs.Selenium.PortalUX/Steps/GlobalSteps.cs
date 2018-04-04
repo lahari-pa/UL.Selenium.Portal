@@ -28,9 +28,12 @@ namespace WERCSmart
 			TestReport.BeginTestModule(ResourcePool.GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator");
 			try
 			{
-				Report.Info("Clicking 'Log In' on the Landing Page");
 				var selLandingPage = new LandingPage();
-				selLandingPage.Click_Login();
+				if (selLandingPage.Wait_for_load(10))
+				{
+					Report.Info("Clicking 'Log In' on the Landing Page");
+					selLandingPage.Click_Login();
+				}
 
 				var selLogin = new Login();
 				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
@@ -95,9 +98,12 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator into the WERCs Account");
 			try
 			{
-				Report.Info("Clicking 'Log In' on the Landing Page");
 				var selLandingPage = new LandingPage();
-				selLandingPage.Click_Login();
+				if (selLandingPage.Wait_for_load(10))
+				{
+					Report.Info("Clicking 'Log In' on the Landing Page");
+					selLandingPage.Click_Login();
+				}
 
 				var selLogin = new Login();
 				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
@@ -128,9 +134,12 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator into the WERCs ULSC Account");
 			try
 			{
-				Report.Info("Clicking 'Log In' on the Landing Page");
 				var selLandingPage = new LandingPage();
-				selLandingPage.Click_Login();
+				if (selLandingPage.Wait_for_load(10))
+				{
+					Report.Info("Clicking 'Log In' on the Landing Page");
+					selLandingPage.Click_Login();
+				}
 
 				var selLogin = new Login();
 				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
