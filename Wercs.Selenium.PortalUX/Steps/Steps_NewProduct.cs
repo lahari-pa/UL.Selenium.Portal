@@ -200,6 +200,79 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Given(@"I Select the Create a New Registration radio button")]
+		public void GivenISelectTheCreateANewRegistrationRadioButton()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I Select the Create a New Registration radio button");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
+				selNewProduct.SelectTypeOfProductToCreate("New");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[Given(@"in the New Product page I click Continue")]
+		public void GivenInTheNewProductPageIClickContinue()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the New Product page I click Continue");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
+				selNewProduct.ClickContinue();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[Given(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Product Name text field")]
+		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheProductNameTextField(string productName)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Type tab of the New Product Page, I enter: " + productName + " in the Product Name text field");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+				selNewProduct.ProductName = productName;
+				
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[Given(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Type of Product select field")]
+		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(string typeOfProduct)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Type tab of the New Product Page, I enter: " + typeOfProduct + " in the Type of Product select field");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded", "Product type tab is loaded.");
+				selNewProduct.ProductType = typeOfProduct;
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+
 		[StepDefinition(@"I should see the radio button: (.*)")]
 		public void ShouldSeeTheRadioButton(string button)
 		{

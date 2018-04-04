@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -42,6 +43,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2).Text.Trim();
 		}
 
+		//New, Copy or UPC
+		public void SelectTypeOfProductToCreate(string Type = "New")
+		{
+			var option = containerElement.FindElements(By.XPath(".//form//input[@type='radio']/../span"), 2)
+				.FirstOrDefault(x => x.Text.Contains(Type));
+			if (option == null)
+			{
+				return;
+			}
+
+			option.Click();
+		}
+
 		public void CreateNewProductOrCopy(bool newProduct = true)
 		{
 			var option = this.containerElement.FindElements(By.XPath(".//form//label[@class='radio']"), 2).FirstOrDefault(x => x.Text.StartsWith((newProduct ? "Yes" : "No")));
@@ -51,6 +65,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			option.Click();
+		}
+
+		//Valid tab names: Product Type, Product Characteristics, Recipient and UPC Details, Review and Submit
+		public bool WaitForTab(string TabName, int secondsToWait = 30)
+		{
+			int counter = 0;
+			while (counter < secondsToWait)
+			{
+				var progWizard = containerElement.FindElement(By.XPath(".//div[@class='prog-wizard']"));
+				if (progWizard != null)
+				{
+					var tab = containerElement.FindElements(By.XPath(".//div[contains(@class, 'progress')]//span[contains(@data-bind, 'description')]"), 2)
+						.FirstOrDefault(x => x.Text.Contains(TabName));
+					if (tab != null)
+					{
+						var ContainerDiv = tab.FindElement(By.XPath("./../../div"));
+						string backGroundColour = ContainerDiv.GetCssValue("background-color");
+						if (backGroundColour.Contains("255, 255, 255"))
+						{
+							return true;
+						}
+					}
+				}
+				Delay.Seconds(Delay.SpeedFactor * 1);
+				counter++;
+			}
+			return false;
 		}
 
 		public bool ClickContinue()
