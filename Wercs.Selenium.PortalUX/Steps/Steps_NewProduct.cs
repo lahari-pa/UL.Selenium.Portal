@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -234,6 +236,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Given(@"I should see the Additional Information Page")]
+		public void GivenIShouldSeeTheAdditionalInformationPage()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the New Product page I click Continue");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForAdditionalProductInformation(), "Additional product information is not showing",
+					"The additional product information page is showing as expected");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 		[Given(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Product Name text field")]
 		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheProductNameTextField(string productName)
 		{
@@ -252,6 +272,184 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[Given(@"in the Product Characteristics tab of the New Product Page, for U\.S\. Toxic Substances Control Act \(TSCA\) status I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForU_S_ToxicSubstancesControlActTSCAStatusISelectOption(string option)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: " + option);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+					"Product characteristics tab is loaded.");
+
+				
+				selNewProduct.TSCAStatus= option;
+
+				Report.IsTrue(selNewProduct.TSCAStatus == option,
+					"Failed to set TSCA status: " + option,
+					"Successfully set TSCA status: " + option);
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+		[Given(@"In the Additional Information Page for Product is solely for the Retailer's use I select: (No|Yes)")]
+		public void GivenInTheAdditionalInformationPageForProductIsSolelyForTheRetailerSUseISelectNoOrYes(string noOrYes)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page for Product is solely for the Retailer's use I select: " + noOrYes);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+
+				bool Expected = (noOrYes == "Yes");
+
+
+				selNewProduct.SolelyForRetailersUse = Expected;
+
+				Report.IsTrue(selNewProduct.SolelyForRetailersUse == Expected,
+					"Failed to set Product is solely for the Retailer's use: " + noOrYes,
+					"Successfully set Product is solely for the Retailer's use: " + noOrYes);
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+
+		[Given(@"In the Additional Information Page for Product is retailers private label or brand I select: (No|Yes)")]
+		public void GivenInTheAdditionalInformationPageForProductIsRetailersPrivateLabelOrBrandISelectNoOrYes(string noOrYes)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page for Product is retailers private label or brand I select: " + noOrYes);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+
+				bool Expected = (noOrYes == "Yes");
+
+
+				selNewProduct.RetailersPrivateLabelOrBrand = Expected;
+
+				Report.IsTrue(selNewProduct.RetailersPrivateLabelOrBrand == Expected,
+					"Failed to set Product is retailers private label or brand: " + noOrYes,
+					"Successfully set Product is retailers private label or brand: " + noOrYes);
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[Given(@"in the Product Characteristics tab of the New Product Page for Prop(.*) I select: (No|Yes)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForPropISelectNoOrYes(string noOrYes)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Prop65 I select: " + noOrYes);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+					"Product characteristics tab is loaded.");
+
+				bool Expected = (noOrYes == "Yes");
+
+
+				selNewProduct.Prop65 = Expected;
+
+				Report.IsTrue(selNewProduct.Prop65 == Expected,
+					"Failed to set Prop 65 value to: " + noOrYes,
+					"Successfully set Prop 65 value to: " + noOrYes);
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+
+		[Given(@"In the Additional Information Page for Product is shipped directly I select: (No|Yes)")]
+		public void GivenInTheAdditionalInformationPageForProductIsShippedDirectlyISelectNoOrYes(string noOrYes)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page for Product is shipped directly I select: " + noOrYes);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+
+				bool Expected = (noOrYes == "Yes");
+
+
+				selNewProduct.ProductShippedDirectly = Expected;
+
+				Report.IsTrue(selNewProduct.ProductShippedDirectly == Expected,
+					"Failed to set product shipped directly value to: " + noOrYes,
+					"Successfully set product shipped directly value to: " + noOrYes);
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+		[Given(@"In the Additional Information Page the check box for: (.*) should be: (checked|unchecked)")]
+		public void GivenInTheAdditionalInformationPageTheCheckBoxXShouldBeCheckedOrUnchecked(string country, string checkedOrUnchecked)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page the check box for: " + country + " should be: " + checkedOrUnchecked);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+				List<string> Countries = new List<string>(){country};
+
+				bool Expected = (checkedOrUnchecked == "checked");
+
+				if (Expected)
+				{
+					Report.IsTrue(selNewProduct.ProductsMayBeSold.Contains(country),
+						"Products may be sold is not set up as expected", "Products may be sold is set up as expected.");
+				}
+				else
+				{
+					Report.IsTrue(!selNewProduct.ProductsMayBeSold.Contains(country),
+						"Products may be sold is not set up as expected", "Products may be sold is set up as expected.");
+				}
+				
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 		[Given(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Type of Product select field")]
 		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(string typeOfProduct)

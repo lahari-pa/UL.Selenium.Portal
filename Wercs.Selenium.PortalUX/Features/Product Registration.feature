@@ -45,13 +45,14 @@ And in the New Product page I click Continue
 And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Product Name text field
 And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Type of Product select field
 And in the New Product page I click Continue
-#By Default, United States should be selected
-#Select No for the "Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns." question
-#Select No for the "Product is a Retailer's Private Label or Brand" question
-#Select No for the "Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)" question
-#Click the Continue button
-#Select Compliant  or Exempt for the following question: "U.S. Toxic Substances Control Act (TSCA) status.” question
-#Select  No for the following question, "Product, including container and/or packaging, contains a chemical on California's Prop 65 list”
+And I should see the Additional Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And In the Additional Information Page for Product is shipped directly I select: No
+And In the Additional Information Page for Product is retailers private label or brand I select: No
+And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+And in the New Product page I click Continue
+And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
 #Click Continue
 #Pesticide screen displays
 #The Battery-Containing Product Information page is shown
