@@ -184,7 +184,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"I login as user: (.*)")]
+		[StepDefinition(@"I login as user: (.*)")]
 		public void GivenILoginAsUser(string username)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " I login as user: " + username);
@@ -207,6 +207,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I log in as user: (.*) with password: (.*)")]
+		public void ThenILogInAsUserSavedasXWithPasswordY(string username, string password)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " I login as user: " + username + " with password: " + password);
+			try
+			{
+
+				var user = (WERCSmartUser)Context.GetFromContext(username);
+				GivenIPopulateTheInputFieldWith("email", user.Email);
+				Delay.Seconds(5);
+				GivenIPopulateTheInputFieldWith("password", password);
+				Delay.Seconds(5);
+				Report.Screenshot();
+				WhenISelectTheLoginButton();
+				Delay.Seconds(5);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 
 		[StepDefinition(@"I populate the (email|password) input field with: (.*)")]
 		public void GivenIPopulateTheInputFieldWith(string inputField, string text)
@@ -227,7 +251,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					if (SavedAsValue == null)
 					{
 						throw new Exception("Expected value: " + text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim() +
-						                    " was not found in context.");
+											" was not found in context.");
 					}
 
 					var SavedUser = (ResourcePool.WERCSmartUser)SavedAsValue;
@@ -240,7 +264,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 							text = SavedUser.Password;
 							break;
 					}
-					
+
 				}
 
 				Report.Info("Inputting '" + text + "' into the " + inputField + " input field");

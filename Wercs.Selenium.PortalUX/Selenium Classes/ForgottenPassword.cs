@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mailosaur;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using ResourcePool;
+using SafewareReporting;
 using SeleniumUtilities;
 
 
@@ -96,5 +99,261 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return text;
 		}
+
+		public bool Reset_Password_Link(Link myLink)
+		{
+			Report.Info("Beginning Reset_Password_Link");
+
+			Report.Info("Link = " + myLink);
+			if (myLink.Href.Contains("ResetPassword"))
+			{
+				Report.Info("Link Found");
+				SeleniumBrowser.Navigate(myLink.Href);
+				return true;
+			}
+			Report.Info(myLink.Href + " Not Found");
+			return false;
+		}
+
+
+	}
+
+	class ForgottenPassword_Questions : BaseObject
+	{
+		public const string BasePath = "//div[@class='login-wrapper register']";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		//Question 1
+		[FindsBy(How = How.Id, Using = "secQuestion1")]
+		private IWebElement _txt_question_one;
+
+		public bool Enter_Answer_One(string answer_text)
+		{
+			Report.Info("Entering Answer One: " + answer_text);
+			_txt_question_one.EnterText(answer_text);
+			return true;
+		}
+
+		//Question 2
+		[FindsBy(How = How.Id, Using = "secQuestion2")]
+		private IWebElement _txt_question_two;
+
+		public bool Enter_Answer_Two(string answer_text)
+		{
+			Report.Info("Entering Answer One: " + answer_text);
+			_txt_question_two.EnterText(answer_text);
+			return true;
+		}
+
+		//Cancel Button
+		[FindsBy(How = How.Id, Using = "carouselContinue")]
+		private IWebElement _btn_cancel;
+
+		public bool Cancel_click()
+		{
+			Report.Info("Attempting to Click Cancel Button");
+			_btn_cancel.Click();
+			return true;
+		}
+
+		//Continue Button
+		[FindsBy(How = How.Id, Using = "carouselContinue")]
+		private IWebElement _btn_continue;
+
+		public bool Continue_click()
+		{
+			Report.Info("Attempting to Click Continue Button");
+			_btn_continue.Click();
+			return true;
+		}
+
+		public bool Forgot_Password_Questions(string savedAs)
+		{
+			Report.Info("Beginning Forgot_Password_Questions");
+
+			if (!Exists)
+			{
+				Report.Info("Not on Questions Page");
+				Report.Screenshot();
+				return false;
+			}
+
+			var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+
+			IWebElement questionOne = containerElement.FindElement(By.XPath(".//label[@for='secQuestion1']"));
+			IWebElement questionTwo = containerElement.FindElement(By.XPath(".//label[@for='secQuestion2']"));
+
+			switch (questionOne.Text)
+			{
+				case "In what city were you born?":
+					if (!Enter_Answer_One(user.CityQuestion))
+					{
+						Report.Info("Failed to Enter Answer One: " + user.CityQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				case "What was the model of your first car?":
+					if (!Enter_Answer_One(user.CarQuestion))
+					{
+						Report.Info("Failed to Enter Answer One: " + user.CarQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				case "What is the first name of your childhood best friend?":
+					if (!Enter_Answer_One(user.FriendQuestion))
+					{
+						Report.Info("Failed to Enter Answer One: " + user.FriendQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				case "In what city was your first job?":
+					if (!Enter_Answer_One(user.JobQuestion))
+					{
+						Report.Info("Failed to Enter Answer One: " + user.JobQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				case "What is your high school mascot?":
+					if (!Enter_Answer_One(user.MascotQuestion))
+					{
+						Report.Info("Failed to Enter Answer One: " + user.MascotQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				default:
+					Report.Error("Unable to Find Correct Question");
+					return false;
+			}
+			Report.Info("Answer One Entered");
+			switch (questionTwo.Text)
+			{
+				case "In what city were you born?":
+					if (!Enter_Answer_Two(user.CityQuestion))
+					{
+						Report.Info("Failed to Enter Answer Two: " + user.CityQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				case "What was the model of your first car?":
+					if (!Enter_Answer_Two(user.CarQuestion))
+					{
+						Report.Info("Failed to Enter Answer Two: " + user.CarQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				case "What is the first name of your childhood best friend?":
+					if (!Enter_Answer_Two(user.FriendQuestion))
+					{
+						Report.Info("Failed to Enter Answer Two: " + user.FriendQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				case "In what city was your first job?":
+					if (!Enter_Answer_Two(user.JobQuestion))
+					{
+						Report.Info("Failed to Enter Answer Two: " + user.JobQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				case "What is your high school mascot?":
+					if (!Enter_Answer_Two(user.MascotQuestion))
+					{
+						Report.Info("Failed to Enter Answer Two: " + user.MascotQuestion);
+						Report.Screenshot();
+						return false;
+					}
+					break;
+				default:
+					Report.Error("Unable to Find Correct Question");
+					return false;
+			}
+			Report.Info("Answer One Entered");
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			Report.Info("Answers Entered");
+			Report.Screenshot();
+			if (!Continue_click())
+			{
+				Report.Info("Failed to Click Continue");
+				Report.Screenshot();
+				return false;
+			}
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			Report.Success("Secutiry Questions Answered");
+			return true;
+		}
+
+		//New Password
+		[FindsBy(How = How.Id, Using = "newPassword")]
+		private IWebElement _txt_new_pw;
+
+		public bool Enter_New_Password(string new_pw)
+		{
+			Report.Info("Entering New Password: " + new_pw);
+			_txt_new_pw.EnterText(new_pw);
+			return true;
+		}
+
+		//Verify Password
+		[FindsBy(How = How.Id, Using = "verifyPassword")]
+		private IWebElement _txt_verify_pw;
+
+		public bool Enter_Verify_Password(string verify_pw)
+		{
+			Report.Info("Entering Verify Password: " + verify_pw);
+			_txt_verify_pw.EnterText(verify_pw);
+			return true;
+		}
+
+		public bool New_Password_Form(string new_password, string verify_pw)
+		{
+			Report.Info("Beginning New_Password_Form: " + new_password + " / " + verify_pw);
+
+			if (!Enter_New_Password(new_password))
+			{
+				Report.Info("Failed to Enter New Password: " + new_password);
+				Report.Screenshot();
+				return false;
+			}
+			if (!Enter_Verify_Password(verify_pw))
+			{
+				Report.Info("Failed to Enter Verify Password: " + verify_pw);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Passwords Entered");
+			Report.Screenshot();
+			if (!Continue_click())
+			{
+				Report.Info("Failed to Click Continue Button");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("New Password Entered Successfully");
+			return true;
+		}
+
+		//Login Button
+		[FindsBy(How = How.Id, Using = "btnLogin")]
+		private IWebElement _btn_login;
+
+		public bool Login_click()
+		{
+			Report.Info("Attempting to Click Login Button");
+			_btn_login.Click();
+			return true;
+		}
+
+
 	}
 }

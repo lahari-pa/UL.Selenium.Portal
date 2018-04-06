@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Linq;
 using Mailosaur;
+using NPOI.SS.Formula.Functions;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
 
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
@@ -38,6 +42,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 				}
+				Delay.Seconds(2 * Delay.SpeedFactor);
 				Report.Screenshot();
 				Report.Success("continue button clicked!");
 			}
@@ -197,6 +202,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I enter the email address for the Account saved as: (.*)")]
+		public void GivenIEnterTheEmailAddressForTheAccountSavedAsX(string savedAs)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I enter email address for user: " + savedAs);
+			try
+			{
+				Report.Info("Getting user information for User: '" + savedAs + "'");
+				var userDetails = (WERCSmartUser)Context.GetFromContext(savedAs);
+				Report.Info("Found an email of: '" + userDetails.Email + "'");
+				Report.Info("Inputting email...");
+				var selForgotten = new ForgottenPassword();
+				selForgotten.Enter_Email(userDetails.Email);
+				Report.Success("Email input successfully!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 		[StepDefinition(@"the email should contain a link to reset a WERCSmart Account Password")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount()
 		{
@@ -215,6 +242,42 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"I click the link in the email I get directed to security questions")]
+		public void WhenIClickTheLinkInTheEmailIGetDirectedToSecurityQuestions()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I click the link in the email I get directed to security questions");
+			try
+			{
+				Report.Info("Clicking the link which allows Password Reset");
+
+				//IWebElement myLink = IWebElement;
+
+				Email matchingEmail = (Email)ScenarioContext.Current["Matching"];
+				//var myLink = matchingEmail.Html.Links[0].Href;
+				var myLink = matchingEmail.Html.Links.ToList();
+
+				foreach (var Link in myLink)
+				{
+					var myFP = new ForgottenPassword();
+
+					if (!myFP.Reset_Password_Link(Link))
+					{
+						throw new Exception("Failed to Click Reset Password Link");
+					}
+					Report.Success("Reset Password Link Clicked");
+
+				}
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 		[StepDefinition(@"the message should contain (.*)")]
 		public void ThenInTheForgottenPasswordWindowIShouldSeeTheFollowingConfirmationMessage(string confirmMessage)
@@ -301,6 +364,111 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"If not already created, I create a user: (.*) with the following parameters:")]
+		public void GivenIfNotAlreadyCreatedICreateAUserXWithTheFollowingParameters(string savedAs, Table parameters)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- If not already created, I create a user: '" + savedAs + "'");
+			try
+			{
+				if (!FeatureContext.Current.ContainsKey(savedAs))
+				{
+					Report.Info("Setting up account details for user: '" + savedAs + "'");
+					var account = parameters.CreateInstance<WERCSmartUser>();
+					account.Email = EmailFunctions.CreateEmail(account.Email);
+					account.Identifier = savedAs;
+					Context.AddToContext(savedAs, account, true);
+					Report.Success("Account details saved!");
+
+					var mySignUp = new StepsSignup();
+					var myLogin = new StepsLogin();
+					var myLanding = new StepsLandingPage();
+					var myHome = new StepsHomepage();
+
+					mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+					myLogin.GivenIClickOnTheNewToWercsmartLink();
+					mySignUp.ThenTheSignupPageShouldAppear();
+					mySignUp.GivenIEnterSignupEmailUser(savedAs);
+					mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+					mySignUp.GivenIClickOnSubmit();
+					mySignUp.ThenTheSignupThankYouPageShouldAppear();
+					mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+					mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+					mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+					mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+					mySignUp.WhenInTheNewUserFormIClickOnContinue();
+					mySignUp.ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm();
+					mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+					mySignUp.EnterPinForUser(savedAs);
+					mySignUp.WhenInTheNewUserFormIClickOnContinue();
+					myLanding.ClickTheLoginButton();
+					myLogin.GivenILoginAsUser(savedAs);
+					mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+					myHome.ThenTheWercSmartHomepageShouldLoad();
+				}
+				Report.Info(savedAs + " Created");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I answer the security questions for Account: (.*)")]
+		public void ThenIAnswerTheSecurityQuestionsForAccountX(string savedAs)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I answer the security questions for Account: " + savedAs);
+			try
+			{
+				var myForgotPW = new ForgottenPassword_Questions();
+				Report.IsTrue(myForgotPW.Forgot_Password_Questions(savedAs), "Failed to Answer Security Questions", "Security Questions Answered Successfully");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I enter a new password: (.*) and verify: (.*)")]
+		public void ThenIEnterANewPasswordPasswordAndVerifyPassword(string new_pw, string verify_pw)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I answer the security questions");
+			try
+			{
+				var myForgotPW = new ForgottenPassword_Questions();
+
+				Report.IsTrue(myForgotPW.New_Password_Form(new_pw, verify_pw), "Failed to Enter New Password and Verify",
+					"New Password Entered and Verified");
+
+				ScenarioContext.Current.Add("NewPassword", new_pw);
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I click the Login button")]
+		public void ThenIClickTheLoginButton()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the Login button");
+			try
+			{
+				var myForgotPW = new ForgottenPassword_Questions();
+				Report.IsTrue(myForgotPW.Login_click(), "Failed to Click Login Button", "Login Button Clicked");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 
 	}
 }

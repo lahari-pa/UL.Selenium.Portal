@@ -59,4 +59,48 @@ And I click the continue button
 Then In the Forgotten Password window I should see the following error messages: This is a required field.
 
 
-
+Scenario: [64860] Forgot Password (security questions answered)
+Given If not already created, I create a user: ForgotPW_SecQs with the following parameters:
+| Field                | Value          |
+| Email                | User_<random>  |
+| Country              | UNITED STATES  |
+| FirstName            | Richard        |
+| LastName             | Smith          |
+| Password             | Pa4*ytuufnn    |
+| Address1             | Address 1      |
+| Address2             | Address 2      |
+| City                 | City Name      |
+| State                | Florida        |
+| Zip                  | 999            |
+| CompanyName          | Company 1      |
+| CompanyPhone         | 123-456-7889   |
+| EmergencyPhoneNumber | 123-456-7789   |
+| SupplierType         | Manufacturer   |
+| CityQuestion         | CityQuestion   |
+| CityHint             | CityHint       |
+| CarQuestion          | CarQuestion    |
+| CarHint              | CarHint        |
+| FriendQuestion       | FriendQuestion |
+| FriendHint           | FriendHint     |
+| JobQuestion          | JobQuestion    |
+| JobHint              | JobHint        |
+| MascotQuestion       | MascotQuestion |
+| MascotHint           | MascotHint     |
+| Pin                  | 1234           |
+Then I click the User Icon
+And I click on Sign Out
+And the landing page should load
+Then I go to the WERCSmart Log in
+Given I click on the Forgot Your Password Link
+Given I enter the email address for the Account saved as: ForgotPW_SecQs
+And I click the continue button
+Then the message should contain Please check your email to get instructions on how to reset your password.
+Then there should be a new email for email Address saved as: ForgotPW_SecQs from: WERCSmartCustomer@ul.com with the title: WERCSmart Password Reset
+And the body of the email should contain: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you!
+And the email should contain a link to reset a WERCSmart Account Password
+When I click the link in the email I get directed to security questions
+Then I answer the security questions for Account: ForgotPW_SecQs
+Then I enter a new password: 123Password! and verify: 123Password!
+Then I click the Login button
+Then I log in as user: ForgotPW_SecQs with password: 123Password!
+Then the WERCSmart homepage should load

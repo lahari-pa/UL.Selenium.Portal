@@ -419,7 +419,18 @@ namespace WERCSmart
 						emailFrom = "wercsmartcustomer@ul.com";
 					}
 				}
-				var Email = Context.GetFromContext(savedAs).ToString();
+
+				var Email = string.Empty;
+				if (savedAs == "ForgotPW_SecQs")
+				{
+					var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+					Email = user.Email;
+				}
+				else
+				{
+					Email = Context.GetFromContext(savedAs).ToString();
+				}
+
 				if (EmailFunctions.WaitForInboxDifferences(Email))
 				{
 					var differences = EmailFunctions.GetInboxDifferences(Email);
@@ -490,6 +501,29 @@ namespace WERCSmart
 				throw;
 			}
 		}
+
+		/// <summary>
+		/// Asserting text in body of email
+		/// </summary>
+		/// <param name="bodyText"></param>
+		[StepDefinition(@"the body of the email should contain: (.*)")]
+		public void ThenTheBodyOfTheEmailShouldContainX(string bodyText)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
+			try
+			{
+				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				var emailBody = EmailFunctions.getEmailBody(email);
+				Report.Info("Body of the Email was: " + emailBody);
+				Report.IsTrue(emailBody.Contains(bodyText), "Body text did not match correctly!", "Body text matched correctly!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 		/// <summary>
 		/// Back button click in the browser

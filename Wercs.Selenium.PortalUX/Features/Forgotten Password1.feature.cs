@@ -225,6 +225,137 @@ testRunner.Then("In the Forgotten Password window I should see the following err
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[64860] Forgot Password (security questions answered)")]
+        public virtual void _64860ForgotPasswordSecurityQuestionsAnswered()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64860] Forgot Password (security questions answered)", ((string[])(null)));
+#line 62
+this.ScenarioSetup(scenarioInfo);
+#line 13
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Value"});
+            table1.AddRow(new string[] {
+                        "Email",
+                        "User_<random>"});
+            table1.AddRow(new string[] {
+                        "Country",
+                        "UNITED STATES"});
+            table1.AddRow(new string[] {
+                        "FirstName",
+                        "Richard"});
+            table1.AddRow(new string[] {
+                        "LastName",
+                        "Smith"});
+            table1.AddRow(new string[] {
+                        "Password",
+                        "Pa4*ytuufnn"});
+            table1.AddRow(new string[] {
+                        "Address1",
+                        "Address 1"});
+            table1.AddRow(new string[] {
+                        "Address2",
+                        "Address 2"});
+            table1.AddRow(new string[] {
+                        "City",
+                        "City Name"});
+            table1.AddRow(new string[] {
+                        "State",
+                        "Florida"});
+            table1.AddRow(new string[] {
+                        "Zip",
+                        "999"});
+            table1.AddRow(new string[] {
+                        "CompanyName",
+                        "Company 1"});
+            table1.AddRow(new string[] {
+                        "CompanyPhone",
+                        "123-456-7889"});
+            table1.AddRow(new string[] {
+                        "EmergencyPhoneNumber",
+                        "123-456-7789"});
+            table1.AddRow(new string[] {
+                        "SupplierType",
+                        "Manufacturer"});
+            table1.AddRow(new string[] {
+                        "CityQuestion",
+                        "CityQuestion"});
+            table1.AddRow(new string[] {
+                        "CityHint",
+                        "CityHint"});
+            table1.AddRow(new string[] {
+                        "CarQuestion",
+                        "CarQuestion"});
+            table1.AddRow(new string[] {
+                        "CarHint",
+                        "CarHint"});
+            table1.AddRow(new string[] {
+                        "FriendQuestion",
+                        "FriendQuestion"});
+            table1.AddRow(new string[] {
+                        "FriendHint",
+                        "FriendHint"});
+            table1.AddRow(new string[] {
+                        "JobQuestion",
+                        "JobQuestion"});
+            table1.AddRow(new string[] {
+                        "JobHint",
+                        "JobHint"});
+            table1.AddRow(new string[] {
+                        "MascotQuestion",
+                        "MascotQuestion"});
+            table1.AddRow(new string[] {
+                        "MascotHint",
+                        "MascotHint"});
+            table1.AddRow(new string[] {
+                        "Pin",
+                        "1234"});
+#line 63
+testRunner.Given("If not already created, I create a user: ForgotPW_SecQs with the following parame" +
+                    "ters:", ((string)(null)), table1, "Given ");
+#line 90
+testRunner.Then("I click the User Icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 91
+testRunner.And("I click on Sign Out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 92
+testRunner.And("the landing page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 93
+testRunner.Then("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 94
+testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 95
+testRunner.Given("I enter the email address for the Account saved as: ForgotPW_SecQs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 96
+testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 97
+testRunner.Then("the message should contain Please check your email to get instructions on how to " +
+                    "reset your password.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 98
+testRunner.Then("there should be a new email for email Address saved as: ForgotPW_SecQs from: WERC" +
+                    "SmartCustomer@ul.com with the title: WERCSmart Password Reset", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 99
+testRunner.And(@"the body of the email should contain: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 100
+testRunner.And("the email should contain a link to reset a WERCSmart Account Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 101
+testRunner.When("I click the link in the email I get directed to security questions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 102
+testRunner.Then("I answer the security questions for Account: ForgotPW_SecQs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 103
+testRunner.Then("I enter a new password: 123Password! and verify: 123Password!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 104
+testRunner.Then("I click the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 105
+testRunner.Then("I log in as user: ForgotPW_SecQs with password: 123Password!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 106
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
