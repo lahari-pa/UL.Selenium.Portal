@@ -81,7 +81,7 @@ namespace Wercs.Selenium.PortalUX.Features
         {
 #line 11
 #line 12
-testRunner.Given("Login into WERCSmart Portal - Administrator Role - WERCs Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 13
 testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

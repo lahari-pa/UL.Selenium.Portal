@@ -9,7 +9,7 @@
 Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
 
 Background:
-Given Login into WERCSmart Portal - Administrator Role - WERCs Account
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then I click the Retail Partners icon in the Navigation Pane
 
 Scenario: [57206] Retailer specific - CVS
