@@ -92,6 +92,39 @@ namespace WERCSmart
 			}
 		}
 
+		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account")]
+		public void GivenLoginIntoWERCSmartPortal_AutomatedPremium()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal asPremium Subscription Account into the WERCs Account");
+			try
+			{
+				Report.Info("Clicking 'Log In' on the Landing Page");
+				var selLandingPage = new LandingPage();
+				selLandingPage.Click_Login();
+
+				var selLogin = new Login();
+				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
+				var username = @"AutomatedPremium.kxxyxunf@mailosaur.io";
+				var password = "Welcome1!";
+
+				Report.Info("Entering Email: '" + username + "'");
+				selLogin.EmailField = username;
+				Report.Info("Entering Password: '" + password + "'");
+				selLogin.PasswordField = password;
+				Report.Info("Clicking login");
+				selLogin.Click_Login();
+
+				var selHomepage = new Homepage();
+				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs Product Account")]
 		public void GivenLoginIntoWERCSmartPortal_AdminRoleProducts()
 		{
