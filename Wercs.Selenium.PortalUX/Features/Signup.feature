@@ -62,6 +62,7 @@ Given If terms of use page appears I accept
 Then the WERCSmart homepage should load
 Then I should see username for user saved as: SignupUser in the right corner
 
+#pass - staging 4.10
 Scenario: [52998] Signup - Emails Do Not Match
 Given I click on the New to WERCSmart Link
 Then the signup page should appear
@@ -79,6 +80,7 @@ Then Under the Enter Email text box the following errors should appear
 | Error text                                  |
 | Email and confirm email fields do not match |
 
+#pass - staging 4.10
 Scenario: [53000] Signup - Copy and Paste Email Address
 Given I click on the New to WERCSmart Link
 Then the signup page should appear

@@ -617,7 +617,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(5);
 			try
 			{
-				string FreshdeskURL = @"https://wercsmarttest.freshdesk.com/support/solutions";
+				string FreshdeskURL = @"https://wercsmart.freshdesk.com/en/support/solutions";
 				List<string> ListOfTabs = SeleniumBrowser.GetTabURLs();
 				Report.IsTrue(ListOfTabs.Contains(FreshdeskURL),
 					"Fresh desk url: " + FreshdeskURL + " was not found. Tabs open: " + string.Join(",", ListOfTabs),

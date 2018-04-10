@@ -88,10 +88,10 @@ testRunner.Given("I login into the WERCSmart Portal - Administrator Role", ((str
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[31343] New Product screen navigation")]
-        public virtual void _31343NewProductScreenNavigation()
+        [NUnit.Framework.DescriptionAttribute("Create a new product")]
+        public virtual void CreateANewProduct()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31343] New Product screen navigation", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new product", ((string[])(null)));
 #line 15
 this.ScenarioSetup(scenarioInfo);
 #line 12
@@ -100,56 +100,9 @@ this.FeatureBackground();
 testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 17
 testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Button"});
-            table1.AddRow(new string[] {
-                        "Create a New Registration"});
-            table1.AddRow(new string[] {
-                        "Copy from an Existing Registration"});
-            table1.AddRow(new string[] {
-                        "Request a UPC from a Manufacturer"});
 #line 18
-testRunner.And("I should see the following radio buttons:", ((string)(null)), table1, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[31344] New Product Screen validation")]
-        public virtual void _31344NewProductScreenValidation()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31344] New Product Screen validation", ((string[])(null)));
-#line 29
-this.ScenarioSetup(scenarioInfo);
-#line 12
-this.FeatureBackground();
-#line 30
 testRunner.Given("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
-testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 32
-testRunner.Then("I should see an error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create a new product")]
-        public virtual void CreateANewProduct()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new product", ((string[])(null)));
-#line 34
-this.ScenarioSetup(scenarioInfo);
-#line 12
-this.FeatureBackground();
-#line 35
-testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 36
-testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
-testRunner.Given("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 38
+#line 19
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
@@ -160,45 +113,45 @@ testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)
         public virtual void _63750NewProduct_BCP()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63750] New Product - BCP", ((string[])(null)));
-#line 40
+#line 21
 this.ScenarioSetup(scenarioInfo);
 #line 12
 this.FeatureBackground();
-#line 41
+#line 22
 testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 42
+#line 23
 testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 24
 testRunner.And("I Select the Create a New Registration radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
+#line 25
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 26
 testRunner.And("In the Product Type tab of the New Product Page, I enter: Answering Machine, Batt" +
                     "ery Included in the Product Name text field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 27
 testRunner.And("In the Product Type tab of the New Product Page, I enter: Answering Machine, Batt" +
                     "ery Included in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 28
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
+#line 29
 testRunner.And("I should see the Additional Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 30
 testRunner.And("In the Additional Information Page the check box for: United States should be: ch" +
                     "ecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
+#line 31
 testRunner.And("In the Additional Information Page for Product is shipped directly I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
+#line 32
 testRunner.And("In the Additional Information Page for Product is retailers private label or bran" +
                     "d I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
+#line 33
 testRunner.And("In the Additional Information Page for Product is solely for the Retailer\'s use I" +
                     " select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 34
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
+#line 35
 testRunner.And("in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substa" +
                     "nces Control Act (TSCA) status I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 36
 testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
                     "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

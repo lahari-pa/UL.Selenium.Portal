@@ -19,7 +19,7 @@ Feature: Home Page
 
 Background:
 
-#pass
+#pass staging 4.10
 Scenario: [55796] Navigate to Home Page
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -69,7 +69,7 @@ And I should see the Subheading Alerts expanded in the main window
 And I should see the Subheading Announcements expanded in the main window
 
 
-#pass
+#pass - staging 4.10
 Scenario: [55817] Product Information Panel - No Alerts/No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -119,7 +119,7 @@ And the Product Grid should have the following headers:
 | Retailers         |
 | Actions           |
 
-#pass
+#pass - staging 4.10
 Scenario: [56020] Bulk Actions
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -133,7 +133,7 @@ And I should see the following options available in the Bulk Actions window
 And I click on the close button on Bulk Actions
 Then I should see the Subheading My Products in the products grid
 
-#pass
+#pass - staging 4.10
 Scenario: [56149] Click Register Product button from home page - Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -143,7 +143,7 @@ And I should see the statement Select the type of product to create:
 And I should see the radio button: Create a New Registration
 And I should see the radio button: Copy from an Existing Registration
 
-#pass
+#pass - staging 4.10
 Scenario: [56158] Retail Partners navigation No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -152,7 +152,7 @@ Then I should see the following heading Retail Partners
 And I should see the following subheading All Retailers
 And I should not see the following subheading Most Recent Retailers
 
-#pass
+#pass - staging 4.10
 Scenario: [56161] UL Solution Center navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -167,7 +167,7 @@ Then Confirm in the UL Solution Center page you see sections for:
 | UL Secure Connect (ULSC) |
 | ULGHS                    |
 
-#pass
+#pass - staging 4.10
 Scenario: [56163] Left hand navigation - Shopping Cart - No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -176,13 +176,14 @@ And I should see the header: Cart is Empty on the Cart is Empty window
 And I click on the close button on Cart is Empty
 Then I should see the Subheading Announcements in the main window
 
-#pass
+#pass - staging 4.10 (might need to look at freshdesk link
 Scenario: [56188] Support navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Then I click the Support icon in the Navigation Pane
 Then Confirm that freshdesk opens in another tab
 
+#pass - staging 4.10
 Scenario: [56206] Sign Out
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -190,7 +191,7 @@ Then I click the User Icon
 And I click on Sign Out
 And the landing page should load
 
-#pass
+#pass - staging 4.10
 Scenario: [56212] My Products grid Actions - Edit Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -253,16 +254,16 @@ And I click Row Actions for the most recent product returned
 Then I click on the Row Action: UPC Update
 And UNDER DEVELOPMENT
 
+#pass - staging 4.10
 Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
 Given I click Bulk Actions in the Products Grid
 And I click Forward Product Registration in the Bulk Actions window
 Then I should see the header: Forward Product Registration on the Forward Product Registration window
-And I should see the subheading 3: Select Retailers on the Forward Product Registration window
-And I should see the subheading 4: You most recently did business with... on the Forward Product Registration window
+And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
 
-
+#pass - staging 4.10
 #This test cases uses the ULSC account
 Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
@@ -279,6 +280,7 @@ Then the WERCSmart homepage should load
 Given I click Bulk Actions in the Products Grid
 And I click Accept Documents in the Bulk Actions window
 And I should see the header: Document Acceptance on the Document Acceptance window
+And UNDER DEVELOPMENT
 
 
 Scenario: [56227] Bulk Actions - Delete Products navigation
@@ -287,6 +289,7 @@ Then the WERCSmart homepage should load
 Given I click Bulk Actions in the Products Grid
 And I click Delete Products in the Bulk Actions window
 And I should see the header: Delete Active Products on the Delete Active Product window
+And UNDER DEVELOPMENT
 
 Scenario: [56280] Product Information - Alerts - click on any notification
 Then clicking on the top Alert should direct me to the My Messages page
@@ -297,5 +300,6 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Then I click More below the Alerts Panel
 And I should see the header: Message Center on the Message Center window
+And UNDER DEVELOPMENT
 
 
