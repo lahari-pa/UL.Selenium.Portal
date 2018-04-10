@@ -236,12 +236,14 @@
     <Compile Include="Selenium Classes\NavigationBar.cs" />
     <Compile Include="Selenium Classes\NewProduct.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
+    <Compile Include="Selenium Classes\PaymentMethods.cs" />
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
     <Compile Include="Selenium Classes\MessageCenter.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />
+    <Compile Include="Selenium Classes\SubscriptionEnrollment.cs" />
     <Compile Include="Selenium Classes\TermsOfUse.cs" />
     <Compile Include="Selenium Classes\TopMenuBar.cs" />
     <Compile Include="Selenium Classes\ULSC.cs" />
@@ -260,6 +262,7 @@
     <Compile Include="Steps\Steps_ProductGrid.cs" />
     <Compile Include="Steps\Steps_RetailPartners.cs" />
     <Compile Include="Steps\Steps_Signup.cs" />
+    <Compile Include="Steps\Steps_SubscriptionEnrollment.cs" />
     <Compile Include="Steps\Steps_ULSC.cs" />
     <Compile Include="Tests\Account\LoginTests.cs" />
     <Compile Include="Tests\TestBase.cs" />

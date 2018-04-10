@@ -23,6 +23,8 @@ namespace Wercs.Selenium.PortalUX.Features
     [NUnit.Framework.CategoryAttribute("Login")]
     [NUnit.Framework.CategoryAttribute("MyAccount")]
     [NUnit.Framework.CategoryAttribute("wercsmart")]
+    [NUnit.Framework.CategoryAttribute("SubEnrollment")]
+    [NUnit.Framework.CategoryAttribute("LandingPage")]
     [NUnit.Framework.CategoryAttribute("run_MyAccount")]
     public partial class MyAccountFeature
     {
@@ -41,6 +43,8 @@ namespace Wercs.Selenium.PortalUX.Features
                         "Login",
                         "MyAccount",
                         "wercsmart",
+                        "SubEnrollment",
+                        "LandingPage",
                         "run_MyAccount"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -75,7 +79,7 @@ namespace Wercs.Selenium.PortalUX.Features
         
         public virtual void FeatureBackground()
         {
-#line 10
+#line 12
 #line hidden
         }
         
@@ -84,37 +88,37 @@ namespace Wercs.Selenium.PortalUX.Features
         public virtual void _61796AccountUserNameInHeader()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[61796] Account User Name in Header", ((string[])(null)));
-#line 12
-this.ScenarioSetup(scenarioInfo);
-#line 10
-this.FeatureBackground();
-#line 13
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 14
-testRunner.Then("I should see username for user saved as: SignupUser in the right corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
+#line 12
+this.FeatureBackground();
 #line 15
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 16
-testRunner.And("I should see the heading: My Account on the My Account page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see username for user saved as: SignupUser in the right corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 17
-testRunner.Given("I save all the users in the User Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 18
-testRunner.Given("I go to Details in User Grid for the current user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 19
-testRunner.Given("In the UserDetails screen I save the current User as: ThisUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 20
-testRunner.Given("In the UserDetails page I set Name to be: Richard Smith", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
-testRunner.Given("In the UserDetails page I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 23
-testRunner.Then("In the User Grid the user saved as: ThisUser has been replaced by: Richard Smith", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 24
-testRunner.Then("I should see user name: Richard Smith in the header next to the user icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 25
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
+#line 18
+testRunner.And("I should see the heading: My Account on the My Account page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 19
+testRunner.Given("I save all the users in the User Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 20
 testRunner.Given("I go to Details in User Grid for the current user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 21
+testRunner.Given("In the UserDetails screen I save the current User as: ThisUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 22
+testRunner.Given("In the UserDetails page I set Name to be: Richard Smith", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 23
+testRunner.Given("In the UserDetails page I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 25
+testRunner.Then("In the User Grid the user saved as: ThisUser has been replaced by: Richard Smith", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 26
+testRunner.Then("I should see user name: Richard Smith in the header next to the user icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 27
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 28
+testRunner.Given("I go to Details in User Grid for the current user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 29
 testRunner.Given("In the UserDetails page I set Name to be: saved as ThisUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -125,15 +129,15 @@ testRunner.Given("In the UserDetails page I set Name to be: saved as ThisUser", 
         public virtual void _63514CreateANewUserOnTheUserGrid()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63514] Create a New User on the User Grid", ((string[])(null)));
-#line 29
-this.ScenarioSetup(scenarioInfo);
-#line 10
-this.FeatureBackground();
-#line 30
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 31
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
+#line 12
+this.FeatureBackground();
 #line 32
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 33
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 34
 testRunner.Then("I create a new email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -154,10 +158,147 @@ testRunner.Then("I create a new email address", ((string)(null)), ((TechTalk.Spe
                         "Saved",
                         "empty",
                         "United Kingdom"});
-#line 33
+#line 35
 testRunner.Then("I add a new user with the following information", ((string)(null)), table1, "Then ");
-#line 36
+#line 38
 testRunner.Then("I confirm the new user is Active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[59245] Add subscription to a new supplier from My account")]
+        public virtual void _59245AddSubscriptionToANewSupplierFromMyAccount()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59245] Add subscription to a new supplier from My account", ((string[])(null)));
+#line 40
+this.ScenarioSetup(scenarioInfo);
+#line 12
+this.FeatureBackground();
+#line 41
+testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Value"});
+            table2.AddRow(new string[] {
+                        "Email",
+                        "User_<random>"});
+            table2.AddRow(new string[] {
+                        "Country",
+                        "UNITED STATES"});
+            table2.AddRow(new string[] {
+                        "FirstName",
+                        "Richard"});
+            table2.AddRow(new string[] {
+                        "LastName",
+                        "Smith"});
+            table2.AddRow(new string[] {
+                        "Password",
+                        "Pa4*ytuufnn"});
+            table2.AddRow(new string[] {
+                        "Address1",
+                        "Address 1"});
+            table2.AddRow(new string[] {
+                        "Address2",
+                        "Address 2"});
+            table2.AddRow(new string[] {
+                        "City",
+                        "City Name"});
+            table2.AddRow(new string[] {
+                        "State",
+                        "Florida"});
+            table2.AddRow(new string[] {
+                        "Zip",
+                        "999"});
+            table2.AddRow(new string[] {
+                        "CompanyName",
+                        "Company 1"});
+            table2.AddRow(new string[] {
+                        "CompanyPhone",
+                        "123-456-7889"});
+            table2.AddRow(new string[] {
+                        "EmergencyPhoneNumber",
+                        "123-456-7789"});
+            table2.AddRow(new string[] {
+                        "SupplierType",
+                        "Manufacturer"});
+            table2.AddRow(new string[] {
+                        "CityQuestion",
+                        "CityQuestion"});
+            table2.AddRow(new string[] {
+                        "CityHint",
+                        "CityHint"});
+            table2.AddRow(new string[] {
+                        "CarQuestion",
+                        "CarQuestion"});
+            table2.AddRow(new string[] {
+                        "CarHint",
+                        "CarHint"});
+            table2.AddRow(new string[] {
+                        "FriendQuestion",
+                        "FriendQuestion"});
+            table2.AddRow(new string[] {
+                        "FriendHint",
+                        "FriendHint"});
+            table2.AddRow(new string[] {
+                        "JobQuestion",
+                        "JobQuestion"});
+            table2.AddRow(new string[] {
+                        "JobHint",
+                        "JobHint"});
+            table2.AddRow(new string[] {
+                        "MascotQuestion",
+                        "MascotQuestion"});
+            table2.AddRow(new string[] {
+                        "MascotHint",
+                        "MascotHint"});
+            table2.AddRow(new string[] {
+                        "Pin",
+                        "1234"});
+#line 42
+testRunner.Given("If not already created, I create a user: New_Sub with the following parameters:", ((string)(null)), table2, "Given ");
+#line 69
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 70
+testRunner.Then("I click on NEW SUBSCRIPTION", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Articles",
+                        "Enhanced Articles",
+                        "Formulated Products",
+                        "Feature Plan",
+                        "Support Services Plan"});
+            table3.AddRow(new string[] {
+                        "Up to 1 Product(s)",
+                        "Up to 1 Product(s)",
+                        "Up to 1 Product(s)",
+                        "Limited",
+                        "Bronze"});
+#line 71
+testRunner.Then("I select the following enrollment options", ((string)(null)), table3, "Then ");
+#line 74
+testRunner.Then("I cancel the Enrollment dialog, confirm correct page opens and Proceed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Articles",
+                        "Enhanced Articles",
+                        "Formulated Products",
+                        "Feature Plan",
+                        "Support Services Plan",
+                        "Body Text"});
+            table4.AddRow(new string[] {
+                        "Up to 1 Product(s)",
+                        "Up to 1 Product(s)",
+                        "Up to 1 Product(s)",
+                        "Limited",
+                        "Bronze",
+                        "Your new purchase will be prorated based on the credit and time left in your curr" +
+                            "ent subscription. Checkout to see the final amount."});
+#line 75
+testRunner.And("I confirm the chosen options and body text are correct", ((string)(null)), table4, "And ");
+#line 78
+testRunner.Then("I click on Checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -297,6 +297,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		//New Subscription Button
+		[FindsBy(How = How.XPath, Using = ".//div/a[text()='New Subscription']")]
+		private IWebElement _btn_new_sub;
+
+		public bool New_Subscription_click()
+		{
+			Report.Info("Attempting to Click New Subscription Button");
+			_btn_new_sub.Click();
+			return true;
+		}
+
 
 	}
 }

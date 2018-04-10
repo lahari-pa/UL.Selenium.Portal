@@ -570,110 +570,110 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-        [StepDefinition(@"the Notification page should appear")]
-        public void ThenTheNotificationPageShouldAppear()
-        {
-            TestReport.BeginTestModule(GlobalParameters.StepCount + " - Notification Page Should Appear");
-            try
-            {
-                Report.Info("Checking that the Notification Page appears");
-                Report.Failure("Notification screen not showing/developed - so failing the step!");
-            }
-            catch (Exception ex)
-            {
-                Report.Failure(ex.Message);
-                throw;
-            }
-        }
+		[StepDefinition(@"the Notification page should appear")]
+		public void ThenTheNotificationPageShouldAppear()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Notification Page Should Appear");
+			try
+			{
+				Report.Info("Checking that the Notification Page appears");
+				Report.Failure("Notification screen not showing/developed - so failing the step!");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
-	    [Then(@"Confirm that you are taken to the (.*) page")]
-	    public void ThenConfirmThatYouAreTakenToTheSpecifiedPage(string pageTitle)
-	    {
-		    TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that you are taken to the " + pageTitle + " page");
+		[Then(@"Confirm that you are taken to the (.*) page")]
+		public void ThenConfirmThatYouAreTakenToTheSpecifiedPage(string pageTitle)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that you are taken to the " + pageTitle + " page");
 			Delay.Seconds(5);
-		    try
-		    {
-			    switch (pageTitle)
-			    {
-				    case "UL Solution Center":
-					    UlSolutionCenter ULSolution = new UlSolutionCenter();
-					    Report.IsTrue(ULSolution.Exists, "UL Solutions page does not exist as expected.", "UL Solutions page exists as expected.");
-					    break;
-				    default:
-					    break;
-			    }
-		    }
-		    catch (Exception ex)
-		    {
-			    Report.Failure(ex.Message);
-			    throw;
-		    }
-	    }
+			try
+			{
+				switch (pageTitle)
+				{
+					case "UL Solution Center":
+						UlSolutionCenter ULSolution = new UlSolutionCenter();
+						Report.IsTrue(ULSolution.Exists, "UL Solutions page does not exist as expected.", "UL Solutions page exists as expected.");
+						break;
+					default:
+						break;
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
-	    [Then(@"Confirm that freshdesk opens in another tab")]
-	    public void ThenConfirmThatFreshdeskOpensInAnotherTab()
-	    {
+		[Then(@"Confirm that freshdesk opens in another tab")]
+		public void ThenConfirmThatFreshdeskOpensInAnotherTab()
+		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that freshdesk opens in another tab");
 			Delay.Seconds(5);
-		    try
-		    {
-			    string FreshdeskURL = @"https://wercsmarttest.freshdesk.com/support/solutions";
-			    List<string> ListOfTabs = SeleniumBrowser.GetTabURLs();
-			    Report.IsTrue(ListOfTabs.Contains(FreshdeskURL),
-				    "Fresh desk url: " + FreshdeskURL + " was not found. Tabs open: " + string.Join(",", ListOfTabs),
-				    " As expected, tab is open with url: " + FreshdeskURL);
+			try
+			{
+				string FreshdeskURL = @"https://wercsmarttest.freshdesk.com/support/solutions";
+				List<string> ListOfTabs = SeleniumBrowser.GetTabURLs();
+				Report.IsTrue(ListOfTabs.Contains(FreshdeskURL),
+					"Fresh desk url: " + FreshdeskURL + " was not found. Tabs open: " + string.Join(",", ListOfTabs),
+					" As expected, tab is open with url: " + FreshdeskURL);
 				Report.Screenshot();
 				Report.Info("Closing Freshdesk");
-			    SeleniumBrowser.CloseTabWithURL(FreshdeskURL);
-			    Delay.Seconds(3);
+				SeleniumBrowser.CloseTabWithURL(FreshdeskURL);
+				Delay.Seconds(3);
 
-		    }
-		    catch (Exception ex)
-		    {
-			    Report.Failure(ex.Message);
-			    throw;
-		    }
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
 
-	    [Then(@"I should see the empty shopping cart pop up")]
-	    public void ThenIShouldSeeTheEmptyShoppingCartPopUp()
-	    {
+		[Then(@"I should see the empty shopping cart pop up")]
+		public void ThenIShouldSeeTheEmptyShoppingCartPopUp()
+		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the empty shopping cart pop up");
-		    Delay.Seconds(5);
-		    try
-		    {
+			Delay.Seconds(5);
+			try
+			{
 
-			    ShoppingCart ThisShoppingCart = new ShoppingCart();
-			    Report.IsTrue(ThisShoppingCart.Exists, "The shopping cart pop up is not showing as expected.",
-				    "As expected, the shopping cart popup is showing.");
-			    Report.Screenshot();
-			    
-		    }
-		    catch (Exception ex)
-		    {
-			    Report.Failure(ex.Message);
-			    throw;
-		    }
+				ShoppingCart ThisShoppingCart = new ShoppingCart();
+				Report.IsTrue(ThisShoppingCart.Exists, "The shopping cart pop up is not showing as expected.",
+					"As expected, the shopping cart popup is showing.");
+				Report.Screenshot();
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
 
-	    [Given(@"I click on Close in the shopping cart")]
-	    public void GivenIClickOnCloseInTheShoppingCart()
-	    {
+		[Given(@"I click on Close in the shopping cart")]
+		public void GivenIClickOnCloseInTheShoppingCart()
+		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click on Close in the shopping cart");
-		    Delay.Seconds(5);
-		    try
-		    {
-			    ShoppingCart ThisShoppingCart = new ShoppingCart();
+			Delay.Seconds(5);
+			try
+			{
+				ShoppingCart ThisShoppingCart = new ShoppingCart();
 				// TODO: Does this function need re-including?
-			    // ThisShoppingCart.ClickClose();
-			    Delay.Seconds(2);
+				// ThisShoppingCart.ClickClose();
+				Delay.Seconds(2);
 
-		    }
-		    catch (Exception ex)
-		    {
-			    Report.Failure(ex.Message);
-			    throw;
-		    }
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
 		}
 
 		[When(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]

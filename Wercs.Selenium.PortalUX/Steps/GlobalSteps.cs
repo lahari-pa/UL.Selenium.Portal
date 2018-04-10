@@ -9,6 +9,8 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 using System.IO;
 using System.Linq;
 using ResourcePool;
+using TechTalk.SpecFlow.Assist;
+using Wercs.Selenium.PortalUX.Steps;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -205,6 +207,62 @@ namespace WERCSmart
 			{
 				TopMenuBar thisTopMenuBar = new TopMenuBar();
 				Assert.That(thisTopMenuBar.ClickSignOut());
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"If not already created, I create a user: (.*) with the following parameters:")]
+		public void GivenIfNotAlreadyCreatedICreateAUserXWithTheFollowingParameters(string savedAs, Table parameters)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- If not already created, I create a user: '" + savedAs + "'");
+
+			if (savedAs == "New_Sub")
+			{
+				savedAs = "New_Sub" + "_" + System.DateTime.Now.ToString("HHmmddMMyy");
+			}
+
+			try
+			{
+				if (!FeatureContext.Current.ContainsKey(savedAs))
+				{
+					Report.Info("Setting up account details for user: '" + savedAs + "'");
+					var account = parameters.CreateInstance<WERCSmartUser>();
+					account.Email = EmailFunctions.CreateEmail(account.Email);
+					account.Identifier = savedAs;
+					Context.AddToContext(savedAs, account, true);
+					Report.Success("Account details saved!");
+
+					var mySignUp = new StepsSignup();
+					var myLogin = new StepsLogin();
+					var myLanding = new StepsLandingPage();
+					var myHome = new StepsHomepage();
+
+					mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+					myLogin.GivenIClickOnTheNewToWercsmartLink();
+					mySignUp.ThenTheSignupPageShouldAppear();
+					mySignUp.GivenIEnterSignupEmailUser(savedAs);
+					mySignUp.GivenIConfirmSignupEmailUser(savedAs);
+					mySignUp.GivenIClickOnSubmit();
+					mySignUp.ThenTheSignupThankYouPageShouldAppear();
+					mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
+					mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+					mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+					mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+					mySignUp.WhenInTheNewUserFormIClickOnContinue();
+					mySignUp.ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm();
+					mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
+					mySignUp.EnterPinForUser(savedAs);
+					mySignUp.WhenInTheNewUserFormIClickOnContinue();
+					myLanding.ClickTheLoginButton();
+					myLogin.GivenILoginAsUser(savedAs);
+					mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
+					myHome.ThenTheWercSmartHomepageShouldLoad();
+				}
+				Report.Info(savedAs + " Created");
 			}
 			catch (Exception ex)
 			{

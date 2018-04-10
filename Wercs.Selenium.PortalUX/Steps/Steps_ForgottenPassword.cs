@@ -365,56 +365,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"If not already created, I create a user: (.*) with the following parameters:")]
-		public void GivenIfNotAlreadyCreatedICreateAUserXWithTheFollowingParameters(string savedAs, Table parameters)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- If not already created, I create a user: '" + savedAs + "'");
-			try
-			{
-				if (!FeatureContext.Current.ContainsKey(savedAs))
-				{
-					Report.Info("Setting up account details for user: '" + savedAs + "'");
-					var account = parameters.CreateInstance<WERCSmartUser>();
-					account.Email = EmailFunctions.CreateEmail(account.Email);
-					account.Identifier = savedAs;
-					Context.AddToContext(savedAs, account, true);
-					Report.Success("Account details saved!");
-
-					var mySignUp = new StepsSignup();
-					var myLogin = new StepsLogin();
-					var myLanding = new StepsLandingPage();
-					var myHome = new StepsHomepage();
-
-					mySignUp.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-					myLogin.GivenIClickOnTheNewToWercsmartLink();
-					mySignUp.ThenTheSignupPageShouldAppear();
-					mySignUp.GivenIEnterSignupEmailUser(savedAs);
-					mySignUp.GivenIConfirmSignupEmailUser(savedAs);
-					mySignUp.GivenIClickOnSubmit();
-					mySignUp.ThenTheSignupThankYouPageShouldAppear();
-					mySignUp.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<SiteNotification>", "Link to create WERCSmart Account");
-					mySignUp.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-					mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-					mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-					mySignUp.WhenInTheNewUserFormIClickOnContinue();
-					mySignUp.ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm();
-					mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
-					mySignUp.EnterPinForUser(savedAs);
-					mySignUp.WhenInTheNewUserFormIClickOnContinue();
-					myLanding.ClickTheLoginButton();
-					myLogin.GivenILoginAsUser(savedAs);
-					mySignUp.GivenIfTermsOfUsePageAppearsIAccept();
-					myHome.ThenTheWercSmartHomepageShouldLoad();
-				}
-				Report.Info(savedAs + " Created");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
 		[StepDefinition(@"I answer the security questions for Account: (.*)")]
 		public void ThenIAnswerTheSecurityQuestionsForAccountX(string savedAs)
 		{

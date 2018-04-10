@@ -425,6 +425,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I click on NEW SUBSCRIPTION")]
+		public void ThenIClickOnNewSubscription()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click on NEW SUBSCRIPTION");
+			try
+			{
+				var selMyAccount = new MyAccount();
+
+				Report.IsTrue(selMyAccount.New_Subscription_click(), "Failed to Click NEW SUBSCRIPTION Button",
+					"NEW SUBSCRIPTION Button Clicked");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+
 
 
 
