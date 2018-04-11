@@ -236,6 +236,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Given(@"I should see the Select Retailers pop up")]
+		public void GivenIShouldSeeTheSelectRetailersPopUp()
+		{
+			var selSelectRetailers = new SelectRetailers();
+			Report.IsTrue(selSelectRetailers.Wait_for_load(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
+		}
+
+
 		[StepDefinition(@"I should see the (.*) Page")]
 		public void GivenIShouldSeeXPage(string pageShouldSee)
 		{
@@ -464,7 +472,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I set all the metal presence value to: (Yes|No)")]
 		public void GivenISetAllTheMetalPresenceValueTo(string noOrYes)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I set all the metal presence value to:: " + noOrYes);
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I set all the metal presence values to: " + noOrYes);
 			try
 			{
 				var selNewProduct = new NewProduct();
@@ -480,6 +488,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 				selNewProduct.MetalPresence = ListOfMetalSettings;
 
 				var CheckOutcome = selNewProduct.MetalPresence;
+
+				foreach (MetalPresence thisMetalPresence in ListOfMetalSettings)
+				{
+					if (CheckOutcome.Select(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence).Count()==0)
+					{
+						Report.Error("Failed to set metal: " + thisMetalPresence.Metal + " to: " + thisMetalPresence.Presence);
+					}
+				}
 
 			}
 			catch (Exception ex)

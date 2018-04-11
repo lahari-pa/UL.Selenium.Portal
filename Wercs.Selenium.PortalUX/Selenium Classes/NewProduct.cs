@@ -940,7 +940,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						}
 						else
 						{
-							throw new Exception("No selected radio for: " + MetalName);
+							ListOfMetals.Add(new MetalPresence(MetalName, "none"));
 						}
 							
 					}
@@ -961,7 +961,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				foreach (MetalPresence thisMetal in value)
 				{
 					var MetalLabel = Header.FindElements(By.XPath("../../following-sibling::div//div[@class='radio']/../preceding-sibling::div/label")).FirstOrDefault(x=>x.Text==thisMetal.Metal);
-
+					MetalLabel.ScrollElementIntoView();
+					MetalLabel.ClickWithScroll();
 					var InputLabel = MetalLabel.FindElements(By.XPath("../..//input/../span"))
 						.FirstOrDefault(x => x.Text == thisMetal.Presence);
 
@@ -973,9 +974,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							try
 							{
 								SafewareReporting.Report.Info("Attempting to set metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
-								MetalInput.ScrollElementIntoView();
-								Delay.Seconds(1);
 								MetalInput.ClickWithScroll();
+								Delay.Seconds(1);
+								if (!MetalInput.Selected)
+								{
+									MetalInput.Click();
+								}
+
+								SafewareReporting.Report.Screenshot();
 							}
 							catch (Exception e)
 							{

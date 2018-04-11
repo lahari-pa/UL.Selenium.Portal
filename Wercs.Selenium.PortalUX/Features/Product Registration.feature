@@ -55,7 +55,7 @@ And in the Product Characteristics tab of the New Product Page, for U.S. Toxic S
 And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
 And in the New Product page I click Continue
 And I should see the Product Includes Battery Page
-And in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: The battery is shipped with but not included in my product
+And in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: The battery is shipped with but not included in my product.
 And in the Product Characteristics tab of the New Product Page I add the following batteries:
 | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
 | Alkaline     | L1028F       | 6                               | 6                                  |

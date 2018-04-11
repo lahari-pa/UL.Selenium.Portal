@@ -240,6 +240,7 @@
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
     <Compile Include="Selenium Classes\MessageCenter.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
+    <Compile Include="Selenium Classes\SelectRetailer.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />

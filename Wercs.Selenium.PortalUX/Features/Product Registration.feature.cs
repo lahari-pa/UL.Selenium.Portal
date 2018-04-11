@@ -208,7 +208,7 @@ testRunner.And("I should see the Product Includes Battery Page", ((string)(null)
 #line 58
 testRunner.And("in the Product Characteristics tab of the New Product Page, for Indicate how batt" +
                     "ery is packaged I select: The battery is shipped with but not included in my pro" +
-                    "duct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "duct.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
