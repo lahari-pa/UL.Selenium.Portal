@@ -255,6 +255,225 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public string DOT {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("DOT"));
+
+				if (lbl != null)
+				{
+					var listOfItems = lbl.FindElements(By.XPath("../..//input"));
+					foreach (var item in listOfItems)
+					{
+						if (item.Selected)
+						{
+							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
+							SafewareReporting.Report.Info(selectedText + " is selected.");
+							return selectedText;
+						}
+					}
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+				return "";
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("DOT"));
+
+				if (lbl != null)
+				{
+					var ThisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
+					if (ThisLabel != null)
+					{
+						var thisInput = ThisLabel.FindElement(By.XPath(".//../input"));
+						if (!thisInput.Selected)
+						{
+							thisInput.Click();
+						}
+					}
+					else
+					{
+						throw new Exception("Label for: " + value + " could not be found");
+					}
+				}
+				else
+				{
+					throw new Exception("Label DOT could not be found");
+				}
+			}
+		}
+
+		public string IMDG {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("IMDG"));
+
+				if (lbl != null)
+				{
+					var listOfItems = lbl.FindElements(By.XPath("../..//input"));
+					foreach (var item in listOfItems)
+					{
+						if (item.Selected)
+						{
+							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
+							SafewareReporting.Report.Info(selectedText + " is selected.");
+							return selectedText;
+						}
+					}
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+				return "";
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("IMDG"));
+
+				if (lbl != null)
+				{
+					var ThisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
+					if (ThisLabel != null)
+					{
+						var thisInput = ThisLabel.FindElement(By.XPath(".//../input"));
+						if (!thisInput.Selected)
+						{
+							thisInput.Click();
+						}
+					}
+					else
+					{
+						throw new Exception("Label for: " + value + " could not be found");
+					}
+				}
+				else
+				{
+					throw new Exception("Label IMDG could not be found");
+				}
+			}
+		}
+
+		public string IATA {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("IATA"));
+
+				if (lbl != null)
+				{
+					var listOfItems = lbl.FindElements(By.XPath("../..//input"));
+					foreach (var item in listOfItems)
+					{
+						if (item.Selected)
+						{
+							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
+							SafewareReporting.Report.Info(selectedText + " is selected.");
+							return selectedText;
+						}
+					}
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+				return "";
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("IATA"));
+
+				if (lbl != null)
+				{
+					var ThisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
+					if (ThisLabel != null)
+					{
+						var thisInput = ThisLabel.FindElement(By.XPath(".//../input"));
+						if (!thisInput.Selected)
+						{
+							thisInput.Click();
+						}
+					}
+					else
+					{
+						throw new Exception("Label for: " + value + " could not be found");
+					}
+				}
+				else
+				{
+					throw new Exception("Label IATA could not be found");
+				}
+			}
+		}
+
+		public string TDG {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("TDG"));
+
+				if (lbl != null)
+				{
+					var listOfItems = lbl.FindElements(By.XPath("../..//input"));
+					foreach (var item in listOfItems)
+					{
+						if (item.Selected)
+						{
+							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
+							SafewareReporting.Report.Info(selectedText + " is selected.");
+							return selectedText;
+						}
+					}
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+				return "";
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("TDG"));
+
+				if (lbl != null)
+				{
+					var ThisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
+					if (ThisLabel != null)
+					{
+						var thisInput = ThisLabel.FindElement(By.XPath(".//../input"));
+						if (!thisInput.Selected)
+						{
+							thisInput.Click();
+						}
+					}
+					else
+					{
+						throw new Exception("Label for: " + value + " could not be found");
+					}
+				}
+				else
+				{
+					throw new Exception("Label TDG could not be found");
+				}
+			}
+		}
 		public List<KeyValuePair<int, string>> TableHeaders(IWebElement table)
 		{
 			List<KeyValuePair<int, string>> th = new EditableList<KeyValuePair<int, string>>();

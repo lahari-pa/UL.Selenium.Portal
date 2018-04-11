@@ -82,7 +82,7 @@ And in the New Product page I click Continue
 
 #################### Coralie 11/4/2018: Clicking add a retailer step no longer necessary because it automatically opens on clicking continue
 #Select any retailer except for O'Reilly, Sears/K-Mart or Wal-Mart/SAM's CLUB because choosing any of these retailers will cause the Select Vendor drop down to display
-I should see the Select Retailers pop up
+And I should see the Select Retailers pop up
 
 # Click Add UPC button
 # Enter UPC Number

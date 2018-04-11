@@ -325,6 +325,61 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Given(@"in the Product Characteristics tab of the New Product Page for DOT I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTISelect(string option)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+				"Product characteristics tab is loaded.");
+
+			selNewProduct.DOT = option;
+
+			Report.IsTrue(selNewProduct.DOT == option,
+				"Failed to set battery packaged option: " + option,
+				"Successfully set battery packaged option: " + option);
+		}
+
+		[Given(@"in the Product Characteristics tab of the New Product Page for IMDG I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIMDGISelect(string option)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+				"Product characteristics tab is loaded.");
+
+			selNewProduct.IMDG = option;
+
+			Report.IsTrue(selNewProduct.IMDG == option,
+				"Failed to set battery packaged option: " + option,
+				"Successfully set battery packaged option: " + option);
+		}
+
+		[Given(@"in the Product Characteristics tab of the New Product Page for IATA I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIATAISelect(string option)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+				"Product characteristics tab is loaded.");
+
+			selNewProduct.IATA = option;
+
+			Report.IsTrue(selNewProduct.IATA == option,
+				"Failed to set battery packaged option: " + option,
+				"Successfully set battery packaged option: " + option);
+		}
+
+		[Given(@"in the Product Characteristics tab of the New Product Page for TDG I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForTDGISelect(string option)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+				"Product characteristics tab is loaded.");
+
+			selNewProduct.TDG = option;
+
+			Report.IsTrue(selNewProduct.TDG == option,
+				"Failed to set battery packaged option: " + option,
+				"Successfully set battery packaged option: " + option);
+		}
 
 		[Given(@"in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIndicateHowBatteryIsPackagedISelectX(string option)
@@ -336,13 +391,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 					"Product characteristics tab is loaded.");
 
-
 				selNewProduct.IndicateHowBatteryIsPackaged = option;
 
 				Report.IsTrue(selNewProduct.IndicateHowBatteryIsPackaged == option,
 					"Failed to set battery packaged option: " + option,
 					"Successfully set battery packaged option: " + option);
-
 
 			}
 			catch (Exception ex)
