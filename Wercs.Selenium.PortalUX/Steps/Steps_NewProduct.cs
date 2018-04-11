@@ -236,6 +236,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I should see the (.*) Page")]
+		public void GivenIShouldSeeXPage(string pageShouldSee)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the " + pageShouldSee + " Page");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForSection(pageShouldSee), pageShouldSee + " is not showing",
+					pageShouldSee + " is showing as expected");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[Given(@"I should see the Additional Information Page")]
 		public void GivenIShouldSeeTheAdditionalInformationPage()
 		{
@@ -243,7 +260,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForAdditionalProductInformation(), "Additional product information is not showing",
+				Report.IsTrue(selNewProduct.WaitForSection("Additional Product Information"), "Additional product information is not showing",
 					"The additional product information page is showing as expected");
 			}
 			catch (Exception ex)
@@ -272,6 +289,69 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[Given(@"in the Product Characteristics tab of the New Product Page I add the following batteries:")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIAddTheFollowingBatteries(TechTalk.SpecFlow.Table table)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page I add the following batteries:");
+			try
+			{
+				List<Battery> ListOfBatteries= new List<Battery>();
+				//| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+				foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+				{
+					Battery thisBattery = new Battery(thisRow["Battery Type"], thisRow["Manufacturer"],
+						Convert.ToInt16(thisRow["Number of batteries per package"].Trim()), Convert.ToInt16( thisRow["How many batteries required to run"].Trim()));
+					ListOfBatteries.Add(thisBattery);
+				}
+				var selNewProduct = new NewProduct();
+
+				if (ListOfBatteries.Count > 0)
+				{
+					selNewProduct.Batteries = ListOfBatteries;
+					selNewProduct.DeleteEmptyBatteryRows();
+				}
+				else
+				{
+					throw new Exception("There are no batteries to set");
+				}
+				
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+		[Given(@"in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIndicateHowBatteryIsPackagedISelectX(string option)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: " + option);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+					"Product characteristics tab is loaded.");
+
+
+				selNewProduct.IndicateHowBatteryIsPackaged = option;
+
+				Report.IsTrue(selNewProduct.IndicateHowBatteryIsPackaged == option,
+					"Failed to set battery packaged option: " + option,
+					"Successfully set battery packaged option: " + option);
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 		[Given(@"in the Product Characteristics tab of the New Product Page, for U\.S\. Toxic Substances Control Act \(TSCA\) status I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForU_S_ToxicSubstancesControlActTSCAStatusISelectOption(string option)
@@ -328,6 +408,61 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I set all the metal presence value to: (Yes|No)")]
+		public void GivenISetAllTheMetalPresenceValueTo(string noOrYes)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I set all the metal presence value to:: " + noOrYes);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForMetalSection(30), "Metal section has failed to load.",
+					"Metal section has loaded");
+				List<string> Metals = selNewProduct.GetAllMetalNames();
+				List<MetalPresence> ListOfMetalSettings = new List<MetalPresence>();
+				foreach (string thisMetal in Metals)
+				{
+					ListOfMetalSettings.Add(new MetalPresence(thisMetal, "No"));
+				}
+
+				selNewProduct.MetalPresence = ListOfMetalSettings;
+
+				var CheckOutcome = selNewProduct.MetalPresence;
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+		[StepDefinition(@"In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP; Report is available I select: (No|Yes)")]
+		public void GivenInTheToxicityCharacteristicsLeachingProcedurePageForProductHasHadTCLPReportIsAvailableISelect(string noOrYes)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP; Report is available I select: " + noOrYes);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product Characteristics tab has not loaded",
+					"Product Characteristics tab is loaded.");
+
+				bool Expected = (noOrYes == "Yes");
+				selNewProduct.ProductHasTCLP = Expected;
+
+				Report.IsTrue(selNewProduct.ProductHasTCLP == Expected,
+					"Failed to set Product has had TCLP: " + noOrYes,
+					"Successfully set Product has had TCLP: " + noOrYes);
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 
 
 		[Given(@"In the Additional Information Page for Product is retailers private label or brand I select: (No|Yes)")]
@@ -358,7 +493,63 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"in the Product Characteristics tab of the New Product Page for Prop(.*) I select: (No|Yes)")]
+		[Given(@"in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: (No|Yes)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForHasALCDOrPlasmaDisplayISelectNoOrYes(string noOrYes)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: " + noOrYes);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+					"Product characteristics tab is loaded.");
+
+				bool Expected = (noOrYes == "Yes");
+
+				selNewProduct.HasLCDOrPlasmaDisplay = Expected;
+
+				Report.IsTrue(selNewProduct.HasLCDOrPlasmaDisplay == Expected,
+					"Failed to set Has a LCD or Plasma Display value to: " + noOrYes,
+					"Successfully set Has a LCD or Plasma Display value to: " + noOrYes);
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+		[Given(@"in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: (No|Yes)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForContainsCircuitBoardISelectNoOrYes(string noOrYes)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: " + noOrYes);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+					"Product characteristics tab is loaded.");
+
+				bool Expected = (noOrYes == "Yes");
+
+				selNewProduct.ContainsCircuitBoard = Expected;
+
+				Report.IsTrue(selNewProduct.ContainsCircuitBoard == Expected,
+					"Failed to set Contains Circuit Board value to: " + noOrYes,
+					"Successfully set Contains Circuit Board value to: " + noOrYes);
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+		[Given(@"in the Product Characteristics tab of the New Product Page for Prop65 I select: (No|Yes)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForPropISelectNoOrYes(string noOrYes)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Prop65 I select: " + noOrYes);
