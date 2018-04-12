@@ -10,7 +10,7 @@
 Feature: Product Registration
 
 Background:
-Given I login into the WERCSmart Portal - Administrator Role
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Scenario: [31343] New Product screen navigation
 Then I click the Register New Product icon in the Navigation Pane
@@ -37,7 +37,7 @@ And I should see the header New Product
 Given I click the Register New Product icon in the Navigation Pane
 When I click continue
 
-Scenario: [63750] New Product - BCP
+Scenario: [63705] New Product - BCP
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
@@ -82,8 +82,9 @@ And in the New Product page I click Continue
 
 #################### Coralie 11/4/2018: Clicking add a retailer step no longer necessary because it automatically opens on clicking continue
 #Select any retailer except for O'Reilly, Sears/K-Mart or Wal-Mart/SAM's CLUB because choosing any of these retailers will cause the Select Vendor drop down to display
-And I should see the Select Retailers pop up
-
+Given the 'Select Retailers' window appears
+Then I select the retailer: Target in the 'Select Retailers' window
+And in the New Product page I click Continue
 # Click Add UPC button
 # Enter UPC Number
 # Select any option from the Type drop down

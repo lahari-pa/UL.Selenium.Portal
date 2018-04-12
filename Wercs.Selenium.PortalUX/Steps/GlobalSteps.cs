@@ -22,7 +22,7 @@ namespace WERCSmart
 	{
 		[StepDefinition(@"I login into the WERCSmart Portal - Administrator Role")]
 		[StepDefinition(@"I login as the administrator")]
-		[Given(@"I login as the administrator")]
+		[StepDefinition(@"I login as the administrator")]
 		[When(@"I login as the administrator")]
 		[Then(@"I login as the administrator")]
 		public void GivenILoginAsTheAdministrator()

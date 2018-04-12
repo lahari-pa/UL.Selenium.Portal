@@ -5,7 +5,6 @@ using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -17,10 +16,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the following option (.*)")]
 		public void ThenIShouldSeeTheFollowingOption(string option)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that the option " + option + " is showing");
+			TestReport.BeginTestModule(GlobalParameters.StepCount,"Checking that the option " + option + " is showing");
 			try
 			{
-				Report.Info("Checking that the option " + option + " is showing");
 				var selUlSolutionCenter = new UlSolutionCenter();
 
 				if (!selUlSolutionCenter.Wait_for_load(10))
@@ -28,8 +26,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 					throw new Exception("Page failed to load!");
 				}
 
-
 				var optionShowing = selUlSolutionCenter.OptionShowing();
+
+				Report.IsTrue(optionShowing.Contains(option.Trim()),
+					"Option: " + option + " was not showing in the list of options! Options showing were: " + string.Join(", ", optionShowing),
+					"Option: " + option + " was showing correctly in the list of options!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)

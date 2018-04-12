@@ -83,7 +83,7 @@ namespace Wercs.Selenium.PortalUX.Features
         {
 #line 12
 #line 13
-testRunner.Given("I login into the WERCSmart Portal - Administrator Role", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
@@ -156,10 +156,10 @@ testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[63750] New Product - BCP")]
-        public virtual void _63750NewProduct_BCP()
+        [NUnit.Framework.DescriptionAttribute("[63705] New Product - BCP")]
+        public virtual void _63705NewProduct_BCP()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63750] New Product - BCP", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63705] New Product - BCP", ((string[])(null)));
 #line 40
 this.ScenarioSetup(scenarioInfo);
 #line 12
@@ -268,7 +268,11 @@ testRunner.And("in the Product Characteristics tab of the New Product Page for T
 #line 80
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 85
-testRunner.And("I should see the Select Retailers pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 86
+testRunner.Then("I select the retailer: Target in the \'Select Retailers\' window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 87
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

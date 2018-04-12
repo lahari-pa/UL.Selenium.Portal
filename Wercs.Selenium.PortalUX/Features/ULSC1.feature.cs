@@ -98,17 +98,64 @@ namespace Wercs.Selenium.PortalUX.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[33001] WERCSLink button navigation")]
-        public virtual void _33001WERCSLinkButtonNavigation()
+        [NUnit.Framework.DescriptionAttribute("[33001] Navigation links - ULSC - Data Management")]
+        public virtual void _33001NavigationLinks_ULSC_DataManagement()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[33001] WERCSLink button navigation", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[33001] Navigation links - ULSC - Data Management", ((string[])(null)));
 #line 22
 this.ScenarioSetup(scenarioInfo);
 #line 19
 this.FeatureBackground();
 #line 23
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 24
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 25
+testRunner.And("I should see ULSC - Data Management in the navigation bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 26
+testRunner.Then("I click the ULSC - Data Management icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 27
+testRunner.And("I switch to the tab: https://wps.thewercs.com/dbSplit/PROD/Wercs.SHA.MVCWebV1/ULS" +
+                    "C/Studio?module=1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
+testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[32996] ULSC - Data Management - User does not have access to Studio")]
+        public virtual void _32996ULSC_DataManagement_UserDoesNotHaveAccessToStudio()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[32996] ULSC - Data Management - User does not have access to Studio", ((string[])(null)));
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 19
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Value"});
+            table1.AddRow(new string[] {
+                        "Email",
+                        "30259FM@sharklasers.com"});
+            table1.AddRow(new string[] {
+                        "Password",
+                        "T5$wbnsmsubhqn"});
+#line 33
+testRunner.Given("I define the user: ULSCNoStudio with the following parameters:", ((string)(null)), table1, "Given ");
+#line 38
+testRunner.Given("I login as user: ULSCNoStudio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 39
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 40
+testRunner.And("I should see ULSC - Data Management in the navigation bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+testRunner.Then("I click the ULSC - Data Management icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 42
+testRunner.And("I switch to the tab: https://wps.thewercs.com/dbSplit/PROD/Wercs.SHA.MVCWebV1/ULS" +
+                    "C/Studio?module=1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 44
 testRunner.And("UNDER DEVELOPMENT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

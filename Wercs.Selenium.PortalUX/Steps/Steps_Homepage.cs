@@ -656,7 +656,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"I click on Close in the shopping cart")]
+		[StepDefinition(@"I click on Close in the shopping cart")]
 		public void GivenIClickOnCloseInTheShoppingCart()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click on Close in the shopping cart");
@@ -678,7 +678,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		[When(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		[Then(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
-		[Given(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
+		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		public void ClickItemInNavigationPanel(string item)
 		{

@@ -44,10 +44,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				.FirstOrDefault().ClickWithScroll();
 		}
 
-		public void clickDone()
+		public bool clickDone()
 		{
-			containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]"))
-				.FirstOrDefault().ClickWithScroll();
+			try
+			{
+				containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]"))
+					.FirstOrDefault().ClickWithScroll();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+			
 		}
 	}
 }

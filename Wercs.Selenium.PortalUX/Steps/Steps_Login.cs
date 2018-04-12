@@ -11,7 +11,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 	[Binding, Scope(Tag = "Login")]
 	class StepsLogin
 	{
-		[Given(@"I click on the Forgot Your Password Link")]
+		[StepDefinition(@"I click on the Forgot Your Password Link")]
 		[When(@"I click on the Forgot Your Password Link")]
 		[Then(@"I click on the Forgot Your Password Link")]
 		[StepDefinition(@"I click on the Forgot Your Password Link")]

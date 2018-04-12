@@ -70,7 +70,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"I generate a new email address for user saved as (.*)")]
+		[StepDefinition(@"I generate a new email address for user saved as (.*)")]
 		public void GivenIGenerateANewEmailAddressForUser(string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I generate a new email address for user saved as " + savedAs);

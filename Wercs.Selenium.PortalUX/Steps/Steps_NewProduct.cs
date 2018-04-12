@@ -202,7 +202,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"I Select the Create a New Registration radio button")]
+		[StepDefinition(@"I Select the Create a New Registration radio button")]
 		public void GivenISelectTheCreateANewRegistrationRadioButton()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I Select the Create a New Registration radio button");
@@ -219,28 +219,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"in the New Product page I click Continue")]
+		[StepDefinition(@"in the New Product page I click Continue")]
 		public void GivenInTheNewProductPageIClickContinue()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the New Product page I click Continue");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
-				selNewProduct.ClickContinue();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
+			selNewProduct.ClickContinue();
 		}
 
-		[Given(@"I should see the Select Retailers pop up")]
+		[StepDefinition(@"I should see the Select Retailers pop up")]
+		[StepDefinition(@"the 'Select Retailers' window appears")]
 		public void GivenIShouldSeeTheSelectRetailersPopUp()
 		{
 			var selSelectRetailers = new SelectRetailers();
 			Report.IsTrue(selSelectRetailers.Wait_for_load(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
+		}
+
+		[StepDefinition(@"I select the retailer: (.*) in the 'Select Retailers' window")]
+		public void ThenISelectTheRetailer_InTheWindow(string retailer)
+		{
+			var selectRetailers = new SelectRetailers();
+			Report.IsTrue(selectRetailers.selectRetailer(retailer), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
+			Report.IsTrue(selectRetailers.clickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
 		}
 
 
@@ -261,7 +261,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"I should see the Additional Information Page")]
+		[StepDefinition(@"I should see the Additional Information Page")]
 		public void GivenIShouldSeeTheAdditionalInformationPage()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the New Product page I click Continue");
@@ -279,7 +279,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Product Name text field")]
+		[StepDefinition(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Product Name text field")]
 		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheProductNameTextField(string productName)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Type tab of the New Product Page, I enter: " + productName + " in the Product Name text field");
@@ -298,7 +298,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"in the Product Characteristics tab of the New Product Page I add the following batteries:")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page I add the following batteries:")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIAddTheFollowingBatteries(TechTalk.SpecFlow.Table table)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page I add the following batteries:");
@@ -333,7 +333,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"in the Product Characteristics tab of the New Product Page for DOT I select: (.*)")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for DOT I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTISelect(string option)
 		{
 			var selNewProduct = new NewProduct();
@@ -347,7 +347,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set battery packaged option: " + option);
 		}
 
-		[Given(@"in the Product Characteristics tab of the New Product Page for IMDG I select: (.*)")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for IMDG I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIMDGISelect(string option)
 		{
 			var selNewProduct = new NewProduct();
@@ -361,7 +361,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set battery packaged option: " + option);
 		}
 
-		[Given(@"in the Product Characteristics tab of the New Product Page for IATA I select: (.*)")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for IATA I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIATAISelect(string option)
 		{
 			var selNewProduct = new NewProduct();
@@ -375,7 +375,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set battery packaged option: " + option);
 		}
 
-		[Given(@"in the Product Characteristics tab of the New Product Page for TDG I select: (.*)")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for TDG I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForTDGISelect(string option)
 		{
 			var selNewProduct = new NewProduct();
@@ -389,7 +389,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set battery packaged option: " + option);
 		}
 
-		[Given(@"in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: (.*)")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIndicateHowBatteryIsPackagedISelectX(string option)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: " + option);
@@ -414,7 +414,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"in the Product Characteristics tab of the New Product Page, for U\.S\. Toxic Substances Control Act \(TSCA\) status I select: (.*)")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for U\.S\. Toxic Substances Control Act \(TSCA\) status I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForU_S_ToxicSubstancesControlActTSCAStatusISelectOption(string option)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: " + option);
@@ -441,7 +441,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"In the Additional Information Page for Product is solely for the Retailer's use I select: (No|Yes)")]
+		[StepDefinition(@"In the Additional Information Page for Product is solely for the Retailer's use I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsSolelyForTheRetailerSUseISelectNoOrYes(string noOrYes)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page for Product is solely for the Retailer's use I select: " + noOrYes);
@@ -534,7 +534,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 
-		[Given(@"In the Additional Information Page for Product is retailers private label or brand I select: (No|Yes)")]
+		[StepDefinition(@"In the Additional Information Page for Product is retailers private label or brand I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsRetailersPrivateLabelOrBrandISelectNoOrYes(string noOrYes)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page for Product is retailers private label or brand I select: " + noOrYes);
@@ -562,7 +562,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: (No|Yes)")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: (No|Yes)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForHasALCDOrPlasmaDisplayISelectNoOrYes(string noOrYes)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: " + noOrYes);
@@ -590,7 +590,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: (No|Yes)")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: (No|Yes)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForContainsCircuitBoardISelectNoOrYes(string noOrYes)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: " + noOrYes);
@@ -618,7 +618,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"in the Product Characteristics tab of the New Product Page for Prop65 I select: (No|Yes)")]
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Prop65 I select: (No|Yes)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForPropISelectNoOrYes(string noOrYes)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Prop65 I select: " + noOrYes);
@@ -648,7 +648,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 
-		[Given(@"In the Additional Information Page for Product is shipped directly I select: (No|Yes)")]
+		[StepDefinition(@"In the Additional Information Page for Product is shipped directly I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsShippedDirectlyISelectNoOrYes(string noOrYes)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page for Product is shipped directly I select: " + noOrYes);
@@ -677,7 +677,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"In the Additional Information Page the check box for: (.*) should be: (checked|unchecked)")]
+		[StepDefinition(@"In the Additional Information Page the check box for: (.*) should be: (checked|unchecked)")]
 		public void GivenInTheAdditionalInformationPageTheCheckBoxXShouldBeCheckedOrUnchecked(string country, string checkedOrUnchecked)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page the check box for: " + country + " should be: " + checkedOrUnchecked);
@@ -711,7 +711,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Type of Product select field")]
+		[StepDefinition(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Type of Product select field")]
 		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(string typeOfProduct)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Type tab of the New Product Page, I enter: " + typeOfProduct + " in the Type of Product select field");

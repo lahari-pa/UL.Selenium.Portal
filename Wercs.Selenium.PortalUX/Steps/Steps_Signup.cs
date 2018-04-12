@@ -95,7 +95,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"I create a user from the ResourcePool: (.*)")]
+		[StepDefinition(@"I create a user from the ResourcePool: (.*)")]
 		public void GivenICreateAUserFromTheResourcePool(string identifier)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I create a user from the ResourcePool: " + identifier);
@@ -501,31 +501,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 					}
 				}
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+
 				if (EmailFunctions.WaitForInboxDifferences(user.Email))
 				{
-					var differences = EmailFunctions.GetInboxDifferences(user.Email);
-					var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom && x.Subject == title);
-
-					if (shouldOrNot == "should")
-					{
-						Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has been found.");
-					}
-					else
-					{
-						Report.IsTrue(matchingEmail == null, "A matching email has been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has not been found.");
-					}
-
-					if (matchingEmail != null)
-					{
-						using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
-						{
-							sw.Write(matchingEmail.Html.Body);
-							sw.Flush();
-							sw.Close();
-						}
-					}
-
-					Context.AddToContext("Matching", matchingEmail);
+					checkForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 				}
 				else
 				{
@@ -535,6 +514,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 					}
 					else
 					{
+						// Try once more just in case there is a delay in recieving the email
+						Report.Info("Email did not arrive on first attempt, so trying again...");
+						int i = 0;
+						while (i < 5)
+						{
+							Report.Info("Attempt: " + (i+1));
+							if (EmailFunctions.WaitForInboxDifferences(user.Email))
+							{
+								checkForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+								return;
+							}
+
+							i++;
+						}
+
 						throw new Exception("Expected email did not arrive");
 					}
 
@@ -545,6 +539,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+
+		public void checkForEmailDifferences(WERCSmartUser user, string emailFrom, string title, bool should = true)
+		{
+			var differences = EmailFunctions.GetInboxDifferences(user.Email);
+			var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom && x.Subject == title);
+
+			if (should)
+			{
+				Report.IsTrue(matchingEmail != null, "A matching email has not been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has been found.");
+			}
+			else
+			{
+				Report.IsTrue(matchingEmail == null, "A matching email has been found.", "Email with subject: " + matchingEmail.Subject + " and body: " + matchingEmail.Text + " has not been found.");
+			}
+
+			if (matchingEmail != null)
+			{
+				using (var sw = new StreamWriter(@"C:\temp\testemail.html"))
+				{
+					sw.Write(matchingEmail.Html.Body);
+					sw.Flush();
+					sw.Close();
+				}
+			}
+
+			Context.AddToContext("Matching", matchingEmail);
 		}
 
 		[StepDefinition(@"the email should contain a link to set up the WERCSmart account")]
@@ -709,7 +731,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"If terms of use page appears I accept")]
+		[StepDefinition(@"If terms of use page appears I accept")]
 		public void GivenIfTermsOfUsePageAppearsIAccept()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- If terms of use page appears I accept");

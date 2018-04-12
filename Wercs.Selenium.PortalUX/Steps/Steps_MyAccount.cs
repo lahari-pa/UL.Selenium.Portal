@@ -91,7 +91,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"I navigate to the MyAccount page")]
+		[StepDefinition(@"I navigate to the MyAccount page")]
 		public void GivenINavigateToTheMyAccountPage()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I navigate to the MyAccount page");
@@ -107,7 +107,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"I save all the users in the User Grid")]
+		[StepDefinition(@"I save all the users in the User Grid")]
 		public void GivenISaveAllTheUsersInTheUserGrid()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I save all the users in the User Grid");
@@ -160,7 +160,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"I go to (.*) in User Grid for the current user")]
+		[StepDefinition(@"I go to (.*) in User Grid for the current user")]
 		public void GivenIGoToActionInUserGrid(string action)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I go to " + action + " in User Grid");
@@ -186,7 +186,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"In the UserDetails screen I save the current User as: (.*)")]
+		[StepDefinition(@"In the UserDetails screen I save the current User as: (.*)")]
 		public void GivenInTheUserDetailsScreenISaveTheCurrentUserAs(string saveAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails screen I save the current User as: " + saveAs);
@@ -215,7 +215,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"In the UserDetails page I set Name to be: (.*)")]
+		[StepDefinition(@"In the UserDetails page I set Name to be: (.*)")]
 		public void GivenInTheUserDetailsPageISetNameToBe(string name)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails page I set Name to be: " + name);
@@ -241,7 +241,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"In the UserDetails page I click (.*)")]
+		[StepDefinition(@"In the UserDetails page I click (.*)")]
 		public void GivenInTheUserDetailsPageIClick(string buttonToClickText)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails page I click " + buttonToClickText);
@@ -263,7 +263,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"I click Save in My Account")]
+		[StepDefinition(@"I click Save in My Account")]
 		public void GivenIClickSaveInMyAccount()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Save in My Account");

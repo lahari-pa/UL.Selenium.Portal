@@ -4,7 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using Castle.Components.DictionaryAdapter;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
+using ResourcePool;
 using SeleniumUtilities;
 
 
@@ -960,39 +963,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				foreach (MetalPresence thisMetal in value)
 				{
-					var MetalLabel = Header.FindElements(By.XPath("../../following-sibling::div//div[@class='radio']/../preceding-sibling::div/label")).FirstOrDefault(x=>x.Text==thisMetal.Metal);
-					MetalLabel.ScrollElementIntoView();
-					MetalLabel.ClickWithScroll();
-					var InputLabel = MetalLabel.FindElements(By.XPath("../..//input/../span"))
-						.FirstOrDefault(x => x.Text == thisMetal.Presence);
+					var MetalLabel = Header.FindElements(By.XPath("../../following::div//label[@class='control-label']")).FirstOrDefault(x=>x.GetValue().Trim()==thisMetal.Metal);
+					var InputLabel = MetalLabel.FindElements(By.XPath("../..//input/../span")).FirstOrDefault(x => x.Text == thisMetal.Presence);
 
 					if (InputLabel != null)
 					{
-						var MetalInput = InputLabel.FindElement(By.XPath("../input"));
-						if (InputLabel != null)
+						try
 						{
-							try
-							{
-								SafewareReporting.Report.Info("Attempting to set metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
-								MetalInput.ClickWithScroll();
-								Delay.Seconds(1);
-								if (!MetalInput.Selected)
-								{
-									MetalInput.Click();
-								}
-
-								SafewareReporting.Report.Screenshot();
-							}
-							catch (Exception e)
-							{
-								SafewareReporting.Report.Error("Failed to click metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
-								throw;
-							}
-							
+							var MetalInput = InputLabel.FindElement(By.XPath("../input"));
+							SafewareReporting.Report.Info("Attempting to set metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
+							MetalInput.TryClick();
 						}
-						else
+						catch (Exception e)
 						{
-							throw new Exception("Cannot find input for: " + thisMetal.Presence);
+							SafewareReporting.Report.Error("Failed to click metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
+							throw;
 						}
 					}
 					else
