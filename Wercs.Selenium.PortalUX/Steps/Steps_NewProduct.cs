@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using iTextSharp.text;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -687,6 +688,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"In the Additional Information Page for Product has been classified using OSHA I select: (No|Yes)")]
+		public void GivenInTheAdditionalInformationPageForProductHasBeenClassifiedOSHAISelectNoOrYes(string noOrYes)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Type"),
+				"Product type has not loaded",
+				"Product type tab is loaded.");
+
+			bool expected = (noOrYes == "Yes");
+			
+			selNewProduct.ProductClassifiedUnderOSHA = expected;
+
+			Report.IsTrue(selNewProduct.ProductClassifiedUnderOSHA == expected,
+				"Failed to set product has been classified using OSHA value to: " + noOrYes,
+				"Successfully set product has been classified using OSHA value to: " + noOrYes);
+		}
+
 
 		[StepDefinition(@"In the Additional Information Page the check box for: (.*) should be: (checked|unchecked)")]
 		public void GivenInTheAdditionalInformationPageTheCheckBoxXShouldBeCheckedOrUnchecked(string country, string checkedOrUnchecked)
@@ -725,19 +743,39 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Type of Product select field")]
 		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(string typeOfProduct)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Type tab of the New Product Page, I enter: " + typeOfProduct + " in the Type of Product select field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded", "Product type tab is loaded.");
-				selNewProduct.ProductType = typeOfProduct;
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded", "Product type tab is loaded.");
+			selNewProduct.ProductType = typeOfProduct;
+		}
 
-			}
-			catch (Exception ex)
+		[StepDefinition(@"I should only see the following options for Primary Physical State:")]
+		public void PrimaryPhysicalOptionsShowingCorrectly(Table expected)
+		{
+			var found = new NewProduct().ListOfPrimaryPhysicalStates();
+			Report.Info("Primary Physical States found: " + string.Join(", ", found));
+
+			foreach (var row in expected.Rows)
 			{
-				Report.Failure(ex.Message);
-				throw;
+				if (Report.IsTrue(found.Contains(row["State"]), "Failed to find state: " + row["State"] + " in the list!", row["State"] + " was successfully found!"))
+				{
+					found.Remove(row["State"]);
+				}
 			}
+
+			Report.IsTrue(found.Count == 0, "Not all Physical States were found! Remaining were: " + string.Join(", ", found), "All primary physical states were found successfully!");
+		}
+
+		[StepDefinition(@"I set the Secondary Physical State to be: (.*)")]
+		public void ThenISetTheSecondaryPhysicalStateToBe(string state)
+		{
+			Report.IsTrue(new NewProduct().SelectSecondaryPhysicalState(state), "Failed to set the secondary physicla state to be: " + state, "Successfully set the Secondary Physical State to be: " + state);
+		}
+
+		[StepDefinition(@"I set the water mixture question to: (Yes|No)")]
+		public void ThenISetTheWaterMixtureQuestionTo(string option)
+		{
+			new NewProduct().SetWaterSolutionQuestion = (option == "Yes");
+			Report.Success("Set water mixture question to: " + option);
 		}
 
 
@@ -831,7 +869,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().ClickSummaruButtonInDataAcceptance(), "Failed to click the Summary button!", "Successfully clicked the Summary button!");
 		}
 
+		[StepDefinition(@"I add the following ingredients:")]
+		public void AddIngredients(Table ingredientInformation)
+		{
+			var Ingredients = ingredientInformation.CreateSet<Ingredient>();
 
+			foreach (var item in Ingredients)
+			{
+				Report.IsTrue(new NewProduct().AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber==""?item.ComponentName:item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
+			}
+		}
 
 
 
