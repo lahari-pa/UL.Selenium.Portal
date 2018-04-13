@@ -12,7 +12,7 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 namespace Wercs.Selenium.PortalUX.Steps
 {
 	[Binding, Scope(Tag = "SubEnrollment")]
-	class Steps_SubscriptionEnrollment
+	class StepsSubscriptionEnrollment
 	{
 
 
@@ -24,15 +24,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				var mySub = new SubscriptionEnrollment();
 
-				foreach (var ThisRow in table.Rows)
+				foreach (var thisRow in table.Rows)
 				{
-					string articles = ThisRow["Articles"];
-					string en_articles = ThisRow["Enhanced Articles"];
-					string form_prods = ThisRow["Formulated Products"];
-					string feature_plan = ThisRow["Feature Plan"];
-					string services_plan = ThisRow["Support Services Plan"];
+					string articles = thisRow["Articles"];
+					string enArticles = thisRow["Enhanced Articles"];
+					string formProds = thisRow["Formulated Products"];
+					string featurePlan = thisRow["Feature Plan"];
+					string servicesPlan = thisRow["Support Services Plan"];
 
-					Report.IsTrue(mySub.Select_Enrollment_Options(articles, en_articles, form_prods, feature_plan, services_plan),
+					Report.IsTrue(mySub.Select_Enrollment_Options(articles, enArticles, formProds, featurePlan, servicesPlan),
 						"Failed to Select Enrollment Options", "Enrollment Options Selected");
 				}
 
@@ -69,19 +69,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the chosen options and body text are correct");
 			try
 			{
-				var mySubDlg = new SubscriptionEnrollment_Dlg();
+				var mySubDlg = new SubscriptionEnrollmentDlg();
 
-				foreach (var ThisRow in table.Rows)
+				foreach (var thisRow in table.Rows)
 				{
-					string articles = ThisRow["Articles"];
-					string en_articles = ThisRow["Enhanced Articles"];
-					string form_prods = ThisRow["Formulated Products"];
-					string feature_plan = ThisRow["Feature Plan"];
-					string services_plan = ThisRow["Support Services Plan"];
-					string body_text = ThisRow["Body Text"];
+					string articles = thisRow["Articles"];
+					string enArticles = thisRow["Enhanced Articles"];
+					string formProds = thisRow["Formulated Products"];
+					string featurePlan = thisRow["Feature Plan"];
+					string servicesPlan = thisRow["Support Services Plan"];
+					string bodyText = thisRow["Body Text"];
 
-					Report.IsTrue(mySubDlg.Check_Options(feature_plan, articles, en_articles, form_prods, services_plan), "Failed to Check Enrollment Options", "Enrollment Options are Correct");
-					Report.IsTrue(mySubDlg.Subscription_Text(body_text), "Incorrect Subscription Text", "Correct Subscription Text");
+					Report.IsTrue(mySubDlg.Check_Options(featurePlan, articles, enArticles, formProds, servicesPlan), "Failed to Check Enrollment Options", "Enrollment Options are Correct");
+					Report.IsTrue(mySubDlg.Subscription_Text(bodyText), "Incorrect Subscription Text", "Correct Subscription Text");
 
 				}
 
@@ -100,7 +100,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var mySub = new SubscriptionEnrollment();
-				var mySubDlg = new SubscriptionEnrollment_Dlg();
+				var mySubDlg = new SubscriptionEnrollmentDlg();
 				var myPay = new PaymentMethods();
 
 				if (button == "Cancel")

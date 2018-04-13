@@ -25,13 +25,13 @@ namespace Wercs.Selenium.PortalUX.Pages.Account
 		/// <summary>
 		/// Stores the URL path for this page.
 		/// </summary>
-		private const string _url = "Account/Login";
+		private const string Url = "Account/Login";
 
 		/// <summary>
 		/// Gets the URL of this page.
 		/// </summary>
 		/// <returns></returns>
-		public static Uri GetUrl() => new Uri(SeleniumHelper.BaseUrl + _url);
+		public static Uri GetUrl() => new Uri(SeleniumHelper.BaseUrl + Url);
 
 		/// <summary>
 		/// Gets the WercSmart logo text element.
@@ -61,7 +61,7 @@ namespace Wercs.Selenium.PortalUX.Pages.Account
 			this.Driver.WaitForAjaxComplete();
 
 			// Once navigation is complete, either we're on a different page URL or we are still on the same page.
-			if (this.Driver.Url.Contains(_url))
+			if (this.Driver.Url.Contains(Url))
 			{
 				e.EventReturn = new LoginPage(this.Driver);
 			}

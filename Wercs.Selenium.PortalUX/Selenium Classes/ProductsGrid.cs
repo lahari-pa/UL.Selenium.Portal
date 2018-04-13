@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using SafewareReporting;
 using SeleniumUtilities;
 
 
@@ -108,6 +109,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2) != null;
 		}
 
+		public bool ClickMoreFilers()
+		{
+			return containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2).TryClick();
+		} 
+
 		public bool ProductIdNameFieldPresent()
 		{
 			return this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2) != null;
@@ -147,12 +153,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		public string ProductIdField {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2).Text; }
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2).GetValue(); }
 			set
 			{
 				var el = this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2);
 				el.EnterText(value);
 				el.SendKeys(Keys.Return);
+				GeneralUtilities.Wait_for_load_finish();
 			}
 		}
 
@@ -210,6 +217,105 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			productElement.DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
 			return productElement;
 		}
+
+		public string UpcNumber
+		{
+			get
+			{
+				var el = containerElement.FindElement(By.XPath(".//input[@placeholder='UPC Number']"), 2);
+				return el == null ? "" : el.GetValue();
+			}
+			set
+			{
+				var el = containerElement.FindElement(By.XPath(".//input[@placeholder='UPC Number']"), 2);
+				if (el == null)
+				{
+					Report.Error("UPC Number field could not be found!");
+					return;
+				}
+				el.EnterText(value);
+			}
+		}
+
+		public bool ClickUpcNumberSearchButton()
+		{
+			var el = containerElement.FindElement(By.XPath(".//input[@placeholder='UPC Number']/..//span[contains(@data-bind,'searchProducts')]"), 2);
+			if (el == null)
+			{
+				Report.Error("Search button in UPC Field could not be found!");
+				return false;
+			}
+
+			return el.TryClick();
+		}
+
+		public bool ClickProductIdNameSearchButton()
+		{
+			var el = containerElement.FindElement(By.XPath(".//input[@placeholder='Product ID/ Name']/..//span[contains(@data-bind,'searchProducts')]"), 2);
+			if (el == null)
+			{
+				Report.Error("Search button in UPC Field could not be found!");
+				return false;
+			}
+
+			return el.TryClick();
+		}
+
+		public bool DeleteAllPresentRows()
+		{
+			var rows = containerElement.FindElements(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+			if (rows.Count == 0)
+			{
+				Report.Info("No rows were found to delete!");
+				return true;
+			}
+
+			foreach (var row in rows)
+			{
+				var toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
+				if (toggleButton == null)
+				{
+					continue;
+				}
+
+				if (toggleButton.TryClick())
+				{
+					var deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 2);
+					if (deleteButton.TryClick())
+					{
+						var delDialog = new DeleteDialog();
+						delDialog.Wait_for_load();
+						delDialog.ClickDelete();
+						GeneralUtilities.Wait_for_load_finish();
+					}
+				}
+			}
+
+			return true;
+		}
+
+		public bool DeleteFirstRow()
+		{
+			var row = containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+			
+			var toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
+			
+			if (toggleButton.TryClick())
+			{
+				var deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 2);
+				if (deleteButton.TryClick())
+				{
+					var delDialog = new DeleteDialog();
+					delDialog.Wait_for_load();
+					delDialog.ClickDelete();
+					GeneralUtilities.Wait_for_load_finish();
+				}
+			}
+
+			return true;
+		}
+
+
 	}
 
 	public class ProductGridItem
@@ -283,7 +389,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	/// <summary>
 	/// Bulk Actions - Sync ULSC Products dialog
 	/// </summary>
-	class SyncULSCProductsDialog : BaseObject
+	class SyncUlscProductsDialog : BaseObject
 	{
 		public const string BasePath = "//h3[text()='Sync Products to ULSC']/../..";
 		[FindsBy(How = How.XPath, Using = BasePath)]

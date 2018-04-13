@@ -4,6 +4,8 @@
 @Signup
 @wercsmart
 @NewProduct
+@ProductGrid
+@DataSummarySheet
 @wercsmart
 @run_ProductRegistration
 
@@ -38,6 +40,7 @@ Given I click the Register New Product icon in the Navigation Pane
 When I click continue
 
 Scenario: [63705] New Product - BCP
+Given I delete all products with UPC Number: 630509667031
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
@@ -45,6 +48,7 @@ And in the New Product page I click Continue
 And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Product Name text field
 And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Type of Product select field
 And in the New Product page I click Continue
+Then I save the product information as: TestCase63705
 And I should see the Additional Product Information Page
 And In the Additional Information Page the check box for: United States should be: checked
 And In the Additional Information Page for Product is shipped directly I select: No
@@ -85,7 +89,27 @@ And in the New Product page I click Continue
 Given the 'Select Retailers' window appears
 Then I select the retailer: Target in the 'Select Retailers' window
 And in the New Product page I click Continue
-# Click Add UPC button
+Given I click the 'Add UPC' button
+Then I add the following into the UPC Fields
+| Field         | Value        |
+| UPCNumber     | 630509667031 |
+| ContainerType | Aerosol Can  |
+| Size          | 20           |
+| DPCI          | 087-16-0238  |
+Given in the New Product page I click Continue
+Then the comments field should appear
+And I enter the following into the comments field: Comments Field Text
+Given in the New Product page I click Continue
+Then The Data Acceptance page should appear
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And I should see the following batteries present:
+| BatteryType | Manufacturer                                                                                                                     | NumberPerPackage | RequiredToRun |
+| Lithium Ion | TL-PB10400 by TP-LINK USA Corporation                                                                                            | 4                | 4             |
+| Alkaline    | Alkaline Manganese Button Cell Mercury Free Battery L1028F\L828F\L1325F\L1345F\L1335F\L1315F\L10 by Chung Pak Battery Works Ltd. | 6                | 6             |
+Then I close the Data Summary tab
+Given I navigate to the home page
+Then I delete the product: TestCase63705
 # Enter UPC Number
 # Select any option from the Type drop down
 # Enter the Size

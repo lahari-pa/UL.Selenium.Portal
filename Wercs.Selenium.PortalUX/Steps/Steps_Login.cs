@@ -246,22 +246,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				if (text.Contains("saved as"))
 				{
-					var SavedAsValue = Context.GetFromContext(text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+					var savedAsValue = Context.GetFromContext(text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 
-					if (SavedAsValue == null)
+					if (savedAsValue == null)
 					{
 						throw new Exception("Expected value: " + text.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim() +
 											" was not found in context.");
 					}
 
-					var SavedUser = (ResourcePool.WERCSmartUser)SavedAsValue;
+					var savedUser = (ResourcePool.WERCSmartUser)savedAsValue;
 					switch (inputField)
 					{
 						case ("email"):
-							text = SavedUser.Email;
+							text = savedUser.Email;
 							break;
 						case ("password"):
-							text = SavedUser.Password;
+							text = savedUser.Password;
 							break;
 					}
 

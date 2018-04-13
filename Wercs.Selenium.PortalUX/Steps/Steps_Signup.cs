@@ -106,16 +106,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Context.AddToContext(identifier, account);
 				GivenISaveTheCurrentEmailsInTheInboxFor(identifier);
 
-				StepsLogin MyStepsLogin = new StepsLogin();
-				MyStepsLogin.GivenIClickOnTheNewToWercsmartLink();
+				StepsLogin myStepsLogin = new StepsLogin();
+				myStepsLogin.GivenIClickOnTheNewToWercsmartLink();
 
-				StepsSignup MyStepsSignup = new StepsSignup();
-				MyStepsSignup.ThenTheSignupPageShouldAppear();
+				StepsSignup myStepsSignup = new StepsSignup();
+				myStepsSignup.ThenTheSignupPageShouldAppear();
 
-				MyStepsSignup.GivenIEnterSignupEmailUser(identifier);
-				MyStepsSignup.GivenIConfirmSignupEmailUser(identifier);
+				myStepsSignup.GivenIEnterSignupEmailUser(identifier);
+				myStepsSignup.GivenIConfirmSignupEmailUser(identifier);
 
-				MyStepsSignup.GivenIClickOnSubmit();
+				myStepsSignup.GivenIClickOnSubmit();
 				Delay.Seconds(1);
 				ThenTheSignupThankYouPageShouldAppear();
 				Delay.Seconds(60);
@@ -135,16 +135,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				WhenInTheNewUserFormIClickOnContinue();
 
-				StepsLandingPage MyStepsLandingPage = new StepsLandingPage();
-				MyStepsLandingPage.ClickTheLoginButton();
-				MyStepsLogin.GivenILoginAsUser(identifier);
+				StepsLandingPage myStepsLandingPage = new StepsLandingPage();
+				myStepsLandingPage.ClickTheLoginButton();
+				myStepsLogin.GivenILoginAsUser(identifier);
 				GivenIfTermsOfUsePageAppearsIAccept();
 
-				StepsHomepage MyStepsHomepage = new StepsHomepage();
-				MyStepsHomepage.ThenTheWercSmartHomepageShouldLoad();
+				StepsHomepage myStepsHomepage = new StepsHomepage();
+				myStepsHomepage.ThenTheWercSmartHomepageShouldLoad();
 
-				GlobalSteps MyGlobalSteps = new GlobalSteps();
-				MyGlobalSteps.GivenILogout();
+				GlobalSteps myGlobalSteps = new GlobalSteps();
+				myGlobalSteps.GivenILogout();
 
 				Report.Success("Account details saved!");
 			}
@@ -481,8 +481,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					if (System.Configuration.ConfigurationManager.AppSettings.AllKeys.Contains("SiteType"))
 					{
-						var SiteType = System.Configuration.ConfigurationManager.AppSettings["SiteType"];
-						switch (SiteType.ToLower())
+						var siteType = System.Configuration.ConfigurationManager.AppSettings["SiteType"];
+						switch (siteType.ToLower())
 						{
 							case ("staging"):
 								emailFrom = "ulscn.notifications@ulnotification.com";
@@ -504,7 +504,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				if (EmailFunctions.WaitForInboxDifferences(user.Email))
 				{
-					checkForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+					CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 				}
 				else
 				{
@@ -522,7 +522,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 							Report.Info("Attempt: " + (i+1));
 							if (EmailFunctions.WaitForInboxDifferences(user.Email))
 							{
-								checkForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+								CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 								return;
 							}
 
@@ -542,7 +542,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		public void checkForEmailDifferences(WERCSmartUser user, string emailFrom, string title, bool should = true)
+		public void CheckForEmailDifferences(WERCSmartUser user, string emailFrom, string title, bool should = true)
 		{
 			var differences = EmailFunctions.GetInboxDifferences(user.Email);
 			var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom && x.Subject == title);

@@ -257,11 +257,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				//var myLink = matchingEmail.Html.Links[0].Href;
 				var myLink = matchingEmail.Html.Links.ToList();
 
-				foreach (var Link in myLink)
+				foreach (var link in myLink)
 				{
-					var myFP = new ForgottenPassword();
+					var myFp = new ForgottenPassword();
 
-					if (!myFP.Reset_Password_Link(Link))
+					if (!myFp.Reset_Password_Link(link))
 					{
 						throw new Exception("Failed to Click Reset Password Link");
 					}
@@ -288,8 +288,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Delay.Seconds(5);
 				Report.Info("Expecting confirmation message " + confirmMessage);
-				var sel_forgotpasswordconfirm = new ForgottenPassword();
-				var showing = sel_forgotpasswordconfirm.ForgotPasswordSuccessMessage();
+				var selForgotpasswordconfirm = new ForgottenPassword();
+				var showing = selForgotpasswordconfirm.ForgotPasswordSuccessMessage();
 				Report.IsTrue(confirmMessage == showing, "Success message showing " + showing, "Success message was showing correctly");
 			}
 			catch (Exception ex)
@@ -371,8 +371,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I answer the security questions for Account: " + savedAs);
 			try
 			{
-				var myForgotPW = new ForgottenPassword_Questions();
-				Report.IsTrue(myForgotPW.Forgot_Password_Questions(savedAs), "Failed to Answer Security Questions", "Security Questions Answered Successfully");
+				var myForgotPw = new ForgottenPasswordQuestions();
+				Report.IsTrue(myForgotPw.Forgot_Password_Questions(savedAs), "Failed to Answer Security Questions", "Security Questions Answered Successfully");
 			}
 			catch (Exception ex)
 			{
@@ -382,17 +382,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I enter a new password: (.*) and verify: (.*)")]
-		public void ThenIEnterANewPasswordPasswordAndVerifyPassword(string new_pw, string verify_pw)
+		public void ThenIEnterANewPasswordPasswordAndVerifyPassword(string newPw, string verifyPw)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I answer the security questions");
 			try
 			{
-				var myForgotPW = new ForgottenPassword_Questions();
+				var myForgotPw = new ForgottenPasswordQuestions();
 
-				Report.IsTrue(myForgotPW.New_Password_Form(new_pw, verify_pw), "Failed to Enter New Password and Verify",
+				Report.IsTrue(myForgotPw.New_Password_Form(newPw, verifyPw), "Failed to Enter New Password and Verify",
 					"New Password Entered and Verified");
 
-				ScenarioContext.Current.Add("NewPassword", new_pw);
+				ScenarioContext.Current.Add("NewPassword", newPw);
 
 			}
 			catch (Exception ex)
@@ -408,8 +408,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the Login button");
 			try
 			{
-				var myForgotPW = new ForgottenPassword_Questions();
-				Report.IsTrue(myForgotPW.Login_click(), "Failed to Click Login Button", "Login Button Clicked");
+				var myForgotPw = new ForgottenPasswordQuestions();
+				Report.IsTrue(myForgotPw.Login_click(), "Failed to Click Login Button", "Login Button Clicked");
 			}
 			catch (Exception ex)
 			{

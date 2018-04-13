@@ -10,7 +10,7 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 namespace Wercs.Selenium.PortalUX.Steps
 {
 	[Binding, Scope(Tag = "ULSC")]
-	class StepsULSC
+	class StepsUlsc
 	{
 
 		[StepDefinition(@"I should see the following option (.*)")]

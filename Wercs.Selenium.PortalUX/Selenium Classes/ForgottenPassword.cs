@@ -118,7 +118,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	}
 
-	class ForgottenPassword_Questions : BaseObject
+	class ForgottenPasswordQuestions : BaseObject
 	{
 		public const string BasePath = "//div[@class='login-wrapper register']";
 
@@ -127,45 +127,45 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//Question 1
 		[FindsBy(How = How.Id, Using = "secQuestion1")]
-		private IWebElement _txt_question_one;
+		private IWebElement _txtQuestionOne;
 
-		public bool Enter_Answer_One(string answer_text)
+		public bool Enter_Answer_One(string answerText)
 		{
-			Report.Info("Entering Answer One: " + answer_text);
-			_txt_question_one.EnterText(answer_text);
+			Report.Info("Entering Answer One: " + answerText);
+			_txtQuestionOne.EnterText(answerText);
 			return true;
 		}
 
 		//Question 2
 		[FindsBy(How = How.Id, Using = "secQuestion2")]
-		private IWebElement _txt_question_two;
+		private IWebElement _txtQuestionTwo;
 
-		public bool Enter_Answer_Two(string answer_text)
+		public bool Enter_Answer_Two(string answerText)
 		{
-			Report.Info("Entering Answer One: " + answer_text);
-			_txt_question_two.EnterText(answer_text);
+			Report.Info("Entering Answer One: " + answerText);
+			_txtQuestionTwo.EnterText(answerText);
 			return true;
 		}
 
 		//Cancel Button
 		[FindsBy(How = How.Id, Using = "carouselContinue")]
-		private IWebElement _btn_cancel;
+		private IWebElement _btnCancel;
 
 		public bool Cancel_click()
 		{
 			Report.Info("Attempting to Click Cancel Button");
-			_btn_cancel.Click();
+			_btnCancel.Click();
 			return true;
 		}
 
 		//Continue Button
 		[FindsBy(How = How.Id, Using = "carouselContinue")]
-		private IWebElement _btn_continue;
+		private IWebElement _btnContinue;
 
 		public bool Continue_click()
 		{
 			Report.Info("Attempting to Click Continue Button");
-			_btn_continue.Click();
+			_btnContinue.Click();
 			return true;
 		}
 
@@ -295,39 +295,39 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//New Password
 		[FindsBy(How = How.Id, Using = "newPassword")]
-		private IWebElement _txt_new_pw;
+		private IWebElement _txtNewPw;
 
-		public bool Enter_New_Password(string new_pw)
+		public bool Enter_New_Password(string newPw)
 		{
-			Report.Info("Entering New Password: " + new_pw);
-			_txt_new_pw.EnterText(new_pw);
+			Report.Info("Entering New Password: " + newPw);
+			_txtNewPw.EnterText(newPw);
 			return true;
 		}
 
 		//Verify Password
 		[FindsBy(How = How.Id, Using = "verifyPassword")]
-		private IWebElement _txt_verify_pw;
+		private IWebElement _txtVerifyPw;
 
-		public bool Enter_Verify_Password(string verify_pw)
+		public bool Enter_Verify_Password(string verifyPw)
 		{
-			Report.Info("Entering Verify Password: " + verify_pw);
-			_txt_verify_pw.EnterText(verify_pw);
+			Report.Info("Entering Verify Password: " + verifyPw);
+			_txtVerifyPw.EnterText(verifyPw);
 			return true;
 		}
 
-		public bool New_Password_Form(string new_password, string verify_pw)
+		public bool New_Password_Form(string newPassword, string verifyPw)
 		{
-			Report.Info("Beginning New_Password_Form: " + new_password + " / " + verify_pw);
+			Report.Info("Beginning New_Password_Form: " + newPassword + " / " + verifyPw);
 
-			if (!Enter_New_Password(new_password))
+			if (!Enter_New_Password(newPassword))
 			{
-				Report.Info("Failed to Enter New Password: " + new_password);
+				Report.Info("Failed to Enter New Password: " + newPassword);
 				Report.Screenshot();
 				return false;
 			}
-			if (!Enter_Verify_Password(verify_pw))
+			if (!Enter_Verify_Password(verifyPw))
 			{
-				Report.Info("Failed to Enter Verify Password: " + verify_pw);
+				Report.Info("Failed to Enter Verify Password: " + verifyPw);
 				Report.Screenshot();
 				return false;
 			}
@@ -345,12 +345,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//Login Button
 		[FindsBy(How = How.Id, Using = "btnLogin")]
-		private IWebElement _btn_login;
+		private IWebElement _btnLogin;
 
 		public bool Login_click()
 		{
 			Report.Info("Attempting to Click Login Button");
-			_btn_login.Click();
+			_btnLogin.Click();
 			return true;
 		}
 

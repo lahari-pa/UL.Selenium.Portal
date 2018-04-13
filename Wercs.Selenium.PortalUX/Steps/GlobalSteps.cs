@@ -8,6 +8,7 @@ using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using System.IO;
 using System.Linq;
+using OpenQA.Selenium;
 using ResourcePool;
 using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Steps;
@@ -142,7 +143,7 @@ namespace WERCSmart
 
 				var selLogin = new Login();
 				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
-				var username = @"AllRetailersProductsCompany.kxxyxunf@mailosaur.io";
+				var username = @"safewaretestaccount.kxxyxunf@mailosaur.io"; /*@"AllRetailersProductsCompany.kxxyxunf@mailosaur.io";*/
 				var password = "Welcome1!";
 
 				Report.Info("Entering Email: '" + username + "'");
@@ -488,8 +489,8 @@ namespace WERCSmart
 				{
 					if (System.Configuration.ConfigurationManager.AppSettings.AllKeys.Contains("SiteType"))
 					{
-						var SiteType = System.Configuration.ConfigurationManager.AppSettings["SiteType"];
-						switch (SiteType.ToLower())
+						var siteType = System.Configuration.ConfigurationManager.AppSettings["SiteType"];
+						switch (siteType.ToLower())
 						{
 							case ("staging"):
 								emailFrom = "ulscn.notifications@ulnotification.com";
@@ -511,20 +512,20 @@ namespace WERCSmart
 					}
 				}
 
-				var Email = string.Empty;
+				var email = string.Empty;
 				if (savedAs == "ForgotPW_SecQs")
 				{
 					var user = (WERCSmartUser)Context.GetFromContext(savedAs);
-					Email = user.Email;
+					email = user.Email;
 				}
 				else
 				{
-					Email = Context.GetFromContext(savedAs).ToString();
+					email = Context.GetFromContext(savedAs).ToString();
 				}
 
-				if (EmailFunctions.WaitForInboxDifferences(Email))
+				if (EmailFunctions.WaitForInboxDifferences(email))
 				{
-					var differences = EmailFunctions.GetInboxDifferences(Email);
+					var differences = EmailFunctions.GetInboxDifferences(email);
 					Report.Info("Found " + differences.Count() + " emails");
 
 					var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom.ToLower() && x.Subject == title);
@@ -645,8 +646,8 @@ namespace WERCSmart
 			try
 			{
 				Report.Info("Switch to Tab: " + url);
-				var CurrentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-				Context.AddToContext("MainWindowHandle", CurrentHandle);
+				var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
 				var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 				foreach (var handle in allHandles)
 				{
@@ -667,6 +668,33 @@ namespace WERCSmart
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I switch to the Data Summary page")]
+		public void SwitchToDataSumaryTab()
+		{
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h2[text()='Summary']"), 2)!=null)
+				{
+					Report.Success("Tab was switched successfully!");
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab!");
+		}
+
+		[StepDefinition(@"I close the Data Summary tab")]
+		public void CloseDataSummaryTab()
+		{
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			var mainHandle = Context.GetFromContext("MainWindowHandle").ToString();
+			SeleniumBrowser.WebBrowser.Close();
+			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
 		}
 	}
 

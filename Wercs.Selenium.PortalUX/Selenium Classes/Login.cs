@@ -83,21 +83,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
             get { return this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).Text; }
 	        set
 	        {
-				IWebElement PW = this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2);
-		        PW.EnterText(value);
-		        PW.SendKeys(Keys.Tab);
+				IWebElement pw = this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2);
+		        pw.EnterText(value);
+		        pw.SendKeys(Keys.Tab);
 
 	        }
         }
 
         public void Click_Login()
         {
-	        IWebElement LoginButton =
+	        IWebElement loginButton =
 		        this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 2);
 
-	        if (LoginButton != null)
+	        if (loginButton != null)
 	        {
-		        LoginButton.ClickWithScroll();
+		        loginButton.ClickWithScroll();
 			}
 	        else
 	        {

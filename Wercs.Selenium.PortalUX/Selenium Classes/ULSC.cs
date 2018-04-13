@@ -7,7 +7,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class ULSC : BaseObject
+	class Ulsc : BaseObject
 	{
 		protected override IWebElement containerElement { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 	}

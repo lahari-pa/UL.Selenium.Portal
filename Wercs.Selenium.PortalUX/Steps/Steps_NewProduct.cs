@@ -5,7 +5,7 @@ using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-
+using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -239,10 +239,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenISelectTheRetailer_InTheWindow(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();
-			Report.IsTrue(selectRetailers.selectRetailer(retailer), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
-			Report.IsTrue(selectRetailers.clickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
+			Report.IsTrue(selectRetailers.SelectRetailer(retailer), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
+			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
 		}
 
+		[StepDefinition(@"I save the product information as: (.*)")]
+		public void SaveProductInformation(string savedas)
+		{
+			var prodDetails = new NewProduct().GetCurrentProductInformation();
+			Context.AddToContext(savedas, prodDetails);
+			Report.Success("Product Information saved!");
+		}
 
 		[StepDefinition(@"I should see the (.*) Page")]
 		public void GivenIShouldSeeXPage(string pageShouldSee)
@@ -304,19 +311,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page I add the following batteries:");
 			try
 			{
-				List<Battery> ListOfBatteries= new List<Battery>();
+				List<Battery> listOfBatteries= new List<Battery>();
 				//| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
 				foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 				{
-					Battery thisBattery = new Battery(thisRow["Battery Type"], thisRow["Manufacturer"],
-						Convert.ToInt16(thisRow["Number of batteries per package"].Trim()), Convert.ToInt16( thisRow["How many batteries required to run"].Trim()));
-					ListOfBatteries.Add(thisBattery);
+					Battery thisBattery = new Battery(){
+						BatteryType = thisRow["Battery Type"],
+						Manufacturer = thisRow["Manufacturer"],
+						NumberPerPackage = Convert.ToInt16(thisRow["Number of batteries per package"].Trim()),
+						RequiredToRun = Convert.ToInt16(thisRow["How many batteries required to run"].Trim())
+						};
+					listOfBatteries.Add(thisBattery);
 				}
 				var selNewProduct = new NewProduct();
 
-				if (ListOfBatteries.Count > 0)
+				if (listOfBatteries.Count > 0)
 				{
-					selNewProduct.Batteries = ListOfBatteries;
+					selNewProduct.Batteries = listOfBatteries;
 					selNewProduct.DeleteEmptyBatteryRows();
 				}
 				else
@@ -334,57 +345,57 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for DOT I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTISelect(string option)
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDotiSelect(string option)
 		{
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 				"Product characteristics tab is loaded.");
 
-			selNewProduct.DOT = option;
+			selNewProduct.Dot = option;
 
-			Report.IsTrue(selNewProduct.DOT == option,
+			Report.IsTrue(selNewProduct.Dot == option,
 				"Failed to set battery packaged option: " + option,
 				"Successfully set battery packaged option: " + option);
 		}
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for IMDG I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIMDGISelect(string option)
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForImdgiSelect(string option)
 		{
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 				"Product characteristics tab is loaded.");
 
-			selNewProduct.IMDG = option;
+			selNewProduct.Imdg = option;
 
-			Report.IsTrue(selNewProduct.IMDG == option,
+			Report.IsTrue(selNewProduct.Imdg == option,
 				"Failed to set battery packaged option: " + option,
 				"Successfully set battery packaged option: " + option);
 		}
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for IATA I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIATAISelect(string option)
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIataiSelect(string option)
 		{
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 				"Product characteristics tab is loaded.");
 
-			selNewProduct.IATA = option;
+			selNewProduct.Iata = option;
 
-			Report.IsTrue(selNewProduct.IATA == option,
+			Report.IsTrue(selNewProduct.Iata == option,
 				"Failed to set battery packaged option: " + option,
 				"Successfully set battery packaged option: " + option);
 		}
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for TDG I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForTDGISelect(string option)
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForTdgiSelect(string option)
 		{
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 				"Product characteristics tab is loaded.");
 
-			selNewProduct.TDG = option;
+			selNewProduct.Tdg = option;
 
-			Report.IsTrue(selNewProduct.TDG == option,
+			Report.IsTrue(selNewProduct.Tdg == option,
 				"Failed to set battery packaged option: " + option,
 				"Successfully set battery packaged option: " + option);
 		}
@@ -425,9 +436,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Product characteristics tab is loaded.");
 
 				
-				selNewProduct.TSCAStatus= option;
+				selNewProduct.TscaStatus= option;
 
-				Report.IsTrue(selNewProduct.TSCAStatus == option,
+				Report.IsTrue(selNewProduct.TscaStatus == option,
 					"Failed to set TSCA status: " + option,
 					"Successfully set TSCA status: " + option);
 
@@ -451,12 +462,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
 					"Product type tab is loaded.");
 
-				bool Expected = (noOrYes == "Yes");
+				bool expected = (noOrYes == "Yes");
 
 
-				selNewProduct.SolelyForRetailersUse = Expected;
+				selNewProduct.SolelyForRetailersUse = expected;
 
-				Report.IsTrue(selNewProduct.SolelyForRetailersUse == Expected,
+				Report.IsTrue(selNewProduct.SolelyForRetailersUse == expected,
 					"Failed to set Product is solely for the Retailer's use: " + noOrYes,
 					"Successfully set Product is solely for the Retailer's use: " + noOrYes);
 
@@ -478,20 +489,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var selNewProduct = new NewProduct();
 				Report.IsTrue(selNewProduct.WaitForMetalSection(30), "Metal section has failed to load.",
 					"Metal section has loaded");
-				List<string> Metals = selNewProduct.GetAllMetalNames();
-				List<MetalPresence> ListOfMetalSettings = new List<MetalPresence>();
-				foreach (string thisMetal in Metals)
+				List<string> metals = selNewProduct.GetAllMetalNames();
+				List<MetalPresence> listOfMetalSettings = new List<MetalPresence>();
+				foreach (string thisMetal in metals)
 				{
-					ListOfMetalSettings.Add(new MetalPresence(thisMetal, "No"));
+					listOfMetalSettings.Add(new MetalPresence(thisMetal, "No"));
 				}
 
-				selNewProduct.MetalPresence = ListOfMetalSettings;
+				selNewProduct.MetalPresence = listOfMetalSettings;
 
-				var CheckOutcome = selNewProduct.MetalPresence;
+				var checkOutcome = selNewProduct.MetalPresence;
 
-				foreach (MetalPresence thisMetalPresence in ListOfMetalSettings)
+				foreach (MetalPresence thisMetalPresence in listOfMetalSettings)
 				{
-					if (CheckOutcome.Select(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence).Count()==0)
+					if (checkOutcome.Select(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence).Count()==0)
 					{
 						Report.Error("Failed to set metal: " + thisMetalPresence.Metal + " to: " + thisMetalPresence.Presence);
 					}
@@ -507,7 +518,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		[StepDefinition(@"In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP; Report is available I select: (No|Yes)")]
-		public void GivenInTheToxicityCharacteristicsLeachingProcedurePageForProductHasHadTCLPReportIsAvailableISelect(string noOrYes)
+		public void GivenInTheToxicityCharacteristicsLeachingProcedurePageForProductHasHadTclpReportIsAvailableISelect(string noOrYes)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP; Report is available I select: " + noOrYes);
 			try
@@ -516,10 +527,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product Characteristics tab has not loaded",
 					"Product Characteristics tab is loaded.");
 
-				bool Expected = (noOrYes == "Yes");
-				selNewProduct.ProductHasTCLP = Expected;
+				bool expected = (noOrYes == "Yes");
+				selNewProduct.ProductHasTclp = expected;
 
-				Report.IsTrue(selNewProduct.ProductHasTCLP == Expected,
+				Report.IsTrue(selNewProduct.ProductHasTclp == expected,
 					"Failed to set Product has had TCLP: " + noOrYes,
 					"Successfully set Product has had TCLP: " + noOrYes);
 
@@ -544,12 +555,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
 					"Product type tab is loaded.");
 
-				bool Expected = (noOrYes == "Yes");
+				bool expected = (noOrYes == "Yes");
 
 
-				selNewProduct.RetailersPrivateLabelOrBrand = Expected;
+				selNewProduct.RetailersPrivateLabelOrBrand = expected;
 
-				Report.IsTrue(selNewProduct.RetailersPrivateLabelOrBrand == Expected,
+				Report.IsTrue(selNewProduct.RetailersPrivateLabelOrBrand == expected,
 					"Failed to set Product is retailers private label or brand: " + noOrYes,
 					"Successfully set Product is retailers private label or brand: " + noOrYes);
 
@@ -563,7 +574,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: (No|Yes)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForHasALCDOrPlasmaDisplayISelectNoOrYes(string noOrYes)
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForHasAlcdOrPlasmaDisplayISelectNoOrYes(string noOrYes)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: " + noOrYes);
 			try
@@ -572,11 +583,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 					"Product characteristics tab is loaded.");
 
-				bool Expected = (noOrYes == "Yes");
+				bool expected = (noOrYes == "Yes");
 
-				selNewProduct.HasLCDOrPlasmaDisplay = Expected;
+				selNewProduct.HasLcdOrPlasmaDisplay = expected;
 
-				Report.IsTrue(selNewProduct.HasLCDOrPlasmaDisplay == Expected,
+				Report.IsTrue(selNewProduct.HasLcdOrPlasmaDisplay == expected,
 					"Failed to set Has a LCD or Plasma Display value to: " + noOrYes,
 					"Successfully set Has a LCD or Plasma Display value to: " + noOrYes);
 
@@ -600,11 +611,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 					"Product characteristics tab is loaded.");
 
-				bool Expected = (noOrYes == "Yes");
+				bool expected = (noOrYes == "Yes");
 
-				selNewProduct.ContainsCircuitBoard = Expected;
+				selNewProduct.ContainsCircuitBoard = expected;
 
-				Report.IsTrue(selNewProduct.ContainsCircuitBoard == Expected,
+				Report.IsTrue(selNewProduct.ContainsCircuitBoard == expected,
 					"Failed to set Contains Circuit Board value to: " + noOrYes,
 					"Successfully set Contains Circuit Board value to: " + noOrYes);
 
@@ -628,12 +639,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 					"Product characteristics tab is loaded.");
 
-				bool Expected = (noOrYes == "Yes");
+				bool expected = (noOrYes == "Yes");
 
 
-				selNewProduct.Prop65 = Expected;
+				selNewProduct.Prop65 = expected;
 
-				Report.IsTrue(selNewProduct.Prop65 == Expected,
+				Report.IsTrue(selNewProduct.Prop65 == expected,
 					"Failed to set Prop 65 value to: " + noOrYes,
 					"Successfully set Prop 65 value to: " + noOrYes);
 
@@ -658,12 +669,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
 					"Product type tab is loaded.");
 
-				bool Expected = (noOrYes == "Yes");
+				bool expected = (noOrYes == "Yes");
 
 
-				selNewProduct.ProductShippedDirectly = Expected;
+				selNewProduct.ProductShippedDirectly = expected;
 
-				Report.IsTrue(selNewProduct.ProductShippedDirectly == Expected,
+				Report.IsTrue(selNewProduct.ProductShippedDirectly == expected,
 					"Failed to set product shipped directly value to: " + noOrYes,
 					"Successfully set product shipped directly value to: " + noOrYes);
 
@@ -686,11 +697,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var selNewProduct = new NewProduct();
 				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
 					"Product type tab is loaded.");
-				List<string> Countries = new List<string>(){country};
+				List<string> countries = new List<string>(){country};
 
-				bool Expected = (checkedOrUnchecked == "checked");
+				bool expected = (checkedOrUnchecked == "checked");
 
-				if (Expected)
+				if (expected)
 				{
 					Report.IsTrue(selNewProduct.ProductsMayBeSold.Contains(country),
 						"Products may be sold is not set up as expected", "Products may be sold is set up as expected.");
@@ -777,5 +788,53 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"I click the 'Add UPC' button")]
+		public void ThenIClickTheAddUpcButton()
+		{
+			Report.IsTrue((new NewProduct()).ClickAddUpcButton(), "Failed to click the 'Add UPC' button!", "Successfully clicked the 'Add UPC' button");
+		}
+
+		[StepDefinition(@"I add the following into the UPC Fields")]
+		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)
+		{
+			var upcInfo = table.CreateInstance<UpcInformation>();
+			Report.Info("UPC Number: " + upcInfo.UpcNumber);
+			Report.Info("Container Type: " + upcInfo.ContainerType);
+			Report.Info("Size: " + upcInfo.Size);
+			Report.Info("DPCI: " + upcInfo.Dpci);
+
+			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+		}
+
+		[StepDefinition(@"the comments field should appear")]
+		public void ThenTheCommentsFieldShouldAppear()
+		{
+			Report.IsTrue(new NewProduct().CommentsAreaShowing(), "Comments field was not displayed!", "Comments field was displayed, as expected");
+		}
+
+		[StepDefinition(@"I enter the following into the comments field: (.*)")]
+		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
+		{
+			Report.IsTrue(new NewProduct().InputCommentAreaText(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
+		[StepDefinition(@"The Data Acceptance page should appear")]
+		public void ThenTheDataAcceptancePageShouldApprear()
+		{
+			Report.IsTrue(new NewProduct().DataAcceptanceScreenAppears(), "Data Acceptance page did not appear!", "As expected, Data Acceptance page loaded successfully!");
+		}
+
+		[StepDefinition(@"I click the Summary button in the Data Acceptance window")]
+		public void GivenIClickTheSummaryButtonInTheDataAcceptanceWindow()
+		{
+			Report.IsTrue(new NewProduct().ClickSummaruButtonInDataAcceptance(), "Failed to click the Summary button!", "Successfully clicked the Summary button!");
+		}
+
+
+
+
+
+
 	}
 }

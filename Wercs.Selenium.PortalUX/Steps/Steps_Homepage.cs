@@ -596,8 +596,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				switch (pageTitle)
 				{
 					case "UL Solution Center":
-						UlSolutionCenter ULSolution = new UlSolutionCenter();
-						Report.IsTrue(ULSolution.Exists, "UL Solutions page does not exist as expected.", "UL Solutions page exists as expected.");
+						UlSolutionCenter ulSolution = new UlSolutionCenter();
+						Report.IsTrue(ulSolution.Exists, "UL Solutions page does not exist as expected.", "UL Solutions page exists as expected.");
 						break;
 					default:
 						break;
@@ -617,14 +617,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(5);
 			try
 			{
-				string FreshdeskURL = @"https://wercsmart.freshdesk.com/en/support/solutions";
-				List<string> ListOfTabs = SeleniumBrowser.GetTabURLs();
-				Report.IsTrue(ListOfTabs.Contains(FreshdeskURL),
-					"Fresh desk url: " + FreshdeskURL + " was not found. Tabs open: " + string.Join(",", ListOfTabs),
-					" As expected, tab is open with url: " + FreshdeskURL);
+				string freshdeskUrl = @"https://wercsmart.freshdesk.com/en/support/solutions";
+				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
+				Report.IsTrue(listOfTabs.Contains(freshdeskUrl),
+					"Fresh desk url: " + freshdeskUrl + " was not found. Tabs open: " + string.Join(",", listOfTabs),
+					" As expected, tab is open with url: " + freshdeskUrl);
 				Report.Screenshot();
 				Report.Info("Closing Freshdesk");
-				SeleniumBrowser.CloseTabWithURL(FreshdeskURL);
+				SeleniumBrowser.CloseTabWithURL(freshdeskUrl);
 				Delay.Seconds(3);
 
 			}
@@ -643,8 +643,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 
-				ShoppingCart ThisShoppingCart = new ShoppingCart();
-				Report.IsTrue(ThisShoppingCart.Exists, "The shopping cart pop up is not showing as expected.",
+				ShoppingCart thisShoppingCart = new ShoppingCart();
+				Report.IsTrue(thisShoppingCart.Exists, "The shopping cart pop up is not showing as expected.",
 					"As expected, the shopping cart popup is showing.");
 				Report.Screenshot();
 
@@ -663,7 +663,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(5);
 			try
 			{
-				ShoppingCart ThisShoppingCart = new ShoppingCart();
+				ShoppingCart thisShoppingCart = new ShoppingCart();
 				// TODO: Does this function need re-including?
 				// ThisShoppingCart.ClickClose();
 				Delay.Seconds(2);

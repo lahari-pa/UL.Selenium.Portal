@@ -156,13 +156,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickButton(string sButtonName)
 		{
-			var Buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//a[@id='carouselContinue']"));
+			var buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//a[@id='carouselContinue']"));
 
-			var ThisButton = Buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == sButtonName.ToLower());
+			var thisButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == sButtonName.ToLower());
 
-			if (ThisButton != null)
+			if (thisButton != null)
 			{
-				ThisButton.ClickWithScroll();
+				thisButton.ClickWithScroll();
 				Delay.Seconds(2);
 				return true;
 			}
@@ -172,12 +172,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickButtonOnAddUserDialog(string buttonToClick)
 		{
-			var AddUserDialog = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='add-user-dialog']"));
-			var Buttons = AddUserDialog.FindElements(By.XPath(".//button"));
-			var MatchingButton = Buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == buttonToClick.ToLower());
-			if (MatchingButton != null)
+			var addUserDialog = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='add-user-dialog']"));
+			var buttons = addUserDialog.FindElements(By.XPath(".//button"));
+			var matchingButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == buttonToClick.ToLower());
+			if (matchingButton != null)
 			{
-				MatchingButton.ClickWithScroll();
+				matchingButton.ClickWithScroll();
 				Delay.Seconds(1);
 				return true;
 			}
@@ -187,9 +187,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//Phone Number Error
 		[FindsBy(How = How.Id, Using = "phone_error")]
-		private IWebElement _error_phone;
+		private IWebElement _errorPhone;
 
-		public bool Add_New_User(string username, string title, string role, string phone_no, string email_address,
+		public bool Add_New_User(string username, string title, string role, string phoneNo, string emailAddress,
 			string confirm, string country)
 		{
 			Report.Info("Beginning Add_New_User: " + username);
@@ -198,8 +198,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Name = username;
 			Title = title;
 			UserRole = role;
-			PhoneNumber = phone_no;
-			EmailAddress = email_address;
+			PhoneNumber = phoneNo;
+			EmailAddress = emailAddress;
 			ConfirmEmailAddress = confirm;
 			Country = country.ToUpper();
 
@@ -234,12 +234,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//Close Button
 		[FindsBy(How = How.XPath, Using = ".//div/button[text()='Close']")]
-		private IWebElement _btn_close;
+		private IWebElement _btnClose;
 
 		public bool Close_click()
 		{
 			Report.Info("Attempting to Click Close Button");
-			_btn_close.Click();
+			_btnClose.Click();
 			return true;
 		}
 

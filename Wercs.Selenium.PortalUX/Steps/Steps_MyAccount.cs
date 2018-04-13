@@ -134,21 +134,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var selMyAccount = new MyAccount();
 				Report.IsTrue(selMyAccount.SaveUserGrid("userGridNew"), "Failed to save users in the user Grid", "Successfully saved users in the User grid");
 				Delay.Seconds(2);
-				List<User> OriginalGrid = (List<User>)Context.GetFromContext("userGrid");
-				List<User> NewGrid = (List<User>)Context.GetFromContext("userGridNew");
-				User SavedUser = (User)Context.GetFromContext(savedAs);
+				List<User> originalGrid = (List<User>)Context.GetFromContext("userGrid");
+				List<User> newGrid = (List<User>)Context.GetFromContext("userGridNew");
+				User savedUser = (User)Context.GetFromContext(savedAs);
 
-				List<User> Matching = OriginalGrid.Where(y => NewGrid.Any(z => z.Username == y.Username)).ToList();
+				List<User> matching = originalGrid.Where(y => newGrid.Any(z => z.Username == y.Username)).ToList();
 
 
 
-				User InOriginalButNotNew = OriginalGrid.Where(y => !NewGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
-				User InNewButNotOriginal = NewGrid.Where(y => !OriginalGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
+				User inOriginalButNotNew = originalGrid.Where(y => !newGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
+				User inNewButNotOriginal = newGrid.Where(y => !originalGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
 
-				Report.IsTrue(InOriginalButNotNew.Username == SavedUser.Username,
-					"User: " + SavedUser.Username + " has not been replaced. ",
-					"As expected, " + SavedUser.Username + " has been replaced");
-				Report.IsTrue(InNewButNotOriginal.Username == replacedBy,
+				Report.IsTrue(inOriginalButNotNew.Username == savedUser.Username,
+					"User: " + savedUser.Username + " has not been replaced. ",
+					"As expected, " + savedUser.Username + " has been replaced");
+				Report.IsTrue(inNewButNotOriginal.Username == replacedBy,
 					"User has not been replaced by: " + replacedBy,
 					"As expected the replacement user is: " + replacedBy);
 			}
@@ -171,11 +171,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var selTopMenuBar = new TopMenuBar();
 
 				//get name of currently signed in
-				string Username = selTopMenuBar.GetCurrentUser();
+				string username = selTopMenuBar.GetCurrentUser();
 
-				Report.IsTrue(selMyAccount.ForUserClickAction(Username, action),
-					"Failed to click action: " + action + " for user: " + Username,
-					"Successfully clicked action: " + action + " for user: " + Username);
+				Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
+					"Failed to click action: " + action + " for user: " + username,
+					"Successfully clicked action: " + action + " for user: " + username);
 
 				Delay.Seconds(1);
 			}
@@ -192,21 +192,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails screen I save the current User as: " + saveAs);
 			try
 			{
-				var MyUserDetails = new UserDetails();
-				User ThisUser = new User();
+				var myUserDetails = new UserDetails();
+				User thisUser = new User();
 
-				ThisUser.Username = MyUserDetails.Name;
-				ThisUser.Title = MyUserDetails.Title;
-				ThisUser.Role = MyUserDetails.UserRole;
-				ThisUser.Purview = MyUserDetails.Purview;
-				ThisUser.Email = MyUserDetails.EmailAddress;
-				ThisUser.Country = MyUserDetails.Country;
-				ThisUser.CountryCode = MyUserDetails.CountryCode;
-				ThisUser.PhoneNumber = MyUserDetails.PhoneNumber;
-				ThisUser.SendNotifications = MyUserDetails.SendNotifications;
+				thisUser.Username = myUserDetails.Name;
+				thisUser.Title = myUserDetails.Title;
+				thisUser.Role = myUserDetails.UserRole;
+				thisUser.Purview = myUserDetails.Purview;
+				thisUser.Email = myUserDetails.EmailAddress;
+				thisUser.Country = myUserDetails.Country;
+				thisUser.CountryCode = myUserDetails.CountryCode;
+				thisUser.PhoneNumber = myUserDetails.PhoneNumber;
+				thisUser.SendNotifications = myUserDetails.SendNotifications;
 				Delay.Seconds(1);
 
-				Context.AddToContext(saveAs, ThisUser);
+				Context.AddToContext(saveAs, thisUser);
 			}
 			catch (Exception ex)
 			{
@@ -222,7 +222,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			try
 			{
-				var MyUserDetails = new UserDetails();
+				var myUserDetails = new UserDetails();
 				Delay.Seconds(3);
 				if (name.ToLower().Contains("saved as"))
 				{
@@ -230,8 +230,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 						.Username;
 				}
 				Report.Info("Inputting name: " + name);
-				MyUserDetails.Name = name;
-				Report.IsTrue(MyUserDetails.Name == name, "Failed to set user details name to: " + name,
+				myUserDetails.Name = name;
+				Report.IsTrue(myUserDetails.Name == name, "Failed to set user details name to: " + name,
 					"Successfully set name to be: " + name);
 			}
 			catch (Exception ex)
@@ -247,12 +247,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the UserDetails page I click " + buttonToClickText);
 			try
 			{
-				var MyUserDetails = new UserDetails();
-				Report.IsTrue(MyUserDetails.ClickButton(buttonToClickText), "Failed to click " + buttonToClickText, "Successfully clicked " + buttonToClickText);
+				var myUserDetails = new UserDetails();
+				Report.IsTrue(myUserDetails.ClickButton(buttonToClickText), "Failed to click " + buttonToClickText, "Successfully clicked " + buttonToClickText);
 
 				if (buttonToClickText.ToLower() == "save")
 				{
-					MyUserDetails.ClickButtonOnAddUserDialog("close");
+					myUserDetails.ClickButtonOnAddUserDialog("close");
 				}
 			}
 			catch (Exception ex)
@@ -331,47 +331,47 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I add a new user with the following information");
 			try
 			{
-				foreach (var ThisRow in table.Rows)
+				foreach (var thisRow in table.Rows)
 				{
-					string user_name = ThisRow["User Name"];
-					string title = ThisRow["Title"];
-					string role = ThisRow["Role"];
-					string phone_no = ThisRow["Phone Number"];
-					string email_address = ThisRow["Email Address"];
-					string confirm_email = ThisRow["Confirm Email"];
-					string country_code = ThisRow["Country Code"];
-					string country = ThisRow["Country"];
+					string userName = thisRow["User Name"];
+					string title = thisRow["Title"];
+					string role = thisRow["Role"];
+					string phoneNo = thisRow["Phone Number"];
+					string emailAddress = thisRow["Email Address"];
+					string confirmEmail = thisRow["Confirm Email"];
+					string countryCode = thisRow["Country Code"];
+					string country = thisRow["Country"];
 
-					if (user_name == "User")
+					if (userName == "User")
 					{
-						user_name = user_name + "_" + System.DateTime.Now.ToString("HHmmddMMyy");
+						userName = userName + "_" + System.DateTime.Now.ToString("HHmmddMMyy");
 
-						ScenarioContext.Current.Add("CurrentUser", user_name);
+						ScenarioContext.Current.Add("CurrentUser", userName);
 
-						Report.Info("User Name = " + user_name);
+						Report.Info("User Name = " + userName);
 					}
 
-					if (email_address == "Saved")
+					if (emailAddress == "Saved")
 					{
 						if (ScenarioContext.Current.ContainsKey("CurrentEmail"))
 						{
-							email_address = ScenarioContext.Current["CurrentEmail"].ToString();
+							emailAddress = ScenarioContext.Current["CurrentEmail"].ToString();
 						}
-						Report.Info("Email Address = " + email_address);
+						Report.Info("Email Address = " + emailAddress);
 					}
 
-					if (confirm_email == "Saved")
+					if (confirmEmail == "Saved")
 					{
 						if (ScenarioContext.Current.ContainsKey("CurrentEmail"))
 						{
-							confirm_email = ScenarioContext.Current["CurrentEmail"].ToString();
+							confirmEmail = ScenarioContext.Current["CurrentEmail"].ToString();
 						}
-						Report.Info("Email Address = " + confirm_email);
+						Report.Info("Email Address = " + confirmEmail);
 					}
 
-					if (country_code == "empty")
+					if (countryCode == "empty")
 					{
-						country_code = "";
+						countryCode = "";
 					}
 
 					var selMyAccount = new MyAccount();
@@ -383,12 +383,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 					//Check Form Has Opened
 					Report.IsTrue(!selMyUserForm.Exists, "Failed to Open Add User Form", "Add User Form Open");
 					//Add New User
-					Report.IsTrue(selMyUserForm.Add_New_User(user_name, title, role, phone_no, email_address, confirm_email, country),
+					Report.IsTrue(selMyUserForm.Add_New_User(userName, title, role, phoneNo, emailAddress, confirmEmail, country),
 						"Failed to Add a New User", "New User Added");
 
 					Delay.Seconds(5 * Delay.SpeedFactor);
 					//Check User Has Been Created
-					Report.IsTrue(selMyAccount.User_Added_Check(user_name, email_address, role), "User Has Not Been Created",
+					Report.IsTrue(selMyAccount.User_Added_Check(userName, emailAddress, role), "User Has Not Been Created",
 						"User Created Successfully");
 
 				}
@@ -408,14 +408,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				var selMyAccount = new MyAccount();
 
-				string user_name = string.Empty;
+				string userName = string.Empty;
 
 				if (ScenarioContext.Current.ContainsKey("CurrentUser"))
 				{
-					user_name = ScenarioContext.Current["CurrentUser"].ToString();
+					userName = ScenarioContext.Current["CurrentUser"].ToString();
 				}
 
-				Report.IsTrue(selMyAccount.Is_User_Active(user_name, active), "User is NOT " + active, "User is " + active);
+				Report.IsTrue(selMyAccount.Is_User_Active(userName, active), "User is NOT " + active, "User is " + active);
 
 			}
 			catch (Exception ex)

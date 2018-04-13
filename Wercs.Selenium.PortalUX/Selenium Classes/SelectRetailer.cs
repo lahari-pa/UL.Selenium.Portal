@@ -14,16 +14,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool selectRetailer(string retailer)
+		public bool SelectRetailer(string retailer)
 		{
-			var RetailerInput = containerElement.FindElements(By.XPath("//label/span")).Where(x => x.Text.Trim() == retailer).FirstOrDefault()
+			var retailerInput = containerElement.FindElements(By.XPath("//label/span")).Where(x => x.Text.Trim() == retailer).FirstOrDefault()
 				.FindElement(By.XPath("../input"));
 
-			if (RetailerInput != null)
+			if (retailerInput != null)
 			{
-				RetailerInput.Click();
+				retailerInput.Click();
 				Delay.Seconds(1);
-				return RetailerInput.Selected;
+				return retailerInput.Selected;
 			}
 			else
 			{
@@ -33,18 +33,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-		public List<string> getListOfRetailers()
+		public List<string> GetListOfRetailers()
 		{
 			return containerElement.FindElements(By.XPath("//label/span")).Select(x => x.Text).ToList();
 		}
 
-		public void clickSelectAll()
+		public void ClickSelectAll()
 		{
 			containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Select all')]"))
 				.FirstOrDefault().ClickWithScroll();
 		}
 
-		public bool clickDone()
+		public bool ClickDone()
 		{
 			try
 			{

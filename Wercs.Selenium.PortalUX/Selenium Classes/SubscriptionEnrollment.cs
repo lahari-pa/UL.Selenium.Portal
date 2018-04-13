@@ -20,38 +20,38 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//Articles
 		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4']/label[text()='Articles ']/../select")]
-		private IWebElement _select_articles;
+		private IWebElement _selectArticles;
 
 		public bool Select_Articles(string articles)
 		{
 			Report.Info("Selecting Number of Articles: " + articles);
-			_select_articles.Select(articles);
+			_selectArticles.Select(articles);
 			return true;
 		}
 
 		//Enhanced Articles
 		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/../select")]
-		private IWebElement _select_en_articles;
+		private IWebElement _selectEnArticles;
 
-		public bool Select_Enhanced_Articles(string en_articles)
+		public bool Select_Enhanced_Articles(string enArticles)
 		{
-			Report.Info("Selecting Number of Enhanced Articles: " + en_articles);
-			_select_en_articles.Select(en_articles);
+			Report.Info("Selecting Number of Enhanced Articles: " + enArticles);
+			_selectEnArticles.Select(enArticles);
 			return true;
 		}
 
 		//Formulated Products
 		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4']/label[text()='Formulated Products ']/../select")]
-		private IWebElement _select_form_prods;
+		private IWebElement _selectFormProds;
 
-		public bool Select_Formulated_Products(string form_prods)
+		public bool Select_Formulated_Products(string formProds)
 		{
-			Report.Info("Selecting Number of Formulated Products: " + form_prods);
-			_select_form_prods.Select(form_prods);
+			Report.Info("Selecting Number of Formulated Products: " + formProds);
+			_selectFormProds.Select(formProds);
 			return true;
 		}
 
-		public bool Select_Range(string articles, string en_articles, string form_prods)
+		public bool Select_Range(string articles, string enArticles, string formProds)
 		{
 			Report.Info("Beginning Select_Range");
 
@@ -69,16 +69,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Report.Info("Number of Articles Selected");
-			if (!Select_Enhanced_Articles(en_articles))
+			if (!Select_Enhanced_Articles(enArticles))
 			{
-				Report.Info("Failed to Select Correct Number of Enhanced Articles: " + en_articles);
+				Report.Info("Failed to Select Correct Number of Enhanced Articles: " + enArticles);
 				Report.Screenshot();
 				return false;
 			}
 			Report.Info("Number of Enhanced Articles Selected");
-			if (!Select_Formulated_Products(form_prods))
+			if (!Select_Formulated_Products(formProds))
 			{
-				Report.Info("Failed to Select Correct Number of Formulated Products: " + form_prods);
+				Report.Info("Failed to Select Correct Number of Formulated Products: " + formProds);
 				Report.Screenshot();
 				return false;
 			}
@@ -91,9 +91,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//======================================================================================================== FEATURE PLAN
 
 
-		public IWebElement Get_Feature_Plan(string feature_plan)
+		public IWebElement Get_Feature_Plan(string featurePlan)
 		{
-			Report.Info("Beginning Get_Feature_Plan: " + feature_plan);
+			Report.Info("Beginning Get_Feature_Plan: " + featurePlan);
 
 			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).ToList();
 
@@ -101,7 +101,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				Report.Info("Feature Plan = " + feature.Text);
 
-				if (feature.GetInnerHTML() == feature_plan)
+				if (feature.GetInnerHTML() == featurePlan)
 				{
 					Report.Success("Feature Plan Found");
 					return feature;
@@ -113,9 +113,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-		public bool Select_Feature_Plan(string feature_plan)
+		public bool Select_Feature_Plan(string featurePlan)
 		{
-			Report.Info("Beginning Select_Feature_Plan: " + feature_plan);
+			Report.Info("Beginning Select_Feature_Plan: " + featurePlan);
 
 			if (!Exists)
 			{
@@ -126,7 +126,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			IWebElement myFeature = null;
 
-			switch (feature_plan)
+			switch (featurePlan)
 			{
 				case "Premium":
 					myFeature = Get_Feature_Plan("Premium");
@@ -186,47 +186,47 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//Gold
 		[FindsBy(How = How.XPath, Using = ".//div[@class='panel-heading gold']/label")]
-		private IWebElement _select_gold;
+		private IWebElement _selectGold;
 		public bool Gold_click()
 		{
 			Report.Info("Attempting to Select Gold Support Services Plan");
-			_select_gold.Click();
+			_selectGold.Click();
 			return true;
 		}
 
 		//Silver
 		[FindsBy(How = How.XPath, Using = ".//div[@class='panel-heading silver']/label")]
-		private IWebElement _select_silver;
+		private IWebElement _selectSilver;
 		public bool Silver_click()
 		{
 			Report.Info("Attempting to Select Silver Support Services Plan");
-			_select_silver.Click();
+			_selectSilver.Click();
 			return true;
 		}
 
 		//Bronze
 		[FindsBy(How = How.XPath, Using = ".//div[@class='panel-heading bronze']/label")]
-		private IWebElement _select_bronze;
+		private IWebElement _selectBronze;
 		public bool Bronze_click()
 		{
 			Report.Info("Attempting to Select Bronze Support Services Plan");
-			_select_bronze.Click();
+			_selectBronze.Click();
 			return true;
 		}
 
 		//General
 		[FindsBy(How = How.XPath, Using = ".//div[@class='panel-heading']/label[contains(text(), 'General Support']")]
-		private IWebElement _select_gen_support;
+		private IWebElement _selectGenSupport;
 		public bool General_Support_click()
 		{
 			Report.Info("Attempting to Select General Support Services Plan");
-			_select_gen_support.Click();
+			_selectGenSupport.Click();
 			return true;
 		}
 
-		public bool Select_Support_Services_Plan(string services_plan)
+		public bool Select_Support_Services_Plan(string servicesPlan)
 		{
-			Report.Info("Beginning Select_Support_Services_Plan: " + services_plan);
+			Report.Info("Beginning Select_Support_Services_Plan: " + servicesPlan);
 
 			if (!Exists)
 			{
@@ -235,7 +235,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			switch (services_plan)
+			switch (servicesPlan)
 			{
 				case "Gold":
 					if (!Gold_click())
@@ -287,33 +287,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//Proceed Button
 		[FindsBy(How = How.XPath, Using = ".//div[@class='row']/div/button[text()='PROCEED']")]
-		private IWebElement _btn_proceed;
+		private IWebElement _btnProceed;
 
 		public bool Proceed_click()
 		{
 			Report.Info("Attempting to Click Proceed Button");
-			_btn_proceed.Click();
+			_btnProceed.Click();
 			return true;
 		}
 
-		public bool Select_Enrollment_Options(string articles, string en_articles, string form_prods, string feature_plan,
-			string services_plan)
+		public bool Select_Enrollment_Options(string articles, string enArticles, string formProds, string featurePlan,
+			string servicesPlan)
 		{
 			Report.Info("Beginning Select_Enrollment_Options");
 
-			if (!Select_Range(articles, en_articles, form_prods))
+			if (!Select_Range(articles, enArticles, formProds))
 			{
 				Report.Info("Failed to Select Range Options");
 				return false;
 			}
 
-			if (!Select_Feature_Plan(feature_plan))
+			if (!Select_Feature_Plan(featurePlan))
 			{
 				Report.Info("Failed to Select Feature Plan");
 				return false;
 			}
 
-			if (!Select_Support_Services_Plan(services_plan))
+			if (!Select_Support_Services_Plan(servicesPlan))
 			{
 				Report.Info("Failed to Select Support Services Plan");
 				return false;
@@ -326,7 +326,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Delay.Seconds(2 * Delay.SpeedFactor);
-			var myEnroll = new SubscriptionEnrollment_Dlg();
+			var myEnroll = new SubscriptionEnrollmentDlg();
 			if (!myEnroll.Exists)
 			{
 				Report.Info("Failed to Open Enrollment Dialog");
@@ -341,17 +341,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	}
 
 
-	class SubscriptionEnrollment_Dlg : BaseDialog
+	class SubscriptionEnrollmentDlg : BaseDialog
 	{
 		[FindsBy(How = How.XPath, Using = "//div[@class='modal-content']")]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Header_Correct(string header_text)
+		public bool Header_Correct(string headerText)
 		{
 			Report.Info("Beginning Header_Correct");
 
 			IWebElement myHeader = containerElement
-				.FindElements(By.XPath(".//div[@class='modal-header']/h2[text()='" + header_text + "']"), 10).FirstOrDefault();
+				.FindElements(By.XPath(".//div[@class='modal-header']/h2[text()='" + headerText + "']"), 10).FirstOrDefault();
 
 			if (myHeader == null)
 			{
@@ -365,25 +365,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			Report.Success("Correct Dialog Opened: " + header_text);
+			Report.Success("Correct Dialog Opened: " + headerText);
 			return true;
 		}
 
 		//Articles
 		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Articles']/../")]
-		private IWebElement _row_articles;
+		private IWebElement _rowArticles;
 
 		//Enhanced Articles
 		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Enhanced Articles']/../")]
-		private IWebElement _row_en_articles;
+		private IWebElement _rowEnArticles;
 
 		//Formulated Products
 		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Formulated Products ']/../")]
-		private IWebElement _row_form_prods;
+		private IWebElement _rowFormProds;
 
 		//Feature Plan
 		[FindsBy(How = How.XPath, Using = ".//div[@class='panel-heading']/span[1]")]
-		private IWebElement _row_feature_plan;
+		private IWebElement _rowFeaturePlan;
 
 		public string Get_Option(string option)
 		{
@@ -402,7 +402,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return myOption.Text;
 		}
 
-		public bool Check_Options(string feature_plan, string articles, string en_articles, string form_prods, string support_plan)
+		public bool Check_Options(string featurePlan, string articles, string enArticles, string formProds, string supportPlan)
 		{
 			Report.Info("Beginning Check_Options");
 
@@ -413,11 +413,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			if (_row_feature_plan.Text != feature_plan)
+			if (_rowFeaturePlan.Text != featurePlan)
 			{
 				Report.Info("Incorrect Feature Plan");
-				Report.Info("Expected: " + feature_plan);
-				Report.Info("Got: " + _row_feature_plan.Text);
+				Report.Info("Expected: " + featurePlan);
+				Report.Info("Got: " + _rowFeaturePlan.Text);
 				Report.Screenshot();
 				return false;
 			}
@@ -432,32 +432,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			string myEnArt = Get_Option(en_articles);
+			string myEnArt = Get_Option(enArticles);
 
-			if (myEnArt != en_articles)
+			if (myEnArt != enArticles)
 			{
 				Report.Info("Incorrect Enhanced Articles Option");
-				Report.Info("Expected: " + en_articles);
+				Report.Info("Expected: " + enArticles);
 				Report.Info("Got: " + myEnArt);
 				Report.Screenshot();
 				return false;
 			}
-			string myForm = Get_Option(form_prods);
+			string myForm = Get_Option(formProds);
 
-			if (myForm != form_prods)
+			if (myForm != formProds)
 			{
 				Report.Info("Incorrect Formulated Products Option");
-				Report.Info("Expected: " + form_prods);
+				Report.Info("Expected: " + formProds);
 				Report.Info("Got: " + myForm);
 				Report.Screenshot();
 				return false;
 			}
-			string mySupp = Get_Option(support_plan);
+			string mySupp = Get_Option(supportPlan);
 
-			if (mySupp != support_plan)
+			if (mySupp != supportPlan)
 			{
 				Report.Info("Incorrect Support Services Plan");
-				Report.Info("Expected: " + support_plan);
+				Report.Info("Expected: " + supportPlan);
 				Report.Info("Got: " + mySupp);
 				Report.Screenshot();
 				return false;
@@ -469,27 +469,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//Checkout Button
 		[FindsBy(How = How.XPath, Using = ".//div[@class='modal-footer']/button[text()='Checkout']")]
-		private IWebElement _btn_checkout;
+		private IWebElement _btnCheckout;
 
 		public bool Checkout_click()
 		{
 			Report.Info("Attempting to Click Checkout Button");
-			_btn_checkout.Click();
+			_btnCheckout.Click();
 			return true;
 		}
 
 		//Cancel Button
 		[FindsBy(How = How.XPath, Using = ".//div[@class='modal-footer']/button[text()='Cancel']")]
-		private IWebElement _btn_cancel;
+		private IWebElement _btnCancel;
 
 		public bool Cancel_click()
 		{
 			Report.Info("Attempting to Click Cancel Button");
-			_btn_cancel.Click();
+			_btnCancel.Click();
 			return true;
 		}
 
-		public bool Subscription_Text(string sub_text)
+		public bool Subscription_Text(string subText)
 		{
 			Report.Info("Beginning Subscription_Text");
 
@@ -502,7 +502,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Report.Info("Subscription Text = " + myText.Text.Trim());
-			if (myText.Text.Trim() != sub_text)
+			if (myText.Text.Trim() != subText)
 			{
 				Report.Info("Subscription Text Incorrect");
 				Report.Screenshot();

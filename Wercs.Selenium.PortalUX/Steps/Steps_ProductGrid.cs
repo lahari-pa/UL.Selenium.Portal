@@ -457,7 +457,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ClickCancelUlscSyncPopup()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the cancel button");
-			var selUlscSyncPopup = new SyncULSCProductsDialog();
+			var selUlscSyncPopup = new SyncUlscProductsDialog();
 			selUlscSyncPopup.ClickCancel();
 
 			Report.Success("cancel button clicked! on the homepage");
@@ -475,7 +475,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Info("Checking that Sync Products to ULSC window appears");
-				var selUlscSyncPopup = new SyncULSCProductsDialog();
+				var selUlscSyncPopup = new SyncUlscProductsDialog();
 				var showing = selUlscSyncPopup.HeaderShowing();
 				Report.IsTrue(showing == headerExpected.Trim(),
 					"Sync Products to ULSC header was not as expected! Expected: '" + headerExpected + "', but found: '" + showing + "' instead!",
@@ -488,5 +488,61 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"I delete all products with (UPC Number): (.*)")]
+		public void DeleteAllProductsMatchingCriteria(string option, string value)
+		{
+			var productGrid = new ProductsGrid();
+			if (Report.IsTrue(productGrid.ClickMoreFilers(), "Failed to click the 'More Filters' option in the product grid", "Successfully clicked the 'More Filters' option in the product grid!", false, false))
+			{
+				switch (option)
+				{
+					case ("UPC Number"):
+					{
+						productGrid.UpcNumber = value;
+						if (!Report.IsTrue(productGrid.UpcNumber == value, "Value: " + value + " was not inputted into the " + option + " field correctly!", "Value: " + value + " was correctly inputted into the " + option + " field", false, false))
+						{
+							// Return so that we don't start removing all elements in the datagrid!
+							return;
+						}
+
+						if (!Report.IsTrue(productGrid.ClickUpcNumberSearchButton(), "Failed to click the UPC Search button!", "Successfully clicked the UPC Search button!", false, false))
+						{
+							// Again, return just in case we don't have the correct results in the search grid!
+							return;
+						}
+
+						GeneralUtilities.Wait_for_load_finish();
+						break;
+					}
+				}
+
+				Report.Info("Attempting to delete all matching products");
+				Report.Screenshot();
+				// Assume that the options have been inputted successfully!
+				Report.IsTrue(productGrid.DeleteAllPresentRows(),"Failed to delete all products!","All matching products deleted successfully!");
+			}
+		}
+
+		[StepDefinition(@"I delete the product: (.*)")]
+		public void ThenIDeleteTheProduct(string savedas)
+		{
+			var Product = (ProductInformation)Context.GetFromContext(savedas);
+			var ProductGrid = new ProductsGrid();
+			ProductGrid.ProductIdField = Product.Id;
+			if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
+			{
+				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the searcn button", "Successfully clicked the search button!", false, false))
+				{
+					GeneralUtilities.Wait_for_load_finish();
+					var firstProduct = ProductGrid.FirstProductInGrid();
+					if(Report.IsTrue(firstProduct.ProductName==Product.Name && firstProduct.ProductId==Product.Id,"First product did not match the required paremeters!","Product was showing at the top of the grid, as expected!"))
+					{
+						Report.IsTrue(ProductGrid.DeleteFirstRow(), "Failed to delete product in first row!", "Successfully deleted product in first row!");
+					}
+				}
+			}
+		}
+
 	}
 }
