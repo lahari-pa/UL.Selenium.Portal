@@ -4,6 +4,7 @@
 @wercsmart
 @SubEnrollment
 @LandingPage
+@PaymentMethods
 
 @run_MyAccount
 
@@ -70,13 +71,34 @@ Given I click on My Account
 Then I click on NEW SUBSCRIPTION
 Then I select the following enrollment options
 | Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan |
-| Up to 1 Product(s) | Up to 1 Product(s) | Up to 1 Product(s)  | Limited      | Bronze                |
+| Up to 1 Product(s) | Up to 1 Product(s) | Up to 1 Product(s)  | Limited      | General Support       |
 Then I cancel the Enrollment dialog, confirm correct page opens and Proceed
 And I confirm the chosen options and body text are correct
 | Articles           | Enhanced Articles  | Formulated Products | Feature Plan | Support Services Plan | Body Text                                                                                                                            |
-| Up to 1 Product(s) | Up to 1 Product(s) | Up to 1 Product(s)  | Limited      | Bronze                | Your new purchase will be prorated based on the credit and time left in your current subscription. Checkout to see the final amount. |
+| Up to 1 Product(s) | Up to 1 Product(s) | Up to 1 Product(s)  | Limited      | General Support       | Your new purchase will be prorated based on the credit and time left in your current subscription. Checkout to see the final amount. |
 Then I click on Checkout
-
-
+ Then I check the Payment Methods heading and sub headings are correct
+ Then I confirm the following payment options are available
+ | Options       |
+ | Credit Card   |
+ | ACH           |
+ | Wire Transfer |
+ Then I confirm that the Contact Information is correct for Account saved as New_Sub
+ Then I confirm that the Billing Address is correct for Account saved as New_Sub
+ And I open the Edit Address form
+ Then I confirm the Sub Headings are correct: Primary Account Contact, Billing Address
+ Then I confirm the Edit Address form has the correct fields
+ | Field                     |
+ | First Name                |
+ | Last Name                 |
+ | Email Address             |
+ | Address 1                 |
+ | Address 2                 |
+ | City                      |
+ | State                     |
+ | Country                   |
+ | Zip Code                  |
+ | Phone Number              |
+ | Shipping/Billing Checkbox |
 
 

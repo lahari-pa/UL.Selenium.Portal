@@ -308,6 +308,176 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public string Get_State_Code(string state)
+		{
+			Report.Info("Beginning Get_State_Code: " + state);
+
+			string myState = string.Empty;
+
+			switch (state)
+			{
+				case "Alabama":
+					myState = "AL";
+					break;
+				case "Alaska":
+					myState = "AK";
+					break;
+				case "Arizona":
+					myState = "AZ";
+					break;
+				case "Arkansas":
+					myState = "AR";
+					break;
+				case "California":
+					myState = "CA";
+					break;
+				case "Colorado":
+					myState = "CO";
+					break;
+				case "Conneticut":
+					myState = "CT";
+					break;
+				case "Deleware":
+					myState = "DE";
+					break;
+				case "District of Columbia":
+					myState = "DC";
+					break;
+				case "Florida":
+					myState = "FL";
+					break;
+				case "Georgia":
+					myState = "GA";
+					break;
+				case "Hawaii":
+					myState = "HI";
+					break;
+				case "Idaho":
+					myState = "ID";
+					break;
+				case "Illinois":
+					myState = "IL";
+					break;
+				case "Indiana":
+					myState = "IN";
+					break;
+				case "Iowa":
+					myState = "IA";
+					break;
+				case "Kansas":
+					myState = "KS";
+					break;
+				case "Kentucky":
+					myState = "KY";
+					break;
+				case "Louisiana":
+					myState = "LA";
+					break;
+				case "Maine":
+					myState = "ME";
+					break;
+				case "Maryland":
+					myState = "MD";
+					break;
+				case "Massachusetts":
+					myState = "MA";
+					break;
+				case "Michigan":
+					myState = "MI";
+					break;
+				case "Minnesota":
+					myState = "MN";
+					break;
+				case "Mississippi":
+					myState = "MS";
+					break;
+				case "Missouri":
+					myState = "MO";
+					break;
+				case "Montana":
+					myState = "MT";
+					break;
+				case "Nebraska":
+					myState = "NE";
+					break;
+				case "Nevada":
+					myState = "NV";
+					break;
+				case "New Hampshire":
+					myState = "NH";
+					break;
+				case "New Jersey":
+					myState = "NJ";
+					break;
+				case "New Mexico":
+					myState = "NM";
+					break;
+				case "New York":
+					myState = "NY";
+					break;
+				case "North Carolina":
+					myState = "NC";
+					break;
+				case "North Dakota":
+					myState = "ND";
+					break;
+				case "Ohio":
+					myState = "OH";
+					break;
+				case "Oklahoma":
+					myState = "OK";
+					break;
+				case "Oregon":
+					myState = "OR";
+					break;
+				case "Pennsylvania":
+					myState = "PA";
+					break;
+				case "Rhode Island":
+					myState = "RI";
+					break;
+				case "South Carolina":
+					myState = "SC";
+					break;
+				case "South Dakota":
+					myState = "SD";
+					break;
+				case "Tennessee":
+					myState = "TN";
+					break;
+				case "Texas":
+					myState = "TX";
+					break;
+				case "Utah":
+					myState = "UT";
+					break;
+				case "Vermont":
+					myState = "VT";
+					break;
+				case "Virginia":
+					myState = "VA";
+					break;
+				case "Washington":
+					myState = "WA";
+					break;
+				case "West Virginia":
+					myState = "WV";
+					break;
+				case "Wisconsin":
+					myState = "WI";
+					break;
+				case "Wyoming":
+					myState = "WY";
+					break;
+				default:
+					Report.Error("Unable to Find Correct State");
+					return "";
+			}
+
+			Report.Success("State Code Found: " + myState);
+			return myState;
+		}
+
 
 	}
 }

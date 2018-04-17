@@ -69,7 +69,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the chosen options and body text are correct");
 			try
 			{
-				var mySubDlg = new SubscriptionEnrollmentDlg();
+				var mySubDlg = new SubscriptionEnrollment_Dlg();
 
 				foreach (var thisRow in table.Rows)
 				{
@@ -100,14 +100,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var mySub = new SubscriptionEnrollment();
-				var mySubDlg = new SubscriptionEnrollmentDlg();
+				var mySubDlg = new SubscriptionEnrollment_Dlg();
 				var myPay = new PaymentMethods();
 
 				if (button == "Cancel")
 				{
 					Report.IsTrue(mySubDlg.Cancel_click(), "Failed to Click Cancel Button", "Cancel Button Clicked");
 					Delay.Seconds(1 * Delay.SpeedFactor);
-					if (mySub.Exists)
+					if (!mySub.Exists)
 					{
 						throw new Exception("Subscription Enrollment Page Failed to Open");
 					}
@@ -117,7 +117,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					Report.IsTrue(mySubDlg.Checkout_click(), "Failed to Click Checkout Button", "Checkout Button Clicked");
 					Delay.Seconds(1 * Delay.SpeedFactor);
-					if (myPay.Exists)
+					if (!myPay.Exists)
 					{
 						throw new Exception("Payment Methods Page Failed to Open");
 					}

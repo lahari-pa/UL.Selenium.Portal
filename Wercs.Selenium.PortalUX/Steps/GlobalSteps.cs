@@ -200,6 +200,41 @@ namespace WERCSmart
 			}
 		}
 
+		[StepDefinition(@"I log in with email: (.*) and password: (.*)")]
+		public void GivenILogInWithEmailXAndPasswordY(string username, string password)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I log in with email: " + username + " and password: " + password);
+			try
+			{
+				var selLandingPage = new LandingPage();
+				if (selLandingPage.Wait_for_load(10))
+				{
+					Report.Info("Clicking 'Log In' on the Landing Page");
+					selLandingPage.Click_Login();
+				}
+
+				var selLogin = new Login();
+				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
+
+				Report.Info("Entering Email: '" + username + "'");
+				selLogin.EmailField = username;
+				Report.Info("Entering Password: '" + password + "'");
+				selLogin.PasswordField = password;
+				Report.Info("Clicking login");
+				selLogin.Click_Login();
+
+				var selHomepage = new Homepage();
+				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 		[StepDefinition(@"I logout")]
 		public void GivenILogout()
 		{
@@ -224,6 +259,7 @@ namespace WERCSmart
 			if (savedAs == "New_Sub")
 			{
 				savedAs = "New_Sub" + "_" + System.DateTime.Now.ToString("HHmmddMMyy");
+				FeatureContext.Current.Add("CurrentAccount", savedAs);
 			}
 
 			try

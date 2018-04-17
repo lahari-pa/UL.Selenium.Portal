@@ -206,6 +206,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Signup.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Test.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ULSC1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,6 +258,7 @@
     <Compile Include="Selenium Classes\UserDetails.cs" />
     <Compile Include="SeleniumHelper.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
+    <Compile Include="Steps\Steps_PaymentMethods.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
     <Compile Include="Steps\Steps_Solution.cs" />
     <Compile Include="Steps\Steps_ForgottenPassword.cs" />
@@ -312,6 +318,10 @@
     <None Include="Features\Signup.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Signup1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Test.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Test.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ULSC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
