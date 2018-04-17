@@ -69,7 +69,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the chosen options and body text are correct");
 			try
 			{
-				var mySubDlg = new SubscriptionEnrollment_Dlg();
+				var mySubDlg = new SubscriptionEnrollmentDlg();
 
 				foreach (var thisRow in table.Rows)
 				{
@@ -100,7 +100,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var mySub = new SubscriptionEnrollment();
-				var mySubDlg = new SubscriptionEnrollment_Dlg();
+				var mySubDlg = new SubscriptionEnrollmentDlg();
 				var myPay = new PaymentMethods();
 
 				if (button == "Cancel")

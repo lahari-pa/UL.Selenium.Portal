@@ -93,9 +93,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//======================================================================================================== FEATURE PLAN
 
 
-		public IWebElement Get_Feature_Plan(string featurePlan)
+		public IWebElement Get_Feature_Plan(string feature_plan)
 		{
-			Report.Info("Beginning Get_Feature_Plan: " + featurePlan);
+			Report.Info("Beginning Get_Feature_Plan: " + feature_plan);
 
 			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).ToList();
 
@@ -258,8 +258,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool General_Support_click()
 		{
-			IWebElement _select_gen_support = Get_General_Support_Plan();
-			if (_select_gen_support == null)
+			IWebElement _selectGenSupport = Get_General_Support_Plan();
+			if (_selectGenSupport == null)
 			{
 				return false;
 			}
@@ -345,7 +345,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Select_Enrollment_Options");
 			Delay.Seconds(5 * Delay.SpeedFactor);
-			if (!Select_Range(articles, en_articles, form_prods))
+			if (!Select_Range(articles, enArticles, formProds))
 			{
 				Report.Info("Failed to Select Range Options");
 				return false;
@@ -498,7 +498,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return myOptionText.Text;
 		}
 
-		public bool Check_Options(string feature_plan, string articles, string en_articles, string form_prods, string support_plan)
+		public bool Check_Options(string feature_plan, string articles, string enArticles, string formProds, string supportPlan)
 		{
 			Report.Info("Beginning Check_Options");
 
