@@ -143,7 +143,9 @@ namespace WERCSmart
 
 				var selLogin = new Login();
 				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
-				var username = @"safewaretestaccount.kxxyxunf@mailosaur.io"; /*@"AllRetailersProductsCompany.kxxyxunf@mailosaur.io";*/
+				var username = @"AllRetailersProductsCompany.kxxyxunf@mailosaur.io"; /*@"AllRetailersProductsCompany.kxxyxunf@mailosaur.io";*/
+
+				//var username = @"dataconsentalwaysdisplay.kxxyxunf@mailosaur.io";
 				var password = "Welcome1!";
 
 				Report.Info("Entering Email: '" + username + "'");
@@ -152,9 +154,6 @@ namespace WERCSmart
 				selLogin.PasswordField = password;
 				Report.Info("Clicking login");
 				selLogin.Click_Login();
-
-				var selHomepage = new Homepage();
-				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 				GeneralUtilities.Wait_for_load_finish();
 			}
 			catch (Exception ex)
@@ -163,6 +162,17 @@ namespace WERCSmart
 				throw;
 			}
 		}
+
+		[Then(@"The home screen should load")]
+		public void ThenTheHomeScreenShouldLoad()
+		{
+			var selHomepage = new Homepage();
+			Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+
+		
 
 		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account")]
 		public void GivenLoginIntoWERCSmartPortal_AdminUlscRole()

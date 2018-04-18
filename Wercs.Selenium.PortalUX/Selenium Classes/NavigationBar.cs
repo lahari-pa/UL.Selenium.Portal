@@ -61,6 +61,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return (expandedOption != null && expandedOption.Displayed);
 		}
 
+		//Home, Register, Retail Partners, Supplier Reports, Solution Center, Shopping Cart, Support
 		public bool Click_Icon(string destination)
 		{
 			var allIcons = this.containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a"), 2);

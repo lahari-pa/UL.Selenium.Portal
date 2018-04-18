@@ -144,7 +144,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					return false;
 				}
 
-				el.Click();
+				el.TryClick();
 				GeneralUtilities.Wait_for_load_finish();
 				return true;
 			}
@@ -826,6 +826,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			}
 		}
+
+		public string OSHA {
+			get
+			{
+				return this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("OSHA")).FindElements(By.XPath("../following-sibling::div//label/input"))
+					.FirstOrDefault(x => x.Selected).FindElement(By.XPath("./following-sibling::span")).Text;
+				}
+			set
+			{
+				var selectItem = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("OSHA")).FindElements(By.XPath("../following-sibling::div//label/span"))
+					.FirstOrDefault(y => y.Text.Contains(value));
+
+				if (selectItem != null)
+				{
+					selectItem.FindElement(By.XPath("../input")).TryClick();
+				}
+			}
+
+		}
 		
 
 		public bool Prop65 {
@@ -1170,6 +1191,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				var dpciField = container.FindElement(By.XPath(".//input[contains(@data-bind,'value.field')]"), 2);
 				dpciField.EnterText(info.Dpci);
+
+				if (info.Quantity.Length > 0)
+				{
+					var quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity']"), 2);
+					quantityField.EnterText(info.Quantity);
+				}
+				
 				return true;
 			}
 			catch (Exception)
@@ -1388,6 +1416,309 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return false;
 		}
+
+		/*===== Safety Data Sheet Authoring ====*/
+
+		public string PersonalProtectionEquipmentRecommended
+		{
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Personal Protection Equipment"));
+
+				if (lbl != null)
+				{
+					var listOfItems = lbl.FindElements(By.XPath("../..//input"));
+					foreach (var item in listOfItems)
+					{
+						if (item.Selected)
+						{
+							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
+							SafewareReporting.Report.Info(selectedText + " is selected.");
+							return selectedText;
+						}
+					}
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+				return "";
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Personal Protection Equipment"));
+
+				if (lbl != null)
+				{
+					var thisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
+					if (thisLabel != null)
+					{
+						var thisInput = thisLabel.FindElement(By.XPath(".//../input"));
+						if (!thisInput.Selected)
+						{
+							thisInput.TryClick();
+						}
+					}
+					else
+					{
+						throw new Exception("Label for: " + value + " could not be found");
+					}
+				}
+				else
+				{
+					throw new Exception("Label personal protection equipment recommended could not be found");
+				}
+			}
+		}
+
+		public string AutoignitionTemperature {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Autoignition Temperature"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+				
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Autoignition Temperature"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+		public string MinimumIgnitionEnergy {
+			get
+			{
+				var lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Ignition"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Ignition"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+		public string Viscosity {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Viscosity"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Viscosity"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+		public string Appearance {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Appearance"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//select"));
+					return input.SelectedOption();
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Appearance"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//select"));
+					input.Select(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+		public string Odor {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Odor"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//select"));
+					return input.SelectedOption();
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Odor"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//select"));
+					input.Select(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+		public string OdorThreshold {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Odor Threshold"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//select"));
+					return input.SelectedOption();
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Odor Threshold"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//select"));
+					input.Select(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+		public string PartitionCoefficient {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Partition Coefficient"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Partition Coefficient"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
 	}
 
 	public class ProductInformation
@@ -1425,6 +1756,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string ContainerType { get; set; }
 		public string Size { get; set; }
 		public string Dpci { get; set; }
+		public string Quantity { get; set; }
+		
 	}
 
 	public class Ingredient

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Castle.Components.DictionaryAdapter;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
@@ -21,6 +22,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> SubHeadingsShowing()
 		{
 			return this.containerElement.FindElements(By.XPath(".//h2"), 2).Where(x => x.Displayed).Select(x => x.Text.Trim()).ToList();
+		}
+
+		public List<string> ListOfRetailersWithAdditionalADataConsentRequests()
+		{
+			List<string> AdditionalDataConsentRequests = new List<string>();
+			var MyDataAndRecipients = containerElement.FindElements(By.XPath(".//h2"), 2).FirstOrDefault(x => x.Text.Contains("My Data & Recipients"));
+			if (MyDataAndRecipients != null)
+			{
+				AdditionalDataConsentRequests = MyDataAndRecipients.FindElements(By.XPath("../ div[2]//a//span")).Select(x => x.Text).ToList();
+			}
+
+			return AdditionalDataConsentRequests;
+		}
+
+		public bool RetailerShowingInAdditionalDataConsentRequests(string retailer)
+		{
+			List<string> AdditionalDataConsentRequests = new List<string>();
+			var MyDataAndRecipients = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//h2"), 2).FirstOrDefault(x => x.Text.Contains("My Data & Recipients"));
+			if (MyDataAndRecipients != null)
+			{
+				AdditionalDataConsentRequests = MyDataAndRecipients.FindElements(By.XPath("../ div[2]//a//span")).Select(x => x.Text).ToList();
+				return AdditionalDataConsentRequests.Contains(retailer);
+			}
+
+			return false;
 		}
 
 		public bool ClickRetailer(string retailer, bool exact = false)
@@ -86,7 +112,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public void ClickProductsInScope()
 		{
-			this.containerElement.FindElement(By.XPath(".//a[contains(@data-bind,'tiersControl.getReport')]"), 2).Click();
+			this.containerElement.FindElement(By.XPath(".//a[contains(@data-bind,'tiersControl.getReport')]"), 2).TryClick();
+		}
+
+		public void ClickBackButton()
+		{
+			var backArrow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='header-with-back']//a/i"), 2);
+			if (backArrow != null)
+			{
+				backArrow.TryClick();
+			}
+		}
+
+		public List<string> GetAllDataConsentTiers()
+		{
+			try
+			{
+				return this.containerElement
+					.FindElements(By.XPath(".//div[contains(@class,'data-consent')]//table//tbody//tr/td"), 2).Select(x => x.Text)
+					.ToList().Where(x=>x.Length>0).ToList();
+			}
+			catch (Exception e)
+			{
+				return new List<string>();
+			}
+			
 		}
 
 		public bool SetDataConsentTier(string tier, bool trueFalse)
@@ -159,7 +209,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public void ClickClose()
 		{
-			this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2);
+			this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick();
 		}
 
 

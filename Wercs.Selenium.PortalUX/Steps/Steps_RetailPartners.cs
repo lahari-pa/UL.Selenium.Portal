@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ResourcePool;
@@ -14,33 +15,81 @@ namespace Wercs.Selenium.PortalUX.Steps
 	[Binding, Scope(Tag = "RetailPartners")]
 	class StepsRetailPartners
 	{
+		[Given(@"If I see the retail partners page I set all data consent tiers to true for all retailers in the top section")]
+		public void GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection()
+		{
+			var selRetailPartners = new RetailPartners();
+
+			if (!selRetailPartners.Wait_for_load(10))
+			{
+				Report.Info("Retail partners page has not loaded so no need to deal with it. ");
+			}
+			else
+			{
+				//get list of all top level retail partners
+				List<string> ListOfMyDataAndRecipients = selRetailPartners.ListOfRetailersWithAdditionalADataConsentRequests();
+
+				//open each one and select all data consent tiers
+				foreach (string retailer in ListOfMyDataAndRecipients)
+				{
+					if (!selRetailPartners.RetailerShowingInAdditionalDataConsentRequests(retailer))
+					{
+						Report.Info("Retailer: " + retailer + " is no longer showing.");
+						break;
+					}
+
+					Report.IsTrue(selRetailPartners.ClickRetailer(retailer),"Failed to click retailer " + retailer + "!","Retailer " + retailer + " was selected successfully!");
+					GeneralUtilities.Wait_for_load_finish();
+					Report.Screenshot();
+
+					RetailParntersDetails thisRetailParntersDetails = new RetailParntersDetails();
+					List<string> DataConsentTiers = thisRetailParntersDetails.GetAllDataConsentTiers();
+
+					foreach (string DCT in DataConsentTiers)
+					{
+						thisRetailParntersDetails.SetDataConsentTier(DCT, true);
+					}
+
+					GivenClickTheSaveChangesButton();
+					ClickCloseOnSavePopupDialog();
+
+					thisRetailParntersDetails.ClickBackButton();
+
+					GeneralUtilities.Wait_for_load_finish();
+					if (!selRetailPartners.Wait_for_load(10))
+					{
+						throw new Exception("Retail partners page has not loaded.");
+					}
+
+				}
+
+				//navigate to the home screen
+				NavigationBar myNavBar = new NavigationBar();
+				myNavBar.Click_Icon("Home");
+
+			}
+
+		}
+
+
 		[StepDefinition(@"I (should|should not) see the following subheading (.*)")]
 		public void ThenIShouldSeeTheFollowingSubheading(string should, string subheading)
 		{
+			var expected = should == "should";
 
-			TestReport.BeginTestModule(GlobalParameters.StepCount, "Checking that the subheading " + subheading + " " + should + " be showing");
-			try
+			var selRetailPartners = new RetailPartners();
+
+			if (!selRetailPartners.Wait_for_load(10))
 			{
-				var expected = should == "should";
-
-				var selRetailPartners = new RetailPartners();
-
-				if (!selRetailPartners.Wait_for_load(10))
-				{
-					throw new Exception("Page failed to load!");
-				}
-
-				var subHeadingsShowing = selRetailPartners.SubHeadingsShowing();
-				Report.IsTrue(subHeadingsShowing.Contains(subheading.Trim()) == expected,
-					"Subheading " + (expected ? "was not" : "was") + " showing as expected! Expected: '" + subheading + "', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
-					"Subheading " + (expected ? "was" : "was not") + " showing: '" + subheading + "', as expected!");
-				Report.Screenshot();
+				throw new Exception("Page failed to load!");
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+
+			var subHeadingsShowing = selRetailPartners.SubHeadingsShowing();
+			Report.IsTrue(subHeadingsShowing.Contains(subheading.Trim()) == expected,
+				"Subheading " + (expected ? "was not" : "was") + " showing as expected! Expected: '" + subheading + "', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
+				"Subheading " + (expected ? "was" : "was not") + " showing: '" + subheading + "', as expected!");
+			Report.Screenshot();
+			
 		}
 
 		[StepDefinition(@"I should see the following heading (.*)")]
@@ -100,6 +149,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+
 
 		[StepDefinition(@"I confirm that there is a section labeled: (.*)")]
 		public void ConfirmHeadingShowing(string header)

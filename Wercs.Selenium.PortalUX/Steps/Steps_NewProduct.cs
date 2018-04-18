@@ -236,7 +236,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selSelectRetailers.Wait_for_load(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
 		}
 
-		[StepDefinition(@"I select the retailer: (.*) in the 'Select Retailers' window")]
+		
+		[StepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
 		public void ThenISelectTheRetailer_InTheWindow(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();
@@ -629,6 +630,122 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Given(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
+		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOSHACompliantSDSISelect(string selection)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+				"Review and submit tab is loaded.");
+
+			selNewProduct.OSHA = selection;
+
+			Report.IsTrue(selNewProduct.OSHA.Contains(selection),
+				"Failed to set OSHA value to: " + selection,
+				"Successfully set OSHA value to: " + selection);
+		}
+
+		[Given(@"in the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: (.*)")]
+		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(string selection)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+				"Review and submit tab is loaded.");
+
+			selNewProduct.PersonalProtectionEquipmentRecommended = selection;
+
+			Report.IsTrue(selNewProduct.PersonalProtectionEquipmentRecommended.Contains(selection),
+				"Failed to set Personal Protection Equipment Recommended value to: " + selection,
+				"Successfully set Personal Protection Equipment Recommended value to: " + selection);
+		}
+
+		[Given(@"in the Review and Submit tab of the New Product Page for Autoignition I enter: (.*)")]
+		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(string selection)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+				"Review and submit tab is loaded.");
+
+			selNewProduct.AutoignitionTemperature = selection;
+
+		}
+
+		[Given(@"in the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: (.*)")]
+		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(string selection)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+				"Review and submit tab is loaded.");
+
+			selNewProduct.MinimumIgnitionEnergy  = selection;
+
+		}
+
+		[Given(@"in the Review and Submit tab of the New Product Page for Viscosity I enter: (.*)")]
+		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(string selection)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+				"Review and submit tab is loaded.");
+
+			selNewProduct.Viscosity = selection;
+
+		}
+
+		[Given(@"in the Review and Submit tab of the New Product Page for Appearance I select: (.*)")]
+		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(string selection)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+				"Review and submit tab is loaded.");
+
+			selNewProduct.Appearance = selection;
+
+			Report.IsTrue(selNewProduct.Appearance.Contains(selection),
+				"Failed to set Appearance value to: " + selection,
+				"Successfully set Appearance value to: " + selection);
+		}
+
+		[Given(@"in the Review and Submit tab of the New Product Page for Odor I select: (.*)")]
+		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(string selection)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+				"Review and submit tab is loaded.");
+
+			selNewProduct.Odor = selection;
+
+			Report.IsTrue(selNewProduct.Odor.Contains(selection),
+				"Failed to set Odor value to: " + selection,
+				"Successfully set Odor value to: " + selection);
+		}
+
+		[Given(@"in the Review and Submit tab of the New Product Page for Odor Threshold I select: (.*)")]
+		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(string selection)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+				"Review and submit tab is loaded.");
+
+			selNewProduct.OdorThreshold = selection;
+
+			Report.IsTrue(selNewProduct.OdorThreshold.Contains(selection),
+				"Failed to set Odor Threshold value to: " + selection,
+				"Successfully set Odor Threshold value to: " + selection);
+		}
+
+		[Given(@"in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: (.*)")]
+		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPartitionCoefficientISelect(string selection)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+				"Review and submit tab is loaded.");
+
+			selNewProduct.PartitionCoefficient = selection;
+			
+		}
+
+
+
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Prop65 I select: (No|Yes)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForPropISelectNoOrYes(string noOrYes)
@@ -841,6 +958,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Container Type: " + upcInfo.ContainerType);
 			Report.Info("Size: " + upcInfo.Size);
 			Report.Info("DPCI: " + upcInfo.Dpci);
+			Report.Info("Quantity: " + upcInfo.Quantity);
 
 			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
 		}
