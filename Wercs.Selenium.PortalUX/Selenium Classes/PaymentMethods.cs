@@ -315,21 +315,75 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		//===================================================================================================== PRIMARY ACCOUNT CONTACT
+
 		//Primary Account Contact Section
 		[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Primary Account Contact']/..")]
 		private IWebElement _section_pac;
+
+		public bool Edit_Primary_Account_Contact(string firstName = "", string lastName = "", string email = "")
+		{
+			Report.Info("Beginning Edit_Primary_Account_Contact");
+
+			if (!Exists)
+			{
+				Report.Info("Not on Edit Address Form");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Edit Address Form Open");
+			if (firstName != "")
+			{
+				IWebElement myFirst = _section_pac.FindElements(By.XPath(".//input[@name='firstName']"), 10).FirstOrDefault();
+				if (myFirst == null)
+				{
+					Report.Info("Failed to Find First Name Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing First Name: " + firstName);
+				myFirst.EnterText(firstName);
+			}
+			if (lastName != "")
+			{
+				IWebElement myLast = _section_pac.FindElements(By.XPath(".//input[@name='lastName']"), 10).FirstOrDefault();
+				if (myLast == null)
+				{
+					Report.Info("Failed to Find Last Name Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Last Name: " + lastName);
+				myLast.EnterText(lastName);
+			}
+			if (email != "")
+			{
+				IWebElement myEmail = _section_pac.FindElements(By.XPath(".//input[@name='email']"), 10).FirstOrDefault();
+				if (myEmail == null)
+				{
+					Report.Info("Failed to Find Email Address Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Email Address: " + email);
+				myEmail.EnterText(email);
+			}
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			Report.Success("Primary Account Contact Edited");
+			Report.Screenshot();
+			return true;
+		}
+
+
+		//================================================================================================= BILLING ADDRESS
 
 		//Billing Address Section
 		[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Billing Address']/..")]
 		private IWebElement _section_bill;
 
-		//Shipping Address Section
-		[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Shipping Address']/..")]
-		private IWebElement _section_ship;
-
-		public bool Field_Headers_Check(List<string> myList)
+		public bool Billing_Headers_Check(List<string> myList)
 		{
-			Report.Info("Beginning Field_Headers_Check");
+			Report.Info("Beginning Billing_Headers_Check");
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
@@ -478,116 +532,127 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
-
 		//============================================================================= FIELDS
 
-		//First Name
-		[FindsBy(How = How.XPath, Using = ".//input[@name='firstName']")]
-		private IWebElement _txtfirstname;
-
-		public bool Enter_First_Name(string first_name)
+		public bool Edit_Billing_Address(string address1 = "", string address2 = "", string city = "", string state = "", string zip = "", string country = "", string phone = "")
 		{
-			Report.Info("Editing First Name: " + first_name);
-			_txtfirstname.EnterText(first_name);
-			return true;
-		}
+			Report.Info("Beginning Edit_Billing_Address");
 
-		//Last Name
-		[FindsBy(How = How.XPath, Using = ".//input[@name='lastName']")]
-		private IWebElement _txtlastname;
+			var myPay = new PaymentMethods();
 
-		public bool Enter_Last_Name(string last_name)
-		{
-			Report.Info("Editing Last Name: " + last_name);
-			_txtlastname.EnterText(last_name);
-			return true;
-		}
-
-		//Email Address
-		[FindsBy(How = How.XPath, Using = ".//input[@name='email']")]
-		private IWebElement _txtemail;
-
-		public bool Enter_Email_Address(string email_address)
-		{
-			Report.Info("Editing Email Address: " + email_address);
-			_txtemail.EnterText(email_address);
-			return true;
-		}
-
-		//Address One
-		[FindsBy(How = How.XPath, Using = ".//input[@name='address1']")]
-		private IWebElement _txtaddress_one;
-
-		public bool Enter_Address_One(string address_one)
-		{
-			Report.Info("Editing Address One: " + address_one);
-			_txtaddress_one.EnterText(address_one);
-			return true;
-		}
-
-		//Address Two
-		[FindsBy(How = How.XPath, Using = ".//input[@name='address2']")]
-		private IWebElement _txtaddress_two;
-
-		public bool Enter_Address_Two(string address_two)
-		{
-			Report.Info("Editing Address Two: " + address_two);
-			_txtaddress_two.EnterText(address_two);
-			return true;
-		}
-
-		//City
-		[FindsBy(How = How.XPath, Using = ".//input[@name='city']")]
-		private IWebElement _txtcity;
-
-		public bool Enter_City(string city)
-		{
-			Report.Info("Editing City: " + city);
-			_txtcity.EnterText(city);
-			return true;
-		}
-
-		//State
-		[FindsBy(How = How.XPath, Using = ".//input[@name='state']")]
-		private IWebElement _txtstate;
-
-		public bool Enter_State(string state)
-		{
-			Report.Info("Editing State: " + state);
-			_txtstate.EnterText(state);
-			return true;
-		}
-
-		//Zip Code
-		[FindsBy(How = How.XPath, Using = ".//input[@name='zip']")]
-		private IWebElement _txtzip;
-
-		public bool Enter_Zip_Code(string zip)
-		{
-			Report.Info("Editing Zip Code: " + zip);
-			_txtzip.EnterText(zip);
-			return true;
-		}
-
-		//Country
-		[FindsBy(How = How.XPath, Using = ".//select[@name='country']")]
-		private IWebElement _select_country;
-
-		public bool Select_Country(string country)
-		{
-			Report.Info("Editing Country: " + country);
-			_select_country.Select(country);
-			return true;
-		}
-
-		//Phone Number
-		[FindsBy(How = How.XPath, Using = ".//input[@name='phone']")]
-		private IWebElement _txtphone;
-
-		public bool Enter_Phone_Number(string phone_number)
-		{
-			Report.Info("Editing Phone Number: " + phone_number);
-			_txtphone.EnterText(phone_number);
+			if (!myPay.Change_click())
+			{
+				Report.Info("Failed to Click Change Button");
+				Report.Screenshot();
+				return false;
+			}
+			Delay.Seconds(2 * Delay.SpeedFactor);
+			if (!Exists)
+			{
+				Report.Info("Not on Edit Address Form");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Edit Address Form Open");
+			if (address1 != "")
+			{
+				IWebElement myAdd1 = _section_bill.FindElements(By.XPath(".//input[@name='address1']"), 10).FirstOrDefault();
+				if (myAdd1 == null)
+				{
+					Report.Info("Failed to Find Address Line 1 Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Address Line 1: " + address1);
+				myAdd1.EnterText(address1);
+			}
+			if (address2 != "")
+			{
+				IWebElement myAdd2 = _section_bill.FindElements(By.XPath(".//input[@name='address2']"), 10).FirstOrDefault();
+				if (myAdd2 == null)
+				{
+					Report.Info("Failed to Find Address Line 2 Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Address Line 2: " + address2);
+				myAdd2.EnterText(address2);
+			}
+			if (city != "")
+			{
+				IWebElement myCity = _section_bill.FindElements(By.XPath(".//input[@name='city']"), 10).FirstOrDefault();
+				if (myCity == null)
+				{
+					Report.Info("Failed to Find City Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing City: " + city);
+				myCity.EnterText(city);
+			}
+			if (state != "")
+			{
+				IWebElement myState = _section_bill.FindElements(By.XPath(".//input[@name='state']"), 10).FirstOrDefault();
+				if (myState == null)
+				{
+					Report.Info("Failed to Find State Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing State: " + state);
+				myState.EnterText(state);
+			}
+			if (state != "")
+			{
+				IWebElement myState = _section_bill.FindElements(By.XPath(".//input[@name='state']"), 10).FirstOrDefault();
+				if (myState == null)
+				{
+					Report.Info("Failed to Find State Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing State: " + state);
+				myState.EnterText(state);
+			}
+			if (zip != "")
+			{
+				IWebElement myZip = _section_bill.FindElements(By.XPath(".//input[@name='zip']"), 10).FirstOrDefault();
+				if (myZip == null)
+				{
+					Report.Info("Failed to Find Zip Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Zip Code: " + zip);
+				myZip.EnterText(zip);
+			}
+			if (country != "")
+			{
+				IWebElement myCountry = _section_bill.FindElements(By.XPath(".//input[@name='country']"), 10).FirstOrDefault();
+				if (myCountry == null)
+				{
+					Report.Info("Failed to Find Zip Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Zip Code: " + country);
+				myCountry.Select(country);
+			}
+			if (phone != "")
+			{
+				IWebElement myPhone = _section_bill.FindElements(By.XPath(".//input[@name='phone']"), 10).FirstOrDefault();
+				if (myPhone == null)
+				{
+					Report.Info("Failed to Find Phone Text Box");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("Editing Phone Number: " + phone);
+				myPhone.EnterText(phone);
+			}
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			Report.Success("Billing Address Edited");
+			Report.Screenshot();
 			return true;
 		}
 
@@ -624,6 +689,134 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+
+		//==================================================================================== SHIPPING ADDRESS
+
+		//Shipping Address Section
+		[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Shipping Address']/..")]
+		private IWebElement _section_ship;
+
+		public bool Shipping_Headers_Check(List<string> myList)
+		{
+			Report.Info("Beginning Shipping_Headers_Check");
+
+			Delay.Seconds(3 * Delay.SpeedFactor);
+
+			if (!Exists)
+			{
+				Report.Info("Not on Edit Address Form");
+				Report.Screenshot();
+				return false;
+			}
+
+			IWebElement myFieldHeader = null;
+
+			foreach (var field in myList)
+			{
+				Report.Info("Field = " + field);
+				switch (field)
+				{
+					case "Address 1":
+						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Address Line 1']"), 10).FirstOrDefault();
+						if (!myFieldHeader.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Address 2":
+						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Address Line 2']"), 10).FirstOrDefault();
+						if (!myFieldHeader.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "City":
+						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='City']"), 10).FirstOrDefault();
+						if (!myFieldHeader.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "State":
+						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='State']"), 10).FirstOrDefault();
+						if (!myFieldHeader.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Zip Code":
+						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Zip']"), 10).FirstOrDefault();
+						if (!myFieldHeader.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Country":
+						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Country']"), 10).FirstOrDefault();
+						if (!myFieldHeader.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Phone Number":
+						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Phone']"), 10).FirstOrDefault();
+						if (!myFieldHeader.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					default:
+						Report.Error("Unable to Find Correct Field Name");
+						return false;
+				}
+			}
+			Report.Info("Shipping Address Fields are Correct");
+			Report.Screenshot();
+			return true;
+		}
+
+		public bool Shipping_Address_Hidden()
+		{
+			Report.Info("Shipping_Address_Hidden");
+
+			if (_section_ship.Displayed)
+			{
+				Report.Info("Shipping Address Not Hidden");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Shipping Address Hidden");
+			Report.Screenshot();
+			return true;
+		}
 
 
 	}

@@ -86,39 +86,119 @@ namespace Wercs.Selenium.PortalUX.Features
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TEST", ((string[])(null)));
 #line 13
 this.ScenarioSetup(scenarioInfo);
-#line 15
-testRunner.Given("I log in with email: User_420183bb6907.kxxyxunf@mailosaur.io and password: Pa4*yt" +
-                    "uufnn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 16
+testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Value"});
+            table1.AddRow(new string[] {
+                        "Email",
+                        "User_<random>"});
+            table1.AddRow(new string[] {
+                        "Country",
+                        "UNITED STATES"});
+            table1.AddRow(new string[] {
+                        "FirstName",
+                        "Richard"});
+            table1.AddRow(new string[] {
+                        "LastName",
+                        "Smith"});
+            table1.AddRow(new string[] {
+                        "Password",
+                        "Pa4*ytuufnn"});
+            table1.AddRow(new string[] {
+                        "Address1",
+                        "Address 1"});
+            table1.AddRow(new string[] {
+                        "Address2",
+                        "Address 2"});
+            table1.AddRow(new string[] {
+                        "City",
+                        "City Name"});
+            table1.AddRow(new string[] {
+                        "State",
+                        "Florida"});
+            table1.AddRow(new string[] {
+                        "Zip",
+                        "999"});
+            table1.AddRow(new string[] {
+                        "CompanyName",
+                        "Company 1"});
+            table1.AddRow(new string[] {
+                        "CompanyPhone",
+                        "123-456-7889"});
+            table1.AddRow(new string[] {
+                        "EmergencyPhoneNumber",
+                        "123-456-7789"});
+            table1.AddRow(new string[] {
+                        "SupplierType",
+                        "Manufacturer"});
+            table1.AddRow(new string[] {
+                        "CityQuestion",
+                        "CityQuestion"});
+            table1.AddRow(new string[] {
+                        "CityHint",
+                        "CityHint"});
+            table1.AddRow(new string[] {
+                        "CarQuestion",
+                        "CarQuestion"});
+            table1.AddRow(new string[] {
+                        "CarHint",
+                        "CarHint"});
+            table1.AddRow(new string[] {
+                        "FriendQuestion",
+                        "FriendQuestion"});
+            table1.AddRow(new string[] {
+                        "FriendHint",
+                        "FriendHint"});
+            table1.AddRow(new string[] {
+                        "JobQuestion",
+                        "JobQuestion"});
+            table1.AddRow(new string[] {
+                        "JobHint",
+                        "JobHint"});
+            table1.AddRow(new string[] {
+                        "MascotQuestion",
+                        "MascotQuestion"});
+            table1.AddRow(new string[] {
+                        "MascotHint",
+                        "MascotHint"});
+            table1.AddRow(new string[] {
+                        "Pin",
+                        "1234"});
+#line 17
+testRunner.Given("If not already created, I create a user: New_Sub with the following parameters:", ((string)(null)), table1, "Given ");
 #line 44
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 45
 testRunner.Then("I click on NEW SUBSCRIPTION", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Articles",
-                        "Enhanced Articles",
-                        "Formulated Products",
-                        "Feature Plan",
-                        "Support Services Plan"});
-            table1.AddRow(new string[] {
-                        "Up to 1 Product(s)",
-                        "Up to 1 Product(s)",
-                        "Up to 1 Product(s)",
-                        "Limited",
-                        "General Support"});
-#line 46
-testRunner.Then("I select the following enrollment options", ((string)(null)), table1, "Then ");
-#line 49
-testRunner.Then("I cancel the Enrollment dialog, confirm correct page opens and Proceed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Articles",
                         "Enhanced Articles",
                         "Formulated Products",
                         "Feature Plan",
+                        "Support Services Plan"});
+            table2.AddRow(new string[] {
+                        "Up to 1 Product(s)",
+                        "Up to 1 Product(s)",
+                        "Up to 1 Product(s)",
+                        "Limited",
+                        "General Support"});
+#line 46
+testRunner.Then("I select the following enrollment options", ((string)(null)), table2, "Then ");
+#line 49
+testRunner.Then("I cancel the Enrollment dialog, confirm correct page opens and Proceed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Articles",
+                        "Enhanced Articles",
+                        "Formulated Products",
+                        "Feature Plan",
                         "Support Services Plan",
                         "Body Text"});
-            table2.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Up to 1 Product(s)",
                         "Up to 1 Product(s)",
                         "Up to 1 Product(s)",
@@ -127,40 +207,105 @@ testRunner.Then("I cancel the Enrollment dialog, confirm correct page opens and 
                         "Your new purchase will be prorated based on the credit and time left in your curr" +
                             "ent subscription. Checkout to see the final amount."});
 #line 50
-testRunner.And("I confirm the chosen options and body text are correct", ((string)(null)), table2, "And ");
+testRunner.And("I confirm the chosen options and body text are correct", ((string)(null)), table3, "And ");
 #line 53
  testRunner.Then("I click on Checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 54
+ testRunner.Then("I check the Payment Methods heading and sub headings are correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Options"});
+            table4.AddRow(new string[] {
+                        "Credit Card"});
+            table4.AddRow(new string[] {
+                        "ACH"});
+            table4.AddRow(new string[] {
+                        "Wire Transfer"});
+#line 55
+ testRunner.Then("I confirm the following payment options are available", ((string)(null)), table4, "Then ");
+#line 60
+ testRunner.Then("I confirm that the Contact Information is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 61
+ testRunner.Then("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 62
  testRunner.And("I open the Edit Address form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
  testRunner.Then("I confirm the Sub Headings are correct: Primary Account Contact, Billing Address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "First Name"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Last Name"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Email Address"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Address 1"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Address 2"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "City"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "State"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Country"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Zip Code"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Phone Number"});
-            table3.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Shipping/Billing Checkbox"});
 #line 64
- testRunner.Then("I confirm the Edit Address form has the correct fields", ((string)(null)), table3, "Then ");
+ testRunner.Then("I confirm the Edit Address form has the correct fields", ((string)(null)), table5, "Then ");
+#line 77
+ testRunner.Then("I un-check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table6.AddRow(new string[] {
+                        "Address 1"});
+            table6.AddRow(new string[] {
+                        "Address 2"});
+            table6.AddRow(new string[] {
+                        "City"});
+            table6.AddRow(new string[] {
+                        "State"});
+            table6.AddRow(new string[] {
+                        "Country"});
+            table6.AddRow(new string[] {
+                        "Zip Code"});
+            table6.AddRow(new string[] {
+                        "Phone Number"});
+#line 78
+ testRunner.And("I confirm the Shipping Address form has the correct fields", ((string)(null)), table6, "And ");
+#line 87
+ testRunner.Then("I check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 88
+ testRunner.Then("I confirm the Shipping Address is hidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 89
+ testRunner.Then("I cancel the Edit Address form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Address Line 1",
+                        "Address Line 2",
+                        "City",
+                        "State",
+                        "Zip Code",
+                        "Country",
+                        "Phone Number"});
+            table7.AddRow(new string[] {
+                        "Address_New",
+                        "<empty>",
+                        "<empty>",
+                        "<empty>",
+                        "<empty>",
+                        "<empty>",
+                        "<empty>"});
+#line 90
+ testRunner.Then("I edit the Billing Address for user saved as: New_Sub", ((string)(null)), table7, "Then ");
+#line 94
+ testRunner.And("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

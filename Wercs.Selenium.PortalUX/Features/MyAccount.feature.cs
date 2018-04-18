@@ -349,6 +349,54 @@ testRunner.Then("I click on Checkout", ((string)(null)), ((TechTalk.SpecFlow.Tab
                         "Shipping/Billing Checkbox"});
 #line 90
  testRunner.Then("I confirm the Edit Address form has the correct fields", ((string)(null)), table6, "Then ");
+#line 103
+ testRunner.Then("I un-check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table7.AddRow(new string[] {
+                        "Address 1"});
+            table7.AddRow(new string[] {
+                        "Address 2"});
+            table7.AddRow(new string[] {
+                        "City"});
+            table7.AddRow(new string[] {
+                        "State"});
+            table7.AddRow(new string[] {
+                        "Country"});
+            table7.AddRow(new string[] {
+                        "Zip Code"});
+            table7.AddRow(new string[] {
+                        "Phone Number"});
+#line 104
+ testRunner.And("I confirm the Shipping Address form has the correct fields", ((string)(null)), table7, "And ");
+#line 113
+ testRunner.Then("I check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 114
+ testRunner.Then("I confirm the Shipping Address is hidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 115
+ testRunner.Then("I cancel the Edit Address form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Address Line 1",
+                        "Address Line 2",
+                        "City",
+                        "State",
+                        "Zip Code",
+                        "Country",
+                        "Phone Number"});
+            table8.AddRow(new string[] {
+                        "Address_New",
+                        "<empty>",
+                        "<empty>",
+                        "<empty>",
+                        "<empty>",
+                        "<empty>",
+                        "<empty>"});
+#line 116
+ testRunner.Then("I edit the Billing Address for user saved as: New_Sub", ((string)(null)), table8, "Then ");
+#line 120
+ testRunner.And("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

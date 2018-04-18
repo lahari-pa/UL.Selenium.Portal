@@ -180,7 +180,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I confirm the Edit Address form has the correct fields")]
 		public void ThenIConfirmTheEditAddressFormHasTheCorrectFields(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " I confirm the Edit Address form has the correct fields");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Edit Address form has the correct fields");
 			try
 			{
 				var myPay = new PaymentMethods_Edit_Address();
@@ -192,7 +192,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					myList.Add(Row["Field"]);
 				}
 
-				if (!myPay.Field_Headers_Check(myList))
+				if (!myPay.Billing_Headers_Check(myList))
 				{
 					throw new Exception("Failed to Check Fields are Correct");
 				}
@@ -205,8 +205,212 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I (check|un-check) the Shipping Address is the same as the billing address checkbox")]
+		public void ThenICheckTheShippingAdreessIsTheSameAsTheBillingAddressCheckbox(string check)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I " + check + " the Shipping Adreess is the same as the billing address checkbox");
+			try
+			{
+				var myPay = new PaymentMethods_Edit_Address();
 
+				bool myCheck = check != "un-check";
 
+				Report.IsTrue(myPay.Shipp_Same_As_Bill_Check(myCheck), "Failed to " + check + " Checkbox",
+					"Successfully " + check + "ed Checkbox");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm the Shipping Address form has the correct fields")]
+		public void ThenIConfirmTheShippingAddressFormHasTheCorrectFields(Table table)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Shipping Address form has the correct fields");
+			try
+			{
+				var myPay = new PaymentMethods_Edit_Address();
+
+				List<string> myList = new List<string>();
+
+				foreach (var Row in table.Rows)
+				{
+					myList.Add(Row["Field"]);
+				}
+
+				if (!myPay.Shipping_Headers_Check(myList))
+				{
+					throw new Exception("Failed to Check Fields are Correct");
+				}
+				Report.Success("Fields are Correct");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm the Shipping Address is hidden")]
+		public void ThenIConfirmTheShippingAddressIsHidden()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Shipping Address is hidden");
+			try
+			{
+				var myPay = new PaymentMethods_Edit_Address();
+
+				Report.IsTrue(myPay.Shipping_Address_Hidden(), "Shipping Address Found", "Shipping Address is Hidden");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I cancel the Edit Address form")]
+		public void ThenICancelTheEditAddressForm()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I cancel the Edit Address form");
+			try
+			{
+				var myPay = new PaymentMethods_Edit_Address();
+
+				Report.IsTrue(myPay.Cancel_click(), "Failed to Click Cancel", "Cancel Button Clicked");
+				Delay.Seconds(2 * Delay.SpeedFactor);
+				var myPaymentOp = new PaymentMethods();
+
+				if (!myPaymentOp.Exists)
+				{
+					throw new Exception("Failed to Open Payment Methods Page");
+				}
+				Report.Success("Payment Methods Page Open");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I edit the Primary Account Contact")]
+		public void ThenIEditThePrimaryAccountContact(Table table)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I edit the Primary Account Contact");
+			try
+			{
+				var myPay = new PaymentMethods_Edit_Address();
+
+				foreach (var thisRow in table.Rows)
+				{
+					string firstName = thisRow["First Name"];
+					string lastName = thisRow["Last Name"];
+					string email = thisRow["Email Address"];
+
+					if (firstName == "<empty>")
+					{
+						firstName = "";
+					}
+					if (lastName == "<empty>")
+					{
+						lastName = "";
+					}
+					if (email == "<empty>")
+					{
+						email = "";
+					}
+
+					Report.IsTrue(myPay.Edit_Primary_Account_Contact(firstName, lastName, email),
+						"Failed to Edit Primary Account Contact", "Primary Account Contact Edited Successfully");
+
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I edit the Billing Address for user saved as: (.*)")]
+		public void ThenIEditTheBillingAddress(string savedAs, Table table)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I edit the Billing Address");
+			try
+			{
+				var myPay = new PaymentMethods_Edit_Address();
+
+				if (savedAs == "New_Sub")
+				{
+					if (FeatureContext.Current.ContainsKey("CurrentAccount"))
+					{
+						savedAs = FeatureContext.Current["CurrentAccount"].ToString();
+					}
+					Report.Info("Account = " + savedAs);
+				}
+
+				var wsUser = (WERCSmartUser)Context.GetFromContext(savedAs);
+				foreach (var thisRow in table.Rows)
+				{
+					string address1 = thisRow["Address Line 1"];
+					string address2 = thisRow["Address Line 2"];
+					string city = thisRow["City"];
+					string state = thisRow["State"];
+					string zip = thisRow["Zip Code"];
+					string country = thisRow["Country"];
+					string phone_no = thisRow["Phone Number"];
+
+					if (address1 == "<empty>")
+					{
+						address1 = "";
+					}
+					if (address2 == "<empty>")
+					{
+						address2 = "";
+					}
+					if (city == "<empty>")
+					{
+						city = "";
+					}
+					if (state == "<empty>")
+					{
+						state = "";
+					}
+					if (zip == "<empty>")
+					{
+						zip = "";
+					}
+					if (country == "<empty>")
+					{
+						country = "";
+					}
+					if (phone_no == "<empty>")
+					{
+						phone_no = "";
+					}
+
+					Report.IsTrue(myPay.Edit_Billing_Address(address1, address2, city, state, zip, country, phone_no),
+						"Failed to Edit Billing Address", "Billing Address Edited Successfully");
+
+					wsUser.Address1 = address1 == "" ? wsUser.Address1 : address1;
+					wsUser.Address2 = address2 == "" ? wsUser.Address2 : address2;
+					wsUser.City = city == "" ? wsUser.City : city;
+					wsUser.State = state == "" ? wsUser.State : state;
+					wsUser.Zip = zip == "" ? wsUser.Zip : zip;
+					wsUser.Country = country == "" ? wsUser.Country : country;
+					wsUser.CompanyPhone = phone_no == "" ? wsUser.CompanyPhone : phone_no;
+
+					Context.AddToContext(savedAs, wsUser);
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 
 	}

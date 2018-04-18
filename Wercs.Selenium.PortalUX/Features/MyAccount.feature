@@ -100,5 +100,21 @@ Then I click on Checkout
  | Zip Code                  |
  | Phone Number              |
  | Shipping/Billing Checkbox |
-
-
+ Then I un-check the Shipping Address is the same as the billing address checkbox
+ And I confirm the Shipping Address form has the correct fields
+ | Field                     |
+ | Address 1                 |
+ | Address 2                 |
+ | City                      |
+ | State                     |
+ | Country                   |
+ | Zip Code                  |
+ | Phone Number              |
+ Then I check the Shipping Address is the same as the billing address checkbox
+ Then I confirm the Shipping Address is hidden
+ Then I cancel the Edit Address form
+ Then I edit the Billing Address for user saved as: New_Sub
+ # ** If field is not to be changed, enter <empty> into table **
+ | Address Line 1 | Address Line 2 | City    | State   | Zip Code | Country | Phone Number |
+ | Address_New    | <empty>        | <empty> | <empty> | <empty>  | <empty> | <empty>      |
+ And I confirm that the Billing Address is correct for Account saved as New_Sub
