@@ -9,7 +9,7 @@
 @wercsmart
 @run_ProductRegistration
 
-Feature: Product Registration
+Feature: Product Registration 
 
 Background:
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

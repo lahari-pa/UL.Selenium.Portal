@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using ResourcePool;
 using SafewareReporting;
+using SafewareSeleniumUtilities;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 
@@ -297,6 +298,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Info("Confirm Excel File is downloaded with name: " + file);
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				Report.Info("Downloads folder: " + downloadsFolder);
+
 				var dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
 				{
@@ -311,38 +314,38 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		//[StepDefinition(@"I confirm the excel file saved as (.*) can be opened and contains data")]
-		//public void ThenConfirmTheExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
-		//{
-		//	TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+		[StepDefinition(@"I confirm the excel file saved as (.*) can be opened and contains data")]
+		public void ThenConfirmTheExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 
-		//	try
-		//	{
-		//		Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
-		//		var File = Context.GetFromContext(savedAs);
-		//		if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
-		//		{
-		//			var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
-		//			Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
-		//			var FirstRow = ExcelUtils.Excel_GetRow(0);
-		//			Report.Info("First row contained: '" + String.Join("', '", FirstRow) + "'");
-		//			bool Data = false;
-		//			for (int i = 1; i <= ExcelUtils.Excel_GetNoRows(); i++)
-		//			{
-		//				var RowData = ExcelUtils.Excel_GetRow(i);
-		//				Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
-		//				Data = true;
-		//			}
+			try
+			{
+				Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+				var File = Context.GetFromContext(savedAs);
+				if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+				{
+					var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
+					Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+					var FirstRow = ExcelUtils.Excel_GetRow(0);
+					Report.Info("First row contained: '" + string.Join("', '", FirstRow) + "'");
+					bool Data = false;
+					for (int i = 1; i <= ExcelUtils.Excel_GetNoRows(); i++)
+					{
+						var RowData = ExcelUtils.Excel_GetRow(i);
+						Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
+						Data = true;
+					}
 
-		//			Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		Report.Failure(ex.Message);
-		//		throw;
-		//	}
-		//}
+					Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 		[StepDefinition(@"I ensure the Data Consent Tier Sliders are set as follows:")]
 		public void DataConsentTiersSet(Table expected)
