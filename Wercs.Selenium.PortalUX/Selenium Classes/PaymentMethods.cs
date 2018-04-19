@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
+using Selenium.Core.ExtensionMethods;
 using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Classes;
 using Global = SeleniumUtilities.Global;
@@ -77,6 +78,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					Report.Success("Payment Method Found");
 					method.Click();
+					Delay.Seconds(3 * Delay.SpeedFactor);
 					return true;
 				}
 				Report.Info("Payment Method Doesn't Match");
@@ -103,6 +105,490 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Info("Payment Method Doesn't Match");
 			}
 			Report.Info("Failed to Find Payment Method");
+			return false;
+		}
+
+		//==================================================================================== CREDIT CARD
+
+		public bool Credit_Card_Fields_Check(List<string> myList)
+		{
+			Report.Info("Beginning Credit_Card_Fields_Check");
+
+			Delay.Seconds(3 * Delay.SpeedFactor);
+
+			if (!Exists)
+			{
+				Report.Info("Not on Payment Methods Page");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+
+			IWebElement _lbl_card_type = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardType']"), 2);
+			IWebElement _lbl_card_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardNumber']"), 2);
+			IWebElement _lbl_ex_date = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardExpirationMonth']"), 2);
+			IWebElement _lbl_cvv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-cardSecurityCode']"), 2);
+			IWebElement _lbl_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardHolderName']"), 2);
+
+
+			foreach (var field in myList)
+			{
+				Report.Info("Field = " + field);
+				switch (field)
+				{
+					case "Card Type":
+						if (!_lbl_card_type.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Card Number":
+						if (!_lbl_card_no.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Expiration Date":
+						if (!_lbl_ex_date.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "CVV":
+						if (!_lbl_cvv.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Cardholder Name":
+						if (!_lbl_cardholder_name.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					default:
+						Report.Error("Unable to Find Correct Field Name");
+						return false;
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			Report.Info("Credit Card Fields are Correct");
+			Report.Screenshot();
+			return true;
+		}
+
+		public bool Credit_Card_Error_Check(List<string> myList)
+		{
+			Report.Info("Beginning Credit_Card_Error_Check");
+
+			Delay.Seconds(3 * Delay.SpeedFactor);
+
+			if (!Exists)
+			{
+				Report.Info("Not on Payment Methods Page");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+
+			IWebElement _err_card_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-creditCardNumber']"), 2);
+			IWebElement _err_ex_date = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-creditCardExpirationMonth']"), 2);
+			IWebElement _err_cvv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-cardSecurityCode']"), 2);
+			IWebElement _err_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-creditCardHolderName']"), 2);
+
+
+			foreach (var field in myList)
+			{
+				Report.Info("Field = " + field);
+				switch (field)
+				{
+					case "Card Number":
+						if (!_err_card_no.Displayed)
+						{
+							Report.Info(field + " Error Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Error Displayed");
+						break;
+					case "Expiration Date":
+						if (!_err_ex_date.Displayed)
+						{
+							Report.Info(field + " Error Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Error Displayed");
+						break;
+					case "CVV":
+						if (!_err_cvv.Displayed)
+						{
+							Report.Info(field + " Error Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Error Displayed");
+						break;
+					case "Cardholder Name":
+						if (!_err_cardholder_name.Displayed)
+						{
+							Report.Info(field + " Error Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					default:
+						Report.Error("Unable to Find Correct Error Name");
+						return false;
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			Report.Info("Credit Card Errors are Correct");
+			Report.Screenshot();
+			return true;
+		}
+
+		public bool Enter_Credit_Card_Details(string card_type, string card_no, string exp_month, string exp_year, string cvv, string cardh_name)
+		{
+			Report.Info("Beginning Enter_Credit_Card_Details");
+
+			Delay.Seconds(3 * Delay.SpeedFactor);
+
+			if (!Exists)
+			{
+				Report.Info("Not on Payment Methods Page");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+
+			IWebElement _pic_card_type_visa = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='card-image-container-Visa']"), 2);
+			IWebElement _pic_card_type_master = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='card-image-container-MasterCard']"), 2);
+			IWebElement _pic_card_type_american = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='card-image-container-AmericanExpress']"), 2);
+			IWebElement _pic_card_type_discover = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='card-image-container-Discover']"), 2);
+			IWebElement _txt_card_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-creditCardNumber']"), 2);
+			IWebElement _sel_exp_month = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//select[@id='input-creditCardExpirationMonth']"), 2);
+			IWebElement _sel_exp_year = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//select[@id='input-creditCardExpirationYear']"), 2);
+			IWebElement _txt_cvv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-cardSecurityCode']"), 2);
+			IWebElement _txt_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-creditCardHolderName']"), 2);
+
+			switch (card_type)
+			{
+				case "Visa":
+					_pic_card_type_visa.Click();
+					Report.Success(card_type + " Selected");
+					break;
+				case "MasterCard":
+					_pic_card_type_master.Click();
+					Report.Success(card_type + " Selected");
+					break;
+				case "American Express":
+					_pic_card_type_american.Click();
+					Report.Success(card_type + " Selected");
+					break;
+				case "Discover":
+					_pic_card_type_discover.Click();
+					Report.Success(card_type + " Selected");
+					break;
+				default:
+					Report.Error("Unable to Find Correct Credit Card Company");
+					return false;
+			}
+			Report.Info("Entering Card Number: " + card_no);
+			_txt_card_no.EnterText(card_no);
+			Report.Info("Selecting Expiry Month: " + exp_month);
+			_sel_exp_month.Select(exp_month);
+			Report.Info("Selecting Expiry Year: " + exp_year);
+			_sel_exp_year.Select(exp_year);
+			Report.Info("Entering CVV: " + cvv);
+			_txt_cvv.EnterText(cvv);
+			Report.Info("Entering Cardholder Name: " + cardh_name);
+			_txt_cardholder_name.EnterText(cardh_name);
+
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			Report.Info("Credit Card Details Entered");
+			Report.Screenshot();
+			return true;
+		}
+
+
+		//==================================================================================== ACH
+
+		public bool ACH_Fields_Check(List<string> myList)
+		{
+			Report.Info("Beginning ACH_Fields_Check");
+
+			Delay.Seconds(3 * Delay.SpeedFactor);
+
+			if (!Exists)
+			{
+				Report.Info("Not on Payment Methods Page");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+
+			IWebElement _lbl_aba_rout_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankABACode']"), 2);
+			IWebElement _lbl_bank_acc_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankAccountNumber']"), 2);
+			IWebElement _lbl_acc_type = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankAccountType']"), 2);
+			IWebElement _lbl_bank_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankName']"), 2);
+			IWebElement _lbl_acc_holder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankAccountName']"), 2);
+
+			foreach (var field in myList)
+			{
+				Report.Info("Field = " + field);
+				switch (field)
+				{
+					case "ABA/Routing Number":
+						if (!_lbl_aba_rout_no.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Bank Account Number":
+						if (!_lbl_bank_acc_no.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Account Type":
+						if (!_lbl_acc_type.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Bank Name":
+						if (!_lbl_bank_name.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					case "Account Holder Name":
+						if (!_lbl_acc_holder_name.Displayed)
+						{
+							Report.Info(field + " Field Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Field Displayed");
+						break;
+					default:
+						Report.Error("Unable to Find Correct Field Name");
+						return false;
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			Report.Info("ACH Fields are Correct");
+			Report.Screenshot();
+			return true;
+		}
+
+		public bool ACH_Error_Check(List<string> myList)
+		{
+			Report.Info("Beginning ACH_Error_Check");
+
+			Delay.Seconds(3 * Delay.SpeedFactor);
+
+			if (!Exists)
+			{
+				Report.Info("Not on Payment Methods Page");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Switching to iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+
+			IWebElement _err_aba_rout_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankABACode']"), 2);
+			IWebElement _err_bank_acc_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankAccountNumber']"), 2);
+			IWebElement _err_acc_type = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankAccountType']"), 2);
+			IWebElement _err_bank_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankName']"), 2);
+			IWebElement _err_acc_holder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankAccountName']"), 2);
+
+			foreach (var field in myList)
+			{
+				Report.Info("Field = " + field);
+				switch (field)
+				{
+					case "ABA/Routing Number":
+						if (!_err_aba_rout_no.Displayed)
+						{
+							Report.Info(field + " Error Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Error Displayed");
+						break;
+					case "Bank Account Number":
+						if (!_err_bank_acc_no.Displayed)
+						{
+							Report.Info(field + " Error Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Error Displayed");
+						break;
+					case "Account Type":
+						if (!_err_acc_type.Displayed)
+						{
+							Report.Info(field + " Error Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Error Displayed");
+						break;
+					case "Bank Name":
+						if (!_err_bank_name.Displayed)
+						{
+							Report.Info(field + " Error Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Error Displayed");
+						break;
+					case "Account Holder Name":
+						if (!_err_acc_holder_name.Displayed)
+						{
+							Report.Info(field + " Error Not Displayed");
+							Report.Screenshot();
+							return false;
+						}
+
+						Report.Success(field + " Error Displayed");
+						break;
+					default:
+						Report.Error("Unable to Find Correct Error Message");
+						return false;
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			Report.Info("ACH Error Messages are Correct");
+			Report.Screenshot();
+			return true;
+		}
+
+
+		//==================================================================================== WIRE TRANSFER
+
+		//Wire Transfer Warning
+		[FindsBy(How = How.Id, Using = "wireTransferWarning-new")]
+		private IWebElement _transfer_warning;
+
+		public bool Wire_Transfer_Warning(string warning)
+		{
+			Report.Info("Beginning Wire_Transfer_Warning");
+
+			Report.Info("Expected Warning = " + warning);
+
+			if (_transfer_warning.Text != warning)
+			{
+				Report.Info("Warning Message Text Incorrect");
+				Report.Info(_transfer_warning.Text);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Warning Message Text correct");
+			Report.Screenshot();
+			return true;
+		}
+
+
+		//Continue Button
+		[FindsBy(How = How.Id, Using = "continueButton")]
+		private IWebElement _btnContinue;
+
+		public bool Continue_click()
+		{
+			Report.Info("Attempting to Click Continue Button");
+			_btnContinue.Click();
+			return true;
+		}
+
+		public bool Continue_Button_Enabled(string enabled)
+		{
+			Report.Info("Beginning Continue_Button_Enabled");
+			Report.Info("Checking Continue Button is " + enabled);
+
+			if (enabled == "enabled")
+			{
+				if (!_btnContinue.IsEnabled())
+				{
+					Report.Info("Continue Button is Disabled");
+					Report.Screenshot();
+					return false;
+				}
+
+				Report.Success("Continue Button is Enabled");
+				return true;
+			}
+
+			if (enabled == "disabled")
+			{
+				if (_btnContinue.IsEnabled())
+				{
+					Report.Info("Continue Button is Enabled");
+					Report.Screenshot();
+					return false;
+				}
+
+				Report.Success("Continue Button is Disabled");
+				return true;
+			}
+			Report.Info("Incorrect Input: " + enabled);
 			return false;
 		}
 
@@ -243,17 +729,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Report.Info("Billing Address is Correct");
 			Report.Screenshot();
-			return true;
-		}
-
-		//Continue Button
-		[FindsBy(How = How.Id, Using = "continueButton")]
-		private IWebElement _btnContinue;
-
-		public bool Continue_click()
-		{
-			Report.Info("Attempting to Click Continue Button");
-			_btnContinue.Click();
 			return true;
 		}
 
@@ -817,6 +1292,74 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Screenshot();
 			return true;
 		}
+
+
+
+
+
+
+
+	}
+
+	class PaymentMethods_Subscription_Billing : BaseDialog
+	{
+		[FindsBy(How = How.XPath, Using = ".//div[@class='col-md-12']/div[@class='panel panel-default ws-panel']")]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool Subscription_Billing_Header_Correct()
+		{
+			Report.Info("Beginning Subscription_Billing_Header_Correct");
+
+			IWebElement myHeader = containerElement
+				.FindElements(By.XPath(".//div/h3[text()='Subscription Billing']"), 10).FirstOrDefault();
+
+			if (myHeader == null)
+			{
+				Report.Info("Failed to Find Header Text");
+				Report.Screenshot();
+				return false;
+			}
+			if (!myHeader.Displayed)
+			{
+				Report.Info("Subscription Billing Header Incorrect");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Correct Page Opened - Subscription Billing");
+			return true;
+		}
+
+		public bool Yearly_Option_Selected()
+		{
+			Report.Info("Yearly_Option_Selected");
+
+			IWebElement myOption = containerElement.FindElement(By.XPath(".//input[@name='billingFrequency']"), 2);
+
+			if (myOption == null)
+			{
+				Report.Info("Failed to Find Yearly Radio Option");
+				Report.Screenshot();
+				return false;
+			}
+
+			if (!myOption.Selected)
+			{
+				Report.Info("Yearly Radio Option Not Selected");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Yearly Radio Option Selected");
+			Report.Screenshot();
+			return true;
+		}
+
+
+
+
+
+
+
+
 
 
 	}

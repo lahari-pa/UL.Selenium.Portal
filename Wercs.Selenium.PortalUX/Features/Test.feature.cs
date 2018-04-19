@@ -209,9 +209,9 @@ testRunner.Then("I cancel the Enrollment dialog, confirm correct page opens and 
 #line 50
 testRunner.And("I confirm the chosen options and body text are correct", ((string)(null)), table3, "And ");
 #line 53
- testRunner.Then("I click on Checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click on Checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 54
- testRunner.Then("I check the Payment Methods heading and sub headings are correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I check the Payment Methods heading and sub headings are correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Options"});
@@ -222,15 +222,15 @@ testRunner.And("I confirm the chosen options and body text are correct", ((strin
             table4.AddRow(new string[] {
                         "Wire Transfer"});
 #line 55
- testRunner.Then("I confirm the following payment options are available", ((string)(null)), table4, "Then ");
+testRunner.Then("I confirm the following payment options are available", ((string)(null)), table4, "Then ");
 #line 60
- testRunner.Then("I confirm that the Contact Information is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm that the Contact Information is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 61
- testRunner.Then("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 62
- testRunner.And("I open the Edit Address form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I open the Edit Address form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
- testRunner.Then("I confirm the Sub Headings are correct: Primary Account Contact, Billing Address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm the Sub Headings are correct: Primary Account Contact, Billing Address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field"});
@@ -257,9 +257,9 @@ testRunner.And("I confirm the chosen options and body text are correct", ((strin
             table5.AddRow(new string[] {
                         "Shipping/Billing Checkbox"});
 #line 64
- testRunner.Then("I confirm the Edit Address form has the correct fields", ((string)(null)), table5, "Then ");
+testRunner.Then("I confirm the Edit Address form has the correct fields", ((string)(null)), table5, "Then ");
 #line 77
- testRunner.Then("I un-check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I un-check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field"});
@@ -278,13 +278,13 @@ testRunner.And("I confirm the chosen options and body text are correct", ((strin
             table6.AddRow(new string[] {
                         "Phone Number"});
 #line 78
- testRunner.And("I confirm the Shipping Address form has the correct fields", ((string)(null)), table6, "And ");
+testRunner.And("I confirm the Shipping Address form has the correct fields", ((string)(null)), table6, "And ");
 #line 87
- testRunner.Then("I check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 88
- testRunner.Then("I confirm the Shipping Address is hidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm the Shipping Address is hidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 89
- testRunner.Then("I cancel the Edit Address form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I cancel the Edit Address form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Address Line 1",
@@ -303,9 +303,112 @@ testRunner.And("I confirm the chosen options and body text are correct", ((strin
                         "<empty>",
                         "<empty>"});
 #line 90
- testRunner.Then("I edit the Billing Address for user saved as: New_Sub", ((string)(null)), table7, "Then ");
+testRunner.Then("I edit the Billing Address for user saved as: New_Sub", ((string)(null)), table7, "Then ");
 #line 94
- testRunner.And("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 95
+testRunner.Then("I confirm the Continue Button is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 96
+testRunner.Then("I select Payment Method: Credit Card", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table8.AddRow(new string[] {
+                        "Card Type"});
+            table8.AddRow(new string[] {
+                        "Card Number"});
+            table8.AddRow(new string[] {
+                        "Expiration Date"});
+            table8.AddRow(new string[] {
+                        "CVV"});
+            table8.AddRow(new string[] {
+                        "Cardholder Name"});
+#line 97
+testRunner.Then("I confirm the Credit Card fields are correct", ((string)(null)), table8, "Then ");
+#line 104
+testRunner.Then("I select Payment Method: ACH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table9.AddRow(new string[] {
+                        "ABA/Routing Number"});
+            table9.AddRow(new string[] {
+                        "Bank Account Number"});
+            table9.AddRow(new string[] {
+                        "Account Type"});
+            table9.AddRow(new string[] {
+                        "Bank Name"});
+            table9.AddRow(new string[] {
+                        "Account Holder Name"});
+#line 105
+testRunner.Then("I confirm the ACH fields are correct", ((string)(null)), table9, "Then ");
+#line 112
+testRunner.Then("I select Payment Method: Wire Transfer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 113
+testRunner.Then(@"I confirm the following warning message appears: Wire Transfer subscription payment will result in the WERCSmart account being locked with regard to registration, UPC updates, and recertifications until funds are received and applied to the subscription balance due. No grace period for receipt of funds is provided for Wire Transfer payments. If you need immediate access to these functions, please select a different payment option before finalizing subscription.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 114
+testRunner.Then("I select Payment Method: Credit Card", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 115
+testRunner.Then("I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table10.AddRow(new string[] {
+                        "Card Number"});
+            table10.AddRow(new string[] {
+                        "Expiration Date"});
+            table10.AddRow(new string[] {
+                        "CVV"});
+            table10.AddRow(new string[] {
+                        "Cardholder Name"});
+#line 116
+testRunner.Then("I confirm Credit Card error messages for the following fields are displayed", ((string)(null)), table10, "Then ");
+#line 122
+testRunner.Then("I select Payment Method: ACH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 123
+testRunner.Then("I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table11.AddRow(new string[] {
+                        "ABA/Routing Number"});
+            table11.AddRow(new string[] {
+                        "Bank Account Number"});
+            table11.AddRow(new string[] {
+                        "Account Type"});
+            table11.AddRow(new string[] {
+                        "Bank Name"});
+            table11.AddRow(new string[] {
+                        "Account Holder Name"});
+#line 124
+testRunner.Then("I confirm ACH error messages for the following fields are displayed", ((string)(null)), table11, "Then ");
+#line 131
+testRunner.Then("I select Payment Method: Credit Card", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Card Type",
+                        "Card Number",
+                        "Expiration Month",
+                        "Expiration Year",
+                        "CVV",
+                        "Cardholder Name"});
+            table12.AddRow(new string[] {
+                        "Visa",
+                        "4111 1111 1111 1111",
+                        "08",
+                        "2028",
+                        "1111",
+                        "test"});
+#line 132
+testRunner.Then("I enter Credit Card details", ((string)(null)), table12, "Then ");
+#line 135
+testRunner.Then("I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 136
+testRunner.Then("I confirm the Purchase Summary header is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 137
+testRunner.Then("I check the Subscription Billing header is correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 138
+testRunner.Then("I confirm the Yearly Radio Option is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

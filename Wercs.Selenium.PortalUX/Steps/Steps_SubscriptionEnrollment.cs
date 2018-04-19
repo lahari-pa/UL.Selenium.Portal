@@ -116,7 +116,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				if (button == "Checkout")
 				{
 					Report.IsTrue(mySubDlg.Checkout_click(), "Failed to Click Checkout Button", "Checkout Button Clicked");
-					Delay.Seconds(1 * Delay.SpeedFactor);
+					Delay.Seconds(10 * Delay.SpeedFactor);
 					if (!myPay.Exists)
 					{
 						throw new Exception("Payment Methods Page Failed to Open");

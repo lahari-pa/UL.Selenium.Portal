@@ -118,3 +118,39 @@ Then I click on Checkout
  | Address Line 1 | Address Line 2 | City    | State   | Zip Code | Country | Phone Number |
  | Address_New    | <empty>        | <empty> | <empty> | <empty>  | <empty> | <empty>      |
  And I confirm that the Billing Address is correct for Account saved as New_Sub
+ Then I confirm the Continue Button is disabled
+Then I select Payment Method: Credit Card
+Then I confirm the Credit Card fields are correct
+| Field           |
+| Card Type       |
+| Card Number     |
+| Expiration Date |
+| CVV             |
+| Cardholder Name |
+Then I select Payment Method: ACH
+Then I confirm the ACH fields are correct
+| Field               |
+| ABA/Routing Number  |
+| Bank Account Number |
+| Account Type        |
+| Bank Name           |
+| Account Holder Name |
+Then I select Payment Method: Wire Transfer
+Then I confirm the following warning message appears: Wire Transfer subscription payment will result in the WERCSmart account being locked with regard to registration, UPC updates, and recertifications until funds are received and applied to the subscription balance due. No grace period for receipt of funds is provided for Wire Transfer payments. If you need immediate access to these functions, please select a different payment option before finalizing subscription.
+Then I select Payment Method: Credit Card
+Then I click Continue
+Then I confirm Credit Card error messages for the following fields are displayed
+| Field           |
+| Card Number     |
+| Expiration Date |
+| CVV             |
+| Cardholder Name |
+Then I select Payment Method: ACH
+Then I click Continue
+Then I confirm ACH error messages for the following fields are displayed
+| Field               |
+| ABA/Routing Number  |
+| Bank Account Number |
+| Account Type        |
+| Bank Name           |
+| Account Holder Name |

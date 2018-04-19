@@ -56,6 +56,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I select Payment Method: (.*)")]
+		public void ThenISelectPaymentMethodX(string payMethod)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I select Payment Method: " + payMethod);
+			try
+			{
+				var myPay = new PaymentMethods();
+
+				Report.IsTrue(myPay.Select_Payment_Method(payMethod), "Failed to Select " + payMethod,
+					"Successfully Selected " + payMethod);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 		[StepDefinition(@"I confirm that the Contact Information is correct for Account saved as (.*)")]
 		public void ThenIConfirmThatTheContactInformationIsCorrect(string savedAs)
 		{
@@ -140,7 +159,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				Report.IsTrue(myPay.Change_click(), "Failed to Click Change Button", "Change Button Clicked");
 
-				Delay.Seconds(2 * Delay.SpeedFactor);
+				Delay.Seconds(4 * Delay.SpeedFactor);
 
 				var myEdit = new PaymentMethods_Edit_Address();
 
@@ -403,6 +422,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 					wsUser.CompanyPhone = phone_no == "" ? wsUser.CompanyPhone : phone_no;
 
 					Context.AddToContext(savedAs, wsUser);
+
+					Report.IsTrue(myPay.Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+					Delay.Seconds(10 * Delay.SpeedFactor);
 				}
 			}
 			catch (Exception ex)
@@ -411,6 +433,224 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"I confirm the Continue Button is (enabled|disabled)")]
+		public void ThenIConfirmTheContinueButtonIsX(string enabled)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Continue Button is " + enabled);
+			try
+			{
+				var myPay = new PaymentMethods();
+
+				Report.IsTrue(myPay.Continue_Button_Enabled(enabled), "Failed: Continue Button is Not" + enabled, "Success: Continue Button is " + enabled);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm the (Credit Card|ACH) fields are correct")]
+		public void ThenIConfirmTheXFieldsAreCorrect(string payMethod, Table table)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the " + payMethod + " fields are correct");
+			try
+			{
+				var myPay = new PaymentMethods();
+
+				List<string> myList = new List<string>();
+
+				foreach (var Row in table.Rows)
+				{
+					myList.Add(Row["Field"]);
+				}
+
+				if (payMethod == "Credit Card")
+				{
+					if (!myPay.Credit_Card_Fields_Check(myList))
+					{
+						throw new Exception("Failed to Check " + payMethod + " Fields are Correct");
+					}
+					Report.Success(payMethod + " Fields are Correct");
+				}
+				if (payMethod == "ACH")
+				{
+					if (!myPay.ACH_Fields_Check(myList))
+					{
+						throw new Exception("Failed to Check " + payMethod + " Fields are Correct");
+					}
+					Report.Success(payMethod + " Fields are Correct");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm the following warning message appears: (.*)")]
+		public void ThenIConfirmTheFollowingWarningMessageAppears(string warningMsg)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Wire Transfer warning message appears");
+			try
+			{
+				var myPay = new PaymentMethods();
+
+				Report.IsTrue(myPay.Wire_Transfer_Warning(warningMsg), "Incorrect Warning Message", "Correct Warning Message");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm (Credit Card|ACH) error messages for the following fields are displayed")]
+		public void ThenIConfirmErrorMessagesForTheFollowingFieldsAreDisplayed(string payMethod, Table table)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm error messages for " + payMethod + " fields are correct");
+			try
+			{
+				var myPay = new PaymentMethods();
+
+				List<string> myList = new List<string>();
+
+				foreach (var Row in table.Rows)
+				{
+					myList.Add(Row["Field"]);
+				}
+				Delay.Seconds(5 * Delay.SpeedFactor);
+				if (payMethod == "Credit Card")
+				{
+					if (!myPay.Credit_Card_Error_Check(myList))
+					{
+						throw new Exception("Failed to Check " + payMethod + " Error Messages are Correct");
+					}
+					Report.Success(payMethod + " Error Messages are Correct");
+				}
+				if (payMethod == "ACH")
+				{
+					if (!myPay.ACH_Error_Check(myList))
+					{
+						throw new Exception("Failed to Check " + payMethod + " Error Messages are Correct");
+					}
+					Report.Success(payMethod + " Error Messages are Correct");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I click Continue")]
+		public void ThenIClickContinue()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Continue");
+			try
+			{
+				var myPay = new PaymentMethods();
+
+				Report.IsTrue(myPay.Continue_click(), "Failed to Click Continue", "Continue Button Clicked");
+				Delay.Seconds(5 * Delay.SpeedFactor);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I enter Credit Card details")]
+		public void ThenIEnterCreditCardDetails(Table table)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I edit the Billing Address");
+			try
+			{
+				var myPay = new PaymentMethods();
+
+				foreach (var thisRow in table.Rows)
+				{
+					string card_type = thisRow["Card Type"];
+					string card_no = thisRow["Card Number"];
+					string exp_month = thisRow["Expiration Month"];
+					string exp_year = thisRow["Expiration Year"];
+					string cvv = thisRow["CVV"];
+					string cardh_name = thisRow["Cardholder Name"];
+
+					Report.IsTrue(myPay.Enter_Credit_Card_Details(card_type, card_no, exp_month, exp_year, cvv, cardh_name),
+						"Failed to Enter Credit Card Details", "Credit Card Details Entered");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm the Purchase Summary header is displayed")]
+		public void ThenIConfirmThePurchaseSummaryHeaderIsDisplayed()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Purchase Summary header is displayed");
+			try
+			{
+				var myPay = new PaymentMethods();
+				Delay.Seconds(5 * Delay.SpeedFactor);
+				Report.IsTrue(myPay.Payment_Header_Correct(), "Payment Methods Header is Incorrect",
+					"Payments Methods Header is Correct");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I check the Subscription Billing header is correct")]
+		public void ThenICheckTheSubscriptionBillingHeaderIsCorrect()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I check the Subscription Billing header is correct");
+			try
+			{
+				var mySub = new PaymentMethods_Subscription_Billing();
+
+				Delay.Seconds(5 * Delay.SpeedFactor);
+				Report.IsTrue(mySub.Subscription_Billing_Header_Correct(), "Header is Incorrect", "Header is Correct");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm the Yearly Radio Option is (selected|not selected)")]
+		public void ThenIConfirmTheYearlyRadioOptionIsX(string select)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Yearly Radio Option is " + select);
+			try
+			{
+				var mySub = new PaymentMethods_Subscription_Billing();
+				if (select == "selected")
+				{
+					Report.IsTrue(!mySub.Yearly_Option_Selected(), "Yearly Radio Option is Not Selected", "Yearly Radio Option is Selected");
+				}
+				if (select == "not selected")
+				{
+					Report.IsTrue(mySub.Yearly_Option_Selected(), "Yearly Radio Option is Selected", "Yearly Radio Option is Not Selected");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 
 	}

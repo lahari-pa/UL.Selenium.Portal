@@ -397,6 +397,82 @@ testRunner.Then("I click on Checkout", ((string)(null)), ((TechTalk.SpecFlow.Tab
  testRunner.Then("I edit the Billing Address for user saved as: New_Sub", ((string)(null)), table8, "Then ");
 #line 120
  testRunner.And("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 121
+ testRunner.Then("I confirm the Continue Button is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 122
+testRunner.Then("I select Payment Method: Credit Card", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table9.AddRow(new string[] {
+                        "Card Type"});
+            table9.AddRow(new string[] {
+                        "Card Number"});
+            table9.AddRow(new string[] {
+                        "Expiration Date"});
+            table9.AddRow(new string[] {
+                        "CVV"});
+            table9.AddRow(new string[] {
+                        "Cardholder Name"});
+#line 123
+testRunner.Then("I confirm the Credit Card fields are correct", ((string)(null)), table9, "Then ");
+#line 130
+testRunner.Then("I select Payment Method: ACH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table10.AddRow(new string[] {
+                        "ABA/Routing Number"});
+            table10.AddRow(new string[] {
+                        "Bank Account Number"});
+            table10.AddRow(new string[] {
+                        "Account Type"});
+            table10.AddRow(new string[] {
+                        "Bank Name"});
+            table10.AddRow(new string[] {
+                        "Account Holder Name"});
+#line 131
+testRunner.Then("I confirm the ACH fields are correct", ((string)(null)), table10, "Then ");
+#line 138
+testRunner.Then("I select Payment Method: Wire Transfer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 139
+testRunner.Then(@"I confirm the following warning message appears: Wire Transfer subscription payment will result in the WERCSmart account being locked with regard to registration, UPC updates, and recertifications until funds are received and applied to the subscription balance due. No grace period for receipt of funds is provided for Wire Transfer payments. If you need immediate access to these functions, please select a different payment option before finalizing subscription.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 140
+testRunner.Then("I select Payment Method: Credit Card", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 141
+testRunner.Then("I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table11.AddRow(new string[] {
+                        "Card Number"});
+            table11.AddRow(new string[] {
+                        "Expiration Date"});
+            table11.AddRow(new string[] {
+                        "CVV"});
+            table11.AddRow(new string[] {
+                        "Cardholder Name"});
+#line 142
+testRunner.Then("I confirm Credit Card error messages for the following fields are displayed", ((string)(null)), table11, "Then ");
+#line 148
+testRunner.Then("I select Payment Method: ACH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 149
+testRunner.Then("I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field"});
+            table12.AddRow(new string[] {
+                        "ABA/Routing Number"});
+            table12.AddRow(new string[] {
+                        "Bank Account Number"});
+            table12.AddRow(new string[] {
+                        "Account Type"});
+            table12.AddRow(new string[] {
+                        "Bank Name"});
+            table12.AddRow(new string[] {
+                        "Account Holder Name"});
+#line 150
+testRunner.Then("I confirm ACH error messages for the following fields are displayed", ((string)(null)), table12, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
