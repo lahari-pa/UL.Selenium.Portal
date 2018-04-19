@@ -24,8 +24,7 @@ And I close the window that opened
 
 # Test originally wanted "https://labworks.ul.com/Pages/RCL.aspx", but redirects to a different link when clicked, so modified accordingly!
 
-When I click the Products in Scope button
-Then I confirm that an excel file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSExcelFile
+When I click the Products in Scope button and confirm that an excel file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSExcelFile
 And I confirm the excel file saved as CVSExcelFile can be opened and contains data
 
 # And Close the excel file and return to the Portal page
@@ -34,22 +33,23 @@ And I confirm the excel file saved as CVSExcelFile can be opened and contains da
 
 Scenario: [57211] Retailer specific - Costco
 When I select the retailer: Costco
-And I confirm that: Costco requires suppliers of all store branded products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
+And I confirm that: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
 
 When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.costco.com/sustainability-environment.html
 And I close the window that opened
 
-When I click the Products in Scope button
-Then I confirm that an excel file is produced called CO_Report_DataUsageTier_<Date>.xlsx and save as CostcoExcelFile
-And I confirm the excel file saved as CostcoExcelFile can be opened and contains data
+When I click the Products in Scope button and confirm that an html file is produced called Report_DataUsageTier_*.htm and save as CostcoHTMLFile
+And I confirm the html file saved as CostcoHTMLFile can be opened and contains text: Unable to generate report since no records were found
+#Then I click the Products in Scope button and confirm that an excel file is produced called CO_Report_DataUsageTier_<Date>.xlsx and save as CostcoExcelFile
+#And I confirm the excel file saved as CostcoExcelFile can be opened and contains data
+
 
 Scenario: [57214] Retailer specific - Dollar Tree
 When I select the retailer: Dollar Tree
 And I confirm that: Dollar Tree requires suppliers of Cleaning and Health & Beauty products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
 And I should not see the More Information hyperlink
-When I click the Products in Scope button
-Then I confirm that an excel file is produced called DT_Report_DataUsageTier_<Date>.xlsx and save as DollarTreeExcelFile
+When I click the Products in Scope button and confirm that an excel file is produced called DT_Report_DataUsageTier_<Date>.xlsx and save as DollarTreeExcelFile
 And I confirm the excel file saved as DollarTreeExcelFile can be opened and contains data
 
 Scenario: [57221] Retailer specific - Target
@@ -60,8 +60,7 @@ When I click the More Information hyperlink
 Then I check that the current URL contains: https://corporate.target.com/corporate-responsibility/sustainability/sustainable-products
 And I close the window that opened
 
-When I click the Products in Scope button
-Then I confirm that an excel file is produced called TG_Report_DataUsageTier_<Date>.xlsx and save as TargetExcelFile
+When I click the Products in Scope button and confirm that an excel file is produced called TG_Report_DataUsageTier_<Date>.xlsx and save as TargetExcelFile
 And I confirm the excel file saved as TargetExcelFile can be opened and contains data
 
 Scenario: [57223] Retailer specific - Walgreens
@@ -72,8 +71,7 @@ When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.walgreens.com/topic/sr/sr_product_integrity_home.jsp
 And I close the window that opened
 
-When I click the Products in Scope button
-Then I confirm that an excel file is produced called WG_Report_DataUsageTier_<Date>.xlsx and save as WalgreensExcelFile
+When I click the Products in Scope button and confirm that an excel file is produced called WG_Report_DataUsageTier_<Date>.xlsx and save as WalgreensExcelFile
 And I confirm the excel file saved as WalgreensExcelFile can be opened and contains data
 
 Scenario: [57225] Retailer specific - Walmart
@@ -84,8 +82,7 @@ When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.walmartsustainabilityhub.com/sustainable-chemistry
 And I close the window that opened
 
-When I click the Products in Scope button
-Then I confirm that an excel file is produced called WM_Report_DataUsageTier_<Date>.xlsx and save as WalmartExcelFile
+When I click the Products in Scope button and confirm that an excel file is produced called WM_Report_DataUsageTier_<Date>.xlsx and save as WalmartExcelFile
 And I confirm the excel file saved as WalmartExcelFile can be opened and contains data
 
 Scenario: [57229] Retailer specific - Canadian Tire
@@ -93,6 +90,5 @@ Scenario: [57229] Retailer specific - Canadian Tire
 When I select the retailer: Canadian Tire
 And I confirm that: Canadian Tire requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2 permissions. is showing under the Data Consent Tiers heading
 
-When I click the Products in Scope button
-Then I confirm that an excel file is produced called CT_Report_DataUsageTier_<Date>.xlsx and save as CanadianTireExcelFile
+When I click the Products in Scope button and confirm that an excel file is produced called CT_Report_DataUsageTier_<Date>.xlsx and save as CanadianTireExcelFile
 And I confirm the excel file saved as CanadianTireExcelFile can be opened and contains data

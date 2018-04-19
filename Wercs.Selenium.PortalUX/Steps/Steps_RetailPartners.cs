@@ -299,55 +299,58 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the Products in Scope button")]
-		public void ThenClickTheProductsInScopeButtonBelowTheMoreInformationHyperlink()
+		[StepDefinition(@"I click the Products in Scope button and confirm that an (excel|html) file is produced called (.*) and save as (.*)")]
+		public void ThenClickTheProductsInScopeButtonBelowTheMoreInformationHyperlink(string filetype, string file, string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click the Products in Scope button");
-			try
+			Report.Info("Click the Products in Scope button");
+
+			var selRetailDetails = new RetailParntersDetails();
+
+			if (!selRetailDetails.Wait_for_load(10))
 			{
-				Report.Info("Click the Products in Scope button");
+				throw new Exception("Page failed to load!");
+			}
 
-				var selRetailDetails = new RetailParntersDetails();
+			string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+			Report.Info("Downloads folder: " + downloadsFolder);
 
-				if (!selRetailDetails.Wait_for_load(10))
-				{
-					throw new Exception("Page failed to load!");
-				}
+			var dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 
-				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-				var dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
-
-				foreach (var file in dir)
-				{
-					File.Delete(file);
-				}
+			foreach (var file_ in dir)
+			{
+				File.Delete(file_);
+			}
 
 
-				selRetailDetails.ClickProductsInScope();
-				Report.Success("Clicked Products in Scope button!");
-				Report.Screenshot();
+			selRetailDetails.ClickProductsInScope();
+			Report.Success("Clicked Products in Scope button!");
+			Report.Screenshot();
 
+			dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+
+			int i = 0;
+			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
+			while (!dir.Any() && i<30)
+			{
 				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
+				Delay.Seconds(Delay.SpeedFactor*1);
+				i++;
+			}
 
-				while (!dir.Any())
-				{
-					dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
-				}
-			}
-			catch (Exception ex)
+			if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
 			{
-				Report.Failure(ex.Message);
-				throw;
+				Context.AddToContext(savedAs, dir.FirstOrDefault());
 			}
+
 		}
 
-		[StepDefinition(@"I confirm that an excel file is produced called (.*) and save as (.*)")]
-		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
+		[StepDefinition(@"I confirm that an (excel|html) file is produced called (.*) and save as (.*)")]
+		public void ConfirmFileAppearsInDownloadsFolder(string filetype, string file, string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm Excel File is downloaded with name: " + file);
 			try
 			{
-				Report.Info("Confirm Excel File is downloaded with name: " + file);
+				Report.Info("Confirm " +  filetype + " file is downloaded with name: " + file);
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 				Report.Info("Downloads folder: " + downloadsFolder);
 
@@ -395,6 +398,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Failure(ex.Message);
 				throw;
+			}
+		}
+
+		[StepDefinition(@"I confirm the html file saved as (.*) can be opened and contains text: (.*)")]
+		public void CheckingDownloadedHTMLFile(string savedAs, string text)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			var file = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(file != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + file.ToString(), false, false))
+			{
+				if (Report.IsTrue(File.ReadAllText(file.ToString()) != "", "File: " + file + " did not contain any content!", "File was not empty", false, false))
+				{
+					Report.IsTrue(File.ReadAllText(file.ToString()).Contains(text), "File did not contain text: " + text + ", content of file was: " + File.ReadAllText(file.ToString()), "File contained text: " + text + "!", false, false);
+				}
 			}
 		}
 
