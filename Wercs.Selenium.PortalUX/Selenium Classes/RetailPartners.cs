@@ -99,6 +99,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'tiersControl.tierInformation')]"), 2).Text;
 		}
 
+		public string DoesNotRequireDataConsentInfo()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[1]/div[1]/div[2]/div"), 2).Text;
+
+		}
+
 		public void ClickMoreInformation()
 		{
 			this.containerElement.FindElement(By.XPath(".//a[contains(@data-bind,'tiersControl.tierMoreInformation')]"), 2).Click();

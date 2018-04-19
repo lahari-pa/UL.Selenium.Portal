@@ -236,6 +236,35 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[When(@"I confirm that: (.*) is showing under the Data Consent Tiers")]
+		public void ThenConfirmFollwoingInformationDisplays(string info)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirming that '" + info + "' is showing under the Data Consent Tiers heading");
+			try
+			{
+				Report.Info("Confirming that '" + info + "' is showing under the Data Consent Tiers heading");
+
+				var selRetailDetails = new RetailParntersDetails();
+
+				if (!selRetailDetails.Wait_for_load(10))
+				{
+					throw new Exception("Page failed to load!");
+				}
+
+				var infoShowing = selRetailDetails.DoesNotRequireDataConsentInfo();
+				Report.IsTrue(infoShowing == info,
+					"Tier information was showing: '" + infoShowing + "', but was expected to show: '" + info + "'",
+					"Tier information was showing: '" + info + "', as expected!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 		[StepDefinition(@"I click the More Information hyperlink")]
 		public void ClickMoreInformation()
 		{
