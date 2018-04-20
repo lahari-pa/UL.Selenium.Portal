@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using SafewareReporting;
@@ -8,6 +9,7 @@ using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using ResourcePool;
 using TechTalk.SpecFlow.Assist;
@@ -205,7 +207,7 @@ namespace WERCSmart
 		}
 
 
-		
+
 
 		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account")]
 		public void GivenLoginIntoWERCSmartPortal_AdminUlscRole()
@@ -534,6 +536,8 @@ namespace WERCSmart
 
 		}
 
+
+
 		[StepDefinition(@"I create a new email address")]
 		public void ThenICreateANewEmailAddress()
 		{
@@ -758,7 +762,7 @@ namespace WERCSmart
 			foreach (var handle in allHandles)
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h2[text()='Summary']"), 2)!=null)
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h2[text()='Summary']"), 2) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					return;

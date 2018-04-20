@@ -443,9 +443,124 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
+		public void ThenInTheMyAccountScreenINavigateToTheXPage(string nav_option)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the My Account screen I navigate to the " + nav_option + " page");
+			try
+			{
+				var selMyAccount = new MyAccount();
 
+				Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), "Failed to Navigate to " + nav_option,
+					"Successully Navigated to " + nav_option);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
+		[StepDefinition(@"In the Subscription Information screen I confirm the Status has the correct information: (.*) Formulated, (.*) Articles, (.*) Enhanced Articles")]
+		public void ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles(string form_no, string art_no, string en_art_no)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Subscription Information screen I confirm the Status has the correct information: " + form_no + " Formulated, " + art_no + " Articles, " + en_art_no + " Enhanced Articles");
+			try
+			{
+				var selMyAccount = new MyAccount_SubscriptionInfo();
 
+				Report.IsTrue(selMyAccount.Status_Information_Correct(form_no, art_no, en_art_no), "Subscription Information is Incorrect",
+					"Subscription Information is Correct");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Subscription Information screen I confirm the Subscription History table has the correct information")]
+		public void ThenInTheSubscriptionInformationScreenIConfirmTheSubscriptionHistoryTableHasTheCorrectInformation(Table table)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Subscription Information screen I confirm the Subscription History table has the correct information");
+			try
+			{
+				var selMyAccount = new MyAccount_SubscriptionInfo();
+
+				foreach (var thisRow in table.Rows)
+				{
+					string sub_level_status = thisRow["Subscription Level Status"];
+					string qty = thisRow["Quantity"];
+
+					Report.Info("Subscription Level Status = " + sub_level_status);
+					Report.Info("Quantity = " + qty);
+
+					Report.IsTrue(selMyAccount.Subscription_Level_Status(sub_level_status),
+						"Failed to Confirm Subscription Level Status", "Subscription Level Status Correct");
+					Report.IsTrue(selMyAccount.Subscription_Quantity(qty),
+						"Failed to Confirm Quantity", "Quantity Correct");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Order History screen I select (Subscription|WERCSmart)")]
+		public void ThenInTheOrderHistoryScreenISelectX(string radio_option)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Order History screen I select  " + radio_option);
+			try
+			{
+				var selMyAccount = new MyAccount_OrderHistory();
+
+				Report.IsTrue(selMyAccount.Order_History_Select(radio_option), "Failed to Select " + radio_option,
+					"Successully Selected " + radio_option);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: (.*)")]
+		public void ThenInTheOrderHistoryScreenIGetTheInvoiceNumberAndDateAndConfirmTheInvoiceEmailHasArrivedForUserSavedAs(string savedAs)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: " + savedAs);
+			try
+			{
+				var myOrder = new MyAccount_OrderHistory();
+				var myAccount = new MyAccount();
+
+				if (savedAs == "New_Sub")
+				{
+					if (FeatureContext.Current.ContainsKey("CurrentAccount"))
+					{
+						savedAs = FeatureContext.Current["CurrentAccount"].ToString();
+					}
+					Report.Info("Account = " + savedAs);
+				}
+
+				var wsUser = (WERCSmartUser)Context.GetFromContext(savedAs);
+
+				string myInvoice = myOrder.Get_Invoice_Number(wsUser.CompanyName);
+				string myDate = myOrder.Get_Invoice_Date(wsUser.CompanyName);
+
+				if (!myAccount.Invoice_Email_Arrived(myInvoice, myDate, wsUser.Email))
+				{
+					throw new Exception("Email has Not Arrived for User: " + savedAs);
+				}
+				Report.Success("Invoice Email has Arrived for User: " + savedAs);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
 
 
 	}

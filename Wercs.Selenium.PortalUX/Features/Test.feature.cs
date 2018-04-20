@@ -403,12 +403,63 @@ testRunner.Then("I select Payment Method: Credit Card", ((string)(null)), ((Tech
 testRunner.Then("I enter Credit Card details", ((string)(null)), table12, "Then ");
 #line 135
 testRunner.Then("I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 136
-testRunner.Then("I confirm the Purchase Summary header is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 137
-testRunner.Then("I check the Subscription Billing header is correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In the Purchase Summary screen I confirm the Purchase Summary header is displayed" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 138
-testRunner.Then("I confirm the Yearly Radio Option is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In the Purchase Summary screen I check the Subscription Billing header is correct" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 139
+testRunner.Then("In the Purchase Summary screen I confirm the Yearly Radio Option is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 140
+testRunner.Then("In the Purchase Summary screen I confirm the column headings are correct: Plan Se" +
+                    "lected, Service Date, Amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 141
+testRunner.Then("In the Purchase Summary screen I confirm the folling statement is shown: Subscrip" +
+                    "tion will be automatically charged to the default payment method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 142
+testRunner.Then(@"In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars.  Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL.  Payment is required when your order is submitted. The method of payment designated on the My Account area will be used.  UL reserves the right to accept or refuse any payment made in any form.  UL does not collect or process your payment details.  Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 143
+testRunner.Then("In the Purchase Summary screen I confirm the following statement is shown: By cli" +
+                    "cking \"Confirm Order\" you will be enrolled in our subscription plan.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 144
+testRunner.Then("In the Purchase Summary screen I click Confirm Order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 145
+testRunner.Then("In the Thank You screen I check the Header is correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 147
+testRunner.Then("In the Thank You screen I click Home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 148
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 149
+testRunner.Then("In the My Account screen I navigate to the Subscription Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 150
+testRunner.Then("In the Subscription Information screen I confirm the Status has the correct infor" +
+                    "mation: 1 Formulated, 1 Articles, 1 Enhanced Articles", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Subscription Level Status",
+                        "Quantity"});
+            table13.AddRow(new string[] {
+                        "Limited Formulated",
+                        "1"});
+            table13.AddRow(new string[] {
+                        "Limited Articles",
+                        "1"});
+            table13.AddRow(new string[] {
+                        "Limited Enhanced Articles",
+                        "1"});
+#line 151
+testRunner.Then("In the Subscription Information screen I confirm the Subscription History table h" +
+                    "as the correct information", ((string)(null)), table13, "Then ");
+#line 156
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 157
+testRunner.Then("In the My Account screen I navigate to the Order History page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 158
+testRunner.Then("In the Order History screen I select Subscription", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 159
+testRunner.Then("In the Order History screen I get the Invoice Number and Date and confirm the inv" +
+                    "oice email has arrived for user saved as: New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

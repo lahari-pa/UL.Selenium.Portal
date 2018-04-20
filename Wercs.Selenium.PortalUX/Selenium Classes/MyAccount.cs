@@ -308,6 +308,76 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		//Accounts Navigation
+		[FindsBy(How = How.Id, Using = "myAccounts_navigation")]
+		private IWebElement _nav_accounts;
+
+		public bool Accounts_Navigation(string nav_option)
+		{
+			Report.Info("Beginning Accounts_Navigation - Navigating to " + nav_option);
+
+			IWebElement myNav = _nav_accounts.FindElement(By.XPath(".//li/a[text()='" + nav_option + "']"), 2);
+
+			if (myNav == null)
+			{
+				Report.Info("Failed to Find Navigation Option");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Navigation Option Found - Attempting to Click Link");
+			myNav.Click();
+			Delay.Seconds(5 * Delay.SpeedFactor);
+
+			switch (nav_option)
+			{
+				case "Company Information":
+					var myComp = new MyAccount_CompanyInfo();
+					if (!myComp.Exists)
+					{
+						Report.Info("Failed to Navigate to " + nav_option);
+					}
+					Report.Success(nav_option + " Opened Successfully");
+					break;
+				case "Subscription Information":
+					var mySub = new MyAccount_SubscriptionInfo();
+					if (!mySub.Exists)
+					{
+						Report.Info("Failed to Navigate to " + nav_option);
+					}
+					Report.Success(nav_option + " Opened Successfully");
+					break;
+				case "Payment Methods":
+					var myPay = new PaymentMethods();
+					if (!myPay.Exists)
+					{
+						Report.Info("Failed to Navigate to " + nav_option);
+					}
+					Report.Success(nav_option + " Opened Successfully");
+					break;
+				case "Order History":
+					var myOrder = new MyAccount_OrderHistory();
+					if (!myOrder.Exists)
+					{
+						Report.Info("Failed to Navigate to " + nav_option);
+					}
+					Report.Success(nav_option + " Opened Successfully");
+					break;
+				case "My Library":
+					var myLibrary = new MyAccount_MyLibrary();
+					if (!myLibrary.Exists)
+					{
+						Report.Info("Failed to Navigate to " + nav_option);
+					}
+					Report.Success(nav_option + " Opened Successfully");
+					break;
+				default:
+					throw new Exception("Failed to Find Correct Option Name");
+			}
+
+			Report.Success("Account Navigation Successful");
+			return true;
+		}
+
 		public string Get_State_Code(string state)
 		{
 			Report.Info("Beginning Get_State_Code: " + state);
@@ -478,6 +548,231 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return myState;
 		}
 
+		public bool Invoice_Email_Arrived(string invoice_no, string invoice_date, string email_address)
+		{
+			Report.Info("Beginning Invoice_Email_Arrived: " + invoice_no);
+
+			if (!EmailFunctions.CheckEmailHasArrived("Invoice " + invoice_no + " is attached", email_address))
+			{
+				Report.Info("Invoice Email has Not Arrived");
+				return false;
+			}
+
+			List<Mailosaur.Email> myEmails = EmailFunctions.GetAllEmailsForEmailEmailAddress(email_address);
+
+			foreach (var myEmail in myEmails)
+			{
+				string myBody = EmailFunctions.getEmailBody(myEmail);
+
+				if (myBody.Contains(invoice_date))
+				{
+					Report.Info("Invoice Date is Incorrect");
+					return false;
+				}
+
+				Report.Info("Invoice Date is Correct");
+			}
+			Report.Success("Invoice Email is Correct");
+			return true;
+		}
 
 	}
+
+	class MyAccount_CompanyInfo : BaseObject
+	{
+		[FindsBy(How = How.Id, Using = "companyInfoContainer")]
+		protected override IWebElement containerElement { get; set; }
+
+
+
+
+
+
+
+
+	}
+
+	class MyAccount_SubscriptionInfo : BaseObject
+	{
+		[FindsBy(How = How.Id, Using = "SubscriptionInfoContainer")]
+		protected override IWebElement containerElement { get; set; }
+
+
+		public bool Status_Information_Correct(string form_no, string art_no, string en_art_no)
+		{
+			Report.Info("Status_Information_Correct");
+
+			IWebElement myText =
+				containerElement.FindElement(
+					By.XPath(".//p[@class='spaced-text']/span[@class='text-bold text-uppercase text-success']"), 2);
+
+			Report.Info(myText.Text.Trim());
+
+			if (!myText.Text.Trim()
+				.Contains(form_no + " Formulated, " + art_no + " Articles, " + en_art_no + " Enhanced Articles"))
+			{
+				Report.Info("Incorrect Status Information");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Correct Status Information");
+			return true;
+		}
+
+		//Subscription History Table
+		[FindsBy(How = How.XPath, Using = ".//div[@class='panel panel-default ws-panel subscription-history']/div/table")]
+		private IWebElement _tbl_sub_history;
+
+		public bool Subscription_Level_Status(string status)
+		{
+			Report.Info("Beginning Subscription_Level_Status");
+
+			IWebElement mySub = _tbl_sub_history.FindElement(By.XPath(".//tbody/tr/td[1]"), 2);
+
+			if (mySub == null)
+			{
+				Report.Info("Failed to Find Subscription Level Status");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Subscription Level Status Found: " + mySub.Text.Trim());
+			if (!mySub.Text.Trim().Contains(status))
+			{
+				Report.Info("Subscription Level Status is Incorrect");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Subscription Level Status is Correct");
+			return true;
+		}
+
+		public bool Subscription_Quantity(string qty)
+		{
+			Report.Info("Beginning Subscription_Quantity");
+
+			IWebElement myQty = _tbl_sub_history.FindElement(By.XPath(".//tbody/tr/td[5]"), 2);
+
+			if (myQty == null)
+			{
+				Report.Info("Failed to Find Quantity");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Quantity Found: " + myQty.Text);
+			if (myQty.Text != qty)
+			{
+				Report.Info("Quantity is Incorrect");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Quantity is Correct");
+			return true;
+		}
+
+
+
+	}
+	class MyAccount_OrderHistory : BaseObject
+	{
+		[FindsBy(How = How.Id, Using = "orderHistoryContainer")]
+		protected override IWebElement containerElement { get; set; }
+
+
+		public bool Order_History_Select(string history_type)
+		{
+			Report.Info("Beginning Order_History_Select");
+
+			IWebElement myType = null;
+
+			switch (history_type)
+			{
+				case "WERCSmart":
+					myType = containerElement.FindElement(By.XPath(".//div[@id='selectorGroup']/label/input[@value='WERCS']"), 2);
+					break;
+				case "Subscription":
+					myType = containerElement.FindElement(By.XPath(".//div[@id='selectorGroup']/label/input[@value='SUBSCRIPTION']"), 2);
+					break;
+				default:
+					throw new Exception("Failed to Find Correct Option Name");
+			}
+
+			if (myType == null)
+			{
+				Report.Info("Failed to Find " + history_type + " Radio Button");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info(history_type + " Found - Attempting to Select");
+			myType.Click();
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			return true;
+		}
+
+		public string Get_Invoice_Number(string submitted_by)
+		{
+			Report.Info("Beginning Get_Invoice_Number");
+
+			IWebElement myCompany = containerElement.FindElement(By.XPath(".//tbody/tr/td[text()='" + submitted_by + "']"), 2);
+
+			if (myCompany == null)
+			{
+				Report.Info("Failed to Find Row");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Info("Row Found");
+
+			IWebElement myInvoice = myCompany.FindElement(By.XPath("../td[1]/span[1]"), 2);
+			if (myInvoice == null)
+			{
+				Report.Info("Failed to Find Invoice Number");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Info("Invoice Number Found: " + myInvoice.Text);
+			return myInvoice.Text;
+		}
+
+		public string Get_Invoice_Date(string submitted_by)
+		{
+			Report.Info("Beginning Get_Invoice_Date");
+
+			IWebElement myCompany = containerElement.FindElement(By.XPath(".//tbody/tr/td[text()='" + submitted_by + "']"), 2);
+
+			if (myCompany == null)
+			{
+				Report.Info("Failed to Find Row");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Info("Row Found");
+
+			IWebElement myDate = myCompany.FindElement(By.XPath("../td[2]"), 2);
+			if (myDate == null)
+			{
+				Report.Info("Failed to Find Invoice Date");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Info("Invoice Date Found: " + myDate.Text);
+			return myDate.Text;
+		}
+
+	}
+
+	class MyAccount_MyLibrary : BaseObject
+	{
+		[FindsBy(How = How.Id, Using = "myLibraryContainer")]
+		protected override IWebElement containerElement { get; set; }
+
+
+
+
+
+
+
+
+	}
+
+
 }

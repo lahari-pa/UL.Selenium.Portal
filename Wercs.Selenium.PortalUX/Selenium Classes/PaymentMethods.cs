@@ -1303,8 +1303,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	class PaymentMethods_Subscription_Billing : BaseDialog
 	{
-		[FindsBy(How = How.XPath, Using = ".//div[@class='col-md-12']/div[@class='panel panel-default ws-panel']")]
+		[FindsBy(How = How.Id, Using = "shoppingCart")]
 		protected override IWebElement containerElement { get; set; }
+
+		public bool Purchase_Header_Correct()
+		{
+			Report.Info("Beginning Purchase_Header_Correct");
+
+			IWebElement myHeader = containerElement
+				.FindElements(By.XPath(".//div[@class='header-with-back']/h2[text()='Purchase Summary']"), 10).FirstOrDefault();
+
+			if (myHeader == null)
+			{
+				Report.Info("Failed to Find Header Text");
+				Report.Screenshot();
+				return false;
+			}
+			if (!myHeader.Displayed)
+			{
+				Report.Info("Incorrect Page Open");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Correct Page Opened");
+			return true;
+		}
 
 		public bool Subscription_Billing_Header_Correct()
 		{
@@ -1353,18 +1376,204 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public bool Column_Headings_Correct(string column_1, string column_2, string column_3)
+		{
+			Report.Info("Beginning Column_Headings_Correct");
 
+			Report.Info("Column 1 = " + column_1);
+			Report.Info("Column 2 = " + column_2);
+			Report.Info("Column 3 = " + column_3);
 
+			IWebElement myColumn1 = containerElement.FindElement(By.XPath(".//table/thead/tr/th[1]"), 2);
+			IWebElement myColumn2 = containerElement.FindElement(By.XPath(".//table/thead/tr/th[2]"), 2);
+			IWebElement myColumn3 = containerElement.FindElement(By.XPath(".//table/thead/tr/th[3]"), 2);
 
+			if (myColumn1 == null)
+			{
+				Report.Info("Failed to Find Column Header 1");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Column Header 1 Found");
+			if (myColumn1.Text != column_1)
+			{
+				Report.Info("Column Header 1 is Incorrect: " + myColumn1.Text);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Column Header 1 is Correct");
+			if (myColumn2 == null)
+			{
+				Report.Info("Failed to Find Column Header 2");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Column Header 2 Found");
+			if (myColumn2.Text != column_2)
+			{
+				Report.Info("Column Header 2 is Incorrect: " + myColumn2.Text);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Column Header 2 is Correct");
+			if (myColumn3 == null)
+			{
+				Report.Info("Failed to Find Column Header 3");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Column Header 3 Found");
+			if (myColumn3.Text != column_3)
+			{
+				Report.Info("Column Header 3 is Incorrect: " + myColumn3.Text);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Column Header 3 is Correct");
+			Report.Success("Column Headers Correct");
+			return true;
+		}
 
+		public bool Table_Footer_Statement(string statement)
+		{
+			Report.Info("Beginning Table_Footer_Statement");
 
+			IWebElement myStatement = containerElement.FindElement(By.XPath(".//tfoot/tr/td[text()='" + statement + "']"), 2);
 
+			if (myStatement == null)
+			{
+				Report.Info("Failed to Find Correct Statement");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Statement Found");
+			return true;
+		}
 
+		public bool Prices_And_Payment_Section(string pricesText)
+		{
+			Report.Info("Beginning Prices_And_Payment_Section");
+
+			IWebElement myHeading = containerElement.FindElement(By.XPath(".//div[@class='alert alert-warning']/h4[text()='Prices and Payment']"), 2);
+
+			if (myHeading == null)
+			{
+				Report.Info("Prices and Payment Heading Not Found");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Prices and Payment Heading Correct");
+
+			IWebElement myText = myHeading.FindElement(By.XPath("../p"), 2);
+
+			if (myText == null)
+			{
+				Report.Info("Prices and Payment Text Not Found");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Prices and Payment Text Found");
+			if (myText.Text.Trim() != pricesText)
+			{
+				Report.Info("Prices and Payment Text Incorrect: " + myText.Text);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Prices and Payment Text Correct");
+			return true;
+		}
+
+		public bool Confirmation_Text_Correct(string confirmText)
+		{
+			Report.Info("Beginning Confirmation_Text_Correct");
+
+			IWebElement myText = containerElement.FindElement(By.XPath(".//div[@class='col-sm-8']/span/b"), 2);
+
+			if (myText == null)
+			{
+				Report.Info("Confirmation Text Not Found");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Confirmation Text Found");
+			if (myText.Text != confirmText)
+			{
+				Report.Info("Confirmation Text Incorrect: " + myText.Text);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Confirmation Text Correct");
+			return true;
+		}
+
+		//Confirm Order Button
+		[FindsBy(How = How.Id, Using = "ConfirmOrder")]
+		private IWebElement _btn_confirm;
+
+		public bool Confirm_Order_click()
+		{
+			Report.Info("Attempting to Click Confirm Order Button");
+			_btn_confirm.Click();
+			return true;
+		}
 
 
 	}
 
+	class PaymentMethods_Thank_You : BaseDialog
+	{
+		[FindsBy(How = How.Id, Using = "shoppingCart")]
+		protected override IWebElement containerElement { get; set; }
 
+		public bool ThankYou_Header_Correct()
+		{
+			Report.Info("Beginning ThankYou_Header_Correct");
+
+			IWebElement myHeader = containerElement
+				.FindElements(By.XPath(".//div[@class='header-with-back']/h2[text()=' Thank You']"), 10).FirstOrDefault();
+
+			if (myHeader == null)
+			{
+				Report.Info("Failed to Find Header Text");
+				Report.Screenshot();
+				return false;
+			}
+			if (!myHeader.Displayed)
+			{
+				Report.Info("Incorrect Page Open");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Correct Page Opened");
+			return true;
+		}
+
+		public bool Thank_You_Text(string tyText)
+		{
+			Report.Info("Beginning Thank_You_Text");
+
+
+
+
+
+			Report.Success("Text Correct");
+			return true;
+
+		}
+
+		//Home Button
+		[FindsBy(How = How.XPath, Using = ".//p[@class='text-right']/a[text()='Home']")]
+		private IWebElement _btn_home;
+
+		public bool Home_click()
+		{
+			Report.Info("Attempting to Click Home Button");
+			_btn_home.Click();
+			return true;
+		}
+
+
+	}
 
 
 }

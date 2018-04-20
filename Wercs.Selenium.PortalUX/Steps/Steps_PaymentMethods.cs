@@ -63,7 +63,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var myPay = new PaymentMethods();
-
+				Delay.Seconds(3 * Delay.SpeedFactor);
 				Report.IsTrue(myPay.Select_Payment_Method(payMethod), "Failed to Select " + payMethod,
 					"Successfully Selected " + payMethod);
 			}
@@ -592,16 +592,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the Purchase Summary header is displayed")]
+		[StepDefinition(@"In the Purchase Summary screen I confirm the Purchase Summary header is displayed")]
 		public void ThenIConfirmThePurchaseSummaryHeaderIsDisplayed()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Purchase Summary header is displayed");
 			try
 			{
-				var myPay = new PaymentMethods();
+				var myPay = new PaymentMethods_Subscription_Billing();
 				Delay.Seconds(5 * Delay.SpeedFactor);
-				Report.IsTrue(myPay.Payment_Header_Correct(), "Payment Methods Header is Incorrect",
-					"Payments Methods Header is Correct");
+				Report.IsTrue(myPay.Subscription_Billing_Header_Correct(), "Purchase Summary Header is Incorrect",
+					"Purchase Summary Header is Correct");
 			}
 			catch (Exception ex)
 			{
@@ -610,7 +610,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I check the Subscription Billing header is correct")]
+		[StepDefinition(@"In the Purchase Summary screen I check the Subscription Billing header is correct")]
 		public void ThenICheckTheSubscriptionBillingHeaderIsCorrect()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I check the Subscription Billing header is correct");
@@ -628,7 +628,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the Yearly Radio Option is (selected|not selected)")]
+		[StepDefinition(@"In the Purchase Summary screen I confirm the Yearly Radio Option is (selected|not selected)")]
 		public void ThenIConfirmTheYearlyRadioOptionIsX(string select)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Yearly Radio Option is " + select);
@@ -641,8 +641,165 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 				if (select == "not selected")
 				{
-					Report.IsTrue(mySub.Yearly_Option_Selected(), "Yearly Radio Option is Selected", "Yearly Radio Option is Not Selected");
+					Report.IsTrue(!mySub.Yearly_Option_Selected(), "Yearly Radio Option is Selected", "Yearly Radio Option is Not Selected");
 				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Purchase Summary screen I confirm the column headings are correct: (.*), (.*), (.*)")]
+		public void ThenIConfirmTheColumnHeadingsAreCorrectXYZ(string column_1, string column_2, string column_3)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the column headings are correct");
+			try
+			{
+				var mySub = new PaymentMethods_Subscription_Billing();
+
+				Report.IsTrue(mySub.Column_Headings_Correct(column_1, column_2, column_3), "Column Headers Incorrect",
+					"Column Headers Correct");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Purchase Summary screen I confirm the folling statement is shown: (.*)")]
+		public void ThenIConfirmTheFollingStatementIsShownX(string statement)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the folling statement is shown: " + statement);
+			try
+			{
+				var mySub = new PaymentMethods_Subscription_Billing();
+
+				Report.IsTrue(mySub.Table_Footer_Statement(statement), "Statement is Not Shown",
+					"Statement is Shown");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Purchase Summary screen I confirm the Prices and Payment section contains the text: (.*)")]
+		public void ThenInThePurchaseSummaryScreenIConfirmThePricesAndPaymentSectionContainsTheText(string prices_text)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Purchase Summary screen I confirm the Prices and Payment section contains the correct text");
+			try
+			{
+				var mySub = new PaymentMethods_Subscription_Billing();
+
+				Report.Info("Prices and Payment Text = " + prices_text);
+
+				Report.IsTrue(mySub.Prices_And_Payment_Section(prices_text), "Prices and Payment Section Incorrect",
+					"Prices and Payment Section Correct");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Purchase Summary screen I confirm the following statement is shown: (.*)")]
+		public void ThenInThePurchaseSummaryScreenIConfirmTheFollowingStatementIsShown(string confirm_text)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Purchase Summary screen I confirm the following statement is shown: " + confirm_text);
+			try
+			{
+				var mySub = new PaymentMethods_Subscription_Billing();
+
+				Report.Info("Confirmation Text = " + confirm_text);
+
+				Report.IsTrue(mySub.Confirmation_Text_Correct(confirm_text), "Confirmation Section Incorrect",
+					"Confirmation Section Correct");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Purchase Summary screen I click Confirm Order")]
+		public void ThenInThePurchaseSummaryScreenIClickConfirmOrder()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Purchase Summary screen I click Confirm Order");
+			try
+			{
+				var mySub = new PaymentMethods_Subscription_Billing();
+
+				Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
+
+				Delay.Seconds(10 * Delay.SpeedFactor);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Thank You screen I check the Header is correct")]
+		public void ThenInTheThankYouScreenICheckTheHeaderIsCorrect()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Thank You screen I check the Header is correct");
+			try
+			{
+				var myPay = new PaymentMethods_Thank_You();
+				Delay.Seconds(5 * Delay.SpeedFactor);
+				Report.IsTrue(myPay.ThankYou_Header_Correct(), "Thank You Header is Incorrect",
+					"Thank You Header is Correct");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Thank You screen I confirm the following statement is shown: (.*)")]
+		public void ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX(string ty_text)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Thank You screen I check the Header is correct");
+			try
+			{
+				var myPay = new PaymentMethods_Thank_You();
+
+				Report.Info("Thank You Text = " + ty_text);
+
+				Report.IsTrue(myPay.Thank_You_Text(ty_text), "Thank You Text is Incorrect",
+					"Thank You Header is Correct");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"In the Thank You screen I click Home")]
+		public void ThenInTheThankYouScreenIClickHome()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Thank You screen I click Home");
+			try
+			{
+				var myPay = new PaymentMethods_Thank_You();
+
+				Report.IsTrue(myPay.Home_click(), "Failed to Click Home Button",
+					"Home Button Clicked");
+
+				Delay.Seconds(5 * Delay.SpeedFactor);
+
+				var myHome = new StepsHomepage();
+
+				myHome.ThenTheWercSmartHomepageShouldLoad();
 			}
 			catch (Exception ex)
 			{
