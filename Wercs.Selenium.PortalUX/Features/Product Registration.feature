@@ -10,7 +10,7 @@
 @RetailPartners
 @run_ProductRegistration
 
-Feature: Product Registration 
+Feature: Product Registration
 
 Background:
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -90,7 +90,7 @@ And in the New Product page I click Continue
 #################### Coralie 11/4/2018: Clicking add a retailer step no longer necessary because it automatically opens on clicking continue
 #Select any retailer except for O'Reilly, Sears/K-Mart or Wal-Mart/SAM's CLUB because choosing any of these retailers will cause the Select Vendor drop down to display
 Given the 'Select Retailers' window appears
-Then In the 'Select Retailers' window I select the retailer: Target 
+Then In the 'Select Retailers' window I select the retailer: Target
 And in the New Product page I click Continue
 Given I click the 'Add UPC' button
 Then I add the following into the UPC Fields
@@ -151,7 +151,7 @@ And in the Product Characteristics tab of the New Product Page, for U.S. Toxic S
 And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
 And in the New Product page I click Continue
 Given the 'Select Retailers' window appears
-Then In the 'Select Retailers' window I select the retailer: Target 
+Then In the 'Select Retailers' window I select the retailer: Target
 And in the New Product page I click Continue
 Given I click the 'Add UPC' button
 Then I add the following into the UPC Fields
@@ -186,3 +186,71 @@ And I enter the following into the comments field: Comments Field Text
 Given in the New Product page I click Continue
 Given I navigate to the home page
 Then I delete the product: TestCase63724
+
+Scenario: [65441] Delete a UPC from the UPC Grid
+Given I generate a random UPC number and save as: UPC65441
+Given I delete all products with UPC Number: saved as UPC65441
+And I click the Register New Product icon in the Navigation Pane
+And I should see the header New Product
+And I Select the Create a New Registration radio button
+And in the New Product page I click Continue
+And In the Product Type tab of the New Product Page, I enter: abrasive in the Product Name text field
+And In the Product Type tab of the New Product Page, I enter: Abrasive in the Type of Product select field
+And in the New Product page I click Continue
+Then I save the product information as: TestCase65441
+And I set the Primary Physical State to be: Solid
+And I set the Secondary Physical State to be: Granular
+And I set the water mixture question to: Yes
+And I set the water solubility description to: Completely soluble
+Given in the New Product page I click Continue
+# Setting Additional Prodiuct Information
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And In the Additional Information Page for Product has been classified using OSHA I select: No
+And In the Additional Information Page for Product is shipped directly I select: No
+And In the Additional Information Page for Product is retailers private label or brand I select: No
+And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+Given in the New Product page I click Continue
+#Enter ingredients
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Formaldehyde  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+#Enter regulatory information - not prop 65
+And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And in the New Product page I click Continue
+
+#Transportation details 1 - not regulated - continue - happy path
+And I should see the Transportation Details 1 Page
+And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: Not Regulated
+#And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(a)(2), 173.120(a)(3)
+#And in the Product Characteristics tab of the New Product Page, for Other DOT Exception I select: None
+And in the New Product page I click Continue
+
+#Retailer association - select a retailer - continue-happy path
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: Target
+And in the New Product page I click Continue
+
+#Enter UPC
+Given I click the 'Add UPC' button
+Then I add the following into the UPC Fields
+| Field         | Value             |
+| UPCNumber     | saved as UPC65441 |
+| ContainerType | Aerosol Can       |
+| Size          | 20                |
+| DPCI          | 087-16-0238       |
+And in the New Product page I click Continue
+
+#Navigate back to UPC screen by click the reipient and upc details tab in the header
+Given In the New Product page I click tab: Recipient and UPC Details
+Given in the New Product page I click section: Universal Product Code
+And I should see the Universal Product Code Page
+And I delete UPC: saved as UPC65441
+Then In the list of UPCs I should not see UPC: saved as UPC65441
+#delete product
+Given I navigate to the home page
+Then I delete the product: TestCase65441
+
+

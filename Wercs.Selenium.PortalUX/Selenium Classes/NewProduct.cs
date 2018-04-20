@@ -9,6 +9,7 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
 using ResourcePool;
+using SafewareReporting.XML;
 using SeleniumUtilities;
 
 
@@ -108,7 +109,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		//Valid tab names: Product Type, Product Characteristics, Recipient and UPC Details, Review and Submit
-			public bool WaitForTab(string tabName, int secondsToWait = 30)
+		public bool WaitForTab(string tabName, int secondsToWait = 30)
 		{
 			int counter = 0;
 			while (counter < secondsToWait)
@@ -130,6 +131,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				counter++;
+			}
+			return false;
+		}
+
+		public bool ClickTab(string tabName)
+		{
+			var tab = containerElement.FindElements(By.XPath(".//div[@class='prog-wizard']//div[contains(@class, 'prog-step')]//a/span"), 2)
+				.FirstOrDefault(x => x.Text.Contains(tabName));
+
+			if (tab != null)
+			{
+				return tab.FindElement(By.XPath("../../a")).TryClick();
+			}
+
+			return false;
+		}
+
+		public bool ClickSection(string section)
+		{
+			var sec = containerElement.FindElements(By.XPath(".//h3"), 2).FirstOrDefault(x=>x.Text.Contains(section));
+
+			if (sec != null)
+			{
+				return sec.TryClick();
 			}
 			return false;
 		}
@@ -1174,6 +1199,53 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.TryClick();
 		}
 
+		public bool DeleteUPC(string upc)
+		{
+			if (upc.ToLower().Contains("saved as"))
+			{
+				upc = Context.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
+			}
+			SafewareReporting.Report.Info("Attempting to delete: " + upc);
+			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var upcmatch = container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2)
+				.FirstOrDefault(x => x.Text.Contains(upc));
+
+			if (upcmatch != null)
+			{
+				if (!upcmatch.FindElement(By.XPath("../..//a[contains(@data-bind, 'Delete')]")).TryClick())
+				{
+					SafewareReporting.Report.Info("Failed to find delete button");
+					return false;
+				}
+
+			}
+			else
+			{
+				SafewareReporting.Report.Info("Failed to find matching row.");
+				return false;
+			}
+			SafewareReporting.Report.Info("Successfully clicked delete button.");
+			SafewareReporting.Report.Screenshot();
+			Delay.Seconds(3);
+			ModalDialog md = new ModalDialog();
+			if (md.Wait_for_load(30))
+			{
+				SafewareReporting.Report.Screenshot();
+				md.Click_OK();
+				SafewareReporting.Report.Info("Clicked OK");
+				SafewareReporting.Report.Screenshot();
+				Delay.Seconds(2);
+				return true;
+			}
+			return false;
+		}
+
+		public List<string> GetAllUPCs()
+		{
+			var container = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			return container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).Select(x => x.Text).ToList();
+		}
+
 		public bool InputUpcInformation(UpcInformation info)
 		{
 			try
@@ -1181,6 +1253,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 
 				var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+				if (info.UpcNumber.ToLower().Contains("saved as"))
+				{
+					var savedUPC = Context
+						.GetFromContext(info.UpcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					info.UpcNumber = savedUPC;
+				}
 				upcNumberField.EnterText(info.UpcNumber);
 
 				var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
@@ -1200,8 +1280,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				
 				return true;
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
+				SafewareReporting.Report.Info(ex.Message);
 				return false;
 			}
 		}
@@ -1255,9 +1336,116 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		// ========= Product Charactertistics Options ========= //
 
+		public string ProductIsRegulatedForTransport {
+			get
+			{
+				var el = containerElement
+					.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//input"), 2)
+					.FirstOrDefault(x => x.Selected).FindElement(By.XPath("../span"));
+				if (el != null)
+				{
+					return el.Text;
+				}
+
+				return "";
+			}
+			set
+			{
+				var el = containerElement
+					.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//span"), 2)
+					.FirstOrDefault(x => x.Text.Contains(value)).FindElement(By.XPath("../input"));
+				if (el != null)
+				{
+					el.TryClick();
+				}
+			}
+		}
+
+		public List<string> DOTExceptions {
+			get
+			{
+				var selectedInputs = containerElement
+					.FindElements(By.XPath(".//label[contains(text(),'DOT Exceptions')]/../following-sibling::div//input"), 2)
+					.Where(x => x.Selected);
+				List<string> selectedLabels = new List<string>();
+				foreach (var input in selectedInputs)
+				{
+					selectedLabels.Add(input.FindElement(By.XPath("../span")).Text);
+				}
+
+				return selectedLabels;
+			}
+			set
+			{
+				foreach (string item in value)
+				{
+					var el = containerElement
+						.FindElements(By.XPath(".//label[contains(text(),'DOT Exceptions')]/../following-sibling::div//span"), 2)
+						.FirstOrDefault(x => x.Text.Contains(item)).FindElement(By.XPath("../input"));
+					if (el != null)
+					{
+						el.TryClick();
+					}
+				}
+				
+			}
+		}
+
+		public string OtherDOTException {
+			get
+			{
+				var el = containerElement
+					.FindElement(By.XPath(".//label[contains(text(),'Other DOT Exception')]/../following-sibling::div//input"), 2);
+				return el.GetValue();
+			}
+			set
+			{
+				var el = containerElement
+					.FindElement(By.XPath(".//label[contains(text(),'Other DOT Exception')]/../following-sibling::div//input"), 2);
+				el.EnterText(value);
+			}
+		}
+
+		public string SpecialPermitNumbers {
+			get
+			{
+				var el = containerElement
+					.FindElement(By.XPath(".//label[contains(text(),'Special Permit')]/../following-sibling::div//input"), 2);
+				return el.GetValue();
+			}
+			set
+			{
+				var el = containerElement
+					.FindElement(By.XPath(".//label[contains(text(),'Special Permit')]/../following-sibling::div//input"), 2);
+				el.EnterText(value);
+			}
+		}
+
+
 		public List<string> ListOfPrimaryPhysicalStates()
 		{
 			return containerElement.FindElements(By.XPath(".//label[text()='Primary Physical State']/..//following-sibling::div//label//span"), 2).Select(x => x.GetValue()).ToList();
+		}
+
+		public bool SelectPrimaryPhysicalState(string item)
+		{
+			try
+			{
+				var el = containerElement
+					.FindElements(By.XPath(".//label[text()='Primary Physical State']/../following-sibling::div//span"), 2)
+					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+				if (el != null)
+				{
+					el.TryClick();
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
 		}
 
 		public bool SelectSecondaryPhysicalState(string item)
@@ -1271,6 +1459,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			catch (Exception)
 			{
 				return false;
+			}
+		}
+
+		public string WaterSolubility
+		{
+			get
+			{
+				var el = containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+				return el.SelectedOption();
+			}
+			set
+			{
+				var el = containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+				el.Select(value);
 			}
 		}
 
@@ -1752,12 +1954,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	public class UpcInformation
 	{
-		public string UpcNumber { get; set; }
-		public string ContainerType { get; set; }
-		public string Size { get; set; }
-		public string Dpci { get; set; }
-		public string Quantity { get; set; }
-		
+		public string UpcNumber { get; set; } = "";
+		public string ContainerType { get; set; } = "";
+		public string Size { get; set; } = "";
+		public string Dpci { get; set; } = "";
+		public string Quantity { get; set; } = "";
+
 	}
 
 	public class Ingredient

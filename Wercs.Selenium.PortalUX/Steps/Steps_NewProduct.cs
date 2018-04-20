@@ -298,6 +298,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
 					"Product type tab is loaded.");
 				selNewProduct.ProductName = productName;
+				Delay.Seconds(1);
 				
 			}
 			catch (Exception ex)
@@ -630,7 +631,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
+		[StepDefinition(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOSHACompliantSDSISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -644,7 +645,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set OSHA value to: " + selection);
 		}
 
-		[Given(@"in the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: (.*)")]
+		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -658,7 +659,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set Personal Protection Equipment Recommended value to: " + selection);
 		}
 
-		[Given(@"in the Review and Submit tab of the New Product Page for Autoignition I enter: (.*)")]
+		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Autoignition I enter: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -669,7 +670,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"in the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: (.*)")]
+		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -680,7 +681,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"in the Review and Submit tab of the New Product Page for Viscosity I enter: (.*)")]
+		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Viscosity I enter: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -691,7 +692,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"in the Review and Submit tab of the New Product Page for Appearance I select: (.*)")]
+		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Appearance I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -705,7 +706,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set Appearance value to: " + selection);
 		}
 
-		[Given(@"in the Review and Submit tab of the New Product Page for Odor I select: (.*)")]
+		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Odor I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -719,7 +720,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set Odor value to: " + selection);
 		}
 
-		[Given(@"in the Review and Submit tab of the New Product Page for Odor Threshold I select: (.*)")]
+		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Odor Threshold I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -733,7 +734,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set Odor Threshold value to: " + selection);
 		}
 
-		[Given(@"in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: (.*)")]
+		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPartitionCoefficientISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -742,6 +743,88 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			selNewProduct.PartitionCoefficient = selection;
 			
+		}
+
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect(string selection)
+		{
+			NewProduct selNewProduct = new NewProduct();
+			selNewProduct.ProductIsRegulatedForTransport = selection;
+			Report.IsTrue(selNewProduct.ProductIsRegulatedForTransport == selection, "Failed to select: " + selection,
+				"Successfully selected: " + selection);
+		}
+
+
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTExceptionsISelect(string selections)
+		{
+			NewProduct selNewProduct = new NewProduct();
+
+			List<string> itemsToSelect = selections.Split(',').ToList().Select(x=>x.Trim()).ToList();
+			selNewProduct.DOTExceptions = itemsToSelect;
+
+			List<string> itemsSelected = selNewProduct.DOTExceptions;
+
+			foreach (string item in itemsToSelect)
+			{
+				if (itemsSelected.Select(x => x.Contains(item)).Count() != 1)
+				{
+					throw new Exception("Failed to select: " + item);
+				}
+			}
+			Report.Success("Successfully selected: " + selections);
+		}
+
+		[StepDefinition(@"In the New Product page I click tab: (.*)")]
+		public void GivenInTheNewProductPageIClickTab(string tab)
+		{
+			NewProduct selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.ClickTab(tab), "Failed to click tab: " + tab, "Successfully clicked tab: " + tab);
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"in the New Product page I click section: (.*)")]
+		public void GivenInTheNewProductPageIClickSection(string section)
+		{
+			NewProduct selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
+			Delay.Seconds(1);
+			GivenIShouldSeeXPage(section);
+		}
+
+		[StepDefinition(@"I delete UPC: (.*)")]
+		public void GivenIDeleteUPC(string upc)
+		{
+			NewProduct selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.DeleteUPC(upc), "Failed to delete UPC:" + upc, "Successfully deleted: " + upc);
+		}
+
+		[Then(@"In the list of UPCs I should not see UPC: (.*)")]
+		public void ThenInTheListOfUPCsIShouldNotSeeUPCSavedAsUPC(string upc)
+		{
+			NewProduct selNewProduct = new NewProduct();
+			if (upc.ToLower().Contains("saved as"))
+			{
+				upc = Context
+					.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+					.ToString();
+			}
+			
+			Report.IsTrue(!selNewProduct.GetAllUPCs().Contains(upc), "UPC: " + upc + " has not been deleted.",
+				"UPC: " + upc + " has been deleted as expected.");
+		}
+
+
+
+
+
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Other DOT Exception I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForOtherDOTExceptionISelect(string selection)
+		{
+			NewProduct selNewProduct = new NewProduct();
+			selNewProduct.OtherDOTException = selection;
+			Report.IsTrue(selNewProduct.OtherDOTException == selection, "Failed to select: " + selection,
+				"Successfully selected: " + selection);
 		}
 
 
@@ -882,11 +965,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(found.Count == 0, "Not all Physical States were found! Remaining were: " + string.Join(", ", found), "All primary physical states were found successfully!");
 		}
 
+		[StepDefinition(@"I set the Primary Physical State to be: (.*)")]
+		public void ThenISetThePrimayPhysicalStateToBe(string state)
+		{
+			Report.IsTrue(new NewProduct().SelectPrimaryPhysicalState(state), "Failed to set the primary physical state to be: " + state, "Successfully set the Primary Physical State to be: " + state);
+		}
+
 		[StepDefinition(@"I set the Secondary Physical State to be: (.*)")]
 		public void ThenISetTheSecondaryPhysicalStateToBe(string state)
 		{
-			Report.IsTrue(new NewProduct().SelectSecondaryPhysicalState(state), "Failed to set the secondary physicla state to be: " + state, "Successfully set the Secondary Physical State to be: " + state);
+			Report.IsTrue(new NewProduct().SelectSecondaryPhysicalState(state), "Failed to set the secondary physical state to be: " + state, "Successfully set the Secondary Physical State to be: " + state);
 		}
+
+		[Then(@"I set the water solubility description to: (.*)")]
+		public void ThenISetTheWaterSolubilityDescriptionTo(string description)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			new NewProduct().WaterSolubility = description;
+			Report.IsTrue(thisNewProduct.WaterSolubility==description, "Failed to set the water solubility description to be: " + description, "Successfully set the water solubility description to be: " + description);
+		}
+
 
 		[StepDefinition(@"I set the water mixture question to: (Yes|No)")]
 		public void ThenISetTheWaterMixtureQuestionTo(string option)

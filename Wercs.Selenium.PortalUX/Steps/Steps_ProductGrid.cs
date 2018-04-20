@@ -489,6 +489,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Given(@"I generate a random UPC number and save as: (.*)")]
+		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
+		{
+			string uPCNo = GlobalFunctions.GenerateUPCNumber();
+			Context.AddToContext(savedAs,uPCNo);
+			Report.Info("Generated UPC No: " + uPCNo);
+		}
+
+
 		[StepDefinition(@"I delete all products with (UPC Number): (.*)")]
 		public void DeleteAllProductsMatchingCriteria(string option, string value)
 		{
@@ -499,6 +508,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					case ("UPC Number"):
 					{
+						if (value.ToLower().Contains("saved as"))
+						{
+							value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+								.ToString();
+						}
 						productGrid.UpcNumber = value;
 						if (!Report.IsTrue(productGrid.UpcNumber == value, "Value: " + value + " was not inputted into the " + option + " field correctly!", "Value: " + value + " was correctly inputted into the " + option + " field", false, false))
 						{
