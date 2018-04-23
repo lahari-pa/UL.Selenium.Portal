@@ -183,3 +183,44 @@ Given I click on My Account
 Then In the My Account screen I navigate to the Order History page
 Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: New_Sub
+
+Scenario: [67822] New subscription to a new supplier from My account - Visual Checks
+#This test requires a new master account in  wercsmart without any subscription
+#Login to WERCSmart Portal - Visaul Automation Account
+#Go to My Account
+#Click New Subscription button
+#Confirm heading as subscription enrollment
+#Confirm that you see the following Statement: "1. Select the range of your products, articles and enhanced articles"
+#Confirm that you see Articles dropdown. 
+#Confirm that when you hover over (i) for Articles you see following heading  "What Are Articles?" 
+#Confirm that when you hover over (i) for Articles you see following statement "According to OSHA regulation 1910.1200, an article is "a manufactured item other than a fluid or particle: (i) which is formed to a specific shape or design during manufacture; (ii) which has end use function(s) dependent in whole or in part upon its shape or design during end use; and (iii) which under normal conditions of use does not release more than very small quantities, e.g., minute or trace amounts of a hazardous chemical (as determined under paragraph (d) of this section), and does not pose a physical hazard or health risk to employees."
+#Confirm that None option is already selected in Articles dropdown
+#Confirm that you see Enhanced Articles dropdown.
+#Confirm that when you hover over (i) for Enhanced Articles you see following heading  "What Are Enhanced Articles?"  
+#Confirm that when you hover over (i) for Articles you see following statement "Beverage registrations or products that include a lithium battery when sold to the consumer (lithium ion or lithium metal) are considered Enhanced Articles for the purpose of WERCSmart registration."
+#Confirm that None option is already selected in  Enhanced Articles dropdown   
+#Confirm that you see Formulated Products dropdown.
+#Confirm that when you hover over (i) for formulated products you see following heading  "What Are formulated product?" 
+#Confirm that when you hover over (i) for formulated products you see following statement  "During the WERCSmart registration process, information about ingredients (e.g., water, ethanol, phosphoric acid) are collected."  
+#Confirm that None option is already selected in Formulated products dropdown  
+#Confirm that you see following sub heading  "2.Select the feature plan"
+#Confirm that you see "Premium" radio option  
+#Confirm that you see following text below Premium "STANDARD + UNLIMITED FEATURES" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

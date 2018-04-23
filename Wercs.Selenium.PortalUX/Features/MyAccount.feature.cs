@@ -565,6 +565,19 @@ testRunner.Then("In the Order History screen I get the Invoice Number and Date a
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[67822] New subscription to a new supplier from My account - Visual Checks")]
+        public virtual void _67822NewSubscriptionToANewSupplierFromMyAccount_VisualChecks()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[67822] New subscription to a new supplier from My account - Visual Checks", ((string[])(null)));
+#line 187
+this.ScenarioSetup(scenarioInfo);
+#line 13
+this.FeatureBackground();
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
