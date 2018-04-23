@@ -1269,8 +1269,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var sizeField = container.FindElement(By.XPath(".//input[@placeholder='Size']"), 2);
 				sizeField.EnterText(info.Size);
 
-				var dpciField = container.FindElement(By.XPath(".//input[contains(@data-bind,'value.field')]"), 2);
-				dpciField.EnterText(info.Dpci);
+				if (info.Dpci.Length> 0)
+				{
+					var dpciField = container.FindElement(By.XPath(".//input[contains(@data-bind,'value.field')]"), 2);
+					dpciField.EnterText(info.Dpci);
+				}
+
 
 				if (info.Quantity.Length > 0)
 				{
@@ -1476,6 +1480,57 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		/// <summary>
+		/// Select the best Water Solubility description dropdown
+		/// </summary>
+		public bool SelectBestWaterSolubilityDescription(string item)
+		{
+			try
+			{
+				var el = containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
+				el.Select(item);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Product Label checkbox options
+		/// </summary>
+		public List<string> ProductLabel {
+			get
+			{
+				var selectedInputs = containerElement
+					.FindElements(By.XPath(".//label[contains(text(),'Refer to your Product Label')]/../following-sibling::div//input"), 2)
+					.Where(x => x.Selected);
+				List<string> selectedLabels = new List<string>();
+				foreach (var input in selectedInputs)
+				{
+					selectedLabels.Add(input.FindElement(By.XPath("../span")).Text);
+				}
+
+				return selectedLabels;
+			}
+			set
+			{
+				foreach (string item in value)
+				{
+					var el = containerElement
+						.FindElements(By.XPath(".//label[contains(text(),'Refer to your Product Label')]/../following-sibling::div//span"), 2)
+						.FirstOrDefault(x => x.Text.Contains(item)).FindElement(By.XPath("../input"));
+					if (el != null)
+					{
+						el.TryClick();
+					}
+				}
+
+			}
+		}
+
+
 		public bool SetWaterSolutionQuestion
 		{
 			set
@@ -1619,6 +1674,45 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+
+		/// <summary>
+		/// Select vendor id from dropdown
+		/// </summary>
+		public bool SelectVendorId(string item)
+		{
+			try
+			{
+				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+
+				var el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
+				el.Select(item);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Select Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) from dropdown
+		/// </summary>
+		public bool SelectPrivateLabelName(string item)
+		{
+			try
+			{
+				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+
+				var el = container.FindElement(By.XPath(".//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/..//select"), 2);
+				el.Select(item);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		/*===== Safety Data Sheet Authoring ====*/
 
 		public string PersonalProtectionEquipmentRecommended
@@ -1746,6 +1840,157 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			}
 		}
+		/// <summary>
+		/// Specific Gravity text box 
+		/// </summary>
+		public string SpecificGravity {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Specific Gravity"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Specific Gravity"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+		/// <summary>
+		/// pH text box 
+		/// </summary>
+		public string PH {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("pH"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("pH"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+		/// <summary>
+		/// Boiling Point (in Celsius) text box 
+		/// </summary>
+		public string BoilingPoint {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Boiling Point (in Celsius)"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Boiling Point (in Celsius)"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+		/// <summary>
+		/// Flash Point (in Celsius) text box 
+		/// </summary>
+		public string FlashPoint {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Flash Point (in Celsius)"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Flash Point (in Celsius)"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
 
 		public string Viscosity {
 			get
@@ -1780,6 +2025,39 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 
 			}
+		}
+
+		/// <summary>
+		/// Flash Point Testing Method Used radio options
+		/// </summary>
+		public string FlashPointTestingMethodUsed {
+			get
+			{
+				List<string> countries = new List<string>();
+				var listOfOptions = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Flash Point Testing Method Used"))
+					.FindElements(By.XPath("../..//input"));
+				foreach (var item in listOfOptions)
+				{
+					if (item.Selected)
+					{
+						return item.FindElement(By.XPath("../..//label")).Text;
+					}
+				}
+
+				return "";
+
+			}
+			set
+			{
+				var thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("Flash Point Testing Method Used")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == value);
+				var optionInput = thisLabel.FindElement(By.XPath(".//../input"));
+				if (!optionInput.Selected)
+				{
+					optionInput.Click();
+				}
+			}
+
 		}
 
 		public string Appearance {

@@ -245,6 +245,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
 		}
 
+		/// <summary>
+		/// Select an option for Indicate full name of product, as sold, via this retailer (e.g.Private Label Aspirin) dropdown
+		/// </summary>
+		[Then(@"In the Retailers tab, I select Private Label name as: (.*)")]
+		public void ThenInTheRetailersTabISelectPrivateLabelNameAs(string option)
+		{
+			Report.IsTrue(new NewProduct().SelectPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
+		}
+
+
+		/// <summary>
+		/// Select an option for vendor id  dropdown
+		/// </summary>
+		[Then(@"In the Retailers tab, I select Vendor id as: (.*)")]
+		public void ThenInTheRetailersTabISelectVendorIdAs(string option)
+		{
+			Report.IsTrue(new NewProduct().SelectVendorId(option), "Failed to set the vendor id to be: " + option, "Successfully set vendor id to be: " + option);
+		}
+
+
 		[StepDefinition(@"I save the product information as: (.*)")]
 		public void SaveProductInformation(string savedas)
 		{
@@ -859,6 +879,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		/// <summary>
+		/// select product lable option for Refer to your Product Label. From the options, select those that appear on the Label.
+		/// </summary>
+		[Given(@"In the Regulatory Inforamtion tab, I select Product Lable as: (.*)")]
+		public void GivenInTheRegulatoryInforamtionTabISelectProductLableAs(string selections)
+		{
+			NewProduct selNewProduct = new NewProduct();
+
+			List<string> itemsToSelect = selections.Split(',').ToList().Select(x => x.Trim()).ToList();
+			selNewProduct.ProductLabel = itemsToSelect;
+
+			List<string> itemsSelected = selNewProduct.ProductLabel;
+
+			foreach (string item in itemsToSelect)
+			{
+				if (itemsSelected.Select(x => x.Contains(item)).Count() != 1)
+				{
+					throw new Exception("Failed to select: " + item);
+				}
+			}
+			Report.Success("Successfully selected: " + selections);
+		}
+
+
 
 		[StepDefinition(@"In the Additional Information Page for Product is shipped directly I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsShippedDirectlyISelectNoOrYes(string noOrYes)
@@ -984,6 +1028,135 @@ namespace Wercs.Selenium.PortalUX.Steps
 			new NewProduct().WaterSolubility = description;
 			Report.IsTrue(thisNewProduct.WaterSolubility==description, "Failed to set the water solubility description to be: " + description, "Successfully set the water solubility description to be: " + description);
 		}
+
+
+		/// <summary>
+		/// Enter data in Specific Gravity text field 
+		/// </summary>
+		[Given(@"In the Product Characteristics tab, I enter: (.*) in the Specific Gravity text field")]
+		public void GivenInTheProductCharacteristicsTabIEnterInTheSpecificGravityTextField(string specificGravity)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + specificGravity + " in the Specific Gravity text field");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+				selNewProduct.SpecificGravity = specificGravity;
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Enter data in pH text field
+		/// </summary>
+		[Given(@"In the product Characteristics tab, I enter: (.*) in the pH text field")]
+		public void GivenInTheProductCharacteristicsTabIEnterInThePHTextField(string pH)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + pH + " in the Specific Gravity text field");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+				selNewProduct.PH = pH;
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Enter data in Boiling Point (in Celsius) text field
+		/// </summary>
+		[Given(@"In the product Characteristics tab, I enter: (.*) in the Boiling point \(in Celsius\) text field")]
+		public void GivenInTheProductCharacteristicsTabIEnterInTheBoilingPointInCelsiusTextField(string boilingPointInCelsius)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + boilingPointInCelsius + " in the Specific Gravity text field");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+				selNewProduct.BoilingPoint = boilingPointInCelsius;
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Enter data in Flash point text field
+		/// </summary>
+		[Given(@"In the product Characteristics tab, I enter: (.*) in the Flash point \(in Celsius\) text field")]
+		public void GivenInTheProductCharacteristicsTabIEnterInTheFlashPointInCelsiusTextField(string flashPointInCelsius)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + flashPointInCelsius + " in the Specific Gravity text field");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+				selNewProduct.FlashPoint = flashPointInCelsius;
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Select an option from Flash Point Testing Method Used 
+		/// </summary>
+		[Given(@"in the Product Characteristics tab, for Flash Point Testing Method Used status I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabForFlashPointTestingMethodUsedStatusISelect(string option)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab, for Flash Point Testing Method Used status I select: " + option);
+			try
+			{
+				var selNewProduct = new NewProduct();
+				//Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+				//	"Product characteristics tab is loaded.");
+
+
+				selNewProduct.FlashPointTestingMethodUsed = option;
+
+				Report.IsTrue(selNewProduct.FlashPointTestingMethodUsed == option,
+					"Failed to set Flash point testing method used status: " + option,
+					"Successfully set Flash point testing method used status: " + option);
+
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
+		/// <summary>
+		/// Select an option for the best Water Solubility description dropdown
+		/// </summary>
+		[Given(@"I set the Select the best Water Solubility description to be: (.*)")]
+		public void GivenISetTheSelectTheBestWaterSolubilityDescriptionToBe(string option)
+		{
+			Report.IsTrue(new NewProduct().SelectBestWaterSolubilityDescription(option), "Failed to set the best Water Solubility description to be: " + option, "Successfully set the best Water Solubility description to be: " + option);
+		}
+
 
 
 		[StepDefinition(@"I set the water mixture question to: (Yes|No)")]

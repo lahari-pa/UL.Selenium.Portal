@@ -56,5 +56,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return retList;
 
 		}
+
+		/// <summary>
+		/// Get Private label option 
+		/// </summary>
+		/// <returns></returns>
+		public string GetPrivateLabelStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'Private Label')] /following-sibling:: p[1]"), 2).Text;
+		}
 	}
 }

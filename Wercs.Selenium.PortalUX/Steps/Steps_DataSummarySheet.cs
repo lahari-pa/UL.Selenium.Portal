@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Web.Administration;
+using ResourcePool;
 using SafewareReporting;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -43,5 +44,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(passed, "Battery was not found on the data summary screen!", "Battery was successfully found on the data summary screen!");
 			}
 		}
+
+
+		[Then(@"I confirm that I see the following option for private label question: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingOptionForPrivateLabelQuestion(string message)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the option: " + message);
+			try
+			{
+				Report.Info("Checking error message");
+				var dataSummarySheet = new DataSummary();
+				var found = dataSummarySheet.GetPrivateLabelStatement();
+
+				Report.IsTrue(found.Trim() == message.Trim(),
+					"private label option was not as expected! Expected: " + message + ", but found: " + found + "!",
+					"private label option was showing: " + message + ", as expected!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 	}
 }
