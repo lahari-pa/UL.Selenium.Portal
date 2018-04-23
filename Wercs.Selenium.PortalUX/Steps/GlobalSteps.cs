@@ -296,6 +296,19 @@ namespace WERCSmart
 			}
 		}
 
+		[StepDefinition(@"I create a new email address and save as: (.*)")]
+		public void GivenICreateANewEmailAddressAndSaveAs(string saveAs)
+		{
+			string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
+
+			string myEmail = EmailFunctions.CreateEmail(myDate);
+			Context.AddToContext(saveAs, myEmail);
+			Report.Info("Saved email: " + myEmail);
+		}
+
+
+		
+
 		[StepDefinition(@"If not already created, I create a user: (.*) with the following parameters:")]
 		public void GivenIfNotAlreadyCreatedICreateAUserXWithTheFollowingParameters(string savedAs, Table parameters)
 		{

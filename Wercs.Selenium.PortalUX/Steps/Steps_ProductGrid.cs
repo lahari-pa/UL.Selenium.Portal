@@ -492,9 +492,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
-			//string uPCNo = GlobalFunctions.GenerateUPCNumber();
-			//Context.AddToContext(savedAs,uPCNo);
-			//Report.Info("Generated UPC No: " + uPCNo);
+			string uPCNo = GlobalFunctions.GenerateUPCNumber();
+			Context.AddToContext(savedAs,uPCNo);
+			Report.Info("Generated UPC No: " + uPCNo);
 		}
 
 

@@ -111,13 +111,13 @@
       <HintPath>packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ResourcePool, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.1.10.0\lib\net45\ResourcePool.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.10.3\lib\net45\ResourcePool.dll</HintPath>
     </Reference>
     <Reference Include="SafewareReportingPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.1.10.0\lib\net45\SafewareReportingPlugin.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.10.3\lib\net45\SafewareReportingPlugin.dll</HintPath>
     </Reference>
     <Reference Include="SafewareSeleniumUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.1.10.0\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.10.3\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
     </Reference>
     <Reference Include="Selenium.Core, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Wercs.Selenium.Core.3.0.1-build20171027-004\lib\net45\Selenium.Core.dll</HintPath>
@@ -142,7 +142,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.1.10.0\lib\net45\TReVor.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.1.10.3\lib\net45\TReVor.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>packages\Selenium.WebDriver.3.5.2\lib\net40\WebDriver.dll</HintPath>
@@ -161,6 +161,11 @@
     <Compile Include="Elements\IButton.cs" />
     <Compile Include="Elements\IButton`1.cs" />
     <Compile Include="Elements\ITextbox.cs" />
+    <Compile Include="Features\ConflictMinerals.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConflictMinerals.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Data Consent Tiers.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -230,6 +235,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
+    <Compile Include="Selenium Classes\ConflictMinerals.cs" />
     <Compile Include="Selenium Classes\DataSummary.cs" />
     <Compile Include="Selenium Classes\ForgottenPassword.cs" />
     <Compile Include="Selenium Classes\ForwardProductRegistration.cs" />
@@ -259,6 +265,7 @@
     <Compile Include="Selenium Classes\UserDetails.cs" />
     <Compile Include="SeleniumHelper.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
+    <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_PaymentMethods.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
     <Compile Include="Steps\Steps_Solution.cs" />
@@ -283,6 +290,10 @@
     <None Include=".editorconfig" />
     <None Include="app.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\ConflictMinerals.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ConflictMinerals.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Data Consent Tiers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -340,7 +351,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Mono.Cecil.dll" />
     <Content Include="Mono.Cecil.Mdb.dll" />
