@@ -12,7 +12,7 @@ Feature: Test
 
 Scenario: TEST
 
-#Given I log in with email: User_28e4aafb46f2.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
+#Given I log in with email: User_cac51b73080b.kxxyxunf@mailosaur.io and password: Pa4*ytuufnn
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: New_Sub with the following parameters:
 | Field                | Value          |
@@ -138,8 +138,8 @@ Then In the Purchase Summary screen I confirm the Purchase Summary header is dis
 Then In the Purchase Summary screen I check the Subscription Billing header is correct
 Then In the Purchase Summary screen I confirm the Yearly Radio Option is selected
 Then In the Purchase Summary screen I confirm the column headings are correct: Plan Selected, Service Date, Amount
-Then In the Purchase Summary screen I confirm the folling statement is shown: Subscription will be automatically charged to the default payment method
-Then In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars.  Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL.  Payment is required when your order is submitted. The method of payment designated on the My Account area will be used.  UL reserves the right to accept or refuse any payment made in any form.  UL does not collect or process your payment details.  Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.								
+Then In the Purchase Summary screen I confirm the folling statement is shown: Subscription will be automatically charged to the default payment method.
+Then In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars. Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL. Payment is required when your order is submitted. The method of payment designated on the My Account area will be used. UL reserves the right to accept or refuse any payment made in any form. UL does not collect or process your payment details. Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.
 Then In the Purchase Summary screen I confirm the following statement is shown: By clicking "Confirm Order" you will be enrolled in our subscription plan.
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I check the Header is correct
@@ -149,10 +149,10 @@ Given I click on My Account
 Then In the My Account screen I navigate to the Subscription Information page
 Then In the Subscription Information screen I confirm the Status has the correct information: 1 Formulated, 1 Articles, 1 Enhanced Articles
 Then In the Subscription Information screen I confirm the Subscription History table has the correct information
-| Subscription Level Status | Quantity |
-| Limited Formulated        | 1        |
-| Limited Articles          | 1        |
-| Limited Enhanced Articles | 1        |
+| Row | Subscription Level Status | Quantity |
+| 1   | Limited Formulated        | 1        |
+| 2   | Limited Articles          | 1        |
+| 3   | Limited Enhanced Articles | 1        |
 Given I click on My Account
 Then In the My Account screen I navigate to the Order History page
 Then In the Order History screen I select Subscription

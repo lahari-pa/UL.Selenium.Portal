@@ -548,7 +548,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return myState;
 		}
 
-		public bool Invoice_Email_Arrived(string invoice_no, string invoice_date, string email_address)
+		public bool Invoice_Email_Arrived(string invoice_no, string email_address)
 		{
 			Report.Info("Beginning Invoice_Email_Arrived: " + invoice_no);
 
@@ -558,20 +558,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			List<Mailosaur.Email> myEmails = EmailFunctions.GetAllEmailsForEmailEmailAddress(email_address);
-
-			foreach (var myEmail in myEmails)
-			{
-				string myBody = EmailFunctions.getEmailBody(myEmail);
-
-				if (myBody.Contains(invoice_date))
-				{
-					Report.Info("Invoice Date is Incorrect");
-					return false;
-				}
-
-				Report.Info("Invoice Date is Correct");
-			}
 			Report.Success("Invoice Email is Correct");
 			return true;
 		}
@@ -600,11 +586,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Status_Information_Correct(string form_no, string art_no, string en_art_no)
 		{
-			Report.Info("Status_Information_Correct");
+			Report.Info("Beginning Status_Information_Correct");
 
 			IWebElement myText =
 				containerElement.FindElement(
-					By.XPath(".//p[@class='spaced-text']/span[@class='text-bold text-uppercase text-success']"), 2);
+					By.XPath(".//div[@class='col-sm-4']/p[@class='spaced-text']"), 2);
 
 			Report.Info(myText.Text.Trim());
 
@@ -623,11 +609,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = ".//div[@class='panel panel-default ws-panel subscription-history']/div/table")]
 		private IWebElement _tbl_sub_history;
 
-		public bool Subscription_Level_Status(string status)
+		public bool Subscription_Level_Status(string row, string status)
 		{
 			Report.Info("Beginning Subscription_Level_Status");
 
-			IWebElement mySub = _tbl_sub_history.FindElement(By.XPath(".//tbody/tr/td[1]"), 2);
+			IWebElement mySub = _tbl_sub_history.FindElement(By.XPath(".//tbody/tr[" + row + "]/td[1]"), 2);
 
 			if (mySub == null)
 			{

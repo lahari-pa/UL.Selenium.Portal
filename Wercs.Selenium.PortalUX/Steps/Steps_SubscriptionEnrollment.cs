@@ -16,7 +16,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 	{
 
 
-		[StepDefinition(@"I select the following enrollment options")]
+		[StepDefinition(@"In the Subscription Enrollment screen I select the following enrollment options")]
 		public void ThenISelectTheFollowingEnrollmentOptions(Table table)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I select enrollment options");

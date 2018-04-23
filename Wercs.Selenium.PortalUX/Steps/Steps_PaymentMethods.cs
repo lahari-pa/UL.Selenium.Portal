@@ -15,7 +15,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 	class Steps_PaymentMethods
 	{
 
-		[StepDefinition(@"I check the Payment Methods heading and sub headings are correct")]
+		[StepDefinition(@"In the Payment Methods screen I check the Payment Methods heading and sub headings are correct")]
 		public void ThenICheckThePaymentMethodsHeadingAndSubHeadingsAreCorrect()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I check the Payment Methods heading and sub headings are correct");
@@ -35,7 +35,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the following payment options are available")]
+		[StepDefinition(@"In the Payment Methods screen I confirm the following payment options are available")]
 		public void ThenIConfirmTheFollowingPaymentOptionsAreAvailable(Table table)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the correct payment options are available");
@@ -56,7 +56,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I select Payment Method: (.*)")]
+		[StepDefinition(@"In the Payment Methods screen I select Payment Method: (.*)")]
 		public void ThenISelectPaymentMethodX(string payMethod)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I select Payment Method: " + payMethod);
@@ -66,6 +66,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Delay.Seconds(3 * Delay.SpeedFactor);
 				Report.IsTrue(myPay.Select_Payment_Method(payMethod), "Failed to Select " + payMethod,
 					"Successfully Selected " + payMethod);
+				Delay.Seconds(3 * Delay.SpeedFactor);
 			}
 			catch (Exception ex)
 			{
@@ -75,7 +76,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[StepDefinition(@"I confirm that the Contact Information is correct for Account saved as (.*)")]
+		[StepDefinition(@"In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as (.*)")]
 		public void ThenIConfirmThatTheContactInformationIsCorrect(string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that the Contact Information is correct for Account saved as " + savedAs);
@@ -110,7 +111,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the Billing Address is correct for Account saved as (.*)")]
+		[StepDefinition(@"In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as (.*)")]
 		public void ThenIConfirmThatTheBillingAddressIsCorrect(string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm that the Billing Address is correct for Account saved as " + savedAs);
@@ -149,7 +150,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I open the Edit Address form")]
+		[StepDefinition(@"In the Payment Methods screen I open the Edit Address form")]
 		public void ThenIOpenTheEditAddressForm()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I open the Edit Address form");
@@ -434,7 +435,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the Continue Button is (enabled|disabled)")]
+		[StepDefinition(@"In the Payment Methods screen I confirm the Continue Button is (enabled|disabled)")]
 		public void ThenIConfirmTheContinueButtonIsX(string enabled)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Continue Button is " + enabled);
@@ -451,7 +452,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the (Credit Card|ACH) fields are correct")]
+		[StepDefinition(@"In the Payment Methods screen I confirm the (Credit Card|ACH) fields are correct")]
 		public void ThenIConfirmTheXFieldsAreCorrect(string payMethod, Table table)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the " + payMethod + " fields are correct");
@@ -490,7 +491,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the following warning message appears: (.*)")]
+		[StepDefinition(@"In the Payment Methods screen I confirm the following warning message appears: (.*)")]
 		public void ThenIConfirmTheFollowingWarningMessageAppears(string warningMsg)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Wire Transfer warning message appears");
@@ -507,7 +508,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm (Credit Card|ACH) error messages for the following fields are displayed")]
+		[StepDefinition(@"In the Payment Methods screen I confirm (Credit Card|ACH) error messages for the following fields are displayed")]
 		public void ThenIConfirmErrorMessagesForTheFollowingFieldsAreDisplayed(string payMethod, Table table)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm error messages for " + payMethod + " fields are correct");
@@ -521,7 +522,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					myList.Add(Row["Field"]);
 				}
-				Delay.Seconds(5 * Delay.SpeedFactor);
+				Delay.Seconds(10 * Delay.SpeedFactor);
 				if (payMethod == "Credit Card")
 				{
 					if (!myPay.Credit_Card_Error_Check(myList))
@@ -546,7 +547,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I click Continue")]
+		[StepDefinition(@"In the Payment Methods screen I click Continue")]
 		public void ThenIClickContinue()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Continue");
@@ -564,7 +565,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I enter Credit Card details")]
+		[StepDefinition(@"In the Payment Methods screen I enter Credit Card details")]
 		public void ThenIEnterCreditCardDetails(Table table)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I edit the Billing Address");
@@ -634,14 +635,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the Yearly Radio Option is " + select);
 			try
 			{
+				Delay.Seconds(2 * Delay.SpeedFactor);
 				var mySub = new PaymentMethods_Subscription_Billing();
 				if (select == "selected")
 				{
-					Report.IsTrue(!mySub.Yearly_Option_Selected(), "Yearly Radio Option is Not Selected", "Yearly Radio Option is Selected");
+					Report.IsTrue(mySub.Yearly_Option_Selected(), "Yearly Radio Option is Not Selected", "Yearly Radio Option is Selected");
 				}
 				if (select == "not selected")
 				{
-					Report.IsTrue(!mySub.Yearly_Option_Selected(), "Yearly Radio Option is Selected", "Yearly Radio Option is Not Selected");
+					Report.IsTrue(mySub.Yearly_Option_Selected(), "Yearly Radio Option is Selected", "Yearly Radio Option is Not Selected");
 				}
 			}
 			catch (Exception ex)

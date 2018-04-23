@@ -61,14 +61,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			Delay.Seconds(0.25 * Delay.SpeedFactor);
+			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			if (!Select_Articles(articles))
 			{
 				Report.Info("Failed to Select Correct Number of Articles: " + articles);
 				Report.Screenshot();
 				return false;
 			}
-			Delay.Seconds(0.25 * Delay.SpeedFactor);
+			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			Report.Info("Number of Articles Selected");
 			if (!Select_Enhanced_Articles(enArticles))
 			{
@@ -76,7 +76,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			Delay.Seconds(0.25 * Delay.SpeedFactor);
+			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			Report.Info("Number of Enhanced Articles Selected");
 			if (!Select_Formulated_Products(formProds))
 			{
@@ -85,7 +85,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Report.Info("Number of Formulated Products Selected");
-			Delay.Seconds(0.25 * Delay.SpeedFactor);
+			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			Report.Success("Range of Products, Articles and Enhanced Articles Selected");
 			return true;
 		}

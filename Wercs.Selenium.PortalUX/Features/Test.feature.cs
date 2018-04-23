@@ -416,9 +416,9 @@ testRunner.Then("In the Purchase Summary screen I confirm the column headings ar
                     "lected, Service Date, Amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 141
 testRunner.Then("In the Purchase Summary screen I confirm the folling statement is shown: Subscrip" +
-                    "tion will be automatically charged to the default payment method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                    "tion will be automatically charged to the default payment method.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 142
-testRunner.Then(@"In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars.  Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL.  Payment is required when your order is submitted. The method of payment designated on the My Account area will be used.  UL reserves the right to accept or refuse any payment made in any form.  UL does not collect or process your payment details.  Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then(@"In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars. Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL. Payment is required when your order is submitted. The method of payment designated on the My Account area will be used. UL reserves the right to accept or refuse any payment made in any form. UL does not collect or process your payment details. Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 143
 testRunner.Then("In the Purchase Summary screen I confirm the following statement is shown: By cli" +
                     "cking \"Confirm Order\" you will be enrolled in our subscription plan.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -437,15 +437,19 @@ testRunner.Then("In the Subscription Information screen I confirm the Status has
                     "mation: 1 Formulated, 1 Articles, 1 Enhanced Articles", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Row",
                         "Subscription Level Status",
                         "Quantity"});
             table13.AddRow(new string[] {
+                        "1",
                         "Limited Formulated",
                         "1"});
             table13.AddRow(new string[] {
+                        "2",
                         "Limited Articles",
                         "1"});
             table13.AddRow(new string[] {
+                        "3",
                         "Limited Enhanced Articles",
                         "1"});
 #line 151

@@ -432,7 +432,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var selMyAccount = new MyAccount();
-
+				Delay.Seconds(1.5 * Delay.SpeedFactor);
 				Report.IsTrue(selMyAccount.New_Subscription_click(), "Failed to Click NEW SUBSCRIPTION Button",
 					"NEW SUBSCRIPTION Button Clicked");
 			}
@@ -489,13 +489,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				foreach (var thisRow in table.Rows)
 				{
+					string row = thisRow["Row"];
 					string sub_level_status = thisRow["Subscription Level Status"];
 					string qty = thisRow["Quantity"];
 
 					Report.Info("Subscription Level Status = " + sub_level_status);
 					Report.Info("Quantity = " + qty);
 
-					Report.IsTrue(selMyAccount.Subscription_Level_Status(sub_level_status),
+					Report.IsTrue(selMyAccount.Subscription_Level_Status(row, sub_level_status),
 						"Failed to Confirm Subscription Level Status", "Subscription Level Status Correct");
 					Report.IsTrue(selMyAccount.Subscription_Quantity(qty),
 						"Failed to Confirm Quantity", "Quantity Correct");
@@ -547,9 +548,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var wsUser = (WERCSmartUser)Context.GetFromContext(savedAs);
 
 				string myInvoice = myOrder.Get_Invoice_Number(wsUser.CompanyName);
-				string myDate = myOrder.Get_Invoice_Date(wsUser.CompanyName);
 
-				if (!myAccount.Invoice_Email_Arrived(myInvoice, myDate, wsUser.Email))
+				if (!myAccount.Invoice_Email_Arrived(myInvoice, wsUser.Email))
 				{
 					throw new Exception("Email has Not Arrived for User: " + savedAs);
 				}

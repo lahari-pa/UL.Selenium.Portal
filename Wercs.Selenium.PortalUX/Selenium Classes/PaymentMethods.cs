@@ -91,6 +91,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Payment_Method_Exists: " + payment_method);
 
+			Delay.Seconds(2 * Delay.SpeedFactor);
+
 			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div")).ToList();
 
 			foreach (var method in allProducts)
