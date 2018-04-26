@@ -400,10 +400,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I confirm the excel file saved as (.*) can be opened and contains data")]
 		public void ThenConfirmTheExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm the excel file saved as " + savedAs + " can be opened and contains data");
-
-			try
-			{
 				Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
 				var File = Context.GetFromContext(savedAs);
 				if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
@@ -422,12 +418,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 					Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
 				}
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
 		}
 
 		[StepDefinition(@"I confirm the html file saved as (.*) can be opened and contains text: (.*)")]

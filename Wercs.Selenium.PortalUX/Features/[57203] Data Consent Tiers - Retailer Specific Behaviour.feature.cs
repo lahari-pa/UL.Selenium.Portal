@@ -169,9 +169,6 @@ testRunner.And("I should not see the More Information hyperlink", ((string)(null
 #line 58
 testRunner.When("I click the Products in Scope button and confirm that an excel file is produced c" +
                     "alled DT_Report_DataUsageTier_<Date>.xlsx and save as DollarTreeExcelFile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 59
-testRunner.And("I confirm the excel file saved as DollarTreeExcelFile can be opened and contains " +
-                    "data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

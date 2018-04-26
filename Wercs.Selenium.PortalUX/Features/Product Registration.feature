@@ -12,19 +12,22 @@
 
 Feature: Product Registration
 
-Background:
+#Background:
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+#Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+#Then The home screen should load
+
+Scenario: [31343] New Product screen navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
-
-Scenario: [31343] New Product screen navigation
 Then I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I should see the following radio buttons:
 | Button                             |
 | Create a New Registration          |
 | Copy from an Existing Registration |
-| Request a UPC from a Manufacturer  |
+
 
 #Old version of this test. Changed 6/2/2018
 #| Yes, create a new product    |
@@ -32,17 +35,26 @@ And I should see the following radio buttons:
 #| No, copy from ULSC service   |
 
 Scenario: [31344] New Product Screen validation
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
 Given I click the Register New Product icon in the Navigation Pane
 When I click continue
 Then I should see an error message: This is a required field.
 
 Scenario: Create a new product
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
 Then I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 Given I click the Register New Product icon in the Navigation Pane
 When I click continue
 
 Scenario: [63705] New Product - BCP
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
 Given I delete all products with UPC Number: 012345678905
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
@@ -118,6 +130,9 @@ Then I delete the product: TestCase63705
 Scenario: [63724] Add New product - Single Battery Product
 # UPC: 630509616084
 # DPCI: 087-06-680
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
 Given I delete all products with UPC Number: 012345678905
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
@@ -188,6 +203,9 @@ Given I navigate to the home page
 Then I delete the product: TestCase63724
 
 Scenario: [65441] Delete a UPC from the UPC Grid
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
 Given I generate a random UPC number and save as: UPC65441
 Given I delete all products with UPC Number: saved as UPC65441
 And I click the Register New Product icon in the Navigation Pane
@@ -257,6 +275,9 @@ Then I delete the product: TestCase65441
 
 Scenario: [63684] Walmart Private label product 
 # UPC: 8713747046683
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
 Given I delete all products with UPC Number: 8713747046683
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
@@ -336,4 +357,60 @@ Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I confirm that I see the following option for private label question: Yes
 #Given I navigate to the home page
+
+
+Scenario: [65392] Ecologo Readiness - Question wording and validation of response
+Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+And I click the Register New Product icon in the Navigation Pane
+And I should see the header New Product
+And I Select the Create a New Registration radio button
+And in the New Product page I click Continue
+And In the Product Type tab of the New Product Page, I enter: Laundry, Detergent in the Product Name text field
+And In the Product Type tab of the New Product Page, I enter: Laundry, Detergent in the Type of Product select field
+And in the New Product page I click Continue
+Then I save the product information as: TestCase65392
+And I set the Primary Physical State to be: Liquid
+And I set the Secondary Physical State to be: Liquid
+And In the Product Characteristics tab, I enter: 2 in the Specific Gravity text field
+And In the product Characteristics tab, I enter: 2 in the pH text field
+And In the product Characteristics tab, I enter: 2 in the Boiling point (in Celsius) text field
+And In the product Characteristics tab, I enter: 2 in the Flash point (in Celsius) text field
+And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Closed cup method
+And I set the Select the best Water Solubility description to be: Very soluble
+And in the New Product page I click Continue
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And In the Additional Information Page for Product has been classified using OSHA I select: No
+And In the Additional Information Page for Product is shipped directly I select: No
+And In the Additional Information Page for Product is retailers private label or brand I select: No
+And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+And in the New Product page I click Continue
+# Setting Ingredient Information
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Formaldehyde  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And in the New Product page I click Continue
+And I should see the Transportation Details 1 Page
+And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: No, due to an exemption or exception
+And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(b)(3): Combustible liquid that does not sustain combustion
+Given in the New Product page I click Continue
+And I should see the Transportation Details 2 Page
+And In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: I do not ship internationally and I do not know the classification
+And in the New Product page I click Continue
+And I should see the ECOLOGO Readiness Page
+And I confirm that I see the following Ecologo statement: Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment. This report will indicate if the product is eligible to be awarded an ECOLOGO Certification, an established symbol of reduced environmental impact. Would you like to receive this assessment?
+And I should see the following radio buttons:
+| Button                             |
+| Yes          |
+| Not at this time |
+And in the New Product page I click Continue
+Then I should see an error message: This is a required field.
+Given I navigate to the home page
+Then I delete the product: TestCase65392
+
 

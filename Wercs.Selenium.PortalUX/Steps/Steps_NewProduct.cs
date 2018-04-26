@@ -276,18 +276,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the (.*) Page")]
 		public void GivenIShouldSeeXPage(string pageShouldSee)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the " + pageShouldSee + " Page");
-			try
-			{
 				var selNewProduct = new NewProduct();
 				Report.IsTrue(selNewProduct.WaitForSection(pageShouldSee), pageShouldSee + " is not showing",
 					pageShouldSee + " is showing as expected");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
 		}
 
 		[StepDefinition(@"I should see the Additional Information Page")]
@@ -768,32 +759,47 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect(string selection)
 		{
-			NewProduct selNewProduct = new NewProduct();
-			selNewProduct.ProductIsRegulatedForTransport = selection;
-			Report.IsTrue(selNewProduct.ProductIsRegulatedForTransport == selection, "Failed to select: " + selection,
-				"Successfully selected: " + selection);
+			//NewProduct selNewProduct = new NewProduct();
+			//selNewProduct.ProductIsRegulatedForTransport = selection;
+			//Report.IsTrue(selNewProduct.ProductIsRegulatedForTransport == selection, "Failed to select: " + selection,
+			//	"Successfully selected: " + selection);
+
+			Report.IsTrue(new NewProduct().ProductIsRegulatedForTransport(selection), "Failed to set the Regulated Transport option to: " + selection, "Successfully set the Regulated Transport to: " + selection);
 		}
 
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTExceptionsISelect(string selections)
 		{
-			NewProduct selNewProduct = new NewProduct();
+			//NewProduct selNewProduct = new NewProduct();
 
-			List<string> itemsToSelect = selections.Split(',').ToList().Select(x=>x.Trim()).ToList();
-			selNewProduct.DOTExceptions = itemsToSelect;
+			//List<string> itemsToSelect = selections.Split(',').ToList().Select(x=>x.Trim()).ToList();
+			//selNewProduct.DOTExceptions = itemsToSelect;
 
-			List<string> itemsSelected = selNewProduct.DOTExceptions;
+			//List<string> itemsSelected = selNewProduct.DOTExceptions;
 
-			foreach (string item in itemsToSelect)
-			{
-				if (itemsSelected.Select(x => x.Contains(item)).Count() != 1)
-				{
-					throw new Exception("Failed to select: " + item);
-				}
-			}
-			Report.Success("Successfully selected: " + selections);
+			//foreach (string item in itemsToSelect)
+			//{
+			//	if (itemsSelected.Select(x => x.Contains(item)).Count() != 1)
+			//	{
+			//		throw new Exception("Failed to select: " + item);
+			//	}
+			//}
+			//Report.Success("Successfully selected: " + selections);
+
+			Report.IsTrue(new NewProduct().DotExcemptionIfApplicable(selections), "Failed to set the DOT Excemption option to: " + selections, "Successfully set the Regulated Transport to: " + selections);
 		}
+
+
+		[Given(@"In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForInternationalShippingWhenDOTExemptionTakenISelect(string selection)
+		{
+			NewProduct selNewProduct = new NewProduct();
+			selNewProduct.InternationalShippingDOTExemption = selection;
+			Report.IsTrue(selNewProduct.InternationalShippingDOTExemption == selection, "Failed to select: " + selection,
+				"Successfully selected: " + selection);
+		}
+
 
 		[StepDefinition(@"In the New Product page I click tab: (.*)")]
 		public void GivenInTheNewProductPageIClickTab(string tab)
@@ -848,6 +854,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, I enter: (.*) in the Provide Special Permit numbers text field")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIEnterInTheProvideSpecialPermitNumbersTextField(string permitNumber)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Specific Gravity text field");
+			try
+			{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+				selNewProduct.SpecialPermitNumbers = permitNumber;
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Prop65 I select: (No|Yes)")]
@@ -882,7 +908,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// select product lable option for Refer to your Product Label. From the options, select those that appear on the Label.
 		/// </summary>
-		[Given(@"In the Regulatory Inforamtion tab, I select Product Lable as: (.*)")]
+		[StepDefinition(@"In the Regulatory Inforamtion tab, I select Product Lable as: (.*)")]
 		public void GivenInTheRegulatoryInforamtionTabISelectProductLableAs(string selections)
 		{
 			NewProduct selNewProduct = new NewProduct();
@@ -901,6 +927,71 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Success("Successfully selected: " + selections);
 		}
+
+
+		/// <summary>
+		/// select option for Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+		/// </summary>
+		[StepDefinition(@"In the VOC - OTC - CARB tab for Product has been granted an Alternative Control Plan I select: (No|Yes)")]
+		public void GivenInTheVOC_OTC_CARBTabForProductHasBeenGrantedAnAlternativeControlPlanISelect(string noOrYes)
+		{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+
+				bool expected = (noOrYes == "Yes");
+
+				selNewProduct.AlternateControlPlan = expected;
+
+				Report.IsTrue(selNewProduct.ProductShippedDirectly == expected,
+					"Failed to set Product has been granted an Alternative Control Plan to: " + noOrYes,
+					"Successfully set Product has been granted an Alternative Control Plan to: " + noOrYes);
+		}
+
+		/// <summary>
+		/// select option for Product label specifies a dilution ratio 
+		/// </summary>
+		[StepDefinition(@"In the VOC - OTC - CARB tab for Product label specifies a dilution ratio I select: (No|Yes)")]
+		public void GivenInTheVOC_OTC_CARBTabForProductLabelSpecifiesADilutionRatioISelectYes(string noOrYes)
+		{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+
+				bool expected = (noOrYes == "Yes");
+
+				selNewProduct.ProductLabelDilutionRatio = expected;
+
+				Report.IsTrue(selNewProduct.ProductShippedDirectly == expected,
+					"Failed to set Product label specifies a dilution ratio to: " + noOrYes,
+					"Successfully set Product label specifies a dilution ratio to: " + noOrYes);
+		}
+
+
+		/// <summary>
+		/// Enter data in Product's VOC content as sold text box 
+		/// </summary>
+		[StepDefinition(@"In the VOC - OTC - CARB tab, I enter: (.*) in the Product's VOC content as sold text field")]
+		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsSoldTextField(string contentAsSold)
+		{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+				selNewProduct.ProductsVocContentAsSold = contentAsSold;
+		}
+
+		/// <summary>
+		/// Enter data in Product's VOC content as used text box 
+		/// </summary>
+		[StepDefinition(@"In the VOC - OTC - CARB tab, I enter: (.*) in the Product's VOC content as used text field")]
+		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsUsedTextField(string contentAsUsed)
+		{
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+					"Product type tab is loaded.");
+				selNewProduct.ProductsVocContentAsUsed = contentAsUsed;
+		}
+
 
 
 
@@ -1033,7 +1124,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Enter data in Specific Gravity text field 
 		/// </summary>
-		[Given(@"In the Product Characteristics tab, I enter: (.*) in the Specific Gravity text field")]
+		[StepDefinition(@"In the Product Characteristics tab, I enter: (.*) in the Specific Gravity text field")]
 		public void GivenInTheProductCharacteristicsTabIEnterInTheSpecificGravityTextField(string specificGravity)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + specificGravity + " in the Specific Gravity text field");
@@ -1055,7 +1146,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Enter data in pH text field
 		/// </summary>
-		[Given(@"In the product Characteristics tab, I enter: (.*) in the pH text field")]
+		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the pH text field")]
 		public void GivenInTheProductCharacteristicsTabIEnterInThePHTextField(string pH)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + pH + " in the Specific Gravity text field");
@@ -1077,7 +1168,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Enter data in Boiling Point (in Celsius) text field
 		/// </summary>
-		[Given(@"In the product Characteristics tab, I enter: (.*) in the Boiling point \(in Celsius\) text field")]
+		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the Boiling point \(in Celsius\) text field")]
 		public void GivenInTheProductCharacteristicsTabIEnterInTheBoilingPointInCelsiusTextField(string boilingPointInCelsius)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + boilingPointInCelsius + " in the Specific Gravity text field");
@@ -1099,7 +1190,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Enter data in Flash point text field
 		/// </summary>
-		[Given(@"In the product Characteristics tab, I enter: (.*) in the Flash point \(in Celsius\) text field")]
+		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the Flash point \(in Celsius\) text field")]
 		public void GivenInTheProductCharacteristicsTabIEnterInTheFlashPointInCelsiusTextField(string flashPointInCelsius)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + flashPointInCelsius + " in the Specific Gravity text field");
@@ -1121,7 +1212,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Select an option from Flash Point Testing Method Used 
 		/// </summary>
-		[Given(@"in the Product Characteristics tab, for Flash Point Testing Method Used status I select: (.*)")]
+		[StepDefinition(@"in the Product Characteristics tab, for Flash Point Testing Method Used status I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabForFlashPointTestingMethodUsedStatusISelect(string option)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab, for Flash Point Testing Method Used status I select: " + option);
@@ -1151,11 +1242,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Select an option for the best Water Solubility description dropdown
 		/// </summary>
-		[Given(@"I set the Select the best Water Solubility description to be: (.*)")]
+		[StepDefinition(@"I set the Select the best Water Solubility description to be: (.*)")]
 		public void GivenISetTheSelectTheBestWaterSolubilityDescriptionToBe(string option)
 		{
 			Report.IsTrue(new NewProduct().SelectBestWaterSolubilityDescription(option), "Failed to set the best Water Solubility description to be: " + option, "Successfully set the best Water Solubility description to be: " + option);
 		}
+
+
+		/// <summary>
+		/// Confirm the ecologo statement 
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following Ecologo statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingEcologoStatement(string statement)
+		{
+
+				var newProductpage = new NewProduct();
+				var found = newProductpage.GetEcologoStatement();
+
+				Report.IsTrue(found.Trim() == statement.Trim(),
+					"ecologo statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+					"ecologo statement was showing: " + statement + ", as expected!");
+		}
+
 
 
 

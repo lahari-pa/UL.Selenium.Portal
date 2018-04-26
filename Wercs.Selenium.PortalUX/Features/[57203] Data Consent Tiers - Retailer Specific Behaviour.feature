@@ -56,7 +56,7 @@ When I select the retailer: Dollar Tree
 And I confirm that: Dollar Tree requires suppliers of Cleaning and Health & Beauty products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
 And I should not see the More Information hyperlink
 When I click the Products in Scope button and confirm that an excel file is produced called DT_Report_DataUsageTier_<Date>.xlsx and save as DollarTreeExcelFile
-And I confirm the excel file saved as DollarTreeExcelFile can be opened and contains data
+#And I confirm the excel file saved as DollarTreeExcelFile can be opened and contains data
 
 Scenario: [57221] Retailer specific - Target
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

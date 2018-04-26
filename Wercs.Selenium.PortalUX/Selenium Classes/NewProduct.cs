@@ -1340,11 +1340,87 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		// ========= Product Charactertistics Options ========= //
 
-		public string ProductIsRegulatedForTransport {
+		public bool ProductIsRegulatedForTransport(string item)
+		{
+			//get
+			//{
+			//	var el = containerElement
+			//		.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//input"), 2)
+			//		.FirstOrDefault(x => x.Selected).FindElement(By.XPath("../span"));
+			//	if (el != null)
+			//	{
+			//		return el.Text;
+			//	}
+
+			//	return "";
+			//}
+			//set
+			//{
+			//	var el = containerElement
+			//		.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//span"), 2)
+			//		.FirstOrDefault(x => x.Text.Contains(value)).FindElement(By.XPath("../input"));
+			//	if (el != null)
+			//	{
+			//		el.TryClick();
+			//	}
+			//}
+
+			try
+			{
+				var el = containerElement
+					.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//span"), 2)
+					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+				if (el != null)
+				{
+					el.TryClick();
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
+
+
+		/// <summary>
+		/// Please select DOT Exceptions if applicable -- different method 
+		/// </summary>
+		public bool DotExcemptionIfApplicable(string item)
+		{
+			try
+			{
+				var el = containerElement
+					.FindElements(By.XPath(".//label[text()='Please select DOT Exceptions if applicable?']/../following-sibling::div//span"), 2)
+					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+				if (el != null)
+				{
+					el.TryClick();
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
+
+		/// <summary>
+		/// International Shipping when DOT Exemption taken radio option
+		/// </summary>
+		public string InternationalShippingDOTExemption {
 			get
 			{
 				var el = containerElement
-					.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//input"), 2)
+					.FindElements(By.XPath(".//label[text()='International Shipping when DOT Exemption taken?']/../following-sibling::div//input"), 2)
 					.FirstOrDefault(x => x.Selected).FindElement(By.XPath("../span"));
 				if (el != null)
 				{
@@ -1356,7 +1432,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			set
 			{
 				var el = containerElement
-					.FindElements(By.XPath(".//label[text()='Product is Regulated for Transport']/../following-sibling::div//span"), 2)
+					.FindElements(By.XPath(".//label[text()='International Shipping when DOT Exemption taken?']/../following-sibling::div//span"), 2)
 					.FirstOrDefault(x => x.Text.Contains(value)).FindElement(By.XPath("../input"));
 				if (el != null)
 				{
@@ -1365,11 +1441,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+
 		public List<string> DOTExceptions {
 			get
 			{
 				var selectedInputs = containerElement
-					.FindElements(By.XPath(".//label[contains(text(),'DOT Exceptions')]/../following-sibling::div//input"), 2)
+					.FindElements(By.XPath(".//label[contains(text(),'Please select DOT Exceptions if applicable')]/../following-sibling::div//input"), 2)
 					.Where(x => x.Selected);
 				List<string> selectedLabels = new List<string>();
 				foreach (var input in selectedInputs)
@@ -1384,7 +1461,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				foreach (string item in value)
 				{
 					var el = containerElement
-						.FindElements(By.XPath(".//label[contains(text(),'DOT Exceptions')]/../following-sibling::div//span"), 2)
+						.FindElements(By.XPath(".//label[contains(text(),'Please select DOT Exceptions if applicable')]/../following-sibling::div//span"), 2)
 						.FirstOrDefault(x => x.Text.Contains(item)).FindElement(By.XPath("../input"));
 					if (el != null)
 					{
@@ -2059,6 +2136,181 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 		}
+
+		/// <summary>
+		/// Product has been granted an Alternative Control Plan option
+		/// </summary>
+		public bool AlternateControlPlan {
+			get
+			{
+				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product has been granted an Alternative Control Plan"))
+					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
+
+				if (selectOption != null)
+				{
+					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
+					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					if (selectedOption.ToLower() == "yes")
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				else
+				{
+					throw new Exception("No Product has been granted an Alternative Control Plan option is selected");
+				}
+			}
+			set
+			{
+				string valueToSet = "Yes";
+				if (!value)
+				{
+					valueToSet = "No";
+				}
+
+				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product has been granted an Alternative Control Plan"))
+					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
+				selectOption.Click();
+			}
+		}
+
+		/// <summary>
+		/// Product label specifies a dilution ratio option
+		/// </summary>
+		public bool ProductLabelDilutionRatio {
+			get
+			{
+				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product label specifies a dilution ratio"))
+					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
+
+				if (selectOption != null)
+				{
+					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
+					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					if (selectedOption.ToLower() == "yes")
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				else
+				{
+					throw new Exception("No Product label specifies a dilution ratio option is selected");
+				}
+			}
+			set
+			{
+				string valueToSet = "Yes";
+				if (!value)
+				{
+					valueToSet = "No";
+				}
+
+				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product label specifies a dilution ratio"))
+					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
+				selectOption.Click();
+			}
+		}
+
+
+		/// <summary>
+		/// Product's VOC content as sold text box 
+		/// </summary>
+		public string ProductsVocContentAsSold {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product's VOC content as sold"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product's VOC content as sold"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+
+		/// <summary>
+		/// Product's VOC content as used text box 
+		/// </summary>
+		public string ProductsVocContentAsUsed {
+			get
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product's VOC content as used"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					return input.Text;
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+			set
+			{
+				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product's VOC content as used"));
+
+				if (lbl != null)
+				{
+					var input = lbl.FindElement(By.XPath("../..//input"));
+					input.EnterText(value);
+				}
+				else
+				{
+					throw new Exception("Label not found as expected.");
+				}
+
+			}
+		}
+
+
+		/// <summary>
+		/// Get Ecologo statement
+		/// </summary>
+		public string GetEcologoStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'UL ECOLOGO Readiness Assessment')]"), 2).Text;
+		}
+
+
 
 		public string Appearance {
 			get

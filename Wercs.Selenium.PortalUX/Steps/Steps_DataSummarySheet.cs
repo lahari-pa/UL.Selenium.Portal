@@ -46,27 +46,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Then(@"I confirm that I see the following option for private label question: (.*)")]
+		[StepDefinition(@"I confirm that I see the following option for private label question: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingOptionForPrivateLabelQuestion(string message)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the option: " + message);
-			try
-			{
-				Report.Info("Checking error message");
 				var dataSummarySheet = new DataSummary();
 				var found = dataSummarySheet.GetPrivateLabelStatement();
 
 				Report.IsTrue(found.Trim() == message.Trim(),
 					"private label option was not as expected! Expected: " + message + ", but found: " + found + "!",
 					"private label option was showing: " + message + ", as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
 		}
+
+
 
 
 	}
