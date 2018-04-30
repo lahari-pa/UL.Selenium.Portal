@@ -454,36 +454,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"the following (icons|icons and labels) should be found in the (header bar|user dropdown|navigation bar)")]
+		[StepDefinition(@"the Navigation Menu should be (expanded|collapsed)")]
+		public void NavigationMenuExpandedCollapsed(string expanded)
+		{
+			Report.IsTrue(new NavigationBar().NavigationMenuExpanded() == (expanded == "expanded"), "Navigation bar was not " + expanded + ", when expected!", "Navigation bar was " + expanded + ", as expected!");
+		}
+
+		[StepDefinition(@"the following (icons|icons and labels) should be found in the (navigation bar)")]
 
 		public void TheFollowingAreShowingInThe(string lookingfor, string area, TechTalk.SpecFlow.Table expected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking correct elements are found in " + area);
-			try
+			foreach (var row in expected.Rows)
 			{
-				Report.Info("Checking that the correct elements are present in the " + area);
-				bool iconsOnly = lookingfor != "icons and labels";
-				foreach (var row in expected.Rows)
+				switch (area)
 				{
-					switch (area)
+					case ("navigation bar"):
 					{
-						case ("navigation bar"):
-							{
-								var selNav = new NavigationBar();
-								Report.IsTrue(selNav.ItemShowingInNavigationPanel(row["Item"], iconsOnly),
-									row["Item"] + " was not found in the Navigation Bar!",
-									row["Item"] + " was successfully found in the Navigation Bar!");
-								break;
-							}
+						Report.IsTrue(new NavigationBar().ItemShowingInNavigationPanel(row["Item"], lookingfor != "icons and labels"),
+							row["Item"] + " was not found in the Navigation Bar!",
+							row["Item"] + " was successfully found in the Navigation Bar!", false, false);
+						break;
 					}
 				}
-				Report.Screenshot();
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I click the User Icon")]

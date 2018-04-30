@@ -60,16 +60,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (!AccountOptionsVisible())
 				{
 					ClickOnUserTopRight();
-					Delay.Seconds(10);
 				}
-				if (!AccountOptionsVisible())
+				//if (!AccountOptionsVisible())
+				//{
+				//	throw new Exception("Account options are not visible as expected");
+				//}
+
+				int i = 0;
+				while (i < 10)
 				{
-					throw new Exception("Account options are not visible as expected");
+					IList<IWebElement> aTags = this.containerElement.FindElements(By.XPath("//ul[@class='dropdown-menu']/li/a"));
+					if (aTags.FirstOrDefault(x => x.Text == option.Trim()).TryClick())
+					{
+						return true;
+					}
+					Delay.Seconds(Delay.SpeedFactor*1);
+					i++;
 				}
-				IList<IWebElement> aTags = this.containerElement.FindElements(By.XPath("//ul[@class='dropdown-menu']/li/a"));
-				aTags.FirstOrDefault(x => x.Text == option.Trim()).Click();
-				Delay.Seconds(5);
-				return true;
+
+				return false;
 			}
 			catch (Exception)
 			{

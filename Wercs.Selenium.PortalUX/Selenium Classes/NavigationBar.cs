@@ -36,6 +36,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool NavigationMenuExpanded()
+		{
+			var element = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'hamburger')]"), 2);
+			var elementClosed = element.GetAttribute("class").Contains("closed");
+			return elementClosed;
+		}
+
 		public bool ItemShowingInNavigationPanel(string item, bool iconOnly = false)
 		{
 			var sideIcons = this.containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a"), 2);

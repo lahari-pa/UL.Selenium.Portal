@@ -303,3 +303,34 @@ And I should see the header: Message Center on the Message Center window
 And UNDER DEVELOPMENT
 
 
+Scenario: [64854] Navigation Settings
+
+# Sign in and expand the menu, checking the correct items are showing
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Then I expand the Navigation Menu
+And the Navigation Menu should be expanded
+And the following icons and labels should be found in the navigation bar
+| Item                 |
+| Home                 |
+| Register New Product |
+| My Messages          |
+| Retail Partners      |
+| Supplier Reports     |
+| UL Solution Center   |
+| Shopping Cart        |
+| Support              |
+And I click on Sign Out
+
+# Sign back in with same account
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+And the Navigation Menu should be expanded
+Given I click on My Account
+And the Navigation Menu should be expanded
+Then I collapse the Navigation Menu
+And I click on Sign Out
+
+# Sign back in a third time
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+And the Navigation Menu should be collapsed
+Given I click on My Account
+And the Navigation Menu should be collapsed
