@@ -1,5 +1,6 @@
 ﻿@Homepage
 @Login
+@Signup
 @MyAccount
 @wercsmart
 @SubEnrollment
@@ -212,7 +213,12 @@ Given If not already created, I create a user: New_VC with the following paramet
 | MascotQuestion       | MascotQuestion |
 | MascotHint           | MascotHint     |
 | Pin                  | 1234           |
-#Login to WERCSmart Portal - Visaul Automation Account
+#Login to WERCSmart Portal - Visaul Automation Accou
+#Given I populate the email input field with: User_9a6761333718.kxxyxunf@mailosaur.io
+#Given I populate the password input field with: Pa4*ytuufnn
+#Given I select the Login button
+#Given If terms of use page appears I accept
+Then the WERCSmart homepage should load
 Given I click on My Account
 Then I click on NEW SUBSCRIPTION
 Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
@@ -252,24 +258,14 @@ Then In the Subscription Enrollment screen I confirm that under the Premium Plan
 | Waste Classification Regulatory Support          | Many retailers are now passing the costs of hazardous waste disposal on to manufacturers like you! Understanding hazardous waste classification requirements and the basis for your products classifications is more important than ever. Rely on UL's regulatory experts to review and provide guidance to minimize your costs.                                                                              |
 | VOC Classification Regulatory Support            | Regulations around VOC are growing in size and complexity. Our regulatory experts will work with you to ensure your organizations products are compliant in the markets you serve.                                                                                                                                                                                                                            |
 | Draft OSHA-Compliant Safety Data Sheet           | Effect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved format for each of your active products.                                                                                                                                                                                                                                                                                         |
-#Click the i next to UL ECOLOGO Readiness Assessment
-#Confirm the eco text is no longer visible.
+
 Then In the Subscription Enrollment screen I confirm that under the Standard Plan I see the following items and further details
 | Item                      | Further details                                                                                                                                                                                                                                                                                                                              |
 | Bronze Agent Support Plan | In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform. |
 
 Then In the Subscription Enrollment screen I confirm that under the Limited Plus Plan I see the following items and further details
-| Item                            | Further details                                                                                                                                                                                                                                                                                                                                           |
-| PurView Sustainability Platform | Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services. |
-
-#Confirm that you see following statement under Limited Plus "PurView Sustainability Platform"
-#Click the i next to PurView Sustainability Platform
-#Confirm that the following statement displays "
-#Learn More"
-#Also confirm that when you click Learn More link it takes you to "https://www.ulpurview.com/"
-# Click the Learn More link
-#confirm that you go to "https://www.ulpurview.com/"  in a new tab
-#Close Purview tab
+| Item                            | Further details                                                                                                                                                                                                                                                                                                                                           | Link text  | Link url                   |
+| PurView Sustainability Platform | Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services. | Learn More | https://www.ulpurview.com/ |
 
 Then In the Subscription Enrollment screen I confirm that under the Limited Plan I see the following items and further details
 | Item                         | Further details                                                                                                                                                                                                                                                                                              |
@@ -278,16 +274,11 @@ Then In the Subscription Enrollment screen I confirm that under the Limited Plan
 | Add Retailer to Registration | As a WERCSmart subscriber, you will benefit from transmitting your product assessment with ease to over 40 retailers. As more retailers continue to join WERCSmart for their compliance and sustainability information, you can forward existing product registrations at any time for no additional charge. |
 | UPC Management               | Add or remove UPCs efficiently and as needed from your existing product registrations at no additional charge.                                                                                                                                                                                               |
 
-
-#Confirm that you see following sub heading  ""
-#Confirm that you see the following statement : "Bronze Agent Support Services is already included with Premium and Standard subscriptions. You can always have our greatest support services. Check out what we offer!"
-#Click the hyperlink "View Agency Service Agreement"
-#Confirm that a popup displays with following heading "View Agency Service Agreement"
-#Confirm that you see the following statement: "By enrolling in Additional Support Service Options (Bronze, Silver or Gold), you, on behalf of the account holder (You) hereby authorize UL Information and Insights Inc. ("We" or "Us") to establish an Agent account in Your WERCSmart account for products entered, modified, or submitted for re-certification on your behalf (the "Products") and further appoint Us as Your designated agent ("Agent") with respect to such Products. You acknowledge that Agent shall have full authority in your WERCSmart account with respect to such Products as if it were You, including but not limited to, entering data, making any certifications required by the WERCSmart platform, and initiating, receiving and responding to any communications from us or any recipient of WERCSmart results. You further acknowledge that You remain responsible for Agent's actions or inactions with respect to such Products. You acknowledge that such authority shall continue until (i) You have withdrawn such authority by the submission of written notice of termination to use and (ii) We have acknowledged the receipt thereof. This Authorization constitutes an amendment to the WERCSmart Terms of Use posted on the WERCSmart site, as amended from time to time."
-#click Close on View Agency Service Agreement popup
-#subscription enrollment screen
-#Confirm that you see "Gold" radio option under  3.Select the Support Services Plan
-#Confirm that you see following statement under Gold ""
+Then under subheading Select the Support Services Plan I should see text: Bronze Agent Support Services is already included with Premium and Standard subscriptions. You can always have our greatest support services. Check out what we offer!
+Then under subheading Select the Support Services Plan I should see hyperlink: (View Agency Service Agreement)
+Then under subheading Select the Support Services Plan clicking on hyperlink: (View Agency Service Agreement) opens Agency Service Agreement popup
+Then Agency Service Agreement popup contains the following text: By enrolling in Additional Support Service Options (Bronze, Silver or Gold), you, on behalf of the account holder (You) hereby authorize UL Information and Insights Inc. ("We" or "Us") to establish an Agent account in Your WERCSmart account for products entered, modified, or submitted for re-certification on your behalf (the "Products") and further appoint Us as Your designated agent ("Agent") with respect to such Products. You acknowledge that Agent shall have full authority in your WERCSmart account with respect to such Products as if it were You, including but not limited to, entering data, making any certifications required by the WERCSmart platform, and initiating, receiving and responding to any communications from us or any recipient of WERCSmart results. You further acknowledge that You remain responsible for Agent's actions or inactions with respect to such Products. You acknowledge that such authority shall continue until (i) You have withdrawn such authority by the submission of written notice of termination to use and (ii) We have acknowledged the receipt thereof. This Authorization constitutes an amendment to the WERCSmart Terms of Use posted on the WERCSmart site, as amended from time to time.
+Then on the Agency Service Agreement popup clicking Close closes the popup
 
 Then In the Subscription Enrollment screen I confirm that under the Gold Plan I see the following items and further details
 | Item                                                                                         | Further details |
@@ -303,23 +294,34 @@ Then In the Subscription Enrollment screen I confirm that under the Silver Plan 
 | On-Hand Management of Holds Updates and Recertification |                 |
 | On-Demand UPC WPS ID and Status Reports                 |                 |
 
-#Confirm that you see "Bronze" radio option under  3.Select the Support Services Plan
-#In Section 2 select Limited Plus
+Given I select feature plan: Limited Plus
+Then In the Subscription Enrollment screen I confirm that I do see the following Plans:
+| plan            |
+| Gold            |
+| Silver          |
+| General Support |
+Then In the Subscription Enrollment screen I confirm that I do not see the following Plans:
+| plan   |
+| Bronze |
 
-#Bronze option only displays when Standard and Premium is selected for 2.Select the Feature Plan
-#Confirm that in Section 3 you now see General Support instead of Bronze
-
-#In Section 2 select Premium
+Given I select feature plan: Premium
+Then In the Subscription Enrollment screen I confirm that I do see the following Plans:
+| plan   |
+| Gold   |
+| Silver |
+| Bronze |
+Then In the Subscription Enrollment screen I confirm that I do not see the following Plans:
+| plan            |
+| General Support |
 
 Then In the Subscription Enrollment screen I confirm that under the Bronze Plan I see the following items and further details
 | Item                                                                                                                | Further details |
 | Agent Guided Basic Account Management Like Account Creation & Update Holds & Recertification Mergers & Acquisitions |                 |
 
-
-#Confirm that you see following statement at the bottom "Based on the above subscription plan setup, here are your estimated annual costs:"
-#Confirm that you see following statement at the bottom "Estimated Annual Cost: $0.00 "
-#Confirm that you see following statement at the bottom  "Estimated Annual Cost per Product: $0.00"
-#Confirm that "Proceed" button at bottom is disabled when number of products is not selected
+Then I should see following statement at the bottom Based on the above subscription plan setup, here are your estimated annual costs:
+Then I should see Estimated Annual Cost of: $0.00
+Then I should see Estimated Annual Cost per Product of: $0.00
+Then I should see Proceed button disabled
 
 Scenario: [64874] Division Area
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

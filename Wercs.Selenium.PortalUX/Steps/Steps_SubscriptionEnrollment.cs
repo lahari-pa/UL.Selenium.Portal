@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Castle.Components.DictionaryAdapter;
+using OpenQA.Selenium.Support.UI;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -70,7 +72,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatISeeTheFollowingPlans(Table table)
 		{
 			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
-			List<Plan> allPlans = MySE.Get_All_Plans();
+			List<Plan> allPlans = new List<Plan>();
+			if (ScenarioContext.Current.ContainsKey("Plans"))
+			{
+				allPlans = (List<Plan>)Context.GetFromContext("Plans");
+			}
+			else
+			{
+				allPlans = MySE.Get_All_Plans();
+				Context.AddToContext("Plans", allPlans);
+			}
 
 			foreach (Plan thisPlan in allPlans)
 			{
@@ -88,13 +99,141 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"In the Subscription Enrollment screen I confirm that under the (.*) Plan I see the following items and further details")]
+		[StepDefinition(@"under subheading (.*) I should see text: (.*)")]
+		public void ThenUnderSubheadingIShouldSeeText(string subHeading, string text)
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			string actualText = MySE.Get_Extra_Text_SubHeader(subHeading);
+			Report.IsTrue(actualText == text, "Text is not showing as expected. Expected: " + text + " but got: " + actualText,
+				"Text is showing as expected: " + text);
+		}
+
+		[StepDefinition(@"under subheading (.*) I should see hyperlink: (.*)")]
+		public void ThenUnderSubheadingIShouldSeeLink(string subHeading, string link)
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			string actualLink = MySE.Get_Extra_Text_Link(subHeading);
+			Report.IsTrue(actualLink == link, "Text is not showing as expected. Expected: " + link + " but got: " + actualLink,
+				"Text is showing as expected: " + link);
+		}
+
+		[StepDefinition(@"I select feature plan: (.*)")]
+		public void GivenISelectFeaturePlan(string plan)
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			MySE.Select_Feature_Plan(plan);
+		}
+
+
+		[StepDefinition(@"under subheading (.*) clicking on hyperlink: (.*) opens Agency Service Agreement popup")]
+		public void ThenClickingOnHyperlinkOpensAgencyServiceAgreementPopup(string subHeading, string link)
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+				MySE.Click_Extra_Text_Link(subHeading,link);
+			AgencyServiceAgreementDlg MyASA = new AgencyServiceAgreementDlg();
+
+			Report.IsTrue(MyASA.Wait_for_load(30), "Agency Service Agreement has not appeared as expected",
+				"Agency Service Agreement pop is showing as expected");
+
+		}
+
+		[Then(@"on the Agency Service Agreement popup clicking Close closes the popup")]
+		public void ThenOnTheAgencyServiceAgreementPopupClickingCloseClosesThePopup()
+		{
+			AgencyServiceAgreementDlg MyASA = new AgencyServiceAgreementDlg();
+			MyASA.ClickCloseButton();
+		}
+
+
+		[Then(@"Agency Service Agreement popup contains the following text: (.*)")]
+		public void ThenAgencyServiceAgreementPopupContainsTheFollowingText(string text)
+		{
+			AgencyServiceAgreementDlg MyASA = new AgencyServiceAgreementDlg();
+			string actualText = MyASA.GetBodyText();
+			Report.IsTrue(actualText == text, "Expected text >>" + text + "<< but got text: >>" + actualText,
+				"Agency Service Agreement pop is showing as expected: " + actualText);
+		}
+
+		[Then(@"I should see following statement at the bottom (.*)")]
+		public void ThenIShouldSeeFollowingStatementAtTheBottom(string statement)
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			string actualText = MySE.GetFooterSubsCalculatorText();
+
+			GeneralFunctions.DoStringsMatch(statement, actualText, true);
+			Report.IsTrue(GeneralFunctions.DoStringsMatch(statement.Trim(), actualText.Trim()), "Expecting: " + statement + " but showing: " + actualText,
+				"Text is showing as expected: " + actualText);
+		}
+
+		[Then(@"I should see Estimated Annual Cost of: (.*)")]
+		public void ThenIShouldSeeEstimatedAnnualCostOf(string cost)
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			string actualCost = MySE.GetEstimatedAnualCost();
+			Report.IsTrue(actualCost.Trim() == cost.Trim(), "Expected cost: " + cost + " actual cost: " + actualCost,
+				"Cost is showing as expected: " + cost);
+		}
+
+		[Then(@"I should see Estimated Annual Cost per Product of:(.*)")]
+		public void ThenIShouldSeeEstimatedAnnualCostPerProductOf(string cost)
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			string actualCost = MySE.GetEstimatedAnualCostPerProduct();
+			Report.IsTrue(actualCost.Trim() == cost.Trim(), "Expected cost: " + cost + " actual cost: " + actualCost,
+				"Cost is showing as expected: " + cost);
+		}
+
+		[Then(@"I should see Proceed button disabled")]
+		public void ThenIShouldSeeProceedButtonDisabled()
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			Report.IsTrue(!MySE.Proceed_button_enabled(), "Proceed button is enabled.", "Proceed button is disabled.");
+		}
+
+
+		[Then(@"In the Subscription Enrollment screen I confirm that I (do|do not) see the following Plans:")]
+		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatIDoOrNotSeeTheFollowingPlans(string doOrNot, Table table)
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			List<string> planNames = MySE.GetAllPlanNames();
+			if (doOrNot == "do")
+			{
+				foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+				{
+					Report.IsTrue(planNames.Contains(thisRow["plan"]), thisRow["plan"] + " is not showing as expected",
+						thisRow["plan"] + " is showing as expected");
+				}
+			}
+			else
+			{
+				foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+				{
+					Report.IsTrue(!planNames.Contains(thisRow["plan"]), thisRow["plan"] + " is showing as expected and should not be",
+						thisRow["plan"] + " is not showing as expected");
+				}
+
+			}
+		}
+
+
+
+		[StepDefinition(@"In the Subscription Enrollment screen I confirm that under the (.*) Plan I see the following items and further details")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatUnderThePlanISeeTheFollowingItemsAndFurtherDetails(string plan, Table table)
 		{
 			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			List<Plan> allPlans = new List<Plan>();
+			if (ScenarioContext.Current.ContainsKey("Plans"))
+			{
+				allPlans = (List<Plan>)Context.GetFromContext("Plans");
+			}
+			else
+			{
+				allPlans = MySE.Get_All_Plans();
+				Context.AddToContext("Plans", allPlans);
+			}
 
-			//| Item | Further details |
-			List<Plan> allPlans = MySE.Get_All_Plans();
+			//| Item | Further details |Link text  | Link url  
+			 
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
 				Plan thisPlan = allPlans.FirstOrDefault(x => x.Plan_Name == plan);
@@ -108,6 +247,44 @@ namespace Wercs.Selenium.PortalUX.Steps
 					thisInfoPoint.Info_Detail = actualHiddenText;
 					Report.IsTrue(thisInfoPoint.Info_Detail.Contains(thisRow["Further details"]), "Expected value: >>" + thisRow["Further details"] + "<< not showing as expected. The value showing is: >>" + thisInfoPoint.Info_Detail + "<<",
 						thisRow["Further details"] + "is showing as expected.");
+				}
+
+				if (table.ContainsColumn("Link text"))
+				{
+					if (thisRow["Link text"].Length > 0)
+					{
+						List<string> ExpectedText = thisRow["Link text"].Split(',').ToList();
+						List<string> ExpectedURLs = thisRow["Link url"].Split(',').ToList();
+
+						if (ExpectedURLs.Count != ExpectedText.Count)
+						{
+							throw new Exception(
+								"The test needs to supply matching numbered comma-delimited lists of expected link text and urls.");
+						}
+
+						List<Info_Link> ExpectedLinks = new List<Info_Link>();
+
+						for (int i = 0; i < ExpectedText.Count; i++)
+						{
+							ExpectedLinks.Add(new Info_Link(ExpectedText[i], ExpectedURLs[i]));
+						}
+
+						List<Info_Link> ActualLinks = thisInfoPoint.Info_Links;
+
+						foreach (Info_Link thisExpectedInfoLink in ExpectedLinks)
+						{
+							var MatchingLink = ActualLinks.FirstOrDefault(x =>
+								x.Link_URL == thisExpectedInfoLink.Link_URL && x.Link_Text == thisExpectedInfoLink.Link_Text);
+							if (MatchingLink != null)
+							{
+								Report.IsTrue(
+									MySE.Click_link(plan, thisRow["Item"], thisExpectedInfoLink.Link_Text, thisExpectedInfoLink.Link_URL),
+									"Failed to correctly click link: " + thisExpectedInfoLink.Link_Text,
+									"Correctly clicked link: " + thisExpectedInfoLink.Link_Text);
+							}
+						}
+					}
+
 				}
 			}
 		}
