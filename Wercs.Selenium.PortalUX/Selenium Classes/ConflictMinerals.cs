@@ -17,13 +17,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		protected override IWebElement containerElement { get; set; }
 
 		public string VerificationCode {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='VerificationCode']"), 2).Text.Trim(); }
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='VerificationCode']"), 2).GetValue().Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='VerificationCode']"), 2).EnterText(value); }
 		}
 
 
 		public string EmailAddress {
-			get { return this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).Text.Trim(); }
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).GetValue().Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).EnterText(value); }
 		}
 
@@ -37,6 +37,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Delay.Seconds(1);
 
 			}
+			get { return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='Password']"), 2).GetValue(); }
 		}
 
 		public bool ErrorMessageShowing()
@@ -158,7 +159,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		public bool AcceptTermsOfUse {
-			get { return this.containerElement.FindElement(By.XPath(".//*[@id='Accepted']"), 2).Selected; }
+			get { return this.containerElement.FindElement(By.XPath(".//*[@id='Accepted']"), 2).Checked(); }
 			set
 			{
 				var chkAccepted = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//*[@id='Accepted']"), 2);
@@ -413,6 +414,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return "";
 
+		}
+
+		public bool GoodGuideDashboardLoads()
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//header//p[contains(text(),'GoodGuide')]"), 2) != null;
 		}
 	}
 }

@@ -152,6 +152,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Congratulations page has loaded as expected");
 		}
 
+		[StepDefinition(@"on the GoodGuide login page I enter the Email address: (.*)")]
 		[StepDefinition(@"in the Conflict Minerals login page I enter Email address: (.*)")]
 		public void GivenInTheConflictMineralsLoginPageIEnterEmailAddress(string emailAddress)
 		{
@@ -162,17 +163,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.EmailAddress = emailAddress;
+			Report.IsTrue(thisConflictMinerals.EmailAddress == emailAddress, "Failed to input the email address: " + emailAddress, "Successfully inputted the email address: " + emailAddress);
 		}
 
+		[StepDefinition(@"the GoodGuide Verification page should load")]
 		[StepDefinition(@"the Conflict Minerals Verification page should load")]
 		public void ThenTheConflictMineralsVerificationPageShouldLoad()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			Report.IsTrue(thisConflictMinerals.WaitForEnterVerificationCodePage(120),
+			Report.IsTrue(new ConflictMinerals().WaitForEnterVerificationCodePage(120),
 				"Enter verification code page has not loaded", "Enter verification page has loaded");
 		}
 
-		[Then(@"the Conflict Minerals terms of use page should load")]
+		[StepDefinition(@"the Conflict Minerals terms of use page should load")]
+		[StepDefinition(@"the GoodGuide terms of use page should load")]
 		public void ThenTheConflictMineralsTermsOfUsePageShouldLoad()
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
@@ -180,11 +183,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Terms of use page has not loaded", "Terms of use page has loaded");
 		}
 
-		[Then(@"in the Conflict Minerals terms of use I check the Accept checkbox")]
+		[StepDefinition(@"in the Conflict Minerals terms of use I check the Accept checkbox")]
+		[StepDefinition(@"on the GoodGuide terms of use I check the Accept checkbox")]
 		public void ThenInTheConflictMineralsTermsOfUseICheckTheAcceptCheckbox()
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.AcceptTermsOfUse = true;
+			Report.Success("Successfully accepted the terms of use!");
 		}
 
 		[Then(@"in the Conflict Minerals I should see the dashboard")]
@@ -205,20 +210,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 
-		[Then(@"in the Conflict Minerals terms of use I click continue")]
+		[StepDefinition(@"on the GoodGuide terms of use I click continue")]
+		[StepDefinition(@"in the Conflict Minerals terms of use I click continue")]
 		public void ThenInTheConflictMineralsTermsOfUseIClickContinue()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			thisConflictMinerals.ClickContinue();
+			Report.IsTrue(new ConflictMinerals().ClickContinue(),"Failed to click continue","Successfully clicked continue!");
 		}
 
 
-
+		[StepDefinition(@"on the GoodGuide login page I enter the Password: (.*)")]
 		[StepDefinition(@"in the Conflict Minerals login page I enter Password: (.*)")]
 		public void GivenInTheConflictMineralsLoginPageIEnterPassword(string password)
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.Password = password;
+			Report.IsTrue(thisConflictMinerals.Password == password, "Failed to input the password: " + password, "Successfully entered the password: " + password);
+
 		}
 
 		[Then(@"if an error message shows I retry entering password: (.*) and clicking on login")]
@@ -232,19 +239,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
+		[StepDefinition(@"on the GoodGuide login page I click on the Login button")]
 		[StepDefinition(@"in the Conflict Minerals login page I click on the Login button")]
 		public void GivenInTheConflictMineralsLoginPageIClickOnTheLoginButton()
 		{
-			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			thisConflictMinerals.ClickLogin();
+			Report.IsTrue(new ConflictMinerals().ClickLogin(),"Failed to click the log in button!","Successfully clicked the log in button!");
 		}
 
 		
 
 
 
-		[Then(@"I confirm that I have received a Signup confirmation email to account: (.*)")]
+		[StepDefinition(@"I confirm that I have received a Signup confirmation email to account: (.*)")]
 		public void ThenIConfirmThatIHaveReceivedASignupConfirmationEmailToAccount(string emailToFind)
 		{
 			if (emailToFind.ToLower().Contains("saved as"))
@@ -270,7 +276,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
-		[Then(@"I confirm that I have a received a Verification code email to account: (.*)")]
+		[StepDefinition(@"I confirm that I have a received a Verification code email to account: (.*)")]
 		public void ThenIConfirmThatIHaveAReceivedAVerificationCodeEmailToAccount(string emailToFind)
 		{
 			if (emailToFind.ToLower().Contains("saved as"))
@@ -283,7 +289,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
-		[Then(@"In the Conflict Minerals Verification page I enter verification code: (.*)")]
+		[StepDefinition(@"In the Conflict Minerals Verification page I enter verification code: (.*)")]
+		[StepDefinition(@"on the GoodGuide Verification page I enter verification code: (.*)")]
 		public void ThenInTheConflictMineralsVerificationPageIEnterVerificationCode(string verificationCode)
 		{
 			if (verificationCode.ToLower().Contains("saved as"))
@@ -294,17 +301,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.VerificationCode = verificationCode;
+			Report.IsTrue(thisConflictMinerals.VerificationCode == verificationCode, "Failed to input the verification code: " + verificationCode, "Successfully inputted the verification code: " + verificationCode);
 		}
 
-		[Then(@"In the Conflict Minerals Verification page I click Verify")]
+		[StepDefinition(@"In the Conflict Minerals Verification page I click Verify")]
+		[StepDefinition(@"on the GoodGuide Verification page I click Verify")]
 		public void ThenInTheConflictMineralsVerificationPageIClickVerify()
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			thisConflictMinerals.ClickVerify();
+			Report.IsTrue(thisConflictMinerals.ClickVerify(),"Failed to click the verify button","Successfully clicked the verify button!");
 		}
 
 
-		[Given(@"I save the verification code sent to account: (.*) as: (.*)")]
+		[StepDefinition(@"I save the verification code sent to account: (.*) as: (.*)")]
 		public void GivenISaveTheVerificationCodeSentToAccountAs(string emailToFind, string saveAs)
 		{
 			if (emailToFind.ToLower().Contains("saved as"))
