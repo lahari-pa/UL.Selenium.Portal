@@ -499,32 +499,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I click on (My Account|Sign Out)")]
+		[StepDefinition(@"I navigate to (My Account)")]
 		public void ThenIClickOnUserItem(string userItem)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking user item " + userItem);
-			try
-			{
-				Report.Info("Clicking user item " + userItem);
-				var selTopHeader = new TopMenuBar();
-				switch (userItem)
-				{
-					case ("My Account"):
-						selTopHeader.ClickMyAccount();
-						break;
-					case ("Sign Out"):
-						selTopHeader.ClickSignOut();
-						break;
-				}
-
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Success("Clicked on user item " + userItem + "!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(userItem == "My Account" ? new TopMenuBar().ClickMyAccount() : new TopMenuBar().ClickSignOut(),
+				"Failed to click on user item: " + userItem,
+				"Clicked on user item " + userItem + "!");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 		[StepDefinition(@"there should be products available in the Products Grid")]

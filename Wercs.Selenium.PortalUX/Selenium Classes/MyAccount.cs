@@ -562,6 +562,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public bool IClickOnAccountFilter(string filter)
+		{
+			return containerElement.FindElement(By.XPath(".//ul[@role='tablist']//a[text()='" + filter + "']"), 2).TryClick();
+		}
+
 	}
 
 	class MyAccount_CompanyInfo : BaseObject
@@ -588,9 +593,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Status_Information_Correct");
 
-			IWebElement myText =
-				containerElement.FindElement(
-					By.XPath(".//div[@class='col-sm-4']/p[@class='spaced-text']"), 2);
+			IWebElement myText = containerElement.FindElement(By.XPath(".//div[@class='col-sm-4']/p[@class='spaced-text']"), 2);
 
 			Report.Info(myText.Text.Trim());
 

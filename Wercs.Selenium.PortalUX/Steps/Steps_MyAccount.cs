@@ -562,6 +562,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I click on the option (User Accounts|Division Accounts)")]
+		public void ClickingOnMyAccountOptionDivisionUserAccounts(string option)
+		{
+			Report.IsTrue(new MyAccount().IClickOnAccountFilter(option), "Failed to click on option: " + option, "Successfully clicked on option: " + option);
+		}
 
 	}
 }
