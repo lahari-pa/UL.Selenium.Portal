@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Castle.Components.DictionaryAdapter;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
@@ -29,6 +30,45 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public string Get_Selected_Articles()
+		{
+			return _selectArticles.SelectedOption();
+		}
+
+		public string Get_Articles_info_header()
+		{
+			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"))
+				.GetAttribute("data-original-title").ToString();
+		}
+
+		public string Get_Articles_info_body()
+		{
+			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"))
+				.GetAttribute("data-content").ToString();
+		}
+
+		public bool Select_Articles_exists()
+		{
+			try
+			{
+				return _selectArticles.Displayed;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public string Get_Page_Header()
+		{
+			return containerElement.FindElement(By.XPath("//div[contains(@class, 'header-with-back')]/h2")).Text.Trim();
+		}
+
+		public List<string> Get_Page_SubHeaders()
+		{
+			return containerElement.FindElements(By.XPath("//h3/span/../../h3")).Select(x => x.Text).ToList();
+		}
+
 		//Enhanced Articles
 		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/../select")]
 		private IWebElement _selectEnArticles;
@@ -38,6 +78,35 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Selecting Number of Enhanced Articles: " + enArticles);
 			_selectEnArticles.Select(enArticles);
 			return true;
+		}
+
+		public bool Select_Enhanced_Articles_Exists()
+		{
+			try
+			{
+				return _selectEnArticles.Displayed;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public string Get_Selected_Enhanced_Articles()
+		{
+			return _selectEnArticles.SelectedOption();
+		}
+
+		public string Get_Enhanced_Articles_info_header()
+		{
+			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"))
+				.GetAttribute("data-original-title").ToString();
+		}
+
+		public string Get_Enhanced_Articles_info_body()
+		{
+			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"))
+				.GetAttribute("data-content").ToString();
 		}
 
 		//Formulated Products
@@ -51,6 +120,203 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public bool Select_Formulated_Products_Exists()
+		{
+			try
+			{
+				return _selectFormProds.Displayed;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public string Get_Selected_Formulated_Products()
+		{
+			return _selectFormProds.SelectedOption();
+		}
+		public string Get_Formulated_Products_info_header()
+		{
+			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"))
+				.GetAttribute("data-original-title").ToString();
+		}
+
+		public string Get_Formulated_Products_info_body()
+		{
+			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"))
+				.GetAttribute("data-content").ToString();
+		}
+
+		public List<string> Get_Feature_Plans()
+		{
+			List<string> featurePlans = new List<string>();
+			Regex regex = new Regex(@".*\r\n");
+			var listOfPlans =containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).Select(x=>x.Text).ToList();
+			foreach (string thisPlan in listOfPlans)
+			{
+				Match match = regex.Match(thisPlan);
+				if (match.Success)
+				{
+					featurePlans.Add(match.Value.Replace("\r\n", string.Empty));
+				}
+			}
+
+			return featurePlans;
+
+		}
+
+		public List<Plan> Get_All_Plans()
+		{
+			List<string> featurePlans = Get_Feature_Plans();
+			List<Plan> listOfPlans = new List<Plan>();
+			var listSubscriptions = containerElement.FindElements(By.XPath(".//div[contains(@class, 'subscription')]")).ToList();
+			
+			foreach (var subscription in listSubscriptions)
+			{
+				Plan newPlan = new Plan();
+
+				Regex regex = new Regex(@".*\r\n");
+
+				string allLabel = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]/label")).Text.Trim();
+				Match match = regex.Match(allLabel);
+				if (match.Success)
+				{
+					newPlan.Plan_Name = match.Value.Replace("\r\n", string.Empty);
+				}
+				
+				
+				var spans = subscription.FindElements(By.XPath(".//div[contains(@class, 'heading')]//span"));
+				if (spans.Count > 1)
+				{
+					newPlan.Best_Value = true;
+					newPlan.Plan_Sub = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[2]")).Text.Trim();
+				}
+				else
+				{
+					newPlan.Plan_Sub = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[1]")).Text.Trim();
+				}
+
+				var infos = subscription.FindElements(By.XPath(".//div[contains(@class, 'body')]//li")).ToList();
+				newPlan.Info_points = new List<Info_Point>();
+				foreach (var info in infos)
+				{
+					Info_Point thisInfoPoint = new Info_Point();
+					thisInfoPoint.Info_Header = info.Text.Trim();
+				//	Report.Info("Looking at: " + thisInfoPoint.Info_Header);
+					try
+					{
+						thisInfoPoint.Info_Detail = info.FindElement(By.XPath(".//div")).Text.Trim();
+						thisInfoPoint.Info_Links = new List<Info_Link>();
+						var links = info.FindElements(By.XPath(".//div/a")).ToList();
+						foreach (var link in links)
+						{
+							thisInfoPoint.Info_Links.Add(new Info_Link(link.Text, link.GetAttribute("href")));
+						}
+						
+					}
+					catch (Exception e)
+					{
+					}
+					newPlan.Info_points.Add(thisInfoPoint);
+				}
+
+				//newPlan.Info_points
+				var subsIndicator = subscription.FindElements(By.XPath(".//div[contains(@class, 'heading')]//div[@class='subs__indicator']"));
+				newPlan.Selected = subsIndicator.Select(x=>x.GetCssValue("background")!="#fff;").Count()>0;
+
+				if (featurePlans.Contains(newPlan.Plan_Name))
+				{
+					newPlan.Plan_Type = "Feature";
+				}
+				else
+				{
+					newPlan.Plan_Type = "Support";
+				}
+
+				listOfPlans.Add(newPlan);
+
+			}
+
+			return listOfPlans;
+		}
+
+		public string Extract_Plan(string stringPlusExtra)
+		{
+			Regex regex = new Regex(@".*\r\n");
+			Match match = regex.Match(stringPlusExtra);
+			if (match.Success)
+			{
+				return match.Value.Replace("\r\n", string.Empty);
+			}
+			else
+			{
+				return "";
+			}
+		}
+
+		public string Click_Info_By_Plan_Item_Return_Hidden(string planName, string item)
+		{
+			Plan thisPlan = Get_All_Plans().FirstOrDefault(x => x.Plan_Name == planName);
+			if (thisPlan != null)
+			{
+				if (thisPlan.Info_points.Select(x=>x.Info_Header).Contains(item))
+				{
+					var PlanLabel = containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
+						.FirstOrDefault(x => (Extract_Plan(x.Text) == thisPlan.Plan_Name));
+					try
+					{
+						var listOfLis = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"));
+						var infoText = listOfLis.FirstOrDefault(x => x.Text.Trim() == item.Trim());
+						var infoLink = infoText.FindElement(By.XPath(".//a"));
+
+						if (infoLink != null)
+						{
+							if (!infoLink.TryClick())
+							{
+								throw new Exception("Failed to click info link.");
+							}
+							Delay.Seconds(1);
+							var expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (Extract_Plan(x.Text) == item)).FindElement(By.XPath(".//div"));
+							if (expandableDiv.GetAttribute("aria-expanded") == "true")
+							{
+								string expandableDivText = expandableDiv.Text.Trim();
+								if (!infoLink.TryClick())
+								{
+									throw new Exception("Failed to click info link.");
+								}
+								return expandableDivText.Trim();
+							}
+							else
+							{
+								throw new Exception("Extra information is not showing.");
+							}
+						}
+						else
+						{
+							throw new Exception("No info link was found");
+						}
+					}
+					catch (Exception e)
+					{
+						throw new Exception("No info link was found");
+					}
+				}
+				else
+				{
+					throw new Exception("Matching item was not found");
+				}
+			}
+			else
+			{
+				throw new Exception("Matching plan was not found");
+			}
+				
+
+			return "";
+		}
+
+		
 		public bool Select_Range(string articles, string enArticles, string formProds)
 		{
 			Report.Info("Beginning Select_Range");
@@ -384,6 +650,37 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	}
 
+	class Plan
+	{
+		public string Plan_Type { get; set; }
+		public string Plan_Name { get; set; }
+		public string Plan_Sub { get; set; }
+		public bool Best_Value { get; set; } = false;
+		public bool Selected { get; set; } = false;
+		public List<Info_Point> Info_points { get; set; }
+		public string Hidden_Info { get; set; }
+	}
+
+	class Info_Point
+	{
+		public string Info_Header { get; set; }
+		public string Info_Detail { get; set; }
+		public List<Info_Link> Info_Links {get;set;}
+	}
+	}
+
+	class Info_Link
+	{
+		public string Link_Text { get; set; }
+		public string Link_URL { get; set; }
+
+		public Info_Link(string text, string url)
+		{
+			Link_Text = text;
+			Link_URL = url;
+		}
+	}
+
 
 	class SubscriptionEnrollmentDlg : BaseDialog
 	{
@@ -606,13 +903,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Screenshot();
 			return true;
 		}
-
-
-
 	}
 
 
-
-
-
-}
