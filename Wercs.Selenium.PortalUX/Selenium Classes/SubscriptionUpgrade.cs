@@ -1,0 +1,266 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Castle.Components.DictionaryAdapter;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using SafewareReporting;
+using SeleniumUtilities;
+using Wercs.Selenium.PortalUX.Classes;
+using Global = SeleniumUtilities.Global;
+
+namespace Wercs.Selenium.PortalUX.Selenium_Classes
+{
+	class SubscriptionUpgrade : SubscriptionEnrollment
+	{
+
+		public bool Downgrade_Range(string range, string current, string downgrade)
+		{
+			Report.Info("Beginning Downgrade_Range");
+
+			Report.Info("Range = " + range);
+			Report.Info("Current  = " + current);
+			Report.Info("Downgrade to = " + downgrade);
+
+			IWebElement myRange = null;
+
+			switch (range)
+			{
+				case "Articles":
+					myRange = _selectArticles;
+					break;
+				case "Enhanced Articles":
+					myRange = _selectEnArticles;
+					break;
+				case "Formulated Products":
+					myRange = _selectFormProds;
+					break;
+				default:
+					throw new Exception("Failed to Find Correct Range Name");
+			}
+
+			if (myRange.SelectedOption() != current)
+			{
+				Report.Info("Current Range is Incorrect: " + current);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Current Range");
+			Report.Info("Selecting Number of " + range + ": " + downgrade);
+			myRange.Select(downgrade);
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			if (myRange.SelectedOption() == downgrade)
+			{
+				Report.Info("Able to Downgrade " + range + " to " + downgrade);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Unable to Downgrade " + range + " to " + downgrade);
+			Report.Screenshot();
+			return true;
+		}
+
+		public bool Feature_Plan_Selected(string featurePlan)
+		{
+			Report.Info("Beginning Feature_Plan_Selected: " + featurePlan);
+
+			if (!Exists)
+			{
+				Report.Info("Not on Subscription Upgrade Page");
+				Report.Screenshot();
+				return false;
+			}
+
+			IWebElement myFeature = Get_Feature_Plan(featurePlan);
+
+			IWebElement myCheck = myFeature.FindElement(By.XPath(".//input"), 2);
+
+			if (myCheck == null)
+			{
+				Report.Info("Failed to Find " + featurePlan + " Radio Button");
+				Report.Screenshot();
+				return false;
+			}
+
+			if (!myCheck.Selected)
+			{
+				Report.Info(featurePlan + " Radio Button is Not Selected");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Correct Feature Plan Selected");
+			Report.Screenshot();
+			return true;
+		}
+
+		public bool Downgrade_Feature_Plan_Check(string currentPlan)
+		{
+			Report.Info("Beginning Downgrade_Feature_Plan_Check");
+
+			IWebElement myStandard = Get_Feature_Plan("Standard");
+			IWebElement standardCheck = myStandard.FindElement(By.XPath(".//input"), 2);
+
+			IWebElement myLimitPlus = Get_Feature_Plan("Limited Plus");
+			IWebElement limitplusCheck = myLimitPlus.FindElement(By.XPath(".//input"), 2);
+
+			IWebElement myLimited = Get_Feature_Plan("Limited");
+			IWebElement limitedCheck = myLimited.FindElement(By.XPath(".//input"), 2);
+
+			switch (currentPlan)
+			{
+				case "Limited Plus":
+					if (limitedCheck.GetAttribute("disabled") != "true")
+					{
+						Report.Info("Limited Plan is Not Disabled");
+						Report.Screenshot();
+						return false;
+					}
+					Report.Info("Limited Plan is Disabled");
+					break;
+				case "Standard":
+					if (limitedCheck.GetAttribute("disabled") != "true")
+					{
+						Report.Info("Limited Plan is Not Disabled");
+						Report.Screenshot();
+						return false;
+					}
+					Report.Info("Limited Plan is Disabled");
+					if (limitplusCheck.GetAttribute("disabled") != "true")
+					{
+						Report.Info("Limited Plus Plan is Not Disabled");
+						Report.Screenshot();
+						return false;
+					}
+					Report.Info("Limited Plus Plan is Disabled");
+					break;
+				case "Premium":
+					if (limitedCheck.GetAttribute("disabled") != "true")
+					{
+						Report.Info("Limited Plan is Not Disabled");
+						Report.Screenshot();
+						return false;
+					}
+					Report.Info("Limited Plan is Disabled");
+					if (limitplusCheck.GetAttribute("disabled") != "true")
+					{
+						Report.Info("Limited Plus Plan is Not Disabled");
+						Report.Screenshot();
+						return false;
+					}
+					Report.Info("Limited Plus Plan is Disabled");
+					if (standardCheck.GetAttribute("disabled") != "true")
+					{
+						Report.Info("Standard Plan is Not Disabled");
+						Report.Screenshot();
+						return false;
+					}
+					Report.Info("Standard Plan is Disabled");
+					break;
+				default:
+					throw new Exception("Failed to Find Correct Feature Plan");
+			}
+			Report.Success("Unable to Downgrade " + currentPlan);
+			return true;
+		}
+
+		public bool Support_Plan_Selected(string supportPlan)
+		{
+			Report.Info("Beginning Support_Plan_Selected: " + supportPlan);
+
+			if (!Exists)
+			{
+				Report.Info("Not on Subscription Upgrade Page");
+				Report.Screenshot();
+				return false;
+			}
+
+			IWebElement mySupport = null;
+
+			switch (supportPlan)
+			{
+				case "Gold":
+					mySupport = _selectGold;
+					break;
+				case "Silver":
+					mySupport = _selectSilver;
+					break;
+				case "Bronze":
+					mySupport = _selectBronze;
+					break;
+				case "General Support":
+					mySupport = Get_General_Support_Plan();
+					break;
+				default:
+					throw new Exception("Failed to Find Correct Support Plan");
+			}
+
+			IWebElement myCheck = mySupport.FindElement(By.XPath(".//input"), 2);
+
+			if (myCheck == null)
+			{
+				Report.Info("Failed to Find " + supportPlan + " Radio Button");
+				Report.Screenshot();
+				return false;
+			}
+
+			if (!myCheck.Selected)
+			{
+				Report.Info(supportPlan + " Radio Button is Not Selected");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Correct Support Services Plan Selected");
+			Report.Screenshot();
+			return true;
+		}
+
+		public bool Downgrade_Support_Plan_Check(string currentPlan)
+		{
+			Report.Info("Beginning Downgrade_Support_Plan_Check");
+
+			IWebElement mySilver = _selectSilver;
+			IWebElement silverCheck = mySilver.FindElement(By.XPath(".//input"), 2);
+
+			IWebElement myBronze = _selectBronze;
+			IWebElement bronzeCheck = myBronze.FindElement(By.XPath(".//input"), 2);
+
+			IWebElement myGen = Get_General_Support_Plan();
+			IWebElement genCheck = myGen.FindElement(By.XPath(".//input"), 2);
+
+			switch (currentPlan)
+			{
+				case "Silver":
+					if ((bronzeCheck.GetAttribute("disabled") != "true") || (genCheck.GetAttribute("disabled") != "true"))
+					{
+						Report.Info("Bronze/General Support Plan is Not Disabled");
+						Report.Screenshot();
+						return false;
+					}
+					Report.Info("Bronze/General Support Plan is Disabled");
+					break;
+				case "Gold":
+					if (silverCheck.GetAttribute("disabled") != "true")
+					{
+						Report.Info("Silver Plan is Not Disabled");
+						Report.Screenshot();
+						return false;
+					}
+					Report.Info("Silver Plan is Disabled");
+					if ((bronzeCheck.GetAttribute("disabled") != "true") || (genCheck.GetAttribute("disabled") != "true"))
+					{
+						Report.Info("Bronze/General Support Plan is Not Disabled");
+						Report.Screenshot();
+						return false;
+					}
+					Report.Info("Bronze/General Support Plan is Disabled");
+					break;
+				default:
+					throw new Exception("Failed to Find Correct Support Services Plan");
+			}
+			Report.Success("Unable to Downgrade " + currentPlan);
+			return true;
+		}
+
+	}
+}

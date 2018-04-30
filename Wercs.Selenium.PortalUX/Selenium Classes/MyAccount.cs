@@ -326,7 +326,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Report.Info("Navigation Option Found - Attempting to Click Link");
 			myNav.Click();
-			Delay.Seconds(5 * Delay.SpeedFactor);
+			Delay.Seconds(10 * Delay.SpeedFactor);
 
 			switch (nav_option)
 			{
@@ -655,6 +655,43 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Report.Success("Quantity is Correct");
+			return true;
+		}
+
+		//UPGRADE Button
+		[FindsBy(How = How.XPath, Using = ".//div/a[text()='Upgrade']")]
+		private IWebElement _btnUpgrade;
+
+		public bool Upgrade_click()
+		{
+			Report.Info("Attempting to Click UPGRADE Button");
+			_btnUpgrade.Click();
+			return true;
+		}
+
+		public bool Click_Upgrade_Button()
+		{
+			Report.Info("Beginning Click_Upgrade_Button");
+
+			if (!Upgrade_click())
+			{
+				Report.Info("Failed to Click UPGRADE Button");
+				Report.Screenshot();
+				return false;
+			}
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			Report.Info("UPGRADE Button Clicked");
+			Report.Screenshot();
+
+			var myUpgrade = new SubscriptionUpgrade();
+			if (!myUpgrade.Exists)
+			{
+				Report.Info("Failed to Navigate to Subscription Upgrade Screen");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Successfully Navigated to Subscription Upgrade Screen");
+			Report.Screenshot();
 			return true;
 		}
 

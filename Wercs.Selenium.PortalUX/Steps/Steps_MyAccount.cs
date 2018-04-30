@@ -509,6 +509,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"In the Subscription Information screen I click the Upgrade button")]
+		public void ThenIClickTheUpgradeButton()
+		{
+			var selMyAccount = new MyAccount_SubscriptionInfo();
+
+			Report.IsTrue(selMyAccount.Click_Upgrade_Button(), "Failed to Click UPGRADE Button",
+				"UPGRADE Button Clicked and Subscription Upgrade Page Opened");
+		}
+
+
 		[StepDefinition(@"In the Order History screen I select (Subscription|WERCSmart)")]
 		public void ThenInTheOrderHistoryScreenISelectX(string radio_option)
 		{

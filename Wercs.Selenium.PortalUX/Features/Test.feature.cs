@@ -26,6 +26,7 @@ namespace Wercs.Selenium.PortalUX.Features
     [NUnit.Framework.CategoryAttribute("SubEnrollment")]
     [NUnit.Framework.CategoryAttribute("LandingPage")]
     [NUnit.Framework.CategoryAttribute("PaymentMethods")]
+    [NUnit.Framework.CategoryAttribute("SubUpgrade")]
     [NUnit.Framework.CategoryAttribute("run_test")]
     public partial class TestFeature
     {
@@ -47,6 +48,7 @@ namespace Wercs.Selenium.PortalUX.Features
                         "SubEnrollment",
                         "LandingPage",
                         "PaymentMethods",
+                        "SubUpgrade",
                         "run_test"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -84,386 +86,29 @@ namespace Wercs.Selenium.PortalUX.Features
         public virtual void TEST()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TEST", ((string[])(null)));
-#line 13
+#line 14
 this.ScenarioSetup(scenarioInfo);
-#line 16
-testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
-                        "Value"});
-            table1.AddRow(new string[] {
-                        "Email",
-                        "User_<random>"});
-            table1.AddRow(new string[] {
-                        "Country",
-                        "UNITED STATES"});
-            table1.AddRow(new string[] {
-                        "FirstName",
-                        "Richard"});
-            table1.AddRow(new string[] {
-                        "LastName",
-                        "Smith"});
-            table1.AddRow(new string[] {
-                        "Password",
-                        "Pa4*ytuufnn"});
-            table1.AddRow(new string[] {
-                        "Address1",
-                        "Address 1"});
-            table1.AddRow(new string[] {
-                        "Address2",
-                        "Address 2"});
-            table1.AddRow(new string[] {
-                        "City",
-                        "City Name"});
-            table1.AddRow(new string[] {
-                        "State",
-                        "Florida"});
-            table1.AddRow(new string[] {
-                        "Zip",
-                        "999"});
-            table1.AddRow(new string[] {
-                        "CompanyName",
-                        "Company 1"});
-            table1.AddRow(new string[] {
-                        "CompanyPhone",
-                        "123-456-7889"});
-            table1.AddRow(new string[] {
-                        "EmergencyPhoneNumber",
-                        "123-456-7789"});
-            table1.AddRow(new string[] {
-                        "SupplierType",
-                        "Manufacturer"});
-            table1.AddRow(new string[] {
-                        "CityQuestion",
-                        "CityQuestion"});
-            table1.AddRow(new string[] {
-                        "CityHint",
-                        "CityHint"});
-            table1.AddRow(new string[] {
-                        "CarQuestion",
-                        "CarQuestion"});
-            table1.AddRow(new string[] {
-                        "CarHint",
-                        "CarHint"});
-            table1.AddRow(new string[] {
-                        "FriendQuestion",
-                        "FriendQuestion"});
-            table1.AddRow(new string[] {
-                        "FriendHint",
-                        "FriendHint"});
-            table1.AddRow(new string[] {
-                        "JobQuestion",
-                        "JobQuestion"});
-            table1.AddRow(new string[] {
-                        "JobHint",
-                        "JobHint"});
-            table1.AddRow(new string[] {
-                        "MascotQuestion",
-                        "MascotQuestion"});
-            table1.AddRow(new string[] {
-                        "MascotHint",
-                        "MascotHint"});
-            table1.AddRow(new string[] {
-                        "Pin",
-                        "1234"});
-#line 17
-testRunner.Given("If not already created, I create a user: New_Sub with the following parameters:", ((string)(null)), table1, "Given ");
-#line 44
+#line 57
+testRunner.Given("I log in with email: User_b69b6adf1a61.kxxyxunf@mailosaur.io and password: Pa4*yt" +
+                    "uufnn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 58
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 45
-testRunner.Then("I click on NEW SUBSCRIPTION", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Articles",
-                        "Enhanced Articles",
-                        "Formulated Products",
-                        "Feature Plan",
-                        "Support Services Plan"});
-            table2.AddRow(new string[] {
-                        "Up to 1 Product(s)",
-                        "Up to 1 Product(s)",
-                        "Up to 1 Product(s)",
-                        "Limited",
-                        "General Support"});
-#line 46
-testRunner.Then("I select the following enrollment options", ((string)(null)), table2, "Then ");
-#line 49
-testRunner.Then("I cancel the Enrollment dialog, confirm correct page opens and Proceed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Articles",
-                        "Enhanced Articles",
-                        "Formulated Products",
-                        "Feature Plan",
-                        "Support Services Plan",
-                        "Body Text"});
-            table3.AddRow(new string[] {
-                        "Up to 1 Product(s)",
-                        "Up to 1 Product(s)",
-                        "Up to 1 Product(s)",
-                        "Limited",
-                        "General",
-                        "Your new purchase will be prorated based on the credit and time left in your curr" +
-                            "ent subscription. Checkout to see the final amount."});
-#line 50
-testRunner.And("I confirm the chosen options and body text are correct", ((string)(null)), table3, "And ");
-#line 53
-testRunner.Then("I click on Checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 54
-testRunner.Then("I check the Payment Methods heading and sub headings are correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Options"});
-            table4.AddRow(new string[] {
-                        "Credit Card"});
-            table4.AddRow(new string[] {
-                        "ACH"});
-            table4.AddRow(new string[] {
-                        "Wire Transfer"});
-#line 55
-testRunner.Then("I confirm the following payment options are available", ((string)(null)), table4, "Then ");
-#line 60
-testRunner.Then("I confirm that the Contact Information is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 61
-testRunner.Then("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 62
-testRunner.And("I open the Edit Address form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
-testRunner.Then("I confirm the Sub Headings are correct: Primary Account Contact, Billing Address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field"});
-            table5.AddRow(new string[] {
-                        "First Name"});
-            table5.AddRow(new string[] {
-                        "Last Name"});
-            table5.AddRow(new string[] {
-                        "Email Address"});
-            table5.AddRow(new string[] {
-                        "Address 1"});
-            table5.AddRow(new string[] {
-                        "Address 2"});
-            table5.AddRow(new string[] {
-                        "City"});
-            table5.AddRow(new string[] {
-                        "State"});
-            table5.AddRow(new string[] {
-                        "Country"});
-            table5.AddRow(new string[] {
-                        "Zip Code"});
-            table5.AddRow(new string[] {
-                        "Phone Number"});
-            table5.AddRow(new string[] {
-                        "Shipping/Billing Checkbox"});
-#line 64
-testRunner.Then("I confirm the Edit Address form has the correct fields", ((string)(null)), table5, "Then ");
-#line 77
-testRunner.Then("I un-check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field"});
-            table6.AddRow(new string[] {
-                        "Address 1"});
-            table6.AddRow(new string[] {
-                        "Address 2"});
-            table6.AddRow(new string[] {
-                        "City"});
-            table6.AddRow(new string[] {
-                        "State"});
-            table6.AddRow(new string[] {
-                        "Country"});
-            table6.AddRow(new string[] {
-                        "Zip Code"});
-            table6.AddRow(new string[] {
-                        "Phone Number"});
-#line 78
-testRunner.And("I confirm the Shipping Address form has the correct fields", ((string)(null)), table6, "And ");
-#line 87
-testRunner.Then("I check the Shipping Address is the same as the billing address checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 88
-testRunner.Then("I confirm the Shipping Address is hidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 89
-testRunner.Then("I cancel the Edit Address form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Address Line 1",
-                        "Address Line 2",
-                        "City",
-                        "State",
-                        "Zip Code",
-                        "Country",
-                        "Phone Number"});
-            table7.AddRow(new string[] {
-                        "Address_New",
-                        "<empty>",
-                        "<empty>",
-                        "<empty>",
-                        "<empty>",
-                        "<empty>",
-                        "<empty>"});
-#line 90
-testRunner.Then("I edit the Billing Address for user saved as: New_Sub", ((string)(null)), table7, "Then ");
-#line 94
-testRunner.And("I confirm that the Billing Address is correct for Account saved as New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
-testRunner.Then("I confirm the Continue Button is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 96
-testRunner.Then("I select Payment Method: Credit Card", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field"});
-            table8.AddRow(new string[] {
-                        "Card Type"});
-            table8.AddRow(new string[] {
-                        "Card Number"});
-            table8.AddRow(new string[] {
-                        "Expiration Date"});
-            table8.AddRow(new string[] {
-                        "CVV"});
-            table8.AddRow(new string[] {
-                        "Cardholder Name"});
-#line 97
-testRunner.Then("I confirm the Credit Card fields are correct", ((string)(null)), table8, "Then ");
-#line 104
-testRunner.Then("I select Payment Method: ACH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field"});
-            table9.AddRow(new string[] {
-                        "ABA/Routing Number"});
-            table9.AddRow(new string[] {
-                        "Bank Account Number"});
-            table9.AddRow(new string[] {
-                        "Account Type"});
-            table9.AddRow(new string[] {
-                        "Bank Name"});
-            table9.AddRow(new string[] {
-                        "Account Holder Name"});
-#line 105
-testRunner.Then("I confirm the ACH fields are correct", ((string)(null)), table9, "Then ");
-#line 112
-testRunner.Then("I select Payment Method: Wire Transfer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 113
-testRunner.Then(@"I confirm the following warning message appears: Wire Transfer subscription payment will result in the WERCSmart account being locked with regard to registration, UPC updates, and recertifications until funds are received and applied to the subscription balance due. No grace period for receipt of funds is provided for Wire Transfer payments. If you need immediate access to these functions, please select a different payment option before finalizing subscription.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 114
-testRunner.Then("I select Payment Method: Credit Card", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 115
-testRunner.Then("I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field"});
-            table10.AddRow(new string[] {
-                        "Card Number"});
-            table10.AddRow(new string[] {
-                        "Expiration Date"});
-            table10.AddRow(new string[] {
-                        "CVV"});
-            table10.AddRow(new string[] {
-                        "Cardholder Name"});
-#line 116
-testRunner.Then("I confirm Credit Card error messages for the following fields are displayed", ((string)(null)), table10, "Then ");
-#line 122
-testRunner.Then("I select Payment Method: ACH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 123
-testRunner.Then("I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field"});
-            table11.AddRow(new string[] {
-                        "ABA/Routing Number"});
-            table11.AddRow(new string[] {
-                        "Bank Account Number"});
-            table11.AddRow(new string[] {
-                        "Account Type"});
-            table11.AddRow(new string[] {
-                        "Bank Name"});
-            table11.AddRow(new string[] {
-                        "Account Holder Name"});
-#line 124
-testRunner.Then("I confirm ACH error messages for the following fields are displayed", ((string)(null)), table11, "Then ");
-#line 131
-testRunner.Then("I select Payment Method: Credit Card", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Card Type",
-                        "Card Number",
-                        "Expiration Month",
-                        "Expiration Year",
-                        "CVV",
-                        "Cardholder Name"});
-            table12.AddRow(new string[] {
-                        "Visa",
-                        "4111 1111 1111 1111",
-                        "08",
-                        "2028",
-                        "1111",
-                        "test"});
-#line 132
-testRunner.Then("I enter Credit Card details", ((string)(null)), table12, "Then ");
-#line 135
-testRunner.Then("I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 137
-testRunner.Then("In the Purchase Summary screen I confirm the Purchase Summary header is displayed" +
-                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 138
-testRunner.Then("In the Purchase Summary screen I check the Subscription Billing header is correct" +
-                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 139
-testRunner.Then("In the Purchase Summary screen I confirm the Yearly Radio Option is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 140
-testRunner.Then("In the Purchase Summary screen I confirm the column headings are correct: Plan Se" +
-                    "lected, Service Date, Amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 141
-testRunner.Then("In the Purchase Summary screen I confirm the folling statement is shown: Subscrip" +
-                    "tion will be automatically charged to the default payment method.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 142
-testRunner.Then(@"In the Purchase Summary screen I confirm the Prices and Payment section contains the text: Prices are quoted in U.S. Dollars. Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL. Payment is required when your order is submitted. The method of payment designated on the My Account area will be used. UL reserves the right to accept or refuse any payment made in any form. UL does not collect or process your payment details. Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 143
-testRunner.Then("In the Purchase Summary screen I confirm the following statement is shown: By cli" +
-                    "cking \"Confirm Order\" you will be enrolled in our subscription plan.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 144
-testRunner.Then("In the Purchase Summary screen I click Confirm Order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 145
-testRunner.Then("In the Thank You screen I check the Header is correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 147
-testRunner.Then("In the Thank You screen I click Home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 148
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 149
+#line 59
 testRunner.Then("In the My Account screen I navigate to the Subscription Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 150
-testRunner.Then("In the Subscription Information screen I confirm the Status has the correct infor" +
-                    "mation: 1 Formulated, 1 Articles, 1 Enhanced Articles", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Row",
-                        "Subscription Level Status",
-                        "Quantity"});
-            table13.AddRow(new string[] {
-                        "1",
-                        "Limited Formulated",
-                        "1"});
-            table13.AddRow(new string[] {
-                        "2",
-                        "Limited Articles",
-                        "1"});
-            table13.AddRow(new string[] {
-                        "3",
-                        "Limited Enhanced Articles",
-                        "1"});
-#line 151
-testRunner.Then("In the Subscription Information screen I confirm the Subscription History table h" +
-                    "as the correct information", ((string)(null)), table13, "Then ");
-#line 156
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 157
-testRunner.Then("In the My Account screen I navigate to the Order History page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 158
-testRunner.Then("In the Order History screen I select Subscription", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 159
-testRunner.Then("In the Order History screen I get the Invoice Number and Date and confirm the inv" +
-                    "oice email has arrived for user saved as: New_Sub", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 61
+testRunner.Then("In the Subscription Information screen I click the Upgrade button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 68
+testRunner.Then("In the Subscription Upgrade screen I confirm the Standard Feature Plan is selecte" +
+                    "d", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 69
+testRunner.Then("In the Subscription Upgrade screen I confirm I cannot downgrade the current Featu" +
+                    "re Plan: Standard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 70
+testRunner.Then("In the Subscription Upgrade screen I confirm the Silver Support Services Plan is " +
+                    "selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 71
+testRunner.Then("In the Subscription Upgrade screen I confirm I cannot downgrade the current Suppo" +
+                    "rt Services Plan: Silver", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

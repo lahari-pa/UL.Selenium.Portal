@@ -550,13 +550,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Payment Methods screen I click Continue")]
 		public void ThenIClickContinue()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click Continue");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Payment Methods screen I click Continue");
 			try
 			{
 				var myPay = new PaymentMethods();
 
 				Report.IsTrue(myPay.Continue_click(), "Failed to Click Continue", "Continue Button Clicked");
-				Delay.Seconds(5 * Delay.SpeedFactor);
+				Delay.Seconds(15 * Delay.SpeedFactor);
 			}
 			catch (Exception ex)
 			{
@@ -739,7 +739,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
 
-				Delay.Seconds(10 * Delay.SpeedFactor);
+				Delay.Seconds(15 * Delay.SpeedFactor);
 			}
 			catch (Exception ex)
 			{

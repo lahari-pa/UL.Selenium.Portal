@@ -265,6 +265,7 @@
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />
     <Compile Include="Selenium Classes\SubscriptionEnrollment.cs" />
+    <Compile Include="Selenium Classes\SubscriptionUpgrade.cs" />
     <Compile Include="Selenium Classes\TermsOfUse.cs" />
     <Compile Include="Selenium Classes\TopMenuBar.cs" />
     <Compile Include="Selenium Classes\ULSC.cs" />
@@ -288,6 +289,7 @@
     <Compile Include="Steps\Steps_RetailPartners.cs" />
     <Compile Include="Steps\Steps_Signup.cs" />
     <Compile Include="Steps\Steps_SubscriptionEnrollment.cs" />
+    <Compile Include="Steps\Steps_SubscriptionUpgrade.cs" />
     <Compile Include="Steps\Steps_ULSC.cs" />
     <Compile Include="Tests\Account\LoginTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
