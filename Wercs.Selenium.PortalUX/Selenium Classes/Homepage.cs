@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -103,14 +104,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool PieChartShowingInProductInformation()
 		{
-			var pieChart = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']//*[contains(@class,'highcharts-pie-series') and contains(@class,'highcharts-tracker')]"), 2);
-			return pieChart != null;
+			var pieChart = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']"), 2);
+			return pieChart != null && pieChart.Displayed;
 		}
 
 		public bool PieChartLegendShowingInProductInformation()
 		{
 			var pieChartLegend = this.containerElement.FindElement(By.XPath(".//div[@id='products-information']//ul[@class='status-list']"), 2);
-			return pieChartLegend != null;
+			return pieChartLegend != null && pieChartLegend.Displayed;
+		}
+
+		public List<string> PieChartLegendItems()
+		{
+			return containerElement.FindElements(By.XPath(".//ul[@class='status-list']//li/span"), 2).Select(x => x.GetElementText().Trim()).ToList();
 		}
 
 		public bool EntryShowingInPieChartLegend(string text, string colour)

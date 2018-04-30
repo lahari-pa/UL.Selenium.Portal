@@ -277,23 +277,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see a Pie Chart and Legend under Product Information")]
-		public void ThenIShouldSeeAPieChartAndLegend()
+		[StepDefinition(@"I (should|should not) see a Pie Chart and Legend under Product Information")]
+		public void ThenIShouldSeeAPieChartAndLegend(string shouldornot)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking if Pie Chart and Legend are visible");
-			try
-			{
-				Report.Info("Checking if Pie Chart and Legend are visible");
-				var selHomepage = new Homepage();
-				Report.IsTrue(selHomepage.PieChartShowingInProductInformation(), "Pie Chart was not showing!", "Pie Chart was showing as expected!");
-				Report.IsTrue(selHomepage.PieChartLegendShowingInProductInformation(), "Pie Chart legend was not showing!", "Pie Chart legend was showing as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			bool expected = shouldornot == "should";
+			var selHomepage = new Homepage();
+			Report.IsTrue(selHomepage.PieChartShowingInProductInformation() == expected, "Pie Chart " + (expected ? "was not" : "was") + " showing!", "Pie Chart " + (expected ? "was" : "was not") + " showing, as expected!");
+			Report.IsTrue(selHomepage.PieChartLegendShowingInProductInformation() == expected, "Pie Chart legend " + (expected ? "was not" : "was") + " not showing!", "Pie Chart legend " + (expected ? "was" : "was not") + " showing, as expected!");
 		}
 
 		[StepDefinition(@"I should see the following states in the Legend:")]
