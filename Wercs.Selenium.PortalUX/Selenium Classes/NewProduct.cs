@@ -9,6 +9,7 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
 using ResourcePool;
+using SafewareReporting;
 using SafewareReporting.XML;
 using SeleniumUtilities;
 
@@ -170,6 +171,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 
 				el.TryClick();
+				GeneralUtilities.WaitForRefreshToDisappear(el);
 				GeneralUtilities.Wait_for_load_finish();
 				return true;
 			}
@@ -178,6 +180,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 		}
+
+		
+
 
 		public string ProductName {
 			get { return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Name') or contains(text(),'Product name')]/../following-sibling::div/input"), 2).Text.Trim(); }
@@ -2450,6 +2455,29 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 
 			}
+		}
+
+		public bool SetOptionInSection(string section, string value)
+		{
+			var xPath = @"(//span[(.//ancestor::div[@class='form-group']//label[contains(text(),""" + section + @""")]) and contains(text(),'" + value + "')]/parent::label | " +
+			            @"//input[(.//ancestor::div[@class='form-group']//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
+			            @"//span[(.//ancestor::div[contains(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+
+			var el = containerElement.FindElement(By.XPath(xPath), 2);
+
+			if (el == null)
+			{
+				Report.Error("Could not the correct input in section: " + section);
+				return false;
+			}
+
+			if (el.GetAttribute("type") == "text")
+			{
+				el.EnterText(value);
+				return el.GetValue() == value;
+			}
+
+			return el.TryClick();
 		}
 	}
 

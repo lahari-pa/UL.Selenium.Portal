@@ -37,5 +37,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.scrollTo(0, 0)");
 		}
+
+		public static bool WaitForRefreshToDisappear(IWebElement button, int maxWaitTime = 60)
+		{
+			if (button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh')]"), 2) == null)
+			{
+				return true;
+			}
+
+			int i = 0;
+			while (button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) != null && i < maxWaitTime)
+			{
+				Delay.Seconds(Delay.SpeedFactor * 1);
+				i++;
+			}
+
+			return button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) != null;
+		}
 	}
 }

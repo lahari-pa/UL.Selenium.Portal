@@ -38,16 +38,12 @@ And In the product Characteristics tab, I enter: 2 in the pH text field
 And In the product Characteristics tab, I enter: 2 in the Boiling point (in Celsius) text field
 And In the product Characteristics tab, I enter: 2 in the Flash point (in Celsius) text field
 And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Closed cup method
-And I set the Select the best Water Solubility description to be: Very soluble
 And in the New Product page I click Continue
 
 # Following the steps from 'Shared Step' 69687
 And I should see the Additional Product Information Page
 And In the Additional Information Page the check box for: United States should be: checked
-And In the Additional Information Page for Product has been classified using OSHA I select: No
-And In the Additional Information Page for Product is shipped directly I select: No
 And In the Additional Information Page for Product is retailers private label or brand I select: Yes
-And In the Additional Information Page for Product is solely for the Retailer's use I select: No
 And in the New Product page I click Continue
 
 # Following the steps from 'Shared Step' 57571
@@ -55,7 +51,31 @@ And in the Product Characteristics tab of the New Product Page, for U.S. Toxic S
 And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
 And in the New Product page I click Continue
 
+# Following the steps from 'Shared Step' 49818
+And I should see the Beverage Regulatory Details Page
+And I set the Product's container or liner contains Bisphenol A (BPA) option to: Yes
+And I set the Does your product contain a Prop 65 chemical? option to: Yes
+And I set the Percent of Alcohol in the Product (numeric entry only) option to: 20
+And in the New Product page I click Continue
 
+# Following the steps from 'Shared Step' 57506
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
+And I set the below options for field: Please select DOT Exceptions if applicable?
+| Option         |
+| 173.120(a)(2): |
+| 173.120(a)(3): |
+And in the New Product page I click Continue
+
+# This was not present in the original test case - but needs handling
+And I should see the Transportation Details 2 Page
+And I set the International Shipping when DOT Exemption taken? option to: I do not ship internationally and I do not know the classification
+And in the New Product page I click Continue
+
+# The below will currently fail (Ticket 65023)
+And I should see the Transportation Details 2 Page
+And I set the International Shipping when DOT Exemption taken? option to: I do not ship internationally and I do not know the classification
+And in the New Product page I click Continue
 
 
 

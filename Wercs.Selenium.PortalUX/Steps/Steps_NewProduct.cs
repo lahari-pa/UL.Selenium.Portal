@@ -1377,6 +1377,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I set the (.*) option to: (.*)")]
+		[StepDefinition(@"I set the (.*) field to: (.*)")]
+		public void SetTheSectionOptionTo(string section, string option)
+		{
+			Report.IsTrue(new NewProduct().SetOptionInSection(section, option), "Failed to set the input to " + option + " in section: " + section, "Successfully set the input to " + option + " in section: " + section);
+		}
+
+		[StepDefinition(@"I set the below options for field: (.*)")]
+		public void CheckAvailableOptionsInSection(string section, Table options)
+		{
+			foreach (var row in options.Rows)
+			{
+				Report.IsTrue(new NewProduct().SetOptionInSection(section, row["Option"]), "Failed to set the input to " + row["Option"] + " in section: " + section, "Successfully set the input to " + row["Option"] + " in section: " + section, false, false);
+			}
+
+			Report.Screenshot();
+		}
+
 
 
 
