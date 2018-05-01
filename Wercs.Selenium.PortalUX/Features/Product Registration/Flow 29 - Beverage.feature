@@ -11,9 +11,6 @@
 @run_FLow29_Beverage
 
 Feature: Flow 29 - Beverage
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
 
 
 Scenario: [60694] Wine - RU001418
