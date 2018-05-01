@@ -141,27 +141,36 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new ChooseGoodGuide_AccountCreation().WaitForCongratulationsPage(120), "Congratulations page has not loaded", "Congratulations page has loaded as expected");
 		}
 
-		[StepDefinition(@"I confirm that I have received a GoodGuide account email to account: (.*)")]
-		public void ThenIConfirmThatIHaveReceivedACARPAccountEmailToAccount(string emailToFind)
+		[StepDefinition(@"I confirm that I have received a (GoodGuide|ULToys) account email to account: (.*)")]
+		public void ThenIConfirmThatIHaveReceivedACARPAccountEmailToAccount(string emailType, string emailToFind)
 		{
+			var emailTitle = emailType == "GoodGuide" ? "Welcome to GoodGuide!" : "Welcome to WERCSmart! Thank you for creating an account!";
+			Report.Info("Expecting an email with title: " + emailTitle);
 			if (emailToFind.ToLower().Contains("saved as"))
 			{
 				emailToFind = Context.GetFromContext(emailToFind.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
 					.ToString().Trim();
 			}
 
-			var passed = EmailFunctions.CheckEmailHasArrived("Welcome to GoodGuide!", emailToFind);
+			var passed = EmailFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
 			if (!passed)
 			{
-				passed = EmailFunctions.CheckEmailHasArrived("Welcome to GoodGuide!", emailToFind);
+				passed = EmailFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
 			}
 			Report.IsTrue(passed,"Email has not arrived as expected", "Email has arrived as expected");
 		}
+
 
 		[StepDefinition(@"the GoodGuide Company Details page should load")]
 		public void GoodGuideCompanyDetailsPageShouldLoad()
 		{
 			Report.IsTrue(new ChooseGoodGuide_AccountCreation().GoodGuideDashboardLoads(), "GoodGuide dashboard failed to load!", "GoodGuide dashboard loaded successfully!");
+		}
+
+		[StepDefinition(@"the ULToys My Company Details page should load")]
+		public void ULToysCompanyDetailsPageShouldLoad()
+		{
+			Report.IsTrue(new ChooseGoodGuide_AccountCreation().UlToysDashboardLoads(), "ULToys dashboard failed to load!", "ULToys dashboard loaded successfully!");
 		}
 	}
 }

@@ -152,9 +152,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Congratulations page has loaded as expected");
 		}
 
-		[StepDefinition(@"on the GoodGuide login page I enter the Email address: (.*)")]
-		[StepDefinition(@"in the Conflict Minerals login page I enter Email address: (.*)")]
-		public void GivenInTheConflictMineralsLoginPageIEnterEmailAddress(string emailAddress)
+		[StepDefinition(@"on the (.*) login page I enter the Email address: (.*)")]
+		[StepDefinition(@"in the (.*) login page I enter Email address: (.*)")]
+		public void GivenInTheConflictMineralsLoginPageIEnterEmailAddress(string dummyType, string emailAddress)
 		{
 			if (emailAddress.ToLower().Contains("saved as"))
 			{
@@ -166,26 +166,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisConflictMinerals.EmailAddress == emailAddress, "Failed to input the email address: " + emailAddress, "Successfully inputted the email address: " + emailAddress);
 		}
 
-		[StepDefinition(@"the GoodGuide Verification page should load")]
-		[StepDefinition(@"the Conflict Minerals Verification page should load")]
-		public void ThenTheConflictMineralsVerificationPageShouldLoad()
+		[StepDefinition(@"the (.*) Verification page should load")]
+		[StepDefinition(@"the (.*) Verification page should load")]
+		public void ThenTheConflictMineralsVerificationPageShouldLoad(string dummyTitle)
 		{
 			Report.IsTrue(new ConflictMinerals().WaitForEnterVerificationCodePage(120),
 				"Enter verification code page has not loaded", "Enter verification page has loaded");
 		}
 
-		[StepDefinition(@"the Conflict Minerals terms of use page should load")]
-		[StepDefinition(@"the GoodGuide terms of use page should load")]
-		public void ThenTheConflictMineralsTermsOfUsePageShouldLoad()
+		[StepDefinition(@"the (.*) terms of use page should load")]
+		[StepDefinition(@"the (.*) terms of use page should load")]
+		public void ThenTheConflictMineralsTermsOfUsePageShouldLoad(string dummyTitle)
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.WaitForTermsOfUsePage(60),
 				"Terms of use page has not loaded", "Terms of use page has loaded");
 		}
 
-		[StepDefinition(@"in the Conflict Minerals terms of use I check the Accept checkbox")]
-		[StepDefinition(@"on the GoodGuide terms of use I check the Accept checkbox")]
-		public void ThenInTheConflictMineralsTermsOfUseICheckTheAcceptCheckbox()
+		[StepDefinition(@"in the (.*) terms of use I check the Accept checkbox")]
+		[StepDefinition(@"on the (.*) terms of use I check the Accept checkbox")]
+		public void ThenInTheConflictMineralsTermsOfUseICheckTheAcceptCheckbox(string dummyTitle)
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.AcceptTermsOfUse = true;
@@ -210,17 +210,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 
-		[StepDefinition(@"on the GoodGuide terms of use I click continue")]
-		[StepDefinition(@"in the Conflict Minerals terms of use I click continue")]
-		public void ThenInTheConflictMineralsTermsOfUseIClickContinue()
+		[StepDefinition(@"on the (.*) terms of use I click continue")]
+		[StepDefinition(@"in the (.*) terms of use I click continue")]
+		public void ThenInTheConflictMineralsTermsOfUseIClickContinue(string dummyTitle)
 		{
 			Report.IsTrue(new ConflictMinerals().ClickContinue(),"Failed to click continue","Successfully clicked continue!");
 		}
 
 
-		[StepDefinition(@"on the GoodGuide login page I enter the Password: (.*)")]
-		[StepDefinition(@"in the Conflict Minerals login page I enter Password: (.*)")]
-		public void GivenInTheConflictMineralsLoginPageIEnterPassword(string password)
+		[StepDefinition(@"on the (.*) login page I enter the Password: (.*)")]
+		[StepDefinition(@"in the (.*) login page I enter Password: (.*)")]
+		public void GivenInTheConflictMineralsLoginPageIEnterPassword(string dummyTitle, string password)
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.Password = password;
@@ -239,9 +239,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"on the GoodGuide login page I click on the Login button")]
-		[StepDefinition(@"in the Conflict Minerals login page I click on the Login button")]
-		public void GivenInTheConflictMineralsLoginPageIClickOnTheLoginButton()
+		[StepDefinition(@"on the (.*) login page I click on the Login button")]
+		[StepDefinition(@"in the (.*) login page I click on the Login button")]
+		public void GivenInTheConflictMineralsLoginPageIClickOnTheLoginButton(string dummyTitle)
 		{
 			Report.IsTrue(new ConflictMinerals().ClickLogin(),"Failed to click the log in button!","Successfully clicked the log in button!");
 		}
@@ -289,9 +289,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
-		[StepDefinition(@"In the Conflict Minerals Verification page I enter verification code: (.*)")]
-		[StepDefinition(@"on the GoodGuide Verification page I enter verification code: (.*)")]
-		public void ThenInTheConflictMineralsVerificationPageIEnterVerificationCode(string verificationCode)
+		[StepDefinition(@"In the (.*) Verification page I enter verification code: (.*)")]
+		[StepDefinition(@"on the (.*) Verification page I enter verification code: (.*)")]
+		public void ThenInTheConflictMineralsVerificationPageIEnterVerificationCode(string dummyTitle, string verificationCode)
 		{
 			if (verificationCode.ToLower().Contains("saved as"))
 			{
@@ -304,9 +304,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisConflictMinerals.VerificationCode == verificationCode, "Failed to input the verification code: " + verificationCode, "Successfully inputted the verification code: " + verificationCode);
 		}
 
-		[StepDefinition(@"In the Conflict Minerals Verification page I click Verify")]
-		[StepDefinition(@"on the GoodGuide Verification page I click Verify")]
-		public void ThenInTheConflictMineralsVerificationPageIClickVerify()
+		[StepDefinition(@"In the (.*) Verification page I click Verify")]
+		[StepDefinition(@"on the (.*) Verification page I click Verify")]
+		public void ThenInTheConflictMineralsVerificationPageIClickVerify(string dummyTitle)
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
 			Report.IsTrue(thisConflictMinerals.ClickVerify(),"Failed to click the verify button","Successfully clicked the verify button!");

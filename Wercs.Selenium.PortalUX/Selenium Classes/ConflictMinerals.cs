@@ -420,5 +420,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//header//p[contains(text(),'GoodGuide')]"), 2) != null;
 		}
+
+		public bool UlToysDashboardLoads()
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h2[text()='My Company Details']"),30)!=null;
+		}
 	}
 }
