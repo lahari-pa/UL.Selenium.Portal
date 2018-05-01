@@ -245,6 +245,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
 		}
 
+		[StepDefinition(@"In the 'Select retailers' window I (should|should not) see the following retailers:")]
+		public void CheckingCorrectRetailersAreShowing(string should, Table expected)
+		{
+			var showing = new SelectRetailers().GetListOfRetailers().Where(x=>x.Trim()!="");
+			Report.Info("Retailers showing were: " + string.Join(", ",showing));
+			bool expectedOrNot = should == "should";
+			foreach (var row in expected.Rows)
+			{
+				Report.IsTrue(showing.Contains(row["Retailer"]) == expectedOrNot, (expectedOrNot ? "Did not find" : "Found") + " the retailer: " + row["Retailer"], "The retailer " + row["Retailer"] + (expectedOrNot ? " was": " was not") + " showing, as expected!", false, false);
+			}
+			Report.Screenshot();
+		}
+
 		/// <summary>
 		/// Select an option for Indicate full name of product, as sold, via this retailer (e.g.Private Label Aspirin) dropdown
 		/// </summary>
@@ -252,6 +265,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenInTheRetailersTabISelectPrivateLabelNameAs(string option)
 		{
 			Report.IsTrue(new NewProduct().SelectPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
+		}
+
+		[Then(@"In the Retailers tab, I set the full product name to be: (.*) for retailer: (.*)")]
+		public void SetFullProductNameForRetailer(string name, string retailer)
+		{
+			Report.IsTrue(new NewProduct().SetFullNameOfProductForRetailer(retailer, name), "Failed to set the full name for retailer: " + retailer + "  to: " + name+ "!", "Successfully set the full name for retailer: " + retailer + "  to: " + name + "!");
 		}
 
 

@@ -22,6 +22,8 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 # This just double checks that the account has been set up correctly - chances are this step won't be actioned
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
+Given I generate a random UPC number and save as: UPC60694
+Given I delete all products with UPC Number: saved as UPC60694
 Then I click the Register New Product icon in the Navigation Pane
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
@@ -67,15 +69,40 @@ And I set the below options for field: Please select DOT Exceptions if applicabl
 | 173.120(a)(3): |
 And in the New Product page I click Continue
 
-# This was not present in the original test case - but needs handling
-And I should see the Transportation Details 2 Page
-And I set the International Shipping when DOT Exemption taken? option to: I do not ship internationally and I do not know the classification
-And in the New Product page I click Continue
-
 # The below will currently fail (Ticket 65023)
-And I should see the Transportation Details 2 Page
-And I set the International Shipping when DOT Exemption taken? option to: I do not ship internationally and I do not know the classification
+And In the 'Select retailers' window I should not see the following retailers:
+| Retailer             |
+| Autozone             |
+| Harbor Freight Tools |
+
+# Entering retailer information
+Then In the 'Select Retailers' window I select the retailer: Walgreens
+And I should see the Retailer Page
+And In the Retailers tab, I set the full product name to be: Wine Product Full Name for retailer: Walgreens
 And in the New Product page I click Continue
 
+# Entering UPC Information
+Given I click the 'Add UPC' button
+Then I add the following into the UPC Fields
+| Field         | Value             |
+| UPCNumber     | saved as UPC60694 |
+| ContainerType | Glass Container   |
+| Size          | 20                |
+And in the New Product page I click Continue
 
+# Additional Documents screen loads
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
 
+# 'Optional Reports and Documents Available for Purchase' screen loads
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Following the steps from 'Shared Step' 57883
+Then the comments field should appear
+And I enter the following into the comments field: Comments Field Text
+Given in the New Product page I click Continue
+
+# Following the steps from 'Shared Step' 42214
+Given I navigate to the home page
+Then I delete the product: TestCase60694

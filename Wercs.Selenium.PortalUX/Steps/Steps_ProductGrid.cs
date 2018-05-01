@@ -550,7 +550,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					GeneralUtilities.Wait_for_load_finish();
 					var firstProduct = ProductGrid.FirstProductInGrid();
-					if(Report.IsTrue(firstProduct.ProductName==Product.Name && firstProduct.ProductId==Product.Id,"First product did not match the required paremeters!","Product was showing at the top of the grid, as expected!"))
+					if(Report.IsTrue(firstProduct.ProductName.StartsWith(Product.Name) && firstProduct.ProductId==Product.Id,"First product did not match the required paremeters!","Product was showing at the top of the grid, as expected!"))
 					{
 						Report.IsTrue(ProductGrid.DeleteFirstRow(), "Failed to delete product in first row!", "Successfully deleted product in first row!");
 					}

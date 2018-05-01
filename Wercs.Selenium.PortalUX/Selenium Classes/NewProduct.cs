@@ -1795,6 +1795,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool SetFullNameOfProductForRetailer(string retailer, string name)
+		{
+			var el = containerElement.FindElement(By.XPath(".//input[@placeholder='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)' and (./ancestor::td//preceding-sibling::td[contains(text(),'" + retailer + "')]) ]"), 2);
+			if (el == null)
+			{
+				Report.Error("Could not find the Full Product Name field!");
+				return false;
+			}
+
+			el.EnterText(name);
+			return el.GetValue() == name;
+
+		}
+
 		/*===== Safety Data Sheet Authoring ====*/
 
 		public string PersonalProtectionEquipmentRecommended
