@@ -1004,6 +1004,55 @@ testRunner.Then("I delete the product: TestCase65392", ((string)(null)), ((TechT
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[63663] Obsoleting/Deleting a Product (not submitted status)")]
+        public virtual void _63663ObsoletingDeletingAProductNotSubmittedStatus()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63663] Obsoleting/Deleting a Product (not submitted status)", ((string[])(null)));
+#line 416
+this.ScenarioSetup(scenarioInfo);
+#line 417
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 418
+testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
+                    "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 419
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 420
+testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 421
+testRunner.And("I Select the Create a New Registration radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 422
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 423
+testRunner.And("In the Product Type tab of the New Product Page, I enter: Soap63663 in the Produc" +
+                    "t Name text field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 424
+testRunner.And("In the Product Type tab of the New Product Page, I enter: Soap (Bar, Liquid) for " +
+                    "Body in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 425
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 426
+testRunner.Then("I save the product information as: TestCase63663", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 427
+testRunner.And("I set the Primary Physical State to be: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 428
+testRunner.And("I set the Secondary Physical State to be: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 429
+testRunner.And("I set the When mixed with an equal amount of water, will this produce a solution " +
+                    "with a pH <= 2 or a pH >= 12.5? option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 430
+testRunner.And("I set the Select the best Water Solubility description to be: Very soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 431
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 432
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 433
+testRunner.Then("I delete the product: TestCase63663", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

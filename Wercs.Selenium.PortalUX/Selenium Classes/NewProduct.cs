@@ -1332,6 +1332,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.Displayed;
 		}
 
+		public bool SelectYesAgreedRadio()
+		{
+			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+			
+		}
+
+		public bool ClickAcceptButton()
+		{
+			var el = containerElement.FindElement(By.XPath(".//a[text()='Accept']"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+
+		}
+
+
+
 		public bool ClickSummaruButtonInDataAcceptance()
 		{
 			var el = containerElement.FindElement(By.XPath(".//a[text()='Summary']"), 2);
@@ -1795,18 +1821,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		public bool SetFullNameOfProductForRetailer(string retailer, string name)
+		/// <summary>
+		///Enter full name of product, as sold, via this retailer (e.g. Private Label Aspirin) from dropdown
+		/// </summary>
+		public bool EnterPrivateLabelName(string item)
 		{
-			var el = containerElement.FindElement(By.XPath(".//input[@placeholder='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)' and (./ancestor::td//preceding-sibling::td[contains(text(),'" + retailer + "')]) ]"), 2);
-			if (el == null)
+			try
 			{
-				Report.Error("Could not find the Full Product Name field!");
+				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+
+				var el = container.FindElement(By.XPath(".//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/..//input"), 2);
+				el.EnterText(item);
+				return true;
+			}
+			catch (Exception)
+			{
 				return false;
 			}
-
-			el.EnterText(name);
-			return el.GetValue() == name;
-
 		}
 
 		/*===== Safety Data Sheet Authoring ====*/

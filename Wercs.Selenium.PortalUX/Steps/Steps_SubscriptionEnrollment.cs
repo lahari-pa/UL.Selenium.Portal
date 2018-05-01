@@ -46,6 +46,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Then(@"the Subscription Enrollment page should load")]
+		public void ThenTheSubscriptionEnrollmentPageShouldLoad()
+		{
+			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
+			Report.IsTrue(MySE.Wait_for_load(60), "Subscription enrollment page is not showing",
+				"Subscription enrollment page is showing.");
+		}
+
+
 		[StepDefinition(@"In the Subscription Enrollment screen I confirm heading as (.*)")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmHeadingAs(string expectedHeader)
 		{

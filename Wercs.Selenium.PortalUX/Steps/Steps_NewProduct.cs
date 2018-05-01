@@ -267,10 +267,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SelectPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
 		}
 
-		[Then(@"In the Retailers tab, I set the full product name to be: (.*) for retailer: (.*)")]
-		public void SetFullProductNameForRetailer(string name, string retailer)
+		/// <summary>
+		/// Select an option for Indicate full name of product, as sold, via this retailer (e.g.Private Label Aspirin) dropdown
+		/// </summary>
+		[Then(@"In the Retailers tab, I enter Private Label name as: (.*)")]
+		public void ThenInTheRetailersTabIEnterPrivateLabelNameAs(string option)
 		{
-			Report.IsTrue(new NewProduct().SetFullNameOfProductForRetailer(retailer, name), "Failed to set the full name for retailer: " + retailer + "  to: " + name+ "!", "Successfully set the full name for retailer: " + retailer + "  to: " + name + "!");
+			Report.IsTrue(new NewProduct().EnterPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
 		}
 
 
@@ -1268,6 +1271,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+
+
 		/// <summary>
 		/// Confirm the ecologo statement 
 		/// </summary>
@@ -1379,6 +1384,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().DataAcceptanceScreenAppears(), "Data Acceptance page did not appear!", "As expected, Data Acceptance page loaded successfully!");
 		}
 
+		[Given(@"In the Data Acceptance page I select Yes, Agreed")]
+		public void GivenInTheDataAcceptancePageISelectYesAgreed()
+		{
+			Report.IsTrue(new NewProduct().SelectYesAgreedRadio(), "Failed to select Yes Agreed", "Clicked Yes Agreed");
+		}
+
+		[Given(@"In the Data Acceptance page I click on the Accept button")]
+		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
+		{
+			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to Click accept button", "Clicked accept button");
+		}
+
+
+
+
 		[StepDefinition(@"I click the Summary button in the Data Acceptance window")]
 		public void GivenIClickTheSummaryButtonInTheDataAcceptanceWindow()
 		{
@@ -1413,8 +1433,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			Report.Screenshot();
 		}
-
-
 
 
 	}
