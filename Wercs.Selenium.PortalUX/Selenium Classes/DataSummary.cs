@@ -64,7 +64,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetPrivateLabelStatement()
 		{
 			WaitForSpinner();
-			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'Private Label')] /following-sibling:: p[1]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'Private Label')]/../p[1]"), 2).Text;
+		}
+
+		/// <summary>
+		/// Get Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+		/// </summary>
+		public string GetAlternativeControlPlanQuestion()
+		{
+			WaitForSpinner();
+			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'Alternative Control Plan')]/../p[1]"), 2).Text;
+		}
+
+		/// <summary>
+		/// Get Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
+		/// </summary>
+		public string GetGramsOfVocPerUseAsDefinedCaliforniaConsumerProductsQuestion()
+		{
+			WaitForSpinner();
+			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'Alternative Control Plan')]/../p[1]"), 2).Text;
 		}
 	}
 }

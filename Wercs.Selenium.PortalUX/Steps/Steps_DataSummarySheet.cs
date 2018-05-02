@@ -57,7 +57,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"private label option was showing: " + message + ", as expected!");
 		}
 
+		[StepDefinition(@"I confirm that I see the following option for Product has been granted an Alternative Control Plan question: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingOptionForProductHasBeenGrantedAnAlternativeControlPlanQuestion(string message)
+		{
+			var dataSummarySheet = new DataSummary();
+			var found = dataSummarySheet.GetAlternativeControlPlanQuestion();
 
+			Report.IsTrue(found.Trim() == message.Trim(),
+				"option was not as expected! Expected: " + message + ", but found: " + found + "!",
+				"option was showing: " + message + ", as expected!");
+		}
+
+		[StepDefinition(@"I confirm that I see the following option for Product does not contain more than grams of VOC per use question: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingOptionForProductDoesNotContainMoreThanGramsOfVOCPerUseQuestion(string message)
+		{
+			var dataSummarySheet = new DataSummary();
+			var found = dataSummarySheet.GetGramsOfVocPerUseAsDefinedCaliforniaConsumerProductsQuestion();
+
+			Report.IsTrue(found.Trim() == message.Trim(),
+				"option was not as expected! Expected: " + message + ", but found: " + found + "!",
+				"option was showing: " + message + ", as expected!");
+		}
 
 
 	}

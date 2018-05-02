@@ -775,6 +775,27 @@ namespace WERCSmart
 			Report.Failure("Failed to find the correct tab!");
 		}
 
+
+		[StepDefinition(@"I switch to Data Acceptance page")]
+		public void ThenISwitchToDataAcceptancePage()
+		{
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[text()='Data Acceptance']"), 2) != null)
+				{
+					Report.Success("Tab was switched successfully!");
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab!");
+		}
+
+
+
 		[StepDefinition(@"I close the Data Summary tab")]
 		public void CloseDataSummaryTab()
 		{

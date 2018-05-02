@@ -153,7 +153,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		//
+		[StepDefinition(@"In the Review and Submit tab of the New Product Page for Volatile Organic Compounds I upload pdf file")]
+		public void ThenInTheReviewAndSubmitTabOfTheNewProductPageForVolatileOrganicCompoundsIUploadPdfFile()
+		{
+			NewProduct selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.ClickBrowseForVolatileOrganicCompounds(), "Failed to upload ", "Successfully upload ");
+		}
+
 
 		[StepDefinition(@"I should see the header (.*)")]
 		public void CorrectHeaderShouldBeShowing(string header)
@@ -950,6 +956,36 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Success("Successfully selected: " + selections);
 		}
 
+		/// <summary>
+		/// Confirm the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations statement 
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement1: (.*)")]
+		public void GivenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement1(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetProductGrantedAlternativeControlPlanStatement();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"Product has been granted an Alternative Control Plan statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"Product has been granted an Alternative Control Plan statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1 statement 
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement2: (.*)")]
+		public void GivenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement2(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetProductDoesNotContainGramsOfVocStatement();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"Product has been granted an Alternative Control Plan statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"Product has been granted an Alternative Control Plan statement was showing: " + statement + ", as expected!");
+		}
+
+
+
 
 		/// <summary>
 		/// select option for Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
@@ -965,10 +1001,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				selNewProduct.AlternateControlPlan = expected;
 
-				Report.IsTrue(selNewProduct.ProductShippedDirectly == expected,
+				Report.IsTrue(selNewProduct.AlternateControlPlan == expected,
 					"Failed to set Product has been granted an Alternative Control Plan to: " + noOrYes,
 					"Successfully set Product has been granted an Alternative Control Plan to: " + noOrYes);
 		}
+
+		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for Product does not contain more than grams of VOC per use I select: (.*)")]
+		public void ThenInTheProductCharacteristicsTabOfTheNewProductPageForProductDoesNotContainMoreThanGramsOfVOCPerUseISelect(string option)
+		{
+
+				var selNewProduct = new NewProduct();
+				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+					"Product characteristics tab is loaded.");
+
+
+				selNewProduct.ProductDoesNotContainGramsOfVoc = option;
+
+				Report.IsTrue(selNewProduct.ProductDoesNotContainGramsOfVoc == option,
+					"Failed to set status: " + option,
+					"Successfully set status: " + option);
+		}
+
+
+
+
 
 		/// <summary>
 		/// select option for Product label specifies a dilution ratio 

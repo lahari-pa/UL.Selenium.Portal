@@ -273,12 +273,12 @@ Then I delete the product: TestCase65441
 
 
 
-Scenario: [63684] Walmart Private label product
-# UPC: 8713747046683
+Scenario: [63684] Walmart Private label product 
+# UPC: 0728990015025
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
-Given I delete all products with UPC Number: 8713747046683
+Given I delete all products with UPC Number: 0728990015025
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
@@ -326,7 +326,7 @@ And in the New Product page I click Continue
 Given I click the 'Add UPC' button
 Then I add the following into the UPC Fields
 | Field         | Value        |
-| UPCNumber     | 8713747046683 |
+| UPCNumber     | 0728990015025 |
 | ContainerType | Aerosol Can  |
 | Size          | 20           |
 #Regulatory Documents to Provide - US only _ request authoring - Happy Path
@@ -413,21 +413,91 @@ Then I should see an error message: This is a required field.
 Given I navigate to the home page
 Then I delete the product: TestCase65392
 
-Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
+
+Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
-Then I click the Register New Product icon in the Navigation Pane
+And I click the Register New Product icon in the Navigation Pane
+And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Soap63663 in the Product Name text field
-And In the Product Type tab of the New Product Page, I enter: Soap (Bar, Liquid) for Body in the Type of Product select field
+And In the Product Type tab of the New Product Page, I enter: Fabric Softener - Single Use Dryer Product Only in the Product Name text field
+And In the Product Type tab of the New Product Page, I enter: Fabric Softener - Single Use Dryer Product Only in the Type of Product select field
 And in the New Product page I click Continue
-Then I save the product information as: TestCase63663
-And I set the Primary Physical State to be: Solid
-And I set the Secondary Physical State to be: Solid
-And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+Then I save the product information as: TestCase56475
+And I should only see the following options for Primary Physical State:
+| State |
+| Solid |
+
+And I set the Secondary Physical State to be: Granular
+And I set the water mixture question to: Yes
 And I set the Select the best Water Solubility description to be: Very soluble
 And in the New Product page I click Continue
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And In the Additional Information Page for Product has been classified using OSHA I select: No
+And In the Additional Information Page for Product is shipped directly I select: No
+And In the Additional Information Page for Product is retailers private label or brand I select: No
+And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+And in the New Product page I click Continue
+# Setting Ingredient Information
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Formaldehyde  | 100     | false               | false       |            |
+And in the New Product page I click Continue
+And I should see the Regulatory Information 1 Page
+And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And in the New Product page I click Continue
+And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I confirm that I see the following VOC-OTC-CARB statement1: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+And I confirm that I see the following VOC-OTC-CARB statement2: Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
+And in the New Product page I click Continue
+Then I should see an error message: This is a required field.
+And In the VOC - OTC - CARB tab for Product has been granted an Alternative Control Plan I select: No
+And In the Product Characteristics tab of the New Product Page, for Product does not contain more than grams of VOC per use I select: Disagree
+And in the New Product page I click Continue
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
+And in the New Product page I click Continue
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+Then I should see an error message: Document is required: Product Label.
+And In the Review and Submit tab of the New Product Page for Volatile Organic Compounds I upload pdf file
+And in the New Product page I click Continue
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And in the Review and Submit tab of the New Product Page for Appearance I select: Buff
+And in the Review and Submit tab of the New Product Page for Odor I select: Roasted soy
+And in the Review and Submit tab of the New Product Page for Odor Threshold I select: No data available
+And in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: 5.5
+And in the New Product page I click Continue
+And I should see the Comments Page
+And in the New Product page I click Continue
+And I should see the Data Acceptance Page
+Then The Data Acceptance page should appear
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And I confirm that I see the following option for Product has been granted an Alternative Control Plan question: No
+And I confirm that I see the following option for Product does not contain more than grams of VOC per use question: Disagree
+Then I switch to Data Acceptance page
 Given I navigate to the home page
-Then I delete the product: TestCase63663
+Then I delete the product: TestCase56475
+
+
+
+
+
+
+
+
+
+
+
+
+

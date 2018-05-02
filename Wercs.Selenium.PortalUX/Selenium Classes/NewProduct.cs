@@ -1606,7 +1606,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// Product Label checkbox options
+		/// Refer to your Product Label. From the options, select those that appear on the Label checkbox options
 		/// </summary>
 		public List<string> ProductLabel {
 			get
@@ -2231,6 +2231,61 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
+		/// Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation radio options
+		/// </summary>
+		public string ProductDoesNotContainGramsOfVoc {
+			get
+			{
+				List<string> countries = new List<string>();
+				var listOfOptions = this.containerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("California Consumer Products Regulation"))
+					.FindElements(By.XPath("../..//input"));
+				foreach (var item in listOfOptions)
+				{
+					if (item.Selected)
+					{
+						return item.FindElement(By.XPath("../..//label")).Text;
+					}
+				}
+
+				return "";
+
+			}
+			set
+			{
+				var thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("California Consumer Products Regulation")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == value);
+				var optionInput = thisLabel.FindElement(By.XPath(".//../input"));
+				if (!optionInput.Selected)
+				{
+					optionInput.Click();
+				}
+			}
+
+		}
+
+		/// <summary>
+		/// Browse and upload for Volatile Organic Compounds
+		/// </summary>
+		public bool ClickBrowseForVolatileOrganicCompounds()
+		{
+			try
+			{
+				var el = this.containerElement.FindElement(By.XPath("//*[@id='collapse1']/div/form/div[2]/div[2]/div[1]/div/a"), 2);
+				if (el == null)
+				{
+					return false;
+				}
+				el.TryClick();
+				GeneralFunctions.EnterFilename("C:\\Dependencies\\WERCSmart\\testdoc.pdf");
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
 		/// Product label specifies a dilution ratio option
 		/// </summary>
 		public bool ProductLabelDilutionRatio {
@@ -2360,6 +2415,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'UL ECOLOGO Readiness Assessment')]"), 2).Text;
 		}
 
+
+		/// <summary>
+		/// Get statement - Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+		/// </summary>
+		public string GetProductGrantedAlternativeControlPlanStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product has been granted an Alternative Control Plan')]"), 2).Text;
+		}
+
+
+		/// <summary>
+		/// Get statement - Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
+		/// </summary>
+		public string GetProductDoesNotContainGramsOfVocStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product does not contain more than 0.05 grams of VOC per use')]"), 2).Text;
+		}
 
 
 		public string Appearance {
