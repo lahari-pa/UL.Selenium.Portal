@@ -273,7 +273,7 @@ Then I delete the product: TestCase65441
 
 
 
-Scenario: [63684] Walmart Private label product 
+Scenario: [63684] Walmart Private label product
 # UPC: 0728990015025
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -413,6 +413,24 @@ Then I should see an error message: This is a required field.
 Given I navigate to the home page
 Then I delete the product: TestCase65392
 
+Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+Then I click the Register New Product icon in the Navigation Pane
+And I Select the Create a New Registration radio button
+And in the New Product page I click Continue
+And In the Product Type tab of the New Product Page, I enter: Soap63663 in the Product Name text field
+And In the Product Type tab of the New Product Page, I enter: Soap (Bar, Liquid) for Body in the Type of Product select field
+And in the New Product page I click Continue
+Then I save the product information as: TestCase63663
+And I set the Primary Physical State to be: Solid
+And I set the Secondary Physical State to be: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description to be: Very soluble
+And in the New Product page I click Continue
+Given I navigate to the home page
+Then I delete the product: TestCase63663
 
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -488,16 +506,3 @@ And I confirm that I see the following option for Product does not contain more 
 Then I switch to Data Acceptance page
 Given I navigate to the home page
 Then I delete the product: TestCase56475
-
-
-
-
-
-
-
-
-
-
-
-
-
