@@ -525,19 +525,15 @@ testRunner.Then("In the Subscription Information screen I confirm the Status has
                     "mation: 1 Formulated, 1 Articles, 1 Enhanced Articles", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Row",
                         "Subscription Level Status",
                         "Quantity"});
             table14.AddRow(new string[] {
-                        "1",
                         "Limited Formulated",
                         "1"});
             table14.AddRow(new string[] {
-                        "2",
                         "Limited Articles",
                         "1"});
             table14.AddRow(new string[] {
-                        "3",
                         "Limited Enhanced Articles",
                         "1"});
 #line 176

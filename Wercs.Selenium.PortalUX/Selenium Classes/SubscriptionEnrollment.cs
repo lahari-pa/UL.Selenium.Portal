@@ -73,19 +73,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string Get_Extra_Text_SubHeader(string subHeader)
 		{
 			return Extract_Before_Return(containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
-			                                       "')]/following-sibling::div/p")).Text);
+												   "')]/following-sibling::div/p")).Text);
 		}
 
 		public string Get_Extra_Text_Link(string subHeader)
 		{
 			return containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
-			                                      "')]/following-sibling::div/p/a")).Text;
+												  "')]/following-sibling::div/p/a")).Text;
 		}
 
-		public void Click_Extra_Text_Link(string subHeader,string link)
+		public void Click_Extra_Text_Link(string subHeader, string link)
 		{
 			containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
-												  "')]/following-sibling::div/p/a[contains(text(),'"+link+"')]")).TryClick();
+												  "')]/following-sibling::div/p/a[contains(text(),'" + link + "')]")).TryClick();
 			Delay.Seconds(1);
 		}
 
@@ -290,7 +290,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetEstimatedAnualCost()
 		{
 			return containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost: ']/strong")).Text.Trim();
-			
+
 		}
 
 		public string GetEstimatedAnualCostPerProduct()
@@ -338,14 +338,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						newPlan.Plan_Sub = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[1]")).Text.Trim();
 					}
-					
+
 				}
 
 				var infos = subscription.FindElements(By.XPath(".//div[contains(@class, 'body')]//li")).ToList();
 				newPlan.Info_points = new List<Info_Point>();
 				foreach (var info in infos)
 				{
-					
+
 					Info_Point thisInfoPoint = new Info_Point();
 					thisInfoPoint.Info_Header = info.Text.Trim();
 					//	Report.Info("Looking at: " + thisInfoPoint.Info_Header);
@@ -372,7 +372,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						infoLink.TryClick();
 						Delay.Seconds(1);
 					}
-					
+
 					catch (Exception e)
 					{
 					}
@@ -381,7 +381,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				//newPlan.Info_points
 				var subsIndicator = subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//div[@class='subs__indicator']"));
-				
+
 				string backGroundColour = subsIndicator.GetCssValue("background-color");
 				if (backGroundColour.Contains("255, 255, 255"))
 				{
@@ -391,7 +391,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					newPlan.Selected = true;
 				}
-				
+
 
 				if (featurePlans.Contains(newPlan.Plan_Name))
 				{
@@ -776,7 +776,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			Delay.Seconds(2 * Delay.SpeedFactor);
+			Delay.Seconds(5 * Delay.SpeedFactor);
 			var myEnroll = new SubscriptionEnrollmentDlg();
 			if (!myEnroll.Exists)
 			{
@@ -1027,24 +1027,24 @@ class SubscriptionEnrollmentDlg : BaseDialog
 
 		IWebElement myText = containerElement.FindElements(By.XPath(".//div[@class='col-sm-11']"), 10).FirstOrDefault();
 
-			if (myText == null)
-			{
-				Report.Info("Subscription Text Not Found");
-				Report.Screenshot();
-				return false;
-			}
-			Report.Info("Subscription Text = " + myText.Text.Trim());
-			if (myText.Text.Trim() != subText)
-			{
-				Report.Info("Subscription Text Incorrect");
-				Report.Screenshot();
-				return false;
-			}
-			Report.Success("Subscription Text Correct");
+		if (myText == null)
+		{
+			Report.Info("Subscription Text Not Found");
 			Report.Screenshot();
-			return true;
+			return false;
 		}
+		Report.Info("Subscription Text = " + myText.Text.Trim());
+		if (myText.Text.Trim() != subText)
+		{
+			Report.Info("Subscription Text Incorrect");
+			Report.Screenshot();
+			return false;
+		}
+		Report.Success("Subscription Text Correct");
+		Report.Screenshot();
+		return true;
 	}
+}
 
 
 class AgencyServiceAgreementDlg : BaseDialog
@@ -1062,4 +1062,4 @@ class AgencyServiceAgreementDlg : BaseDialog
 		containerElement.FindElement(By.XPath("//div[@class='modal-footer']/button")).TryClick();
 	}
 }
-	 
+

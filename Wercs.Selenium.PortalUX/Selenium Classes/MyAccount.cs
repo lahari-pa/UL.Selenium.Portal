@@ -612,11 +612,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = ".//div[@class='panel panel-default ws-panel subscription-history']/div/table")]
 		private IWebElement _tbl_sub_history;
 
-		public bool Subscription_Level_Status(string row, string status)
+		public bool Subscription_Level_Status(string status)
 		{
 			Report.Info("Beginning Subscription_Level_Status");
 
-			IWebElement mySub = _tbl_sub_history.FindElement(By.XPath(".//tbody/tr[" + row + "]/td[1]"), 2);
+			IWebElement mySub = _tbl_sub_history.FindElement(By.XPath(".//tbody/tr/td[contains(text(), '" + status + "')]"), 2);
 
 			if (mySub == null)
 			{
@@ -624,22 +624,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			Report.Info("Subscription Level Status Found: " + mySub.Text.Trim());
-			if (!mySub.Text.Trim().Contains(status))
-			{
-				Report.Info("Subscription Level Status is Incorrect");
-				Report.Screenshot();
-				return false;
-			}
+			//Report.Info("Subscription Level Status Found: " + mySub.Text.Trim());
+			//if (!mySub.Text.Trim().Contains(status))
+			//{
+			//	Report.Info("Subscription Level Status is Incorrect");
+			//	Report.Screenshot();
+			//	return false;
+			//}
 			Report.Success("Subscription Level Status is Correct");
 			return true;
 		}
 
-		public bool Subscription_Quantity(string qty)
+		public bool Subscription_Quantity(string qty, string status)
 		{
 			Report.Info("Beginning Subscription_Quantity");
 
-			IWebElement myQty = _tbl_sub_history.FindElement(By.XPath(".//tbody/tr/td[5]"), 2);
+			IWebElement mySub = _tbl_sub_history.FindElement(By.XPath(".//tbody/tr/td[contains(text(), '" + status + "')]"), 2);
+
+			IWebElement myQty = mySub.FindElement(By.XPath("../td[5]"), 2);
 
 			if (myQty == null)
 			{
@@ -756,6 +758,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return "";
 			}
 			Report.Info("Invoice Number Found: " + myInvoice.Text);
+			Report.Screenshot();
 			return myInvoice.Text;
 		}
 

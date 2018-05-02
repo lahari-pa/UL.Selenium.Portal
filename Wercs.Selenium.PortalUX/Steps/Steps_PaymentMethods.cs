@@ -18,43 +18,39 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Payment Methods screen I check the Payment Methods heading and sub headings are correct")]
 		public void ThenICheckThePaymentMethodsHeadingAndSubHeadingsAreCorrect()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I check the Payment Methods heading and sub headings are correct");
-			try
-			{
-				var myPay = new PaymentMethods();
-				Delay.Seconds(5 * Delay.SpeedFactor);
-				Report.IsTrue(myPay.Payment_Header_Correct(), "Payment Methods Header is Incorrect",
-					"Payments Methods Header is Correct");
-				Report.IsTrue(myPay.Sub_Heading_Correct(), "Payments Methods Sub Heading is Incorrect",
-					"Payments Methods Sub Heading is Correct");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			var myPay = new PaymentMethods();
+			Delay.Seconds(5 * Delay.SpeedFactor);
+			Report.IsTrue(myPay.Payment_Header_Correct(), "Payment Methods Header is Incorrect",
+				"Payments Methods Header is Correct");
+			Report.IsTrue(myPay.Sub_Heading_Correct(), "Payments Methods Sub Heading is Incorrect",
+				"Payments Methods Sub Heading is Correct");
 		}
 
 		[StepDefinition(@"In the Payment Methods screen I confirm the following payment options are available")]
 		public void ThenIConfirmTheFollowingPaymentOptionsAreAvailable(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the correct payment options are available");
-			try
-			{
-				var myPay = new PaymentMethods();
+			var myPay = new PaymentMethods();
 
-				foreach (var Row in table.Rows)
-				{
-					Report.IsTrue(myPay.Payment_Method_Exists(Row["Options"]), Row["Options"] + " Is Not Available", Row["Options"] + " Available");
-				}
-				Report.Success("Payment Options are all Available");
-			}
-			catch (Exception ex)
+			foreach (var Row in table.Rows)
 			{
-				Report.Failure(ex.Message);
-				throw;
+				Report.IsTrue(myPay.Payment_Method_Exists(Row["Options"]), Row["Options"] + " Is Not Available", Row["Options"] + " Available");
 			}
+			Report.Success("Payment Options are all Available");
 		}
+
+		[StepDefinition(@"In the Payment Methods screen I confirm the Default method is: (.*)")]
+		public void ThenInThePaymentMethodsScreenIConfirmTheDefaultMethodIsX(string defaultMethod)
+		{
+			var myPay = new PaymentMethods();
+
+			if (defaultMethod == "Credit Card")
+			{
+				Report.IsTrue(myPay.Credit_Card_Default(), "Failed to Confirm Default Payment Method is " + defaultMethod,
+					"Successfully Confirmed Default Payment Method is " + defaultMethod);
+			}
+
+		}
+
 
 		[StepDefinition(@"In the Payment Methods screen I select Payment Method: (.*)")]
 		public void ThenISelectPaymentMethodX(string payMethod)
@@ -554,7 +550,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var myPay = new PaymentMethods();
-
+				Delay.Seconds(2 * Delay.SpeedFactor);
 				Report.IsTrue(myPay.Continue_click(), "Failed to Click Continue", "Continue Button Clicked");
 				Delay.Seconds(15 * Delay.SpeedFactor);
 			}
@@ -568,7 +564,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Payment Methods screen I enter Credit Card details")]
 		public void ThenIEnterCreditCardDetails(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I edit the Billing Address");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Payment Methods screen I enter Credit Card details");
 			try
 			{
 				var myPay = new PaymentMethods();
@@ -601,7 +597,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				var myPay = new PaymentMethods_Subscription_Billing();
 				Delay.Seconds(5 * Delay.SpeedFactor);
-				Report.IsTrue(myPay.Subscription_Billing_Header_Correct(), "Purchase Summary Header is Incorrect",
+				Report.IsTrue(myPay.Purchase_Header_Correct(), "Purchase Summary Header is Incorrect",
 					"Purchase Summary Header is Correct");
 			}
 			catch (Exception ex)
@@ -739,7 +735,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
 
-				Delay.Seconds(15 * Delay.SpeedFactor);
+				Delay.Seconds(20 * Delay.SpeedFactor);
 			}
 			catch (Exception ex)
 			{

@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
 using SeleniumUtilities;
+using TechTalk.SpecFlow;
 using Wercs.Selenium.PortalUX.Classes;
 using Global = SeleniumUtilities.Global;
 
@@ -222,16 +223,29 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			IWebElement mySilver = _selectSilver;
 			IWebElement silverCheck = mySilver.FindElement(By.XPath(".//input"), 2);
 
-			IWebElement myBronze = _selectBronze;
-			IWebElement bronzeCheck = myBronze.FindElement(By.XPath(".//input"), 2);
+			IWebElement mySupp = null;
 
-			IWebElement myGen = Get_General_Support_Plan();
-			IWebElement genCheck = myGen.FindElement(By.XPath(".//input"), 2);
+			mySupp = containerElement.FindElement(By.XPath(".//div[@class='panel-heading bronze']/label"), 2);
+
+			if (mySupp == null)
+			{
+				Report.Info("Bronze Support Plan Not Found - Checking for General Support");
+				mySupp = Get_General_Support_Plan();
+
+				if (mySupp == null)
+				{
+					Report.Info("Failed to Find General Support Plans");
+					Report.Screenshot();
+					return false;
+				}
+			}
+
+			IWebElement suppCheck = mySupp.FindElement(By.XPath(".//input"), 2);
 
 			switch (currentPlan)
 			{
 				case "Silver":
-					if ((bronzeCheck.GetAttribute("disabled") != "true") || (genCheck.GetAttribute("disabled") != "true"))
+					if (suppCheck.GetAttribute("disabled") != "true")
 					{
 						Report.Info("Bronze/General Support Plan is Not Disabled");
 						Report.Screenshot();
@@ -247,7 +261,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						return false;
 					}
 					Report.Info("Silver Plan is Disabled");
-					if ((bronzeCheck.GetAttribute("disabled") != "true") || (genCheck.GetAttribute("disabled") != "true"))
+					if (suppCheck.GetAttribute("disabled") != "true")
 					{
 						Report.Info("Bronze/General Support Plan is Not Disabled");
 						Report.Screenshot();
@@ -260,6 +274,110 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Report.Success("Unable to Downgrade " + currentPlan);
 			return true;
+		}
+
+		public bool Sub_Upgrade_Cost_Change(string costText, string rangeType, string rangeValue)
+		{
+			Report.Info("Beginning Sub_Upgrade_Cost_Change for " + costText);
+
+			IWebElement myCurrentCost = null;
+
+			if (costText == "Estimated Annual Cost")
+			{
+				myCurrentCost = containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[1]/div/p/strong"), 2);
+				ScenarioContext.Current.Add("CurrentEstCost", myCurrentCost.Text);
+			}
+			if (costText == "Estimated Annual Cost per Product")
+			{
+				myCurrentCost = containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[2]/div/p/strong"), 2);
+				ScenarioContext.Current.Add("CurrentPerCost", myCurrentCost.Text);
+			}
+
+			if (myCurrentCost == null)
+			{
+				Report.Info("Failed to Find Cost Text for: " + costText);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Current " + costText + " = " + myCurrentCost.Text);
+
+			if (rangeType == "Articles")
+			{
+				if (!Select_Articles(rangeValue))
+				{
+					Report.Info("Failed to Select " + rangeValue + " for " + rangeType);
+					Report.Screenshot();
+					return false;
+				}
+			}
+			if (rangeType == "Enhanced Articles")
+			{
+				if (!Select_Enhanced_Articles(rangeValue))
+				{
+					Report.Info("Failed to Select " + rangeValue + " for " + rangeType);
+					Report.Screenshot();
+					return false;
+				}
+			}
+			if (rangeType == "Formulated Products")
+			{
+				if (!Select_Formulated_Products(rangeValue))
+				{
+					Report.Info("Failed to Select " + rangeValue + " for " + rangeType);
+					Report.Screenshot();
+					return false;
+				}
+			}
+			Delay.Seconds(1 * Delay.SpeedFactor);
+			Report.Info("Selected " + rangeValue + " for " + rangeType);
+			Report.Info("Checking Cost has Changed");
+
+			IWebElement myNewCost = null;
+
+			if (costText == "Estimated Annual Cost")
+			{
+				myNewCost = containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[1]/div/p/strong"), 2);
+				if (myNewCost == null)
+				{
+					Report.Info("Failed to Find Cost Text for: " + costText);
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("New " + costText + " = " + myNewCost.Text);
+				string myCurrent = ScenarioContext.Current["CurrentEstCost"].ToString();
+				if (myNewCost.Text == myCurrent)
+				{
+					Report.Info(costText + " Has Not Changed");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Success(costText + " Has Changed");
+				Report.Screenshot();
+				return true;
+			}
+			if (costText == "Estimated Annual Cost per Product")
+			{
+				myNewCost = containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[2]/div/p/strong"), 2);
+				if (myNewCost == null)
+				{
+					Report.Info("Failed to Find Cost Text for: " + costText);
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info("New " + costText + " = " + myNewCost.Text);
+				string myCurrent = ScenarioContext.Current["CurrentPerCost"].ToString();
+				if (myNewCost.Text == myCurrent)
+				{
+					Report.Info(costText + " Has Not Changed");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Success(costText + " Has Changed");
+				Report.Screenshot();
+				return true;
+			}
+			Report.Info("Incorrect Cost Text: " + costText);
+			return false;
 		}
 
 	}

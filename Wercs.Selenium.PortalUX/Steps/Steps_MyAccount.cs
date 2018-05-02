@@ -489,16 +489,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				foreach (var thisRow in table.Rows)
 				{
-					string row = thisRow["Row"];
 					string sub_level_status = thisRow["Subscription Level Status"];
 					string qty = thisRow["Quantity"];
 
 					Report.Info("Subscription Level Status = " + sub_level_status);
 					Report.Info("Quantity = " + qty);
 
-					Report.IsTrue(selMyAccount.Subscription_Level_Status(row, sub_level_status),
+					Report.IsTrue(selMyAccount.Subscription_Level_Status(sub_level_status),
 						"Failed to Confirm Subscription Level Status", "Subscription Level Status Correct");
-					Report.IsTrue(selMyAccount.Subscription_Quantity(qty),
+					Report.IsTrue(selMyAccount.Subscription_Quantity(qty, sub_level_status),
 						"Failed to Confirm Quantity", "Quantity Correct");
 				}
 			}

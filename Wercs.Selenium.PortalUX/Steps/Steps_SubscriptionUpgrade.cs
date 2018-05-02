@@ -77,6 +77,71 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully Checked " + supportPlan + " Plan Cannot be Downgraded");
 		}
 
+		[StepDefinition(@"In the Subscription Upgrade screen I confirm the Proceed button is (disabled when there is no change|enabled when a change is made) in the plan selection")]
+		public void ThenInTheSubscriptionUpgradeScreenIConfirmTheProceedButtonIsDisabledWhenThereIsNoChangeInThePlanSelection(string enabled)
+		{
+			var mySub = new SubscriptionUpgrade();
+
+			if (enabled == "disabled when there is no change")
+			{
+				Report.IsTrue(!mySub.Proceed_button_enabled(), "Proceed Button is Enabled",
+					"Proceed Button is Disabled");
+			}
+			if (enabled == "enabled when a change is made")
+			{
+				Report.IsTrue(mySub.Proceed_button_enabled(), "Proceed Button is Disabled",
+					"Proceed Button is Enabled");
+			}
+		}
+
+		[StepDefinition(@"In the Subscription Upgrade screen for (Articles|Enhanced Articles|Formulated Products) I select (.*)")]
+		public void ThenInTheSubscriptionUpgradeScreenForXISelectY(string rangeType, string rangeValue)
+		{
+			var mySub = new SubscriptionUpgrade();
+
+			if (rangeType == "Articles")
+			{
+				Report.IsTrue(mySub.Select_Articles(rangeValue), "Failed to Select " + rangeValue + " for " + rangeType,
+					"Selected " + rangeValue + " for " + rangeType);
+			}
+			if (rangeType == "Enhanced Articles")
+			{
+				Report.IsTrue(mySub.Select_Enhanced_Articles(rangeValue), "Failed to Select " + rangeValue + " for " + rangeType,
+					"Selected " + rangeValue + " for " + rangeType);
+			}
+			if (rangeType == "Formulated Products")
+			{
+				Report.IsTrue(mySub.Select_Formulated_Products(rangeValue), "Failed to Select " + rangeValue + " for " + rangeType,
+					"Selected " + rangeValue + " for " + rangeType);
+			}
+
+		}
+
+		[StepDefinition(@"In the Subscription Upgrade screen I confirm the (Estimated Annual Cost|Estimated Annual Cost per Product) changes when (Articles|Enhanced Articles|Formulated Products) are changed to (.*)")]
+		public void ThenInTheSubscriptionUpgradeScreenIConfirmTheEstimatedAnnualCostChangesWhenAPlanSelectionIsChanged(string costText, string rangeType, string rangeValue)
+		{
+			var mySub = new SubscriptionUpgrade();
+
+			Report.IsTrue(mySub.Sub_Upgrade_Cost_Change(costText, rangeType, rangeValue), "Failed to Check " + costText + " Changes when " + rangeType + " are Changed to " + rangeValue,
+				costText + " Successfully Changed when " + rangeType + " are Changed to " + rangeValue);
+		}
+
+		[StepDefinition(@"In the Subscription Upgrade screen I select the following enrollment options")]
+		public void ThenInTheSubscriptionUpgradeScreenISelectTheFollowingEnrollmentOptions(Table table)
+		{
+			var mySub = new StepsSubscriptionEnrollment();
+
+			mySub.ThenISelectTheFollowingEnrollmentOptions(table);
+		}
+
+		[StepDefinition(@"In the Subscription popup I confirm the (.*) header exists")]
+		public void ThenInTheSubscriptionPopupIConfirmTheXHeaderExists(string headerText)
+		{
+			var mySub = new SubscriptionEnrollmentDlg();
+
+			Report.IsTrue(mySub.Header_Correct(headerText), headerText + " Header Incorrect", headerText + " Header Correct");
+		}
+
 
 
 	}

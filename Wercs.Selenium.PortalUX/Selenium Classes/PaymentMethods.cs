@@ -112,6 +112,46 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		//==================================================================================== CREDIT CARD
 
+		public bool Credit_Card_Default()
+		{
+			Report.Info("Beginning Credit_Card_Default");
+
+			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//h4[@class='card-title']")).ToList();
+
+			IWebElement myCard = null;
+
+			foreach (var method in allProducts)
+			{
+				if (method.Text.Trim().Replace("\r\n", " ").Contains("Credit Card"))
+				{
+					Report.Success("Payment Method Found");
+					myCard = method;
+					break;
+				}
+				Report.Info("Payment Method Doesn't Match");
+			}
+
+			if (myCard == null)
+			{
+				Report.Info("Failed to Find Credit Card Payment Method");
+				Report.Screenshot();
+				return false;
+			}
+
+			IWebElement myDefault = myCard.FindElement(By.XPath(".//span[text()='Default']"), 2);
+
+			if (myDefault == null)
+			{
+				Report.Info("Credit Card Payment Method is Not Default Method");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Credit Card Payment Method is Default Method");
+			Report.Screenshot();
+			return true;
+		}
+
+
 		public bool Credit_Card_Fields_Check(List<string> myList)
 		{
 			Report.Info("Beginning Credit_Card_Fields_Check");

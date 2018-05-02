@@ -174,10 +174,10 @@ Given I click on My Account
 Then In the My Account screen I navigate to the Subscription Information page
 Then In the Subscription Information screen I confirm the Status has the correct information: 1 Formulated, 1 Articles, 1 Enhanced Articles
 Then In the Subscription Information screen I confirm the Subscription History table has the correct information
-| Row | Subscription Level Status | Quantity |
-| 1   | Limited Formulated        | 1        |
-| 2   | Limited Articles          | 1        |
-| 3   | Limited Enhanced Articles | 1        |
+| Subscription Level Status | Quantity |
+| Limited Formulated        | 1        |
+| Limited Articles          | 1        |
+| Limited Enhanced Articles | 1        |
 Given I click on My Account
 Then In the My Account screen I navigate to the Order History page
 Then In the Order History screen I select Subscription
