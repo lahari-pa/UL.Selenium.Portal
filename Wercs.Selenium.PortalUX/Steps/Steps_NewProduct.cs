@@ -1489,7 +1489,5 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			Report.Screenshot();
 		}
-
-
 	}
 }
