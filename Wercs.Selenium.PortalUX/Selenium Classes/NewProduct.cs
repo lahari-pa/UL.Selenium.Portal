@@ -2813,9 +2813,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SetOptionInSection(string section, string value)
 		{
-			var xPath = @"(//span[(.//ancestor::div[@class='form-group']//label[contains(text(),""" + section + @""")]) and contains(text(),'" + value + "')]/parent::label | " +
-			            @"//input[(.//ancestor::div[@class='form-group']//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
-			            @"//span[(.//ancestor::div[contains(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "')]/parent::label | " +
+						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			var el = containerElement.FindElement(By.XPath(xPath), 2);
 
@@ -2832,6 +2832,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			return el.TryClick();
+		}
+
+		public bool SetAllCheckOptionsInSection(string section, bool check)
+		{
+			var xpath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])]/preceding-sibling::input";
+			var els = containerElement.FindElements(By.XPath(xpath), 2);
+			foreach (var el in els)
+			{
+				el.Check(check);
+			}
+
+			return true;
 		}
 	}
 

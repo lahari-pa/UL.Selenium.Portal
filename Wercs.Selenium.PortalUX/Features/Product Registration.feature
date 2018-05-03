@@ -454,11 +454,14 @@ And I set the Select the best Water Solubility description to be: Very soluble
 And in the New Product page I click Continue
 And I should see the Additional Product Information Page
 And In the Additional Information Page the check box for: United States should be: checked
-And In the Additional Information Page for Product has been classified using OSHA I select: No
-And In the Additional Information Page for Product is shipped directly I select: No
-And In the Additional Information Page for Product is retailers private label or brand I select: No
-And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+
+# Adapted to use the generic method
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer. option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
 And in the New Product page I click Continue
+
 # Setting Ingredient Information
 Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -473,8 +476,10 @@ And I confirm that I see the following VOC-OTC-CARB statement1: Product has been
 And I confirm that I see the following VOC-OTC-CARB statement2: Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
 And in the New Product page I click Continue
 Then I should see an error message: This is a required field.
-And In the VOC - OTC - CARB tab for Product has been granted an Alternative Control Plan I select: No
-And In the Product Characteristics tab of the New Product Page, for Product does not contain more than grams of VOC per use I select: Disagree
+# Moved these to the new 'generic' format for easier editing down the road!
+And I set the Product has been granted an Alternative Control Plan option to: No
+And I set the Product does not contain more than 0.05 grams of VOC per use option to: Disagree
+#And In the Product Characteristics tab of the New Product Page, for Product does not contain more than grams of VOC per use I select: Disagree
 And in the New Product page I click Continue
 Given the 'Select Retailers' window appears
 Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
@@ -484,7 +489,7 @@ And in the Review and Submit tab of the New Product Page for OSHA compliant SDS 
 And in the New Product page I click Continue
 And I should see the Additional Documents to Provide Page
 And in the New Product page I click Continue
-Then I should see an error message: Document is required: Product Label.
+Then I should see an error message: Document is required: Product Label
 And In the Review and Submit tab of the New Product Page for Volatile Organic Compounds I upload pdf file
 And in the New Product page I click Continue
 And I should see the Optional Reports and Documents Available for Purchase Page
