@@ -2811,10 +2811,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public List<string> GetErrorsForSection(string section)
+		{
+			var els = containerElement.FindElements(By.XPath(".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),'" + section + "')])]"), 2);
+			return els.Select(x => x.GetElementText()).ToList();
+		}
+
 		public bool SetOptionInSection(string section, string value)
 		{
 			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "')]/parent::label | " +
 						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
+			            @"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			var el = containerElement.FindElement(By.XPath(xPath), 2);
@@ -2829,6 +2836,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				el.EnterText(value);
 				return el.GetValue() == value;
+			}
+			if (el.TagName.ToLower() == "select")
+			{
+				int i = 0;
+				while (i < 10)
+				{
+					try
+					{
+						el.Select(value);
+						return el.SelectedOption() == value;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
+				}
+
+				return el.SelectedOption() == value;
 			}
 
 			return el.TryClick();

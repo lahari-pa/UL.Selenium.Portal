@@ -1570,5 +1570,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			Report.Screenshot();
 		}
+
+		// NB: The error messages should be delimited by the '|' character!
+		[StepDefinition(@"(.*) should be showing the error messages: (.*)")]
+		public void ErrorMessagesAreShowingForItem(string section, string pipeDelimitedErrorMessages)
+		{
+			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			Report.Info("Error messages showing are: " + string.Join(", ",errorMessages));
+			foreach (var item in errorMessagesExpected)
+			{
+				Report.IsTrue(errorMessages.Contains(item.Trim()), "Failed to find the error message: " + item + "!", "Successfully found the error message: " + item + "!", false, false);
+			}
+			Report.Screenshot();
+		}
+
 	}
 }

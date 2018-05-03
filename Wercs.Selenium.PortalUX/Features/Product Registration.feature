@@ -572,6 +572,75 @@ And In the product Characteristics tab, I enter: 0.5 in the VOC content in grams
 And in the New Product page I click Continue
 And I should see the Volatile Organic Compound Summary Page
 
+Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Available for Purchase screen
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# SS - 57753
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+And I click the Register New Product icon in the Navigation Pane
+And I should see the header New Product
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+And I set the Product Name option to: Deodorant - Non-aerosol
+And In the Product Type tab of the New Product Page, I enter: Deodorant - Non-aerosol in the Type of Product select field
+And in the New Product page I click Continue
+Then I save the product information as: TestCase67661
+
+And in the New Product page I click Continue
+And Primary Physical State should be showing the error messages: This is a required field.
+
+
+And I set the Primary Physical State option to: Solid
+And I set the Secondary Physical State to be: Solid
+And I set the When mixed with an equal amount of water option to: No
+And I set the Select the best Water Solubility description to be: Very soluble
+And in the New Product page I click Continue
+
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Formaldehyde  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
+Given in the New Product page I click Continue
+
+# Regulatory 3 Page Details
+And I should see the Regulatory Information 3 Page
+And I set the below options for field: Refer to your Product Label
+| Option            |
+| None of the Above |
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport option to: Yes
+And I set the below options for field: Select all modes of transport that you've classified the product for
+| Option                         |
+| DOT                            |
+| Shipping with limited quantity |
+Given in the New Product page I click Continue
+
+# U. S. Department of Transportation (DOT) Classification Page
+Then I should see the U. S. Department of Transportation (DOT) Classification Page
+And I set the UN Number field to: UN1950
+And I set the Proper Shipping Name field to: Aerosols
+And I set the Technical Name (if applicable) field to: My Aerosol Product
+And I set the Hazard Class (select) field to: 2.1
+And I set the Packing Group (select) field to: None
+
+
 
 
 
