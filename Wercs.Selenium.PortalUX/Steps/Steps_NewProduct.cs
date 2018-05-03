@@ -470,27 +470,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for U\.S\. Toxic Substances Control Act \(TSCA\) status I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForU_S_ToxicSubstancesControlActTSCAStatusISelectOption(string option)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: " + option);
-			try
-			{
 				var selNewProduct = new NewProduct();
 				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 					"Product characteristics tab is loaded.");
 
-				
 				selNewProduct.TscaStatus= option;
 
 				Report.IsTrue(selNewProduct.TscaStatus == option,
 					"Failed to set TSCA status: " + option,
 					"Successfully set TSCA status: " + option);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
 		}
 
 
@@ -796,6 +784,61 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Select all modes of transport I select: (.*)")]
+		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForSelectAllModesOfTransportISelect(string selections)
+		{
+			Report.IsTrue(new NewProduct().AllModesOfTransport(selections), "Failed to set option to: " + selections, "Successfully set option to: " + selections);
+		}
+
+		/// <summary>
+		/// Enter in UN Number textbox
+		/// </summary>
+		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the UN Number text field")]
+		public void GivenInTheProductCharacteristicsTabIEnterInTheUNNumberTextField(string text)
+		{
+			//var selNewProduct = new NewProduct();
+			//Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+			//	"Product type tab is loaded.");
+			//selNewProduct.UNnumber = option;
+
+			Report.IsTrue(new NewProduct().UNnumber(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
+		/// <summary>
+		/// Select Hazard Class from dropdown
+		/// </summary>
+		[StepDefinition(@"In the product Characteristics tab, I set Hazard Class to be: (.*)")]
+		public void GivenInTheProductCharacteristicsTabISetHazardClassToBe(string option)
+		{
+			Report.IsTrue(new NewProduct().HazardClassSelect(option), "Failed to set the option to be: " + option, "Successfully set option to be: " + option);
+		}
+
+		/// <summary>
+		/// Enter in Technical Name (if applicable) textbox
+		/// </summary>
+		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the Technical Name text field")]
+		public void GivenInTheProductCharacteristicsTabIEnterInTheTechnicalNameTextField(string text)
+		{
+			Report.IsTrue(new NewProduct().TechnicalName(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
+		}
+
+		/// <summary>
+		/// Select Proper Shipping Name from dropdown
+		/// </summary>
+		[StepDefinition(@"In the product Characteristics tab, I set the Proper Shipping Name to be: (.*)")]
+		public void GivenInTheProductCharacteristicsTabISetTheProperShippingNameToBe(string option)
+		{
+			Report.IsTrue(new NewProduct().ProperShippingName(option), "Failed to set the option to be: " + option, "Successfully set option to be: " + option);
+		}
+
+		[StepDefinition(@"In the product Characteristics tab, I set Packing Group to be: (.*)")]
+		public void GivenInTheProductCharacteristicsTabISetPackingGroupToBe(string option)
+		{
+			Report.IsTrue(new NewProduct().PackingGroupSelect(option), "Failed to set the option to be: " + option, "Successfully set option to be: " + option);
+		}
+
+
+
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTExceptionsISelect(string selections)
 		{
@@ -819,7 +862,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[Given(@"In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: (.*)")]
+		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForInternationalShippingWhenDOTExemptionTakenISelect(string selection)
 		{
 			NewProduct selNewProduct = new NewProduct();
@@ -984,6 +1027,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Product has been granted an Alternative Control Plan statement was showing: " + statement + ", as expected!");
 		}
 
+		/// <summary>
+		/// Confirm VOC content in grams ozone per gram statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement3: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement3(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetVocContentInGramsStatement();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+
+		/// <summary>
+		/// Confirm error message for VOC content in grams ozone per gram statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following error message for VOC content in grams ozone per gram: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingErrorMessageForVOCContentInGramsOzonePerGram(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetErrorMessageForVocContentInGrams();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
 
 
 
@@ -1022,9 +1093,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Successfully set status: " + option);
 		}
 
-
-
-
+		/// <summary>
+		/// Enter in VOC content in grams ozone per gram text field 
+		/// </summary>
+		[Then(@"In the product Characteristics tab, I enter: (.*) in the VOC content in grams ozone per gram text field")]
+		public void ThenInTheProductCharacteristicsTabIEnterInTheVOCContentInGramsOzonePerGramTextField(string option)
+		{
+			Report.IsTrue(new NewProduct().VocContentInGrams(option), "Text: " + option + " was not successfully inputted into the comments field!", "Text: " + option + " was successfully inputted into the comments field!");
+		}
 
 		/// <summary>
 		/// select option for Product label specifies a dilution ratio 
@@ -1327,6 +1403,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[Then(@"In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: (.*)")]
+		public void ThenInTheProductCharacteristicsTabOfTheNewProductPageForWhenTheProductHasAFlammablePropellantISelect(string option)
+		{
+			Report.IsTrue(new NewProduct().ProductHasFlammablePropellant(option), "Failed to set option to be: " + option, "Successfully set the option to be: " + option);
+		}
 
 
 		/// <summary>

@@ -506,3 +506,70 @@ And I confirm that I see the following option for Product does not contain more 
 Then I switch to Data Acceptance page
 Given I navigate to the home page
 Then I delete the product: TestCase56475
+
+Scenario: [56484] VOC - Aero checks
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+And I click the Register New Product icon in the Navigation Pane
+And I should see the header New Product
+And I Select the Create a New Registration radio button
+And in the New Product page I click Continue
+And In the Product Type tab of the New Product Page, I enter: Clear Coating - Aerosol in the Product Name text field
+And In the Product Type tab of the New Product Page, I enter: Clear Coating - Aerosol in the Type of Product select field
+And in the New Product page I click Continue
+Then I save the product information as: TestCase56484
+And I should only see the following options for Primary Physical State:
+| State |
+| Aerosol |
+And I set the Secondary Physical State to be: Solid spray
+And In the product Characteristics tab, I enter: 2 in the pH text field
+And I set the Select the best Water Solubility description to be: Very soluble
+And In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: This product is not classified as D001 or D003 Hazardous Waste under RCRA
+And in the New Product page I click Continue
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And In the Additional Information Page for Product has been classified using OSHA I select: No
+And In the Additional Information Page for Product is shipped directly I select: No
+And In the Additional Information Page for Product is retailers private label or brand I select: No
+And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+And in the New Product page I click Continue
+# Setting Ingredient Information
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+And I should see the Regulatory Information 1 Page
+And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And in the New Product page I click Continue
+And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: Yes
+And in the Product Characteristics tab of the New Product Page, for Select all modes of transport I select: DOT
+And in the Product Characteristics tab of the New Product Page, for Select all modes of transport I select: Shipping with limited quantity
+And in the Product Characteristics tab of the New Product Page, for Select all modes of transport I select: Shipping with consumer commodity
+And in the New Product page I click Continue
+And I should see the U. S. Department of Transportation (DOT) Classification Page
+And In the product Characteristics tab, I enter: UN1950 in the UN Number text field
+And in the New Product page I click Continue
+Then I should see an error message: This is a required field.
+And In the product Characteristics tab, I set the Proper Shipping Name to be: Aerosols
+And In the product Characteristics tab, I enter: test in the Technical Name text field
+And In the product Characteristics tab, I set Hazard Class to be: 2.1
+And In the product Characteristics tab, I set Packing Group to be: None
+And in the New Product page I click Continue
+And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I confirm that I see the following VOC-OTC-CARB statement1: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+And I confirm that I see the following VOC-OTC-CARB statement3: VOC content in grams ozone per gram
+And In the VOC - OTC - CARB tab for Product has been granted an Alternative Control Plan I select: No
+And in the New Product page I click Continue
+And I confirm that I see the following error message for VOC content in grams ozone per gram: This is a required field.
+And In the product Characteristics tab, I enter: 0.5 in the VOC content in grams ozone per gram text field
+And in the New Product page I click Continue
+And I should see the Volatile Organic Compound Summary Page
+
+
+
+
+
+
+

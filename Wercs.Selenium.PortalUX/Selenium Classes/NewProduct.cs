@@ -1417,6 +1417,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 
+		/// <summary>
+		/// Select all modes of transport that you've classified the product for checkbox options
+		/// </summary>
+		public bool AllModesOfTransport(string item)
+		{
+			try
+			{
+				var el = containerElement
+					.FindElements(By.XPath(".//label[contains(text(),'Select all modes of transport')]/../following-sibling::div//span"), 2)
+					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+				if (el != null)
+				{
+					el.TryClick();
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 
 		/// <summary>
 		/// Please select DOT Exceptions if applicable -- different method 
@@ -1440,7 +1464,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
-
 		}
 
 
@@ -1585,6 +1608,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				var el = containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
 				el.Select(value);
+			}
+		}
+
+		/// <summary>
+		/// When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then radio options
+		/// </summary>
+		public bool ProductHasFlammablePropellant(string item)
+		{
+			try
+			{
+				var el = containerElement
+					.FindElements(By.XPath(".//label[contains(text(),'flammable propellant')]/../following-sibling::div//span"), 2)
+					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+				if (el != null)
+				{
+					el.TryClick();
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
 			}
 		}
 
@@ -2133,6 +2180,164 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		/// <summary>
+		/// UN Number text box 
+		/// </summary>
+		public bool UNnumber(string text)
+		{
+			//get
+			//{
+			//	var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+			//		.FirstOrDefault(x => x.Text.Contains("UN Number"));
+
+			//	if (lbl != null)
+			//	{
+			//		var input = lbl.FindElement(By.XPath("../..//input"));
+			//		return input.Text;
+			//	}
+			//	else
+			//	{
+			//		throw new Exception("Label not found as expected.");
+			//	}
+
+			//}
+			//set
+			//{
+			//	var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+			//		.FirstOrDefault(x => x.Text.Contains("UN Number"));
+
+			//	if (lbl != null)
+			//	{
+			//		var input = lbl.FindElement(By.XPath("../..//input"));
+			//		input.EnterText(value);
+			//	}
+			//	else
+			//	{
+			//		throw new Exception("Label not found as expected.");
+			//	}
+
+			//}
+
+			try
+			{
+				var el = containerElement.FindElement(By.XPath(".//label[text()='UN Number']/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Technical Name (if applicable) text box 
+		/// </summary>
+		public bool TechnicalName(string text)
+		{
+			try
+			{
+				var el = containerElement.FindElement(By.XPath(".//label[text()='Technical Name (if applicable)']/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
+		/// <summary>
+		/// VOC content in grams ozone per gram text box 
+		/// </summary>
+		public bool VocContentInGrams(string text)
+		{
+			try
+			{
+				var el = containerElement.FindElement(By.XPath(".//label[text()='VOC content in grams ozone per gram']/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					return true;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
+		/// <summary>
+		/// Proper Shipping Name dropdown
+		/// </summary>
+		public bool ProperShippingName(string item)
+		{
+			try
+			{
+				var el = containerElement.FindElement(By.XPath(".//label[text()='Proper Shipping Name']/..//following-sibling::div//select"), 2);
+				el.Select(item);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Hazard Class (select) dropdown
+		/// </summary>
+		public bool HazardClassSelect(string item)
+		{
+			try
+			{
+				var el = containerElement.FindElement(By.XPath(".//label[text()='Hazard Class (select)']/..//following-sibling::div//select"), 2);
+				el.Select(item);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+
+		/// <summary>
+		/// Packing Group (select) dropdown
+		/// </summary>
+		public bool PackingGroupSelect(string item)
+		{
+			try
+			{
+				var el = containerElement.FindElement(By.XPath(".//label[text()='Packing Group (select)']/..//following-sibling::div//select"), 2);
+				GeneralUtilities.Wait_for_load_finish();
+				el.Select(item);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+
 		public string Viscosity {
 			get
 			{
@@ -2431,7 +2636,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 		/// <summary>
-		/// Get statement - Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+		/// Gets statement - Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
 		/// </summary>
 		public string GetProductGrantedAlternativeControlPlanStatement()
 		{
@@ -2440,11 +2645,29 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 		/// <summary>
-		/// Get statement - Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
+		/// Gets statement - Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
 		/// </summary>
 		public string GetProductDoesNotContainGramsOfVocStatement()
 		{
 			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product does not contain more than 0.05 grams of VOC per use')]"), 2).Text;
+		}
+
+
+		/// <summary>
+		/// Gets statement - VOC content in grams ozone per gram
+		/// </summary>
+		public string GetVocContentInGramsStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'VOC content in grams ozone per gram')]"), 2).Text;
+		}
+
+
+		/// <summary>
+		/// Gets error message for VOC content in grams ozone per gram
+		/// </summary>
+		public string GetErrorMessageForVocContentInGrams()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[text()='VOC content in grams ozone per gram']/../following-sibling::div//span"), 2).Text;
 		}
 
 
