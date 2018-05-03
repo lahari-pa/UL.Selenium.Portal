@@ -567,6 +567,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//ul[@role='tablist']//a[text()='" + filter + "']"), 2).TryClick();
 		}
 
+		public bool DivisionGridShowing()
+		{
+			return containerElement.FindElement(By.XPath(".//div[@id='division-accounts-grid']//table"), 2) != null;
+		}
+
 	}
 
 	class MyAccount_CompanyInfo : BaseObject
@@ -574,7 +579,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.Id, Using = "companyInfoContainer")]
 		protected override IWebElement containerElement { get; set; }
 
-
+		public string ReturnUserOrDivisionAccountsNumber(string AccountType)
+		{
+			return containerElement.FindElement(By.XPath(".//a[contains(normalize-space(),'" + AccountType + " Accounts')]/span"), 2).GetElementText();
+		}
 
 
 

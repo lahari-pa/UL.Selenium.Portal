@@ -323,7 +323,10 @@ Then I should see Estimated Annual Cost of: $0.00
 Then I should see Estimated Annual Cost per Product of: $0.00
 Then I should see Proceed button disabled
 
-Scenario: [64874] Division Area
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Scenario: [64874] Division Area - no divisions set up
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 And I navigate to My Account
 And I click on the option Division Accounts
+And I should not see the Division Accounts grid
+And In the My Account screen I navigate to the Company Information page
+Then In the Company Information screen I should see 0 Division Accounts

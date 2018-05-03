@@ -443,6 +443,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+
 		[StepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		public void ThenInTheMyAccountScreenINavigateToTheXPage(string nav_option)
 		{
@@ -575,6 +576,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ClickingOnMyAccountOptionDivisionUserAccounts(string option)
 		{
 			Report.IsTrue(new MyAccount().IClickOnAccountFilter(option), "Failed to click on option: " + option, "Successfully clicked on option: " + option);
+		}
+
+		[StepDefinition(@"I (should|should not) see the Division Accounts grid")]
+		public void DivisionsAccountGridIsShowing(string shouldornot)
+		{
+			bool expected = shouldornot == "should";
+			bool showing = new MyAccount().DivisionGridShowing();
+			Report.IsTrue(showing == expected, "Division area " + (showing ? "was" : "was not") + showing + "!", "Division area " + (showing ? "was" : "was not") + showing + "!");
+		}
+
+		[StepDefinition(@"In the Company Information screen I should see (.*) (Division|User) Accounts")]
+		public void CompanyInformation_DivisionAccountsShowing(string number, string type)
+		{
+			var showing = new MyAccount_CompanyInfo().ReturnUserOrDivisionAccountsNumber(type);
+			Report.IsTrue(showing.Trim() == number, "Found: " + showing + " " + type + " accounts, when " + number + " were expected!", "Successfully found: " + number + " " + type + " accounts!");
+
 		}
 
 	}
