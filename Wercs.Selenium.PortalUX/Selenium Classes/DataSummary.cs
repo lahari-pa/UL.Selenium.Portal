@@ -82,7 +82,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetGramsOfVocPerUseAsDefinedCaliforniaConsumerProductsQuestion()
 		{
 			WaitForSpinner();
-			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'Alternative Control Plan')]/../p[1]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'California Consumer Products Regulation')]/../p[1]"), 2).Text;
 		}
 	}
 }

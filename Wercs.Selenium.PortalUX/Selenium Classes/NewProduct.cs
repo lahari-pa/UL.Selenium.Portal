@@ -2687,6 +2687,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'VOC content in grams ozone per gram')]"), 2).Text;
 		}
 
+		/// <summary>
+		/// Gets statement Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are:
+		/// </summary>
+		public string GetVocContentWithIntendedUsesAerosolCoatingStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field')]//b[contains(text(),'Aerosol Coatings by the CARB VOC')]"), 2).Text;
+		}
 
 		/// <summary>
 		/// Gets error message for VOC content in grams ozone per gram
@@ -2696,8 +2703,62 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//label[text()='VOC content in grams ozone per gram']/../following-sibling::div//span"), 2).Text;
 		}
 
+		/// <summary>
+		/// Gets date VOC Analysis Date (Today's Date)
+		/// </summary>
+		public string GetVocAnalysisDate()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'VOC Analysis')]//b"), 2).Text;
+		}
 
-		public string Appearance {
+		/// <summary>
+		/// Gets VOC Grams Ozone-Grams Product value
+		/// </summary>
+		public string GetVocGramOzone()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'VOC Grams Ozone')]//b"), 2).Text;
+		}
+
+		/// <summary>
+		/// Gets Does not exceed the limits specified in the Aerosol Coatings by the CARB statement
+		/// </summary>
+		public string LimitsSpecifiedAerosolCoatingCARB()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified in the Aerosol Coatings by the CARB')]"), 2).Text;
+		}
+
+		/// <summary>
+		/// Gets Based on the type of product, this must comply with the most restrictive VOC limit. statement
+		/// </summary>
+		public string BasedOnTypeOfProductComplyWithVOCLimit()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'Based on the type of product')]"), 2).Text;
+		}
+
+		public List<VocLimits> GetDisplayedVocLimits()
+		{
+
+			var retList = new List<VocLimits>();
+			var tableElement = containerElement.FindElement(By.XPath(".//table[@class='table table-hover table-fixed']"), 2);
+			if (tableElement == null)
+			{
+				return null;
+			}
+
+			var rows = tableElement.FindElements(By.XPath(".//tbody//tr"), 2);
+			foreach (var row in rows)
+			{
+				var use = row.FindElement(By.XPath(".//td[1]"), 2).GetValue();
+				var voccompliancelimit = row.FindElement(By.XPath(".//td[2]"), 2).GetValue();
+				var regulation = row.FindElement(By.XPath(".//td[3]"), 2).GetValue();
+				retList.Add(new VocLimits() { Use = use, VocComplianceLimit = voccompliancelimit, Regulation = regulation });
+			}
+
+			return retList;
+
+		}
+
+	public string Appearance {
 			get
 			{
 				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -2982,5 +3043,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool PublicallyDisclosed { get; set; }
 		public bool TradeSecret { get; set; }
 		public string PublicName { get; set; }
+	}
+
+	public class VocLimits
+	{
+		public string Use { get; set; }
+		public string VocComplianceLimit { get; set; }
+		public string Regulation { get; set; }
 	}
 }

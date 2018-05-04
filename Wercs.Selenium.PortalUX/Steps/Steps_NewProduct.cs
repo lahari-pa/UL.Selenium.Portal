@@ -1089,6 +1089,36 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		/// <summary>
+		/// Confirm Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are: statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement4: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement4(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetVocContentWithIntendedUsesAerosolCoatingStatement();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+
+		/// <summary>
+		/// Confirm VOC Analysis Date (Today's Date)
+		/// </summary>
+		[StepDefinition(@"I confirm that I see todays VOC Analysis Date")]
+		public void ThenIConfirmThatISeeTodaysVOCAnalysisDate()
+		{
+			var date = DateTime.Now.ToString("MM/dd/yyyy");
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetVocAnalysisDate();
+
+			Report.IsTrue(found.Trim() == date.Trim(),
+				"date was not as expected! Expected: " + date + ", but found: " + found + "!",
+				"statement was showing: " + date + ", as expected!");
+		}
+
+		/// <summary>
 		/// Confirm error message for VOC content in grams ozone per gram statement
 		/// </summary>
 		[StepDefinition(@"I confirm that I see the following error message for VOC content in grams ozone per gram: (.*)")]
@@ -1102,7 +1132,47 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was showing: " + statement + ", as expected!");
 		}
 
+		/// <summary>
+		/// Confirm VOC Grams Ozone/Grams Product
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC Grams Ozone Grams Product: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingVOCGramsOzoneGramsProduct(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetVocGramOzone();
 
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm Does not exceed the limits specified in the Aerosol Coatings by the CARB statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following limits statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingLimitsStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.LimitsSpecifiedAerosolCoatingCARB();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm Based on the type of product, this must comply with the most restrictive VOC limit statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following comply with restrictive VOC statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingComplyWithRestrictiveVOCStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.BasedOnTypeOfProductComplyWithVOCLimit();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
 
 		/// <summary>
 		/// select option for Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
@@ -1629,6 +1699,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(errorMessages.Contains(item.Trim()), "Failed to find the error message: " + item + "!", "Successfully found the error message: " + item + "!", false, false);
 			}
 			Report.Screenshot();
+		}
+
+
+		[StepDefinition(@"I should see the following Voc Limits present:")]
+		public void ThenIShouldSeeTheFollowingVocLimitsPresent(Table information)
+		{
+			var expected = information.CreateSet<VocLimits>();
+			var voclimits = new NewProduct();
+			var displayed = voclimits.GetDisplayedVocLimits();
+			foreach (var expectedinfo in expected)
+			{
+				Report.Info("Checking use: " + expectedinfo.Use + " and Voc Compliance Limit: " + expectedinfo.VocComplianceLimit + " and Regulation: " + expectedinfo.Regulation);
+				var matchingType = displayed.Where(x => x.Use == expectedinfo.Use);
+				if (matchingType.Count() == 0)
+				{
+					Report.Failure("No Use data displayed: " + expectedinfo.Use + " were displayed!");
+					continue;
+				}
+
+				bool passed = false;
+				foreach (var matched in matchingType)
+				{
+					if (matched.Use.Contains(expectedinfo.Use) && matched.VocComplianceLimit == expectedinfo.VocComplianceLimit && matched.Regulation == expectedinfo.Regulation)
+					{
+						passed = true;
+						break;
+					}
+				}
+
+				Report.IsTrue(passed, "Voc Limit data was not found!", "Voc Limit data found!");
+			}
 		}
 
 	}
