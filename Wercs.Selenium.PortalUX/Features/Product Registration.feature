@@ -516,6 +516,7 @@ Scenario: [56484] VOC - Aero checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
+
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
@@ -575,29 +576,36 @@ And I should see the Volatile Organic Compound Summary Page
 Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Available for Purchase screen
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
-# SS - 57753
+# Checking that the test will run correctly by handling extra screens / removing existing products
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
+Given I generate a random UPC number and save as: UPC56484
+Given I delete all products with UPC Number: saved as UPC56484
+
+# New Product Page
 And I click the Register New Product icon in the Navigation Pane
-And I should see the header New Product
+And I should see the New Product Page
 And I set the Select the type of product to create option to: Create a New Registration
 And in the New Product page I click Continue
 
+# The Product Page
+And I should see the The Product Page
 And I set the Product Name option to: Deodorant - Non-aerosol
 And In the Product Type tab of the New Product Page, I enter: Deodorant - Non-aerosol in the Type of Product select field
 And in the New Product page I click Continue
-Then I save the product information as: TestCase67661
 
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase67661
 And in the New Product page I click Continue
 And Primary Physical State should be showing the error messages: This is a required field.
-
-
 And I set the Primary Physical State option to: Solid
-And I set the Secondary Physical State to be: Solid
+And I set the Secondary Physical State option to: Solid
 And I set the When mixed with an equal amount of water option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
+And I set the Select the best Water Solubility description option to: Very soluble
 And in the New Product page I click Continue
 
+# Additional Product Information Page
 And In the Additional Information Page the check box for: United States should be: checked
 And I set the Product has been classified using OSHA (US) option to: No
 And I set the Product is shipped directly by supplier to the consumer option to: No
@@ -605,6 +613,8 @@ And I set the Product is a Retailer's Private Label or Brand option to: No
 And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
 And in the New Product page I click Continue
 
+# Ingredients Page
+And I should see the Ingredients Page
 Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Formaldehyde  | 100     | false               | false       |            |
@@ -634,16 +644,84 @@ Given in the New Product page I click Continue
 
 # U. S. Department of Transportation (DOT) Classification Page
 Then I should see the U. S. Department of Transportation (DOT) Classification Page
-And I set the UN Number field to: UN1950
-And I set the Proper Shipping Name field to: Aerosols
-And I set the Technical Name (if applicable) field to: My Aerosol Product
-And I set the Hazard Class (select) field to: 2.1
-And I set the Packing Group (select) field to: None
+And I set the UN Number field to: UN1944
+And I set the Proper Shipping Name field to: Matches, safety
+And I set the Technical Name (if applicable) field to: My Safe Product
+And I set the Hazard Class (select) field to: 4.1
+And I set the Packing Group (select) field to: III
+Given in the New Product page I click Continue
 
+# Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I set the Product has been granted an Alternative Control Plan option to: No
+And I set the HVOC (high volatile organic compound) content field to: 200
+And I set the MVOC (microbial volatile organic compound) content field to: 200
+Given in the New Product page I click Continue
 
+# Volatile Organic Compound Summary Page
+Then I should see the Volatile Organic Compound Summary Page
+Given in the New Product page I click Continue
 
+# Retailers Page
+Then In the 'Select Retailers' window I select the retailer: Walgreens
+And I should see the Retailer Page
+Given in the New Product page I click Continue
 
+# Universal Product Code (UPC) Page
+And I should see the Universal Product Code (UPC) Page
+Given I click the 'Add UPC' button
+Then I add the following into the UPC Fields
+| Field         | Value             |
+| UPCNumber     | saved as UPC56484 |
+| ContainerType | Glass Container   |
+| Size          | 20                |
+And in the New Product page I click Continue
 
+# Regulatory Documents to Provide
+And I should see the Regulatory Documents to Provide Page
+And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
+Then in the New Product page I click Continue
 
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+Then in the New Product page I click Continue
 
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And I purchase the following additional documents:
+| Document Name  | Language      |
+| Canada GHS SDS | English (U.S) |
+Then in the New Product page I click Continue
 
+# Additional Documents -> Contact Information Page
+And I should see the Additional Documents -> Contact Information Page
+And I set the Manufacturer Name field to: Manufacturer
+And I set the Address field to: Address
+And I set the Phone field to: Phone
+And I set the Emergency Phone field to: EmergencyPhone
+Then in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the below options for field: Personal Protection Equipment Recommended
+| Option                         |
+| Mask                           |
+And I set the Autoignition Temperature (°C) field to: 20
+And I set the Minimum Ignition Energy (mJ) field to: 20
+And I set the Viscosity field to: 20
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 20
+Then in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+Then in the New Product page I click section: Optional Reports and Documents Available for Purchase
+And the following additional documents should be showing as selected:
+| Document Name  | Language      |
+| Canada GHS SDS | English (U.S) |
+
+# Delete the prodiuct created to cleanup
+Given I navigate to the home page
+Then I delete the product: TestCase67661

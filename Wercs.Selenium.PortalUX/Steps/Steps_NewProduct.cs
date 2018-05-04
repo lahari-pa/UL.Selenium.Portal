@@ -160,6 +160,52 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selNewProduct.ClickBrowseForVolatileOrganicCompounds(), "Failed to upload ", "Successfully upload ");
 		}
 
+		[StepDefinition(@"I click the browse button for label: (.*) and upload PDF: (.*)")]
+		public void UploadPDFFile(string label, string pdfFile)
+		{
+			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
+		}
+
+		[StepDefinition(@"I purchase the following additional documents:")]
+		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
+		{
+			foreach (var row in table.Rows)
+			{
+				Report.IsTrue(new NewProduct().AddDocument(row["Document Name"], row["Language"]), "Failed to add document: " + row["Document Name"], "Succesfully added document: " + row["Document Name"], false, false);
+			}
+
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"the following additional documents should be selected:")]
+		public void TheFollowingAdditionalDocumentsShouldBeSelected(Table table)
+		{
+			foreach (var row in table.Rows)
+			{
+				Report.IsTrue(new NewProduct().AddDocument(row["Document Name"], row["Language"]), "Failed to add document: " + row["Document Name"], "Succesfully added document: " + row["Document Name"], false, false);
+			}
+
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"the following additional documents should be showing as selected:")]
+		public void TheFollowingLanguagesShouldBeSelectedCorrectly(Table table)
+		{
+			foreach (var row in table.Rows)
+			{
+				var languagesShowing = new NewProduct().GetSelectedLanguagesForDocument(row["Document Name"]);
+				var languagesExpected = row["Language"].Split(',').Select(x => x.Trim());
+
+				Report.Info("Languages found for " + row["Document Name"] + ": " + string.Join(", ",languagesShowing));
+
+				foreach (var lang in languagesExpected)
+				{
+					Report.IsTrue(languagesShowing.Contains(lang), "Failed to find " + lang + " in the list of selected languages!", "Successfully found " + lang + " in the list of selected languages!", false, false);
+				}
+			}
+
+			Report.Screenshot();
+		}
 
 		[StepDefinition(@"I should see the header (.*)")]
 		public void CorrectHeaderShouldBeShowing(string header)

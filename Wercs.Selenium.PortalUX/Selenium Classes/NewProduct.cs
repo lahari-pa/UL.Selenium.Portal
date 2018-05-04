@@ -2504,6 +2504,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool UploadFileForSection(string section, string pdfFilePath)
+		{
+			var el = containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Browse']"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			if (!el.TryClick())
+			{
+				return false;
+			}
+
+			GeneralFunctions.EnterFilename(pdfFilePath);
+
+			int i = 0;
+			while (containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Remove']"), 2) == null && i<10)
+			{
+				i++;
+				Delay.Seconds(Delay.SpeedFactor*1);
+			}
+
+			return true;
+		}
+
 		/// <summary>
 		/// Product label specifies a dilution ratio option
 		/// </summary>
@@ -2651,6 +2676,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product does not contain more than 0.05 grams of VOC per use')]"), 2).Text;
 		}
+
 
 
 		/// <summary>
@@ -2870,6 +2896,42 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			return true;
+		}
+
+		public bool AddDocument(string documentName, string language)
+		{
+			var rowContainer = containerElement.FindElement(By.XPath(".//span[text()='" + documentName +"']//ancestor::div[contains(@class,'document-row')]"), 2);
+			if (rowContainer == null)
+			{
+				return false;
+			}
+
+			//rowContainer.FindElement(By.XPath(".//input[@type='search']"), 2).TryClick();
+			var selectEl = rowContainer.FindElement(By.XPath(".//div[@class='add-language']//select"), 10);
+			selectEl.Select(language);
+
+			return selectEl.SelectedOption() == language;
+
+		}
+
+		public List<string> GetSelectedLanguagesForDocument(string documentName)
+		{
+			var rowContainer = containerElement.FindElement(By.XPath(".//span[text()='" + documentName + "']//ancestor::div[contains(@class,'document-row')]"), 2);
+			int i = 0;
+			while (i < 10 && rowContainer==null)
+			{
+				Delay.Seconds(Delay.SpeedFactor*2);
+				rowContainer = containerElement.FindElement(By.XPath(".//span[text()='" + documentName + "']//ancestor::div[contains(@class,'document-row')]"), 2);
+			}
+
+			if (rowContainer == null)
+			{
+				return null;
+			}
+
+			var el = rowContainer.FindElements(By.XPath(".//span[@class='selection']//li[not(.//input)]"), 2);
+
+			return el.Select(x => x.GetElementText().Replace("×", "").Trim()).ToList();
 		}
 	}
 
