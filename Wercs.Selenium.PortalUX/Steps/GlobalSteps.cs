@@ -189,6 +189,30 @@ namespace WERCSmart
 			}
 		}
 
+		[StepDefinition(@"I Login into WERCSmart Portal - Division Account")]
+		public void GivenLoginIntoWERCSmartPortal_DivisionAccount ()
+		{
+				var selLandingPage = new LandingPage();
+				if (selLandingPage.Wait_for_load(10))
+				{
+					Report.Info("Clicking 'Log In' on the Landing Page");
+					selLandingPage.Click_Login();
+				}
+
+				var selLogin = new Login();
+				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
+				var username = @"automateddivision.kxxyxunf@mailosaur.io"; 
+				var password = "Welcome1!";
+
+				Report.Info("Entering Email: '" + username + "'");
+				selLogin.EmailField = username;
+				Report.Info("Entering Password: '" + password + "'");
+				selLogin.PasswordField = password;
+				Report.Info("Clicking login");
+				selLogin.Click_Login();
+				GeneralUtilities.Wait_for_load_finish();
+		}
+
 		[Then(@"The home screen should load")]
 		public void ThenTheHomeScreenShouldLoad()
 		{

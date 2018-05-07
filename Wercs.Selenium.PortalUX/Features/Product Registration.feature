@@ -807,3 +807,137 @@ And the following additional documents should be showing as selected:
 # Delete the prodiuct created to cleanup
 Given I navigate to the home page
 Then I delete the product: TestCase67661
+
+Scenario: [56483] VOC - Antiperspirant and Deodorant checks
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Checking that the test will run correctly by handling extra screens
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# New Product Page
+And I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# The Product Page
+And I should see the The Product Page
+And I set the Product Name option to: Antiperspirants - Non-aerosol
+And In the Product Type tab of the New Product Page, I enter: Antiperspirants - Non-aerosol in the Type of Product select field
+And in the New Product page I click Continue
+
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase56483
+And I should only see the following options for Primary Physical State:
+| State |
+| Liquid |
+| Solid |
+And I set the Primary Physical State option to: Solid
+And I set the Secondary Physical State option to: Solid
+And I set the When mixed with an equal amount of water option to: No
+And I set the Select the best Water Solubility description option to: Very soluble
+And in the New Product page I click Continue
+
+# Additional Product Information page
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+# Ingredient Page
+And I should see the Ingredients Page
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
+Given in the New Product page I click Continue
+
+# Regulatory 3 Page Details
+And I should see the Regulatory Information 3 Page
+And I set the below options for field: Refer to your Product Label
+| Option            |
+| None of the Above |
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport option to: Not Regulated
+Given in the New Product page I click Continue
+
+# Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No
+And in the New Product page I click Continue
+Then HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: This is a required field.
+Then MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
+And I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 1
+And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 1
+And in the New Product page I click Continue
+
+# Volatile Organic Compound Summary page
+And I should see the Volatile Organic Compound Summary Page
+And I confirm that I see todays VOC Analysis Date
+And I should see the following Voc Limits present:
+| Use                               | VOC Compliance Limit         | Regulation                                                    |
+| Antiperspirants - Non-aerosol     | 0                         | HVOC CARB and OTC Model Rule limit                               |
+| Antiperspirants - Non-aerosol     | 0                         | MVOC CARB and OTC Model Rule limit                               |
+And I confirm that I see the following HVOC: 1
+And I confirm that I see the following MVOC: 1
+And I confirm that I see the following comply with restrictive VOC statement: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm that I see the following limits statement: Exceeds the limits specified by CARB and OTC Model Rule
+
+#change the HVOC and MVOC value
+Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
+And I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 0
+And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 0
+And in the New Product page I click Continue
+And I confirm that I see the following limits statement: Does not exceed the limits specified by CARB and OTC Model Rule
+And in the New Product page I click Continue
+
+# Retailers Page
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
+And in the New Product page I click Continue
+
+# Regulatory Documents to Provide Page
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
+And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+And in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 5
+And in the New Product page I click Continue
+
+# Comments Page
+And I should see the Comments Page
+And in the New Product page I click Continue
+
+# Data Acceptance Page and clean up 
+And I should see the Data Acceptance Page
+Given I navigate to the home page
+Then I delete the product: TestCase56483

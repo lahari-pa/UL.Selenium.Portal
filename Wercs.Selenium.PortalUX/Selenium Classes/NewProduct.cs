@@ -2720,11 +2720,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// Gets Does not exceed the limits specified in the Aerosol Coatings by the CARB statement
+		/// Gets HVOC value
 		/// </summary>
-		public string LimitsSpecifiedAerosolCoatingCARB()
+		public string GetHvocValue()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified in the Aerosol Coatings by the CARB')]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'HVOC')]//b"), 2).Text;
+		}
+
+		/// <summary>
+		/// Gets MVOC value
+		/// </summary>
+		public string GetMvocValue()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'MVOC')]//b"), 2).Text;
+		}
+
+		/// <summary>
+		/// Gets limits specified statement
+		/// </summary>
+		public string LimitsSpecified()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified')]"), 2).Text;
 		}
 
 		/// <summary>

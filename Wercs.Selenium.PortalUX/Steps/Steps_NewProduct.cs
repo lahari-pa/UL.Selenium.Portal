@@ -1147,13 +1147,41 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
-		/// Confirm Does not exceed the limits specified in the Aerosol Coatings by the CARB statement
+		/// Confirm HVOC value
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following HVOC: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingHVOC(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetHvocValue();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"value was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"value was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm MVOC value
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following MVOC: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingMVOC(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetMvocValue();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"value was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"value was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm limits statement
 		/// </summary>
 		[StepDefinition(@"I confirm that I see the following limits statement: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingLimitsStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
-			var found = newProductpage.LimitsSpecifiedAerosolCoatingCARB();
+			var found = newProductpage.LimitsSpecified();
 
 			Report.IsTrue(found.Trim() == statement.Trim(),
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
