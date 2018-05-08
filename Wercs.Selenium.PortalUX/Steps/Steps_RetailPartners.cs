@@ -189,10 +189,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the text under section: (.*) is showing: (.*)")]
-		public void TextIsShowingCorrectlyInSection(string section, string text)
+		[StepDefinition(@"The Supplier ID Table (should|should not) be showing")]
+		public void SupplierIdShowingCorrectly(string shouldornot)
 		{
-
+			bool expected = shouldornot == "should";
+			Report.IsTrue(new RetailParntersDetails().SupplierIDTableShowing() == expected, (expected ? "Expected" : "Did not expect") + " the Supplier ID table to be showing!", "The Supplier ID " + (expected ? "was" : "was not") + " table showing, as expected!");
 		}
 
 		[StepDefinition(@"I confirm that under the pie chart I see the label: (.*)")]

@@ -55,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			// Finds all the most recent retail partners
 			var recentPartners = this.containerElement.FindElements(By.XPath(".//div[@class='most-recent']//span[@class='sr-only']"), 2);
 
-			if (recentPartners.Any(x => x.Text.Contains(retailer)))
+			if (recentPartners.Any(x => x.Text.ToLower().Contains(retailer.ToLower())))
 			{
 				// Retailer was found in the most recent retailer portion of the screen!
 				recentPartners.FirstOrDefault(x => x.Text.Contains(retailer)).FindElement(By.XPath("../.."), 2).Click();
@@ -65,10 +65,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			// Retailer not found in the most recent retailers portion, so checking the rest of the retailers
 			var allPartners = this.containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//span[@class='sr-only']"), 2);
 
-			if (allPartners.Any(x => x.Text.Contains(retailer)))
+			if (allPartners.Any(x => x.Text.ToLower().Contains(retailer.ToLower())))
 			{
 				// Retailer was found in the most recent retailer portion of the screen!
-				allPartners.FirstOrDefault(x => x.Text.Contains(retailer)).FindElement(By.XPath("../.."), 2).Click();
+				allPartners.FirstOrDefault(x => x.Text.ToLower().Contains(retailer.ToLower())).FindElement(By.XPath("../.."), 2).Click();
 				return true;
 			}
 
@@ -103,6 +103,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetSectionText(string section)
 		{
 			return containerElement.FindElement(By.XPath(".//div[contains(@class,'panel') and (./preceding-sibling::h3[text()='" + section + "'])]"), 2).Text;
+		}
+
+		public bool SupplierIDTableShowing()
+		{
+			return containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2) != null;
 		}
 
 		public string GetChartLegend()
