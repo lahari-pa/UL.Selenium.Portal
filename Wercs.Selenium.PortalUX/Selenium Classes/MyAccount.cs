@@ -579,9 +579,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.Id, Using = "companyInfoContainer")]
 		protected override IWebElement containerElement { get; set; }
 
-		public string ReturnUserOrDivisionAccountsNumber(string AccountType)
+		public string ReturnUserOrDivisionAccountsNumber(string accountType)
 		{
-			return containerElement.FindElement(By.XPath(".//a[contains(normalize-space(),'" + AccountType + " Accounts')]/span"), 2).GetElementText();
+			return containerElement.FindElement(By.XPath(".//a[contains(normalize-space(),'" + accountType + " Accounts')]/span"), 2).GetElementText();
 		}
 
 

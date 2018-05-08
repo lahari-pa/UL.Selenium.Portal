@@ -249,6 +249,9 @@
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\AccountCreation.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\Homepage.cs" />
+    <Compile Include="Selenium Classes\ChooseGoodGuide\MyProducts.cs" />
+    <Compile Include="Selenium Classes\ChooseGoodGuide\GGNewProduct.cs" />
+    <Compile Include="Selenium Classes\ChooseGoodGuide\TopMenu.cs" />
     <Compile Include="Selenium Classes\ConflictMinerals.cs" />
     <Compile Include="Selenium Classes\DataSummary.cs" />
     <Compile Include="Selenium Classes\ForgottenPassword.cs" />

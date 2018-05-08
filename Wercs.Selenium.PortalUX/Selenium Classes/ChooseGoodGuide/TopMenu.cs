@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using SeleniumUtilities;
+
+namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
+{
+	class TopMenu : BaseObject
+	{
+		public const string BasePath = "//header[@class='topnavbar-wrapper']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+		public bool ClickDropDownNextToSelectBox(string selectBoxText)
+		{
+			return containerElement.FindElement(By.XPath(".//a[text() = '"+selectBoxText+"']/following-sibling::button")).TryClick();
+		}
+
+		public bool ClickSelectBox(string selectBoxText)
+		{
+			return containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']")).TryClick();
+		}
+
+		public bool ClickItemFromSelectBox(string selectBoxText, string itemToSelect)
+		{
+			try
+			{
+				if (ClickDropDownNextToSelectBox(selectBoxText))
+				{
+					Delay.Seconds(1);
+					var dropDownMenu = containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']")).FirstOrDefault(x => x.Displayed);
+					return dropDownMenu.FindElement(By.XPath(".//li/a/span[text()='" + itemToSelect + "']")).TryClick();
+
+				}
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+			return false;
+
+		}
+	}
+}
