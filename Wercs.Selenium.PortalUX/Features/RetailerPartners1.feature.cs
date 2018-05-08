@@ -77,49 +77,225 @@ namespace Wercs.Selenium.PortalUX.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 11
-#line 12
-testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-        }
-        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[56881] Retailer Partners - Main Page layout (existing supplier)")]
         public virtual void _56881RetailerPartners_MainPageLayoutExistingSupplier()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56881] Retailer Partners - Main Page layout (existing supplier)", ((string[])(null)));
-#line 14
+#line 12
 this.ScenarioSetup(scenarioInfo);
-#line 11
-this.FeatureBackground();
-#line 16
+#line 14
 testRunner.And("I login into the WERCSmart Portal - Administrator Role", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
+#line 15
 testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
+#line 17
 testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 20
+#line 18
 testRunner.And("I should see the following subheading All Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
+#line 19
 testRunner.And("I should see the following subheading Most Recent Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
+#line 20
 testRunner.And("Confirm that you see Retailer tiles shown under the Most Recent Retails heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 23
+#line 21
 testRunner.And("Confirm that you see Retailer tiles shown under the All Retailers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 24
+#line 22
 testRunner.And("Confirm that the retailers shown under the Most Recent Retailers heading are not " +
                     "repeated under the All Retailers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
+#line 23
 testRunner.And("Confirm that none of the tiles are blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
+#line 24
 testRunner.And("Confirm that if the Retailer logo is not shown, then the Retailer name is shown i" +
                     "n the Retailer tile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
+#line 25
 testRunner.And(@"Use the Stored Procedure GET_MOST_RECENT_RETAILERS to confirm that the retailers shown under Most Recent Retailers is correct NOTE: Parameters for the GET_MOST_RECENT_RETAILERS are @SUPPLIERGUID  - different for each supplier  @TOPPRODUCTS - use the number 8 @SOURCESERVICE - use the word PORTAL    Supplier GUID should be enclosed in single quotes   The word PORTAL for the SOURCESERVICE does not need single quotes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
+#line 26
 testRunner.And(@"Use this query to see the list of currently active retailers in Portal select * from t_client where f_active = 1 and ISNULL(f_config.value('(/Client/@Active)[1]','varchar(20)'),'true') = 'true'  order by f_name CONFIRM this list matches the list of retailers you see in the Retail Partners page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[56895] Retailer Partners - Main Page layout (New supplier)")]
+        public virtual void _56895RetailerPartners_MainPageLayoutNewSupplier()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56895] Retailer Partners - Main Page layout (New supplier)", ((string[])(null)));
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line 30
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 33
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 34
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 35
+testRunner.And("I should see the following subheading All Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 36
+testRunner.Then("I confirm that none of the available Retailer Tiles are blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Retailer",
+                        "Code"});
+            table1.AddRow(new string[] {
+                        "Ahold",
+                        "AH"});
+            table1.AddRow(new string[] {
+                        "Albertsons Companies",
+                        "SW"});
+            table1.AddRow(new string[] {
+                        "Amazon",
+                        "AM"});
+            table1.AddRow(new string[] {
+                        "Autozone",
+                        "AZ"});
+            table1.AddRow(new string[] {
+                        "Bed Bath and Beyond",
+                        "BB"});
+            table1.AddRow(new string[] {
+                        "Canadian Tire",
+                        "CT"});
+            table1.AddRow(new string[] {
+                        "Costco",
+                        "CO"});
+            table1.AddRow(new string[] {
+                        "CVS",
+                        "CV"});
+            table1.AddRow(new string[] {
+                        "Delhaize",
+                        "DA"});
+            table1.AddRow(new string[] {
+                        "Dick\'s Sporting Goods",
+                        "DI"});
+            table1.AddRow(new string[] {
+                        "Dollar General",
+                        "DG"});
+            table1.AddRow(new string[] {
+                        "Dollar Tree",
+                        "DT"});
+            table1.AddRow(new string[] {
+                        "Essendant",
+                        "US"});
+            table1.AddRow(new string[] {
+                        "Family Dollar",
+                        "FD"});
+            table1.AddRow(new string[] {
+                        "Genuine Parts",
+                        "GP"});
+            table1.AddRow(new string[] {
+                        "Harbor Freight Tools",
+                        "HF"});
+            table1.AddRow(new string[] {
+                        "HD Supply",
+                        "HS"});
+            table1.AddRow(new string[] {
+                        "HyVee",
+                        "HV"});
+            table1.AddRow(new string[] {
+                        "Kroger",
+                        "KG"});
+            table1.AddRow(new string[] {
+                        "Lowes",
+                        "LW"});
+            table1.AddRow(new string[] {
+                        "McLane",
+                        "ML"});
+            table1.AddRow(new string[] {
+                        "Meijer",
+                        "MJ"});
+            table1.AddRow(new string[] {
+                        "Michaels",
+                        "MI"});
+            table1.AddRow(new string[] {
+                        "Northgate Market",
+                        "NM"});
+            table1.AddRow(new string[] {
+                        "Office Depot",
+                        "OD"});
+            table1.AddRow(new string[] {
+                        "O\'Reilly Auto Parts",
+                        "OR"});
+            table1.AddRow(new string[] {
+                        "Petco",
+                        "PC"});
+            table1.AddRow(new string[] {
+                        "Price Chopper",
+                        "PR"});
+            table1.AddRow(new string[] {
+                        "Rite Aid",
+                        "RA"});
+            table1.AddRow(new string[] {
+                        "Save Mart Supermarkets",
+                        "SM"});
+            table1.AddRow(new string[] {
+                        "Schnucks",
+                        "SC"});
+            table1.AddRow(new string[] {
+                        "Sears K Mart",
+                        "SE"});
+            table1.AddRow(new string[] {
+                        "Smart & Final",
+                        "SF"});
+            table1.AddRow(new string[] {
+                        "Staples",
+                        "SP"});
+            table1.AddRow(new string[] {
+                        "SuperValue",
+                        "SV"});
+            table1.AddRow(new string[] {
+                        "Target",
+                        "TG"});
+            table1.AddRow(new string[] {
+                        "The Home Depot",
+                        "HD"});
+            table1.AddRow(new string[] {
+                        "Topco",
+                        "TP"});
+            table1.AddRow(new string[] {
+                        "Tractor Value Supply",
+                        "TS"});
+            table1.AddRow(new string[] {
+                        "Ultra Standard",
+                        "ST"});
+            table1.AddRow(new string[] {
+                        "Unified",
+                        "UF"});
+            table1.AddRow(new string[] {
+                        "Wakefren",
+                        "WF"});
+            table1.AddRow(new string[] {
+                        "Walgreens",
+                        "WG"});
+            table1.AddRow(new string[] {
+                        "BONBONS",
+                        "WM-BO"});
+            table1.AddRow(new string[] {
+                        "Walmart.com",
+                        "WM-CO"});
+            table1.AddRow(new string[] {
+                        "Hayneedle",
+                        "WM-HN"});
+            table1.AddRow(new string[] {
+                        "Jet",
+                        "WM-JE"});
+            table1.AddRow(new string[] {
+                        "MODCLOTH",
+                        "WM-MC"});
+            table1.AddRow(new string[] {
+                        "Moosejaw",
+                        "WM-MJ"});
+            table1.AddRow(new string[] {
+                        "Shoes.com",
+                        "WM-SC"});
+            table1.AddRow(new string[] {
+                        "Walmart",
+                        "WM"});
+            table1.AddRow(new string[] {
+                        "Winco Foods",
+                        "WC"});
+            table1.AddRow(new string[] {
+                        "NewEgg",
+                        "NE"});
+#line 42
+testRunner.And("I check that the following retailers are showing:", ((string)(null)), table1, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

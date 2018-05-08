@@ -274,11 +274,13 @@ Then I delete the product: TestCase65441
 
 
 Scenario: [63684] Walmart Private label product
-# UPC: 0728990015025
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
-Given I delete all products with UPC Number: 0728990015025
+Given I generate a random UPC number and save as: UPC63684
+Given I delete all products with UPC Number: saved as UPC63684
+
+
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
@@ -325,10 +327,10 @@ And In the Retailers tab, I select Vendor id as: test
 And in the New Product page I click Continue
 Given I click the 'Add UPC' button
 Then I add the following into the UPC Fields
-| Field         | Value        |
-| UPCNumber     | 0728990015025 |
-| ContainerType | Aerosol Can  |
-| Size          | 20           |
+| Field         | Value             |
+| UPCNumber     | saved as UPC63684 |
+| ContainerType | Aerosol Can       |
+| Size          | 20                |
 #Regulatory Documents to Provide - US only _ request authoring - Happy Path
 Given in the New Product page I click Continue
 And I should see the Regulatory Documents to Provide Page

@@ -591,13 +591,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(@"I confirm that none of the available Retailer Tiles are blank")]
+		public void NoRetailerTilesAreBlank()
+		{
+			Report.IsTrue(new RetailPartners().NoRetailerTilesAreEmpty(), "Some retailer partner containers were empty!", "No retailer partner containers were empty!");
+		}
 
+		[StepDefinition(@"I check that the following retailers are showing:")]
+		public void RetailersAreCorrectlyShowing(Table expected)
+		{
+			var showing = new RetailPartners().GetAllAvailableRetailers();
 
+			var retList = new List<string>();
+			foreach (var show in showing)
+			{
+				string[] parts1 = show.Split('/');
+				string[] parts2 = parts1[parts1.Length - 1].Split('?');
+				string filename = parts2[0];
+				retList.Add(Path.GetFileNameWithoutExtension(filename).ToUpper());
+			}
 
+			foreach (var row in expected.Rows)
+			{
+				Report.IsTrue(retList.Contains(row["Code"]), "Failed to find retailer: " + row["Retailer"], "Successfully found a retailer: " + row["Retailer"], false, false);
+			}
 
-
-
-
-
+			Report.Screenshot();
+		}
 	}
 }

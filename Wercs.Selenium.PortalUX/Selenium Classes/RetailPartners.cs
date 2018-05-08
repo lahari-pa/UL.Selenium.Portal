@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Castle.Components.DictionaryAdapter;
 using OpenQA.Selenium;
@@ -74,6 +75,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			// Retailer not found!
 
 			return false;
+		}
+
+		public bool NoRetailerTilesAreEmpty()
+		{
+			return !containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//div[starts-with(@class,'col') and not(.//a)]"), 2).Any();
+		}
+
+		public List<string> GetAllAvailableRetailers()
+		{
+			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).Select(x=>x.GetCssValue("background-image").Replace(@"""","").Replace("url(","").Replace(")","")).ToList();
 		}
 	}
 
@@ -205,6 +216,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'alert-warning') and contains(@data-bind,'additionalInfo')]"), 2).Text;
 		}
+
+
+	
 	}
 
 	public class DataEntryNotification : BaseObject
