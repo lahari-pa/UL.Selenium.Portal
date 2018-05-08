@@ -120,37 +120,46 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I select the retailer: (.*)")]
-		public void SelectRetailer(string retailer)
+
+		[StepDefinition(@"I should see the retailer heading: (.*)")]
+		public void CorrectRetailerShowing(string retailer)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Selecting retailer " + retailer);
-			try
-			{
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Info("Selecting retailer " + retailer);
-
-				var selRetailPartners = new RetailPartners();
-
-				if (!selRetailPartners.Wait_for_load(10))
-				{
-					throw new Exception("Page failed to load!");
-				}
-
-
-				Report.IsTrue(selRetailPartners.ClickRetailer(retailer),
-					"Failed to click retailer " + retailer + "!",
-					"Retailer " + retailer + " was selected successfully!");
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new RetailParntersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!");
 		}
 
 
+		[StepDefinition(@"I select the retailer: (.*)")]
+		public void SelectRetailer(string retailer)
+		{
+			GeneralUtilities.Wait_for_load_finish();
+			var selRetailPartners = new RetailPartners();
+
+			if (!selRetailPartners.Wait_for_load(10))
+			{
+				throw new Exception("Page failed to load!");
+			}
+			
+			Report.IsTrue(selRetailPartners.ClickRetailer(retailer),
+				"Failed to click retailer " + retailer + "!",
+				"Retailer " + retailer + " was selected successfully!");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"Section: (.*) should be showing text: (.*)")]
+		public void SectionShouldBeShowingText(string section, string text)
+		{
+			var showing = new RetailParntersDetails().GetSectionText(section).Trim();
+			Report.IsTrue(showing == text.Trim(), "Text was not showing: " + text.Trim() + ". Instead found: " + showing, "Text was showing: " + text.Trim() + ", as expected!");
+		}
+
+		[StepDefinition(@"I should see the button: (.*) in section: (.*)")]
+		public void ButtonsShowingInSection(string button, string section)
+		{
+			var buttons = new RetailParntersDetails().GetButtons(section);
+			Report.Info("Buttons showing: " + string.Join(", ",buttons));
+			Report.IsTrue(buttons.Contains(button.Trim()), "Failed to find the button: " + button + "!", "Succesfully found the button: " + button);
+		}
 
 		[StepDefinition(@"I confirm that there is a section labeled: (.*)")]
 		public void ConfirmHeadingShowing(string header)
@@ -180,6 +189,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm that the text under section: (.*) is showing: (.*)")]
+		public void TextIsShowingCorrectlyInSection(string section, string text)
+		{
+
+		}
+
 		[StepDefinition(@"I confirm that under the pie chart I see the label: (.*)")]
 		public void ConfirmPieChartLegend(string legendLabel)
 		{
@@ -206,6 +221,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"The pie chart should be showing on the retailer details page")]
+		public void PieChartShowing()
+		{
+			Report.IsTrue(new RetailParntersDetails().PieChartShowing(), "Pie Chart was not visible!", "Pie chart was visible, as exoected!");
+		}
+
+		[StepDefinition(@"The pie chart footer text should contain: (.*)")]
+		public void PieChartFooterTextShowingAsExpected(string text)
+		{
+			var showing = new RetailParntersDetails().GetPieChartFooterText();
+			Report.Info("Text found was: " + showing);
+			Report.IsTrue(showing.Contains(text), "Showing text did not contain: " + text + "!", "Displayed text successfully contained: " + text);
 		}
 
 		[StepDefinition(@"I confirm that: (.*) is showing under the Data Consent Tiers heading")]

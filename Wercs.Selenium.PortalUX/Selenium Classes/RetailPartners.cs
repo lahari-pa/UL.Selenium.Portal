@@ -100,9 +100,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return headers.Any(x => x.Text.Contains(header));
 		}
 
+		public string GetSectionText(string section)
+		{
+			return containerElement.FindElement(By.XPath(".//div[contains(@class,'panel') and (./preceding-sibling::h3[text()='" + section + "'])]"), 2).Text;
+		}
+
 		public string GetChartLegend()
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[@class='chart-legend']"), 2).Text;
+		}
+
+		public bool PieChartShowing()
+		{
+			return containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//*[name()='svg']"), 2) != null;
+		}
+
+		public string GetPieChartFooterText()
+		{
+			return containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//div[@class='chart-legend']/p"), 2).Text;
 		}
 
 		public string GetTierInformation()
@@ -217,8 +232,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'alert-warning') and contains(@data-bind,'additionalInfo')]"), 2).Text;
 		}
 
+		public string GetSelectedRetailer()
+		{
+			return containerElement.FindElement(By.XPath("//h2[@id='retailerLabel']"), 2).GetElementText();
+		}
 
-	
+		public List<string> GetButtons(string section)
+		{
+			return containerElement.FindElements(By.XPath(".//div[contains(@class,'panel') and (./preceding-sibling::h3[text()='" + section + "'])]//ul[contains(@class,'list')]//a"), 2).Select(x => x.Text).ToList();
+		}
+
 	}
 
 	public class DataEntryNotification : BaseObject
