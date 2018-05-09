@@ -30,7 +30,7 @@ namespace Wercs.Selenium.PortalUX.Features
     [NUnit.Framework.CategoryAttribute("wercsmart")]
     [NUnit.Framework.CategoryAttribute("RetailPartners")]
     [NUnit.Framework.CategoryAttribute("ConflictMinerals")]
-    [NUnit.Framework.CategoryAttribute("run_ConflictMinerals")]
+    [NUnit.Framework.CategoryAttribute("run_conflictminerals")]
     public partial class ConflictMineralsFeature
     {
         
@@ -55,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Features
                         "wercsmart",
                         "RetailPartners",
                         "ConflictMinerals",
-                        "run_ConflictMinerals"});
+                        "run_conflictminerals"});
             testRunner.OnFeatureStart(featureInfo);
         }
         

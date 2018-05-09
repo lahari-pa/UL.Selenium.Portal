@@ -9,7 +9,7 @@
 @wercsmart
 @RetailPartners
 @ConflictMinerals
-@run_ConflictMinerals
+@run_conflictminerals
 
 Feature: Conflict Minerals
 
