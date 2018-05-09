@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -29,6 +31,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Selecting Number of Articles: " + articles);
 			_selectArticles.Select(articles);
 			return true;
+		}
+
+		public bool SetSection(string section, string option)
+		{
+			var el = containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
+			if (el == null)
+			{
+				Report.Error("Could not find the section: " + section);
+				return false;
+			}
+
+			el.Select(option);
+
+			return el.SelectedOption() == option;
+		}
+
+		public string GetSectionSelectedOption(string section)
+		{
+			var el = containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
+			if (el == null)
+			{
+				Report.Error("Could not find the section: " + section);
+				return null;
+			}
+
+			return el.SelectedOption();
+
 		}
 
 		public string Get_Selected_Articles()
@@ -60,6 +89,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool RefreshContainerElement()
+		{
+			containerElement = SeleniumBrowser.WebBrowser.FindElement(By.Id("enrollment"), 2);
+			return containerElement != null;
+		}
+
+		public List<string> ReturnSelectDropDownItems(string label)
+		{
+			return new SelectElement(containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//following-sibling::select"), 2)).Options.Select(x => x.Text.Trim()).ToList();
+		}
+
+		public bool HoverOverInformationElement(string label)
+		{
+			var el = containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//i[contains(@class,'info-circle')]"), 2);
+			var actions = new Actions(SeleniumBrowser.WebBrowser);
+			actions.MoveToElement(el).Build().Perform();
+			Delay.Seconds(Delay.SpeedFactor*3);
+			return true;
+		}
+
 		public string Get_Page_Header()
 		{
 			return containerElement.FindElement(By.XPath("//div[contains(@class, 'header-with-back')]/h2")).Text.Trim();
@@ -67,6 +116,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> Get_Page_SubHeaders()
 		{
+			RefreshContainerElement();
 			return containerElement.FindElements(By.XPath("//h3/span/../../h3")).Select(x => x.Text).ToList();
 		}
 
@@ -634,6 +684,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public string GetSelectedItemInSection(string section)
+		{
+			switch (section.ToLower())
+			{
+				case ("select the feature plan"):
+					var input_1 = containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div[@class='row']//input"), 2).FirstOrDefault(x => x.Checked());
+					return input_1.FindElement(By.XPath("./parent::label"), 2).GetElementText();
+				case ("select the support services plan"):
+					var input_2 = containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div//input"), 2).FirstOrDefault(x => x.Checked());
+					return input_2.FindElement(By.XPath("./parent::label"), 2).GetElementText();
+			}
+			return "";
+		}
+
 		public IWebElement Get_General_Support_Plan()
 		{
 			Report.Info("Beginning Get_General_Support_Plan");
@@ -738,8 +802,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Proceed_click()
 		{
 			Report.Info("Attempting to Click Proceed Button");
-			_btnProceed.Click();
-			return true;
+			return _btnProceed.TryClick();
 		}
 
 		public bool Proceed_button_enabled()
@@ -1063,3 +1126,43 @@ class AgencyServiceAgreementDlg : BaseDialog
 	}
 }
 
+class SubscriptionPopup : BaseDialog
+{
+	[FindsBy(How = How.XPath, Using = "//div[starts-with(@class,'popover') and @role='tooltip']")]
+	protected override IWebElement containerElement { get; set; }
+
+	public string GetHeaderText()
+	{
+		if (containerElement == null)
+		{
+			Report.Error("Popup dialo could not be located!");
+			return "";
+		}
+		var el = containerElement.FindElement(By.XPath(".//h3"), 2);
+
+		if (el == null)
+		{
+			Report.Error("Could not find header in popup dialog");
+			return "";
+		}
+		return el.Text;
+	}
+
+	public string GetBodyText()
+	{
+		if (containerElement == null)
+		{
+			Report.Error("Popup dialo could not be located!");
+			return "";
+		}
+		var el = containerElement.FindElement(By.XPath(".//div[@class='popover-content']"), 2);
+
+		if (el == null)
+		{
+			Report.Error("Could not find body in popup dialog");
+			return "";
+		}
+		return el.Text;
+	}
+	
+}

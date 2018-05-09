@@ -55,20 +55,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Payment Methods screen I select Payment Method: (.*)")]
 		public void ThenISelectPaymentMethodX(string payMethod)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I select Payment Method: " + payMethod);
-			try
-			{
-				var myPay = new PaymentMethods();
-				Delay.Seconds(3 * Delay.SpeedFactor);
-				Report.IsTrue(myPay.Select_Payment_Method(payMethod), "Failed to Select " + payMethod,
-					"Successfully Selected " + payMethod);
-				Delay.Seconds(3 * Delay.SpeedFactor);
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			var myPay = new PaymentMethods();
+			Delay.Seconds(3 * Delay.SpeedFactor);
+			Report.IsTrue(myPay.Select_Payment_Method(payMethod), "Failed to Select " + payMethod,
+				"Successfully Selected " + payMethod);
+			Delay.Seconds(3 * Delay.SpeedFactor);
 		}
 
 

@@ -605,8 +605,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Report.Info(myText.Text.Trim());
 
-			if (!myText.Text.Trim()
-				.Contains(form_no + " Formulated, " + art_no + " Articles, " + en_art_no + " Enhanced Articles"))
+			var Expected = new List<string>();
+			Expected.Add(form_no == "0" ? "" : form_no + " Formulated");
+			Expected.Add(art_no == "0" ? "" : art_no + " Articles");
+			Expected.Add(en_art_no == "0" ? "" : en_art_no + " Enhanced Articles");
+			var ExpectedText = string.Join(", ", Expected.Where(x => x != ""));
+
+			Report.Info("Expected string: " + ExpectedText);
+
+			if (!myText.Text.Trim().Contains(ExpectedText))
 			{
 				Report.Info("Incorrect Status Information");
 				Report.Screenshot();

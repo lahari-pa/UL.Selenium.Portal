@@ -163,6 +163,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Agency Service Agreement pop is showing as expected: " + actualText);
 		}
 
+		[StepDefinition(@"I set the (Articles|Enhanced Articles|Formulated Products) to be: (.*), then the Annual Cost should be: (.*)")]
+		public void CheckingThatUpdatingInputsChangesCost(string section, string option, string cost)
+		{
+			if (Report.IsTrue(new SubscriptionEnrollment().SetSection(section, option), "Failed to set section: " + section + " to option: " + option, "Successfully set section: " + section + " to option: " + option))
+			{
+				var actualCost = new SubscriptionEnrollment().GetEstimatedAnualCost();
+				Report.IsTrue(actualCost.Trim() == cost.Trim(), string.Format("Expected to see a total cost of: {0}, but found: {1}!", cost,actualCost), string.Format("Total cost was showing {0}, as expected", cost));
+			}
+		}
+
 		[Then(@"I should see following statement at the bottom (.*)")]
 		public void ThenIShouldSeeFollowingStatementAtTheBottom(string statement)
 		{
@@ -192,11 +202,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Cost is showing as expected: " + cost);
 		}
 
-		[Then(@"I should see Proceed button disabled")]
-		public void ThenIShouldSeeProceedButtonDisabled()
+		[StepDefinition(@"I should see Proceed button (enabled|disabled)")]
+		public void ThenIShouldSeeProceedButtonDisabled(string enabled)
 		{
-			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
-			Report.IsTrue(!MySE.Proceed_button_enabled(), "Proceed button is enabled.", "Proceed button is disabled.");
+			bool expectedEnabled = enabled == "enabled";
+			Report.IsTrue(new SubscriptionEnrollment().Proceed_button_enabled() == expectedEnabled, string.Format("Proceed button is {0}", expectedEnabled ? "disabled":"enabled"), "Proceed button is " + enabled);
 		}
 
 
@@ -248,9 +258,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Plan thisPlan = allPlans.FirstOrDefault(x => x.Plan_Name == plan);
 
 				Info_Point thisInfoPoint = thisPlan.Info_points.FirstOrDefault(x => x.Info_Header == thisRow["Item"]);
-				Report.IsTrue(thisInfoPoint != null, "Item has not been found: " + thisRow["Item"].ToString(),"Item has been found: " + thisRow["Item"].ToString());
+				Report.IsTrue(thisInfoPoint != null, "Item has not been found: " + thisRow["Item"].ToString(),"Item has been found: " + thisRow["Item"].ToString(), false, false);
 
-				if (thisRow["Further details"].Length > 0)
+				if (thisRow.ContainsKey("Further details") && thisRow["Further details"].Length > 0)
 				{
 					string actualHiddenText = MySE.Click_Info_By_Plan_Item_Return_Hidden(plan, thisRow["Item"].ToString());
 					thisInfoPoint.Info_Detail = actualHiddenText;
@@ -300,27 +310,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 
-		[Then(@"In the Subscription Enrollment screen I confirm that the option showing in the (.*) dropdown is: (.*)")]
+		[StepDefinition(@"In the Subscription Enrollment screen I confirm that the option showing in the (Articles|Enhanced Articles|Formulated Products) dropdown is: (.*)")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatTheOptionShowingInTheDropdownIs(string dropdown, string expectedOption)
 		{
-			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
-			string selectedOption = "";
-			switch (dropdown)
-			{
-				case "Articles":
-					selectedOption = MySE.Get_Selected_Articles();
-					break;
-				case "Enhanced Articles":
-					selectedOption = MySE.Get_Selected_Enhanced_Articles();
-					break;
-				case "Formulated Products":
-					selectedOption = MySE.Get_Selected_Formulated_Products();
-					break;
-				default:
-					throw new Exception("Dropdown item did not match any of the options");
-			}
-
-			Report.IsTrue(expectedOption == selectedOption, "Selected option should be: " + expectedOption + " but is: " + selectedOption,"Option is showing as expected");
+			var selected = new SubscriptionEnrollment().GetSectionSelectedOption(dropdown);
+			Report.IsTrue(expectedOption == selected, "Selected option should be: " + expectedOption + " but is: " + selected, "Option is showing as expected");
 		}
 
 
@@ -347,6 +341,35 @@ namespace Wercs.Selenium.PortalUX.Steps
 					throw new Exception("Dropdown item did not match any of the options");
 			}
 			
+		}
+
+		[StepDefinition("I check that the following are showing in the (Articles|Enhanced Articles|Formulated Products) dropdown:")]
+		public void CheckThatCorrectItemsAreShowing(string section, Table expected)
+		{
+			var showing = new SubscriptionUpgrade().ReturnSelectDropDownItems(section);
+			Report.Info("Available items: "+  string.Join(", ",showing));
+			foreach (var row in expected.Rows)
+			{
+				Report.IsTrue(showing.Contains(row[0].Trim()), "Failed to find the item: " + row[0] + "!", "Item: " + row[0].Trim() + " was found successfully!", false, false);
+			}
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"The (Articles|Enhanced Articles|Formulated Products) popup should have (header|content): (.*)")]
+		public void CheckingContentOfPopupDialog(string section, string type, string text)
+		{
+			new SubscriptionEnrollment().HoverOverInformationElement(section);
+			var Popup = new SubscriptionPopup();
+			switch (type)
+			{
+				case ("header"):
+					Report.IsTrue(Popup.GetHeaderText().Trim() == text.Trim(), "Header was not as expected! Found: " + Popup.GetHeaderText().Trim() + ", but expected: " + text.Trim(), "Header was showing: " + text + " as expected");
+					return;
+				case ("content"):
+					var bodyText = Popup.GetBodyText().Trim();
+					Report.IsTrue(bodyText  == text.Trim(), "Body text was not as expected! Found: " + bodyText + ", but expected: " + text.Trim(), "Body text was showing: " + text + " as expected");
+					return;
+			}
 		}
 
 		[Then(@"In the Subscription Enrollment screen I confirm that when you hover over \(i\) for (.*) you see following (heading|statement): (.*)")]
@@ -415,6 +438,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I click on the Proceed button")]
+		public void ClickProceedButton()
+		{
+			Report.IsTrue(new SubscriptionEnrollment().Proceed_click(), "Failed to click the proceed button!", "Successfully clicked the proceed button!");
+		}
+
+		[StepDefinition(@"The selected item in section: (Select the feature plan|Select the Support Services Plan) should be: (.*)")]
+		public void VerifyCorrectItemIsSelectedInSection(string section, string text)
+		{
+			var showing = new SubscriptionEnrollment().GetSelectedItemInSection(section).Split(new string[]{"\r\n"}, StringSplitOptions.None).FirstOrDefault().Trim();
+			Report.IsTrue(text.Trim() == showing.Trim(), "Selected item was not as expected! Expected: " + text.Trim() + ", but found: " + showing.Trim(), "Item " + text.Trim() + " was successfully selected!");
 		}
 
 		[StepDefinition(@"I confirm the chosen options and body text are correct")]

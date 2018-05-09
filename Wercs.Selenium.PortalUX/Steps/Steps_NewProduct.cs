@@ -1675,6 +1675,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
 			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to Click accept button", "Clicked accept button");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 

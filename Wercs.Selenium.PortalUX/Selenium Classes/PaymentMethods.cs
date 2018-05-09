@@ -64,11 +64,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public bool RefindContainerElement()
+		{
+			containerElement = SeleniumBrowser.WebBrowser.FindElement(By.Id("paymentMethodsContainer"), 2);
+			return containerElement != null;
+		}
+
 		public bool Select_Payment_Method(string payment_method)
 		{
 			Report.Info("Beginning Select_Payment_Method: " + payment_method);
-
-			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div")).ToList();
+			RefindContainerElement();
+			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div"),2).ToList();
 
 			foreach (var method in allProducts)
 			{
@@ -1610,8 +1616,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Home_click()
 		{
 			Report.Info("Attempting to Click Home Button");
-			_btn_home.Click();
-			return true;
+			var el = containerElement.FindElement(By.XPath(".//a[text()='Home']"), 2);
+			return el.TryClick();
 		}
 
 
