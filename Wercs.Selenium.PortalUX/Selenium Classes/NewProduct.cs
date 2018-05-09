@@ -2677,7 +2677,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product does not contain more than 0.05 grams of VOC per use')]"), 2).Text;
 		}
 
-
+		/// <summary>
+		/// Gets statement - Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule
+		/// </summary>
+		public bool GetAmountOfVocByOTCRuleStatement()
+		{
+			var el = containerElement.FindElement(By.XPath(".//label[contains(text(),'OTC Model Rule')]"), 2);
+			return el != null;
+		}
 
 		/// <summary>
 		/// Gets statement - VOC content in grams ozone per gram
@@ -2728,6 +2735,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
+		/// Gets CARB value
+		/// </summary>
+		public string GetCARBValue()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'CARB')]//b"), 2).Text;
+		}
+
+		/// <summary>
 		/// Gets MVOC value
 		/// </summary>
 		public string GetMvocValue()
@@ -2749,6 +2764,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string BasedOnTypeOfProductComplyWithVOCLimit()
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'Based on the type of product')]"), 2).Text;
+		}
+
+		/// <summary>
+		/// Gets VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states. statement
+		/// </summary>
+		public string VocWeightPercentageForEachStateStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'description') and contains(text(),'weight percentage of total formula')]"), 2).Text;
 		}
 
 		public List<VocLimits> GetDisplayedVocLimits()
@@ -2774,7 +2797,34 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-	public string Appearance {
+		public List<VocPercentForStates> GetDisplayedVocPercentForEachState()
+		{
+
+			var retList = new List<VocPercentForStates>();
+			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover table-fixed']"), 2);
+			var tableElement = containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'VOC content as weight percentage of total formula')]"), 2);
+			
+			if (tableElement == null)
+			{
+				return null;
+			}
+
+			var rows = tableElement.FindElements(By.XPath(".//tbody//tr"), 2);
+			foreach (var row in rows)
+			{
+				var state = row.FindElement(By.XPath(".//td[1]"), 2).GetValue();
+				var regulation = row.FindElement(By.XPath(".//td[2]"), 2).GetValue();
+				var vocvalue = row.FindElement(By.XPath(".//td[3]"), 2).GetValue();
+				var statevocthreshold = row.FindElement(By.XPath(".//td[4]"), 2).GetValue();
+				var message = row.FindElement(By.XPath(".//td[5]"), 2).GetValue();
+				retList.Add(new VocPercentForStates() { State = state, Regulation = regulation, VocValue = vocvalue, StateVocThreshold = statevocthreshold, Message = message });
+			}
+
+			return retList;
+
+		}
+
+		public string Appearance {
 			get
 			{
 				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -3066,5 +3116,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string Use { get; set; }
 		public string VocComplianceLimit { get; set; }
 		public string Regulation { get; set; }
+	}
+
+	public class VocPercentForStates
+	{
+		public string State { get; set; }
+		public string Regulation { get; set; }
+		public string VocValue { get; set; }
+		public string StateVocThreshold { get; set; }
+		public string Message { get; set; }
 	}
 }

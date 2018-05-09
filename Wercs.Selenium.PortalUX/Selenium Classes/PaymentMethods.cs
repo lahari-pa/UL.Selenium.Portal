@@ -1340,13 +1340,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Screenshot();
 			return true;
 		}
-
-
-
-
-
-
-
 	}
 
 	class PaymentMethods_Subscription_Billing : BaseDialog

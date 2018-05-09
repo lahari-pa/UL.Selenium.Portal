@@ -1161,6 +1161,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
+		/// Confirm CARB value
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following CARB value: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingCARBValue(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetCARBValue();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"value was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"value was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
 		/// Confirm MVOC value
 		/// </summary>
 		[StepDefinition(@"I confirm that I see the following MVOC: (.*)")]
@@ -1730,6 +1744,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 		}
 
+		// NB: The error messages should be delimited by the '|' character!
+		[StepDefinition(@"(.*) should not be showing the error messages: (.*)")]
+		public void ErrorMessagesAreNotShowingForItem(string section, string pipeDelimitedErrorMessages)
+		{
+			Delay.Seconds(5 * Delay.SpeedFactor);
+			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
+			foreach (var item in errorMessagesExpected)
+			{
+				Report.IsFalse(errorMessages.Contains(item.Trim()), "Error message still displays: " + item + "!", "Error message does not display: " + item + "!", false);
+			}
+			Report.Screenshot();
+		}
+
 
 		[StepDefinition(@"I should see the following Voc Limits present:")]
 		public void ThenIShouldSeeTheFollowingVocLimitsPresent(Table information)
@@ -1759,6 +1788,49 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				Report.IsTrue(passed, "Voc Limit data was not found!", "Voc Limit data found!");
 			}
+		}
+
+		[StepDefinition(@"I should see the following Voc percent for each state:")]
+		public void ThenIShouldSeeTheFollowingVocPercentForEachState(Table information)
+		{
+			var expected = information.CreateSet<VocPercentForStates>();
+			var voclimits = new NewProduct();
+			var displayed = voclimits.GetDisplayedVocPercentForEachState();
+			foreach (var expectedinfo in expected)
+			{
+				Report.Info("Checking State: " + expectedinfo.State + " and Regulation: " + expectedinfo.Regulation + " and VOC value: " + expectedinfo.VocValue + " and State VOC Threshold: " + expectedinfo.StateVocThreshold + " and VOC value: " + expectedinfo.Message);
+				var matchingType = displayed.Where(x => x.State == expectedinfo.State);
+				if (matchingType.Count() == 0)
+				{
+					Report.Failure("No State data displayed: " + expectedinfo.State + " were displayed!");
+					continue;
+				}
+
+				bool passed = false;
+				foreach (var matched in matchingType)
+				{
+					if (matched.State.Contains(expectedinfo.State) && matched.Regulation == expectedinfo.Regulation && matched.VocValue == expectedinfo.VocValue && matched.StateVocThreshold == expectedinfo.StateVocThreshold && matched.Message == expectedinfo.Message)
+					{
+						passed = true;
+						break;
+					}
+				}
+
+				Report.IsTrue(passed, "Voc percent for each state was not found!", "Voc percent for each data found!");
+			}
+		}
+
+		/// <summary>
+		/// Confirm the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule statement 
+		/// </summary>
+		[StepDefinition(@"I confirm that I do not see the following VOC Content as defined by OTC Model Rule statement")]
+		public void ThenIconfirmThatIDoNotSeeTheFollowingVOCContentAsDefinedByOTCModelRuleStatement()
+		{
+
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetAmountOfVocByOTCRuleStatement();
+
+			Report.IsFalse(found, "statement was displayed", "statement was not displayed",false);
 		}
 
 	}

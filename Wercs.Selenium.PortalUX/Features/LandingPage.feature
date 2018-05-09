@@ -39,4 +39,4 @@ Given I stay on the homepage with no activity until the inactivity popup appears
 Then Click No on the inactivity popup
 # You are logged out of the site
 And the landing page should load
-
+#verify the wait time is 15 min for each click on popup (yes/no)
