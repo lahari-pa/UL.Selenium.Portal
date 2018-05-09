@@ -18,6 +18,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickSaveAndNext()
 		{
+			Delay.Seconds(1);
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[(./b[contains(text(), 'Save and Next')])]"))
 				.TryClick();
 
@@ -46,7 +47,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				counter++;
 			}
-
+			SafewareReporting.Report.Info("Waited until: " + counter.ToString());
 			return false;
 		}
 
@@ -134,7 +135,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				return containerElement.FindElement(By.XPath("//div[@class='form-group']/div[@class='INFO']/p")).Text.Trim();
+				return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='form-group']/div[@class='INFO' and not(contains(@style, 'none'))]/p")).Text.Trim();
 			}
 			catch (Exception e)
 			{
@@ -225,7 +226,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			{
 				try
 				{
-					var score = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//text[@class='highcharts-title']/tspan"));
+					var score = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//*[@id='GGPREV_chart']//*[name()='svg']//*[name()='text']//*[name()='tspan']"));
 					return Convert.ToInt16(score.Text.Trim());
 				}
 				catch (Exception e)
@@ -413,7 +414,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			{
 				try
 				{
-					var upcGrid = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[contains(@class, 'upcgrid')]"));
+					var upcGrid = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[contains(@class, 'upcgrid')]//button[(i[contains(@class, 'edit')])]"));
 					if (upcGrid != null)
 					{
 						return true;
@@ -534,8 +535,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool DataAcceptanceClickOK()
 		{
-			var buttonOK = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdAcceptProduct']"));
+			var buttonOK = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button[@id='cmdAcceptProduct']"));
 			return buttonOK.TryClick();
+		}
+
+
+		// ========= Data Acceptance ========= //
+		public bool SelectPlan(int numberOfProducts)
+		{
+			var listOfRows =
+				SeleniumBrowser.WebBrowser.FindElements(
+					By.XPath("//h3[contains(text(), 'GoodGuide Products')]/../following-sibling::div/table/tbody/tr"));
+
+			var planRadio =
+				listOfRows.FirstOrDefault(x => x.FindElement(By.XPath(".//td[1]")).Text.Contains(numberOfProducts.ToString()));
+
+			if (planRadio != null)
+			{
+				return planRadio.FindElement(By.XPath(".//td[2]//input")).TryClick();
+			}
+
+			return false;
+		}
+
+		public bool InChoosePlanClickNext()
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdNext']")).TryClick();
 		}
 
 		// ========= Add Ingredient Functions ========= //
@@ -607,12 +632,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				Delay.Seconds(3);
 				var searching = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//li[contains(@class,'ui-menu-item')]"), 2);
 				int i = 0;
-				while (searching != null && i < 10)
+				while (searching != null && i < 60)
 				{
-					Delay.Seconds(Delay.SpeedFactor * 1);
-					i++;
-					searching = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//li[contains(@class,'ui-menu-item')]"), 2);
+					try
+					{
+						Delay.Seconds(Delay.SpeedFactor * 1);
+						i++;
+						searching = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//li[contains(@class,'ui-menu-item')]"), 2);
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine(e);
+						throw;
+					}
 				}
+				
 
 				// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
 				// If no elements match this, then we will simply take the first element in the list

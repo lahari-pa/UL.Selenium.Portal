@@ -21,7 +21,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickSelectBox(string selectBoxText)
 		{
-			return containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']")).TryClick();
+			for (int i = 0; i < 60; i++)
+			{
+				try
+				{
+					var select = containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"));
+					if (select != null)
+					{
+						return select.TryClick();
+					}
+				}
+				catch (Exception e)
+				{
+				}
+			}
+
+			return false;
+
 		}
 
 		public bool ClickItemFromSelectBox(string selectBoxText, string itemToSelect)

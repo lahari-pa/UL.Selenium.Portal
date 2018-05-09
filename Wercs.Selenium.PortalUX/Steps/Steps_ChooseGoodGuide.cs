@@ -142,6 +142,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			GGNewProduct thisGgNewProduct = new GGNewProduct();
 			Report.IsTrue(thisGgNewProduct.UPCUpload(uploadType, filePath), "Failed to upload image",
 				"Successfully uploaded image");
+			Delay.Seconds(3);
 		}
 
 		[StepDefinition(@"in the Data Acceptance section I answer: (.*) to would you like to submit product info")]
@@ -180,7 +181,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in the GoodGuide site I should be in the UPC Grid")]
 		public void ThenInTheGoodGuideSiteIShouldBeInTheUPCGrid()
 		{
-			Report.IsTrue(new GGNewProduct().UPCGridWaitForLoad(30), "UPC Grid is not showing as expected.",
+			Report.IsTrue(new GGNewProduct().UPCGridWaitForLoad(60), "UPC Grid is not showing as expected.",
 				"UPC Grid is showing as expected");
 		}
 
@@ -191,6 +192,84 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Clicked button: " + button);
 		}
 
+		[StepDefinition(@"in the GoodGuide My Products page I set the search criteria as follows:")]
+		public void GivenInTheGoodGuideMyProductsPageISetTheSearchCriteriaAsFollows(Table table)
+		{
+			//we know there will only be one row
+			string searchBy = table.Rows[0]["Search By"].Trim();
+			string filter = table.Rows[0]["Filter"].Trim();
+			if (filter.ToLower().Contains("saved as"))
+			{
+				filter = Context.GetFromContext(filter.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString().Trim();
+			}
+			string upc=table.Rows[0]["UPC"].Trim();
+			string status = table.Rows[0]["Status"].Trim();
+
+			Report.IsTrue(new MyProducts().SetSearchCriteria(searchBy, filter, upc, status),
+				"Failed to set search criteria: " + searchBy + ", " + filter + ", " + upc + ", " + status,
+				"Set search criteria successfully.");
+		}
+
+		[StepDefinition(@"in the GoodGuide My Products page I click on Filter")]
+		public void GivenInTheGoodGuideMyProductsPageIClickOnFilter()
+		{
+			Report.IsTrue(new MyProducts().ClickFilter(), "Failed to click filter button", "Successfully clicked on filter");
+		}
+
+		[Then(@"in the GoodGuide My Products page I (should|should not) see product with (.*): (.*)")]
+		public void ThenInTheGoodGuideMyProductsPageIShouldSeeProductWithItemValue(string shouldOrNot, string columnName, string value)
+		{
+			if (value.ToLower().Contains("saved as"))
+			{
+				value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString().Trim();
+			}
+			Report.Info("Looking for value: " + value);
+
+			if (shouldOrNot == "should")
+			{
+				Report.IsTrue(new MyProducts().FindAndClickProduct(columnName, value), "Product was not showing as expected.",
+					"Product found");
+			}
+			else
+			{
+				Report.IsTrue(!(new MyProducts().FindAndClickProduct(columnName, value)), "Product was showing.",
+					"Product not found");
+			}
+			
+		}
+
+		[Then(@"in the GoodGuide My Products page I delete product with (.*): (.*)")]
+		public void ThenInTheGoodGuideMyProductsPageIDeleteProductWithItemValue(string columnName, string value)
+		{
+			MyProducts thisMyProducts = new MyProducts();
+			if (!thisMyProducts.Wait_for_load(60))
+			{
+				throw new Exception("My Products page has not loaded");
+			}
+			
+			if (value.ToLower().Contains("saved as"))
+			{
+				value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString().Trim();
+			}
+			Report.IsTrue(thisMyProducts.ClickDeleteProduct(columnName, value), "Product was not showing as expected.",
+				"Product found");
+
+			DeleteProduct thisDeleteProduct = new DeleteProduct();
+			if (!thisDeleteProduct.Wait_for_load(60))
+			{
+				throw new Exception("Delete confirmation page has not loaded");
+			}
+
+			Report.IsTrue(thisDeleteProduct.ClickDelete(), "Failed to click confirm delete",
+				"Clicked confirm delete");
+
+			Report.IsTrue(thisDeleteProduct.WaitForDialogToDisappear(60), "Delete confirm dialog has not disappeared",
+				"Delete dialog has disappeared.");
+		}
+	
 
 
 		[StepDefinition(@"in the GoodGuide site I click the 'Add UPC' button")]
@@ -259,16 +338,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.IsTrue(new MyProducts().Wait_for_load(60), section + " has failed to appear", section + " is showing as expected.");
 					break;
 				default:
-					Report.IsTrue(thisGgNewProduct.WaitForSection(section), section + " has failed to appear", section + " is showing as expected.");
+					Report.IsTrue(thisGgNewProduct.WaitForSection(section,120), section + " has failed to appear", section + " is showing as expected.");
 					break;
 				}
 			Delay.Seconds(3);
 			
 		}
 
+		[Given(@"I generate a random product name and save as (.*)")]
+		public void GivenIGenerateARandomProductNameAndSaveAs(string saveAs)
+		{
+			Context.AddToContext(saveAs,Guid.NewGuid().ToString());
+		}
+
+
 		[StepDefinition(@"in the Product Identification page I enter product name: (.*)")]
 		public void GivenInTheProductIdentificationPageIEnterProductName(string name)
 		{
+			if (name.ToLower().Contains("saved as"))
+			{
+				name = Context.GetFromContext(name.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString().Trim();
+			}
 			Report.IsTrue(new GGNewProduct().EnterProductName(name), "Product name has not been entered correctly", "Product name has been entered correctly");
 		}
 

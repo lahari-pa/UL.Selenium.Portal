@@ -74,8 +74,9 @@ Then in the GoodGuide site the New Product page should load
 Given in the GoodGuide New Product page I select: Create a New Product
 Given in the GoodGuide New Product page I click button: Save and Next
 Then in the GoodGuide site the Product Identification page should load
-Given in the Product Identification page I enter product name: Test
-Given in the Product Identification page I select Product Line/Brand: test3 and if it does not exist I create it
+Given I generate a random product name and save as MyProductName
+Given in the Product Identification page I enter product name: saved as MyProductName
+Given in the Product Identification page I select Product Line/Brand: test4 and if it does not exist I create it
 Given in the Product Identification page I select Category: Health and Beauty
 Then in the Product Identification page I should see message: Your product qualifies for a GoodGuide rating, a trusted indicator of product health. At the end of this registration, take a moment to preview and optionally add this product’s rating to the extensive GoodGuide online catalog, consumers' reliable resource for science-based product information. To learn more, visit http://www.goodguide.com
 Given in the Product Identification page I select SubCategory: After Shave for Men
@@ -117,13 +118,15 @@ Given in the GoodGuide New Product page I click button: Save and Next
 Then in the GoodGuide site the Summary page should load
 Then in the Data Acceptance section I answer: Yes to would you like to submit product info
 Then in the Data Acceptance section I click on Accept
-
+Then in the GoodGuide site the Subscription Enrollment page should load
 #Should be in shopping cart
 #Click Submit Order
-#Confirm that your product is in the My Products grid
-
-
-
-
-Then the My Products page should load
-Then in the My Products page I select product to edit
+Given on the top navigation bar I click on My Products
+Then in the GoodGuide site the My Products page should load
+Given in the GoodGuide My Products page I set the search criteria as follows:
+| Search By           | Filter                 | UPC | Status |
+| WPS ID/Product Name | saved as MyProductName |     | All    |
+Given in the GoodGuide My Products page I click on Filter
+Then in the GoodGuide My Products page I should see product with Name: saved as MyProductName
+Then in the GoodGuide My Products page I delete product with Name: saved as MyProductName
+Then in the GoodGuide My Products page I should not see product with Name: saved as MyProductName
