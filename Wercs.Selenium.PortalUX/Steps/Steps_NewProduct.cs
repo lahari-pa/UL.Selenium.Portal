@@ -1423,6 +1423,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SelectPrimaryPhysicalState(state), "Failed to set the primary physical state to be: " + state, "Successfully set the Primary Physical State to be: " + state);
 		}
 
+
+
 		[StepDefinition(@"I set the Secondary Physical State to be: (.*)")]
 		public void ThenISetTheSecondaryPhysicalStateToBe(string state)
 		{
@@ -1764,6 +1766,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 		}
 
+		// NB: Multiple values should be delimited by the '|' character!
+		[StepDefinition(@"(.*) should be showing the value: (.*)")]
+		public void CheckingFieldInputIsCorrect(string section, string value)
+		{
+			var showing = new NewProduct().GetOptionsForSection(section);
+			Report.Info("Value(s) showing were: " + string.Join(", ",showing));
+			var expected = value.Split('|').Select(x=>x.Trim()).ToList();
+			foreach (var expec in expected)
+			{
+				Report.IsTrue(showing.Contains(expec), "Failed to find the selected value: " + expec + " in the section: " + section + "!", string.Format("Successfully found {0} in section: {1}", expec, section),false,false);
+			}
+			Report.Screenshot();
+		}
 
 		[StepDefinition(@"I should see the following Voc Limits present:")]
 		public void ThenIShouldSeeTheFollowingVocLimitsPresent(Table information)

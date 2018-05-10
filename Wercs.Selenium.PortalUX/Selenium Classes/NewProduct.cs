@@ -3033,6 +3033,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.TryClick();
 		}
 
+		public List<string> GetOptionsForSection(string section)
+		{
+			var matchingElements = containerElement.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[starts-with(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
+
+			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
+			{
+				return new List<string> {matchingElements.FirstOrDefault().SelectedOption()};
+			}
+
+			// Assume we have 'input' tags
+
+			if (matchingElements.FirstOrDefault().GetAttribute("type").ToLower() == "checkbox" || matchingElements.FirstOrDefault().GetAttribute("type").ToLower() == "radio")
+			{
+				// In this case, we should return all the selected options
+				return matchingElements.Where(x => x.Checked()).Select(x => x.FindElement(By.XPath(".//following-sibling::span"), 2).Text.Trim()).ToList();
+			}
+			if (matchingElements.FirstOrDefault().GetAttribute("type").ToLower() == "text")
+			{
+				return new List<string> { matchingElements.FirstOrDefault().Text };
+			}
+
+			return null;
+		}
+
 		public bool SetAllCheckOptionsInSection(string section, bool check)
 		{
 			var xpath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])]/preceding-sibling::input";

@@ -211,6 +211,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 29 - Beverage.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 32 - Grocery.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 32 - Grocery.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\RetailerPartners1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -350,6 +355,10 @@
     <None Include="Features\Product Registration\Flow 29 - Beverage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 29 - Beverage.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 32 - Grocery.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 32 - Grocery.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\RetailerPartners.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
