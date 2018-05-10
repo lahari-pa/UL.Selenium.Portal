@@ -1882,6 +1882,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool SetPrivateLabelName(string item, string retailer)
+		{
+			try
+			{
+				var el = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//tr[(.//td[text()='" + retailer + "'])]//input[starts-with(@placeholder,'Indicate full name of product')]"), 2);
+				if (el == null)
+				{
+					Report.Error("Could not find the input field for retailer: " + retailer);
+					return false;
+				}
+				el.EnterText(item);
+
+				return el.GetValue() == item.Trim();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		/// <summary>
 		///Enter full name of product, as sold, via this retailer (e.g. Private Label Aspirin) from dropdown
 		/// </summary>

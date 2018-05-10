@@ -272,8 +272,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"in the New Product page I click Continue")]
-		public void GivenInTheNewProductPageIClickContinue()
+		[StepDefinition(@"in the (.*) page I click Continue")]
+		public void GivenInTheNewProductPageIClickContinue(string dummyVariable)
 		{
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
@@ -313,7 +313,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Select an option for Indicate full name of product, as sold, via this retailer (e.g.Private Label Aspirin) dropdown
 		/// </summary>
-		[Then(@"In the Retailers tab, I select Private Label name as: (.*)")]
+		[StepDefinition(@"In the Retailers tab, I select Private Label name as: (.*)")]
 		public void ThenInTheRetailersTabISelectPrivateLabelNameAs(string option)
 		{
 			Report.IsTrue(new NewProduct().SelectPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
@@ -328,6 +328,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().EnterPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
 		}
 
+		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
+		public void ForRetailerIEnterPrivateLabelName(string retailer, string option)
+		{
+			Report.IsTrue(new NewProduct().SetPrivateLabelName(option, retailer), "Failed to set the Private label name to be: " + option + " for retailer: " + retailer, "Successfully set private label name to be: " + option + " for retailer: " + retailer);
+		}
 
 		/// <summary>
 		/// Select an option for vendor id  dropdown
