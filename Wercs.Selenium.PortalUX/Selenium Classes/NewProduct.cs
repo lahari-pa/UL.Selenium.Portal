@@ -3003,6 +3003,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return els.Select(x => x.GetElementText()).ToList();
 		}
 
+		public bool SetAdditionalOptionInSection(string section, string value)
+		{
+			// In some cases the below step will not find the correct element - rather than changing this we will create this step which exclusively looks for checkboxes!
+			var el = containerElement.FindElement(By.XPath(@".//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + @"') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input"), 2);
+			if (el == null)
+			{
+				Report.Error("Could not find element");
+				return false;
+			}
+			return el.TryClick();
+		}
+
 		public bool SetOptionInSection(string section, string value)
 		{
 			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "')]/parent::label | " +

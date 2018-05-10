@@ -1719,11 +1719,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I set the (.*) option to: (.*)")]
 		[StepDefinition(@"I set the (.*) field to: (.*)")]
+		[StepDefinition(@"I set the (.*) option to: (.*)")]
 		public void SetTheSectionOptionTo(string section, string option)
 		{
-			Report.IsTrue(new NewProduct().SetOptionInSection(section, option), "Failed to set the input to " + option + " in section: " + section, "Successfully set the input to " + option + " in section: " + section);
+			Report.IsTrue(new NewProduct().SetOptionInSection(section, option),
+				"Failed to set the input to " + option + " in section: " + section,
+				"Successfully set the input to " + option + " in section: " + section);
+		}
+
+		[StepDefinition(@"I check the 'I do not have exact' checkbox for field: (.*)")]
+		public void SectExatcDataNotKnown(string section)
+		{
+			string option = "I do not have exact";
+			Report.IsTrue(new NewProduct().SetAdditionalOptionInSection(section, option),
+				"Failed to set the input to " + option + " in section: " + section,
+				"Successfully set the input to " + option + " in section: " + section);
 		}
 
 		[StepDefinition(@"I set the below options for field: (.*)")]
