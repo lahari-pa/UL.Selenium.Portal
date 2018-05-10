@@ -91,11 +91,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			option.Click();
 		}
 
+		public bool RefreshContainer()
+		{
+			containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+			return containerElement != null;
+		}
+
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
 			int counter = 0;
 			while (counter < secondsToWait)
 			{
+				RefreshContainer();
 				var addProductHeader = containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3"))
 					.FirstOrDefault(x => x.Text.Contains(sectionHeader));
 				if (addProductHeader != null)
@@ -1827,6 +1834,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public string GetIngredientErrorMessage()
+		{
+			var el = containerElement.FindElement(By.XPath(".//div[contains(@class,'formulation-grid')]//div[@role='alert']//span[starts-with(@data-bind,'text')]"), 2);
+			return el == null ? "" : el.Text;
 		}
 
 

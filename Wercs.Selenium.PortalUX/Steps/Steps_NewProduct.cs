@@ -1853,5 +1853,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsFalse(found, "statement was displayed", "statement was not displayed",false);
 		}
 
+		[StepDefinition(@"I (should|should not) see the ingredients error message")]
+		public void IngredientsErrorMessageShowing(string should)
+		{
+			var expected = should == "should";
+			Report.IsTrue(expected == (new NewProduct().GetIngredientErrorMessage() != ""),
+				string.Format("{0} to see the ingredients error message!", expected ? "Did not expect" : "Expected"),
+				string.Format("Ingredients error message {0} showing!", expected ? "was" : "was not"));
+		}
+
+		[StepDefinition(@"The ingredients error message should be showing: (.*)")]
+		public void IngredientsErrorMessageShowingCorrectText(string text)
+		{
+			var showing = new NewProduct().GetIngredientErrorMessage();
+			Report.IsTrue(showing.Trim() == text.Trim(),
+				string.Format("Ingredients error message was not as expected. Expected: {0} but found {1}",text.Trim(), showing.Trim()),
+				string.Format("Ingredients error message was showing {0} as expected!", text.Trim()));
+		}
+
+
 	}
 }
