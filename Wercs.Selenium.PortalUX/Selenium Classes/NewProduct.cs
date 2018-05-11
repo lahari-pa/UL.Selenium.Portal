@@ -2711,9 +2711,34 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
+		/// Gets statement - Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?
+		/// </summary>
+		public string GetUseVocPercentageAllAreaStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'VOC percentages entered for all areas')]"), 2).Text;
+		}
+
+		/// <summary>
+		/// Gets statement - Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB
+		/// </summary>
+		public string GetAmountOfVocDefinedByCARBStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'excluding exempt compounds as defined by the CARB')]"), 2).Text;
+		}
+
+		/// <summary>
 		/// Gets statement - Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule
 		/// </summary>
-		public bool GetAmountOfVocByOTCRuleStatement()
+		public string GetAmountOfVocByOTCRuleStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'OTC Model Rule')]"), 2).Text;
+			//return el != null;
+		}
+
+		/// <summary>
+		/// Gets statement - Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule
+		/// </summary>
+		public bool GetAmountOfVocByOTCRuleNotStatement()
 		{
 			var el = containerElement.FindElement(By.XPath(".//label[contains(text(),'OTC Model Rule')]"), 2);
 			return el != null;
@@ -2792,6 +2817,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
+		/// Gets limits specified in the California Consumer Products Regulation statement
+		/// </summary>
+		public string LimitsSpecifiedCaliforniaConsumerProductsRegulation()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified in the California Consumer Products Regulation')]"), 2).Text;
+		}
+
+		/// <summary>
+		/// Gets limits specified by the Ozone Transport Commission statement
+		/// </summary>
+		public string LimitsSpecifiedOzoneTransportCommission()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified by the Ozone Transport Commission')]"), 2).Text;
+		}
+
+		/// <summary>
 		/// Gets Based on the type of product, this must comply with the most restrictive VOC limit. statement
 		/// </summary>
 		public string BasedOnTypeOfProductComplyWithVOCLimit()
@@ -2834,9 +2875,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 
 			var retList = new List<VocPercentForStates>();
-			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover table-fixed']"), 2);
-			var tableElement = containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'VOC content as weight percentage of total formula')]"), 2);
-			
+			//var container = containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'description') and contains(text(),'VOC content as weight percentage of total formula')]"), 2);
+			//var tableElement = container.FindElement(By.XPath(".//table[@class='table table-hover table-fixed']"), 2);
+			var tableElement = containerElement.FindElement(By.XPath("//*[@id='collapse5']/div/form/div[4]/div/div/table"), 2);
 			if (tableElement == null)
 			{
 				return null;

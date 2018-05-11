@@ -1208,6 +1208,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
+		/// Confirm limits specified in the California Consumer Products Regulation statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following limits specified in the California Consumer Products Regulation statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingLimitsSpecifiedInTheCaliforniaConsumerProductsRegulationStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.LimitsSpecifiedCaliforniaConsumerProductsRegulation();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm limits specified by the Ozone Transport Commission statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following limits specified by the Ozone Transport Commission statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingLimitsSpecifiedByTheOzoneTransportCommissionStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.LimitsSpecifiedOzoneTransportCommission();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
 		/// Confirm Based on the type of product, this must comply with the most restrictive VOC limit statement
 		/// </summary>
 		[StepDefinition(@"I confirm that I see the following comply with restrictive VOC statement: (.*)")]
@@ -1824,12 +1852,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the following Voc percent for each state:")]
 		public void ThenIShouldSeeTheFollowingVocPercentForEachState(Table information)
 		{
+			//Delay.Seconds(5 * Delay.SpeedFactor);
 			var expected = information.CreateSet<VocPercentForStates>();
 			var voclimits = new NewProduct();
 			var displayed = voclimits.GetDisplayedVocPercentForEachState();
 			foreach (var expectedinfo in expected)
 			{
-				Report.Info("Checking State: " + expectedinfo.State + " and Regulation: " + expectedinfo.Regulation + " and VOC value: " + expectedinfo.VocValue + " and State VOC Threshold: " + expectedinfo.StateVocThreshold + " and VOC value: " + expectedinfo.Message);
+				Report.Info("Checking State: " + expectedinfo.State + " and Regulation: " + expectedinfo.Regulation + " and VOC value: " + expectedinfo.VocValue + " and State VOC Threshold: " + expectedinfo.StateVocThreshold + " and Message: " + expectedinfo.Message);
 				var matchingType = displayed.Where(x => x.State == expectedinfo.State);
 				if (matchingType.Count() == 0)
 				{
@@ -1859,9 +1888,50 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 
 			var newProductpage = new NewProduct();
+			var found = newProductpage.GetAmountOfVocByOTCRuleNotStatement();
+
+			Report.IsFalse(found, "statement was displayed", "statement was not displayed", false);
+		}
+
+		/// <summary>
+		/// Confirm the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule statement 
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC Content as defined by OTC Model Rule statement: (.*)")]
+		public void ThenIconfirmThatISeeTheFollowingVOCContentAsDefinedByOTCModelRuleStatement(string statement)
+		{
+
+			var newProductpage = new NewProduct();
 			var found = newProductpage.GetAmountOfVocByOTCRuleStatement();
 
-			Report.IsFalse(found, "statement was displayed", "statement was not displayed",false);
+			Report.IsTrue(found.Equals(statement), "statement was not displayed", "statement was displayed");
+		}
+
+		/// <summary>
+		/// Confirm Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC Content as defined by CARB statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingVOCContentAsDefinedByCARBStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetAmountOfVocDefinedByCARBStatement();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC percentages entered for all areas statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingVOCPercentagesEnteredForAllAreasStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetUseVocPercentageAllAreaStatement();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
 		}
 
 		[StepDefinition(@"I (should|should not) see the ingredients error message")]
@@ -1882,6 +1952,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 				string.Format("Ingredients error message was showing {0} as expected!", text.Trim()));
 		}
 
+		/// <summary>
+		/// Confirm VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states. statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC content as weight percentage for each state statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingVOCContentAsWeightPercentageForEachStateStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.VocWeightPercentageForEachStateStatement();
 
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
 	}
 }
