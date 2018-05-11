@@ -196,7 +196,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var languagesShowing = new NewProduct().GetSelectedLanguagesForDocument(row["Document Name"]);
 				var languagesExpected = row["Language"].Split(',').Select(x => x.Trim());
 
-				Report.Info("Languages found for " + row["Document Name"] + ": " + string.Join(", ",languagesShowing));
+				Report.Info("Languages found for " + row["Document Name"] + ": " + string.Join(", ", languagesShowing));
 
 				foreach (var lang in languagesExpected)
 				{
@@ -288,7 +288,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selSelectRetailers.Wait_for_load(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
 		}
 
-		
+
 		[StepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
 		public void ThenISelectTheRetailer_InTheWindow(string retailer)
 		{
@@ -300,12 +300,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the 'Select retailers' window I (should|should not) see the following retailers:")]
 		public void CheckingCorrectRetailersAreShowing(string should, Table expected)
 		{
-			var showing = new SelectRetailers().GetListOfRetailers().Where(x=>x.Trim()!="");
-			Report.Info("Retailers showing were: " + string.Join(", ",showing));
+			var showing = new SelectRetailers().GetListOfRetailers().Where(x => x.Trim() != "");
+			Report.Info("Retailers showing were: " + string.Join(", ", showing));
 			bool expectedOrNot = should == "should";
 			foreach (var row in expected.Rows)
 			{
-				Report.IsTrue(showing.Contains(row["Retailer"]) == expectedOrNot, (expectedOrNot ? "Did not find" : "Found") + " the retailer: " + row["Retailer"], "The retailer " + row["Retailer"] + (expectedOrNot ? " was": " was not") + " showing, as expected!", false, false);
+				Report.IsTrue(showing.Contains(row["Retailer"]) == expectedOrNot, (expectedOrNot ? "Did not find" : "Found") + " the retailer: " + row["Retailer"], "The retailer " + row["Retailer"] + (expectedOrNot ? " was" : " was not") + " showing, as expected!", false, false);
 			}
 			Report.Screenshot();
 		}
@@ -355,9 +355,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the (.*) Page")]
 		public void GivenIShouldSeeXPage(string pageShouldSee)
 		{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForSection(pageShouldSee), pageShouldSee + " is not showing",
-					pageShouldSee + " is showing as expected");
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForSection(pageShouldSee), pageShouldSee + " is not showing",
+				pageShouldSee + " is showing as expected");
 		}
 
 		[StepDefinition(@"I should see the Additional Information Page")]
@@ -389,7 +389,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Product type tab is loaded.");
 				selNewProduct.ProductName = productName;
 				Delay.Seconds(1);
-				
+
 			}
 			catch (Exception ex)
 			{
@@ -404,16 +404,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page I add the following batteries:");
 			try
 			{
-				List<Battery> listOfBatteries= new List<Battery>();
+				List<Battery> listOfBatteries = new List<Battery>();
 				//| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
 				foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 				{
-					Battery thisBattery = new Battery(){
+					Battery thisBattery = new Battery() {
 						BatteryType = thisRow["Battery Type"],
 						Manufacturer = thisRow["Manufacturer"],
 						NumberPerPackage = Convert.ToInt16(thisRow["Number of batteries per package"].Trim()),
 						RequiredToRun = Convert.ToInt16(thisRow["How many batteries required to run"].Trim())
-						};
+					};
 					listOfBatteries.Add(thisBattery);
 				}
 				var selNewProduct = new NewProduct();
@@ -427,7 +427,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					throw new Exception("There are no batteries to set");
 				}
-				
+
 
 			}
 			catch (Exception ex)
@@ -521,15 +521,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for U\.S\. Toxic Substances Control Act \(TSCA\) status I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForU_S_ToxicSubstancesControlActTSCAStatusISelectOption(string option)
 		{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+				"Product characteristics tab is loaded.");
 
-				selNewProduct.TscaStatus= option;
+			selNewProduct.TscaStatus = option;
 
-				Report.IsTrue(selNewProduct.TscaStatus == option,
-					"Failed to set TSCA status: " + option,
-					"Successfully set TSCA status: " + option);
+			Report.IsTrue(selNewProduct.TscaStatus == option,
+				"Failed to set TSCA status: " + option,
+				"Successfully set TSCA status: " + option);
 		}
 
 
@@ -583,7 +583,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				foreach (MetalPresence thisMetalPresence in listOfMetalSettings)
 				{
-					if (checkOutcome.Select(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence).Count()==0)
+					if (checkOutcome.Select(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence).Count() == 0)
 					{
 						Report.Error("Failed to set metal: " + thisMetalPresence.Metal + " to: " + thisMetalPresence.Presence);
 					}
@@ -755,7 +755,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
-			selNewProduct.MinimumIgnitionEnergy  = selection;
+			selNewProduct.MinimumIgnitionEnergy = selection;
 
 		}
 
@@ -820,7 +820,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Review and submit tab is loaded.");
 
 			selNewProduct.PartitionCoefficient = selection;
-			
+
 		}
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: (.*)")]
@@ -957,7 +957,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 					.ToString();
 			}
-			
+
 			Report.IsTrue(!selNewProduct.GetAllUPCs().Contains(upc), "UPC: " + upc + " has not been deleted.",
 				"UPC: " + upc + " has been deleted as expected.");
 		}
@@ -1051,7 +1051,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
-		/// Confirm the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations statement 
+		/// Confirm the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations statement
 		/// </summary>
 		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement1: (.*)")]
 		public void GivenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement1(string statement)
@@ -1065,7 +1065,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
-		/// Confirm Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1 statement 
+		/// Confirm Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1 statement
 		/// </summary>
 		[StepDefinition(@"I confirm that I see the following VOC-OTC-CARB statement2: (.*)")]
 		public void GivenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement2(string statement)
@@ -1255,37 +1255,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the VOC - OTC - CARB tab for Product has been granted an Alternative Control Plan I select: (No|Yes)")]
 		public void GivenInTheVOC_OTC_CARBTabForProductHasBeenGrantedAnAlternativeControlPlanISelect(string noOrYes)
 		{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				"Product type tab is loaded.");
 
-				bool expected = (noOrYes == "Yes");
+			bool expected = (noOrYes == "Yes");
 
-				selNewProduct.AlternateControlPlan = expected;
+			selNewProduct.AlternateControlPlan = expected;
 
-				Report.IsTrue(selNewProduct.AlternateControlPlan == expected,
-					"Failed to set Product has been granted an Alternative Control Plan to: " + noOrYes,
-					"Successfully set Product has been granted an Alternative Control Plan to: " + noOrYes);
+			Report.IsTrue(selNewProduct.AlternateControlPlan == expected,
+				"Failed to set Product has been granted an Alternative Control Plan to: " + noOrYes,
+				"Successfully set Product has been granted an Alternative Control Plan to: " + noOrYes);
 		}
 
 		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for Product does not contain more than grams of VOC per use I select: (.*)")]
 		public void ThenInTheProductCharacteristicsTabOfTheNewProductPageForProductDoesNotContainMoreThanGramsOfVOCPerUseISelect(string option)
 		{
 
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+				"Product characteristics tab is loaded.");
 
 
-				selNewProduct.ProductDoesNotContainGramsOfVoc = option;
+			selNewProduct.ProductDoesNotContainGramsOfVoc = option;
 
-				Report.IsTrue(selNewProduct.ProductDoesNotContainGramsOfVoc == option,
-					"Failed to set status: " + option,
-					"Successfully set status: " + option);
+			Report.IsTrue(selNewProduct.ProductDoesNotContainGramsOfVoc == option,
+				"Failed to set status: " + option,
+				"Successfully set status: " + option);
 		}
 
 		/// <summary>
-		/// Enter in VOC content in grams ozone per gram text field 
+		/// Enter in VOC content in grams ozone per gram text field
 		/// </summary>
 		[Then(@"In the product Characteristics tab, I enter: (.*) in the VOC content in grams ozone per gram text field")]
 		public void ThenInTheProductCharacteristicsTabIEnterInTheVOCContentInGramsOzonePerGramTextField(string option)
@@ -1294,47 +1294,47 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
-		/// select option for Product label specifies a dilution ratio 
+		/// select option for Product label specifies a dilution ratio
 		/// </summary>
 		[StepDefinition(@"In the VOC - OTC - CARB tab for Product label specifies a dilution ratio I select: (No|Yes)")]
 		public void GivenInTheVOC_OTC_CARBTabForProductLabelSpecifiesADilutionRatioISelectYes(string noOrYes)
 		{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				"Product type tab is loaded.");
 
-				bool expected = (noOrYes == "Yes");
+			bool expected = (noOrYes == "Yes");
 
-				selNewProduct.ProductLabelDilutionRatio = expected;
+			selNewProduct.ProductLabelDilutionRatio = expected;
 
-				Report.IsTrue(selNewProduct.ProductShippedDirectly == expected,
-					"Failed to set Product label specifies a dilution ratio to: " + noOrYes,
-					"Successfully set Product label specifies a dilution ratio to: " + noOrYes);
+			Report.IsTrue(selNewProduct.ProductShippedDirectly == expected,
+				"Failed to set Product label specifies a dilution ratio to: " + noOrYes,
+				"Successfully set Product label specifies a dilution ratio to: " + noOrYes);
 		}
 
 
 		/// <summary>
-		/// Enter data in Product's VOC content as sold text box 
+		/// Enter data in Product's VOC content as sold text box
 		/// </summary>
 		[StepDefinition(@"In the VOC - OTC - CARB tab, I enter: (.*) in the Product's VOC content as sold text field")]
 		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsSoldTextField(string contentAsSold)
 		{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.ProductsVocContentAsSold = contentAsSold;
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				"Product type tab is loaded.");
+			selNewProduct.ProductsVocContentAsSold = contentAsSold;
 		}
 
 		/// <summary>
-		/// Enter data in Product's VOC content as used text box 
+		/// Enter data in Product's VOC content as used text box
 		/// </summary>
 		[StepDefinition(@"In the VOC - OTC - CARB tab, I enter: (.*) in the Product's VOC content as used text field")]
 		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsUsedTextField(string contentAsUsed)
 		{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.ProductsVocContentAsUsed = contentAsUsed;
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				"Product type tab is loaded.");
+			selNewProduct.ProductsVocContentAsUsed = contentAsUsed;
 		}
 
 
@@ -1377,7 +1377,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Product type tab is loaded.");
 
 			bool expected = (noOrYes == "Yes");
-			
+
 			selNewProduct.ProductClassifiedUnderOSHA = expected;
 
 			Report.IsTrue(selNewProduct.ProductClassifiedUnderOSHA == expected,
@@ -1395,7 +1395,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var selNewProduct = new NewProduct();
 				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
 					"Product type tab is loaded.");
-				List<string> countries = new List<string>(){country};
+				List<string> countries = new List<string>() { country };
 
 				bool expected = (checkedOrUnchecked == "checked");
 
@@ -1409,7 +1409,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.IsTrue(!selNewProduct.ProductsMayBeSold.Contains(country),
 						"Products may be sold is not set up as expected", "Products may be sold is set up as expected.");
 				}
-				
+
 
 			}
 			catch (Exception ex)
@@ -1464,12 +1464,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			NewProduct thisNewProduct = new NewProduct();
 			new NewProduct().WaterSolubility = description;
-			Report.IsTrue(thisNewProduct.WaterSolubility==description, "Failed to set the water solubility description to be: " + description, "Successfully set the water solubility description to be: " + description);
+			Report.IsTrue(thisNewProduct.WaterSolubility == description, "Failed to set the water solubility description to be: " + description, "Successfully set the water solubility description to be: " + description);
 		}
 
 
 		/// <summary>
-		/// Enter data in Specific Gravity text field 
+		/// Enter data in Specific Gravity text field
 		/// </summary>
 		[StepDefinition(@"In the Product Characteristics tab, I enter: (.*) in the Specific Gravity text field")]
 		public void GivenInTheProductCharacteristicsTabIEnterInTheSpecificGravityTextField(string specificGravity)
@@ -1557,7 +1557,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
-		/// Select an option from Flash Point Testing Method Used 
+		/// Select an option from Flash Point Testing Method Used
 		/// </summary>
 		[StepDefinition(@"in the Product Characteristics tab, for Flash Point Testing Method Used status I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabForFlashPointTestingMethodUsedStatusISelect(string option)
@@ -1604,18 +1604,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		/// <summary>
-		/// Confirm the ecologo statement 
+		/// Confirm the ecologo statement
 		/// </summary>
 		[StepDefinition(@"I confirm that I see the following Ecologo statement: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingEcologoStatement(string statement)
 		{
 
-				var newProductpage = new NewProduct();
-				var found = newProductpage.GetEcologoStatement();
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetEcologoStatement();
 
-				Report.IsTrue(found.Trim() == statement.Trim(),
-					"ecologo statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-					"ecologo statement was showing: " + statement + ", as expected!");
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"ecologo statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"ecologo statement was showing: " + statement + ", as expected!");
 		}
 
 
@@ -1743,8 +1743,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			foreach (var item in Ingredients)
 			{
-				Report.IsTrue(new NewProduct().AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber==""?item.ComponentName:item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
+				Report.IsTrue(new NewProduct().AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
 			}
+		}
+
+		[StepDefinition(@"in the ingredients page I enter the (CAS number| name), select it from the list and set the percentage as: (.*)")]
+		public void SelectCasNameEnterPercentage(string casName, string percentage)
+		{
+
 		}
 
 		[StepDefinition(@"I set the (.*) field to: (.*)")]
@@ -1782,7 +1788,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
 			var errorMessages = new NewProduct().GetErrorsForSection(section);
-			Report.Info("Error messages showing are: " + string.Join(", ",errorMessages));
+			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
 			foreach (var item in errorMessagesExpected)
 			{
 				Report.IsTrue(errorMessages.Contains(item.Trim()), "Failed to find the error message: " + item + "!", "Successfully found the error message: " + item + "!", false, false);
@@ -1810,11 +1816,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void CheckingFieldInputIsCorrect(string section, string value)
 		{
 			var showing = new NewProduct().GetOptionsForSection(section);
-			Report.Info("Value(s) showing were: " + string.Join(", ",showing));
-			var expected = value.Split('|').Select(x=>x.Trim()).ToList();
+			Report.Info("Value(s) showing were: " + string.Join(", ", showing));
+			var expected = value.Split('|').Select(x => x.Trim()).ToList();
 			foreach (var expec in expected)
 			{
-				Report.IsTrue(showing.Contains(expec), "Failed to find the selected value: " + expec + " in the section: " + section + "!", string.Format("Successfully found {0} in section: {1}", expec, section),false,false);
+				Report.IsTrue(showing.Contains(expec), "Failed to find the selected value: " + expec + " in the section: " + section + "!", string.Format("Successfully found {0} in section: {1}", expec, section), false, false);
 			}
 			Report.Screenshot();
 		}
@@ -1881,7 +1887,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
-		/// Confirm the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule statement 
+		/// Confirm the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule statement
 		/// </summary>
 		[StepDefinition(@"I confirm that I do not see the following VOC Content as defined by OTC Model Rule statement")]
 		public void ThenIconfirmThatIDoNotSeeTheFollowingVOCContentAsDefinedByOTCModelRuleStatement()
@@ -1894,7 +1900,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
-		/// Confirm the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule statement 
+		/// Confirm the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule statement
 		/// </summary>
 		[StepDefinition(@"I confirm that I see the following VOC Content as defined by OTC Model Rule statement: (.*)")]
 		public void ThenIconfirmThatISeeTheFollowingVOCContentAsDefinedByOTCModelRuleStatement(string statement)
@@ -1948,7 +1954,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var showing = new NewProduct().GetIngredientErrorMessage();
 			Report.IsTrue(showing.Trim() == text.Trim(),
-				string.Format("Ingredients error message was not as expected. Expected: {0} but found {1}",text.Trim(), showing.Trim()),
+				string.Format("Ingredients error message was not as expected. Expected: {0} but found {1}", text.Trim(), showing.Trim()),
 				string.Format("Ingredients error message was showing {0} as expected!", text.Trim()));
 		}
 
