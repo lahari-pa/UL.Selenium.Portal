@@ -296,6 +296,7 @@
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_PaymentMethods.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
+    <Compile Include="Steps\Steps_Shared.cs" />
     <Compile Include="Steps\Steps_Solution.cs" />
     <Compile Include="Steps\Steps_ForgottenPassword.cs" />
     <Compile Include="Steps\Steps_ForwardProductRegistration.cs" />

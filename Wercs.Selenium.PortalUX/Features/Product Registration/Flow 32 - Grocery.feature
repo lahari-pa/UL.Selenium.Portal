@@ -147,59 +147,26 @@ Then The home screen should load
 Given I generate a random UPC number and save as: UPC60775
 Given I delete all products with UPC Number: saved as UPC60775
 
-# ====== Following the steps from 'Shared Step' 57753 ====== #
-Then I click the Register New Product icon in the Navigation Pane
-And I should see the New Product Page
-And I set the Select the type of product to create option to: Create a New Registration
-And in the New Product page I click Continue
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-# ====== Following the steps from 'Shared Step' 57561 ====== #
-And I should see the The Product Page
-And I set the Product Name as it a appears on the Package Label field to: Cooking oil - Non-Aerosol
-And In the Product Type tab of the New Product Page, I enter: Cooking oil - Non-Aerosol in the Type of Product select field
-And in the The Product page I click Continue
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product)
+
 Then I save the product information as: TestCase60775
 
-# ====== Following the steps from 'Shared Step' 60778 ====== #
-And I should see the Product Characteristics Page
-And Primary Physical State should be showing the value: Liquid
-And I set the Secondary Physical State option to: Liquid
-And I set the Specific Gravity field to: 20
-And I set the pH field to: 7
+Given I call Shared Step 60779 (Enter Liquid - Cooking Oil - Non-Aerosol)
 
-And I check the 'I do not have exact' checkbox for field: Boiling Point (in Celsius)
-And I set the Boiling Point (in Celsius) option to: Not tested/Unknown
+Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 
-And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)
-And I set the Flash Point (in Celsius) field to: Combustible IIIA (>60C and <93C)
+Given I call Shared Step 57570 (Enter Ingredients)
 
-And I set the Select the best Water Solubility description field to: Decomposes
-And I set the Select all ingredients included in this product field to: Dairy
-And I set the Product is manufactured in a facility that processes, or contains field to: Dairy or products containing dairy or milk
-And I set the Product is verified and sold as field to: None of the Above
-And I set the Product contains the following sweeteners field to: None of the Above
-And I set the Product contains the following artificial dye(s) option to: None of the Above
-And in the Product Characteristics page I click Continue
+#Given I Confirm the following error message is not visible " ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding."
 
-# ====== Following the steps from 'Shared Step' 60756 ====== #
-And I should see the Additional Product Information Page
-And Select countries the product may be sold in should be showing the value: United States
-And I set the Select the product's Country of Origin field to: United Kingdom
-And I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) field to: No
-And I set the Product is shipped directly by supplier to the consumer. field to: No
-And I set the Product is a Retailer's Private Label or Brand field to: No
-And I set the Product is sold to the Retailer solely for the Retailer's use field to: No
-And in the Additional Product Information page I click Continue
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
-# ====== Following the steps from 'Shared Step' 57570 ====== #
-And I should see the Ingredients Page
-When in the Ingredients page I click Continue
-Then I should see the ingredients error message
-And The ingredients error message should be showing: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
-Then I add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Butane        | 100     | false               | false       |            |
-And in the Ingredients page I click Continue
+
+# ====== Following the steps from 'Shared Step' 57713 (Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path) ====== #
+#Select the None of the above check box for the "Refer to your Product Label. From the options, select those that appear on the Label." question
+And in the Regulatory Information 1 page I click Continue
 
 # Regulatory Information 1 Page
 And I should see the Regulatory Information 1 Page

@@ -3047,20 +3047,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SetAdditionalOptionInSection(string section, string value)
 		{
 			// In some cases the below step will not find the correct element - rather than changing this we will create this step which exclusively looks for checkboxes!
-			var el = containerElement.FindElement(By.XPath(@".//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + @"') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input"), 2);
+			var el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + @"') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input"), 2);
 			if (el == null)
 			{
 				Report.Error("Could not find element");
 				return false;
 			}
+
+			el.SendKeys(Keys.PageUp);
+			Delay.Seconds(1);
 			return el.TryClick();
 		}
 
 		public bool SetOptionInSection(string section, string value)
 		{
-			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "')]/parent::label | " +
+			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
 						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
-			            @"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
+						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			var el = containerElement.FindElement(By.XPath(xPath), 2);
@@ -3070,7 +3074,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Error("Could not the correct input in section: " + section);
 				return false;
 			}
-
+			
 			if (el.GetAttribute("type") == "text")
 			{
 				el.EnterText(value);
@@ -3094,6 +3098,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 
 				return el.SelectedOption() == value;
+			}
+
+			try
+			{
+				if (el.GetAttribute("type") == "checkbox")
+				{
+					el.Check(true);
+					return el.Checked();
+				}
+					
+			}
+			catch (Exception e)
+			{
+				
 			}
 
 			return el.TryClick();
