@@ -34,7 +34,7 @@ And I confirm the excel file saved as CVSExcelFile can be opened and contains da
 # You should be returned to the main Retail Partner page.
 
 Scenario: [57211] Retailer specific - Costco
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I Login into WERCSmart Portal - data consent Account
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: Costco
 And I confirm that: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading

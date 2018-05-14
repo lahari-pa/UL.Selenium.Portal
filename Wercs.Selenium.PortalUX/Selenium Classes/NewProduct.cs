@@ -2727,6 +2727,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
+		/// Gets statement - Verify VOC content is below the threshold of 0.02lb/start of CARB
+		/// </summary>
+		public string GetVOCContentBelowThresholdOfCARBStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'start of CARB')]"), 2).Text;
+		}
+
+		/// <summary>
+		/// Gets statement - Verify VOC content is below the threshold of 0.02lb/start of OTC
+		/// </summary>
+		public string GetVOCContentBelowThresholdOfOTCStatement()
+		{
+			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'start of OTC')]"), 2).Text;
+		}
+
+		/// <summary>
 		/// Gets statement - Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule
 		/// </summary>
 		public string GetAmountOfVocByOTCRuleStatement()
@@ -2817,6 +2833,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
+		/// Gets limits specified by CARB statement
+		/// </summary>
+		public string LimitsSpecifiedByCARB()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified by CARB')]"), 2).Text;
+		}
+
+		/// <summary>
+		/// Gets limits specified by OTC statement
+		/// </summary>
+		public string LimitsSpecifiedByOTC()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified by OTC')]"), 2).Text;
+		}
+
+		/// <summary>
 		/// Gets limits specified in the California Consumer Products Regulation statement
 		/// </summary>
 		public string LimitsSpecifiedCaliforniaConsumerProductsRegulation()
@@ -2865,6 +2897,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var voccompliancelimit = row.FindElement(By.XPath(".//td[2]"), 2).GetValue();
 				var regulation = row.FindElement(By.XPath(".//td[3]"), 2).GetValue();
 				retList.Add(new VocLimits() { Use = use, VocComplianceLimit = voccompliancelimit, Regulation = regulation });
+			}
+
+			return retList;
+
+		}
+
+		public List<VocLimitsWithUnits> GetDisplayedVocLimitsWithUnits()
+		{
+
+			var retList = new List<VocLimitsWithUnits>();
+			var tableElement = containerElement.FindElement(By.XPath(".//table[@class='table table-hover table-fixed']"), 2);
+			if (tableElement == null)
+			{
+				return null;
+			}
+
+			var rows = tableElement.FindElements(By.XPath(".//tbody//tr"), 2);
+			foreach (var row in rows)
+			{
+				var use = row.FindElement(By.XPath(".//td[1]"), 2).GetValue();
+				var voccompliancelimit = row.FindElement(By.XPath(".//td[2]"), 2).GetValue();
+				var units = row.FindElement(By.XPath(".//td[3]"), 2).GetValue();
+				var regulation = row.FindElement(By.XPath(".//td[4]"), 2).GetValue();
+				retList.Add(new VocLimitsWithUnits() { Use = use, VocComplianceLimit = voccompliancelimit, Units = units, Regulation = regulation });
 			}
 
 			return retList;
@@ -3243,6 +3299,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	{
 		public string Use { get; set; }
 		public string VocComplianceLimit { get; set; }
+		public string Regulation { get; set; }
+	}
+
+	public class VocLimitsWithUnits
+	{
+		public string Use { get; set; }
+		public string VocComplianceLimit { get; set; }
+		public string Units { get; set; }
 		public string Regulation { get; set; }
 	}
 

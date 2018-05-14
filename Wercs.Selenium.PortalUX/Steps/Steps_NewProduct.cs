@@ -1222,6 +1222,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		/// <summary>
+		/// Confirm imits specified by CARB statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following limits specified by CARB statement: (.*)")]
+		public void LimitsSpecificedByCARBStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.LimitsSpecifiedByCARB();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm imits specified by OTC Model Rule statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following limits specified by OTC statement: (.*)")]
+		public void LimitsSpecificedByOTCStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.LimitsSpecifiedByOTC();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
 		/// Confirm limits specified by the Ozone Transport Commission statement
 		/// </summary>
 		[StepDefinition(@"I confirm that I see the following limits specified by the Ozone Transport Commission statement: (.*)")]
@@ -1855,6 +1883,36 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I should see the following Voc Limits with units  present:")]
+		public void VocLimitsWithUnits(Table information)
+		{
+			var expected = information.CreateSet<VocLimitsWithUnits>();
+			var voclimits = new NewProduct();
+			var displayed = voclimits.GetDisplayedVocLimitsWithUnits();
+			foreach (var expectedinfo in expected)
+			{
+				Report.Info("Checking use: " + expectedinfo.Use + " and Voc Compliance Limit: " + expectedinfo.VocComplianceLimit + " and Units: " + expectedinfo.Units + " and Regulation: " + expectedinfo.Regulation);
+				var matchingType = displayed.Where(x => x.Use == expectedinfo.Use);
+				if (matchingType.Count() == 0)
+				{
+					Report.Failure("No Use data displayed: " + expectedinfo.Use + " were displayed!");
+					continue;
+				}
+
+				bool passed = false;
+				foreach (var matched in matchingType)
+				{
+					if (matched.Use.Contains(expectedinfo.Use) && matched.VocComplianceLimit == expectedinfo.VocComplianceLimit && matched.Units == expectedinfo.Units && matched.Regulation == expectedinfo.Regulation)
+					{
+						passed = true;
+						break;
+					}
+				}
+
+				Report.IsTrue(passed, "Voc Limit with units data was not found!", "Voc Limit with units data found!");
+			}
+		}
+
 		[StepDefinition(@"I should see the following Voc percent for each state:")]
 		public void ThenIShouldSeeTheFollowingVocPercentForEachState(Table information)
 		{
@@ -1920,6 +1978,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var newProductpage = new NewProduct();
 			var found = newProductpage.GetAmountOfVocDefinedByCARBStatement();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm Verify VOC content is below the threshold of 0.02lb/start of CARB statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC Content below threshold CARB statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingVOCContentBelowThresholdCARBStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetVOCContentBelowThresholdOfCARBStatement();
+
+			Report.IsTrue(found.Trim() == statement.Trim(),
+				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
+				"statement was showing: " + statement + ", as expected!");
+		}
+
+		/// <summary>
+		/// Confirm Verify VOC content is below the threshold of 0.02lb/start of OTC statement
+		/// </summary>
+		[StepDefinition(@"I confirm that I see the following VOC Content below threshold OTC statement: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingVOCContentBelowThresholdOTCStatement(string statement)
+		{
+			var newProductpage = new NewProduct();
+			var found = newProductpage.GetVOCContentBelowThresholdOfOTCStatement();
 
 			Report.IsTrue(found.Trim() == statement.Trim(),
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
