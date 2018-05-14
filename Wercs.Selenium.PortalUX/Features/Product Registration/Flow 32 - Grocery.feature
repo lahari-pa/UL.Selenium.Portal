@@ -163,25 +163,12 @@ Given I call Shared Step 57570 (Enter Ingredients)
 
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-# ====== Following the steps from 'Shared Step' 57713 (Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path) ====== #
-#Select the None of the above check box for the "Refer to your Product Label. From the options, select those that appear on the Label." question
-And in the Regulatory Information 1 page I click Continue
+Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
-# Regulatory Information 1 Page
-And I should see the Regulatory Information 1 Page
-And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
-Then in the Regulatory Information 1 page I click Continue
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path)
 
-# ====== Following the steps from 'Shared Step' 57506 ====== #
-And I should see the Transportation Details 1 Page
-And I set the Product is Regulated for Transport option to: Yes
-And I set the below options for field: Select all modes of transport that you've classified the product for
-| Option                   |
-| IMDG                     |
-| Shipping fully regulated |
-And in the Transportation Details 1 page I click Continue
 
 # ====== Following the steps from 'Shared Step' 57728 ====== #
 Then I should see the International Marine (IMDG) Classification Page

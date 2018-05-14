@@ -102,9 +102,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
-			MyStepsNewProduct.SetTheSectionOptionTo("U.S.Toxic Substances Control Act (TSCA) status", "Compliant");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product, including container and/or packaging, contains a chemical on California's Prop 65 list", "No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
+
+		[Given(@"I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path")]
+		public void GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath(int p0, int p1)
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Refer to your Product Label. From the options, select those that appear on the Label.", "None of the Above");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
+		}
+
+		[Given(@"I call Shared 57506 \(Transportation Details 1 - Regulated for Transport\(No\) - Exemption\(Random\) - Continue - Happy Path\)")]
+		public void GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath(int p0, int p1)
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is Regulated for Transport", "No, due to an exemption or exception");
+			//MyStepsNewProduct.GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTExceptionsISelect(new List<string>("173.120(a)(4):  FP > 35 °C (95 °F), with a fire point > 100 °C (212 °F)"));
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+		}
+
+		[Given(@"I call Shared 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\)")]
+		public void GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath(int p0)
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 		}
 
 	}
