@@ -5,9 +5,7 @@ using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
-using Selenium.Core.ExtensionMethods;
 using SeleniumUtilities;
-using Wercs.Selenium.PortalUX.Classes;
 using Global = SeleniumUtilities.Global;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -613,7 +611,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (enabled == "enabled")
 			{
-				if (!_btnContinue.IsEnabled())
+				if (!_btnContinue.Enabled)
 				{
 					Report.Info("Continue Button is Disabled");
 					Report.Screenshot();
@@ -626,7 +624,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (enabled == "disabled")
 			{
-				if (_btnContinue.IsEnabled())
+				if (_btnContinue.Enabled)
 				{
 					Report.Info("Continue Button is Enabled");
 					Report.Screenshot();
