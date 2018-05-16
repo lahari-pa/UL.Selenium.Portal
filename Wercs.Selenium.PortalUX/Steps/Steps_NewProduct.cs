@@ -1775,11 +1775,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"in the ingredients page I enter the (CAS number| name), select it from the list and set the percentage as: (.*)")]
-		public void SelectCasNameEnterPercentage(string casName, string percentage)
-		{
-
-		}
 
 		[StepDefinition(@"I set the (.*) field to: (.*)")]
 		[StepDefinition(@"I set the (.*) option to: (.*)")]
@@ -1788,6 +1783,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SetOptionInSection(section, option),
 				"Failed to set the input to " + option + " in section: " + section,
 				"Successfully set the input to " + option + " in section: " + section);
+		}
+
+		[StepDefinition(@"I only see the following sections")]
+		public void CheckDisplayedSections(Table sections)
+		{
+			var ExpectedSections = new List<string>();
+			foreach (var Row in sections.Rows)
+			{
+				ExpectedSections.Add(Row["Section"]);
+			}
+			var ActualSections = new NewProduct().GetDisplayedSections();
+			Report.IsTrue(ExpectedSections.All(ActualSections.Contains) && ExpectedSections.Count == ActualSections.Count, "The displayed sections: '" + string.Join(",", ActualSections) + "' did not match the expected sections: '" + string.Join(",", ExpectedSections) + "'");
 		}
 
 		[StepDefinition(@"I check the 'I do not have exact' checkbox for field: (.*)")]
@@ -2056,6 +2063,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(found.Trim() == statement.Trim(),
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
 				"statement was showing: " + statement + ", as expected!");
+		}
+
+		[StepDefinition(@"I add the EPA registration number: (.*)")]
+		public void IAddTheEPARegistrationNumber(string epaNumber)
+		{
+			// New EPA rows are always added to the top of the stack, so check if top row has any data before entering the test value
+			var newProductpage = new NewProduct();
+			if (!newProductpage.TopEPARowIsEmpty())
+			{
+				Report.Info("Adding a new EPA row because there is pre-existing data");
+				newProductpage.AddEPARow();
+				Report.Info("Entering the EPA number: " + epaNumber);
+				newProductpage.EnterEPATopRow(epaNumber);
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Info("Entering the EPA number: " + epaNumber);
+				newProductpage.EnterEPATopRow(epaNumber);
+				Report.Screenshot();
+			}
 		}
 	}
 }

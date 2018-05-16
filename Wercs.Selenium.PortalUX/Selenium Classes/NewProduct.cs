@@ -44,7 +44,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public ProductInformation GetCurrentProductInformation()
 		{
-			return new ProductInformation(){Id=GetProductId(), Name=GetProductName()};
+			return new ProductInformation() { Id = GetProductId(), Name = GetProductName() };
 		}
 
 		public string GetInitialStatement()
@@ -158,7 +158,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSection(string section)
 		{
-			var sec = containerElement.FindElements(By.XPath(".//h3"), 2).FirstOrDefault(x=>x.Text.Contains(section));
+			var sec = containerElement.FindElements(By.XPath(".//h3"), 2).FirstOrDefault(x => x.Text.Contains(section));
 
 			if (sec != null)
 			{
@@ -188,7 +188,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		
+
 
 
 		public string ProductName {
@@ -226,7 +226,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-		public List<string>ProductsMayBeSold {
+		public List<string> ProductsMayBeSold {
 			get
 			{
 				List<string> countries = new List<string>();
@@ -254,7 +254,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						countryInput.Click();
 					}
 				}
-				
+
 			}
 		}
 
@@ -281,7 +281,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					throw new Exception("Label not found as expected.");
 				}
-				
+
 				return "";
 
 			}
@@ -291,7 +291,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					.FirstOrDefault(x => x.Text.Contains("Indicate how battery is packaged"));
 
 				if (lbl != null)
-				{ 
+				{
 					var thisLabel = lbl.FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text.Contains(value));
 					if (thisLabel != null)
 					{
@@ -579,7 +579,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					emptyBatteryRowsExist = false;
 				}
 			}
-			
+
 		}
 
 		public List<Battery> Batteries {
@@ -587,11 +587,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				List<Battery> listOfBatteries = new List<Battery>();
 				IWebElement thisTable = containerElement.FindElement(By.XPath(".//table"));
-				List <KeyValuePair<int, string>> th = TableHeaders(thisTable);
+				List<KeyValuePair<int, string>> th = TableHeaders(thisTable);
 
 				var listOfRows = containerElement.FindElements(By.XPath(".//tbody//tr"));
 
-				int batteryTypeIndex = th.FirstOrDefault(x => x.Value =="Battery Type").Key;
+				int batteryTypeIndex = th.FirstOrDefault(x => x.Value == "Battery Type").Key;
 				int manufacturerIndex = th.FirstOrDefault(x => x.Value == "Manufacturer").Key;
 				int perPackageIndex = th.FirstOrDefault(x => x.Value.Contains("per package")).Key;
 				int batteriesRequiredIndex = th.FirstOrDefault(x => x.Value.Contains("required")).Key;
@@ -614,7 +614,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					numberPerPackage = Convert.ToInt16(thisRow.FindElement(By.XPath(".//td[" + perPackageIndex.ToString() + "]")).Text);
 					requiredToRun = Convert.ToInt16(thisRow.FindElement(By.XPath(".//td[" + batteriesRequiredIndex.ToString() + "]")).Text);
 
-					listOfBatteries.Add(new Battery(){BatteryType = batteryType, Manufacturer = manufacturer,NumberPerPackage = numberPerPackage,RequiredToRun = requiredToRun});
+					listOfBatteries.Add(new Battery() { BatteryType = batteryType, Manufacturer = manufacturer, NumberPerPackage = numberPerPackage, RequiredToRun = requiredToRun });
 				}
 
 				//table/tbody//tr
@@ -665,7 +665,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						{
 							SafewareReporting.Report.Info(e.Message);
 						}
-						
+
 						Delay.Seconds(1);
 						i++;
 					}
@@ -699,8 +699,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		public bool ProductClassifiedUnderOSHA
-		{
+		public bool ProductClassifiedUnderOSHA {
 			get
 			{
 				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -745,7 +744,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Product is shipped directly"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x=>!x.GetCssValue("background-color").Contains("255, 255, 255"));
+					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
 				{
@@ -870,7 +869,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return this.containerElement.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("OSHA")).FindElements(By.XPath("../following-sibling::div//label/input"))
 					.FirstOrDefault(x => x.Selected).FindElement(By.XPath("./following-sibling::span")).Text;
-				}
+			}
 			set
 			{
 				var selectItem = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -884,7 +883,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 		}
-		
+
 
 		public bool Prop65 {
 			get
@@ -1059,13 +1058,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						{
 							listOfMetals.Add(new MetalPresence(metalName, "none"));
 						}
-							
+
 					}
 					catch (Exception e)
 					{
 						SafewareReporting.Report.Info(e.Message);
 					}
-					
+
 				}
 
 				return listOfMetals;
@@ -1077,7 +1076,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				foreach (MetalPresence thisMetal in value)
 				{
-					var metalLabel = header.FindElements(By.XPath("../../following::div//label[@class='control-label']")).FirstOrDefault(x=>x.GetValue().Trim()==thisMetal.Metal);
+					var metalLabel = header.FindElements(By.XPath("../../following::div//label[@class='control-label']")).FirstOrDefault(x => x.GetValue().Trim() == thisMetal.Metal);
 					var inputLabel = metalLabel.FindElements(By.XPath("../..//input/../span")).FirstOrDefault(x => x.Text == thisMetal.Presence);
 
 					if (inputLabel != null)
@@ -1106,7 +1105,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> GetAllMetalNames()
 		{
 			List<string> listOfMetals = new List<string>();
-			var circuitDiv =SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
+			var circuitDiv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
 
 			var listOfMetalRows = circuitDiv.FindElements(By.XPath("../../following-sibling::div"));
 			string metalName = "";
@@ -1120,9 +1119,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				catch (Exception e)
 				{
-				//	SafewareReporting.Report.Error(e.Message);
+					//	SafewareReporting.Report.Error(e.Message);
 				}
-				
+
 			}
 			return listOfMetals;
 		}
@@ -1169,25 +1168,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		public string ProductLineOrBrand 
-	    {
-		    set
+		public string ProductLineOrBrand {
+			set
 			{
 				var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Line')]/../following-sibling::div//select"), 2);
 				el.SelectByValue(value);
-		    }
+			}
 
-	    }
+		}
 
-        public string ProductType
-        {
-            set
-            {
-                var el = this.containerElement.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 2);
-                el.Click();
-                var inputField = this.containerElement.FindElement(By.XPath("//span[contains(@class,'select2-container')]//input"), 2);
-                inputField.EnterText(value);
-                GeneralUtilities.Wait_for_load_finish();
+		public string ProductType {
+			set
+			{
+				var el = this.containerElement.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 2);
+				el.Click();
+				var inputField = this.containerElement.FindElement(By.XPath("//span[contains(@class,'select2-container')]//input"), 2);
+				inputField.EnterText(value);
+				GeneralUtilities.Wait_for_load_finish();
 
 				var dropDownResults = this.containerElement.FindElements(By.XPath("//span[contains(@class,'select2-container')]//ul/li"), 2);
 				var ddlEl = dropDownResults.FirstOrDefault(x => x.Text.Trim() == value);
@@ -1281,7 +1278,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var sizeField = container.FindElement(By.XPath(".//input[@placeholder='Size']"), 2);
 				sizeField.EnterText(info.Size);
 
-				if (info.Dpci.Length> 0)
+				if (info.Dpci.Length > 0)
 				{
 					var dpciField = container.FindElement(By.XPath(".//input[contains(@data-bind,'value.field')]"), 2);
 					dpciField.EnterText(info.Dpci);
@@ -1293,7 +1290,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					var quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity']"), 2);
 					quantityField.EnterText(info.Quantity);
 				}
-				
+
 				return true;
 			}
 			catch (Exception ex)
@@ -1348,7 +1345,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			return el.TryClick();
-			
+
 		}
 
 		public bool ClickAcceptButton()
@@ -1450,7 +1447,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 		/// <summary>
-		/// Please select DOT Exceptions if applicable -- different method 
+		/// Please select DOT Exceptions if applicable -- different method
 		/// </summary>
 		public bool DotExcemptionIfApplicable(string item)
 		{
@@ -1529,7 +1526,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						el.TryClick();
 					}
 				}
-				
+
 			}
 		}
 
@@ -1604,8 +1601,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		public string WaterSolubility
-		{
+		public string WaterSolubility {
 			get
 			{
 				var el = containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
@@ -1693,8 +1689,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 
-		public bool SetWaterSolutionQuestion
-		{
+		public bool SetWaterSolutionQuestion {
 			set
 			{
 				var btns = containerElement.FindElements(By.XPath(".//label[contains(text(),'When mixed with an equal')]/..//following-sibling::div//input/following-sibling::span"), 2);
@@ -1733,14 +1728,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				// If no elements match this, then we will simply take the first element in the list
 
 				var Matches = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+
+				while (Matches.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) == null)
+				{
+					Delay.Seconds(Delay.SpeedFactor * 1);
+					Matches = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+				}
 				if (Matches.Count == 0)
 				{
 					return false;
 				}
-
-				var MatchingCasValues = Matches.Where(x=>x.FindElement(By.XPath(".//span[2]"), 2).GetValue().Trim()==ingredient.CASNumber.Trim());
-				
-				if (MatchingCasValues.Count()==0)
+				var MatchingCasValues = Matches.Where(x => x.FindElement(By.XPath(".//span[@class='text-muted']"), 2).GetValue().Trim() == ingredient.CASNumber.Trim());
+				var matchText = Matches.Select(x => x.FindElement(By.XPath(".//span[@class='text-muted']"), 2).GetValue().Trim()).ToList();
+				if (MatchingCasValues.Count() == 0)
 				{
 					MatchedEntry = Matches.FirstOrDefault();
 					ingredient.CASNumber = MatchedEntry.FindElement(By.XPath(".//span[2]"), 2).GetValue();
@@ -1749,7 +1749,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				else
 				{
 					// In this case we have entries with matching CAS Numbers, so we should double check that our product name matches?
-					if (ingredient.ComponentName == "" || ingredient.ComponentName==null)
+					if (ingredient.ComponentName == "" || ingredient.ComponentName == null)
 					{
 						// No Component name was specified, so we just take the first value with a matching CAS Number!
 						MatchedEntry = MatchingCasValues.FirstOrDefault();
@@ -1792,7 +1792,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				while (Matches.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) == null)
 				{
-					Delay.Seconds(Delay.SpeedFactor*1);
+					Delay.Seconds(Delay.SpeedFactor * 1);
 					Matches = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 				}
 
@@ -1936,8 +1936,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		/*===== Safety Data Sheet Authoring ====*/
 
-		public string PersonalProtectionEquipmentRecommended
-		{
+		public string PersonalProtectionEquipmentRecommended {
 			get
 			{
 				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -2007,7 +2006,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					throw new Exception("Label not found as expected.");
 				}
-				
+
 			}
 			set
 			{
@@ -2062,7 +2061,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 		/// <summary>
-		/// Specific Gravity text box 
+		/// Specific Gravity text box
 		/// </summary>
 		public string SpecificGravity {
 			get
@@ -2100,7 +2099,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// pH text box 
+		/// pH text box
 		/// </summary>
 		public string PH {
 			get
@@ -2138,7 +2137,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// Boiling Point (in Celsius) text box 
+		/// Boiling Point (in Celsius) text box
 		/// </summary>
 		public string BoilingPoint {
 			get
@@ -2176,7 +2175,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// Flash Point (in Celsius) text box 
+		/// Flash Point (in Celsius) text box
 		/// </summary>
 		public string FlashPoint {
 			get
@@ -2214,7 +2213,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// UN Number text box 
+		/// UN Number text box
 		/// </summary>
 		public bool UNnumber(string text)
 		{
@@ -2270,7 +2269,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// Technical Name (if applicable) text box 
+		/// Technical Name (if applicable) text box
 		/// </summary>
 		public bool TechnicalName(string text)
 		{
@@ -2294,7 +2293,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// VOC content in grams ozone per gram text box 
+		/// VOC content in grams ozone per gram text box
 		/// </summary>
 		public bool VocContentInGrams(string text)
 		{
@@ -2553,10 +2552,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			GeneralFunctions.EnterFilename(pdfFilePath);
 
 			int i = 0;
-			while (containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Remove']"), 2) == null && i<10)
+			while (containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Remove']"), 2) == null && i < 10)
 			{
 				i++;
-				Delay.Seconds(Delay.SpeedFactor*1);
+				Delay.Seconds(Delay.SpeedFactor * 1);
 			}
 
 			return true;
@@ -2607,7 +2606,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 		/// <summary>
-		/// Product's VOC content as sold text box 
+		/// Product's VOC content as sold text box
 		/// </summary>
 		public string ProductsVocContentAsSold {
 			get
@@ -2646,7 +2645,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 		/// <summary>
-		/// Product's VOC content as used text box 
+		/// Product's VOC content as used text box
 		/// </summary>
 		public string ProductsVocContentAsUsed {
 			get
@@ -3115,6 +3114,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.TryClick();
 		}
 
+		public List<string> GetDisplayedSections()
+		{
+			var DisplayedSections = new List<string>();
+			var els = containerElement.FindElements(By.XPath(@"//div[starts-with(@class,'form-group')]"));
+			foreach (var element in els)
+			{
+				DisplayedSections.Add(element.FindElement(By.XPath(@"./div/label")).Text);
+			}
+			return DisplayedSections;
+		}
+
 		public bool SetOptionInSection(string section, string value)
 		{
 			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
@@ -3127,7 +3137,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (el == null)
 			{
-				Report.Error("Could not the correct input in section: " + section);
+				Report.Error("Could not find the correct input in section: " + section);
 				return false;
 			}
 			
@@ -3179,7 +3189,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
 			{
-				return new List<string> {matchingElements.FirstOrDefault().SelectedOption()};
+				return new List<string> { matchingElements.FirstOrDefault().SelectedOption() };
 			}
 
 			// Assume we have 'input' tags
@@ -3211,7 +3221,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool AddDocument(string documentName, string language)
 		{
-			var rowContainer = containerElement.FindElement(By.XPath(".//span[text()='" + documentName +"']//ancestor::div[contains(@class,'document-row')]"), 2);
+			var rowContainer = containerElement.FindElement(By.XPath(".//span[text()='" + documentName + "']//ancestor::div[contains(@class,'document-row')]"), 2);
 			if (rowContainer == null)
 			{
 				return false;
@@ -3229,9 +3239,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var rowContainer = containerElement.FindElement(By.XPath(".//span[text()='" + documentName + "']//ancestor::div[contains(@class,'document-row')]"), 2);
 			int i = 0;
-			while (i < 10 && rowContainer==null)
+			while (i < 10 && rowContainer == null)
 			{
-				Delay.Seconds(Delay.SpeedFactor*2);
+				Delay.Seconds(Delay.SpeedFactor * 2);
 				rowContainer = containerElement.FindElement(By.XPath(".//span[text()='" + documentName + "']//ancestor::div[contains(@class,'document-row')]"), 2);
 			}
 
@@ -3243,6 +3253,76 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var el = rowContainer.FindElements(By.XPath(".//span[@class='selection']//li[not(.//input)]"), 2);
 
 			return el.Select(x => x.GetElementText().Replace("×", "").Trim()).ToList();
+		}
+
+		public bool TopEPARowIsEmpty()
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The EPA Registration Table could not be found");
+			}
+			var RowInputs = EPATable.FindElements(By.XPath(@".//input[@class='form-control']"));
+			if (RowInputs.Count > 0)
+			{
+				if (RowInputs[0].GetAttribute("value") == "")
+				{
+					return true;
+				}
+				return false;
+			}
+			throw new Exception("There were no EPA registration rows visible on the Pesticide Details page");
+		}
+
+		public void EnterEPATopRow(string epaNumber)
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The EPA Registration Table could not be found");
+			}
+			var RowInputs = EPATable.FindElements(By.XPath(@".//input[@class='form-control']"));
+			if (RowInputs.Count > 0)
+			{
+				RowInputs[0].SendKeys(epaNumber);
+				return;
+			}
+			throw new Exception("There were no EPA registration rows visible on the Pesticide Details page");
+		}
+		public void AddEPARow()
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The EPA Registration Table could not be found");
+			}
+			var NewRowButton = EPATable.FindElement(By.XPath(@".//button[@data-bind='click: addRow']"));
+			if (NewRowButton == null)
+			{
+				throw new Exception("The New Row Button is not visible on the EPA registration page");
+			}
+			NewRowButton.Click();
 		}
 	}
 
@@ -3258,7 +3338,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string Manufacturer { get; set; }
 
 		public int NumberPerPackage { get; set; }
-		public int RequiredToRun { get; set; }	
+		public int RequiredToRun { get; set; }
 	}
 
 	public class MetalPresence
