@@ -79,6 +79,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"option was showing: " + message + ", as expected!");
 		}
 
+		[StepDefinition(@"(.*) should be showing the following option: (.*)")]
+		public void ShouldBeShowingFollowing(string section, string option)
+		{
+			var dataSummarySheet = new DataSummary();
+			var found = dataSummarySheet.GetInfoForSectionOption(section, option);
+
+			Report.IsTrue(found.Contains(option),
+					"Failed to set the input to " + option + " in section: " + section,
+					"Successfully set the input to " + option + " in section: " + section);
+		
+		//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
+	}
 
 	}
 }

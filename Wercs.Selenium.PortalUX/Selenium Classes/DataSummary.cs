@@ -84,5 +84,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			WaitForSpinner();
 			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'California Consumer Products Regulation')]/../p[1]"), 2).Text;
 		}
+
+		public List<string> GetInfoForSectionOption(string section, string option)
+		{
+			WaitForSpinner();
+			var els = containerElement.FindElements(By.XPath(".//h4[@class='summary-question' and contains(text(),'" + section + "')]/../p[contains(text(),'" + option + "')]"), 2);
+			
+			return els.Select(x => x.GetElementText()).ToList();
+		}
 	}
 }
