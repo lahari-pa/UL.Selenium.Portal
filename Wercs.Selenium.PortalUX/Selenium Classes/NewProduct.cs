@@ -3405,7 +3405,154 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
-			return links.FirstOrDefault().TryClick();
+			bool clicked = links.FirstOrDefault().TryClick();
+			GeneralUtilities.Wait_for_load_finish();
+			RefreshContainer();
+			return clicked;
+		}
+
+		public bool ExpirationDateRowHasData(int row)
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The State Pesticide Registration Table could not be found");
+			}
+			var ExpirationDateInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs-2')]/div/input"));
+			if (ExpirationDateInputs.Count > 0)
+			{
+				var currentInput = ExpirationDateInputs[row];
+				var expirationDateText = currentInput.GetAttribute("value");
+				return expirationDateText != "";
+			}
+			throw new Exception("There were no Pesticide State Registration Expiration Date rows visible");
+		}
+
+		public bool KellyDataIsTickedAtRow(int index)
+		{
+			RefreshContainer();
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The State Pesticide Registration Table could not be found");
+			}
+			var stateRow = EPATable.FindElements(By.XPath(@".//tr[contains(@data-bind, 'css')]"))[index];
+			var kellyDataCheck = stateRow.FindElements(By.XPath(@".//td[5]/div[@class='fa fa-check' and not(contains(@style, 'display: none'))]"));
+			if (kellyDataCheck.Count == 0)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public void EditPesticideRegExpirationDate(string date, string state)
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The State Pesticide Registration Table could not be found");
+			}
+			var expirationDateInputs = EPATable.FindElements(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/div/input[@type='text']"));
+			if (expirationDateInputs.Count == 0)
+			{
+				Report.Failure("Failed to find a match on the State text: '" + state + "'");
+				Report.Screenshot();
+				return;
+			}
+			expirationDateInputs.FirstOrDefault().Clear();
+			expirationDateInputs.FirstOrDefault().SendKeys(date);
+		}
+
+		public bool KellyDataIsTickedAtState(string state)
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The State Pesticide Registration Table could not be found");
+			}
+			var kellyDataTick = EPATable.FindElements(By.XPath(
+				@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/ancestor::tr/td/div[@class='fa fa-check' and not(contains(@style, 'display: none'))]"));
+			if (kellyDataTick.Count == 0)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public string GetPesticideRegExpirationDate(string state)
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The State Pesticide Registration Table could not be found");
+			}
+			var expirationDateInput = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/div/input[@type='text']"));
+			if (expirationDateInput == null)
+			{
+				Report.Failure("Failed to find a match on the State text: '" + state + "'");
+				Report.Screenshot();
+				return null;
+			}
+			return expirationDateInput.GetValue();
+		}
+
+		public string GetPesticideRegKellyExpirationDate(string state)
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The State Pesticide Registration Table could not be found");
+			}
+			var kellyExpirationDateInput = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td/following-sibling::td/label"));
+			if (kellyExpirationDateInput == null)
+			{
+				Report.Failure("Failed to find a match on the State text: '" + state + "'");
+				Report.Screenshot();
+				return null;
+			}
+			return kellyExpirationDateInput.GetValue();
 		}
 	}
 
