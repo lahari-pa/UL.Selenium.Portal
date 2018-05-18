@@ -2085,5 +2085,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Screenshot();
 			}
 		}
+
+		[StepDefinition(@"I edit each State Pesticide Registration Number with an edited suffix")]
+		public void IEditEachStatePesticideRegNumberWithSuffix()
+		{
+			var newProductPage = new NewProduct();
+			var RowCount = newProductPage.CountPesticideRegRows();
+			for (int i = 0; i < RowCount; i++)
+			{
+				newProductPage.AddSuffixToPesticideRegistrationNumRow(i);
+			}
+			Report.Success("All State Pesticide Registration Number row were user edited");
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I check each State Pesticide Registration Number contains the edited suffix")]
+		public bool ICheckEachStatePesticideRegNumberContains()
+		{
+			var newProductPage = new NewProduct();
+			var RowCount = newProductPage.CountPesticideRegRows();
+			for (int i = 0; i < RowCount; i++)
+			{
+				if (!newProductPage.CheckPesticideRegNumIsEdited(i))
+				{
+					var rowNumber = i + 1;
+					Report.Failure("Row number: " + rowNumber + " did not contain the edited suffix as expected");
+					Report.Screenshot();
+					return false;
+				}
+			}
+			Report.Success("All State Pesticide Registration Numbers contained the user edited suffix");
+			Report.Screenshot();
+			return true;
+		}
+
+		[StepDefinition(@"I click the Update Wercs Smart data with EPA data through Kelly Services link")]
+		public void IClickTheUpdateWercsSmartDataThroughKellyServicesLink()
+		{
+			var newProductPage = new NewProduct();
+			Report.IsTrue(newProductPage.ClickEPAKellyServicesLink(), "Failed to click the EPA Kelly Services link on the Pesticide State Registration Details page", "Successfully clicked the EPA Kelly Services link on the Pesticide State Registration Details page");
+		}
 	}
 }

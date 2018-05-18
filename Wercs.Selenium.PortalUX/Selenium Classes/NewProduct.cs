@@ -3140,7 +3140,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Error("Could not find the correct input in section: " + section);
 				return false;
 			}
-			
+
 			if (el.GetAttribute("type") == "text")
 			{
 				el.EnterText(value);
@@ -3173,11 +3173,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					el.Check(true);
 					return el.Checked();
 				}
-					
+
 			}
 			catch (Exception e)
 			{
-				
+
 			}
 
 			return el.TryClick();
@@ -3322,7 +3322,94 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				throw new Exception("The New Row Button is not visible on the EPA registration page");
 			}
+			Report.Info("Adding a new row to the EPA Registration table on the Pesticide Details - US page");
 			NewRowButton.Click();
+		}
+
+		public int CountPesticideRegRows()
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The State Pesticide Registration Table could not be found");
+			}
+			var RowInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs-4')]/input"));
+			if (RowInputs.Count > 0)
+			{
+				Report.Info("There are " + RowInputs.Count + " State Pesticide Registration rows showing");
+				return RowInputs.Count;
+			}
+			throw new Exception("There were no State Pesticide Registration rows visible on the Pesticide State Registration Details page");
+		}
+
+		public void AddSuffixToPesticideRegistrationNumRow(int row)
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The State Pesticide Registration Table could not be found");
+			}
+			var RowInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs-4')]/input"));
+			if (RowInputs.Count > 0)
+			{
+				var currentRow = RowInputs[row];
+				currentRow.SendKeys("-edited");
+				return;
+			}
+			throw new Exception("There were no State Pesticide Registration rows visible on the Pesticide State Registration Details page");
+		}
+
+		public bool CheckPesticideRegNumIsEdited(int row)
+		{
+			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			int i = 0;
+			while (i < 30 && EPATable == null)
+			{
+				Delay.Seconds(1);
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+				i++;
+			}
+			if (EPATable == null)
+			{
+				throw new Exception("The State Pesticide Registration Table could not be found");
+			}
+			var RowInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs-4')]/input"));
+			if (RowInputs.Count > 0)
+			{
+				var currentRow = RowInputs[row];
+				var rowText = currentRow.GetAttribute("value");
+				return rowText.Contains("-edited");
+			}
+			throw new Exception("There were no State Pesticide Registration rows visible on the Pesticide State Registration Details page");
+		}
+
+		public bool ClickEPAKellyServicesLink()
+		{
+			var links = containerElement.FindElements(By.XPath(
+				@".//div[@class='panel-heading']/following-sibling::div//span[contains(text(),'Update WERCSmart data with EPA data through Kelly Services')]"));
+			if (links == null)
+			{
+				return false;
+			}
+			if (links.Count == 0)
+			{
+				return false;
+			}
+			return links.FirstOrDefault().TryClick();
 		}
 	}
 

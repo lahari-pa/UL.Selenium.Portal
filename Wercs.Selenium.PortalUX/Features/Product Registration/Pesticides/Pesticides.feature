@@ -12,6 +12,7 @@
 
 Feature: Pesticides
 
+#release day
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -74,8 +75,31 @@ And I set the below options for field: Refer to your Product Label
 Given in the New Product page I click Continue
 
 And I should see the Pesticide Details - U.S. Page
+
 And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+
 Given in the New Product page I click Continue
 
 Given I add the EPA registration number: 72315-6
+
 Given in the New Product page I click Continue
+And I should see the Pesticide Details - State Registration Details Page
+
+Given I edit each State Pesticide Registration Number with an edited suffix
+
+Given in the New Product page I click Continue
+And I should see the Transportation Details 1 Page
+
+Then in the New Product page I click section: Pesticide Details - State Registration Details
+And I should see the Pesticide Details - State Registration Details Page
+
+Then I check each State Pesticide Registration Number contains the edited suffix
+
+Given I click the Update Wercs Smart data with EPA data through Kelly Services link
+
+Then I check each State Pesticide Registration Number contains the edited suffix
+
+Given I navigate to the home page
+
+Then I delete the product: TestCase71051
+
