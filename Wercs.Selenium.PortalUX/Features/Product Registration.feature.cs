@@ -706,6 +706,11 @@ testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)
 #line 244
 testRunner.And("in the Product Characteristics tab of the New Product Page, for Product is Regula" +
                     "ted for Transport I select: Not Regulated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 245
+testRunner.And("in the Product Characteristics tab of the New Product Page, for DOT Exceptions I " +
+                    "select: 173.120(a)(2), 173.120(a)(3)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 246
+testRunner.And("I set the Other DOT Exception field to: None", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 247
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 250

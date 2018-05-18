@@ -167,37 +167,15 @@ Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of 
 
 Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
+And I should see the Transportation Details 2 Page
+And In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: I do not ship internationally and I do not know the classification
+And in the New Product page I click Continue
+
 Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path)
 
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60775
 
-# ====== Following the steps from 'Shared Step' 57728 ====== #
-Then I should see the International Marine (IMDG) Classification Page
-And I set the UN Number field to: UN1950
-And I set the Proper Shipping Name field to: Aerosols
-And I set the Technical Name (if applicable) field to: My Safe Product
-And I set the Hazard Class (select) field to: 2
-And I set the Packing Group (select) field to: None
-Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
-
-# ====== Following the steps from 'Shared Step' 57510 ====== #
-Then In the 'Select Retailers' window I select the retailer: Walgreens
-And I should see the Retailer Page
-And in the Retailer page I click Continue
-
-# ====== Following the steps from 'Shared Step' 57960 ====== #
-And I should see the Universal Product Code (UPC) Page
-Given I click the 'Add UPC' button
-Then I add the following into the UPC Fields
-| Field         | Value             |
-| UPCNumber     | saved as UPC60775 |
-| ContainerType | Aerosol Can       |
-| Size          | 20                |
-And in the Universal Product Code (UPC) page I click Continue
-
-# Regulatory Documents to Provide Page
-And I should see the Regulatory Documents to Provide Page
-And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-Then in the Regulatory Documents to Provide page I click Continue
+Given I call Shared 60567 (Upload Product Label only)
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
@@ -207,11 +185,8 @@ Then in the Additional Documents to Provide page I click Continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-# ====== Following the steps from 'Shared Step' 57883 ====== #
-And I should see the Comments Page
-And I enter the following into the comments field: Comments Field Text
-Given in the Comments page I click Continue
+Given I call Shared 57883 (Comments - Happy Path)
 
-# ====== Following the steps from 'Shared Step' 42214 ====== #
-Given I navigate to the home page
+Given I call Shared 54796 (Purchase Summary)
+
 Then I delete the product: TestCase60775

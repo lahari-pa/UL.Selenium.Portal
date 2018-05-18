@@ -242,8 +242,8 @@ And in the New Product page I click Continue
 #Transportation details 1 - not regulated - continue - happy path
 And I should see the Transportation Details 1 Page
 And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: Not Regulated
-#And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(a)(2), 173.120(a)(3)
-#And in the Product Characteristics tab of the New Product Page, for Other DOT Exception I select: None
+And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(a)(2), 173.120(a)(3)
+And I set the Other DOT Exception field to: None
 And in the New Product page I click Continue
 
 #Retailer association - select a retailer - continue-happy path

@@ -893,22 +893,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTExceptionsISelect(string selections)
 		{
-			//NewProduct selNewProduct = new NewProduct();
-
-			//List<string> itemsToSelect = selections.Split(',').ToList().Select(x=>x.Trim()).ToList();
-			//selNewProduct.DOTExceptions = itemsToSelect;
-
-			//List<string> itemsSelected = selNewProduct.DOTExceptions;
-
-			//foreach (string item in itemsToSelect)
-			//{
-			//	if (itemsSelected.Select(x => x.Contains(item)).Count() != 1)
-			//	{
-			//		throw new Exception("Failed to select: " + item);
-			//	}
-			//}
-			//Report.Success("Successfully selected: " + selections);
-
+			
 			Report.IsTrue(new NewProduct().DotExcemptionIfApplicable(selections), "Failed to set the DOT Excemption option to: " + selections, "Successfully set the Regulated Transport to: " + selections);
 		}
 

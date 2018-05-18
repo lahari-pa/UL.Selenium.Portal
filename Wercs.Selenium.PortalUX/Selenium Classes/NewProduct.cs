@@ -1447,22 +1447,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 		/// <summary>
-		/// Please select DOT Exceptions if applicable -- different method
+		/// Please select DOT Exceptions if applicable -- eg 173.120(a)(2), 173.120(a)(3)
 		/// </summary>
 		public bool DotExcemptionIfApplicable(string item)
 		{
 			try
 			{
-				var el = containerElement
-					.FindElements(By.XPath(".//label[text()='Please select DOT Exceptions if applicable?']/../following-sibling::div//span"), 2)
-					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
-				if (el != null)
+				var itemsToSelect = item.Split(',').Select(x => x.Trim());
+				foreach(string thisItem in itemsToSelect)
 				{
-					el.TryClick();
-					return true;
+					SetOptionInSection("Please select DOT Exceptions if applicable", thisItem);
 				}
-
-				return false;
+				return true;
 			}
 			catch (Exception)
 			{
