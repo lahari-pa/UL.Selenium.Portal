@@ -1,6 +1,7 @@
 ﻿@LandingPage
 @Login
 @Homepage
+@wercsmart
 @run_Login
 
 Feature: Login
@@ -9,6 +10,7 @@ Background:
 
 Given I go to the WERCSmart Log in
 
+@singlerun
 Scenario: [50820] Language Selector - Japanese
 
 When From the Language drop down I select Japanese

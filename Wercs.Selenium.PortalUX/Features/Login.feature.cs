@@ -48,6 +48,7 @@ namespace Wercs.Selenium.PortalUX.Features
                         "LandingPage",
                         "Login",
                         "Homepage",
+                        "wercsmart",
                         "run_Login"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -88,8 +89,8 @@ namespace Wercs.Selenium.PortalUX.Features
         
         public virtual void FeatureBackground()
         {
-#line 8
-#line 10
+#line 9
+#line 11
 testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
@@ -100,37 +101,40 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("singlerun")]
         public virtual void _50820LanguageSelector_Japanese()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50820] Language Selector - Japanese", ((string[])(null)));
-#line 12
-this.ScenarioSetup(scenarioInfo);
-#line 8
-this.FeatureBackground();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50820] Language Selector - Japanese", new string[] {
+                        "singlerun"});
 #line 14
-testRunner.When("From the Language drop down I select Japanese", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
-testRunner.Then("I should see for the sign in: ログイン", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
 #line 16
-testRunner.And("I should see for the email label: 電子メールアドレス", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.When("From the Language drop down I select Japanese", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17
-testRunner.And("I should see for the password label: パスワード", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see for the sign in: ログイン", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 18
-testRunner.And("I should see for the forgotten password: パスワードを忘れた場合", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see for the email label: 電子メールアドレス", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 19
-testRunner.And("I should see for the login button: ログイン", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see for the password label: パスワード", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
-testRunner.When("From the Language drop down I select English", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And("I should see for the forgotten password: パスワードを忘れた場合", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
-testRunner.Then("I should see for the sign in: Login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I should see for the login button: ログイン", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
-testRunner.And("I should see for the email label: Email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.When("From the Language drop down I select English", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 23
-testRunner.And("I should see for the password label: Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see for the sign in: Login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 24
-testRunner.And("I should see for the forgotten password: Forgot your Password?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see for the email label: Email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 25
+testRunner.And("I should see for the password label: Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 26
+testRunner.And("I should see for the forgotten password: Forgot your Password?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
 testRunner.And("I should see for the login button: Login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -142,37 +146,38 @@ testRunner.And("I should see for the login button: Login", ((string)(null)), ((T
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Login")]
         public virtual void _50828LanguageSelector_Chinese()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50828] Language Selector - Chinese", ((string[])(null)));
-#line 27
-this.ScenarioSetup(scenarioInfo);
-#line 8
-this.FeatureBackground();
 #line 29
-testRunner.When("From the Language drop down I select Chinese", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 30
-testRunner.Then("I should see for the sign in: 注册", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
 #line 31
-testRunner.And("I should see for the email label: 电子邮件地址", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.When("From the Language drop down I select Chinese", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 32
-testRunner.And("I should see for the password label: 密码", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see for the sign in: 注册", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 33
-testRunner.And("I should see for the forgotten password: 忘记密码？", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see for the email label: 电子邮件地址", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 34
-testRunner.And("I should see for the login button: 登陆", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see for the password label: 密码", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
-testRunner.When("From the Language drop down I select English", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And("I should see for the forgotten password: 忘记密码？", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
-testRunner.Then("I should see for the sign in: Login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I should see for the login button: 登陆", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 37
-testRunner.And("I should see for the email label: Email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.When("From the Language drop down I select English", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 38
-testRunner.And("I should see for the password label: Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see for the sign in: Login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 39
-testRunner.And("I should see for the forgotten password: Forgot your Password?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see for the email label: Email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 40
+testRunner.And("I should see for the password label: Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+testRunner.And("I should see for the forgotten password: Forgot your Password?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
 testRunner.And("I should see for the login button: Login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -184,43 +189,44 @@ testRunner.And("I should see for the login button: Login", ((string)(null)), ((T
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Login")]
         public virtual void _50830Validation_ErrorMessages()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50830] Validation - Error Messages", ((string[])(null)));
-#line 42
-this.ScenarioSetup(scenarioInfo);
-#line 8
-this.FeatureBackground();
 #line 44
-testRunner.Then("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 45
-testRunner.And("I ensure that the password input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
 #line 46
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 47
-testRunner.Then("I should see the following error message for email: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I ensure that the password input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 48
-testRunner.Given("I populate the email input field with: SeleniumAdmin01@thewercs.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 49
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 50
-testRunner.Then("I should see the following error message for password: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 51
-testRunner.Given("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
-testRunner.And("I populate the password input field with: incorrectpassword", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 54
 testRunner.Then("I should see the following error message for email: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 55
+#line 50
 testRunner.Given("I populate the email input field with: SeleniumAdmin01@thewercs.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 56
-testRunner.And("I populate the password input field with: Selenium1!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
+#line 51
 testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 52
+testRunner.Then("I should see the following error message for password: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 53
+testRunner.Given("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
+testRunner.And("I populate the password input field with: incorrectpassword", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 55
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 56
+testRunner.Then("I should see the following error message for email: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 57
+testRunner.Given("I populate the email input field with: SeleniumAdmin01@thewercs.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 58
+testRunner.And("I populate the password input field with: Selenium1!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 60
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -232,29 +238,30 @@ testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTa
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Login")]
         public virtual void _50831AccountLockout()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50831] Account Lockout", ((string[])(null)));
-#line 61
-this.ScenarioSetup(scenarioInfo);
-#line 8
-this.FeatureBackground();
 #line 63
-testRunner.Given("I populate the email input field with: a@a.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
-testRunner.And("I populate the password input field with: aaaaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
+#line 9
+this.FeatureBackground();
 #line 65
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("I populate the email input field with: a@a.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 66
-testRunner.Given("I populate the password input field with: bbbbb", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I populate the password input field with: aaaaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 67
 testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 68
-testRunner.Given("I populate the password input field with: ccccc", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I populate the password input field with: bbbbb", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 69
 testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 70
+testRunner.Given("I populate the password input field with: ccccc", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 71
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 72
 testRunner.Then("I should see a server error with message: Your account is locked and will unlock " +
                     "after 30 minutes.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

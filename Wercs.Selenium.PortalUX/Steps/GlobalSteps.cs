@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using ResourcePool;
+using SafewareReportingPlugin;
 using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Steps;
 

@@ -1827,7 +1827,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
 			foreach (var item in errorMessagesExpected)
 			{
-				Report.IsFalse(errorMessages.Contains(item.Trim()), "Error message still displays: " + item + "!", "Error message does not display: " + item + "!", false);
+				Report.IsTrue(!errorMessages.Contains(item.Trim()), "Error message still displays: " + item + "!", "Error message does not display: " + item + "!", false);
 			}
 			Report.Screenshot();
 		}
@@ -1947,7 +1947,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var newProductpage = new NewProduct();
 			var found = newProductpage.GetAmountOfVocByOTCRuleNotStatement();
 
-			Report.IsFalse(found, "statement was displayed", "statement was not displayed", false);
+			Report.IsTrue(!found, "statement was displayed", "statement was not displayed", false);
 		}
 
 		/// <summary>

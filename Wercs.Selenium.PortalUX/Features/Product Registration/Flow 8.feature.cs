@@ -13,107 +13,107 @@
 namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
 {
     using TechTalk.SpecFlow;
-
-
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
-	[System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class Flow8Feature
     {
-
-		private static TechTalk.SpecFlow.ITestRunner testRunner;
-
-		private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
-
+        
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
+        
 #line 1 "Flow 8.feature"
 #line hidden
-
-		public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
-			{
-			get
-			{
-				return this._testContext;
-			}
-			set
-			{
-				this._testContext = value;
-			}
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
-		public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
-		{
-			testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-			TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Flow 8", null, ProgrammingLanguage.CSharp, new string[] {
-						"LandingPage",
-						"Login",
-						"Homepage",
-						"Signup",
-						"wercsmart",
-						"NewProduct",
-						"ProductGrid",
-						"DataSummarySheet",
-						"wercsmart",
-						"RetailPartners",
-						"run_FLow32_Grocery"});
-			testRunner.OnFeatureStart(featureInfo);
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
-		public static void FeatureTearDown()
-		{
-			testRunner.OnFeatureEnd();
-			testRunner = null;
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
-		public virtual void TestInitialize()
-		{
-			if (((testRunner.FeatureContext != null)
-						&& (testRunner.FeatureContext.FeatureInfo.Title != "Flow 8")))
-			{
-				global::Wercs.Selenium.PortalUX.Features.ProductRegistration.Flow8Feature.FeatureSetup(null);
-			}
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
-		public virtual void ScenarioTearDown()
-		{
-			testRunner.OnScenarioEnd();
-		}
-
-		public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
-		{
-			testRunner.OnScenarioStart(scenarioInfo);
-			testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
-		}
-
-		public virtual void ScenarioCleanup()
-		{
-			testRunner.CollectScenarioErrors();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[57295] Absorbent solid - Automotive(RU000939) - 8-S - Validation")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 8")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
-		public virtual void _57295AbsorbentSolid_AutomotiveRU000939_8_S_Validation()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57295] Absorbent solid - Automotive(RU000939) - 8-S - Validation", ((string[])(null)));
+        
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
+        {
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Flow 8", null, ProgrammingLanguage.CSharp, new string[] {
+                        "LandingPage",
+                        "Login",
+                        "Homepage",
+                        "Signup",
+                        "wercsmart",
+                        "NewProduct",
+                        "ProductGrid",
+                        "DataSummarySheet",
+                        "wercsmart",
+                        "RetailPartners",
+                        "run_FLow32_Grocery"});
+            testRunner.OnFeatureStart(featureInfo);
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
+        {
+            testRunner.OnFeatureEnd();
+            testRunner = null;
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
+        public virtual void TestInitialize()
+        {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "Flow 8")))
+            {
+                global::Wercs.Selenium.PortalUX.Features.ProductRegistration.Flow8Feature.FeatureSetup(null);
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
+        public virtual void ScenarioTearDown()
+        {
+            testRunner.OnScenarioEnd();
+        }
+        
+        public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
+        {
+            testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
+        }
+        
+        public virtual void ScenarioCleanup()
+        {
+            testRunner.CollectScenarioErrors();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[57295] Absorbent solid - Automotive(RU000939) - 8-S")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 8")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
+        public virtual void _57295AbsorbentSolid_AutomotiveRU000939_8_S()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57295] Absorbent solid - Automotive(RU000939) - 8-S", ((string[])(null)));
 #line 15
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 18
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 21
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
