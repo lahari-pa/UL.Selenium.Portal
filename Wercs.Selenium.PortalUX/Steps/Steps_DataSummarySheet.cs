@@ -86,8 +86,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var found = dataSummarySheet.GetInfoForSectionOption(section, option);
 
 			Report.IsTrue(found.Contains(option),
-					"Failed to set the input to " + option + " in section: " + section,
-					"Successfully set the input to " + option + " in section: " + section);
+					"option was not as expected! Expected: " + option + " in section: " + section,
+					"option was showing: " + option + " in section: " + section);
 		
 		//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
 	}

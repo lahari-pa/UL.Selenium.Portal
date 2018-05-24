@@ -245,3 +245,588 @@ And Type of Product should be showing the following option: Automotive Accessori
 Then I switch to Data Acceptance page
 Given I navigate to the home page
 Then I delete the product: TestCase57332
+
+Scenario: [58184] Craft kits containing clays or plasters(RU000299) - 8-S
+
+# Logging in as the correct user
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Just checks that the correct page loads
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# New Product Page
+And I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# The Product Page
+And I should see the The Product Page
+And I set the Product Name option to: Flow8 - Craft kits containing clays or plasters
+And In the Product Type tab of the New Product Page, I enter: Craft kits containing clays or plasters in the Type of Product select field
+And in the New Product page I click Continue
+
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase58184
+And I should only see the following options for Primary Physical State:
+| State |
+| Solid |
+And I set the Secondary Physical State option to: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description option to: Soluble in water
+And in the New Product page I click Continue
+
+# Additional Product Information page
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product is marketed for use by, or on, a child option to: No
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+# Ingredient Page
+And I should see the Ingredients Page
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: Yes
+And I set the Prop 65 warning is required option to: Yes
+And I set the Prop 65 warning is present on the product's label option to: Yes
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+Given in the New Product page I click Continue
+Then Product is Regulated for Transport should be showing the error messages: This is a required field.
+And I set the Product is Regulated for Transport option to: Yes
+And I set the below options for field: Select all modes of transport that you've classified the product for
+| Option                          |
+| IMDG                            |
+| Shipping with limited quantity  |
+
+Given in the New Product page I click Continue
+
+# IMDG page
+And I should see the International Marine (IMDG) Classification Page
+And I set the UN Number option to: UN1950
+And I set the Proper Shipping Name option to: Aerosols
+And I set the Technical Name (if applicable) option to: Testcase58184
+And I set the Hazard Class (select) option to: 2
+And I set the Packing Group (select) option to: None
+Given in the New Product page I click Continue
+
+# Retailers Page
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
+And in the New Product page I click Continue
+
+# Regulatory Documents to Provide Page
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 5
+And in the New Product page I click Continue
+
+# Comments Page
+And I should see the Comments Page
+And in the New Product page I click Continue
+
+# Data Acceptance and Summary
+And I should see the Data Acceptance Page
+Then The Data Acceptance page should appear
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And Type of Product should be showing the following option: Craft kits containing clays or plasters
+Then I switch to Data Acceptance page
+Given I navigate to the home page
+Then I delete the product: TestCase58184
+
+Scenario: [58187] Matches (RU000317) - 8-S
+
+# Logging in as the correct user
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Just checks that the correct page loads
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# New Product Page
+And I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# The Product Page
+And I should see the The Product Page
+And I set the Product Name option to: Flow8 - Matches
+And In the Product Type tab of the New Product Page, I enter: Matches in the Type of Product select field
+And in the New Product page I click Continue
+
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase58187
+And I should only see the following options for Primary Physical State:
+| State |
+| Solid |
+And I set the Secondary Physical State option to: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description option to: Soluble in water
+And in the New Product page I click Continue
+
+# Additional Product Information page
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+# Ingredient Page
+And I should see the Ingredients Page
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: Yes
+And I set the Prop 65 warning is required option to: Yes
+And I set the Prop 65 warning is present on the product's label option to: Yes
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport option to: Yes
+And I set the below options for field: Select all modes of transport that you've classified the product for
+| Option                            |
+| IATA                              |
+| Shipping with limited quantity    |
+| Shipping with consumer commodity  |
+
+Given in the New Product page I click Continue
+
+# IATA page
+And I should see the International Air Transport (IATA) Classification Page
+And I set the UN Number option to: UN1950
+And I set the Proper Shipping Name option to: Aerosols, non-flammable
+And I set the Technical Name (if applicable) option to: Testcase58187
+And I set the Hazard Class (select) option to: 2.2
+And I set the Packing Group (select) option to: None
+Given in the New Product page I click Continue
+
+# Retailers Page
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
+And in the New Product page I click Continue
+
+# Regulatory Documents to Provide Page
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 5
+And in the New Product page I click Continue
+
+# Comments Page
+And I should see the Comments Page
+And in the New Product page I click Continue
+
+# Data Acceptance and Summary
+And I should see the Data Acceptance Page
+Then The Data Acceptance page should appear
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And Type of Product should be showing the following option: Matches
+Then I switch to Data Acceptance page
+Given I navigate to the home page
+Then I delete the product: TestCase58187
+
+Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
+
+# Logging in as the correct user
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Just checks that the correct page loads
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# New Product Page
+And I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# The Product Page
+And I should see the The Product Page
+And I set the Product Name option to: Flow8 - Engines for Model Rockets
+And In the Product Type tab of the New Product Page, I enter: Engines for Model Rockets in the Type of Product select field
+And in the New Product page I click Continue
+
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase58293
+And I should only see the following options for Primary Physical State:
+| State |
+| Solid |
+And I set the Secondary Physical State option to: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description option to: Soluble in water
+And in the New Product page I click Continue
+
+# Additional Product Information page
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product is marketed for use by, or on, a child option to: No
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+# Ingredient Page
+And I should see the Ingredients Page
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: Yes
+And I set the Prop 65 warning is required option to: Yes
+And I set the Prop 65 warning is present on the product's label option to: Yes
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+Given in the New Product page I click Continue
+Then Product is Regulated for Transport should be showing the error messages: This is a required field.
+And I set the Product is Regulated for Transport option to: Yes
+And I set the below options for field: Select all modes of transport that you've classified the product for
+| Option                          |
+| IMDG                            |
+| Shipping with limited quantity  |
+
+Given in the New Product page I click Continue
+
+# IMDG page
+And I should see the International Marine (IMDG) Classification Page
+And I set the UN Number option to: UN1950
+And I set the Proper Shipping Name option to: Aerosols
+And I set the Technical Name (if applicable) option to: Testcase58293
+And I set the Hazard Class (select) option to: 2
+And I set the Packing Group (select) option to: None
+Given in the New Product page I click Continue
+
+# Retailers Page
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
+And in the New Product page I click Continue
+
+# Regulatory Documents to Provide Page
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 5
+And in the New Product page I click Continue
+
+# Comments Page
+And I should see the Comments Page
+And in the New Product page I click Continue
+
+# Data Acceptance and Summary
+And I should see the Data Acceptance Page
+Then The Data Acceptance page should appear
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And Type of Product should be showing the following option: Engines for Model Rockets
+Then I switch to Data Acceptance page
+Given I navigate to the home page
+Then I delete the product: TestCase58293
+
+Scenario: [56477] Fireworks (RU000330) - 8-S
+
+# Logging in as the correct user
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Just checks that the correct page loads
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# New Product Page
+And I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# The Product Page
+And I should see the The Product Page
+And I set the Product Name option to: Flow8 - Fireworks
+And In the Product Type tab of the New Product Page, I enter: Fireworks in the Type of Product select field
+And in the New Product page I click Continue
+
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase56477
+And I should only see the following options for Primary Physical State:
+| State |
+| Solid |
+And I set the Secondary Physical State option to: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description option to: Soluble in water
+And in the New Product page I click Continue
+
+# Additional Product Information page
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+# Ingredient Page
+And I should see the Ingredients Page
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: Yes
+And I set the Prop 65 warning is required option to: Yes
+And I set the Prop 65 warning is present on the product's label option to: Yes
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport option to: Yes
+And I set the below options for field: Select all modes of transport that you've classified the product for
+| Option                            |
+| IATA                              |
+| Shipping with limited quantity    |
+| Shipping with consumer commodity  |
+
+Given in the New Product page I click Continue
+
+# IATA page
+And I should see the International Air Transport (IATA) Classification Page
+And I set the UN Number option to: UN1950
+And I set the Proper Shipping Name option to: Aerosols, non-flammable
+And I set the Technical Name (if applicable) option to: Testcase56477
+And I set the Hazard Class (select) option to: 2.2
+And I set the Packing Group (select) option to: None
+Given in the New Product page I click Continue
+
+# Retailers Page
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
+And in the New Product page I click Continue
+
+# Regulatory Documents to Provide Page
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 5
+And in the New Product page I click Continue
+
+# Comments Page
+And I should see the Comments Page
+And in the New Product page I click Continue
+
+# Data Acceptance and Summary
+And I should see the Data Acceptance Page
+Then The Data Acceptance page should appear
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And Type of Product should be showing the following option: Fireworks
+Then I switch to Data Acceptance page
+Given I navigate to the home page
+Then I delete the product: TestCase56477
+
+Scenario: [57088] Engine (motor) oil for Auto or Boat
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Checking that the test will run correctly by handling extra screens
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# New Product Page
+And I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# The Product Page
+And I should see the The Product Page
+And I set the Product Name option to: Flow8 - Engine (motor) oil for Auto or Boat
+And In the Product Type tab of the New Product Page, I enter: Engine (motor) oil for Auto or Boat in the Type of Product select field
+And in the New Product page I click Continue
+
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase57088
+And I should only see the following options for Primary Physical State:
+| State |
+| Liquid |
+
+And I set the Secondary Physical State option to: Liquid
+And I set the Specific Gravity option to: 2
+And I set the pH option to: 2
+And I set the Boiling Point (in Celsius) option to: 2
+And I set the Flash Point (in Celsius) option to: 61
+And I set the Flash Point Testing Method Used option to: Closed cup method
+And I set the Select the best Water Solubility description option to: Very soluble
+And in the New Product page I click Continue
+
+# Additional Product Information page
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+# Ingredient Page
+And I should see the Ingredients Page
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport option to: Yes
+And I set the below options for field: Select all modes of transport that you've classified the product for
+| Option                            |
+| IATA                              |
+| Shipping with limited quantity    |
+| Shipping with consumer commodity  |
+
+Given in the New Product page I click Continue
+
+# IATA page
+And I should see the International Air Transport (IATA) Classification Page
+And I set the UN Number option to: UN1950
+And I set the Proper Shipping Name option to: Aerosols, non-flammable
+And I set the Technical Name (if applicable) option to: Testcase57088
+And I set the Hazard Class (select) option to: 2.2
+And I set the Packing Group (select) option to: None
+Given in the New Product page I click Continue
+
+# Retailers Page
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
+And in the New Product page I click Continue
+
+# Regulatory Documents to Provide Page
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 5
+And in the New Product page I click Continue
+
+# Comments Page
+And I should see the Comments Page
+And in the New Product page I click Continue
+
+# Data Acceptance and Summary
+And I should see the Data Acceptance Page
+Then The Data Acceptance page should appear
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And Type of Product should be showing the following option: Engine (motor) oil for Auto or Boat
+Then I switch to Data Acceptance page
+Given I navigate to the home page
+Then I delete the product: TestCase57088

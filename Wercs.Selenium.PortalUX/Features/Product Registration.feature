@@ -277,8 +277,8 @@ Scenario: [63684] Walmart Private label product
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
-Given I generate a random UPC number and save as: UPC63684
-Given I delete all products with UPC Number: saved as UPC63684
+#Given I generate a random UPC number and save as: UPC63684
+#Given I delete all products with UPC Number: saved as UPC63684
 
 
 And I click the Register New Product icon in the Navigation Pane
@@ -288,7 +288,7 @@ And in the New Product page I click Continue
 And In the Product Type tab of the New Product Page, I enter: Pet shampoo in the Product Name text field
 And In the Product Type tab of the New Product Page, I enter: Pet shampoo in the Type of Product select field
 And in the New Product page I click Continue
-#Then I save the product information as: TestCase63684
+Then I save the product information as: TestCase63684
 
 # Setting Product Characteristics
 And I should only see the following options for Primary Physical State:
@@ -328,7 +328,7 @@ And in the New Product page I click Continue
 Given I click the 'Add UPC' button
 Then I add the following into the UPC Fields
 | Field         | Value             |
-| UPCNumber     | saved as UPC63684 |
+| UPCNumber     | 0034100570231     |
 | ContainerType | Aerosol Can       |
 | Size          | 20                |
 #Regulatory Documents to Provide - US only _ request authoring - Happy Path
@@ -492,7 +492,8 @@ And in the New Product page I click Continue
 And I should see the Additional Documents to Provide Page
 And in the New Product page I click Continue
 Then I should see an error message: Document is required: Product Label
-And In the Review and Submit tab of the New Product Page for Volatile Organic Compounds I upload pdf file
+#And In the Review and Submit tab of the New Product Page for Volatile Organic Compounds I upload pdf file
+And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
 And in the New Product page I click Continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 And in the New Product page I click Continue
@@ -1005,6 +1006,7 @@ Given in the New Product page I click Continue
 And I should see the Transportation Details 1 Page
 And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: No, due to an exemption or exception
 And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(b)(3): Combustible liquid that does not sustain combustion
+#And I set the Please select DOT Exceptions if applicable option to: 173.120(a)(3): FP > 35 °C (95 °F), but does not sustain combustion
 Given in the New Product page I click Continue
 
 # Transportation Details 2 Page

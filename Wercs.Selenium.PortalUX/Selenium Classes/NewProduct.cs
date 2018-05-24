@@ -1453,12 +1453,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				var itemsToSelect = item.Split(',').Select(x => x.Trim());
-				foreach(string thisItem in itemsToSelect)
+				var el = containerElement
+					.FindElements(By.XPath(".//label[contains(text(),'Please select DOT Exceptions if applicable?')]/../following-sibling::div//span"), 2)
+					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+				if (el != null)
 				{
-					SetOptionInSection("Please select DOT Exceptions if applicable", thisItem);
+					el.TryClick();
+					return true;
 				}
-				return true;
+
+				return false;
 			}
 			catch (Exception)
 			{
