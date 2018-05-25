@@ -1830,7 +1830,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (myProduct.GetDisplayedSections().Contains(section))
 			{
 				Report.Info("Selecting the first option for section: " + section);
-				var options = myProduct.GetDropDownOptionsForSection(section);
+				//var options = myProduct.GetDropDownOptionsForSection(section);
 				Report.IsTrue(myProduct.SetOptionInSection(section, option), "The option: " + option + " could not be selected in section: " + section, "The option: " + option + " was selected in section: " + section);
 			}
 			else

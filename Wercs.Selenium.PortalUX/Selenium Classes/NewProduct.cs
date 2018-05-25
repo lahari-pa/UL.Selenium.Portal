@@ -3219,6 +3219,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public string VocAnalysisDateStatement()
+		{
+			return "";
+		}
+
+		public int RadioButtonsInSection(string dummy)
+		{
+			return 0;
+		}
+
+		public List<string> GetAllOptionsForSection(string dummy)
+		{
+			return new List<string>();
+		}
+
+		public string RegulatoryInformationLabelLinks()
+		{
+			return "";
+		}
+
 		public bool AddDocument(string documentName, string language)
 		{
 			var rowContainer = containerElement.FindElement(By.XPath(".//span[text()='" + documentName + "']//ancestor::div[contains(@class,'document-row')]"), 2);
