@@ -201,3 +201,117 @@ Then I confirm the 'Is Kelly Data' field for State: AZ is checked
 Given I navigate to the home page
 
 Then I delete the product: TestCase62848
+
+Scenario: [62775] Pesticides - Validation of Which one best describes your product question - Prevents, Destroys etc
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Shared step 57753
+Then I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# Shared step 57561 The Product - Enter Product Name and select Type of Product
+# Specified conditions - use 'Pet Shampoo with Pest Control' as the product type
+And I should see the The Product Page
+And I set the Product Name as it a appears on the Package Label field to: Product - Pet Shampoo with Pest Control 62775
+And In the Product Type tab of the New Product Page, I enter: Pet Shampoo with Pest Control in the Type of Product select field
+And in the The Product page I click Continue
+Then I save the product information as: TestCase62775
+
+# Shared step 57514 Product characteristics - Liquid Only available - Enter all data - Continue
+And I should see the Product Characteristics Page
+And Primary Physical State should be showing the value: Liquid
+And I set the Secondary Physical State option to: Liquid
+And I set the Specific Gravity field to: 5
+And I set the pH field to: 9
+And I set the Boiling Point (in Celsius) field to: 80
+And I set the Flash Point (in Celsius) field to: 71
+And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Not applicable/available
+And in the New Product page I click Continue
+
+And I should see the Additional Product Information Page
+
+Given I see the following sections
+| Section                               |
+| Which one best describes your product |
+
+Given I should see a total of 2 radio buttons for the section: Which one best describes your product
+
+Then I should see the following radio buttons:
+| Button                                                                                                                  |
+| Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)                      |
+| Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth |
+
+And in the New Product page I click Continue
+
+Then I should see an error message: This is a required field.
+
+And I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)
+
+Then Which one best describes your product should not be showing the error messages: This is a required field.
+
+And in the New Product page I click Continue
+
+Then Which one best describes your product should not be showing the error messages: This is a required field.
+
+Given I navigate to the home page
+
+Then I delete the product: TestCase62775
+
+Scenario: [62776] Pesticides - Validation of Which one best describes your product - Regulates Plant Growth
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Shared step 57753
+Then I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# Shared step 57561 The Product - Enter Product Name and select Type of Product
+# Specified conditions - use 'Pet Shampoo with Pest Control' as the product type
+And I should see the The Product Page
+And I set the Product Name as it a appears on the Package Label field to: Product - Pet Shampoo with Pest Control 62775
+And In the Product Type tab of the New Product Page, I enter: Pet Shampoo with Pest Control in the Type of Product select field
+And in the The Product page I click Continue
+Then I save the product information as: TestCase62776
+
+# Shared step 57514 Product characteristics - Liquid Only available - Enter all data - Continue
+And I should see the Product Characteristics Page
+And Primary Physical State should be showing the value: Liquid
+And I set the Secondary Physical State option to: Liquid
+And I set the Specific Gravity field to: 5
+And I set the pH field to: 9
+And I set the Boiling Point (in Celsius) field to: 80
+And I set the Flash Point (in Celsius) field to: 71
+And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Not applicable/available
+And in the New Product page I click Continue
+
+And I should see the Additional Product Information Page
+
+Given I see the following sections
+| Section                               |
+| Which one best describes your product |
+
+Given I should see a total of 2 radio buttons for the section: Which one best describes your product
+
+Then I should see the following radio buttons:
+| Button                                                                                                                  |
+| Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)                      |
+| Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth |
+
+And in the New Product page I click Continue
+
+Then I should see an error message: This is a required field.
+
+And I set the Which one best describes your product field to: Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth
+
+Then Which one best describes your product should not be showing the error messages: This is a required field.
+
+And in the New Product page I click Continue
+
+Then Which one best describes your product should not be showing the error messages: This is a required field.
+
+Given I navigate to the home page
+
+Then I delete the product: TestCase62776

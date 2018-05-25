@@ -149,7 +149,7 @@ Given I delete all products with UPC Number: saved as UPC60775
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cooking oil - Non-Aerosol
 
 Then I save the product information as: TestCase60775
 
@@ -157,7 +157,9 @@ Given I call Shared Step 60779 (Enter Liquid - Cooking Oil - Non-Aerosol)
 
 Given I call Shared Step 60756 (Additional Product Information with Country and every option)
 
-Given I call Shared Step 57570 (Enter Ingredients)
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane        | 100     | false               | false       |            |
 
 #Given I Confirm the following error message is not visible " ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding."
 
@@ -171,9 +173,9 @@ And I should see the Transportation Details 2 Page
 And In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: I do not ship internationally and I do not know the classification
 And in the New Product page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path)
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60775
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60775, container type: Aerosol Can and size: 20
 
 Given I call Shared 60567 (Upload Product Label only)
 
@@ -185,7 +187,7 @@ Then in the Additional Documents to Provide page I click Continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57883 (Comments - Happy Path)
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared 54796 (Purchase Summary)
 

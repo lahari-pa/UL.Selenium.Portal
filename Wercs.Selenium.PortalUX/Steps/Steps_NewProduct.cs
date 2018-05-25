@@ -144,7 +144,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(found.Trim() == message.Trim(),
 					"Error message was not as expected! Expected: " + message + ", but found: " + found + "!",
 					"Error message was showing: " + message + ", as expected!");
-				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+		[StepDefinition(@"I should not see an error message: (.*)")]
+		public void NotErrorMessage(string message)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the error message: " + message);
+			try
+			{
+				Report.Info("Checking error message: " + message + " is not appearing");
+				var selNewProduct = new NewProduct();
+				var found = selNewProduct.ErrorMessage();
+
+				Report.IsTrue(found == null || found.Trim() != message.Trim(),
+					"Error message was showing when it wasn't expected to! Error: " + message,
+					"As expected, the error message was not showing. Error: " + message);
 			}
 			catch (Exception ex)
 			{
@@ -364,18 +383,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the Additional Information Page")]
 		public void GivenIShouldSeeTheAdditionalInformationPage()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the New Product page I click Continue");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForSection("Additional Product Information"), "Additional product information is not showing",
-					"The additional product information page is showing as expected");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.WaitForSection("Additional Product Information"), "Additional product information is not showing",
+				"The additional product information page is showing as expected");
 		}
 
 
@@ -1109,6 +1119,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was showing: " + date + ", as expected!");
 		}
 
+		[StepDefinition(@"I confirm that the VOC Analysis Date statement is showing")]
+		public void ThenIConfirmThatTheVOCAnalysisDateIsShowing()
+		{
+			var vocDateStatement = new NewProduct().VocAnalysisDateStatement();
+			Report.IsFalse(vocDateStatement == null, "The VOC Analysis Date Statement was not showing", "The VOC Analysis Date Statement was showing as expected: " + vocDateStatement);
+		}
+
 		/// <summary>
 		/// Confirm error message for VOC content in grams ozone per gram statement
 		/// </summary>
@@ -1122,6 +1139,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
 				"statement was showing: " + statement + ", as expected!");
 		}
+
 
 		/// <summary>
 		/// Confirm VOC Grams Ozone/Grams Product
@@ -1691,6 +1709,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I should see a total of (.*) radio buttons for the section: (.*)")]
+		public void RadioButtonCountInSection(string count, string section)
+		{
+			var selNewProduct = new NewProduct();
+			var expectedCount = Convert.ToInt32(count);
+			var actualCount = selNewProduct.RadioButtonsInSection(section);
+			Report.IsTrue(expectedCount == actualCount,
+				"The number of radio buttons appearing in section: " + section + " did not match the expected count: " + count, "The number of radio buttons appearing in section: " + section + " matched the expected count: " + count);
+		}
+
 		[StepDefinition(@"I click the 'Add UPC' button")]
 		public void ThenIClickTheAddUpcButton()
 		{
@@ -1771,8 +1799,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set the input to " + option + " in section: " + section);
 		}
 
-		[StepDefinition(@"I only see the following sections")]
-		public void CheckDisplayedSections(Table sections)
+		[StepDefinition(@"I (see|only see) the following sections")]
+		public void CheckDisplayedSections(string toDo, Table sections)
 		{
 			var ExpectedSections = new List<string>();
 			foreach (var Row in sections.Rows)
@@ -1780,8 +1808,48 @@ namespace Wercs.Selenium.PortalUX.Steps
 				ExpectedSections.Add(Row["Section"]);
 			}
 			var ActualSections = new NewProduct().GetDisplayedSections();
-			Report.IsTrue(ExpectedSections.All(ActualSections.Contains) && ExpectedSections.Count == ActualSections.Count, "The displayed sections: '" + string.Join(",", ActualSections) + "' did not match the expected sections: '" + string.Join(",", ExpectedSections) + "'");
+			if (toDo == "only see")
+			{
+				Report.IsTrue(ExpectedSections.All(ActualSections.Contains) && ExpectedSections.Count == ActualSections.Count, "The displayed sections: '" + string.Join(",", ActualSections) + "' did not match the expected sections: '" + string.Join(",", ExpectedSections) + "'");
+				return;
+			}
+			Report.IsTrue(ExpectedSections.All(ActualSections.Contains), "The displayed sections: '" + string.Join(",", ActualSections) + "' did not match the expected sections: '" + string.Join(",", ExpectedSections) + "'");
 		}
+
+		[StepDefinition(@"I select the first option in section: (.*)")]
+		public void SelectFirstOptionInSection(string section)
+		{
+			NewProduct myProduct = new NewProduct();
+			Report.IsTrue(myProduct.SetOptionInSection(section, myProduct.GetAllOptionsForSection(section)[0]), "The option: " + myProduct.GetAllOptionsForSection(section)[0] + " could not be selected in section: " + section, "The option: " + myProduct.GetAllOptionsForSection(section)[0] + " was selected in section: " + section);
+		}
+
+		[StepDefinition(@"If Section: (.*) is visible, I select the first option")]
+		public void IfSectionIsVisibleISelectTheOption(string section, string option)
+		{
+			NewProduct myProduct = new NewProduct();
+			if (myProduct.GetDisplayedSections().Contains(section))
+			{
+				Report.Info("Selecting the first option for section: " + section);
+				var options = myProduct.GetDropDownOptionsForSection(section);
+				Report.IsTrue(myProduct.SetOptionInSection(section, option), "The option: " + option + " could not be selected in section: " + section, "The option: " + option + " was selected in section: " + section);
+			}
+			else
+			{
+				Report.Info("The section: " + section + " was not showing so no option was selected");
+			}
+		}
+
+		//[StepDefinition(@"I see the following questions")]
+		//public void CheckDisplayedSectionsContain(Table sections)
+		//{
+		//	var ExpectedSections = new List<string>();
+		//	foreach (var Row in sections.Rows)
+		//	{
+		//		ExpectedSections.Add(Row["Section"]);
+		//	}
+		//	var ActualSections = new NewProduct().GetDisplayedSections();
+		//	Report.IsTrue(ExpectedSections.All(ActualSections.Contains), "The displayed sections: '" + string.Join(",", ActualSections) + "' did not match the expected sections: '" + string.Join(",", ExpectedSections) + "'");
+		//}
 
 		[StepDefinition(@"I check the 'I do not have exact' checkbox for field: (.*)")]
 		public void SectExatcDataNotKnown(string section)
@@ -2213,6 +2281,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var expirationDate = newProductPage.GetPesticideRegExpirationDate(state);
 			var kellyExpirationDate = newProductPage.GetPesticideRegKellyExpirationDate(state);
 			Report.IsTrue(expirationDate == kellyExpirationDate, "The Expiration Date does not match the value provided by Kelly", "The Expiration correctly matches the value provided by Kelly");
+		}
+
+		[StepDefinition(
+			@"I confirm the Label Information section on the Regulatory Information 3 page contains a link for: (.*)")]
+		public void IConfirmLabelInformationOnRegulatoryInformationPageContains(string labelLink)
+		{
+			var newProductPage = new NewProduct();
+			var labelLinksShowing = newProductPage.RegulatoryInformationLabelLinks();
+			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the Regulatory Information 3 page", "The link with text: '" + labelLink + "' was found on the Regulatory Information 3 page as expected");
 		}
 	}
 }

@@ -459,12 +459,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				switch (area)
 				{
 					case ("navigation bar"):
-					{
-						Report.IsTrue(new NavigationBar().ItemShowingInNavigationPanel(row["Item"], lookingfor != "icons and labels"),
-							row["Item"] + " was not found in the Navigation Bar!",
-							row["Item"] + " was successfully found in the Navigation Bar!", false, false);
-						break;
-					}
+						{
+							Report.IsTrue(new NavigationBar().ItemShowingInNavigationPanel(row["Item"], lookingfor != "icons and labels"),
+								row["Item"] + " was not found in the Navigation Bar!",
+								row["Item"] + " was successfully found in the Navigation Bar!", false, false);
+							break;
+						}
 				}
 			}
 			Report.Screenshot();
@@ -647,7 +647,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		public void ClickItemInNavigationPanel(string item)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Selecting " + item + " in the Navigation Pane");
 			try
 			{
 				Report.Info("Selecting " + item + " in the Navigation Pane");
