@@ -439,7 +439,11 @@ IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)$(TargetNam
 IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)SafewareSeleniumUtilities.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
 IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)SafewareReportingPlugin.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
 IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)TReVor.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)ResourcePool.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"</PostBuildEvent>
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)ResourcePool.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
+
+rem ##### Copy chromedriver.exe and iedriverserver.exe from packages to bin #####
+xcopy "$(SolutionDir)\packages\Selenium.WebDriver.ChromeDriver.2.35.0\driver\win32\chromedriver.exe" "$(TargetDir)" /r /y
+xcopy "$(SolutionDir)\packages\Selenium.WebDriver.IEDriver.3.9.0\driver\iedriverserver.exe" "$(TargetDir)" /r /y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
   <PropertyGroup>
