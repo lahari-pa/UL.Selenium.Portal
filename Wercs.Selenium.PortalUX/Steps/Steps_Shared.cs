@@ -38,7 +38,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
 			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
-				"AAA WERCS Test " + type);
+				"AAA WERCS Test " + type.Replace("/", " "));
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
 			TestReport.StartStep("In the New Product page I click Continue");
@@ -256,8 +256,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep(@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyStepsNewProduct.UploadPDFFile("Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep(@"I click the browse button for label: Product Label in section: Volatile Organic Compounds and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", "Volatile Organic Compounds", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -468,12 +468,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
 			TestReport.StartStep("I set the Primary Physical State option to: Solid");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
-			TestReport.StartStep("I set the Secondary Physical State option to: Solid Gel Consistency");
-			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid Gel Consistency");
 			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
 			MyNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?", "No");
 			TestReport.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
+			TestReport.StartStep("I set the Secondary Physical State option to: Solid Gel Consistency");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid Gel Consistency");
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -567,11 +567,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
-			TestReport.StartStep("I should see the Volatile Organic Compound (VOC) for Ozone Transport Commission (OTC) and/or California Air Resource Board (CARB) Page");
-			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound (VOC) for Ozone Transport Commission (OTC) and/or California Air Resource Board (CARB)");
+			TestReport.StartStep("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page");
+			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)");
 			TestReport.StartStep("I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
+		}
 
+		[StepDefinition(@"I call Shared Step 32931 \(Liquid Core Product - select  No - Happy Path\)")]
+		public void LiquidCoreProduct_SelectNo_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Liquid Core Product Page");
+			MyNewProduct.GivenIShouldSeeXPage("Liquid Core Product");
+			TestReport.StartStep("I set the Is there a free liquid in the Product's container that is 10ml or greater? field to: No");
+			MyNewProduct.SetTheSectionOptionTo("I set the Is there a free liquid in the Product's container that is 10ml or greater?", "No");
+			TestReport.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Liquid Core Product");
 		}
 	}
 }

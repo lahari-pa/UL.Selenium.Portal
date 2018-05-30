@@ -223,6 +223,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 8.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 9.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 9.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Pesticides\Pesticides.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -380,6 +385,10 @@
     <None Include="Features\Product Registration\Flow 8.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 8.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 9.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 9.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Pesticides\Pesticides.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

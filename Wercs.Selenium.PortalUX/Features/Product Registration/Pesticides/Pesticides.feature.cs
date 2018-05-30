@@ -116,6 +116,8 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration.Pesticides
 this.ScenarioSetup(scenarioInfo);
 #line 18
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 19
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 21
 testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 22
@@ -282,6 +284,8 @@ testRunner.Then("I delete the product: TestCase71051", ((string)(null)), ((TechT
 this.ScenarioSetup(scenarioInfo);
 #line 108
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 109
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 111
 testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 112
@@ -459,6 +463,8 @@ testRunner.Then("I delete the product: TestCase62848", ((string)(null)), ((TechT
 this.ScenarioSetup(scenarioInfo);
 #line 206
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 207
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 209
 testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 210
@@ -509,7 +515,7 @@ testRunner.And("I should see the Additional Product Information Page", ((string)
 #line 235
 testRunner.Given("I see the following sections", ((string)(null)), table7, "Given ");
 #line 239
-testRunner.Given("I should see a total of 2 radio buttons for the section: Which one best describes" +
+testRunner.Given("I should see a total of 3 radio buttons for the section: Which one best describes" +
                     " your product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -520,26 +526,28 @@ testRunner.Given("I should see a total of 2 radio buttons for the section: Which
             table8.AddRow(new string[] {
                         "Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, D" +
                             "ehydrates plants for control of growth"});
+            table8.AddRow(new string[] {
+                        "Product is not considered a pesticide product"});
 #line 241
 testRunner.Then("I should see the following radio buttons:", ((string)(null)), table8, "Then ");
-#line 246
+#line 247
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 248
+#line 249
 testRunner.Then("I should see an error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 250
+#line 251
 testRunner.And("I set the Which one best describes your product field to: Prevents, Destroys Repe" +
                     "ls Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 252
+#line 253
 testRunner.Then("Which one best describes your product should not be showing the error messages: T" +
                     "his is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 254
+#line 255
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 256
+#line 257
 testRunner.Then("Which one best describes your product should not be showing the error messages: T" +
                     "his is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 258
+#line 259
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 260
+#line 261
 testRunner.Then("I delete the product: TestCase62775", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -564,61 +572,63 @@ testRunner.Then("I delete the product: TestCase62775", ((string)(null)), ((TechT
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[62776] Pesticides - Validation of Which one best describes your product - Regula" +
                     "tes Plant Growth", ((string[])(null)));
-#line 262
-this.ScenarioSetup(scenarioInfo);
 #line 263
+this.ScenarioSetup(scenarioInfo);
+#line 264
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 266
-testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 265
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 267
-testRunner.And("I should see the New Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 268
+testRunner.And("I should see the New Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 269
 testRunner.And("I set the Select the type of product to create option to: Create a New Registrati" +
                     "on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 269
+#line 270
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 273
-testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 274
+testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 275
 testRunner.And("I set the Product Name as it a appears on the Package Label field to: Product - P" +
                     "et Shampoo with Pest Control 62775", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 275
+#line 276
 testRunner.And("In the Product Type tab of the New Product Page, I enter: Pet Shampoo with Pest C" +
                     "ontrol in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 276
-testRunner.And("in the The Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 277
+testRunner.And("in the The Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 278
 testRunner.Then("I save the product information as: TestCase62776", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 280
-testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 281
-testRunner.And("Primary Physical State should be showing the value: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 282
-testRunner.And("I set the Secondary Physical State option to: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("Primary Physical State should be showing the value: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 283
-testRunner.And("I set the Specific Gravity field to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State option to: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 284
-testRunner.And("I set the pH field to: 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Specific Gravity field to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 285
-testRunner.And("I set the Boiling Point (in Celsius) field to: 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the pH field to: 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 286
-testRunner.And("I set the Flash Point (in Celsius) field to: 71", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Boiling Point (in Celsius) field to: 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 287
+testRunner.And("I set the Flash Point (in Celsius) field to: 71", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 288
 testRunner.And("in the Product Characteristics tab, for Flash Point Testing Method Used status I " +
                     "select: Not applicable/available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 288
+#line 289
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 290
+#line 291
 testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
             table9.AddRow(new string[] {
                         "Which one best describes your product"});
-#line 292
+#line 293
 testRunner.Given("I see the following sections", ((string)(null)), table9, "Given ");
-#line 296
-testRunner.Given("I should see a total of 2 radio buttons for the section: Which one best describes" +
+#line 297
+testRunner.Given("I should see a total of 3 radio buttons for the section: Which one best describes" +
                     " your product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -629,27 +639,29 @@ testRunner.Given("I should see a total of 2 radio buttons for the section: Which
             table10.AddRow(new string[] {
                         "Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, D" +
                             "ehydrates plants for control of growth"});
-#line 298
+            table10.AddRow(new string[] {
+                        "Product is not considered a pesticide product"});
+#line 299
 testRunner.Then("I should see the following radio buttons:", ((string)(null)), table10, "Then ");
-#line 303
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 305
-testRunner.Then("I should see an error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 307
+testRunner.Then("I should see an error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 309
 testRunner.And("I set the Which one best describes your product field to: Regulates Plant Growth," +
                     " Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for c" +
                     "ontrol of growth", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 309
-testRunner.Then("Which one best describes your product should not be showing the error messages: T" +
-                    "his is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 311
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 313
 testRunner.Then("Which one best describes your product should not be showing the error messages: T" +
                     "his is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 313
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 315
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("Which one best describes your product should not be showing the error messages: T" +
+                    "his is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 317
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 319
 testRunner.Then("I delete the product: TestCase62776", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

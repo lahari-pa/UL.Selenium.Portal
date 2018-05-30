@@ -2560,6 +2560,34 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return true;
 		}
+		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)
+		public bool UploadFileForSectionAndType(string label, string section, string pdfFilePath)
+		{
+			var el = containerElement.FindElement(
+				By.XPath(
+					".//div[child::label[text()='" + section + "']]/following-sibling::div[//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]]//a[text()='Browse']"),
+				2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			if (!el.TryClick())
+			{
+				return false;
+			}
+
+			GeneralFunctions.EnterFilename(pdfFilePath);
+
+			int i = 0;
+			while (containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Remove']"), 2) == null && i < 10)
+			{
+				i++;
+				Delay.Seconds(Delay.SpeedFactor * 1);
+			}
+
+			return true;
+		}
 
 		/// <summary>
 		/// Product label specifies a dilution ratio option
@@ -3117,11 +3145,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> GetDisplayedSections()
 		{
 			var DisplayedSections = new List<string>();
-			var els = containerElement.FindElements(By.XPath(@"//div[starts-with(@class,'form-group')]"));
-			foreach (var element in els)
-			{
-				DisplayedSections.Add(element.FindElement(By.XPath(@"./div/label")).Text);
-			}
+			var els = containerElement.FindElements(By.XPath(@"//div[starts-with(@class,'form-group')]/div/label"));
+			DisplayedSections = els.Select(x => x.Text).ToList();
 			return DisplayedSections;
 		}
 
@@ -3219,24 +3244,41 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		//JamesFix
 		public string VocAnalysisDateStatement()
 		{
-			return "";
+			var vocAnalysisDateStatement =
+				containerElement.FindElement(
+					By.XPath(@"//div[contains(text(), 'VOC Analysis Date') and ancestor::div[@class='form-group has-success']]"));
+			return vocAnalysisDateStatement == null ? null : vocAnalysisDateStatement.Text;
 		}
 
-		public int RadioButtonsInSection(string dummy)
+		public int RadioButtonsInSection(string section)
 		{
-			return 0;
+			var xpath = @"//div[./label[contains(text(), '" + section + "')]]/following-sibling::div//div[@class='radio']";
+			var radios = containerElement.FindElements(By.XPath(xpath), 2);
+			return radios == null ? 0 : radios.Count;
 		}
 
-		public List<string> GetAllOptionsForSection(string dummy)
+		public List<string> GetAllOptionsForSection(string section)
 		{
-			return new List<string>();
+			var optionsText = new List<string>();
+			var matchingElements = containerElement.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[starts-with(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
+			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
+			{
+				optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+				return optionsText;
+			}
+			var xpath = @"//div[./label[contains(text(), '" + section + "')]]/following-sibling::div//div[@class='radio']/label/span";
+			optionsText = containerElement.FindElements(By.XPath(xpath), 2).Select(x => x.Text).ToList();
+			return optionsText;
 		}
 
-		public string RegulatoryInformationLabelLinks()
+		public List<string> RegulatoryInformationLabelLinks()
 		{
-			return "";
+			var linksText = new List<string>();
+			linksText = containerElement.FindElements(By.XPath(".//a[@class='link-publication']")).Select(x => x.Text).ToList();
+			return linksText;
 		}
 
 		public bool AddDocument(string documentName, string language)

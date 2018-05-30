@@ -186,6 +186,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
+		[StepDefinition(@"I click the browse button for label: (.*) in section: (.*) and upload PDF: (.*)")]
+		public void UploadPDFFileSectionAndType(string label, string section, string pdfFile)
+		{
+			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(label, section, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
+
+		}
 		[StepDefinition(@"I purchase the following additional documents:")]
 		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
 		{
@@ -1452,12 +1458,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+
 		[StepDefinition(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Type of Product select field")]
 		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(string typeOfProduct)
 		{
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded", "Product type tab is loaded.");
 			selNewProduct.ProductType = typeOfProduct;
+			//If Type of Product hasn't updated, try again ignoring case
+			//CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 		}
 
 		[StepDefinition(@"I should only see the following options for Primary Physical State:")]

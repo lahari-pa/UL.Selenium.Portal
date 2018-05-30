@@ -48,9 +48,7 @@ Then I confirm the Label Information section on the Regulatory Information 3 pag
 Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Shared Step 57507
-And I set the below options for field: Product is Regulated for Transport
-| Option        |
-| Not Regulated |
+Given I set the Product is Regulated for Transport field to: Not Regulated
 Given in the New Product page I click Continue
 
 Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)

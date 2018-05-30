@@ -16,7 +16,7 @@ Feature: Pesticides
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
+Then The home screen should load
 # ***** Shared step 57753 ***** #
 Then I click the Register New Product icon in the Navigation Pane
 And I should see the New Product Page
@@ -106,7 +106,7 @@ Then I delete the product: TestCase71051
 Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly when the Update WERCSmart data link is used
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
+Then The home screen should load
 # ***** Shared step 57753 ***** #
 Then I click the Register New Product icon in the Navigation Pane
 And I should see the New Product Page
@@ -204,7 +204,7 @@ Then I delete the product: TestCase62848
 
 Scenario: [62775] Pesticides - Validation of Which one best describes your product question - Prevents, Destroys etc
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
+Then The home screen should load
 # Shared step 57753
 Then I click the Register New Product icon in the Navigation Pane
 And I should see the New Product Page
@@ -236,12 +236,13 @@ Given I see the following sections
 | Section                               |
 | Which one best describes your product |
 
-Given I should see a total of 2 radio buttons for the section: Which one best describes your product
+Given I should see a total of 3 radio buttons for the section: Which one best describes your product
 
 Then I should see the following radio buttons:
 | Button                                                                                                                  |
 | Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)                      |
 | Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth |
+| Product is not considered a pesticide product                                                                           |
 
 And in the New Product page I click Continue
 
@@ -261,7 +262,7 @@ Then I delete the product: TestCase62775
 
 Scenario: [62776] Pesticides - Validation of Which one best describes your product - Regulates Plant Growth
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
+Then The home screen should load
 # Shared step 57753
 Then I click the Register New Product icon in the Navigation Pane
 And I should see the New Product Page
@@ -293,12 +294,13 @@ Given I see the following sections
 | Section                               |
 | Which one best describes your product |
 
-Given I should see a total of 2 radio buttons for the section: Which one best describes your product
+Given I should see a total of 3 radio buttons for the section: Which one best describes your product
 
 Then I should see the following radio buttons:
 | Button                                                                                                                  |
 | Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)                      |
 | Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth |
+| Product is not considered a pesticide product                                                                           |
 
 And in the New Product page I click Continue
 
