@@ -2565,7 +2565,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var el = containerElement.FindElement(
 				By.XPath(
-					".//div[child::label[text()='" + section + "']]/following-sibling::div[//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]]//a[text()='Browse']"),
+					".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div[//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]]//a[text()='Browse']"),
 				2);
 			if (el == null)
 			{
@@ -2580,7 +2580,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			GeneralFunctions.EnterFilename(pdfFilePath);
 
 			int i = 0;
-			while (containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Remove']"), 2) == null && i < 10)
+			while (containerElement.FindElement(By.XPath(".//span[contains(text(),'" + section + "')]//parent::div//a[text()='Remove']"), 2) == null && i < 10)
 			{
 				i++;
 				Delay.Seconds(Delay.SpeedFactor * 1);

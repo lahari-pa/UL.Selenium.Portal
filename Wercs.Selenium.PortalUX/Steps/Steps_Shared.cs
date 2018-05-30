@@ -69,6 +69,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(@"I call Shared Step 60747 \(Select Primary Physical Property - Liquid - With Ingredients\)")]
+		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients(int p0)
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
+			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
+			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Flammable 1C");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains", "Dairy or products containing dairy or milk");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following sweeteners", "None of the Above");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following artificial dye(s)", "None of the Above");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+
 		[StepDefinition(@"I call Shared Step 60756 \(Additional Product Information with Country and every option\)")]
 		public void GivenICallSharedStepAdditionalProductInformationWithCountryAndEveryOption()
 		{
@@ -252,17 +276,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
 		}
 
-		[StepDefinition(@"I call Shared 60567 \(Upload Product Label only\)")]
-		public void GivenICallSharedUploadProductLabelOnly()
+		[StepDefinition(@"I call Shared 60567 \(Upload Product Label only\) : (.*)")]
+		public void GivenICallSharedUploadProductLabelOnly(string docPath)
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep(@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyStepsNewProduct.UploadPDFFile("Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", "Upload Full Product Label", docPath);
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
-
+		
 		[StepDefinition(@"I call Shared 60567 \(Upload Product Label only\) for section: (.*)")]
 		public void GivenICallSharedUploadProductLabelOnlySectionSpecific(string section)
 		{

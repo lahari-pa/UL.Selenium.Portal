@@ -55,6 +55,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
                         "DataSummarySheet",
                         "wercsmart",
                         "RetailPartners",
+                        "SubEnrollment",
                         "run_FLow32_Grocery"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -106,98 +107,99 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
         public virtual void _60774FoodItemDispensedByCompressedGas_DairyTopping_RU001244()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60774] Food Item Dispensed by Compressed Gas - Dairy Topping - RU001244", ((string[])(null)));
-#line 15
+#line 16
 this.ScenarioSetup(scenarioInfo);
-#line 18
+#line 19
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
+#line 22
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 22
+#line 23
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 25
-testRunner.Given("I generate a random UPC number and save as: UPC60774", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 26
+testRunner.Given("I generate a random UPC number and save as: UPC60774", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 27
 testRunner.Given("I delete all products with UPC Number: saved as UPC60774", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
-testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 30
-testRunner.And("I should see the New Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 31
+testRunner.And("I should see the New Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 32
 testRunner.And("I set the Select the type of product to create option to: Create a New Registrati" +
                     "on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 33
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 35
-testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
+testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 37
 testRunner.And("I set the Product Name as it a appears on the Package Label field to: Food Item D" +
                     "ispensed by Compressed Gas - Dairy Topping", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
+#line 38
 testRunner.And("In the Product Type tab of the New Product Page, I enter: Food Item Dispensed by " +
                     "Compressed Gas - Dairy Topping in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
-testRunner.And("in the The Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
+testRunner.And("in the The Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 40
 testRunner.Then("I save the product information as: TestCase60774", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 42
-testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 43
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 44
 testRunner.And("Primary Physical State should be showing the value: Product is packaged in a gas " +
                     "cylinder (e.g., whip cream)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
-testRunner.And("I set the Secondary Physical State option to: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 45
-testRunner.And("I set the pH field to: 7", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State option to: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 46
-testRunner.And("I set the Select the best Water Solubility description field to: Decomposes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the pH field to: 7", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 47
+testRunner.And("I set the Select the best Water Solubility description field to: Decomposes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 48
 testRunner.And("I set the When the product has a flammable propellant field to: This product is n" +
                     "ot classified as D001 or D003 Hazardous Waste under RCRA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
-testRunner.And("I set the Select all ingredients included in this product field to: Dairy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 49
+testRunner.And("I set the Select all ingredients included in this product field to: Dairy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
 testRunner.And("I set the Product is manufactured in a facility that processes, or contains field" +
                     " to: Dairy or products containing dairy or milk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
-testRunner.And("I set the Product is verified and sold as field to: None of the Above", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
-testRunner.And("I set the Product contains the following sweeteners field to: None of the Above", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Product is verified and sold as field to: None of the Above", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
+testRunner.And("I set the Product contains the following sweeteners field to: None of the Above", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
 testRunner.And("I set the Product contains the following artificial dye(s) option to: None of the" +
                     " Above", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 54
 testRunner.And("in the Product Characteristics page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
-testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 57
+testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
 testRunner.And("Select countries the product may be sold in should be showing the value: United S" +
                     "tates", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
-testRunner.And("I set the Select the product\'s Country of Origin field to: United Kingdom", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 59
+testRunner.And("I set the Select the product\'s Country of Origin field to: United Kingdom", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 60
 testRunner.And("I set the Product has been classified using OSHA (US) Globally Harmonized Standar" +
                     "ds (GHS) field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
-testRunner.And("I set the Product is shipped directly by supplier to the consumer. field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
-testRunner.And("I set the Product is a Retailer\'s Private Label or Brand field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Product is shipped directly by supplier to the consumer. field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
+testRunner.And("I set the Product is a Retailer\'s Private Label or Brand field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 63
 testRunner.And("I set the Product is sold to the Retailer solely for the Retailer\'s use field to:" +
                     " No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 64
 testRunner.And("in the Additional Product Information page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
-testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 67
-testRunner.When("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 68
-testRunner.Then("I should see the ingredients error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 69
+testRunner.Then("I should see the ingredients error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 70
 testRunner.And("The ingredients error message should be showing: ALERT! The ingredient table does" +
                     " not include a compressed gas (Bag-On-Valve) or a propellant. Please update your" +
                     " ingredients to include the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -214,22 +216,22 @@ testRunner.And("The ingredients error message should be showing: ALERT! The ingr
                         "false",
                         "false",
                         ""});
-#line 70
+#line 71
 testRunner.Then("I add the following ingredients:", ((string)(null)), table1, "Then ");
-#line 73
+#line 74
 testRunner.And("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
-testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 77
-testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 78
+testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 79
 testRunner.And("I set the Product, including container and/or packaging, contains a chemical on C" +
                     "alifornia\'s Prop 65 list option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
+#line 80
 testRunner.Then("in the Regulatory Information 1 page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 82
-testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 83
+testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 84
 testRunner.And("I set the Product is Regulated for Transport option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -238,35 +240,35 @@ testRunner.And("I set the Product is Regulated for Transport option to: Yes", ((
                         "IMDG"});
             table2.AddRow(new string[] {
                         "Shipping fully regulated"});
-#line 84
+#line 85
 testRunner.And("I set the below options for field: Select all modes of transport that you\'ve clas" +
                     "sified the product for", ((string)(null)), table2, "And ");
-#line 88
+#line 89
 testRunner.And("in the Transportation Details 1 page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
-testRunner.Then("I should see the International Marine (IMDG) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 92
-testRunner.And("I set the UN Number field to: UN1950", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see the International Marine (IMDG) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 93
-testRunner.And("I set the Proper Shipping Name field to: Aerosols", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the UN Number field to: UN1950", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 94
-testRunner.And("I set the Technical Name (if applicable) field to: My Safe Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Proper Shipping Name field to: Aerosols", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 95
-testRunner.And("I set the Hazard Class (select) field to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Technical Name (if applicable) field to: My Safe Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 96
-testRunner.And("I set the Packing Group (select) field to: None", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Hazard Class (select) field to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 97
+testRunner.And("I set the Packing Group (select) field to: None", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 98
 testRunner.Given("in the U. S. Department of Transportation (DOT) Classification page I click Conti" +
                     "nue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 100
-testRunner.Then("In the \'Select Retailers\' window I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 101
-testRunner.And("I should see the Retailer Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("In the \'Select Retailers\' window I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 102
+testRunner.And("I should see the Retailer Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 103
 testRunner.And("in the Retailer page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 105
-testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 106
+testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 107
 testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -281,35 +283,35 @@ testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.
             table3.AddRow(new string[] {
                         "Size",
                         "20"});
-#line 107
+#line 108
 testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table3, "Then ");
-#line 112
+#line 113
 testRunner.And("in the Universal Product Code (UPC) page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 115
-testRunner.And("I should see the Regulatory Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 116
+testRunner.And("I should see the Regulatory Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 117
 testRunner.And("I click the browse button for label: Product Label and upload PDF: C:\\Dependencie" +
                     "s\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 117
+#line 118
 testRunner.Then("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 120
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 121
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 122
 testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 124
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 125
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 126
 testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 128
-testRunner.And("I should see the Comments Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 129
-testRunner.And("I enter the following into the comments field: Comments Field Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Comments Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 130
+testRunner.And("I enter the following into the comments field: Comments Field Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 131
 testRunner.Given("in the Comments page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 133
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 134
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 135
 testRunner.Then("I delete the product: TestCase60774", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -328,34 +330,35 @@ testRunner.Then("I delete the product: TestCase60774", ((string)(null)), ((TechT
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
         public virtual void _60775CookingOilNon_Aerosol_RU000942()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60775] Cooking Oil, Non-Aerosol - RU000942", ((string[])(null)));
-#line 137
+#line 138
 this.ScenarioSetup(scenarioInfo);
-#line 140
+#line 141
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 143
+#line 144
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 144
+#line 145
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 147
-testRunner.Given("I generate a random UPC number and save as: UPC60775", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 148
+testRunner.Given("I generate a random UPC number and save as: UPC60775", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 149
 testRunner.Given("I delete all products with UPC Number: saved as UPC60775", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 150
+#line 151
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 152
+#line 153
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Cooking oil - Non-Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 154
+#line 155
 testRunner.Then("I save the product information as: TestCase60775", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 156
+#line 157
 testRunner.Given("I call Shared Step 60779 (Enter Liquid - Cooking Oil - Non-Aerosol)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 158
+#line 159
 testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
                     "ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -371,46 +374,51 @@ testRunner.Given("I call Shared Step 60756 (Additional Product Information with 
                         "false",
                         "false",
                         ""});
-#line 160
+#line 161
 testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table4, "Given ");
-#line 166
+#line 167
 testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 168
+#line 169
 testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 170
+#line 171
 testRunner.Given("I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exe" +
                     "mption(Random) - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 172
-testRunner.And("I should see the Transportation Details 2 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 173
+testRunner.And("I should see the Transportation Details 2 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 174
 testRunner.And("In the Product Characteristics tab of the New Product Page, for International Shi" +
                     "pping when DOT Exemption taken I select: I do not ship internationally and I do " +
                     "not know the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 174
+#line 175
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 176
+#line 177
 testRunner.Given("I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
                     "Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 178
+#line 179
 testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
                     "ze Only) for UPC: saved as UPC60775, container type: Aerosol Can and size: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 180
-testRunner.Given("I call Shared 60567 (Upload Product Label only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 183
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 181
+testRunner.Given("I call Shared 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\testd" +
+                    "oc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 184
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 185
 testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 187
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 188
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 189
 testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 190
+#line 191
 testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 192
-testRunner.Given("I call Shared 54796 (Purchase Summary)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 194
+#line 193
+testRunner.Given("I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 195
+testRunner.Then("the Subscription Enrollment page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 199
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 200
 testRunner.Then("I delete the product: TestCase60775", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

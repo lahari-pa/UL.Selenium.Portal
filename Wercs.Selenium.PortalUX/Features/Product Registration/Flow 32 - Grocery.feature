@@ -8,6 +8,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@SubEnrollment
 @run_FLow32_Grocery
 
 Feature: [64739] Flow 32 - Grocery
@@ -177,7 +178,7 @@ Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue -
 
 Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60775, container type: Aerosol Can and size: 20
 
-Given I call Shared 60567 (Upload Product Label only)
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
@@ -189,6 +190,11 @@ Then in the Optional Reports and Documents Available for Purchase page I click C
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared 54796 (Purchase Summary)
+Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
+Then the Subscription Enrollment page should load
+
+#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
+#Given I call Shared 54796 (Purchase Summary)
+Given I navigate to the home page
 Then I delete the product: TestCase60775
