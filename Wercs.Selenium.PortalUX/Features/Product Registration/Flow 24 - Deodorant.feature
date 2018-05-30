@@ -47,9 +47,7 @@ Then I confirm the Label Information section on the Regulatory Information 3 pag
 
 Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-# Shared Step 57507
-Given I set the Product is Regulated for Transport field to: Not Regulated
-Given in the New Product page I click Continue
+Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 
 Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
@@ -80,7 +78,7 @@ Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Typ
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only)
+Given I call Shared 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 
 And in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -94,7 +92,9 @@ Then I should see the Data Acceptance Page
 
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
-#Given I call Shared 54796 (Purchase Summary)
+Given I navigate to the home page
+
+Then I delete the product: TestCase60617
 
 Scenario: [60637] Deodorant - Non-Aerosol - RU000760(Solid)
 
@@ -149,7 +149,7 @@ Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Typ
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only)
+Given I call Shared 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 
 And in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -178,6 +178,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Aerosol
 
+Then I save the product information as: TestCase60619
+
 Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
 Given I call Shared Step 60310 (Additional Product Information - Without Child question)
@@ -198,4 +200,28 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared Step 49621 (Volatile Organic Compounds (VOC) for OTC and CARB - No)
+#Given I call Shared Step 49621 (Volatile Organic Compounds (VOC) for OTC and CARB - No)
+
+Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+
+Given I call Shared 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
+
+Given I click continue
+
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
+
+Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60619, container type: Aerosol Can and size: 33
+
+Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I call Shared 60567 (Upload Product Label only) for section: Volatile Organic Compounds
+
+And in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
+| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60619

@@ -6,6 +6,7 @@ using NPOI.SS.Formula.Functions;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
+using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
@@ -256,8 +257,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep(@"I click the browse button for label: Product Label in section: Volatile Organic Compounds and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", "Volatile Organic Compounds", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep(@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyStepsNewProduct.UploadPDFFile("Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep(@"in the New Product page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared 60567 \(Upload Product Label only\) for section: (.*)")]
+		public void GivenICallSharedUploadProductLabelOnlySectionSpecific(string section)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section + @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section, @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -337,8 +349,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I set the Primary Physical State option to: Liquid");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
-			TestReport.StartStep("I set the Secondary Physical State option to: Liquid");
-			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			TestReport.StartStep("I set the Specific Gravity option to: 20");
 			MyNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
 			TestReport.StartStep("I check the 'I do not have exact' checkbox for field: pH");
@@ -357,6 +367,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			TestReport.StartStep("I set the Select the best Water Solubility description field to: 100g/100ml");
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
+			TestReport.StartStep("I set the Secondary Physical State option to: Liquid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			TestReport.StartStep("In the Product Characteristics page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
@@ -581,9 +593,108 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I should see the Liquid Core Product Page");
 			MyNewProduct.GivenIShouldSeeXPage("Liquid Core Product");
 			TestReport.StartStep("I set the Is there a free liquid in the Product's container that is 10ml or greater? field to: No");
-			MyNewProduct.SetTheSectionOptionTo("I set the Is there a free liquid in the Product's container that is 10ml or greater?", "No");
+			MyNewProduct.SetTheSectionOptionTo("Is there a free liquid in the Product's container that is 10ml or greater?", "No");
 			TestReport.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Liquid Core Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 57507 \(Transportation Details 1- Not Regulated - Continue - Happy Path\)")]
+		public void ICallSharedTransportationDetails1_NotRegulated_Continue_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			NewProduct MyNewProduct = new NewProduct();
+			TestReport.StartStep("I should see the Transportation Details 1 Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			TestReport.StartStep("I set the Product is Regulated for Transport field to: Not Regulated");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is Regulated for Transport", "Not Regulated");
+			//MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			var showing = MyNewProduct.GetOptionsForSection("Product is Regulated for Transport");
+			bool selected = false;
+			int wait = 0;
+			while (!selected && !showing.Contains("Not Regulated") && wait <= 10)
+			{
+				// Check if the option exists in the drop down
+				if (MyNewProduct.GetAllOptionsForSection("Product is Regulated for Transport").Contains("Not Regulated"))
+				{
+					// If yes, attempt again
+					Report.Info("Trying again to select option: Not Regulated");
+					MyNewProductSteps.SetTheSectionOptionTo("Product is Regulated for Transport", "Not Regulated");
+					if (MyNewProduct.SetOptionInSection("Product is Regulated for Transport", "Not Regulated"))
+					{
+						selected = true;
+					}
+				}
+				else
+				{
+					// If no, report fail
+					Report.Failure("It was not possible to select the option: Not Regulated for the section: Product is Regulated for Transport");
+					Report.Screenshot();
+				}
+				wait++;
+				Delay.Seconds(1);
+			}
+			TestReport.StartStep("In the Product is Regulated for Transport page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product is Regulated for Transport");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 57502 \(Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
+		public void ICallSharedAdditionalProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep("I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			TestReport.StartStep("I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			TestReport.StartStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		// Duplicate with Shared Step 57884
+		[StepDefinition(@"I call Shared Step 59663 \(Safety Data Sheet Authoring - Additional Data \(Optional\)\)")]
+		public void ICallSharedSafetyDataSheetAuthoring_AdditionalDataOptional(Table table)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Data (Optional)");
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: " + table.Rows[0]["Personal Protection Equipment"]);
+			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(table.Rows[0]["Personal Protection Equipment"]);
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " + table.Rows[0]["Autoignition Temperature"]);
+			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(table.Rows[0]["Autoignition Temperature"]);
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: " + table.Rows[0]["Minimum Ignition Energy"]);
+			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(table.Rows[0]["Minimum Ignition Energy"]);
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " + table.Rows[0]["Viscosity"]);
+			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " + table.Rows[0]["Appearance"]);
+			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(table.Rows[0]["Appearance"]);
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " + table.Rows[0]["Odor"]);
+			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(table.Rows[0]["Odor"]);
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " + table.Rows[0]["Odor Threshold"]);
+			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(table.Rows[0]["Odor Threshold"]);
+			// if Product's Dispensing Method is required enter any option
+			var actualSections = new NewProduct().GetDisplayedSections();
+			if (actualSections.Contains("Product's Dispensing Method"))
+			{
+				TestReport.StartStep("In the Review and Submit tab of the New Product Page for Product's Dispensing Method I select: " + table.Rows[0]["Product's Dispensing Method"]);
+				MyNewProduct.SetTheSectionOptionTo("Product's Dispensing Method", table.Rows[0]["Product's Dispensing Method"]);
+			}
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Partition Coefficient I enter: " + table.Rows[0]["Partition Coefficient"]);
+			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPartitionCoefficientISelect(table.Rows[0]["Partition Coefficient"]);
+			TestReport.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 	}
 }
