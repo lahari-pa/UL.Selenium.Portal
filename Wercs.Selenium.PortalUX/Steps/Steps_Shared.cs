@@ -507,8 +507,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?", "No");
 			TestReport.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
-			TestReport.StartStep("I set the Secondary Physical State option to: Solid Gel Consistency");
-			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid Gel Consistency");
+			TestReport.StartStep("I set the Secondary Physical State option to: Solid");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			TestReport.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\) with the following inputs:")]
+		public void GivenICallSharedEnterPhysicalProperty_SolidParameters(Table table)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
+			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
+			TestReport.StartStep("I set the Primary Physical State option to: Solid");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?", "No");
+			var waterSolubility = table == null ? "N/A" : table.Rows.FirstOrDefault()["Water Solubility"];
+			if (waterSolubility != null && waterSolubility != "N/A")
+			{
+				TestReport.StartStep("I set the Select the best Water Solubility description option to: " + waterSolubility);
+				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", waterSolubility);
+			}
+			else
+			{
+				TestReport.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
+				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
+			}
+			var secondaryState = table == null ? "N/A" : table.Rows.FirstOrDefault()["Secondary Physical State"];
+			if (secondaryState != null && secondaryState != "N/A")
+			{
+				TestReport.StartStep("I set the Secondary Physical State option to: " + secondaryState);
+				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", secondaryState);
+			}
+			else
+			{
+				TestReport.StartStep("I set the Secondary Physical State option to: Solid");
+				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			}
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
