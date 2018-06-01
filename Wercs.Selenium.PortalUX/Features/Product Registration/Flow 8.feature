@@ -8,7 +8,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
-@run_FLow8
+@run_Flow8
 
 Feature: Flow 8
 

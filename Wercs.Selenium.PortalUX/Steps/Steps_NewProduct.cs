@@ -1718,14 +1718,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see a total of (.*) radio buttons for the section: (.*)")]
-		public void RadioButtonCountInSection(string count, string section)
+		[StepDefinition(@"I should see (a total of|at least) (.*) radio buttons for the section: (.*)")]
+		public void RadioButtonCountInSection(string condition, string count, string section)
 		{
 			var selNewProduct = new NewProduct();
 			var expectedCount = Convert.ToInt32(count);
 			var actualCount = selNewProduct.RadioButtonsInSection(section);
-			Report.IsTrue(expectedCount == actualCount,
-				"The number of radio buttons appearing in section: " + section + " did not match the expected count: " + count, "The number of radio buttons appearing in section: " + section + " matched the expected count: " + count);
+			if (condition == "a total of")
+			{
+				Report.IsTrue(expectedCount == actualCount,
+					"The number of radio buttons appearing in section: " + section + " did not match the expected count: " + count, "The number of radio buttons appearing in section: " + section + " matched the expected count: " + count);
+			}
+			if (condition == "at least")
+			{
+				Report.IsTrue(actualCount >= expectedCount, "Expected there to be at least: " + expectedCount + " radio buttons for section: " + section + " but there were: " + actualCount, "There were at least: " + expectedCount + " radio buttons for section: " + section + " as expected");
+			}
 		}
 
 		[StepDefinition(@"I click the 'Add UPC' button")]
@@ -1808,21 +1815,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set the input to " + option + " in section: " + section);
 		}
 
-		[StepDefinition(@"I (see|only see) the following sections")]
-		public void CheckDisplayedSections(string toDo, Table sections)
+		[StepDefinition(@"I (see|only see|do not see) the following sections")]
+		public void CheckDisplayedSections(string condition, Table sections)
 		{
-			var ExpectedSections = new List<string>();
+			var expectedSections = new List<string>();
 			foreach (var Row in sections.Rows)
 			{
-				ExpectedSections.Add(Row["Section"]);
+				expectedSections.Add(Row["Section"]);
 			}
-			var ActualSections = new NewProduct().GetDisplayedSections();
-			if (toDo == "only see")
+			var ActualSections = new NewProduct().GetDisplayedSections().Select(x => x.Trim()).ToList();
+			if (condition == "only see")
 			{
-				Report.IsTrue(ExpectedSections.All(ActualSections.Contains) && ExpectedSections.Count == ActualSections.Count, "The displayed sections: '" + string.Join(",", ActualSections) + "' did not match the expected sections: '" + string.Join(",", ExpectedSections) + "'");
+				List<string> mismatch = new List<string>();
+				foreach (var section in ActualSections)
+				{
+					if (!expectedSections.Contains(section))
+					{
+						mismatch.Add(section);
+					}
+				}
+				Report.IsTrue(mismatch.Count == 0 && expectedSections.Count == ActualSections.Count, "The following sections were showing when they should not be: " + string.Join("; ", mismatch), "The only displayed sections were: '" + string.Join("; ", ActualSections) + "' as expected");
 				return;
 			}
-			Report.IsTrue(ExpectedSections.All(ActualSections.Contains), "The displayed sections: '" + string.Join(",", ActualSections) + "' did not match the expected sections: '" + string.Join(",", ExpectedSections) + "'");
+			if (condition == "see")
+			{
+				Report.IsTrue(expectedSections.All(ActualSections.Contains), "The displayed sections: '" + string.Join("; ", ActualSections) + "' did not match the expected sections: '" + string.Join("; ", expectedSections) + "'", "The displayed sections: '" + string.Join("; ", ActualSections) + "' matched the expected sections: '" + string.Join("; ", expectedSections) + "'");
+				return;
+			}
+			if (condition == "do not see")
+			{
+				Report.IsFalse(expectedSections.Any(ActualSections.Contains), "Sections were showing which should not be. The sections not allowed are: " + string.Join("; ", expectedSections) + ". Actual sections: " + string.Join("; ", ActualSections), "Sections were not showing as expected: " + string.Join("; ", expectedSections));
+			}
 		}
 
 		[StepDefinition(@"I select the first option in section: (.*)")]
@@ -2299,6 +2322,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var newProductPage = new NewProduct();
 			var labelLinksShowing = newProductPage.RegulatoryInformationLabelLinks();
 			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the Regulatory Information 3 page", "The link with text: '" + labelLink + "' was found on the Regulatory Information 3 page as expected");
+		}
+
+		[StepDefinition(@"In the Regulatory Documents to Provide Page, the document type is: (.*) for section: (.*)")]
+		public void RegulatoryDocumentsConfirmDocumentTypeInSection(string type, string section)
+		{
+			Report.IsTrue(new NewProduct().GetDocumentTypeForSection(section) == type, "The document type for section: " + section + " was not: " + type + " when it was expected to be", " The document type for section: " + section + " was not: " + type + " as expected");
 		}
 	}
 }

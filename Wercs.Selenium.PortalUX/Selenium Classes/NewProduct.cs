@@ -2585,10 +2585,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				i++;
 				Delay.Seconds(Delay.SpeedFactor * 1);
 			}
-
 			return true;
 		}
 
+		public string GetDocumentTypeForSection(string section)
+		{
+			var xpath = ".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div[//span[not(contains(@style, 'display: none;'))]]/div[not(contains(@style,'display: none;'))]/span[contains(@data-bind, 'text: Description')]";
+			var labelType = containerElement.FindElement(By.XPath(xpath));
+			if (labelType == null)
+			{
+				return null;
+			}
+			return labelType.Text;
+		}
 		/// <summary>
 		/// Product label specifies a dilution ratio option
 		/// </summary>

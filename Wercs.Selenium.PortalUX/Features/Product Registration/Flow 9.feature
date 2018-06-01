@@ -53,7 +53,7 @@ Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Ty
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only)
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -145,7 +145,7 @@ Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Ty
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only)
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -195,7 +195,7 @@ Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Ty
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only)
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -246,7 +246,7 @@ Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Ty
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only)
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -259,4 +259,38 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
+
+Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking SDS step shows only product label and Additional documents to provide shows SDS as optional)
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57500 (The Product- Enter name, select product type: Herbal or Dietary Supplement - Continue - Happy Path)
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Acetone
+
+Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+Then I should see the Regulatory Documents to Provide Page
+
+Then I see the following sections
+| Section                                                                                                                        |
+| Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) |
+
+Given In the Regulatory Documents to Provide Page, the document type is: Product Label for section: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)
+
+Then I do not see the following sections
+| Section                                   |
+| OSHA-compliant Safety Data Sheet, English |
 

@@ -285,7 +285,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
-		
+
 		[StepDefinition(@"I call Shared 60567 \(Upload Product Label only\) for section: (.*)")]
 		public void GivenICallSharedUploadProductLabelOnlySectionSpecific(string section)
 		{
@@ -597,7 +597,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 57727 \(Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path\)")]
-		public void GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity_Continue_HappyPath()
+		public void GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity()
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
@@ -615,7 +615,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 57728 \(U.S. Department of Transportation \(DOT\) Classification - Enter UN1950 \(Aerosol\) - Select data - Continue - Happy Path\)")]
-		public void GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData_Continue()
+		public void GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData()
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
@@ -659,7 +659,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57507 \(Transportation Details 1- Not Regulated - Continue - Happy Path\)")]
-		public void ICallSharedTransportationDetails1_NotRegulated_Continue_HappyPath()
+		public void ICallSharedTransportationDetails1_NotRegulated()
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
@@ -700,7 +700,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 57502 \(Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
-		public void ICallSharedAdditionalProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse_Continue()
+		public void ICallSharedAdditionalProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse()
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
@@ -755,6 +755,126 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPartitionCoefficientISelect(table.Rows[0]["Partition Coefficient"]);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+		//Duplicate with Shared Step 57561
+		[StepDefinition(@"I call Shared Step 57500 \(The Product- Enter name, select product type: (.*) - Continue - Happy Path\)")]
+		public void ICallSharedTheProduct_EnterNameSelectProductType(string type)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the The Product Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
+			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
+			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
+				"AAA WERCS Test " + type.Replace("/", " "));
+			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
+			TestReport.StartStep("In the New Product page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue\)")]
+		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectSolid_StateAndSubcat_MixedAndWater_Random()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Product Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
+			TestReport.StartStep("I set the Primary Physical State option to: Solid");
+			MyNewProductSteps.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: Yes");
+			MyNewProductSteps.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?", "Yes");
+			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
+			{
+				TestReport.StartStep("I set the Select the best Water Solubility description option to: Soluble in water");
+				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
+			}
+			TestReport.StartStep("I set the Secondary Physical State option to: Solid");
+			MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			TestReport.StartStep("In the New Product page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 59680 \(Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
+		public void ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			var tableFirst = new Table("Section");
+			tableFirst.AddRow("Select countries the product may be sold in");
+			tableFirst.AddRow("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
+			tableFirst.AddRow("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
+			tableFirst.AddRow("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.");
+			TestReport.StartStep("I only the following sections");
+			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
+			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
+			TestReport.StartStep("Select countries the product may be sold in should be showing the value: United States");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			TestReport.StartStep("I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			TestReport.StartStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			var tableSecond = new Table("Section");
+			tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
+			tableSecond.AddRow("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
+			TestReport.StartStep("I only the following sections");
+			Report.Info("Checking that the questions relating to: Private Label, GNR are now visble");
+			MyNewProductSteps.CheckDisplayedSections("see", tableSecond);
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 29181 \(Ingredients - add any chemical\) with name: (.*)")]
+		public void ICallSharedIngredients_AddAnyChemical(string name)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Ingredients Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
+			var table = new Table("ComponentName", "Percent");
+			table.AddRow(name, "100");
+			MyNewProductSteps.AddIngredients(table);
+			TestReport.StartStep("In the Ingredients page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+			TestReport.StartStep("I should see the Regulatory Information 1 Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Regulatory Information 1");
+		}
+
+		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
+		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Information 1 Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Regulatory Information 1");
+			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Exempt");
+			MyNewProductSteps.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Exempt");
+			TestReport.StartStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product, including container and/or packaging, contains a chemical on California's Prop 65 list", "No");
+			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
+
+		[StepDefinition(@"I call Shared Step 29206 \(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\)")]
+		public void ICallSharedRetailer_SelectNoRetailer_ClickDone()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
+			MyStepsNewProduct.ThenISelectTheRetailer_InTheWindow("No Retailer/No UPC Product");
+			TestReport.StartStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			TestReport.StartStep("In the Retailer page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
 	}
 }

@@ -55,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
                         "DataSummarySheet",
                         "wercsmart",
                         "RetailPartners",
-                        "run_FLow32_Grocery"});
+                        "run_Flow8"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -106,7 +106,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow8")]
         public virtual void _57295AbsorbentSolid_AutomotiveRU000939_8_S()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57295] Absorbent solid - Automotive(RU000939) - 8-S", ((string[])(null)));
@@ -313,7 +313,7 @@ testRunner.Then("I delete the product: TestCase57295", ((string)(null)), ((TechT
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow8")]
         public virtual void _57332AutomotiveAccessoriesContainingGelSeatCushionsEtc_8_S()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8-S", ((string[])(null)));
@@ -521,7 +521,7 @@ testRunner.Then("I delete the product: TestCase57332", ((string)(null)), ((TechT
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow8")]
         public virtual void _58184CraftKitsContainingClaysOrPlastersRU000299_8_S()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[58184] Craft kits containing clays or plasters(RU000299) - 8-S", ((string[])(null)));
@@ -731,7 +731,7 @@ testRunner.Then("I delete the product: TestCase58184", ((string)(null)), ((TechT
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow8")]
         public virtual void _58187MatchesRU000317_8_S()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[58187] Matches (RU000317) - 8-S", ((string[])(null)));
@@ -934,7 +934,7 @@ testRunner.Then("I delete the product: TestCase58187", ((string)(null)), ((TechT
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow8")]
         public virtual void _58293EnginesForModelRocketsRU000338_8_S()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[58293] Engines for Model Rockets(RU000338) - 8-S", ((string[])(null)));
@@ -1143,7 +1143,7 @@ testRunner.Then("I delete the product: TestCase58293", ((string)(null)), ((TechT
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow8")]
         public virtual void _56477FireworksRU000330_8_S()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56477] Fireworks (RU000330) - 8-S", ((string[])(null)));
@@ -1346,7 +1346,7 @@ testRunner.Then("I delete the product: TestCase56477", ((string)(null)), ((TechT
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow32_Grocery")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow8")]
         public virtual void _57088EngineMotorOilForAutoOrBoat()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57088] Engine (motor) oil for Auto or Boat", ((string[])(null)));
