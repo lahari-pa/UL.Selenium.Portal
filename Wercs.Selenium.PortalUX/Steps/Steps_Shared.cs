@@ -70,10 +70,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 60747 \(Select Primary Physical Property - Liquid - With Ingredients\)")]
-		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients(int p0)
+		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
@@ -82,8 +83,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
-			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Flammable 1C");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "<23C");
+			NewProduct thisNewProduct = new NewProduct();
+			if (thisNewProduct.OptionExists("Select the best Water Solubility description"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			}
+			
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains", "Dairy or products containing dairy or milk");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
