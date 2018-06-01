@@ -132,46 +132,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I should see an error message: (.*)")]
-		public void ErrorMessage(string message)
+		public void ErrorMessageSpecific(string message)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the error message: " + message);
-			try
-			{
-				Report.Info("Checking error message");
-				var selNewProduct = new NewProduct();
-				var found = selNewProduct.ErrorMessage();
+			Report.Info("Checking error message");
+			var selNewProduct = new NewProduct();
+			var found = selNewProduct.ErrorMessage();
 
-				Report.IsTrue(found.Trim() == message.Trim(),
-					"Error message was not as expected! Expected: " + message + ", but found: " + found + "!",
-					"Error message was showing: " + message + ", as expected!");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(found.Trim() == message.Trim(),
+				"Error message was not as expected! Expected: " + message + ", but found: " + found + "!",
+				"Error message was showing: " + message + ", as expected!");
 		}
 		[StepDefinition(@"I should not see an error message: (.*)")]
-		public void NotErrorMessage(string message)
+		public void NotErrorMessageSpecific(string message)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the error message: " + message);
-			try
-			{
-				Report.Info("Checking error message: " + message + " is not appearing");
-				var selNewProduct = new NewProduct();
-				var found = selNewProduct.ErrorMessage();
+			Report.Info("Checking error message: " + message + " is not appearing");
+			var selNewProduct = new NewProduct();
+			var found = selNewProduct.ErrorMessage();
 
-				Report.IsTrue(found == null || found.Trim() != message.Trim(),
-					"Error message was showing when it wasn't expected to! Error: " + message,
-					"As expected, the error message was not showing. Error: " + message);
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(found == null || found.Trim() != message.Trim(),
+				"Error message was showing when it wasn't expected to! Error: " + message,
+				"As expected, the error message was not showing. Error: " + message);
 		}
 
+		[StepDefinition(@"I click Continue and should not see an error message")]
+		public void NoErrorMessagesVisible()
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.ClickContinueNoError(), "An error message appeared when it should not", "No error message appeared as expected");
+		}
 
 		[StepDefinition(@"In the Review and Submit tab of the New Product Page for Volatile Organic Compounds I upload pdf file")]
 		public void ThenInTheReviewAndSubmitTabOfTheNewProductPageForVolatileOrganicCompoundsIUploadPdfFile()
@@ -1834,12 +1822,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 						mismatch.Add(section);
 					}
 				}
-				Report.IsTrue(mismatch.Count == 0 && expectedSections.Count == ActualSections.Count, "The following sections were showing when they should not be: " + string.Join("; ", mismatch), "The only displayed sections were: '" + string.Join("; ", ActualSections) + "' as expected");
+				Report.IsTrue(expectedSections.All(ActualSections.Contains) && expectedSections.Count == ActualSections.Count, "The following sections were showing when they should not be: " + string.Join("; ", mismatch), "The only displayed sections were: '" + string.Join("; ", ActualSections) + "' as expected");
 				return;
 			}
 			if (condition == "see")
 			{
-				Report.IsTrue(expectedSections.All(ActualSections.Contains), "The displayed sections: '" + string.Join("; ", ActualSections) + "' did not match the expected sections: '" + string.Join("; ", expectedSections) + "'", "The displayed sections: '" + string.Join("; ", ActualSections) + "' matched the expected sections: '" + string.Join("; ", expectedSections) + "'");
+				Report.IsTrue(expectedSections.All(ActualSections.Contains), "The displayed sections: '" + string.Join("; ", ActualSections) + "' did not match the expected sections: '" + string.Join("; ", expectedSections) + "'", "The displayed sections: '" + string.Join("; ", ActualSections) + "' matched the expected sections");
 				return;
 			}
 			if (condition == "do not see")
@@ -2324,10 +2312,48 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the Regulatory Information 3 page", "The link with text: '" + labelLink + "' was found on the Regulatory Information 3 page as expected");
 		}
 
-		[StepDefinition(@"In the Regulatory Documents to Provide Page, the document type is: (.*) for section: (.*)")]
-		public void RegulatoryDocumentsConfirmDocumentTypeInSection(string type, string section)
+		[StepDefinition(@"In the (Regulatory Documents to Provide|Additional Documents) Page, the document type is: (.*) for section: (.*)")]
+		public void RegulatoryDocumentsConfirmDocumentTypeInSection(string page, string type, string section)
 		{
-			Report.IsTrue(new NewProduct().GetDocumentTypeForSection(section) == type, "The document type for section: " + section + " was not: " + type + " when it was expected to be", " The document type for section: " + section + " was not: " + type + " as expected");
+			Report.IsTrue(new NewProduct().GetDocumentTypeForSection(section) == type, "On page: '" + page + "' the document type for section: '" + section + "' was not: '" + type + "' when it was expected to be", " On page: '" + page + "' the document type for section: '" + section + "' was: '" + type + "' as expected");
+		}
+
+		[StepDefinition(@"In the Ingredients Page I select the first Public Name dropdown option for ingredient: (.*)")]
+		public void IngredientSelectPublicName(string name)
+		{
+			Report.IsTrue(new NewProduct().SelectIngredientPublicName(name), "The Public Name option for ingredient: " + name + " was not changed", "The Public Name for ingredient: " + name + " was succesfully changed");
+		}
+
+		[StepDefinition(@"In the Ingredients Page I select the Trade Secret checkbox for ingredient: (.*)")]
+		public void IngredientClickTradeSecretCheckbox(string name)
+		{
+			Report.IsTrue(new NewProduct().ClickIngredientTradeSecretCheckbox(name), "The Trade Secret checkbox was not clicked successfully", "The Trade Secret checkbox was clicked successfully");
+		}
+
+		[StepDefinition(@"In the Ingredients Page I confirm the Public Name option is (enabled|disabled) for ingredient: (.*)")]
+		public void IngredientPublicNameIsEnabledDisabled(string condition, string chemicalName)
+		{
+			if (condition == "enabled")
+			{
+				Report.IsTrue(new NewProduct().PublicNameOptionIsEnabled(chemicalName), "The Public Name option was disabled for ingredient: " + chemicalName + " when it was expected to be enabled", "The Public Name option for ingredient: " + chemicalName + " was enabled as expected");
+			}
+
+			if (condition == "disabled")
+			{
+				Report.IsFalse(new NewProduct().PublicNameOptionIsEnabled(chemicalName), "The Public Name option was enabled for ingredient: " + chemicalName + " when it was expected to be disabled", "The Public Name option for ingredient: " + chemicalName + " was disabled as expected");
+			}
+		}
+
+		[StepDefinition(@"In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient: (.*)")]
+		public void IngredientClickPubliclyDisclosedCheckbox(string chemicalName)
+		{
+			Report.IsTrue(new NewProduct().ClickIngredientPubliclyDisclosedCheckbox(chemicalName), "The Trade Secret checkbox was not clicked successfully", "The Trade Secret checkbox was clicked successfully");
+		}
+
+		[StepDefinition(@"In the Ingredients page I check there are (.*) Publicly Disclosed ingredients in the Total section")]
+		public void IngredientsPubliclyDisclosedTotalIsCorrect(string total)
+		{
+			Report.IsTrue(new NewProduct().PubliclyDisclosedTotalIsCorrect(total), "The Publicly Disclosed summary text did not match the expected: " + total, "The Publicaly Disclosed summary text matched the expected: " + total);
 		}
 	}
 }

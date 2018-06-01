@@ -77,39 +77,31 @@ Given I call Shared 57753 (Create a New Registration via Register New Product (e
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 
+Then I save the product information as: TestCase58098
+
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
 
 Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
 
-#Custom shared
-
 Given I add the following ingredients:
-| ComponentName |
-| Aqua          |
+| ComponentName    | Percent |
+| Aqua             | 50      |
+| Sodium hydroxide | 50      |
 
-#Type component name (eg water)
+Given In the Ingredients Page I select the first Public Name dropdown option for ingredient: Aqua
 
-#Select search result
+Given In the Ingredients Page I select the Trade Secret checkbox for ingredient: Aqua
 
-# 100 % input
+Given In the Ingredients Page I confirm the Public Name option is disabled for ingredient: Aqua
 
-# Select a name in Public Name dropdown
+Given In the Ingredients Page I select the Trade Secret checkbox for ingredient: Aqua
 
-#Confirm public name is populated in dropdown
+Given In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient: Aqua
 
-# Click checkbox for Trade Secret
+Given In the Ingredients page I check there are 1 Publicly Disclosed ingredients in the Total section
 
-# Confirm public name is no longer visible in the dropdown
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 
-# Deselect Trade Secret checkbox
-
-#Click the checkbox for Publically Disclosed
-
-#Confirm the number to the right pf Total Percent changes to match the number of checkboxes that are selected for Publicly Disclosed? You should see 1/3
-
-#Click the WERCSmart logo
-
-# Shared 43758
 
 Scenario: [58078] Energy or Nutritional Bars - RU000618
 
@@ -270,6 +262,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type: Herbal or Dietary Supplement - Continue - Happy Path)
 
+Then I save the product information as: TestCase63325
+
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -294,3 +288,24 @@ Then I do not see the following sections
 | Section                                   |
 | OSHA-compliant Safety Data Sheet, English |
 
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given in the Regulatory Documents to Provide page I click Continue
+
+Then I should see the Additional Documents to Provide Page
+
+Then I see the following sections
+| Section                                           |
+| Upload Physical Data-related Documents (Optional) |
+
+Given In the Additional Documents Page, the document type is: OSHA SDS for section: Upload Physical Data-related Documents (Optional)
+
+Then I see the following sections
+| Section                                           |
+| Toxicity Characteristic Leaching Procedure (TCLP) |
+
+Given I click Continue and should not see an error message
+
+Then I should see the Optional Reports and Documents Available for Purchase Page
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325

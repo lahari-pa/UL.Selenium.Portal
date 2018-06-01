@@ -59,6 +59,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string ErrorMessage()
 		{
+			this.RefreshContainer();
 			return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2).Text;
 		}
 
@@ -188,7 +189,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool ClickContinueNoError()
+		{
+			try
+			{
+				var el = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'continue-button')]"), 2);
+				if (el == null)
+				{
+					return false;
+				}
 
+				el.TryClick();
+				if (!GeneralUtilities.WaitForRefreshToDisappear(el) && ErrorMessage() != null)
+				{
+					Report.Screenshot();
+					return false;
+				}
+
+				GeneralUtilities.Wait_for_load_finish();
+				return true;
+			}
+			catch (Exception)
+			{
+				Report.Error("Page loaded too quickly to check error message.");
+				return true;
+			}
+		}
 
 
 		public string ProductName {
@@ -2539,6 +2565,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool UploadFileForSection(string section, string pdfFilePath)
 		{
 			var el = containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Browse']"), 2);
+			Report.Info("Clicking Browse for document type: " + section);
 			if (el == null)
 			{
 				return false;
@@ -2548,16 +2575,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
-
+			Report.Info("Entering file name with path: " + pdfFilePath);
 			GeneralFunctions.EnterFilename(pdfFilePath);
-
 			int i = 0;
 			while (containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Remove']"), 2) == null && i < 10)
 			{
 				i++;
 				Delay.Seconds(Delay.SpeedFactor * 1);
 			}
-
 			return true;
 		}
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)
@@ -2590,13 +2615,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetDocumentTypeForSection(string section)
 		{
-			var xpath = ".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div[//span[not(contains(@style, 'display: none;'))]]/div[not(contains(@style,'display: none;'))]/span[contains(@data-bind, 'text: Description')]";
-			var labelType = containerElement.FindElement(By.XPath(xpath));
-			if (labelType == null)
+			try
+			{
+				var xpath = ".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div[//span[not(contains(@style, 'display: none;'))]]/div[not(contains(@style,'display: none;'))]/span[contains(@data-bind, 'text: Description')]";
+				var labelType = containerElement.FindElement(By.XPath(xpath));
+				if (labelType == null)
+				{
+					return null;
+				}
+
+				return labelType.Text;
+			}
+			catch (NoSuchElementException)
 			{
 				return null;
 			}
-			return labelType.Text;
 		}
 		/// <summary>
 		/// Product label specifies a dilution ratio option
@@ -3647,6 +3680,127 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return null;
 			}
 			return kellyExpirationDateInput.GetValue();
+		}
+
+		public bool SelectIngredientPublicName(string chemicalName)
+		{
+			var publicNameText = IngredientRow(chemicalName).FindElements(By.XPath(".//td[contains(@class,'inci-name')]//option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+			var publicName = publicNameText[0];
+			var publicNameOption = IngredientRow(chemicalName).FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+			publicNameOption.Select(publicName);
+			if (publicNameOption.SelectedOption() == publicName)
+			{
+				return true;
+			}
+			Report.Failure("The ingredient row for: " + chemicalName + " was found but the Public Name option was not changed");
+			Report.Screenshot();
+			return false;
+		}
+
+		public IWebElement IngredientRow(string chemicalName)
+		{
+			var rows = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2);
+			var matchingRow = rows.FirstOrDefault(x => x.FindElement(By.XPath(".//div[@class = 'chemical-name']"), 2).GetValue().Trim() == chemicalName);
+			if (matchingRow == null)
+			{
+				Report.Failure("The ingredient row was not found by chemical name: " + chemicalName);
+				Report.Screenshot();
+				return null;
+			}
+			return matchingRow;
+		}
+
+		public int IngredientRowCount()
+		{
+			var rows = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//td[@class='component-name']]"), 2);
+			return rows.Count;
+		}
+		public bool ClickIngredientTradeSecretCheckbox(string chemicalName)
+		{
+			var tradeSecretInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
+			if (tradeSecretInput == null)
+			{
+				Report.Failure("Could not find the Trade Secret checkbox");
+				Report.Screenshot();
+				return false;
+			}
+			var ticked = tradeSecretInput.Checked();
+			tradeSecretInput.Click();
+			tradeSecretInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
+			if (tradeSecretInput.Checked() == ticked)
+			{
+				Report.Failure("The Trade Secret checkbox was displayed but it was not successfully selected");
+				Report.Screenshot();
+				return false;
+			}
+			if (ticked == false)
+			{
+				Report.Info("The Trade Secret box has been checked");
+			}
+			else
+			{
+				Report.Info("The Trade Secret box has been unchecked");
+			}
+			return true;
+		}
+
+		public bool ClickIngredientPubliclyDisclosedCheckbox(string chemicalName)
+		{
+			var publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
+			if (publiclyDisclosedInput == null)
+			{
+				Report.Failure("Could not find the Trade Secret checkbox");
+				Report.Screenshot();
+				return false;
+			}
+			var ticked = publiclyDisclosedInput.Checked();
+			publiclyDisclosedInput.Click();
+			publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
+			if (publiclyDisclosedInput.Checked() == ticked)
+			{
+				Report.Failure("The Publicly Disclosed checkbox was displayed but it was not successfully selected");
+				Report.Screenshot();
+				return false;
+			}
+			if (ticked == false)
+			{
+				Report.Info("The Publicly Disclosed box has been checked");
+			}
+			else
+			{
+				Report.Info("The Publicly Disclosed box has been unchecked");
+			}
+			return true;
+		}
+		public bool PublicNameOptionIsEnabled(string chemicalName)
+		{
+			var publicNameOption = IngredientRow(chemicalName).FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+			if (publicNameOption.Enabled)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public bool PubliclyDisclosedTotalIsCorrect(string total)
+		{
+			try
+			{
+				var totalExpected = IngredientRowCount().ToString();
+				var pubDisExpected = total;
+				var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
+				var summaryActual = pubDisSummary.Split(new[] { " / " }, StringSplitOptions.None);
+				Report.Info("Public Disclosure Total was showing as: " + summaryActual[0] + " out of a total " + summaryActual[1] + " ingredients");
+				if (summaryActual[0] == pubDisExpected && summaryActual[1] == totalExpected)
+				{
+					return true;
+				}
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
 		}
 	}
 
