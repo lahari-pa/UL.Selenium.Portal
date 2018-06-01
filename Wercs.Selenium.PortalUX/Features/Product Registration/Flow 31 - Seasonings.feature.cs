@@ -95,8 +95,8 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU00" +
-            "1246")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU001" +
+            "246")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "[64739] Flow 31 - Seasonings")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
@@ -110,37 +110,35 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow31_Seasonings")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mytag")]
-        public virtual void Scenario60738SeasoningsSpicesOrFlavoringForFood_SaltsLiquid_RU001246()
+        public virtual void Scenario60737SeasoningsSpicesOrFlavoringForFood_SaltsSolid_RU001246()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU00" +
-                    "1246", new string[] {
-                        "mytag"});
-#line 16
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU001" +
+                    "246", ((string[])(null)));
+#line 17
 this.ScenarioSetup(scenarioInfo);
-#line 18
+#line 19
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
+#line 22
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 22
+#line 23
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 25
-testRunner.Given("I generate a random UPC number and save as: UPC60738", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 26
-testRunner.Given("I delete all products with UPC Number: saved as UPC60738", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 28
+testRunner.Given("I generate a random UPC number and save as: UPC60737", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 27
+testRunner.Given("I delete all products with UPC Number: saved as UPC60737", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 29
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
+#line 31
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Seasonings, Spices or Flavoring for Food - Salts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 32
-testRunner.Then("I save the product information as: TestCase60738", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 34
-testRunner.Given("I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingred" +
-                    "ients)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 33
+testRunner.Then("I save the product information as: TestCase60737", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 35
+testRunner.Given("I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredi" +
+                    "ents)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
 testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
                     "ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -156,37 +154,133 @@ testRunner.Given("I call Shared Step 60756 (Additional Product Information with 
                         "false",
                         "false",
                         ""});
-#line 38
+#line 39
 testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table1, "Given ");
-#line 44
+#line 45
 testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
+#line 47
 testRunner.Given("I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
                     "Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 48
+#line 49
 testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
-                    "ze Only) for UPC: saved as UPC60738, container type: Aerosol Can and size: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 50
+                    "ze Only) for UPC: saved as UPC60737, container type: Aerosol Can and size: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 51
 testRunner.Given("I call Shared 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\testd" +
                     "oc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 54
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 55
 testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 57
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 58
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
 testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 60
+#line 61
 testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 62
+#line 63
 testRunner.Given("I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
+#line 65
 testRunner.Then("the Subscription Enrollment page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 68
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 69
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 70
+testRunner.Then("I delete the product: TestCase60737", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU00" +
+            "1246")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "[64739] Flow 31 - Seasonings")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow31_Seasonings")]
+        public virtual void Scenario60738SeasoningsSpicesOrFlavoringForFood_SaltsLiquid_RU001246()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU00" +
+                    "1246", ((string[])(null)));
+#line 74
+this.ScenarioSetup(scenarioInfo);
+#line 76
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 79
+testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
+                    "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 80
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 83
+testRunner.Given("I generate a random UPC number and save as: UPC60738", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 84
+testRunner.Given("I delete all products with UPC Number: saved as UPC60738", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 86
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 88
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Seasonings, Spices or Flavoring for Food - Salts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 90
+testRunner.Then("I save the product information as: TestCase60738", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 92
+testRunner.Given("I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingred" +
+                    "ients)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 94
+testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
+                    "ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table2.AddRow(new string[] {
+                        "Butane",
+                        "100",
+                        "false",
+                        "false",
+                        ""});
+#line 96
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table2, "Given ");
+#line 102
+testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 104
+testRunner.Given("I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
+                    "Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 106
+testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
+                    "ze Only) for UPC: saved as UPC60738, container type: Aerosol Can and size: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 108
+testRunner.Given("I call Shared 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\testd" +
+                    "oc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 111
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 112
+testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 115
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 116
+testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
+                    "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 118
+testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 120
+testRunner.Given("I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 122
+testRunner.Then("the Subscription Enrollment page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 126
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 127
 testRunner.Then("I delete the product: TestCase60738", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
