@@ -70,7 +70,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 60747 \(Select Primary Physical Property - Liquid - With Ingredients\)")]
-		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients(int p0)
+		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
@@ -97,10 +97,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStepAdditionalProductInformationWithCountryAndEveryOption()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct myNewProduct = new NewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			if (myNewProduct.CountryofOriginExists())
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
@@ -233,6 +237,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Please select DOT Exceptions if applicable", "173.120(a)(4)");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
+
+		[StepDefinition(@"I call Shared Step 57980 \(Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path\)")]
+		public void GivenICallSharedStepTransportationDetails_YesOnlyOption_SelectIMDGFullyRegulated_Continue_HappyPath()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is Regulated for Transport", "Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "IMDG");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "Shipping fully regulated");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+		}
+
+		[Given(@"I call Shared Step 57794 \(Confirm VOC \(SCAQMD\) step title, Confirm ACP question shown  - Select No - Happy Path\)")]
+		public void GivenICallSharedStepConfirmVOCSCAQMDStepTitleConfirmACPQuestionShown_SelectNo_HappyPath()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
+		}
+
+
 
 		[StepDefinition(@"I call Shared 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: (.*)")]
 		public void GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath(string retailer)
@@ -396,6 +419,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
+		[Given(@"I call Shared Step 57111 \(Enter Product Data for Physical State - Aerosol only\)")]
+		public void GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnly()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			// Primary Physical State is Aerosol which is the only option available
+			TestReport.StartStep("I should only see the following options for Primary Physical State: Aerosol");
+			TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				"State"});
+			produtTable.AddRow(new string[] {
+				"Aerosol"});
+			TestReport.StartStep("I set the Secondary Physical State field to: Liquid spray");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid spray");
+			TestReport.StartStep("I check the 'I do not have exact' checkbox for field: pH");
+			MyNewProduct.SectExatcDataNotKnown("pH");
+			TestReport.StartStep("I set the pH field to: 7.1 - 9.9");
+			MyNewProduct.SetTheSectionOptionTo("pH", "7.1 - 9.9");
+			TestReport.StartStep("If Section: Select the best Water Solubility description is visible, I select the first option");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
+			TestReport.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+
+
 		[StepDefinition(@"I call Shared 57528 \(Product Characteristics - Aerosol Only - add data - Continue - Happy Path\)")]
 		public void ICallSharedProductCharacteristics_AerosolOnly_AddData_Continue_HappyPath()
 		{
@@ -468,6 +517,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenIShouldSeeXPage("Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)");
 			TestReport.StartStep("I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. field to: No");
 			MyNewProduct.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
+		}
+
+		[Given(@"I call Shared Step 60552 \(VOC - AERO Question \(ozone\) enter value - Click Continue - Happy Path\): (.*)")]
+		public void GivenICallSharedStepVOC_AEROQuestionOzoneEnterValue_ClickContinue_HappyPath(string value)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I Enter a value for the 'VOC content in grams ozone per gram' question: " + value);
+			MyNewProduct.SetTheSectionOptionTo("VOC content in grams ozone per gram", value);
+			TestReport.StartStep("In the Volatile Organic Compounds (VOC) page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC)");
 		}
 
 		[StepDefinition(@"I call Shared 60631 \(VOC - HVOC and MVOC - add values - Continue - Happy Path\)")]
@@ -612,6 +672,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the Transportation Details 1 page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
+
+		[StepDefinition(@"I call Shared Step 65705 \(Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue\)")]
+		public void GivenICallSharedStepTransportation_DOTUNStep_EnterUNSelectAerosolsNoneAddTechnicalNameClickContinue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the UN Number field to: UN1950");
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
+			Delay.Seconds(2);
+			TestReport.StartStep("I select 'Aerosols' option in section: Proper Shipping Name");
+			MyNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Aerosols");
+			Delay.Seconds(2);
+			TestReport.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
+			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
+			Delay.Seconds(2);
+			TestReport.StartStep("I select '2.1' in section: Hazard Class (select)");
+			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2.1");
+			TestReport.StartStep("I select 'None' in section: Packing Group (select)");
+			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "None");
+			TestReport.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
+		}
+
 
 		[StepDefinition(
 			@"I call Shared Step 57728 \(U.S. Department of Transportation \(DOT\) Classification - Enter UN1950 \(Aerosol\) - Select data - Continue - Happy Path\)")]

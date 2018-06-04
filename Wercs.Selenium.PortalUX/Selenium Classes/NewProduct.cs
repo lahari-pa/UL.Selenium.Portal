@@ -117,6 +117,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool CountryofOriginExists()
+		{
+			IWebElement myLabel =
+				containerElement.FindElement(By.XPath(".//label[text()='Select the product's Country of Origin']"), 2);
+
+			if (myLabel == null)
+			{
+				Report.Info("'Select the product's Country of Origin' Not Available");
+				return false;
+			}
+			Report.Info("'Select the product's Country of Origin' Available");
+			return true;
+		}
+
 		//Valid tab names: Product Type, Product Characteristics, Recipient and UPC Details, Review and Submit
 		public bool WaitForTab(string tabName, int secondsToWait = 30)
 		{
@@ -3197,13 +3211,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			try
 			{
 				var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
-				            @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
-				            @"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
-				            @"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
-				            @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+							@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
+							@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
+							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 				var el = containerElement.FindElement(By.XPath(xPath), 2);
-				return (el!=null && el.Displayed);
+				return (el != null && el.Displayed);
 			}
 			catch (Exception e)
 			{
