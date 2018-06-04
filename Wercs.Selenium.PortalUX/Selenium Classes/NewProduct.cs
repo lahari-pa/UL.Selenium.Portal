@@ -1785,6 +1785,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					MatchedEntry = Matches.FirstOrDefault();
 					ingredient.CASNumber = MatchedEntry.FindElement(By.XPath(".//span[2]"), 2).GetValue();
 					ingredient.ComponentName = MatchedEntry.FindElement(By.XPath(".//span[1]"), 2).GetValue();
+					Report.Info("Clicking result in smart search with CAS number: " + MatchedEntry.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
 				}
 				else
 				{
@@ -1793,6 +1794,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						// No Component name was specified, so we just take the first value with a matching CAS Number!
 						MatchedEntry = MatchingCasValues.FirstOrDefault();
+						Report.Info("Clicking result in smart search with CAS number: " + MatchedEntry.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
 					}
 					else
 					{
@@ -1802,11 +1804,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						{
 							// No match was found, so just take the first entry!
 							MatchedEntry = MatchingCasValues.FirstOrDefault();
+							Report.Info("Clicking result in smart search with CAS number: " + MatchedEntry.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
 						}
 						else
 						{
 							// Matching entry was found, so taking this instead!
 							MatchedEntry = matchingNames;
+							Report.Info("Clicking result in smart search with CAS number: " + MatchedEntry.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
 						}
 					}
 				}
