@@ -1340,6 +1340,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public List<string> GetUPCHeaders()
+		{
+			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var rList = new List<string>();
+			if (container != null)
+			{
+				rList = container.FindElement(By.XPath(".//th[@class='col-xs-5']")).GetValue().Replace("\r\n", "|").Split('|').Select(x => x.Trim()).Where(x => x != "UPC Number").ToList();
+			}
+			return rList;
+		}
 		public bool CommentsAreaShowing()
 		{
 			var el = containerElement.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);

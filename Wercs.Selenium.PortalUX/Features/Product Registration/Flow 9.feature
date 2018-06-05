@@ -269,7 +269,7 @@ Given I call Shared Step 59680 (Additional Product Information - US only, No Chi
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Vitamin E
 
-Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
@@ -368,11 +368,11 @@ Given I delete all products with UPC Number: saved as UPC58075
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Nutritional Supplement for Infants - Liquid - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplement for Infants - Liquid
 
 Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
-Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
+Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -381,11 +381,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Citric acid   | 25      | false               | false       |            |
 | Vitamin E     | 5       | false               | false       |            |
 
-#Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+# Added in 57637 to make test run. Consult Aaron (WERCS)
 
-# Removed above step and added in 57637 to make test run. Ask Wercs testers
-
-Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
 Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 

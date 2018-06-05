@@ -203,6 +203,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 13.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 16.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 16.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 22.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -379,6 +384,10 @@
     <None Include="Features\Product Registration\Flow 13.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 13.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 16.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 16.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 22.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

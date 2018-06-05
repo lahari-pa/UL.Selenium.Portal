@@ -2355,6 +2355,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Report.IsTrue(new NewProduct().PubliclyDisclosedTotalIsCorrect(total), "The Publicly Disclosed summary text did not match the expected: " + total, "The Publicaly Disclosed summary text matched the expected: " + total);
 		}
+
+		[StepDefinition(@"I confirm 'Quantity' is visible in the UPC header")]
+		public void ConfirmQuantityIsVisibleInUPCHeader()
+		{
+			Report.IsTrue(new NewProduct().GetUPCHeaders().Contains("Quantity"), "The text 'Quantity' did not appear in the UPC header on the Universal Product Code page", "The text 'Quantity' appeared in the UPC header on the Universal Product Code page as expected");
+		}
 	}
 }
 
