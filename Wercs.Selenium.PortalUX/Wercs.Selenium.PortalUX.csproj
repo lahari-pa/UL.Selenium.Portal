@@ -107,16 +107,13 @@
       <HintPath>packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ResourcePool, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.2.0.9\lib\net45\ResourcePool.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.2.1.2\lib\net45\ResourcePool.dll</HintPath>
     </Reference>
     <Reference Include="SafewareReportingPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.2.0.9\lib\net45\SafewareReportingPlugin.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.2.1.2\lib\net45\SafewareReportingPlugin.dll</HintPath>
     </Reference>
     <Reference Include="SafewareSeleniumUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.2.0.9\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.2.1.2\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -138,8 +135,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.2.0.9\lib\net45\TReVor.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\Safeware.SeleniumUtilities.2.1.2\lib\net45\TReVor.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>packages\Selenium.WebDriver.3.5.2\lib\net40\WebDriver.dll</HintPath>
@@ -222,6 +218,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 29 - Beverage.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Product Registration\Flow 30 - Grocery.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 30 - Grocery.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Product Registration\Flow 31 - Seasonings.feature.cs">
       <AutoGen>True</AutoGen>
@@ -401,6 +402,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 29 - Beverage.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Product Registration\Flow 30 - Grocery.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 30 - Grocery.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Product Registration\Flow 31 - Seasonings.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 31 - Seasonings.feature.cs</LastGenOutput>
@@ -453,8 +458,23 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Content Include="Resources\chromedriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\geckodriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\IEDriverServer.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MicrosoftWebDriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ResourceManager.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

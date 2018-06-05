@@ -1803,6 +1803,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set the input to " + option + " in section: " + section);
 		}
 
+
+
 		[StepDefinition(@"I (see|only see|do not see) the following sections")]
 		public void CheckDisplayedSections(string condition, Table sections)
 		{

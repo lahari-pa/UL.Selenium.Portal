@@ -1,0 +1,170 @@
+﻿@LandingPage
+@Login
+@Homepage
+@Signup
+@wercsmart
+@NewProduct
+@ProductGrid
+@DataSummarySheet
+@wercsmart
+@RetailPartners
+@SubEnrollment
+@run_FLow30_Grocery
+
+Feature: [64735] Flow 30 - Grocery
+
+Scenario: [60725] Baked Goods, Crackers - RU001449
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
+Given I generate a random UPC number and save as: UPC60725
+Given I delete all products with UPC Number: saved as UPC60725
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Baked Goods, Crackers
+
+Then I save the product information as: TestCase60725
+
+Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
+
+Given I call shared step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
+
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+
+#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
+
+Given I call Shared 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60725, container type: Aerosol Can and size: 20
+
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+
+Given I call Shared 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+Then in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+
+Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+
+Then the Subscription Enrollment page should load
+
+#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
+#Given I call Shared 54796 (Purchase Summary)
+Given I navigate to the home page
+Then I delete the product: TestCase60725
+
+
+Scenario: [60724] Condiments, Sauces - RU001454
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
+Given I generate a random UPC number and save as: UPC60724
+Given I delete all products with UPC Number: saved as UPC60724
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condiments, Sauces
+
+Then I save the product information as: TestCase60724
+
+Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
+
+Given I call shared step 69687 (Additional Product Information - Country and Private Label or Brand - No)
+
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+
+#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
+
+Given I call Shared 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Aerosol Can and size: 20
+
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+
+Given I call Shared 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+Then in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+
+Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+
+Then the Subscription Enrollment page should load
+
+#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
+#Given I call Shared 54796 (Purchase Summary)
+Given I navigate to the home page
+Then I delete the product: TestCase60724
+
+
+Scenario: [60723] Jelly, Jam or Preserves - RU001456
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
+Given I generate a random UPC number and save as: UPC60723
+Given I delete all products with UPC Number: saved as UPC60723
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Jelly, Jam or Preserves
+
+Then I save the product information as: TestCase60723
+
+Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
+
+Given I call shared step 69687 (Additional Product Information - Country and Private Label or Brand - No)
+
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+
+#Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
+
+Given I call Shared 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Aerosol Can and size: 20
+
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+
+Given I call Shared 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+Then in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+
+Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+
+Then the Subscription Enrollment page should load
+
+#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
+#Given I call Shared 54796 (Purchase Summary)
+Given I navigate to the home page
+Then I delete the product: TestCase60723
+

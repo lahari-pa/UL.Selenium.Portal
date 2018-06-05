@@ -69,21 +69,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared Step 60747 \(Select Primary Physical Property - Liquid - With Ingredients\)")]
-		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
+
+		[StepDefinition(@"I call Shared Step 60741 \(Select Primary Physical Property - Solid - With Ingredients\)")]
+		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Solid_WithIngredients()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
-			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
-			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
-			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
-			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
-			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
-			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
-			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
-			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Flammable 1C");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Cream");
+			NewProduct MyNewProduct = new NewProduct();
+			if (MyNewProduct.OptionExists("When mixed with an equal amount of water"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
+			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains", "Dairy or products containing dairy or milk");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
@@ -93,8 +92,73 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(@"I call Shared Step 60747 \(Select Primary Physical Property - Liquid - With Ingredients\)")]
+		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+//MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
+			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
+
+			NewProduct MyNewProduct = new NewProduct();
+			if (MyNewProduct.OptionExists("Flash Point (in Celsius)", "Flammable 1C"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Flammable 1C");
+			}
+			else
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Not Tested/Unknown");
+			}
+
+			if (MyNewProduct.OptionExists("Select the best Water Solubility description"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			}
+				
+			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains", "Dairy or products containing dairy or milk");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following sweeteners", "None of the Above");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following artificial dye(s)", "None of the Above");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call shared step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
+		public void GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call shared step 69687 \(Additional Product Information - Country and Private Label or Brand - No\)")]
+		public void GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+
+
+
 		[StepDefinition(@"I call Shared Step 60756 \(Additional Product Information with Country and every option\)")]
-		public void GivenICallSharedStepAdditionalProductInformationWithCountryAndEveryOption()
+		public void GivenICallSharedStep60756AdditionalProductInformationWithCountryAndEveryOption()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			NewProduct myNewProduct = new NewProduct();
@@ -221,6 +285,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
 
+		[Given(@"I call Shared 69682 \(Retailer Association - Add Private Label Information\) and select the retailer: (.*) and enter the name: (.*)")]
+		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformation(string retailer, string name)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: " + retailer);
+			MyStepsNewProduct.ThenISelectTheRetailer_InTheWindow(retailer);
+			TestReport.StartStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			NewProduct MyNewProduct = new NewProduct();
+			MyNewProduct.SetFullNameOfProductForRetailer(retailer, name);
+			TestReport.StartStep("In the Retailer page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
+		}
+
 		[StepDefinition(@"I call Shared Step 57980 \(Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path\)")]
 		public void GivenICallSharedStepTransportationDetails_YesOnlyOption_SelectIMDGFullyRegulated_Continue_HappyPath()
 		{
@@ -292,6 +371,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
+
+		[Given(@"I call Shared 60715 \(Additional Documents to Provide - OSHA SDS - only\) : (.*)")]
+		public void GivenICall60715SharedAdditionalDocumentsToProvide_OSHASDS_OnlyCDependenciesWERCSmartTestdoc_Pdf(string docPath)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.UploadPDFFileSectionAndType("OSHA SDS","Upload Physical", docPath);
+			TestReport.StartStep(@"in the New Product page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 
 		[StepDefinition(@"I call Shared 60567 \(Upload Product Label only\) for section: (.*)")]
 		public void GivenICallSharedUploadProductLabelOnlySectionSpecific(string section)

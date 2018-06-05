@@ -437,9 +437,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 					var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
 					Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
 					var FirstRow = ExcelUtils.Excel_GetRow(0);
-					Report.Info("First row contained: '" + string.Join("', '", FirstRow) + "'");
+					Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
 					bool Data = false;
-					for (int i = 1; i <= ExcelUtils.Excel_GetNoRows(); i++)
+					for (int i = 1; i < ExcelUtils.Excel_GetNoRows(); i++)
 					{
 						var RowData = ExcelUtils.Excel_GetRow(i);
 						Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
