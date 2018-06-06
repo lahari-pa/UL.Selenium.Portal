@@ -302,6 +302,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selSelectRetailers.Wait_for_load(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
 		}
 
+		[StepDefinition(@"I confirm that (.*) is listed as a retailer on the Select Retailers pop up")]
+		public void ThenIConfirmThatXIsListedAsARetailerOnTheSelectRetailersPopUp(string retailer)
+		{
+			Report.IsTrue(new SelectRetailers().GetListOfRetailers().Contains(retailer),
+				"Retailer is not listed: " + retailer, "Retailer is listed as expected: " + retailer);
+		}
+
+
 
 		[StepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
 		public void ThenISelectTheRetailer_InTheWindow(string retailer)

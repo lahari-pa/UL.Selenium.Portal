@@ -221,3 +221,38 @@ Given I navigate to the home page
 Then I delete the product: TestCase60722
 
 
+Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens and Harbor Freight
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
+Given I generate a random UPC number and save as: UPC73041
+Given I delete all products with UPC Number: saved as UPC73041
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cereal
+
+Then I save the product information as: TestCase73041
+
+Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
+
+Given I call shared step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
+
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+
+Then In the 'Select retailers' window I should not see the following retailers:
+| Retailer |
+| Walgreen |
+
+Then In the 'Select retailers' window I should see the following retailers:
+| Retailer             |
+| Harbor Freight Tools |  
+
+Given I navigate to the home page
+Then I delete the product: TestCase73041
+
+

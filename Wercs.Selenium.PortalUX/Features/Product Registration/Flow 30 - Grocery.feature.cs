@@ -413,6 +413,75 @@ testRunner.Then("I delete the product: TestCase60722", ((string)(null)), ((TechT
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[73041] Cereals - RU001448 - Retailers associated Walgreens and Harbor Freight")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "[64735] Flow 30 - Grocery")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow30_Grocery")]
+        public virtual void _73041Cereals_RU001448_RetailersAssociatedWalgreensAndHarborFreight()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73041] Cereals - RU001448 - Retailers associated Walgreens and Harbor Freight", ((string[])(null)));
+#line 224
+this.ScenarioSetup(scenarioInfo);
+#line 226
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 228
+testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
+                    "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 229
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 232
+testRunner.Given("I generate a random UPC number and save as: UPC73041", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 233
+testRunner.Given("I delete all products with UPC Number: saved as UPC73041", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 235
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 237
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Cereal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 239
+testRunner.Then("I save the product information as: TestCase73041", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 241
+testRunner.Given("I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredi" +
+                    "ents)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 243
+testRunner.Given("I call shared step 60726 (Additional Product Information - Country and Private La" +
+                    "bel or Brand - Yes)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 245
+testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Retailer"});
+            table1.AddRow(new string[] {
+                        "Walgreen"});
+#line 247
+testRunner.Then("In the \'Select retailers\' window I should not see the following retailers:", ((string)(null)), table1, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Retailer"});
+            table2.AddRow(new string[] {
+                        "Harbor Freight Tools"});
+#line 251
+testRunner.Then("In the \'Select retailers\' window I should see the following retailers:", ((string)(null)), table2, "Then ");
+#line 255
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 256
+testRunner.Then("I delete the product: TestCase73041", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
