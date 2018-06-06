@@ -319,6 +319,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
 		}
 
+		[Given(@"In the select retailers window I click cancel")]
+		public void GivenInTheSelectRetailersWindowIClickCancel()
+		{
+			var selectRetailers = new SelectRetailers();
+			selectRetailers.ClickDone();
+		}
+
+
 		[StepDefinition(@"In the 'Select retailers' window I (should|should not) see the following retailers:")]
 		public void CheckingCorrectRetailersAreShowing(string should, Table expected)
 		{

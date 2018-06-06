@@ -234,7 +234,7 @@ Given I delete all products with UPC Number: saved as UPC73041
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cereal
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cereals
 
 Then I save the product information as: TestCase73041
 
@@ -244,14 +244,12 @@ Given I call shared step 60726 (Additional Product Information - Country and Pri
 
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
-Then In the 'Select retailers' window I should not see the following retailers:
-| Retailer |
-| Walgreen |
-
 Then In the 'Select retailers' window I should see the following retailers:
 | Retailer             |
-| Harbor Freight Tools |  
+| Walgreens            |
+| Harbor Freight Tools |
 
+Given In the select retailers window I click cancel
 Given I navigate to the home page
 Then I delete the product: TestCase73041
 

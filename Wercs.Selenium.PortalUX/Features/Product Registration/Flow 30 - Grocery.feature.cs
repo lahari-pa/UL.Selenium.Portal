@@ -450,7 +450,7 @@ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Regist
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 237
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-                    "duct): Cereal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "duct): Cereals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 239
 testRunner.Then("I save the product information as: TestCase73041", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 241
@@ -465,19 +465,16 @@ testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 6
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
             table1.AddRow(new string[] {
-                        "Walgreen"});
-#line 247
-testRunner.Then("In the \'Select retailers\' window I should not see the following retailers:", ((string)(null)), table1, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Retailer"});
-            table2.AddRow(new string[] {
+                        "Walgreens"});
+            table1.AddRow(new string[] {
                         "Harbor Freight Tools"});
-#line 251
-testRunner.Then("In the \'Select retailers\' window I should see the following retailers:", ((string)(null)), table2, "Then ");
-#line 255
+#line 247
+testRunner.Then("In the \'Select retailers\' window I should see the following retailers:", ((string)(null)), table1, "Then ");
+#line 252
+testRunner.Given("In the select retailers window I click cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 253
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 256
+#line 254
 testRunner.Then("I delete the product: TestCase73041", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
