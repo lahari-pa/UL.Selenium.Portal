@@ -1,0 +1,60 @@
+﻿@LandingPage
+@Login
+@Homepage
+@Signup
+@wercsmart
+@NewProduct
+@ProductGrid
+@DataSummarySheet
+@wercsmart
+@RetailPartners
+@run_Flow17
+
+Feature: Flow 17
+
+Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I generate a random UPC number and save as: UPC60017
+
+Given I delete all products with UPC Number: saved as UPC60017
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57500 (The Product- Enter name, select product type: Lithium Primary/Metal Batteries - Continue - Happy Path)
+
+Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+
+Given I call Shared Step 60026 (Additional Product Information - US - Battery - No to all)
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Lithium perchlorate | 50      | false               | false       |            |
+| manganese dioxide   | 50      | false               | false       |            |
+
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step temp (Lithium Battery Characteristics - any data - Happy path)
+
+Given I call Shared Step 60096 (Lithium Battery Transportation)
+
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+
+Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC60017 with container type: Plastic Container size: 24.0 and quantity: 100
+
+Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Gloves                        | 800                      | 0.900                   | 9.989     | Black      | Acidic | No data available | 9.229                 |
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60017. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)

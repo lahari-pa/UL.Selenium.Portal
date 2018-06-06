@@ -30,6 +30,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		//Duplicate with 57500
 		[StepDefinition(@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type)
 		{
@@ -97,7 +98,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
-//MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
+			//MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
@@ -121,7 +122,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
 			}
-				
+
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains", "Dairy or products containing dairy or milk");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
@@ -324,6 +325,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var selSelectRetailers = new SelectRetailers();
+			if (!selSelectRetailers.Wait_for_load(10))
+			{
+				Report.Warn("The Select Retailers page was not loaded on entering the Retailer page");
+				// Click Add Retailers Button
+			}
 			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: " + retailer);
 			MyStepsNewProduct.ThenISelectTheRetailer_InTheWindow(retailer);
 			TestReport.StartStep("I should see the Retailer Page");
@@ -377,7 +384,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.UploadPDFFileSectionAndType("OSHA SDS","Upload Physical", docPath);
+			MyStepsNewProduct.UploadPDFFileSectionAndType("OSHA SDS", "Upload Physical", docPath);
 			TestReport.StartStep(@"in the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -1189,7 +1196,68 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I confirm the Manufacturer column is visible");
 			// Confirm Manufacturer column is visble.
 			// Close new tab
+		}
 
+		[StepDefinition(@"I call Shared Step 60026 \(Additional Product Information - US - Battery - No to all\)")]
+		public void SharedAdditionalProductInformation_US_Battery_NoToAll()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("Select countries the product may be sold in should be showing the value: United States");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			TestReport.StartStep("I set the Select one option below field to: Battery is packaged for Retail Sale");
+			MyNewProductSteps.SetTheSectionOptionTo("Select one option below", "Battery is packaged for Retail Sale");
+			TestReport.StartStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step temp \(Lithium Battery Characteristics - any data - Happy path\)")]
+		public void SharedLithiumBatteryCharacteristics_AnyData()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Lithium Battery Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Lithium Battery Characteristics");
+			TestReport.StartStep("I set the Type of Battery field to: Battery");
+			MyNewProductSteps.SetTheSectionOptionTo("Type of Battery", "Battery");
+			TestReport.StartStep("I set the Weight of Lithium in grams (single unit) field to: 0.1");
+			MyNewProductSteps.SetTheSectionOptionTo("Weight of Lithium in grams (single unit)", "0.1");
+			TestReport.StartStep("I set the Weight of the single unit (grams) field to: 10");
+			MyNewProductSteps.SetTheSectionOptionTo("Weight of the single unit (grams)", "10");
+			TestReport.StartStep("I set the Battery meets UN 38.3 testing requirements field to: Yes");
+			MyNewProductSteps.SetTheSectionOptionTo("Battery meets ", "Yes");
+			TestReport.StartStep("I set the Battery is manufactured under a Quality Management Program outlined in IATA 3.9.2.6 field to: YES");
+			MyNewProductSteps.SetTheSectionOptionTo("Battery is manufactured under a Quality Management Program outlined in ", "YES");
+			TestReport.StartStep("In the Lithium Battery Characteristics page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Characteristics");
+		}
+
+		[StepDefinition(@"I call Shared Step 60096 \(Lithium Battery Transportation\)")]
+		public void SharedLithiumBatteryTransportation()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Lithium Battery Transportation Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Lithium Battery Transportation");
+			TestReport.StartStep("I set the For U.S. Department of Transportation (DOT), indicate the transport classification field to: Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail");
+			MyNewProductSteps.SetTheSectionOptionTo("For U.S. Department of Transportation (DOT), indicate the transport classification", "Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail");
+			TestReport.StartStep("I set the For Marine transport (IMDG), indicate the classification field to: Fully-regulated dangerous goods: UN3090, Lithium metal batteries, 9");
+			MyNewProductSteps.SetTheSectionOptionTo("For Marine transport (IMDG), indicate the classification", "Fully-regulated dangerous goods: UN3090, Lithium metal batteries, 9");
+			TestReport.StartStep("I set the For Air transport (IATA), indicate the classification field to: Section IB");
+			MyNewProductSteps.SetTheSectionOptionTo("For Air transport (IATA), indicate the classification", "Section IB");
+			//For Canada's Transportation of Dangerous Goods (TDG), indicate the classification
+			TestReport.StartStep("I set the For Canada's Transportation of Dangerous Goods (TDG), indicate the classification field to: None of the above/Not intended for shipment in Canada");
+			MyNewProductSteps.SetTheSectionOptionTo("For Canada's Transportation of Dangerous Goods (TDG), indicate the classification", "None of the above/Not intended for shipment in Canada");
+			TestReport.StartStep("In the Lithium Battery Transportation page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Transportation");
 		}
 	}
 }

@@ -81,7 +81,7 @@ Then I save the product information as: TestCase58098
 
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
 
-Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
+Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
 
 Given I add the following ingredients:
 | ComponentName    | Percent |
@@ -417,8 +417,6 @@ Given I call Shared 57753 (Create a New Registration via Register New Product (e
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type: Nutritional Supplements for Domesticated Animals - Continue - Happy Path)
 
-#Product characteristics? Added in the below step for now. Contact WERCS testers
-
 Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
 Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
@@ -429,9 +427,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Vitamin A     | 10      | false               | false       |            |
 | Citric acid   | 25      | false               | false       |            |
 
-#Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-
-# Removed above step and added in 57637 to make test run. Ask Wercs testers
+# Added in 57637 to make test run. Ask Wercs testers
 
 Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
