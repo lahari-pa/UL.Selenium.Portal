@@ -177,14 +177,14 @@ Given If I see the retail partners page I set all data consent tiers to true for
 Then The home screen should load
 
 # ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
-Given I generate a random UPC number and save as: UPC60723
-Given I delete all products with UPC Number: saved as UPC60723
+Given I generate a random UPC number and save as: UPC60722
+Given I delete all products with UPC Number: saved as UPC60722
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Jelly, Jam or Preserves
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nut Butters
 
-Then I save the product information as: TestCase60723
+Then I save the product information as: TestCase60722
 
 Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
 
@@ -196,7 +196,7 @@ Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Aerosol Can and size: 20
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60722, container type: Aerosol Can and size: 20
 
 Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
@@ -218,6 +218,6 @@ Then the Subscription Enrollment page should load
 #CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
 #Given I call Shared 54796 (Purchase Summary)
 Given I navigate to the home page
-Then I delete the product: TestCase60723
+Then I delete the product: TestCase60722
 
 
