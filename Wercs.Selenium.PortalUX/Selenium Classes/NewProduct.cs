@@ -1228,11 +1228,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				var dropDownResults = this.containerElement.FindElements(By.XPath("//span[contains(@class,'select2-container')]//ul/li"), 2);
 				var ddlEl = dropDownResults.FirstOrDefault(x => x.Text.Trim() == value);
+				// Check again ignoring the case
 				if (ddlEl == null)
 				{
-					return;
+					ddlEl = dropDownResults.FirstOrDefault(x => x.Text.Trim().ToLower() == value.ToLower());
+					if (ddlEl == null)
+					{
+						return;
+					}
 				}
-
 				ddlEl.Click();
 			}
 		}
@@ -1849,8 +1853,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Delay.Seconds(Delay.SpeedFactor * 1);
 					Matches = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 				}
-
-				var MatchingNameValue = Matches.FirstOrDefault(x => x.FindElement(By.XPath(".//span[@class='component-name']"), 2).GetValue().Trim() == ingredient.ComponentName.Trim());
+				var MatchingNameValue = Matches.FirstOrDefault(x => x.FindElement(By.XPath(".//span[@class='component-name']"), 2).GetValue().Trim().ToLower() == ingredient.ComponentName.Trim().ToLower());
 
 				if (MatchingNameValue == null)
 				{
@@ -1858,16 +1861,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					MatchedEntry = Matches.FirstOrDefault();
 					ingredient.CASNumber = MatchedEntry.FindElement(By.XPath(".//span[2]"), 2).GetValue();
 					ingredient.ComponentName = MatchedEntry.FindElement(By.XPath(".//span[1]"), 2).GetValue();
+					Report.Info("There was no match on name, so selected the first search result with name: " + ingredient.ComponentName + " and CAS number: " + ingredient.CASNumber);
 				}
 				else
 				{
 					MatchedEntry = MatchingNameValue;
 					// We have found a match by the component name! So we should update our CAS Number field
 					ingredient.CASNumber = MatchingNameValue.FindElement(By.XPath(".//span[2]"), 2).GetValue();
+					Report.Info("Selecting the first search result which matched on chemical name: " + ingredient.ComponentName + " with CAS: " + ingredient.CASNumber);
 				}
 			}
-
-
 
 			// So now we simple need to try and click this element! Easy right...
 
@@ -3242,10 +3245,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool OptionExists(string section, string value)
 		{
 			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
-			            @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
-			            @"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
-			            @"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
-			            @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
+						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			var el = containerElement.FindElement(By.XPath(xPath), 2);
 
