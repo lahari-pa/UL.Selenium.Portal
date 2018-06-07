@@ -204,10 +204,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 13.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 15.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 15.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Product Registration\Flow 17.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 17.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Product Registration\Flow 18 tests.feature.cs">
+      <DependentUpon>Flow 18 tests.feature</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 18.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Flow 18.feature</DependentUpon>
+      <DependentUpon>Flow 16.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Product Registration\Flow 22.feature.cs">
       <AutoGen>True</AutoGen>
@@ -224,10 +239,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 25.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 28 - Auto Parts.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 28 - Auto Parts.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 29 - Beverage.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 29 - Beverage.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Product Registration\Flow 30 - Grocery.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 30 - Grocery.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Product Registration\Flow 31 - Seasonings.feature.cs">
       <AutoGen>True</AutoGen>
@@ -395,9 +420,21 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 13.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Product Registration\Flow 18.feature">
+    <None Include="Features\Product Registration\Flow 15.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 15.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 16.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 18.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 17.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 17.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 18 tests.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 18 tests.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 22.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -411,9 +448,17 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 25.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Product Registration\Flow 28 - Auto Parts.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 28 - Auto Parts.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Product Registration\Flow 29 - Beverage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 29 - Beverage.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 30 - Grocery.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 30 - Grocery.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 31 - Seasonings.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

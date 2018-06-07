@@ -46,7 +46,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"the Subscription Enrollment page should load")]
+		[StepDefinition(@"the Subscription Enrollment page should load")]
 		public void ThenTheSubscriptionEnrollmentPageShouldLoad()
 		{
 			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
@@ -61,7 +61,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
 			var actualHeader = MySE.Get_Page_Header().Trim();
 			Report.IsTrue(actualHeader == expectedHeader, "Expected: " + expectedHeader + " but got: " + actualHeader,
-				"Page header is showing as expected: "+actualHeader);
+				"Page header is showing as expected: " + actualHeader);
 		}
 
 		[Then(@"In the Subscription Enrollment screen I confirm that I see the following subheadings:")]
@@ -94,7 +94,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			foreach (Plan thisPlan in allPlans)
 			{
-				Report.Info(thisPlan.Plan_Type + " " + thisPlan.Plan_Name + " " + thisPlan.Plan_Sub + " "+ thisPlan.Best_Value.ToString() + " " + thisPlan.Selected);
+				Report.Info(thisPlan.Plan_Type + " " + thisPlan.Plan_Name + " " + thisPlan.Plan_Sub + " " + thisPlan.Best_Value.ToString() + " " + thisPlan.Selected);
 			}
 
 			//| Plan Type | Plan Name | Plan Subtext | Best Value | Selected |
@@ -102,7 +102,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Info("Checking on plan: " + thisRow["Plan Name"]);
 				Plan MatchingPlan =
-					allPlans.FirstOrDefault(x => x.Plan_Type == thisRow["Plan Type"] && x.Plan_Name == thisRow["Plan Name"]&& x.Plan_Sub== thisRow["Plan Subtext"] && x.Best_Value == (thisRow["Best Value"].ToLower()=="true") && x.Selected == (thisRow["Selected"].ToLower() == "true"));
+					allPlans.FirstOrDefault(x => x.Plan_Type == thisRow["Plan Type"] && x.Plan_Name == thisRow["Plan Name"] && x.Plan_Sub == thisRow["Plan Subtext"] && x.Best_Value == (thisRow["Best Value"].ToLower() == "true") && x.Selected == (thisRow["Selected"].ToLower() == "true"));
 				Report.IsTrue(MatchingPlan != null, "No matching item has been found for plan name: " + thisRow["Plan Name"],
 					"Plan: " + thisRow["Plan Name"] + " has matched as expected.");
 			}
@@ -138,7 +138,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenClickingOnHyperlinkOpensAgencyServiceAgreementPopup(string subHeading, string link)
 		{
 			SubscriptionEnrollment MySE = new SubscriptionEnrollment();
-				MySE.Click_Extra_Text_Link(subHeading,link);
+			MySE.Click_Extra_Text_Link(subHeading, link);
 			AgencyServiceAgreementDlg MyASA = new AgencyServiceAgreementDlg();
 
 			Report.IsTrue(MyASA.Wait_for_load(30), "Agency Service Agreement has not appeared as expected",
@@ -169,7 +169,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (Report.IsTrue(new SubscriptionEnrollment().SetSection(section, option), "Failed to set section: " + section + " to option: " + option, "Successfully set section: " + section + " to option: " + option))
 			{
 				var actualCost = new SubscriptionEnrollment().GetEstimatedAnualCost();
-				Report.IsTrue(actualCost.Trim() == cost.Trim(), string.Format("Expected to see a total cost of: {0}, but found: {1}!", cost,actualCost), string.Format("Total cost was showing {0}, as expected", cost));
+				Report.IsTrue(actualCost.Trim() == cost.Trim(), string.Format("Expected to see a total cost of: {0}, but found: {1}!", cost, actualCost), string.Format("Total cost was showing {0}, as expected", cost));
 			}
 		}
 
@@ -206,7 +206,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenIShouldSeeProceedButtonDisabled(string enabled)
 		{
 			bool expectedEnabled = enabled == "enabled";
-			Report.IsTrue(new SubscriptionEnrollment().Proceed_button_enabled() == expectedEnabled, string.Format("Proceed button is {0}", expectedEnabled ? "disabled":"enabled"), "Proceed button is " + enabled);
+			Report.IsTrue(new SubscriptionEnrollment().Proceed_button_enabled() == expectedEnabled, string.Format("Proceed button is {0}", expectedEnabled ? "disabled" : "enabled"), "Proceed button is " + enabled);
 		}
 
 
@@ -252,13 +252,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 			//| Item | Further details |Link text  | Link url  
-			 
+
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
 				Plan thisPlan = allPlans.FirstOrDefault(x => x.Plan_Name == plan);
 
 				Info_Point thisInfoPoint = thisPlan.Info_points.FirstOrDefault(x => x.Info_Header == thisRow["Item"]);
-				Report.IsTrue(thisInfoPoint != null, "Item has not been found: " + thisRow["Item"].ToString(),"Item has been found: " + thisRow["Item"].ToString(), false, false);
+				Report.IsTrue(thisInfoPoint != null, "Item has not been found: " + thisRow["Item"].ToString(), "Item has been found: " + thisRow["Item"].ToString(), false, false);
 
 				if (thisRow.ContainsKey("Further details") && thisRow["Further details"].Length > 0)
 				{
@@ -340,14 +340,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 				default:
 					throw new Exception("Dropdown item did not match any of the options");
 			}
-			
+
 		}
 
 		[StepDefinition("I check that the following are showing in the (Articles|Enhanced Articles|Formulated Products) dropdown:")]
 		public void CheckThatCorrectItemsAreShowing(string section, Table expected)
 		{
 			var showing = new SubscriptionUpgrade().ReturnSelectDropDownItems(section);
-			Report.Info("Available items: "+  string.Join(", ",showing));
+			Report.Info("Available items: " + string.Join(", ", showing));
 			foreach (var row in expected.Rows)
 			{
 				Report.IsTrue(showing.Contains(row[0].Trim()), "Failed to find the item: " + row[0] + "!", "Item: " + row[0].Trim() + " was found successfully!", false, false);
@@ -367,7 +367,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					return;
 				case ("content"):
 					var bodyText = Popup.GetBodyText().Trim();
-					Report.IsTrue(bodyText  == text.Trim(), "Body text was not as expected! Found: " + bodyText + ", but expected: " + text.Trim(), "Body text was showing: " + text + " as expected");
+					Report.IsTrue(bodyText == text.Trim(), "Body text was not as expected! Found: " + bodyText + ", but expected: " + text.Trim(), "Body text was showing: " + text + " as expected");
 					return;
 			}
 		}
@@ -449,7 +449,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"The selected item in section: (Select the feature plan|Select the Support Services Plan) should be: (.*)")]
 		public void VerifyCorrectItemIsSelectedInSection(string section, string text)
 		{
-			var showing = new SubscriptionEnrollment().GetSelectedItemInSection(section).Split(new string[]{"\r\n"}, StringSplitOptions.None).FirstOrDefault().Trim();
+			var showing = new SubscriptionEnrollment().GetSelectedItemInSection(section).Split(new string[] { "\r\n" }, StringSplitOptions.None).FirstOrDefault().Trim();
 			Report.IsTrue(text.Trim() == showing.Trim(), "Selected item was not as expected! Expected: " + text.Trim() + ", but found: " + showing.Trim(), "Item " + text.Trim() + " was successfully selected!");
 		}
 

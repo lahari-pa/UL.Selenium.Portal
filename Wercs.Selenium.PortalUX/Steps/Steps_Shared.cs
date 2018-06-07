@@ -112,34 +112,52 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
+		//[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
+		//public void GivenICallSharedStepAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
+		//{
+		//	StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+		//	NewProduct myNewProduct = new NewProduct();
+		//	MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+		//	Delay.Seconds(1);
+		//	if (myNewProduct.SectionExists("Select countries the product may be sold in"))
+		//	{
+		//		MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+		//	}
+		//	if (myNewProduct.SectionExists("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)"))
+		//	{
+		//		MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)", "No");
+		//	}
+		//	if (myNewProduct.SectionExists("Product is shipped directly by supplier to the consumer."))
+		//	{
+		//		MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.", "No");
+		//	}
+		//	if (myNewProduct.SectionExists("Product is a Retailer's Private Label or Brand"))
+		//	{
+		//		MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+		//	}
+		//	if (myNewProduct.SectionExists("Product is sold to the Retailer solely for the Retailer's use"))
+		//	{
+		//		MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use", "No");
+		//	}
+		//	MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		//}
+
 		[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
-		public void GivenICallSharedStepAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
+		public void SharedAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			NewProduct myNewProduct = new NewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
-			Delay.Seconds(1);
-			if (myNewProduct.SectionExists("Select countries the product may be sold in"))
-			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-			}
-			if (myNewProduct.SectionExists("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)"))
-			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)", "No");
-			}
-			if (myNewProduct.SectionExists("Product is shipped directly by supplier to the consumer."))
-			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.", "No");
-			}
-			if (myNewProduct.SectionExists("Product is a Retailer's Private Label or Brand"))
-			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
-			}
-			if (myNewProduct.SectionExists("Product is sold to the Retailer solely for the Retailer's use"))
-			{
-				MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use", "No");
-			}
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep("Select countries the product may be sold in should be showing the value: United States");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
 		[StepDefinition(@"I call Shared Step 70393 \(Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only\)")]
@@ -1332,6 +1350,383 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
 			TestReport.StartStep("In the Additional Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+
+		[StepDefinition(@"I confirm that the default selected retailer is: (.*) then click Continue")]
+		public void CustomConfirmDefaultSelectedRetailer_ClickContinue(string retailer)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Retailer Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Retailer");
+			TestReport.StartStep("The selected retailers on the Retailer page should be:");
+			MyNewProductSteps.SelectedRetailersShouldBe(new List<string> { retailer });
+			TestReport.StartStep("In the Retailer page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Retailer");
+		}
+
+		[StepDefinition(@"I call Shared Step 59922 \(Additional Product Information - Private Label or Brand only\)")]
+		public void SharedAdditionalProductInformation_PrivateLabelOrBrandOnly()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep("Select countries the product may be sold in should be showing the value: United States");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 58189 \(Answer Electronic Equipment questions - With Cathode Ray - No to all\)")]
+		public void SharedAnswerElectronicEquipmentQuestions_WithCathodeRay_NoToAll()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I set the Contains Circuit Board option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Contains Circuit Board", "No");
+			TestReport.StartStep("I set the Has a Cathode Ray Tube (CRT) option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Has a Cathode Ray Tube (CRT)", "No");
+			TestReport.StartStep("I set the Has a LCD for Plasma Display option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Has a LCD for Plasma Display", "No");
+			TestReport.StartStep("In the Answer Electronic Equipment questions page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Answer Electronic Equipment questions");
+		}
+
+
+
+		[StepDefinition(@"I call Shared Step 60741 \(Select Primary Physical Property - Solid - With Ingredients\)")]
+		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Solid_WithIngredients()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Cream");
+			NewProduct MyNewProduct = new NewProduct();
+			if (MyNewProduct.OptionExists("When mixed with an equal amount of water"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
+			}
+
+			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains", "Dairy or products containing dairy or milk");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following sweeteners", "None of the Above");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following artificial dye(s)", "None of the Above");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call shared step 69687 \(Additional Product Information - Country and Private Label or Brand - No\)")]
+		public void GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared 60685 Fuel Container Regulatory Details - Yes")]
+		public void GivenICallSharedFuelContainerRegulatoryDetails_Yes()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see Fuel Container Regulatory Details");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Fuel Container Regulatory Details");
+			TestReport.StartStep("I Product is a Safety Can to: Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Safety Can", "Yes");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Fuel Container Regulatory Details");
+		}
+
+		[StepDefinition(@"I call Shared 56808 Regulatory Information - Prop 65 - No - Continue")]
+		public void GivenICallShared56808RegulatoryInformation_Prop_No_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Information 1 Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
+			TestReport.StartStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product, including container and/or packaging, contains a chemical on California's Prop 65 list", "No");
+			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
+
+		[Given(@"I call Shared 69682 \(Retailer Association - Add Private Label Information\) and select the retailer: (.*) and enter the name: (.*)")]
+		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformation(string retailer, string name)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: " + retailer);
+			MyStepsNewProduct.ThenISelectTheRetailer_InTheWindow(retailer);
+			TestReport.StartStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			NewProduct MyNewProduct = new NewProduct();
+			MyNewProduct.SetFullNameOfProductForRetailer(retailer, name);
+			TestReport.StartStep("In the Retailer page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
+		}
+
+
+		[Given(@"I call Shared 60715 \(Additional Documents to Provide - OSHA SDS - only\) : (.*)")]
+		public void GivenICall60715SharedAdditionalDocumentsToProvide_OSHASDS_OnlyCDependenciesWERCSmartTestdoc_Pdf(string docPath)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.UploadPDFFileSectionAndType("OSHA SDS", "Upload Physical", docPath);
+			TestReport.StartStep(@"in the New Product page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 65511 \(Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
+		public void ICallSharedAdditionalProductInformation_NoChildNoDirectShipNoPLClickContinue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 57503 \(Regulatory Information 1- TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
+		public void ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Information 1 Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
+			var table = new Table("Section");
+			table.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
+			table.AddRow("Product, including container and/or packaging, contains a chemical on California's Prop 65 list");
+			Report.Info("Checking that the only visible questions relate to: TSCA and Prop 65");
+			MyStepsNewProduct.CheckDisplayedSections("only see", table);
+			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
+			TestReport.StartStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product, including container and/or packaging, contains a chemical on California's Prop 65 list", "No");
+			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
+
+		[StepDefinition(@"I call Shared Step 59927 \(Primary Physical State > Solid only available – Without Water Solubility question\)")]
+		public void SharedPrimaryPhysicalStateSolidOnlyAvailable_WithoutWaterSolubilityQuestion()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
+			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
+			TestReport.StartStep("I set the Secondary Physical State field to: Solid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? field to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?", "No");
+			TestReport.StartStep("In the Physical Properties page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical Properties");
+		}
+
+		[StepDefinition(@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity \) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
+		public void SharedEnterUniversalProductCodeUPC_Battery_ConfirmQuantity(string upc, string containerType, string size, string quantity)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I confirm 'Quantity' is visible in the UPC header");
+			MyStepsNewProduct.ConfirmQuantityIsVisibleInUPCHeader();
+			TestReport.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			TechTalk.SpecFlow.Table upcTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Field",
+				"Value"
+			});
+			upcTable.AddRow(new string[] {
+				"UPCNumber",
+				"saved as UPC" + upc
+			});
+			upcTable.AddRow(new string[] {
+				"ContainerType",
+				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
+			});
+			upcTable.AddRow(new string[] {
+				"Quantity",
+				quantity
+			});
+			TestReport.StartStep("I add the following into the UPC Fields");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
+		}
+
+		[StepDefinition(@"I call Shared Step 69358 \(Data Acceptance - Click Summary Button\)")]
+		public void SharedDataAcceptance_ClickSummaryButton()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I click the Summary button in the Data Acceptance window");
+			MyStepsNewProduct.GivenIClickTheSummaryButtonInTheDataAcceptanceWindow();
+			TestReport.StartStep("I confirm the Manufacturer column is visible");
+			// Confirm Manufacturer column is visble.
+			// Close new tab
+		}
+
+		[StepDefinition(@"I call Shared Step 60026 \(Additional Product Information - US - Battery - No to all\)")]
+		public void SharedAdditionalProductInformation_US_Battery_NoToAll()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("Select countries the product may be sold in should be showing the value: United States");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			TestReport.StartStep("I set the Select one option below field to: Battery is packaged for Retail Sale");
+			MyNewProductSteps.SetTheSectionOptionTo("Select one option below", "Battery is packaged for Retail Sale");
+			TestReport.StartStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 73282 \(Lithium Battery Characteristics - Weight in Grams\)")]
+		public void SharedLithiumBatteryCharacteristics_WeightInGrams()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Lithium Battery Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Lithium Battery Characteristics");
+			TestReport.StartStep("I set the Type of Battery field to: Battery");
+			MyNewProductSteps.SetTheSectionOptionTo("Type of Battery", "Battery");
+			TestReport.StartStep("I set the Weight of Lithium in grams (single unit) field to: 0.1");
+			MyNewProductSteps.SetTheSectionOptionTo("Weight of Lithium in grams (single unit)", "0.1");
+			TestReport.StartStep("I set the Weight of the single unit (grams) field to: 10");
+			MyNewProductSteps.SetTheSectionOptionTo("Weight of the single unit (grams)", "10");
+			TestReport.StartStep("I set the Battery meets UN 38.3 testing requirements field to: Yes");
+			MyNewProductSteps.SetTheSectionOptionTo("Battery meets ", "Yes");
+			TestReport.StartStep("I set the Battery is manufactured under a Quality Management Program outlined in IATA 3.9.2.6 field to: YES");
+			MyNewProductSteps.SetTheSectionOptionTo("Battery is manufactured under a Quality Management Program outlined in ", "YES");
+			TestReport.StartStep("In the Lithium Battery Characteristics page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Characteristics");
+		}
+
+		[StepDefinition(@"I call Shared Step 54799 \(Lithium Battery Characteristics - any data - Happy path\)")]
+		public void SharedLithiumBatteryCharacteristics_AnyData()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Lithium Battery Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Lithium Battery Characteristics");
+			TestReport.StartStep("I set the Type of Battery field to: Battery");
+			MyNewProductSteps.SetTheSectionOptionTo("Type of Battery", "Battery");
+			TestReport.StartStep("I set the Watt-hour of the battery (single unit) field to: 0.1");
+			MyNewProductSteps.SetTheSectionOptionTo("Watt-hour of the battery (single unit)", "0.1");
+			TestReport.StartStep("I set the Weight of the single unit (grams) field to: 10");
+			MyNewProductSteps.SetTheSectionOptionTo("Weight of the single unit (grams)", "10");
+			TestReport.StartStep("I set the Battery meets UN 38.3 testing requirements field to: Yes");
+			MyNewProductSteps.SetTheSectionOptionTo("Battery meets ", "Yes");
+			TestReport.StartStep("I set the Battery is manufactured under a Quality Management Program outlined in IATA 3.9.2.6 field to: YES");
+			MyNewProductSteps.SetTheSectionOptionTo("Battery is manufactured under a Quality Management Program outlined in ", "YES");
+			TestReport.StartStep("In the Lithium Battery Characteristics page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Characteristics");
+		}
+
+		[StepDefinition(@"I call Shared Step 60096 \(Lithium Battery Transportation\)")]
+		public void SharedLithiumBatteryTransportation()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Lithium Battery Transportation Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Lithium Battery Transportation");
+			TestReport.StartStep("I set the For U.S. Department of Transportation (DOT), indicate the transport classification field to: Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail");
+			MyNewProductSteps.SetTheSectionOptionTo("For U.S. Department of Transportation (DOT), indicate the transport classification", "Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail");
+			TestReport.StartStep("I select the first option for section: For Marine transport (IMDG), indicate the classification");
+			MyNewProductSteps.SelectFirstOptionInSection("For Marine transport (IMDG), indicate the classification");
+			TestReport.StartStep("I set the For Air transport (IATA), indicate the classification field to: Section IB");
+			MyNewProductSteps.SetTheSectionOptionTo("For Air transport (IATA), indicate the classification", "Section IB");
+			TestReport.StartStep("I set the For Canada's Transportation of Dangerous Goods (TDG), indicate the classification field to: None of the above/Not intended for shipment in Canada");
+			MyNewProductSteps.SetTheSectionOptionTo("For Canada's Transportation of Dangerous Goods (TDG), indicate the classification", "None of the above/Not intended for shipment in Canada");
+			TestReport.StartStep("In the Lithium Battery Transportation page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Transportation");
+		}
+
+		[StepDefinition(@"I call Shared Step 69422 \(Additional Documents to Provide - Upload Product Photo\)")]
+		public void SharedAdditionalDocumentsToProvide_UploadProductPhoto()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep(@"I click the browse button for label: Please upload a PDF of the product. in section: Product Photo and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProductSteps.UploadPDFFileSectionAndType("Please upload a PDF of the product.", "Product Photo", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
+
+		[StepDefinition(@"I call Shared Step 54797 \(Select the specific Lithium Ion chemistry of the Battery\)")]
+		public void SharedSelectTheSpecificLithiumIonChemistry()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Select the specific Lithium Ion chemistry of the Battery Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Select the specific Lithium Ion chemistry of the Battery");
+			TestReport.StartStep("I select the first option in section: Select the best description");
+			MyNewProductSteps.SelectFirstOptionInSection("Select the best description");
+			TestReport.StartStep("In the Select the specific Lithium Ion chemistry page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Select the specific Lithium Ion chemistry");
+		}
+
+		// Duplicate of Shared step 60026
+		[StepDefinition(@"I call Shared Step 65493 \(Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue\)")]
+		public void SharedAdditionalProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep("I set the Select one option below field to: Battery is packaged for Retail Sale");
+			MyNewProductSteps.SetTheSectionOptionTo("Select one option below", "Battery is packaged for Retail Sale");
+			TestReport.StartStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call shared step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
+		public void GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+
+			//CLF - this option doesn't always appear. Putting this fix in for now but may need a new version of the step
+			NewProduct MyNewProduct = new NewProduct();
+			if (MyNewProduct.OptionExists("Select the product's Country of Origin"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			}
+
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
 
