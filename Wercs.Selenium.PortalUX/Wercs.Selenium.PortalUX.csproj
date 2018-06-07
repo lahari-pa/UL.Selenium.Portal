@@ -164,6 +164,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data Consent Tiers.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 14.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 14.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Forgotten Password1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -199,15 +204,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 13.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Product Registration\Flow 16.feature.cs">
+    <Compile Include="Features\Product Registration\Flow 18.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Flow 16.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Product Registration\Flow 17.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Flow 17.feature</DependentUpon>
+      <DependentUpon>Flow 18.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Product Registration\Flow 22.feature.cs">
       <AutoGen>True</AutoGen>
@@ -219,20 +219,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 24 - Deodorant.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Product Registration\Flow 28 - Auto Parts.feature.cs">
+    <Compile Include="Features\Product Registration\Flow 25.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Flow 28 - Auto Parts.feature</DependentUpon>
+      <DependentUpon>Flow 25.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Product Registration\Flow 29 - Beverage.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 29 - Beverage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Product Registration\Flow 30 - Grocery.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Flow 30 - Grocery.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Product Registration\Flow 31 - Seasonings.feature.cs">
       <AutoGen>True</AutoGen>
@@ -368,6 +363,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Data Consent Tiers.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Product Registration\Flow 14.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 14.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Forgotten Password.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Forgotten Password1.feature.cs</LastGenOutput>
@@ -396,13 +395,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 13.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Product Registration\Flow 16.feature">
+    <None Include="Features\Product Registration\Flow 18.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Flow 16.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Product Registration\Flow 17.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Flow 17.feature.cs</LastGenOutput>
+      <LastGenOutput>Flow 18.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 22.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -412,17 +407,13 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 24 - Deodorant.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Product Registration\Flow 28 - Auto Parts.feature">
+    <None Include="Features\Product Registration\Flow 25.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Flow 28 - Auto Parts.feature.cs</LastGenOutput>
+      <LastGenOutput>Flow 25.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 29 - Beverage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 29 - Beverage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Product Registration\Flow 30 - Grocery.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Flow 30 - Grocery.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 31 - Seasonings.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -476,7 +467,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -64,6 +64,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2).Text;
 		}
 
+		public string BatteyWarning()
+		{
+			this.RefreshContainer();
+			return this.containerElement.FindElement(By.XPath(".//div[@class='WARNING']"), 2).Text;
+		}
+
 		public string GetCurrentProduct()
 		{
 			return this.containerElement.FindElement(By.XPath(".//h2[@class='product-name']"), 2).Text.Trim();
@@ -2620,9 +2626,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)
 		public bool UploadFileForSectionAndType(string label, string section, string pdfFilePath)
 		{
+			//var el = containerElement.FindElement(
+			//By.XPath(
+			//	".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div[//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]]//a[text()='Browse']"),
+			//2);
 			var el = containerElement.FindElement(
 				By.XPath(
-					".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div[//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]]//a[text()='Browse']"),
+					".//div[child::label[contains(text(),'" + section + "')]]/following-sibling::div//span[text()='" + label + "' and not(contains(@style, 'display: none;'))]/..//a[text()='Browse']"),
 				2);
 			if (el == null)
 			{
@@ -3267,6 +3277,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool SectionExists(string section)
+		{
+			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
+						section + @""")]) and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
+						section + @""")]) and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
+						section + @""")]) and @type='text'] | " +
+						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
+						section + @""")])] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
+						section + @""")]) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+
+			var el = containerElement.FindElement(By.XPath(xPath), 2);
+
+			if (el == null)
+			{
+				Report.Info("Section unavailable: " + section);
+				return false;
+			}
+			Report.Info("Section exists: " + section);
+			return true;
+		}
+
 		public bool SetOptionInSection(string section, string value)
 		{
 			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
@@ -3321,7 +3355,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 
 			}
-
 			return el.TryClick();
 		}
 

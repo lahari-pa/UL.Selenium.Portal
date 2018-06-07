@@ -131,6 +131,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I should see battery manufacturer message: (.*)")]
+		public void ThenIShouldSeeBatteryManufacturerMessage(string message)
+		{
+			Report.Info("Checking error message");
+			var selNewProduct = new NewProduct();
+			var found = selNewProduct.BatteyWarning();
+
+			Report.IsTrue(found.Trim() == message.Trim(),
+				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
+				"Warning message was showing: " + message + ", as expected!");
+		}
+
+
 		[StepDefinition(@"I should see an error message: (.*)")]
 		public void ErrorMessageSpecific(string message)
 		{
