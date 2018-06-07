@@ -138,7 +138,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+
+			//CLF - this option doesn't always appear. Putting this fix in for now but may need a new version of the step
+			NewProduct MyNewProduct = new NewProduct();
+			if (MyNewProduct.OptionExists("Select the product's Country of Origin"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			}
+			
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -249,6 +256,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 		}
 
+		[StepDefinition(@"I call Shared 60685 Fuel Container Regulatory Details - Yes")]
+		public void GivenICallSharedFuelContainerRegulatoryDetails_Yes()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see Fuel Container Regulatory Details");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Fuel Container Regulatory Details");
+			TestReport.StartStep("I Product is a Safety Can to: Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Safety Can", "Yes");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Fuel Container Regulatory Details");
+		}
+
+
+
 		[StepDefinition(@"I call Shared 57571 \(Enter Regulatory Information - Not Prop 65\)")]
 		public void GivenICallSharedEnterRegulatoryInformation_NotProp()
 		{
@@ -263,6 +284,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
+
+		[StepDefinition(@"I call Shared 56808 Regulatory Information - Prop 65 - No - Continue")]
+		public void GivenICallShared56808RegulatoryInformation_Prop_No_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Information 1 Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
+			TestReport.StartStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product, including container and/or packaging, contains a chemical on California's Prop 65 list", "No");
+			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
+
 
 		[StepDefinition(@"I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path")]
 		public void GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath()

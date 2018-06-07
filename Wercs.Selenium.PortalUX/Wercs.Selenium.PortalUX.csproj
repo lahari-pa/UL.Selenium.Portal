@@ -219,6 +219,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 24 - Deodorant.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 28 - Auto Parts.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 28 - Auto Parts.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 29 - Beverage.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -406,6 +411,10 @@
     <None Include="Features\Product Registration\Flow 24 - Deodorant.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 24 - Deodorant.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 28 - Auto Parts.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 28 - Auto Parts.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 29 - Beverage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
