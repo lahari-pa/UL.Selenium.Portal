@@ -209,20 +209,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 15.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 16.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 16.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 17.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 17.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Product Registration\Flow 18 tests.feature.cs">
-      <DependentUpon>Flow 18 tests.feature</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Include="Features\Product Registration\Flow 18.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Flow 16.feature</DependentUpon>
+      <DependentUpon>Flow 18.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Product Registration\Flow 22.feature.cs">
       <AutoGen>True</AutoGen>
@@ -426,15 +426,15 @@
     </None>
     <None Include="Features\Product Registration\Flow 16.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Flow 18.feature.cs</LastGenOutput>
+      <LastGenOutput>Flow 16.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 17.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 17.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Product Registration\Flow 18 tests.feature">
+    <None Include="Features\Product Registration\Flow 18.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Flow 18 tests.feature.cs</LastGenOutput>
+      <LastGenOutput>Flow 18.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 22.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
