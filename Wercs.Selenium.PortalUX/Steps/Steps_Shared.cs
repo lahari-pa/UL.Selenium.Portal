@@ -84,6 +84,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				MyStepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
 			}
+
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains", "Dairy or products containing dairy or milk");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
@@ -177,6 +178,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
 			}
+
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS)", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
@@ -213,7 +215,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Percent",
 				"PublicallyDisclosed",
 				"TradeSecret",
-				"PublicName"});
+				"PublicName"
+			});
 			aerosolIngredients.AddRow(new string[] {
 				"Butane",
 				"20",
@@ -235,7 +238,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Percent",
 				"PublicallyDisclosed",
 				"TradeSecret",
-				"PublicName"});
+				"PublicName"
+			});
 			otherIngredients.AddRow(new string[] {
 				"Sodium hydroxide",
 				"40",
@@ -353,18 +357,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
 		}
 
-
-
 		[StepDefinition(@"I call Shared 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: (.*)")]
 		public void GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath(string retailer)
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			var selSelectRetailers = new SelectRetailers();
+			// Step expects the Select Retailers pop up open by default but if not we need to click 'Add Retailers' to avoid null reference
 			if (!selSelectRetailers.Wait_for_load(10))
 			{
-				Report.Warn("The Select Retailers page was not loaded on entering the Retailer page");
-				// Click Add Retailers Button
+				TestReport.StartStep("I click 'Add Retailers' in the Retailers page");
+				Report.Warn("The Select Retailers page was not loaded by default on the Retailer page. Clicking Add Retailers");
+				MyStepsNewProduct.ClickAddRetailersInRetailersPage();
 			}
 			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: " + retailer);
 			MyStepsNewProduct.ThenISelectTheRetailer_InTheWindow(retailer);
@@ -387,16 +391,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			TechTalk.SpecFlow.Table upcTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Field",
-				"Value"});
+				"Value"
+			});
 			upcTable.AddRow(new string[] {
 				"UPCNumber",
-				"saved as UPC"+upc});
+				"saved as UPC" + upc
+			});
 			upcTable.AddRow(new string[] {
 				"ContainerType",
-				containerType});
+				containerType
+			});
 			upcTable.AddRow(new string[] {
 				"Size",
-				size});
+				size
+			});
 			TestReport.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
@@ -543,9 +551,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// Primary Physical State is Aerosol which is the only option available
 			TestReport.StartStep("I should only see the following options for Primary Physical State: Aerosol");
 			TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
-				"State"});
+				"State"
+			});
 			produtTable.AddRow(new string[] {
-				"Aerosol"});
+				"Aerosol"
+			});
 			TestReport.StartStep("I set the Secondary Physical State field to: Liquid spray");
 			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid spray");
 			TestReport.StartStep("I check the 'I do not have exact' checkbox for field: pH");
@@ -569,9 +579,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// Primary Physical State is Aerosol which is the only option available
 			TestReport.StartStep("I should only see the following options for Primary Physical State: Aerosol");
 			TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
-				"State"});
+				"State"
+			});
 			produtTable.AddRow(new string[] {
-				"Aerosol"});
+				"Aerosol"
+			});
 			MyNewProduct.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
 			TestReport.StartStep("I set the Primary Physical State field to: Aerosol");
 			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Aerosol");
@@ -711,6 +723,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				TestReport.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
 				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
 			}
+
 			var secondaryState = table == null ? "N/A" : table.Rows.FirstOrDefault()["Secondary Physical State"];
 			if (secondaryState != null && secondaryState != "N/A")
 			{
@@ -722,6 +735,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				TestReport.StartStep("I set the Secondary Physical State option to: Solid");
 				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			}
+
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -890,9 +904,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.Failure("It was not possible to select the option: Not Regulated for the section: Product is Regulated for Transport");
 					Report.Screenshot();
 				}
+
 				wait++;
 				Delay.Seconds(1);
 			}
+
 			TestReport.StartStep("In the Product is Regulated for Transport page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product is Regulated for Transport");
 		}
@@ -950,11 +966,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				TestReport.StartStep("In the Review and Submit tab of the New Product Page for Product's Dispensing Method I select: " + table.Rows[0]["Product's Dispensing Method"]);
 				MyNewProduct.SetTheSectionOptionTo("Product's Dispensing Method", table.Rows[0]["Product's Dispensing Method"]);
 			}
+
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Partition Coefficient I enter: " + table.Rows[0]["Partition Coefficient"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPartitionCoefficientISelect(table.Rows[0]["Partition Coefficient"]);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
+
 		//Duplicate with Shared Step 57561
 		[StepDefinition(@"I call Shared Step 57500 \(The Product- Enter name, select product type: (.*) - Continue - Happy Path\)")]
 		public void ICallSharedTheProduct_EnterNameSelectProductType(string type)
@@ -989,6 +1007,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				TestReport.StartStep("I set the Select the best Water Solubility description option to: Soluble in water");
 				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
 			}
+
 			TestReport.StartStep("I set the Secondary Physical State option to: Solid");
 			MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			TestReport.StartStep("In the New Product page I click Continue");
@@ -1202,19 +1221,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
 			TechTalk.SpecFlow.Table upcTable = new TechTalk.SpecFlow.Table(new string[] {
 				"Field",
-				"Value"});
+				"Value"
+			});
 			upcTable.AddRow(new string[] {
 				"UPCNumber",
-				"saved as UPC"+upc});
+				"saved as UPC" + upc
+			});
 			upcTable.AddRow(new string[] {
 				"ContainerType",
-				containerType});
+				containerType
+			});
 			upcTable.AddRow(new string[] {
 				"Size",
-				size});
+				size
+			});
 			upcTable.AddRow(new string[] {
 				"Quantity",
-				quantity});
+				quantity
+			});
 			TestReport.StartStep("I add the following into the UPC Fields");
 			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
@@ -1254,8 +1278,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step temp \(Lithium Battery Characteristics - any data - Happy path\)")]
-		public void SharedLithiumBatteryCharacteristics_AnyData()
+		[StepDefinition(@"I call Shared Step 73282 \(Lithium Battery Characteristics - Weight in Grams\)")]
+		public void SharedLithiumBatteryCharacteristics_WeightInGrams()
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
@@ -1275,6 +1299,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Characteristics");
 		}
 
+		[StepDefinition(@"I call Shared Step 54799 \(Lithium Battery Characteristics - any data - Happy path\)")]
+		public void SharedLithiumBatteryCharacteristics_AnyData()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Lithium Battery Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Lithium Battery Characteristics");
+			TestReport.StartStep("I set the Type of Battery field to: Battery");
+			MyNewProductSteps.SetTheSectionOptionTo("Type of Battery", "Battery");
+			TestReport.StartStep("I set the Watt-hour of the battery (single unit) field to: 0.1");
+			MyNewProductSteps.SetTheSectionOptionTo("Watt-hour of the battery (single unit)", "0.1");
+			TestReport.StartStep("I set the Weight of the single unit (grams) field to: 10");
+			MyNewProductSteps.SetTheSectionOptionTo("Weight of the single unit (grams)", "10");
+			TestReport.StartStep("I set the Battery meets UN 38.3 testing requirements field to: Yes");
+			MyNewProductSteps.SetTheSectionOptionTo("Battery meets ", "Yes");
+			TestReport.StartStep("I set the Battery is manufactured under a Quality Management Program outlined in IATA 3.9.2.6 field to: YES");
+			MyNewProductSteps.SetTheSectionOptionTo("Battery is manufactured under a Quality Management Program outlined in ", "YES");
+			TestReport.StartStep("In the Lithium Battery Characteristics page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Characteristics");
+		}
+
 		[StepDefinition(@"I call Shared Step 60096 \(Lithium Battery Transportation\)")]
 		public void SharedLithiumBatteryTransportation()
 		{
@@ -1284,15 +1329,73 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenIShouldSeeXPage("Lithium Battery Transportation");
 			TestReport.StartStep("I set the For U.S. Department of Transportation (DOT), indicate the transport classification field to: Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail");
 			MyNewProductSteps.SetTheSectionOptionTo("For U.S. Department of Transportation (DOT), indicate the transport classification", "Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail");
-			TestReport.StartStep("I set the For Marine transport (IMDG), indicate the classification field to: Fully-regulated dangerous goods: UN3090, Lithium metal batteries, 9");
-			MyNewProductSteps.SetTheSectionOptionTo("For Marine transport (IMDG), indicate the classification", "Fully-regulated dangerous goods: UN3090, Lithium metal batteries, 9");
+			TestReport.StartStep("I select the first option for section: For Marine transport (IMDG), indicate the classification");
+			MyNewProductSteps.SelectFirstOptionInSection("For Marine transport (IMDG), indicate the classification");
 			TestReport.StartStep("I set the For Air transport (IATA), indicate the classification field to: Section IB");
 			MyNewProductSteps.SetTheSectionOptionTo("For Air transport (IATA), indicate the classification", "Section IB");
-			//For Canada's Transportation of Dangerous Goods (TDG), indicate the classification
 			TestReport.StartStep("I set the For Canada's Transportation of Dangerous Goods (TDG), indicate the classification field to: None of the above/Not intended for shipment in Canada");
 			MyNewProductSteps.SetTheSectionOptionTo("For Canada's Transportation of Dangerous Goods (TDG), indicate the classification", "None of the above/Not intended for shipment in Canada");
 			TestReport.StartStep("In the Lithium Battery Transportation page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Lithium Battery Transportation");
+		}
+
+		[StepDefinition(@"I call Shared Step 69422 \(Additional Documents to Provide - Upload Product Photo\)")]
+		public void SharedAdditionalDocumentsToProvide_UploadProductPhoto()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep(@"I click the browse button for label: Please upload a PDF of the product. in section: Product Photo and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProductSteps.UploadPDFFileSectionAndType("Please upload a PDF of the product.", "Product Photo", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
+
+		[StepDefinition(@"I call Shared Step 54797 \(Select the specific Lithium Ion chemistry of the Battery\)")]
+		public void SharedSelectTheSpecificLithiumIonChemistry()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Select the specific Lithium Ion chemistry of the Battery Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Select the specific Lithium Ion chemistry of the Battery");
+			TestReport.StartStep("I select the first option in section: Select the best description");
+			MyNewProductSteps.SelectFirstOptionInSection("Select the best description");
+			TestReport.StartStep("In the Select the specific Lithium Ion chemistry page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Select the specific Lithium Ion chemistry");
+		}
+
+		// Duplicate of Shared step 60026
+		[StepDefinition(@"I call Shared Step 65493 \(Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue\)")]
+		public void SharedAdditionalProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep("I set the Select one option below field to: Battery is packaged for Retail Sale");
+			MyNewProductSteps.SetTheSectionOptionTo("Select one option below", "Battery is packaged for Retail Sale");
+			TestReport.StartStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition("I confirm that the default selected retailer is: (.*) then click Continue")]
+		public void CustomConfirmDefaultSelectedRetailer_ClickContinue(string retailer)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Retailer Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Retailer");
+			TestReport.StartStep("The selected retailers on the Retailer page should be:");
+			MyNewProductSteps.SelectedRetailersShouldBe(new List<string> { retailer });
+			TestReport.StartStep("In the Retailer page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
 	}
 }

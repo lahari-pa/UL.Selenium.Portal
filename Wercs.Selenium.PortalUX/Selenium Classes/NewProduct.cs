@@ -12,6 +12,7 @@ using ResourcePool;
 using SafewareReporting;
 using SafewareReporting;
 using SeleniumUtilities;
+using TechTalk.SpecFlow;
 
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -3281,7 +3282,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Error("Could not find the correct input in section: " + section);
 				return false;
 			}
-
+			Report.Info("Entering value of: '" + value + "' in section: '" + section + "'");
 			if (el.GetAttribute("type") == "text")
 			{
 				el.EnterText(value);
@@ -3804,13 +3805,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
 			if (publiclyDisclosedInput == null)
 			{
-				Report.Failure("Could not find the Trade Secret checkbox");
+				Report.Failure("Could not find the Publicly Disclosed checkbox");
 				Report.Screenshot();
 				return false;
 			}
 			var ticked = publiclyDisclosedInput.Checked();
-			publiclyDisclosedInput.Click();
-			publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
+			publiclyDisclosedInput.TryClick();
 			if (publiclyDisclosedInput.Checked() == ticked)
 			{
 				Report.Failure("The Publicly Disclosed checkbox was displayed but it was not successfully selected");
@@ -3820,11 +3820,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			if (ticked == false)
 			{
 				Report.Info("The Publicly Disclosed box has been checked");
+				return true;
 			}
-			else
-			{
-				Report.Info("The Publicly Disclosed box has been unchecked");
-			}
+			Report.Info("The Publicly Disclosed box has been unchecked");
 			return true;
 		}
 		public bool PublicNameOptionIsEnabled(string chemicalName)
@@ -3837,6 +3835,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		// Checks the running total of publically disclosed ingredients (eg. "1 / 3")
 		public bool PubliclyDisclosedTotalIsCorrect(string total)
 		{
 			try
@@ -3855,6 +3854,36 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			catch (Exception)
 			{
 				return false;
+			}
+		}
+
+		public bool ClickAddARetailers()
+		{
+			try
+			{
+				var button = containerElement.FindElement(By.XPath(".//a[@class='btn btn-success' and text()='Add Retailers']"));
+				return button.TryClick();
+			}
+			catch (Exception ex)
+			{
+				return false;
+			}
+		}
+		public List<string> SelectedRetailers()
+		{
+			try
+			{
+				var selectedRetailers = new List<string>();
+				var selectedRetailersName = containerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
+				foreach (var row in selectedRetailersName)
+				{
+					selectedRetailers.Add(row.Text);
+				}
+				return selectedRetailers;
+			}
+			catch (Exception)
+			{
+				return null;
 			}
 		}
 	}

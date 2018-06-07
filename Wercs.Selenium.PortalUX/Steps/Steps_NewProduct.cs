@@ -2379,6 +2379,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Report.IsTrue(new NewProduct().GetUPCHeaders().Contains("Quantity"), "The text 'Quantity' did not appear in the UPC header on the Universal Product Code page", "The text 'Quantity' appeared in the UPC header on the Universal Product Code page as expected");
 		}
+
+		[StepDefinition(@"I click 'Add Retailers' in the Retailers page")]
+		public void ClickAddRetailersInRetailersPage()
+		{
+			Report.IsTrue(new NewProduct().ClickAddARetailers(), "Failed to click Add Retailers in the Retailers page", "Clicked Add Retailers in the Retailers page");
+		}
+
+		[StepDefinition(@"The selected retailers on the Retailer page should be:")]
+		public void SelectedRetailersShouldBe(List<string> expectedRetailers)
+		{
+			var actualRetailers = new NewProduct().SelectedRetailers();
+			Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
+		}
 	}
 }
 
