@@ -2405,6 +2405,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var actualRetailers = new NewProduct().SelectedRetailers();
 			Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
 		}
+
+		public void SelectTCLPElementOptionsToNo(List<string> elements)
+		{
+			var newProduct = new NewProduct();
+			foreach (var section in elements)
+			{
+				TestReport.StartStep("I set the " + elements + " option to: No");
+				Report.IsTrue(newProduct.SetOptionInSection(section, "No"),
+					"Failed to set the input to 'No' in section: '" + section + "'",
+					"Successfully set the input to 'No' in section: '" + section + "'");
+			}
+		}
 	}
 }
 

@@ -152,10 +152,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
 			TestReport.StartStep("Select countries the product may be sold in should be showing the value: United States");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
-			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
-			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			TestReport.StartStep("In the Additional Product Information page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
@@ -308,6 +308,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.SelectFirstOptionInSection("Indicate how battery is packaged");
 			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I set the Indicate how battery is packaged field to: Installed in the product");
+			MyStepsNewProduct.SetTheSectionOptionTo("Indicate how battery is packaged", "Installed in the product");
+			TestReport.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Number of batteries per package | How many batteries are required to run |");
 			List<Battery> listOfBatteries = new List<Battery>();
 			//| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
@@ -321,7 +324,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				listOfBatteries.Add(thisBattery);
 			}
 			var selNewProduct = new NewProduct();
-
 			if (listOfBatteries.Count > 0)
 			{
 				selNewProduct.Batteries = listOfBatteries;
@@ -331,7 +333,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				throw new Exception("There are no batteries to set");
 			}
-
+			TestReport.StartStep("In the Product Includes Battery page I click continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Includes Battery");
 		}
 
 		[StepDefinition(@"I call Shared Step 57589 \(Enter Pesticide Data - United States \(without EPA number\)\)")]
@@ -355,7 +358,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			NewProduct myNewProduct = new NewProduct();
+			TestReport.StartStep("I should see the Toxicity Characteristics Leaching Procedure (TCLP) Product Report Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristics Leaching Procedure (TCLP) Product Report");
+			TestReport.StartStep("I set the Product has had TCLP testing; Report is available option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing; Report is available", "No");
+			TestReport.StartStep("I select No for all elements including Copper");
 			MyStepsNewProduct.SetTheSectionOptionTo("Lead", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Mercury", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Silver", "No");
@@ -810,8 +817,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
 			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
-			TestReport.StartStep("I set the Primary Physical State option to: Solid");
-			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			var showing = new NewProduct().GetOptionsForSection("Primary Physical State");
+			if (!showing.Contains("Solid"))
+			{
+				TestReport.StartStep("I set the Primary Physical State option to: Solid");
+				Report.Info("Setting the Physical State to Solid because it was not selected by default");
+				MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
+			}
 			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
 			MyNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?", "No");
 			TestReport.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
@@ -1391,12 +1403,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the Has a Cathode Ray Tube (CRT) option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Has a Cathode Ray Tube (CRT)", "No");
 			TestReport.StartStep("I set the Has a LCD for Plasma Display option to: No");
-			MyNewProductSteps.SetTheSectionOptionTo("Has a LCD for Plasma Display", "No");
+			MyNewProductSteps.SetTheSectionOptionTo("Has a LCD or Plasma Display", "No");
 			TestReport.StartStep("In the Answer Electronic Equipment questions page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Answer Electronic Equipment questions");
 		}
-
-
 
 		[StepDefinition(@"I call Shared Step 60741 \(Select Primary Physical Property - Solid - With Ingredients\)")]
 		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Solid_WithIngredients()
@@ -1729,6 +1739,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-
+		[StepDefinition(@"I call Shared Step 58608 \(Additional Documents to Provide - Label - OSHA - CARB\)")]
+		public void SharedAdditionalDocumentsToProvide_Label_OSHA_CARB()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Documents To Provide Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Documents To Provide");
+			TestReport.StartStep(@"I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProductSteps.UploadPDFFile("Product Label", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep(@"I click the browse button for label: OSHA SDS and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProductSteps.UploadPDFFile("OSHA SDS", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep(@"I click the browse button for label: Executive Order from the CARB and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProductSteps.UploadPDFFile("Executive Order from the CARB", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+		}
 	}
 }
