@@ -97,10 +97,7 @@ And I set the Hazard Class (select) field to: 2
 And I set the Packing Group (select) field to: None
 Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
 
-# ====== Following the steps from 'Shared Step' 57510 ====== #
-Then In the 'Select Retailers' window I select the retailer: Walgreens
-And I should see the Retailer Page
-And in the Retailer page I click Continue
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 # ====== Following the steps from 'Shared Step' 57960 ====== #
 And I should see the Universal Product Code (UPC) Page

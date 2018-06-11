@@ -651,7 +651,7 @@ And in the New Product page I click Continue
 And I should see the Comments Page
 And in the New Product page I click Continue
 
-# Data Acceptance Page and clean up 
+# Data Acceptance Page and clean up
 And I should see the Data Acceptance Page
 Given I navigate to the home page
 Then I delete the product: TestCase56484
@@ -940,7 +940,7 @@ And in the New Product page I click Continue
 And I should see the Comments Page
 And in the New Product page I click Continue
 
-# Data Acceptance Page and clean up 
+# Data Acceptance Page and clean up
 And I should see the Data Acceptance Page
 Given I navigate to the home page
 Then I delete the product: TestCase56483
@@ -1077,7 +1077,7 @@ And in the New Product page I click Continue
 And I should see the Comments Page
 And in the New Product page I click Continue
 
-# Data Acceptance Page and clean up 
+# Data Acceptance Page and clean up
 And I should see the Data Acceptance Page
 Given I navigate to the home page
 Then I delete the product: TestCase56476
@@ -1247,7 +1247,7 @@ And in the New Product page I click Continue
 And I should see the Comments Page
 And in the New Product page I click Continue
 
-# Data Acceptance Page and clean up 
+# Data Acceptance Page and clean up
 And I should see the Data Acceptance Page
 Given I navigate to the home page
 Then I delete the product: TestCase56481
@@ -1387,7 +1387,7 @@ And in the New Product page I click Continue
 And I should see the Comments Page
 And in the New Product page I click Continue
 
-# Data Acceptance Page and clean up 
+# Data Acceptance Page and clean up
 And I should see the Data Acceptance Page
 Given I navigate to the home page
 Then I delete the product: TestCase56477

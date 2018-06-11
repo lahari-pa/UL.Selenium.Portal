@@ -954,8 +954,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheNewProductPageIClickSection(string section)
 		{
 			NewProduct selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			Delay.Seconds(1);
+			Report.IsTrue(selNewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
+			Delay.Seconds(5);
 			GivenIShouldSeeXPage(section);
 		}
 

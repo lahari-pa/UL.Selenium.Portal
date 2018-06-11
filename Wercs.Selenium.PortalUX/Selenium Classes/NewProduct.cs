@@ -180,11 +180,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSection(string section)
 		{
-			var sec = containerElement.FindElements(By.XPath(".//h3"), 2).FirstOrDefault(x => x.Text.Contains(section));
-
-			if (sec != null)
+			for (int i = 0; i < 5; i++)
 			{
-				return sec.TryClick();
+				var sec = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//h3"), 2).FirstOrDefault(x => x.Text.Contains(section));
+
+				if (sec != null)
+				{
+					if (sec.TryClick())
+					{
+						return true;
+					}
+				}
+			}
+
+			var h3 = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//h3"), 2);
+			foreach (var item in h3)
+			{
+				Report.Info("Found: " + item.Text);
 			}
 			return false;
 		}
@@ -1241,7 +1253,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					ddlEl = dropDownResults.FirstOrDefault(x => x.Text.Trim().ToLower() == value.ToLower());
 					if (ddlEl == null)
 					{
-						return;
+						//Check again accepting contains rather than full match
+						ddlEl = dropDownResults.FirstOrDefault(x => x.Text.Trim().ToLower().Contains(value.ToLower()));
+						if (ddlEl == null)
+						{
+							return;
+						}
 					}
 				}
 				ddlEl.Click();
