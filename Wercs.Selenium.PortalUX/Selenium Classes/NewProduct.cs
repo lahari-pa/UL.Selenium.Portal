@@ -191,6 +191,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						return true;
 					}
 				}
+				Delay.Seconds(1);
 			}
 
 			var h3 = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//h3"), 2);
