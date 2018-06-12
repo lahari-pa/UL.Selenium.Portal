@@ -269,6 +269,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 32 - Grocery.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 7.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 7.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 8.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -476,6 +481,10 @@
     <None Include="Features\Product Registration\Flow 32 - Grocery.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 32 - Grocery.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 7.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 7.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 8.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

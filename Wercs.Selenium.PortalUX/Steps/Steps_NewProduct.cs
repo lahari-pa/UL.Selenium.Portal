@@ -2407,6 +2407,50 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
 		}
 
+		[StepDefinition(@"The VOC intended use text is shown: (.*)")]
+		public void VOCIntendedUseTextMatches(string text)
+		{
+			var displayedStatements = new NewProduct().AllVOCStatements();
+			Report.IsTrue(displayedStatements.Contains(text), "The VOC Intended Use text was not as expected: '" + text + "'", "The VOC Intended Use text matched as expected: '" + text + "'");
+		}
+		[StepDefinition(@"in the VOC Limits table, the (Use|VOC Compliance Limit|Regulation) column should contain the value: (.*)")]
+		public void VOCLimitsTableContainsUse(string column, string valueExpected)
+		{
+			var displayed = new NewProduct().GetDisplayedVocLimitsWithUnits();
+			if (column == "Use")
+			{
+				Report.IsTrue(displayed.Any(x => x.Use == valueExpected),
+					string.Format("The VOC Limits table did not contain an entry with use: '{0}'", valueExpected),
+					string.Format("The VOC Limits table contained an entry with use: '{0}' as expected", valueExpected));
+			}
+			if (column == "VOC Compliance Limit")
+			{
+				Report.IsTrue(displayed.Any(x => x.VocComplianceLimit == valueExpected),
+					string.Format("The VOC Limits table did not contain an entry with use: '{0}'", valueExpected),
+					string.Format("The VOC Limits table contained an entry with use: '{0}' as expected", valueExpected));
+			}
+
+			if (column == "Regulation")
+			{
+				Report.IsTrue(displayed.Any(x => x.Regulation == valueExpected),
+					string.Format("The VOC Limits table did not contain an entry with use: '{0}'", valueExpected),
+					string.Format("The VOC Limits table contained an entry with use: '{0}' as expected", valueExpected));
+			}
+		}
+
+		[StepDefinition(@"The VOC content in g/L message shows the value: (.*)")]
+		public void VOCContentMessageShowsTheValue(string value)
+		{
+			var vocContentValue = new NewProduct().VOCContentInGPerL();
+			Report.IsTrue(vocContentValue.Trim() == value, "The value for VOC content in g/L was not as expected. The value showing is: " + vocContentValue + " The expected value was: " + value, "The VOC content in g/L value was as expected: " + value);
+		}
+
+		[StepDefinition(@"The VOC Summary page contains the statement with the text: (.*)")]
+		public void VOCSummaryContainsStatement(string value)
+		{
+			var statements = new NewProduct().AllVOCStatements();
+			Report.IsTrue(statements.Contains(value), "The statement with text: " + value + " was not showing on the VOC Summary page", "The statement with text: " + value + " was showing on the VOC summary page as expected.");
+		}
 		public void SelectTCLPElementOptionsToNo(List<string> elements)
 		{
 			var newProduct = new NewProduct();

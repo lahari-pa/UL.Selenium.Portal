@@ -1877,8 +1877,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Delay.Seconds(Delay.SpeedFactor * 1);
 					Matches = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 				}
-				var MatchingNameValue = Matches.FirstOrDefault(x => x.FindElement(By.XPath(".//span[@class='component-name']"), 2).GetValue().Trim().ToLower() == ingredient.ComponentName.Trim().ToLower());
-
+				// Null reference exception on .GetValue() if Matches is exhausted to the end due to "Loading more results" row at the bottom (no span with component-name)
+				var matchesComponentName = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]//span[@class='component-name']"), 2);
+				var MatchingNameValue = matchesComponentName.FirstOrDefault(x => x.GetValue().Trim().ToLower() == ingredient.ComponentName.Trim().ToLower());
 				if (MatchingNameValue == null)
 				{
 					// No matching name entry was found, so we take the first one just in case we are looking for a partial match!
@@ -1891,7 +1892,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					MatchedEntry = MatchingNameValue;
 					// We have found a match by the component name! So we should update our CAS Number field
-					ingredient.CASNumber = MatchingNameValue.FindElement(By.XPath(".//span[2]"), 2).GetValue();
+					ingredient.CASNumber = MatchingNameValue.FindElement(By.XPath(".//following-sibling::span[@class='text-muted']"), 2).GetValue();
 					Report.Info("Selecting the first search result which matched on chemical name: " + ingredient.ComponentName + " with CAS: " + ingredient.CASNumber);
 				}
 			}
@@ -3040,19 +3041,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return null;
 			}
-
+			// James
+			// Previously using static indices for each column in the table (Use | Compliance Limits | Units | Regulation)
+			// but the 'units' column is sometimes ommited causing null ref exception
 			var rows = tableElement.FindElements(By.XPath(".//tbody//tr"), 2);
+			// Fetch the indices for each column from the headings by name.
+			var columnHeadings = tableElement.FindElements(By.XPath(".//thead//th"), 2).ToList();
+			int getIndex;
+			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Use"));
+			// If the returned index for any column name is -1, we return a null string for that property.
+			var useInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "VOC Compliance Limit"));
+			var complianceInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Units"));
+			var unitsInd = getIndex == -1 ? null : (getIndex + 1).ToString();
+			getIndex = columnHeadings.IndexOf(columnHeadings.FirstOrDefault(x => x.Text == "Regulation"));
+			var regulationInd = getIndex == -1 ? null : (getIndex + 1).ToString();
 			foreach (var row in rows)
 			{
-				var use = row.FindElement(By.XPath(".//td[1]"), 2).GetValue();
-				var voccompliancelimit = row.FindElement(By.XPath(".//td[2]"), 2).GetValue();
-				var units = row.FindElement(By.XPath(".//td[3]"), 2).GetValue();
-				var regulation = row.FindElement(By.XPath(".//td[4]"), 2).GetValue();
+				var use = useInd == null ? null : row.FindElement(By.XPath(".//td[" + useInd + "]"), 2).GetValue();
+				var voccompliancelimit = complianceInd == null ? null : row.FindElement(By.XPath(".//td[" + complianceInd + "]"), 2).GetValue();
+				var units = unitsInd == null ? null : row.FindElement(By.XPath(".//td[" + unitsInd + "]"), 2).GetValue();
+				var regulation = regulationInd == null ? null : row.FindElement(By.XPath(".//td[" + regulationInd + "]"), 2).GetValue();
 				retList.Add(new VocLimitsWithUnits() { Use = use, VocComplianceLimit = voccompliancelimit, Units = units, Regulation = regulation });
 			}
-
 			return retList;
-
 		}
 
 		public List<VocPercentForStates> GetDisplayedVocPercentForEachState()
@@ -3935,6 +3948,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return null;
 			}
+		}
+
+		public string VOCContentInGPerL()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(), 'VOC content in g/L'))]/b")).Text;
+		}
+
+		public List<string> AllVOCStatements()
+		{
+			var xPath = ".//div[@data-bind='html: field.field' and parent::div[@class='col-sm-12']]";
+			return containerElement.FindElements(By.XPath(xPath), 2).Select(x => x.Text.Trim()).ToList();
+		}
+
+		// James
+		// Click an individual checkbox by section and value. (check if unchecked, uncheck if checked). Report the checked state before and after.
+		public bool ClickCheckbox(string section, string value)
+		{
+			var xPath = "//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),'" + section + "')]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox']";
+			var box = containerElement.FindElement(By.XPath(xPath), 2);
+			if (box.Checked())
+			{
+				Report.Info(string.Format("The checkbox for section '{0}' and option '{1}' is checked. It is now being unchecked", section, value));
+				return box.TryClick();
+			}
+			Report.Info(string.Format("The checkbox for section '{0}' and option '{1}' is unchecked. It is now being checked", section, value));
+			return box.TryClick();
 		}
 	}
 

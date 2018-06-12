@@ -646,10 +646,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			@"I call Shared Step 57794 \(Confirm VOC \(SCAQMD\) step title, Confirm ACP question shown  - Select No - Happy Path\)")]
 		public void GivenICallSharedStepConfirmVOCSCAQMDStepTitleConfirmACPQuestionShown_SelectNo_HappyPath()
 		{
+			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.SetTheSectionOptionTo(
+			TestReport.StartStep(string.Format("I should see the '{0}' page",
+				"Volatile Organic Compounds (VOC) for South Coast Air Quality Management District (SCAQMD) and Canada"));
+			MyStepsNewProduct.GivenIShouldSeeXPage("Volatile Organic Compounds (VOC) for South Coast Air Quality Management District (SCAQMD) and Canada");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
-				"No");
+				"No"));
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
 		}
 
 		[StepDefinition(
@@ -1240,8 +1245,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.ThenIConfirmThatTheVOCAnalysisDateIsShowing();
 			TestReport.StartStep("I confirm that I see todays VOC Analysis Date");
 			MyNewProduct.ThenIConfirmThatISeeTodaysVOCAnalysisDate();
-			TestReport.StartStep("In the Volatile Organic Compound Summary page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compound Summary");
+			//TestReport.StartStep("In the Volatile Organic Compound Summary page I click Continue");
+			//MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compound Summary");
 		}
 
 		[StepDefinition(@"I call Shared Step 42214 \(Delete a Product from the Product grid\) to delete product: (.*)")]
@@ -1679,6 +1684,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
 			TestReport.StartStep("I should see the Ingredients Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
+			TestReport.StartStep("I add the ingredient " + name + " at 100%");
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
 			MyNewProductSteps.AddIngredients(table);
@@ -2223,6 +2229,90 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep(
 				@"I click the browse button for label: Executive Order from the CARB and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
 			MyNewProductSteps.UploadPDFFile("Executive Order from the CARB", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep("Clicking continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
+
+		[StepDefinition(@"I call Shared Step 26897 \(Product Characteristics - Solid only available - continue\)")]
+		public void SharedProductCharacteristics_SolidOnlyAvailable_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Product Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
+			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
+			TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
+			MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
+			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?", "No");
+			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
+			{
+				TestReport.StartStep("I set the Select the best Water Solubility description option to: Soluble in water");
+				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
+			}
+			TestReport.StartStep("Clicking continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+		[StepDefinition(@"I call Shared Step 57590 \(Enter Pesticide Data - United States \(with EPA number\)\)")]
+		public void SharedEnterPesticideData_UnitedStatesWithEPANumber()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes");
+			MyNewProductSteps.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "Yes");
+			TestReport.StartStep("I add the EPA Registration Number: 72315-6");
+			MyNewProductSteps.IAddTheEPARegistrationNumber("72315-6");
+			TestReport.StartStep("Clicking continue in the Pesticide Details page");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Pesticide Details");
+		}
+
+		[StepDefinition(@"I call Shared Step 57508 \(VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all States - Continue - Happy Path\)")]
+		public void SharedVOCSCAQMDCanada_YesLowSolidYesApplyToAllStates_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
+			TestReport.StartStep("I set the Product is a Low Solid option to: Yes");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Low Solid", "Yes");
+			TestReport.StartStep("I set the VOC content in g/L contained in this product option to: 10.0");
+			MyNewProductSteps.SetTheSectionOptionTo("VOC content in g/L contained in this product", "10.0");
+			TestReport.StartStep("I set the Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison? option to: Yes");
+			MyNewProductSteps.SetTheSectionOptionTo("Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison?", "Yes");
+			TestReport.StartStep("Clicking continue in the VOC SCAQMD/Canada page");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("VOC SCAQMD/Canada");
+		}
+
+		[StepDefinition(@"I call Shared Step 57798 \(Additional Product Information- Pesticide, Canada Only - No to everything else, Continue\)")]
+		public void SharedAdditionalProductInformation_Pesticide_CanadaOnly_NoToAll_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct MyNewProduct = new NewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
+			var countrySold = MyNewProduct.GetOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+			TestReport.StartStep("I set the Select countries the product may be sold in option to: Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			TestReport.StartStep("I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Which one best describes your product", "Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			TestReport.StartStep("I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			TestReport.StartStep("I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 		
 	}
