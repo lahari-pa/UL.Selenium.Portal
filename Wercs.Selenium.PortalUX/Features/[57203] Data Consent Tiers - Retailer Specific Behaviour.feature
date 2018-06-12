@@ -14,6 +14,7 @@ Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
 
 Scenario: [57206] Retailer specific - CVS
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: CVS
 Then I confirm that there is a section labeled: CVS
@@ -34,7 +35,8 @@ And I confirm the excel file saved as CVSExcelFile can be opened and contains da
 # You should be returned to the main Retail Partner page.
 
 Scenario: [57211] Retailer specific - Costco
-Given I Login into WERCSmart Portal - data consent Account
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: Costco
 And I confirm that: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
@@ -43,29 +45,31 @@ When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.costco.com/sustainability-environment.html
 And I close the window that opened
 
-When I click the Products in Scope button and confirm that an html file is produced called Report_DataUsageTier_*.htm and save as CostcoHTMLFile
-And I confirm the html file saved as CostcoHTMLFile can be opened and contains text: Unable to generate report since no records were found
-#Then I click the Products in Scope button and confirm that an excel file is produced called CO_Report_DataUsageTier_<Date>.xlsx and save as CostcoExcelFile
-#And I confirm the excel file saved as CostcoExcelFile can be opened and contains data
+#When I click the Products in Scope button and confirm that an html file is produced called Report_DataUsageTier_*.htm and save as CostcoHTMLFile
+#And I confirm the html file saved as CostcoHTMLFile can be opened and contains text: Unable to generate report since no records were found
+Then I click the Products in Scope button and confirm that an excel file is produced called CO_Report_DataUsageTier_<Date>.xlsx and save as CostcoExcelFile
+And I confirm the excel file saved as CostcoExcelFile can be opened and contains data
 
 
 Scenario: [57214] Retailer specific - Dollar Tree
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: Dollar Tree
-And I confirm that: Dollar Tree requires suppliers of Cleaning and Health & Beauty products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
+And I confirm that: Dollar Tree requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2 permissions. is showing under the Data Consent Tiers heading
 And I should not see the More Information hyperlink
 When I click the Products in Scope button and confirm that an excel file is produced called DT_Report_DataUsageTier_<Date>.xlsx and save as DollarTreeExcelFile
-#And I confirm the excel file saved as DollarTreeExcelFile can be opened and contains data
+And I confirm the excel file saved as DollarTreeExcelFile can be opened and contains data
 
 Scenario: [57221] Retailer specific - Target
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: Target
 And I confirm that: Target requests suppliers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under the Data Consent Tiers heading
 
 When I click the More Information hyperlink
-Then I check that the current URL contains: https://corporate.target.com/corporate-responsibility/sustainability/sustainable-products
+Then I check that the current URL contains: https://corporate.target.com/corporate-responsibility/planet/sustainable-products
 And I close the window that opened
 
 When I click the Products in Scope button and confirm that an excel file is produced called TG_Report_DataUsageTier_<Date>.xlsx and save as TargetExcelFile
@@ -73,6 +77,7 @@ And I confirm the excel file saved as TargetExcelFile can be opened and contains
 
 Scenario: [57223] Retailer specific - Walgreens
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: Walgreens
 And I confirm that: Walgreens requests suppliers of Cleaning and Health & Beauty products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
@@ -86,9 +91,10 @@ And I confirm the excel file saved as WalgreensExcelFile can be opened and conta
 
 Scenario: [57225] Retailer specific - Walmart
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: Wal-Mart
-And I confirm that: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. is showing under the Data Consent Tiers heading
+And I confirm that: Walmart requires suppliers of formulated products in the following categories to grant Tier 2.1 and Tier 2.2 permissions: Cleaning, Health and Beauty, OTC - Over the Counter, Nutritional Supplements, Battery and Battery-containing Products and Lawn and Garden is showing under the Data Consent Tiers heading
 
 When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.walmartsustainabilityhub.com/sustainable-chemistry
@@ -100,6 +106,7 @@ And I confirm the excel file saved as WalmartExcelFile can be opened and contain
 Scenario: [57229] Retailer specific - Canadian Tire
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: Canadian Tire
 And I confirm that: Canadian Tire requires suppliers of formulated products to grant Tier 2.1 and Tier 2.2 permissions. is showing under the Data Consent Tiers heading
@@ -111,7 +118,9 @@ And I confirm the excel file saved as CanadianTireExcelFile can be opened and co
 
 Scenario: [69112] Retailer specific - Topco
 
-Given I Login into WERCSmart Portal - data consent Account
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: TopCo
 And I confirm that: This recipient does not require additional data consent tiers at this time. is showing under the Data Consent Tiers
 

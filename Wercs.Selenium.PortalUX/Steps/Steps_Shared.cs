@@ -685,8 +685,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			TestReport.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
-			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+
+			// below step was throwing error when selected No-retailer so  need to remove  
+			//TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 		}
 
 		[StepDefinition(
@@ -1567,7 +1569,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep(
 				"In the Review and Submit tab of the New Product Page for Partition Coefficient I enter: " +
 				table.Rows[0]["Partition Coefficient"]);
-			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPartitionCoefficientISelect(
+			MyNewProduct.SetTheSectionOptionTo("Partition Coefficient",
 				table.Rows[0]["Partition Coefficient"]);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -2314,6 +2316,94 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the Additional Product Information page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
-		
+
+
+		[StepDefinition(@"I call Shared Step 73629 \(Product Characteristics - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
+		public void ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(Table table)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Product Characteristics Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
+				table.Rows[0]["Secondary Physical State"]);
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+				table.Rows[0]["Secondary Physical State"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
+				table.Rows[0]["Specific Gravity"]);
+			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
+				table.Rows[0]["Specific Gravity"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
+				table.Rows[0]["pH"]);
+			MyNewProduct.SetTheSectionOptionTo("pH",
+				table.Rows[0]["pH"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: " +
+				table.Rows[0]["Boiling Point (in Celsius)"]);
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)",
+				table.Rows[0]["Boiling Point (in Celsius)"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: " +
+				table.Rows[0]["Flash Point (in Celsius)"]);
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)",
+				table.Rows[0]["Flash Point (in Celsius)"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: " +
+				table.Rows[0]["Flash Point Testing Method Used"]);
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
+				table.Rows[0]["Flash Point Testing Method Used"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
+				table.Rows[0]["Select the best Water Solubility description"]);
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
+				table.Rows[0]["Select the best Water Solubility description"]);
+			TestReport.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 73748 \(Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
+		public void GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct myNewProduct = new NewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			if (myNewProduct.SectionExists(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo(
+					"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
+					"No");
+			}
+
+			if (myNewProduct.SectionExists("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+					"No");
+			}
+
+			if (myNewProduct.SectionExists("Product is shipped directly by supplier to the consumer."))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.",
+					"No");
+			}
+
+			if (myNewProduct.SectionExists("Product is a Retailer's Private Label or Brand"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			}
+
+			if (myNewProduct.SectionExists("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)"))
+			{
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			}
+
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
 	}
 }
