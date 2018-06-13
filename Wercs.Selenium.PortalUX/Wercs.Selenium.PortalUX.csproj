@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -537,9 +536,6 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.WebDriver.IEDriver.3.9.0\build\Selenium.WebDriver.IEDriver.targets'))" />
-    <Error Condition="!Exists('packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.WebDriver.ChromeDriver.2.35.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
-    <Error Condition="!Exists('packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('packages\Safeware.SeleniumUtilities.2.1.7\build\Safeware.SeleniumUtilities.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Safeware.SeleniumUtilities.2.1.7\build\Safeware.SeleniumUtilities.targets'))" />
   </Target>
   <PropertyGroup>
@@ -551,11 +547,7 @@ IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)$(TargetNam
 IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)SafewareSeleniumUtilities.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
 IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)SafewareReportingPlugin.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
 IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)TReVor.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)ResourcePool.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
-
-rem ##### Copy chromedriver.exe and iedriverserver.exe from packages to bin #####
-xcopy "$(SolutionDir)\packages\Selenium.WebDriver.ChromeDriver.2.35.0\driver\win32\chromedriver.exe" "$(TargetDir)" /r /y
-xcopy "$(SolutionDir)\packages\Selenium.WebDriver.IEDriver.3.9.0\driver\iedriverserver.exe" "$(TargetDir)" /r /y</PostBuildEvent>
+IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)ResourcePool.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
   <PropertyGroup>
