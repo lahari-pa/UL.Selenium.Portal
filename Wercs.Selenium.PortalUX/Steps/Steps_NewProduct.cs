@@ -2462,6 +2462,49 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Successfully set the input to 'No' in section: '" + section + "'");
 			}
 		}
+
+		// Replace with 'ISeeXPage' if there is a problem with a required field missing from the test step
+		[StepDefinition("I check the new page has loaded with no required field error. Navigating from: (.*) to: (.*)")]
+		public void NewPageLoadedNoRequiredFieldError(string oldPage, string newPage)
+		{
+			var myNewProduct = new NewProduct();
+			int wait = 0;
+			while (wait < 5)
+			{
+				// If the new page has loaded we are happy to return
+				if (myNewProduct.WaitForSection(newPage, 1))
+				{
+					Report.Success("The page: '" + newPage + "' has loaded");
+					Report.Screenshot();
+					return;
+				}
+				if (myNewProduct.ErrorMessage() == "This is a required field." && myNewProduct.WaitForSection(oldPage, 1))
+				{
+					var section = myNewProduct.SectionWithRequiredFieldError();
+					Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
+					var options = myNewProduct.GetAllOptionsForSection(section);
+					if (options.Contains("Yes") && options.Contains("No"))
+					{
+						myNewProduct.SetOptionInSection(section, "No");
+					}
+					else
+					{
+						SelectFirstOptionInSection(section);
+					}
+					Report.Info("Clicking continue");
+					ClickContinue();
+					if (myNewProduct.WaitForSection(newPage))
+					{
+						Report.Info("The new page has loaded");
+						Report.Screenshot();
+						return;
+					}
+				}
+				wait++;
+			}
+			Report.Failure("Did not see the Required field error message, but the new page was not loaded");
+			Report.Screenshot();
+		}
 	}
 }
 

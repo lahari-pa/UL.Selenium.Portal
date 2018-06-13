@@ -3440,7 +3440,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var radios = containerElement.FindElements(By.XPath(xpath), 2);
 			return radios == null ? 0 : radios.Count;
 		}
-
+		// James
+		// Currently deals with select (option) and input (radio)
 		public List<string> GetAllOptionsForSection(string section)
 		{
 			var optionsText = new List<string>();
@@ -3450,8 +3451,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();
 				return optionsText;
 			}
-			var xpath = @"//div[./label[contains(text(), '" + section + "')]]/following-sibling::div//div[@class='radio']/label/span";
-			optionsText = containerElement.FindElements(By.XPath(xpath), 2).Select(x => x.Text).ToList();
+			//var xpath = @"//div[./label[contains(text(), '" + section + "')]]/following-sibling::div//div[@class='radio']/label/span";
+			//optionsText = containerElement.FindElements(By.XPath(xpath), 2).Select(x => x.Text).ToList();
+			optionsText = matchingElements.Select(x => x.FindElement(By.XPath(@"./following-sibling::span"), 2).Text).ToList();
 			return optionsText;
 		}
 
@@ -3975,6 +3977,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Report.Info(string.Format("The checkbox for section '{0}' and option '{1}' is unchecked. It is now being checked", section, value));
 			return box.TryClick();
+		}
+		// James
+		// If a shared step does not specify a compulsory field input, fetch that section name so we can select an option and continue test after reporting the fail
+		public string SectionWithRequiredFieldError()
+		{
+			try
+			{
+				var xPath = "//div[.//p[@class='form-error' and .//span[contains(text(),'This is a required field.')]] and @class='form-group has-feedback has-error']//label[@class='control-label']";
+				var section = containerElement.FindElement(By.XPath(xPath), 2);
+				return section.Text;
+			}
+			catch (Exception)
+			{
+				return null;
+			}
 		}
 	}
 
