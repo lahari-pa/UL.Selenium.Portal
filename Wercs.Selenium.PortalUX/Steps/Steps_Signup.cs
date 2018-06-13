@@ -15,10 +15,11 @@ using WERCSmart;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
-	[Binding, Scope(Tag = "Signup")]
-	class StepsSignup
+	[Binding, Scope(Tag = "Signup"), Scope(Tag = "WERCSmart_Signup")]
+	public class StepsSignup
 	{
 		[StepDefinition(@"the signup page should appear")]
+		[StepDefinition(@"\[WERCSmart] The signup page should appear")]
 		public void ThenTheSignupPageShouldAppear()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- the signup page should appear");
@@ -158,6 +159,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		[StepDefinition(@"I define the user: (.*) with the following parameters:")]
+		[StepDefinition(@"\[WERCSmart] I define the user: (.*) with the following parameters:")]
 		public void DefineUser(string savedAs, Table parameters)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Set up user saved as: '" + savedAs + "'");
@@ -199,6 +201,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		[StepDefinition(@"I enter signup email for user: (.*)")]
+		[StepDefinition(@"\[WERCSmart] I enter signup email for user: (.*)")]
 		public void GivenIEnterSignupEmailUser(string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter sign up email for user: " + savedAs);
@@ -377,6 +380,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		[StepDefinition(@"I confirm signup email for user: (.*)")]
+		[StepDefinition(@"\[WERCSmart] I confirm signup email for user: (.*)")]
 		public void GivenIConfirmSignupEmailUser(string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter confirm sign up email for user: " + savedAs);
@@ -395,6 +399,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"\[WERCSmart] I click on submit")]
 		[StepDefinition(@"I click on submit")]
 		public void GivenIClickOnSubmit()
 		{
@@ -427,6 +432,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"the signup thank you page should appear")]
+		[StepDefinition(@"\[WERCSmart] The signup thank you page should appear")]
 		public void ThenTheSignupThankYouPageShouldAppear()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- The signup thank you page should appear");
@@ -454,6 +460,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I save the current emails in the inbox for user saved as: (.*)")]
+		[StepDefinition(@"\[WERCSmart] I save the current emails in the inbox for user saved as: (.*)")]
 		public void GivenISaveTheCurrentEmailsInTheInboxFor(string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I save the current emails in this inbox so I can locate the new one when it arrives");
@@ -472,6 +479,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"there (should|should not) be a new email for user: (.*) from: (.*) with the title: (.*)")]
+		[StepDefinition(@"\[WERCSmart] There (should|should not) be a new email for user: (.*) from: (.*) with the title: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
@@ -500,8 +508,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 						emailFrom = "wercsmartcustomer@ul.com";
 					}
 				}
+				Report.Info("Expecting email from: " + emailFrom);
+				
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+				if (user == null)
+				{
+					Report.Error("Failed to find a WERCSmart User saved as: " + savedAs);
+				}
 
+				Report.Info("Checking for email differences");
 				if (EmailFunctions.WaitForInboxDifferences(user.Email))
 				{
 					CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
@@ -545,7 +560,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void CheckForEmailDifferences(WERCSmartUser user, string emailFrom, string title, bool should = true)
 		{
 			var differences = EmailFunctions.GetInboxDifferences(user.Email);
+
+			Report.Info("Checking that differences have been found...");
+			if (differences.FirstOrDefault() == null)
+			{
+				Report.Error("No emails found");
+				return;
+			}
+
+			Report.Info("Emails have been found!");
 			var matchingEmail = differences.FirstOrDefault(x => x.From.FirstOrDefault().Address.ToLower() == emailFrom && x.Subject == title);
+			Report.Info("Checking that a matching email has been found");
 
 			if (should)
 			{
@@ -570,6 +595,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"the email should contain a link to set up the WERCSmart account")]
+		[StepDefinition(@"\[WERCSmart] The email should contain a link to set up the WERCSmart account")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a link the email which sets up the WERCSmart account");
@@ -629,6 +655,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		[StepDefinition(@"I click on the link I should see the WERCSmart new account page")]
+		[StepDefinition(@"\[WERCSmart] I click on the link I should see the WERCSmart new account page")]
 		public void WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- When I click on the link I should see the WERCSmart new account page");
@@ -651,6 +678,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I enter the information into the new user form for user saved as: (.*)")]
+		[StepDefinition(@"\[WERCSmart] I enter the information into the new user form for user saved as: (.*)")]
 		public void WhenIEnterTheFollowingInformationIntoTheNewUserForm(string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I enter the data in the table into the new account form.");
@@ -804,50 +832,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I create a user account with the following parameters saved as: (.*)")]
+		[StepDefinition(@"\[WERCSmart] I create a user account with the following parameters saved as: (.*)")]
 		public void CreateNewStandardAccount(string savedAs, Table parameters)
 		{
-			try
-			{
-				var stepsLogin = new StepsLogin();
-				DefineUser(savedAs, parameters);
-				GlobalParameters.StepCount++;
-				GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
-				GlobalParameters.StepCount++;
-				stepsLogin.GivenIClickOnTheNewToWercsmartLink();
-				GlobalParameters.StepCount++;
-				ThenTheSignupPageShouldAppear();
-				GlobalParameters.StepCount++;
-				GivenIEnterSignupEmail(savedAs);
-				GlobalParameters.StepCount++;
-				GivenIConfirmSignupEmailUser(savedAs);
-				GlobalParameters.StepCount++;
-				GivenIClickOnSubmit();
-				GlobalParameters.StepCount++;
-				ThenTheSignupThankYouPageShouldAppear();
-				GlobalParameters.StepCount++;
-				ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "WERCSmartCustomer@ul.com", "Link to create WERCSmart Account");
-				GlobalParameters.StepCount++;
-				ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-				GlobalParameters.StepCount++;
-				WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-				GlobalParameters.StepCount++;
-				WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-				GlobalParameters.StepCount++;
-				WhenInTheNewUserFormIClickOnContinue();
-				GlobalParameters.StepCount++;
-				ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm();
-				GlobalParameters.StepCount++;
-				EnterTheFollowingIntoSecurityQuestions(savedAs);
-				GlobalParameters.StepCount++;
-				EnterPinForUser(savedAs);
-				GlobalParameters.StepCount++;
-				WhenInTheNewUserFormIClickOnContinue();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			TestReport.UseSubSteps = true;
+			var stepsLogin = new StepsLogin();
+			DefineUser(savedAs, parameters);
+			GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			stepsLogin.GivenIClickOnTheNewToWercsmartLink();
+			ThenTheSignupPageShouldAppear();
+			GivenIEnterSignupEmailUser(savedAs);
+			GivenIConfirmSignupEmailUser(savedAs);
+			GivenIClickOnSubmit();
+			ThenTheSignupThankYouPageShouldAppear();
+			ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<sitenotification>", "Link to create WERCSmart Account");
+			ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			WhenInTheNewUserFormIClickOnContinue();
+			ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm();
+			EnterTheFollowingIntoSecurityQuestions(savedAs);
+			EnterPinForUser(savedAs);
+			WhenInTheNewUserFormIClickOnContinue();
+			TestReport.UseSubSteps = false;
 		}
 
 	}

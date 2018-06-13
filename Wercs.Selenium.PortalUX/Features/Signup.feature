@@ -3,7 +3,7 @@
 @PaymentMethods
 @Login
 @Homepage
-@Signup
+@WERCSmart_Signup
 @MyAccount
 @NewProduct
 @ProductGrid

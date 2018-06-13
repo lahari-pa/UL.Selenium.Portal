@@ -4,7 +4,7 @@
 @Signup
 @RetailPartners
 @wercsmart
-@run_Signup
+@run_RetailerPartners
 
 Feature: Retailer Partners
 

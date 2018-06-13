@@ -46,7 +46,7 @@ namespace Wercs.Selenium.PortalUX.Features
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UL Toys", null, ProgrammingLanguage.CSharp, new string[] {
                         "wercsmart",
-                        "run_ChooseGoodGuide",
+                        "run_ULToys",
                         "ConflictMinerals",
                         "WERCSmart_ChooseGoodGuide"});
             testRunner.OnFeatureStart(featureInfo);
@@ -90,7 +90,7 @@ namespace Wercs.Selenium.PortalUX.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[68368] UL Toys - Create a New Company")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "UL Toys")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ChooseGoodGuide")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ULToys")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ConflictMinerals")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WERCSmart_ChooseGoodGuide")]
         public virtual void _68368ULToys_CreateANewCompany()

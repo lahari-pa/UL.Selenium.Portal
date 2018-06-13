@@ -50,7 +50,7 @@ namespace Wercs.Selenium.PortalUX.Features
                         "PaymentMethods",
                         "Login",
                         "Homepage",
-                        "Signup",
+                        "WERCSmart_Signup",
                         "MyAccount",
                         "NewProduct",
                         "ProductGrid",
@@ -111,7 +111,7 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WERCSmart_Signup")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
@@ -263,7 +263,7 @@ testRunner.Then("I should see username for user saved as: SignupUser in the righ
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WERCSmart_Signup")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
@@ -323,7 +323,7 @@ testRunner.Then("Under the Enter Email text box the following errors should appe
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WERCSmart_Signup")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
@@ -364,7 +364,7 @@ testRunner.Given("In the popup error I click on Cancel", ((string)(null)), ((Tec
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WERCSmart_Signup")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
@@ -548,7 +548,7 @@ testRunner.Then("I should see username for user saved as: SignupUser in the righ
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WERCSmart_Signup")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]

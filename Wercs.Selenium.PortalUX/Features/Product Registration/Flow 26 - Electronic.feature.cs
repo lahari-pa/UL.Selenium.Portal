@@ -56,7 +56,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
                         "wercsmart",
                         "RetailPartners",
                         "SubEnrollment",
-                        "run_FLow28_AutoParts"});
+                        "run_Flow26_Electronic"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -108,7 +108,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow28_AutoParts")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow26_Electronic")]
         public virtual void _60671ComputerCombinationOfMonitorDesktop_RU001177()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60671] Computer (Combination of Monitor + Desktop) - RU001177", ((string[])(null)));

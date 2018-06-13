@@ -9,7 +9,7 @@
 @wercsmart
 @RetailPartners
 @SubEnrollment
-@run_FLow28_AutoParts
+@run_Flow28_AutoParts
 
 Feature: [64733] Flow 28 - Auto Parts
 

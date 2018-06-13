@@ -8,7 +8,7 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
-	[Binding, Scope(Tag = "Login")]
+	[Binding, Scope(Tag = "Login"), Scope(Tag = "WERCSmart_Login")]
 	class StepsLogin
 	{
 		[StepDefinition(@"I click on the Forgot Your Password Link")]
@@ -32,6 +32,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I click on the New to WERCSmart Link")]
+		[StepDefinition(@"\[WERCSmart] I click on the New to WERCSmart Link")]
 		public void GivenIClickOnTheNewToWercsmartLink()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Given I click on the new to WERCSmart link");

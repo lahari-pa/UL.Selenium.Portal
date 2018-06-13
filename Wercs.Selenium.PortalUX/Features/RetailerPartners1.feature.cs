@@ -51,7 +51,7 @@ namespace Wercs.Selenium.PortalUX.Features
                         "Signup",
                         "RetailPartners",
                         "wercsmart",
-                        "run_Signup"});
+                        "run_RetailerPartners"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -98,7 +98,7 @@ namespace Wercs.Selenium.PortalUX.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
         public virtual void _56881RetailerPartners_MainPageLayoutExistingSupplier()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56881] Retailer Partners - Main Page layout (existing supplier)", ((string[])(null)));
@@ -144,7 +144,7 @@ testRunner.And(@"Use this query to see the list of currently active retailers in
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
         public virtual void _56909RetailerDetailPage_RetailerDoesNotRequireSupplierIDButDoesRequireDataConsentTiers()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56909] Retailer Detail Page - Retailer does not require Supplier ID but does req" +
@@ -196,7 +196,7 @@ testRunner.And("The pie chart footer text should contain: % of your product port
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
         public virtual void _56914RetailerDetailPage_RetailerRequiresSupplierIDAndDataConsentTiers()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tie" +
@@ -246,7 +246,7 @@ testRunner.And("The pie chart footer text should contain: % of your product port
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
         public virtual void _56895RetailerPartners_MainPageLayoutNewSupplier()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56895] Retailer Partners - Main Page layout (New supplier)", ((string[])(null)));

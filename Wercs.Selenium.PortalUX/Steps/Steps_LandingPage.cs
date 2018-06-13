@@ -9,13 +9,14 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
-	[Binding, Scope(Tag = "LandingPage")]
+	[Binding, Scope(Tag = "LandingPage"), Scope(Tag = "WERCSmart_LandingPage")]
 	class StepsLandingPage
 	{
 
 		[StepDefinition(@"I go to the WERCSmart Log in")]
 		[StepDefinition(@"I go to the WERCSmart Log in")]
 		[StepDefinition(@"I click the login button")]
+		[StepDefinition(@"\[WERCSmart] I go to the WERCSmart Log in")]
 		public void ClickTheLoginButton()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click the WERCSmart login button");

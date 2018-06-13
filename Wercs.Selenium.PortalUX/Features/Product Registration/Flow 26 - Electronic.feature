@@ -9,7 +9,7 @@
 @wercsmart
 @RetailPartners
 @SubEnrollment
-@run_FLow28_AutoParts
+@run_Flow26_Electronic
 
 Feature: [64732] Flow 26 - Electronic
 

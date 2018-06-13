@@ -55,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
                         "DataSummarySheet",
                         "wercsmart",
                         "RetailPartners",
-                        "run_FLow13"});
+                        "run_Flow13"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -106,7 +106,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow13")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow13")]
         public virtual void _58753HairColorKit_RU000724()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[58753] Hair Color Kit - RU000724", ((string[])(null)));
