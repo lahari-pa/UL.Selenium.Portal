@@ -134,7 +134,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 
@@ -685,7 +685,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 
-			// below step was throwing error when selected No-retailer so  need to remove  
+			// below step was throwing error when selected No-retailer so  need to remove
 			//TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 		}
@@ -2487,6 +2487,57 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			TestReport.StartStep("In the Additional Product Information page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call Shared Step 70675 \(Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue\)")]
+		public void SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct myStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Secondary Physical State",
+				"Liquid"));
+			myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Specific Gravity",
+				"1.0"));
+			myStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "1.0");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"pH",
+				"10.2"));
+			myStepsNewProduct.SetTheSectionOptionTo("pH", "10.2");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Boiling Point (in Celsius)",
+				"120"));
+			myStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "120");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Flash Point (in Celsius)",
+				"55"));
+			myStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "55");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Flash Point Testing Method Used",
+				"Closed cup method"));
+			myStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Select the best Water Solubility description",
+				"100g/100ml"));
+			myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+		[StepDefinition(@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
+		public void SharedTransportationDetails2_DoNotShipInternationally_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct myStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Transportation Details 2 page");
+			myStepsNewProduct.GivenIShouldSeeXPage("Transportation Details 2");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"International Shipping when DOT Exemption taken?",
+				"I do not ship internationally and I do not know the classification"));
+			myStepsNewProduct.SetTheSectionOptionTo("International Shipping when DOT Exemption taken?", "I do not ship internationally and I do not know the classification");
+			TestReport.StartStep("In the Transportation Details 2 page I click continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 2");
 		}
 	}
 }

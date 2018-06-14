@@ -38,7 +38,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						break;
 					}
 
-					Report.IsTrue(selRetailPartners.ClickRetailer(retailer),"Failed to click retailer " + retailer + "!","Retailer " + retailer + " was selected successfully!");
+					Report.IsTrue(selRetailPartners.ClickRetailer(retailer), "Failed to click retailer " + retailer + "!", "Retailer " + retailer + " was selected successfully!");
 					GeneralUtilities.Wait_for_load_finish();
 					Report.Screenshot();
 
@@ -89,7 +89,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Subheading " + (expected ? "was not" : "was") + " showing as expected! Expected: '" + subheading + "', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
 				"Subheading " + (expected ? "was" : "was not") + " showing: '" + subheading + "', as expected!");
 			Report.Screenshot();
-			
+
 		}
 
 		[StepDefinition(@"I should see the following heading (.*)")]
@@ -138,7 +138,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				throw new Exception("Page failed to load!");
 			}
-			
+
 			Report.IsTrue(selRetailPartners.ClickRetailer(retailer),
 				"Failed to click retailer " + retailer + "!",
 				"Retailer " + retailer + " was selected successfully!");
@@ -157,7 +157,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ButtonsShowingInSection(string button, string section)
 		{
 			var buttons = new RetailParntersDetails().GetButtons(section);
-			Report.Info("Buttons showing: " + string.Join(", ",buttons));
+			Report.Info("Buttons showing: " + string.Join(", ", buttons));
 			Report.IsTrue(buttons.Contains(button.Trim()), "Failed to find the button: " + button + "!", "Succesfully found the button: " + button);
 		}
 
@@ -389,10 +389,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			int i = 0;
 			Report.Info("Waiting for up to 30 seconds for the file to appear in the downloads folder...");
-			while (!dir.Any() && i<30)
+			while (!dir.Any() && i < 30)
 			{
 				dir = Directory.GetFiles(downloadsFolder, "*_Report_DataUsage*.xlsx", SearchOption.AllDirectories);
-				Delay.Seconds(Delay.SpeedFactor*1);
+				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
 			}
 
@@ -409,7 +409,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm Excel File is downloaded with name: " + file);
 			try
 			{
-				Report.Info("Confirm " +  filetype + " file is downloaded with name: " + file);
+				Report.Info("Confirm " + filetype + " file is downloaded with name: " + file);
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 				Report.Info("Downloads folder: " + downloadsFolder);
 
@@ -430,24 +430,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I confirm the excel file saved as (.*) can be opened and contains data")]
 		public void ThenConfirmTheExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
-				Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
-				var File = Context.GetFromContext(savedAs);
-				if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
+			var File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
+				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
+				var FirstRow = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
+				bool Data = false;
+				for (int i = 1; i < ExcelUtils.Excel_GetNoRows(); i++)
 				{
-					var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
-					Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
-					var FirstRow = ExcelUtils.Excel_GetRow(0);
-					Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
-					bool Data = false;
-					for (int i = 1; i < ExcelUtils.Excel_GetNoRows(); i++)
-					{
-						var RowData = ExcelUtils.Excel_GetRow(i);
-						Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
-						Data = true;
-					}
-
-					Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+					var RowData = ExcelUtils.Excel_GetRow(i);
+					Report.Info("Row " + i + " had " + FirstRow[0] + ": " + RowData[0] + " and " + FirstRow[1] + ": " + RowData[1]);
+					Data = true;
 				}
+
+				Report.IsTrue(Data, "Excel did not contain any product data!", "Excel file contained product data, as expected!");
+			}
 		}
 
 		[StepDefinition(@"I confirm the html file saved as (.*) can be opened and contains text: (.*)")]
@@ -647,6 +647,47 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I should see Retailer tiles under the (All Retailers|Most Recent Retailers) heading")]
+		public void RetailerTilesUnderMostRecentRetailers(string heading)
+		{
+			var selRetailPartners = new RetailPartners();
+			if (heading == "All Retailers")
+			{
+				Report.IsTrue(selRetailPartners.TilesAppearBelowHeading("all-retailers"), "There were no tiles below heading: " + heading, "Tiles were showing below heading: " + heading);
+				return;
+			}
+			Report.IsTrue(selRetailPartners.TilesAppearBelowHeading("most-recent"), "There were no tiles below heading: " + heading, "Tiles were showing below heading: " + heading);
+		}
+
+		[StepDefinition(@"I confirm that the retailers shown under the Most Recent Retailers heading are not repeated under the All Retailers heading")]
+		public void RetailersShownUnderMostRecentHeadingAreNotRepeatedUnderAllRetailers()
+		{
+			var selRetailPartners = new RetailPartners();
+			bool anyMatch = selRetailPartners.AllRetailerTilesBelowHeading("most-recent").Intersect(selRetailPartners.AllRetailerTilesBelowHeading("all-retailers")).Any();
+			Report.IsTrue(!anyMatch, "There were retailers appearing under Most Recent Retailers which were repeated under All Retailers", "No Retailers under the Most Recent heading were repeated under the All Retailers heading");
+		}
+
+		[StepDefinition(@"I confirm that if the Retailer logo is not shown, then the Retailer name is shown in the Retailer tile")]
+		public void RetailerLogoIsNotShownThenRetailerNameIsShown()
+		{
+			var selRetailPartners = new RetailPartners();
+			var allRetailers = selRetailPartners.GetAllAvailableRetailers();
+			var count = allRetailers.Count;
+			for (int i = 1; i <= count; i++)
+			{
+				//string[] parts = allRetailers[i - 1].Split('/');
+				//var filename = parts[parts.Length - 1].Split('?')[0];
+				//var retailerCode = Path.GetFileNameWithoutExtension(filename).ToUpper();
+				var retailerName = selRetailPartners.AllRetailerNames()[i - 1];
+				if (!selRetailPartners.RetailerImageDisplayed(i))
+				{
+					Report.IsTrue(selRetailPartners.RetailerTextDisplayed(i),
+						"The Retailer logo for: '" + retailerName + "' was not displayed, and neither was the Retailer name, when it should be",
+						"The Retailer logo for: '" + retailerName + "' was not displayed, so the Retailer name was displayed as expected.");
+				}
+			}
 		}
 	}
 }

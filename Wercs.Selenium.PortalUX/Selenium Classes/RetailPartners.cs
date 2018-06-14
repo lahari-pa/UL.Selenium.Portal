@@ -84,7 +84,34 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetAllAvailableRetailers()
 		{
-			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).Select(x=>x.GetCssValue("background-image").Replace(@"""","").Replace("url(","").Replace(")","")).ToList();
+			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).Select(x => x.GetCssValue("background-image").Replace(@"""", "").Replace("url(", "").Replace(")", "")).ToList();
+		}
+		public bool TilesAppearBelowHeading(string heading)
+		{
+			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]")).Any();
+		}
+
+		public List<string> AllRetailerTilesBelowHeading(string heading)
+		{
+			return containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]//span[@class='sr-only']")).Select(x => x.Text).ToList();
+		}
+		public bool RetailerImageDisplayed(int tile)
+		{
+			var el = containerElement.FindElement(By.XPath(@".//div[starts-with(@class,'col-sm-3')][" + tile + "]/a"));
+			var backgorundImage = el.GetCssValue("background-image");
+			el.ScrollElementIntoView();
+			return backgorundImage != "none";
+		}
+
+		public bool RetailerTextDisplayed(int tile)
+		{
+			var el = containerElement.FindElement(By.XPath(@".//div[starts-with(@class,'col-sm-3')][" + tile + "]//span[@class='sr-only']"));
+			return el.Displayed;
+		}
+
+		public List<string> AllRetailerNames()
+		{
+			return containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]//span[@class='sr-only']")).Select(x => x.Text).ToList();
 		}
 	}
 
@@ -167,13 +194,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return this.containerElement
 					.FindElements(By.XPath(".//div[contains(@class,'data-consent')]//table//tbody//tr/td"), 2).Select(x => x.Text)
-					.ToList().Where(x=>x.Length>0).ToList();
+					.ToList().Where(x => x.Length > 0).ToList();
 			}
 			catch (Exception e)
 			{
 				return new List<string>();
 			}
-			
+
 		}
 
 		public bool SetDataConsentTier(string tier, bool trueFalse)
