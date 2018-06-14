@@ -100,7 +100,7 @@ Given I call Shared Step 57798 (Additional Product Information- Pesticide, Canad
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Polymethyl acrylate
 
-# Wrong step. CEPA question is displayed because previous step set the couuntries sold in to only Canada
+# Wrong step. CEPA question is displayed because previous step set the countries sold in to only Canada
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 Given I call Shared Step 57590 (Enter Pesticide Data - United States (with EPA number))
@@ -151,11 +151,14 @@ Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Option
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Then I should see the Data Acceptance Page
-
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
-
+# Data Acceptance and Summary verification
+And I should see the Data Acceptance Page
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And Type of Product should be showing the following option: Automotive Coating - SCAQMD any other coating type
+Then I switch to Data Acceptance page
 Given I navigate to the home page
+Then I delete the product: TestCase57905
 
 Scenario: [63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit
 
