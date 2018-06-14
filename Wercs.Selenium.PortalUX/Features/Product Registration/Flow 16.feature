@@ -294,7 +294,9 @@ Given I delete all products with UPC Number: saved as UPC59280
 
 Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Silver Battery
+Then I save the product information as: TestCase59280
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Silvery Battery
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
@@ -324,7 +326,14 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59280. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+# Data Acceptance and Summary verification
+And I should see the Data Acceptance Page
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And Type of Product should be showing the following option: Silver Battery
+Then I switch to Data Acceptance page
+Given I navigate to the home page
+Then I delete the product: TestCase59280
 
 Scenario: [59281] Water-Charged Cell - RU001543
 
