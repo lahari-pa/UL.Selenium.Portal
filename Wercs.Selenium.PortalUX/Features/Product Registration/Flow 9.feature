@@ -437,6 +437,8 @@ Given I call Shared 57753 (Create a New Registration via Register New Product (e
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type: Nutritional Supplements for Domesticated Animals - Continue - Happy Path)
 
+Then I save the product information as: TestCase58089
+
 Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
 Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
@@ -479,6 +481,8 @@ Given I call Shared 57753 (Create a New Registration via Register New Product (e
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Paint balls
 
+Then I save the product information as: TestCase58097
+
 Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
@@ -490,7 +494,8 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | CASNumber  | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | 18618-43-4 | 100     | false               | false       |            |
 
-# Sign out of WERCSmart
+Given I navigate to the home page
+Then I delete the product: TestCase58760
 
 Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 
