@@ -149,7 +149,7 @@ And I should only see the following options for Primary Physical State:
 And I set the Secondary Physical State to be: Granular
 And I set the water mixture question to: Yes
 Given in the New Product page I click Continue
-# Setting Additional Prodiuct Information
+# Setting Additional Product Information
 And I should see the Additional Product Information Page
 And In the Additional Information Page the check box for: United States should be: checked
 And In the Additional Information Page for Product has been classified using OSHA I select: No
@@ -221,7 +221,7 @@ And I set the Secondary Physical State to be: Granular
 And I set the water mixture question to: Yes
 And I set the water solubility description to: Completely soluble
 Given in the New Product page I click Continue
-# Setting Additional Prodiuct Information
+# Setting Additional Product Information
 And I should see the Additional Product Information Page
 And In the Additional Information Page the check box for: United States should be: checked
 And In the Additional Information Page for Product has been classified using OSHA I select: No

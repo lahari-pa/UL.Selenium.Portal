@@ -495,7 +495,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | 18618-43-4 | 100     | false               | false       |            |
 
 Given I navigate to the home page
-Then I delete the product: TestCase58760
+Then I delete the product: TestCase58097
 
 Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 

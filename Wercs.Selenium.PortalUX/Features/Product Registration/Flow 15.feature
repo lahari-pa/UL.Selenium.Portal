@@ -26,6 +26,8 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type: Lights, LED - Continue - Happy Path)
 
+Then I save the product information as: TestCase58760
+
 Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
 
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
@@ -66,6 +68,8 @@ Given I delete all products with UPC Number: saved as UPC58759
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type: Servers, Small-Scale - Continue - Happy Path)
+
+Then I save the product information as: TestCase58759
 
 # Shared 60935 replacing 57865 in test case
 

@@ -1430,7 +1430,7 @@ And in the New Product page I click Continue
 And I should see the Comments Page
 And in the New Product page I click Continue
 
-# Data Acceptance and Summary verification 
+# Data Acceptance and Summary verification
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
@@ -1482,7 +1482,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: test data
 
-# Data Acceptance and Summary verification 
+# Data Acceptance and Summary verification
 And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
