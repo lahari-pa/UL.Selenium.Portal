@@ -44,7 +44,14 @@ Given in the Additional Documents Request page I click Continue
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+# Data Acceptance and Summary verification
+And I should see the Data Acceptance Page
+Given I click the Summary button in the Data Acceptance window
+Then I switch to the Data Summary page
+And Type of Product should be showing the following option: Lights, LED
+Then I switch to Data Acceptance page
+Given I navigate to the home page
+Then I delete the product: TestCase58760
 
 Scenario: [58759] Servers, Small-Scale - RU001183
 
