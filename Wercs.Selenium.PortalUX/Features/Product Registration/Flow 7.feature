@@ -161,6 +161,7 @@ Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And Type of Product should be showing the following option: Automotive Coating - SCAQMD any other coating type
 Then I switch to Data Acceptance page
+
 Given I navigate to the home page
 Then I delete the product: TestCase57905
 

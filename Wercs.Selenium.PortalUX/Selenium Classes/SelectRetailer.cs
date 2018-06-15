@@ -48,5 +48,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]")).FirstOrDefault().TryClick();
 		}
+
+		public bool ClickClose()
+		{
+			return containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//i[@class='fa fa-close']")).FirstOrDefault().TryClick();
+		}
 	}
 }

@@ -3440,7 +3440,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var radios = containerElement.FindElements(By.XPath(xpath), 2);
 			return radios == null ? 0 : radios.Count;
 		}
-		// James
+
 		// Currently deals with select (option) and input (radio)
 		public List<string> GetAllOptionsForSection(string section)
 		{
@@ -3449,10 +3449,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
 			{
 				optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+				// Occasionally needs some time to refresh the options in the drop down depending on the previous selection
+				for (int i = 0; i < 5; i++)
+				{
+					optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+					if (optionsText.Count > 0)
+					{
+						break;
+					}
+					Delay.Seconds(1);
+				}
 				return optionsText;
 			}
-			//var xpath = @"//div[./label[contains(text(), '" + section + "')]]/following-sibling::div//div[@class='radio']/label/span";
-			//optionsText = containerElement.FindElements(By.XPath(xpath), 2).Select(x => x.Text).ToList();
 			optionsText = matchingElements.Select(x => x.FindElement(By.XPath(@"./following-sibling::span"), 2).Text).ToList();
 			return optionsText;
 		}
@@ -3958,13 +3966,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(), 'VOC content in g/L'))]/b")).Text;
 		}
 
-		public List<string> AllVOCStatements()
+		public List<string> AllAdditionalStatements()
 		{
 			var xPath = ".//div[@data-bind='html: field.field' and parent::div[@class='col-sm-12']]";
 			return containerElement.FindElements(By.XPath(xPath), 2).Select(x => x.Text.Trim()).ToList();
 		}
 
-		// James
 		// Click an individual checkbox by section and value. (check if unchecked, uncheck if checked). Report the checked state before and after.
 		public bool ClickCheckbox(string section, string value)
 		{
@@ -3978,7 +3985,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info(string.Format("The checkbox for section '{0}' and option '{1}' is unchecked. It is now being checked", section, value));
 			return box.TryClick();
 		}
-		// James
+
 		// If a shared step does not specify a compulsory field input, fetch that section name so we can select an option and continue test after reporting the fail
 		public string SectionWithRequiredFieldError()
 		{

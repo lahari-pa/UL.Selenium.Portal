@@ -339,18 +339,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selectRetailers.ClickDone();
 		}
 
-
-		[StepDefinition(@"In the 'Select retailers' window I (should|should not) see the following retailers:")]
+		// Added 'should only' parameter to check an exclusive list of Retailers
+		[StepDefinition(@"In the 'Select retailers' window I (should|should only|should not) see the following retailers:")]
 		public void CheckingCorrectRetailersAreShowing(string should, Table expected)
 		{
-			var showing = new SelectRetailers().GetListOfRetailers().Where(x => x.Trim() != "");
+			var showing = new SelectRetailers().GetListOfRetailers().Where(x => x.Trim() != "").ToList();
+			var checkedRetailers = showing;
 			Report.Info("Retailers showing were: " + string.Join(", ", showing));
-			bool expectedOrNot = should == "should";
+			bool expectedOrNot = should != "should not";
 			foreach (var row in expected.Rows)
 			{
 				Report.IsTrue(showing.Contains(row["Retailer"]) == expectedOrNot, (expectedOrNot ? "Did not find" : "Found") + " the retailer: " + row["Retailer"], "The retailer " + row["Retailer"] + (expectedOrNot ? " was" : " was not") + " showing, as expected!", false, false);
+				if (showing.Contains(row["Retailer"]))
+				{
+					checkedRetailers.Remove(row["Retailer"]);
+				}
 			}
-			Report.Screenshot();
+			if (should == "should only")
+			{
+				Report.IsTrue(checkedRetailers.Count == 0,
+					"There were displayed Retailers not included in the expected list:: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())),
+					"As expected the only displayed Retailers were those in the list: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())));
+			}
 		}
 
 		/// <summary>
@@ -1872,7 +1882,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void SelectFirstOptionInSection(string section)
 		{
 			NewProduct myProduct = new NewProduct();
-			Report.IsTrue(myProduct.SetOptionInSection(section, myProduct.GetAllOptionsForSection(section)[0]), "The option: " + myProduct.GetAllOptionsForSection(section)[0] + " could not be selected in section: " + section, "The option: " + myProduct.GetAllOptionsForSection(section)[0] + " was selected in section: " + section);
+			var options = myProduct.GetAllOptionsForSection(section);
+			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), "The option: " + options[0] + " could not be selected in section: " + section, "The option: " + options[0] + " was selected in section: " + section);
 		}
 
 		[StepDefinition(@"If Section: (.*) is visible, I select the first option")]
@@ -2410,7 +2421,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"The VOC intended use text is shown: (.*)")]
 		public void VOCIntendedUseTextMatches(string text)
 		{
-			var displayedStatements = new NewProduct().AllVOCStatements();
+			var displayedStatements = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(displayedStatements.Contains(text), "The VOC Intended Use text was not as expected: '" + text + "'", "The VOC Intended Use text matched as expected: '" + text + "'");
 		}
 		[StepDefinition(@"in the VOC Limits table, the (Use|VOC Compliance Limit|Regulation) column should contain the value: (.*)")]
@@ -2448,7 +2459,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"The VOC Summary page contains the statement with the text: (.*)")]
 		public void VOCSummaryContainsStatement(string value)
 		{
-			var statements = new NewProduct().AllVOCStatements();
+			var statements = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(statements.Contains(value), "The statement with text: " + value + " was not showing on the VOC Summary page", "The statement with text: " + value + " was showing on the VOC summary page as expected.");
 		}
 		public void SelectTCLPElementOptionsToNo(List<string> elements)
@@ -2504,6 +2515,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Failure("Did not see the Required field error message, but the new page was not loaded");
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I click close in the 'Select Retailers' window")]
+		public void ClickCloseSelectRetailersWindow()
+		{
+			Report.IsTrue(new SelectRetailers().ClickClose(), "The 'Select Retailers' Window was not closed", "The 'Select Retailers' Window was successfully closed.");
+		}
+
+		[StepDefinition(@"The message with text: (.*) is visble on the (.*) page")]
+		public void MessageVisibleOnPage(string message, string page)
+		{
+			var actualMessages = new NewProduct().AllAdditionalStatements();
+			Report.IsTrue(actualMessages.Any(x => x.Contains(message)),
+				string.Format("The message: '{0}' was not visble on the '{1}' page.", message, page),
+				string.Format("The message: '{0}' was visble on the '{1}' page as expected.", message, page));
 		}
 	}
 }

@@ -18,7 +18,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"the WERCSmart homepage should be loaded")]
 		public void ThenTheWercSmartHomepageShouldLoad()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
 			try
 			{
 				Report.Info("Making sure that the WERCSmart homepage is loaded");
@@ -40,7 +39,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I stay on the homepage with no activity until the inactivity popup appears")]
 		public void ThenStayOnTheHomepageWithNoActivityForMinutes()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Stay on the homepage with no activity until the inactivity popup appears");
 			try
 			{
 				// In order to do this we have to keep the SeleniumWebDriver Busy - cannot let it be idle for 10 minutes otherwise we will hit an error when we attempt to do something!
@@ -65,7 +63,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"Click (Yes|No) on the inactivity popup")]
 		public void GivenClickOnInactivityPopup(string button)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click " + button + " on inactivity popup");
 			try
 			{
 				Report.Info("Clicking " + button + " on inactivity popup");
@@ -97,7 +94,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see (.*) in the (header bar|user dropdown|navigation bar|main window|home page header|products grid)")]
 		public void ThenIShouldSeeTheUlwercSmartLogoInTheHeaderBar(string item, string area)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - " + item + " should be showing in the " + area);
 			try
 			{
 				switch (area)
@@ -225,7 +221,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I click on the triangle next to Product Information to (expand|collapse) the section")]
 		public void WhenIClickOnTheTraingleNextToProductInformation(string expandCollapse)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking on Triangle next to Product Information");
 			try
 			{
 				Report.Info("Clicking on Triangle next to Product Information to " + expandCollapse + " the section");
@@ -246,7 +241,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"the (Product Information|Alerts|Announcements) dialog should be (visible|hidden)")]
 		public void ThenProductInformationDialogShouldBe(string dialog, string visibility)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking if " + dialog + " dialog is " + visibility);
 			try
 			{
 				Report.Info("Checking if " + dialog + " dialog is visible");
@@ -289,7 +283,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the following states in the Legend:")]
 		public void ThenIShouldSeeTheFollowingStatesInTheLegend(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking contents of Pie Chart Legend");
 			try
 			{
 				Report.Info("Checking contents of Pie Chart Legend");
@@ -310,7 +303,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I see notifications in the (Alerts|Announcement) Panel")]
 		public void GivenISeeNotificationsInThePanel(string panel)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that notifications exist in the " + panel + " Panel");
 			try
 			{
 				Report.Info("Checking that notifications exist in the " + panel + " Panel");
@@ -328,7 +320,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"clicking on the top (Alert|Announcement) should direct me to the My Messages page")]
 		public void ThenClickingOnTheTopShouldDirectMeToTheMyMessagesPage(string panel)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Selecting top " + panel);
 			try
 			{
 				Report.Info("Clicking on the top Alert");
@@ -351,7 +342,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I confirm that I am taken to the My Messages (Alerts|Announcements) page")]
 		public void ThenIConfirmThatIAmTakenToTheMyMessagesAlertsPage(string page)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - My Messages " + page + " Page should load");
 			try
 			{
 				// ===== NEED TO KNOW WHERE THIS GOES BEFORE DOING THE NEXT PART ===== //
@@ -367,7 +357,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I navigate to the home page")]
 		public void ThenINavigateToTheHomePage()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Navigating to the Home Page");
 			try
 			{
 				Report.Info("Navigating to the Home Page");
@@ -386,7 +375,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the following filter options below My Products")]
 		public void GivenIShouldSeeTheFollowingFilterOptionsBelowMyProducts(Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking 'My Products' Filter Options");
 			try
 			{
 				Report.Info("Checking 'My Products' Filter Options");
@@ -408,7 +396,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I click More below the (Alerts|Announcements) Panel")]
 		public void ThenIClickBelowTheAlertsPanel(string panel)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking More below the " + panel + " Panel");
 			try
 			{
 				Report.Info("Clicking More below the " + panel + " Panel");
@@ -427,7 +414,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I (expand|collapse) the Navigation Menu")]
 		public void ThenIClickTheNavigationMenuIcon(string expand)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - " + (expand == "expand" ? "Expand" : "Collapse") + " the Navigation Menu");
 			try
 			{
 				Report.Info("Attempting to click the Navigation Menu Icon");

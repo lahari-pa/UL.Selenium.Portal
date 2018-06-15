@@ -7,6 +7,7 @@ using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using WERCSmart;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
@@ -2523,6 +2524,124 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStepsNewProduct.SetTheSectionOptionTo("International Shipping when DOT Exemption taken?", "I do not ship internationally and I do not know the classification");
 			TestReport.StartStep("In the Transportation Details 2 page I click continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 2");
+		}
+
+		[StepDefinition(@"I call Shared Step 62686 \(Enter Physical Property - Liquid - Without Water Solubility\)")]
+		public void SharedEnterPhysicalProperty_Liquid_WithoutWaterSolubility()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct myStepsNewProduct = new StepsNewProduct();
+			NewProduct myNewProduct = new NewProduct();
+			TestReport.StartStep(string.Format("'{0}' should be showing the value: '{1}'",
+				"Primary Physical State",
+				"Liquid"));
+			myStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
+			if (!myNewProduct.GetOptionsForSection("Primary Physical State").Contains("Liquid"))
+			{
+				Report.Info("Liquid was not set as the Primary Physical State by default, so selecting the option.");
+				myNewProduct.SetOptionInSection("Primary Physical State", "Liquid");
+			}
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Specific Gravity",
+				"10"));
+			myStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "10");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"pH",
+				"8"));
+			myStepsNewProduct.SetTheSectionOptionTo("pH", "8");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Boiling Point (in Celsius)",
+				"30"));
+			myStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "30");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Flash Point (in Celsius)",
+				"80"));
+			myStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "80");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Flash Point Testing Method Used",
+				"Not applicable/available"));
+			myStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Secondary Physical State",
+				"Liquid"));
+			myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+
+		[StepDefinition(@"I call Shared Step 49818 \(Beverage Regulatory Details\)")]
+		public void SharedBeverageRegulatoryDetails()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct myStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Product's container or liner contains Bisphenol A (BPA)",
+				"Yes"));
+			myStepsNewProduct.SetTheSectionOptionTo("Product's container or liner contains Bisphenol A (BPA)", "Yes");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Does your product contain a Prop 65 chemical?",
+				"Yes"));
+			myStepsNewProduct.SetTheSectionOptionTo("Does your product contain a Prop 65 chemical?", "Yes");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Percent of Alcohol in the Product (numeric entry only)",
+				"12.0"));
+			myStepsNewProduct.SetTheSectionOptionTo("Percent of Alcohol in the Product (numeric entry only)", "12.0");
+			TestReport.StartStep("In the Beverage Regulatory Details page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
+		}
+
+		[StepDefinition(@"I call Shared Step 71618 \(U. S. Department of Transportation \(DOT\) Classification - For Alcohol\)")]
+		public void SharedUSDepartmentOfTransportationDOTClassification_ForAlcohol()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct myStepsNewProduct = new StepsNewProduct();
+			NewProduct myNewProduct = new NewProduct();
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"UN Number",
+				"UN2789"));
+			myStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN2789");
+			TestReport.StartStep("I select the first valid option for section: 'Proper Shipping Name'");
+			myStepsNewProduct.SelectFirstOptionInSection("Proper Shipping Name");
+			var shippingName = myNewProduct.GetAllOptionsForSection("Proper Shipping Name")[0];
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Technical Name (if applicable)",
+				"Technical " + shippingName));
+			myStepsNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical " + shippingName);
+			TestReport.StartStep("I select the first valid option for section: 'Hazard Class (select)'");
+			myStepsNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Packing Group (select)",
+				"III"));
+			myStepsNewProduct.SetTheSectionOptionTo("Packing Group (select)", "III");
+			if (myNewProduct.GetOptionsForSection("Packing Group (select)").Contains("Choose..."))
+			{
+				Report.Info("Option 'III' was not available in section: 'Packing Group (select)' so selecting the first valid option");
+				myStepsNewProduct.SelectFirstOptionInSection("Packing Group (select)");
+			}
+			TestReport.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
+		}
+		[StepDefinition(@"I call Shared Step 73956 \(Go to Summary and verify data\) with product type: (.*)")]
+
+		public void SharedGoToSummaryAndVerifyData(string typeOfProduct)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct myStepsNewProduct = new StepsNewProduct();
+			GlobalSteps myGlobalSteps = new GlobalSteps();
+			TestReport.StartStep("I should see the Data Acceptance Page");
+			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
+			TestReport.StartStep("I click the Summary button in the Data Acceptance window");
+			myStepsNewProduct.GivenIClickTheSummaryButtonInTheDataAcceptanceWindow();
+			TestReport.StartStep("I switch to the Data Summary page");
+			myGlobalSteps.SwitchToDataSumaryTab();
+			TestReport.StartStep("Type of Product should be showing the following option: " + typeOfProduct);
+			new StepsDataSummarySheet().ShouldBeShowingFollowing("Type of Product", typeOfProduct);
+			TestReport.StartStep("I close the Data Summary tab");
+			myGlobalSteps.CloseDataSummaryTab();
+			TestReport.StartStep("I should see the Data Acceptance Page");
+			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
+			TestReport.StartStep("I navigate to the home page");
+			new StepsHomepage().ThenINavigateToTheHomePage();
 		}
 	}
 }

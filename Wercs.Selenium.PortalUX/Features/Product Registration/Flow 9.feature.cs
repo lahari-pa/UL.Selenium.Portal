@@ -849,8 +849,8 @@ testRunner.Given("I delete all products with UPC Number: saved as UPC58091", ((s
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 339
-testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type: Latex glo" +
-                    "ves - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Latex gloves", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 341
 testRunner.Then("I save the product information as: TestCase58091", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 343

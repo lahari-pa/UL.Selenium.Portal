@@ -14,166 +14,118 @@ Feature: Flow 29 - Beverage
 
 
 Scenario: [60694] Wine - RU001418
+
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
-# This just double checks that the account has been set up correctly - chances are this step won't be actioned
-Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
+
 Given I generate a random UPC number and save as: UPC60694
+
 Given I delete all products with UPC Number: saved as UPC60694
-Then I click the Register New Product icon in the Navigation Pane
-And I Select the Create a New Registration radio button
-And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Wine in the Product Name text field
-And In the Product Type tab of the New Product Page, I enter: Wine in the Type of Product select field
-And in the New Product page I click Continue
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+
 Then I save the product information as: TestCase60694
-And I set the Primary Physical State to be: Liquid
 
-# Following the steps from 'Shared Step' 57441
-And I set the Secondary Physical State option to: Liquid
-And I set the Specific Gravity field to: 20
-And I set the pH field to: 10
-And I set the Boiling Point field to: 20
-And I set the Flash Point (in Celsius) field to: 20
-And I set the Flash Point Testing Method Used option to: Closed cup method
-And in the New Product page I click Continue
+Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
 
-# Following the steps from 'Shared Step' 69687
-And I should see the Additional Product Information Page
-And In the Additional Information Page the check box for: United States should be: checked
-And In the Additional Information Page for Product is retailers private label or brand I select: Yes
-And in the New Product page I click Continue
+Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
 
-# Following the steps from 'Shared Step' 57571
-And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
-And in the New Product page I click Continue
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
-# Following the steps from 'Shared Step' 49818
-And I should see the Beverage Regulatory Details Page
-And I set the Product's container or liner contains Bisphenol A (BPA) option to: Yes
-And I set the Does your product contain a Prop 65 chemical? option to: Yes
-And I set the Percent of Alcohol in the Product (numeric entry only) option to: 20
-And in the New Product page I click Continue
+Given I call Shared Step 49818 (Beverage Regulatory Details)
 
-# Following the steps from 'Shared Step' 57506
-And I should see the Transportation Details 1 Page
-And I set the Product is Regulated for Transport option to: No, due to an exemption or exception
-And I set the below options for field: Please select DOT Exceptions if applicable?
-| Option         |
-| 173.120(a)(2): |
-| 173.120(a)(3): |
-And in the New Product page I click Continue
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
-# The below will currently fail (Ticket 65023)
-And In the 'Select retailers' window I should not see the following retailers:
-| Retailer             |
-| Autozone             |
-| Harbor Freight Tools |
+Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol)
 
-# Entering retailer information
-Then In the 'Select Retailers' window I select the retailer: Walgreens
-And I should see the Retailer Page
-And In the Retailers tab, for the retailer: Walgreens I enter Private Label name: Wine Product Full Name
-And in the New Product page I click Continue
+Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 
-# Entering UPC Information
-Given I click the 'Add UPC' button
-Then I add the following into the UPC Fields
-| Field         | Value             |
-| UPCNumber     | saved as UPC60694 |
-| ContainerType | Glass Container   |
-| Size          | 20                |
-And in the New Product page I click Continue
+Given in the Additional Documents to Provide page I click Continue
 
-# Additional Documents screen loads
-And I should see the Additional Documents to Provide Page
-And in the New Product page I click Continue
+Then The message with text: Additional documents are not subject to standard two day turnaround. is visble on the Optional Reports and Documents Available for Purchase page
 
-# 'Optional Reports and Documents Available for Purchase' screen loads
-And I should see the Optional Reports and Documents Available for Purchase Page
-And in the New Product page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
-# Following the steps from 'Shared Step' 57883
-Then the comments field should appear
-And I enter the following into the comments field: Comments Field Text
-Given in the New Product page I click Continue
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Following the steps from 'Shared Step' 42214
-Given I navigate to the home page
-Then I delete the product: TestCase60694
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
 
 Scenario: [60695] Juice and Juice Drinks - RU001413
+
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
-# This just double checks that the account has been set up correctly - chances are this step won't be actioned
-Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
+
 Given I generate a random UPC number and save as: UPC60695
+
 Given I delete all products with UPC Number: saved as UPC60695
-Then I click the Register New Product icon in the Navigation Pane
-And I Select the Create a New Registration radio button
-And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Juice and Juice Drinks in the Product Name text field
-And In the Product Type tab of the New Product Page, I enter: Juice and Juice Drinks in the Type of Product select field
-And in the New Product page I click Continue
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Juice and Juice Drinks
+
 Then I save the product information as: TestCase60695
 
-# Following the steps from 'Shared Step' 69687
-And I should see the Additional Product Information Page
-And In the Additional Information Page the check box for: United States should be: checked
-And I set the Product is a Retailer's Private Label or Brand option to: No
-And in the Additional Product Information page I click Continue
+Given I call shared step 69687 (Additional Product Information - Country and Private Label or Brand - No)
 
-# Following the steps from 'Shared Step' 57571
-And I should see the Regulatory Information 1 Page
-And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
-And in the Regulatory Information 1 page I click Continue
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
-# Following the steps from 'Shared Step' 49818
-And I should see the Beverage Regulatory Details Page
-And I set the Product's container or liner contains Bisphenol A (BPA) option to: Yes
-And I set the Does your product contain a Prop 65 chemical? option to: Yes
-And I set the Percent of Alcohol in the Product (numeric entry only) option to: 20
-And in the Beverage Regulatory Details page I click Continue
+Given I call Shared Step 49818 (Beverage Regulatory Details)
 
-# The below will currently fail (Ticket 65023)
-And In the 'Select retailers' window I should not see the following retailers:
+Then In the 'Select retailers' window I should not see the following retailers:
 | Retailer             |
 | Autozone             |
-| Harbor Freight Tools |
 
-# Entering retailer information
-Then In the 'Select Retailers' window I select the retailer: Walgreens
-And I should see the Retailer Page
-#And In the Retailers tab, for the retailer: Walgreens I enter Private Label name: Juice and Juice Drinks Product Full Name
-And in the Retailer page I click Continue
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
-# Entering UPC Information
-And I should see the Universal Product Code (UPC) Page
-Given I click the 'Add UPC' button
-Then I add the following into the UPC Fields
-| Field         | Value             |
-| UPCNumber     | saved as UPC60695 |
-| ContainerType | Plastic Container |
-| Size          | 20                |
-And in the Universal Product Code (UPC) page I click Continue
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60695, container type: Plastic Container and size: 3.5
 
-# Additional Documents screen loads
-And I should see the Additional Documents to Provide Page
-And in the New Product page I click Continue
+Then I should see the Additional Documents to Provide Page
 
-# 'Optional Reports and Documents Available for Purchase' screen loads
-And I should see the Optional Reports and Documents Available for Purchase Page
-And in the New Product page I click Continue
+Given in the Additional Documents to Provide page I click Continue
 
-# Following the steps from 'Shared Step' 57883
-Then the comments field should appear
-And I enter the following into the comments field: Comments Field Text
-Given in the New Product page I click Continue
+Then I should see the Optional Reports and Documents Available for Purchase Page
 
-# Following the steps from 'Shared Step' 42214
-Given I navigate to the home page
-Then I delete the product: TestCase60695
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60695
+
+Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+
+Then I save the product information as: TestCase73085
+
+Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
+
+Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
+
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 49818 (Beverage Regulatory Details)
+
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+
+Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol)
+
+Then the 'Select Retailers' window appears
+
+Then In the 'Select retailers' window I should only see the following retailers:
+| Retailer                   |
+| Walgreens                  |
+| No Retailer/No UPC Product |
+
+Given I click close in the 'Select Retailers' window
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73085
