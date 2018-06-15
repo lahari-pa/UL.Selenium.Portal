@@ -124,8 +124,8 @@ testRunner.Given("I delete all products with UPC Number: saved as UPC60017", ((s
 testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 27
-testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type: Lithium P" +
-                    "rimary/Metal Batteries - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Lithium Primary/Metal Batteries", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29
 testRunner.Given("I call Shared Step 59927 (Primary Physical State > Solid only available – Without" +
                     " Water Solubility question)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -234,8 +234,8 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 70
-testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type: Lithium i" +
-                    "on batteries - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Lithium ion batteries", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 72
 testRunner.Then("I save the product information as: TestCase60018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 74

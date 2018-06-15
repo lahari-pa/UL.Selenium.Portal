@@ -274,7 +274,7 @@ Then The home screen should load
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Herbal or Dietary Supplement - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Herbal or Dietary Supplement
 
 Then I save the product information as: TestCase63325
 
@@ -336,7 +336,7 @@ Given I delete all products with UPC Number: saved as UPC58091
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Latex gloves - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Latex gloves
 
 Then I save the product information as: TestCase58091
 
@@ -435,7 +435,7 @@ Given I delete all products with UPC Number: saved as UPC58089
 
 Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Nutritional Supplements for Domesticated Animals - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplements for Domesticated Animals
 
 Then I save the product information as: TestCase58089
 
@@ -557,7 +557,7 @@ Given I delete all products with UPC Number: saved as UPC58081
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Nutritional Supplement - Solid - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplement - Solid
 
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
 

@@ -94,7 +94,7 @@ Given I delete all products with UPC Number: saved as UPC57905
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Automotive Coating - SCAQMD any other coating type - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Automotive Coating - SCAQMD any other coating type
 
 Then I save the product information as: TestCase57905
 
@@ -172,7 +172,7 @@ Then The home screen should load
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Grout - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Grout
 
 Then I save the product information as: TestCase63623
 

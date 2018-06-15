@@ -31,7 +31,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		//Duplicate with 57500
+		/// <summary>
+		/// Enter a product name
+		/// select Type of product
+		/// click continue 
+		/// </summary>
 		[StepDefinition(
 			@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type)
@@ -1572,25 +1576,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				table.Rows[0]["Partition Coefficient"]);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-		}
-
-		//Duplicate with Shared Step 57561
-		[StepDefinition(
-			@"I call Shared Step 57500 \(The Product- Enter name, select product type: (.*) - Continue - Happy Path\)")]
-		public void ICallSharedTheProduct_EnterNameSelectProductType(string type)
-		{
-			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep("I should see the The Product Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
-			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
-			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
-				"AAA WERCS Test " + type.Replace("/", " "));
-			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
-								 " in the Type of Product select field");
-			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
-			TestReport.StartStep("In the New Product page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
 		[StepDefinition(

@@ -24,7 +24,7 @@ Given I delete all products with UPC Number: saved as UPC60017
 
 Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Lithium Primary/Metal Batteries - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
@@ -67,7 +67,7 @@ Then The home screen should load
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Lithium ion batteries - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium ion batteries
 
 Then I save the product information as: TestCase60018
 
