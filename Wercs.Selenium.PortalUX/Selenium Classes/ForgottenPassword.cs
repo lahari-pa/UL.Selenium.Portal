@@ -351,6 +351,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Attempting to Click Login Button");
 			_btnLogin.Click();
+			Delay.Seconds(Delay.SpeedFactor * 1);
 			return true;
 		}
 

@@ -741,8 +741,8 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 277
-testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type: Herbal or" +
-                    " Dietary Supplement - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Herbal or Dietary Supplement", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 279
 testRunner.Then("I save the product information as: TestCase63325", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 281
@@ -1092,8 +1092,8 @@ testRunner.Given("I delete all products with UPC Number: saved as UPC58089", ((s
 testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 438
-testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type: Nutrition" +
-                    "al Supplements for Domesticated Animals - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Nutritional Supplements for Domesticated Animals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 440
 testRunner.Then("I save the product information as: TestCase58089", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 442
@@ -1391,8 +1391,8 @@ testRunner.Given("I delete all products with UPC Number: saved as UPC58081", ((s
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 560
-testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type: Nutrition" +
-                    "al Supplement - Solid - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Nutritional Supplement - Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 562
 testRunner.Given("I call Shared Step 37857 (Enter Physical Property - Solid)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 564

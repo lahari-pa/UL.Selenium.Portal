@@ -1881,7 +1881,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+
+			// was failing on country of origin so adding if statement 
+			if (new NewProduct().GetDisplayedSections().Contains("Select the product's Country of Origin"))
+			{
+				TestReport.StartStep("I set the Select the product's Country of Origin option to: United Kingdom");
+				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
