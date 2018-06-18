@@ -124,8 +124,8 @@ testRunner.Given("I delete all products with UPC Number: saved as UPC58760", ((s
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 27
-testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type: Lights, L" +
-                    "ED - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Lights, LED", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29
 testRunner.Then("I save the product information as: TestCase58760", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 31
@@ -151,20 +151,12 @@ testRunner.Given("in the Additional Documents Request page I click Continue", ((
 testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Com" +
                     "ments Text 58760. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
                     "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 50
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 49
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Light" +
+                    "s, LED", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 51
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
-testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 53
-testRunner.And("Type of Product should be showing the following option: Lights, LED", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
-testRunner.Then("I switch to Data Acceptance page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 55
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 56
-testRunner.Then("I delete the product: TestCase58760", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase58760", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -186,28 +178,28 @@ testRunner.Then("I delete the product: TestCase58760", ((string)(null)), ((TechT
         public virtual void _58759ServersSmall_Scale_RU001183()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[58759] Servers, Small-Scale - RU001183", ((string[])(null)));
-#line 58
+#line 53
 this.ScenarioSetup(scenarioInfo);
-#line 60
+#line 55
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 62
+#line 57
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 64
+#line 59
 testRunner.Given("I generate a random UPC number and save as: UPC58759", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 66
+#line 61
 testRunner.Given("I delete all products with UPC Number: saved as UPC58759", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 68
+#line 63
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 70
-testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type: Servers, " +
-                    "Small-Scale - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 72
+#line 65
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Servers, Small-Scale", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 67
 testRunner.Then("I save the product information as: TestCase58759", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 76
+#line 71
 testRunner.Given("I call Shared Step 60935 (Additional Product Information - US - Direct Ship - Pri" +
                     "vate Label Only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 78
+#line 73
 testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -220,41 +212,33 @@ testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 6
                         "Agawo Battery Industry Co., Ltd",
                         "4",
                         "2"});
-#line 80
+#line 75
 testRunner.Given("I call Shared 48367 (Product Includes Battery > any type)", ((string)(null)), table1, "Given ");
-#line 84
+#line 79
 testRunner.Given("I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No" +
                     " to ALL With Copper)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 86
+#line 81
 testRunner.Given("I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ra" +
                     "y - No to all)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 88
+#line 83
 testRunner.Given("I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
                     "Path) and select the retailer: Staples", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 90
+#line 85
 testRunner.Then("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
                     "ze Only) for UPC: saved as UPC58759, container type: Plastic Container and size:" +
                     " 10.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 92
+#line 87
 testRunner.Given("I call Shared Step 58608 (Additional Documents to Provide - Label - OSHA - CARB)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 94
+#line 89
 testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Com" +
                     "ments Text 58759. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
                     "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 97
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 98
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 99
-testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 100
-testRunner.And("Type of Product should be showing the following option: Servers, Small-Scale", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 101
-testRunner.Then("I switch to Data Acceptance page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 102
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 103
-testRunner.Then("I delete the product: TestCase58759", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 91
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Serve" +
+                    "rs, Small-Scale", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 93
+testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase58759", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

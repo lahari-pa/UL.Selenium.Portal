@@ -1430,12 +1430,9 @@ And in the New Product page I click Continue
 And I should see the Comments Page
 And in the New Product page I click Continue
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Toothpaste - Whitening
-Then I switch to Data Acceptance page
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Toothpaste - Whitening
+
+#Replace shared 42214
 Given I navigate to the home page
 Then I delete the product: TestCase58285
 
@@ -1482,11 +1479,8 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: test data
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Paint, Model
-Then I switch to Data Acceptance page
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Paint, Model
+
+#Replace shared 42214
 Given I navigate to the home page
 Then I delete the product: TestCase58390

@@ -203,8 +203,7 @@ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and
 #line 70
 testRunner.Then("I save the product information as: TestCase60695", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 72
-testRunner.Given("I call shared step 69687 (Additional Product Information - Country and Private La" +
-                    "bel or Brand - No)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call shared step 69687 (Additional Product Information - US, No(PL))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 74
 testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 76

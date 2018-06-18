@@ -44,7 +44,11 @@ And I confirm the 'Is Kelly Data' field is marked with a check for every State c
 
 Given in the Pesticide Details - State Registration Details page I click Continue
 
-Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+#The test case calls two conflicting Transportation Details 1 shared steps in succession. Picking the Not Regulated option because there is no Transportation Details 3 step afterwards
+
+#Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+
+Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 
 Given I call Shared Step 57508 (VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all States - Continue - Happy Path)
 
@@ -62,10 +66,11 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
 
-# Shared 42759 is a duplicate - using 57960
 Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57863, container type: Metal Container and size: 40
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+# Additional Documents to Provide page is showing here
 
 Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
@@ -73,14 +78,9 @@ Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Option
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: ABS Welding
-Then I switch to Data Acceptance page
-Given I navigate to the home page
-Then I delete the product: TestCase57863
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: ABS Welding
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57863
 
 Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (RU001232)
 
@@ -155,15 +155,9 @@ Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Option
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Automotive Coating - SCAQMD any other coating type
-Then I switch to Data Acceptance page
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Automotive Coating - SCAQMD any other coating type
 
-Given I navigate to the home page
-Then I delete the product: TestCase57905
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57905
 
 Scenario: [63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit
 

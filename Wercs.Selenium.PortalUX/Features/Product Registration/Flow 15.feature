@@ -24,7 +24,7 @@ Given I delete all products with UPC Number: saved as UPC58760
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Lights, LED - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lights, LED
 
 Then I save the product information as: TestCase58760
 
@@ -46,14 +46,9 @@ Given in the Additional Documents Request page I click Continue
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Lights, LED
-Then I switch to Data Acceptance page
-Given I navigate to the home page
-Then I delete the product: TestCase58760
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lights, LED
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58760
 
 Scenario: [58759] Servers, Small-Scale - RU001183
 
@@ -67,7 +62,7 @@ Given I delete all products with UPC Number: saved as UPC58759
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57500 (The Product- Enter name, select product type: Servers, Small-Scale - Continue - Happy Path)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Servers, Small-Scale
 
 Then I save the product information as: TestCase58759
 
@@ -93,11 +88,6 @@ Given I call Shared Step 58608 (Additional Documents to Provide - Label - OSHA -
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58759. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Servers, Small-Scale
-Then I switch to Data Acceptance page
-Given I navigate to the home page
-Then I delete the product: TestCase58759
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Servers, Small-Scale
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58759

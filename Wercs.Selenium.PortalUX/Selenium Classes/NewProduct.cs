@@ -3510,7 +3510,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool TopEPARowIsEmpty()
 		{
-			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			IWebElement EPATable = null;
+			try
+			{
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				return false;
+			}
 			int i = 0;
 			while (i < 30 && EPATable == null)
 			{
@@ -3536,7 +3545,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public void EnterEPATopRow(string epaNumber)
 		{
-			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			IWebElement EPATable = null;
+			try
+			{
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+				return;
+			}
 			int i = 0;
 			while (i < 30 && EPATable == null)
 			{
@@ -3558,7 +3577,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 		public void AddEPARow()
 		{
-			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			IWebElement EPATable = null;
+			try
+			{
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				return;
+			}
 			int i = 0;
 			while (i < 30 && EPATable == null)
 			{
@@ -3581,7 +3609,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public int CountPesticideRegRows()
 		{
-			var EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			IWebElement EPATable = null;
+			try
+			{
+				EPATable = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"));
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+				return 0;
+			}
 			int i = 0;
 			while (i < 30 && EPATable == null)
 			{
@@ -3963,7 +4001,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string VOCContentInGPerL()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(), 'VOC content in g/L'))]/b")).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and starts-with(text(), 'VOC content in g/L')]/b")).Text;
 		}
 
 		public List<string> AllAdditionalStatements()

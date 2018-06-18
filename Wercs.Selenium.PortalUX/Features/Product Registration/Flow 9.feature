@@ -63,12 +63,9 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58072. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Baby/infant/Adult Care/Cleansing Wipes
-Then I switch to Data Acceptance page
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baby/infant/Adult Care/Cleansing Wipes
+
+#Replace shared 42214
 Given I navigate to the home page
 Then I delete the product: TestCase58072
 
@@ -151,12 +148,9 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Energy or Nutritional Bars
-Then I switch to Data Acceptance page
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
+
+#Replace shared 42214
 Given I navigate to the home page
 Then I delete the product: TestCase58078
 
@@ -206,12 +200,9 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Energy or Nutritional Powder/Mix
-Then I switch to Data Acceptance page
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Powder/Mix
+
+#Replace shared 42214
 Given I navigate to the home page
 Then I delete the product: TestCase58079
 
@@ -367,12 +358,9 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58091. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Latex gloves
-Then I switch to Data Acceptance page
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Latex gloves
+
+#Replace shared 42214
 Given I navigate to the home page
 Then I delete the product: TestCase58091
 

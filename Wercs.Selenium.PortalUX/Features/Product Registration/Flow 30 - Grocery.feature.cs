@@ -217,8 +217,7 @@ testRunner.Then("I save the product information as: TestCase60724", ((string)(nu
 testRunner.Given("I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingred" +
                     "ients)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 87
-testRunner.Given("I call shared step 69687 (Additional Product Information - Country and Private La" +
-                    "bel or Brand - No)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call shared step 69687 (Additional Product Information - US, No(PL))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 89
 testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 93
@@ -297,8 +296,7 @@ testRunner.Then("I save the product information as: TestCase60723", ((string)(nu
 testRunner.Given("I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredi" +
                     "ents)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 139
-testRunner.Given("I call shared step 69687 (Additional Product Information - Country and Private La" +
-                    "bel or Brand - No)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call shared step 69687 (Additional Product Information - US, No(PL))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 141
 testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 145
@@ -377,8 +375,7 @@ testRunner.Then("I save the product information as: TestCase60722", ((string)(nu
 testRunner.Given("I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredi" +
                     "ents)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 191
-testRunner.Given("I call shared step 69687 (Additional Product Information - Country and Private La" +
-                    "bel or Brand - No)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call shared step 69687 (Additional Product Information - US, No(PL))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 193
 testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 197

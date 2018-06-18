@@ -84,7 +84,7 @@ Then I save the product information as: TestCase60724
 
 Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
 
-Given I call shared step 69687 (Additional Product Information - Country and Private Label or Brand - No)
+Given I call shared step 69687 (Additional Product Information - US, No(PL))
 
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
@@ -136,7 +136,7 @@ Then I save the product information as: TestCase60723
 
 Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
 
-Given I call shared step 69687 (Additional Product Information - Country and Private Label or Brand - No)
+Given I call shared step 69687 (Additional Product Information - US, No(PL))
 
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
@@ -188,7 +188,7 @@ Then I save the product information as: TestCase60722
 
 Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
 
-Given I call shared step 69687 (Additional Product Information - Country and Private Label or Brand - No)
+Given I call shared step 69687 (Additional Product Information - US, No(PL))
 
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 

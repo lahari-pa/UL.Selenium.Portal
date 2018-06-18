@@ -44,14 +44,9 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Mixture, Blend, Formula or Solution from 3rd Party
-Then I switch to Data Acceptance page
-Given I navigate to the home page
-Then I delete the product: TestCase58430
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula or Solution from 3rd Party
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 
 Scenario: [58605] Suppository (no laxative) -  RU001151
 
@@ -91,14 +86,9 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Suppository, Medicinal
-Then I switch to Data Acceptance page
-Given I navigate to the home page
-Then I delete the product: TestCase58605
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Suppository, Medicinal
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58605
 
 Scenario: [58604] Condom - RU000937
 
@@ -144,15 +134,9 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58604. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Condom with or without Spermicide
-Then I switch to Data Acceptance page
-Given I navigate to the home page
-Then I delete the product: TestCase58604
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condom with or without Spermicide
 
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58604
 
 
 Scenario: [58606] Medicinal Liquids - RU001188
@@ -204,11 +188,6 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58606. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Data Acceptance and Summary verification
-And I should see the Data Acceptance Page
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And Type of Product should be showing the following option: Medicinal Liquids
-Then I switch to Data Acceptance page
-Given I navigate to the home page
-Then I delete the product: TestCase58606
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Medicinal Liquids
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58606

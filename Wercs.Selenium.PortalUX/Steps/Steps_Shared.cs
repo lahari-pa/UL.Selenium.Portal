@@ -35,7 +35,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Enter a product name
 		/// select Type of product
-		/// click continue 
+		/// click continue
 		/// </summary>
 		[StepDefinition(
 			@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
@@ -1874,18 +1874,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(
-			@"I call shared step 69687 \(Additional Product Information - Country and Private Label or Brand - No\)")]
+			@"I call shared step 69687 \(Additional Product Information - US, No\(PL\)\)")]
 		public void GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
-
-			// was failing on country of origin so adding if statement 
+			// was failing on country of origin so adding if statement.
+			// Flagging a fail because this condition doesn't exactly match the test case. If Origin Q. is expected here, should use a different shared step?
 			if (new NewProduct().GetDisplayedSections().Contains("Select the product's Country of Origin"))
 			{
 				TestReport.StartStep("I set the Select the product's Country of Origin option to: United Kingdom");
+				Report.Failure("The Country of Origin question was showing (required field) when it was not expected. Selecting an option.");
 				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
 			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
@@ -2270,8 +2271,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.SetTheSectionOptionTo("Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.", "No");
 			TestReport.StartStep("I set the Product is a Low Solid option to: Yes");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Low Solid", "Yes");
-			TestReport.StartStep("I set the VOC content in g/L contained in this product option to: 10.0");
-			MyNewProductSteps.SetTheSectionOptionTo("VOC content in g/L contained in this product", "10.0");
+			TestReport.StartStep("I set the VOC content of product in g/L, including water and exempt compounds. option to: 10.0");
+			MyNewProductSteps.SetTheSectionOptionTo("VOC content of product in g/L, including water and exempt compounds.", "10.0");
 			TestReport.StartStep("I set the Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison? option to: Yes");
 			MyNewProductSteps.SetTheSectionOptionTo("Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison?", "Yes");
 			TestReport.StartStep("Clicking continue in the VOC SCAQMD/Canada page");
@@ -2648,6 +2649,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
 			TestReport.StartStep("I navigate to the home page");
 			new StepsHomepage().ThenINavigateToTheHomePage();
+		}
+
+		[StepDefinition(@"I call Shared Step 43758 \(Product Grid- Filter for Product- Select Product - Delete\) for product: (.*)")]
+		public void SharedProductGrid_FilterForProduct_SelectProduct_Delete(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I delete the product: " + savedAs);
+			new StepsProductGrid().ThenIDeleteTheProduct(savedAs);
 		}
 	}
 }

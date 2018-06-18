@@ -2585,19 +2585,12 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 testRunner.And("I should see the Comments Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1431
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1434
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1435
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 1433
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Tooth" +
+                    "paste - Whitening", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 1436
-testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 1437
-testRunner.And("Type of Product should be showing the following option: Toothpaste - Whitening", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1438
-testRunner.Then("I switch to Data Acceptance page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 1439
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1440
+#line 1437
 testRunner.Then("I delete the product: TestCase58285", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -2620,19 +2613,19 @@ testRunner.Then("I delete the product: TestCase58285", ((string)(null)), ((TechT
         public virtual void _58390PaintModel_RU000333()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[58390] Paint,Model - RU000333", ((string[])(null)));
-#line 1442
+#line 1439
 this.ScenarioSetup(scenarioInfo);
-#line 1444
+#line 1441
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1446
+#line 1443
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 1448
+#line 1445
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1450
+#line 1447
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Paint, Model", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1452
+#line 1449
 testRunner.Then("I save the product information as: TestCase58390", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2651,10 +2644,10 @@ testRunner.Then("I save the product information as: TestCase58390", ((string)(nu
                         "66",
                         "Closed cup method",
                         "Appreciable"});
-#line 1454
+#line 1451
 testRunner.Given("I call Shared Step 73629 (Product Characteristics - Liquid - select any options(e" +
                     "nter pH, boiling point, flash point))", ((string)(null)), table39, "Given ");
-#line 1458
+#line 1455
 testRunner.Given("I call Shared Step 73748 (Additional Product Information - US only - No to GHS - " +
                     "No to shipped supplier - No to Private Label - No to Sold to retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -2670,28 +2663,28 @@ testRunner.Given("I call Shared Step 73748 (Additional Product Information - US 
                         "false",
                         "false",
                         ""});
-#line 1460
+#line 1457
 testRunner.Then("I add the following ingredients:", ((string)(null)), table40, "Then ");
-#line 1463
+#line 1460
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1465
+#line 1462
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1467
+#line 1464
 testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Lim" +
                     "ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1469
+#line 1466
 testRunner.Given("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
                     "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1471
+#line 1468
 testRunner.Given("I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
                     "Path) and select the retailer: No Retailer/No UPC Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1473
+#line 1470
 testRunner.Given("I call Shared 57881 (Regulatory Documents to Provide - US only - request authorin" +
                     "g - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1475
+#line 1472
 testRunner.Given("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1477
+#line 1474
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -2713,24 +2706,17 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Orange",
                         "No data available",
                         "41.3005"});
-#line 1479
+#line 1476
 testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     "))", ((string)(null)), table41, "Given ");
-#line 1483
+#line 1480
 testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: test data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1486
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1487
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1488
-testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 1489
-testRunner.And("Type of Product should be showing the following option: Paint, Model", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1490
-testRunner.Then("I switch to Data Acceptance page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 1491
+#line 1482
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Paint" +
+                    ", Model", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 1485
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1492
+#line 1486
 testRunner.Then("I delete the product: TestCase58390", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

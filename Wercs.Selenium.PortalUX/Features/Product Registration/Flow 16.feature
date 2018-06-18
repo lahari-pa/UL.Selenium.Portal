@@ -328,9 +328,8 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Silver Battery
 
-# Shared step 43758
-Given I navigate to the home page
-Then I delete the product: TestCase59280
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase59280
+
 
 Scenario: [59281] Water-Charged Cell - RU001543
 
