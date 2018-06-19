@@ -710,7 +710,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Retail partners page is showing as expected");
 		}
 
-
+		[Then(@"I should see the Retailer Detail page")]
+		public void ThenIShouldSeeTheRetailerDetailPage()
+		{
+			Report.IsTrue(new RetailParntersDetails().Wait_for_load(60), "Retailer detail page is not showing as expected",
+				"Retailer detail page is showing as expected");
+		}
 
 	}
 }

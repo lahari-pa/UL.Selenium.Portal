@@ -38,7 +38,6 @@ Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: Costco
 And I confirm that: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
-
 When I click the More Information hyperlink
 Then I check that the current URL contains: https://www.costco.com/sustainability-environment.html
 And I close the window that opened
@@ -131,4 +130,7 @@ Then The home screen should load
 Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: TopCo
 And I confirm that: This recipient does not require additional data consent tiers at this time. is showing under the Data Consent Tiers
+
+
+
 

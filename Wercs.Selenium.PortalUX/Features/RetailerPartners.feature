@@ -138,3 +138,18 @@ And I check that the following retailers are showing:
 | Walmart                | WM    |
 | Winco Foods            | WC    |
 | NewEgg                 | NE    |
+
+
+Scenario: [56903] Retailer Detail Page - Retailer does not require Supplier ID or Data Consent Tiers
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Then I click the Retail Partners icon in the Navigation Pane
+Then I should see the following heading Retail Partners
+When I select the retailer: Lowe's
+Then I should see the Retailer Detail page
+Then I should see the retailer heading: Lowe's
+#This is not showing. Raising the question whether it should be....
+#Then I should see message: you may receive your assessment in approximately two (2) business days, if no delays in the assessment, and should no data issues arise. "
+And Section: Your Supplier IDs should be showing text: This retailer does not support Supplier ID management
+And I confirm that there is a section labeled: Data Consent Tiers
+And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time. 
