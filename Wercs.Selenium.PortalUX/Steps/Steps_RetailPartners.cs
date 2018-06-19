@@ -7,7 +7,7 @@ using SafewareReporting;
 using SafewareSeleniumUtilities;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-
+using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -690,32 +690,60 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"I click on close in the Report Download dialog")]
+		[StepDefinition(@"I click on close in the Report Download dialog")]
 		public void GivenIClickOnCloseInTheReportDownloadDialog()
 		{
 			Report.IsTrue(new ReportDownload().ClickClose(),"Failed to click close on Report Download modal dialog", "Successfully clicked close");
 		}
 
-		[Given(@"I click the back arrow next to CVS")]
+		[StepDefinition(@"I click the back arrow next to CVS")]
 		public void GivenIClickTheBackArrowNextToCVS()
 		{
 			Report.IsTrue(new RetailParntersDetails().ClickBackButton(), "Failed to click the back arrow",
 				"Successfully clicked the back arrow");
 		}
 
-		[Then(@"I should see the Retail Partners page")]
+		[StepDefinition(@"I should see the Retail Partners page")]
 		public void ThenIShouldSeeTheRetailPartnersPage()
 		{
 			Report.IsTrue(new RetailPartners().Wait_for_load(60), "Retail partners page is not showing as expected",
 				"Retail partners page is showing as expected");
 		}
 
-		[Then(@"I should see the Retailer Detail page")]
+		[StepDefinition(@"I should see the Retailer Detail page")]
 		public void ThenIShouldSeeTheRetailerDetailPage()
 		{
 			Report.IsTrue(new RetailParntersDetails().Wait_for_load(60), "Retailer detail page is not showing as expected",
 				"Retailer detail page is showing as expected");
 		}
+
+		[StepDefinition(@"I check that in the Supplier ID table the following columns are showing:")]
+		public void ThenICheckThatInTheSupplierIDTableTheFollowingColumnsAreShowing(Table supplierIDTable)
+		{
+			List<string> SupplierIDHeaders = new RetailParntersDetails().GetSupplierIDTableHeaders().OrderBy(x=>x).ToList();
+
+			List<string> ExpectedSupplierIDHeaders = supplierIDTable.Rows.Select(row=>row["Column name"].Trim()).OrderBy(x => x).ToList();
+
+			bool passed = true;
+
+			foreach (string thisHeader in ExpectedSupplierIDHeaders)
+			{
+				if (!SupplierIDHeaders.Contains(thisHeader))
+				{
+					passed = false;
+					Report.Error(thisHeader + " was not found.");
+				}
+			}
+
+			Report.IsTrue(passed,
+				"Expected supplier column names: " + string.Join(",", ExpectedSupplierIDHeaders) +
+				" and actual column names: " + string.Join(",", SupplierIDHeaders) + " do not match",
+				"Expected and actual Supplier ID table column names match as expected");
+
+
+
+		}
+
 
 	}
 }

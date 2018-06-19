@@ -152,6 +152,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//div[@class='chart-legend']/p"), 2).Text;
 		}
 
+		public string GetAndYouText()
+		{
+			return containerElement.FindElement(By.XPath(".//div[@class='chart-legend']/../../..//h3"), 2).Text;
+			
+		}
+
 		public string GetTierInformation()
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'tiersControl.tierInformation')]"), 2).Text;
@@ -274,6 +280,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> GetButtons(string section)
 		{
 			return containerElement.FindElements(By.XPath(".//div[contains(@class,'panel') and (./preceding-sibling::h3[text()='" + section + "'])]//ul[contains(@class,'list')]//a"), 2).Select(x => x.Text).ToList();
+		}
+
+		public List<string> GetSupplierIDTableHeaders()
+		{
+			return containerElement
+				.FindElements(
+					By.XPath(
+						".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table/thead/tr/th"),
+					2).Select(x => x.Text).Select(x=>x.Trim()).ToList();
 		}
 
 	}

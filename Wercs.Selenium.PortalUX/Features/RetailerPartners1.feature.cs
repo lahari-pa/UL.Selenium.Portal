@@ -471,6 +471,66 @@ testRunner.And("Section: Data Consent Tiers should be showing text: This recipie
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[56907] Retailer Detail Page - Retailer does require Supplier ID but does not req" +
+            "uire Data Consent Tiers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Retailer Partners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
+        public virtual void _56907RetailerDetailPage_RetailerDoesRequireSupplierIDButDoesNotRequireDataConsentTiers()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56907] Retailer Detail Page - Retailer does require Supplier ID but does not req" +
+                    "uire Data Consent Tiers", ((string[])(null)));
+#line 158
+this.ScenarioSetup(scenarioInfo);
+#line 159
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 160
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 161
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 162
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 163
+testRunner.When("I select the retailer: Sears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 164
+testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 165
+testRunner.Then("I should see the retailer heading: Sears/K-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Column name"});
+            table2.AddRow(new string[] {
+                        "Supplier ID"});
+            table2.AddRow(new string[] {
+                        "Company or Brand Name"});
+            table2.AddRow(new string[] {
+                        "Is Active"});
+            table2.AddRow(new string[] {
+                        "Is Default"});
+            table2.AddRow(new string[] {
+                        "Actions"});
+#line 166
+testRunner.Then("I check that in the Supplier ID table the following columns are showing:", ((string)(null)), table2, "Then ");
+#line 174
+testRunner.Given("I call Shared Step 56968 (Confirm - Data Consent Tiers not required )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 175
+testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 176
+testRunner.And("Section: Data Consent Tiers should be showing text: This recipient does not requi" +
+                    "re additional data consent tiers at this time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 177
+testRunner.Given("I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) " +
+                    "for retailer: Sears/K-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

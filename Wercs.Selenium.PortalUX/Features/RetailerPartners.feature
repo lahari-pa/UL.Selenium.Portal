@@ -152,4 +152,27 @@ Then I should see the retailer heading: Lowe's
 #Then I should see message: you may receive your assessment in approximately two (2) business days, if no delays in the assessment, and should no data issues arise. "
 And Section: Your Supplier IDs should be showing text: This retailer does not support Supplier ID management
 And I confirm that there is a section labeled: Data Consent Tiers
-And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time. 
+And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time.
+
+
+Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but does not require Data Consent Tiers
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Then I click the Retail Partners icon in the Navigation Pane
+Then I should see the following heading Retail Partners
+When I select the retailer: Sears
+Then I should see the Retailer Detail page
+Then I should see the retailer heading: Sears/K-Mart
+Then I check that in the Supplier ID table the following columns are showing:
+| Column name           |
+| Supplier ID           |
+| Company or Brand Name |
+| Is Active             |
+| Is Default            |
+| Actions               |
+
+Given I call Shared Step 56968 (Confirm - Data Consent Tiers not required )
+And I confirm that there is a section labeled: Data Consent Tiers
+And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time.
+Given I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) for retailer: Sears/K-Mart
+
