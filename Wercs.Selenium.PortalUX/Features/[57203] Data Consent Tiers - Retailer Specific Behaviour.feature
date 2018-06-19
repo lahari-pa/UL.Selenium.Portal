@@ -20,7 +20,6 @@ When I select the retailer: CVS
 Then I confirm that there is a section labeled: CVS
 And I confirm that under the pie chart I see the label: % of your product portfolio is associated with CVS
 And I confirm that: CVS requires suppliers of all store branded products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
-
 When I click the More Information hyperlink
 Then I check that the current URL contains: https://login.ulscm.com/RPUI/cvsportal
 And I close the window that opened
@@ -29,10 +28,9 @@ And I close the window that opened
 
 When I click the Products in Scope button and confirm that an excel file is produced called CV_Report_DataUsageTier_<Date>.xlsx and save as CVSExcelFile
 And I confirm the excel file saved as CVSExcelFile can be opened and contains data
-
-# And Close the excel file and return to the Portal page
-# And Click the back arrow next to CVS
-# You should be returned to the main Retail Partner page.
+Given I click on close in the Report Download dialog
+And I click the back arrow next to CVS
+Then I should see the Retail Partners page
 
 Scenario: [57211] Retailer specific - Costco
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

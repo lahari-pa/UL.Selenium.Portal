@@ -179,13 +179,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			this.containerElement.FindElement(By.XPath(".//a[contains(@data-bind,'tiersControl.getReport')]"), 2).TryClick();
 		}
 
-		public void ClickBackButton()
+		public bool ClickBackButton()
 		{
 			var backArrow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='header-with-back']//a/i"), 2);
 			if (backArrow != null)
 			{
-				backArrow.TryClick();
+				return backArrow.TryClick();
 			}
+
+			return false;
 		}
 
 		public List<string> GetAllDataConsentTiers()
@@ -285,6 +287,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public void ClickClose()
 		{
 			this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick();
+		}
+
+
+	}
+
+	public class ReportDownload : BaseObject
+	{
+		public const string BasePath = "//div[@id='download-modal']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool ClickClose()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[text()='Close']"), 2).TryClick();
 		}
 
 

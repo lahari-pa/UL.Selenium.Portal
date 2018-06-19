@@ -689,5 +689,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 			}
 		}
+
+		[Given(@"I click on close in the Report Download dialog")]
+		public void GivenIClickOnCloseInTheReportDownloadDialog()
+		{
+			Report.IsTrue(new ReportDownload().ClickClose(),"Failed to click close on Report Download modal dialog", "Successfully clicked close");
+		}
+
+		[Given(@"I click the back arrow next to CVS")]
+		public void GivenIClickTheBackArrowNextToCVS()
+		{
+			Report.IsTrue(new RetailParntersDetails().ClickBackButton(), "Failed to click the back arrow",
+				"Successfully clicked the back arrow");
+		}
+
+		[Then(@"I should see the Retail Partners page")]
+		public void ThenIShouldSeeTheRetailPartnersPage()
+		{
+			Report.IsTrue(new RetailPartners().Wait_for_load(60), "Retail partners page is not showing as expected",
+				"Retail partners page is showing as expected");
+		}
+
+
+
 	}
 }
