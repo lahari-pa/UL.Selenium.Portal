@@ -2570,6 +2570,55 @@ namespace Wercs.Selenium.PortalUX.Steps
 				string.Format("The message: '{0}' was not visble on the '{1}' page.", message, page),
 				string.Format("The message: '{0}' was visble on the '{1}' page as expected.", message, page));
 		}
+
+		// Custom 'shared step' so we can use the data omEPARegistration class in one go
+		[StepDefinition("I confirm data for EPA Registration: (.*) is complete")]
+		public void ConfirmDataForEPARegistrationIsComplete(string epaNumber)
+		{
+			var epaRegistrations = new NewProduct().EPARegistrationData;
+			TestReport.StartStep("I confirm that the EPA Registration No column of the table shows the EPA number previously entered");
+			Report.IsTrue(epaRegistrations.Any(x => x.EPANumber == epaNumber),
+				"The EPA Registration No. column did not contain an entry with the manually entered value: " + epaNumber,
+				"As expected the EPA Registration No. column contains an entry with the manually entered value: " + epaNumber);
+			TestReport.StartStep("I confirm that data is present in the Active Ingredient column for EPA registration: " + epaNumber);
+			var editedEPA = epaRegistrations.FirstOrDefault(x => x.EPANumber == epaNumber);
+			if (editedEPA == null)
+			{
+				Report.Failure("There were no rows in the EPA Registration table with the user added EPA Number: " + epaNumber);
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.IsTrue(!editedEPA.ActiveIngredient.IsNullOrEmpty(),
+					"There was no data in the Active Ingredient field for EPA Number: " + epaNumber,
+					"As expected there was data: '" + editedEPA.ActiveIngredient + "' in the Active Ingredient field for EPA Number: " + epaNumber);
+			}
+			TestReport.StartStep("I confirm that data is present in the Percent of Active Ingredient column for EPA registration: " + epaNumber);
+			if (editedEPA == null)
+			{
+				Report.Failure("There were no rows in the EPA Registration table with the user added EPA Number: " + epaNumber);
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.IsTrue(!editedEPA.PercentActiveIngredient.IsNullOrEmpty(),
+					"There was no data in the Percentage Active Ingredient field for EPA Number: " + epaNumber,
+					"As expected there was data: '" + editedEPA.PercentActiveIngredient + "' in the Percentage Active Ingredient field for EPA Number: " + epaNumber);
+			}
+			// Wording of the test says 'I confirm all three columns are uneditable.' I have assumed this is: EPA number, Active Ingredient, Percent Active Ingredient
+			TestReport.StartStep("I confirm that all three columns are un-editable");
+			if (editedEPA == null)
+			{
+				Report.Failure("There were no rows in the EPA Registration table with the user added EPA Number: " + epaNumber);
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.IsTrue(!editedEPA.Editable,
+					"There were editable fields for EPA number: " + epaNumber,
+					"All fields for EPA number: " + epaNumber + " were un-editable as expected");
+			}
+		}
 	}
 }
 

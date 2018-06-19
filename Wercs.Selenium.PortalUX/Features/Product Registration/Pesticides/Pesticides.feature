@@ -328,3 +328,47 @@ Given I click continue
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62852
+
+Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient information returned from call to Kelly API
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+
+Given I save the product information as: TestCase56547
+
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Then I should see the Pesticide Details - U.S. Page
+
+Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+
+Given in the New Product page I click Continue
+
+Given I add the EPA registration number: 73605-2
+
+Given in the New Product page I click Continue
+
+Then I should see the Pesticide Details - State Registration Details Page
+
+Given in the New Product page I click section: Pesticide Details - U.S.
+
+Then I should see the Pesticide Details - U.S. Page
+
+Given I confirm data for EPA Registration: 73605-2 is complete
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56547

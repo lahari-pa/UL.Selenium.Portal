@@ -298,6 +298,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RetailerPartners.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Security Roles.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Security Roles.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Signup1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -509,6 +514,10 @@
     <None Include="Features\RetailerPartners.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>RetailerPartners1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Security Roles.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Security Roles.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Signup.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
