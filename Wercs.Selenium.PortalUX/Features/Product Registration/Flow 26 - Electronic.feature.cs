@@ -121,10 +121,6 @@ testRunner.Given("If I see the retail partners page I set all data consent tiers
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 22
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 25
-testRunner.Given("I generate a random UPC number and save as: UPC60671", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
-testRunner.Given("I delete all products with UPC Number: saved as UPC60671", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 28
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -147,17 +143,13 @@ testRunner.Given("I call Shared 61449 Toxicity Characteristic Leaching Procedure
 testRunner.Given("I call Shared 58189 Answer Electronic Equipment questions - With Cathode Ray - No" +
                     " to all", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 46
-testRunner.Given("I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
-                    "Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 63219 (Retailer Association - Select No Retailer - Click conti" +
+                    "nue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 48
-testRunner.Given("I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm " +
-                    "Quantity ) for UPC saved as: UPC60671 with container type: Aerosol Can size: 20 " +
-                    "and quantity: 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 50
 testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
+#line 50
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
+#line 52
 testRunner.Then("I delete the product: TestCase60671", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

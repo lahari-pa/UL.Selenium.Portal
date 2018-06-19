@@ -542,13 +542,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenIDeleteTheProduct(string savedas)
 		{
 			var Product = (ProductInformation)Context.GetFromContext(savedas);
+			Report.Info("Attempting to delete: " + Product.Name);
 			var ProductGrid = new ProductsGrid();
 			ProductGrid.ProductIdField = Product.Id;
 			if (Report.IsTrue(ProductGrid.ProductIdField == Product.Id, "Value: " + Product.Id + " was not inputted into the Product Id field correctly!", "Value: " + Product.Id + " was correctly inputted into the Product Id field", false, false))
 			{
-				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the searcn button", "Successfully clicked the search button!", false, false))
+				if (Report.IsTrue(ProductGrid.ClickProductIdNameSearchButton(), "Failed to click the search button", "Successfully clicked the search button!", false, false))
 				{
 					GeneralUtilities.Wait_for_load_finish();
+					if (!ProductGrid.RowsAreFoundInProductGrid())
+					{
+
+					}
 					var firstProduct = ProductGrid.FirstProductInGrid();
 					if(Report.IsTrue(firstProduct.ProductName.StartsWith(Product.Name) && firstProduct.ProductId==Product.Id,"First product did not match the required paremeters!","Product was showing at the top of the grid, as expected!"))
 					{

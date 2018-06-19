@@ -34,8 +34,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetProductId()
 		{
 			var el = containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2).Text;
-			var matches = Regex.Matches(el, @"\(([^)]*)\)");
-			return matches[matches.Count - 1].Groups[1].Value;
+			var matches = Regex.Matches(el, @"\(\d*\)");
+			var bracketedValue = matches[matches.Count - 1].Groups[0].Value;
+			return bracketedValue.Trim().Substring(1, bracketedValue.Length - 2);
 		}
 
 		public string GetProductName()

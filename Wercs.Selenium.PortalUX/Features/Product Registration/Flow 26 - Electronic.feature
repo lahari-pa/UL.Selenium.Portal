@@ -22,8 +22,8 @@ Given If I see the retail partners page I set all data consent tiers to true for
 Then The home screen should load
 
 # ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
-Given I generate a random UPC number and save as: UPC60671
-Given I delete all products with UPC Number: saved as UPC60671
+#Given I generate a random UPC number and save as: UPC60671
+#Given I delete all products with UPC Number: saved as UPC60671
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
@@ -43,12 +43,11 @@ Given I call Shared 61449 Toxicity Characteristic Leaching Procedure (TCLP) - se
 
 Given I call Shared 58189 Answer Electronic Equipment questions - With Cathode Ray - No to all
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-
-Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC60671 with container type: Aerosol Can size: 20 and quantity: 6
+Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I navigate to the home page
+
 Then I delete the product: TestCase60671
 

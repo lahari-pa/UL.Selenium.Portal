@@ -218,6 +218,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return productElement;
 		}
 
+		public bool RowsAreFoundInProductGrid()
+		{
+			try
+			{
+				var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
+				return (productRow != null);
+			}
+			catch (Exception e)
+			{
+				return false;
+				throw;
+			}
+		}
+
 		public string UpcNumber
 		{
 			get
