@@ -2658,5 +2658,62 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I delete the product: " + savedAs);
 			new StepsProductGrid().ThenIDeleteTheProduct(savedAs);
 		}
+
+		[StepDefinition(@"I call Shared Step 57514 \(Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path\)")]
+		public void SharedProductCharacteristics_LiquidOnlyAvailable_EnterAllData_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct myStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Specific Gravity",
+				"15.0"));
+			myStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "15.0");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"pH",
+				"9.5"));
+			myStepsNewProduct.SetTheSectionOptionTo("pH", "9.5");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Boiling Point (in Celsius)",
+				"120"));
+			myStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "120");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Flash Point (in Celsius)",
+				"80"));
+			myStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "80");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Flash Point Testing Method Used",
+				"Not applicable/available"));
+			myStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
+			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
+			{
+				TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+					"Select the best Water Solubility description",
+					"100g/100ml"));
+				myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
+			}
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Secondary Physical State",
+				"Liquid"));
+			myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+
+		[StepDefinition(@"I call Shared Step 57505 \(Pesticide Data - U.S. - EPA reg #\(No\) - EPA Exempt # \(Random\) - Continue - Happy Path\)")]
+		public void SharedPesticideData_US_EPARegNo_EPAExemptRandom_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct myStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Product has an Environmental Protection Agency (EPA) Registration Number",
+				"No"));
+			myStepsNewProduct.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "No");
+			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
+				"Select the applicable exemption",
+				"Product is FIFRA 25(b) Exempt."));
+			myStepsNewProduct.SetTheSectionOptionTo("Select the applicable exemption", "Product is FIFRA 25(b) Exempt.");
+			TestReport.StartStep("In the Pesticide Details - U.S. page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - U.S.");
+		}
 	}
 }

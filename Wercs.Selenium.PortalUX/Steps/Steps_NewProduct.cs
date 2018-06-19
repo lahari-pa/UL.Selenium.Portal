@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Castle.Core.Internal;
 using iTextSharp.text;
 using ResourcePool;
 using SafewareReporting;
@@ -2190,16 +2191,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (!newProductpage.TopEPARowIsEmpty())
 			{
 				Report.Info("Adding a new EPA row because there is pre-existing data");
-				newProductpage.AddEPARow();
+				Report.IsTrue(newProductpage.AddEPARow(),
+					"New EPA Row was not added successfully",
+					"New EPA Row was added successfully");
 				Report.Info("Entering the EPA number: " + epaNumber);
-				newProductpage.EnterEPATopRow(epaNumber);
-				Report.Screenshot();
+				Report.IsTrue(newProductpage.EnterEPATopRow(epaNumber),
+					"The EPA Number " + epaNumber + " was not successfully added to the top EPA table row",
+					"The EPA Number " + epaNumber + " was successfully added to the top EPA table row");
 			}
 			else
 			{
 				Report.Info("Entering the EPA number: " + epaNumber);
-				newProductpage.EnterEPATopRow(epaNumber);
-				Report.Screenshot();
+				Report.IsTrue(newProductpage.EnterEPATopRow(epaNumber),
+					"The EPA Number " + epaNumber + " was not successfully added to the top EPA table row",
+					"The EPA Number " + epaNumber + " was successfully added to the top EPA table row");
 			}
 		}
 
@@ -2208,12 +2213,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var newProductPage = new NewProduct();
 			var RowCount = newProductPage.CountPesticideRegRows();
+			var notEdited = new List<string>();
 			for (int i = 0; i < RowCount; i++)
 			{
-				newProductPage.AddSuffixToPesticideRegistrationNumRow(i);
+				if (!newProductPage.AddSuffixToPesticideRegistrationNumRow(i))
+				{
+					notEdited.Add(i + 1.ToString());
+				}
 			}
-			Report.Success("All State Pesticide Registration Number row were user edited");
-			Report.Screenshot();
+			Report.IsTrue(notEdited.Count == 0,
+				"The State Pesticide Registration Number for the following rows was not successfully edited: " + string.Join(", ", notEdited),
+				"Every State Pesticide Registrtaion Number in the table was successfully edited");
 		}
 
 		[StepDefinition(@"I check each State Pesticide Registration Number contains the edited suffix")]
@@ -2221,18 +2231,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var newProductPage = new NewProduct();
 			var RowCount = newProductPage.CountPesticideRegRows();
+			var notEdited = new List<string>();
 			for (int i = 0; i < RowCount; i++)
 			{
 				if (!newProductPage.CheckPesticideRegNumIsEdited(i))
 				{
-					var rowNumber = i + 1;
-					Report.Failure("Row number: " + rowNumber + " did not contain the edited suffix as expected");
 					Report.Screenshot();
-					return;
+					notEdited.Add(i + 1.ToString());
 				}
 			}
-			Report.Success("All State Pesticide Registration Numbers contained the user edited suffix");
-			Report.Screenshot();
+			Report.IsTrue(notEdited.Count == 0,
+				"The State Pesticide Registration Number for the following rows was not successfully edited: " + string.Join(", ", notEdited),
+				"Every State Pesticide Registrtaion Number in the table was successfully edited");
 		}
 
 		[StepDefinition(@"I click the Update Wercs Smart data with EPA data through Kelly Services link")]
@@ -2248,26 +2258,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var newProductPage = new NewProduct();
 			var RowCount = newProductPage.CountPesticideRegRows();
 			var expirationDateIndexes = new List<int>();
+			Report.Screenshot();
 			for (int i = 0; i < RowCount; i++)
 			{
 				if (newProductPage.ExpirationDateRowHasData(i))
 				{
 					var rowNumber = i + 1;
 					Report.Info("State at row number: " + rowNumber + " contained an Expiration Date");
-					if (i == 0)
-					{
-						Report.Screenshot();
-					}
 					expirationDateIndexes.Add(i);
 				}
 			}
-			if (expirationDateIndexes.Count == 0)
-			{
-				Report.Failure("No States were found to contain data for Expiration Date on the Pesticide State Registration Details page");
-				Report.Screenshot();
-				return;
-			}
-			Report.Success("Some States contained data in Expiration Date column as expected");
+			Report.IsTrue(expirationDateIndexes.Count > 0,
+				"No States were found to contain data for Expiration Date on the Pesticide State Registration Details page",
+				"Some States contained data in Expiration Date column as expected");
 			// We add the indexes as a list to the scenario context to allow checking the 'Is Kelly Data Data' field in another step
 			Context.AddToContext("Expiration Date Indexes", expirationDateIndexes);
 		}
@@ -2305,14 +2308,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Regex dateRegex = new Regex(@"^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$");
 			if (!dateRegex.IsMatch(expirationDate))
 			{
-				throw new Exception("The format of the provided date text was incorrect. Enter a date like: 'YYYY-MM-DD'");
+				Report.Failure("The format of the provided date text was incorrect. Enter a date like: 'YYYY-MM-DD'");
+				Report.Screenshot();
 			}
-
 			if (state.Length != 2)
 			{
-				throw new Exception("The state text provided was incorrect. Enter a state like: 'AZ', 'CO' etc.");
+				Report.Failure("The state text provided was incorrect. Enter a state like: 'AZ', 'CO' etc.");
+				Report.Screenshot();
 			}
-			newProductPage.EditPesticideRegExpirationDate(expirationDate, state);
+			Report.IsTrue(newProductPage.EditPesticideRegExpirationDate(expirationDate, state),
+				string.Format("The Pesticide Registration Expiration Date for state '{0}' was not successfully edited to be '{1}'",
+					state, expirationDate),
+				string.Format("The Pesticide Registration Expiration Date for state '{0}' was successfully edited to be '{1}'",
+					state, expirationDate));
 		}
 
 		[StepDefinition(@"I confirm the 'Is Kelly Data' field for State: (.*) (is|is not) checked")]
@@ -2325,14 +2333,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			if (check == "is")
 			{
-				Report.IsTrue(newProductPage.KellyDataIsTickedAtState(state), "The 'Is Kelly Data' field for State : " + state + " didn't contain a check when it was expected to", "The 'Is Kelly Data' field for State: " + state + " contained a check as expected");
+				Report.IsTrue(newProductPage.KellyDataIsTickedForState(state), "The 'Is Kelly Data' field for State : " + state + " didn't contain a check when it was expected to", "The 'Is Kelly Data' field for State: " + state + " contained a check as expected");
 				return;
 			}
-			Report.IsFalse(newProductPage.KellyDataIsTickedAtState(state), "The 'Is Kelly Data' field for State: " + state + " contained a check when it should not", "The 'Is Kelly Data' field for State: " + state + " did not contain a check as expected");
+			Report.IsFalse(newProductPage.KellyDataIsTickedForState(state), "The 'Is Kelly Data' field for State: " + state + " contained a check when it should not", "The 'Is Kelly Data' field for State: " + state + " did not contain a check as expected");
 		}
 
 		[StepDefinition(
-			@"I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page")]
+			@"I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State")]
 		public void IConfirmTheExpirationDateMatchesTheKellyValue()
 		{
 			var newProductPage = new NewProduct();
@@ -2344,6 +2352,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var expirationDate = newProductPage.GetPesticideRegExpirationDate(state);
 			var kellyExpirationDate = newProductPage.GetPesticideRegKellyExpirationDate(state);
 			Report.IsTrue(expirationDate == kellyExpirationDate, "The Expiration Date does not match the value provided by Kelly", "The Expiration correctly matches the value provided by Kelly");
+		}
+
+		[StepDefinition(@"I confirm the Expiration Date field for state: (.*) is showing the value: (.*)")]
+		public void ExpirationDateForStateIsShowingValue(string state, string date)
+		{
+			var actualDate = new NewProduct().GetPesticideRegExpirationDate(state);
+			Report.IsTrue(actualDate == date,
+				string.Format("The Expiration Date field for State: '{0}' was not showing the value: '{1}' as expected. It was showing the value: '{2}'",
+					state, date, actualDate),
+				string.Format("The Expiration Date field for State: '{0}' was showing the value: '{1}' as expected",
+					state, date));
+		}
+
+		[StepDefinition(@"I confirm the Expiration Date Provided By Kelly field for state: (.*) is blank")]
+		public void IConfirmTheExpirationDateProvidedByKellyForStateIsBlank(string currentState)
+		{
+			var newProductPage = new NewProduct();
+			var state = "";
+			if (ScenarioContext.Current.ContainsKey("state"))
+			{
+				state = Context.GetFromContext("state").ToString();
+				Report.Info("Looking at state from test context: " + state);
+			}
+			else
+			{
+				state = currentState;
+				Report.Info("Looking at state from test definition: " + state);
+			}
+			Report.IsTrue(newProductPage.GetPesticideRegKellyExpirationDate(state).IsNullOrEmpty(),
+				"The Expiration Date Provided By Kelly field for state " + state + " was not blank when it was expected to be.",
+				"The Expiration Date Provided By Kelly field for state: " + state + " was blank as expected");
 		}
 
 		[StepDefinition(
