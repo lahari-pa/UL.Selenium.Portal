@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Castle.Core.Internal;
 using ResourcePool;
 using SafewareReporting;
 using SafewareSeleniumUtilities;
@@ -236,6 +237,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var showing = new RetailParntersDetails().GetPieChartFooterText();
 			Report.Info("Text found was: " + showing);
 			Report.IsTrue(showing.Contains(text), "Showing text did not contain: " + text + "!", "Displayed text successfully contained: " + text);
+		}
+
+		[StepDefinition(@"I see a percentage number in the middle of the pie chart")]
+		public void PercentageMiddleOfPieChart()
+		{
+			var percentage = new RetailParntersDetails().ChartCentrePercentage();
+			Report.IsTrue(!percentage.IsNullOrEmpty(),
+				"There was no percentage showing in the middle of the pie chart",
+				"The percentage: " + percentage + " was displayed in the middle of the pie chart");
+		}
+
+		[StepDefinition(@"I confirm that the color of the pie chart for the Retailer selected is Green")]
+		public void ColorOfPieChartForSelectedRetailerGreen()
+		{
+			Report.IsTrue(new RetailParntersDetails().ChartRetailerFillIsGreen(),
+				"The pie chart fill for the retailer was not green",
+				"The pie chart fill for the retailer was green as expected");
+		}
+
+		[StepDefinition(@"I confirm the percentage in the pie chart legend statement matches the percentage shown in the middle of the pie chart")]
+		public void PieChartLegendPercentageMatchesPieChartPercentage()
+		{
+			var selRetailPartnersDetails = new RetailParntersDetails();
+			var chartPercentage = selRetailPartnersDetails.ChartCentrePercentage();
+			var chartLegend = selRetailPartnersDetails.GetChartLegend();
+			Report.IsTrue(chartLegend.Contains(chartPercentage),
+				"The percentage showing in the pie chart legend does not match the percentage within the pie chart",
+				"The percentage showing in the pie chart legend matches the percentage within the pie chart as expected");
 		}
 
 		[StepDefinition(@"I confirm that: (.*) is showing under the Data Consent Tiers heading")]
@@ -693,7 +722,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I click on close in the Report Download dialog")]
 		public void GivenIClickOnCloseInTheReportDownloadDialog()
 		{
-			Report.IsTrue(new ReportDownload().ClickClose(),"Failed to click close on Report Download modal dialog", "Successfully clicked close");
+			Report.IsTrue(new ReportDownload().ClickClose(), "Failed to click close on Report Download modal dialog", "Successfully clicked close");
 		}
 
 		[StepDefinition(@"I click the back arrow next to CVS")]
@@ -720,9 +749,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I check that in the Supplier ID table the following columns are showing:")]
 		public void ThenICheckThatInTheSupplierIDTableTheFollowingColumnsAreShowing(Table supplierIDTable)
 		{
-			List<string> SupplierIDHeaders = new RetailParntersDetails().GetSupplierIDTableHeaders().OrderBy(x=>x).ToList();
+			List<string> SupplierIDHeaders = new RetailParntersDetails().GetSupplierIDTableHeaders().OrderBy(x => x).ToList();
 
-			List<string> ExpectedSupplierIDHeaders = supplierIDTable.Rows.Select(row=>row["Column name"].Trim()).OrderBy(x => x).ToList();
+			List<string> ExpectedSupplierIDHeaders = supplierIDTable.Rows.Select(row => row["Column name"].Trim()).OrderBy(x => x).ToList();
 
 			bool passed = true;
 
@@ -742,6 +771,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 
+		}
+		[StepDefinition(@"I click the back arrow on the Retail Partners Details page")]
+		public void ClickTheBackArrowRetailPartnersDetails()
+		{
+			Report.IsTrue(new RetailParntersDetails().ClickBackButton(), "Failed to click the back arrow",
+				"Successfully clicked the back arrow");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 

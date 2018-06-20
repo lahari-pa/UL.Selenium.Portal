@@ -152,10 +152,29 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//div[@class='chart-legend']/p"), 2).Text;
 		}
 
+		public bool ChartRetailerFillIsGreen()
+		{
+			var chart = containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//*[name()='svg']"), 2);
+			if (chart == null)
+			{
+				return false;
+			}
+			return chart.FindElement(By.XPath(".//*[name()='path' and @class='highcharts-point highcharts-color-0' and @fill='#9ac36c']"), 2) != null;
+		}
+
+		public string ChartCentrePercentage()
+		{
+			var el = containerElement.FindElement(By.XPath(".//div[@id='total-products']"), 2);
+			if (el == null)
+			{
+				return null;
+			}
+			return el.Text;
+		}
+
 		public string GetAndYouText()
 		{
 			return containerElement.FindElement(By.XPath(".//div[@class='chart-legend']/../../..//h3"), 2).Text;
-			
 		}
 
 		public string GetTierInformation()
@@ -288,7 +307,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				.FindElements(
 					By.XPath(
 						".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table/thead/tr/th"),
-					2).Select(x => x.Text).Select(x=>x.Trim()).ToList();
+					2).Select(x => x.Text).Select(x => x.Trim()).ToList();
 		}
 
 	}

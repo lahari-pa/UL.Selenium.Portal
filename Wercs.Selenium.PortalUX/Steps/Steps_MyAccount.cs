@@ -97,8 +97,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I navigate to the MyAccount page");
 			try
 			{
+				Report.Info("Navigating to the My Account page");
 				TopMenuBar thisTopMenuBar = new TopMenuBar();
 				thisTopMenuBar.ClickMyAccount();
+				Report.IsTrue(new MyAccount().Wait_for_load(),
+					"The My Account page did not load",
+					"The My Account page was loaded");
+				GeneralUtilities.Wait_for_load_finish();
 			}
 			catch (Exception ex)
 			{
@@ -507,7 +512,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					{
 						Report.Error(ex.Message);
 					}
-					
+
 				}
 			}
 			catch (Exception ex)
@@ -602,5 +607,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[StepDefinition(@"In Your Company User Accounts the user (.*) is associated with the administrator email address")]
+		public void UserIsAssociatedAdminEmail(string user)
+		{
+			List<User> listOfUsers = (List<User>)Context.GetFromContext("userGrid");
+			var userMatch = listOfUsers.FirstOrDefault(x => x.Username == user);
+			Report.IsFalse(userMatch == null,
+				"The user: " + user + " was not found in the My Account user grid",
+				"The user: " + user + " was found in the My Account user grid");
+			if (userMatch == null)
+			{
+				Report.Failure("The user: " + user + " was not found in the My Account user grid");
+				Report.Screenshot();
+				return;
+			}
+			Report.Success("The user: " + user + " was found in the My Account user grid");
+			Report.Screenshot();
+			var adminEmail = GlobalParameters.Admin1;
+			Report.IsTrue(userMatch.Email == adminEmail,
+				string.Format("The user: '{0}' was not associated with the email address: '{1}'",
+					user, adminEmail),
+				string.Format("The user: '{0}' was associated with the email address: '{1}' as expected",
+					user, adminEmail));
+		}
 	}
 }

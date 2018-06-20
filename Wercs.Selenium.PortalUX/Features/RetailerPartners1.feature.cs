@@ -147,37 +147,37 @@ testRunner.And("I confirm that if the Retailer logo is not shown, then the Retai
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56909] Retailer Detail Page - Retailer does not require Supplier ID but does req" +
                     "uire Data Consent Tiers", ((string[])(null)));
-#line 31
+#line 30
 this.ScenarioSetup(scenarioInfo);
-#line 32
+#line 31
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 33
+#line 32
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 36
+#line 35
 testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
+#line 36
 testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 38
+#line 37
 testRunner.And("I select the retailer: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
+#line 40
 testRunner.Then("I should see the retailer heading: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 42
+#line 41
 testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 42
 testRunner.And("Section: Your Supplier IDs should be showing text: This retailer does not support" +
                     " Supplier ID management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
+#line 43
 testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 44
 testRunner.And("I should see the button: What are the Data Usage Tiers? in section: Data Consent " +
                     "Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 45
 testRunner.And("I should see the button: Products in Scope in section: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 46
 testRunner.And("I confirm that there is a section labeled: Costco & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
+#line 47
 testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 48
 testRunner.And("The pie chart footer text should contain: % of your product portfolio is associat" +
                     "ed with Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -199,36 +199,36 @@ testRunner.And("The pie chart footer text should contain: % of your product port
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tie" +
                     "rs", ((string[])(null)));
-#line 52
+#line 51
 this.ScenarioSetup(scenarioInfo);
-#line 53
+#line 52
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 54
+#line 53
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 57
+#line 56
 testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
+#line 57
 testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 59
+#line 58
 testRunner.And("I select the retailer: Wal-mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 61
 testRunner.Then("I should see the retailer heading: Wal-Mart/SAM\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 63
+#line 62
 testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
+#line 63
 testRunner.And("The Supplier ID Table should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
+#line 64
 testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
+#line 65
 testRunner.And("I should see the button: What are the Data Usage Tiers? in section: Data Consent " +
                     "Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
+#line 66
 testRunner.And("I should see the button: Products in Scope in section: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 67
 testRunner.And("I confirm that there is a section labeled: Wal-Mart/SAM\'S CLUB & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
+#line 68
 testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
+#line 69
 testRunner.And("The pie chart footer text should contain: % of your product portfolio is associat" +
                     "ed with Wal-Mart/SAM\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -248,17 +248,17 @@ testRunner.And("The pie chart footer text should contain: % of your product port
         public virtual void _56895RetailerPartners_MainPageLayoutNewSupplier()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56895] Retailer Partners - Main Page layout (New supplier)", ((string[])(null)));
-#line 73
+#line 72
 this.ScenarioSetup(scenarioInfo);
-#line 74
+#line 73
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 77
+#line 76
 testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
+#line 77
 testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 79
+#line 78
 testRunner.And("I should see the following subheading All Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
+#line 79
 testRunner.Then("I confirm that none of the available Retailer Tiles are blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -423,7 +423,7 @@ testRunner.Then("I confirm that none of the available Retailer Tiles are blank",
             table1.AddRow(new string[] {
                         "NewEgg",
                         "NE"});
-#line 86
+#line 85
 testRunner.And("I check that the following retailers are showing:", ((string)(null)), table1, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -444,28 +444,28 @@ testRunner.And("I check that the following retailers are showing:", ((string)(nu
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56903] Retailer Detail Page - Retailer does not require Supplier ID or Data Cons" +
                     "ent Tiers", ((string[])(null)));
-#line 143
+#line 142
 this.ScenarioSetup(scenarioInfo);
-#line 144
+#line 143
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 145
+#line 144
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 146
+#line 145
 testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 147
+#line 146
 testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 148
+#line 147
 testRunner.When("I select the retailer: Lowe\'s", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 149
+#line 148
 testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 150
+#line 149
 testRunner.Then("I should see the retailer heading: Lowe\'s", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 153
+#line 152
 testRunner.And("Section: Your Supplier IDs should be showing text: This retailer does not support" +
                     " Supplier ID management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 154
+#line 153
 testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 155
+#line 154
 testRunner.And("Section: Data Consent Tiers should be showing text: This recipient does not requi" +
                     "re additional data consent tiers at this time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -487,21 +487,21 @@ testRunner.And("Section: Data Consent Tiers should be showing text: This recipie
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56907] Retailer Detail Page - Retailer does require Supplier ID but does not req" +
                     "uire Data Consent Tiers", ((string[])(null)));
-#line 158
+#line 157
 this.ScenarioSetup(scenarioInfo);
-#line 159
+#line 158
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 160
+#line 159
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 161
+#line 160
 testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 162
+#line 161
 testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 163
+#line 162
 testRunner.When("I select the retailer: Sears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 164
+#line 163
 testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 165
+#line 164
 testRunner.Then("I should see the retailer heading: Sears/K-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -516,18 +516,63 @@ testRunner.Then("I should see the retailer heading: Sears/K-Mart", ((string)(nul
                         "Is Default"});
             table2.AddRow(new string[] {
                         "Actions"});
-#line 166
+#line 165
 testRunner.Then("I check that in the Supplier ID table the following columns are showing:", ((string)(null)), table2, "Then ");
-#line 174
+#line 173
 testRunner.Given("I call Shared Step 56968 (Confirm - Data Consent Tiers not required )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 175
+#line 174
 testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 176
+#line 175
 testRunner.And("Section: Data Consent Tiers should be showing text: This recipient does not requi" +
                     "re additional data consent tiers at this time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 177
+#line 176
 testRunner.Given("I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) " +
                     "for retailer: Sears/K-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[56981] Retailer & You - layout")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Retailer Partners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
+        public virtual void _56981RetailerYou_Layout()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56981] Retailer & You - layout", ((string[])(null)));
+#line 179
+this.ScenarioSetup(scenarioInfo);
+#line 181
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 183
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 185
+testRunner.Given("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 187
+testRunner.And("I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 189
+testRunner.And("I confirm that there is a section labeled: Walgreens & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 191
+testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 193
+testRunner.Given("I see a percentage number in the middle of the pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 195
+testRunner.Given("I confirm that the color of the pie chart for the Retailer selected is Green", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 197
+testRunner.And("The pie chart footer text should contain: % of your product portfolio is associat" +
+                    "ed with Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 199
+testRunner.Given("I confirm the percentage in the pie chart legend statement matches the percentage" +
+                    " shown in the middle of the pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 207
+testRunner.Given("I click the back arrow on the Retail Partners Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 209
+testRunner.Then("I should see the Retail Partners page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

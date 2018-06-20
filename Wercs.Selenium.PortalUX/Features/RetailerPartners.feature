@@ -27,7 +27,6 @@ And I confirm that if the Retailer logo is not shown, then the Retailer name is 
 # And Use this query to see the list of currently active retailers in Portal select * from t_client where f_active = 1 and ISNULL(f_config.value('(/Client/@Active)[1]','varchar(20)'),'true') = 'true'  order by f_name CONFIRM this list matches the list of retailers you see in the Retail Partners page
 
 
-
 Scenario: [56909] Retailer Detail Page - Retailer does not require Supplier ID but does require Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -176,3 +175,35 @@ And I confirm that there is a section labeled: Data Consent Tiers
 And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time.
 Given I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) for retailer: Sears/K-Mart
 
+
+Scenario: [56981] Retailer & You - layout
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click the Retail Partners icon in the Navigation Pane
+
+And I select the retailer: Walgreens
+
+And I confirm that there is a section labeled: Walgreens & You
+
+And The pie chart should be showing on the retailer details page
+
+Given I see a percentage number in the middle of the pie chart
+
+Given I confirm that the color of the pie chart for the Retailer selected is Green
+
+And The pie chart footer text should contain: % of your product portfolio is associated with Walgreens
+
+Given I confirm the percentage in the pie chart legend statement matches the percentage shown in the middle of the pie chart
+
+# Not seeing these elements currently, so unable to code it
+
+# Given I see the Thumbs up graphic
+
+# Given I see the "It's been <X> good years" statement below the thumbs up graphic
+
+Given I click the back arrow on the Retail Partners Details page
+
+Then I should see the Retail Partners page
