@@ -6,7 +6,7 @@
 Feature: Data Consent Tiers
 
 Background:
-Given Login into WERCSmart Portal - Administrator Role - WERCs Account
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then I click the Retail Partners icon in the Navigation Pane
 
 Scenario: [56942] Data Consent Tiers - Walmart

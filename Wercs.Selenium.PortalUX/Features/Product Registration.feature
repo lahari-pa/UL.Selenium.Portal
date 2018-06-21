@@ -275,90 +275,56 @@ Then I delete the product: TestCase65441
 
 Scenario: [63684] Walmart Private label product
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
-#Given I generate a random UPC number and save as: UPC63684
-#Given I delete all products with UPC Number: saved as UPC63684
 
+# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
+Given I generate a random UPC number and save as: UPC63684
+Given I delete all products with UPC Number: saved as UPC63684
 
-And I click the Register New Product icon in the Navigation Pane
-And I should see the header New Product
-And I Select the Create a New Registration radio button
-And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Pet shampoo in the Product Name text field
-And In the Product Type tab of the New Product Page, I enter: Pet shampoo in the Type of Product select field
-And in the New Product page I click Continue
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet shampoo
+
 Then I save the product information as: TestCase63684
 
-# Setting Product Characteristics
-And I should only see the following options for Primary Physical State:
-| State |
-| Liquid |
+Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+| Secondary Physical State | Specific Gravity | pH      | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used     | Select the best Water Solubility description |
+| Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
 
-And I set the Secondary Physical State to be: Liquid
-And In the Product Characteristics tab, I enter: 2 in the Specific Gravity text field
-And In the product Characteristics tab, I enter: 2 in the pH text field
-And In the product Characteristics tab, I enter: 2 in the Boiling point (in Celsius) text field
-And In the product Characteristics tab, I enter: 2 in the Flash point (in Celsius) text field
-And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Closed cup method
-And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
-And I should see the Additional Product Information Page
-And In the Additional Information Page the check box for: United States should be: checked
-And In the Additional Information Page for Product has been classified using OSHA I select: No
-And In the Additional Information Page for Product is shipped directly I select: No
-And In the Additional Information Page for Product is retailers private label or brand I select: Yes
-And In the Additional Information Page for Product is solely for the Retailer's use I select: No
-And in the New Product page I click Continue
-# Setting Ingredient Information
-Then I add the following ingredients:
+
+Given I call Shared Step 63804 (Additional Product Information with Yes to Private Label )
+| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+| No                                                             | No                            | Yes                         | No                         |
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Formaldehyde  | 100     | false               | false       |            |
-Given in the New Product page I click Continue
-And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
-And in the New Product page I click Continue
-And In the Regulatory Inforamtion tab, I select Product Lable as: None of the Above
-And in the New Product page I click Continue
-Given the 'Select Retailers' window appears
-Then In the 'Select Retailers' window I select the retailer: Wal-Mart/SAM'S CLUB
-And In the Retailers tab, I select Private Label name as: Holiday Time
-And In the Retailers tab, I select Vendor id as: test
-And in the New Product page I click Continue
-Given I click the 'Add UPC' button
-Then I add the following into the UPC Fields
-| Field         | Value             |
-| UPCNumber     | 0034100570231     |
-| ContainerType | Aerosol Can       |
-| Size          | 20                |
-#Regulatory Documents to Provide - US only _ request authoring - Happy Path
-Given in the New Product page I click Continue
-And I should see the Regulatory Documents to Provide Page
-And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+| Cocoa butter  | 100     | false               | false       |            |
 
-Given in the New Product page I click Continue
-Given in the New Product page I click Continue
-Given in the New Product page I click Continue
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
-#SaDS authoring - additional data
-And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
-And in the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: Gloves
-And in the Review and Submit tab of the New Product Page for Autoignition I enter: 55
-And in the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: 55
-And in the Review and Submit tab of the New Product Page for Viscosity I enter: 4.5
-And in the Review and Submit tab of the New Product Page for Appearance I select: Buff
-And in the Review and Submit tab of the New Product Page for Odor I select: Roasted soy
-And in the Review and Submit tab of the New Product Page for Odor Threshold I select: No data available
-And in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: 5.5
-Given in the New Product page I click Continue
-Then the comments field should appear
-And I enter the following into the comments field: Comments Field Text
-Given in the New Product page I click Continue
-Then The Data Acceptance page should appear
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And I confirm that I see the following option for private label question: Yes
-#Given I navigate to the home page
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Given I call Shared 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: test
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC63684, container type: Plastic Container and size: 3.6
+
+Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given in the Additional Documents to Provide page I click Continue
+
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Apron                         | 550                      | 63.625                  | 33.333    | Brown      | Banana | No data available | 30                    |
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet shampoo
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
 
 
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response

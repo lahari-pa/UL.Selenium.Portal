@@ -1130,8 +1130,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"No");
 			TestReport.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
 			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
-			TestReport.StartStep("I set the Secondary Physical State option to: Solid");
-			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
+			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
+			{
+				TestReport.StartStep(
+					"I set the Secondary Physical State option to: Solid");
+				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+					"Solid");
+			}
+			//TestReport.StartStep("I set the Secondary Physical State option to: Solid");
+			//MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -2808,5 +2815,70 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(
+			@"I call Shared Step 63804 \(Additional Product Information with Yes to Private Label \)")]
+		public void ICallSharedStepAdditionalProductInformationWithYesToPrivateLabel(Table table)
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct myNewProduct = new NewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			if (myNewProduct.SectionExists(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)"))
+			{
+				TestReport.StartStep(
+					"In the Product Type tab of the New Product Page for Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) I select:" +
+					table.Rows[0]["Classified using OSHA (US) Globally Harmonized Standards (GHS)"]);
+				MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+					table.Rows[0]["Classified using OSHA (US) Globally Harmonized Standards (GHS)"]);
+			}
+			if (myNewProduct.SectionExists(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns."))
+			{
+				TestReport.StartStep(
+					"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." +
+					table.Rows[0]["Shipped directly by supplier"]);
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+					table.Rows[0]["Shipped directly by supplier"]);
+			}
+			if (myNewProduct.SectionExists(
+				"Product is a Retailer's Private Label or Brand"))
+			{
+				TestReport.StartStep(
+					"Product is a Retailer's Private Label or Brand" +
+					table.Rows[0]["Private Label or Brand"]);
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand",
+					table.Rows[0]["Private Label or Brand"]);
+			}
+			if (myNewProduct.SectionExists(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)"))
+			{
+				TestReport.StartStep(
+					"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)" +
+					table.Rows[0]["Good Not for resale"]);
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+					table.Rows[0]["Good Not for resale"]);
+			}
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[Given(
+			@"I call Shared 65181 \(Retailer Association - Add Private Label Information and Select Vendor ID\) and select the retailer: (.*) and enter the name: (.*) and select Vendor id: (.*)")]
+		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId(string retailer, string name, string option)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: " + retailer);
+			MyStepsNewProduct.ThenISelectTheRetailer_InTheWindow(retailer);
+			TestReport.StartStep("I should see the Retailer Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
+			NewProduct MyNewProduct = new NewProduct();
+			MyNewProduct.SelectPrivateLabelName(name);
+			MyNewProduct.SelectVendorId(option);
+			TestReport.StartStep("In the Retailer page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
+		}
 	}
 }
