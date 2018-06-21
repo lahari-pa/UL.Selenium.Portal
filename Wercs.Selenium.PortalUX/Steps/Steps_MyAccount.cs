@@ -452,19 +452,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		public void ThenInTheMyAccountScreenINavigateToTheXPage(string nav_option)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the My Account screen I navigate to the " + nav_option + " page");
-			try
-			{
-				var selMyAccount = new MyAccount();
-
-				Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), "Failed to Navigate to " + nav_option,
-					"Successully Navigated to " + nav_option);
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			var selMyAccount = new MyAccount();
+			Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), "Failed to Navigate to " + nav_option,
+				"Successully Navigated to " + nav_option);
 		}
 
 		[StepDefinition(@"In the Subscription Information screen I confirm the Status has the correct information: (.*) Formulated, (.*) Articles, (.*) Enhanced Articles")]
@@ -629,6 +619,142 @@ namespace Wercs.Selenium.PortalUX.Steps
 					user, adminEmail),
 				string.Format("The user: '{0}' was associated with the email address: '{1}' as expected",
 					user, adminEmail));
+		}
+
+		[StepDefinition(@"The My Account user grid is currently on page number: (.*)")]
+		public void UserGridIsActiveOnPageNumber(string expectedPage)
+		{
+			var selMyAccount = new MyAccount();
+			var activePage = selMyAccount.UserAccountsActivePage();
+			Report.IsTrue(activePage == expectedPage,
+				"The My Account user grid is not on the expected page: " + expectedPage + ". It is on page: " + activePage,
+				"The My Account user grid is on the expected page: " + expectedPage);
+		}
+
+		[StepDefinition(@"I click (next|previous|...) in the My Account user grid")]
+		public void ClickNextPrevInUserGrid(string navOption)
+		{
+			Report.IsTrue(new MyAccount().UserGridNavigation(navOption),
+				"Failed to navigate in the user grid with action: " + navOption,
+				"Successfully navigated in the user grid with action: " + navOption);
+		}
+
+		[StepDefinition(@"I add (.*) new users with emails using the following information")]
+		public void AddMultipleUsersWithEmails(string userCount, Table table)
+		{
+			for (int i = 0; i < Convert.ToInt32(userCount); i++)
+			{
+				string myDate = DateTime.Now.ToString("HHmmssddMMyy");
+				string myEmail = EmailFunctions.CreateEmail(myDate);
+				if (myEmail == "")
+				{
+					throw new Exception("Failed to Create a New Email Address");
+				}
+				Context.AddToContext("CurrentEmail", myEmail);
+				Report.Success("Email Address Created and Saved in Scenario Context");
+				foreach (var thisRow in table.Rows)
+				{
+					string userName = thisRow["User Name"];
+					string title = thisRow["Title"];
+					string role = thisRow["Role"];
+					string phoneNo = thisRow["Phone Number"];
+					string emailAddress = thisRow["Email Address"];
+					string confirmEmail = thisRow["Confirm Email"];
+					string countryCode = thisRow["Country Code"];
+					string country = thisRow["Country"];
+
+					if (userName == "User")
+					{
+						userName = userName + "_" + System.DateTime.Now.ToString("HHmmddMMyy");
+
+						Context.AddToContext("CurrentUser", userName);
+
+						Report.Info("User Name = " + userName);
+					}
+
+					if (emailAddress == "Saved")
+					{
+						if (ScenarioContext.Current.ContainsKey("CurrentEmail"))
+						{
+							emailAddress = ScenarioContext.Current["CurrentEmail"].ToString();
+						}
+						Report.Info("Email Address = " + emailAddress);
+					}
+
+					if (confirmEmail == "Saved")
+					{
+						if (ScenarioContext.Current.ContainsKey("CurrentEmail"))
+						{
+							confirmEmail = ScenarioContext.Current["CurrentEmail"].ToString();
+						}
+						Report.Info("Email Address = " + confirmEmail);
+					}
+
+					if (countryCode == "empty")
+					{
+						countryCode = "";
+					}
+					var selMyAccount = new MyAccount();
+					//Open New User Form
+					Report.IsTrue(selMyAccount.Add_New_User_click(), "Failed to Click Add New User Link",
+						"New User Form Link Clicked");
+					Delay.Seconds(3 * Delay.SpeedFactor);
+					var selMyUserForm = new UserDetails();
+					//Check Form Has Opened
+					Report.IsTrue(!selMyUserForm.Exists, "Failed to Open Add User Form", "Add User Form Open");
+					//Add New User
+					Report.IsTrue(selMyUserForm.Add_New_User(userName, title, role, phoneNo, emailAddress, confirmEmail, country),
+						"Failed to Add a New User", "New User Added");
+
+					Delay.Seconds(1 * Delay.SpeedFactor);
+					//Check User Has Been Created
+					//Report.IsTrue(selMyAccount.User_Added_Check(userName, emailAddress, role), "User Has Not Been Created",
+					//"User Created Successfully");
+				}
+			}
+		}
+
+		[StepDefinition(@"I see the use grid page navigation input with up and down arrows")]
+		public void PageInputNumber()
+		{
+			Report.IsTrue(new MyAccount().UserGridNavPageInputShowing(),
+				"The user grid page navigation input was not visible",
+				"The user grid page navigation input was visible as expected");
+		}
+
+		[StepDefinition(@"I enter the (up|down) arrow into the user grid page navigation box then the correct page is shown")]
+		public void EnterArrowUserGridNavigationBox(string direction)
+		{
+			var selMyAccount = new MyAccount();
+			var pageNavigationValue = Context.GetFromContext("Page Navigation Value") == null
+				? selMyAccount.CurrentPageUserGridNavPageInput()
+				: Context.GetFromContext("Page Navigation Value").ToString();
+
+			TestReport.StartStep(GlobalParameters.StepCount + " - I enter the " + direction + " arrow into the page navigation box");
+			Report.Info("Entering the " + direction + " arrow key to the user grid page navigation input");
+			selMyAccount.KeyToUserGridNavPageInput(direction);
+			Report.Info("Pressing the enter key");
+			selMyAccount.KeyToUserGridNavPageInput("enter");
+			var iteration = direction == "up" ? "increased" : "decreased";
+			GlobalParameters.StepCount++;
+			TestReport.StartStep(GlobalParameters.StepCount + " - I confirm the page number has " + iteration + " by 1");
+			var currentPage = Convert.ToInt32(selMyAccount.UserAccountsActivePage());
+			int difference = direction == "up" ? 1 : -1;
+			Report.IsTrue(currentPage == Convert.ToInt32(pageNavigationValue) + difference,
+				string.Format("The active page did not {0} by 1 after entering the '{1}' arrow into the page navigation box at position '{2}'",
+					iteration.Remove(iteration.Length - 1), direction, pageNavigationValue),
+				string.Format("The active page correctly {0} by 1 after entering the '{1}' arrow into the page navigation box at position '{2}'",
+					iteration, direction, pageNavigationValue));
+		}
+
+		[StepDefinition(@"I type the number (.*) into the user grid page navigation box and press the enter key")]
+		public void TypeNumberUserGridNavigationBoxAndPressEnter(string pageNum)
+		{
+			var selMyAccount = new MyAccount();
+			Report.Info("Entering text: " + pageNum + " into the user grid page navigation input");
+			selMyAccount.NumToUserGridNavPageInput(pageNum);
+			Report.Info("Pressing the enter key");
+			selMyAccount.KeyToUserGridNavPageInput("enter");
 		}
 	}
 }

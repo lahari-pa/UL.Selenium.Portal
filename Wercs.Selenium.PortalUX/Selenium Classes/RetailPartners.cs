@@ -152,14 +152,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//div[@class='chart-legend']/p"), 2).Text;
 		}
 
-		public bool ChartRetailerFillIsGreen()
+		public string ChartRetailerFill()
 		{
 			var chart = containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//*[name()='svg']"), 2);
 			if (chart == null)
 			{
-				return false;
+				return null;
 			}
-			return chart.FindElement(By.XPath(".//*[name()='path' and @class='highcharts-point highcharts-color-0' and @fill='#9ac36c']"), 2) != null;
+			var chartSector = chart.FindElement(By.XPath(".//*[name()='path' and @class='highcharts-point highcharts-color-0']"), 2);
+			if (chartSector == null)
+			{
+				return null;
+			}
+			return chartSector.GetAttribute("fill");
 		}
 
 		public string ChartCentrePercentage()

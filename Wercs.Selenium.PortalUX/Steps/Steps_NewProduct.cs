@@ -2214,11 +2214,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var newProductPage = new NewProduct();
 			var RowCount = newProductPage.CountPesticideRegRows();
 			var notEdited = new List<string>();
+			int counter;
 			for (int i = 0; i < RowCount; i++)
 			{
 				if (!newProductPage.AddSuffixToPesticideRegistrationNumRow(i))
 				{
-					notEdited.Add(i + 1.ToString());
+					counter = i + 1;
+					notEdited.Add(counter.ToString());
 				}
 			}
 			Report.IsTrue(notEdited.Count == 0,

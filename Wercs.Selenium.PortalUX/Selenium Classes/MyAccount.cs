@@ -314,68 +314,45 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Accounts_Navigation(string nav_option)
 		{
-			Report.Info("Beginning Accounts_Navigation - Navigating to " + nav_option);
-
+			Report.Info("Navigating to the page - " + nav_option);
 			IWebElement myNav = _nav_accounts.FindElement(By.XPath(".//li/a[text()='" + nav_option + "']"), 2);
-
+			bool navigated;
 			if (myNav == null)
 			{
-				Report.Info("Failed to Find Navigation Option");
+				Report.Info("Failed to Find Navigation Option: " + nav_option);
 				Report.Screenshot();
 				return false;
 			}
 			Report.Info("Navigation Option Found - Attempting to Click Link");
-			myNav.Click();
-			Delay.Seconds(10 * Delay.SpeedFactor);
-
+			myNav.TryClick();
+			GeneralUtilities.Wait_for_load_finish();
 			switch (nav_option)
 			{
 				case "Company Information":
 					var myComp = new MyAccount_CompanyInfo();
-					if (!myComp.Exists)
-					{
-						Report.Info("Failed to Navigate to " + nav_option);
-					}
-					Report.Success(nav_option + " Opened Successfully");
+					navigated = myComp.Exists;
 					break;
 				case "Subscription Information":
 					var mySub = new MyAccount_SubscriptionInfo();
-					if (!mySub.Exists)
-					{
-						Report.Info("Failed to Navigate to " + nav_option);
-					}
-					Report.Success(nav_option + " Opened Successfully");
+					navigated = mySub.Exists;
 					break;
 				case "Payment Methods":
 					var myPay = new PaymentMethods();
-					if (!myPay.Exists)
-					{
-						Report.Info("Failed to Navigate to " + nav_option);
-					}
-					Report.Success(nav_option + " Opened Successfully");
+					navigated = myPay.Exists;
 					break;
 				case "Order History":
 					var myOrder = new MyAccount_OrderHistory();
-					if (!myOrder.Exists)
-					{
-						Report.Info("Failed to Navigate to " + nav_option);
-					}
-					Report.Success(nav_option + " Opened Successfully");
+					navigated = myOrder.Exists;
 					break;
 				case "My Library":
 					var myLibrary = new MyAccount_MyLibrary();
-					if (!myLibrary.Exists)
-					{
-						Report.Info("Failed to Navigate to " + nav_option);
-					}
-					Report.Success(nav_option + " Opened Successfully");
+					navigated = myLibrary.Exists;
 					break;
 				default:
-					throw new Exception("Failed to Find Correct Option Name");
+					Report.Info("The specified navigation option: " + nav_option + " was not valid");
+					return false;
 			}
-
-			Report.Success("Account Navigation Successful");
-			return true;
+			return navigated;
 		}
 
 		public string Get_State_Code(string state)
@@ -572,6 +549,113 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//div[@id='division-accounts-grid']//table"), 2) != null;
 		}
 
+		public string UserAccountsActivePage()
+		{
+			var userGrid = containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
+			if (userGrid == null)
+			{
+				return null;
+			}
+			var pageEl = userGrid.FindElement(By.XPath(".//li[@class='active']/span"), 2);
+			if (pageEl == null)
+			{
+				return null;
+			}
+			pageEl.ScrollElementIntoView();
+			return userGrid.FindElement(By.XPath(".//li[@class='active']/span"), 2).Text;
+		}
+
+		public bool UserGridNavigation(string navOption)
+		{
+			Report.Info("Navigating in the user grid with action - " + navOption);
+			var userGrid = containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"), 2);
+			if (userGrid == null)
+			{
+				Report.Info("Could not locate the user grid");
+				return false;
+			}
+			IWebElement navEl = null;
+			switch (navOption)
+			{
+				case "next":
+					navEl = userGrid.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
+					break;
+				case "previous":
+					navEl = userGrid.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
+					break;
+				case "...":
+					navEl = userGrid.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+					break;
+				default:
+					Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
+					return false;
+			}
+			if (navEl == null)
+			{
+				Report.Info("Could not locate the navigation button element");
+				return false;
+			}
+			navEl.ScrollElementIntoView();
+			return navEl.TryClick();
+		}
+
+		public IWebElement UserGridNavPageInput()
+		{
+			return containerElement.FindElement(By.XPath(".//input[@type='number']"), 2);
+		}
+
+		public bool UserGridNavPageInputShowing()
+		{
+			return this.UserGridNavPageInput() != null;
+		}
+
+		public void KeyToUserGridNavPageInput(string action)
+		{
+			var inputEl = UserGridNavPageInput();
+			if (inputEl == null)
+			{
+				Report.Failure("The navigation input box could not be found");
+				return;
+			}
+			inputEl.ScrollElementIntoView();
+			switch (action)
+			{
+				case "up":
+					inputEl.SendKeys(Keys.ArrowUp);
+					break;
+				case "down":
+					inputEl.SendKeys(Keys.ArrowDown);
+					break;
+				case "enter":
+					inputEl.SendKeys(Keys.Enter);
+					break;
+				default:
+					Report.Failure("The action requested was beyond those specified: 'up', 'down', or 'enter'");
+					break;
+			}
+		}
+
+		public void NumToUserGridNavPageInput(string pageNumber)
+		{
+			var inputEl = UserGridNavPageInput();
+			if (inputEl == null)
+			{
+				Report.Failure("The navigation input box could not be found");
+				return;
+			}
+			inputEl.EnterText(pageNumber);
+		}
+
+		public string CurrentPageUserGridNavPageInput()
+		{
+			var inputEl = UserGridNavPageInput();
+			if (inputEl == null)
+			{
+				Report.Failure("The navigation input box could not be found");
+				return null;
+			}
+			return inputEl.GetAttribute("value");
+		}
 	}
 
 	class MyAccount_CompanyInfo : BaseObject

@@ -251,9 +251,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I confirm that the color of the pie chart for the Retailer selected is Green")]
 		public void ColorOfPieChartForSelectedRetailerGreen()
 		{
-			Report.IsTrue(new RetailParntersDetails().ChartRetailerFillIsGreen(),
-				"The pie chart fill for the retailer was not green",
-				"The pie chart fill for the retailer was green as expected");
+			var selRetailPartnersDetails = new RetailParntersDetails();
+			var testChartFill = selRetailPartnersDetails.ChartRetailerFill();
+			Report.IsTrue(testChartFill == "#9ac36c",
+				"The pie chart fill for the retailer was not green. The hex code displayed is: " + testChartFill,
+				"The pie chart fill for the retailer was green as expected. The hex code displayed is: " + testChartFill);
 		}
 
 		[StepDefinition(@"I confirm the percentage in the pie chart legend statement matches the percentage shown in the middle of the pie chart")]

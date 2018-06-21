@@ -157,17 +157,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickButton(string sButtonName)
 		{
 			var buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//a[@id='carouselContinue']"));
-
 			var thisButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == sButtonName.ToLower());
-
-			if (thisButton != null)
-			{
-				thisButton.ClickWithScroll();
-				Delay.Seconds(2);
-				return true;
-			}
-
-			return false;
+			return thisButton.TryClick();
 		}
 
 		public bool ClickButtonOnAddUserDialog(string buttonToClick)
@@ -215,7 +206,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Delay.Seconds(2 * Delay.SpeedFactor);
 
 			var myDlg = new AddUserThankYouDialog();
-
+			myDlg.Wait_for_load();
 			if (!myDlg.Add_User_Thank_You())
 			{
 				Report.Info("Failed to Add User");
@@ -239,8 +230,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Close_click()
 		{
 			Report.Info("Attempting to Click Close Button");
-			_btnClose.Click();
-			return true;
+			return _btnClose.TryClick();
 		}
 
 		public bool Add_User_Thank_You()
