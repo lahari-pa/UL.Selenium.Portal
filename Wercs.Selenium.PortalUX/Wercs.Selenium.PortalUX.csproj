@@ -334,6 +334,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Selenium Classes\AccountNotifications.cs" />
+    <Compile Include="Selenium Classes\AddNewSupplier.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\AccountCreation.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\Homepage.cs" />
     <Compile Include="Selenium Classes\ChooseGoodGuide\MyProducts.cs" />

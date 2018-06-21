@@ -315,6 +315,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					2).Select(x => x.Text).Select(x => x.Trim()).ToList();
 		}
 
+		public bool ClickAddSupplierId()
+		{
+			return containerElement.FindElement(By.XPath(".//a[@class='add-supplier-id']")).TryClick();
+		}
+
 	}
 
 	public class DataEntryNotification : BaseObject

@@ -177,33 +177,38 @@ Given I call Shared Step 56967 (Confirm Retailer & You information is shown corr
 
 
 Scenario: [56981] Retailer & You - layout
-
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
 Then The home screen should load
-
 Given I click the Retail Partners icon in the Navigation Pane
-
 And I select the retailer: Walgreens
-
 And I confirm that there is a section labeled: Walgreens & You
-
 And The pie chart should be showing on the retailer details page
-
 Given I see a percentage number in the middle of the pie chart
-
 Given I confirm that the color of the pie chart for the Retailer selected is Green
-
 And The pie chart footer text should contain: % of your product portfolio is associated with Walgreens
 
 Given I confirm the percentage in the pie chart legend statement matches the percentage shown in the middle of the pie chart
-
 # Not seeing these elements currently, so unable to code it
-
 # Given I see the Thumbs up graphic
-
 # Given I see the "It's been <X> good years" statement below the thumbs up graphic
-
 Given I click the back arrow on the Retail Partners Details page
-
 Then I should see the Retail Partners page
+
+Scenario: [56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID - Cancel
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Then I click the Retail Partners icon in the Navigation Pane
+Then I should see the following heading Retail Partners
+When I select the retailer: Sears
+Then I should see the Retailer Detail page
+Given I click on the Add new Supplier ID link
+Then I confirm the pop up shows the heading: Add New Supplier
+Then I confirm the pop up shows the Supplier ID heading and data entry field
+Then I confirm the pop up shows the Company or Brand Name heading and data entry field
+Then I confirm the pop up shows the Is Default Heading and check box
+Then I confirm the pop up shows a Save button
+Then I confirm the pop up shows a Cancel button
+Given in the modal dialog I click cancel
+Given I confirm in the browser popup
+Then I confirm the Add New Supplier ID pop up closes
+

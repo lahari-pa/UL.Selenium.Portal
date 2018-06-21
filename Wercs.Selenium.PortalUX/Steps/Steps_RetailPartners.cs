@@ -771,8 +771,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 				" and actual column names: " + string.Join(",", SupplierIDHeaders) + " do not match",
 				"Expected and actual Supplier ID table column names match as expected");
 
+		}
 
+		[Given(@"I click on the Add new Supplier ID link")]
+		public void GivenIClickOnTheAddNewSupplierIDLink()
+		{
+			Report.IsTrue(new RetailParntersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
+				"Successfully clicked add supplier id link");
+		}
 
+		[Then(@"I confirm the pop up shows the heading: (.*)")]
+		public void ThenIConfirmThePopUpShowsTheHeading(string title)
+		{
+			var actualTitle = new ModalDialog().GetTitle();
+			Report.IsTrue(actualTitle == title, "Title is " + actualTitle + " but should be: " + title,
+				"Title is showing as expected: " + title);
 		}
 		[StepDefinition(@"I click the back arrow on the Retail Partners Details page")]
 		public void ClickTheBackArrowRetailPartnersDetails()
@@ -782,6 +795,61 @@ namespace Wercs.Selenium.PortalUX.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
+		[Then(@"I confirm the pop up shows the Supplier ID heading and data entry field")]
+		public void ThenIConfirmThePopUpShowsTheSupplierIDHeadingAndDataEntryField()
+		{
+			Report.IsTrue(new AddNewSupplier().EnterSupplierIDExists(), "Supplier ID field does not exist as expected",
+				"Supplier ID field exists as expected");
+		}
 
+		[Then(@"I confirm the pop up shows the Company or Brand Name heading and data entry field")]
+		public void ThenIConfirmThePopUpShowsTheCompanyOrBrandNameHeadingAndDataEntryField()
+		{
+			Report.IsTrue(new AddNewSupplier().EnterCompanyOrBrandNameExists(), "Company or brand name field does not exist as expected",
+				"Company or brand name exists as expected");
+		}
+
+		[Then(@"I confirm the pop up shows the Is Default Heading and check box")]
+		public void ThenIConfirmThePopUpShowsTheIsDefaultHeadingAndCheckBox()
+		{
+			Report.IsTrue(new AddNewSupplier().IsDefaultExists(), "Is Default field does not exist as expected",
+				"Is Default exists as expected");
+		}
+
+
+		[Then(@"I confirm the pop up shows a Save button")]
+		public void ThenIConfirmThePopUpShowsASaveButton()
+		{
+			Report.IsTrue(new AddNewSupplier().SaveButtonExists(), "Save button does not exist as expected",
+				"Save button exists as expected");
+		}
+
+		[Then(@"I confirm the pop up shows a Cancel button")]
+		public void ThenIConfirmThePopUpShowsACancelButton()
+		{
+			Report.IsTrue(new AddNewSupplier().CancelButtonExists(), "Cancel button does not exist as expected",
+				"Cancel button exists as expected");
+		}
+
+		[Given(@"in the modal dialog I click cancel")]
+		public void GivenInTheModalDialogIClickCancel()
+		{
+			Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
+				"Successfully clicked cancel");
+		}
+
+		[Then(@"I confirm the Add New Supplier ID pop up closes")]
+		public void ThenIConfirmTheAddNewSupplierIDPopUpCloses()
+		{
+			Delay.Seconds(1);
+			Report.IsTrue(!(new ModalDialog().Exists), "Dialog has not closed as expected",
+				"Dialog has closed as expected");
+		}
+
+		[Given(@"I confirm in the browser popup")]
+		public void GivenIConfirmInTheBrowserPopup()
+		{
+			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+		}
 	}
 }

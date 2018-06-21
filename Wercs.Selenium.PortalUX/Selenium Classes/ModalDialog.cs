@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
@@ -20,10 +21,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				.FirstOrDefault(x =>x.Text == "OK").TryClick();
 		}
 
-		public void Click_Cancel()
+		public bool Click_Cancel()
 		{
-			this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 				.FirstOrDefault(x => x.Text == "CANCEL").TryClick();
+		}
+
+		public bool CancelButtonExists()
+		{
+			try
+			{
+				var CancelButton = this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+					.FirstOrDefault(x => x.Text == "CANCEL");
+				return (CancelButton.Enabled && CancelButton.Displayed);
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
 		}
 
 		public string GetText()
@@ -34,7 +50,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetTitle()
 		{
-			return this.containerElement.FindElements(By.XPath("//h4[@class='modal-title']")).FirstOrDefault(x => x.Displayed)
+			return this.containerElement.FindElements(By.XPath("//*[@class='modal-title']")).FirstOrDefault(x => x.Displayed)
 				.Text;
 		}
 	}
