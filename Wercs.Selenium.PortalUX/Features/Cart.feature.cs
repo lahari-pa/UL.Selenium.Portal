@@ -1,0 +1,4 @@
+﻿#error (33:1): expected: #EOF, #TableRow, #DocStringSeparator, #StepLine, #TagLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got '//Click Continue on Additional Documents to Provide'
+#error (34:1): expected: #EOF, #TableRow, #DocStringSeparator, #StepLine, #TagLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got '//Click on the Australia GHS SDS dropdown box for Optional Reports and Documents Available for Purchase screen = English (U.S) , English(Australian) option displays)'
+#error (35:1): expected: #EOF, #TableRow, #DocStringSeparator, #StepLine, #TagLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got '//Select both options (English (U.S) , English(Australian)) =  Fees displays on right side under total ($400)'
+#error (36:1): expected: #EOF, #TableRow, #DocStringSeparator, #StepLine, #TagLine, #ScenarioLine, #ScenarioOutlineLine, #Comment, #Empty, got '//Click Continue'

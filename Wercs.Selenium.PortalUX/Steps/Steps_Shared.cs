@@ -2880,5 +2880,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
+
+		
+		[Given(@"I call Shared Step 57753 \(Create a New Registration via Register New Product \(expanded menu\)\)")]
+		public void GivenICallSharedStep57753CreateANewRegistrationViaRegisterNewProductExpandedMenu()
+		{
+			StepsHomepage MyStepsHomePage = new StepsHomepage();
+			MyStepsHomePage.ClickItemInNavigationPanel("Register New Product");
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("New Product");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the type of product", "Create a New Registration");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
 	}
 }

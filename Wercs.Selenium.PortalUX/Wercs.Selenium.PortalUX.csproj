@@ -308,6 +308,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Signup.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Cart.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cart.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Test.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -523,6 +528,10 @@
     <None Include="Features\Signup.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Signup1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Cart.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Cart.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Test.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -566,12 +566,41 @@ testRunner.Given("I confirm that the color of the pie chart for the Retailer sel
 #line 188
 testRunner.And("The pie chart footer text should contain: % of your product portfolio is associat" +
                     "ed with Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 190
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[56982] Retailer & You - validation of information shown")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Retailer Partners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
+        public virtual void _56982RetailerYou_ValidationOfInformationShown()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56982] Retailer & You - validation of information shown", ((string[])(null)));
+#line 192
+this.ScenarioSetup(scenarioInfo);
+#line 193
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 194
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 195
+testRunner.Given("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 196
+testRunner.And("I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 197
+testRunner.And("I confirm that there is a section labeled: Walgreens & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 200
 testRunner.Given("I confirm the percentage in the pie chart legend statement matches the percentage" +
                     " shown in the middle of the pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 194
+#line 204
 testRunner.Given("I click the back arrow on the Retail Partners Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 195
+#line 205
 testRunner.Then("I should see the Retail Partners page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -590,40 +619,40 @@ testRunner.Then("I should see the Retail Partners page", ((string)(null)), ((Tec
         public virtual void _56911RetailerDetailPage_YourSupplierID_AddNewSupplierID_Cancel()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID - Cancel", ((string[])(null)));
-#line 197
-this.ScenarioSetup(scenarioInfo);
-#line 198
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 199
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 200
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 201
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 202
-testRunner.When("I select the retailer: Sears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 203
-testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 204
-testRunner.Given("I click on the Add new Supplier ID link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 205
-testRunner.Then("I confirm the pop up shows the heading: Add New Supplier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 206
-testRunner.Then("I confirm the pop up shows the Supplier ID heading and data entry field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 207
+this.ScenarioSetup(scenarioInfo);
+#line 208
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 209
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 210
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 211
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 212
+testRunner.When("I select the retailer: Sears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 213
+testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 214
+testRunner.Given("I click on the Add new Supplier ID link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 215
+testRunner.Then("I confirm the pop up shows the heading: Add New Supplier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 216
+testRunner.Then("I confirm the pop up shows the Supplier ID heading and data entry field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 217
 testRunner.Then("I confirm the pop up shows the Company or Brand Name heading and data entry field" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 208
+#line 218
 testRunner.Then("I confirm the pop up shows the Is Default Heading and check box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 209
+#line 219
 testRunner.Then("I confirm the pop up shows a Save button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 210
+#line 220
 testRunner.Then("I confirm the pop up shows a Cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 211
+#line 221
 testRunner.Given("in the modal dialog I click cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 212
+#line 222
 testRunner.Given("I confirm in the browser popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 213
+#line 223
 testRunner.Then("I confirm the Add New Supplier ID pop up closes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

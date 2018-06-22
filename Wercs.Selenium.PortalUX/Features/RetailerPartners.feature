@@ -187,6 +187,16 @@ Given I see a percentage number in the middle of the pie chart
 Given I confirm that the color of the pie chart for the Retailer selected is Green
 And The pie chart footer text should contain: % of your product portfolio is associated with Walgreens
 
+
+#BLOCKED because requires database access
+Scenario: [56982] Retailer & You - validation of information shown
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: Walgreens
+And I confirm that there is a section labeled: Walgreens & You
+
+
 Given I confirm the percentage in the pie chart legend statement matches the percentage shown in the middle of the pie chart
 # Not seeing these elements currently, so unable to code it
 # Given I see the Thumbs up graphic
