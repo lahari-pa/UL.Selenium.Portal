@@ -60,7 +60,7 @@ And I enter the information into the new user form for user saved as: SignupUser
 And In the new user form I click on continue
 Then I should be on the Security questions page of the form
 And I enter the following into the Security Questions window for user saved as: SignupUser
-And I enter the pin: for user saved as: SignupUser
+And I enter the pin for user saved as: SignupUser
 When In the new user form I click on continue
 Given I go to the WERCSmart Log in
 Given I login as user: SignupUser
@@ -123,7 +123,7 @@ Given I define the user: SignupUser2 with the following parameters:
 | JobHint              | JobHint        |
 | MascotQuestion       | MascotQuestion |
 | MascotHint           | MascotHint     |
-| Pin                  | 1234           |
+| Pin                  | abcd           |
 
 Given I save the current emails in the inbox for user saved as: SignupUser2
 Given I click on the New to WERCSmart Link
@@ -136,6 +136,7 @@ Then there should be a new email for user: SignupUser2 from: <SiteNotification> 
 Then the email should contain a link to set up the WERCSmart account
 When I click on the link I should see the WERCSmart new account page
 And In the new user form I click on continue
+Then I should be on the Account Information page of the form
 Then In the Country entry error I see error message: This is a required field.
 Then In the First Name entry error I see error message: This is a required field.
 Then In the Last Name entry error I see error message: This is a required field.
@@ -150,20 +151,29 @@ Then In the Company Phone entry error I see error message: This is a required fi
 Then In the Country Code entry error I see error message: This is a required field.
 Then In the Emergency Phone Number entry error I see error message: This is a required field.
 Then In the Supplier Type entry error I see error message: This is a required field.
-
-
-
-And I enter the information into the new user form for user saved as: SignupUser
+And I enter the information into the new user form for user saved as: SignupUser2
 And In the new user form I click on continue
-Then I should be on the Security questions page of the form
-And I enter the following into the Security Questions window for user saved as: SignupUser
-And I enter the pin: for user saved as: SignupUser
+Then I should be on the Security Questions page of the form
+And In the new user form I click on continue
+Then In the CityQuestion entry error I see error message: This is a required field.
+Then In the CarQuestion entry error I see error message: This is a required field.
+Then In the FriendQuestion entry error I see error message: This is a required field.
+Then In the JobQuestion entry error I see error message: This is a required field.
+Then In the MascotQuestion entry error I see error message: This is a required field.
+Then In the PINQuestion entry error I see error message: This is a required field.
+And I enter the following into the Security Questions window for user saved as: SignupUser2
+And I enter the pin for user saved as: SignupUser2
+When In the new user form I click on continue
+#CLF 22 June 2018 This error message seems to have changed
+#Then In the PINQuestion entry error I see error message: Please choose a four digit pin number that we can use to verify your identity.
+Then In the PINQuestion entry error I see error message: PIN must be a 4 digit number.
+And I enter the pin: 1234
 When In the new user form I click on continue
 Given I go to the WERCSmart Log in
-Given I login as user: SignupUser
+Given I login as user: SignupUser2
 Given If terms of use page appears I accept
 Then the WERCSmart homepage should load
-Then I should see username for user saved as: SignupUser in the right corner
+Then I should see username for user saved as: SignupUser2 in the right corner
 
 Scenario: [63297] Add subscription to a new supplier through data entry
 Given I define the user: 63297 with the following parameters:
@@ -208,7 +218,7 @@ And I enter the information into the new user form for user saved as: 63297
 And In the new user form I click on continue
 Then I should be on the Security questions page of the form
 And I enter the following into the Security Questions window for user saved as: 63297
-And I enter the pin: for user saved as: 63297
+And I enter the pin for user saved as: 63297
 When In the new user form I click on continue
 Given I go to the WERCSmart Log in
 Given I login as user: 63297

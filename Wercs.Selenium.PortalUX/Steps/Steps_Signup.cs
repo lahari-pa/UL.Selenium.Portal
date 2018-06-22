@@ -129,7 +129,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				WhenInTheNewUserFormIClickOnContinue();
 
-				ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm();
+				ThenIShouldBeOnThePageOfTheForm("Security questions");
 
 				EnterTheFollowingIntoSecurityQuestions(identifier);
 				EnterPinForUser(identifier);
@@ -337,32 +337,85 @@ namespace Wercs.Selenium.PortalUX.Steps
 					case "Confirm Password":
 						Report.IsTrue(errorMessage == thisNewUser.ConfirmPasswordErrorValue,
 						   "Expected confirm password error message is: " + errorMessage + " actually error message is: " +
-						   thisNewUser.ConfirmPasswordErrorValue, "As expected, password error message is: " + errorMessage);
+						   thisNewUser.ConfirmPasswordErrorValue, "As expected, confirm password error message is: " + errorMessage);
 						break;
 					case "Address 1":
 						Report.IsTrue(errorMessage == thisNewUser.Address1ErrorValue,
 						   "Expected address 1 error message is: " + errorMessage + " actually error message is: " +
-						   thisNewUser.Address1ErrorValue, "As expected, password error message is: " + errorMessage);
+						   thisNewUser.Address1ErrorValue, "As expected, address 1 error message is: " + errorMessage);
 						break;
 					case "City":
-						Report.IsTrue(errorMessage == thisNewUser.Address1ErrorValue,
-						   "Expected address 1 error message is: " + errorMessage + " actually error message is: " +
-						   thisNewUser.Address1ErrorValue, "As expected, password error message is: " + errorMessage);
+						Report.IsTrue(errorMessage == thisNewUser.CityErrorValue,
+						   "Expected city error message is: " + errorMessage + " actually error message is: " +
+						   thisNewUser.CityErrorValue, "As expected, city error message is: " + errorMessage);
 						break;
 					case "State":
+						Report.IsTrue(errorMessage == thisNewUser.StateErrorValue,
+							"Expected state error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.StateErrorValue, "As expected, state error message is: " + errorMessage);
 						break;
 					case "Zip":
+						Report.IsTrue(errorMessage == thisNewUser.ZipErrorValue,
+							"Expected zip error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.ZipErrorValue, "As expected, zip error message is: " + errorMessage);
 						break;
 					case "Company":
+						Report.IsTrue(errorMessage == thisNewUser.CompanyErrorValue,
+							"Expected company error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.CompanyErrorValue, "As expected, company error message is: " + errorMessage);
 						break;
 					case "Company Phone":
+						Report.IsTrue(errorMessage == thisNewUser.CompanyPhoneErrorValue,
+							"Expected company error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.CompanyPhoneErrorValue, "As expected, company phone error message is: " + errorMessage);
 						break;
 					case "Country Code":
+						Report.IsTrue(errorMessage == thisNewUser.CountryCodeErrorValue,
+							"Expected country code error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.CountryCodeErrorValue, "As expected, country code error message is: " + errorMessage);
 						break;
 					case "Emergency Phone Number":
+						Report.IsTrue(errorMessage == thisNewUser.EmergencyPhoneNumberErrorValue,
+							"Expected emergency phone number error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.EmergencyPhoneNumberErrorValue, "As expected, emergency phone number error message is: " + errorMessage);
 						break;
 					case "Supplier Type":
+						Report.IsTrue(errorMessage == thisNewUser.SupplierTypeErrorValue,
+							"Expected supplier type error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.SupplierTypeErrorValue, "As expected, supplier type error message is: " + errorMessage);
 						break;
+
+					case "CityQuestion":
+						Report.IsTrue(errorMessage == thisNewUser.CityBornErrorValue,
+							"Expected In what city were you born?  question error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.CityBornErrorValue, "As expected, In what city were you born?  error message is: " + errorMessage);
+						break;
+					case "CarQuestion":
+						Report.IsTrue(errorMessage == thisNewUser.FirstCarModelErrorValue,
+							"Expected What was the model of your first car?  question error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.FirstCarModelErrorValue, "As expected, What was the model of your first car?  error message is: " + errorMessage);
+						break;
+					case "FriendQuestion":
+						Report.IsTrue(errorMessage == thisNewUser.BestFriendErrorValue,
+							"Expected What is the first name of your childhood best friend? question error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.BestFriendErrorValue, "As expected, What is the first name of your childhood best friend? error message is: " + errorMessage);
+						break;
+					case "JobQuestion":
+						Report.IsTrue(errorMessage == thisNewUser.FirstJobErrorValue,
+							"Expected In what city was your first job? question error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.FirstJobErrorValue, "As expected, In what city was your first job? error message is: " + errorMessage);
+						break;
+					case "MascotQuestion":
+						Report.IsTrue(errorMessage == thisNewUser.HighSchoolMascotErrorValue,
+							"Expected What is your high school mascot? question error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.HighSchoolMascotErrorValue, "As expected, What is your high school mascot? error message is: " + errorMessage);
+						break;
+					case "PINQuestion":
+						Report.IsTrue(errorMessage == thisNewUser.PINErrorValue,
+							"Expected PIN question error message is: " + errorMessage + " actually error message is: " +
+							thisNewUser.PINErrorValue, "As expected, PIN error message is: " + errorMessage);
+						break;
+
 					default:
 						throw new Exception("Field was not found: " + input);
 
@@ -739,17 +792,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I should be on the Security questions page of the form")]
-		public void ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm()
+		[StepDefinition(@"I should be on the (.*) page of the form")]
+		public void ThenIShouldBeOnThePageOfTheForm(string pageTitle)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Ensure navigation to Security Quuestions");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- check current page title");
 			try
 			{
-				Report.Info("Checkin that the Security Questions page has loaded...");
 				NewUser thisNewUser = new NewUser();
-				Report.IsTrue(thisNewUser.WaitForPageTitle("Security Questions", 60),
-					"Security Questions page has not loaded as expected.",
-					"Security Questions page loaded as expected!");
+				Report.IsTrue(thisNewUser.WaitForPageTitle(pageTitle, 60),
+					pageTitle + " page has not loaded as expected.",
+					pageTitle + " page loaded as expected!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -758,6 +810,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[Then(@"I should be on the New Account page of the form")]
+		public void ThenIShouldBeOnTheNewAccountPageOfTheForm()
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Check that new account page has loaded");
+			try
+			{
+				Report.Info("Checking that the New Account page has loaded");
+				NewUser thisNewUser = new NewUser();
+				Report.IsTrue(thisNewUser.WaitForPageTitle("New Account", 60),
+					"New Account page has not loaded as expected.",
+					"New Account page loaded as expected!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 
 		[StepDefinition(@"If terms of use page appears I accept")]
 		public void GivenIfTermsOfUsePageAppearsIAccept()
@@ -811,7 +884,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I enter the pin: for user saved as: (.*)")]
+		[StepDefinition(@"I enter the pin: (.*)")]
+		public void EnterPin(string pin)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter Pin: '" + pin + "'");
+			try
+			{
+				NewUser thisNewUser = new NewUser();
+				Report.Info("Beginning to enter pin: '" + pin + "'");
+				thisNewUser.Pin = pin;
+				Report.IsTrue(pin == thisNewUser.Pin, "Pin was not entered correctly!", "Pin was entered successfully!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I enter the pin for user saved as: (.*)")]
 		public void EnterPinForUser(string savedAs)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Enter Pin: for user: '" + savedAs + "'");
@@ -850,7 +942,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
 			WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
 			WhenInTheNewUserFormIClickOnContinue();
-			ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm();
+			ThenIShouldBeOnThePageOfTheForm("Security questions");
 			EnterTheFollowingIntoSecurityQuestions(savedAs);
 			EnterPinForUser(savedAs);
 			WhenInTheNewUserFormIClickOnContinue();

@@ -364,7 +364,7 @@ namespace WERCSmart
 					mySignUp.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
 					mySignUp.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
 					mySignUp.WhenInTheNewUserFormIClickOnContinue();
-					mySignUp.ThenIShouldBeOnTheSecurityQuestionsPageOfTheForm();
+					mySignUp.ThenIShouldBeOnThePageOfTheForm("Security questions");
 					mySignUp.EnterTheFollowingIntoSecurityQuestions(savedAs);
 					mySignUp.EnterPinForUser(savedAs);
 					mySignUp.WhenInTheNewUserFormIClickOnContinue();

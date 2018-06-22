@@ -143,7 +143,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = "//p[@id='supplierType_error']//span")]
 		private IWebElement _supplierTypeError;
 
+		[FindsBy(How = How.XPath, Using = "//p[@id='cityBornInAnswer_error']//span")]
+		private IWebElement _cityBornError;
 
+		[FindsBy(How = How.XPath, Using = "//p[@id='firstCarModelAnswer_error']//span")]
+		private IWebElement _firstCarModelError;
+
+		[FindsBy(How = How.XPath, Using = "//p[@id='bestFriendAnswer_error']//span")]
+		private IWebElement _bestFriendAnswerError;
+
+		[FindsBy(How = How.XPath, Using = "//p[@id='firstJobCityAnswer_error']//span")]
+		private IWebElement _firstJobCityAnswerError;
+
+		[FindsBy(How = How.XPath, Using = "//p[@id='mascotAnswer_error']//span")]
+		private IWebElement _mascotAnswerError;
+
+		[FindsBy(How = How.XPath, Using = "//p[@id='password_error']//span")]
+		private IWebElement _pINAnswerError;
 
 		public string CountryErrorValue {
 			get
@@ -332,6 +348,90 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (this._supplierTypeError != null)
 				{
 					return this._supplierTypeError.GetValue();
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
+
+		public string CityBornErrorValue {
+			get
+			{
+				if (this._cityBornError != null)
+				{
+					return this._cityBornError.GetValue();
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
+
+		public string FirstCarModelErrorValue {
+			get
+			{
+				if (this._firstCarModelError != null)
+				{
+					return this._firstCarModelError.GetValue();
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
+
+		public string BestFriendErrorValue {
+			get
+			{
+				if (this._bestFriendAnswerError != null)
+				{
+					return this._bestFriendAnswerError.GetValue();
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
+
+		public string FirstJobErrorValue {
+			get
+			{
+				if (this._firstJobCityAnswerError != null)
+				{
+					return this._firstJobCityAnswerError.GetValue();
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
+
+		public string HighSchoolMascotErrorValue {
+			get
+			{
+				if (this._mascotAnswerError != null)
+				{
+					return this._mascotAnswerError.GetValue();
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
+
+		public string PINErrorValue {
+			get
+			{
+				if (this._pINAnswerError != null)
+				{
+					return this._pINAnswerError.GetValue();
 				}
 				else
 				{
