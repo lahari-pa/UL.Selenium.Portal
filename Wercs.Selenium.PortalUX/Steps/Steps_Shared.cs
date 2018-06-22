@@ -2816,13 +2816,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		[StepDefinition(
-			@"I call Shared Step 63804 \(Additional Product Information with Yes to Private Label \)")]
-		public void ICallSharedStepAdditionalProductInformationWithYesToPrivateLabel(Table table)
+			@"I call Shared Step 63804 \(Additional Product Information - enter options\)")]
+		public void ICallSharedStepAdditionalProductInformationEnterOptions(Table table)
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			NewProduct myNewProduct = new NewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
+			if (myNewProduct.SectionExists(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)"))
+			{
+				TestReport.StartStep(
+					"In the Product Type tab of the New Product Page for Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) I select:" +
+					table.Rows[0]["Product is marketed for use"]);
+				MyStepsNewProduct.SetTheSectionOptionTo("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
+					table.Rows[0]["Product is marketed for use"]);
+			}
 			if (myNewProduct.SectionExists(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)"))
 			{
@@ -2891,6 +2900,59 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("New Product");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select the type of product", "Create a New Registration");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 74760 \(Product Characteristics - Select Liquid as primary physical state and enter all required data\)")]
+		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Product Characteristics Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Delay.Seconds(1);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Primary Physical State I select: " +
+				table.Rows[0]["Primary Physical State"]);
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State",
+				table.Rows[0]["Primary Physical State"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
+				table.Rows[0]["Secondary Physical State"]);
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+				table.Rows[0]["Secondary Physical State"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Specific Gravity I enter: " +
+				table.Rows[0]["Specific Gravity"]);
+			MyNewProduct.SetTheSectionOptionTo("Specific Gravity",
+				table.Rows[0]["Specific Gravity"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for pH I enter: " +
+				table.Rows[0]["pH"]);
+			MyNewProduct.SetTheSectionOptionTo("pH",
+				table.Rows[0]["pH"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Boiling Point (in Celsius) I enter: " +
+				table.Rows[0]["Boiling Point (in Celsius)"]);
+			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)",
+				table.Rows[0]["Boiling Point (in Celsius)"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point (in Celsius) I enter: " +
+				table.Rows[0]["Flash Point (in Celsius)"]);
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)",
+				table.Rows[0]["Flash Point (in Celsius)"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Flash Point Testing Method Used I enter: " +
+				table.Rows[0]["Flash Point Testing Method Used"]);
+			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used",
+				table.Rows[0]["Flash Point Testing Method Used"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I enter: " +
+				table.Rows[0]["Select the best Water Solubility description"]);
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
+				table.Rows[0]["Select the best Water Solubility description"]);
+			TestReport.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 	}
 }
