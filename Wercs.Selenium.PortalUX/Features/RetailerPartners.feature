@@ -139,6 +139,7 @@ And I check that the following retailers are showing:
 | NewEgg                 | NE    |
 
 
+
 Scenario: [56903] Retailer Detail Page - Retailer does not require Supplier ID or Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
