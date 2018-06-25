@@ -1896,7 +1896,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// Flagging a fail because this condition doesn't exactly match the test case. If Origin Q. is expected here, should use a different shared step?
 			if (new NewProduct().GetDisplayedSections().Contains("Select the product's Country of Origin"))
 			{
-				TestReport.StartStep("I set the Select the product's Country of Origin option to: United Kingdom");
+				TestReport.StartStep("I set the Select the product's Country of Origin option to: United States");
 				Report.Failure(
 					"The Country of Origin question was showing (required field) when it was not expected. Selecting an option.");
 				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
@@ -2954,5 +2954,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
+
+		[Given(@"I call shared step 74123 \(Additional Product Information - Grocery - US - Random Country - No\(PL\)\)")]
+		public void GivenICallSharedStepAdditionalProductInformation_Grocery_US_RandomCountry_NoPL()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyNewProductSteps.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+
+			//CLF - this option doesn't always appear. Putting this fix in for now but may need a new version of the step
+			NewProduct MyNewProduct = new NewProduct();
+			if (MyNewProduct.OptionExists("Select the product's Country of Origin"))
+			{
+				Report.Info("Select country of origin appears...");
+				MyNewProductSteps.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
+
+			}
+
+			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
 	}
 }
