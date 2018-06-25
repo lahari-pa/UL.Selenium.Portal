@@ -76,7 +76,7 @@ Given I call Shared 48367 (Product Includes Battery > any type)
 | Battery Type | Manufacturer                    | Number of batteries per package | How many batteries required to run |
 | Alkaline     | Agawo Battery Industry Co., Ltd | 4                               | 2                                  |
 
-Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+Given I call Shared Step 48369 (Toxicity Characteristic Leaching Procedure (TCLP) - No to ALL With Copper)
 
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 

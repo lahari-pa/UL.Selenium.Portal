@@ -169,7 +169,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var account = parameters.CreateInstance<WERCSmartUser>();
 				account.Email = EmailFunctions.CreateEmail(account.Email);
 				account.Identifier = savedAs;
-				Context.AddToContext(savedAs, account);
+				Context.AddToContext(savedAs, account, true);
 				Report.Success("Account details saved!");
 			}
 			catch (Exception ex)

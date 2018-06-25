@@ -13,6 +13,7 @@ Feature: MyAccount
 
 Scenario: [61796] Account User Name in Header
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
 Then I should see username for user saved as: SignupUser in the right corner
 Given I click on My Account
 And I should see the heading: My Account on the My Account page
@@ -30,6 +31,7 @@ Given In the UserDetails page I set Name to be: saved as ThisUser
 
 Scenario: [63514] Create a New User on the User Grid
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Then The home screen should load
 Given I click on My Account
 Then I create a new email address
 Then I add a new user with the following information

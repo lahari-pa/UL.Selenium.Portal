@@ -528,8 +528,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			NewProduct myNewProduct = new NewProduct();
 			TestReport.StartStep(
-				"I should see the Toxicity Characteristics Leaching Procedure (TCLP) Product Report Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristics Leaching Procedure (TCLP) Product Report");
+				"I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristics Leaching Procedure (TCLP)");
 			TestReport.StartStep("I set the Product has had TCLP testing; Report is available option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing; Report is available", "No");
 			TestReport.StartStep("I select No for all elements including Copper");
@@ -548,9 +548,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 			TestReport.StartStep(
-				"In the Toxicity Characteristics Leaching Procedure (TCLP) Product Report page I click Continue");
+				"In the Toxicity Characteristic Leaching Procedure (TCLP) Product Report page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
-				"Toxicity Characteristics Leaching Procedure (TCLP) Product Report");
+				"Toxicity Characteristic Leaching Procedure (TCLP) Product Report");
 		}
 
 		[StepDefinition(
@@ -1539,53 +1539,42 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
+
 			TestReport.StartStep("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Data (Optional)");
-			TestReport.StartStep(
-				"In the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: " +
-				table.Rows[0]["Personal Protection Equipment"]);
-			MyNewProduct
-				.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(
-					table.Rows[0]["Personal Protection Equipment"]);
-			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " +
-			                     table.Rows[0]["Autoignition Temperature"]);
-			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(
-				table.Rows[0]["Autoignition Temperature"]);
-			TestReport.StartStep(
-				"In the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: " +
-				table.Rows[0]["Minimum Ignition Energy"]);
-			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(
-				table.Rows[0]["Minimum Ignition Energy"]);
-			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-			                     table.Rows[0]["Viscosity"]);
-			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
-			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
-			                     table.Rows[0]["Appearance"]);
-			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(
-				table.Rows[0]["Appearance"]);
-			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " +
-			                     table.Rows[0]["Odor"]);
-			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(table.Rows[0]["Odor"]);
-			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " +
-			                     table.Rows[0]["Odor Threshold"]);
-			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(
-				table.Rows[0]["Odor Threshold"]);
+
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: " + table.Rows[0]["Personal Protection Equipment"]);
+			MyNewProduct.SetTheSectionOptionTo("Personal Protection Equipment Recommended", table.Rows[0]["Personal Protection Equipment"]);
+
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " + table.Rows[0]["Autoignition Temperature"]);
+			MyNewProduct.SetTheSectionOptionTo("Autoignition Temperature",table.Rows[0]["Autoignition Temperature"]);
+
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: " + table.Rows[0]["Minimum Ignition Energy"]);
+			MyNewProduct.SetTheSectionOptionTo("Minimum Ignition Energy", table.Rows[0]["Minimum Ignition Energy"]);
+
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " + table.Rows[0]["Viscosity"]);
+			MyNewProduct.SetTheSectionOptionTo("Viscosity", table.Rows[0]["Viscosity"]);
+
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " + table.Rows[0]["Appearance"]);
+			MyNewProduct.SetTheSectionOptionTo("Appearance", table.Rows[0]["Appearance"]);
+
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " + table.Rows[0]["Odor"]);
+			MyNewProduct.SetTheSectionOptionTo("Odor", table.Rows[0]["Odor"]);
+
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " + table.Rows[0]["Odor Threshold"]);
+			MyNewProduct.SetTheSectionOptionTo("Odor Threshold", table.Rows[0]["Odor Threshold"]);
 			// if Product's Dispensing Method is required enter any option
+
 			var actualSections = new NewProduct().GetDisplayedSections();
 			if (actualSections.Contains("Product's Dispensing Method"))
 			{
-				TestReport.StartStep(
-					"In the Review and Submit tab of the New Product Page for Product's Dispensing Method I select: " +
-					table.Rows[0]["Product's Dispensing Method"]);
-				MyNewProduct.SetTheSectionOptionTo("Product's Dispensing Method",
-					table.Rows[0]["Product's Dispensing Method"]);
+				TestReport.StartStep("In the Review and Submit tab of the New Product Page for Product's Dispensing Method I select: " + table.Rows[0]["Product's Dispensing Method"]);
+				MyNewProduct.SetTheSectionOptionTo("Product's Dispensing Method", table.Rows[0]["Product's Dispensing Method"]);
 			}
 
-			TestReport.StartStep(
-				"In the Review and Submit tab of the New Product Page for Partition Coefficient I enter: " +
-				table.Rows[0]["Partition Coefficient"]);
-			MyNewProduct.SetTheSectionOptionTo("Partition Coefficient",
-				table.Rows[0]["Partition Coefficient"]);
+			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Partition Coefficient I enter: " + table.Rows[0]["Partition Coefficient"]);
+			MyNewProduct.SetTheSectionOptionTo("Partition Coefficient",table.Rows[0]["Partition Coefficient"]);
+
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}

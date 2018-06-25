@@ -10,7 +10,7 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 namespace Wercs.Selenium.PortalUX.Steps
 {
 	[Binding, Scope(Tag = "LandingPage"), Scope(Tag = "WERCSmart_LandingPage")]
-	class StepsLandingPage
+	public class StepsLandingPage
 	{
 
 		[StepDefinition(@"I go to the WERCSmart Log in")]

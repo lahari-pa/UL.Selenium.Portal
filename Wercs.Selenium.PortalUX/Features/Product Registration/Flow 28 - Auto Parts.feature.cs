@@ -142,7 +142,8 @@ testRunner.Given("I call Shared 56808 Regulatory Information - Prop 65 - No - Co
 testRunner.Given("I call Shared 60685 Fuel Container Regulatory Details - Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 40
 testRunner.Given("I call Shared 69682 (Retailer Association - Add Private Label Information) and se" +
-                    "lect the retailer: Weis and enter the name: Private Label Gasoline", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "lect the retailer: Harbor Freight Tools and enter the name: Private Label Gasoli" +
+                    "ne", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 42
 testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
                     "ze Only) for UPC: saved as UPC60673, container type: Aerosol Can and size: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -152,11 +153,11 @@ testRunner.Given("I call Shared 60567 (Upload Product Label only) : C:\\Dependen
 #line 46
 testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 48
-testRunner.Given("I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Gasol" +
+                    "ine Container, Portable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 50
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
-testRunner.Then("I delete the product: TestCase60673", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase60673", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -111,11 +111,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string ConfirmEmailAddress {
 			get
 			{
-				return this._sConfirmEmail.GetValue();
+				return containerElement.FindElement(By.Id("txtConfirm"), 2).GetValue();
 			}
 			set
 			{
-				this._sConfirmEmail.EnterText(value);
+				containerElement.FindElement(By.Id("txtConfirm"),2).EnterText(value);
 				Report.Success("Entered confirm email address: " + value);
 			}
 		}

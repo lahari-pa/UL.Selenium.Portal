@@ -591,6 +591,13 @@ namespace WERCSmart
 			}
 		}
 
+		[StepDefinition(@"in the received email I should see the title: (.*)")]
+		public void ThenInTheReceivedEmailIShouldSeeTheTitleWERCSmartPasswordReset(string expectedTitle)
+		{
+
+		}
+
+
 		[StepDefinition(@"there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
 		{

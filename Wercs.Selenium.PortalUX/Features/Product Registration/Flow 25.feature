@@ -40,7 +40,7 @@ Given I call Shared 48367 (Product Includes Battery > any type)
 
 Given I click continue
 
-Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+Given I call Shared Step 48369 (Toxicity Characteristic Leaching Procedure (TCLP) - No to ALL With Copper)
 
 Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 
@@ -80,7 +80,7 @@ Given I call Shared 48367 (Product Includes Battery > any type)
 
 Given I click continue
 
-Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+Given I call Shared Step 48369 (Toxicity Characteristic Leaching Procedure (TCLP) - No to ALL With Copper)
 
 Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 

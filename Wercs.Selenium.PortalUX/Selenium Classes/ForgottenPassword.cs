@@ -43,7 +43,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				try
 				{
-					this.containerElement.FindElement(By.XPath("//input[@id='forgotEmail']"), 2).EnterText(email, true);
+					this.containerElement.FindElement(By.XPath("//input[@id='forgotEmail']"), 2).EnterText(email);
 					return;
 				}
 				catch (Exception)
