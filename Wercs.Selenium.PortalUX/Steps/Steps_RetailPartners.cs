@@ -662,7 +662,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void RetailersAreCorrectlyShowing(Table expected)
 		{
 			var showing = new RetailPartners().GetAllAvailableRetailers();
-
 			var retList = new List<string>();
 			foreach (var show in showing)
 			{
@@ -671,12 +670,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 				string filename = parts2[0];
 				retList.Add(Path.GetFileNameWithoutExtension(filename).ToUpper());
 			}
-
 			foreach (var row in expected.Rows)
 			{
 				Report.IsTrue(retList.Contains(row["Code"]), "Failed to find retailer: " + row["Retailer"], "Successfully found a retailer: " + row["Retailer"], false, false);
 			}
-
 			Report.Screenshot();
 		}
 
@@ -851,5 +848,44 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 		}
+
+		[StepDefinition(@"I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view")]
+		public void AllWalMartAffiliatesNavigateToSamsClub()
+		{
+			var retailerInfo = new List<KeyValuePair<string, string>>
+			{
+				new KeyValuePair<string, string>("WM-BO","Bonobos"),
+				new KeyValuePair<string, string>("WM-CO","Walmart.com"),
+				new KeyValuePair<string, string>("WM-HN","Hayneedle"),
+				new KeyValuePair<string, string>("WM-JE","Jet"),
+				new KeyValuePair<string, string>("WM-MC","MODCLOTH"),
+				new KeyValuePair<string, string>("WM-MJ","Moosejaw"),
+				new KeyValuePair<string, string>("WM-SC","Shoes.com")
+			};
+			var retailerNames = retailerInfo.Select(x => x.Value).ToList();
+			foreach (var retailer in retailerInfo)
+			{
+				TestReport.UseSubSteps = false;
+				TestReport.StartStep("Clicking the retailer: " + retailer.Value + " should navigate to the Wal-Mart/SAM'S CLUB Retail Partners Details page with all 7 affiliates shown under <retailer> & You");
+				TestReport.UseSubSteps = true;
+				var selRetailPartners = new RetailPartners();
+				var selRetailPartnersDetails = new RetailParntersDetails();
+				TestReport.StartStep("Clicking on the logo for the retailer: " + retailer.Value + " in the Retail Partners page");
+				Report.IsTrue(selRetailPartners.ClickRetailerLogo(retailer.Key),
+					"Failed to click on the logo for retailer: " + retailer.Value,
+					"Successfully clicked on the logo for retailer: " + retailer.Value);
+				TestReport.StartStep("I confirm that the Wal-mart/SAM'S CLUB Details page is shown");
+				Report.IsTrue(selRetailPartnersDetails.GetSelectedRetailer() == "Wal-Mart/SAM'S CLUB",
+					"The selected retailer on Retail Partner Details page was not 'Wal-Mart/SAM'S CLUB'",
+					"The selected retailer on Retail Partner Details page was 'Wal-Mart/SAM'S CLUB' as expected");
+				TestReport.StartStep("I confirm that under the <Retailer> & You heading all 7 Wal-Mart affiliate retailers are displayed");
+				var actualRetailers = selRetailPartnersDetails.WalmartRegistrationsRetailers();
+				Report.IsTrue(!actualRetailers.Except(retailerNames).Any() && actualRetailers.Count == retailerNames.Count,
+					"The actual list of retailers showing under '<Retailer> & You' did not match the expected list. Showing retailers were: " + string.Join(", ", actualRetailers.Select(x => "'" + x + "'")),
+					"The actual list of retailers showing under '<Retailer> & You matched the expected list");
+				selRetailPartnersDetails.ClickBackButton();
+			}
+		}
 	}
 }
+

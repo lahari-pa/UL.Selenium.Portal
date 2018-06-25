@@ -77,6 +77,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool ClickRetailerLogo(string retailerCode)
+		{
+			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).FirstOrDefault(x => x.GetCssValue("background-image").ToLower().Contains(retailerCode.ToLower())).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
 		public bool NoRetailerTilesAreEmpty()
 		{
 			return !containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//div[starts-with(@class,'col') and not(.//a)]"), 2).Any();
@@ -211,13 +216,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickBackButton()
 		{
-			var backArrow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='header-with-back']//a/i"), 2);
-			if (backArrow != null)
-			{
-				return backArrow.TryClick();
-			}
-
-			return false;
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='header-with-back']//a/i"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public List<string> GetAllDataConsentTiers()
@@ -320,6 +319,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//a[@class='add-supplier-id']")).TryClick();
 		}
 
+		public List<string> WalmartRegistrationsRetailers()
+		{
+			var xPath = ".//p[contains(text(),'Walmart registrations')]/following-sibling::ul/li";
+			return containerElement.FindElements(By.XPath(xPath), 2).Select(x => x.Text.Trim()).ToList();
+		}
 	}
 
 	public class DataEntryNotification : BaseObject
@@ -349,4 +353,5 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 	}
+
 }

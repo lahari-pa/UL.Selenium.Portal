@@ -3996,6 +3996,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return rEPA;
 			}
 		}
+
+		public bool SelectRetailer(string retailerName)
+		{
+			var xPath = @".//input[@type='checkbox' and parent::td/following-sibling::td[text() =""" + retailerName + @"""]]";
+			var box = containerElement.FindElement(By.XPath(xPath), 2);
+			return box.TryClick() && box.Checked();
+		}
+
+		public bool DeleteSelectedRetailers()
+		{
+			var xPath = ".//a[@class='btn delete-selected']/i";
+			return containerElement.FindElement(By.XPath(xPath), 2).TryClick();
+		}
 	}
 
 	public class ProductInformation

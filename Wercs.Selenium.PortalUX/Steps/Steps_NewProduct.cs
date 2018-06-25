@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using iTextSharp.text;
 using ResourcePool;
+using System.IO;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -2621,6 +2622,86 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"All fields for EPA number: " + epaNumber + " were un-editable as expected");
 			}
 		}
+
+		[StepDefinition(@"I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page")]
+		public void SelectWalmartAffiliate_SelectsAll_WalMartSAMsClub()
+		{
+			var retailerInfo = new List<KeyValuePair<string, string>>
+			{
+				new KeyValuePair<string, string>("WM-BO","BONOBOS"),
+				new KeyValuePair<string, string>("WM-CO","Walmart.com"),
+				new KeyValuePair<string, string>("WM-HN","Hayneedle"),
+				new KeyValuePair<string, string>("WM-JE","Jet"),
+				new KeyValuePair<string, string>("WM-MC","MODCLOTH"),
+				new KeyValuePair<string, string>("WM-MJ","Moosejaw"),
+				new KeyValuePair<string, string>("WM-SC","Shoes.com"),
+				new KeyValuePair<string, string>("WM","Walmart")
+			};
+			foreach (var retailer in retailerInfo)
+			{
+				TestReport.UseSubSteps = false;
+				TestReport.StartStep("Selecting retailer: '" + retailer + "' selects all Wal-mart affiliates in 'Select a Retailer', then the retailer is set to: 'Wal-Mart/SAM'S CLUB'");
+				TestReport.UseSubSteps = true;
+				var selSelectRetailers = new SelectRetailers();
+				var selNewProduct = new NewProduct();
+				TestReport.StartStep(GlobalParameters.StepCount + " - I select retailer: " + retailer.Value);
+				GlobalParameters.StepCount++;
+				Report.Info("Clicking the checkbox for retailer with logo: " + retailer.Key);
+				Report.IsTrue(selSelectRetailers.SelectRetailerByLogo(retailer.Key),
+					"Failed to select retailer: " + retailer.Value,
+					"Successfully selected retailer: " + retailer.Value);
+				TestReport.StartStep(GlobalParameters.StepCount + " - I confirm all of the Walmart affiliated retailers are now selected");
+				GlobalParameters.StepCount++;
+				Report.Info("Comparing the selected retailer list with the expected retailer list");
+				var allSelected = new List<string>();
+				foreach (var selected in selSelectRetailers.SelectedRetailers(true))
+				{
+					string[] parts = selected.Split('/');
+					string filename = parts[parts.Length - 1].Split('?')[0];
+					allSelected.Add(Path.GetFileNameWithoutExtension(filename).ToLower());
+				}
+				var allExpected = retailerInfo.Select(x => x.Key.ToLower()).ToList();
+				Report.IsTrue(!allSelected.Except(allExpected).Any() && allExpected.Count == allSelected.Count,
+					"The selected retailers did not match the group of Walmart Affiliates: " + string.Join(", ", retailerInfo.Select(x => "'" + x.Value + "'").ToList()),
+					"The selected retailers matched the group of Walmart Affiliates: ");
+				TestReport.StartStep(GlobalParameters.StepCount + " - I click the Done button");
+				GlobalParameters.StepCount++;
+				Report.IsTrue(selSelectRetailers.ClickDone(),
+					"Failed to click the 'Done' button!",
+					"Successfully clicked the 'Done' button");
+				TestReport.StartStep(GlobalParameters.StepCount + " - I confirm the only retailer selected is: 'Wal-Mart/SAM'S CLUB' ");
+				GlobalParameters.StepCount++;
+				var actualRetailers = selNewProduct.SelectedRetailers();
+				var expectedRetailers = new List<string>() { @"Wal-Mart/SAM'S CLUB" };
+				Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count,
+					"The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers),
+					" The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
+				Report.Info("Clicking 'Add New Retailer'");
+				selNewProduct.ClickAddARetailers();
+				Report.Info("Refreshing the selected retailers with 'select all'");
+				selSelectRetailers.ClickSelectAll();
+				selSelectRetailers.ClickSelectAll();
+			}
+			new SelectRetailers().ClickClose();
+		}
+
+		[StepDefinition(@"On the Retailer page I delete the following retailers:")]
+		public void DeleteRetailers(Table table)
+		{
+			var selNewProduct = new NewProduct();
+			var deleteRetailers = new List<string>();
+			table.Rows.ForEach(x => deleteRetailers.Add(x["Retailer"]));
+			foreach (var retailer in deleteRetailers)
+			{
+				Report.Info("Clicking the select checkbox for retailer: " + retailer);
+				Report.IsTrue(selNewProduct.SelectRetailer(retailer),
+					"Failed to select retailer: " + retailer,
+					"Successfully selected retailer: " + retailer);
+			}
+			Report.Info("Clicking the delete icon for the selected retailers");
+			Report.IsTrue(selNewProduct.DeleteSelectedRetailers(),
+				"Failed to delete the selected retailers",
+				"Successfully deleted the selected retailers");
+		}
 	}
 }
-
