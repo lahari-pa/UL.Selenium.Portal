@@ -27,3 +27,9 @@ Then I should see the following tabs in the My Library page
 | My Distributors    |
 | My Ingredients     |
 
+Scenario: [70535] Add Brand
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+

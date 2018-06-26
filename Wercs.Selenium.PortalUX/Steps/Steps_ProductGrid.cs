@@ -493,7 +493,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
 			string uPCNo = GlobalFunctions.GenerateUPCNumber();
-			Context.AddToContext(savedAs,uPCNo);
+			Context.AddToContext(savedAs, uPCNo);
 			Report.Info("Generated UPC No: " + uPCNo);
 		}
 
@@ -507,34 +507,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 				switch (option)
 				{
 					case ("UPC Number"):
-					{
-						if (value.ToLower().Contains("saved as"))
 						{
-							value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
-								.ToString();
-						}
-						productGrid.UpcNumber = value;
-						if (!Report.IsTrue(productGrid.UpcNumber == value, "Value: " + value + " was not inputted into the " + option + " field correctly!", "Value: " + value + " was correctly inputted into the " + option + " field", false, false))
-						{
-							// Return so that we don't start removing all elements in the datagrid!
-							return;
-						}
+							if (value.ToLower().Contains("saved as"))
+							{
+								value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+									.ToString();
+							}
+							productGrid.UpcNumber = value;
+							if (!Report.IsTrue(productGrid.UpcNumber == value, "Value: " + value + " was not inputted into the " + option + " field correctly!", "Value: " + value + " was correctly inputted into the " + option + " field", false, false))
+							{
+								// Return so that we don't start removing all elements in the datagrid!
+								return;
+							}
 
-						if (!Report.IsTrue(productGrid.ClickUpcNumberSearchButton(), "Failed to click the UPC Search button!", "Successfully clicked the UPC Search button!", false, false))
-						{
-							// Again, return just in case we don't have the correct results in the search grid!
-							return;
-						}
+							if (!Report.IsTrue(productGrid.ClickUpcNumberSearchButton(), "Failed to click the UPC Search button!", "Successfully clicked the UPC Search button!", false, false))
+							{
+								// Again, return just in case we don't have the correct results in the search grid!
+								return;
+							}
 
-						GeneralUtilities.Wait_for_load_finish();
-						break;
-					}
+							GeneralUtilities.Wait_for_load_finish();
+							break;
+						}
 				}
 
 				Report.Info("Attempting to delete all matching products");
 				Report.Screenshot();
 				// Assume that the options have been inputted successfully!
-				Report.IsTrue(productGrid.DeleteAllPresentRows(),"Failed to delete all products!","All matching products deleted successfully!");
+				Report.IsTrue(productGrid.DeleteAllPresentRows(), "Failed to delete all products!", "All matching products deleted successfully!");
 			}
 		}
 
@@ -555,7 +555,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 					}
 					var firstProduct = ProductGrid.FirstProductInGrid();
-					if(Report.IsTrue(firstProduct.ProductName.StartsWith(Product.Name) && firstProduct.ProductId==Product.Id,"First product did not match the required paremeters!","Product was showing at the top of the grid, as expected!"))
+					if (Report.IsTrue(firstProduct.ProductName.StartsWith(Product.Name) && firstProduct.ProductId == Product.Id, "First product did not match the required paremeters!", "Product was showing at the top of the grid, as expected!"))
 					{
 						Report.IsTrue(ProductGrid.DeleteFirstRow(), "Failed to delete product in first row!", "Successfully deleted product in first row!");
 					}
@@ -563,5 +563,58 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+
+		[StepDefinition(@"The current page in the products grid is: (.*)")]
+		public void CurrentPageProductsGrid(string expectedPage)
+		{
+			var currentPage = new ProductsGrid().ActivePage();
+			Report.IsTrue(currentPage == expectedPage,
+				"The current page in the products grid did not match the expected page",
+				"The current page in the products grid matched the expected page");
+		}
+		[StepDefinition(@"I click (next|previous|...) in the products grid")]
+		public void NavigateInProductsGrid(string navOption)
+		{
+			Report.IsTrue(new ProductsGrid().GridNavigation(navOption),
+				"Failed to navigate in the products grid with action: " + navOption,
+				"Successfully navigated in the products grid with action: " + navOption);
+		}
+		[StepDefinition(@"I should see the products grid navigation input with up and down arrows")]
+		public void PageInputNumber()
+		{
+			Report.IsTrue(new ProductsGrid().GridNavigationInputDisplayed(),
+				"The products grid page navigation number input was not visible",
+				"The products grid page navigation number input was visible as expected");
+		}
+		[StepDefinition(@"I type the number (.*) into the products grid page navigation box and press the enter key")]
+		public void TypeNumberGridNavigationInputAndPressEnter(string pageNum)
+		{
+			var selProductsGrid = new ProductsGrid();
+			Report.Info("Entering text: " + pageNum + " into the user grid page navigation input");
+			selProductsGrid.NumToGridNavigationInput(pageNum);
+			Report.Info("Pressing the enter key");
+			selProductsGrid.KeyToGridNavigationInput("enter");
+		}
+		[StepDefinition(@"I enter the (up|down) arrow into the products grid page navigation input then the correct page is shown")]
+		public void EnterArrowUserGridNavigationBox(string direction)
+		{
+			var selProductsGrid = new ProductsGrid();
+			var pageNavigationValue = selProductsGrid.CurrentPageGridNavigationInput();
+			TestReport.StartStep(GlobalParameters.StepCount + " - I enter the " + direction + " arrow into the page navigation box");
+			Report.Info("Entering the " + direction + " arrow key to the products grid page navigation input");
+			selProductsGrid.KeyToGridNavigationInput(direction);
+			Report.Info("Pressing the enter key");
+			selProductsGrid.KeyToGridNavigationInput("enter");
+			var iteration = direction == "up" ? "increased" : "decreased";
+			GlobalParameters.StepCount++;
+			TestReport.StartStep(GlobalParameters.StepCount + " - I confirm the page number has " + iteration + " by 1");
+			var currentPage = Convert.ToInt32(selProductsGrid.ActivePage());
+			int difference = direction == "up" ? 1 : -1;
+			Report.IsTrue(currentPage == Convert.ToInt32(pageNavigationValue) + difference,
+				string.Format("The active page did not {0} by 1 after entering the '{1}' arrow into the page navigation box at position '{2}'",
+					iteration.Remove(iteration.Length - 1), direction, pageNavigationValue),
+				string.Format("The active page correctly {0} by 1 after entering the '{1}' arrow into the page navigation box at position '{2}'",
+					iteration, direction, pageNavigationValue));
+		}
 	}
 }

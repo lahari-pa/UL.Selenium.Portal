@@ -369,7 +369,7 @@ Given I click on My Account
 
 Given I click ... in the My Account user grid
 
-Given I see the use grid page navigation input with up and down arrows
+Given I see the user grid page navigation input with up and down arrows
 
 Given I type the number 2 into the user grid page navigation box and press the enter key
 

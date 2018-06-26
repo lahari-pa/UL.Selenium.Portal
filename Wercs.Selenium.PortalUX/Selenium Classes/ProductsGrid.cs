@@ -112,7 +112,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickMoreFilers()
 		{
 			return containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2).TryClick();
-		} 
+		}
 
 		public bool ProductIdNameFieldPresent()
 		{
@@ -232,8 +232,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		public string UpcNumber
-		{
+		public string UpcNumber {
 			get
 			{
 				var el = containerElement.FindElement(By.XPath(".//input[@placeholder='UPC Number']"), 2);
@@ -311,9 +310,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool DeleteFirstRow()
 		{
 			var row = containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-			
+
 			var toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
-			
+
 			if (toggleButton.TryClick())
 			{
 				var deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 2);
@@ -329,7 +328,125 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public string ActivePage()
+		{
+			var el = containerElement.FindElement(By.XPath(".//li[@class='active']/span"), 2);
+			if (el == null)
+			{
+				return null;
+			}
+			//el.ScrollElementIntoView();
+			return el.Text;
+		}
+		public bool GridNavigation(string navOption)
+		{
+			Report.Info("Navigating in the products grid with action - " + navOption);
+			RefreshContainer();
+			IWebElement navEl;
+			switch (navOption)
+			{
+				case "next":
+					navEl = containerElement.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
+					break;
+				case "previous":
+					navEl = containerElement.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
+					break;
+				case "...":
+					navEl = containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+					break;
+				default:
+					Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
+					return false;
+			}
+			if (navEl == null)
+			{
+				Report.Info("Could not locate the navigation button element for: " + navOption);
+				return false;
+			}
+			//navEl.ScrollElementIntoView();
+			return navEl.TryClick();
+		}
+		public IWebElement GridNavigationInput()
+		{
+			return containerElement.FindElement(By.XPath(".//input[@type='number']"), 2);
+		}
 
+		public bool GridNavigationInputDisplayed()
+		{
+			if (GridNavigationInput() == null)
+			{
+				GridNavigation("...");
+			}
+			return GridNavigationInput() != null;
+		}
+
+		public void KeyToGridNavigationInput(string action)
+		{
+			var inputEl = GridNavigationInput();
+			if (inputEl == null)
+			{
+				GridNavigation("...");
+				inputEl = GridNavigationInput();
+			}
+			if (inputEl == null)
+			{
+				Report.Failure("The navigation input box could not be found");
+				return;
+			}
+			switch (action)
+			{
+				case "up":
+					inputEl.SendKeys(Keys.ArrowUp);
+					break;
+				case "down":
+					inputEl.SendKeys(Keys.ArrowDown);
+					break;
+				case "enter":
+					inputEl.SendKeys(Keys.Enter);
+					break;
+				default:
+					Report.Failure("The action requested was beyond those specified: 'up', 'down', or 'enter'");
+					break;
+			}
+		}
+
+		public void NumToGridNavigationInput(string pageNumber)
+		{
+			try
+			{
+				var inputEl = GridNavigationInput();
+				if (inputEl == null)
+				{
+					Report.Failure("The navigation input box could not be found");
+					return;
+				}
+
+				inputEl.EnterText(pageNumber);
+			}
+			catch (StaleElementReferenceException)
+			{
+				this.RefreshContainer();
+				GridNavigation("...");
+				GridNavigationInput().EnterText(pageNumber);
+			}
+
+		}
+
+		public string CurrentPageGridNavigationInput()
+		{
+			var inputEl = GridNavigationInput();
+			if (inputEl == null)
+			{
+				Report.Failure("The navigation input box could not be found");
+				return null;
+			}
+			return inputEl.GetAttribute("value");
+		}
+		public bool RefreshContainer()
+		{
+			containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+			return containerElement != null;
+		}
 	}
 
 	public class ProductGridItem

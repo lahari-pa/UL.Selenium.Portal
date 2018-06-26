@@ -384,8 +384,42 @@ Scenario: [67299] Terms of Use - footer
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 
+Then The home screen should load
+
 Given I click the Terms of Use link in the footer
 
 Given I confirm the WERCSmart Terms of Use page opened in a new tab and navigate to it
 
 And I close the window that opened
+
+Scenario: [65886] My Products - Pagination
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Then The current page in the products grid is: 1
+
+Given I click next in the products grid
+
+Then The current page in the products grid is: 2
+
+Given I click previous in the products grid
+
+Then The current page in the products grid is: 1
+
+Given I click ... in the products grid
+
+Then I should see the products grid navigation input with up and down arrows
+
+Given I type the number 15 into the products grid page navigation box and press the enter key
+
+Then The current page in the products grid is: 15
+
+Given I click ... in the products grid
+
+Given I enter the up arrow into the products grid page navigation input then the correct page is shown
+
+Given I click ... in the products grid
+
+Given I enter the down arrow into the products grid page navigation input then the correct page is shown

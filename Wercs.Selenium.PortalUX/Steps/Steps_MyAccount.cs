@@ -715,7 +715,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I see the use grid page navigation input with up and down arrows")]
+		[StepDefinition(@"I see the user grid page navigation input with up and down arrows")]
 		public void PageInputNumber()
 		{
 			Report.IsTrue(new MyAccount().UserGridNavPageInputShowing(),
