@@ -2967,5 +2967,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
+		[StepDefinition(
+			@"I call Shared Step 74981 \(Product Characteristics - gas\)")]
+		public void ICallSharedProductCharacteristics_Gas(Table table)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Product Characteristics Page");
+			MyNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			Delay.Seconds(1);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Secondary Physical State I select: " +
+				table.Rows[0]["Secondary Physical State"]);
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
+				table.Rows[0]["Secondary Physical State"]);
+			TestReport.StartStep(
+				"In the Product Characteristics tab of the New Product Page for Select the best Water Solubility description I select: " +
+				table.Rows[0]["Select the best Water Solubility description"]);
+			MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description",
+				table.Rows[0]["Select the best Water Solubility description"]);
+			TestReport.StartStep("In the New Product page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
 	}
 }

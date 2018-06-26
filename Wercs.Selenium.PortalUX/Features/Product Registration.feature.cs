@@ -824,8 +824,7 @@ testRunner.Given("I call Shared Step 73629 (Product Characteristics - Liquid - s
                         "Yes",
                         "No"});
 #line 297
-testRunner.Given("I call Shared Step 63804 (Additional Product Information with Yes to Private Labe" +
-                    "l )", ((string)(null)), table11, "Given ");
+testRunner.Given("I call Shared Step 63804 (Additional Product Information - enter options)", ((string)(null)), table11, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",

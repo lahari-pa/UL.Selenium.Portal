@@ -294,7 +294,7 @@ Given I call Shared Step 73629 (Product Characteristics - Liquid - select any op
 | Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
 
 
-Given I call Shared Step 63804 (Additional Product Information with Yes to Private Label )
+Given I call Shared Step 63804 (Additional Product Information - enter options)
 | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 | No                                                             | No                            | Yes                         | No                         |
 
