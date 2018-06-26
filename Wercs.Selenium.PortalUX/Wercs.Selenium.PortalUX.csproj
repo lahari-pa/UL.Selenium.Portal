@@ -163,6 +163,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data Consent Tiers.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\MyLibrary.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyLibrary.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 12.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -417,6 +422,10 @@
     <None Include="Features\Data Consent Tiers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Data Consent Tiers.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\MyLibrary.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MyLibrary.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 12.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

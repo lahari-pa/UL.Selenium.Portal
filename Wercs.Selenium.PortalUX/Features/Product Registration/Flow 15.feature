@@ -12,6 +12,7 @@
 
 Feature: Flow 15
 
+@tfs_design
 Scenario: [58760] Lights, LED - RU000948
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

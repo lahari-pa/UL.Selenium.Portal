@@ -12,6 +12,7 @@
 
 Feature: Flow 17
 
+@tfs_design
 Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -59,6 +60,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
+@tfs_design
 Scenario: [60018] Lithium Ion Battery - RU000345
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

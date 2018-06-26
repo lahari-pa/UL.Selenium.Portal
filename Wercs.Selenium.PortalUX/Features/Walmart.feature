@@ -12,6 +12,7 @@
 
 Feature: Walmart
 
+@tfs_design
 Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

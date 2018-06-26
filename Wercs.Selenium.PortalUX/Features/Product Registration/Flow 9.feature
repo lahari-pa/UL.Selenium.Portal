@@ -366,6 +366,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I navigate to the home page
 Then I delete the product: TestCase58091
 
+@tfs_design
 Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -413,6 +414,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
+@tfs_design
 Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -535,6 +537,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
+@tfs_design
 Scenario: [58081] Nutritional Supplement - Solid - RU000619
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

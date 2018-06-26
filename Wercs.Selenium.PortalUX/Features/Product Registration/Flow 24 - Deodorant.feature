@@ -12,7 +12,7 @@
 
 Feature: Flow 24 - Deodorant
 
-
+@tfs_design
 Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -96,6 +96,7 @@ Given I navigate to the home page
 
 Then I delete the product: TestCase60617
 
+@tfs_design
 Scenario: [60637] Deodorant - Non-Aerosol - RU000760(Solid)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -163,6 +164,7 @@ Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60637
 
+@tfs_design
 Scenario: [60619] Deodorant - Aerosol - RU000758
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

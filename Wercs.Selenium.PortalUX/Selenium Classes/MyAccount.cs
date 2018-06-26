@@ -893,12 +893,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.Id, Using = "myLibraryContainer")]
 		protected override IWebElement containerElement { get; set; }
 
+		// My Packaging Types
 
+		// My Brands
 
+		// My Distributors
 
-
-
-
+		// My Ingredients
 
 	}
 

@@ -12,6 +12,7 @@
 
 Feature: Flow 16
 
+@tfs_design
 Scenario: [59273] Alkaline Battery - RU000344
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -60,6 +61,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
+@tfs_design
 Scenario: [59274] Battery Containing Mercury - RU000729
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -106,6 +108,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59274
 
+@tfs_design
 Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -151,6 +154,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
 
+@tfs_design
 Scenario: [59277] Magnesium Battery - RU000728
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -194,6 +198,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
+@tfs_design
 Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -238,6 +243,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
+@tfs_design
 Scenario: [59279] Nickel-Cadmium Battery - RU000346
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -330,7 +336,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase59280
 
-
+@tfs_design
 Scenario: [59281] Water-Charged Cell - RU001543
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -376,6 +382,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
+@tfs_design
 Scenario: [59282] Zinc Air - RU001205
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -420,6 +427,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
+@tfs_design
 Scenario: [59275] Carbon Zinc Battery - RU000727
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
