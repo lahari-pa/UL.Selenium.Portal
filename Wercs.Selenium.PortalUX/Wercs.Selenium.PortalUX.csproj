@@ -318,6 +318,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Cart.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\SupplierReports.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierReports.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Test.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -379,6 +384,7 @@
     <Compile Include="Selenium Classes\Signup.cs" />
     <Compile Include="Selenium Classes\SubscriptionEnrollment.cs" />
     <Compile Include="Selenium Classes\SubscriptionUpgrade.cs" />
+    <Compile Include="Selenium Classes\SupplierReports.cs" />
     <Compile Include="Selenium Classes\TermsOfUse.cs" />
     <Compile Include="Selenium Classes\TopMenuBar.cs" />
     <Compile Include="Selenium Classes\ULSC.cs" />
@@ -403,6 +409,7 @@
     <Compile Include="Steps\Steps_Signup.cs" />
     <Compile Include="Steps\Steps_SubscriptionEnrollment.cs" />
     <Compile Include="Steps\Steps_SubscriptionUpgrade.cs" />
+    <Compile Include="Steps\Steps_SupplierReports.cs" />
     <Compile Include="Steps\Steps_ULSC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -546,6 +553,10 @@
     <None Include="Features\Cart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Cart.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\SupplierReports.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SupplierReports.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Test.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -849,6 +849,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 		}
 
+		[Then(@"I confirm that the excel file saved as: (.*) contains the following columns:")]
+		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
+		{
+			var File = Context.GetFromContext(savedAs);
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+
+				foreach (TableRow thisRow in table.Rows)
+				{
+					Report.IsTrue(ColumnTitles.Contains(thisRow["Column"]),
+						"Column name is not found: " + thisRow["Column"],
+						"Column name has been found as expected: " + thisRow["Column"]);
+				}
+			}
+		}
+
+		
+
 		[StepDefinition(@"I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view")]
 		public void AllWalMartAffiliatesNavigateToSamsClub()
 		{

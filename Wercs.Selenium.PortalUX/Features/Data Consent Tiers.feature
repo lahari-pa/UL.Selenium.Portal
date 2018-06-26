@@ -9,6 +9,7 @@ Background:
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then I click the Retail Partners icon in the Navigation Pane
 
+@tfs_design
 Scenario: [56942] Data Consent Tiers - Walmart
 Given I select the retailer: Wal-Mart
 Then I confirm that there is a section labeled: Data Consent Tiers
@@ -27,7 +28,7 @@ And the save changes button is shown
 
 Given I ensure the Data Consent Tier Sliders are set as follows:
 | Tier | State |
-| 2.1  | On    |  
+| 2.1  | On    |
 
 Then I click the Save Changes button
 And I click close on the Save Changes popup dialog
@@ -39,7 +40,7 @@ And the save changes button is not shown
 Given I ensure the Data Consent Tier Sliders are set as follows:
 | Tier | State |
 | 2.1  | Off   |
-| 2.2  | On    | 
+| 2.2  | On    |
 
 Then I click the Save Changes button
 And I click close on the Save Changes popup dialog
@@ -50,7 +51,7 @@ And the save changes button is not shown
 
 Given I ensure the Data Consent Tier Sliders are set as follows:
 | Tier | State |
-| 4.1  | On    |  
+| 4.1  | On    |
 
 Then I click the Save Changes button
 And I click close on the Save Changes popup dialog

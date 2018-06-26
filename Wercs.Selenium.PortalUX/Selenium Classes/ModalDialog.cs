@@ -9,7 +9,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
 	class ModalDialog : BaseObject
 	{
-		public const string BasePath = "//div[contains(@class, 'modal-dialog') and not(ancestor::div[@id='select-retailers-dialog' or @id='LogOutModal'])]";
+		public const string BasePath = "//div[contains(@class, 'modal-dialog') and not(ancestor::div[@id='select-retailers-dialog' or @id='LogOutModal']) and (.//parent::div[contains(@style,'display: block')])]";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
@@ -25,6 +25,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 				.FirstOrDefault(x => x.Text == "CANCEL").TryClick();
+		}
+
+		public bool Click_Skip()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+				.FirstOrDefault(x => x.Text == "SKIP").TryClick();
+		}
+
+		public bool Click_Closex()
+		{
+			return this.containerElement.FindElements(By.XPath("//button[@class='close']//span"), 2).FirstOrDefault(x => x.Text.Contains("×")).TryClick();
 		}
 
 		public bool CancelButtonExists()

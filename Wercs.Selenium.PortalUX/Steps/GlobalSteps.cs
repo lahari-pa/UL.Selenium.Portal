@@ -34,29 +34,7 @@ namespace WERCSmart
 			TestReport.BeginTestModule(ResourcePool.GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator");
 			try
 			{
-				var selLandingPage = new LandingPage();
-				if (selLandingPage.Wait_for_load(10))
-				{
-					Report.Info("Clicking 'Log In' on the Landing Page");
-					selLandingPage.Click_Login();
-				}
-
-				var selLogin = new Login();
-				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
-				Report.Info("Entering Email: '" + GlobalParameters.Admin1 + "'");
-				selLogin.EmailField = GlobalParameters.Admin1;
-				Report.Info("Entering Password: '" + GlobalParameters.AdminPassword1 + "'");
-				selLogin.PasswordField = GlobalParameters.AdminPassword1;
-				Report.Info("Clicking login");
-				selLogin.Click_Login();
-
-				//var Sel_TOU = new TermsOfUse();
-				//if (Sel_TOU.Wait_for_load(10))
-				// Sel_TOU.Accept();
-
-				var selHomepage = new Homepage();
-				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
-				GeneralUtilities.Wait_for_load_finish();
+				GivenILogInWithEmailXAndPasswordY(GlobalParameters.Admin1, GlobalParameters.AdminPassword1);
 			}
 			catch (Exception ex)
 			{
@@ -68,25 +46,9 @@ namespace WERCSmart
 		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs Visual Account")]
 		public void GivenLoginIntoWERCSmartPortal_AdministratorRole()
 		{
-			Report.Info("Clicking 'Log In' on the Landing Page");
-			var selLandingPage = new LandingPage();
-			selLandingPage.Click_Login();
-
-			var selLogin = new Login();
-			Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
 			var username = @"automatedcompany1.kxxyxunf@mailosaur.io";
 			var password = "Welcome1!";
-
-			Report.Info("Entering Email: '" + username + "'");
-			selLogin.EmailField = username;
-			Report.Info("Entering Password: '" + password + "'");
-			selLogin.PasswordField = password;
-			Report.Info("Clicking login");
-			selLogin.Click_Login();
-
-			var selHomepage = new Homepage();
-			Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
-			GeneralUtilities.Wait_for_load_finish();
+			GivenILogInWithEmailXAndPasswordY(username, password);
 		}
 
 		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account")]
@@ -95,25 +57,9 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal asPremium Subscription Account into the WERCs Account");
 			try
 			{
-				Report.Info("Clicking 'Log In' on the Landing Page");
-				var selLandingPage = new LandingPage();
-				selLandingPage.Click_Login();
-
-				var selLogin = new Login();
-				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
 				var username = @"AutomatedPremium.kxxyxunf@mailosaur.io";
 				var password = "Welcome1!";
-
-				Report.Info("Entering Email: '" + username + "'");
-				selLogin.EmailField = username;
-				Report.Info("Entering Password: '" + password + "'");
-				selLogin.PasswordField = password;
-				Report.Info("Clicking login");
-				selLogin.Click_Login();
-
-				var selHomepage = new Homepage();
-				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
-				GeneralUtilities.Wait_for_load_finish();
+				GivenILogInWithEmailXAndPasswordY(username, password);
 			}
 			catch (Exception ex)
 			{
@@ -128,25 +74,10 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal using data consent Account");
 			try
 			{
-				Report.Info("Clicking 'Log In' on the Landing Page");
-				var selLandingPage = new LandingPage();
-				selLandingPage.Click_Login();
-
-				var selLogin = new Login();
-				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
+				
 				var username = @"dataconsent.kxxyxunf@mailosaur.io";
 				var password = "Welcome1!";
-
-				Report.Info("Entering Email: '" + username + "'");
-				selLogin.EmailField = username;
-				Report.Info("Entering Password: '" + password + "'");
-				selLogin.PasswordField = password;
-				Report.Info("Clicking login");
-				selLogin.Click_Login();
-
-				//var selHomepage = new Homepage();
-				//Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
-				GeneralUtilities.Wait_for_load_finish();
+				GivenILogInWithEmailXAndPasswordY(username, password);
 			}
 			catch (Exception ex)
 			{
@@ -161,27 +92,12 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator into the WERCs Account");
 			try
 			{
-				var selLandingPage = new LandingPage();
-				if (selLandingPage.Wait_for_load(10))
-				{
-					Report.Info("Clicking 'Log In' on the Landing Page");
-					selLandingPage.Click_Login();
-				}
-
-				var selLogin = new Login();
-				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
+				
 				var username = @"AllRetailersProductsCompany.kxxyxunf@mailosaur.io"; /*@"AllRetailersProductsCompany.kxxyxunf@mailosaur.io";*/
-
 				//var username = @"dataconsentalwaysdisplay.kxxyxunf@mailosaur.io";
 				var password = "Welcome1!";
+				GivenILogInWithEmailXAndPasswordY(username, password);
 
-				Report.Info("Entering Email: '" + username + "'");
-				selLogin.EmailField = username;
-				Report.Info("Entering Password: '" + password + "'");
-				selLogin.PasswordField = password;
-				Report.Info("Clicking login");
-				selLogin.Click_Login();
-				GeneralUtilities.Wait_for_load_finish();
 			}
 			catch (Exception ex)
 			{
@@ -193,25 +109,9 @@ namespace WERCSmart
 		[StepDefinition(@"I Login into WERCSmart Portal - Division Account")]
 		public void GivenLoginIntoWERCSmartPortal_DivisionAccount()
 		{
-			var selLandingPage = new LandingPage();
-			if (selLandingPage.Wait_for_load(10))
-			{
-				Report.Info("Clicking 'Log In' on the Landing Page");
-				selLandingPage.Click_Login();
-			}
-
-			var selLogin = new Login();
-			Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
 			var username = @"automateddivision.kxxyxunf@mailosaur.io";
 			var password = "Welcome1!";
-
-			Report.Info("Entering Email: '" + username + "'");
-			selLogin.EmailField = username;
-			Report.Info("Entering Password: '" + password + "'");
-			selLogin.PasswordField = password;
-			Report.Info("Clicking login");
-			selLogin.Click_Login();
-			GeneralUtilities.Wait_for_load_finish();
+			GivenILogInWithEmailXAndPasswordY(username, password);
 		}
 
 		[Then(@"The home screen should load")]
@@ -231,28 +131,9 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator into the WERCs ULSC Account");
 			try
 			{
-				var selLandingPage = new LandingPage();
-				if (selLandingPage.Wait_for_load(10))
-				{
-					Report.Info("Clicking 'Log In' on the Landing Page");
-					selLandingPage.Click_Login();
-				}
-
-				var selLogin = new Login();
-				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
 				var username = @"automatedULSC.kxxyxunf@mailosaur.io ";
 				var password = "Welcome1!";
-
-				Report.Info("Entering Email: '" + username + "'");
-				selLogin.EmailField = username;
-				Report.Info("Entering Password: '" + password + "'");
-				selLogin.PasswordField = password;
-				Report.Info("Clicking login");
-				selLogin.Click_Login();
-
-				var selHomepage = new Homepage();
-				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
-				GeneralUtilities.Wait_for_load_finish();
+				GivenILogInWithEmailXAndPasswordY(username, password);
 			}
 			catch (Exception ex)
 			{
@@ -264,9 +145,6 @@ namespace WERCSmart
 		[StepDefinition(@"I log in with email: (.*) and password: (.*)")]
 		public void GivenILogInWithEmailXAndPasswordY(string username, string password)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I log in with email: " + username + " and password: " + password);
-			try
-			{
 				var selLandingPage = new LandingPage();
 				if (selLandingPage.Wait_for_load(10))
 				{
@@ -287,12 +165,7 @@ namespace WERCSmart
 				var selHomepage = new Homepage();
 				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 				GeneralUtilities.Wait_for_load_finish();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+				GivenIfAModalDialogOpensICloseIt();
 		}
 
 
@@ -591,11 +464,11 @@ namespace WERCSmart
 			}
 		}
 
-		[StepDefinition(@"in the received email I should see the title: (.*)")]
-		public void ThenInTheReceivedEmailIShouldSeeTheTitleWERCSmartPasswordReset(string expectedTitle)
-		{
+		//[StepDefinition(@"in the received email I should see the title: (.*)")]
+		//public void ThenInTheReceivedEmailIShouldSeeTheTitleWERCSmartPasswordReset(string expectedTitle)
+		//{
 
-		}
+		//}
 
 
 		[StepDefinition(@"there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
@@ -838,6 +711,29 @@ namespace WERCSmart
 			SeleniumBrowser.WebBrowser.Close();
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
 		}
+
+		[Given(@"If a modal dialog opens I skip it")]
+		public void GivenIfAModalDialogOpensISkipIt()
+		{
+			ModalDialog thisModalDialog = new ModalDialog();
+			if (thisModalDialog.Wait_for_load(3))
+			{
+				Report.Info("modal dialog is opened. ");
+				Report.IsTrue(thisModalDialog.Click_Skip(), "Failed to click skip button", "Clicked skip button");
+			}
+		}
+
+		[Given(@"If a modal dialog opens I close it")]
+		public void GivenIfAModalDialogOpensICloseIt()
+		{
+			ModalDialog thisModalDialog = new ModalDialog();
+			if (thisModalDialog.Wait_for_load(3))
+			{
+				Report.Info("modal dialog is opened. ");
+				Report.IsTrue(thisModalDialog.Click_Closex(), "Failed to click close button", "Clicked close button");
+			}
+		}
+
 
 		[StepDefinition(@"I click the Terms of Use link in the footer")]
 		public void ClickTermsOfUseFooter()
