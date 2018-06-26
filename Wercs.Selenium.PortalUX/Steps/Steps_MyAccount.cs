@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Castle.Core.Internal;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -755,6 +756,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selMyAccount.NumToUserGridNavPageInput(pageNum);
 			Report.Info("Pressing the enter key");
 			selMyAccount.KeyToUserGridNavPageInput("enter");
+		}
+		[StepDefinition(@"I should see the following tabs in the My Library page")]
+		public void TabsShowingInMyLibrary(Table tabs)
+		{
+			var selMyLibrary = new MyAccount_MyLibrary();
+			var tabsExpected = new List<string>();
+			tabs.Rows.ForEach(x => tabsExpected.Add(x["Tab"]));
+			var tabsDisplayed = selMyLibrary.AllTabs();
+			Report.IsTrue(!tabsDisplayed.Except(tabsExpected).Any() && tabsDisplayed.Count == tabsExpected.Count,
+				"The displayed tabs did not match the list of expected tabs. Displayed was: " + string.Join(", ", tabsDisplayed),
+				"The displayed tabs matched the list of expected tabs: " + string.Join(", ", tabsDisplayed));
 		}
 	}
 }

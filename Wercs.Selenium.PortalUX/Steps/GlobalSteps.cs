@@ -838,7 +838,34 @@ namespace WERCSmart
 			SeleniumBrowser.WebBrowser.Close();
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
 		}
+
+		[StepDefinition(@"I click the Terms of Use link in the footer")]
+		public void ClickTermsOfUseFooter()
+		{
+			Report.IsTrue(new Homepage().ClickTermsOfUse(),
+				"Failed to click the Terms Of Use link",
+				"Successfully clicked the Terms Of Use link");
+		}
+
+		[StepDefinition(@"I confirm the WERCSmart Terms of Use page opened in a new tab and navigate to it")]
+		public void SwitchToTermsOfUseTab()
+		{
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				Report.Info("Switching tab");
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h2[contains(text(),'Terms of Use')]"), 2) != null)
+				{
+					Report.Success("The Terms Of Use page opened in a new tab. Successfully switched to that tab.");
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab!");
+			Report.Screenshot();
+		}
 	}
-
-
 }

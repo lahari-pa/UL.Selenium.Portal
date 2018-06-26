@@ -170,10 +170,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[@id='at-a-glance']//h3[contains(text(),'Announcements')]/../div"), 2).Displayed;
 			//return Convert.ToBoolean(containerElement.FindElement(By.XPath(".//div[@id='at-a-glance']"), 2).GetAttribute("aria-expanded"));
 		}
+		public string FooterText()
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//footer/p"), 2).Text;
+		}
+
+		public bool ClickTermsOfUse()
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//footer/p/a"), 2).TryClick();
+		}
 	}
 
-	
-	
+
+
 	class HomePageHeader : BaseObject
 	{
 		public const string BasePath = "//div[@class='page-inner-header home-header affix']";

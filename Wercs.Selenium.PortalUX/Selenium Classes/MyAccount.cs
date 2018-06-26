@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using BoDi;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
@@ -893,9 +894,38 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.Id, Using = "myLibraryContainer")]
 		protected override IWebElement containerElement { get; set; }
 
-		// My Packaging Types
+		public bool SelectTab(string heading)
+		{
+			return containerElement.FindElement(By.XPath(".//li[@role='presentation']/a[text() = '" + heading + "']"), 2).TryClick();
+		}
 
-		// My Brands
+		public bool ActiveTab(string heading)
+		{
+			return containerElement.FindElement(By.XPath(".//a[text() = '" + heading + "']/parent::li[@role='presentation']"), 2).GetAttribute("class") == "active";
+		}
+
+		public List<string> AllTabs()
+		{
+			return containerElement.FindElements(By.XPath(".//li[@role='presentation']/a")).Select(x => x.Text).ToList();
+		}
+		class MyPackagingTypes : MyAccount_MyLibrary
+		{
+			public bool Active { get; set; }
+
+			public bool AddNew()
+			{
+				return containerElement.FindElement(By.XPath(".//a[@class = 'btn btn-default pull-right' and text() = 'Add New' and not(ancestor::div[@id='brandContainer'])]"), 2).TryClick();
+			}
+		}
+
+		class MyBrands : MyAccount_MyLibrary
+		{
+			public bool Active { get; set; }
+			public bool AddNew()
+			{
+				return containerElement.FindElement(By.XPath(".//a[@class = 'btn btn-default pull-right' and text() = 'Add New' and not(ancestor::div[@id='brandContainer'])]"), 2).TryClick();
+			}
+		}
 
 		// My Distributors
 

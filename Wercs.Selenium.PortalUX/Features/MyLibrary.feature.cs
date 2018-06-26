@@ -116,8 +116,6 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 21
 testRunner.Given("In the My Account screen I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 23
-testRunner.Then("bla bla", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tab"});
@@ -129,8 +127,8 @@ testRunner.Then("bla bla", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), 
                         "My Distributors"});
             table1.AddRow(new string[] {
                         "My Ingredients"});
-#line 25
-testRunner.Then("I should see the following tabs:", ((string)(null)), table1, "Then ");
+#line 23
+testRunner.Then("I should see the following tabs in the My Library page", ((string)(null)), table1, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

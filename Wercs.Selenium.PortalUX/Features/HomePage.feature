@@ -379,3 +379,13 @@ And I should see the Subheading Alerts in the main window
 And the Alerts dialog should be visible
 And I should see the Subheading Announcements in the main window
 And the Announcements dialog should be visible
+
+Scenario: [67299] Terms of Use - footer
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+
+Given I click the Terms of Use link in the footer
+
+Given I confirm the WERCSmart Terms of Use page opened in a new tab and navigate to it
+
+And I close the window that opened
