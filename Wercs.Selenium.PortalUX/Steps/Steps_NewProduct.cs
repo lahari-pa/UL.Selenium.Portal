@@ -2703,5 +2703,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to delete the selected retailers",
 				"Successfully deleted the selected retailers");
 		}
+
+		[StepDefinition(@"I confirm the last created brand in My Library - My Brands appears in the 'Product Line or Brand' drop down")]
+		public void BrandAppearsInProductLineDropDown()
+		{
+			var expectedName = Context.GetFromContext("Saved brand name") == null ? null : Context.GetFromContext("Saved brand name").ToString();
+			if (expectedName == null)
+			{
+				Report.Failure("Saved brand name was not found in context. The test must call 'click save' in My Library - My Brands");
+				return;
+			}
+			var productLineOptions = new NewProduct().AllProductLineOrBrandOptions();
+			Report.IsTrue(productLineOptions.Contains(expectedName),
+				"The 'Product Line or Brand' drop down did not contain the last saved brand name: " + expectedName + ". The options showing were: " + string.Join(", ", productLineOptions),
+				"The Product Line or Brand drop down contained the last saved brand name: " + expectedName + " as expected");
+		}
 	}
 }

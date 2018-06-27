@@ -1235,7 +1235,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Line')]/../following-sibling::div//select"), 2);
 				el.SelectByValue(value);
 			}
-
 		}
 
 		public string ProductType {
@@ -4008,6 +4007,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var xPath = ".//a[@class='btn delete-selected']/i";
 			return containerElement.FindElement(By.XPath(xPath), 2).TryClick();
+		}
+
+		public List<string> AllProductLineOrBrandOptions()
+		{
+			var el = containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Line')]/../following-sibling::div//select"), 2);
+			if (el == null)
+			{
+				Report.Failure("Could not locate the Product Line or Brand option");
+				return new List<string>();
+			}
+			return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
 		}
 	}
 

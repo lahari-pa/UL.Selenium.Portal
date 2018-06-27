@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using BoDi;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using Org.BouncyCastle.Asn1.Mozilla;
 using SafewareReporting;
 using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Classes;
@@ -894,7 +895,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.Id, Using = "myLibraryContainer")]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool SelectTab(string heading)
+		public bool ClickTab(string heading)
 		{
 			return containerElement.FindElement(By.XPath(".//li[@role='presentation']/a[text() = '" + heading + "']"), 2).TryClick();
 		}
@@ -908,30 +909,96 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElements(By.XPath(".//li[@role='presentation']/a")).Select(x => x.Text).ToList();
 		}
-		class MyPackagingTypes : MyAccount_MyLibrary
-		{
-			public bool Active { get; set; }
-
-			public bool AddNew()
-			{
-				return containerElement.FindElement(By.XPath(".//a[@class = 'btn btn-default pull-right' and text() = 'Add New' and not(ancestor::div[@id='brandContainer'])]"), 2).TryClick();
-			}
-		}
-
-		class MyBrands : MyAccount_MyLibrary
-		{
-			public bool Active { get; set; }
-			public bool AddNew()
-			{
-				return containerElement.FindElement(By.XPath(".//a[@class = 'btn btn-default pull-right' and text() = 'Add New' and not(ancestor::div[@id='brandContainer'])]"), 2).TryClick();
-			}
-		}
-
-		// My Distributors
-
-		// My Ingredients
-
 	}
+	class MyPackagingTypes : MyAccount_MyLibrary
+	{
+		public bool Active { get; set; }
 
+		public bool AddNew()
+		{
+			return containerElement.FindElement(By.XPath(".//a[@class = 'btn btn-default pull-right' and text() = 'Add New' and not(ancestor::div[@id='brandContainer'])]"), 2).TryClick();
+		}
+	}
+	class MyBrands : MyAccount_MyLibrary
+	{
+		public bool Active { get; set; }
+		public bool AddNew()
+		{
+			return containerElement.FindElement(By.XPath(".//a[@class = 'btn btn-default pull-right' and text() = 'Add New' and ancestor::div[@id='brandContainer']]"), 2).TryClick();
+		}
 
+		public void EnterBrandName(string value)
+		{
+			var inputEl = containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='text']"), 2);
+			if (inputEl == null)
+			{
+				Report.Failure("Could not find input element for Brand Name");
+				return;
+			}
+			inputEl.EnterText(value);
+		}
+
+		public bool ActiveIsChecked()
+		{
+			var inputEl = containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='checkbox']"), 2);
+			if (inputEl == null)
+			{
+				Report.Failure("Could not find 'Active?' checkbox input element in My Brands page");
+				return false;
+			}
+			return inputEl.Checked();
+		}
+
+		public bool ClickSave()
+		{
+			var row = containerElement.FindElement(By.XPath(".//tr[.//a[@data-bind='click: save']]"), 2);
+			var allRows = containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr"), 2).ToList();
+			if (row == null)
+			{
+				Report.Failure("Could not find a row in the My Brands grid with the 'save' button");
+				return false;
+			}
+			var rowName = row.FindElement(By.XPath(".//input[@type='text']"), 2);
+			var rowIndex = allRows.IndexOf(row);
+			Context.AddToContext("Saved brand name", rowName?.GetAttribute("value"));
+			Context.AddToContext("Saved brand row index", rowIndex);
+			return row.FindElement(By.XPath(".//a[@data-bind='click: save']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+		public bool ClickCancel()
+		{
+			return containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//a[@data-bind='click: cancel']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
+		public List<string> AllSavedBrands()
+		{
+			return containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']//span[@data-bind='text:Phrase']"), 2).Select(x => x.Text).ToList();
+		}
+
+		public string BrandNameAtRowIndex(int rowIndex)
+		{
+			Report.Info("Getting Brand name at row position: " + rowIndex);
+			var row = containerElement.FindElement(By.XPath("//tbody[@data-bind='foreach: productLines']/tr[" + rowIndex + "]"), 2);
+			if (row == null)
+			{
+				Report.Failure("There was no row showing at position: " + rowIndex);
+				return null;
+			}
+			return row.FindElement(By.XPath(".//span[@data-bind = 'text:Phrase']"), 2).Text;
+		}
+
+		public string IsActiveTextForBrand(int rowIndex, string brandName)
+		{
+			Report.Info("Getting 'Active?' text at row number: " + rowIndex);
+			var textEl = containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + rowIndex + "][.//span[text()='" + brandName + "']]//span[starts-with(@data-bind,'text: IsActive')]"), 2);
+			if (textEl == null)
+			{
+				Report.Failure("Unable to locate 'Active?' text element for the My Brands row at index: " + rowIndex);
+				return null;
+			}
+			return textEl.Text;
+		}
+	}
+	// My Distributors
+
+	// My Ingredients
 }
