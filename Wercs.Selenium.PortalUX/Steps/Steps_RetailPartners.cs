@@ -907,6 +907,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 				selRetailPartnersDetails.ClickBackButton();
 			}
 		}
+
+		[Then(@"I confirm that the excel file saved as: (.*) in column: (.*) there are no numbers")]
+		public void ThenIConfirmThatTheExcelFileSavedAsInColumnThereAreNoNumbers(string savedAs, string columnName)
+		{
+			var File = Context.GetFromContext(savedAs);
+			bool AllPassed = true;
+			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			{
+				var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
+
+				//get the index of column
+				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
+				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
+				int ColumnIndex = 0;
+				for (int i = 0; i < ColumnTitles.Count; i++)
+				{
+					if (ColumnTitles[i] == columnName)
+					{
+						ColumnIndex = i;
+					}
+				}
+
+				List<string> RowItems = ExcelUtils.Excel_GetColumn(ColumnIndex);
+
+				
+
+				foreach (string thisItem in RowItems)
+				{
+					if (thisItem.Any(char.IsDigit))
+					{
+						Report.Info("The following item contains a digit: " + thisItem);
+						AllPassed = false;
+					}
+				}
+			}
+
+			Report.IsTrue(AllPassed, "Not all items were strings", "As expected all items were strings");
+		}
+
 	}
 }
 

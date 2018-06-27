@@ -37,7 +37,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully clicked download button.");
 		}
 
+		[Given(@"under the supplier Reports menu I should see the following options")]
+		public void GivenUnderTheSupplierReportsMenuIShouldSeeTheFollowingOptions(Table table)
+		{
+			var SupplierReports = new SupplierReports().GetReportList();
 
+			foreach (TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(SupplierReports.Contains(thisRow["Reports"]),
+					thisRow["Reports"] + " is not showing as expected", thisRow["Reports"] + " is showing as expected");
+			}
+		}
+
+		[Given(@"In the Kits that contain a specific product I search and select product: (.*)")]
+		public void GivenInTheKitsThatContainASpecificProductISearchAndSelectProduct(string productCode)
+		{
+			Report.IsTrue(new SupplierReports().SelectKitThatContainsSpecificProduct(productCode),
+				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
+		}
 
 	}
 }
