@@ -10,7 +10,6 @@ using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
 using ResourcePool;
 using SafewareReporting;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 

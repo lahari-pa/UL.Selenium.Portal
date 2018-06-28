@@ -506,14 +506,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public void ClickDelete()
+		public bool ClickDelete()
 		{
-			this.containerElement.FindElement(By.XPath(".//button[text()='Delete']"), 2).Click();
+			return containerElement.FindElement(By.XPath(".//button[text()='Delete']"), 2).TryClick();
 		}
 
-		public void ClickCancel()
+		public bool ClickCancel()
 		{
-			this.containerElement.FindElement(By.XPath(".//button[text()='Cancel']"), 2).Click();
+			return containerElement.FindElement(By.XPath(".//button[text()='Cancel']"), 2).TryClick();
+		}
+
+		public string ItemRemovedText()
+		{
+			var itemName = containerElement.FindElement(By.XPath(".//strong[@data-bind='text:itemObj.Name']"), 2);
+			var itemID = containerElement.FindElement(By.XPath(".//span[@data-bind='text:itemObj.ProductID']"), 2);
+			if (itemName == null || itemID == null)
+			{
+				return null;
+			}
+			return itemName.Text + "(" + itemID.Text + ")";
 		}
 	}
 

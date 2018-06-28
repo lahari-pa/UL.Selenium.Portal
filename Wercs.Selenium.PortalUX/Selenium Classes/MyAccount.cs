@@ -900,9 +900,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//li[@role='presentation']/a[text() = '" + heading + "']"), 2).TryClick();
 		}
 
-		public bool ActiveTab(string heading)
+		public string ActiveTab()
 		{
-			return containerElement.FindElement(By.XPath(".//a[text() = '" + heading + "']/parent::li[@role='presentation']"), 2).GetAttribute("class") == "active";
+			return containerElement.FindElement(By.XPath(".//a[parent::li[@role='presentation' and @class='active']]"), 2).Text;
 		}
 
 		public List<string> AllTabs()
@@ -913,10 +913,100 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	class MyPackagingTypes : MyAccount_MyLibrary
 	{
 		public bool Active { get; set; }
-
 		public bool AddNew()
 		{
 			return containerElement.FindElement(By.XPath(".//a[@class = 'btn btn-default pull-right' and text() = 'Add New' and not(ancestor::div[@id='brandContainer'])]"), 2).TryClick();
+		}
+		public bool ClickDelete()
+		{
+			return containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu' and preceding-sibling::*[@aria-expanded='true']]")).TryClick();
+		}
+		public bool ClickActions(ThisPackagingType packagingType)
+		{
+			return containerElement.FindElement(By.XPath(".//div[@role='group' and ./ancestor::tr[.//div[text()='" + packagingType.Name + "'] and .//small[text()='" + packagingType.ID + "']]]/button"), 2).TryClick();
+		}
+		public bool PackagingTypeInGrid(bool appears, ThisPackagingType packagingType)
+		{
+			int pageNumber = GetPage("current");
+			int lastPageNumber = GetPage("last");
+			while (pageNumber <= lastPageNumber)
+			{
+				var rows = containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']/tr"), 2);
+				foreach (var row in rows)
+				{
+					var thisID = row.FindElement(By.XPath("./td/div/small"), 2).Text;
+					var thisName = row.FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
+					if (thisID == packagingType.ID && thisName == packagingType.Name)
+					{
+						return appears;
+					}
+				}
+				if (NextDisabled())
+				{
+					return !appears;
+				}
+				Navigation("next");
+				pageNumber = GetPage("current");
+			}
+			return !appears;
+		}
+		public bool NextDisabled()
+		{
+			var pagingControl = containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
+			if (pagingControl == null)
+			{
+				Report.Failure("Unable to find the paging control on grid navigation");
+				return false;
+			}
+			return pagingControl.FindElement(By.XPath(".//span[@class='current next' and parent::li[@class='disabled']]"), 2) != null;
+		}
+		public bool Navigation(string navOption)
+		{
+			var pagingControl = containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
+			if (pagingControl == null)
+			{
+				Report.Failure("Unable to find the paging control on grid navigation");
+				return false;
+			}
+			switch (navOption.ToLower())
+			{
+				case "next":
+					return pagingControl.FindElement(By.XPath(".//a[@class='page-link next']")).TryClick();
+				case "previous":
+					return pagingControl.FindElement(By.XPath(".//a[@class='page-link previous']")).TryClick();
+			}
+			Report.Failure("Unable to apply navigation option: " + navOption);
+			return false;
+		}
+		public int GetPage(string position)
+		{
+			if (position.ToLower() == "current")
+			{
+				var activePageControl = containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']/li[@class='active']/span"), 2);
+				if (activePageControl == null)
+				{
+					Report.Failure("The page control could not be found on the My Packaging Types grid");
+					return -1;
+				}
+				return Convert.ToInt32(activePageControl.Text);
+			}
+			if (position.ToLower() == "last")
+			{
+				var lastControl = containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[@class='page-link']"), 2);
+				if (lastControl.Count == 0)
+				{
+					Report.Info("Last page is: 1");
+					return 1;
+				}
+				return Convert.ToInt32(lastControl.Last().Text);
+			}
+			return 1;
+		}
+		public class ThisPackagingType
+		{
+			public string ID { get; set; }
+			public string Name { get; set; }
+			public string Date { set; get; }
 		}
 	}
 	class MyBrands : MyAccount_MyLibrary

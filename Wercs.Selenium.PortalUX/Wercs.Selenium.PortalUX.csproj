@@ -374,6 +374,7 @@
     <Compile Include="Selenium Classes\NavigationBar.cs" />
     <Compile Include="Selenium Classes\NewProduct.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
+    <Compile Include="Selenium Classes\PackagingType.cs" />
     <Compile Include="Selenium Classes\PaymentMethods.cs" />
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
     <Compile Include="Selenium Classes\MessageCenter.cs" />
@@ -393,6 +394,8 @@
     <Compile Include="Steps\GlobalSteps.cs" />
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
+    <Compile Include="Steps\Steps_Brands.cs" />
+    <Compile Include="Steps\Steps_PackagingTypes.cs" />
     <Compile Include="Steps\Steps_PaymentMethods.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
     <Compile Include="Steps\Steps_Shared.cs" />
