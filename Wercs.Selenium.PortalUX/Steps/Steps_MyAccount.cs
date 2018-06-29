@@ -703,9 +703,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						"Failed to Add a New User", "New User Added");
 
 					Delay.Seconds(1 * Delay.SpeedFactor);
-					//Check User Has Been Created
-					//Report.IsTrue(selMyAccount.User_Added_Check(userName, emailAddress, role), "User Has Not Been Created",
-					//"User Created Successfully");
+
 				}
 			}
 		}
@@ -781,6 +779,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selMyPackagingTypes.Active = activeTab == expectedTab,
 				"The current active tab was not: " + expectedTab + "' as expected. The active tab was: " + activeTab,
 				"The current active tab was: '" + activeTab + "' as expected");
+		}
+
+		[StepDefinition(@"I click 'Add New' in the (My Packaging Types|My Brands) section of My Library")]
+		public void ClickAddNewMyLibrary(string tab)
+		{
+			if (tab == "My Packaging Types")
+			{
+				Report.IsTrue(new MyPackagingTypes().AddNew(),
+					"Failed to click 'Add New' under My Packaging Types",
+					"Successfully clicked 'Add New' under My Packaging Types");
+				GeneralUtilities.Wait_for_load_finish();
+				return;
+			}
+			if (tab == "My Brands")
+			{
+				Report.IsTrue(new MyBrands().AddNew(),
+					"Failed to click 'Add New' under My Brands",
+					"Successfully clicked 'Add New' under My Brands");
+				return;
+			}
+			Report.Failure("Unable to 'Add New' for specified section: " + tab);
 		}
 	}
 }

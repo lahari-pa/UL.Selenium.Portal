@@ -17,30 +17,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 	[Binding, Scope(Tag = "Brands")]
 	class Steps_Brands
 	{
-		[StepDefinition(@"I click 'Add New' in the (My Packaging Types|My Brands) section of My Library")]
-		public void ClickAddNewMyLibrary(string tab)
-		{
-			if (tab == "My Packaging Types")
-			{
-				Report.IsTrue(new MyPackagingTypes().AddNew(),
-					"Failed to click 'Add New' under My Packaging Types",
-					"Successfully clicked 'Add New' under My Packaging Types");
-				GeneralUtilities.Wait_for_load_finish();
-				return;
-			}
-
-			if (tab == "My Brands")
-			{
-				Report.IsTrue(new MyBrands().AddNew(),
-					"Failed to click 'Add New' under My Brands",
-					"Successfully clicked 'Add New' under My Brands");
-				return;
-			}
-			Report.Failure("Unable to 'Add New' for specified section: " + tab);
-		}
-
 		[StepDefinition(@"I enter the Brand Name: (.*) in the input field on the expanded row")]
-		public void EnterBrandNameMyLibrary(string name)
+		public void EnterBrandNameExpandedRow(string name)
 		{
 			Report.Info("Entering '" + name + "' in the 'Product Line/ Brand Name' column in the grid");
 			new MyBrands().EnterBrandName(name);
@@ -48,7 +26,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I confirm the 'Active' input is checked on the expanded row in the My Brands grid")]
-		public void ActiveIsCheckedInMyBrands()
+		public void ActiveIsCheckedExpandedRow()
 		{
 			Report.IsTrue(new MyBrands().ActiveIsChecked(),
 				"The 'Active?' input box was not checked for the expanded (editing) row but it was expected to be",
@@ -87,7 +65,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
 			var savedBrandName = Context.GetFromContext("Saved brand name").ToString();
 			//Matching on both row index and brand name in case there are previously added duplicates
-			var actualActive = new MyBrands().IsActiveTextForBrand(savedRowIndex, savedBrandName);
+			var actualActive = new MyBrands().IsActiveText(savedRowIndex, savedBrandName);
 			Report.IsTrue(actualActive.Trim().ToLower() == active.ToLower(),
 				"The 'Active?' text did not match the expected value for the last saved Brand : " + savedBrandName + ". Expected: " + active + " but found: " + actualActive,
 				"The 'Active?' text: '" + actualActive + "' matched the expected value for the last saved Brand: " + savedBrandName);
@@ -99,10 +77,54 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
 			var savedBrandName = Context.GetFromContext("Saved brand name").ToString();
 			var selMyBrands = new MyBrands();
-			var brandName = selMyBrands.BrandNameAtRowIndex(savedRowIndex);
+			var brandName = selMyBrands.BrandName(savedRowIndex);
 			Report.IsTrue(brandName == savedBrandName,
 				"The saved brand: '" + savedBrandName + "' was not appearing in the Brands Grid. The brands displayed are: " + string.Join(", ", selMyBrands.AllSavedBrands()),
 				"The saved brand: " + savedBrandName + " was appearing in the Brands Grid as expected");
+		}
+		[StepDefinition(@"I click Edit in the My Brands grid for the last saved brand")]
+		public void ClickEditMyBrandsGrid()
+		{
+			var savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
+			var savedBrandName = Context.GetFromContext("Saved brand name").ToString();
+			Report.IsTrue(new MyBrands().ClickEdit(savedRowIndex, savedBrandName),
+				"Failed to click 'Edit' for the saved Brand: " + savedBrandName + " at row: " + savedRowIndex,
+				"Successfully clicked 'Edit' for the saved Brand: " + savedBrandName + " at row: " + savedRowIndex);
+		}
+
+		[StepDefinition(@"I (select|deselect) the 'Active' checkbox on the expanded row in the My Brands grid")]
+		public void CheckActiveCheckboxExpandedRow(string selectOrNot)
+		{
+			var select = selectOrNot == "select";
+			var selMyBrands = new MyBrands();
+			if (select && selMyBrands.ActiveIsChecked())
+			{
+				Report.Failure("Cannot select the 'Active' box because it was already checked!");
+				return;
+			}
+			if (!select && !selMyBrands.ActiveIsChecked())
+			{
+				Report.Failure("Cannot deselect the 'Active' box because it was not checked!");
+				return;
+			}
+			Report.IsTrue(selMyBrands.ClickActive(),
+				"Failed to click 'Acitve?' checkbox for expanded row",
+				"Successfully clicked 'Acitve?' checkbox for expanded row");
+			Report.IsTrue(select == selMyBrands.ActiveIsChecked(),
+				"The 'Active?' checkbox has not been " + selectOrNot + "ed!",
+				"The 'Active?' checkbox has been successfully " + selectOrNot + "ed.");
+		}
+
+		[StepDefinition(@"I save the active brands list to context")]
+		public void SaveActiveBrandsListToContext()
+		{
+			var activeBrands = new MyBrands().AllActiveSavedBrands();
+			if (activeBrands.Count == 0)
+			{
+				Report.Failure("There were no active brands to save in the My Brands grid");
+				return;
+			}
+			Context.AddToContext("Active Brands", activeBrands);
 		}
 	}
 }

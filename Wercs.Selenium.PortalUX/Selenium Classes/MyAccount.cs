@@ -919,15 +919,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 		public bool ClickDelete()
 		{
-			return containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu' and preceding-sibling::*[@aria-expanded='true']]")).TryClick();
+			return containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu' and preceding-sibling::*[@aria-expanded='true']]//a[contains(text(),'Delete')]")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+		public bool ClickEdit()
+		{
+			return containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu' and preceding-sibling::*[@aria-expanded='true']]//a[contains(text(),'Edit')]")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 		public bool ClickActions(ThisPackagingType packagingType)
 		{
 			return containerElement.FindElement(By.XPath(".//div[@role='group' and ./ancestor::tr[.//div[text()='" + packagingType.Name + "'] and .//small[text()='" + packagingType.ID + "']]]/button"), 2).TryClick();
 		}
+		//when appears=true, bool PackagingTypeAppearsInGrid. when appears=false, bool PackagingTypeDoesNotAppearInGrid
 		public bool PackagingTypeInGrid(bool appears, ThisPackagingType packagingType)
 		{
 			int pageNumber = GetPage("current");
+			if (pageNumber == -1)
+			{
+				Report.Failure("Could not get current page number from the grid");
+				return false;
+			}
 			int lastPageNumber = GetPage("last");
 			while (pageNumber <= lastPageNumber)
 			{
@@ -971,9 +981,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			switch (navOption.ToLower())
 			{
 				case "next":
-					return pagingControl.FindElement(By.XPath(".//a[@class='page-link next']")).TryClick();
+					return pagingControl.FindElement(By.XPath(".//a[@class='page-link next']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 				case "previous":
-					return pagingControl.FindElement(By.XPath(".//a[@class='page-link previous']")).TryClick();
+					return pagingControl.FindElement(By.XPath(".//a[@class='page-link previous']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 			}
 			Report.Failure("Unable to apply navigation option: " + navOption);
 			return false;
@@ -1016,7 +1026,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElement(By.XPath(".//a[@class = 'btn btn-default pull-right' and text() = 'Add New' and ancestor::div[@id='brandContainer']]"), 2).TryClick();
 		}
-
 		public void EnterBrandName(string value)
 		{
 			var inputEl = containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='text']"), 2);
@@ -1027,10 +1036,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			inputEl.EnterText(value);
 		}
-
 		public bool ActiveIsChecked()
 		{
-			var inputEl = containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='checkbox']"), 2);
+			var inputEl = containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='checkbox' and @data-bind='checked:IsActive']"), 2);
 			if (inputEl == null)
 			{
 				Report.Failure("Could not find 'Active?' checkbox input element in My Brands page");
@@ -1038,7 +1046,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return inputEl.Checked();
 		}
-
+		public bool ClickActive()
+		{
+			var inputEl = containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//input[@type='checkbox' and @data-bind='checked:IsActive']"), 2);
+			if (inputEl == null)
+			{
+				Report.Failure("Could not find 'Active?' checkbox input element in My Brands page");
+				return false;
+			}
+			return inputEl.TryClick();
+		}
 		public bool ClickSave()
 		{
 			var row = containerElement.FindElement(By.XPath(".//tr[.//a[@data-bind='click: save']]"), 2);
@@ -1058,13 +1075,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']//a[@data-bind='click: cancel']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
+		public bool ClickEdit(int row, string brandName)
+		{
+			return containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + row + "][.//span[text()='" + brandName + "']]//a[contains(@data-bind,'click: edit')]"), 2).TryClick();
 
+		}
 		public List<string> AllSavedBrands()
 		{
 			return containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']//span[@data-bind='text:Phrase']"), 2).Select(x => x.Text).ToList();
 		}
-
-		public string BrandNameAtRowIndex(int rowIndex)
+		public List<string> AllActiveSavedBrands()
+		{
+			return containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[.//span[@class='plus-container' and text()='Yes']]//span[@data-bind='text:Phrase']"), 2).Select(x => x.Text).ToList();
+		}
+		public string BrandName(int rowIndex)
 		{
 			Report.Info("Getting Brand name at row position: " + rowIndex);
 			var row = containerElement.FindElement(By.XPath("//tbody[@data-bind='foreach: productLines']/tr[" + rowIndex + "]"), 2);
@@ -1075,14 +1099,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return row.FindElement(By.XPath(".//span[@data-bind = 'text:Phrase']"), 2).Text;
 		}
-
-		public string IsActiveTextForBrand(int rowIndex, string brandName)
+		public string IsActiveText(int row, string brandName)
 		{
-			Report.Info("Getting 'Active?' text at row number: " + rowIndex);
-			var textEl = containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + rowIndex + "][.//span[text()='" + brandName + "']]//span[starts-with(@data-bind,'text: IsActive')]"), 2);
+			Report.Info("Getting 'Active?' text at row number: " + row);
+			var textEl = containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + row + "][.//span[text()='" + brandName + "']]//span[starts-with(@data-bind,'text: IsActive')]"), 2);
 			if (textEl == null)
 			{
-				Report.Failure("Unable to locate 'Active?' text element for the My Brands row at index: " + rowIndex);
+				Report.Failure("Unable to locate 'Active?' text element for the My Brands row at index: " + row);
 				return null;
 			}
 			return textEl.Text;

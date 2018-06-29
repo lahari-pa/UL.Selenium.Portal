@@ -123,5 +123,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The Packaging Group ID " + packagingType.ID + " did not appear in the Delete Product Pop Up dialog",
 				"The Packaging Group ID " + packagingType.ID + " appeared in the Delete Product Pop Up dialog as expected");
 		}
+		[StepDefinition(@"I edit Packaging Type saved as: (.*)")]
+		public void EditPackagingType(string savedAs)
+		{
+			var selPackagingTypes = new MyPackagingTypes();
+			var packagingType = new MyPackagingTypes.ThisPackagingType();
+			packagingType.ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString();
+			packagingType.Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString();
+			TestReport.StartStep("I click 'Actions' (...) for the created Package Type");
+			Report.IsTrue(selPackagingTypes.ClickActions(packagingType),
+				string.Format("Failed to click 'Actions' (...) for Packaging Type with ID '{0}' and name '{1}'",
+					packagingType.ID, packagingType.Name),
+				string.Format("Successfully clicked 'Actions' (...) for Packaging Type with ID '{0}' and name '{1}'",
+					packagingType.ID, packagingType.Name));
+			TestReport.StartStep("I click 'edit' for the created Package Type");
+			Report.IsTrue(selPackagingTypes.ClickEdit(),
+				string.Format("Failed to click 'edit' for Packaging Type with ID '{0}' and name '{1}'",
+					packagingType.ID, packagingType.Name),
+				string.Format("Successfully clicked 'edit' for Packaging Type with ID '{0}' and name '{1}'",
+					packagingType.ID, packagingType.Name));
+		}
 	}
 }

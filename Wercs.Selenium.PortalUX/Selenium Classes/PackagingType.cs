@@ -67,7 +67,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				el.EnterText(option);
 				Delay.Seconds(1);
-				return el.Text == option;
+				return el.GetAttribute("value") == option;
 			}
 			Report.Failure("Could not find element of select type or input type in the table.");
 			return false;

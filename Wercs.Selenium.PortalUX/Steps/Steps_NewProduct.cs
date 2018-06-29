@@ -2704,19 +2704,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully deleted the selected retailers");
 		}
 
-		[StepDefinition(@"I confirm the last created brand in My Library - My Brands appears in the 'Product Line or Brand' drop down")]
-		public void BrandAppearsInProductLineDropDown()
+		[StepDefinition(@"I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down")]
+		public void OnlyActiveBrandAppearInProductLineDropDown()
 		{
-			var expectedName = Context.GetFromContext("Saved brand name") == null ? null : Context.GetFromContext("Saved brand name").ToString();
-			if (expectedName == null)
+			var activeBrands = (List<string>)Context.GetFromContext("Active Brands");
+			if (activeBrands.IsNullOrEmpty())
 			{
 				Report.Failure("Saved brand name was not found in context. The test must call 'click save' in My Library - My Brands");
 				return;
 			}
 			var productLineOptions = new NewProduct().AllProductLineOrBrandOptions();
-			Report.IsTrue(productLineOptions.Contains(expectedName),
-				"The 'Product Line or Brand' drop down did not contain the last saved brand name: " + expectedName + ". The options showing were: " + string.Join(", ", productLineOptions),
-				"The Product Line or Brand drop down contained the last saved brand name: " + expectedName + " as expected");
+			Report.IsTrue(!productLineOptions.Except(activeBrands).Any() && productLineOptions.Count == activeBrands.Count,
+				"The 'Product Line or Brand' drop down options were not limited exclusively to saved active brands. The options showing were: " + string.Join(", ", productLineOptions),
+				"The 'Product Line or Brand' drop down options were limited exclusively to saved active brands as expected. The options showing were: " + string.Join(", ", productLineOptions));
 		}
 	}
 }
