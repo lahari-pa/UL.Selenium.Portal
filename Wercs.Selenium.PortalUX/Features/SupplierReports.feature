@@ -176,4 +176,22 @@ Then I confirm that the excel file saved as: 73229 contains the following column
 | WPSID        |
 | Product Name |
 
+Scenario: [73227] Products and Recommended Use Report
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I click the Supplier Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: Products and Recommended Use Report 
+Then In the Supplier Reports screen the current page should be: Products and Recommended Use Report 
+Given In the Supplier Reports screen I click on the Download button
+Given I click on close in the Report Download dialog
+Given I confirm that an excel file is produced called Products and Recommended Use Report.xlsx and save as 73227
+Then I confirm that the excel file saved as: 73227 contains the following columns:
+
+| Column         |
+| Supplier       |
+| RU Description |
+| RU Category    |
+| WPSID          |
+| Product Name   |  
+
+
 
