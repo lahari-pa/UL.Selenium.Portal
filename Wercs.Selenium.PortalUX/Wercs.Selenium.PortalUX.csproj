@@ -163,6 +163,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data Consent Tiers.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\FlashpointTestingTransportation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FlashpointTestingTransportation.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Kits.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Kits.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\MyLibrary.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -437,6 +447,14 @@
     <None Include="Features\Data Consent Tiers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Data Consent Tiers.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\FlashpointTestingTransportation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FlashpointTestingTransportation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Kits.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Kits.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\MyLibrary.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

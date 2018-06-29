@@ -177,19 +177,17 @@ this.FeatureBackground();
 #line 35
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
-testRunner.Given("If a modal dialog opens I close it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 37
 testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 38
+#line 37
 testRunner.Given("Under the Supplier Reports menu I choose: Active UPCs for Products Report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 39
+#line 38
 testRunner.Then("In the Supplier Reports screen the current page should be: Active UPCs for Produc" +
                     "ts Report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 40
+#line 39
 testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 41
+#line 40
 testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
+#line 41
 testRunner.Given("I confirm that an excel file is produced called Active UPCs for Products Report.x" +
                     "lsx and save as 68421", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -201,7 +199,7 @@ testRunner.Given("I confirm that an excel file is produced called Active UPCs fo
                         "Product Name"});
             table2.AddRow(new string[] {
                         "Active UPCs"});
-#line 43
+#line 42
 testRunner.Then("I confirm that the excel file saved as: 68421 contains the following columns:", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -224,26 +222,24 @@ testRunner.Then("I confirm that the excel file saved as: 68421 contains the foll
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68422] Battery-containing products report", new string[] {
                         "tfstestcase:68422"});
-#line 52
+#line 51
 this.ScenarioSetup(scenarioInfo);
 #line 13
 this.FeatureBackground();
-#line 53
+#line 52
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 54
-testRunner.Given("If a modal dialog opens I close it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 55
+#line 53
 testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 56
+#line 54
 testRunner.Given("Under the Supplier Reports menu I choose: Battery-containing products report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 57
+#line 55
 testRunner.Then("In the Supplier Reports screen the current page should be: Battery-containing pro" +
                     "ducts report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 58
+#line 56
 testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 59
+#line 57
 testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 60
+#line 58
 testRunner.Given("I confirm that an excel file is produced called Battery-containing products repor" +
                     "t.xlsx and save as 68422", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -259,7 +255,7 @@ testRunner.Given("I confirm that an excel file is produced called Battery-contai
                         "Battery Type"});
             table3.AddRow(new string[] {
                         "Battery Mfg"});
-#line 61
+#line 59
 testRunner.Then("I confirm that the excel file saved as: 68422 contains the following columns:", ((string)(null)), table3, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -280,26 +276,24 @@ testRunner.Then("I confirm that the excel file saved as: 68422 contains the foll
         public virtual void _68423FormulatedVsArticlesReport()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68423] Formulated vs Articles Report", ((string[])(null)));
-#line 71
+#line 69
 this.ScenarioSetup(scenarioInfo);
 #line 13
 this.FeatureBackground();
-#line 72
+#line 70
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 73
-testRunner.Given("If a modal dialog opens I close it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 74
+#line 71
 testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 75
+#line 72
 testRunner.Given("Under the Supplier Reports menu I choose: Formulated vs. Articles Report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 76
+#line 73
 testRunner.Then("In the Supplier Reports screen the current page should be: Formulated vs. Article" +
                     "s Report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 77
+#line 74
 testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 78
+#line 75
 testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 79
+#line 76
 testRunner.Given("I confirm that an excel file is produced called Formulated vs. Articles Report.xl" +
                     "sx and save as 68423", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -319,7 +313,7 @@ testRunner.Given("I confirm that an excel file is produced called Formulated vs.
                         "3rd Party Formula"});
             table4.AddRow(new string[] {
                         "ULGHS Document Only"});
-#line 80
+#line 77
 testRunner.Then("I confirm that the excel file saved as: 68423 contains the following columns:", ((string)(null)), table4, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -340,27 +334,25 @@ testRunner.Then("I confirm that the excel file saved as: 68423 contains the foll
         public virtual void _73082UPCReportForAllProductsWithRetailer()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73082] UPC Report for All Products with Retailer", ((string[])(null)));
-#line 91
+#line 88
 this.ScenarioSetup(scenarioInfo);
 #line 13
 this.FeatureBackground();
-#line 92
+#line 89
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 93
-testRunner.Given("If a modal dialog opens I close it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 94
+#line 90
 testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 95
+#line 91
 testRunner.Given("Under the Supplier Reports menu I choose: UPC Report for All Products with Retail" +
                     "er", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 96
+#line 92
 testRunner.Then("In the Supplier Reports screen the current page should be: UPC Report for All Pro" +
                     "ducts with Retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 97
+#line 93
 testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 98
+#line 94
 testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 99
+#line 95
 testRunner.Given("I confirm that an excel file is produced called UPC Report for All Products with " +
                     "Retailer.xlsx and save as 73082", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -382,9 +374,9 @@ testRunner.Given("I confirm that an excel file is produced called UPC Report for
                         "Retailer Unique Product Identifier"});
             table5.AddRow(new string[] {
                         "Container Type"});
-#line 100
+#line 96
 testRunner.Then("I confirm that the excel file saved as: 73082 contains the following columns:", ((string)(null)), table5, "Then ");
-#line 110
+#line 106
 testRunner.Then("I confirm that the excel file saved as: 73082 in column: Container Type there are" +
                     " no numbers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -406,28 +398,26 @@ testRunner.Then("I confirm that the excel file saved as: 73082 in column: Contai
         public virtual void _73225KitsThatContainASpecificProduct()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73225] Kits that Contain a specific Product", ((string[])(null)));
-#line 112
+#line 109
 this.ScenarioSetup(scenarioInfo);
 #line 13
 this.FeatureBackground();
-#line 113
+#line 110
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 114
-testRunner.Given("If a modal dialog opens I close it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 115
+#line 111
 testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 116
+#line 112
 testRunner.Given("Under the Supplier Reports menu I choose: Kits that contain a specific product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 117
+#line 113
 testRunner.Then("In the Supplier Reports screen the current page should be: Kits that contain a sp" +
                     "ecific product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 118
-testRunner.Given("In the Kits that contain a specific product I search and select product: 1459158", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 119
+#line 114
+testRunner.Given("In the Kits that contain a specific product I search and select product: 1500009", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 115
 testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 120
+#line 116
 testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 121
+#line 117
 testRunner.Given("I confirm that an excel file is produced called Kits that contain a specific prod" +
                     "uct.xlsx and save as 73225", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -441,8 +431,172 @@ testRunner.Given("I confirm that an excel file is produced called Kits that cont
                         "Kit WPSID"});
             table6.AddRow(new string[] {
                         "Kit Name"});
-#line 122
+#line 118
 testRunner.Then("I confirm that the excel file saved as: 73225 contains the following columns:", ((string)(null)), table6, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[73228] Products that are Associated with a specific Kit")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Supplier Reports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ForgottenPassword")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        public virtual void _73228ProductsThatAreAssociatedWithASpecificKit()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73228] Products that are Associated with a specific Kit", ((string[])(null)));
+#line 126
+this.ScenarioSetup(scenarioInfo);
+#line 13
+this.FeatureBackground();
+#line 127
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 128
+testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 129
+testRunner.Given("Under the Supplier Reports menu I choose: Products that are associated with a spe" +
+                    "cific kit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 130
+testRunner.Then("In the Supplier Reports screen the current page should be: Products that are asso" +
+                    "ciated with a specific kit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 131
+testRunner.Given("In the Kits that contain a specific product I search and select product: 1500009", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 132
+testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 133
+testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 134
+testRunner.Given("I confirm that an excel file is produced called Products that are associated with" +
+                    " a specific kit.xlsx and save as 73228", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Column"});
+            table7.AddRow(new string[] {
+                        "Product in Kit"});
+            table7.AddRow(new string[] {
+                        "Product in Kit Name"});
+            table7.AddRow(new string[] {
+                        "Kit WPSID"});
+            table7.AddRow(new string[] {
+                        "Kit Name"});
+#line 135
+testRunner.Then("I confirm that the excel file saved as: 73228 contains the following columns:", ((string)(null)), table7, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[73226] Pesticide Certificate Report")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Supplier Reports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ForgottenPassword")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        public virtual void _73226PesticideCertificateReport()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73226] Pesticide Certificate Report", ((string[])(null)));
+#line 143
+this.ScenarioSetup(scenarioInfo);
+#line 13
+this.FeatureBackground();
+#line 144
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 145
+testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 146
+testRunner.Given("Under the Supplier Reports menu I choose: Pesticide Certificate Report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 147
+testRunner.Then("In the Supplier Reports screen the current page should be: Pesticide Certificate " +
+                    "Report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 148
+testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 149
+testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 150
+testRunner.Given("I confirm that an excel file is produced called Pesticide Certificate Report.xlsx" +
+                    " and save as 73226", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Column"});
+            table8.AddRow(new string[] {
+                        "Supplier"});
+            table8.AddRow(new string[] {
+                        "WPSID"});
+            table8.AddRow(new string[] {
+                        "Product Name"});
+            table8.AddRow(new string[] {
+                        "Pesticide Certificates Currently Expired Count"});
+            table8.AddRow(new string[] {
+                        "Pesticide Certificates Expire in 1-30 Days Count"});
+            table8.AddRow(new string[] {
+                        "Pesticide Certificates Expire in 31-60 Days Count"});
+            table8.AddRow(new string[] {
+                        "Pesticide Certificates Expire in 61-90 Days Count"});
+            table8.AddRow(new string[] {
+                        "In Re-certification"});
+#line 151
+testRunner.Then("I confirm that the excel file saved as: 73226 contains the following columns:", ((string)(null)), table8, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[73229] Products with VOCs")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Supplier Reports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ForgottenPassword")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        public virtual void _73229ProductsWithVOCs()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73229] Products with VOCs", ((string[])(null)));
+#line 164
+this.ScenarioSetup(scenarioInfo);
+#line 13
+this.FeatureBackground();
+#line 165
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 166
+testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 167
+testRunner.Given("Under the Supplier Reports menu I choose: Products with VOCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 168
+testRunner.Then("In the Supplier Reports screen the current page should be: Products with VOCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 169
+testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 170
+testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 171
+testRunner.Given("I confirm that an excel file is produced called Products with VOCs.xlsx and save " +
+                    "as 73229", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Column"});
+            table9.AddRow(new string[] {
+                        "Supplier"});
+            table9.AddRow(new string[] {
+                        "WPSID"});
+            table9.AddRow(new string[] {
+                        "Product Name"});
+#line 172
+testRunner.Then("I confirm that the excel file saved as: 73229 contains the following columns:", ((string)(null)), table9, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

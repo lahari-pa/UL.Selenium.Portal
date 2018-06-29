@@ -37,6 +37,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// select Type of product
 		/// click continue
 		/// </summary>
+
+		//Seems to be identical to 57500
 		[StepDefinition(
 			@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type)
@@ -3054,5 +3056,73 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the Product Characteristics page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
+
+		[Given(@"I call Shared Step 57500 \(The Product- Enter name, select product type - Continue - Happy Path\): (.*)")]
+		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option)
+		{
+			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option);
+		}
+
+		[Given(@"I call Shared Step 63460 \(Additional Product Information - SOLD = US, No\(PL\), No\(GNFR\) only shown \(mainly kits\) Happy Path\)")]
+		public void GivenICallSharedStepAdditionalProductInformation_SOLDUSNoPLNoGNFROnlyShownMainlyKitsHappyPath()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			Delay.Seconds(1);
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use",
+				"No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[Given(@"I call Shared Step 74339 \(Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH\)")]
+		public void GivenICallSharedStepProductCharacteristics_SelectLiquidAndEnterOnlySecondaryStateSpecificGravityPH()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Product Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
+			MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			MyNewProductSteps.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
+		}
+
+		[Given(@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
+		public void GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
+		{
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep(
+				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
+				"Product is not considered a pesticide product");
+			TestReport.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			TestReport.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			MyNewProduct.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+
+
 	}
 }

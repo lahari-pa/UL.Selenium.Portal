@@ -1782,6 +1782,45 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool AddItemToKit(string product)
+		{
+			try
+			{
+				var placeholderEl = containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
+				placeholderEl.TryClick();
+				IWebElement MatchedEntry = null;
+				var inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+				inputEl.EnterText(product);
+				var searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+				int i = 0;
+				while (searching != null && i < 10)
+				{
+					Delay.Seconds(Delay.SpeedFactor * 1);
+					i++;
+					searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+				}
+				var Matches = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+				var MatchingNameValue = Matches.FirstOrDefault(x => x.GetValue().Trim().ToLower() == product.Trim().ToLower());
+				if (MatchingNameValue == null)
+				{
+					// No matching name entry was found, so we take the first one just in case we are looking for a partial match!
+					MatchedEntry = Matches.FirstOrDefault();
+				}
+				else
+				{
+					MatchedEntry = MatchingNameValue;
+				}
+
+				return MatchedEntry.TryClick();
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+			
+		}
+
+
 		// ========= Add Ingredient Functions ========= //
 
 		public bool AddIngredient(Ingredient ingredient)
@@ -4030,6 +4069,64 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
 		}
+
+		public bool SetSubOptionInSection(string section, string subsection, string value)
+		{
+			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+			            @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+			            @"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
+			            @"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
+			            @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+
+			var el = containerElement.FindElement(By.XPath(xPath), 2);
+
+			if (el == null)
+			{
+				Report.Error("Could not find the correct input in section: " + section);
+				return false;
+			}
+			Report.Info("Entering value of: '" + value + "' in section: '" + section + "'");
+			if (el.GetAttribute("type") == "text")
+			{
+				el.EnterText(value);
+				return el.GetValue() == value;
+			}
+			if (el.TagName.ToLower() == "select")
+			{
+				int i = 0;
+				while (i < 10)
+				{
+					try
+					{
+						el.Select(value);
+						return el.SelectedOption() == value;
+					}
+					catch (Exception)
+					{
+						i++;
+						Delay.Seconds(1);
+					}
+				}
+
+				return el.SelectedOption() == value;
+			}
+
+			try
+			{
+				if (el.GetAttribute("type") == "checkbox")
+				{
+					el.Check(true);
+					return el.Checked();
+				}
+
+			}
+			catch (Exception e)
+			{
+
+			}
+			return el.TryClick();
+		}
+
 	}
 
 	public class ProductInformation

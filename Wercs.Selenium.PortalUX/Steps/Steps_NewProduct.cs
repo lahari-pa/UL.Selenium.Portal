@@ -1844,6 +1844,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SetOptionInSection(section, option),
 				"Failed to set the input to " + option + " in section: " + section,
 				"Successfully set the input to " + option + " in section: " + section);
+			Delay.Seconds(1);
 		}
 
 
@@ -2719,5 +2720,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The 'Product Line or Brand' drop down options were not limited exclusively to saved active brands. The options showing were: " + string.Join(", ", productLineOptions),
 				"The 'Product Line or Brand' drop down options were limited exclusively to saved active brands as expected. The options showing were: " + string.Join(", ", productLineOptions));
 		}
+
+		[Given(@"In the Create the kit page I search for and select: (.*)")]
+		public void GivenInTheCreateTheKitPageISearchForAndSelect(string productToAdd)
+		{
+			Report.IsTrue(new NewProduct().AddItemToKit(productToAdd),
+				"Failed to add product: " + productToAdd + " to kit.",
+				"Successfully added product: " + productToAdd + " to kit.");
+		}
+
+		[Then(@"in the (.*) page I (should|should not) see the (.*) question")]
+		public void ThenInThePageIShouldOrShouldNotSeeQuestion(string page, string shouldOrNot, string question)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			if (!thisNewProduct.WaitForSection(page))
+			{
+				throw new Exception("Not on the right page");
+			}
+
+			Report.IsTrue(thisNewProduct.SectionExists(question) == (shouldOrNot == "should"),
+				"Question is not showing as expected", "Question is showing or not as expected");
+
+		}
+		
+
 	}
 }
