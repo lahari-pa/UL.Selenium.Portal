@@ -1722,30 +1722,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the following radio buttons:")]
-		public void ShouldSeeTheRadioButton(Table expected)
+		[StepDefinition(@"I should see the following radio buttons(.*):")]
+		public void ShouldSeeTheRadioButton(string order, Table expected)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the correct Radio buttons");
-			try
+			var selNewProduct = new NewProduct();
+			var radioButtonsShowing = selNewProduct.RadioButtons();
+			foreach (var row in expected.Rows)
 			{
-				var selNewProduct = new NewProduct();
-				var radioButtonsShowing = selNewProduct.RadioButtons();
-
-				foreach (var row in expected.Rows)
-				{
-					var buttonText = row["Button"];
-					Report.Info("Checking that I see the radio button '" + buttonText + "'");
-					Report.IsTrue(radioButtonsShowing.Contains(buttonText.Trim()),
-						"Radio Button was not showing as expected! Expected: '" + buttonText + "', but found: '" + string.Join("', '", radioButtonsShowing) + "'!",
-						"Radio Button was showing: '" + buttonText + "', as expected!");
-				}
-				Report.Screenshot();
+				var button = row["button"];
+				Report.Info("Checking that I see the radio button '" + button + "'");
+				Report.IsTrue(radioButtonsShowing.Contains(button.Trim()),
+					"Radio Button was not showing as expected! Expected: '" + button + "', but found: '" + string.Join("', '", radioButtonsShowing) + "'!",
+					"Radio Button was showing: '" + button + "', as expected!");
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I should see (a total of|at least) (.*) radio buttons for the section: (.*)")]
@@ -1753,7 +1743,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var selNewProduct = new NewProduct();
 			var expectedCount = Convert.ToInt32(count);
-			var actualCount = selNewProduct.RadioButtonsInSection(section);
+			var actualCount = selNewProduct.RadioButtonCountInSection(section);
 			if (condition == "a total of")
 			{
 				Report.IsTrue(expectedCount == actualCount,
@@ -1763,6 +1753,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.IsTrue(actualCount >= expectedCount, "Expected there to be at least: " + expectedCount + " radio buttons for section: " + section + " but there were: " + actualCount, "There were at least: " + expectedCount + " radio buttons for section: " + section + " as expected");
 			}
+		}
+
+		[StepDefinition(@"Section: (.*) should be showing the following radio buttons in order:")]
+		public void CheckRadioButtonsInSectionAndOrder(string section, Table expected)
+		{
+			var expectedRadioButtons = new List<string>();
+			expected.Rows.ForEach(x => expectedRadioButtons.Add(x["Button"]));
+			var radioButtonsShowing = new NewProduct().RadioButtonsInSection(section);
+			Report.IsTrue(expectedRadioButtons.SequenceEqual(radioButtonsShowing) && expectedRadioButtons.Count == radioButtonsShowing.Count,
+				"The actual radio buttons for section: " + section + " did not match the expected text in order. The radios showing are:\n" + string.Join("\n", radioButtonsShowing),
+				"The actual radio buttons for section: " + section + " matched the expected text in order. The radios showing are:\n" + string.Join("\n", radioButtonsShowing));
 		}
 
 		[StepDefinition(@"I click the 'Add UPC' button")]

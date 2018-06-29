@@ -372,3 +372,206 @@ Given I confirm data for EPA Registration: 73605-2 is complete
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56547
+
+@pesticidequestion
+Scenario: [57512] Pesticide question shows in Additional Product Information for Flow 2L
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+
+Given I save the product information as: TestCase57512
+
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57512
+@pesticidequestion
+Scenario: [57516] Pesticide question shows in Additional Product Information for Flow 2-LS
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fertilizer
+
+Given I save the product information as: TestCase57516
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57516
+@pesticidequestion
+Scenario: [57520] Pesticide question shows in Additional Product Information for Flow 2-LS-B
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Animal Deterrent - Non-Aerosol
+
+Given I save the product information as: TestCase57520
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57520
+@pesticidequestion
+Scenario: [57522] Pesticide question shows in Additional Product Information for Flow 2-S
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+
+Given I save the product information as: TestCase57522
+
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57522
+@pesticidequestion
+Scenario: [57527] Pesticide question shows in Additional Product Information for Flow 6-A
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Disinfectant (Aerosol)
+
+Given I save the product information as: TestCase57527
+
+Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57527
+@pesticidequestion
+Scenario: [57529] Pesticide question shows in Additional Product Information for Flow 6-AG
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
+
+Given I save the product information as: TestCase57529
+
+Given I call Shared Step 57532 (Product Characteristics - Aerosol & Gas available - Select Gas - Continue - Happy Path)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57529
+@pesticidequestion
+Scenario: [57533] Pesticide question shows in Additional Product Information for Flow 6-All
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Flea and Tick
+
+Given I save the product information as: TestCase57533
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57533
+@pesticidequestion
+Scenario: [57534] Pesticide question shows in Additional Product Information for Flow 6-LS
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bathroom and Tile Cleaner - Non-aerosol
+
+Given I save the product information as: TestCase57534
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57534
+@pesticidequestion
+Scenario: [57546] Pesticide question shows in Additional Product Information for Flow 2-A
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Algicide - Aerosol
+
+Given I save the product information as: TestCase57546
+
+Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57546
+@pesticidequestion
+Scenario: [66344] Pesticide question shows in Additional Product Information for 3-Pest
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wipes, Disinfecting control
+
+Given I save the product information as: TestCase66344
+
+Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66344
+@pesticidequestion
+Scenario: [66345] Pesticide question shows in Additional Product Information for Flow3-VOCSCA
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood finishing cloth, with Stain
+
+Given I save the product information as: TestCase66345
+
+Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+
+Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345

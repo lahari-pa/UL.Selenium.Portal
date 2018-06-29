@@ -52,7 +52,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void BrandNameExistsMyBrandsGrid(string brandName)
 		{
 			Report.Info("Fetching all brands saved in the My Brands grid");
-			var displayedBrands = new MyBrands().AllSavedBrands();
+			var displayedBrands = new MyBrands().SavedBrands();
 			Report.IsTrue(displayedBrands.Contains(brandName),
 				"The brand: " + brandName + " was not present in the My Brands grid. The saved brands are: " + string.Join(", ", displayedBrands.Select(x => "'" + x + "'").ToList()),
 				"The brand: " + brandName + " was present in the My Brands grid as expected");
@@ -79,7 +79,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var selMyBrands = new MyBrands();
 			var brandName = selMyBrands.BrandName(savedRowIndex);
 			Report.IsTrue(brandName == savedBrandName,
-				"The saved brand: '" + savedBrandName + "' was not appearing in the Brands Grid. The brands displayed are: " + string.Join(", ", selMyBrands.AllSavedBrands()),
+				"The saved brand: '" + savedBrandName + "' was not appearing in the Brands Grid. The brands displayed are: " + string.Join(", ", selMyBrands.SavedBrands()),
 				"The saved brand: " + savedBrandName + " was appearing in the Brands Grid as expected");
 		}
 		[StepDefinition(@"I click Edit in the My Brands grid for the last saved brand")]
@@ -118,7 +118,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I save the active brands list to context")]
 		public void SaveActiveBrandsListToContext()
 		{
-			var activeBrands = new MyBrands().AllActiveSavedBrands();
+			var activeBrands = new MyBrands().ActiveSavedBrands();
 			if (activeBrands.Count == 0)
 			{
 				Report.Failure("There were no active brands to save in the My Brands grid");

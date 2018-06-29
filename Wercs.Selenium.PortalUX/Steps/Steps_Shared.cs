@@ -49,7 +49,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
 				"AAA WERCS Test " + type.Replace("/", " "));
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
-			                     " in the Type of Product select field");
+								 " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -784,7 +784,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section +
-			                     @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+								 @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section,
 				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
@@ -846,7 +846,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(
 					table.Rows[0]["Personal Protection Equipment"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " +
-			                     table.Rows[0]["Autoignition Temperature"]);
+								 table.Rows[0]["Autoignition Temperature"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(
 				table.Rows[0]["Autoignition Temperature"]);
 			TestReport.StartStep(
@@ -855,17 +855,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(
 				table.Rows[0]["Minimum Ignition Energy"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-			                     table.Rows[0]["Viscosity"]);
+								 table.Rows[0]["Viscosity"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
-			                     table.Rows[0]["Appearance"]);
+								 table.Rows[0]["Appearance"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(
 				table.Rows[0]["Appearance"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " +
-			                     table.Rows[0]["Odor"]);
+								 table.Rows[0]["Odor"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(table.Rows[0]["Odor"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " +
-			                     table.Rows[0]["Odor Threshold"]);
+								 table.Rows[0]["Odor Threshold"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(
 				table.Rows[0]["Odor Threshold"]);
 			TestReport.StartStep(
@@ -1161,7 +1161,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (waterSolubility != null && waterSolubility != "N/A")
 			{
 				TestReport.StartStep("I set the Select the best Water Solubility description option to: " +
-				                     waterSolubility);
+									 waterSolubility);
 				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", waterSolubility);
 			}
 			else
@@ -1547,7 +1547,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.SetTheSectionOptionTo("Personal Protection Equipment Recommended", table.Rows[0]["Personal Protection Equipment"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " + table.Rows[0]["Autoignition Temperature"]);
-			MyNewProduct.SetTheSectionOptionTo("Autoignition Temperature",table.Rows[0]["Autoignition Temperature"]);
+			MyNewProduct.SetTheSectionOptionTo("Autoignition Temperature", table.Rows[0]["Autoignition Temperature"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: " + table.Rows[0]["Minimum Ignition Energy"]);
 			MyNewProduct.SetTheSectionOptionTo("Minimum Ignition Energy", table.Rows[0]["Minimum Ignition Energy"]);
@@ -1573,7 +1573,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Partition Coefficient I enter: " + table.Rows[0]["Partition Coefficient"]);
-			MyNewProduct.SetTheSectionOptionTo("Partition Coefficient",table.Rows[0]["Partition Coefficient"]);
+			MyNewProduct.SetTheSectionOptionTo("Partition Coefficient", table.Rows[0]["Partition Coefficient"]);
 
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -1810,7 +1810,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I should see the Retailer Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Retailer");
 			TestReport.StartStep("The selected retailers on the Retailer page should be:");
-			MyNewProductSteps.SelectedRetailersShouldBe(new List<string> {retailer});
+			MyNewProductSteps.SelectedRetailersShouldBe(new List<string> { retailer });
 			TestReport.StartStep("In the Retailer page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
@@ -2879,7 +2879,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
 
-		
+
 		[Given(@"I call Shared Step 57753 \(Create a New Registration via Register New Product \(expanded menu\)\)")]
 		public void GivenICallSharedStep57753CreateANewRegistrationViaRegisterNewProductExpandedMenu()
 		{
@@ -3021,6 +3021,38 @@ namespace Wercs.Selenium.PortalUX.Steps
 				table.Rows[0]["VOC for states"]);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 56799 \(Confirm Additional Product Information shows Pesticide question and its radio buttons\)")]
+		public void ICallSharedConfirmAdditionalProductInformationShowsPesticideQuestion()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			MyNewProduct.GivenIShouldSeeXPage("Additional Product Information");
+			var sections = new Table("Section");
+			sections.AddRow("Which one best describes your product");
+			TestReport.StartStep("I confirm the 'Which one best describes your product' question is shown");
+			MyNewProduct.CheckDisplayedSections("see", sections);
+			var buttons = new Table("Button");
+			buttons.AddRow("Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
+			buttons.AddRow("Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth");
+			buttons.AddRow("Product is not considered a pesticide product");
+			TestReport.StartStep("I confirm the radios showing in order are: Prevents, Destroys Repels Pests..', 'Regulates Plant Growth, Defoliates..', 'Product is not considered a pesticide product'");
+			MyNewProduct.CheckRadioButtonsInSectionAndOrder("Which one best describes your product", buttons);
+		}
+
+		[StepDefinition(@"I call Shared Step 57532 \(Product Characteristics - Aerosol & Gas available - Select Gas - Continue - Happy Path\)")]
+		public void ICallSharedProductCharacteristics_AerosolAndGasAvailable_SelectGas_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the Primary Physical State option to: Gas");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Gas");
+			TestReport.StartStep("I set the Secondary Physical State option to: Gas");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Gas");
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 	}
 }

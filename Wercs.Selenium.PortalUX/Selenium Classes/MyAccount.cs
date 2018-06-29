@@ -1080,11 +1080,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + row + "][.//span[text()='" + brandName + "']]//a[contains(@data-bind,'click: edit')]"), 2).TryClick();
 
 		}
-		public List<string> AllSavedBrands()
+		public List<string> SavedBrands()
 		{
 			return containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']//span[@data-bind='text:Phrase']"), 2).Select(x => x.Text).ToList();
 		}
-		public List<string> AllActiveSavedBrands()
+		public List<string> ActiveSavedBrands()
 		{
 			return containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[.//span[@class='plus-container' and text()='Yes']]//span[@data-bind='text:Phrase']"), 2).Select(x => x.Text).ToList();
 		}

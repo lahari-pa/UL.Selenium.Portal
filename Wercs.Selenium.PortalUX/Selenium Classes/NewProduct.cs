@@ -3433,11 +3433,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return vocAnalysisDateStatement == null ? null : vocAnalysisDateStatement.Text;
 		}
 
-		public int RadioButtonsInSection(string section)
+		public int RadioButtonCountInSection(string section)
 		{
 			var xpath = @"//div[./label[contains(text(), '" + section + "')]]/following-sibling::div//div[@class='radio']";
 			var radios = containerElement.FindElements(By.XPath(xpath), 2);
 			return radios == null ? 0 : radios.Count;
+		}
+
+		public List<string> RadioButtonsInSection(string section)
+		{
+			var xpath = @"//div[./label[contains(text(), '" + section + "')]]/following-sibling::div//div[@class='radio']//span";
+			var radios = containerElement.FindElements(By.XPath(xpath), 2);
+			if (radios.Count == 0)
+			{
+				Report.Failure("There were no radios showing in section: " + section);
+				return new List<string>();
+			}
+			return radios.Select(x => x.Text).ToList();
 		}
 
 		// Currently deals with select (option) and input (radio)
