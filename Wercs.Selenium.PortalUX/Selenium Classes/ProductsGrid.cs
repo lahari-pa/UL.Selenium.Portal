@@ -109,7 +109,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2) != null;
 		}
 
-		public bool ClickMoreFilers()
+		public bool ClickMoreFilters()
 		{
 			return containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2).TryClick();
 		}
@@ -338,6 +338,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			//el.ScrollElementIntoView();
 			return el.Text;
 		}
+
 		public bool GridNavigation(string navOption)
 		{
 			Report.Info("Navigating in the products grid with action - " + navOption);
@@ -366,6 +367,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			//navEl.ScrollElementIntoView();
 			return navEl.TryClick();
 		}
+
 		public IWebElement GridNavigationInput()
 		{
 			return containerElement.FindElement(By.XPath(".//input[@type='number']"), 2);
@@ -442,6 +444,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return inputEl.GetAttribute("value");
 		}
+
 		public bool RefreshContainer()
 		{
 			containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
@@ -560,6 +563,78 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public void ClickCancel()
 		{
 			this.containerElement.FindElement(By.XPath(".//button[text()='Cancel']"), 2).Click();
+		}
+	}
+
+	class MoreFilters : ProductsGrid
+	{
+		public List<string> Options(string filter)
+		{
+			IWebElement el;
+			switch (filter)
+			{
+				case "Brand":
+					el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
+					if (el == null)
+					{
+						return new List<string>();
+					}
+					return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "All Brands").ToList();
+				case "Retailer":
+					el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
+					if (el == null)
+					{
+						return new List<string>();
+					}
+					return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "All Retailers").ToList();
+				case "Additional Programs":
+					el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
+					if (el == null)
+					{
+						return new List<string>();
+					}
+					return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "None").ToList();
+				default:
+					return new List<string>();
+			}
+		}
+		public string Brand {
+			get
+			{
+				var el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
+				return el == null ? null : el.SelectedOption();
+			}
+			set
+			{
+				var el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
+				el?.Select(value);
+			}
+		}
+
+		public string Retailer {
+			get
+			{
+				var el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
+				return el == null ? null : el.SelectedOption();
+			}
+			set
+			{
+				var el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
+				el?.Select(value);
+			}
+		}
+
+		public string AdditionalPrograms {
+			get
+			{
+				var el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
+				return el == null ? null : el.SelectedOption();
+			}
+			set
+			{
+				var el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
+				el?.Select(value);
+			}
 		}
 	}
 }

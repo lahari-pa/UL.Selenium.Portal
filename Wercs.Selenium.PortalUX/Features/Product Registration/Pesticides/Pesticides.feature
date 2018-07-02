@@ -373,7 +373,6 @@ Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56547
 
-@pesticidequestion
 Scenario: [57512] Pesticide question shows in Additional Product Information for Flow 2L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -391,7 +390,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57512
-@pesticidequestion
+
 Scenario: [57516] Pesticide question shows in Additional Product Information for Flow 2-LS
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -409,7 +408,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57516
-@pesticidequestion
+
 Scenario: [57520] Pesticide question shows in Additional Product Information for Flow 2-LS-B
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -427,7 +426,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57520
-@pesticidequestion
+
 Scenario: [57522] Pesticide question shows in Additional Product Information for Flow 2-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -445,7 +444,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57522
-@pesticidequestion
+
 Scenario: [57527] Pesticide question shows in Additional Product Information for Flow 6-A
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -463,7 +462,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57527
-@pesticidequestion
+
 Scenario: [57529] Pesticide question shows in Additional Product Information for Flow 6-AG
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -481,7 +480,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57529
-@pesticidequestion
+
 Scenario: [57533] Pesticide question shows in Additional Product Information for Flow 6-All
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -499,7 +498,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57533
-@pesticidequestion
+
 Scenario: [57534] Pesticide question shows in Additional Product Information for Flow 6-LS
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -517,7 +516,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57534
-@pesticidequestion
+
 Scenario: [57546] Pesticide question shows in Additional Product Information for Flow 2-A
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -535,7 +534,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57546
-@pesticidequestion
+@tfs_design
 Scenario: [66344] Pesticide question shows in Additional Product Information for 3-Pest
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -555,7 +554,7 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66344
-@pesticidequestion
+@tfs_design
 Scenario: [66345] Pesticide question shows in Additional Product Information for Flow3-VOCSCA
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

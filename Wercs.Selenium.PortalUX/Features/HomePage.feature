@@ -76,7 +76,6 @@ And I should see the Subheading Product Information expanded in the main window
 And I should see the Subheading Alerts expanded in the main window
 And I should see the Subheading Announcements expanded in the main window
 
-
 #pass - staging 4.10
 Scenario: [55817] Product Information Panel - No Alerts/No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -290,7 +289,6 @@ And I click Accept Documents in the Bulk Actions window
 And I should see the header: Document Acceptance on the Document Acceptance window
 And UNDER DEVELOPMENT
 
-
 Scenario: [56227] Bulk Actions - Delete Products navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -309,7 +307,6 @@ Then the WERCSmart homepage should load
 Then I click More below the Alerts Panel
 And I should see the header: Message Center on the Message Center window
 And UNDER DEVELOPMENT
-
 
 Scenario: [64854] Navigation Settings
 
@@ -423,3 +420,26 @@ Given I enter the up arrow into the products grid page navigation input then the
 Given I click ... in the products grid
 
 Given I enter the down arrow into the products grid page navigation input then the correct page is shown
+
+# NB this test requires pre set up products with a Brand/ Product Line added in the 'The Product' section
+Scenario: [68388] More Filters - Brand
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+And I should see an option for More Filters
+
+Given I click More Fitlers in the products grid
+
+Given I select the SuperBrand(TM) option in the Brand More Filters drop down
+
+Given I click Row Actions for the first product returned
+
+And I click on the Row Action: Edit
+
+Given In the New Product page I click tab: Product Type
+
+And in the New Product page I click section: The Product
+
+Then Product Line or Brand (optional) should be showing the value: SuperBrand(TM)

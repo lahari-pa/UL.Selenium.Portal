@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -502,7 +503,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void DeleteAllProductsMatchingCriteria(string option, string value)
 		{
 			var productGrid = new ProductsGrid();
-			if (Report.IsTrue(productGrid.ClickMoreFilers(), "Failed to click the 'More Filters' option in the product grid", "Successfully clicked the 'More Filters' option in the product grid!", false, false))
+			if (Report.IsTrue(productGrid.ClickMoreFilters(), "Failed to click the 'More Filters' option in the product grid", "Successfully clicked the 'More Filters' option in the product grid!", false, false))
 			{
 				switch (option)
 				{
@@ -615,6 +616,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 					iteration.Remove(iteration.Length - 1), direction, pageNavigationValue),
 				string.Format("The active page correctly {0} by 1 after entering the '{1}' arrow into the page navigation box at position '{2}'",
 					iteration, direction, pageNavigationValue));
+		}
+
+		[StepDefinition(@"I click More Fitlers in the products grid")]
+		public void ClickMoreFilters()
+		{
+			Report.IsTrue(new ProductsGrid().ClickMoreFilters(),
+				"Failed to click 'More Filters' in the products grid",
+				"Successfully clicked 'More Filters' in the products grid");
+		}
+
+		[StepDefinition(@"I select the (.*) option in the (Brand|Retailer|Additional Programs) More Filters drop down")]
+		public void SetMoreFilterOption(string option, string filter)
+		{
+			var selMoreFilters = new MoreFilters();
+			Context.AddToContext("Filter Option", option);
+			Report.Info("Selecting option: " + option + " for filter drop down: " + filter);
+			if (filter == "Brand")
+			{
+				selMoreFilters.Brand = option;
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			if (filter == "Retailer")
+			{
+				selMoreFilters.Retailer = option;
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			if (filter == "Additional Programs")
+			{
+				selMoreFilters.AdditionalPrograms = option;
+				GeneralUtilities.Wait_for_load_finish();
+			}
 		}
 	}
 }
