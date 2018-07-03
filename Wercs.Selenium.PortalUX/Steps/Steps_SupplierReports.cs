@@ -56,5 +56,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
 		}
 
+		[Given(@"In the UPC Report for Specific Product with Retailer I search and select product: (.*)")]
+		public void GivenInTheUPCReportForSpecificProductWithRetailerISearchAndSelectProduct(string productCode)
+		{
+			Report.IsTrue(new SupplierReports().SelectKitThatContainsSpecificProduct(productCode),
+				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
+		}
+
+
 	}
 }

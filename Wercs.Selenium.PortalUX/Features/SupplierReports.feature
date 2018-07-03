@@ -13,7 +13,6 @@ Feature: Supplier Reports
 Background:
 Given I go to the WERCSmart Log in
 
-@tfstestcase:68420
 Scenario: [68420] List of Supplier Reports
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -30,7 +29,6 @@ Given under the supplier Reports menu I should see the following options
 | UPC Report for All Products with Retailer        |
 | UPC Report for Specific Product with Retailer    |
 
-@tfstestcase:68421
 Scenario: [68421] Active UPCs for Products Report
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -179,8 +177,8 @@ Then I confirm that the excel file saved as: 73229 contains the following column
 Scenario: [73227] Products and Recommended Use Report
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: Products and Recommended Use Report 
-Then In the Supplier Reports screen the current page should be: Products and Recommended Use Report 
+Given Under the Supplier Reports menu I choose: Products and Recommended Use Report
+Then In the Supplier Reports screen the current page should be: Products and Recommended Use Report
 Given In the Supplier Reports screen I click on the Download button
 Given I click on close in the Report Download dialog
 Given I confirm that an excel file is produced called Products and Recommended Use Report.xlsx and save as 73227
@@ -191,7 +189,25 @@ Then I confirm that the excel file saved as: 73227 contains the following column
 | RU Description |
 | RU Category    |
 | WPSID          |
-| Product Name   |  
+| Product Name   |
+
+Scenario: [73230] UPC Report for Specific Product with Retailer
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I click the Supplier Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: UPC Report for Specific Product with Retailer
+Then In the Supplier Reports screen the current page should be: UPC Report for Specific Product with Retailer
+Given In the UPC Report for Specific Product with Retailer I search and select product: 1459158
+Given In the Supplier Reports screen I click on the Download button
+Given I click on close in the Report Download dialog
+Given I confirm that an excel file is produced called UPC Report for Specific Product with Retailer.xlsx and save as 73230
+Then I confirm that the excel file saved as: 73230 contains the following columns:
+
+| Column       |
+| UPC          |
+| Retailer     |
+| Status       |
+| WPSID        |
+| Product Name |
 
 
 
