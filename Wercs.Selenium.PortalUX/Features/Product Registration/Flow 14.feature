@@ -31,7 +31,7 @@ Then I save the product information as: TestCase58736
 
 Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 
-Given I call Shared Step 37857 (Enter Physical Property - Solid)
+Given I call Shared Step 73223 (Enter Physical Property - Solid - Without Secondary Physical State)
 
 Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 
@@ -66,10 +66,6 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58736. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
-
-Given I call Shared 54796 (Purchase Summary)
-
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58736
 
 
@@ -85,13 +81,9 @@ Given I delete all products with UPC Number: saved as UPC58738
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer Wipes for Use on Domesticated Animals
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer for Use on Domesticated Animals
 
 Then I save the product information as: TestCase58738
-
-#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-
-Given I call Shared Step 00000 (Liquid Core Product - select Yes - Happy Path)
 
 Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
@@ -110,7 +102,7 @@ Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EP
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
-Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
+Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data): UN Number: 1992, Proper Shipping Name: Aerosols, Technical Name: Technical Test Name, Hazard Class: 2.1, Packing Group: None
 
 Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 
@@ -127,9 +119,5 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58738. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
-
-Given I call Shared 54796 (Purchase Summary)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58738

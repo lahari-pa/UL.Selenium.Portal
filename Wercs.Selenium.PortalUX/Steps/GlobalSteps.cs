@@ -74,7 +74,7 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal using data consent Account");
 			try
 			{
-				
+
 				var username = @"dataconsent.kxxyxunf@mailosaur.io";
 				var password = "Welcome1!";
 				GivenILogInWithEmailXAndPasswordY(username, password);
@@ -92,9 +92,8 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator into the WERCs Account");
 			try
 			{
-				
 				var username = @"AllRetailersProductsCompany.kxxyxunf@mailosaur.io"; /*@"AllRetailersProductsCompany.kxxyxunf@mailosaur.io";*/
-				//var username = @"dataconsentalwaysdisplay.kxxyxunf@mailosaur.io";
+																					 //var username = @"dataconsentalwaysdisplay.kxxyxunf@mailosaur.io";
 				var password = "Welcome1!";
 				GivenILogInWithEmailXAndPasswordY(username, password);
 
@@ -145,27 +144,27 @@ namespace WERCSmart
 		[StepDefinition(@"I log in with email: (.*) and password: (.*)")]
 		public void GivenILogInWithEmailXAndPasswordY(string username, string password)
 		{
-				var selLandingPage = new LandingPage();
-				if (selLandingPage.Wait_for_load(10))
-				{
-					Report.Info("Clicking 'Log In' on the Landing Page");
-					selLandingPage.Click_Login();
-				}
+			var selLandingPage = new LandingPage();
+			if (selLandingPage.Wait_for_load(10))
+			{
+				Report.Info("Clicking 'Log In' on the Landing Page");
+				selLandingPage.Click_Login();
+			}
 
-				var selLogin = new Login();
-				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
+			var selLogin = new Login();
+			Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
 
-				Report.Info("Entering Email: '" + username + "'");
-				selLogin.EmailField = username;
-				Report.Info("Entering Password: '" + password + "'");
-				selLogin.PasswordField = password;
-				Report.Info("Clicking login");
-				selLogin.Click_Login();
+			Report.Info("Entering Email: '" + username + "'");
+			selLogin.EmailField = username;
+			Report.Info("Entering Password: '" + password + "'");
+			selLogin.PasswordField = password;
+			Report.Info("Clicking login");
+			selLogin.Click_Login();
 
-				var selHomepage = new Homepage();
-				Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
-				GeneralUtilities.Wait_for_load_finish();
-				GivenIfAModalDialogOpensICloseIt();
+			var selHomepage = new Homepage();
+			Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
+			GeneralUtilities.Wait_for_load_finish();
+			GivenIfAModalDialogOpensICloseIt();
 		}
 
 

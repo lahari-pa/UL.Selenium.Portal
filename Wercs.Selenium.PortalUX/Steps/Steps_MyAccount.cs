@@ -801,5 +801,42 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Failure("Unable to 'Add New' for specified section: " + tab);
 		}
+
+		[StepDefinition(@"In the Company Information page I confirm the Company Information is correct")]
+		public void ThenInTheCompanyInformationPageIConfirmTheCompanyInformationIsCorrect(Table myTable)
+		{
+			var myCompanyInfo = new MyAccount_CompanyInfo();
+
+			foreach (var thisRow in myTable.Rows)
+			{
+				string companyName = thisRow["Company Name"];
+				Report.Info("Company Name = '" + companyName + "'");
+				string adminName = thisRow["Admin Name"];
+				Report.Info("Admin Name = '" + adminName + "'");
+				string emailAddress = thisRow["Email Address"];
+				Report.Info("Email Address = '" + emailAddress + "'");
+				string supplierType = thisRow["Supplier Type"];
+				Report.Info("Supplier Type = '" + supplierType + "'");
+				string country = thisRow["Country"].ToUpper();
+				Report.Info("Country = '" + country + "'");
+				string address = thisRow["Address"];
+				Report.Info("Address = '" + address + "'");
+				string city = thisRow["City"];
+				Report.Info("City = '" + city + "'");
+				string state = thisRow["State"];
+				Report.Info("State = '" + state + "'");
+				string zipCode = thisRow["Zip Code"];
+				Report.Info("Zip Code = '" + zipCode + "'");
+				string countryCode = thisRow["Country Code"];
+				Report.Info("Country Code = '" + countryCode + "'");
+				string companyPhone = thisRow["Phone"];
+				Report.Info("Phone = '" + companyPhone + "'");
+
+				Report.IsTrue(myCompanyInfo.Company_Information_Correct(companyName, adminName, emailAddress, supplierType,
+						country, address, city, state, zipCode, countryCode, companyPhone),
+					"Failed to Confirm Correct Company Information", "Correct Company Information Confirmed");
+			}
+		}
+
 	}
 }

@@ -1157,6 +1157,60 @@ testRunner.Given("I enter the down arrow into the user grid page navigation box 
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[68417] Company Information")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MyAccount")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_MyAccount")]
+        public virtual void _68417CompanyInformation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68417] Company Information", ((string[])(null)));
+#line 387
+this.ScenarioSetup(scenarioInfo);
+#line 389
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 391
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 393
+testRunner.Given("In the My Account page I navigate to the Company Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Company Name",
+                        "Admin Name",
+                        "Email Address",
+                        "Supplier Type",
+                        "Country",
+                        "Address",
+                        "City",
+                        "State",
+                        "Zip Code",
+                        "Country Code",
+                        "Phone"});
+            table30.AddRow(new string[] {
+                        "Visual",
+                        "Automated, Visual Company",
+                        "automatedcompany1.kxxyxunf@mailosaur.io",
+                        "Manufacturer",
+                        "United States",
+                        "31 British American Blvd",
+                        "Latham",
+                        "NY",
+                        "12110",
+                        "1",
+                        "555-555-5555"});
+#line 395
+testRunner.Then("In the Company Information page I confirm the Company Information is correct", ((string)(null)), table30, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

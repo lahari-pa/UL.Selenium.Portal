@@ -227,3 +227,5 @@ Then I confirm the name and ID for Packaging Type saved as: ThisPackaging appear
 Given I click Delete in the Delete Product pop up
 
 Then I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
+
+

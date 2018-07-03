@@ -160,6 +160,27 @@ Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classifi
 
 Given I call Shared Step 57678 (Confirm Volatile Organic Compounds (VOC OTC/CARB) step title - Select No to all questions - Happy Path)
 
+Given I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continue - Happy Path): 0.5
+
+Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
+
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Dick's Sporting Goods
+
+Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60546, container type: Aerosol Can and size: 9.99
+
+Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given I call Shared 60567 (Upload Product Label only) for section: Volatile Organic Compounds
+
+And in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
+| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60546
 
 
 Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol - RU001043

@@ -670,6 +670,199 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//a[contains(normalize-space(),'" + accountType + " Accounts')]/span"), 2).GetElementText();
 		}
 
+		public string ReturnCompanyName()
+		{
+			return containerElement.FindElement(By.XPath(".//h3[contains(@data-bind, 'companyName.field')]"), 2).GetValue();
+		}
+		public string ReturnAdminName()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'userName.field')]"), 2).GetValue();
+		}
+		public string ReturnEmailAddress()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'userEmail.field')]"), 2).GetValue();
+		}
+		public string ReturnSupplierType()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'selectedSupplierType.field')]"), 2).GetValue();
+		}
+		public string ReturnCountry()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'countryName()')]"), 2).GetValue();
+		}
+		public string ReturnAddress()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'address1.field')]"), 2).GetValue();
+		}
+		public string ReturnCity()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'city.field')]"), 2).GetValue();
+		}
+		public string ReturnState()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'state.field')]"), 2).GetValue();
+		}
+		public string ReturnZip()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'zipCode.field')]"), 2).GetValue();
+		}
+		public string ReturnCountryCode()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'countryCode.field')]"), 2).GetValue();
+		}
+		public string ReturnCompanyPhone()
+		{
+			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind, 'phone.field')]"), 2).GetValue();
+		}
+
+		public bool Company_Information_Correct(string companyName, string adminName, string emailAddress,
+			string supplierType, string country, string address, string city, string state, string zipCode,
+			string countryCode, string companyPhone)
+		{
+			Report.Info("Beginning Company_Information_Correct");
+
+			if (!Exists)
+			{
+				Report.Info("Failed to Open Company Information Page");
+				Report.Screenshot();
+				return false;
+			}
+
+			//Company Name
+			string myCompName = ReturnCompanyName();
+			if (myCompName != companyName)
+			{
+				Report.Info("Incorrect Company Name");
+				Report.Info("Expected: '" + companyName + "'");
+				Report.Info("Returned: '" + myCompName + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Company Name: '" + myCompName + "'");
+
+			//Admin Name
+			string myAdminName = ReturnAdminName();
+			if (myAdminName != adminName)
+			{
+				Report.Info("Incorrect Admin Name");
+				Report.Info("Expected: '" + adminName + "'");
+				Report.Info("Returned: '" + myAdminName + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Admin Name: '" + myAdminName + "'");
+
+			//Email Address
+			string myEmail = ReturnEmailAddress();
+			if (myEmail != emailAddress)
+			{
+				Report.Info("Incorrect Email Address");
+				Report.Info("Expected: '" + emailAddress + "'");
+				Report.Info("Returned: '" + myEmail + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Email Address: '" + myEmail + "'");
+
+			//Supplier Type
+			string mySupplier = ReturnSupplierType();
+			if (mySupplier != supplierType)
+			{
+				Report.Info("Incorrect Supplier Type");
+				Report.Info("Expected: '" + supplierType + "'");
+				Report.Info("Returned: '" + mySupplier + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Supplier Type: '" + mySupplier + "'");
+
+			//Country
+			string myCountry = ReturnCountry();
+			if (myCountry != country)
+			{
+				Report.Info("Incorrect Country");
+				Report.Info("Expected: '" + country + "'");
+				Report.Info("Returned: '" + myCountry + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Country: '" + myCountry + "'");
+
+			//Address
+			string myAddress = ReturnAddress();
+			if (myAddress != address)
+			{
+				Report.Info("Incorrect Address");
+				Report.Info("Expected: '" + address + "'");
+				Report.Info("Returned: '" + myAddress + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Address: '" + myAddress + "'");
+
+			//City
+			string myCity = ReturnCity();
+			if (myCity != city)
+			{
+				Report.Info("Incorrect City");
+				Report.Info("Expected: '" + city + "'");
+				Report.Info("Returned: '" + myCity + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct City: '" + myCity + "'");
+
+			//State
+			string myState = ReturnState();
+			if (myState != state)
+			{
+				Report.Info("Incorrect State");
+				Report.Info("Expected: '" + state + "'");
+				Report.Info("Returned: '" + myState + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct State: '" + myState + "'");
+
+			//Zip Code
+			string myZip = ReturnZip();
+			if (myZip != zipCode)
+			{
+				Report.Info("Incorrect Zip Code");
+				Report.Info("Expected: '" + zipCode + "'");
+				Report.Info("Returned: '" + myZip + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Zip Code: '" + myZip + "'");
+
+			//Country Code
+			string myCC = ReturnCountryCode();
+			if (myCC != countryCode)
+			{
+				Report.Info("Incorrect Country Code");
+				Report.Info("Expected: '" + countryCode + "'");
+				Report.Info("Returned: '" + myCC + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Country Code: '" + myCC + "'");
+
+			//Company Phone
+			string myPhone = ReturnCompanyPhone();
+			if (myPhone != companyPhone)
+			{
+				Report.Info("Incorrect Company Phone");
+				Report.Info("Expected: '" + companyPhone + "'");
+				Report.Info("Returned: '" + myPhone + "'");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Correct Company Phone: '" + myPhone + "'");
+
+			Report.Success("Company Information Correct");
+			return true;
+		}
 
 
 
