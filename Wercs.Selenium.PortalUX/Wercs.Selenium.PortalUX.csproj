@@ -168,6 +168,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FlashpointTestingTransportation.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Ingredients.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ingredients.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Kits.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -456,6 +461,10 @@
     <None Include="Features\FlashpointTestingTransportation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>FlashpointTestingTransportation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Ingredients.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Ingredients.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Kits.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

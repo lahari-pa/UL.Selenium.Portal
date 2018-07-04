@@ -210,4 +210,27 @@ Then I confirm that the excel file saved as: 73230 contains the following column
 | Product Name |
 
 
+#Not finished because no data is currently downloading
+Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I click the Supplier Reports icon in the QuickLinks Pane
+Given Under the Supplier Reports menu I choose: Sustainability Survey Eligibility–Health & Beauty
+Then In the Supplier Reports screen the current page should be: Sustainability Survey Eligibility–Health & Beauty
+Given In the Supplier Report page in the select Retailer dropdown I select: Target
+Given In the Supplier Reports screen I click on the Download button
+Given I click on close in the Report Download dialog
+Given I confirm that an excel file is produced called Sustainability Survey Eligibility–Health & Beauty.html and save as 75391
+Then I confirm that the excel file saved as: 75391 contains the following columns:
+
+| Column                                              |
+| WERCSmart ID                                        |
+| Product Name                                        |
+| Quantity of Active UPCs                             |
+| Transparency Indicator Ratio                        |
+| 3rd Party Formula Use Indicator                     |
+| Last Submission Date                                |
+| Current Submission Level                            |
+| Current Data Tier Consent for the Selected Retailer |  
+
+
 

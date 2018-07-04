@@ -63,6 +63,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
 		}
 
+		[Given(@"In the Supplier Report page in the select Retailer dropdown I select: (.*)")]
+		public void GivenInTheSupplierReportPageInTheSelectRetailerDropdownISelect(string retailer)
+		{
+			Report.IsTrue(new SupplierReports().SelectRetailer(retailer),
+				"Failed to select retailer: " + retailer, "Successfully selected retailer: " + retailer);
+		}
+
 
 	}
 }

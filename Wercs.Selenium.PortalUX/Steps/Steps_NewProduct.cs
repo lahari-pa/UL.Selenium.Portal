@@ -2743,6 +2743,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[When(@"In the ingredients table I click (CAS Number|Chemical Name) to order")]
+		public void WhenInTheIngredientsTableIClickCASNumberChemicalNameToOrder(string orderBy)
+		{
+			Report.IsTrue(new NewProduct().ClickCASNumberChemicalName(orderBy),
+				"Failed to click CAS Number/Chemical name", "Successfully clicked CAS Number/Chemical name");
+		}
+
+		[Then(@"In the ingredients table the ingredients should be in the following order")]
+		public void ThenInTheIngredientsTableTheIngredientsShouldBeInTheFollowingOrder(Table table)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			List<Ingredient> ListOfIngedients = thisNewProduct.GetIngredients();
+			int i = 0;
+			foreach (TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(ListOfIngedients[i].ComponentName.Contains(thisRow["Name"]),
+					"Expected to see: " + thisRow["Name"] + " but got: " + ListOfIngedients[i].ComponentName,
+					" As expected, ingredient: " + thisRow["Name"] + " is showing");
+				i++;
+			}
+		}
+
 
 	}
 }

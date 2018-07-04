@@ -4127,6 +4127,48 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.TryClick();
 		}
 
+		public bool ClickCASNumberChemicalName(string cASChemical)
+		{
+			if (cASChemical.ToLower().Contains("name"))
+			{
+				return containerElement
+					.FindElement(By.XPath(
+						"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'ChemicalName')]"))
+					.TryClick();
+			}
+			else
+			{
+				return containerElement
+					.FindElement(By.XPath(
+						"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'CasNumber')]"))
+					.TryClick();
+			}
+			
+		}
+
+		public List<Ingredient> GetIngredients()
+		{
+			List<Ingredient> Ingredients = new List<Ingredient>();
+			var rows = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//td[@class='component-name']]"), 2);
+			foreach (var thisRow in rows)
+			{
+				Ingredient thisIngredient = new Ingredient();
+				thisIngredient.ComponentName =
+					thisRow.FindElement(By.XPath(".//td[@class='component-name']//div[@class='chemical-name']")).Text;
+				thisIngredient.Percent =
+					thisRow.FindElement(By.XPath(".//td[@class='percent-comp']//input")).Text;
+				thisIngredient.PublicallyDisclosed =
+					thisRow.FindElement(By.XPath(".//td[@class='transparency']//input")).Checked();
+				thisIngredient.TradeSecret =
+					thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Checked();
+				thisIngredient.PublicName =
+					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select")).SelectedOption();
+				Ingredients.Add(thisIngredient);
+			}
+
+			return Ingredients;
+		}
+
 	}
 
 	public class ProductInformation

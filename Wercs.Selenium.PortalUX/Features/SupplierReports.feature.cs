@@ -708,6 +708,69 @@ testRunner.Then("I confirm that the excel file saved as: 73230 contains the foll
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[75391] Sustainability Survey Eligibility – Health & Beauty")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Supplier Reports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ForgottenPassword")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        public virtual void _75391SustainabilitySurveyEligibilityHealthBeauty()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[75391] Sustainability Survey Eligibility – Health & Beauty", ((string[])(null)));
+#line 214
+this.ScenarioSetup(scenarioInfo);
+#line 13
+this.FeatureBackground();
+#line 215
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 216
+testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 217
+testRunner.Given("Under the Supplier Reports menu I choose: Sustainability Survey Eligibility–Healt" +
+                    "h & Beauty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 218
+testRunner.Then("In the Supplier Reports screen the current page should be: Sustainability Survey " +
+                    "Eligibility–Health & Beauty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 219
+testRunner.Given("In the Supplier Report page in the select Retailer dropdown I select: Target", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 220
+testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 221
+testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 222
+testRunner.Given("I confirm that an excel file is produced called Sustainability Survey Eligibility" +
+                    "–Health & Beauty.html and save as 75391", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Column"});
+            table12.AddRow(new string[] {
+                        "WERCSmart ID"});
+            table12.AddRow(new string[] {
+                        "Product Name"});
+            table12.AddRow(new string[] {
+                        "Quantity of Active UPCs"});
+            table12.AddRow(new string[] {
+                        "Transparency Indicator Ratio"});
+            table12.AddRow(new string[] {
+                        "3rd Party Formula Use Indicator"});
+            table12.AddRow(new string[] {
+                        "Last Submission Date"});
+            table12.AddRow(new string[] {
+                        "Current Submission Level"});
+            table12.AddRow(new string[] {
+                        "Current Data Tier Consent for the Selected Retailer"});
+#line 223
+testRunner.Then("I confirm that the excel file saved as: 75391 contains the following columns:", ((string)(null)), table12, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

@@ -94,5 +94,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return MatchedEntry.TryClick();
 			}
 		}
+
+		public bool SelectRetailer(string retailer)
+		{
+			var selectionBox = containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"));
+			selectionBox.Select(retailer);
+			return selectionBox.SelectedOption() == retailer;
+		}
 	}
 }
