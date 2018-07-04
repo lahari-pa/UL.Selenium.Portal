@@ -218,7 +218,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyAccount.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Product Registration.feature.cs">
+    <Compile Include="Features\Product Registration\Product Registration.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Product Registration.feature</DependentUpon>
@@ -278,6 +278,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 29 - Beverage.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 3.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 3.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 30 - Grocery.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -322,6 +327,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Pesticides.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Product Registration\VOC\VOC.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VOC.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\RetailerPartners1.feature.cs">
       <AutoGen>True</AutoGen>
@@ -502,7 +512,7 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MyAccount.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Product Registration.feature">
+    <None Include="Features\Product Registration\Product Registration.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Product Registration.feature.cs</LastGenOutput>
     </None>
@@ -550,6 +560,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 29 - Beverage.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Product Registration\Flow 3.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 3.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Product Registration\Flow 30 - Grocery.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 30 - Grocery.feature.cs</LastGenOutput>
@@ -585,6 +599,10 @@
     <None Include="Features\Product Registration\Pesticides\Pesticides.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Pesticides.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\VOC\VOC.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>VOC.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\RetailerPartners.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -1803,7 +1803,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().DataAcceptanceScreenAppears(), "Data Acceptance page did not appear!", "As expected, Data Acceptance page loaded successfully!");
 		}
 
-		[Given(@"In the Data Acceptance page I select Yes, Agreed")]
+		[StepDefinition(@"I confirm error message is displayed: (.*)")]
+		public void ThenIConfirmErrorMessageIsDisplayedX(string errorMsg)
+		{
+			Report.IsTrue(new NewProduct().Data_Acceptance_Error(errorMsg), "Failed to confirm error message", "Confirmed error message displayed");
+		}
+
+
+		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
 			Report.IsTrue(new NewProduct().SelectYesAgreedRadio(), "Failed to select Yes Agreed", "Clicked Yes Agreed");

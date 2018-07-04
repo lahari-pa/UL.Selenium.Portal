@@ -1498,6 +1498,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public bool Data_Acceptance_Error(string errorMsg)
+		{
+			IWebElement myError =
+				containerElement.FindElement(By.XPath(".//p[@class='form-error']/span[text()='" + errorMsg + "']"), 2);
+
+			if (myError == null)
+			{
+				Report.Info("Failed to Find Error Message: '" + errorMsg + "'");
+				return false;
+			}
+			Report.Success("Message Displayed: '" + errorMsg + "'");
+			return true;
+		}
+
 
 		/// <summary>
 		/// Select all modes of transport that you've classified the product for checkbox options
@@ -1817,7 +1831,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
-			
+
 		}
 
 
@@ -3113,7 +3127,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var retList = new List<VocPercentForStates>();
 			//var container = containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'description') and contains(text(),'VOC content as weight percentage of total formula')]"), 2);
 			//var tableElement = container.FindElement(By.XPath(".//table[@class='table table-hover table-fixed']"), 2);
-			var tableElement = containerElement.FindElement(By.XPath("//*[@id='collapse5']/div/form/div[4]/div/div/table"), 2);
+			var tableElement = containerElement.FindElement(By.XPath("//div[text()='VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.']//parent::div//parent::div//following-sibling::table"), 2);
 			if (tableElement == null)
 			{
 				return null;
@@ -4073,10 +4087,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SetSubOptionInSection(string section, string subsection, string value)
 		{
 			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
-			            @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
-			            @"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
-			            @"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
-			            @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
+						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
+						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			var el = containerElement.FindElement(By.XPath(xPath), 2);
 
@@ -4164,7 +4178,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				default:
 					throw new Exception("Please provide header title");
 			}
-			
+
 		}
 
 		public List<Ingredient> GetIngredients()
