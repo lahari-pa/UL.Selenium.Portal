@@ -4127,21 +4127,42 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.TryClick();
 		}
 
-		public bool ClickCASNumberChemicalName(string cASChemical)
+		public bool IngredientOrderbY(string orderBy)
 		{
-			if (cASChemical.ToLower().Contains("name"))
+			switch (orderBy.ToLower())
 			{
-				return containerElement
-					.FindElement(By.XPath(
-						"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'ChemicalName')]"))
-					.TryClick();
-			}
-			else
-			{
-				return containerElement
-					.FindElement(By.XPath(
-						"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'CasNumber')]"))
-					.TryClick();
+				case "chemical name":
+					return containerElement
+						.FindElement(By.XPath(
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'ChemicalName')]"))
+						.TryClick();
+				case "cas number":
+					return containerElement
+						.FindElement(By.XPath(
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'CasNumber')]"))
+						.TryClick();
+				case "percent":
+					return containerElement
+						.FindElement(By.XPath(
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'Percent')]"))
+						.TryClick();
+				case "publicly disclosed":
+					return containerElement
+						.FindElement(By.XPath(
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'PubliclyDisclosed')]"))
+						.TryClick();
+				case "trade secret":
+					return containerElement
+						.FindElement(By.XPath(
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'TradeSecret')]"))
+						.TryClick();
+				case "public name":
+					return containerElement
+						.FindElement(By.XPath(
+							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'PublicName')]"))
+						.TryClick();
+				default:
+					throw new Exception("Please provide header title");
 			}
 			
 		}

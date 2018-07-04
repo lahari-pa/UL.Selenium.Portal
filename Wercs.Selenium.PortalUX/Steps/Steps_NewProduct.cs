@@ -2743,11 +2743,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[When(@"In the ingredients table I click (CAS Number|Chemical Name) to order")]
+		[When(@"In the ingredients table I click (CAS Number|Chemical Name|Percent|Publicly Disclosed|Trade Secret|Public Name) to order")]
 		public void WhenInTheIngredientsTableIClickCASNumberChemicalNameToOrder(string orderBy)
 		{
-			Report.IsTrue(new NewProduct().ClickCASNumberChemicalName(orderBy),
-				"Failed to click CAS Number/Chemical name", "Successfully clicked CAS Number/Chemical name");
+			Report.IsTrue(new NewProduct().IngredientOrderbY(orderBy),
+				"Failed to click " + orderBy, "Successfully clicked " + orderBy);
 		}
 
 		[Then(@"In the ingredients table the ingredients should be in the following order")]
