@@ -2772,26 +2772,72 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"for ingredient: (.*) the Trade Secret checkbox is (enabled|disabled)")]
-		public void ThenForIngredientTheTradeSecretCheckboxIsDisabledOrEndabled(string ingredient, string enabledOrDisabled)
+		[Then(@"for ingredient: (.*) the (Trade Secret|Publicly Disclosed) checkbox is (enabled|disabled)")]
+		public void ThenForIngredientTheTradeSecretCheckboxIsDisabledOrEndabled(string ingredient, string checkbox, string enabledOrDisabled)
 		{
 			NewProduct thisNewProduct = new NewProduct();
+			switch (checkbox)
+			{
+				case "Publicly Disclosed":
+					Report.IsTrue(
+						thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).PublicDisclosureEnabled ==
+						(enabledOrDisabled.ToLower() == "enabled"), "Public Disclosure checkbox is not showing as expected.",
+						"Public Disclosure is showing as expected.");
+					break;
+				case "Trade Secret":
+					Report.IsTrue(
+						thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).TradeSecretEnabled ==
+						(enabledOrDisabled.ToLower() == "enabled"), "Trade secret checkbox is not showing as expected.",
+						"Trade secret is showing as expected.");
+					break;
+				default:
+					throw new Exception("Please provide valid checkbox name");
+
+			}
 			
-			Report.IsTrue(
-				thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).TradeSecretEnabled ==
-				(enabledOrDisabled.ToLower() == "enabled"), "Trade secret checkbox is not showing as expected.",
-				"Trade secret is showing as expected.");
 		}
 
-		[Given(@"for ingredient: (.*) I set Public Disclosure checkbox to checked: (true|false)")]
-		public void GivenForIngredientISetPublicDisclosureCheckboxToCheckedTrueFalse(string ingredient, string checkedTrueFalse)
+		[Then(@"for ingredient: (.*) the Public Name selectbox is (enabled|disabled)")]
+		public void ThenForIngredientThePublicNameSelectboxIsEnabledDisabled(string ingredient, string enabledOrDisabled)
 		{
+			NewProduct thisNewProduct = new NewProduct();
+			Report.IsTrue(
+				thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).PublicNameEnabled ==
+				(enabledOrDisabled.ToLower() == "enabled"), "Public name select box is not showing as expected.",
+				"Public name select box is showing as expected.");
+		}
 
-			Report.IsTrue(new NewProduct().SetIngredientPubliclyDisclosed(ingredient, checkedTrueFalse=="true"),
-				"Failed to set public disclosure checkbox to: " + checkedTrueFalse + " for ingredient: " + ingredient,
-				"Successfully set public disclosure checkbox to: " + checkedTrueFalse);
+
+		[Given(@"for ingredient: (.*) I set (Public Disclosure|Trade Secret) checkbox to checked: (true|false)")]
+		public void GivenForIngredientISetPublicDisclosureCheckboxToCheckedTrueFalse(string ingredient, string checkbox, string checkedTrueFalse)
+		{
+			switch (checkbox)
+			{
+				case "Public Disclosure":
+					Report.IsTrue(new NewProduct().SetIngredientPubliclyDisclosed(ingredient, checkedTrueFalse == "true"),
+						"Failed to set public disclosure checkbox to: " + checkedTrueFalse + " for ingredient: " + ingredient,
+						"Successfully set public disclosure checkbox to: " + checkedTrueFalse);
+					break;
+				case "Trade Secret":
+					Report.IsTrue(new NewProduct().SetIngredientTradeSecret(ingredient, checkedTrueFalse == "true"),
+						"Failed to set public disclosure checkbox to: " + checkedTrueFalse + " for ingredient: " + ingredient,
+						"Successfully set public disclosure checkbox to: " + checkedTrueFalse);
+					break;
+				default:
+					throw new Exception("Please provide valid checkbox name");
+
+			}
+			
 
 		}
+
+		[Then(@"for ingredient: (.*) the Public Name selectbox shows names")]
+		public void ThenForIngredientThePublicNameSelectboxShowsNames(string ingredient)
+		{
+			Report.IsTrue(new NewProduct().GetIngredientPublicNameOptions(ingredient).Count > 1,
+				"No options are showing in public name select box", "options are showing in public name select box");
+		}
+
 
 
 

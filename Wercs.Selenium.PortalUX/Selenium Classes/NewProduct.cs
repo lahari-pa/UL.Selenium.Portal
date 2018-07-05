@@ -1977,7 +1977,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					var publicName = matchingrow.FindElement(By.XPath(".//td[@class='inci-name']//select"), 2);
 					publicName.Select(ingredient.PublicName);
 				}
-				
+
 				return true;
 			}
 
@@ -3945,6 +3945,40 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool SetIngredientTradeSecret(string chemicalName, bool checkedTrueFalse)
+		{
+			var tradeSecretInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
+			if (tradeSecretInput == null)
+			{
+				Report.Failure("Could not find the Trade Secret checkbox");
+				Report.Screenshot();
+				return false;
+			}
+			var ticked = tradeSecretInput.Checked();
+
+			if (ticked == checkedTrueFalse)
+			{
+				Report.Info("Trade Secret checkbox was already in the required state");
+				return true;
+			}
+			else
+			{
+				tradeSecretInput.TryClick();
+
+			}
+			ticked = tradeSecretInput.Checked();
+
+			if (ticked == checkedTrueFalse)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+
 		public bool ClickIngredientPubliclyDisclosedCheckbox(string chemicalName)
 		{
 			var publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
@@ -4244,27 +4278,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Checked();
 				thisIngredient.PublicName =
 					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select")).SelectedOption();
-				try
-				{
-					if (thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Enabled==false)
-					{
-						thisIngredient.TradeSecretEnabled = false;
-					}
-					else
-					{
-						thisIngredient.TradeSecretEnabled = true;
-					}
+				thisIngredient.TradeSecretEnabled = thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Enabled;
+				thisIngredient.PublicDisclosureEnabled = thisRow.FindElement(By.XPath(".//td[@class='transparency']//input")).Enabled;
+				thisIngredient.PublicNameEnabled =
+					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select")).Enabled;
 
-				}
-				catch (Exception e)
-				{
-					thisIngredient.TradeSecretEnabled = true;
-				}
-				
 				Ingredients.Add(thisIngredient);
 			}
 
 			return Ingredients;
+		}
+
+		public List<string> GetIngredientPublicNameOptions(string chemicalName)
+		{
+			return IngredientRow(chemicalName).FindElements(By.XPath(".//select/option")).Select(x=>x.Text).ToList();
 		}
 
 	}
@@ -4317,6 +4344,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool TradeSecret { get; set; }
 		public string PublicName { get; set; }
 		public bool TradeSecretEnabled { get; set; }
+		public bool PublicDisclosureEnabled { get; set; }
+
+		public bool PublicNameEnabled { get; set; }
 	}
 
 	public class VocLimits

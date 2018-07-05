@@ -101,3 +101,22 @@ Then in the Ingredients page I click Continue
 And I should see the Regulatory Information 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
+Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+Then I save the product information as: TestCase65470
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+  Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane        | 100     | false                | true       |            |
+Then for ingredient: Butane the Publicly Disclosed checkbox is disabled
+Then for ingredient: Butane the Public Name selectbox is disabled
+Given for ingredient: Butane I set Trade Secret checkbox to checked: false
+Then for ingredient: Butane the Publicly Disclosed checkbox is enabled
+Then for ingredient: Butane the Public Name selectbox is enabled
+Then for ingredient: Butane the Public Name selectbox shows names
+Then in the Ingredients page I click Continue
+And I should see the Regulatory Information 1 Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
