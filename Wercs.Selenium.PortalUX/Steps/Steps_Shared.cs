@@ -3190,6 +3190,35 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
+		/*
+		[Given(@"I call Shared Step 57514 \(Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path\)")]
+		public void GivenICallSharedStepProductCharacteristics_LiquidOnlyAvailable_EnterAllData_Continue_HappyPath()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			MyStepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "20");
+			MyStepsNewProduct.SetTheSectionOptionTo("pH", "7");
+			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
+			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
+			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "63");
+			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Open cup method");
+			MyStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+		*/
+		
+
+		[Given(@"I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue")]
+		public void GivenICallSharedStepIngredients_AddAnyChemical_DONotClickContinue(Table ingredientsTable)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Ingredients Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
+			TestReport.StartStep("I add the following ingredients:");
+			MyStepsNewProduct.AddIngredients(ingredientsTable);
+		}
 
 
 

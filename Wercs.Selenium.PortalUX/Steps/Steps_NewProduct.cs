@@ -2772,6 +2772,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Then(@"for ingredient: (.*) the Trade Secret checkbox is (enabled|disabled)")]
+		public void ThenForIngredientTheTradeSecretCheckboxIsDisabledOrEndabled(string ingredient, string enabledOrDisabled)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			
+			Report.IsTrue(
+				thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).TradeSecretEnabled ==
+				(enabledOrDisabled.ToLower() == "enabled"), "Trade secret checkbox is not showing as expected.",
+				"Trade secret is showing as expected.");
+		}
+
+		[Given(@"for ingredient: (.*) I set Public Disclosure checkbox to checked: (true|false)")]
+		public void GivenForIngredientISetPublicDisclosureCheckboxToCheckedTrueFalse(string ingredient, string checkedTrueFalse)
+		{
+
+			Report.IsTrue(new NewProduct().SetIngredientPubliclyDisclosed(ingredient, checkedTrueFalse=="true"),
+				"Failed to set public disclosure checkbox to: " + checkedTrueFalse + " for ingredient: " + ingredient,
+				"Successfully set public disclosure checkbox to: " + checkedTrueFalse);
+
+		}
+
+
 
 	}
 }

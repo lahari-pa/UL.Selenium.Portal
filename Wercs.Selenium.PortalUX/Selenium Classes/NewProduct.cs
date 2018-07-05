@@ -1965,6 +1965,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				// So we hopefully hgave our matching row now - so lets try and get the Precentage Concentration field
 				var concInput = matchingrow.FindElement(By.XPath(".//input[contains(@class,'percent-comp')]"), 2);
 				concInput.EnterText(ingredient.Percent);
+
+				var publicDisclosure = matchingrow.FindElement(By.XPath(".//td[@class='transparency']//input"), 2);
+				publicDisclosure.Check(ingredient.PublicallyDisclosed);
+
+				var tradeSecret = matchingrow.FindElement(By.XPath(".//td[@class='trade-secret']//input"), 2);
+				tradeSecret.Check(ingredient.TradeSecret);
+
+				if (ingredient.PublicName.Trim().Length > 0)
+				{
+					var publicName = matchingrow.FindElement(By.XPath(".//td[@class='inci-name']//select"), 2);
+					publicName.Select(ingredient.PublicName);
+				}
+				
 				return true;
 			}
 
@@ -3899,6 +3912,39 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public bool SetIngredientPubliclyDisclosed(string chemicalName, bool checkedTrueFalse)
+		{
+			var publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
+			if (publiclyDisclosedInput == null)
+			{
+				Report.Failure("Could not find the Publicly Disclosed checkbox");
+				Report.Screenshot();
+				return false;
+			}
+			var ticked = publiclyDisclosedInput.Checked();
+
+			if (ticked == checkedTrueFalse)
+			{
+				Report.Info("Publicly Disclosed checkbox was already in the required state");
+				return true;
+			}
+			else
+			{
+				publiclyDisclosedInput.TryClick();
+
+			}
+			ticked = publiclyDisclosedInput.Checked();
+
+			if (ticked == checkedTrueFalse)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public bool ClickIngredientPubliclyDisclosedCheckbox(string chemicalName)
 		{
 			var publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
@@ -4198,6 +4244,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Checked();
 				thisIngredient.PublicName =
 					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select")).SelectedOption();
+				try
+				{
+					if (thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Enabled==false)
+					{
+						thisIngredient.TradeSecretEnabled = false;
+					}
+					else
+					{
+						thisIngredient.TradeSecretEnabled = true;
+					}
+
+				}
+				catch (Exception e)
+				{
+					thisIngredient.TradeSecretEnabled = true;
+				}
+				
 				Ingredients.Add(thisIngredient);
 			}
 
@@ -4253,6 +4316,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool PublicallyDisclosed { get; set; }
 		public bool TradeSecret { get; set; }
 		public string PublicName { get; set; }
+		public bool TradeSecretEnabled { get; set; }
 	}
 
 	public class VocLimits
