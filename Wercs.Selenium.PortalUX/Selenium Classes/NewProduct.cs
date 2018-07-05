@@ -4361,6 +4361,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public Alert GetAlert()
+		{
+			Alert thisAlert = new Alert();
+
+			thisAlert.Title = containerElement
+				.FindElement(By.XPath(".//div[contains(@class,'alert')]/p[contains(@class, 'text-danger')]/strong"))
+				.Text;
+			thisAlert.SubTitle = containerElement
+				.FindElement(By.XPath(".//div[contains(@class,'alert')]/p[contains(@class, 'text-danger')]")).GetInnerText();
+
+			thisAlert.Text = containerElement
+				.FindElement(By.XPath(
+					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p"))
+				.Text;
+
+			return thisAlert;
+		}
+
+		
+
 	}
 
 	public class ProductInformation
@@ -4450,5 +4470,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 
 		}
+	}
+
+	public class Alert
+	{
+		public string Title { get; set; }
+		public string SubTitle { get; set; }
+		public string Text { get; set; }
 	}
 }

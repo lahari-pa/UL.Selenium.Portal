@@ -190,6 +190,28 @@ Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Con
 | WPS1437542    | 50      | false               | true        |            |
 | Butane        | 50      | false               | true        |            |
 Then in the Ingredients page I click Continue
-Then a warning popup dialog should appear with the message: Please be aware that your product contains a 3rd Party component that requires updating. We have sent a notification to your 3rd Party component supplier requesting that it update its component information relating to public disclosure of ingredients.
+Then a Warning popup dialog should appear with the message: Please be aware that your product contains a 3rd Party component that requires updating. We have sent a notification to your 3rd Party component supplier requesting that it update its component information relating to public disclosure of ingredients.
 And I should see the Regulatory Information 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
+
+Scenario: [71291] Product Ingredients contains a third party component that requires updating for public disclosure
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+Then I save the product information as: TestCase71291
+And I set the Secondary Physical State option to: Pellets
+And I set the When mixed with an equal amount of water field to: No
+And I set the Select the best Water Solubility description field to: Appreciable
+Then in the Product Characteristics page I click Continue
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+Given I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Wood dust     | 75.0    | false               | false       |            |
+| RED 4         | 20.0    | false               | false       |            |
+| Clothianidin  | 5.0     | false               | false       |            |
+Then in the Ingredients page I click Continue
+And I should see the Neonicotinoid Warning Page
+Then I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.
+Then in the Neonicotinoid Warning page I click Continue
+And I should see the Regulatory Information 1 Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291

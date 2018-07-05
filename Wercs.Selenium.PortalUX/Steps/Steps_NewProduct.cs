@@ -2887,18 +2887,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"a warning popup dialog should appear with the message: (.*)")]
-		public void ThenAWarningPopupDialogShouldAppearWithTheMessage(string message)
+		[Then(@"a (Danger & Warning|Warning) popup dialog should appear with the message: (.*)")]
+		public void ThenAWarningPopupDialogShouldAppearWithTheMessage(string title, string message)
 		{
 			ModalDialog thisModalDialog = new ModalDialog();
-			Report.IsTrue(thisModalDialog.GetTitle() == "Warning", "Title is not showing as warning",
-				"Title is showing as warning");
+			Report.IsTrue(thisModalDialog.GetTitle() == title, "Title is not showing as " + title,
+				"Title is showing as" + title);
 			Report.IsTrue(thisModalDialog.GetText() == message, "Expected message: " + message + " but got: " + thisModalDialog.GetText(),
 				"Title is showing as expected: " + message);
 			thisModalDialog.Click_OK();
 			Delay.Seconds(1);
 
 		}
+
+		[Then(@"I should see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
+		public void ThenIShouldSeeAnAlertWithTitleSubtitleText(string title, string subtitle, string text)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			Alert thisAlert = thisNewProduct.GetAlert();
+			Report.IsTrue(thisAlert.Title == title, "Title is not as expected", "Title matches");
+			Report.IsTrue(thisAlert.SubTitle.Contains(subtitle), "SubTitle is not as expected. Expected " + subtitle + " but got: " + thisAlert.SubTitle, "SubTitle matches");
+			Report.IsTrue(thisAlert.Text == text, "Text is not as expected. Expected " + text + " but got: " + thisAlert.Text, "Text matches");
+
+		}
+
 
 
 	}
