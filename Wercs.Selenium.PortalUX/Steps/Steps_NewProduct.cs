@@ -2852,6 +2852,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SelectIngredientPublicName(ingredient,publicName), "Failed to set public name for ingredient: " + ingredient + " to: " + publicName, "Successfully set public name for ingredient: " +ingredient + " to: " + publicName);
 		}
 
+		[Given(@"In the ingredients table the following column titles and inputs are showing")]
+		public void GivenInTheIngredientsTableTheFollowingColumnTitlesAndInputsAreShowing(Table table)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(
+					thisNewProduct.IngredientTableCheckInputByColumnTitle(thisRow["Column"], thisRow["Input"]),
+					"Column input did not apppear as expected: " + thisRow["Column"] + ":" + thisRow["Input"],
+					"Column input appeared as expected: " + thisRow["Column"] + ":" + thisRow["Input"]);
+			}
+		}
 
 	}
 }

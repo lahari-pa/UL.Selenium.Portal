@@ -4321,6 +4321,46 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public List<string> GetIngredientTableColumnHeaders()
+		{
+			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//thead//th"), 2).Select(x=>x.Text).ToList();
+		}
+
+		//checkbox, textbox, select
+		public bool IngredientTableCheckInputByColumnTitle(string columnTitle, string expectedInput)
+		{
+			var firstRow = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2).FirstOrDefault();
+			var cell = firstRow.FindElements(By.XPath(".//td")).FirstOrDefault();
+			switch (columnTitle)
+			{
+				case "Percent":
+					cell = firstRow.FindElement(By.XPath(".//td[@class='percent-comp']"));
+					break;
+				case "Publicly Disclosed?":
+					cell = firstRow.FindElement(By.XPath(".//td[@class='transparency']"));
+					break;
+				case "Trade Secret?":
+					cell = firstRow.FindElement(By.XPath(".//td[@class='trade-secret']"));
+					break;
+				case "Public Name":
+					cell = firstRow.FindElement(By.XPath(".//td[@class='inci-name']"));
+					break;
+				default:
+					throw new Exception("Please provide viable column names");
+			}
+			switch (expectedInput)
+			{
+				case "checkbox":
+					return cell.FindElements(By.XPath(".//input[@type='checkbox']")).Count > 0;
+				case "textbox":
+					return cell.FindElements(By.XPath(".//input[@type='text']")).Count > 0;
+				case "select":
+					return cell.FindElements(By.XPath(".//select")).Count > 0;
+				default:
+					throw new Exception("Please provide suitable expected input");
+			}
+		}
+
 	}
 
 	public class ProductInformation
