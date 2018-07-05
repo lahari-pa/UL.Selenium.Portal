@@ -632,7 +632,7 @@ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Regist
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 163
-testRunner.Then("I save the product information as: TestCase65451", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase65448", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 164
 testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -678,7 +678,80 @@ testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((
 testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 177
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase65451", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "ct: TestCase65448", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[63321] Product Ingredients contains a third party component that requires updati" +
+            "ng for public disclosure")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _63321ProductIngredientsContainsAThirdPartyComponentThatRequiresUpdatingForPublicDisclosure()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63321] Product Ingredients contains a third party component that requires updati" +
+                    "ng for public disclosure", ((string[])(null)));
+#line 180
+this.ScenarioSetup(scenarioInfo);
+#line 181
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 182
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 183
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 184
+testRunner.Then("I save the product information as: TestCase63321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 185
+testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 186
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 187
+testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table15.AddRow(new string[] {
+                        "WPS1437542",
+                        "50",
+                        "false",
+                        "true",
+                        ""});
+            table15.AddRow(new string[] {
+                        "Butane",
+                        "50",
+                        "false",
+                        "true",
+                        ""});
+#line 188
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table15, "Given ");
+#line 192
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 193
+testRunner.Then(@"a warning popup dialog should appear with the message: Please be aware that your product contains a 3rd Party component that requires updating. We have sent a notification to your 3rd Party component supplier requesting that it update its component information relating to public disclosure of ingredients.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 194
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 195
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase63321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

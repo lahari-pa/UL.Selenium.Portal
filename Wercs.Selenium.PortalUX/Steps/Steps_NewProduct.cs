@@ -2865,5 +2865,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Then(@"a warning popup dialog should appear with the message: (.*)")]
+		public void ThenAWarningPopupDialogShouldAppearWithTheMessage(string message)
+		{
+			ModalDialog thisModalDialog = new ModalDialog();
+			Report.IsTrue(thisModalDialog.GetTitle() == "Warning", "Title is not showing as warning",
+				"Title is showing as warning");
+			Report.IsTrue(thisModalDialog.GetText() == message, "Expected message: " + message + " but got: " + thisModalDialog.GetText(),
+				"Title is showing as expected: " + message);
+			thisModalDialog.Click_OK();
+			Delay.Seconds(1);
+
+		}
+
+
 	}
 }

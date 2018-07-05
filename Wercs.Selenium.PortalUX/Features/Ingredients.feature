@@ -160,7 +160,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
-Then I save the product information as: TestCase65451
+Then I save the product information as: TestCase65448
 Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
@@ -174,4 +174,22 @@ Given In the ingredients table the following column titles and inputs are showin
 | Public Name              | select   |
 Then in the Ingredients page I click Continue
 And I should see the Regulatory Information 1 Page
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
+
+
+Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+Then I save the product information as: TestCase63321
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I should see the Ingredients Page
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| WPS1437542    | 50      | false               | true        |            |
+| Butane        | 50      | false               | true        |            |
+Then in the Ingredients page I click Continue
+Then a warning popup dialog should appear with the message: Please be aware that your product contains a 3rd Party component that requires updating. We have sent a notification to your 3rd Party component supplier requesting that it update its component information relating to public disclosure of ingredients.
+And I should see the Regulatory Information 1 Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
