@@ -48,6 +48,7 @@ Given I select any Walmart Affiliate automatically selects all from that group, 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73917
 
+
 Scenario: [73920] Walmart Affiliates when Viewing My Retail Partners
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -71,3 +72,35 @@ Given I check that the following retailers are showing:
 Given I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view
 
 And I navigate to the home page
+
+
+Scenario: [74133] Walmart Product Type Electronics
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+#Test case calls shared 31053 but this is identical
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Electronic Equipment with Circuit Board Only
+
+Then I save the product information as: TestCase74133
+
+Given I call shared step 69687 (Additional Product Information - US, No(PL))
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+
+And I should see the Electronic Equipment Page
+
+And in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: Yes
+
+And in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: No
+
+And in the New Product page I click Continue
+
+Given the 'Select Retailers' window appears
+
+Given I check that Walmart and all of its affiliates are not available
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74133

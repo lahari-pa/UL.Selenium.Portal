@@ -2772,6 +2772,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I check that Walmart and all of its affiliates are not available")]
+		public void GivenICheckThatWalmartAndAllOfItsAffiliatesAreNotAvailable()
+		{
+			var retailerList = new SelectRetailers().GetListOfRetailers();
+
+			foreach (var myRetailer in retailerList)
+			{
+				Report.Info("Retailer = " + myRetailer);
+				if (myRetailer.Contains("Walmart"))
+				{
+					throw new Exception("Unsuccessful: retailer: '" + myRetailer + "' available");
+				}
+			}
+			Report.Success("Walmart and all of its affiliates are not available");
+			Report.Screenshot();
+			SelectRetailers myDone = new SelectRetailers();
+			TestReport.StartStep("In the Retailer page I click Done");
+			myDone.ClickDone();
+			Delay.Seconds(0.5);
+			Report.Screenshot();
+		}
+
 		[Then(@"for ingredient: (.*) the (Trade Secret|Publicly Disclosed) checkbox is (enabled|disabled)")]
 		public void ThenForIngredientTheTradeSecretCheckboxIsDisabledOrEndabled(string ingredient, string checkbox, string enabledOrDisabled)
 		{

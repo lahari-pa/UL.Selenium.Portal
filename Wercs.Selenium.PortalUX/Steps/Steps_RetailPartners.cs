@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Castle.Core.Internal;
+using EnvDTE;
 using ResourcePool;
 using SafewareReporting;
 using SafewareSeleniumUtilities;
@@ -868,7 +869,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		
+
 
 		[StepDefinition(@"I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view")]
 		public void AllWalMartAffiliatesNavigateToSamsClub()
@@ -931,7 +932,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				List<string> RowItems = ExcelUtils.Excel_GetColumn(ColumnIndex);
 
-				
+
 
 				foreach (string thisItem in RowItems)
 				{

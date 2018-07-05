@@ -531,7 +531,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			NewProduct myNewProduct = new NewProduct();
 			TestReport.StartStep(
 				"I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristics Leaching Procedure (TCLP)");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristic Leaching Procedure (TCLP)");
 			TestReport.StartStep("I set the Product has had TCLP testing; Report is available option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing; Report is available", "No");
 			TestReport.StartStep("I select No for all elements including Copper");

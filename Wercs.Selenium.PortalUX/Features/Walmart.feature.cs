@@ -181,15 +181,15 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         public virtual void _73920WalmartAffiliatesWhenViewingMyRetailPartners()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73920] Walmart Affiliates when Viewing My Retail Partners", ((string[])(null)));
-#line 51
+#line 52
 this.ScenarioSetup(scenarioInfo);
-#line 53
+#line 54
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 55
+#line 56
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 57
+#line 58
 testRunner.Given("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 59
+#line 60
 testRunner.Then("I should see the Retail Partners page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -216,13 +216,71 @@ testRunner.Then("I should see the Retail Partners page", ((string)(null)), ((Tec
             table2.AddRow(new string[] {
                         "Shoes.com",
                         "WM-SC"});
-#line 61
+#line 62
 testRunner.Given("I check that the following retailers are showing:", ((string)(null)), table2, "Given ");
-#line 71
+#line 72
 testRunner.Given("I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM\'" +
                     "S CLUB view", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 73
+#line 74
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[74133] Walmart Product Type Electronics")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Walmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Walmart")]
+        public virtual void _74133WalmartProductTypeElectronics()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74133] Walmart Product Type Electronics", ((string[])(null)));
+#line 77
+this.ScenarioSetup(scenarioInfo);
+#line 79
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 82
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 84
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Electronic Equipment with Circuit Board Only", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 86
+testRunner.Then("I save the product information as: TestCase74133", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 88
+testRunner.Given("I call shared step 69687 (Additional Product Information - US, No(PL))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 90
+testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 92
+testRunner.Given("I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No" +
+                    " to ALL With Copper)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 94
+testRunner.And("I should see the Electronic Equipment Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 96
+testRunner.And("in the Product Characteristics tab of the New Product Page for Contains Circuit B" +
+                    "oard I select: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 98
+testRunner.And("in the Product Characteristics tab of the New Product Page for Has a LCD or Plasm" +
+                    "a Display I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 100
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
+testRunner.Given("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 104
+testRunner.Given("I check that Walmart and all of its affiliates are not available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 106
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase74133", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
