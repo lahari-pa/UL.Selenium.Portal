@@ -3865,6 +3865,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool SelectIngredientPublicName(string chemicalName, string publicName)
+		{
+			var publicNameOption = IngredientRow(chemicalName).FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+			publicNameOption.Select(publicName);
+			if (publicNameOption.SelectedOption() == publicName)
+			{
+				return true;
+			}
+			Report.Failure("The ingredient row for: " + chemicalName + " was found but the Public Name option was not changed");
+			Report.Screenshot();
+			return false;
+		}
+
 		public IWebElement IngredientRow(string chemicalName)
 		{
 			var rows = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2);
@@ -4292,6 +4305,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> GetIngredientPublicNameOptions(string chemicalName)
 		{
 			return IngredientRow(chemicalName).FindElements(By.XPath(".//select/option")).Select(x=>x.Text).ToList();
+		}
+
+		public string GetPublicNameErrorMessage(string ingredient)
+		{
+			try
+			{
+				return IngredientRow(ingredient)
+					.FindElement(By.XPath(".//td[@class='inci-name']//p[@class='form-error']/span")).Text;
+			}
+			catch (Exception e)
+			{
+				return "";
+			}
+
 		}
 
 	}

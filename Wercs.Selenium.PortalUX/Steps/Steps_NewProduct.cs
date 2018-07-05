@@ -2838,7 +2838,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"No options are showing in public name select box", "options are showing in public name select box");
 		}
 
+		[Then(@"for ingredient: (.*) I should see an error below the public name column which reads: (.*)")]
+		public void ThenForIngredientIShouldSeeAnErrorBelowThePublicNameColumn(string ingredient, string error)
+		{
+			string actualError = new NewProduct().GetPublicNameErrorMessage(ingredient);
+			Report.IsTrue(actualError == error, "Expected error: " + error + " but got: " + actualError,
+				"Error was as expected: " + error);
+		}
 
+		[Then(@"for ingredient: (.*) I select Public Name: (.*)")]
+		public void ThenForIngredientISelectPublicName(string ingredient, string publicName)
+		{
+			Report.IsTrue(new NewProduct().SelectIngredientPublicName(ingredient,publicName), "Failed to set public name for ingredient: " + ingredient + " to: " + publicName, "Successfully set public name for ingredient: " +ingredient + " to: " + publicName);
+		}
 
 
 	}

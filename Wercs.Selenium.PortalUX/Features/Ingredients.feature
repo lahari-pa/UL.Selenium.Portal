@@ -120,3 +120,38 @@ Then for ingredient: Butane the Public Name selectbox shows names
 Then in the Ingredients page I click Continue
 And I should see the Regulatory Information 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
+
+#CLF - this is basically the same as 65470
+Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclosed & Public Name are not active
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+Then I save the product information as: TestCase65459
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+  Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane        | 100     | false                | true       |            |
+Then for ingredient: Butane the Publicly Disclosed checkbox is disabled
+Then for ingredient: Butane the Public Name selectbox is disabled
+Then in the Ingredients page I click Continue
+And I should see the Regulatory Information 1 Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
+
+Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Name is required, trade secret is not required
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+Then I save the product information as: TestCase65451
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+  Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane        | 100     | true                | false       |            |
+Then for ingredient: Butane the Trade Secret checkbox is disabled
+Then in the Ingredients page I click Continue
+Then for ingredient: Butane I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+Then for ingredient: Butane I select Public Name: n-Butane
+Then in the Ingredients page I click Continue
+And I should see the Regulatory Information 1 Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
