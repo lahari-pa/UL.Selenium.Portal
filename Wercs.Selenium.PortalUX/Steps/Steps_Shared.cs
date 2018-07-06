@@ -3220,7 +3220,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.AddIngredients(ingredientsTable);
 		}
 
-
 		[StepDefinition(
 			@"I call Shared 57539 \(Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path\)")]
 		public void ICallSharedProductCharacteristics_AerosolAndLiquidSelectAerosol_Continue_HappyPath()
@@ -3284,6 +3283,87 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Yes");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 57980 \(Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path\)")]
+		public void GivenICallSharedTransportationDetails1_YesOption_SelectIMDGLimitedQuantity()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the Product is Regulated for Transport field to: Yes");
+			MyNewProduct.SetTheSectionOptionTo("Product is Regulated for Transport", "Yes");
+			TestReport.StartStep(
+				"I set the Select all modes of transport that you've classified the product for field to: DOT");
+			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
+				"IMDG");
+			TestReport.StartStep(
+				"I set the Select all modes of transport that you've classified the product for field to: Shipping with limited quantity");
+			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
+				"Shipping with limited quantity");
+			TestReport.StartStep("In the Transportation Details 1 page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+		}
+
+		[StepDefinition(
+			@"I call Shared Step 57981 \(Transportation - IMDG UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue\)")]
+		public void
+			GivenICallSharedStepTransportation_IMDGUNStep_EnterUNSelectAerosolsNoneAddTechnicalNameClickContinue()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the UN Number field to: UN1950");
+			MyNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
+			Delay.Seconds(2);
+			TestReport.StartStep("I select 'Aerosols' option in section: Proper Shipping Name");
+			MyNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Aerosols");
+			Delay.Seconds(2);
+			TestReport.StartStep("I enter 'Technical Test Name' in section: Technical Name (if applicable)");
+			MyNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Test Name");
+			Delay.Seconds(2);
+			TestReport.StartStep("I select '2.1' in section: Hazard Class (select)");
+			MyNewProduct.SetTheSectionOptionTo("Hazard Class (select)", "2");
+			TestReport.StartStep("I select 'None' in section: Packing Group (select)");
+			MyNewProduct.SetTheSectionOptionTo("Packing Group (select)", "None");
+			TestReport.StartStep(
+				"In the International Marine (IMDG) Classification page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue(
+				"International Marine (IMDG) Classification");
+		}
+
+		[StepDefinition(
+			@"I call Shared 57978 \(Product Characteristics - All select Gas - Continue - Happy Path\)")]
+		public void ICallSharedProductCharacteristics_AllSelectGas_Continue_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			// Primary Physical State displays All
+			TestReport.StartStep("I should only see the following options for Primary Physical State: Aerosol, Gas, Liquid, Solid");
+			TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				"State"
+			});
+			produtTable.AddRow(new string[] {
+				"Aerosol"
+			});
+			produtTable.AddRow(new string[] {
+				"Gas"
+			});
+			produtTable.AddRow(new string[] {
+				"Liquid"
+			});
+			produtTable.AddRow(new string[] {
+				"Solid"
+			});
+			TestReport.StartStep("I set the Primary Physical State field to: Gas");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Gas");
+			TestReport.StartStep("I set the Secondary Physical State field to: Gas");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Gas");
+			TestReport.StartStep(
+				"If Section: Select the best Water Solubility description is visible, I select the first option");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
+				"Insoluble");
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 	}
 }
