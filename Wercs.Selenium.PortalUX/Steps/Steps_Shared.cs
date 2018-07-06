@@ -3221,6 +3221,69 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(
+			@"I call Shared 57539 \(Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path\)")]
+		public void ICallSharedProductCharacteristics_AerosolAndLiquidSelectAerosol_Continue_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			// Primary Physical State displays Aerosol and Liquid
+			TestReport.StartStep("I should only see the following options for Primary Physical State: Aerosol, Liquid");
+			TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				"State"
+			});
+			produtTable.AddRow(new string[] {
+				"Aerosol"
+			});
+			produtTable.AddRow(new string[] {
+				"Liquid"
+			});
+			TestReport.StartStep("I set the Primary Physical State field to: Aerosol");
+			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Aerosol");
+			TestReport.StartStep("I set the Secondary Physical State field to: Liquid spray");
+			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid spray");
+			TestReport.StartStep("I set the pH field to: 10.4");
+			MyNewProduct.SetTheSectionOptionTo("pH", "10.4");
+			TestReport.StartStep(
+				"If Section: Select the best Water Solubility description is visible, I select the first option");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
+				"Insoluble");
+			TestReport.StartStep(
+				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			MyNewProduct.SelectFirstOptionInSection(
+				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			//TestReport.StartStep("I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then field to: The product is classified as a D003 Hazardous Waste under RCRA.");
+			//MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "The product is classified as a D003 Hazardous Waste under RCRA.");
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
 
+		[StepDefinition(@"I call Shared 57932 \(Enter Regulatory Information - Yes to Prop 65\)")]
+		public void GivenICallSharedEnterRegulatoryInformation_YesToProp()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Information 1 Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
+			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
+			TestReport.StartStep(
+				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product, including container and/or packaging, contains a chemical on California's Prop 65 list",
+				"Yes");
+			TestReport.StartStep(
+				"Prop 65 warning is required: Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Prop 65 warning is required",
+				"Yes");
+			TestReport.StartStep(
+				"Prop 65 warning is present on the product's label: Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Prop 65 warning is present on the product's label",
+				"Yes");
+			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
 	}
 }
