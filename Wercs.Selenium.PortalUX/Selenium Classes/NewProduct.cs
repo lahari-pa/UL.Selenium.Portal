@@ -1972,7 +1972,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var tradeSecret = matchingrow.FindElement(By.XPath(".//td[@class='trade-secret']//input"), 2);
 				tradeSecret.Check(ingredient.TradeSecret);
 
-				if (ingredient.PublicName.Trim().Length > 0)
+				
+				if (ingredient.PublicName!=null && ingredient.PublicName.Trim().Length > 0)
 				{
 					var publicName = matchingrow.FindElement(By.XPath(".//td[@class='inci-name']//select"), 2);
 					publicName.Select(ingredient.PublicName);
@@ -3850,6 +3851,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return null;
 			}
 			return kellyExpirationDateInput.GetValue();
+		}
+
+		public string GetEPATableError()
+		{
+			try
+			{
+				return containerElement
+					.FindElement(
+						By.XPath(
+							@".//div[@class ='panel-heading']/following-sibling::table/following-sibling::div/p[@class='form-error']/span"),
+						15).Text;
+
+			}
+			catch (Exception e)
+			{
+				return "";
+			}
 		}
 
 		public bool SelectIngredientPublicName(string chemicalName)

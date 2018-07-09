@@ -2929,6 +2929,38 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(1);
 		}
 
+		[Then(@"in page Pesticide Details - State Registration Details I should see error: (.*)")]
+		public void ThenInPagePesticideDetails_StateRegistrationDetailsIShouldSeeError(string error)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			string actualError = thisNewProduct.GetEPATableError();
+			Report.IsTrue(actualError == error, "Expected error: " + error + " but got: " + actualError,
+				"As expected, error is showing as: " + error);
+		}
+
+		[Then(@"I should see the appropriate response depending on today's date")]
+		public void ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDate()
+		{
+			int year = DateTime.Now.Year;
+			NewProduct thisNewProduct = new NewProduct();
+			DateTime Oct1stthisYear = new DateTime(year, 10, 1);
+			if (DateTime.Now < Oct1stthisYear)
+			{
+				ThenInPagePesticideDetails_StateRegistrationDetailsIShouldSeeError(
+					"State IA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+			}
+			else
+			{
+				GivenIShouldSeeXPage("Transportation Details 1");
+				GivenInTheNewProductPageIClickSection("Pesticide Details - State Registration Details");
+				//If the current date is > Oct 1st confirm the Transportation Details 1 step is shown and Click the Pesticide Details -State Registration Details heading
+			}
+
+
+		}
+
+
+
 
 		[StepDefinition(@"I click the 'Use My Ingredients' button")]
 		public void ClickUseMyIngredients()

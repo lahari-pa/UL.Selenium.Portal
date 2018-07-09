@@ -218,6 +218,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyAccount.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EPA State Expiry Date Validation.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Product Registration.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -513,6 +518,10 @@
     <None Include="Features\MyAccount.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MyAccount.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EPA State Expiry Date Validation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Product Registration.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

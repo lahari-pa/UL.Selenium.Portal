@@ -2306,8 +2306,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
 			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
 			MyNewProductSteps.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
-			TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
-			MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
+			NewProduct thisNewProduct = new NewProduct();
+			if (thisNewProduct.OptionExists("Secondary Physical State"))
+			{
+				TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
+				MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
+			}
+			else
+			{
+				Report.Info("Secondary physical state is not showing");
+			}
+			
 			TestReport.StartStep(
 				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(
@@ -3365,5 +3374,129 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the Product Characteristics page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
+
+		[Given(@"I call Shared Step 63226 \(Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path\)")]
+		public void GivenICallSharedStepPesticideDate_YesRegistered_EnterEPANumberNotOnKelly_ClickContinue_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct MyNewProduct = new NewProduct();
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "Yes");
+			MyStepsNewProduct.IAddTheEPARegistrationNumber("TEST-1234");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - U.S.");
+		}
+
+		
+
+		DateTime GetRandomDate(DateTime dtStart, DateTime dtEnd)
+		{
+			Random rand = new Random();
+			int cdayRange = (dtEnd - dtStart).Days;
+			return dtStart.AddDays(rand.NextDouble() * cdayRange);
+		}
+
+
+		//CLF - turns out to work the data has be after today!
+		[Given(@"I call Shared Step 55819 \(EPA expiration date - enter current year - NOT Dec 31st\) for state: (.*)")]
+		public void GivenICallSharedStepEPAExpirationDate_EnterCurrentYear_NOTDecSt(string state)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct MyNewProduct = new NewProduct();
+
+			DateTime dtStart = DateTime.Now.AddDays(1);
+			int year = DateTime.Now.Year;
+			int month = 12;
+			int day = 30;
+
+			DateTime dtEnd = new DateTime(year, month, day);
+
+			DateTime dt = GetRandomDate(dtStart,dtEnd);
+
+			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+
+
+		}
+
+		//CLF - From test plans - Confirm that an error shows "State IA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable."
+		// in fact it seems that the date has to be after October 1st.
+		[Given(@"I call Shared Step 55820 \(EPA expiration date - enter next year - NOT Dec 31st\) for state: (.*)")]
+		public void GivenICallSharedStepEPAExpirationDate_EnterNextYear_NOTDecStForState(string state)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct MyNewProduct = new NewProduct();
+
+			int year = DateTime.Now.Year+1;
+			int month = 10;
+			int day = 1;
+
+			DateTime dtStart = new DateTime(year, month, day);
+
+			year = DateTime.Now.Year;
+			month = 12;
+			day = 30;
+
+			DateTime dtEnd = new DateTime(year, month, day);
+
+			DateTime dt = GetRandomDate(dtStart, dtEnd);
+
+			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+		}
+
+		[Given(@"I call Shared Step 55821 \(EPA expiration date - enter Dec 31st of Next year\) for state: (.*)")]
+		public void GivenICallSharedStep55821ExpirationDate31DecNextYear(string state)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct MyNewProduct = new NewProduct();
+
+			int year = DateTime.Now.Year + 1;
+			int month = 12;
+			int day = 31;
+
+			DateTime dt = new DateTime(year, month, day);
+
+			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+		}
+
+		[Given(@"I call Shared Step 55822 \(EPA expiration date - enter Dec 31st of Current year\) for state: (.*)")]
+		public void GivenICallSharedStep55822ExpirationDate31DecthisYear(string state)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NewProduct MyNewProduct = new NewProduct();
+
+			int year = DateTime.Now.Year;
+			int month = 12;
+			int day = 31;
+
+			DateTime dt = new DateTime(year, month, day);
+
+			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+		}
+
+
 	}
 }
