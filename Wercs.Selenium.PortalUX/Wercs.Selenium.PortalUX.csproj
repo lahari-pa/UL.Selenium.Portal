@@ -406,6 +406,7 @@
     <Compile Include="Selenium Classes\Login.cs" />
     <Compile Include="Selenium Classes\ModalDialog.cs" />
     <Compile Include="Selenium Classes\MyAccount.cs" />
+    <Compile Include="Selenium Classes\MyIngredientsModal.cs" />
     <Compile Include="Selenium Classes\NavigationBar.cs" />
     <Compile Include="Selenium Classes\NewProduct.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
@@ -430,6 +431,7 @@
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />
+    <Compile Include="Steps\Steps_MyIngredients.cs" />
     <Compile Include="Steps\Steps_PackagingTypes.cs" />
     <Compile Include="Steps\Steps_PaymentMethods.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />

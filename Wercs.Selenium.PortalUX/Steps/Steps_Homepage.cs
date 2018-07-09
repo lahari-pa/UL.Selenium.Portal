@@ -706,5 +706,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
+
+		[StepDefinition(@"I click the WERCSmart logo")]
+		public void ClickWercSmartLogo()
+		{
+			Report.IsTrue(new TopMenuBar().ClickWercsSmartLogo(),
+				"Failed to click the WERCSmart logo",
+				"Successfully clicked the WERCSmart logo");
+		}
 	}
 }

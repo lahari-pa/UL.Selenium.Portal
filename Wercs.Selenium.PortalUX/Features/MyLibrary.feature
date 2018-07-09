@@ -9,6 +9,8 @@
 @NewProduct
 @PackagingTypes
 @Brands
+@MyIngredients
+@ProductGrid
 @run_MyLibrary
 
 Feature: MyLibrary
@@ -228,4 +230,57 @@ Given I click Delete in the Delete Product pop up
 
 Then I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
 
+Scenario: [70539] Add an Ingredient (Basic) and remove
 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Given I navigate to the My Ingredients tab in the My Library page
+
+And I save the current list of ingredients in My Library to context
+
+Given I enter the text: wat into the My Ingredients search field
+
+And I select 'Water' from the smart search results
+
+And I save the ingredient I added in My Library to context
+
+Given I click Save in the My Ingredients tab
+
+Given I click the WERCSmart logo
+
+Then The home screen should load
+
+#This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
+Given I edit the product with ID: 1470688
+
+Given In the New Product page I click tab: Product Characteristics
+
+And in the New Product page I click section: Ingredients
+
+Given I click the 'Use My Ingredients' button
+
+Then I see the My Ingredients pop up
+
+Then I confirm that the component with name: Water is displayed in the My Ingredients pop up
+
+And I click OK in the My Ingredients dialog
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Given I navigate to the My Ingredients tab in the My Library page
+
+Given I remove the last ingredient I added to My Library
+
+Then I confirm the component name in the delete product popup matches the last ingredient I added
+
+Given I click: YES in the 'Remove Component from My Ingredients' pop up
+
+Then I confirm the ingredient I added to My Library has been removed from the ingredients grid

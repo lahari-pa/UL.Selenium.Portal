@@ -618,7 +618,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					iteration, direction, pageNavigationValue));
 		}
 
-		[StepDefinition(@"I click More Fitlers in the products grid")]
+		[StepDefinition(@"I click More Filters in the products grid")]
 		public void ClickMoreFilters()
 		{
 			Report.IsTrue(new ProductsGrid().ClickMoreFilters(),
@@ -647,6 +647,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 				selMoreFilters.AdditionalPrograms = option;
 				GeneralUtilities.Wait_for_load_finish();
 			}
+		}
+
+
+
+		[StepDefinition(@"I edit the product with ID: (.*)")]
+		public void EditFirstProductForRetailer(string id)
+		{
+			var selProductsGrid = new ProductsGrid();
+			selProductsGrid.ProductIdField = id;
+			Report.IsTrue(selProductsGrid.ClickActionsForFirstResultInGrid() && selProductsGrid.ClickRowAction("Edit"),
+				"Failed to edit the product with ID: " + id,
+				"Successfully edited the product with ID: " + id);
+			GeneralUtilities.Wait_for_load_finish();
 		}
 	}
 }

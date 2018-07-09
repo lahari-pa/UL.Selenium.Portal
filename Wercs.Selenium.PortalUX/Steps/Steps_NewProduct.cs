@@ -2930,5 +2930,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(@"I click the 'Use My Ingredients' button")]
+		public void ClickUseMyIngredients()
+		{
+			Report.IsTrue(new NewProduct().ClickUseMyIngredients(),
+				"Failed to click the 'Use My Ingredients' button",
+				"Successfully clicked the 'Use My Ingredients' button");
+		}
+
+		[StepDefinition(@"I click OK in the My Ingredients dialog")]
+		public void ClickOKMyIngredientsDialog()
+		{
+			Report.IsTrue(new MyIngredientsModal().Click_OK(), "Failed to click OK in the My Ingredients dialog", "Successfully clicked OK in the My Ingredients dialog");
+		}
+
+		[StepDefinition(@"I see the My Ingredients pop up")]
+		public void MyIngredientsDialogAppears()
+		{
+			Report.IsTrue(new MyIngredientsModal().Exists, "The My Ingredients pop up did not appear", "The My Ingredients pop up appeared as expected");
+		}
+
+		[StepDefinition(@"I confirm that the component with name: (.*) is displayed in the My Ingredients pop up")]
+		public void ComponentDisplayedMyIngredientsDialog(string name)
+		{
+			var selMyIngredientsModal = new MyIngredientsModal();
+			var myIngredients = selMyIngredientsModal.MyIngredients();
+			Report.IsTrue(myIngredients.Any(x => x.ComponentName == name),
+				"Ingredient with name: " + name + " was not displayed in the My Ingredients pop up",
+				"Ingredient with name: " + name + " was displayed in the My Ingredients pop up as expected.");
+		}
 	}
 }

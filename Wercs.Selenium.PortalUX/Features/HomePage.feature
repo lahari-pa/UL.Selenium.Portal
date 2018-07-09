@@ -430,7 +430,7 @@ Then The home screen should load
 
 And I should see an option for More Filters
 
-Given I click More Fitlers in the products grid
+Given I click More Filters in the products grid
 
 Given I select the SuperBrand(TM) option in the Brand More Filters drop down
 

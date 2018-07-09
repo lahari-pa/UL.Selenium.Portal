@@ -3075,6 +3075,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'description') and contains(text(),'weight percentage of total formula')]"), 2).Text;
 		}
 
+
+
 		public List<VocLimits> GetDisplayedVocLimits()
 		{
 
@@ -4049,6 +4051,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool ClickUseMyIngredients()
+		{
+			return containerElement.FindElement(By.XPath(".//button[starts-with(@data-bind,'click: openMyIngredients')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
 		public bool ClickAddARetailers()
 		{
 			try

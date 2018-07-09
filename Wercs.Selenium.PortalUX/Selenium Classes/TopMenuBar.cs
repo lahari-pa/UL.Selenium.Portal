@@ -74,7 +74,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						return true;
 					}
-					Delay.Seconds(Delay.SpeedFactor*1);
+					Delay.Seconds(Delay.SpeedFactor * 1);
 					i++;
 				}
 
@@ -91,6 +91,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool WercSmartLogoShowing()
 		{
 			return this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2) != null;
+		}
+
+		public bool ClickWercsSmartLogo()
+		{
+			return containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public bool NotificationIconShowing()

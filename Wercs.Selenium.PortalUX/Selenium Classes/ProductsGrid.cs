@@ -178,6 +178,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public bool ClickActions(int row)
+		{
+			return containerElement.FindElement(By.XPath(".//table//tbody//tr[" + row + "]//button[contains(@class,'ellipsis-button')]"), 2).TryClick();
+
+		}
+
 		public List<string> ActionsAvailableInDropDown()
 		{
 			var dropDownContents = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a"), 2);
@@ -610,7 +616,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				el?.Select(value);
 			}
 		}
-
 		public string Retailer {
 			get
 			{
@@ -623,7 +628,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				el?.Select(value);
 			}
 		}
-
 		public string AdditionalPrograms {
 			get
 			{
