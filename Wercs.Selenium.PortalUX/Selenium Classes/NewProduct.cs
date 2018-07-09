@@ -4376,10 +4376,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p"))
 				.Text;
 
+			thisAlert.Links = containerElement
+				.FindElements(By.XPath(
+					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p/a"))
+				.Select(x => new Mailosaur.Link() {
+					Href = x.GetAttribute("href"),
+					Text = x.Text
+				}).ToList();
+
 			return thisAlert;
 		}
 
-		
+		public bool ClickAlertLink(string linkText)
+		{
+			return containerElement
+				.FindElements(By.XPath(
+					".//div[contains(@class,\'alert\')]/p[contains(@class, \'text-danger\')]/following-sibling::p/a"))
+				.FirstOrDefault(x => x.Text == linkText).TryClick();
+		}
+
+
+
 
 	}
 
@@ -4477,5 +4494,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string Title { get; set; }
 		public string SubTitle { get; set; }
 		public string Text { get; set; }
+
+		public List<Mailosaur.Link> Links{get;set;}
 	}
 }

@@ -11,7 +11,6 @@
 @run_Flow24_Deodorant
 
 Feature: Flow 24 - Deodorant
-
 @tfs_design
 Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 

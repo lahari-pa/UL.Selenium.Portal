@@ -212,6 +212,7 @@ Given I add the following ingredients:
 Then in the Ingredients page I click Continue
 And I should see the Neonicotinoid Warning Page
 Then I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.
+Then on the Neonicotinoid Warning Page I should see a link with text: EPA website which links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators
 Then in the Neonicotinoid Warning page I click Continue
 And I should see the Regulatory Information 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291

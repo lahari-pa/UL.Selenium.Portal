@@ -832,10 +832,14 @@ testRunner.And("I should see the Neonicotinoid Warning Page", ((string)(null)), 
 #line 214
 testRunner.Then(@"I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 215
-testRunner.Then("in the Neonicotinoid Warning page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("on the Neonicotinoid Warning Page I should see a link with text: EPA website whic" +
+                    "h links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-p" +
+                    "ollinators", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 216
-testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("in the Neonicotinoid Warning page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 217
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 218
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase71291", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden

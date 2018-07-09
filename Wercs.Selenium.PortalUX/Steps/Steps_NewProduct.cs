@@ -2911,6 +2911,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[Then(@"on the Neonicotinoid Warning Page I should see a link with text: (.*) which links to page: (.*)")]
+		public void ThenOnTheNeonicotinoidWarningPageIShouldSeeALinkWithTextWhichLinksToPage(string linkText, string link)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			Alert thisAlert = thisNewProduct.GetAlert();
+			Report.IsTrue(thisAlert.Text.Contains(linkText), "Link text: " + linkText + " is not showing as expected.",
+				"Link text is showing as expected.");
+
+			Report.IsTrue(thisNewProduct.ClickAlertLink(linkText), "Failed to click link: " + linkText,
+				"Successfully clicked link.");
+			Delay.Seconds(3);
+			
+			Report.IsTrue(SeleniumBrowser.GetTabURLs().Contains(link), "Active page is not as expected",
+				"Active page is as expected");
+			SeleniumBrowser.CloseTabWithURL(link);
+			Delay.Seconds(1);
+		}
 
 
 	}
