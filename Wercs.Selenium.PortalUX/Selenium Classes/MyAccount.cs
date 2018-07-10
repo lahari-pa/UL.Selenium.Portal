@@ -1365,21 +1365,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 		public bool Navigation(string navOption)
 		{
-			var pagingControl = containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
-			if (pagingControl == null)
-			{
-				Report.Failure("Unable to find the paging control on grid navigation");
-				return false;
-			}
+
 			switch (navOption.ToLower())
 			{
 				case "next":
-					return pagingControl.FindElement(By.XPath(".//a[@class='page-link next']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+					return containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link next']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 				case "previous":
-					return pagingControl.FindElement(By.XPath(".//a[@class='page-link previous']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+					return containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link previous']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 			}
 			Report.Failure("Unable to apply navigation option: " + navOption);
 			return false;
+		}
+		public bool ClickPage(string page)
+		{
+			return containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link' and text()= '" + page + "']"), 2).TryClick();
 		}
 		public int GetPage(string position)
 		{
@@ -1395,13 +1394,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (position.ToLower() == "last")
 			{
-				var lastControl = containerElement.FindElements(By.XPath(".//div[@id='settings']//ul[@id='pagingControl']/li/a[@class='page-link']"), 2);
+				var lastControl = containerElement.FindElements(By.XPath(".//div[@id='settings']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
 				if (lastControl.Count == 0)
 				{
 					Report.Info("Last page is: 1");
 					return 1;
 				}
-				return Convert.ToInt32(lastControl.Last().Text);
+				return int.Parse(lastControl.Last().Text);
 			}
 			return 1;
 		}
@@ -1409,11 +1408,56 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElements(By.XPath(".//tbody[not(starts-with(@data-bind,'foreach:'))]/tr"), 2).Count;
 		}
-		public IngredientItem GetIngredient(int row)
+		public bool ClickPubliclyDisclosed(IngredientItem ingredient)
+		{
+			ClickPage(ingredient.Page.ToString());
+			return containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]/input[contains(@data-bind,'checked: isDisclosed')]"), 2).TryClick();
+		}
+		public bool ClickTradeSecret(IngredientItem ingredient)
+		{
+			ClickPage(ingredient.Page.ToString());
+			return containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]//input[contains(@data-bind,'checked: isTradeSecret')]"), 2).TryClick();
+		}
+		public List<IngredientItem> IngredientsLibrary()
+		{
+			var selMyIngredients = new MyIngredients();
+			var rList = new List<IngredientItem>();
+			selMyIngredients.ClickPage("1");
+			int pageNumber = selMyIngredients.GetPage("current");
+			var ingredientNumber = 1;
+			if (pageNumber == -1)
+			{
+				Report.Failure("Could not get current page number from the grid");
+				return rList;
+			}
+			int lastPageNumber = selMyIngredients.GetPage("last");
+			while (pageNumber <= lastPageNumber && pageNumber != -1)
+			{
+				var rowCount = selMyIngredients.IngredientCount();
+				for (int i = 1; i <= rowCount; i++)
+				{
+					rList.Add(selMyIngredients.GetIngredient(i, ingredientNumber));
+					ingredientNumber++;
+				}
+				if (selMyIngredients.NextDisabled())
+				{
+					Report.Info("Found a total of: " + rList.Count + " ingredients");
+					selMyIngredients.ClickPage("1");
+					return rList;
+				}
+				selMyIngredients.Navigation("next");
+				pageNumber = selMyIngredients.GetPage("current");
+			}
+			Report.Info("Found a total of: " + rList.Count + " ingredients");
+			selMyIngredients.ClickPage("1");
+			return rList;
+		}
+		public IngredientItem GetIngredient(int row, int id)
 		{
 			IngredientItem rIngredient = new IngredientItem();
 			rIngredient.Row = row;
 			rIngredient.Page = GetPage("current");
+			rIngredient.ID = id.ToString();
 			var tableRow = containerElement.FindElement(By.XPath(".//tbody/tr[" + row + "]"), 2);
 			if (tableRow == null)
 			{
@@ -1436,8 +1480,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			public string PublicName { get; set; }
 			public int Row { get; set; }
 			public int Page { get; set; }
+			// ID is for our reference to distinguish Ingredient items
+			// By date added (sequence of all ordered from smallest to largest page#, row#)
+			public string ID { get; set; }
 			public bool ClickRemove()
 			{
+				ClickPage(Page.ToString());
 				return containerElement.FindElement(By.XPath(".//tbody/tr[" + Row + "]//button[@title='Remove']"), 2).TryClick();
 			}
 		}

@@ -4,6 +4,7 @@ using System.Linq;
 using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using SafewareReporting;
 using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -37,32 +38,37 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				.FirstOrDefault(x => x.Text.Trim().ToLower() == option.ToLower()).TryClick();
 		}
 
-		public List<Ingredient> MyIngredients()
+		public List<MyIngredients.IngredientItem> MyIngredients()
 		{
-			var rIngredients = new List<Ingredient>();
+			var rIngredients = new List<MyIngredients.IngredientItem>();
+			int count = 1;
 			var rows = containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
 			foreach (var row in rows)
 			{
-				rIngredients.Add(new Ingredient() {
+				rIngredients.Add(new MyIngredients.IngredientItem() {
+					ID = count.ToString(),
 					CASNumber = row.FindElement(By.XPath(".//span[@data-bind='text: component.cas']")).Text,
-					ComponentName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']")).Text,
+					ChemicalName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']")).Text,
 					PublicallyDisclosed = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isDisclosed')]")).Checked(),
 					TradeSecret = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isTradeSecret')]")).Checked(),
 					PublicName = row.FindElement(By.XPath(".//select[contains(@data-bind,'value: publicName')]")).SelectedOption()
 				});
+				count++;
 			}
 			while (this.Click_Next())
 			{
 				rows = containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
 				foreach (var row in rows)
 				{
-					rIngredients.Add(new Ingredient() {
+					rIngredients.Add(new MyIngredients.IngredientItem() {
+						ID = count.ToString(),
 						CASNumber = row.FindElement(By.XPath(".//span[@data-bind='text: component.cas']")).Text,
-						ComponentName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']")).Text,
+						ChemicalName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']")).Text,
 						PublicallyDisclosed = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isDisclosed')]")).Checked(),
 						TradeSecret = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isTradeSecret')]")).Checked(),
 						PublicName = row.FindElement(By.XPath(".//select[contains(@data-bind,'value: publicName')]")).SelectedOption()
 					});
+					count++;
 				}
 			}
 			return rIngredients;

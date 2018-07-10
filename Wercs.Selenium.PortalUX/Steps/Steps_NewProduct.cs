@@ -2816,7 +2816,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					throw new Exception("Please provide valid checkbox name");
 
 			}
-			
+
 		}
 
 		[Then(@"for ingredient: (.*) the Public Name selectbox is (enabled|disabled)")]
@@ -2849,7 +2849,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					throw new Exception("Please provide valid checkbox name");
 
 			}
-			
+
 
 		}
 
@@ -2871,7 +2871,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Then(@"for ingredient: (.*) I select Public Name: (.*)")]
 		public void ThenForIngredientISelectPublicName(string ingredient, string publicName)
 		{
-			Report.IsTrue(new NewProduct().SelectIngredientPublicName(ingredient,publicName), "Failed to set public name for ingredient: " + ingredient + " to: " + publicName, "Successfully set public name for ingredient: " +ingredient + " to: " + publicName);
+			Report.IsTrue(new NewProduct().SelectIngredientPublicName(ingredient, publicName), "Failed to set public name for ingredient: " + ingredient + " to: " + publicName, "Successfully set public name for ingredient: " + ingredient + " to: " + publicName);
 		}
 
 		[Given(@"In the ingredients table the following column titles and inputs are showing")]
@@ -2922,7 +2922,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisNewProduct.ClickAlertLink(linkText), "Failed to click link: " + linkText,
 				"Successfully clicked link.");
 			Delay.Seconds(3);
-			
+
 			Report.IsTrue(SeleniumBrowser.GetTabURLs().Contains(link), "Active page is not as expected",
 				"Active page is as expected");
 			SeleniumBrowser.CloseTabWithURL(link);
@@ -2982,14 +2982,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new MyIngredientsModal().Exists, "The My Ingredients pop up did not appear", "The My Ingredients pop up appeared as expected");
 		}
 
-		[StepDefinition(@"I confirm that the component with name: (.*) is displayed in the My Ingredients pop up")]
-		public void ComponentDisplayedMyIngredientsDialog(string name)
+		[StepDefinition(@"I confirm My Ingredient saved as: (.*) appears in the Use My Ingredients popup")]
+		public void MyIngredientsDialogContainsIngredient(string savedAs)
 		{
-			var selMyIngredientsModal = new MyIngredientsModal();
-			var myIngredients = selMyIngredientsModal.MyIngredients();
-			Report.IsTrue(myIngredients.Any(x => x.ComponentName == name),
-				"Ingredient with name: " + name + " was not displayed in the My Ingredients pop up",
-				"Ingredient with name: " + name + " was displayed in the My Ingredients pop up as expected.");
+			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
+			var showingIngredients = new MyIngredientsModal().MyIngredients();
+			var matchID = showingIngredients.Where(x => x.ID == ingredient.ID);
+			if (matchID.Count() == 0)
+			{
+				Report.Failure("The saved ingredient at position: " + ingredient.ID + " was not found on the My Ingredients pop up");
+				return;
+			}
+			Report.IsTrue(matchID.FirstOrDefault().ChemicalName == ingredient.ChemicalName,
+				string.Format("The ingredient: '{0}' at position: '{1}' was not found in the My Ingredients pop up"
+					, ingredient.ChemicalName, ingredient.ID),
+				string.Format("The ingredient: '{0}' at position: '{1}' was found in the My Ingredients pop up as expected"
+					, ingredient.ChemicalName, ingredient.ID));
+			Report.IsTrue(matchID.FirstOrDefault().PublicallyDisclosed == ingredient.PublicallyDisclosed,
+				string.Format("The Publically Disclosed checkbox was not as expected for ingredient: '{0}' at position: '{1}'. Expected: '{2}'"
+					, ingredient.ChemicalName, ingredient.ID, ingredient.PublicallyDisclosed.ToString()),
+				string.Format("The Publically Disclosed checkbox was '{0}' as expected for ingredient: '{1}' at position: '{2}'"
+					, ingredient.PublicallyDisclosed.ToString(), ingredient.ChemicalName, ingredient.ID));
+			Report.IsTrue(matchID.FirstOrDefault().TradeSecret == ingredient.TradeSecret,
+				string.Format("The Trade Secret checkbox was not as expected for ingredient: '{0}' at position: '{1}'. Expected: '{2}'"
+					, ingredient.ChemicalName, ingredient.ID, ingredient.TradeSecret.ToString()),
+				string.Format("The Trade Secret checkbox was '{0}' as expected for ingredient: '{1}' at position: '{2}'"
+					, ingredient.TradeSecret.ToString(), ingredient.ChemicalName, ingredient.ID));
 		}
 	}
 }

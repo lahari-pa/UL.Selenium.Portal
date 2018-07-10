@@ -522,7 +522,7 @@ testRunner.Given("I enter the text: wat into the My Ingredients search field", (
 #line 249
 testRunner.And("I select \'Water\' from the smart search results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 251
-testRunner.And("I save the ingredient I added in My Library to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I save the ingredient I added in My Library to context as: water70539", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 253
 testRunner.Given("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 255
@@ -540,8 +540,8 @@ testRunner.Given("I click the \'Use My Ingredients\' button", ((string)(null)), 
 #line 268
 testRunner.Then("I see the My Ingredients pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 270
-testRunner.Then("I confirm that the component with name: Water is displayed in the My Ingredients " +
-                    "pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I confirm My Ingredient saved as: water70539 appears in the Use My Ingredients po" +
+                    "pup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 272
 testRunner.And("I click OK in the My Ingredients dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 274
@@ -551,15 +551,98 @@ testRunner.Given("In the My Account page I navigate to the My Library page", ((s
 #line 278
 testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 280
-testRunner.Given("I remove the last ingredient I added to My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I remove My Ingredient in My Library saved as: water70539", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 282
-testRunner.Then("I confirm the component name in the delete product popup matches the last ingredi" +
-                    "ent I added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm the component name in the delete product popup matches the ingredient s" +
+                    "aved as: water70539", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 284
 testRunner.Given("I click: YES in the \'Remove Component from My Ingredients\' pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 286
-testRunner.Then("I confirm the ingredient I added to My Library has been removed from the ingredie" +
-                    "nts grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm My Ingredient saved as: water70539 in My Library has been removed from " +
+                    "the grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[70556] Add an Ingredient (Trade secret) and remove")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MyLibrary")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PackagingTypes")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Brands")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyIngredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_MyLibrary")]
+        public virtual void _70556AddAnIngredientTradeSecretAndRemove()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70556] Add an Ingredient (Trade secret) and remove", ((string[])(null)));
+#line 288
+this.ScenarioSetup(scenarioInfo);
+#line 290
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 292
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 294
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 296
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 298
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 300
+testRunner.And("I save the current list of ingredients in My Library to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 302
+testRunner.Given("I enter the text: wat into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 304
+testRunner.And("I select \'Water\' from the smart search results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 306
+testRunner.And("I save the ingredient I added in My Library to context as: water70557", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 308
+testRunner.Given("I click the Trade Secret checkbox for My Ingredient saved as: water70557", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 310
+testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 312
+testRunner.Given("I click the WERCSmart logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 314
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 317
+testRunner.Given("I edit the product with ID: 1470688", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 319
+testRunner.Given("In the New Product page I click tab: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 321
+testRunner.And("in the New Product page I click section: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 323
+testRunner.Given("I click the \'Use My Ingredients\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 325
+testRunner.Then("I see the My Ingredients pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 327
+testRunner.And("I confirm My Ingredient saved as: water70557 appears in the Use My Ingredients po" +
+                    "pup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 329
+testRunner.And("I click OK in the My Ingredients dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 331
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 333
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 335
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 337
+testRunner.Given("I remove My Ingredient in My Library saved as: water70557", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 339
+testRunner.Then("I confirm the component name in the delete product popup matches the ingredient s" +
+                    "aved as: water70557", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 341
+testRunner.Given("I click: YES in the \'Remove Component from My Ingredients\' pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 343
+testRunner.Then("I confirm My Ingredient saved as: water70557 in My Library has been removed from " +
+                    "the grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

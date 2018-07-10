@@ -43,37 +43,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I save the current list of ingredients in My Library to context")]
 		public void AddMyIngredientsToContext()
 		{
-			var selMyIngredients = new MyIngredients();
-			var rList = new List<MyIngredients.IngredientItem>();
-			int pageNumber = selMyIngredients.GetPage("current");
-			if (pageNumber == -1)
-			{
-				Report.Failure("Could not get current page number from the grid");
-				return;
-			}
-			int lastPageNumber = selMyIngredients.GetPage("last");
-			while (pageNumber <= lastPageNumber && pageNumber != -1)
-			{
-				var rowCount = selMyIngredients.IngredientCount();
-				for (int i = 1; i <= rowCount; i++)
-				{
-					rList.Add(selMyIngredients.GetIngredient(i));
-				}
-				if (selMyIngredients.NextDisabled())
-				{
-					Report.Info("Adding a total of: " + rList.Count + " ingredients to test context");
-					Context.AddToContext("My Library Ingredients", rList);
-					return;
-				}
-				selMyIngredients.Navigation("next");
-				pageNumber = selMyIngredients.GetPage("current");
-			}
-			Report.Info("Adding a total of: " + rList.Count + " ingredients to test context");
-			Context.AddToContext("My Library Ingredients", rList);
+			Context.AddToContext("My Library Ingredients", new MyIngredients().IngredientsLibrary());
 		}
 
-		[StepDefinition(@"I save the ingredient I added in My Library to context")]
-		public void AddNewIngredientToContext()
+		// Note pre-requisite is saving list of ingredients to Context prior to searching - AddMyIngredientsToContext()
+		[StepDefinition(@"I save the ingredient I added in My Library to context as: (.*)")]
+		public void AddNewIngredientToContext(string savedAs)
 		{
 			var selMyIngredients = new MyIngredients();
 			var rList = new List<MyIngredients.IngredientItem>();
@@ -86,49 +61,55 @@ namespace Wercs.Selenium.PortalUX.Steps
 				return;
 			}
 			int lastPageNumber = selMyIngredients.GetPage("last");
+			int ingredientNumber = 1;
 			while (pageNumber <= lastPageNumber && pageNumber != -1)
 			{
 				var rowCount = selMyIngredients.IngredientCount();
 				for (int i = 1; i <= rowCount; i++)
 				{
-					rList.Add(selMyIngredients.GetIngredient(i));
+					rList.Add(selMyIngredients.GetIngredient(i, ingredientNumber));
+					ingredientNumber++;
 				}
 				if (selMyIngredients.NextDisabled())
 				{
 					Report.Info("There were a total of: " + rList.Count + " ingredients");
 					if (rList.Count == previous.Count + 1)
 					{
-						Context.AddToContext("My Ingredient Addition", rList.Except(previous).FirstOrDefault());
+						var result = rList.First(r => previous.All(p => r.ID != p.ID));
+						Context.AddToContext("My_Ingredient_" + savedAs, rList.First(r => previous.All(p => r.ID != p.ID)));
+						selMyIngredients.ClickPage("1");
 						return;
 					}
 					Report.Failure("Attempted to add the new ingredient to context, but the list of ingredients has not increased by 1");
+					selMyIngredients.ClickPage("1");
 					return;
 				}
 				selMyIngredients.Navigation("next");
 				pageNumber = selMyIngredients.GetPage("current");
 			}
 			Report.Info("A total of: " + rList.Count + " ingredients were found");
+			selMyIngredients.ClickPage("1");
 			if (rList.Count == previous.Count + 1)
 			{
-				Context.AddToContext("My Ingredient Addition", rList.Except(previous).FirstOrDefault());
+				Context.AddToContext("My Ingredient Addition", rList.First(r => previous.All(p => r.ID != p.ID)));
 				return;
 			}
 			Report.Failure("Attempted to add the new ingredient to context, but the list of ingredients has not increased by 1");
 		}
 
-		[StepDefinition("I remove the last ingredient I added to My Library")]
-		public void RemoveIngredientIAddedToMyLibraryFromContext()
+		[StepDefinition("I remove My Ingredient in My Library saved as: (.*)")]
+		public void RemoveIngredientIAddedToMyLibraryFromContext(string savedAs)
 		{
-			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My Ingredient Addition");
+			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
 			Report.IsTrue(ingredient.ClickRemove(),
 				"Failed to remove ingredient from My Library",
 				"Successfully removed ingredient from My Library");
 		}
 
-		[StepDefinition(@"I confirm the component name in the delete product popup matches the last ingredient I added")]
-		public void DeleteMyIngredientDialogComponentNameMatchesLastAdded()
+		[StepDefinition(@"I confirm the component name in the delete product popup matches the ingredient saved as: (.*)")]
+		public void DeleteMyIngredientDialogComponentNameMatchesLastAdded(string savedAs)
 		{
-			var savedIngredient = (MyIngredients.IngredientItem)Context.GetFromContext("My Ingredient Addition");
+			var savedIngredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
 			var actualName = new MyIngredientsModal().IngredientToRemove();
 			Report.IsTrue(actualName.Contains(savedIngredient.ChemicalName.Trim()),
 				"The 'Remove Component from My Ingredients' dialog message did not contain the Chemical name: " + savedIngredient.ChemicalName,
@@ -143,18 +124,33 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully clicked button: " + option + " in the 'Remove Component from My Ingredients' pop up");
 		}
 
-		[StepDefinition("I confirm the ingredient I added to My Library has been removed from the ingredients grid")]
-		public void ConfirmIngredientHasBeenRemoved()
+		[StepDefinition("I confirm My Ingredient saved as: (.*) in My Library has been removed from the grid")]
+		public void ConfirmIngredientHasBeenRemoved(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
-			var savedIngredient = (MyIngredients.IngredientItem)Context.GetFromContext("My Ingredient Addition");
+			var savedIngredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
 			TestReport.StartStep("Adding current list of ingredients to context");
-			AddMyIngredientsToContext();
+			var currentIngredients = new MyIngredients().IngredientsLibrary();
 			TestReport.StartStep("Checking the ingredient I originally added has now been removed from the grid");
-			var currentIngredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext("My Library Ingredients");
 			Report.IsTrue(!currentIngredients.Contains(savedIngredient),
-				"The removed ingredient was still showing in the ingredients grid",
-				"The removed ingredient was no longer showing in the ingredients grid");
+				"The removed ingredient: " + savedIngredient.ChemicalName + " was still showing in the ingredients grid at position: " + savedIngredient.ID,
+				"The removed ingredient: " + savedIngredient.ChemicalName + " was no longer showing in the ingredients grid at position: " + savedIngredient.ID + " as expected");
+		}
+
+		[StepDefinition(@"I click the Trade Secret checkbox for My Ingredient saved as: (.*)")]
+		public void SelectTradeSecretCheckbox(string savedAs)
+		{
+			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
+			if (new MyIngredients().ClickTradeSecret(ingredient))
+			{
+				Report.Success("Successfully clicked the Trade Secret checkbox for ingredient: " + ingredient.ChemicalName + " on row: " + ingredient.Row);
+				Report.Screenshot();
+				ingredient.TradeSecret = !ingredient.TradeSecret;
+				Context.AddToContext("My Ingredient Addition", ingredient);
+				return;
+			}
+			Report.Failure("Failed to click the Trade Secret checkbox for ingredient: " + ingredient.ChemicalName + " on row: " + ingredient.Row);
+			Report.Screenshot();
 		}
 	}
 }
