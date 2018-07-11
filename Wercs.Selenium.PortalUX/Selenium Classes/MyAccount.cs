@@ -1411,12 +1411,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickPubliclyDisclosed(IngredientItem ingredient)
 		{
 			ClickPage(ingredient.Page.ToString());
-			return containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]/input[contains(@data-bind,'checked: isDisclosed')]"), 2).TryClick();
+			return containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]//input[contains(@data-bind,'checked: isDisclosed')]"), 2).TryClick();
 		}
 		public bool ClickTradeSecret(IngredientItem ingredient)
 		{
 			ClickPage(ingredient.Page.ToString());
 			return containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]//input[contains(@data-bind,'checked: isTradeSecret')]"), 2).TryClick();
+		}
+		public string PublicName(IngredientItem ingredient)
+		{
+			ClickPage(ingredient.Page.ToString());
+			return containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]//select[contains(@data-bind,'value: publicName')]"), 2).SelectedOption();
+		}
+		public void EnterPublicName(IngredientItem ingredient, string name)
+		{
+			ClickPage(ingredient.Page.ToString());
+			containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]//select[contains(@data-bind,'value: publicName')]"), 2).Select(name);
 		}
 		public List<IngredientItem> IngredientsLibrary()
 		{
@@ -1449,6 +1459,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				pageNumber = selMyIngredients.GetPage("current");
 			}
 			Report.Info("Found a total of: " + rList.Count + " ingredients");
+			Report.Screenshot();
 			selMyIngredients.ClickPage("1");
 			return rList;
 		}
@@ -1458,17 +1469,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			rIngredient.Row = row;
 			rIngredient.Page = GetPage("current");
 			rIngredient.ID = id.ToString();
-			var tableRow = containerElement.FindElement(By.XPath(".//tbody/tr[" + row + "]"), 2);
+			var tableRow = containerElement.FindElement(By.XPath(".//div[@id='settings']//tbody/tr[" + row + "]"), 2);
 			if (tableRow == null)
 			{
 				return new IngredientItem();
 			}
-			var chemNameTest = tableRow.FindElement(By.XPath("//span[contains(@data-bind,'name')]"), 2);
-			rIngredient.ChemicalName = tableRow.FindElement(By.XPath("//span[@data-bind='text: component.name']"), 2).Text;
-			rIngredient.CASNumber = tableRow.FindElement(By.XPath("//span[@data-bind='text: component.cas']"), 2).Text;
-			rIngredient.PublicallyDisclosed = tableRow.FindElement(By.XPath("//input[contains(@data-bind, 'checked: isDisclosed')]"), 2).Checked();
-			rIngredient.TradeSecret = tableRow.FindElement(By.XPath("//input[contains(@data-bind, 'checked: isTradeSecret')]"), 2).Checked();
-			rIngredient.PublicName = tableRow.FindElement(By.XPath("//select[contains(@data-bind,'value: publicName')]"), 2).SelectedOption();
+			rIngredient.ChemicalName = tableRow.FindElement(By.XPath(".//span[@data-bind='text: component.name']"), 2).Text;
+			rIngredient.CASNumber = tableRow.FindElement(By.XPath(".//span[@data-bind='text: component.cas']"), 2).Text;
+			rIngredient.PublicallyDisclosed = tableRow.FindElement(By.XPath(".//input[contains(@data-bind, 'checked: isDisclosed')]"), 2).Checked();
+			rIngredient.TradeSecret = tableRow.FindElement(By.XPath(".//input[contains(@data-bind, 'checked: isTradeSecret')]"), 2).Checked();
+			rIngredient.PublicName = tableRow.FindElement(By.XPath(".//select[contains(@data-bind,'value: publicName')]"), 2).SelectedOption();
 			return rIngredient;
 		}
 		public class IngredientItem : MyIngredients
@@ -1480,13 +1490,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			public string PublicName { get; set; }
 			public int Row { get; set; }
 			public int Page { get; set; }
-			// ID is for our reference to distinguish Ingredient items
-			// By date added (sequence of all ordered from smallest to largest page#, row#)
+			// ID is for our reference to distinguish Ingredient items (sequence ordered from smallest to largest page#, row#)
 			public string ID { get; set; }
 			public bool ClickRemove()
 			{
 				ClickPage(Page.ToString());
 				return containerElement.FindElement(By.XPath(".//tbody/tr[" + Row + "]//button[@title='Remove']"), 2).TryClick();
+			}
+			public bool ClickPubliclyDisclosed()
+			{
+				ClickPage(Page.ToString());
+				return containerElement.FindElement(By.XPath(".//tbody/tr[" + Row + "]/input[contains(@data-bind,'checked: isDisclosed')]"), 2).TryClick();
+			}
+			public bool ClickTradeSecret()
+			{
+				ClickPage(Page.ToString());
+				return containerElement.FindElement(By.XPath(".//tbody/tr[" + Row + "]//input[contains(@data-bind,'checked: isTradeSecret')]"), 2).TryClick();
 			}
 		}
 	}

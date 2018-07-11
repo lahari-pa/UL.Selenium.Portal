@@ -303,9 +303,9 @@ Given I enter the text: wat into the My Ingredients search field
 
 And I select 'Water' from the smart search results
 
-And I save the ingredient I added in My Library to context as: water70557
+And I save the ingredient I added in My Library to context as: water70556
 
-Given I click the Trade Secret checkbox for My Ingredient saved as: water70557
+Given I click the Trade Secret checkbox for My Ingredient saved as: water70556
 
 And I click Save in the My Ingredients tab
 
@@ -324,7 +324,7 @@ Given I click the 'Use My Ingredients' button
 
 Then I see the My Ingredients pop up
 
-And I confirm My Ingredient saved as: water70557 appears in the Use My Ingredients popup
+And I confirm My Ingredient saved as: water70556 appears in the Use My Ingredients popup
 
 And I click OK in the My Ingredients dialog
 
@@ -334,10 +334,74 @@ Given In the My Account page I navigate to the My Library page
 
 Given I navigate to the My Ingredients tab in the My Library page
 
-Given I remove My Ingredient in My Library saved as: water70557
+Given I remove My Ingredient in My Library saved as: water70556
 
-Then I confirm the component name in the delete product popup matches the ingredient saved as: water70557
+Then I confirm the component name in the delete product popup matches the ingredient saved as: water70556
 
 Given I click: YES in the 'Remove Component from My Ingredients' pop up
 
-Then I confirm My Ingredient saved as: water70557 in My Library has been removed from the grid
+Then I confirm My Ingredient saved as: water70556 in My Library has been removed from the grid
+
+Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Given I navigate to the My Ingredients tab in the My Library page
+
+And I save the current list of ingredients in My Library to context
+
+# Test specifies 'type 50-00' and select Formaldehyde but this is returning all results containing sequence '500' in the CAS,
+# ordererd numerically, disregarding the dash.
+# Suggest adding better 'search functionality' tests later.
+# There is a lot of junk data, and the results for 50-00-0 search are not displaying the Public Name/ synonym options.
+# Have reported to Amanda. Use search by name for now.
+Given I enter the text: Formald into the My Ingredients search field
+
+And I select 'Formaldehyde' from the smart search results
+
+And I save the ingredient I added in My Library to context as: formaldehyde70567
+
+Given I click the Publicly Disclosed checkbox for My Ingredient saved as: formaldehyde70567
+
+Given I set the Public Name to be: Formaldehyde solution for My Ingredient saved as: formaldehyde70567
+
+And I click Save in the My Ingredients tab
+
+Given I click the WERCSmart logo
+
+Then The home screen should load
+
+#This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
+Given I edit the product with ID: 1470688
+
+Given In the New Product page I click tab: Product Characteristics
+
+And in the New Product page I click section: Ingredients
+
+Given I click the 'Use My Ingredients' button
+
+Then I see the My Ingredients pop up
+
+And I confirm My Ingredient saved as: formaldehyde70567 appears in the Use My Ingredients popup
+
+And I click OK in the My Ingredients dialog
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Given I navigate to the My Ingredients tab in the My Library page
+
+Given I remove My Ingredient in My Library saved as: formaldehyde70567
+
+Then I confirm the component name in the delete product popup matches the ingredient saved as: formaldehyde70567
+
+Given I click: YES in the 'Remove Component from My Ingredients' pop up
+
+Then I confirm My Ingredient saved as: formaldehyde70567 in My Library has been removed from the grid

@@ -968,7 +968,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			NewProduct selNewProduct = new NewProduct();
 			Delay.Seconds(1);
 			Report.IsTrue(selNewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
-			Delay.Seconds(5);
 			GivenIShouldSeeXPage(section);
 		}
 
@@ -2968,6 +2967,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().ClickUseMyIngredients(),
 				"Failed to click the 'Use My Ingredients' button",
 				"Successfully clicked the 'Use My Ingredients' button");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 		[StepDefinition(@"I click OK in the My Ingredients dialog")]
@@ -3008,6 +3008,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 					, ingredient.ChemicalName, ingredient.ID, ingredient.TradeSecret.ToString()),
 				string.Format("The Trade Secret checkbox was '{0}' as expected for ingredient: '{1}' at position: '{2}'"
 					, ingredient.TradeSecret.ToString(), ingredient.ChemicalName, ingredient.ID));
+			Report.IsTrue(matchID.FirstOrDefault().PublicName == ingredient.PublicName,
+				string.Format("The Public Name was not as expected for ingredient: '{0}' at position: '{1}'. Expected: '{2}'"
+					, ingredient.ChemicalName, ingredient.ID, ingredient.PublicName),
+				string.Format("The Public Name was '{0}' as expected for ingredient: '{1}' at position: '{2}'"
+					, ingredient.PublicName, ingredient.ChemicalName, ingredient.ID));
 		}
 	}
 }

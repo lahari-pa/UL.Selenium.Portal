@@ -137,20 +137,53 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The removed ingredient: " + savedIngredient.ChemicalName + " was no longer showing in the ingredients grid at position: " + savedIngredient.ID + " as expected");
 		}
 
-		[StepDefinition(@"I click the Trade Secret checkbox for My Ingredient saved as: (.*)")]
-		public void SelectTradeSecretCheckbox(string savedAs)
+		[StepDefinition(@"I click the (Trade Secret|Publicly Disclosed) checkbox for My Ingredient saved as: (.*)")]
+		public void SelectTradeSecretCheckbox(string checkbox, string savedAs)
 		{
 			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
-			if (new MyIngredients().ClickTradeSecret(ingredient))
+			if (checkbox == "Trade Secret")
 			{
-				Report.Success("Successfully clicked the Trade Secret checkbox for ingredient: " + ingredient.ChemicalName + " on row: " + ingredient.Row);
+				if (new MyIngredients().ClickTradeSecret(ingredient))
+				{
+					Report.Success("Successfully clicked the Trade Secret checkbox for ingredient: " + ingredient.ChemicalName + " on row: " + ingredient.Row);
+					Report.Screenshot();
+					ingredient.TradeSecret = !ingredient.TradeSecret;
+					Context.AddToContext("My_Ingredient_" + savedAs, ingredient);
+					return;
+				}
+				Report.Failure("Failed to click the Trade Secret checkbox for ingredient: " + ingredient.ChemicalName + " on row: " + ingredient.Row);
 				Report.Screenshot();
-				ingredient.TradeSecret = !ingredient.TradeSecret;
-				Context.AddToContext("My Ingredient Addition", ingredient);
 				return;
 			}
-			Report.Failure("Failed to click the Trade Secret checkbox for ingredient: " + ingredient.ChemicalName + " on row: " + ingredient.Row);
-			Report.Screenshot();
+			if (checkbox == "Publicly Disclosed")
+			{
+				if (new MyIngredients().ClickPubliclyDisclosed(ingredient))
+				{
+					Report.Success("Successfully clicked the Publicly Disclosed checkbox for ingredient: " + ingredient.ChemicalName + " on row: " + ingredient.Row);
+					Report.Screenshot();
+					ingredient.PublicallyDisclosed = !ingredient.PublicallyDisclosed;
+					Context.AddToContext("My_Ingredient_" + savedAs, ingredient);
+					return;
+				}
+				Report.Failure("Failed to click the Publicly Disclosed checkbox for ingredient: " + ingredient.ChemicalName + " on row: " + ingredient.Row);
+				Report.Screenshot();
+				return;
+			}
+			Report.Failure("The checkbox paramater must be either Trade Secret or Publicly Disclosed");
+		}
+
+		[StepDefinition(@"I set the Public Name to be: (.*) for My Ingredient saved as: (.*)")]
+		public void SetPublicNameForIngredient(string publicName, string savedAs)
+		{
+			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
+			var selMyIngredients = new MyIngredients();
+			selMyIngredients.EnterPublicName(ingredient, publicName);
+			Delay.Seconds(1);
+			Report.IsTrue(selMyIngredients.PublicName(ingredient) == publicName,
+				"Failed to set the Public name for ingredient: " + ingredient.ChemicalName + " to value: " + publicName,
+				"Successfully set the Public name for ingredient: " + ingredient.ChemicalName + " to value: " + publicName);
+			ingredient.PublicName = publicName;
+			Context.AddToContext("My_Ingredient_" + savedAs, ingredient);
 		}
 	}
 }
