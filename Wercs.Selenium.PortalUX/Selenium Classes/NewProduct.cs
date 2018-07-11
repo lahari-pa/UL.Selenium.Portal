@@ -1664,7 +1664,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				var el = containerElement
 					.FindElements(By.XPath(".//label[text()='Primary Physical State']/../following-sibling::div//span"), 2)
-					.FirstOrDefault(x => x.Text == item).FindElement(By.XPath("../input"));
+					.FirstOrDefault(x => x.Text.ToLower() == item.ToLower()).FindElement(By.XPath("../input"));
 				if (el != null)
 				{
 					el.TryClick();
@@ -3524,8 +3524,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		// Currently deals with select (option) and input (radio)
 		public List<string> GetAllOptionsForSection(string section)
 		{
+			Delay.Seconds(3);
+			Report.Info("Beginning get all options for section.");
 			var optionsText = new List<string>();
-			var matchingElements = containerElement.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[starts-with(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
+			var matchingElements = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[starts-with(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
 			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
 			{
 				optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();
@@ -3541,7 +3543,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				return optionsText;
 			}
+			Report.Info("Found " + matchingElements.Count.ToString());
 			optionsText = matchingElements.Select(x => x.FindElement(By.XPath(@"./following-sibling::span"), 2).Text).ToList();
+			Report.Info("Returning: " + string.Join(",", optionsText));
 			return optionsText;
 		}
 

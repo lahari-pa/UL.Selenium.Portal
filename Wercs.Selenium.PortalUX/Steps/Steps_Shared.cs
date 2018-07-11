@@ -3408,7 +3408,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			DateTime dtStart = DateTime.Now.AddDays(1);
 			int year = DateTime.Now.Year;
 			int month = 12;
-			int day = 30;
+			int day = 29;
 
 			DateTime dtEnd = new DateTime(year, month, day);
 
@@ -3446,7 +3446,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			DateTime dtEnd = new DateTime(year, month, day);
 
 			DateTime dt = GetRandomDate(dtStart, dtEnd);
-
+			Report.Info("Attempting to enter date: " + dt.ToString("yyyy-MM-dd"));
 			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
 				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
@@ -3495,6 +3495,80 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Pesticide Details - State Registration Details");
+		}
+
+		[Given(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP\)")]
+		public void GivenICallSharedStep57501ProductCharacteristics_MoreThanOneState_SelectSolid_StateSubcat_MixedWater_Random_Continue_HP()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Product Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
+			MyNewProductSteps.ThenISetThePrimayPhysicalStateToBe("solid");
+			NewProduct thisNewProduct = new NewProduct();
+			if (thisNewProduct.OptionExists("Secondary Physical State"))
+			{
+				TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
+				MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
+			}
+			else
+			{
+				Report.Info("Secondary physical state is not showing");
+			}
+
+			TestReport.StartStep(
+				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo(
+				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
+			{
+				TestReport.StartStep(
+					"I set the Select the best Water Solubility description option to: Soluble in water");
+				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description",
+					"Soluble in water");
+			}
+
+			TestReport.StartStep("Clicking continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+
+		[Given(@"I call Shared Step 57528 \(Product Characteristics - Aerosol Only - add data - Continue - Happy Path\)")]
+		public void GivenICallSharedStep57528ProductCharacteristics_AerosolOnly_AddData_Continue_HappyPath()
+		{
+			TestReport.UseSubSteps = true;
+			NewProduct MyNewProduct = new NewProduct();
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Product Characteristics Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
+			TestReport.StartStep("Primary Physical State should be showing the value: Aerosol");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Primary Physical State", "Aerosol");
+			NewProduct thisNewProduct = new NewProduct();
+			if (thisNewProduct.OptionExists("Secondary Physical State"))
+			{
+				TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
+				MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
+			}
+			else
+			{
+				Report.Info("Secondary physical state is not showing");
+			}
+			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
+			
+			TestReport.StartStep(
+				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			MyNewProductSteps.SelectFirstOptionInSection(
+				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
+
+		[Given(@"I call Shared Step (.*) \(Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path\)")]
+		public void GivenICallSharedStepRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath()
+		{
+			ScenarioContext.Current.Pending();
 		}
 
 

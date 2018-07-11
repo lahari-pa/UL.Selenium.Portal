@@ -2937,8 +2937,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"As expected, error is showing as: " + error);
 		}
 
-		[Then(@"I should see the appropriate response depending on today's date")]
-		public void ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDate()
+		[Then(@"I should see the appropriate response depending on today's date for state: (.*)")]
+		public void ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(string state)
 		{
 			int year = DateTime.Now.Year;
 			NewProduct thisNewProduct = new NewProduct();
@@ -2946,7 +2946,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (DateTime.Now < Oct1stthisYear)
 			{
 				ThenInPagePesticideDetails_StateRegistrationDetailsIShouldSeeError(
-					"State IA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+					"State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
 			}
 			else
 			{
