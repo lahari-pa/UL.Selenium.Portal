@@ -2000,7 +2000,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var table = new Table("Section");
 			table.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
 			table.AddRow(
-				"Product, including container and/or packaging, contains a chemical on California's Prop 65 list");
+				"Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
 			Report.Info("Checking that the only visible questions relate to: TSCA and Prop 65");
 			MyStepsNewProduct.CheckDisplayedSections("only see", table);
 			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
@@ -2008,7 +2008,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep(
 				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product, including container and/or packaging, contains a chemical on California's Prop 65 list",
+				"Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?",
 				"No");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
