@@ -3306,6 +3306,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetErrorsForSection(string section)
 		{
+
 			var els = containerElement.FindElements(By.XPath(".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),'" + section + "')])]"), 2);
 			return els.Select(x => x.GetElementText()).ToList();
 		}
@@ -3376,6 +3377,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		
+
 		public bool SectionExists(string section)
 		{
 			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
@@ -3400,6 +3403,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		
+
 		public bool SetOptionInSection(string section, string value)
 		{
 			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
@@ -3410,11 +3415,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			var el = containerElement.FindElement(By.XPath(xPath), 2);
 
+
 			if (el == null)
 			{
 				Report.Error("Could not find the correct input in section: " + section);
 				return false;
 			}
+
+			el.ScrollElementIntoView();
 			Report.Info("Entering value of: '" + value + "' in section: '" + section + "'");
 			if (el.GetAttribute("type") == "text")
 			{
@@ -3524,7 +3532,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		// Currently deals with select (option) and input (radio)
 		public List<string> GetAllOptionsForSection(string section)
 		{
-			Delay.Seconds(3);
+			Delay.Seconds(1);
 			Report.Info("Beginning get all options for section.");
 			var optionsText = new List<string>();
 			var matchingElements = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[starts-with(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
@@ -4423,7 +4431,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				.FirstOrDefault(x => x.Text == linkText).TryClick();
 		}
 
+		public void MoveToLabel(string section)
+		{
+			try
+			{
+				var xPath = @"(//label[starts-with(text(),""" + section + @""")]))";
 
+				SeleniumBrowser.WebBrowser.FindElement(By.XPath(xPath), 2).TryClick();
+			}
+			catch (Exception e)
+			{
+				
+			}
+		}
 
 
 	}

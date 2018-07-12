@@ -1953,7 +1953,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
 			foreach (var item in errorMessagesExpected)
 			{
-				Report.IsTrue(errorMessages.Contains(item.Trim()), "Failed to find the error message: " + item + "!", "Successfully found the error message: " + item + "!", false, false);
+				Report.IsTrue(errorMessages.Contains(item.Trim()), "Failed to find the error message: " + item + "!", "Successfully found the error message: " + item + " for section: " + section, false, false);
 			}
 			Report.Screenshot();
 		}
@@ -3014,5 +3014,49 @@ namespace Wercs.Selenium.PortalUX.Steps
 				string.Format("The Public Name was '{0}' as expected for ingredient: '{1}' at position: '{2}'"
 					, ingredient.PublicName, ingredient.ChemicalName, ingredient.ID));
 		}
+
+		[Then(@"Field exists: (.*)")]
+		public void ThenFieldExists(string field)
+		{
+
+			Report.IsTrue(new NewProduct().OptionExists(field),
+				"Field does not exist",
+				"Field exists");
+			Delay.Seconds(1);
+			
+		}
+
+		[StepDefinition(@"(.*) should not be showing any error messages")]
+		public void ErrorMessagesShouldNotBeShowingForItem(string section)
+		{
+			Delay.Seconds(5 * Delay.SpeedFactor);
+			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			Report.IsTrue(errorMessages.Count ==0, "No error message should be showing", "As expected, no error messages are showing");
+
+		}
+
+		[Then(@"For every field in the table I should see the following error: (.*)")]
+		public void ThenForEveryFieldInTheTableIShouldSeeTheFollowingError(string expectedError, Table table)
+		{
+			Delay.Seconds(3);
+			foreach (TableRow thisRow in table.Rows)
+			{
+				ErrorMessagesAreShowingForItem(thisRow["Field"], expectedError);
+			}
+		}
+
+		[Then(@"For every field in the table I call shared step 56494 expecting error: (.*)")]
+		public void ThenForEveryFieldInTheTableICallSharedStep56494ExpecingError(string error, Table table)
+		{
+			Steps_Shared thisStepShared = new Steps_Shared();
+			foreach (TableRow thisRow in table.Rows)
+			{
+				NewProduct MyNewProduct = new NewProduct();
+				MyNewProduct.MoveToLabel(thisRow["Field"]);
+				thisStepShared.GivenICallSharedStep56494PesticideDetailsCanadaProvinceCodeconfirmationvalidationAndSelectionForProvince(thisRow["Field"], error);
+			}
+		}
+
+
 	}
 }

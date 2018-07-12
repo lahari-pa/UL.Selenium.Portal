@@ -575,3 +575,78 @@ Given I call Shared Step 56799 (Confirm Additional Product Information shows Pes
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345
+
+#CLF - 12/7/2018 Test is not complete because plan does not seem to be complete
+@56500
+Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+Given I save the product information as: TestCase56500
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+Given I call Shared Step 57798 (Additional Product Information- Pesticide, Canada Only - No to everything else, Continue)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+Then I should see the Pesticide Details - Canada Page
+Then Field exists: Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product
+Then in the Pesticide Details - Canada page I click Continue
+Then For every field in the table I should see the following error: This is a required field.
+| Field                |
+| Provide Canada       |
+| Product              |
+| Alberta              |
+| British Columbia     |
+| Labrador             |
+| Manitoba             |
+| New Brunswick        |
+| New Foundland        |
+| Nova Scotia          |
+| Ontario              |
+| Prince Edward Island |
+| Quebec               |
+| Saskatchewan         |
+| Northwest Territory  |
+| Yukon Territory      |
+
+Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 279255
+Then in the Pesticide Details - Canada page I click Continue
+Then Provide Canada should be showing the error messages: Enter a valid number (5 or 8 digits).
+Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: abc256
+Then in the Pesticide Details - Canada page I click Continue
+Then Provide Canada should be showing the error messages: Enter a valid number (5 or 8 digits).
+Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 2792
+Then in the Pesticide Details - Canada page I click Continue
+Then Provide Canada should be showing the error messages: Enter a valid number (5 or 8 digits).
+Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 27925
+Then in the Pesticide Details - Canada page I click Continue
+Then Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product should not be showing any error messages
+Then Field exists: Product's packaging includes a Poison Danger symbol
+Given I set the Product's packaging includes a Poison Danger symbol field to: No
+Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
+Then For every field in the table I call shared step 56494 expecting error: This is a required field.
+| Field                |
+| Alberta              |
+| British Columbia     |
+| Labrador             |
+| Manitoba             |
+| New Brunswick        |
+| New Foundland        |
+| Nova Scotia          |
+| Ontario              |
+| Prince Edward Island |
+| Quebec               |
+| Saskatchewan         |
+| Northwest Territory  |
+| Yukon Territory      |
+Then in the Pesticide Details - Canada page I click Continue
+Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
+Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
+Then I should see the Additional Documents to Provide Page
+Then in the Additional Documents to Provide page I click Continue
+Then I should see the Optional Reports and Documents Available for Purchase Page
+Then in the Optional Reports and Documents Available for Purchase page I click Continue
+#CLF - from here the test outcomes to dnot seem to be as predicted.
+#I'm seeing Additional Documents -> Contact Information
+Given I navigate to the home page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500
