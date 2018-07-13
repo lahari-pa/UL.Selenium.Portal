@@ -55,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration.Pesticides
                         "DataSummarySheet",
                         "wercsmart",
                         "RetailPartners",
-                        "run_Pesticides"});
+                        "run_EPAState"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -107,7 +107,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration.Pesticides
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Pesticides")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
         public virtual void _56593PesticideData_EPAExpirationDateValidationIowa_Dec31StForCurrentCalendarYearUntilOct1StThenDec31StForThisOrNextYear()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56593] Pesticide Data - EPA Expiration date validation (Iowa - Dec 31st for curr" +
@@ -188,7 +188,7 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Pesticides")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
         public virtual void _56592PesticideData_EPAExpirationDateValidationGeorgia_Dec31StForCurrentCalendarYearUntilOct1StThenDec31StForThisOrNextYear()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56592] Pesticide Data - EPA Expiration date validation (Georgia - Dec 31st for c" +
@@ -269,7 +269,7 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Pesticides")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
         public virtual void _56582PesticideData_EPAExpirationDateValidationAlaska_Dec31StForCurrentCalendarYearUntilOct1StThenDec31StForThisOrNextYear()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56582] Pesticide Data - EPA Expiration date validation (Alaska - Dec 31st for cu" +
@@ -350,7 +350,7 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Pesticides")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
         public virtual void _56591PesticideData_EPAExpirationDateValidationColoradoDec31StForCurrentCalendarYearUntilOct1StThenDec31StForThisOrNextYear()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56591] Pesticide Data - EPA Expiration date validation (Colorado Dec 31st for cu" +
@@ -429,7 +429,7 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Pesticides")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
         public virtual void _56590PesticideData_EPAExpirationDateValidationCalifornia_Dec31StForCurrentCalendarYearUntilOct1StThenDec31StForThisOrNextYear()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56590] Pesticide Data - EPA Expiration date validation (California - Dec 31st fo" +
@@ -507,7 +507,7 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Pesticides")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
         public virtual void _56583PesticideData_EPAExpirationDateValidationArkansasDec31StForCurrentCalendarYearUntilOct1StThenDec31StForThisOrNextYear()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56583] Pesticide Data - EPA Expiration date validation (Arkansas > Dec 31st for " +

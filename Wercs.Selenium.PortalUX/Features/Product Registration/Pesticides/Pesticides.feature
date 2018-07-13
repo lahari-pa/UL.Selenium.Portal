@@ -650,3 +650,30 @@ Then in the Optional Reports and Documents Available for Purchase page I click C
 #I'm seeing Additional Documents -> Contact Information
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500
+
+Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returned from call to Kelly API (done)
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with pest control
+Given I save the product information as: TestCase56541
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I should see the Pesticide Details - U.S. Page
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+Given in the New Product page I click Continue
+Given I add the EPA registration number: 72315-6
+Given in the New Product page I click Continue
+And I should see the Pesticide Details - State Registration Details Page
+
+#Confirm the Expiration Date column shows 1 or more date(s)
+#Confirm the Expiration Date provided by Kelly shows the same date as shown in the Expiration Date column for rows where a date is shown in the Expiration Date  column.
+#Confirm that the Is Kelly Data column shows a check mark for all rows where a date is shown in the Expiration Data column
+
+Given in the New Product page I click Continue
+And I should see the Transportation Details 1 Page
+Given I navigate to the home page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56541
+

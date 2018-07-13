@@ -8,7 +8,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
-@run_Pesticides
+@run_EPAState
 
 Feature:  EPA State Expiry Date Validation (Suite ID: 56545)
 

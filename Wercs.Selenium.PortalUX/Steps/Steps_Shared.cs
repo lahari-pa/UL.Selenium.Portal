@@ -1775,6 +1775,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep(
 				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
 			new NewProduct().Prop65 = false;
+
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}

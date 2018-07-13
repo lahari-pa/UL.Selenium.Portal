@@ -127,7 +127,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool CountryofOriginExists()
 		{
 			IWebElement myLabel =
-				containerElement.FindElement(By.XPath(".//label[text()='Select the product's Country of Origin']"), 2);
+				containerElement.FindElement(By.XPath(".//label[contains(text(),'Country of Origin')]"), 2);
 
 			if (myLabel == null)
 			{
@@ -982,7 +982,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					.FirstOrDefault(x => x.Text.Contains("Prop 65")||x.Text.Contains("Proposition 65"))
 					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
-
+				Report.Screenshot();
 
 			}
 		}
