@@ -5,6 +5,7 @@ using System.Linq;
 using Castle.Components.DictionaryAdapter;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using SafewareReporting;
 using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -54,26 +55,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			// Finds all the most recent retail partners
 			var recentPartners = this.containerElement.FindElements(By.XPath(".//div[@class='most-recent']//span[@class='sr-only']"), 2);
-
 			if (recentPartners.Any(x => x.Text.ToLower().Contains(retailer.ToLower())))
 			{
 				// Retailer was found in the most recent retailer portion of the screen!
-				recentPartners.FirstOrDefault(x => x.Text.Contains(retailer)).FindElement(By.XPath("../.."), 2).Click();
-				return true;
+				return recentPartners.FirstOrDefault(x => x.Text.ToLower().Contains(retailer.ToLower())).FindElement(By.XPath("../.."), 2).TryClick();
 			}
-
 			// Retailer not found in the most recent retailers portion, so checking the rest of the retailers
 			var allPartners = this.containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//span[@class='sr-only']"), 2);
-
 			if (allPartners.Any(x => x.Text.ToLower().Contains(retailer.ToLower())))
 			{
 				// Retailer was found in the most recent retailer portion of the screen!
-				allPartners.FirstOrDefault(x => x.Text.ToLower().Contains(retailer.ToLower())).FindElement(By.XPath("../.."), 2).Click();
-				return true;
+				return allPartners.FirstOrDefault(x => x.Text.ToLower().Contains(retailer.ToLower())).FindElement(By.XPath("../.."), 2).TryClick();
 			}
-
 			// Retailer not found!
-
+			Report.Failure("No matching retailer for: " + retailer + " was found!");
 			return false;
 		}
 
@@ -102,15 +97,29 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 		public bool RetailerImageDisplayed(int tile)
 		{
-			var el = containerElement.FindElement(By.XPath(@".//div[starts-with(@class,'col-sm-3')][" + tile + "]/a"));
-			var backgorundImage = el.GetCssValue("background-image");
-			el.ScrollElementIntoView();
-			return backgorundImage != "none";
+			try
+			{
+				var el = containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]/a"), 2).ToList()[tile - 1];
+				var backgorundImage = el.GetCssValue("background-image");
+				el.ScrollElementIntoView();
+				return backgorundImage != "none";
+			}
+			catch (Exception ex)
+			{
+				Report.Failure("RetailerImageDisplayed: " + ex.Message);
+				return false;
+			}
 		}
 
 		public bool RetailerTextDisplayed(int tile)
 		{
-			var el = containerElement.FindElement(By.XPath(@".//div[starts-with(@class,'col-sm-3')][" + tile + "]//span[@class='sr-only']"));
+			var el = containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]//span[@class='sr-only']"), 2).ToList()[tile - 1];
+			if (el == null)
+			{
+				Report.Failure("Failed to find text element for tile: " + tile);
+				return false;
+			}
+			Report.Info("Text showing for tile " + tile + " is: " + el.Text);
 			return el.Displayed;
 		}
 

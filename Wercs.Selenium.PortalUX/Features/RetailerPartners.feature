@@ -55,7 +55,7 @@ Then The home screen should load
 # Retail Partners Page
 And I click the Retail Partners icon in the Navigation Pane
 Then I should see the following heading Retail Partners
-And I select the retailer: Wal-mart
+And I select the retailer: Wal-Mart
 
 # Retailer Detail Page
 Then I should see the retailer heading: Wal-Mart/SAM'S CLUB

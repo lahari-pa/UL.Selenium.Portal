@@ -716,6 +716,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 						"The Retailer logo for: '" + retailerName + "' was not displayed, and neither was the Retailer name, when it should be",
 						"The Retailer logo for: '" + retailerName + "' was not displayed, so the Retailer name was displayed as expected.");
 				}
+				else
+				{
+					Report.Info("The retailer logo was displayed for: " + retailerName);
+				}
 			}
 		}
 
