@@ -397,5 +397,58 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click the YES button in the Remove Ingredients pop up",
 				"Successfully clicked the YES button in the Remove Ingredients pop up");
 		}
+
+		[StepDefinition(@"I click the (Next|Previous) button in the My Ingredients grid navigation")]
+		public void ClickNavigationButton(string navOption)
+		{
+			Report.IsTrue(new MyIngredients().Navigation(navOption),
+				"Failed to click the " + navOption + " navigation button in the My Ingredients tab",
+				"Successfully clicked the " + navOption + " navigation button in the My Ingredients tab");
+		}
+
+		[StepDefinition(@"I confirm the navigation button is enabled in the My Ingredients grid")]
+		public void NaviageionOptionsEnabled()
+		{
+			Report.IsFalse(new MyIngredients().NextDisabled(),
+				"The Next navigation button was disabled in the My Ingredients tab",
+				"The Next navigation button was enabled in the My Ingredients tab as expected");
+		}
+
+		[StepDefinition(@"I confirm the current active page number in the My Ingredients grid is: (.*)")]
+		public void ConfirmPageNumber(string expectedPage)
+		{
+			var actualPage = new MyIngredients().GetPage("current").ToString();
+			Report.IsTrue(string.Equals(expectedPage, actualPage),
+				"The current active page did not match the expected value. Active page was: " + actualPage + ". Expected page was: " + expectedPage,
+				"The current active page matched the expected value: " + actualPage);
+		}
+
+		[StepDefinition(@"I confirm the ingredients for page (.*) saved as: (.*) are displayed")]
+		public void IngredientsPageIsDisplayed(string page, string savedAs)
+		{
+			if (Context.GetFromContext(savedAs) == null)
+			{
+				Report.Failure("There was no ingredient list in context saved as: " + savedAs);
+				return;
+			}
+			var selMyIngredients = new MyIngredients();
+			var ingredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
+			ingredients = ingredients.Where(i => i.Page == int.Parse(page)).OrderBy(i => i.Index).ToList();
+			for (int i = 1; i <= ingredients.Count; i++)
+			{
+				var ingredient = ingredients[i - 1];
+				var showingingredient = selMyIngredients.GetIngredient(i, ingredient.Index);
+				bool match = showingingredient.ChemicalName == ingredient.ChemicalName && showingingredient.PublicallyDisclosed == ingredient.PublicallyDisclosed && showingingredient.TradeSecret == showingingredient.TradeSecret && showingingredient.PublicName == ingredient.PublicName;
+				Report.IsTrue(match,
+					"Ingredient at row: " + ingredient.Row + " on page: " + page + " did not match the expected ingredient",
+					"Ingredient at row: " + ingredient.Row + " on page: " + page + " matched the expected ingredient");
+			}
+		}
+
+		[StepDefinition(@"I click page number: (.*) in the My Ingredients grid navigation")]
+		public void ClickPageNumber(string page)
+		{
+			Report.IsTrue(new MyIngredients().ClickPage(page), "Failed to click page number: " + page, "Successfully clicked page number: " + page);
+		}
 	}
 }

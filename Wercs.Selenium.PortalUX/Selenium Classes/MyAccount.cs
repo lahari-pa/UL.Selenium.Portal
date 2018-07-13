@@ -1387,7 +1387,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				case "next":
 					return containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link next']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 				case "previous":
-					return containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link previous']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+					return containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link prev']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 			}
 			Report.Failure("Unable to apply navigation option: " + navOption);
 			return false;

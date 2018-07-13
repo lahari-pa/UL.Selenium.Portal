@@ -959,6 +959,91 @@ testRunner.And("I remove all ingredients in the list saved as: My Library New In
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[73328] Pagination functionality")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MyLibrary")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PackagingTypes")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Brands")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyIngredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_MyLibrary")]
+        public virtual void _73328PaginationFunctionality()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73328] Pagination functionality", ((string[])(null)));
+#line 497
+this.ScenarioSetup(scenarioInfo);
+#line 499
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 501
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 503
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 505
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 507
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 509
+testRunner.And("I save the current list of ingredients in My Library to context as: My Library In" +
+                    "gredients Pagination", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 511
+testRunner.Then("I confirm the navigation button is enabled in the My Ingredients grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 513
+testRunner.Given("I click the Next button in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 515
+testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 517
+testRunner.And("I confirm the ingredients for page 2 saved as: My Library Ingredients Pagination " +
+                    "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 519
+testRunner.Given("I click the Next button in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 521
+testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 523
+testRunner.And("I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination " +
+                    "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 525
+testRunner.Given("I click the Previous button in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 527
+testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 529
+testRunner.And("I confirm the ingredients for page 2 saved as: My Library Ingredients Pagination " +
+                    "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 531
+testRunner.Given("I click the Previous button in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 533
+testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 535
+testRunner.And("I confirm the ingredients for page 1 saved as: My Library Ingredients Pagination " +
+                    "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 537
+testRunner.Given("I click page number: 2 in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 539
+testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 541
+testRunner.And("I confirm the ingredients for page 2 saved as: My Library Ingredients Pagination " +
+                    "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 543
+testRunner.Given("I click page number: 3 in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 545
+testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 547
+testRunner.And("I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination " +
+                    "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 549
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

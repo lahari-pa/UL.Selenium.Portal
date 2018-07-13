@@ -493,3 +493,57 @@ Given I navigate to the My Ingredients tab in the My Library page
 Then I confirm that all changes in edited ingredients: My Library Ingredients Edited 2 were saved
 
 And I remove all ingredients in the list saved as: My Library New Ingredients
+
+Scenario: [73328] Pagination functionality
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Given I navigate to the My Ingredients tab in the My Library page
+
+And I save the current list of ingredients in My Library to context as: My Library Ingredients Pagination
+
+Then I confirm the navigation button is enabled in the My Ingredients grid
+
+Given I click the Next button in the My Ingredients grid navigation
+
+Then I confirm the current active page number in the My Ingredients grid is: 2
+
+And I confirm the ingredients for page 2 saved as: My Library Ingredients Pagination are displayed
+
+Given I click the Next button in the My Ingredients grid navigation
+
+Then I confirm the current active page number in the My Ingredients grid is: 3
+
+And I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination are displayed
+
+Given I click the Previous button in the My Ingredients grid navigation
+
+Then I confirm the current active page number in the My Ingredients grid is: 2
+
+And I confirm the ingredients for page 2 saved as: My Library Ingredients Pagination are displayed
+
+Given I click the Previous button in the My Ingredients grid navigation
+
+Then I confirm the current active page number in the My Ingredients grid is: 1
+
+And I confirm the ingredients for page 1 saved as: My Library Ingredients Pagination are displayed
+
+Given I click page number: 2 in the My Ingredients grid navigation
+
+Then I confirm the current active page number in the My Ingredients grid is: 2
+
+And I confirm the ingredients for page 2 saved as: My Library Ingredients Pagination are displayed
+
+Given I click page number: 3 in the My Ingredients grid navigation
+
+Then I confirm the current active page number in the My Ingredients grid is: 3
+
+And I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination are displayed
+
+And I navigate to the home page
