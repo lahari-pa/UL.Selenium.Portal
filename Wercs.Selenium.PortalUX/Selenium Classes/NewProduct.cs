@@ -949,7 +949,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			get
 			{
 				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Prop 65"))
+					.FirstOrDefault(x => x.Text.Contains("Prop 65")||x.Text.Contains("Proposition 65"))
 					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
@@ -979,7 +979,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 
 				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Prop 65"))
+					.FirstOrDefault(x => x.Text.Contains("Prop 65")||x.Text.Contains("Proposition 65"))
 					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
 

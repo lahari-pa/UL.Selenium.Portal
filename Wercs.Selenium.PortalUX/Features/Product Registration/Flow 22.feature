@@ -164,6 +164,8 @@ Given I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click 
 
 Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
 
+Given in the Volatile Organic Compound Summary page I click Continue
+
 Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Dick's Sporting Goods
 
 Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60546, container type: Aerosol Can and size: 9.99

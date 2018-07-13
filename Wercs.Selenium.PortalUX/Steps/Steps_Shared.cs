@@ -460,9 +460,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
 			TestReport.StartStep(
 				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product, including container and/or packaging, contains a chemical on California's Prop 65 list",
-				"No");
+			new NewProduct().Prop65 = false;
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -677,11 +675,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
 				"No");
+			/* CLF- 13/7/2018 This does not seem to be in the step design
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB",
 				"0");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule",
+				"0");
+				*/
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product label specifies a dilution ratio which results in a final VOC concentration for the product during use",
+				"Yes");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product's VOC content as used",
+				"0");
+			MyStepsNewProduct.SetTheSectionOptionTo(
+				"Product's VOC content as sold",
 				"0");
 			MyStepsNewProduct.SelectFirstOptionInSection("Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?");
 			TestReport.StartStep("In the VOC page I click Continue");
@@ -1315,6 +1324,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.ThenIConfirmThatTheVOCAnalysisDateIsShowing();
 			TestReport.StartStep("I confirm that I see todays VOC Analysis Date");
 			MyNewProduct.ThenIConfirmThatISeeTodaysVOCAnalysisDate();
+
 			//TestReport.StartStep("In the Volatile Organic Compound Summary page I click Continue");
 			//MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compound Summary");
 		}
@@ -1764,9 +1774,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Compliant with Domestic Substances List (DSL)");
 			TestReport.StartStep(
 				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			MyNewProductSteps.SetTheSectionOptionTo(
-				"Product, including container and/or packaging, contains a chemical on California's Prop 65 list",
-				"No");
+			new NewProduct().Prop65 = false;
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -2007,9 +2015,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
 			TestReport.StartStep(
 				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?",
-				"No");
+			new NewProduct().Prop65 = false;
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -2257,9 +2263,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
 			TestReport.StartStep(
 				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product, including container and/or packaging, contains a chemical on California's Prop 65 list",
-				"No");
+			new NewProduct().Prop65 = false;
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -2716,7 +2720,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Does your product contain a Prop 65 chemical?",
 				"Yes"));
-			myStepsNewProduct.SetTheSectionOptionTo("Does your product contain a Prop 65 chemical?", "Yes");
+			new NewProduct().Prop65 = true;
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Percent of Alcohol in the Product (numeric entry only)",
 				"12.0"));
@@ -3282,9 +3286,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Yes");
 			TestReport.StartStep(
 				"Prop 65 warning is required: Yes");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Prop 65 warning is required",
-				"Yes");
+			new NewProduct().Prop65 = true;
 			TestReport.StartStep(
 				"Prop 65 warning is present on the product's label: Yes");
 			MyStepsNewProduct.SetTheSectionOptionTo(

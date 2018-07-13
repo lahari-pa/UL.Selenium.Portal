@@ -8,11 +8,23 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@SubEnrollment
 @run_Flow13
 
 Feature: Flow 13
 
+CLF - Currently blocked because of access to SHA:
 
+	CLF - It seems like the test involves creating 2 products and then adding them to a kit.
+	I have automated the creation of 2 products but I think I may be missing a necessary setting
+	because when I then follow the steps to create a kit and get to the page where you have to
+	select products to go into the kit, no products are found.
+
+	AC - The products need to be in a completed status in order for them to be found in the search.
+	So if you test doesn’t go into SHA and set them to completed they will not show up.
+
+
+#Blocked
 Scenario: [58753] Hair Color Kit - RU000724
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -111,6 +123,7 @@ Then The Data Acceptance page should appear
 Given In the Data Acceptance page I select Yes, Agreed
 Given In the Data Acceptance page I click on the Accept button
 Then the Subscription Enrollment page should load
+
 ######## Kit item 2
 Then I click the Register New Product icon in the Navigation Pane
 And I Select the Create a New Registration radio button
