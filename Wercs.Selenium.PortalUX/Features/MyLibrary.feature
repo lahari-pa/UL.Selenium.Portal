@@ -242,11 +242,11 @@ Given In the My Account page I navigate to the My Library page
 
 Given I navigate to the My Ingredients tab in the My Library page
 
-And I save the current list of ingredients in My Library to context
+And I save the current list of ingredients in My Library to context as: My Library Ingredients
 
 Given I enter the text: wat into the My Ingredients search field
 
-And I select 'Water' from the smart search results
+And I select the smart search result with name: Water and CAS: 7732-18-5
 
 And I save the ingredient I added in My Library to context as: water70539
 
@@ -297,11 +297,11 @@ Given In the My Account page I navigate to the My Library page
 
 Given I navigate to the My Ingredients tab in the My Library page
 
-And I save the current list of ingredients in My Library to context
+And I save the current list of ingredients in My Library to context as: My Library Ingredients
 
 Given I enter the text: wat into the My Ingredients search field
 
-And I select 'Water' from the smart search results
+And I select the smart search result with name: Water and CAS: 7732-18-5
 
 And I save the ingredient I added in My Library to context as: water70556
 
@@ -354,7 +354,7 @@ Given In the My Account page I navigate to the My Library page
 
 Given I navigate to the My Ingredients tab in the My Library page
 
-And I save the current list of ingredients in My Library to context
+And I save the current list of ingredients in My Library to context as: My Library Ingredients
 
 # Test specifies 'type 50-00' and select Formaldehyde but this is returning all results containing sequence '500' in the CAS,
 # ordererd numerically, disregarding the dash.
@@ -363,7 +363,7 @@ And I save the current list of ingredients in My Library to context
 # Have reported to Amanda. Use search by name for now.
 Given I enter the text: Formald into the My Ingredients search field
 
-And I select 'Formaldehyde' from the smart search results
+And I select the smart search result with name: Formaldehyde and CAS: 50-00-0
 
 And I save the ingredient I added in My Library to context as: formaldehyde70567
 
@@ -405,3 +405,91 @@ Then I confirm the component name in the delete product popup matches the ingred
 Given I click: YES in the 'Remove Component from My Ingredients' pop up
 
 Then I confirm My Ingredient saved as: formaldehyde70567 in My Library has been removed from the grid
+
+Scenario: [73329] Edit Ingredient
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Given I navigate to the My Ingredients tab in the My Library page
+
+Given I add the following ingredients and save them to context as: My Library New Ingredients
+| Chemical Name             | CAS          |
+| Sulfuric acid             | 7664-93-9    |
+| Cobalt sulfate            | 10124-43-3   |
+| Graphene                  | 1034343-98-0 |
+| Pyrrole-2-carboxylic acid | 634-97-9     |
+| Formaldehyde              | 50-00-0      |
+| Polycarbonate             | 25037-45-0   |
+| Nitric acid               | 7697-37-2    |
+| Cumene                    | 98-82-8      |
+| Argon                     | 7440-37-1    |
+| Mica                      | 12001-26-2   |
+
+# The test has a step 'Select one of the ingredients' before editing other ones. Having an ingredient selected has no bearing on 'Save' so skipping this
+# And I select the ingredient in My Library at index: 5 from ingredients saved as: My Library Ingredients
+
+# Explicit 'true/false' will only ever edit ingredient state once. Flip the checkbox with Y/N, avoid checking the same value repeatedly
+# Public Name iterates the option up or down in the list of dropdown options (+,-). If index out of range, select the first option
+Given I edit the ingredients: My Library New Ingredients and save the edited ingredients to context as: My Library Ingredients Edited
+| Index | Click Publicly Disclosed | Click Trade Secret | Public Name Change |
+| 1     | Y                        | N                  | +                  |
+| 2     | N                        | Y                  | =                  |
+| 3     | N                        | N                  | -                  |
+| 4     | N                        | Y                  | +                  |
+| 5     | Y                        | N                  | +                  |
+| 6     | Y                        | N                  | +                  |
+| 7     | N                        | Y                  | =                  |
+| 8     | N                        | N                  | -                  |
+| 9     | N                        | Y                  | +                  |
+| 10    | Y                        | N                  | +                  |
+
+And I click Save in the My Ingredients tab
+
+Given I navigate to the home page
+
+Then The home screen should load
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Given I navigate to the My Ingredients tab in the My Library page
+
+And I confirm that all changes in edited ingredients: My Library Ingredients Edited were saved
+
+# Repeat editing steps - check saved changes persist over mutliple operation
+
+Given I edit the ingredients: My Library New Ingredients and save the edited ingredients to context as: My Library Ingredients Edited 2
+| Index | Click Publicly Disclosed | Click Trade Secret | Public Name Change |
+| 1     | Y                        | N                  | +                  |
+| 2     | N                        | Y                  | -                  |
+| 3     | Y                        | N                  | -                  |
+| 4     | N                        | N                  | +                  |
+| 5     | N                        | N                  | =                  |
+| 6     | Y                        | N                  | +                  |
+| 7     | N                        | Y                  | +                  |
+| 8     | Y                        | N                  | -                  |
+| 9     | N                        | Y                  | +                  |
+| 10    | Y                        | N                  | =                  |
+
+And I click Save in the My Ingredients tab
+
+Given I navigate to the home page
+
+Then The home screen should load
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Given I navigate to the My Ingredients tab in the My Library page
+
+Then I confirm that all changes in edited ingredients: My Library Ingredients Edited 2 were saved
+
+And I remove all ingredients in the list saved as: My Library New Ingredients

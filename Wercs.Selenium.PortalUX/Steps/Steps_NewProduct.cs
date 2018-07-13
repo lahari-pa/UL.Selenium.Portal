@@ -2987,32 +2987,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
 			var showingIngredients = new MyIngredientsModal().MyIngredients();
-			var matchID = showingIngredients.Where(x => x.ID == ingredient.ID);
+			var matchID = showingIngredients.Where(x => x.Index == ingredient.Index);
 			if (matchID.Count() == 0)
 			{
-				Report.Failure("The saved ingredient at position: " + ingredient.ID + " was not found on the My Ingredients pop up");
+				Report.Failure("The saved ingredient at position: " + ingredient.Index + " was not found on the My Ingredients pop up");
 				return;
 			}
 			Report.IsTrue(matchID.FirstOrDefault().ChemicalName == ingredient.ChemicalName,
 				string.Format("The ingredient: '{0}' at position: '{1}' was not found in the My Ingredients pop up"
-					, ingredient.ChemicalName, ingredient.ID),
+					, ingredient.ChemicalName, ingredient.Index),
 				string.Format("The ingredient: '{0}' at position: '{1}' was found in the My Ingredients pop up as expected"
-					, ingredient.ChemicalName, ingredient.ID));
+					, ingredient.ChemicalName, ingredient.Index));
 			Report.IsTrue(matchID.FirstOrDefault().PublicallyDisclosed == ingredient.PublicallyDisclosed,
 				string.Format("The Publically Disclosed checkbox was not as expected for ingredient: '{0}' at position: '{1}'. Expected: '{2}'"
-					, ingredient.ChemicalName, ingredient.ID, ingredient.PublicallyDisclosed.ToString()),
+					, ingredient.ChemicalName, ingredient.Index, ingredient.PublicallyDisclosed.ToString()),
 				string.Format("The Publically Disclosed checkbox was '{0}' as expected for ingredient: '{1}' at position: '{2}'"
-					, ingredient.PublicallyDisclosed.ToString(), ingredient.ChemicalName, ingredient.ID));
+					, ingredient.PublicallyDisclosed.ToString(), ingredient.ChemicalName, ingredient.Index));
 			Report.IsTrue(matchID.FirstOrDefault().TradeSecret == ingredient.TradeSecret,
 				string.Format("The Trade Secret checkbox was not as expected for ingredient: '{0}' at position: '{1}'. Expected: '{2}'"
-					, ingredient.ChemicalName, ingredient.ID, ingredient.TradeSecret.ToString()),
+					, ingredient.ChemicalName, ingredient.Index, ingredient.TradeSecret.ToString()),
 				string.Format("The Trade Secret checkbox was '{0}' as expected for ingredient: '{1}' at position: '{2}'"
-					, ingredient.TradeSecret.ToString(), ingredient.ChemicalName, ingredient.ID));
+					, ingredient.TradeSecret.ToString(), ingredient.ChemicalName, ingredient.Index));
 			Report.IsTrue(matchID.FirstOrDefault().PublicName == ingredient.PublicName,
 				string.Format("The Public Name was not as expected for ingredient: '{0}' at position: '{1}'. Expected: '{2}'"
-					, ingredient.ChemicalName, ingredient.ID, ingredient.PublicName),
+					, ingredient.ChemicalName, ingredient.Index, ingredient.PublicName),
 				string.Format("The Public Name was '{0}' as expected for ingredient: '{1}' at position: '{2}'"
-					, ingredient.PublicName, ingredient.ChemicalName, ingredient.ID));
+					, ingredient.PublicName, ingredient.ChemicalName, ingredient.Index));
 		}
 
 		[Then(@"Field exists: (.*)")]

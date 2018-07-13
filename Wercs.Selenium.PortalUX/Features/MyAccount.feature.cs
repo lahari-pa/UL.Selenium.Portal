@@ -563,7 +563,7 @@ testRunner.Then("In the Thank You screen I click Home", ((string)(null)), ((Tech
 #line 175
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 176
-testRunner.Then("In the My Account screen I navigate to the Subscription Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In the My Account page I navigate to the Subscription Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 177
 testRunner.Then("In the Subscription Information screen I confirm the Status has the correct infor" +
                     "mation: 1 Formulated, 1 Articles, 1 Enhanced Articles", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -586,7 +586,7 @@ testRunner.Then("In the Subscription Information screen I confirm the Subscripti
 #line 183
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 184
-testRunner.Then("In the My Account screen I navigate to the Order History page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In the My Account page I navigate to the Order History page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 185
 testRunner.Then("In the Order History screen I select Subscription", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 186
@@ -1026,7 +1026,7 @@ testRunner.And("I click on the option Division Accounts", ((string)(null)), ((Te
 #line 332
 testRunner.And("I should not see the Division Accounts grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 333
-testRunner.And("In the My Account screen I navigate to the Company Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In the My Account page I navigate to the Company Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 334
 testRunner.Then("In the Company Information screen I should see 0 Division Accounts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

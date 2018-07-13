@@ -173,7 +173,7 @@ Then In the Thank You screen I check the Header is correct
 #Then In the Thank You screen I confirm the following statement is shown: Thank you for enrolling in a subscription plan. You’ve successfully submitted your first registration for assessment! What happens now? Our team of Assessment Professionals will review your product’s data and provide information to your recipient for proper handling, transport and storage. The assessment process takes about two (2) business days to finalize and then is transferred to your recipient. Your product’s registration data remains in our database. The UL WERCSmart team works with you to provide over 40 retailers critical product information to on-board your products while keeping the recipient’s employees, consumers and the environment safe. UL is committed to helping you monitor and manage your product’s data needs with the highest standard of confidentiality and service. Should you need any assistance regarding your registration, please visit the Support area’s Solution Center, or contact one of our professional Support Team Representatives.
 Then In the Thank You screen I click Home
 Given I click on My Account
-Then In the My Account screen I navigate to the Subscription Information page
+Then In the My Account page I navigate to the Subscription Information page
 Then In the Subscription Information screen I confirm the Status has the correct information: 1 Formulated, 1 Articles, 1 Enhanced Articles
 Then In the Subscription Information screen I confirm the Subscription History table has the correct information
 | Subscription Level Status | Quantity |
@@ -181,7 +181,7 @@ Then In the Subscription Information screen I confirm the Subscription History t
 | Limited Articles          | 1        |
 | Limited Enhanced Articles | 1        |
 Given I click on My Account
-Then In the My Account screen I navigate to the Order History page
+Then In the My Account page I navigate to the Order History page
 Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: New_Sub
 
@@ -330,7 +330,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 And I navigate to My Account
 And I click on the option Division Accounts
 And I should not see the Division Accounts grid
-And In the My Account screen I navigate to the Company Information page
+And In the My Account page I navigate to the Company Information page
 Then In the Company Information screen I should see 0 Division Accounts
 
 Scenario: [65887] Pagination

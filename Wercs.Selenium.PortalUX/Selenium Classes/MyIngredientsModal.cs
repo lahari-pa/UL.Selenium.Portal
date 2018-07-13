@@ -46,7 +46,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			foreach (var row in rows)
 			{
 				rIngredients.Add(new MyIngredients.IngredientItem() {
-					ID = count.ToString(),
+					Index = count,
 					CASNumber = row.FindElement(By.XPath(".//span[@data-bind='text: component.cas']")).Text,
 					ChemicalName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']")).Text,
 					PublicallyDisclosed = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isDisclosed')]")).Checked(),
@@ -61,7 +61,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				foreach (var row in rows)
 				{
 					rIngredients.Add(new MyIngredients.IngredientItem() {
-						ID = count.ToString(),
+						Index = count,
 						CASNumber = row.FindElement(By.XPath(".//span[@data-bind='text: component.cas']")).Text,
 						ChemicalName = row.FindElement(By.XPath(".//span[@data-bind='text: component.name']")).Text,
 						PublicallyDisclosed = row.FindElement(By.XPath(".//input[starts-with(@data-bind,'checked: isDisclosed')]")).Checked(),

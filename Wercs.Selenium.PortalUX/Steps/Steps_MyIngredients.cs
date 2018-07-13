@@ -6,6 +6,7 @@ using Castle.Core.Internal;
 using iTextSharp.text;
 using ResourcePool;
 using System.IO;
+using NUnit.Framework;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -25,12 +26,33 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully entered search term: " + value + " in My Ingredients search");
 		}
 
-		[StepDefinition(@"I select '(.*)' from the smart search results")]
-		public void SelectSearchResult(string result)
+		[StepDefinition(@"I select the smart search result with name: (.*) and CAS: (.*)")]
+		public void SelectSearchResult(string name, string cas)
 		{
-			Report.IsTrue(new MyIngredients().ClickSearchResult(result),
-				"Failed to select search result with name: " + result,
-				"Successully selected search result with name: " + result);
+			Report.IsTrue(new MyIngredients().ClickSearchResult(name, cas),
+				"Failed to select search result with name: " + name + " and CAS: " + cas,
+				"Successully selected search result with name: " + name + " and CASL " + cas);
+		}
+
+		[StepDefinition(@"I add the following ingredients and save them to context as: (.*)")]
+		public void AddIngredientItems(string savedAs, Table ingredients)
+		{
+			TestReport.UseSubSteps = true;
+			var ingredientsContext = new List<MyIngredients.IngredientItem>();
+			var selMyIngredients = new MyIngredients();
+			var allIngredients = selMyIngredients.IngredientsLibrary();
+			foreach (var row in ingredients.Rows)
+			{
+				TestReport.StartStep("I add the ingredient: " + row["Chemical Name"] + " to My Library");
+				Report.Info("I enter the text: " + row["Chemical Name"] + " into the My Ingredients search field");
+				EnterTextInSearch(row["Chemical Name"]);
+				Report.Info("I select '" + row["Chemical Name"] + "' from the smart search results");
+				SelectSearchResult(row["Chemical Name"], row["CAS"]);
+				var allIngredientsUpdate = selMyIngredients.IngredientsLibrary();
+				ingredientsContext.Add(allIngredientsUpdate.First(r => allIngredients.All(p => r.Index != p.Index)));
+				allIngredients = allIngredientsUpdate;
+			}
+			Context.AddToContext(savedAs, ingredientsContext);
 		}
 
 		[StepDefinition(@"I click Save in the My Ingredients tab")]
@@ -40,10 +62,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click Save in the My Ingredients tab",
 				"Successfully clicked Save in the My Ingredients tab");
 		}
-		[StepDefinition(@"I save the current list of ingredients in My Library to context")]
-		public void AddMyIngredientsToContext()
+		[StepDefinition(@"I save the current list of ingredients in My Library to context as: (.*)")]
+		public void AddMyIngredientsToContext(string savedAs)
 		{
-			Context.AddToContext("My Library Ingredients", new MyIngredients().IngredientsLibrary());
+			Context.AddToContext(savedAs, new MyIngredients().IngredientsLibrary());
 		}
 
 		// Note pre-requisite is saving list of ingredients to Context prior to searching - AddMyIngredientsToContext()
@@ -75,8 +97,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.Info("There were a total of: " + rList.Count + " ingredients");
 					if (rList.Count == previous.Count + 1)
 					{
-						var result = rList.First(r => previous.All(p => r.ID != p.ID));
-						Context.AddToContext("My_Ingredient_" + savedAs, rList.First(r => previous.All(p => r.ID != p.ID)));
+						Context.AddToContext("My_Ingredient_" + savedAs, rList.First(r => previous.All(p => r.Index != p.Index)));
 						selMyIngredients.ClickPage("1");
 						return;
 					}
@@ -91,7 +112,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selMyIngredients.ClickPage("1");
 			if (rList.Count == previous.Count + 1)
 			{
-				Context.AddToContext("My Ingredient Addition", rList.First(r => previous.All(p => r.ID != p.ID)));
+				Context.AddToContext("My Ingredient Addition", rList.First(r => previous.All(p => r.Index != p.Index)));
 				return;
 			}
 			Report.Failure("Attempted to add the new ingredient to context, but the list of ingredients has not increased by 1");
@@ -100,8 +121,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition("I remove My Ingredient in My Library saved as: (.*)")]
 		public void RemoveIngredientIAddedToMyLibraryFromContext(string savedAs)
 		{
+			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
+			{
+				Report.Failure("There was no ingredient in context saved as: " + savedAs);
+				return;
+			}
 			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
-			Report.IsTrue(ingredient.ClickRemove(),
+			Report.IsTrue(new MyIngredients().ClickRemove(ingredient),
 				"Failed to remove ingredient from My Library",
 				"Successfully removed ingredient from My Library");
 		}
@@ -109,6 +135,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I confirm the component name in the delete product popup matches the ingredient saved as: (.*)")]
 		public void DeleteMyIngredientDialogComponentNameMatchesLastAdded(string savedAs)
 		{
+			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
+			{
+				Report.Failure("There was no ingredient in context saved as: " + savedAs);
+				return;
+			}
 			var savedIngredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
 			var actualName = new MyIngredientsModal().IngredientToRemove();
 			Report.IsTrue(actualName.Contains(savedIngredient.ChemicalName.Trim()),
@@ -127,19 +158,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition("I confirm My Ingredient saved as: (.*) in My Library has been removed from the grid")]
 		public void ConfirmIngredientHasBeenRemoved(string savedAs)
 		{
+			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
+			{
+				Report.Failure("There was no ingredient in context saved as: " + savedAs);
+				return;
+			}
 			TestReport.UseSubSteps = true;
 			var savedIngredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
 			TestReport.StartStep("Adding current list of ingredients to context");
 			var currentIngredients = new MyIngredients().IngredientsLibrary();
 			TestReport.StartStep("Checking the ingredient I originally added has now been removed from the grid");
 			Report.IsTrue(!currentIngredients.Contains(savedIngredient),
-				"The removed ingredient: " + savedIngredient.ChemicalName + " was still showing in the ingredients grid at position: " + savedIngredient.ID,
-				"The removed ingredient: " + savedIngredient.ChemicalName + " was no longer showing in the ingredients grid at position: " + savedIngredient.ID + " as expected");
+				"The removed ingredient: " + savedIngredient.ChemicalName + " was still showing in the ingredients grid at position: " + savedIngredient.Index,
+				"The removed ingredient: " + savedIngredient.ChemicalName + " was no longer showing in the ingredients grid at position: " + savedIngredient.Index + " as expected");
 		}
 
 		[StepDefinition(@"I click the (Trade Secret|Publicly Disclosed) checkbox for My Ingredient saved as: (.*)")]
 		public void SelectTradeSecretCheckbox(string checkbox, string savedAs)
 		{
+			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
+			{
+				Report.Failure("There was no ingredient in context saved as: " + savedAs);
+				return;
+			}
 			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
 			if (checkbox == "Trade Secret")
 			{
@@ -175,6 +216,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I set the Public Name to be: (.*) for My Ingredient saved as: (.*)")]
 		public void SetPublicNameForIngredient(string publicName, string savedAs)
 		{
+			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
+			{
+				Report.Failure("There was no ingredient in context saved as: " + savedAs);
+				return;
+			}
 			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
 			var selMyIngredients = new MyIngredients();
 			selMyIngredients.EnterPublicName(ingredient, publicName);
@@ -184,6 +230,172 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set the Public name for ingredient: " + ingredient.ChemicalName + " to value: " + publicName);
 			ingredient.PublicName = publicName;
 			Context.AddToContext("My_Ingredient_" + savedAs, ingredient);
+		}
+
+		[StepDefinition(@"I (select|deselect) the ingredient in My Library at index: (.*) from ingredients saved as: (.*)")]
+		public void SelectIngredientMyLibrary(string select, string index, string savedAs)
+		{
+			if (Context.GetFromContext(savedAs) == null)
+			{
+				Report.Failure("There was no ingredient list in context saved as: " + savedAs);
+				return;
+			}
+			var ingredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
+			var ingredient = ingredients.FirstOrDefault(x => x.Index == int.Parse(index));
+			var selMyIngredients = new MyIngredients();
+			Report.IsTrue(selMyIngredients.ClickSelect(ingredient),
+				"Failed to click the input checkbox to select ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index,
+				"Successfully clicked the input checkbox to select ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index);
+			Delay.Seconds(1);
+			var selected = select == "select";
+			Report.IsTrue(selMyIngredients.Selected(ingredient) == selected,
+				"The selected checkbox was not successfully " + select + "ed.",
+				"The selected checkbox was successfully " + select + "ed.");
+		}
+
+		[StepDefinition(@"I edit the ingredients: (.*) and save the edited ingredients to context as: (.*)")]
+		public void EditMyLibraryIngredients(string savedAs, string savedAsEdit, Table ingredientFields)
+		{
+			if (Context.GetFromContext(savedAs) == null)
+			{
+				Report.Failure("There was no ingredient list in context saved as: " + savedAs);
+				return;
+			}
+			TestReport.UseSubSteps = true;
+			var ingredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
+			var selMyIngredients = new MyIngredients();
+			//| Index | Click Publicly Disclosed | Click Trade Secret | Public Name Index |
+			var index = "";
+			var publicNameChange = "";
+			var contextList = new List<MyIngredients.IngredientItem>();
+			foreach (var row in ingredientFields.Rows)
+			{
+				index = row["Index"];
+				if (index == null || !index.All(char.IsDigit))
+				{
+					continue;
+				}
+				if (int.Parse(index) > ingredients.Count)
+				{
+					Report.Failure("The ingredient index: " + index + " exceeded the ingredients count (index out of range)");
+					continue;
+				}
+				var ingredient = ingredients[int.Parse(index) - 1];
+				if (ingredient == null)
+				{
+					Report.Failure("The ingredient to edit at index: " + index + " did not exist in the saved list of ingredients: " + savedAs);
+					continue;
+				}
+				TestReport.StartStep("I edit the ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index);
+				if (row["Click Trade Secret"].ToLower() == "y")
+				{
+					ingredient.TradeSecret = !ingredient.TradeSecret;
+				}
+				if (row["Click Publicly Disclosed"].ToLower() == "y")
+				{
+					ingredient.PublicallyDisclosed = !ingredient.PublicallyDisclosed;
+				}
+				// Get all Public Name options, pick at index. if out of range, pick first.
+				var options = selMyIngredients.PublicNameOptions(ingredient);
+				var selectedOption = selMyIngredients.PublicName(ingredient);
+				var optionIndex = options.IndexOf(selectedOption);
+				publicNameChange = row["Public Name Change"];
+				if (publicNameChange != null && (string.Equals(publicNameChange, "+") || string.Equals(publicNameChange, "-") || string.Equals(publicNameChange, "=")))
+				{
+					if (string.Equals(publicNameChange, "+"))
+					{
+						ingredient.PublicName = optionIndex + 1 == options.Count ? options.First() : options[optionIndex + 1];
+					}
+					else if (string.Equals(publicNameChange, "-"))
+					{
+						ingredient.PublicName = optionIndex == 0 ? options.Last() : options[optionIndex - 1];
+					}
+					contextList.Add(ingredient);
+					Report.IsTrue(selMyIngredients.EditIngredient(ingredient),
+						"Failed to edit ingredient: " + ingredient.ChemicalName + " at index: " + ingredient.Index,
+						"Successfully edited ingredient: " + ingredient.ChemicalName + " at index: " + ingredient.Index);
+				}
+				else
+				{
+					contextList.Add(ingredient);
+					Report.Warn("The Public Name Change value was null or did not match '+', '-' or '='");
+					Report.IsTrue(selMyIngredients.EditIngredient(ingredient),
+						"Failed to edit ingredient: " + ingredient.ChemicalName + " at index: " + ingredient.Index,
+						"Successfully edited ingredient: " + ingredient.ChemicalName + " at index: " + ingredient.Index);
+				}
+			}
+			Context.AddToContext(savedAsEdit, contextList);
+		}
+
+		[StepDefinition(@"I confirm that all changes in edited ingredients: (.*) were saved")]
+		public void EditedIngredientsWereSaved(string savedAs)
+		{
+			if (Context.GetFromContext(savedAs) == null)
+			{
+				Report.Failure("There was no ingredient list in context saved as: " + savedAs);
+				return;
+			}
+			var expectedIngredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
+			var selMyIngredients = new MyIngredients();
+			var actualIngredients = selMyIngredients.IngredientsLibrary();
+			Report.Info("Comparing current My Library ingredients against saved edited list.");
+			Report.Info("Found " + actualIngredients.Count + " ingredients");
+			foreach (var ingredient in expectedIngredients)
+			{
+				selMyIngredients.ClickPage(ingredient.Page.ToString());
+				var publicallyDisclosedMatch = ingredient.PublicallyDisclosed == expectedIngredients.First(e => e.Index == ingredient.Index).PublicallyDisclosed;
+				var tradeSecretMatch = ingredient.TradeSecret == expectedIngredients.First(e => e.Index == ingredient.Index).TradeSecret;
+				var publicNameMatch = ingredient.PublicName == expectedIngredients.First(e => e.Index == ingredient.Index).PublicName;
+				if (publicallyDisclosedMatch && tradeSecretMatch && publicNameMatch)
+				{
+					Report.Success("Ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index + " was successfully saved and matched the edited state. Publicly Disclosed = " + ingredient.PublicallyDisclosed + ". Trade Secret = " + ingredient.TradeSecret + ". Public Name = " + ingredient.PublicName);
+					Report.Screenshot();
+				}
+				else
+				{
+					if (!publicallyDisclosedMatch)
+					{
+						Report.Failure("Ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index + ". The Publically Disclosed checkbox was not successfully saved and did not match the edited state: " + ingredient.PublicallyDisclosed);
+						Report.Screenshot();
+					}
+					if (!tradeSecretMatch)
+					{
+						Report.Failure("Ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index + ". The Trade Secret checkbox was not successfully saved and did not match the edited state: " + ingredient.TradeSecret);
+						Report.Screenshot();
+					}
+					if (!publicNameMatch)
+					{
+						Report.Failure("Ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index + ". The Public Name option was not successfully saved and did not match the edited state: " + ingredient.PublicName);
+						Report.Screenshot();
+					}
+				}
+			}
+		}
+
+		[StepDefinition(@"I remove all ingredients in the list saved as: (.*)")]
+		public void DeleteIngredientsInContextList(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			if (Context.GetFromContext(savedAs) == null)
+			{
+				Report.Failure("There was no ingredient list in context saved as: " + savedAs);
+				return;
+			}
+			var ingredients = (List<MyIngredients.IngredientItem>)Context.GetFromContext(savedAs);
+			var selMyIngredients = new MyIngredients();
+			var selMyIngredientsModal = new MyIngredientsModal();
+			foreach (var ingredient in ingredients)
+			{
+				Report.IsTrue(selMyIngredients.ClickSelect(ingredient),
+					"Failed to click select for ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index,
+					"Successfully clicked select for ingredient: " + ingredient.ChemicalName + " at position: " + ingredient.Index);
+			}
+			Report.IsTrue(selMyIngredients.ClickDeleteChecked(),
+				"Failed to click 'Delete Checked' button",
+				"Successfully clicled 'Delete Checked' button");
+			Report.IsTrue(selMyIngredientsModal.ClickButton("YES"),
+				"Failed to click the YES button in the Remove Ingredients pop up",
+				"Successfully clicked the YES button in the Remove Ingredients pop up");
 		}
 	}
 }

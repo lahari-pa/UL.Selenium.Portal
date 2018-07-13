@@ -516,11 +516,12 @@ testRunner.Given("In the My Account page I navigate to the My Library page", ((s
 #line 243
 testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 245
-testRunner.And("I save the current list of ingredients in My Library to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I save the current list of ingredients in My Library to context as: My Library In" +
+                    "gredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 247
 testRunner.Given("I enter the text: wat into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 249
-testRunner.And("I select \'Water\' from the smart search results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I select the smart search result with name: Water and CAS: 7732-18-5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 251
 testRunner.And("I save the ingredient I added in My Library to context as: water70539", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 253
@@ -597,11 +598,12 @@ testRunner.Given("In the My Account page I navigate to the My Library page", ((s
 #line 298
 testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 300
-testRunner.And("I save the current list of ingredients in My Library to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I save the current list of ingredients in My Library to context as: My Library In" +
+                    "gredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 302
 testRunner.Given("I enter the text: wat into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 304
-testRunner.And("I select \'Water\' from the smart search results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I select the smart search result with name: Water and CAS: 7732-18-5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 306
 testRunner.And("I save the ingredient I added in My Library to context as: water70556", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 308
@@ -680,11 +682,12 @@ testRunner.Given("In the My Account page I navigate to the My Library page", ((s
 #line 355
 testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 357
-testRunner.And("I save the current list of ingredients in My Library to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I save the current list of ingredients in My Library to context as: My Library In" +
+                    "gredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 364
 testRunner.Given("I enter the text: Formald into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 366
-testRunner.And("I select \'Formaldehyde\' from the smart search results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I select the smart search result with name: Formaldehyde and CAS: 50-00-0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 368
 testRunner.And("I save the ingredient I added in My Library to context as: formaldehyde70567", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 370
@@ -730,6 +733,229 @@ testRunner.Given("I click: YES in the \'Remove Component from My Ingredients\' p
 #line 407
 testRunner.Then("I confirm My Ingredient saved as: formaldehyde70567 in My Library has been remove" +
                     "d from the grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[73329] Edit Ingredient")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MyLibrary")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PackagingTypes")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Brands")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyIngredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_MyLibrary")]
+        public virtual void _73329EditIngredient()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73329] Edit Ingredient", ((string[])(null)));
+#line 409
+this.ScenarioSetup(scenarioInfo);
+#line 411
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 413
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 415
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 417
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 419
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Chemical Name",
+                        "CAS"});
+            table2.AddRow(new string[] {
+                        "Sulfuric acid",
+                        "7664-93-9"});
+            table2.AddRow(new string[] {
+                        "Cobalt sulfate",
+                        "10124-43-3"});
+            table2.AddRow(new string[] {
+                        "Graphene",
+                        "1034343-98-0"});
+            table2.AddRow(new string[] {
+                        "Pyrrole-2-carboxylic acid",
+                        "634-97-9"});
+            table2.AddRow(new string[] {
+                        "Formaldehyde",
+                        "50-00-0"});
+            table2.AddRow(new string[] {
+                        "Polycarbonate",
+                        "25037-45-0"});
+            table2.AddRow(new string[] {
+                        "Nitric acid",
+                        "7697-37-2"});
+            table2.AddRow(new string[] {
+                        "Cumene",
+                        "98-82-8"});
+            table2.AddRow(new string[] {
+                        "Argon",
+                        "7440-37-1"});
+            table2.AddRow(new string[] {
+                        "Mica",
+                        "12001-26-2"});
+#line 421
+testRunner.Given("I add the following ingredients and save them to context as: My Library New Ingre" +
+                    "dients", ((string)(null)), table2, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Index",
+                        "Click Publicly Disclosed",
+                        "Click Trade Secret",
+                        "Public Name Change"});
+            table3.AddRow(new string[] {
+                        "1",
+                        "Y",
+                        "N",
+                        "+"});
+            table3.AddRow(new string[] {
+                        "2",
+                        "N",
+                        "Y",
+                        "="});
+            table3.AddRow(new string[] {
+                        "3",
+                        "N",
+                        "N",
+                        "-"});
+            table3.AddRow(new string[] {
+                        "4",
+                        "N",
+                        "Y",
+                        "+"});
+            table3.AddRow(new string[] {
+                        "5",
+                        "Y",
+                        "N",
+                        "+"});
+            table3.AddRow(new string[] {
+                        "6",
+                        "Y",
+                        "N",
+                        "+"});
+            table3.AddRow(new string[] {
+                        "7",
+                        "N",
+                        "Y",
+                        "="});
+            table3.AddRow(new string[] {
+                        "8",
+                        "N",
+                        "N",
+                        "-"});
+            table3.AddRow(new string[] {
+                        "9",
+                        "N",
+                        "Y",
+                        "+"});
+            table3.AddRow(new string[] {
+                        "10",
+                        "Y",
+                        "N",
+                        "+"});
+#line 439
+testRunner.Given("I edit the ingredients: My Library New Ingredients and save the edited ingredient" +
+                    "s to context as: My Library Ingredients Edited", ((string)(null)), table3, "Given ");
+#line 452
+testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 454
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 456
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 458
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 460
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 462
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 464
+testRunner.And("I confirm that all changes in edited ingredients: My Library Ingredients Edited w" +
+                    "ere saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Index",
+                        "Click Publicly Disclosed",
+                        "Click Trade Secret",
+                        "Public Name Change"});
+            table4.AddRow(new string[] {
+                        "1",
+                        "Y",
+                        "N",
+                        "+"});
+            table4.AddRow(new string[] {
+                        "2",
+                        "N",
+                        "Y",
+                        "-"});
+            table4.AddRow(new string[] {
+                        "3",
+                        "Y",
+                        "N",
+                        "-"});
+            table4.AddRow(new string[] {
+                        "4",
+                        "N",
+                        "N",
+                        "+"});
+            table4.AddRow(new string[] {
+                        "5",
+                        "N",
+                        "N",
+                        "="});
+            table4.AddRow(new string[] {
+                        "6",
+                        "Y",
+                        "N",
+                        "+"});
+            table4.AddRow(new string[] {
+                        "7",
+                        "N",
+                        "Y",
+                        "+"});
+            table4.AddRow(new string[] {
+                        "8",
+                        "Y",
+                        "N",
+                        "-"});
+            table4.AddRow(new string[] {
+                        "9",
+                        "N",
+                        "Y",
+                        "+"});
+            table4.AddRow(new string[] {
+                        "10",
+                        "Y",
+                        "N",
+                        "="});
+#line 468
+testRunner.Given("I edit the ingredients: My Library New Ingredients and save the edited ingredient" +
+                    "s to context as: My Library Ingredients Edited 2", ((string)(null)), table4, "Given ");
+#line 481
+testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 483
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 485
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 487
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 489
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 491
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 493
+testRunner.Then("I confirm that all changes in edited ingredients: My Library Ingredients Edited 2" +
+                    " were saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 495
+testRunner.And("I remove all ingredients in the list saved as: My Library New Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
