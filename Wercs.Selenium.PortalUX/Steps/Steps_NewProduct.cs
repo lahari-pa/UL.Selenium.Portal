@@ -2615,8 +2615,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"There was no data in the Percentage Active Ingredient field for EPA Number: " + epaNumber,
 					"As expected there was data: '" + editedEPA.PercentActiveIngredient + "' in the Percentage Active Ingredient field for EPA Number: " + epaNumber);
 			}
-			// Wording of the test says 'I confirm all three columns are uneditable.' I have assumed this is: EPA number, Active Ingredient, Percent Active Ingredient
-			TestReport.StartStep("I confirm that all three columns are un-editable");
+			TestReport.StartStep("I confirm that the Active Ingredient and Percent of Active Ingredient columns are un-editable");
 			if (editedEPA == null)
 			{
 				Report.Failure("There were no rows in the EPA Registration table with the user added EPA Number: " + epaNumber);
@@ -2624,9 +2623,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			else
 			{
-				Report.IsTrue(!editedEPA.Editable,
-					"There were editable fields for EPA number: " + epaNumber,
-					"All fields for EPA number: " + epaNumber + " were un-editable as expected");
+				Report.IsTrue(!editedEPA.ActiveIngredientEditable,
+					"The Active Ingredient field for EPA: " + epaNumber + " registration was editable when it was not expected to be.",
+					"The Active Ingredient field for EPA: " + epaNumber + " was un-editable as expected");
+				Report.IsTrue(!editedEPA.PercentActiveIngredientEditable,
+					"The Percent of Active Ingredient field for EPA: " + epaNumber + " registration was editable when it was not expected to be.",
+					"The Precent of Active Ingredient field for EPA: " + epaNumber + " was un-editable as expected");
 			}
 		}
 

@@ -22,6 +22,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+				if (user == null)
+				{
+					Report.Failure("Could not find user saved as: " + savedAs + " in context");
+					return;
+				}
 				TopMenuBar thisTopMenuBar = new TopMenuBar();
 				string username = user.FirstName + ", " + user.LastName;
 				Report.Info("Looking for username: " + username);
@@ -232,8 +237,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Delay.Seconds(3);
 				if (name.ToLower().Contains("saved as"))
 				{
-					name = ((User)Context.GetFromContext(name.Replace("saved as", "", StringComparison.OrdinalIgnoreCase)))
-						.Username;
+					var user = (User)Context.GetFromContext(name.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+					if (user == null)
+					{
+						Report.Failure("The user saved as: " + name + " was not found in context");
+						return;
+					}
+					name = user.Username;
 				}
 				Report.Info("Inputting name: " + name);
 				myUserDetails.Name = name;
@@ -255,10 +265,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				var myUserDetails = new UserDetails();
 				Report.IsTrue(myUserDetails.ClickButton(buttonToClickText), "Failed to click " + buttonToClickText, "Successfully clicked " + buttonToClickText);
-
+				GeneralUtilities.Wait_for_load_finish();
 				if (buttonToClickText.ToLower() == "save")
 				{
 					myUserDetails.ClickButtonOnAddUserDialog("close");
+					GeneralUtilities.Wait_for_load_finish();
 				}
 			}
 			catch (Exception ex)
@@ -381,15 +392,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 					//Open New User Form
 					Report.IsTrue(selMyAccount.Add_New_User_click(), "Failed to Click Add New User Link",
 						"New User Form Link Clicked");
-					Delay.Seconds(3 * Delay.SpeedFactor);
+					Delay.Seconds(1);
 					var selMyUserForm = new UserDetails();
 					//Check Form Has Opened
 					Report.IsTrue(!selMyUserForm.Exists, "Failed to Open Add User Form", "Add User Form Open");
 					//Add New User
 					Report.IsTrue(selMyUserForm.Add_New_User(userName, title, role, phoneNo, emailAddress, confirmEmail, country),
 						"Failed to Add a New User", "New User Added");
-
-					Delay.Seconds(5 * Delay.SpeedFactor);
+					Delay.Seconds(1);
 					//Check User Has Been Created
 					Report.IsTrue(selMyAccount.User_Added_Check(userName, emailAddress, role), "User Has Not Been Created",
 						"User Created Successfully");
@@ -837,6 +847,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 						country, address, city, state, zipCode, countryCode, companyPhone),
 					"Failed to Confirm Correct Company Information", "Correct Company Information Confirmed");
 			}
+		}
+
+		[StepDefinition(@"I close the 'Thank You' user updated dialog")]
+		public void CloseThankYouUpdated()
+		{
+			Report.IsTrue(new AddUserThankYouDialog().Updated_User_Thank_You_Close(), "Failed to click Close in Thank You pop up", "Successfully clicked Close in the Thank You pop up");
+		}
+		[StepDefinition(@"I close the 'Thank You' user added dialog")]
+		public void CloseThankYouCreated()
+		{
+			Report.IsTrue(new AddUserThankYouDialog().Add_User_Thank_You(), "Failed to click Close in Thank You pop up", "Successfully clicked Close in the Thank You pop up");
 		}
 
 	}

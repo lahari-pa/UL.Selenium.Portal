@@ -115,7 +115,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			set
 			{
-				containerElement.FindElement(By.Id("txtConfirm"),2).EnterText(value);
+				containerElement.FindElement(By.Id("txtConfirm"), 2).EnterText(value);
 				Report.Success("Entered confirm email address: " + value);
 			}
 		}
@@ -168,9 +168,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var matchingButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == buttonToClick.ToLower());
 			if (matchingButton != null)
 			{
-				matchingButton.ClickWithScroll();
-				Delay.Seconds(1);
-				return true;
+				return matchingButton.TryClick();
 			}
 
 			return false;
@@ -268,7 +266,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-
-
+		public bool Updated_User_Thank_You_Close()
+		{
+			Report.Info("Beginning Add_User_Thank_You");
+			IWebElement myText = containerElement.FindElements(By.XPath(".//div/p[@class='marBot-20']"), 10).FirstOrDefault();
+			if (myText == null)
+			{
+				Report.Info("Failed to Find Thenk You Text");
+				Report.Screenshot();
+				return false;
+			}
+			Report.IsTrue(myText.Text == "The user account has been updated.", "Thank You Text Incorrect: " + myText.Text, "Thank You Text Correct: The user acount has been updated.");
+			return Close_click();
+		}
 	}
 }

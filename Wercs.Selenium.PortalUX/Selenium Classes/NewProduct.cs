@@ -4177,15 +4177,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var regNo = "";
 				var activeIngredient = "";
 				var percentActiveIngredient = "";
-				bool editable;
+				bool activeIngredientEditable;
+				bool percentActiveIngredientEditable;
 				var EPARows = EPATable.FindElements(By.XPath(@".//tr[@class='rpds-rowcolor-0']"), 2);
 				foreach (var EPARow in EPARows)
 				{
 					regNo = EPARow.FindElement(By.XPath("./td[@class='col-xs-5']/input"), 2).GetValue();
 					activeIngredient = EPARow.FindElement(By.XPath("./td[@class='col-xs-3'][1]/div")).GetValue();
 					percentActiveIngredient = EPARow.FindElement(By.XPath("./td[@class='col-xs-3'][2]/div")).GetValue();
-					editable = EPARow.FindElements(By.XPath("./td/input"), 2).Count > 0;
-					rEPA.Add(new EPARegistration() { ActiveIngredient = activeIngredient, EPANumber = regNo, PercentActiveIngredient = percentActiveIngredient, Editable = editable });
+					activeIngredientEditable = EPARow.FindElement(By.XPath("./td[@class='col-xs-3'][1]/input"), 2) != null;
+					percentActiveIngredientEditable = EPARow.FindElement(By.XPath("./td[@class='col-xs-3'][2]/input"), 2) != null;
+					rEPA.Add(new EPARegistration() {
+						ActiveIngredient = activeIngredient,
+						EPANumber = regNo,
+						PercentActiveIngredient =
+							percentActiveIngredient,
+						ActiveIngredientEditable = activeIngredientEditable,
+						PercentActiveIngredientEditable =  percentActiveIngredientEditable
+					});
 				}
 				return rEPA;
 			}
@@ -4193,7 +4202,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<StatePesticideRegistration> GetStatePesticideRegistrationDetails()
 		{
-			List <StatePesticideRegistration> AllResults = new List<StatePesticideRegistration>();
+			List<StatePesticideRegistration> AllResults = new List<StatePesticideRegistration>();
 			var EPATable = this.EPATable();
 			if (EPATable == null)
 			{
@@ -4220,11 +4229,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					KellyDate = thisRow.FindElement(By.XPath(".//td[4]//label")).Text;
 				}
 				var IsKellyData = false;
-				if (thisRow.FindElements(By.XPath(".//td[5]//div"))!=null)
+				if (thisRow.FindElements(By.XPath(".//td[5]//div")) != null)
 				{
 					IsKellyData = thisRow.FindElements(By.XPath(".//td[5]//div")).Count == 1;
 				}
-				
+
 				AllResults.Add(new StatePesticideRegistration() {
 					State = State,
 					ExpirationDate = ExpirationDate,
@@ -4578,7 +4587,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string EPANumber { get; set; }
 		public string ActiveIngredient { get; set; }
 		public string PercentActiveIngredient { get; set; }
-		public bool Editable { get; set; }
+		public bool ActiveIngredientEditable { get; set; }
+		public bool PercentActiveIngredientEditable { get; set; }
 		public void Remove()
 		{
 
