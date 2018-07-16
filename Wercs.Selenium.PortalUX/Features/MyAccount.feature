@@ -349,17 +349,6 @@ Given I click previous in the My Account user grid
 
 Then The My Account user grid is currently on page number: 1
 
-# Tool to quickly add x users (for pagination tests)
-Scenario: Add multiple users
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-
-Given I click on My Account
-
-Given I add 30 new users with emails using the following information
-| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
-| User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |
-
 # Requires 9 pages of users (not 6 as the test case states)
 Scenario: [70511] Pagination (...) need an account with six pages of users
 
@@ -382,7 +371,6 @@ Given I enter the up arrow into the user grid page navigation box then the corre
 Given I click ... in the My Account user grid
 
 Given I enter the down arrow into the user grid page navigation box then the correct page is shown
-
 
 Scenario: [68417] Company Information
 

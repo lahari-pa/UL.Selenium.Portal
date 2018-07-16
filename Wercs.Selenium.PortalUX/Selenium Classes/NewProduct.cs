@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
@@ -949,7 +950,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			get
 			{
 				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Prop 65")||x.Text.Contains("Proposition 65"))
+					.FirstOrDefault(x => x.Text.Contains("Prop 65") || x.Text.Contains("Proposition 65"))
 					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
@@ -979,7 +980,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 
 				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Prop 65")||x.Text.Contains("Proposition 65"))
+					.FirstOrDefault(x => x.Text.Contains("Prop 65") || x.Text.Contains("Proposition 65"))
 					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
 				Report.Screenshot();
@@ -1972,8 +1973,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var tradeSecret = matchingrow.FindElement(By.XPath(".//td[@class='trade-secret']//input"), 2);
 				tradeSecret.Check(ingredient.TradeSecret);
 
-				
-				if (ingredient.PublicName!=null && ingredient.PublicName.Trim().Length > 0)
+
+				if (ingredient.PublicName != null && ingredient.PublicName.Trim().Length > 0)
 				{
 					var publicName = matchingrow.FindElement(By.XPath(".//td[@class='inci-name']//select"), 2);
 					publicName.Select(ingredient.PublicName);
@@ -3377,7 +3378,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-		
+
 
 		public bool SectionExists(string section)
 		{
@@ -3403,7 +3404,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
-		
+
 
 		public bool SetOptionInSection(string section, string value)
 		{
@@ -3803,6 +3804,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			expirationDateInputs.FirstOrDefault().Clear();
 			expirationDateInputs.FirstOrDefault().SendKeys(date);
+			expirationDateInputs.FirstOrDefault().SendKeys(Keys.Enter);
 			expirationDateInputs.FirstOrDefault().ScrollElementIntoView();
 			Delay.Seconds(1);
 			return expirationDateInputs.FirstOrDefault().GetValue() == date;
@@ -4386,7 +4388,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetIngredientPublicNameOptions(string chemicalName)
 		{
-			return IngredientRow(chemicalName).FindElements(By.XPath(".//select/option")).Select(x=>x.Text).ToList();
+			return IngredientRow(chemicalName).FindElements(By.XPath(".//select/option")).Select(x => x.Text).ToList();
 		}
 
 		public string GetPublicNameErrorMessage(string ingredient)
@@ -4405,7 +4407,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetIngredientTableColumnHeaders()
 		{
-			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//thead//th"), 2).Select(x=>x.Text).ToList();
+			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//thead//th"), 2).Select(x => x.Text).ToList();
 		}
 
 		//checkbox, textbox, select
@@ -4487,7 +4489,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			catch (Exception e)
 			{
-				
+
 			}
 		}
 
@@ -4589,7 +4591,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string SubTitle { get; set; }
 		public string Text { get; set; }
 
-		public List<Mailosaur.Link> Links{get;set;}
+		public List<Mailosaur.Link> Links { get; set; }
 	}
 
 	public class StatePesticideRegistration

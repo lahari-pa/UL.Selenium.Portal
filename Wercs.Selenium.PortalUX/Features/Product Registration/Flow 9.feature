@@ -31,9 +31,7 @@ Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
 
-#Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
-
-Given I call Shared Step 73748 (Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -55,7 +53,7 @@ Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Ty
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given in the Additional Documents to Provide page I click Continue
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -67,9 +65,7 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baby/infant/Adult Care/Cleansing Wipes
 
-#Replace shared 42214
-Given I navigate to the home page
-Then I delete the product: TestCase58072
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58072
 
 Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 
@@ -141,6 +137,8 @@ Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Ty
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+# Breaking here because the 'Additional Documents to Provide' page shows (OSHA SDS, TCLP etc)
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 

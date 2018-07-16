@@ -1721,14 +1721,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the following radio buttons(.*):")]
-		public void ShouldSeeTheRadioButton(string order, Table expected)
+		[StepDefinition(@"I should see the following radio buttons:")]
+		public void ShouldSeeTheRadioButton(Table expected)
 		{
 			var selNewProduct = new NewProduct();
 			var radioButtonsShowing = selNewProduct.RadioButtons();
 			foreach (var row in expected.Rows)
 			{
-				var button = row["button"];
+				var button = row["Button"];
 				Report.Info("Checking that I see the radio button '" + button + "'");
 				Report.IsTrue(radioButtonsShowing.Contains(button.Trim()),
 					"Radio Button was not showing as expected! Expected: '" + button + "', but found: '" + string.Join("', '", radioButtonsShowing) + "'!",
@@ -1962,7 +1962,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"(.*) should not be showing the error messages: (.*)")]
 		public void ErrorMessagesAreNotShowingForItem(string section, string pipeDelimitedErrorMessages)
 		{
-			Delay.Seconds(5 * Delay.SpeedFactor);
+			Delay.Seconds(1);
 			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
 			var errorMessages = new NewProduct().GetErrorsForSection(section);
 			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
@@ -1970,7 +1970,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.IsTrue(!errorMessages.Contains(item.Trim()), "Error message still displays: " + item + "!", "Error message does not display: " + item + "!", false);
 			}
-			Report.Screenshot();
 		}
 
 		// NB: Multiple values should be delimited by the '|' character!
@@ -3023,7 +3022,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Field does not exist",
 				"Field exists");
 			Delay.Seconds(1);
-			
+
 		}
 
 		[StepDefinition(@"(.*) should not be showing any error messages")]
@@ -3031,7 +3030,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Delay.Seconds(5 * Delay.SpeedFactor);
 			var errorMessages = new NewProduct().GetErrorsForSection(section);
-			Report.IsTrue(errorMessages.Count ==0, "No error message should be showing", "As expected, no error messages are showing");
+			Report.IsTrue(errorMessages.Count == 0, "No error message should be showing", "As expected, no error messages are showing");
 
 		}
 

@@ -454,13 +454,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var selNewProduct = new NewProduct();
 			TestReport.StartStep("I should see the Regulatory Information 1 Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
 			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
 			TestReport.StartStep(
-				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			new NewProduct().Prop65 = false;
+				"I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			selNewProduct.Prop65 = false;
+			Delay.Seconds(1);
+			Report.IsFalse(selNewProduct.Prop65, "The Prop 65 option was not successfully set to No", "The Prop 65 question was successfully set to No");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -2321,7 +2324,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Info("Secondary physical state is not showing");
 			}
-			
+
 			TestReport.StartStep(
 				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(
@@ -3221,7 +3224,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 		*/
-		
+
 
 		[Given(@"I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue")]
 		public void GivenICallSharedStepIngredients_AddAnyChemical_DONotClickContinue(Table ingredientsTable)
@@ -3390,7 +3393,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Pesticide Details - U.S.");
 		}
 
-		
+
 
 		DateTime GetRandomDate(DateTime dtStart, DateTime dtEnd)
 		{
@@ -3415,7 +3418,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			DateTime dtEnd = new DateTime(year, month, day);
 
-			DateTime dt = GetRandomDate(dtStart,dtEnd);
+			DateTime dt = GetRandomDate(dtStart, dtEnd);
 
 			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
@@ -3436,7 +3439,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			NewProduct MyNewProduct = new NewProduct();
 
-			int year = DateTime.Now.Year+1;
+			int year = DateTime.Now.Year + 1;
 			int month = 10;
 			int day = 1;
 
@@ -3559,7 +3562,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("Secondary physical state is not showing");
 			}
 			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
-			
+
 			TestReport.StartStep(
 				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			MyNewProductSteps.SelectFirstOptionInSection(

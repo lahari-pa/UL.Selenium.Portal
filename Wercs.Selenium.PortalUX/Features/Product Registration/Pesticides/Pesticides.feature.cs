@@ -515,7 +515,7 @@ testRunner.Then("I confirm that there is data populated in the Expiration Date C
 testRunner.Then("I confirm the \'Is Kelly Data\' field is marked with a check for every State contai" +
                     "ning data in \'Expiration Date\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 259
-testRunner.Then("I edit the Expiration Date to: 2018-07-01 for the State: NY on the Pesticide Stat" +
+testRunner.Then("I edit the Expiration Date to: 2018-12-01 for the State: NY on the Pesticide Stat" +
                     "e Registration Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 261
 testRunner.Given("I confirm the Expiration Date Provided By Kelly field for state: NY is blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -530,12 +530,12 @@ testRunner.Given("in the Pesticide Details - U.S. page I click Continue", ((stri
 #line 271
 testRunner.Given("I confirm the Expiration Date Provided By Kelly field for state: NY is blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 273
-testRunner.Then("I confirm the Expiration Date field for state: NY is showing the value: 2018-07-0" +
+testRunner.Then("I confirm the Expiration Date field for state: NY is showing the value: 2018-12-0" +
                     "1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 275
 testRunner.Given("I click the Update Wercs Smart data with EPA data through Kelly Services link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 277
-testRunner.Then("I confirm the Expiration Date field for state: NY is showing the value: 2018-07-0" +
+testRunner.Then("I confirm the Expiration Date field for state: NY is showing the value: 2018-12-0" +
                     "1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 279
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

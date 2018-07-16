@@ -169,7 +169,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			int pageNo = 1;
 
-			while (pageNo < 10)
+			while (pageNo <= GetPage("last"))
 			{
 				Delay.Seconds(1.5 * Delay.SpeedFactor);
 
@@ -599,6 +599,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			navEl.ScrollElementIntoView();
 			return navEl.TryClick();
+		}
+
+		public int GetPage(string position)
+		{
+			if (position.ToLower() == "current")
+			{
+				var activePageControl = containerElement.FindElement(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
+				if (activePageControl == null)
+				{
+					Report.Failure("The page control could not be found on the My Packaging Types grid");
+					return -1;
+				}
+				return int.Parse(activePageControl.Text);
+			}
+			if (position.ToLower() == "last")
+			{
+				var lastControl = containerElement.FindElements(By.XPath(".//div[@id='user-accounts']//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+				if (lastControl.Count == 0)
+				{
+					Report.Info("Last page is: 1");
+					return 1;
+				}
+				return int.Parse(lastControl.Last().Text);
+			}
+			return 1;
 		}
 
 		public IWebElement UserGridNavPageInput()

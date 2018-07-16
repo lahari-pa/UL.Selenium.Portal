@@ -256,7 +256,7 @@ Then I confirm that there is data populated in the Expiration Date Column for so
 
 Then I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
 
-Then I edit the Expiration Date to: 2018-07-01 for the State: NY on the Pesticide State Registration Details page
+Then I edit the Expiration Date to: 2018-12-01 for the State: NY on the Pesticide State Registration Details page
 
 Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 
@@ -270,11 +270,11 @@ Given in the Pesticide Details - U.S. page I click Continue
 
 Given I confirm the Expiration Date Provided By Kelly field for state: NY is blank
 
-Then I confirm the Expiration Date field for state: NY is showing the value: 2018-07-01
+Then I confirm the Expiration Date field for state: NY is showing the value: 2018-12-01
 
 Given I click the Update Wercs Smart data with EPA data through Kelly Services link
 
-Then I confirm the Expiration Date field for state: NY is showing the value: 2018-07-01
+Then I confirm the Expiration Date field for state: NY is showing the value: 2018-12-01
 
 Given I navigate to the home page
 
