@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using ResourcePool;
 using SafewareReporting;
@@ -714,5 +715,58 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click the WERCSmart logo",
 				"Successfully clicked the WERCSmart logo");
 		}
+
+		[StepDefinition(@"I should see the following states in the following order in the Legend:")]
+		public void ThenIShouldSeeTheFollowingStatesInTheFollowingOrderInTheLegend(Table table)
+		{
+			try
+			{
+				Report.Info("Checking order of states in the Pie Chart Legend");
+				var selHomepage = new Homepage();
+				var ListOfStates = selHomepage.PieChartLegendItems();
+				var ExpectedStates = table.Rows.Select(x => x["State"]).ToList();
+				int i = 0;
+				foreach (string expectedState in ExpectedStates)
+				{
+					Report.IsTrue(expectedState == ListOfStates[i],
+						"Expected: " + expectedState + " but got: " + ListOfStates[i],
+						"As expected, " + expectedState + " is showing in the right order");
+					i++;
+				}
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[Given(@"I should see the following filters in the following order under My products:")]
+		public void GivenIShouldSeeTheFollowingFiltersInTheFollowingOrderUnderMyProducts(Table table)
+		{
+			try
+			{
+				Report.Info("Checking order of states in the Pie Chart Legend");
+				var selProductsGrid = new ProductsGrid();
+				var ListOfFilters = selProductsGrid.GetAllFilters();
+				var ExpectedFilters = table.Rows.Select(x => x["Filter"]).ToList();
+				int i = 0;
+				foreach (string expectedFilter in ExpectedFilters)
+				{
+					Report.IsTrue(expectedFilter == ListOfFilters[i],
+						"Expected: " + expectedFilter + " but got: " + ListOfFilters[i],
+						"As expected, " + expectedFilter + " is showing in the right order");
+					i++;
+				}
+
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 	}
 }

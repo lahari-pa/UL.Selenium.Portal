@@ -92,12 +92,12 @@ And the Announcements dialog should be visible
 
 And I should see a Pie Chart and Legend under Product Information
 And I should see the following states in the Legend:
-| State             | Colour |
-| Not Yet Submitted | Grey   |
+| State                  | Colour |
+| Not Yet Submitted      | Grey   |
 | Assessment in Progress | Yellow |
 | Sending to Retailers   | Blue   |
 | Accepted by Retailers  | Green  |
-| Needs Your Attention   | Red    |
+| Needs Your Attention   | Red    |  
 
 Given I see notifications in the Announcement Panel
 
@@ -423,23 +423,46 @@ Given I enter the down arrow into the products grid page navigation input then t
 
 # NB this test requires pre set up products with a Brand/ Product Line added in the 'The Product' section
 Scenario: [68388] More Filters - Brand
-
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
 Then The home screen should load
-
 And I should see an option for More Filters
-
 Given I click More Filters in the products grid
-
 Given I select the SuperBrand(TM) option in the Brand More Filters drop down
-
 Given I click Row Actions for the first product returned
-
 And I click on the Row Action: Edit
-
 Given In the New Product page I click tab: Product Type
-
 And in the New Product page I click section: The Product
-
 Then Product Line or Brand (optional) should be showing the value: SuperBrand(TM)
+
+
+#CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
+#in the development environment
+Scenario: [71188] Primary Filter on My Products View - UPC Filter
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I filter the products by: Accepted by Retailers
+Given I edit the first product in results
+
+Scenario: [65617] Correct Order of Statuses
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+And I should see a Pie Chart and Legend under Product Information
+And I should see the following states in the following order in the Legend:
+| State                  |
+| Not Yet Submitted      | 
+| Assessment in Progress |
+| Sending to Retailers   | 
+| Accepted by Retailers  |
+| Needs Your Attention   |
+And I should see the following filters in the following order under My products:
+| Filter                  |
+| All                    |
+| Not Yet Submitted      |
+| Assessment in Progress |
+| Sending to Retailers   |
+| Accepted by Retailers  |
+| Needs Your Attention   |
+| Canceled               |
+
+
+
+

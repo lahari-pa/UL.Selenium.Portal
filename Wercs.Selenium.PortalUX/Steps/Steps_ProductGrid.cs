@@ -661,5 +661,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully edited the product with ID: " + id);
 			GeneralUtilities.Wait_for_load_finish();
 		}
+
+		[StepDefinition(@"I edit the first product in results")]
+		public void EditFirstProductInResults()
+		{
+			var selProductsGrid = new ProductsGrid();
+			Report.IsTrue(selProductsGrid.ClickActionsForFirstResultInGrid() && selProductsGrid.ClickRowAction("Edit"),
+				"Failed to edit the first product",
+				"Successfully edited first product");
+			GeneralUtilities.Wait_for_load_finish();
+		}
 	}
 }

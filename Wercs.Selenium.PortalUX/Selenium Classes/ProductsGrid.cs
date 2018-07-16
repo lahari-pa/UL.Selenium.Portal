@@ -44,6 +44,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return productsGrid.FindElements(By.XPath(".//tbody/tr"), 2).Count;
 		}
 
+		public List<string> GetAllFilters()
+		{
+			return this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"))
+				.Select(x => x.Text).ToList();
+		}
+
 		public bool FilterOptionShowingCorrectly(string option, string colourExpected)
 		{
 			var allFilters = this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2);
