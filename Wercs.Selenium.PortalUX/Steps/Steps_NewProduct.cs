@@ -3057,6 +3057,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Then(@"I confirm that every date in the Expiration Date column has a matching date in the Expiration Date provided by Kelly column")]
+		public void ThenIConfirmThatEveryDateInTheExpirationDateColumnHasAMatchingDateInTheExpirationDateProvidedByKellyColumn()
+		{
+			List<StatePesticideRegistration>
+				AllPesticideDetails = new NewProduct().GetStatePesticideRegistrationDetails();
+
+			foreach (StatePesticideRegistration thisRow in AllPesticideDetails)
+			{
+				if (thisRow.ExpirationDate.Length > 0)
+				{
+					Report.IsTrue(thisRow.ExpirationDate == thisRow.ExpirationDateByKelly,
+						"For state: " + thisRow.State + "Expiration date: " + thisRow.ExpirationDate +
+						" does not match Kelly expiration date: " + thisRow.ExpirationDateByKelly,
+						"As expected, for state: " + thisRow.State +
+						" Expiration date and Kelly Expiration date are matching on: " + thisRow.ExpirationDate);
+				}
+			}
+		}
 
 	}
 }

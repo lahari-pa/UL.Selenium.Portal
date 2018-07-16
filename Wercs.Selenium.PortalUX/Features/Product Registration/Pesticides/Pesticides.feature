@@ -667,11 +667,9 @@ Given in the New Product page I click Continue
 Given I add the EPA registration number: 72315-6
 Given in the New Product page I click Continue
 And I should see the Pesticide Details - State Registration Details Page
-
-#Confirm the Expiration Date column shows 1 or more date(s)
-#Confirm the Expiration Date provided by Kelly shows the same date as shown in the Expiration Date column for rows where a date is shown in the Expiration Date  column.
-#Confirm that the Is Kelly Data column shows a check mark for all rows where a date is shown in the Expiration Data column
-
+Given I confirm that there is data populated in the Expiration Date Column for some States
+Then I confirm that every date in the Expiration Date column has a matching date in the Expiration Date provided by Kelly column
+And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
 Given in the New Product page I click Continue
 And I should see the Transportation Details 1 Page
 Given I navigate to the home page

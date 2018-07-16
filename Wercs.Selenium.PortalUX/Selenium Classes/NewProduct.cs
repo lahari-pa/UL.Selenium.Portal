@@ -4189,6 +4189,52 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public List<StatePesticideRegistration> GetStatePesticideRegistrationDetails()
+		{
+			List <StatePesticideRegistration> AllResults = new List<StatePesticideRegistration>();
+			var EPATable = this.EPATable();
+			if (EPATable == null)
+			{
+				Report.Failure("The EPA Registration Table could not be found");
+				Report.Screenshot();
+				return AllResults;
+			}
+
+			var Rows = EPATable.FindElements(By.XPath(".//tbody/tr")).ToList();
+
+			foreach (var thisRow in Rows)
+			{
+				var State = thisRow.FindElement(By.XPath(".//td[2]//div")).Text;
+				var ExpirationDate = thisRow.FindElement(By.XPath(".//td[3]//input")).GetValue();
+				var RegNo = thisRow.FindElement(By.XPath(".//td[1]//input"));
+				var RegistrationNumber = RegNo.Text;
+				if (RegistrationNumber.Length == 0)
+				{
+					RegistrationNumber = RegNo.GetAttribute("placeholder");
+				}
+				var KellyDate = "";
+				if (thisRow.FindElement(By.XPath(".//td[4]//label")) != null)
+				{
+					KellyDate = thisRow.FindElement(By.XPath(".//td[4]//label")).Text;
+				}
+				var IsKellyData = false;
+				if (thisRow.FindElements(By.XPath(".//td[5]//div"))!=null)
+				{
+					IsKellyData = thisRow.FindElements(By.XPath(".//td[5]//div")).Count == 1;
+				}
+				
+				AllResults.Add(new StatePesticideRegistration() {
+					State = State,
+					ExpirationDate = ExpirationDate,
+					RegistrationNumber = RegistrationNumber,
+					ExpirationDateByKelly = KellyDate,
+					IsKellyData = IsKellyData
+				});
+			}
+
+			return AllResults;
+		}
+
 		public bool SelectRetailer(string retailerName)
 		{
 			var xPath = @".//input[@type='checkbox' and parent::td/following-sibling::td[text() =""" + retailerName + @"""]]";
@@ -4544,5 +4590,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string Text { get; set; }
 
 		public List<Mailosaur.Link> Links{get;set;}
+	}
+
+	public class StatePesticideRegistration
+	{
+		public string RegistrationNumber { get; set; }
+		public string State { get; set; }
+		public string ExpirationDate { get; set; }
+		public string ExpirationDateByKelly { get; set; }
+		public bool IsKellyData { get; set; }
 	}
 }

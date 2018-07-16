@@ -1452,13 +1452,22 @@ testRunner.Given("I add the EPA registration number: 72315-6", ((string)(null)),
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 669
 testRunner.And("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 675
+#line 670
+testRunner.Given("I confirm that there is data populated in the Expiration Date Column for some Sta" +
+                    "tes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 671
+testRunner.Then("I confirm that every date in the Expiration Date column has a matching date in th" +
+                    "e Expiration Date provided by Kelly column", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 672
+testRunner.And("I confirm the \'Is Kelly Data\' field is marked with a check for every State contai" +
+                    "ning data in \'Expiration Date\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 673
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 676
+#line 674
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 677
+#line 675
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 678
+#line 676
 testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56541", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
