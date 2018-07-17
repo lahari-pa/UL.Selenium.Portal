@@ -146,6 +146,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\GlobalParametersPortal.cs" />
     <Compile Include="Classes\Mailosaur.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Features\ChooseGoodGuide.feature.cs">
@@ -429,6 +430,10 @@
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />
+    <Compile Include="Selenium Classes\StudioDesktop.cs" />
+    <Compile Include="Selenium Classes\StudioManageGlobalMessages.cs" />
+    <Compile Include="Selenium Classes\StudioSHAManager.cs" />
+    <Compile Include="Selenium Classes\StudioTopMenu.cs" />
     <Compile Include="Selenium Classes\SubscriptionEnrollment.cs" />
     <Compile Include="Selenium Classes\SubscriptionUpgrade.cs" />
     <Compile Include="Selenium Classes\SupplierReports.cs" />
@@ -437,6 +442,7 @@
     <Compile Include="Selenium Classes\ULSC.cs" />
     <Compile Include="Selenium Classes\UlSolutionCenter.cs" />
     <Compile Include="Selenium Classes\UserDetails.cs" />
+    <Compile Include="Selenium Classes\StudioLogin.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
@@ -445,6 +451,7 @@
     <Compile Include="Steps\Steps_PackagingTypes.cs" />
     <Compile Include="Steps\Steps_PaymentMethods.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
+    <Compile Include="Steps\Steps_SHA.cs" />
     <Compile Include="Steps\Steps_Shared.cs" />
     <Compile Include="Steps\Steps_Solution.cs" />
     <Compile Include="Steps\Steps_ForgottenPassword.cs" />

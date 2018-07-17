@@ -4,6 +4,7 @@ using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using ResourcePool;
+using SafewareReporting;
 using SeleniumUtilities;
 
 
@@ -178,6 +179,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickTermsOfUse()
 		{
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//footer/p/a"), 2).TryClick();
+		}
+
+		public List<string> GetAnnouncements()
+		{
+			return this.containerElement
+				.FindElements(
+					By.XPath(
+						".//div[@id='at-a-glance']//h3[contains(text(),'Announcements')]/../div//table//tr/td/span"), 2)
+				.Select(x => x.Text).ToList();
+
+		}
+
+		public int GetAnnouncementCount()
+		{
+			try
+			{
+				string AnnouncementCount = this.containerElement
+					.FindElement(By.XPath(".//div[@id='at-a-glance']//h3[contains(text(),'Announcements')]/span")).GetValue();
+				Report.Info("Got announcement count: " + AnnouncementCount);
+				return Convert.ToInt16(AnnouncementCount);
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+				return -1;
+			}
+			
 		}
 	}
 

@@ -768,5 +768,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Then(@"In the announcements area I should see my saved messages")]
+		public void ThenInTheAnnouncementsAreaIShouldSeeMySavedMessages()
+		{
+			Homepage myHomepage = new Homepage();
+			List<Message> ListOfMessages = (List<Message>)Context.GetFromContext("Messages");
+			List<string> MessagesOnHomepage = myHomepage.GetAnnouncements();
+
+			foreach (string thisMessage in ListOfMessages.Select(x => x.MessageBody).ToList())
+			{
+				Report.IsTrue(MessagesOnHomepage.Contains(thisMessage), thisMessage + " is not showing in Announcements",
+					"Is showing in Announcements as expected.");
+			}
+
+			int ActualMessageCount = myHomepage.GetAnnouncementCount();
+			Report.IsTrue(ActualMessageCount == MessagesOnHomepage.Count,
+				"Listed count is: " + ActualMessageCount.ToString() + " but number of messages is: " +
+				MessagesOnHomepage.Count.ToString(),
+				"As expected, message count is showing as: " + ActualMessageCount.ToString());
+		}
+
+
 	}
 }

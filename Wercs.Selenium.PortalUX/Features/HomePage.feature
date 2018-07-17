@@ -14,6 +14,7 @@
 @DocumentAcceptance
 @DeleteActiveProducts
 @Solutions
+@SHA
 
 
 Feature: Home Page
@@ -97,7 +98,7 @@ And I should see the following states in the Legend:
 | Assessment in Progress | Yellow |
 | Sending to Retailers   | Blue   |
 | Accepted by Retailers  | Green  |
-| Needs Your Attention   | Red    |  
+| Needs Your Attention   | Red    |
 
 Given I see notifications in the Announcement Panel
 
@@ -448,9 +449,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 And I should see a Pie Chart and Legend under Product Information
 And I should see the following states in the following order in the Legend:
 | State                  |
-| Not Yet Submitted      | 
+| Not Yet Submitted      |
 | Assessment in Progress |
-| Sending to Retailers   | 
+| Sending to Retailers   |
 | Accepted by Retailers  |
 | Needs Your Attention   |
 And I should see the following filters in the following order under My products:
@@ -462,6 +463,19 @@ And I should see the following filters in the following order under My products:
 | Accepted by Retailers  |
 | Needs Your Attention   |
 | Canceled               |
+
+Scenario: [59732] Announcements - Add
+Given I navigate to Studio
+Given I call shared step 53542 (Login with Administrator Role Continue 2 (2nd login shared step))
+Given I call shared step 59066 (Go to SHA Manager)
+Given I call shared step 59728 (Go to Manage Global Messages)
+Given In the the Manage Global Messages dialog I add and save the following messages:
+| Title    | Message   | Type          | Active | Level   |
+| My title | generated | GlobalMessage | true   | Warning |
+Given I close the Manage Global Messages dialog
+Given I navigate to Portal
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Then In the announcements area I should see my saved messages
 
 
 

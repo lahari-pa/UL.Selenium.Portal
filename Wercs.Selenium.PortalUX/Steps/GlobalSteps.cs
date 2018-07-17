@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Reflection;
 using System.Threading;
 using SafewareReporting;
@@ -14,16 +15,49 @@ using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReportingPlugin;
 using TechTalk.SpecFlow.Assist;
+using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Steps;
 
 [assembly: Apartment(ApartmentState.STA)]
 
 namespace WERCSmart
 {
-
 	[Binding]
 	public class GlobalSteps
 	{
+		[BeforeTestRun(Order = 1)]
+		public static void SetTestURL()
+		{
+			if (ConfigurationManager.AppSettings.AllKeys.Contains("SiteType"))
+			{
+				switch (ConfigurationManager.AppSettings["SiteType"].ToLower())
+				{
+					case ("local"):
+					case ("development"):
+					{
+						GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
+						GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
+							break;
+					}
+					case ("staging"):
+					{
+						GlobalParameters.TestUrl = @"https://staging.thewercs.com";
+						GlobalParametersPortal.SHAUrl = @"";
+						break;
+					}
+						
+					default:
+					{
+						GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
+						GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
+						break;
+					}
+				}
+			}
+		}
+
+
+
 		[StepDefinition(@"I login into the WERCSmart Portal - Administrator Role")]
 		[StepDefinition(@"I login as the administrator")]
 		[StepDefinition(@"I login as the administrator")]

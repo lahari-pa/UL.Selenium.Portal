@@ -3628,6 +3628,35 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
+		[Given(@"I call shared step 53542 \(Login with Administrator Role Continue 2 \(2nd login shared step\)\)")]
+		public void GivenICallSharedStep53542LoginWithAdministratorRoleContinue2NdLoginSharedStep()
+		{
+			TestReport.UseSubSteps = true;
+			Steps_SHA MyStepsSHA = new Steps_SHA();
+
+			MyStepsSHA.GivenILoginToStudioAsAdministrator();
+
+		}
+
+		[Given(@"I call shared step 59066 \(Go to SHA Manager\)")]
+		public void GivenICallSharedStep59066GoToSHAManager()
+		{
+			Steps_SHA MyStepsSHA = new Steps_SHA();
+			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
+			StudioSHAManager thisStudioShaManager = new StudioSHAManager();
+			
+			Report.IsTrue(thisStudioShaManager.WaitForProductList(60), "Product list is showing",
+				"Product list is not showing");
+		}
+
+		[Given(@"I call shared step 59728 \(Go to Manage Global Messages\)")]
+		public void GivenICallSharedStep59728GoToManageGlobalMessages()
+		{
+			Steps_SHA MyStepsSHA = new Steps_SHA();
+			Delay.Seconds(1);
+			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Manage Global Messages");
+		}
+
 
 	}
 }
