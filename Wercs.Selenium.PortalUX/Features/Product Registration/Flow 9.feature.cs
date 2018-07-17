@@ -377,11 +377,12 @@ testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-
                     "ze Only) for UPC: saved as UPC58078, container type: Plastic Container and size:" +
                     " 3.6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 137
-testRunner.Given("I call Shared 57881 (Regulatory Documents to Provide - US only - request authorin" +
-                    "g - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I set the OSHA-compliant Safety Data Sheet, English field to: Request to author", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 139
 testRunner.Given("I call Shared 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\testd" +
                     "oc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 141
+testRunner.Given("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 143
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

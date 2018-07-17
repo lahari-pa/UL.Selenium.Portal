@@ -2007,6 +2007,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var selNewProduct = new NewProduct();
 			TestReport.StartStep("I should see the Regulatory Information 1 Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
 			var table = new Table("Section");
@@ -2019,7 +2020,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
 			TestReport.StartStep(
 				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			new NewProduct().Prop65 = false;
+			selNewProduct.Prop65 = false;
+			Delay.Seconds(1);
+			Report.IsTrue(!selNewProduct.Prop65, "The Prop 65 option was not set to 'No'", "The Prop 65 option was set to: 'No'");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -3592,7 +3595,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.ErrorMessagesAreShowingForItem(province, error);
+			MyStepsNewProduct.ErrorMessagesAreShowingForItem(province, "should", error);
 			MyStepsNewProduct.SelectFirstOptionInSection(province);
 			MyStepsNewProduct.ErrorMessagesShouldNotBeShowingForItem(province);
 		}

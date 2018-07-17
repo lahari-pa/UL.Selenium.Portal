@@ -1754,15 +1754,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"Section: (.*) should be showing the following radio buttons in order:")]
+		[StepDefinition(@"The following radio buttons should be displayed for section: (.*)")]
 		public void CheckRadioButtonsInSectionAndOrder(string section, Table expected)
 		{
 			var expectedRadioButtons = new List<string>();
 			expected.Rows.ForEach(x => expectedRadioButtons.Add(x["Button"]));
 			var radioButtonsShowing = new NewProduct().RadioButtonsInSection(section);
-			Report.IsTrue(expectedRadioButtons.SequenceEqual(radioButtonsShowing) && expectedRadioButtons.Count == radioButtonsShowing.Count,
-				"The actual radio buttons for section: " + section + " did not match the expected text in order. The radios showing are:\n" + string.Join("\n", radioButtonsShowing),
-				"The actual radio buttons for section: " + section + " matched the expected text in order. The radios showing are:\n" + string.Join("\n", radioButtonsShowing));
+			Report.IsTrue(expectedRadioButtons.All(x => radioButtonsShowing.Contains(x)),
+				"The actual radio buttons for section: " + section + " were no as expected. Actual radios: " + string.Join(", ", radioButtonsShowing) + ". Expected: " + string.Join(", ", expectedRadioButtons),
+				"The actual radio buttons for section: " + section + " were as expected: " + string.Join(", ", radioButtonsShowing));
 		}
 
 		[StepDefinition(@"I click the 'Add UPC' button")]
@@ -1945,31 +1945,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		// NB: The error messages should be delimited by the '|' character!
-		[StepDefinition(@"(.*) should be showing the error messages: (.*)")]
-		public void ErrorMessagesAreShowingForItem(string section, string pipeDelimitedErrorMessages)
+		[StepDefinition(@"(.*) (should|should not) be showing the error messages: (.*)")]
+		public void ErrorMessagesAreShowingForItem(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
 			var errorMessages = new NewProduct().GetErrorsForSection(section);
 			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
-			foreach (var item in errorMessagesExpected)
+			if (should == "should")
 			{
-				Report.IsTrue(errorMessages.Contains(item.Trim()), "Failed to find the error message: " + item + "!", "Successfully found the error message: " + item + " for section: " + section, false, false);
+				foreach (var item in errorMessagesExpected)
+				{
+					Report.IsTrue(errorMessages.Contains(item.Trim()), "Failed to find the error message: " + item + "!", "Successfully found the error message: " + item + " for section: " + section, false, false);
+				}
+			}
+			if (should == "should not")
+			{
+				foreach (var item in errorMessagesExpected)
+				{
+					Report.IsFalse(errorMessages.Contains(item.Trim()), "The error message: " + item + " was displayed under section" + section + " when it should not be.", "The error message: " + item + " was not displayed under section: " + section + " as expected", false, false);
+				}
 			}
 			Report.Screenshot();
-		}
-
-		// NB: The error messages should be delimited by the '|' character!
-		[StepDefinition(@"(.*) should not be showing the error messages: (.*)")]
-		public void ErrorMessagesAreNotShowingForItem(string section, string pipeDelimitedErrorMessages)
-		{
-			Delay.Seconds(1);
-			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
-			var errorMessages = new NewProduct().GetErrorsForSection(section);
-			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
-			foreach (var item in errorMessagesExpected)
-			{
-				Report.IsTrue(!errorMessages.Contains(item.Trim()), "Error message still displays: " + item + "!", "Error message does not display: " + item + "!", false);
-			}
 		}
 
 		// NB: Multiple values should be delimited by the '|' character!
@@ -3042,7 +3038,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(3);
 			foreach (TableRow thisRow in table.Rows)
 			{
-				ErrorMessagesAreShowingForItem(thisRow["Field"], expectedError);
+				ErrorMessagesAreShowingForItem(thisRow["Field"], "should", expectedError);
 			}
 		}
 
@@ -3077,5 +3073,105 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm the EPA Pesticide Registration table is (shown|not shown)")]
+		public void EPAPesticideTableIsShownOrNot(string shown)
+		{
+			var selNewProduct = new NewProduct();
+			if (shown == "shown")
+			{
+				Report.IsTrue(selNewProduct.EPATable() != null, "The EPA Registration Number Table was not showing", "The EPA Registration Number Table was showing as expected");
+			}
+			if (shown == "not shown")
+			{
+				Report.IsTrue(selNewProduct.EPATable() == null, "The EPA Registration Number Table was showing when it should not be.", "The EPA Registration Number Table was not showing as expected");
+			}
+		}
+
+		[StepDefinition(@"The following options should be (displayed|displayed exclusively) for section: (.*)")]
+		public void CheckOptionsInSection(string exclusivity, string section, Table expected)
+		{
+			var expectedOptions = new List<string>();
+			expected.Rows.ForEach(x => expectedOptions.Add(x["Option"]));
+			var displayedOptions = new NewProduct().GetAllOptionsForSection(section);
+			if (exclusivity == "displayed")
+			{
+				Report.IsTrue(expectedOptions.All(x => displayedOptions.Contains(x)),
+					"All expected options were not displayed under section: " + section + ". Displayed options: " + string.Join(", ", displayedOptions) + ". Expected options: " + string.Join(", ", expectedOptions),
+					"All expected options were displayed under section: " + section + ": " + string.Join(", ", displayedOptions));
+			}
+			if (exclusivity == "displayed exclusively")
+			{
+				Report.IsTrue(expectedOptions.Equals(displayedOptions),
+					"The actual options for section: " + section + " did not match the expected options. Actual options: " + string.Join(", ", displayedOptions) + ". Expected options: " + string.Join(", ", expectedOptions),
+					"The actual options for section: " + section + " matched the expected options: " + string.Join(", ", displayedOptions));
+			}
+		}
+
+		[StepDefinition(@"I confirm the EPA Registration table contains the heading: (.*)")]
+		public void EPATableHeadingExpected(string expectedHeading)
+		{
+			var actualHeading = new NewProduct().EPATableHeading();
+			Report.IsTrue(string.Equals(actualHeading.Trim(), expectedHeading.Trim()),
+				"The table heading did not match the expected text: " + expectedHeading + ". Displayed heading: " + actualHeading,
+				"The table heading matched the expected text: " + expectedHeading);
+		}
+
+		[StepDefinition(@"I confirm the following columns are displayed in the EPA Registration table")]
+		public void ConfirmDisplayedColumnsInEPATable(Table columns)
+		{
+			var expectedColumns = new List<string>();
+			columns.Rows.ForEach(x => expectedColumns.Add(x["Column Heading"]));
+			var actualColumns = new NewProduct().EPATableColumnHeadings();
+			Report.IsTrue(expectedColumns.All(x => actualColumns.Contains(x)),
+				"The expected columns were not displayed in the EPA table. Expected: " + string.Join(", ", expectedColumns) + ". Actual: " + string.Join(", ", actualColumns),
+				"The expected columns were displayed in the EPA table: " + string.Join(", ", expectedColumns));
+		}
+
+		[StepDefinition(@"I click Remove for the item on the first EPA Registration Table row")]
+		public void RemoveFirstEPARegistration()
+		{
+			Report.IsTrue(new NewProduct().RemoveEPATopRow(), "Failed to click 'Remove' on the top row of the EPA table", "Successfully clicked 'Remove' on the top row of the EPA table");
+		}
+
+		[StepDefinition(@"I confirm the EPA Registration Table is empty")]
+		public void ConfirmEPATableIsEmpty()
+		{
+			var displayedEPARegistrations = new NewProduct().EPARegistrationData;
+			Report.IsTrue(displayedEPARegistrations.Count == 0, "There were rows in the EPA Table when it was expected to be empty", "The EPA Table was empty as expected, with a row count of 0");
+		}
+
+		[StepDefinition(@"I confirm the EPA Registration Table contains a total of (.*) rows")]
+		public void ConfirmEPARegistrationRowCount(string count)
+		{
+			if (!count.All(char.IsDigit))
+			{
+				Report.Failure("The expected row count must be numeric");
+				return;
+			}
+			var expectedCount = int.Parse(count);
+			var actualCount = new NewProduct().EPARegistrationData.Count;
+			Report.IsTrue(expectedCount == actualCount,
+				"The actual EPA Registration row count did not match the expected count. Expected: " + expectedCount + ". Actual: " + actualCount,
+				"The actual EPA Registration row count was: " + actualCount + " as expected.");
+		}
+
+		[StepDefinition(@"I click Add Row in the EPA Registration Table")]
+		public void ClickAddRowEPATable()
+		{
+			Report.IsTrue(new NewProduct().AddEPARow(),
+				"Failed to click Add Row in the EPA Table",
+				"Successfully clicked Add Row in the EPA Table");
+		}
+		[StepDefinition(@"I check the State Pesticide Registration Number field matches the text: (.*)")]
+		public void CheckStatePesticideRegistrationNumber(string regNumText)
+		{
+			var newProductPage = new NewProduct();
+			var stateRegistrationData = newProductPage.GetStatePesticideRegistrationDetails();
+			var failReg = stateRegistrationData.FirstOrDefault(x => x.RegistrationNumber.Trim() != regNumText.Trim());
+			var failState = failReg == null ? "N/A" : failReg.State;
+			Report.IsTrue(failReg == null,
+				"The State Pesticide Registration Number column did not match the expected text: " + regNumText + ". Failed on state: " + failState,
+				"The State Pesticide Registration Number column matched the expected text: " + regNumText);
+		}
 	}
 }

@@ -3466,6 +3466,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.TryClick();
 		}
 
+		// Returns the SELECTED option(s) for section. See GetAllOptionsForSection to return all available options for a section
 		public List<string> GetOptionsForSection(string section)
 		{
 			var matchingElements = containerElement.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[starts-with(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
@@ -3643,6 +3644,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Delay.Seconds(1);
 			return RowInputs[0].GetValue().Contains(epaNumber);
 		}
+
+		public bool RemoveEPATopRow()
+		{
+			var EPATable = this.EPATable();
+			if (EPATable == null)
+			{
+				Report.Failure("The EPA Registration Table could not be found");
+				Report.Screenshot();
+				return false;
+			}
+			var removeEls = EPATable.FindElements(By.XPath(@".//a[@class='close']"), 2);
+			if (removeEls.Count == 0)
+			{
+				Report.Failure("There were no EPA registration rows visible on the Pesticide Details page");
+				Report.Screenshot();
+				return false;
+			}
+			return removeEls[0].TryClick();
+		}
+
 		public bool AddEPARow()
 		{
 			var EPATable = this.EPATable();
@@ -4157,9 +4178,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		private IWebElement EPATable()
+		public IWebElement EPATable()
 		{
-			return containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"), 15);
+			return containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"), 10);
 		}
 
 		public List<EPARegistration> EPARegistrationData {
@@ -4173,13 +4194,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Screenshot();
 					return null;
 				}
-
 				var regNo = "";
 				var activeIngredient = "";
 				var percentActiveIngredient = "";
 				bool activeIngredientEditable;
 				bool percentActiveIngredientEditable;
+				int row;
 				var EPARows = EPATable.FindElements(By.XPath(@".//tr[@class='rpds-rowcolor-0']"), 2);
+				int i = 1;
 				foreach (var EPARow in EPARows)
 				{
 					regNo = EPARow.FindElement(By.XPath("./td[@class='col-xs-5']/input"), 2).GetValue();
@@ -4187,16 +4209,29 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					percentActiveIngredient = EPARow.FindElement(By.XPath("./td[@class='col-xs-3'][2]/div")).GetValue();
 					activeIngredientEditable = EPARow.FindElement(By.XPath("./td[@class='col-xs-3'][1]/input"), 2) != null;
 					percentActiveIngredientEditable = EPARow.FindElement(By.XPath("./td[@class='col-xs-3'][2]/input"), 2) != null;
+					row = i;
 					rEPA.Add(new EPARegistration() {
 						ActiveIngredient = activeIngredient,
 						EPANumber = regNo,
+						Row = row,
 						PercentActiveIngredient =
 							percentActiveIngredient,
 						ActiveIngredientEditable = activeIngredientEditable,
-						PercentActiveIngredientEditable =  percentActiveIngredientEditable
+						PercentActiveIngredientEditable = percentActiveIngredientEditable
 					});
+					i++;
 				}
 				return rEPA;
+			}
+			set
+			{
+				for (int i = 0; i < value.Count; i++)
+				{
+					var epaRegistration = value[i];
+					AddEPARow();
+					EnterEPATopRow(epaRegistration.EPANumber);
+					epaRegistration.Row = i + 1;
+				}
 			}
 		}
 
@@ -4210,9 +4245,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return AllResults;
 			}
-
 			var Rows = EPATable.FindElements(By.XPath(".//tbody/tr")).ToList();
-
+			Report.Info("Getting state data for: " + Rows.Count + " rows");
 			foreach (var thisRow in Rows)
 			{
 				var State = thisRow.FindElement(By.XPath(".//td[2]//div")).Text;
@@ -4223,11 +4257,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					RegistrationNumber = RegNo.GetAttribute("placeholder");
 				}
+
 				var KellyDate = "";
 				if (thisRow.FindElement(By.XPath(".//td[4]//label")) != null)
 				{
 					KellyDate = thisRow.FindElement(By.XPath(".//td[4]//label")).Text;
 				}
+
 				var IsKellyData = false;
 				if (thisRow.FindElements(By.XPath(".//td[5]//div")) != null)
 				{
@@ -4242,10 +4278,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					IsKellyData = IsKellyData
 				});
 			}
-
 			return AllResults;
 		}
 
+		public string EPATableHeading()
+		{
+			var heading = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading' and ancestor::div[@class='form-group has-success']]/div"), 10);
+			if (heading == null)
+			{
+				Report.Failure("Could not find EPA table header");
+				return null;
+			}
+			return heading.Text;
+		}
+
+		public List<string> EPATableColumnHeadings()
+		{
+			var epaTable = this.EPATable();
+			if (epaTable == null)
+			{
+				return new List<string>();
+			}
+			var rList = new List<string>();
+			var columnHeaders = epaTable.FindElements(By.XPath(".//th"), 2).ToList();
+			columnHeaders.ForEach(x => rList.Add(x.Text));
+			return rList;
+			//return epaTable.FindElements(By.XPath(".//th"), 2).ToList().Select(x => x.GetAttribute("value")).ToList();
+		}
 		public bool SelectRetailer(string retailerName)
 		{
 			var xPath = @".//input[@type='checkbox' and parent::td/following-sibling::td[text() =""" + retailerName + @"""]]";
@@ -4589,9 +4648,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string PercentActiveIngredient { get; set; }
 		public bool ActiveIngredientEditable { get; set; }
 		public bool PercentActiveIngredientEditable { get; set; }
-		public void Remove()
-		{
 
+		public int Row { get; set; }
+		public bool ClickRemove()
+		{
+			var epaTable = new NewProduct().EPATable();
+			if (epaTable == null)
+			{
+				return false;
+			}
+			var removeEls = epaTable.FindElements(By.XPath("//a[@class = 'close']"), 2);
+			if (removeEls.Count < Row)
+			{
+				return false;
+			}
+			return removeEls[Row - 1].TryClick();
 		}
 	}
 

@@ -427,7 +427,6 @@ Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57520
 
-
 Scenario: [57522] Pesticide question shows in Additional Product Information for Flow 2-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -675,3 +674,128 @@ And I should see the Transportation Details 1 Page
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56541
 
+Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Environment Protection Agency (EPA) Registration Number
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+
+Then I save the product information as: TestCase62778
+
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Then I should see the Pesticide Details - U.S. Page
+
+And I see the following sections
+| Section                                                                  |
+| Product has an Environmental Protection Agency (EPA) Registration Number |
+
+And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+| Option |
+| Yes    |
+| No     |
+
+Given I click continue
+
+Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
+
+Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+
+Then Product has an Environmental Protection Agency (EPA) Registration Number should not be showing the error messages: This is a required field
+
+And I confirm the EPA Pesticide Registration table is shown
+
+Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No
+
+Then I confirm the EPA Pesticide Registration table is not shown
+
+And I see the following sections
+| Section                         |
+| Select the applicable exemption |
+
+Then Product has an Environmental Protection Agency (EPA) Registration Number should not be showing the error messages: This is a required field
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
+
+Scenario: [62780] Pesticide Details - U.S. - Validation of EPA Registration Number table
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+
+Then I save the product information as: TestCase62780
+
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Then I should see the Pesticide Details - U.S. Page
+
+And I see the following sections
+| Section                                                                  |
+| Product has an Environmental Protection Agency (EPA) Registration Number |
+
+Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+
+And I confirm the EPA Pesticide Registration table is shown
+
+Then I confirm the EPA Registration table contains the heading: Provide the EPA Registration Number
+
+And I confirm the following columns are displayed in the EPA Registration table
+| Column Heading                 |
+| EPA Pesticide Registration No. |
+| Federal EPA Active Ingredient. |
+| Percent of Active Ingredient.  |
+| Remove                         |
+
+Given I click continue
+
+Then I should see an error message: Federal Registration Number is required
+
+Given I click Remove for the item on the first EPA Registration Table row
+
+And I confirm the EPA Registration Table contains a total of 0 rows
+
+Then I should see an error message: Required answer missing
+
+Given I click Add Row in the EPA Registration Table
+
+Then I should see an error message: Federal Registration Number is required
+
+And I confirm the EPA Registration Table contains a total of 1 rows
+
+Given I add the EPA registration number: 123456789
+
+Given I click continue
+
+Then I should see the Pesticide Details - State Registration Details Page
+
+And I check the State Pesticide Registration Number field matches the text: 123456789
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62780

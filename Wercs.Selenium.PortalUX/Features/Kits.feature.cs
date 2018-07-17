@@ -343,21 +343,30 @@ testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)
 #line 101
 testRunner.Then("in the Transport Details 1 page I should see the Product is Regulated for Transpo" +
                     "rt question", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Button"});
+            table3.AddRow(new string[] {
+                        "Yes"});
+            table3.AddRow(new string[] {
+                        "No, due to an exemption"});
 #line 102
-testRunner.Then("in the Transport Details 1 page under the Product is Regulated for Transport ques" +
-                    "tion I should see the Radio button: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 103
-testRunner.Then("in the Transport Details 1 page under the Product is Regulated for Transport ques" +
-                    "tion I should see the Radio button: No, due to an exemption", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 104
-testRunner.Then("in the Transport Details 1 page I should not see the Not regulated option", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 105
-testRunner.Then("in the Transportation Details 1 page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 106
-testRunner.Then("in the Transport Details 1 page I should see the error: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 107
-testRunner.Given("I set the Product is Regulated for Transport field to: No, due to an exemption", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The following radio buttons should be displayed for section: Product is Regulated" +
+                    " for Transport", ((string)(null)), table3, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Section"});
+            table4.AddRow(new string[] {
+                        "Not regulated"});
 #line 108
+testRunner.And("I do not see the following sections", ((string)(null)), table4, "And ");
+#line 112
+testRunner.Then("in the Transportation Details 1 page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 113
+testRunner.Then("in the Transport Details 1 page I should see the error: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 114
+testRunner.Given("I set the Product is Regulated for Transport field to: No, due to an exemption", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 115
 testRunner.Then("in the Transport Details 1 page I should not see the error: This is a required fi" +
                     "eld", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

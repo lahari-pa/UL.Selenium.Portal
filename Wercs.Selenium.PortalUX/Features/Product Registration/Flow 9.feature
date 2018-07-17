@@ -134,11 +134,11 @@ Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue -
 
 Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
 
 Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
-# Breaking here because the 'Additional Documents to Provide' page shows (OSHA SDS, TCLP etc)
+Given in the Additional Documents to Provide page I click Continue
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
