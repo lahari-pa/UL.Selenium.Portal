@@ -478,5 +478,12 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then In the announcements area I should see my saved messages
 
 
-
+Scenario: [58579] Live Help - Chat Feature
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Given I click on the Live Help button on the upper right
+Then I should see the Live Help dialog
+Then In the Live Help dialog I should see the following text: Please provide the following to begin a live chat or call: Support: +1-518-720-6220 or +1-877-642-6753  Agency: +1-855-313-1230
+Given In the Live Help dialog I enter name: John Smith
+Given In the Live Help dialog I enter email: johnsmithtest@test.co.uk
+Given In the Live Help dialog I click on the x to close
 

@@ -788,6 +788,69 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"As expected, message count is showing as: " + ActualMessageCount.ToString());
 		}
 
+		[Given(@"I click on the Live Help button on the upper right")]
+		public void GivenIClickOnTheLiveHelpButtonOnTheUpperRight()
+		{
+			TopMenuBar myTopMenuBar = new TopMenuBar();
+			Report.IsTrue(myTopMenuBar.ClickLiveHelp(), "Failed to click live help", "Clicked live help");
+		}
+
+		[Then(@"I should see the Live Help dialog")]
+		public void ThenIShouldSeeTheLiveHelpDialog()
+		{
+			Report.IsTrue(new LiveHelp().Wait_for_load(), "Live Help dialog is not showing",
+				"Live Help dialog is showing as expected");
+		}
+
+		[Then(@"In the Live Help dialog I should see the following text: (.*)")]
+		public void ThenInTheLiveHelpDialogIShouldSeeTheFollowingText(string expectedText)
+		{
+			string actualText = new LiveHelp().GetFormText().Trim().Replace(System.Environment.NewLine, " ");
+
+			Report.Info("ActualText length = " + actualText.Length.ToString());
+			Report.Info("ExpectedText length = " + expectedText.Trim().Length.ToString());
+			int i = 0;
+			if (actualText != expectedText.Trim())
+			{
+				foreach (char thisChar in expectedText.ToCharArray().ToList())
+				{
+					if (i + 2 < actualText.Length)
+					{
+						Report.Info("Expecting: " + thisChar.ToString() + " and getting: " + actualText[i]);
+					}
+					else
+					{
+						break;
+					}
+					i++;
+				}
+			}
+
+			Report.IsTrue(actualText == expectedText.Trim(), "Expected: " + expectedText + " but got: " + actualText,
+				"Text is showing as expected: " + expectedText);
+		}
+
+		[Given(@"In the Live Help dialog I enter name: (.*)")]
+		public void GivenInTheLiveHelpDialogIEnterName(string name)
+		{
+			LiveHelp myLiveHelp = new LiveHelp();
+			Report.IsTrue(myLiveHelp.EnterName(name), "Failed to enter name: " + name,
+				"Successfully entered name: " + name);
+		}
+
+		[Given(@"In the Live Help dialog I enter email: (.*)")]
+		public void GivenInTheLiveHelpDialogIEnterEmail(string email)
+		{
+			LiveHelp myLiveHelp = new LiveHelp();
+			Report.IsTrue(myLiveHelp.EnterEmail(email), "Failed to enter email: " + email,
+				"Successfully entered email: " + email);
+		}
+
+		[Given(@"In the Live Help dialog I click on the x to close")]
+		public void GivenInTheLiveHelpDialogIClickOnTheXToClose()
+		{
+			Report.IsTrue(new LiveHelp().ClickCloseX(), "Failed to click x to close", "Clicked x to close");
+		}
 
 	}
 }

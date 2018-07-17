@@ -414,6 +414,7 @@
     <Compile Include="Selenium Classes\Homepage.cs" />
     <Compile Include="Selenium Classes\InactivityPopup.cs" />
     <Compile Include="Selenium Classes\LandingPage.cs" />
+    <Compile Include="Selenium Classes\LiveHelp.cs" />
     <Compile Include="Selenium Classes\Login.cs" />
     <Compile Include="Selenium Classes\ModalDialog.cs" />
     <Compile Include="Selenium Classes\MyAccount.cs" />

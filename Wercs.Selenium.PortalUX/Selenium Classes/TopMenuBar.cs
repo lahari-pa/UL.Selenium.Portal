@@ -121,5 +121,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return ddt.GetValue();
 
 		}
+
+		public bool ClickLiveHelp()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[(.//i[@id='live-help'])]"), 2).TryClick();
+		}
 	}
 }
