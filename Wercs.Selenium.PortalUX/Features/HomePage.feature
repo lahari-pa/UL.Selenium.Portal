@@ -244,7 +244,11 @@ Then the WERCSmart homepage should load
 When I filter the products by: Assessment in Progress
 And I click Row Actions for the most recent product returned
 Then I click on the Row Action: View
-And UNDER DEVELOPMENT
+Then A Summary page should open in a new browser tab
+Then I should not seen an Accept button
+Given I close the browser tab with the Summary page
+
+
 
 Scenario: [56219] My Products grid Actions - Documents navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

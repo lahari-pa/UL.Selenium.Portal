@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ResourcePool;
 using SafewareReporting;
@@ -671,5 +672,77 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully edited first product");
 			GeneralUtilities.Wait_for_load_finish();
 		}
+
+		[Then(@"A Summary page should open in a new browser tab")]
+		public void ThenASummaryPageShouldOpenInANewBrowserTab()
+		{
+			List<string> OpenBrowsers =
+				SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
+					.ToList();
+			for (int i = 0; i < 30; i++)
+			{
+				OpenBrowsers = SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
+					.ToList();
+				if (OpenBrowsers.Count > 1)
+				{
+					break;
+				}
+			}
+
+			foreach (string url in OpenBrowsers)
+			{
+				SeleniumBrowser.SwitchToTabWithURL(url);
+				if (new SummaryPage().Wait_for_load())
+				{
+					Report.Success("Summary window is showing");
+					Report.Screenshot();
+					return;
+				}
+			}
+
+			Report.Failure("Summary window is not showing");
+			Report.Screenshot();
+		}
+
+		[Then(@"I should not seen an Accept button")]
+		public void ThenIShouldNotSeenAnAcceptButton()
+		{
+			SummaryPage thisSummaryPage = new SummaryPage();
+			Report.IsTrue(!thisSummaryPage.ListOfButtons().Contains("Accept"), "Accept button is showing",
+				"Accept button is not showing");
+		}
+
+		[Given(@"I close the browser tab with the Summary page")]
+		public void GivenICloseTheBrowserTabWithTheSummaryPage()
+		{
+			List<string> OpenBrowsers =
+				SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
+					.ToList();
+			for (int i = 0; i < 30; i++)
+			{
+				OpenBrowsers = SeleniumBrowser.GetTabURLs().Where(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()))
+					.ToList();
+				if (OpenBrowsers.Count > 1)
+				{
+					break;
+				}
+			}
+
+			foreach (string url in OpenBrowsers)
+			{
+				SeleniumBrowser.SwitchToTabWithURL(url);
+				if (new SummaryPage().Wait_for_load())
+				{
+					Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
+						"Closed tab with url: " + url);
+					return;
+				}
+			}
+
+			Report.Failure("Did not find Summary page to close");
+		}
+
+
+
 	}
 }

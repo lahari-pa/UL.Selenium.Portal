@@ -438,6 +438,7 @@
     <Compile Include="Selenium Classes\StudioTopMenu.cs" />
     <Compile Include="Selenium Classes\SubscriptionEnrollment.cs" />
     <Compile Include="Selenium Classes\SubscriptionUpgrade.cs" />
+    <Compile Include="Selenium Classes\SummaryPage.cs" />
     <Compile Include="Selenium Classes\SupplierReports.cs" />
     <Compile Include="Selenium Classes\TermsOfUse.cs" />
     <Compile Include="Selenium Classes\TopMenuBar.cs" />
