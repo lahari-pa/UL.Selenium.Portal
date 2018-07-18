@@ -91,13 +91,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public void CreateNewProductOrCopy(bool newProduct = true)
 		{
-			var option = this.containerElement.FindElements(By.XPath(".//form//label[@class='radio']"), 2).FirstOrDefault(x => x.Text.StartsWith((newProduct ? "Yes" : "No")));
-			if (option == null)
+			if (newProduct)
 			{
-				return;
+				SelectTypeOfProductToCreate("New");
 			}
-
-			option.Click();
+			else
+			{
+				SelectTypeOfProductToCreate("Copy");
+			}
 		}
 
 		public bool RefreshContainer()

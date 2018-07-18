@@ -232,11 +232,12 @@ When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Delete
 And I cancel the Delete Dialog
 Then I should see products in the Product Grid
+Given I save the number of items in the pie chart
 When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Delete
 And I confirm the Delete Dialog
 Then I should not see products in the Product Grid
-And UNDER DEVELOPMENT
+Then the number of items in the pie chart should be one less than the figure I saved
 
 Scenario: [56218] My Products grid Actions - View Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

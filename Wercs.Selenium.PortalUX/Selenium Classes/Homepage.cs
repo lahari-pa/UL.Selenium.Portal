@@ -115,6 +115,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return pieChartLegend != null && pieChartLegend.Displayed;
 		}
 
+		public int PieChartProductsTotal()
+		{
+			var el = containerElement.FindElement(By.XPath(".//div[@id='total-products']"), 2);
+			if (el == null)
+			{
+				return -1;
+			}
+			return Convert.ToInt16(el.Text);
+		}
+
 		public List<string> PieChartLegendItems()
 		{
 			return containerElement.FindElements(By.XPath(".//ul[@class='status-list']//li/span"), 2).Select(x => x.GetElementText().Trim()).ToList();

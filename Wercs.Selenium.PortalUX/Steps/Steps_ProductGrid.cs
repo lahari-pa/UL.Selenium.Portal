@@ -742,6 +742,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Failure("Did not find Summary page to close");
 		}
 
+		[Given(@"I save the number of items in the pie chart")]
+		public void GivenISaveTheNumberOfItemsInThePieChart()
+		{
+			Homepage myHomepage = new Homepage();
+			int currentProductCount = myHomepage.PieChartProductsTotal();
+			Context.AddToContext("ProductCount", currentProductCount);
+			Report.IsTrue(currentProductCount > -1, "Failed to get current product count",
+				"Current product count is: " + currentProductCount.ToString());
+		}
+
+		[Then(@"the number of items in the pie chart should be one less than the figure I saved")]
+		public void ThenTheNumberOfItemsInThePieChartShouldBeOneLessThanTheFigureISaved()
+		{
+			Homepage myHomepage = new Homepage();
+			int currentProductCount = myHomepage.PieChartProductsTotal();
+			int savedProductcount = Convert.ToInt16( Context.GetFromContext("ProductCount"));
+			Report.IsTrue(currentProductCount == (savedProductcount - 1),
+				"Current count is: " + currentProductCount.ToString() + " saved count is: " +
+				savedProductcount.ToString(),
+				"As expected, current product count (" + currentProductCount.ToString() +
+				" is one less than saved count");
+		}
+
 
 
 	}
