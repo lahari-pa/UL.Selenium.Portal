@@ -318,7 +318,6 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Then I click More below the Alerts Panel
 And I should see the header: Message Center on the Message Center window
-And UNDER DEVELOPMENT
 
 Scenario: [64854] Navigation Settings
 

@@ -779,5 +779,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Delete Active Products page is not showing as expected.", "Delete Active Products page is showing");
 		}
 
+		[Then(@"I should see the header: Message Center on the Message Center window")]
+		public void ThenIShouldSeeTheHeaderMessageCenterOnTheMessageCenterWindow()
+		{
+			Report.IsTrue(new MessageCenter().Wait_for_load(),
+				"Message centre page is not showing as expected.", "Message centre page is showing");
+		}
+
+
 	}
 }
