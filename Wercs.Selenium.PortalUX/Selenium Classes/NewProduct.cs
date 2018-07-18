@@ -3079,7 +3079,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'description') and contains(text(),'weight percentage of total formula')]"), 2).Text;
 		}
 
-
+		public List<string> GetVOCSummaryStatements()
+		{
+			var statements =
+				containerElement.FindElements(By.XPath(".//div[contains(@class, 'success') and not(.//table)]"));
+			return statements.Select(x => x.GetValue().Trim()).ToList();
+		}
 
 		public List<VocLimits> GetDisplayedVocLimits()
 		{

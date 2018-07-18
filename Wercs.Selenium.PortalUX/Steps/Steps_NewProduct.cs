@@ -3204,6 +3204,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to set the date to " + days + " from today: " + targetDate.Day + " " + targetDate.Month + " " + targetDate.Year + " with the calendar selector for state: " + state,
 				"Successfully set the date to " + days + " from today: " + targetDate.Day + " " + targetDate.Month + " " + targetDate.Year + " with the calendar selector for state: " + state);
 		}
+		[Then(@"in the VOC Summary page I should see the following noneditable statements")]
+		public void ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(Table table)
+		{
+			List<string> VOCSummaryStatements = new NewProduct().GetVOCSummaryStatements();
+			List<string> expectedStatements = table.Rows.Select(x => x["Statement"]).ToList();
+			foreach (string statement in expectedStatements)
+			{
+				Report.IsTrue(VOCSummaryStatements.Contains(statement), "Expected statement: " + statement,
+					"Statement: " + statement + " showing as expected");
+			}
+		}
 
 		[StepDefinition(@"I confirm that the EPA table row for state: (.*) is highlighted with the color: (none|peach|light peach|)")]
 		public void EPATableRowHighlight(string state, string colour)

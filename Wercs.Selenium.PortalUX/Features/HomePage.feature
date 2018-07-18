@@ -309,7 +309,8 @@ Given I click Bulk Actions in the Products Grid
 And I click Delete Products in the Bulk Actions window
 And I should see the header: Delete Active Products on the Delete Active Product window
 
-Scenario: [56280] Product Information - Alerts - click on any notification
+Scenario: [56280] Document is created and is ready for review
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then clicking on the top Alert should direct me to the My Messages page
 And UNDER DEVELOPMENT
 
