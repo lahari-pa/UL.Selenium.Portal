@@ -547,3 +547,25 @@ Then I confirm the current active page number in the My Ingredients grid is: 3
 And I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination are displayed
 
 And I navigate to the home page
+
+Scenario: [73326] Searching an Ingredient
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Given I navigate to the My Ingredients tab in the My Library page
+
+Given I enter the text: 50-0 into the My Ingredients search field
+
+Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
+
+Given I enter the text: Formald into the My Ingredients search field
+
+Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
+
+And I navigate to the home page

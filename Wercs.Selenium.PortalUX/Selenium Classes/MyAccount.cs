@@ -1330,6 +1330,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	{
 		public bool EnterTextSearch(string value)
 		{
+			//refocus in case previous search results are open
+			containerElement.Click();
 			var placeholderEl = containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
 			if (!placeholderEl.TryClick())
 			{
@@ -1391,6 +1393,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Report.Info("Selecting the first search result which matched on chemical name: " + name);
 			return nameMatch.FindElement(By.XPath("./ancestor::li[1]"), 2).TryClick();
+		}
+		public List<SearchResult> SearchResults()
+		{
+			var rList = new List<SearchResult>();
+			var results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option') and not(@aria-disabled)]"), 2).ToList();
+			foreach (var result in results)
+			{
+				rList.Add(new SearchResult {
+					CAS = result.FindElement(By.XPath(".//span[@class='text-muted']"), 2).Text,
+					Name = result.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text
+				});
+			}
+			return rList;
 		}
 		public bool ClickSave()
 		{
@@ -1586,6 +1601,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Delay.Seconds(1);
 			edited.Add(publicName.SelectedOption() == ingredient.PublicName);
 			return edited.All(e => e);
+		}
+		public class SearchResult
+		{
+			public string Name { get; set; }
+			public string CAS { get; set; }
 		}
 		public class IngredientItem : MyIngredients
 		{

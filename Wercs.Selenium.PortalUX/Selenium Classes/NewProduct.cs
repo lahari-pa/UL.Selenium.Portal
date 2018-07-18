@@ -3950,8 +3950,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				activeMonth = DateTime.ParseExact(activeDate[0], "MMMM", CultureInfo.CurrentCulture).Month;
 			}
 			// Select day
-			bool clicked = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//td[@class='day' and text()='" + date.Day + "']"), 2).TryClick();
-			return clicked;
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//td[@class='day' and text()='" + date.Day + "']"), 2).TryClick();
 		}
 
 		public string[] EPACalednarActiveDate()
@@ -4648,7 +4647,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		
+
 
 	}
 

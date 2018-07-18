@@ -450,5 +450,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Report.IsTrue(new MyIngredients().ClickPage(page), "Failed to click page number: " + page, "Successfully clicked page number: " + page);
 		}
+
+		[StepDefinition(@"I confirm that the smart search results contain a chemical with CAS: (.*) and Name: (.*)")]
+		public void SmartSearchResultsContainChemical(string cas, string name)
+		{
+			var searchResults = new MyIngredients().SearchResults();
+			Report.IsTrue(searchResults.Any(x => x.CAS == cas && x.Name == name),
+				"No search results were returned with CAS: " + cas + " and name: " + name + " in the top " + searchResults.Count + " results.",
+				"There was a search result with CAS: " + cas + " and name: " + name + " returned as expected");
+		}
 	}
 }
