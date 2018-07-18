@@ -3644,7 +3644,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Steps_SHA MyStepsSHA = new Steps_SHA();
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			StudioSHAManager thisStudioShaManager = new StudioSHAManager();
-			
+
 			Report.IsTrue(thisStudioShaManager.WaitForProductList(60), "Product list is showing",
 				"Product list is not showing");
 		}

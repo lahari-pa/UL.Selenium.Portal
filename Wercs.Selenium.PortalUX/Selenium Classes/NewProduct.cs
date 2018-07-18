@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
@@ -3800,11 +3801,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			var stateRow = EPATable.FindElements(By.XPath(@".//tr[contains(@data-bind, 'css')]"), 2)[index];
-			var kellyDataCheck = stateRow.FindElements(By.XPath(@".//td[5]/div[@class='fa fa-check' and not(contains(@style, 'display: none'))]"), 2);
-			if (kellyDataCheck.Count == 0)
+			var kellyDataCheck = stateRow.FindElement(By.XPath(@".//td[5]/div[@class='fa fa-check' and not(contains(@style, 'display: none'))]"), 2);
+			if (kellyDataCheck == null)
 			{
 				return false;
 			}
+			kellyDataCheck.ScrollElementIntoView();
 			return true;
 		}
 
@@ -3841,13 +3843,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			var kellyDataTick = EPATable.FindElements(By.XPath(
+			var kellyDataTick = EPATable.FindElement(By.XPath(
 				@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/ancestor::tr/td/div[@class='fa fa-check' and not(contains(@style, 'display: none'))]"), 2);
-			if (kellyDataTick.Count == 0)
+			if (kellyDataTick != null)
 			{
-				return false;
+				kellyDataTick.ScrollElementIntoView();
+				return true;
 			}
-			return true;
+			return false;
 		}
 
 		public string GetPesticideRegExpirationDate(string state)
@@ -3893,12 +3896,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				return containerElement
-					.FindElement(
-						By.XPath(
-							@".//div[@class ='panel-heading']/following-sibling::table/following-sibling::div/p[@class='form-error']/span"),
-						15).Text;
-
+				return containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table/following-sibling::div/p[@class='form-error']/span"), 15).Text;
 			}
 			catch (Exception e)
 			{
@@ -3906,6 +3904,94 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool EPASelectExpirationDateFromCalendar(string state, DateTime date)
+		{
+			var EPATable = this.EPATable();
+			if (EPATable == null)
+			{
+				Report.Failure("The State Pesticide Registration Table could not be found");
+				Report.Screenshot();
+				return false;
+			}
+			var calendarButton = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td//span[@class='input-group-addon']"), 2);
+			if (!calendarButton.TryClick())
+			{
+				var inputEl = EPATable.FindElement(By.XPath(@"..//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td//input"), 2);
+				if (!inputEl.TryClick())
+				{
+					Report.Failure("Could not click calender button for state: " + state);
+					Report.Screenshot();
+					return false;
+				}
+			}
+			var activeDate = EPACalednarActiveDate();
+			if (activeDate == null)
+			{
+				Report.Failure("Unable to locate the active date (Month Year) in the EPA calendar pop up for state: " + state);
+				Report.Screenshot();
+				return false;
+			}
+			var activeYear = int.Parse(activeDate[1]);
+			var activeMonth = DateTime.ParseExact(activeDate[0], "MMMM", CultureInfo.CurrentCulture).Month;
+			// Fail test if target date preceeds the default Month Year on the calendar
+			if (date.Year < activeYear || date.Year == activeYear && date.Month < activeMonth)
+			{
+				Report.Failure("Target date must be equal or later than the current active date on the calendar");
+				Report.Screenshot();
+				return false;
+			}
+			// Perform loop until target year = active year and target month = active month
+			while (date.Year > activeYear || date.Year == activeYear && date.Month > activeMonth)
+			{
+				// Click next month
+				SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//th[@class='next']"), 2).TryClick();
+				activeDate = EPACalednarActiveDate();
+				activeYear = int.Parse(activeDate[1]);
+				activeMonth = DateTime.ParseExact(activeDate[0], "MMMM", CultureInfo.CurrentCulture).Month;
+			}
+			// Select day
+			bool clicked = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//td[@class='day' and text()='" + date.Day + "']"), 2).TryClick();
+			return clicked;
+		}
+
+		public string[] EPACalednarActiveDate()
+		{
+			var calendarTable = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]"), 2);
+			var datePicker = calendarTable?.FindElement(By.XPath(".//th[@class='datepicker-switch']"), 2);
+			return datePicker?.Text.Split(' ');
+		}
+
+		public IWebElement StateEPARow(string state)
+		{
+			return this.EPATable().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
+		}
+		public string GetEPATableRowClassColour(string state)
+		{
+			var epaRow = this.EPATable().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
+			if (epaRow == null)
+			{
+				Report.Failure("Unable to locate EPA table row for state: " + state);
+				return null;
+			}
+			// Hack for screenshots - Don't scroll to row if we're looking at the top 4 states, because they are obscured by the banner
+			if (new[] { "AK", "AL", "AR", "AZ" }.All(x => x != state))
+			{
+				epaRow.ScrollElementIntoView();
+			}
+			var colourCode = epaRow.GetAttribute("class");
+			return colourCode?.Replace("rpds-", "");
+		}
+
+		public string GetEPATableRowBackgroundHex(string state)
+		{
+			var epaRow = this.EPATable().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
+			if (epaRow == null)
+			{
+				Report.Failure("Unable to locate EPA table row for state: " + state);
+				return null;
+			}
+			return epaRow.GetCssValue("background-color");
+		}
 		public bool SelectIngredientPublicName(string chemicalName)
 		{
 			var publicNameText = IngredientRow(chemicalName).FindElements(By.XPath(".//td[contains(@class,'inci-name')]//option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();

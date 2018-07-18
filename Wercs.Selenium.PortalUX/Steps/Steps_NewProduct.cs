@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
@@ -2335,14 +2336,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var newProductPage = new NewProduct();
 			if (state.Length != 2)
 			{
-				throw new Exception("The state text provided was incorrect. Enter a state like: 'AZ', 'CO' etc.");
+				Report.Warn("Expecting a state provided in the form: AZ, IL, NY etc.");
 			}
 			if (check == "is")
 			{
 				Report.IsTrue(newProductPage.KellyDataIsTickedForState(state), "The 'Is Kelly Data' field for State : " + state + " didn't contain a check when it was expected to", "The 'Is Kelly Data' field for State: " + state + " contained a check as expected");
 				return;
 			}
-			Report.IsFalse(newProductPage.KellyDataIsTickedForState(state), "The 'Is Kelly Data' field for State: " + state + " contained a check when it should not", "The 'Is Kelly Data' field for State: " + state + " did not contain a check as expected");
+			if (check == "is not")
+			{
+				Report.IsFalse(newProductPage.KellyDataIsTickedForState(state), "The 'Is Kelly Data' field for State: " + state + " contained a check when it should not", "The 'Is Kelly Data' field for State: " + state + " did not contain a check as expected");
+			}
 		}
 
 		[StepDefinition(
@@ -3174,7 +3178,58 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The State Pesticide Registration Number column matched the expected text: " + regNumText);
 		}
 
-		
+		[StepDefinition(@"I confirm the State Registration EPA table does not contain any Expiration data")]
+		public void ConfirmExpirationDataBlankInStateEPATable()
+		{
+			var newProductPage = new NewProduct();
+			var epaData = newProductPage.GetStatePesticideRegistrationDetails();
+			var failReg = epaData.FirstOrDefault(x => !x.ExpirationDate.IsNullOrEmpty()) ?? epaData.FirstOrDefault(x => !x.ExpirationDateByKelly.IsNullOrEmpty());
+			var failState = failReg == null ? "N/A" : failReg.State;
+			Report.IsTrue(failReg == null,
+				"The State Registration EPA table contained Expiration data when it was not expected. Broke on state: " + failState,
+				"The State Registration EPA table did not contain any Expiration data as expected");
+		}
 
+		[StepDefinition(@"I set the Expiration Date to be (.*) days from today using the calendar selector for state: (.*)")]
+		public void SetExpirationDateForState(string days, string state)
+		{
+			if (!days.All(char.IsDigit))
+			{
+				Report.Failure("The entered number of days must be numeric");
+				return;
+			}
+			var daysParse = int.Parse(days);
+			var targetDate = DateTime.Today.Add(TimeSpan.FromDays(daysParse));
+			Report.IsTrue(new NewProduct().EPASelectExpirationDateFromCalendar(state, targetDate),
+				"Failed to set the date to " + days + " from today: " + targetDate.Day + " " + targetDate.Month + " " + targetDate.Year + " with the calendar selector for state: " + state,
+				"Successfully set the date to " + days + " from today: " + targetDate.Day + " " + targetDate.Month + " " + targetDate.Year + " with the calendar selector for state: " + state);
+		}
+
+		[StepDefinition(@"I confirm that the EPA table row for state: (.*) is highlighted with the color: (none|peach|light peach|)")]
+		public void EPATableRowHighlight(string state, string colour)
+		{
+			string expectedColourCode;
+			switch (colour)
+			{
+				case "none":
+					expectedColourCode = "rowcolor-0";
+					break;
+				case "light peach":
+					expectedColourCode = "rowcolor-1";
+					break;
+				case "peach":
+					expectedColourCode = "rowcolor-2";
+					break;
+				default:
+					Report.Failure("The expected colour must be none, peach or light peach");
+					return;
+			}
+			// Matching on the 'code' (rowcolor-0, 1, 2) contained in the td class. Reporting the hex code for additional info.
+			var actualColourCode = new NewProduct().GetEPATableRowClassColour(state);
+			var actualHexCode = new NewProduct().GetEPATableRowBackgroundHex(state);
+			Report.IsTrue(expectedColourCode == actualColourCode,
+				"The row for state: " + state + " was not highlighted " + colour + " as expected. The displayed hex code is: " + actualHexCode,
+				"The row for state " + state + " was highlighted " + colour + " as expected");
+		}
 	}
 }

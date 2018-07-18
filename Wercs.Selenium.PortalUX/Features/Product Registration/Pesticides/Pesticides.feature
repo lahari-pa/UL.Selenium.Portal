@@ -799,3 +799,119 @@ And I check the State Pesticide Registration Number field matches the text: 1234
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62780
+
+Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user edits date from Kelly
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+
+Then I save the product information as: TestCase56577
+
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Then I should see the Pesticide Details - U.S. Page
+
+Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+
+Given I add the EPA registration number: 56228-10
+
+Given I click continue
+
+Then I should see the Pesticide Details - State Registration Details Page
+
+And I confirm that there is data populated in the Expiration Date Column for some States
+
+And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
+
+Then I edit the Expiration Date to: 2019-12-31 for the State: AZ on the Pesticide State Registration Details page
+
+Given in the New Product page I click Continue
+
+And I should see the Transportation Details 1 Page
+
+Then in the New Product page I click section: Pesticide Details - State Registration Details
+
+Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56577
+
+Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates and coloring
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+
+Then I save the product information as: TestCase62799
+
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Then I should see the Pesticide Details - U.S. Page
+
+Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+
+Given I add the EPA registration number: testregistrationnumber
+
+Given I click continue
+
+Then I should see the Pesticide Details - State Registration Details Page
+
+And I confirm the State Registration EPA table does not contain any Expiration data
+
+Given I set the Expiration Date to be 29 days from today using the calendar selector for state: AL
+
+Then I confirm that the EPA table row for state: AL is highlighted with the color: peach
+
+And I confirm the Expiration Date Provided By Kelly field for state: AL is blank
+
+And I confirm the 'Is Kelly Data' field for State: AL is not checked
+
+Given I set the Expiration Date to be 60 days from today using the calendar selector for state: NY
+
+Then I confirm that the EPA table row for state: NY is highlighted with the color: light peach
+
+Given I set the Expiration Date to be 100 days from today using the calendar selector for state: WA
+
+Then I confirm that the EPA table row for state: WA is highlighted with the color: none
+
+Given I click continue
+
+And I should see the Transportation Details 1 Page
+
+Then in the New Product page I click section: Pesticide Details - State Registration Details
+
+Then I confirm that the EPA table row for state: AL is highlighted with the color: peach
+
+Then I confirm that the EPA table row for state: NY is highlighted with the color: light peach
+
+Then I confirm that the EPA table row for state: WA is highlighted with the color: none
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62799
