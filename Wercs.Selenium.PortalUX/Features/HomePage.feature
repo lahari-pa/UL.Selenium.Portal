@@ -14,6 +14,7 @@
 @DocumentAcceptance
 @DeleteActiveProducts
 @Solutions
+@ReviewDocuments
 @SHA
 
 
@@ -251,7 +252,13 @@ Then the WERCSmart homepage should load
 When I filter the products by: Assessment in Progress
 And I click Row Actions for the most recent product returned
 Then I click on the Row Action: Documents
-And UNDER DEVELOPMENT
+And I should see Review Documents
+Then In the Documents section I should see the following columns: Document Name, Subformat, Language, Actions
+Given I click on the View link of the first document in Supplier Uploaded
+Then a document should open
+Given I close the document
+
+
 
 Scenario: [56220] My Products grid Actions - Edit UPCs
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

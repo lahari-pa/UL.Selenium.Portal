@@ -427,6 +427,7 @@
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
     <Compile Include="Selenium Classes\MessageCenter.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
+    <Compile Include="Selenium Classes\ReviewDocuments.cs" />
     <Compile Include="Selenium Classes\SelectRetailer.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
@@ -452,6 +453,7 @@
     <Compile Include="Steps\Steps_PackagingTypes.cs" />
     <Compile Include="Steps\Steps_PaymentMethods.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
+    <Compile Include="Steps\Steps_ReviewDocuments.cs" />
     <Compile Include="Steps\Steps_SHA.cs" />
     <Compile Include="Steps\Steps_Shared.cs" />
     <Compile Include="Steps\Steps_Solution.cs" />

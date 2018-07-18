@@ -3173,5 +3173,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The State Pesticide Registration Number column did not match the expected text: " + regNumText + ". Failed on state: " + failState,
 				"The State Pesticide Registration Number column matched the expected text: " + regNumText);
 		}
+
+		
+
 	}
 }
