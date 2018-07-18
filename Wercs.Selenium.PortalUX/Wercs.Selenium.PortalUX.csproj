@@ -408,6 +408,7 @@
     <Compile Include="Selenium Classes\ChooseGoodGuide\TopMenu.cs" />
     <Compile Include="Selenium Classes\ConflictMinerals.cs" />
     <Compile Include="Selenium Classes\DataSummary.cs" />
+    <Compile Include="Selenium Classes\DeleteActiveProducts.cs" />
     <Compile Include="Selenium Classes\DocumentAcceptance.cs" />
     <Compile Include="Selenium Classes\ForgottenPassword.cs" />
     <Compile Include="Selenium Classes\ForwardProductRegistration.cs" />

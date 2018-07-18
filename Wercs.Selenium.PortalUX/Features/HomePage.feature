@@ -302,13 +302,12 @@ Given I click Bulk Actions in the Products Grid
 And I click Accept Documents in the Bulk Actions window
 And I should see the header: Document Acceptance on the Document Acceptance window
 
-Scenario: [56227] Bulk Actions - Delete Products navigation
+Scenario: [56227] Bulk Actions  Delete Products navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Given I click Bulk Actions in the Products Grid
 And I click Delete Products in the Bulk Actions window
 And I should see the header: Delete Active Products on the Delete Active Product window
-And UNDER DEVELOPMENT
 
 Scenario: [56280] Product Information - Alerts - click on any notification
 Then clicking on the top Alert should direct me to the My Messages page

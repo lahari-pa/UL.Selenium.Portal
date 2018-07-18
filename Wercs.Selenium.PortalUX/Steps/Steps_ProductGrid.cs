@@ -772,6 +772,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Document Acceptance page is not showing as expected.", "Document Acceptance page is showing");
 		}
 
+		[Given(@"I should see the header: Delete Active Products on the Delete Active Product window")]
+		public void GivenIShouldSeeTheHeaderDeleteActiveProductsOnTheDeleteActiveProductWindow()
+		{
+			Report.IsTrue(new DeleteActiveProducts().Wait_for_load(),
+				"Delete Active Products page is not showing as expected.", "Delete Active Products page is showing");
+		}
 
 	}
 }
