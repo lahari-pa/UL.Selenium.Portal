@@ -211,6 +211,7 @@ Then I click on the Row Action: Edit
 Then the Product Type page should be loaded
 And the product saved as: FirstProduct should be visible in editor
 
+#Design
 Scenario: [56214] My Products grid Actions - Submit Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -264,7 +265,7 @@ Then a document should open
 Given I close the document
 
 
-
+#Design
 Scenario: [56220] My Products grid Actions - Edit UPCs
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -300,7 +301,6 @@ Then the WERCSmart homepage should load
 Given I click Bulk Actions in the Products Grid
 And I click Accept Documents in the Bulk Actions window
 And I should see the header: Document Acceptance on the Document Acceptance window
-And UNDER DEVELOPMENT
 
 Scenario: [56227] Bulk Actions - Delete Products navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account

@@ -765,6 +765,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				" is one less than saved count");
 		}
 
+		[Given(@"I should see the header: Document Acceptance on the Document Acceptance window")]
+		public void GivenIShouldSeeTheHeaderDocumentAcceptanceOnTheDocumentAcceptanceWindow()
+		{
+			Report.IsTrue(new DocumentAcceptance().Wait_for_load(),
+				"Document Acceptance page is not showing as expected.", "Document Acceptance page is showing");
+		}
 
 
 	}
