@@ -3670,6 +3670,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Manage Global Messages");
 		}
 
+		[Given(@"I call shared step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
+		public void GivenICallSharedStep57801ConfirmVOCSummaryStepShownConfirmVOCAnalysisDateIsShown_HappyPath()
+		{
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			MyStepsNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
+			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] { "Statement" });
+			table1.AddRow(new string[] { "VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy") });
+			MyStepsNewProduct.ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table1);
+		}
+		
+		[Given(@"I call shared step 57817 \(VOC Results - Confirm VOC Limits table shows correct values \(OTC & CARB\) - Happy Path\): (.*)")]
+		public void GivenICallSharedStep57817VOCResults_ConfirmVOCLimitsTableShowsCorrectValuesOTCCARB_HappyPath(string use)
+		{
+			List<VocLimitsWithUnits> LimitsTable = new NewProduct().GetDisplayedVocLimitsWithUnits();
+
+			Report.IsTrue(LimitsTable.Where(x => x.Regulation.Trim() == "OTC Model rule limit").Count() == 1, "Limits table does not contain one and only one OTC Model rule limit. Count is: " + LimitsTable.Where(x => x.Regulation.Trim() == "OTC Model rule limit").Count().ToString(), "Limits table contains one and only one OTC Model rule limit");
+			Report.IsTrue(LimitsTable.Where(x => x.Regulation == "CARB limit").Count() == 1, "Limits table does not contain one and only one CARB limit", "Limits table contains one and only one CARB limit");
+			foreach (VocLimitsWithUnits thisLimit in LimitsTable)
+			{
+				Report.IsTrue(thisLimit.Use == use, "Use is not showing as: " + use, "Use is showing correctly");
+				Report.IsTrue(thisLimit.VocComplianceLimit.Length>0, "VOC Compliance Limit column is not showing a value", "VOC Compliance Limit column is showing a value: " + thisLimit.VocComplianceLimit);
+				Report.IsTrue(thisLimit.Units == null, "Units column is showing incorrectly",
+					"Units column is not showing");
+			}
+			
+		}
 
 	}
 }

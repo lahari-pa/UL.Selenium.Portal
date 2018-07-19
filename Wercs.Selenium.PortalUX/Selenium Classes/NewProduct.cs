@@ -2843,6 +2843,38 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public string VOCContentsAsSoldError()
+		{
+			var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				.FirstOrDefault(x => x.Text.Contains("Product's VOC content as sold"));
+
+			if (lbl != null)
+			{
+				try
+				{
+					var error = lbl.FindElement(By.XPath("../..//input/../p//span"));
+					if (error != null)
+					{
+						return error.Text;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				catch (Exception e)
+				{
+					return null;
+				}
+				
+			}
+			else
+			{
+				throw new Exception("Label not found as expected.");
+			}
+			
+		}
+
 
 		/// <summary>
 		/// Product's VOC content as used text box
@@ -2880,6 +2912,38 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 
 			}
+		}
+
+		public string VOCContentsAsUsedError()
+		{
+			var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				.FirstOrDefault(x => x.Text.Contains("Product's VOC content as used"));
+
+			if (lbl != null)
+			{
+				try
+				{
+					var error = lbl.FindElement(By.XPath("../..//input/../p//span"));
+					if (error != null)
+					{
+						return error.Text;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				catch (Exception e)
+				{
+					return null;
+				}
+				
+			}
+			else
+			{
+				throw new Exception("Label not found as expected.");
+			}
+
 		}
 
 
@@ -3108,7 +3172,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return retList;
 
 		}
-
+		
 		public List<VocLimitsWithUnits> GetDisplayedVocLimitsWithUnits()
 		{
 
@@ -4651,6 +4715,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			}
 		}
+
+
 
 
 

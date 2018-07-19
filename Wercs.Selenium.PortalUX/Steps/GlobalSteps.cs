@@ -41,7 +41,7 @@ namespace WERCSmart
 					}
 					case ("staging"):
 					{
-						GlobalParameters.TestUrl = @"https://staging.thewercs.com";
+						GlobalParameters.TestUrl = @"https://staging.thewercs.com/Wercs.SHA.MVCWebV1/";
 						GlobalParametersPortal.SHAUrl = @"";
 						break;
 					}

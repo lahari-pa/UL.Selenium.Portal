@@ -333,6 +333,105 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "VOC - Flow 19 Dilution - validation of limits (Suite ID: 64747)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_VOCFlow19")]
+        public virtual void _62708VOC_Flow19_Dilution_LimitsChecking_Sold1Used2()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2", ((string[])(null)));
+#line 91
+this.ScenarioSetup(scenarioInfo);
+#line 92
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 93
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 94
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 95
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Floor Wax Stripper (Light or Medium Build-Up)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 96
+testRunner.Then("I save the product information as: TestCase62708", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 97
+testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 98
+testRunner.Given("I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direc" +
+                    "t Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 99
+testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
+                    "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 100
+testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 101
+testRunner.Given("I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION" +
+                    " ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 102
+testRunner.Given("I set the Product label specifies a dilution ratio which results in a final VOC c" +
+                    "oncentration for the product during use field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 103
+testRunner.Given("in the VOC page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 104
+testRunner.Then("For the Product\'s VOC content as sold field I should see the following error: Thi" +
+                    "s is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 105
+testRunner.Then("For the Product\'s VOC content as used field I should see the following error: Thi" +
+                    "s is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 106
+testRunner.Given("I set the Product\'s VOC content as sold field to: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 107
+testRunner.Given("I set the Product\'s VOC content as used field to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 108
+testRunner.Then("For the Product\'s VOC content as sold field I should see not see an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 109
+testRunner.Then("For the Product\'s VOC content as used field I should see not see an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 110
+testRunner.Given("in the VOC page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 111
+testRunner.Then("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 112
+testRunner.Given("I call shared step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis da" +
+                    "te is shown - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 113
+testRunner.Given("I call shared step 57817 (VOC Results - Confirm VOC Limits table shows correct va" +
+                    "lues (OTC & CARB) - Happy Path): Floor Wax Stripper (Light or Medium Build-Up)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Statement"});
+            table4.AddRow(new string[] {
+                        "VOC percent as sold 1"});
+            table4.AddRow(new string[] {
+                        "VOC percent diluted for use 2"});
+            table4.AddRow(new string[] {
+                        "Based on the type of product, this must comply with the most restrictive VOC limi" +
+                            "t."});
+            table4.AddRow(new string[] {
+                        "Does not exceed the limits specified in the California Consumer Products Regulati" +
+                            "on"});
+            table4.AddRow(new string[] {
+                        "Does not exceed the limits specified by the Ozone Transport Commission"});
+#line 114
+testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table4, "Then ");
+#line 121
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase62708", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

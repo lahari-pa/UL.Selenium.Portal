@@ -3242,5 +3242,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The row for state: " + state + " was not highlighted " + colour + " as expected. The displayed hex code is: " + actualHexCode,
 				"The row for state " + state + " was highlighted " + colour + " as expected");
 		}
+
+		[Then(@"For the Product's VOC content as sold field I should see the following error: (.*)")]
+		public void ThenForTheProductSVOCContentAsSoldFieldIShouldSeeTheFollowingError(string error)
+		{
+			string actualError = new NewProduct().VOCContentsAsSoldError();
+			if (actualError == null)
+			{
+				actualError = "null";
+			}
+			Report.IsTrue(actualError == error, "Error is not showing as expected. Expected: " + error + " but got: " + actualError,
+				"Error is showing as expected");
+		}
+
+		[Then(@"For the Product's VOC content as used field I should see the following error: (.*)")]
+		public void ThenForTheProductSVOCContentAsUsedFieldIShouldSeeTheFollowingError(string error)
+		{
+			string actualError = new NewProduct().VOCContentsAsUsedError();
+			if (actualError == null)
+			{
+				actualError = "null";
+			}
+			Report.IsTrue(actualError == error, "Error is not showing as expected. Expected: " + error + " but got: " + actualError,
+				"Error is showing as expected");
+		}
+
+		[Then(@"For the Product's VOC content as sold field I should see not see an error")]
+		public void ThenForTheProductSVOCContentAsSoldFieldIShouldSeeNotSeeAnError()
+		{
+			Report.IsTrue(new NewProduct().VOCContentsAsSoldError() == null, "Expected no error but got: " + new NewProduct().VOCContentsAsSoldError(),
+				"Error is showing as expected");
+		}
+
+		[Then(@"For the Product's VOC content as used field I should see not see an error")]
+		public void ThenForTheProductSVOCContentAsUsedFieldIShouldSeeNotSeeAnError()
+		{
+			Report.IsTrue(new NewProduct().VOCContentsAsUsedError() == null, "Expected no error but got: " + new NewProduct().VOCContentsAsUsedError(),
+				"Error is showing as expected");
+		}
+
+
 	}
 }
