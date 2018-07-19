@@ -424,9 +424,12 @@ testRunner.Given("I call shared step 57817 (VOC Results - Confirm VOC Limits tab
                             "on"});
             table4.AddRow(new string[] {
                         "Does not exceed the limits specified by the Ozone Transport Commission"});
+            table4.AddRow(new string[] {
+                        "Based on your previous selections, the product has the following intended use: Th" +
+                            "e OTC Model Rule and CARB limits for this intended use are:"});
 #line 114
 testRunner.Then("in the VOC Summary page I should see the following noneditable statements", ((string)(null)), table4, "Then ");
-#line 121
+#line 122
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase62708", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden

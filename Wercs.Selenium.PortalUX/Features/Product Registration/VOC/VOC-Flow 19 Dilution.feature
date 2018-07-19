@@ -112,10 +112,11 @@ Then I should see the Volatile Organic Compound Summary Page
 Given I call shared step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
 Given I call shared step 57817 (VOC Results - Confirm VOC Limits table shows correct values (OTC & CARB) - Happy Path): Floor Wax Stripper (Light or Medium Build-Up)
 Then in the VOC Summary page I should see the following noneditable statements
-| Statement                                                                           |
-| VOC percent as sold 1                                                               |
-| VOC percent diluted for use 2                                                       |
-| Based on the type of product, this must comply with the most restrictive VOC limit. |
-| Does not exceed the limits specified in the California Consumer Products Regulation |
-| Does not exceed the limits specified by the Ozone Transport Commission              |
+| Statement                                                                                                                                    |
+| VOC percent as sold 1                                                                                                                        |
+| VOC percent diluted for use 2                                                                                                                |
+| Based on the type of product, this must comply with the most restrictive VOC limit.                                                          |
+| Does not exceed the limits specified in the California Consumer Products Regulation                                                          |
+| Does not exceed the limits specified by the Ozone Transport Commission                                                                       |
+| Based on your previous selections, the product has the following intended use: The OTC Model Rule and CARB limits for this intended use are: |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
