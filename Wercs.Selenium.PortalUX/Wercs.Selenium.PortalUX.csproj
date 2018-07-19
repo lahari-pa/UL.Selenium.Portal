@@ -354,6 +354,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VOC-Flow 19 Dilution.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\VOC\VOC-SCAQMD.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VOC-SCAQMD.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\VOC\VOC.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -659,6 +664,10 @@
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>VOC-Flow 19 Dilution.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\VOC\VOC-SCAQMD.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>VOC-SCAQMD.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\VOC\VOC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

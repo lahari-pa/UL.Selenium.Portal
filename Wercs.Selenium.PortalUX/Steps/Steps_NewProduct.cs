@@ -3281,6 +3281,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Error is showing as expected");
 		}
 
+		[Then(@"the VOC concentration question shows a yes and a no button")]
+		public void ThenTheVOCConcentrationQuestionShowsAYesAndANoButton()
+		{
+			Report.IsTrue(new NewProduct().VOCConcentrationQuestionHasYesAndNo(), "Expected VOC Concentration to have yes and no",
+				"VOC concentration has yes and no");
+		}
+
+		[Then(@"For the VOC concentration question field I should see the following error: (.*)")]
+		public void ThenForTheVOCConcentrationQuestionFieldIShouldSeeTheFollowingError(string error)
+		{
+			string actualError = new NewProduct().VOCConcentrationError();
+			if (actualError == null)
+			{
+				actualError = "null";
+			}
+			Report.IsTrue(actualError == error, "Error is not showing as expected. Expected: " + error + " but got: " + actualError,
+				"Error is showing as expected");
+		}
+
+		[Then(@"For the VOC page I should see the following error: (.*)")]
+		public void ThenForTheVOCPageIShouldSeeTheFollowingError(string error)
+		{
+			List<string> actualErrors = new NewProduct().VOCAlerts();
+			if (actualErrors == null)
+			{
+				actualErrors = new List<string>();
+			}
+			Report.IsTrue(actualErrors.Contains(error), "Error is not showing as expected. Expected: " + error + " but got: " + string.Join(",", actualErrors),
+				"Error is showing as expected");
+		}
+
 
 	}
 }

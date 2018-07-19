@@ -120,3 +120,22 @@ Then in the VOC Summary page I should see the following noneditable statements
 | Does not exceed the limits specified by the Ozone Transport Commission                                                                       |
 | Based on your previous selections, the product has the following intended use: The OTC Model Rule and CARB limits for this intended use are: |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
+
+Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution = No to Dilution checking warning message shown
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
+Then I save the product information as: TestCase56478
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+Then the VOC concentration question shows a yes and a no button
+Given in the VOC page I click Continue
+Then For the VOC concentration question field I should see the following error: This is a required field.
+Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: No
+Then For the VOC page I should see the following error: Please ensure that you have selected the correct Recommended Use for your product. For further questions, please refer to the VOC User's Guide.
+Given in the VOC page I click Continue
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56478

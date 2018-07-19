@@ -2843,6 +2843,69 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool VOCConcentrationQuestionHasYesAndNo()
+		{
+			var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				.FirstOrDefault(x => x.Text.Contains("VOC concentration"));
+
+			if (lbl != null)
+			{
+				var inputs = lbl.FindElements(By.XPath("../..//input/../span"));
+				var options = inputs.Select(x => x.GetValue()).ToList();
+				return options.Contains("Yes") && options.Contains("No");
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public string VOCConcentrationError()
+		{
+			var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
+				.FirstOrDefault(x => x.Text.Contains("VOC concentration"));
+
+			if (lbl != null)
+			{
+				try
+				{
+					var error = lbl.FindElement(By.XPath("../..//input/../../../p//span"));
+					if (error != null)
+					{
+						return error.Text;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				catch (Exception e)
+				{
+					return null;
+				}
+
+			}
+			else
+			{
+				throw new Exception("Label not found as expected.");
+			}
+
+		}
+
+		public List<string> VOCAlerts()
+		{
+			try
+			{
+				var errors = containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"));
+
+				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
+			}
+			catch (Exception e)
+			{
+				return null;
+			}
+		}
+
 		public string VOCContentsAsSoldError()
 		{
 			var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
