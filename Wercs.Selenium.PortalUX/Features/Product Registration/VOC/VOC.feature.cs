@@ -401,8 +401,8 @@ testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)
 #line 151
 testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 152
-testRunner.And("I set the Product, including container and/or packaging, contains a chemical on C" +
-                    "alifornia\'s Prop 65 list option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
+                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 153
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 156
@@ -663,8 +663,8 @@ testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)
 #line 289
 testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 290
-testRunner.And("I set the Product, including container and/or packaging, contains a chemical on C" +
-                    "alifornia\'s Prop 65 list option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
+                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 291
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 294
@@ -936,8 +936,8 @@ testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)
 #line 430
 testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 431
-testRunner.And("I set the Product, including container and/or packaging, contains a chemical on C" +
-                    "alifornia\'s Prop 65 list option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
+                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 432
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 435
@@ -1358,8 +1358,8 @@ testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)
 #line 598
 testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 599
-testRunner.And("I set the Product, including container and/or packaging, contains a chemical on C" +
-                    "alifornia\'s Prop 65 list option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
+                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 600
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 603
@@ -1610,8 +1610,8 @@ testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)
 #line 732
 testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 733
-testRunner.And("I set the Product, including container and/or packaging, contains a chemical on C" +
-                    "alifornia\'s Prop 65 list option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
+                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 734
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 737

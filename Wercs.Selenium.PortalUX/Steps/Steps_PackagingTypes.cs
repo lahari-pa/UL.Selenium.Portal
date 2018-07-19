@@ -48,22 +48,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void PackagingTypeSavedAsAppearsInGrid(string savedAs, string appearsOrNot)
 		{
 			var appears = appearsOrNot == "appears";
-			var packagingType = new MyPackagingTypes.ThisPackagingType();
-			packagingType.ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString();
-			packagingType.Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString();
+			var packagingType = new MyPackagingTypes.PackagingTypeItem {
+				ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString(),
+				Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString()
+			};
 			var reverseAppears = appears ? "does not appear" : "appears";
 			Report.IsTrue(new MyPackagingTypes().PackagingTypeInGrid(appears, packagingType),
-				"The saved Packaging Type " + reverseAppears + " in the My Packaging Types grid",
-				"The saved Packaging Type " + appearsOrNot + " in the My Packaging Types grid as expected");
+				"The saved Packaging Type with name: " + packagingType.Name + " and ID: " + packagingType.ID + " " + reverseAppears + " in the My Packaging Types grid",
+				"The saved Packaging Type  with name: " + packagingType.Name + " and ID: " + packagingType.ID + " " + appearsOrNot + " in the My Packaging Types grid as expected");
 		}
 
 		[StepDefinition(@"I delete Packaging Type saved as: (.*)")]
 		public void DeletePackagingType(string savedAs)
 		{
 			var selPackagingTypes = new MyPackagingTypes();
-			var packagingType = new MyPackagingTypes.ThisPackagingType();
-			packagingType.ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString();
-			packagingType.Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString();
+			var packagingType = new MyPackagingTypes.PackagingTypeItem {
+				ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString(),
+				Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString()
+			};
 			TestReport.StartStep("I click 'Actions' (...) for the created Package Type");
 			Report.IsTrue(selPackagingTypes.ClickActions(packagingType),
 				string.Format("Failed to click 'Actions' (...) for Packaging Type with ID '{0}' and name '{1}'",
@@ -109,9 +111,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I confirm the name and ID for Packaging Type saved as: (.*) appear in the Delete Product pop up")]
 		public void PackagingTypeDetailsAppearInDeleteProductPopUp(string savedAs)
 		{
-			var packagingType = new MyPackagingTypes.ThisPackagingType();
-			packagingType.ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString();
-			packagingType.Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString();
+			var packagingType = new MyPackagingTypes.PackagingTypeItem {
+				ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString(),
+				Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString()
+			};
 			var delDialog = new DeleteDialog();
 			var itemText = delDialog.ItemRemovedText();
 			TestReport.StartStep("I confirm the name for the saved Packaging Group appears in the popup");
@@ -123,13 +126,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The Packaging Group ID " + packagingType.ID + " did not appear in the Delete Product Pop Up dialog",
 				"The Packaging Group ID " + packagingType.ID + " appeared in the Delete Product Pop Up dialog as expected");
 		}
+
 		[StepDefinition(@"I edit Packaging Type saved as: (.*)")]
 		public void EditPackagingType(string savedAs)
 		{
 			var selPackagingTypes = new MyPackagingTypes();
-			var packagingType = new MyPackagingTypes.ThisPackagingType();
-			packagingType.ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString();
-			packagingType.Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString();
+			var packagingType = new MyPackagingTypes.PackagingTypeItem {
+				ID = Context.GetFromContext("PackagingTypeID_" + savedAs).ToString(),
+				Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString()
+			};
 			TestReport.StartStep("I click 'Actions' (...) for the created Package Type");
 			Report.IsTrue(selPackagingTypes.ClickActions(packagingType),
 				string.Format("Failed to click 'Actions' (...) for Packaging Type with ID '{0}' and name '{1}'",

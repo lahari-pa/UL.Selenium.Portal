@@ -338,6 +338,8 @@ Scenario: [65887] Pagination
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 
+Then The home screen should load
+
 Given I navigate to the MyAccount page
 
 Then The My Account user grid is currently on page number: 1

@@ -675,6 +675,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep(string.Format("I set the {0} option to: {1}",
+				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
+				"No"));
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
 				"No");
@@ -686,15 +689,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule",
 				"0");
 				*/
+			TestReport.StartStep(string.Format("I set the {0} option to: {1}",
+				"Product label specifies a dilution ratio which results in a final VOC concentration for the product during use",
+				"Yes"));
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product label specifies a dilution ratio which results in a final VOC concentration for the product during use",
 				"Yes");
+			TestReport.StartStep(string.Format("I set the {0} option to: {1}",
+				"Product's VOC content as used",
+				"0"));
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product's VOC content as used",
 				"0");
+			TestReport.StartStep(string.Format("I set the {0} option to: {1}",
+				"Product's VOC content as sold",
+				"0"));
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product's VOC content as sold",
 				"0");
+			TestReport.StartStep("I select the first option for section: Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?");
 			MyStepsNewProduct.SelectFirstOptionInSection("Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?");
 			TestReport.StartStep("In the VOC page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("VOC");

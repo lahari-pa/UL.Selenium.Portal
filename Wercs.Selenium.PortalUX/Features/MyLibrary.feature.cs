@@ -389,8 +389,8 @@ testRunner.Then("I confirm the name and ID for Packaging Type saved as: ThisPack
 #line 171
 testRunner.Given("I click Delete in the Delete Product pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 173
-testRunner.And("I confirm that only \'Active\' brands saved in My Library - My Brands appear in the" +
-                    " \'Product Line or Brand\' drop down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that the Packaging Type saved as: ThisPackaging does not appear in the " +
+                    "My Packaging Types grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

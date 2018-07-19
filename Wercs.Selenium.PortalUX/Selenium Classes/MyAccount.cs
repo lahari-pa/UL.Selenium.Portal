@@ -1140,12 +1140,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElement(By.XPath(".//ul[@class='dropdown-menu' and preceding-sibling::*[@aria-expanded='true']]//a[contains(text(),'Edit')]")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
-		public bool ClickActions(ThisPackagingType packagingType)
+		public bool ClickActions(PackagingTypeItem packagingType)
 		{
 			return containerElement.FindElement(By.XPath(".//div[@role='group' and ./ancestor::tr[.//div[text()='" + packagingType.Name + "'] and .//small[text()='" + packagingType.ID + "']]]/button"), 2).TryClick();
 		}
 		//when appears=true, bool PackagingTypeAppearsInGrid. when appears=false, bool PackagingTypeDoesNotAppearInGrid
-		public bool PackagingTypeInGrid(bool appears, ThisPackagingType packagingType)
+		public bool PackagingTypeInGrid(bool appears, PackagingTypeItem packagingType)
 		{
 			int pageNumber = GetPage("current");
 			if (pageNumber == -1)
@@ -1227,7 +1227,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return 1;
 		}
-		public class ThisPackagingType
+		public class PackagingTypeItem
 		{
 			public string ID { get; set; }
 			public string Name { get; set; }
@@ -1366,7 +1366,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickSearchResult(string name, string cas)
 		{
 			var resultsName = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]//span[@class='component-name']"), 2);
-			if (resultsName.Count == 0)
+			if (resultsName.Count == 0 && GeneralUtilities.Wait_for_load_finish())
 			{
 				Report.Info("Unable to locate any search results with chemical name!");
 				return false;

@@ -7,7 +7,7 @@
 @RetailPartners
 @wercsmart
 @Signup
-@run_SupplierReports
+@run_Kits
 
 Feature: Kits
 

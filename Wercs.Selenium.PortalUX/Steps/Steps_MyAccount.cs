@@ -748,8 +748,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(currentPage == Convert.ToInt32(pageNavigationValue) + difference,
 				string.Format("The active page did not {0} by 1 after entering the '{1}' arrow into the page navigation box at position '{2}'",
 					iteration.Remove(iteration.Length - 1), direction, pageNavigationValue),
-				string.Format("The active page correctly {0} by 1 after entering the '{1}' arrow into the page navigation box at position '{2}'",
-					iteration, direction, pageNavigationValue));
+				string.Format("The active page correctly {0} by 1 to page {1} after entering the '{2}' arrow into the page navigation box at position '{3}'",
+					iteration, currentPage, direction, pageNavigationValue));
 		}
 
 		[StepDefinition(@"I type the number (.*) into the user grid page navigation box and press the enter key")]

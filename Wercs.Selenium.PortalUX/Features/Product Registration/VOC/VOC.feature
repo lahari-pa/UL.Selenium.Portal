@@ -149,7 +149,7 @@ Given in the New Product page I click Continue
 # Regulatory 1 Page Details
 And I should see the Regulatory Information 1 Page
 And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
 Given in the New Product page I click Continue
 
 # Transportation Details 1 Page
@@ -287,7 +287,7 @@ Given in the New Product page I click Continue
 # Regulatory 1 Page Details
 And I should see the Regulatory Information 1 Page
 And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
 Given in the New Product page I click Continue
 
 # Transportation Details 1 Page
@@ -428,7 +428,7 @@ Given in the New Product page I click Continue
 # Regulatory 1 Page Details
 And I should see the Regulatory Information 1 Page
 And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
 Given in the New Product page I click Continue
 
 # Transportation Details 1 Page
@@ -596,7 +596,7 @@ Given in the New Product page I click Continue
 # Regulatory 1 Page Details
 And I should see the Regulatory Information 1 Page
 And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
 Given in the New Product page I click Continue
 
 # Regulatory 3 Page Details
@@ -730,7 +730,7 @@ Given in the New Product page I click Continue
 # Regulatory 1 Page Details
 And I should see the Regulatory Information 1 Page
 And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
 Given in the New Product page I click Continue
 
 # Transportation Details 1 Page

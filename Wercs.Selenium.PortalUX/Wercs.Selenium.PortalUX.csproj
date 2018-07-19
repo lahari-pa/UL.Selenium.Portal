@@ -159,6 +159,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConflictMinerals.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\CVS RCL.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CVS RCL.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Data Consent Tiers.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -498,6 +503,10 @@
     <None Include="Features\ConflictMinerals.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ConflictMinerals.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CVS RCL.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CVS RCL.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Data Consent Tiers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -48,7 +48,6 @@ Given I select any Walmart Affiliate automatically selects all from that group, 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73917
 
-
 Scenario: [73920] Walmart Affiliates when Viewing My Retail Partners
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -126,7 +125,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
 
-
+@walmarttest
 Scenario: [74133] Walmart Product Type Electronics
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
