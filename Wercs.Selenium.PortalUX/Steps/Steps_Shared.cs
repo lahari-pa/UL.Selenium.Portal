@@ -739,6 +739,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 		}
 
+		// Enter UPC string in the form: "Equals"+upcNumber where upcNumber is the exact number to input, rather than using the randomly generated step from context
 		[StepDefinition(
 			@"I call Shared 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc,
@@ -750,24 +751,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
 			TestReport.StartStep("I click the 'Add UPC' button");
 			MyStepsNewProduct.ThenIClickTheAddUpcButton();
-			TechTalk.SpecFlow.Table upcTable = new TechTalk.SpecFlow.Table(new string[] {
-				"Field",
-				"Value"
-			});
-			upcTable.AddRow(new string[] {
-				"UPCNumber",
-				"saved as UPC" + upc
-			});
-			upcTable.AddRow(new string[] {
-				"ContainerType",
-				containerType
-			});
-			upcTable.AddRow(new string[] {
-				"Size",
-				size
-			});
 			TestReport.StartStep("I add the following into the UPC Fields");
-			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			if (upc.Contains("Equals"))
+			{
+				var upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation { ContainerType = containerType, Size = size, UpcNumber = upc_ };
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
+			}
+			else
+			{
+				Table upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
 		}
@@ -3670,6 +3668,55 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Manage Global Messages");
 		}
 
+		[StepDefinition(@"I call shared step 63860 \(Additional Product Information - US, No\(child\), No\(OSHA\), No\(DSV\), Yes\(PLP\), No\(GNFR\)\)")]
+		public void SharedAdditionalProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR()
+		{
+			TestReport.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information Page");
+			selNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep(
+				"Select countries the product may be sold in should be showing the value: United States");
+			selNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
+				"United States");
+			TestReport.StartStep(
+				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			TestReport.StartStep(
+				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
+				"No");
+			TestReport.StartStep(
+				"I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. field to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
+				"No");
+			TestReport.StartStep("I set the Product is a Retailer's Private Label or Brand field to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "Yes");
+			TestReport.StartStep(
+				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
+				"No");
+			TestReport.StartStep("In the Additional Product Information page I click Continue");
+			selNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+		}
+
+		[StepDefinition(@"I call shared step 74201 \(Select Retailers - CVS\)")]
+		public void SelectRetailers_CVS()
+		{
+			TestReport.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("In the Select Retailers popup I select the retailer: CVS");
+			selStepsNewProduct.ThenISelectTheRetailer_InTheWindow("CVS");
+			// Temporary addition - expect it to be changed on TFS
+			TestReport.StartStep("I enter private label as 'Private Label Lip Balm'");
+			selStepsNewProduct.ThenInTheRetailersTabIEnterPrivateLabelNameAs("Private Label Lip Balm");
+			TestReport.StartStep("I click continue");
+			selStepsNewProduct.ClickContinue();
+		}
 		[Given(@"I call shared step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
 		public void GivenICallSharedStep57801ConfirmVOCSummaryStepShownConfirmVOCAnalysisDateIsShown_HappyPath()
 		{
@@ -3697,5 +3744,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			
 		}
 
+		[StepDefinition(@"I call shared step 74202 \(CVS Pharmacy - Yes, I wish to Continue\)")]
+		public void SharedCVSPharmacy_YesIWishToContinue()
+		{
+			TestReport.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I confirm the CVS Pharmacy section appears");
+			selNewProductSteps.GivenIShouldSeeXPage("CVS Own Brand Registration");
+			TestReport.StartStep(
+				"I set the Continue? option to: Yes, I wish to continue registration");
+			selNewProductSteps.SetTheSectionOptionTo(
+				"Continue?",
+				"Yes, I wish to continue registration");
+			TestReport.StartStep("I click continue");
+			selNewProductSteps.ClickContinue();
+		}
 	}
 }

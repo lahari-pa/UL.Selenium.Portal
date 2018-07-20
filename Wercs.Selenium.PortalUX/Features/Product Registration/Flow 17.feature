@@ -75,8 +75,6 @@ Then I save the product information as: TestCase60018
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared Step 54797 (Select the specific Lithium Ion chemistry of the Battery)
-
 Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -105,6 +103,22 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60018. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+# Removed step
+
+#Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+
+# New steps
+
+Given In the Data Acceptance page I select Yes, Agreed
+
+Given I click the Summary button in the Data Acceptance window
+
+And I switch to the Data Summary page
+
+Then I should not see any error messages
+
+And I close the Data Summary tab
+
+Then I should see the Data Acceptance Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018

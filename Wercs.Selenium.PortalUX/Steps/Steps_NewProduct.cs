@@ -170,6 +170,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"As expected, the error message was not showing. Error: " + message);
 		}
 
+		[StepDefinition(@"I should not see any error messages")]
+		public void NoErrorMessages()
+		{
+			Report.Info("Check no error messages are appearing");
+			var selNewProduct = new NewProduct();
+			var found = selNewProduct.ErrorMessage();
+
+			Report.IsTrue(found == null,
+				"Error message was showing when it wasn't expected to! Error: " + found,
+				"As expected, the error message was not showing.");
+		}
+
 		[StepDefinition(@"I click Continue and should not see an error message")]
 		public void NoErrorMessagesVisible()
 		{
@@ -1854,8 +1866,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(1);
 		}
 
-
-
 		[StepDefinition(@"I (see|only see|do not see) the following sections")]
 		public void CheckDisplayedSections(string condition, Table sections)
 		{
@@ -1887,6 +1897,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.IsFalse(expectedSections.Any(ActualSections.Contains), "Sections were showing which should not be. The sections not allowed are: " + string.Join("; ", expectedSections) + ". Actual sections: " + string.Join("; ", ActualSections), "Sections were not showing as expected: " + string.Join("; ", expectedSections));
 			}
+		}
+
+		[StepDefinition(@"the question: (.*) is displayed at position: (.*)")]
+		public void CheckDisplayedSections(string section, string position)
+		{
+			var actualSections = new NewProduct().GetDisplayedSections().Select(x => x.Trim()).ToList();
+			var index = position.All(char.IsDigit) ? int.Parse(position) - 1 : -1;
+			if (index == -1)
+			{
+				Report.Failure("The specified question position must be numeric");
+				return;
+			}
+			Report.IsTrue(actualSections[index].Trim() == section,
+				"The section: " + section + " was not displayed at position: " + position + "!",
+				"The section: " + section + " was displayed at position: " + position + " as expected");
 		}
 
 		[StepDefinition(@"I select the first option in section: (.*)")]
@@ -2059,7 +2084,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.Failure("No State data displayed: " + expectedinfo.State + " were displayed!");
 					continue;
 				}
-
 				bool passed = false;
 				foreach (var matched in matchingType)
 				{
@@ -2069,8 +2093,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						break;
 					}
 				}
-
-				Report.IsTrue(passed, "Voc percent for each state was not found!", "Voc percent for each data found!");
+				Report.IsTrue(passed, "Voc percent data did not match for state: " + expectedinfo.State, "Voc percent data matched for state: " + expectedinfo.State);
 			}
 		}
 
@@ -3096,18 +3119,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var expectedOptions = new List<string>();
 			expected.Rows.ForEach(x => expectedOptions.Add(x["Option"]));
+			var expectedOptionsLower = expectedOptions.Select(x => x.ToLower()).ToList();
 			var displayedOptions = new NewProduct().GetAllOptionsForSection(section);
+			var displayedOptionsLower = displayedOptions.Select(x => x.ToLower()).ToList();
 			if (exclusivity == "displayed")
 			{
-				Report.IsTrue(expectedOptions.All(x => displayedOptions.Contains(x)),
+				Report.IsTrue(expectedOptions.All(x => displayedOptionsLower.Contains(x.ToLower())),
 					"All expected options were not displayed under section: " + section + ". Displayed options: " + string.Join(", ", displayedOptions) + ". Expected options: " + string.Join(", ", expectedOptions),
 					"All expected options were displayed under section: " + section + ": " + string.Join(", ", displayedOptions));
 			}
 			if (exclusivity == "displayed exclusively")
 			{
-				Report.IsTrue(expectedOptions.Equals(displayedOptions),
-					"The actual options for section: " + section + " did not match the expected options. Actual options: " + string.Join(", ", displayedOptions) + ". Expected options: " + string.Join(", ", expectedOptions),
-					"The actual options for section: " + section + " matched the expected options: " + string.Join(", ", displayedOptions));
+				var differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
+				Report.IsTrue(expectedOptionsLower.Equals(displayedOptionsLower),
+					"The actual options for section: " + section + " did not match the expected options. The differences were: " + string.Join(", ", differences),
+					"The actual options for section: " + section + " matched the expected options.");
 			}
 		}
 
@@ -3313,5 +3339,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[Given(@"I save the UPC number (.*) as: (.*)")]
+		public void SaveUpcNumberAs(string upc, string savedAs)
+		{
+			Context.AddToContext(savedAs, upc);
+			Report.Info("Saved UPC No: " + upc + " saved as: " + savedAs);
+		}
 	}
 }

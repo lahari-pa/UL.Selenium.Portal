@@ -174,49 +174,6 @@ Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62775
 
-Scenario: [62776] Pesticides - Validation of Which one best describes your product - Regulates Plant Growth
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
-Then The home screen should load
-
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
-
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
-
-Then I save the product information as: TestCase62776
-
-Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
-
-And I should see the Additional Product Information Page
-
-Given I see the following sections
-| Section                               |
-| Which one best describes your product |
-
-Given I should see a total of 3 radio buttons for the section: Which one best describes your product
-
-Then I should see the following radio buttons:
-| Button                                                                                                                  |
-| Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)                      |
-| Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth |
-| Product is not considered a pesticide product                                                                           |
-
-And in the New Product page I click Continue
-
-Then I should see an error message: This is a required field.
-
-And I set the Which one best describes your product field to: Regulates Plant Growth, Defoliates (removes leaves) Plants and controls growth, Dehydrates plants for control of growth
-
-Then Which one best describes your product should not be showing the error messages: This is a required field.
-
-And in the New Product page I click Continue
-
-Then Which one best describes your product should not be showing the error messages: This is a required field.
-
-Given I navigate to the home page
-
-Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62776
 
 Scenario: [62849] Pesticide - Manually entered date not altered by refresh from Kelly
 

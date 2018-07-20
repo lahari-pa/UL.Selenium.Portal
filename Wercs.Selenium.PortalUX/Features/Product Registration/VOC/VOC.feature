@@ -846,12 +846,9 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared Step 57678 (Confirm Volatile Organic Compounds (VOC OTC/CARB) step title - Select No to all questions - Happy Path)
-
-And I should see the following Voc Limits present:
-| Use                  | VOC Compliance Limit | Regulation           |
-| Insecticide - Fogger | 45                   | OTC Model rule limit |
-| Insecticide - Fogger | 45                   | CARB limit           |
+Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
+| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
+| No                                       | 0                     | 0                          | Yes            |
 
 And I should see the following Voc percent for each state:
 | State           | Regulation            | VOC Value | State VOC Threshold | Message                          |

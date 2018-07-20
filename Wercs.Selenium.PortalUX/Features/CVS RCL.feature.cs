@@ -116,6 +116,185 @@ this.ScenarioSetup(scenarioInfo);
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 21
+testRunner.Given("I save the UPC number 050428290231 as: UPC74208", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 23
+testRunner.Given("I delete all products with UPC Number: saved as UPC74208", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 25
+testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+                    " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 27
+testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Lip Balm", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 29
+testRunner.Then("I save the product information as: TestCase74208", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 31
+testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
+                    "Solid - State&Subcat - Mixed&Water -random - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 33
+testRunner.Given("I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA" +
+                    "), No(DSV), Yes(PLP), No(GNFR))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 35
+testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Camphor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
+testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 39
+testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+                    "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 43
+testRunner.Given("I call shared step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 45
+testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
+                    "ze Only) for UPC: saved as UPC74208, container type: Plastic Container and size:" +
+                    " 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 47
+testRunner.Given("I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 49
+testRunner.Given("I set the What is the CVS Store Brand associated to this product? option to: Beau" +
+                    "ty 360 (CVS Pharmacy)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 51
+testRunner.Given("I set the Who is the Product Development Manager (PDM) for this product? option t" +
+                    "o: Canady, Cory Cory.Canady@CVSHealth.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 53
+testRunner.Then("the question: What is the CVS merchandising category for this product? is display" +
+                    "ed at position: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Option"});
+            table1.AddRow(new string[] {
+                        "Acne/HSC"});
+            table1.AddRow(new string[] {
+                        "Adult Care"});
+            table1.AddRow(new string[] {
+                        "Allergy Remedies"});
+            table1.AddRow(new string[] {
+                        "Apparel"});
+            table1.AddRow(new string[] {
+                        "Appliances"});
+            table1.AddRow(new string[] {
+                        "Baby Care"});
+            table1.AddRow(new string[] {
+                        "Baked Goods – Frozen Food"});
+            table1.AddRow(new string[] {
+                        "Batteries"});
+            table1.AddRow(new string[] {
+                        "Beverages"});
+            table1.AddRow(new string[] {
+                        "Bulb & Wire"});
+            table1.AddRow(new string[] {
+                        "Candles"});
+            table1.AddRow(new string[] {
+                        "Candy"});
+            table1.AddRow(new string[] {
+                        "Cold Remedies"});
+            table1.AddRow(new string[] {
+                        "Cosmetics"});
+            table1.AddRow(new string[] {
+                        "Dairy"});
+            table1.AddRow(new string[] {
+                        "Deodorants"});
+            table1.AddRow(new string[] {
+                        "Diet/Nutrition"});
+            table1.AddRow(new string[] {
+                        "Digestive Health"});
+            table1.AddRow(new string[] {
+                        "External Pain"});
+            table1.AddRow(new string[] {
+                        "Eye Care"});
+            table1.AddRow(new string[] {
+                        "Facial Care"});
+            table1.AddRow(new string[] {
+                        "Feminine Care"});
+            table1.AddRow(new string[] {
+                        "First Aid"});
+            table1.AddRow(new string[] {
+                        "Foot Care"});
+            table1.AddRow(new string[] {
+                        "Fragrances"});
+            table1.AddRow(new string[] {
+                        "Grocery"});
+            table1.AddRow(new string[] {
+                        "Hair Care"});
+            table1.AddRow(new string[] {
+                        "Hair Notions"});
+            table1.AddRow(new string[] {
+                        "Hand & Body"});
+            table1.AddRow(new string[] {
+                        "Home Diagnostics"});
+            table1.AddRow(new string[] {
+                        "Home Health Care"});
+            table1.AddRow(new string[] {
+                        "Hosiery"});
+            table1.AddRow(new string[] {
+                        "Household"});
+            table1.AddRow(new string[] {
+                        "Household Paper"});
+            table1.AddRow(new string[] {
+                        "Housewares"});
+            table1.AddRow(new string[] {
+                        "Laundry"});
+            table1.AddRow(new string[] {
+                        "Nicotine Replacement"});
+            table1.AddRow(new string[] {
+                        "Oral Hygiene"});
+            table1.AddRow(new string[] {
+                        "Pain Relievers"});
+            table1.AddRow(new string[] {
+                        "Personal Cleansing"});
+            table1.AddRow(new string[] {
+                        "Personal Intimacy"});
+            table1.AddRow(new string[] {
+                        "Pet Supplies"});
+            table1.AddRow(new string[] {
+                        "Photo Processing 1 Hour"});
+            table1.AddRow(new string[] {
+                        "Picture Frames & ALB"});
+            table1.AddRow(new string[] {
+                        "Pro Salon"});
+            table1.AddRow(new string[] {
+                        "Reading Glasses"});
+            table1.AddRow(new string[] {
+                        "Seasonal"});
+            table1.AddRow(new string[] {
+                        "Seasonal Fall & Winter"});
+            table1.AddRow(new string[] {
+                        "Seasonal Toys"});
+            table1.AddRow(new string[] {
+                        "Shaving Needs"});
+            table1.AddRow(new string[] {
+                        "Small Electronics"});
+            table1.AddRow(new string[] {
+                        "Snacks"});
+            table1.AddRow(new string[] {
+                        "Stationery"});
+            table1.AddRow(new string[] {
+                        "Suncare"});
+            table1.AddRow(new string[] {
+                        "Sunglasses"});
+            table1.AddRow(new string[] {
+                        "Top of Checkout"});
+            table1.AddRow(new string[] {
+                        "Toys"});
+            table1.AddRow(new string[] {
+                        "Trial Travel"});
+            table1.AddRow(new string[] {
+                        "Vitamins"});
+            table1.AddRow(new string[] {
+                        "Wine & Spirits"});
+            table1.AddRow(new string[] {
+                        "Other"});
+#line 55
+testRunner.And("The following options should be displayed exclusively for section: What is the CV" +
+                    "S merchandising category for this product?", ((string)(null)), table1, "And ");
+#line 119
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 121
+testRunner.Then("What is the CVS merchandising category for this product? should be showing the er" +
+                    "ror messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 125
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase74208", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

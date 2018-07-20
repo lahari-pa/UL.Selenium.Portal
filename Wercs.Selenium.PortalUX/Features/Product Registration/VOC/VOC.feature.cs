@@ -1812,24 +1812,20 @@ testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes optio
 #line 847
 testRunner.Given("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
                     "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 849
-testRunner.Given("I call Shared Step 57678 (Confirm Volatile Organic Compounds (VOC OTC/CARB) step " +
-                    "title - Select No to all questions - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Use",
-                        "VOC Compliance Limit",
-                        "Regulation"});
+                        "Product granted Alternative Control Plan",
+                        "Amount of VOC by CARB",
+                        "Amount of VOC by OTC Model",
+                        "VOC for states"});
             table23.AddRow(new string[] {
-                        "Insecticide - Fogger",
-                        "45",
-                        "OTC Model rule limit"});
-            table23.AddRow(new string[] {
-                        "Insecticide - Fogger",
-                        "45",
-                        "CARB limit"});
-#line 851
-testRunner.And("I should see the following Voc Limits present:", ((string)(null)), table23, "And ");
+                        "No",
+                        "0",
+                        "0",
+                        "Yes"});
+#line 849
+testRunner.Given("I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CA" +
+                    "RB - Yes for state values)", ((string)(null)), table23, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
@@ -1945,9 +1941,9 @@ testRunner.And("I should see the following Voc Limits present:", ((string)(null)
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-#line 856
+#line 853
 testRunner.And("I should see the following Voc percent for each state:", ((string)(null)), table24, "And ");
-#line 877
+#line 874
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase74626", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
