@@ -3781,5 +3781,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click continue");
 			selNewProductSteps.ClickContinue();
 		}
+
+		[StepDefinition(@"I call shared step 57205 \(Go to Retail Partners - Select CVS\)")]
+		public void SharedGoToRetailPartners_SelectCVS()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the Retail Partners icon in the Navigation Pane");
+			new StepsHomepage().ClickItemInNavigationPanel("Retail Partners");
+			TestReport.StartStep("I should see the heading 'Retail Partners'");
+			new StepsRetailPartners().ThenIShouldSeeTheFollowingHeading("Retail Partners");
+			TestReport.StartStep("I select the retailer: CVS");
+			new StepsRetailPartners().SelectRetailer("CVS");
+		}
 	}
 }

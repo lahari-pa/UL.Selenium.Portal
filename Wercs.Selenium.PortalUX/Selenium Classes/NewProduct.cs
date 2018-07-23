@@ -3609,6 +3609,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.FindElement(By.XPath("./input"), 2).TryClick();
 		}
 
+		public bool ClickSelectForSection(string section)
+		{
+			return containerElement.FindElement(By.XPath(@".//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2).TryClick();
+		}
 		// Returns the SELECTED option(s) for section. See GetAllOptionsForSection to return all available options for a section
 		public List<string> GetOptionsForSection(string section)
 		{

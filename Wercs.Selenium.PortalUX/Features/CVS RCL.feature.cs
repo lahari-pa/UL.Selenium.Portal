@@ -944,6 +944,275 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[74188] CVS Store Brand Associations and verification")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CVS RCL")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_CVSRCL")]
+        public virtual void _74188CVSStoreBrandAssociationsAndVerification()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74188] CVS Store Brand Associations and verification", ((string[])(null)));
+#line 512
+this.ScenarioSetup(scenarioInfo);
+#line 514
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 516
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 518
+testRunner.Given("I call shared step 57205 (Go to Retail Partners - Select CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Tier",
+                        "State"});
+            table3.AddRow(new string[] {
+                        "2.1",
+                        "On"});
+            table3.AddRow(new string[] {
+                        "2.2",
+                        "On"});
+#line 520
+testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table3, "Then ");
+#line 525
+testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 527
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 529
+testRunner.Given("I save the UPC number 050428290231 as: UPC74188", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 531
+testRunner.Given("I delete all products with UPC Number: saved as UPC74188", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 533
+testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+                    " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 535
+testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Lip Balm", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 537
+testRunner.Then("I save the product information as: TestCase74188", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 539
+testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
+                    "Solid - State&Subcat - Mixed&Water -random - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 541
+testRunner.Given("I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA" +
+                    "), No(DSV), Yes(PLP), No(GNFR))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 543
+testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 545
+testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 547
+testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+                    "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 551
+testRunner.Given("I call shared step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 553
+testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
+                    "ze Only) for UPC: saved as UPC74188, container type: Plastic Container and size:" +
+                    " 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 555
+testRunner.Given("I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 557
+testRunner.Then("the question: What is the CVS Store Brand associated to this product? is displaye" +
+                    "d at position: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Option"});
+            table4.AddRow(new string[] {
+                        "Beauty 360 (CVS Pharmacy)"});
+            table4.AddRow(new string[] {
+                        "Blade"});
+            table4.AddRow(new string[] {
+                        "Caliber"});
+            table4.AddRow(new string[] {
+                        "Cottondale"});
+            table4.AddRow(new string[] {
+                        "CVS Batteries"});
+            table4.AddRow(new string[] {
+                        "CVS Brand was intentionally not assigned and item has a CVS / Advanced Healthcare" +
+                            " distribution statement"});
+            table4.AddRow(new string[] {
+                        "CVS Health (CVS Pharmacy)"});
+            table4.AddRow(new string[] {
+                        "DVX"});
+            table4.AddRow(new string[] {
+                        "Essence Of Beauty"});
+            table4.AddRow(new string[] {
+                        "GE Abound"});
+            table4.AddRow(new string[] {
+                        "GE Lighting - PL"});
+            table4.AddRow(new string[] {
+                        "Gold Emblem"});
+            table4.AddRow(new string[] {
+                        "Gran Legacy"});
+            table4.AddRow(new string[] {
+                        "Hawaiian Traditions"});
+            table4.AddRow(new string[] {
+                        "House to Home"});
+            table4.AddRow(new string[] {
+                        "Island Accents"});
+            table4.AddRow(new string[] {
+                        "JT Boots"});
+            table4.AddRow(new string[] {
+                        "Just The Basics"});
+            table4.AddRow(new string[] {
+                        "Live Better"});
+            table4.AddRow(new string[] {
+                        "Lux Flavors"});
+            table4.AddRow(new string[] {
+                        "Merry Brite"});
+            table4.AddRow(new string[] {
+                        "Non-Brand with CVS Distribution Statement"});
+            table4.AddRow(new string[] {
+                        "Nuance Salma Hayek"});
+            table4.AddRow(new string[] {
+                        "Pa\'Ina"});
+            table4.AddRow(new string[] {
+                        "Pet Central"});
+            table4.AddRow(new string[] {
+                        "Poparazzi"});
+            table4.AddRow(new string[] {
+                        "Radiance Base"});
+            table4.AddRow(new string[] {
+                        "Radiance Platinum"});
+            table4.AddRow(new string[] {
+                        "Red And Pink"});
+            table4.AddRow(new string[] {
+                        "Rosebrook"});
+            table4.AddRow(new string[] {
+                        "Santa\'s Treats"});
+            table4.AddRow(new string[] {
+                        "Skin + Pharmacy"});
+            table4.AddRow(new string[] {
+                        "Spooky Village"});
+            table4.AddRow(new string[] {
+                        "Style Essentials"});
+            table4.AddRow(new string[] {
+                        "Total Home"});
+            table4.AddRow(new string[] {
+                        "Vida Mia"});
+            table4.AddRow(new string[] {
+                        "ZX"});
+            table4.AddRow(new string[] {
+                        "Other"});
+#line 559
+testRunner.And("The following options should be displayed for section: What is the CVS Store Bran" +
+                    "d associated to this product?", ((string)(null)), table4, "And ");
+#line 600
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 602
+testRunner.Then("What is the CVS Store Brand associated to this product? should be showing the err" +
+                    "or messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 604
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase74188", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[74207] Product Development Manager (PDM) and verification")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CVS RCL")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_CVSRCL")]
+        public virtual void _74207ProductDevelopmentManagerPDMAndVerification()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74207] Product Development Manager (PDM) and verification", ((string[])(null)));
+#line 606
+this.ScenarioSetup(scenarioInfo);
+#line 608
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 610
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 612
+testRunner.Given("I call shared step 57205 (Go to Retail Partners - Select CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Tier",
+                        "State"});
+            table5.AddRow(new string[] {
+                        "2.1",
+                        "On"});
+            table5.AddRow(new string[] {
+                        "2.2",
+                        "On"});
+#line 614
+testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table5, "Then ");
+#line 619
+testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 621
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 623
+testRunner.Given("I save the UPC number 050428290231 as: UPC74207", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 625
+testRunner.Given("I delete all products with UPC Number: saved as UPC74207", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 627
+testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+                    " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 629
+testRunner.Given("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Lip Balm", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 631
+testRunner.Then("I save the product information as: TestCase74207", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 633
+testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
+                    "Solid - State&Subcat - Mixed&Water -random - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 635
+testRunner.Given("I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA" +
+                    "), No(DSV), Yes(PLP), No(GNFR))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 637
+testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 639
+testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 641
+testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+                    "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 645
+testRunner.Given("I call shared step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 647
+testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
+                    "ze Only) for UPC: saved as UPC74207, container type: Plastic Container and size:" +
+                    " 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 649
+testRunner.Given("I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 651
+testRunner.Given("I set the What is the CVS Store Brand associated to this product? option to: Live" +
+                    " Better", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 653
+testRunner.Then("the question: Who is the Product Development Manager (PDM) for this product? is d" +
+                    "isplayed at position: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 657
+testRunner.Then("The Product Development Manager options should comprise a list containing the dom" +
+                    "ain @CVSHealth.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 659
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 661
+testRunner.Then("Who is the Product Development Manager (PDM) for this product? should be showing " +
+                    "the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 663
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase74207", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

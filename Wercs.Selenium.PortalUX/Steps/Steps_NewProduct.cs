@@ -3122,23 +3122,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void CheckOptionsInSection(string exclusivity, string section, Table expected)
 		{
 			var expectedOptions = new List<string>();
+			var differences = new List<string>();
 			expected.Rows.ForEach(x => expectedOptions.Add(x["Option"]));
 			var expectedOptionsLower = expectedOptions.Select(x => x.ToLower()).ToList();
 			var displayedOptions = new NewProduct().GetAllOptionsForSection(section);
 			var displayedOptionsLower = displayedOptions.Select(x => x.ToLower()).ToList();
 			if (exclusivity == "displayed")
 			{
+				differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
 				Report.IsTrue(expectedOptions.All(x => displayedOptionsLower.Contains(x.ToLower())),
-					"All expected options were not displayed under section: " + section + ". Displayed options: " + string.Join(", ", displayedOptions) + ". Expected options: " + string.Join(", ", expectedOptions),
+					"All expected options were not displayed under section: " + section + ". The differences were: " + string.Join(", ", differences.Select(x => "'" + x + "'").ToList()) + ". The displayed options were: " + string.Join(", ", displayedOptions),
 					"All expected options were displayed under section: " + section + ": " + string.Join(", ", displayedOptions));
 			}
 			if (exclusivity == "displayed exclusively")
 			{
-				var differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
+				differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
 				Report.IsTrue(expectedOptionsLower.Equals(displayedOptionsLower),
-					"The actual options for section: " + section + " did not match the expected options. The differences were: " + string.Join(", ", differences),
+					"The actual options for section: " + section + " did not match the expected options. The differences were: " + string.Join(", ", differences.Select(x => "'" + x + "'").ToList()),
 					"The actual options for section: " + section + " matched the expected options.");
 			}
+		}
+
+		[StepDefinition(@"The Product Development Manager options should comprise a list containing the domain @CVSHealth.com")]
+		public void PDMOptionsShouldContainCVSEmailDomain()
+		{
+			var displayedOptions = new NewProduct().GetAllOptionsForSection("Who is the Product Development Manager (PDM) for this product?");
+			Report.IsTrue(displayedOptions.Where(x => x!="Choose...").ToList().All(x => x.ToLower().Contains("@cvshealth.com")),
+				"Not all options in the PDM drop down contained the domain CVSHealth.com",
+				"All options in the PDM drop down contained the domain CVSHealth.com as expected");
 		}
 
 		[StepDefinition(@"I confirm the EPA Registration table contains the heading: (.*)")]
@@ -3348,6 +3359,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Context.AddToContext(savedAs, upc);
 			Report.Info("Saved UPC No: " + upc + " saved as: " + savedAs);
+		}
+
+		[StepDefinition(@"I click the dropdown box for section: (.*)")]
+		public void ClickSelectForSection(string section)
+		{
+			Report.IsTrue(new NewProduct().ClickSelectForSection(section),
+				"Failed to click drop down element for section: " + section,
+				"Successfully clicked the drop down for section: " + section);
 		}
 	}
 }

@@ -508,3 +508,156 @@ Given I click continue
 Then Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)? should be showing the error messages: This is a required field.
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74260
+
+Scenario: [74188] CVS Store Brand Associations and verification
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+
+Then I ensure the Data Consent Tier Sliders are set as follows:
+| Tier | State |
+| 2.1  | On    |
+| 2.2  | On    |
+
+Given if the save button is visible, I save changes and close the popup dialog
+
+Given I navigate to the home page
+
+Given I save the UPC number 050428290231 as: UPC74188
+
+Given I delete all products with UPC Number: saved as UPC74188
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+
+Then I save the product information as: TestCase74188
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+# Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
+
+Given I call shared step 74201 (Select Retailers - CVS)
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74188, container type: Plastic Container and size: 2.10
+
+Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+
+Then the question: What is the CVS Store Brand associated to this product? is displayed at position: 1
+
+And The following options should be displayed for section: What is the CVS Store Brand associated to this product?
+| Option                                                                                                   |
+| Beauty 360 (CVS Pharmacy)                                                                                |
+| Blade                                                                                                    |
+| Caliber                                                                                                  |
+| Cottondale                                                                                               |
+| CVS Batteries                                                                                            |
+| CVS Brand was intentionally not assigned and item has a CVS / Advanced Healthcare distribution statement |
+| CVS Health (CVS Pharmacy)                                                                                |
+| DVX                                                                                                      |
+| Essence Of Beauty                                                                                        |
+| GE Abound                                                                                                |
+| GE Lighting - PL                                                                                         |
+| Gold Emblem                                                                                              |
+| Gran Legacy                                                                                              |
+| Hawaiian Traditions                                                                                      |
+| House to Home                                                                                            |
+| Island Accents                                                                                           |
+| JT Boots                                                                                                 |
+| Just The Basics                                                                                          |
+| Live Better                                                                                              |
+| Lux Flavors                                                                                              |
+| Merry Brite                                                                                              |
+| Non-Brand with CVS Distribution Statement                                                                |
+| Nuance Salma Hayek                                                                                       |
+| Pa'Ina                                                                                                   |
+| Pet Central                                                                                              |
+| Poparazzi                                                                                                |
+| Radiance Base                                                                                            |
+| Radiance Platinum                                                                                        |
+| Red And Pink                                                                                             |
+| Rosebrook                                                                                                |
+| Santa's Treats                                                                                           |
+| Skin + Pharmacy                                                                                          |
+| Spooky Village                                                                                           |
+| Style Essentials                                                                                         |
+| Total Home                                                                                               |
+| Vida Mia                                                                                                 |
+| ZX                                                                                                       |
+| Other                                                                                                    |
+
+Given I click continue
+
+Then What is the CVS Store Brand associated to this product? should be showing the error messages: This is a required field.
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74188
+
+Scenario: [74207] Product Development Manager (PDM) and verification
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+
+Then I ensure the Data Consent Tier Sliders are set as follows:
+| Tier | State |
+| 2.1  | On    |
+| 2.2  | On    |
+
+Given if the save button is visible, I save changes and close the popup dialog
+
+Given I navigate to the home page
+
+Given I save the UPC number 050428290231 as: UPC74207
+
+Given I delete all products with UPC Number: saved as UPC74207
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+
+Then I save the product information as: TestCase74207
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+# Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
+
+Given I call shared step 74201 (Select Retailers - CVS)
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74207, container type: Plastic Container and size: 2.10
+
+Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+
+Given I set the What is the CVS Store Brand associated to this product? option to: Live Better
+
+Then the question: Who is the Product Development Manager (PDM) for this product? is displayed at position: 2
+
+#Given I click the dropdown box for section: Who is the Product Development Manager (PDM) for this product?
+
+Then The Product Development Manager options should comprise a list containing the domain @CVSHealth.com
+
+Given I click continue
+
+Then Who is the Product Development Manager (PDM) for this product? should be showing the error messages: This is a required field.
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74207

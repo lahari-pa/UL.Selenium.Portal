@@ -590,7 +590,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var selRetailDetails = new RetailParntersDetails();
 
 				Report.IsTrue(selRetailDetails.ClickSaveChanges(), "Failed to click 'Save Changes'", "Successfully clicked 'Save Changes'");
-				Report.Screenshot();
 			}
 			catch (Exception ex)
 			{
@@ -622,6 +621,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
+		public void ClickSaveClosePopupIfVisible()
+		{
+			var selRetailDetails = new RetailParntersDetails();
+			if (selRetailDetails.SaveChangesButtonShowing())
+			{
+				Report.Info("The save button was visible, so saving changes.");
+				Report.IsTrue(selRetailDetails.ClickSaveChanges(),
+					"Failed to click 'Save Changes'",
+					"Successfully clicked 'Save Changes'");
+				var selDataEntryChanges = new DataEntryNotification();
+				Report.Info("Closing the save changes dialog if it appears");
+				if (selDataEntryChanges.Wait_for_load())
+				{
+					Report.Info("The save changes dialog appeared. Clicking Close.");
+					Report.IsTrue(selDataEntryChanges.ClickClose(), "Failed to click close in the Save Changes dialog", "Successfully clicked close in the Save Changes dialog");
+				}
+				else
+				{
+					Report.Info("The save changes dialog did not appear");
+				}
+			}
+		}
 		[StepDefinition(@"the following warning message should be showing: (.*)")]
 		public void ThenTheFollowingWarningMessageShouldBeShowing(string expected)
 		{

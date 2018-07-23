@@ -282,21 +282,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSaveChanges()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//p/a[contains(@class,'btn')]"), 2);
-			if (el == null)
-			{
-				return false;
-			}
-
-			try
-			{
-				el.Click();
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
+			return containerElement.FindElement(By.XPath(".//p/a[contains(@class,'btn') and not(contains(style,'display: none'))]"), 2).TryClick();
 		}
 
 		public string WarningMessage()
@@ -341,9 +327,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public void ClickClose()
+		public bool ClickClose()
 		{
-			this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick();
 		}
 
 
