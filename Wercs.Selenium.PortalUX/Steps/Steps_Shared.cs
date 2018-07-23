@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Castle.Core.Internal;
 using NPOI.SS.Formula.Functions;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -3727,11 +3728,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var selStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("In the Select Retailers popup I select the retailer: CVS");
 			selStepsNewProduct.ThenISelectTheRetailer_InTheWindow("CVS");
-			// Temporary addition - expect it to be changed on TFS
-			TestReport.StartStep("I enter private label as 'Private Label Lip Balm'");
-			selStepsNewProduct.ThenInTheRetailersTabIEnterPrivateLabelNameAs("Private Label Lip Balm");
 			TestReport.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
+			if (new NewProduct().ErrorMessage() == "This is a required field.")
+			{
+				Report.Failure("Required field error was showing on continue. Attempting to enter Private Label field (not specified by shared step)");
+				TestReport.StartStep("I enter private label as 'This Private Label'");
+				selStepsNewProduct.ThenInTheRetailersTabIEnterPrivateLabelNameAs("This Private Label");
+				TestReport.StartStep("I click continue");
+				selStepsNewProduct.ClickContinue();
+			}
 		}
 		[Given(@"I call shared step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
 		public void GivenICallSharedStep57801ConfirmVOCSummaryStepShownConfirmVOCAnalysisDateIsShown_HappyPath()

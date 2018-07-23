@@ -1981,14 +1981,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				foreach (var item in errorMessagesExpected)
 				{
-					Report.IsTrue(errorMessages.Contains(item.Trim()), "Failed to find the error message: " + item + "!", "Successfully found the error message: " + item + " for section: " + section, false, false);
+					Report.IsTrue(errorMessages.Contains(item.Trim()),
+						"Failed to find the error message: " + item + " under section: " + section + "!",
+						"Successfully found the error message: " + item + " for section: " + section, false, false);
 				}
 			}
 			if (should == "should not")
 			{
 				foreach (var item in errorMessagesExpected)
 				{
-					Report.IsFalse(errorMessages.Contains(item.Trim()), "The error message: " + item + " was displayed under section" + section + " when it should not be.", "The error message: " + item + " was not displayed under section: " + section + " as expected", false, false);
+					Report.IsFalse(errorMessages.Contains(item.Trim()),
+						"The error message: " + item + " was displayed under section" + section + " when it should not be.",
+						"The error message: " + item + " was not displayed under section: " + section + " as expected", false, false);
 				}
 			}
 			Report.Screenshot();
