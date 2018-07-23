@@ -2929,13 +2929,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					return null;
 				}
-				
+
 			}
 			else
 			{
 				throw new Exception("Label not found as expected.");
 			}
-			
+
 		}
 
 
@@ -3000,7 +3000,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					return null;
 				}
-				
+
 			}
 			else
 			{
@@ -3235,7 +3235,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return retList;
 
 		}
-		
+
 		public List<VocLimitsWithUnits> GetDisplayedVocLimitsWithUnits()
 		{
 
@@ -3597,14 +3597,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 
 			}
-			return el.TryClick();
+			// don't click the label if it contains a web link
+			if (el.FindElement(By.XPath("./span/a[contains(@href,'http')]"), 2) == null && el.TryClick())
+			{
+				Delay.Seconds(1);
+				if (GetOptionsForSection(section).Contains(value))
+				{
+					return true;
+				}
+			}
+			return el.FindElement(By.XPath("./input"), 2).TryClick();
 		}
 
 		// Returns the SELECTED option(s) for section. See GetAllOptionsForSection to return all available options for a section
 		public List<string> GetOptionsForSection(string section)
 		{
-			var matchingElements = containerElement.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[starts-with(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
-
+			var matchingElements = containerElement.FindElements(By.XPath(@".//div[contains(@class,'form-group') and .//label[starts-with(text(),""" + section + @""")]]//*[name()='input' or name()='select']"), 2);
+			if (matchingElements.Count == 0)
+			{
+				return new List<string>();
+			}
 			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
 			{
 				return new List<string> { matchingElements.FirstOrDefault().SelectedOption() };

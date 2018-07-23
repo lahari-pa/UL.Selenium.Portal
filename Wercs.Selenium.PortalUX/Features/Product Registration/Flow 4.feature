@@ -458,15 +458,17 @@ Then I save the product information as: TestCase57958
 
 Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
-Given I call Shared Step 63804 (Additional Product Information - enter options)
-| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-| No                                                             | No                            | No                         | No                         |
+#Given I call Shared Step 63804 (Additional Product Information - enter options)
+#| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+#| No                                                             | No                           | No                     | No                  |
+
+Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Enter Regulatory Information - Yes to Prop 65)
+Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -519,7 +521,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Enter Regulatory Information - Yes to Prop 65)
+Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -573,7 +575,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Enter Regulatory Information - Yes to Prop 65)
+Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
 
@@ -628,7 +630,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Enter Regulatory Information - Yes to Prop 65)
+Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -681,7 +683,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Enter Regulatory Information - Yes to Prop 65)
+Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -734,7 +736,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Enter Regulatory Information - Yes to Prop 65)
+Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
 
@@ -789,7 +791,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Enter Regulatory Information - Yes to Prop 65)
+Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 

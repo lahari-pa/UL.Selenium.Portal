@@ -3288,28 +3288,44 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(@"I call Shared 57932 \(Enter Regulatory Information - Yes to Prop 65\)")]
+		[StepDefinition(@"I call Shared 57932 \(Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path\)")]
 		public void GivenICallSharedEnterRegulatoryInformation_YesToProp()
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var selNewProduct = new NewProduct();
 			TestReport.StartStep("I should see the Regulatory Information 1 Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
 			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
 			TestReport.StartStep(
-				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: Yes");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product, including container and/or packaging, contains a chemical on California's Prop 65 list",
-				"Yes");
-			TestReport.StartStep(
 				"Prop 65 warning is required: Yes");
-			new NewProduct().Prop65 = true;
-			TestReport.StartStep(
-				"Prop 65 warning is present on the product's label: Yes");
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Prop 65 warning is present on the product's label",
-				"Yes");
+			selNewProduct.Prop65 = true;
+			Delay.Seconds(1);
+			Report.IsTrue(selNewProduct.Prop65,
+				"Failed to set Carries Prop 65 Warning to Yes",
+				"Successfully set Carries Prop 65 Warning to Yes");
+			TestReport.StartStep("I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
+			MyStepsNewProduct.SetTheSectionOptionTo("Is the need to warn triggered by",
+				"A chemical or chemicals in the product, or chemicals formed during the use of the product.");
+			TestReport.StartStep("I set the How is the exposure warning transmitted? field to: By affixing it to the product or its packaging");
+			MyStepsNewProduct.SetTheSectionOptionTo("How is the exposure warning transmitted?",
+				"By affixing it to the product or its packaging");
+			TestReport.StartStep("I set the Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured field to: Both, because instances of this product manufactured before, on and after August 30, 2018 are on the market.");
+			MyStepsNewProduct.SetTheSectionOptionTo("Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured",
+				"Both, because instances of this product manufactured before, on and after August 30, 2018 are on the market.");
+			TestReport.StartStep("I set the If the product carries a safe-harbor short-form warning, indicate which of the following is provided: field to: WARNING: Cancer - ");
+			MyStepsNewProduct.SetTheSectionOptionTo("If the product carries a safe-harbor short-form warning, indicate which of the following is provided:",
+				"WARNING: Cancer - ");
+			TestReport.StartStep("I set the If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: field to: This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer. For more information go to ");
+			MyStepsNewProduct.SetTheSectionOptionTo("If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:",
+				"This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer. For more information go to ");
+			TestReport.StartStep("I set the Enter the names of one or more listed carcinogens which are the subject of this warning field to: Arsenic");
+			MyStepsNewProduct.SetTheSectionOptionTo("Enter the names of one or more listed carcinogens which are the subject of this warning",
+				"Arsenic");
+			TestReport.StartStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
+			MyStepsNewProduct.SetTheSectionOptionTo("If the product carries a custom warning, please provide the exact text that is being used:",
+				"NA");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -3726,7 +3742,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			table1.AddRow(new string[] { "VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy") });
 			MyStepsNewProduct.ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table1);
 		}
-		
+
 		[Given(@"I call shared step 57817 \(VOC Results - Confirm VOC Limits table shows correct values \(OTC & CARB\) - Happy Path\): (.*)")]
 		public void GivenICallSharedStep57817VOCResults_ConfirmVOCLimitsTableShowsCorrectValuesOTCCARB_HappyPath(string use)
 		{
@@ -3737,11 +3753,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			foreach (VocLimitsWithUnits thisLimit in LimitsTable)
 			{
 				Report.IsTrue(thisLimit.Use == use, "Use is not showing as: " + use, "Use is showing correctly");
-				Report.IsTrue(thisLimit.VocComplianceLimit.Length>0, "VOC Compliance Limit column is not showing a value", "VOC Compliance Limit column is showing a value: " + thisLimit.VocComplianceLimit);
+				Report.IsTrue(thisLimit.VocComplianceLimit.Length > 0, "VOC Compliance Limit column is not showing a value", "VOC Compliance Limit column is showing a value: " + thisLimit.VocComplianceLimit);
 				Report.IsTrue(thisLimit.Units == null, "Units column is showing incorrectly",
 					"Units column is not showing");
 			}
-			
+
 		}
 
 		[StepDefinition(@"I call shared step 74202 \(CVS Pharmacy - Yes, I wish to Continue\)")]
