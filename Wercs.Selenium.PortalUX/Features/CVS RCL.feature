@@ -652,8 +652,6 @@ Given I set the What is the CVS Store Brand associated to this product? option t
 
 Then the question: Who is the Product Development Manager (PDM) for this product? is displayed at position: 2
 
-#Given I click the dropdown box for section: Who is the Product Development Manager (PDM) for this product?
-
 Then The Product Development Manager options should comprise a list containing the domain @CVSHealth.com
 
 Given I click continue
@@ -661,3 +659,157 @@ Given I click continue
 Then Who is the Product Development Manager (PDM) for this product? should be showing the error messages: This is a required field.
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74207
+
+Scenario: [74270] CVS RCL - Page should not show if Product does NOT have CVS Selected but has an eligible UPC
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+
+Then I ensure the Data Consent Tier Sliders are set as follows:
+| Tier | State |
+| 2.1  | On    |
+| 2.2  | On    |
+
+Given if the save button is visible, I save changes and close the popup dialog
+
+Given I navigate to the home page
+
+Given I save the UPC number 050428075661 as: UPC74270
+
+Given I delete all products with UPC Number: saved as UPC74270
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+
+Then I save the product information as: TestCase74270
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Given I call shared step 74269 (Select Retailers - Rite Aid)
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74270, container type: Plastic Container and size: 10
+
+Then I should not see the CVS RCL Page
+
+And I should see the Regulatory Documents to Provide Page
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74270
+
+Scenario: [74272] CVS RCL - Page is NOT shown if Product has CVS selected with a UPC that does not start 050428
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+
+Then I ensure the Data Consent Tier Sliders are set as follows:
+| Tier | State |
+| 2.1  | On    |
+| 2.2  | On    |
+
+Given if the save button is visible, I save changes and close the popup dialog
+
+Given I navigate to the home page
+
+Given I save the UPC number 0043396824430 as: UPC74272
+
+Given I delete all products with UPC Number: saved as UPC74272
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+
+Then I save the product information as: TestCase74272
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Glycerin
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Given I call shared step 74201 (Select Retailers - CVS)
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74272, container type: Plastic Container and size: 10
+
+Then I should not see the CVS RCL Page
+
+And I should see the Regulatory Documents to Provide Page
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74272
+
+Scenario: [74261] CVS Brand Registration section and validation
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+
+Then I ensure the Data Consent Tier Sliders are set as follows:
+| Tier | State |
+| 2.1  | On    |
+| 2.2  | On    |
+
+Given if the save button is visible, I save changes and close the popup dialog
+
+Given I navigate to the home page
+
+Given I save the UPC number 050428075661 as: UPC74261
+
+Given I delete all products with UPC Number: saved as UPC74261
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+
+Then I save the product information as: TestCase74261
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Glycerin
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Given I call shared step 74201 (Select Retailers - CVS)
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74261, container type: Plastic Container and size: 10
+
+And I confirm the page heading shows the CVS Logo with the title 'CVS Own Brand Registration' below the logo
+
+And The displayed message text is comprised of the following paragraphs
+| Paragraph                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| CVS Pharmacy has taken a major step forward in advancing its efforts to remove chemicals of concern to our customers. This action is a significant milestone in CVS Pharmacy's journey to provide products that are safe, compliant, sustainable and help people on their path to better health. As a supplier registering a CVS Pharmacy Store Brand Product, you are required to complete additional screening and questions to support CVS's restricted chemical commitment.                                                                                                                                       |
+| Your product will be screened by WERCs against CVS Pharmacy's Restricted Chemical Policy (RCP) as outlined in the CVS Store Brand Quality Assurance Agreement. CVS will be notified when an item is non-compliant with CVS Pharmacy's RCP. The notification will include the item that is out of compliance and only disclose the non-compliant ingredients marked as publicly available. The output of the screening has been designed to protect the supplier's proprietary information. The Supplier is responsible for working directly with their CVS Product Development Manager to resolve the non-compliance. |
+
+And I see the following sections
+| Section   |
+| Continue? |
+
+Given I click continue
+
+Then I should see an error message: This is a required field.
+
+Then The alert message is displayed with text: Contact your CVS Product Development Manager with any questions.
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74261

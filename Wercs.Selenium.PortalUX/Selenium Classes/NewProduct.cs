@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
+using Castle.Core.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
@@ -2892,12 +2893,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-		public List<string> VOCAlerts()
+		public List<string> DisplayedAlerts()
 		{
 			try
 			{
 				var errors = containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"));
-
 				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
 			}
 			catch (Exception e)
@@ -4380,7 +4380,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> AllAdditionalStatements()
 		{
 			var xPath = ".//div[@data-bind='html: field.field' and parent::div[@class='col-sm-12']]";
-			return containerElement.FindElements(By.XPath(xPath), 2).Select(x => x.Text.Trim()).ToList();
+			var statements = containerElement.FindElements(By.XPath(xPath), 2);
+			if (statements.IsNullOrEmpty())
+			{
+				return new List<string>();
+			}
+			return statements.Select(x => x.Text.Trim()).ToList();
+		}
+		public List<string> AllAdditionalStatementParagraphs()
+		{
+			var xPath = @".//div[@data-bind='html: field.field' and parent::div[@class='col-sm-12']]/p";
+			var paragraphs = containerElement.FindElements(By.XPath(xPath), 2);
+			if (paragraphs.IsNullOrEmpty())
+			{
+				return new List<string>();
+			}
+			return paragraphs.Select(x => x.Text.Trim()).ToList();
 		}
 
 		// Click an individual checkbox by section and value. (check if unchecked, uncheck if checked). Report the checked state before and after.
@@ -4794,7 +4809,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			}
 		}
-
+		public bool SectionLogoDisplayed(string logo, int secondsToWait = 30)
+		{
+			int counter = 0;
+			while (counter < secondsToWait)
+			{
+				RefreshContainer();
+				var headerLogo = containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3/img"))
+					.FirstOrDefault(x => x.GetAttribute("src").ToLower().Contains(logo.ToLower()));
+				if (headerLogo != null)
+				{
+					return true;
+				}
+				Delay.Seconds(1);
+				counter++;
+			}
+			return false;
+		}
 
 
 

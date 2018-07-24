@@ -3793,5 +3793,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I select the retailer: CVS");
 			new StepsRetailPartners().SelectRetailer("CVS");
 		}
+
+		[StepDefinition(@"I call shared step 74269 \(Select Retailers - Rite Aid\)")]
+		public void SharedSelectRetailers_RiteAid()
+		{
+			TestReport.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("In the Select Retailers popup I select the retailer: Rite Aid");
+			selStepsNewProduct.ThenISelectTheRetailer_InTheWindow("Rite Aid");
+			TestReport.StartStep("I click continue");
+			selStepsNewProduct.ClickContinue();
+			if (new NewProduct().ErrorMessage() == "This is a required field.")
+			{
+				Report.Failure("Required field error was showing on continue. Attempting to enter Private Label field (not specified by shared step)");
+				TestReport.StartStep("I enter private label as 'This Private Label'");
+				selStepsNewProduct.ThenInTheRetailersTabIEnterPrivateLabelNameAs("This Private Label");
+				TestReport.StartStep("I click continue");
+				selStepsNewProduct.ClickContinue();
+			}
+		}
 	}
 }

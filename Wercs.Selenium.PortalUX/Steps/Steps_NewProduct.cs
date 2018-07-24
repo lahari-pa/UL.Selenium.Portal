@@ -421,11 +421,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I should see the (.*) Page")]
-		public void GivenIShouldSeeXPage(string pageShouldSee)
+		public void GivenIShouldSeeXPage(string page)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForSection(pageShouldSee), pageShouldSee + " is not showing",
-				pageShouldSee + " is showing as expected");
+			Report.IsTrue(selNewProduct.WaitForSection(page),
+				page + " is not showing when it was expected to",
+				page + " is showing as expected");
 		}
 
 		[StepDefinition(@"I should see the Additional Information Page")]
@@ -3147,7 +3148,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void PDMOptionsShouldContainCVSEmailDomain()
 		{
 			var displayedOptions = new NewProduct().GetAllOptionsForSection("Who is the Product Development Manager (PDM) for this product?");
-			Report.IsTrue(displayedOptions.Where(x => x!="Choose...").ToList().All(x => x.ToLower().Contains("@cvshealth.com")),
+			Report.IsTrue(displayedOptions.Where(x => x != "Choose...").ToList().All(x => x.ToLower().Contains("@cvshealth.com")),
 				"Not all options in the PDM drop down contained the domain CVSHealth.com",
 				"All options in the PDM drop down contained the domain CVSHealth.com as expected");
 		}
@@ -3344,7 +3345,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Then(@"For the VOC page I should see the following error: (.*)")]
 		public void ThenForTheVOCPageIShouldSeeTheFollowingError(string error)
 		{
-			List<string> actualErrors = new NewProduct().VOCAlerts();
+			List<string> actualErrors = new NewProduct().DisplayedAlerts();
 			if (actualErrors == null)
 			{
 				actualErrors = new List<string>();
@@ -3367,6 +3368,61 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().ClickSelectForSection(section),
 				"Failed to click drop down element for section: " + section,
 				"Successfully clicked the drop down for section: " + section);
+		}
+
+		[StepDefinition(@"I should not see the (.*) Page")]
+		public void GivenIShouldNotSeeXPage(string page)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(!selNewProduct.WaitForSection(page, 20),
+				page + " is showing when it was not expected",
+				page + " is not showing as expected");
+		}
+
+		[StepDefinition(@"I confirm the page heading shows the CVS Logo with the title 'CVS Own Brand Registration' below the logo")]
+		public void CVSOwnBrandRegistrationPageIsDisplayedWithLogo()
+		{
+			TestReport.UseSubSteps = true;
+			var selNewProduct = new NewProduct();
+			TestReport.StartStep("I confirm the CVS Logo is displayed in the page heading");
+			Report.IsTrue(selNewProduct.SectionLogoDisplayed("cvs-pharmacy"),
+				"The CVS logo was not displayed in the page header!",
+				"The CVS logo was displayed in the page header");
+			TestReport.StartStep("I confirm the title of the page heading is 'CVS Own Brand Registration'");
+			Report.IsTrue(selNewProduct.WaitForSection("CVS Own Brand Registration"),
+				"The page header was not 'CVS Own Brand Registration'!",
+				"The page header was 'CVS Own Brand Registration' as expected");
+		}
+
+		[StepDefinition(@"The displayed message text is comprised of the following paragraphs")]
+		public void MessageTextContainsParagraphs(Table paragraphText)
+		{
+			TestReport.UseSubSteps = true;
+			var expectedParagraphs = new List<string>();
+			paragraphText.Rows.ForEach(x => expectedParagraphs.Add(x["Paragraph"]));
+			var actualParagraphs = new NewProduct().AllAdditionalStatementParagraphs();
+			int count = 1;
+			foreach (var para in actualParagraphs)
+			{
+				TestReport.StartStep("Checking paragraph: " + count + " matches expected text");
+				Report.IsTrue(para.Trim() == expectedParagraphs[count - 1],
+					"Paragraph " + count + " did not match the expected text: '" + para + "'",
+					"Paragraph " + count + " matched the expected text: '" + para + "'");
+				count++;
+			}
+		}
+		[Then(@"The alert message is displayed with text: (.*)")]
+		public void AlertMessageDisplayed(string alert)
+		{
+			List<string> actualAlerts = new NewProduct().DisplayedAlerts();
+			if (actualAlerts == null)
+			{
+				Report.Failure("Could not locate any alert messages on the page");
+				return;
+			}
+			Report.IsTrue(actualAlerts.Contains(alert),
+				"Message is not displayed as expected. Expected: " + alert + " but got: " + string.Join(",", actualAlerts),
+				"Message: '" + alert + "' is displayed as expected");
 		}
 	}
 }
