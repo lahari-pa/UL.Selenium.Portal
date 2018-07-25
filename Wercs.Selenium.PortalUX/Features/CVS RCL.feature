@@ -58,7 +58,6 @@ And The following options should be displayed exclusively for section: What is t
 | Adult Care                |
 | Allergy Remedies          |
 | Apparel                   |
-| Appliances                |
 | Baby Care                 |
 | Baked Goods – Frozen Food |
 | Batteries                 |
@@ -108,7 +107,6 @@ And The following options should be displayed exclusively for section: What is t
 | Snacks                    |
 | Stationery                |
 | Suncare                   |
-| Sunglasses                |
 | Top of Checkout           |
 | Toys                      |
 | Trial Travel              |
@@ -563,7 +561,6 @@ And The following options should be displayed for section: What is the CVS Store
 | Caliber                                                                                                  |
 | Cottondale                                                                                               |
 | CVS Batteries                                                                                            |
-| CVS Brand was intentionally not assigned and item has a CVS / Advanced Healthcare distribution statement |
 | CVS Health (CVS Pharmacy)                                                                                |
 | DVX                                                                                                      |
 | Essence Of Beauty                                                                                        |

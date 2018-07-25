@@ -1778,9 +1778,11 @@ testRunner.Then("I delete the product: TestCase56484", ((string)(null)), ((TechT
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_voc")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("test74626")]
         public virtual void _74626VOC_ShowStateCollectionWhenStateTableHasAValue()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74626] VOC - Show state collection when state table has a value", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74626] VOC - Show state collection when state table has a value", new string[] {
+                        "test74626"});
 #line 825
 this.ScenarioSetup(scenarioInfo);
 #line 827

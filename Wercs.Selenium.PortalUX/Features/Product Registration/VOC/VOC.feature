@@ -821,7 +821,7 @@ And I should see the Data Acceptance Page
 Given I navigate to the home page
 Then I delete the product: TestCase56484
 
-
+@test74626
 Scenario: [74626] VOC - Show state collection when state table has a value
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

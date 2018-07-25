@@ -40,7 +40,7 @@ Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
 # Not currently showing Reg 3 page - requires specific product type or ingredient present?
 
-#Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Then the 'Select Retailers' window appears
 
@@ -125,7 +125,6 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
 
-@walmarttest
 Scenario: [74133] Walmart Product Type Electronics
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -156,3 +155,86 @@ Given the 'Select Retailers' window appears
 Given I check that Walmart and all of its affiliates are not available
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74133
+
+@test74017
+Scenario: [74017] Walmart Affiliates when Adding a UPC
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I generate a random UPC number and save as: UPC74017
+
+Given I delete all products with UPC Number: saved as UPC74017
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+
+Then I save the product information as: TestCase74017
+
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+
+Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Glycerol      | 50      | false               | false       |            |
+| Palm oil      | 50      | false               | false       |            |
+
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Then the 'Select Retailers' window appears
+
+Given In the 'Select Retailers' window I select the retailer: Jet
+
+Given I click continue
+
+Given In the Retailers tab, I select Vendor id as: test
+
+And I click continue
+
+Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74017, container type: Cardboard and size: 15
+
+# Next test steps are not compatible...
+# Click Add Retailer Link
+# select Wal-mart/ SAMs CLUB
+# confirm WM under Destination Retailers
+
+@test73919
+Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I generate a random UPC number and save as: UPC73919
+
+Given I delete all products with UPC Number: saved as UPC73919
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+
+Then I save the product information as: TestCase73919
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+
+# Additional Product Info? As title suggests, needs set 'direct ship' to yes
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Glycerol      | 50      | false               | false       |            |
+| Palm oil      | 50      | false               | false       |            |
+
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Then the 'Select Retailers' window appears
+
+Given I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73919

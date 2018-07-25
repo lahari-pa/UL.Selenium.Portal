@@ -405,7 +405,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Select an option for vendor id  dropdown
 		/// </summary>
-		[Then(@"In the Retailers tab, I select Vendor id as: (.*)")]
+		[StepDefinition(@"In the Retailers tab, I select Vendor id as: (.*)")]
 		public void ThenInTheRetailersTabISelectVendorIdAs(string option)
 		{
 			Report.IsTrue(new NewProduct().SelectVendorId(option), "Failed to set the vendor id to be: " + option, "Successfully set vendor id to be: " + option);
@@ -2592,6 +2592,33 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Failure("Did not see the Required field error message, but the new page was not loaded");
 			Report.Screenshot();
+		}
+		//Checks next page has loaded on Continue. If not, look for 'this is a required field' error. If yes, throw excpt. The test is now out of sync, so further steps will only report junk.
+		[StepDefinition(@"I click Continue in product registration")]
+		public void ClickContinueProductRegistration()
+		{
+			var selNewProduct = new NewProduct();
+			Report.Info("Checking new product is loaded");
+			Report.IsTrue(selNewProduct.Wait_for_load(10),
+				"The New Product page is not currently loaded",
+				"The New Product page is loaded");
+			var currentPage = selNewProduct.ActivePanelHeading();
+			Report.Info("Current expanded section is: " + currentPage);
+			Report.Info("Clicking continue");
+			Report.IsTrue(selNewProduct.ClickContinue(),
+				"Failed to click the Continue button",
+				"Successfully clicked the Continue button");
+			Report.Info("Checking for 'required field' error and if new page hasn't loaded");
+			if (selNewProduct.ErrorMessage() == "This is a required field." && selNewProduct.WaitForSection(currentPage))
+			{
+				var section = selNewProduct.SectionWithRequiredFieldError();
+				Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
+				Report.Screenshot();
+				throw new Exception("New page did not load on Continue - required field.");
+			}
+			Report.Failure("New page was not loaded.");
+			Report.Screenshot();
+			throw new Exception("New page did not load on Continue.");
 		}
 
 		[StepDefinition(@"I click close in the 'Select Retailers' window")]

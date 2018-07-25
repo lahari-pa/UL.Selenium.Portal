@@ -4419,6 +4419,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				var xPath = "//div[.//p[@class='form-error' and .//span[contains(text(),'This is a required field.')]] and @class='form-group has-feedback has-error']//label[@class='control-label']";
 				var section = containerElement.FindElement(By.XPath(xPath), 2);
+				section.ScrollElementIntoView();
 				return section.Text;
 			}
 			catch (Exception)
@@ -4827,9 +4828,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-
-
-
+		public string ActivePanelHeading()
+		{
+			return containerElement.FindElement(By.XPath(".//div[@class='panel-heading']//h3"), 2).Text;
+		}
 	}
 
 	public class ProductInformation

@@ -1080,8 +1080,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			TestReport.StartStep("In the Additional Product Information page I click Continue");
-			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			TestReport.StartStep("I click Continue in the product registration");
+			//MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
+			MyNewProduct.ClickContinueProductRegistration();
 		}
 
 		[StepDefinition(
@@ -2324,12 +2325,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			NewProduct thisNewProduct = new NewProduct();
 			TestReport.StartStep("I should see the Product Characteristics Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
+			TestReport.StartStep("There should only be one option available for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
 			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
-			MyNewProductSteps.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
-			NewProduct thisNewProduct = new NewProduct();
+			if (!thisNewProduct.GetOptionsForSection("Primary Physical State").Contains("Solid"))
+			{
+				Report.Failure("The Primary Physical State was not set to Solid by default.");
+				Report.Screenshot();
+				Report.Info("Setting the Primary Physical State to: Solid");
+				MyNewProductSteps.SetTheSectionOptionTo(
+					"Primary Physical State",
+					"Solid");
+			}
+			else
+			{
+				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+				Report.Screenshot();
+			}
 			if (thisNewProduct.OptionExists("Secondary Physical State"))
 			{
 				TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
@@ -2337,9 +2352,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			else
 			{
-				Report.Info("Secondary physical state is not showing");
+				Report.Failure("Secondary physical state is not showing as specified by shared step");
 			}
-
 			TestReport.StartStep(
 				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(

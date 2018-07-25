@@ -177,10 +177,10 @@ Given I call Shared Step 37857 (Enter Physical Property - Solid) with the follow
 Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Cocoa Powder        | 15.629  | true                | false       | Cocoa      |
-| Banana powder       | 20.3    | false               | true        |            |
-| Oat flour (Oatmeal) | 64.071  | false               | false       |            |
+| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName   |
+| Cocoa Powder        | 15.629  | true                | false       | Cocoa Powder |
+| Banana powder       | 20.3    | false               | true        |              |
+| Oat flour (Oatmeal) | 64.071  | false               | false       |              |
 
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
@@ -487,6 +487,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 Given I navigate to the home page
 Then I delete the product: TestCase58097
 
+@tfs_design
 Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -501,9 +502,11 @@ Given I call Shared 57753 (Create a New Registration via Register New Product (e
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Suppository, Laxative, Stool-Softener
 
-# Missing Physical Property step. Added in the following.
+Then I save the product information as: TestCase58094
 
-Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
+# Missing from TFS test case
+
+#Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
 Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
@@ -534,6 +537,11 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58094. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+
+And I call Shared 54796 (Purchase Summary)
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58094
+
 
 @tfs_design
 Scenario: [58081] Nutritional Supplement - Solid - RU000619
