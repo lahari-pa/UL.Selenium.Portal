@@ -725,15 +725,8 @@
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem ##### TRVSERVER BACKUP DIRECTORY (CORE FILES) #####
-
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" md  "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)$(TargetName)$(TargetExt).config" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)$(TargetName)$(TargetExt)" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)SafewareSeleniumUtilities.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)SafewareReportingPlugin.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)TReVor.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"
-IF EXIST "\\TRVSERVER.SAFEWARE.LOCAL\c drive\dlls" copy "$(TargetDir)ResourcePool.dll" "\\TRVSERVER.SAFEWARE.LOCAL\C drive\dlls\%25username%25\$(ProjectName)"</PostBuildEvent>
+    <PostBuildEvent>rem ##### TReVor Post Build Events #####
+"$(TargetDir)Resources\PostBuildEvent.exe"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
   <PropertyGroup>
