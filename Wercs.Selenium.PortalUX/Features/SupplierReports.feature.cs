@@ -771,6 +771,69 @@ testRunner.Then("I confirm that the excel file saved as: 75391 contains the foll
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[76551] California Proposition 65 - Registrations Prior to August 30, 2018")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Supplier Reports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ForgottenPassword")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        public virtual void _76551CaliforniaProposition65_RegistrationsPriorToAugust302018()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[76551] California Proposition 65 - Registrations Prior to August 30, 2018", ((string[])(null)));
+#line 234
+this.ScenarioSetup(scenarioInfo);
+#line 13
+this.FeatureBackground();
+#line 236
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 238
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 240
+testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 242
+testRunner.Given("Under the Supplier Reports menu I choose: California Proposition 65 - Registratio" +
+                    "ns Prior to August 30, 2018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 244
+testRunner.Then("In the Supplier Reports screen the current page should be: California Proposition" +
+                    " 65 - Registrations Prior to August 30, 2018", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 246
+testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 248
+testRunner.Given("I confirm that a file is downloaded with file name: California Proposition 65  Re" +
+                    "gistrations Prior to August 30 2018.xlsx then close the Report Download popup. I" +
+                    " save the file as excel76551", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Column"});
+            table13.AddRow(new string[] {
+                        "WERCSmart ID"});
+            table13.AddRow(new string[] {
+                        "WERCSmart Product Name"});
+            table13.AddRow(new string[] {
+                        "Contains Chemical on List"});
+            table13.AddRow(new string[] {
+                        "Prop 65 Warning Required"});
+            table13.AddRow(new string[] {
+                        "Prop 65 Warning on Label"});
+            table13.AddRow(new string[] {
+                        "Last Order Date"});
+            table13.AddRow(new string[] {
+                        "Last Revision Date"});
+#line 250
+testRunner.Then("I confirm that the excel file saved as: excel76551 contains the following columns" +
+                    ":", ((string)(null)), table13, "Then ");
+#line 260
+testRunner.And("I delete the excel file saved as excel76551", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

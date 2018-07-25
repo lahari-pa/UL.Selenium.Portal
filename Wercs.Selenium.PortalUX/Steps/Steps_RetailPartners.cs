@@ -444,7 +444,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("Confirm " + filetype + " file is downloaded with name: " + file);
 				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 				Report.Info("Downloads folder: " + downloadsFolder);
-
 				var dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
 				if (Report.IsTrue(dir.Any(), "No file was found with name " + file, "File with name: " + dir.FirstOrDefault() + " was found successfully!"))
 				{
@@ -879,8 +878,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Then(@"I confirm that the excel file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
-			var File = Context.GetFromContext(savedAs);
-			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
+			var File = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
 				var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
@@ -890,7 +889,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					Report.IsTrue(ColumnTitles.Contains(thisRow["Column"]),
 						"Column name is not found: " + thisRow["Column"],
-						"Column name has been found as expected: " + thisRow["Column"]);
+						"Column name has been found as expected: " + thisRow["Column"], false, false);
 				}
 			}
 		}
@@ -973,6 +972,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(AllPassed, "Not all items were strings", "As expected all items were strings");
 		}
 
+		[StepDefinition(@"I delete the excel file saved as (.*)")]
+		public void DeleteExcelFile(string savedAs)
+		{
+			var file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + savedAs);
+				return;
+			}
+			Report.Info("Deleting file: " + file);
+			File.Delete(file);
+		}
 	}
 }
 

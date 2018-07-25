@@ -221,7 +221,6 @@ Given In the Supplier Reports screen I click on the Download button
 Given I click on close in the Report Download dialog
 Given I confirm that an excel file is produced called Sustainability Survey Eligibility–Health & Beauty.html and save as 75391
 Then I confirm that the excel file saved as: 75391 contains the following columns:
-
 | Column                                              |
 | WERCSmart ID                                        |
 | Product Name                                        |
@@ -230,7 +229,32 @@ Then I confirm that the excel file saved as: 75391 contains the following column
 | 3rd Party Formula Use Indicator                     |
 | Last Submission Date                                |
 | Current Submission Level                            |
-| Current Data Tier Consent for the Selected Retailer |  
+| Current Data Tier Consent for the Selected Retailer |
 
+Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 2018
 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
+Then The home screen should load
+
+Given I click the Supplier Reports icon in the QuickLinks Pane
+
+Given Under the Supplier Reports menu I choose: California Proposition 65 - Registrations Prior to August 30, 2018
+
+Then In the Supplier Reports screen the current page should be: California Proposition 65 - Registrations Prior to August 30, 2018
+
+Given In the Supplier Reports screen I click on the Download button
+
+Given I confirm that a file is downloaded with file name: California Proposition 65  Registrations Prior to August 30 2018.xlsx then close the Report Download popup. I save the file as excel76551
+
+Then I confirm that the excel file saved as: excel76551 contains the following columns:
+| Column                    |
+| WERCSmart ID              |
+| WERCSmart Product Name    |
+| Contains Chemical on List |
+| Prop 65 Warning Required  |
+| Prop 65 Warning on Label  |
+| Last Order Date           |
+| Last Revision Date        |
+
+And I delete the excel file saved as excel76551
