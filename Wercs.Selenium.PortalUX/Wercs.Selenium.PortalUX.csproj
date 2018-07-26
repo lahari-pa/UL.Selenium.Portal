@@ -189,6 +189,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyLibrary.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\MyMessages.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyMessages.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 12.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -473,6 +478,7 @@
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />
     <Compile Include="Steps\Steps_MyIngredients.cs" />
+    <Compile Include="Steps\Steps_MyMessages.cs" />
     <Compile Include="Steps\Steps_PackagingTypes.cs" />
     <Compile Include="Steps\Steps_PaymentMethods.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
@@ -532,6 +538,10 @@
     <None Include="Features\MyLibrary.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MyLibrary.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\MyMessages.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MyMessages.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 12.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -21,6 +21,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath("..//h2"), 2).Text.Trim();
 		}
+
+		public bool ClickPrimaryButton(string button)
+		{
+			return containerElement.FindElement(By.XPath(".//button[@class='btn btn-primary' and text()='" + button + "']"), 2).TryClick();
+		}
 	}
 
 }

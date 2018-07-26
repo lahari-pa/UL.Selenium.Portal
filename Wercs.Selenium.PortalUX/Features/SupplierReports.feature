@@ -137,17 +137,29 @@ Then I confirm that the excel file saved as: 73228 contains the following column
 | Kit WPSID           |
 | Kit Name            |
 
-#Not finished because at the moment the report is downloading as html not xls and with no results.
+#Fail - report is downloading as html not xls and with no results.
+@bug73226
 Scenario: [73226] Pesticide Certificate Report
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I click the Supplier Reports icon in the QuickLinks Pane
-Given Under the Supplier Reports menu I choose: Pesticide Certificate Report
-Then In the Supplier Reports screen the current page should be: Pesticide Certificate Report
-Given In the Supplier Reports screen I click on the Download button
-Given I click on close in the Report Download dialog
-Given I confirm that an excel file is produced called Pesticide Certificate Report.xlsx and save as 73226
-Then I confirm that the excel file saved as: 73226 contains the following columns:
 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click the Supplier Reports icon in the QuickLinks Pane
+
+Given Under the Supplier Reports menu I choose: Pesticide Certificate Report
+
+Then In the Supplier Reports screen the current page should be: Pesticide Certificate Report
+
+Given In the Supplier Reports screen I click on the Download button
+
+#Given I click on close in the Report Download dialog
+
+#Given I confirm that an excel file is produced called Pesticide Certificate Report.xlsx and save as 73226
+
+Given I confirm that a file is downloaded with file name: Pesticide Certificate Report.xlsx then close the Report Download popup. I save the file as excel73226
+
+Then I confirm that the excel file saved as: excel73226 contains the following columns:
 | Column                                            |
 | Supplier                                          |
 | WPSID                                             |
@@ -157,6 +169,8 @@ Then I confirm that the excel file saved as: 73226 contains the following column
 | Pesticide Certificates Expire in 31-60 Days Count |
 | Pesticide Certificates Expire in 61-90 Days Count |
 | In Re-certification                               |
+
+And I delete the excel file saved as excel73226
 
 
 Scenario: [73229] Products with VOCs
