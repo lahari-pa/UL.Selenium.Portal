@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Castle.Core.Internal;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -102,6 +103,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Failed to close the Report Download popup",
 					"Successfully closed the Report Download popup");
 			}
+		}
+
+		[StepDefinition(@"I delete the Supplier Report file saved as (.*)")]
+		public void DeleteExcelFile(string savedAs)
+		{
+			var file = Context.GetFromContext(savedAs)?.ToString() ?? "";
+			if (file.IsNullOrEmpty())
+			{
+				Report.Failure("Could not find file saved as: " + savedAs);
+				return;
+			}
+			Report.Info("Deleting file: " + file);
+			File.Delete(file);
+		}
+
+		[StepDefinition(@"In the Supplier Report page I should see the report description should be showing with text: (.*)")]
+		public void SupplierReportPageIShoudSeeDescription(string expected)
+		{
+			var displayed = new SupplierReports().GetCurrentSubText();
+			Report.IsTrue(expected == displayed,
+				"The report description text did not match the expected text. Expected: '" + expected + "'. But got: '" + displayed + "'.",
+				"The report description text was displayed as expected.");
 		}
 	}
 }

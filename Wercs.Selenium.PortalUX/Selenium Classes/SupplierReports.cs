@@ -26,12 +26,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetCurrentTitle()
 		{
-			return containerElement.FindElement(By.XPath(".//form[@id='panel']//h3")).Text;
+			return containerElement.FindElement(By.XPath(".//form[@id='panel']//h3"))?.Text;
 		}
 
 		public string GetCurrentSubText()
 		{
-			return containerElement.FindElement(By.XPath(".//form[@id='panel']//p")).Text;
+			return containerElement.FindElement(By.XPath(".//form[@id='panel']//p"))?.Text;
 		}
 
 		public bool ClickDownload()
@@ -82,8 +82,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			var MatchingValues = Matches.Where(x =>x.GetValue().Trim().Contains(searchTerm.Trim()));
-			
+			var MatchingValues = Matches.Where(x => x.GetValue().Trim().Contains(searchTerm.Trim()));
+
 			if (MatchingValues.Count() == 0)
 			{
 				return false;

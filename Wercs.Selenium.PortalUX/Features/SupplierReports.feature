@@ -271,4 +271,35 @@ Then I confirm that the excel file saved as: excel76551 contains the following c
 | Last Order Date           |
 | Last Revision Date        |
 
-And I delete the excel file saved as excel76551
+And I delete the Supplier Report file saved as excel76551
+
+# broken because it is downloading an empty html file. Same as: 73226
+Scenario: [76759] Waste Classification Summary Report
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click the Supplier Reports icon in the QuickLinks Pane
+
+Given Under the Supplier Reports menu I choose: Waste Classification Summary Report
+
+Then In the Supplier Reports screen the current page should be: Waste Classification Summary Report
+
+And In the Supplier Report page I should see the report description should be showing with text: Report will show the waste classification for each of the 50 states and other areas within the United States, as well as the Federal waste classification. For specific information about a registration's waste classification, and how the waste classification was derived, you may request an Additional Document from the My Products area for the registration you're interested in receiving details about.
+
+Given In the Supplier Reports screen I click on the Download button
+
+Given I confirm that a file is downloaded with file name: Waste Classification Summary Report.xlsx then close the Report Download popup. I save the file as SupplierReport76759
+
+Then I confirm that the excel file saved as: excel76551 contains the following columns:
+| Column        |
+| WERCSmart ID  |
+| Product Name  |
+| Federal Waste |
+| EPA Type      |
+| EPA Code      |
+
+# Confirm that the report contains the columns for: Each State and they appear in alphabetical order
+
+And I delete the Supplier Report file saved as SupplierReport76759

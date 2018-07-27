@@ -835,7 +835,67 @@ testRunner.Given("I confirm that a file is downloaded with file name: California
 testRunner.Then("I confirm that the excel file saved as: excel76551 contains the following columns" +
                     ":", ((string)(null)), table13, "Then ");
 #line 274
-testRunner.And("I delete the excel file saved as excel76551", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I delete the Supplier Report file saved as excel76551", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[76759] Waste Classification Summary Report")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Supplier Reports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ForgottenPassword")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        public virtual void _76759WasteClassificationSummaryReport()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[76759] Waste Classification Summary Report", ((string[])(null)));
+#line 277
+this.ScenarioSetup(scenarioInfo);
+#line 13
+this.FeatureBackground();
+#line 279
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 281
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 283
+testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 285
+testRunner.Given("Under the Supplier Reports menu I choose: Waste Classification Summary Report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 287
+testRunner.Then("In the Supplier Reports screen the current page should be: Waste Classification S" +
+                    "ummary Report", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 289
+testRunner.And(@"In the Supplier Report page I should see the report description should be showing with text: Report will show the waste classification for each of the 50 states and other areas within the United States, as well as the Federal waste classification. For specific information about a registration's waste classification, and how the waste classification was derived, you may request an Additional Document from the My Products area for the registration you're interested in receiving details about.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 291
+testRunner.Given("In the Supplier Reports screen I click on the Download button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 293
+testRunner.Given("I confirm that a file is downloaded with file name: Waste Classification Summary " +
+                    "Report.xlsx then close the Report Download popup. I save the file as SupplierRep" +
+                    "ort76759", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Column"});
+            table14.AddRow(new string[] {
+                        "WERCSmart ID"});
+            table14.AddRow(new string[] {
+                        "Product Name"});
+            table14.AddRow(new string[] {
+                        "Federal Waste"});
+            table14.AddRow(new string[] {
+                        "EPA Type"});
+            table14.AddRow(new string[] {
+                        "EPA Code"});
+#line 295
+testRunner.Then("I confirm that the excel file saved as: excel76551 contains the following columns" +
+                    ":", ((string)(null)), table14, "Then ");
+#line 305
+testRunner.And("I delete the Supplier Report file saved as SupplierReport76759", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
