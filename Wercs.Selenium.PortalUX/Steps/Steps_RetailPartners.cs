@@ -942,7 +942,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
 				var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
-
 				//get the index of column
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
@@ -954,11 +953,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						ColumnIndex = i;
 					}
 				}
-
 				List<string> RowItems = ExcelUtils.Excel_GetColumn(ColumnIndex);
-
-
-
 				foreach (string thisItem in RowItems)
 				{
 					if (thisItem.Any(char.IsDigit))
@@ -968,7 +963,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 					}
 				}
 			}
-
 			Report.IsTrue(AllPassed, "Not all items were strings", "As expected all items were strings");
 		}
 

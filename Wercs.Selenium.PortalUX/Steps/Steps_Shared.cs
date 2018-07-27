@@ -1943,26 +1943,35 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 60741 \(Select Primary Physical Property - Solid - With Ingredients\)")]
 		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Solid_WithIngredients()
 		{
+			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Product Characteristics page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			TestReport.StartStep("I set the Primary Physical State option to: Solid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Solid");
-			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
+			TestReport.StartStep("I set the Secondary Physical State option to: Cream");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Cream");
 			NewProduct MyNewProduct = new NewProduct();
 			if (MyNewProduct.OptionExists("When mixed with an equal amount of water"))
 			{
+				TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH option to: Yes");
 				MyStepsNewProduct.SetTheSectionOptionTo(
 					"When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
 			}
-
+			TestReport.StartStep("I set the Select all ingredients included in this product option to: Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
+			TestReport.StartStep("I set the Product is manufactured in a facility that processes, or contains option to: Dairy or products containing dairy or milk");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
 				"Dairy or products containing dairy or milk");
+			TestReport.StartStep("I set the Product is verified and sold as option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
+			TestReport.StartStep("I set the Product contains the following sweeteners option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following sweeteners", "None of the Above");
+			TestReport.StartStep("I set the Product contains the following artificial dye(s) option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following artificial dye(s)",
 				"None of the Above");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			TestReport.StartStep("I click continue");
+			MyStepsNewProduct.ClickContinueProductRegistration();
 		}
 
 		[StepDefinition(

@@ -2609,16 +2609,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click the Continue button",
 				"Successfully clicked the Continue button");
 			Report.Info("Checking for 'required field' error and if new page hasn't loaded");
-			if (selNewProduct.ErrorMessage() == "This is a required field." && selNewProduct.WaitForSection(currentPage))
+			if (selNewProduct.WaitForSection(currentPage, 30))
 			{
-				var section = selNewProduct.SectionWithRequiredFieldError();
-				Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
+				if (selNewProduct.ErrorMessage() == "This is a required field.")
+				{
+					var section = selNewProduct.SectionWithRequiredFieldError();
+					Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
+					Report.Screenshot();
+					throw new Exception("New page did not load on Continue - required field.");
+				}
+				Report.Failure("New page was not loaded.");
 				Report.Screenshot();
-				throw new Exception("New page did not load on Continue - required field.");
+				throw new Exception("New page did not load on Continue.");
 			}
-			Report.Failure("New page was not loaded.");
+			Report.Success("New page was loaded");
 			Report.Screenshot();
-			throw new Exception("New page did not load on Continue.");
+			Report.Info("Current page is: " + selNewProduct.ActivePanelHeading());
 		}
 
 		[StepDefinition(@"I click close in the 'Select Retailers' window")]

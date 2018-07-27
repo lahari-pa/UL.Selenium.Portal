@@ -168,7 +168,7 @@ Then the Subscription Enrollment page should load
 Given I navigate to the home page
 Then I delete the product: TestCase60723
 
-
+@tfs_design
 Scenario: [60722] Nut Butters - RU001455
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

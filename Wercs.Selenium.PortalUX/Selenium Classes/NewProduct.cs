@@ -64,7 +64,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string ErrorMessage()
 		{
 			this.RefreshContainer();
-			return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2)?.Text;
 		}
 
 		public string BatteyWarning()

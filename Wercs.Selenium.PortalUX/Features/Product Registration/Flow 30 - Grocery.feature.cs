@@ -347,9 +347,11 @@ testRunner.Then("I delete the product: TestCase60723", ((string)(null)), ((TechT
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FLow30_Grocery")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
         public virtual void _60722NutButters_RU001455()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60722] Nut Butters - RU001455", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60722] Nut Butters - RU001455", new string[] {
+                        "tfs_design"});
 #line 172
 this.ScenarioSetup(scenarioInfo);
 #line 174
