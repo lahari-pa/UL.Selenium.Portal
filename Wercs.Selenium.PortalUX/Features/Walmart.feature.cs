@@ -469,11 +469,12 @@ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and
 #line 174
 testRunner.Then("I save the product information as: TestCase74017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 176
-testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
-                    "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call shared step 77711 (Product Characteristics - Primary (L/S), 2nd - any, Ent" +
+                    "er Gravity, pH, Boiling Point, Flash Point, Flash Point Test - any, Water - any)" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 178
-testRunner.Given("I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direc" +
-                    "t Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",

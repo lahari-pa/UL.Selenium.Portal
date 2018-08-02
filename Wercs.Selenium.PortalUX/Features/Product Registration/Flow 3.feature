@@ -12,7 +12,6 @@
 
 Feature: Flow 3
 
-
 Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

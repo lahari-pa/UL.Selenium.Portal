@@ -176,7 +176,6 @@ Then in the Ingredients page I click Continue
 And I should see the Regulatory Information 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
-
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

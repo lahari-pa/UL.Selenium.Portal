@@ -3835,5 +3835,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 				selStepsNewProduct.ClickContinue();
 			}
 		}
+
+		[StepDefinition(@"I call shared step 77711 \(Product Characteristics - Primary \(L/S\), 2nd - any, Enter Gravity, pH, Boiling Point, Flash Point, Flash Point Test - any, Water - any\)")]
+		public void SharedProductCharacteristics_PrimaryLS_Any_EnterGravity_pH_BoilingPoint_FlashPointTestAny_WaterAny()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct stepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the Primary Physical State option to: Liquid");
+			stepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			TestReport.StartStep("I set the Secondary Physical State option to: Liquid");
+			stepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			TestReport.StartStep("I set the Specific Gravity option to: 10");
+			stepsNewProduct.SetTheSectionOptionTo("Specific Gravity", "10");
+			TestReport.StartStep("I set the pH option to: 5");
+			stepsNewProduct.SetTheSectionOptionTo("pH", "5");
+			TestReport.StartStep("I set the pH option to: 5");
+			stepsNewProduct.SetTheSectionOptionTo("pH", "5");
+			TestReport.StartStep("I set the Boiling Point (in Celsius) option to: 80");
+			stepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "80");
+			TestReport.StartStep("I set the Flash Point (in Celsius) option to: 130");
+			stepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "130");
+			TestReport.StartStep("I set the Flash Point Testing Method option to: Open cup method");
+			stepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Open cup method");
+			TestReport.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
+			stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
+			TestReport.StartStep("I click continue in the new product registration");
+			stepsNewProduct.ClickContinueProductRegistration();
+		}
 	}
 }
