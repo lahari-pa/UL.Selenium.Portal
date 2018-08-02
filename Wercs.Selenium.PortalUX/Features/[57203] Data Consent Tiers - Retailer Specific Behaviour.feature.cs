@@ -442,19 +442,78 @@ testRunner.And("I confirm the excel file saved as CanadianTireExcelFile can be o
         public virtual void _69112RetailerSpecific_Topco()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69112] Retailer specific - Topco", ((string[])(null)));
-#line 126
+#line 124
 this.ScenarioSetup(scenarioInfo);
-#line 128
+#line 126
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 129
+#line 127
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 130
+#line 128
 testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 131
+#line 129
 testRunner.When("I select the retailer: TopCo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 132
+#line 130
 testRunner.And("I confirm that: This recipient does not require additional data consent tiers at " +
                     "this time. is showing under the Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[74540] Target - Data Tier Warning when not all are selected")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "[57203] Data Consent Tiers - Retailer Specific Behavior")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ForgottenPassword")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_DataConsentTiers_RetailerSpecific")]
+        public virtual void _74540Target_DataTierWarningWhenNotAllAreSelected()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74540] Target - Data Tier Warning when not all are selected", ((string[])(null)));
+#line 132
+this.ScenarioSetup(scenarioInfo);
+#line 134
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 136
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 138
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 140
+testRunner.When("I select the retailer: Target", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 142
+testRunner.Then("the Data Consent Tier: Tier 2.1 should be set to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 144
+testRunner.Given("I toggle the data consent tier: Tier 2.1 to: off", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 146
+testRunner.Given("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 148
+testRunner.Given("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Message"});
+            table1.AddRow(new string[] {
+                        "NOTE: Your selection does not meet this retailer\'s request. Target requests suppl" +
+                            "iers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier " +
+                            "3, and Tier 4.1 consent. Target will be notified of your Data Tier selections"});
+            table1.AddRow(new string[] {
+                        @"Revising the Data Use Tier consents you have provided to a retailer will suspend your participation in that retailer’s programs. Product data and reports generated while you consent was in effect will remain available to the retailer, but no further product data or reports will be generated."});
+#line 150
+testRunner.Then("the warning message in the Retail Partners details page should contain the follow" +
+                    "ing:", ((string)(null)), table1, "Then ");
+#line 155
+testRunner.Given("I toggle the data consent tier: Tier 2.1 to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 157
+testRunner.Given("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 159
+testRunner.Given("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 161
+testRunner.And("I confirm that: Target requests suppliers of Cleaning and Health & Beauty product" +
+                    "s to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under th" +
+                    "e Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 163
+testRunner.And("I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

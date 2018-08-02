@@ -121,8 +121,6 @@ And I confirm that: Canadian Tire requires suppliers of formulated products to g
 When I click the Products in Scope button and confirm that an excel file is produced called CT_Report_DataUsageTier_<Date>.xlsx and save as CanadianTireExcelFile
 And I confirm the excel file saved as CanadianTireExcelFile can be opened and contains data
 
-
-
 Scenario: [69112] Retailer specific - Topco
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -131,6 +129,35 @@ Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: TopCo
 And I confirm that: This recipient does not require additional data consent tiers at this time. is showing under the Data Consent Tiers
 
+Scenario: [74540] Target - Data Tier Warning when not all are selected
 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
+Then The home screen should load
 
+Then I click the Retail Partners icon in the Navigation Pane
+
+When I select the retailer: Target
+
+Then the Data Consent Tier: Tier 2.1 should be set to: on
+
+Given I toggle the data consent tier: Tier 2.1 to: off
+
+Given I click the Save Changes button
+
+Given I click close on the Save Changes popup dialog
+
+Then the warning message in the Retail Partners details page should contain the following:
+| Message                                                                                                                                                                                                                                                                                             |
+| NOTE: Your selection does not meet this retailer's request. Target requests suppliers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. Target will be notified of your Data Tier selections                                                       |
+| Revising the Data Use Tier consents you have provided to a retailer will suspend your participation in that retailer’s programs. Product data and reports generated while you consent was in effect will remain available to the retailer, but no further product data or reports will be generated. |
+
+Given I toggle the data consent tier: Tier 2.1 to: on
+
+Given I click the Save Changes button
+
+Given I click close on the Save Changes popup dialog
+
+And I confirm that: Target requests suppliers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under the Data Consent Tiers heading
+
+And I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown

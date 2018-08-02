@@ -73,6 +73,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[StepDefinition(@"I toggle the data consent tier: (.*) to: (on|off)")]
+		public void SetDataConsentTier(string dct, string onOff)
+		{
+			var selRetailParntersDetails = new RetailParntersDetails();
+			var toggle = onOff == "on";
+			Report.IsTrue(selRetailParntersDetails.SetDataConsentTier(dct, toggle), "failed to toggle the data consent tier: " + dct + " to: " + onOff, "Successfully toggled the data consent tier: " + dct + " to: " + onOff);
+		}
 
 		[StepDefinition(@"I (should|should not) see the following subheading (.*)")]
 		public void ThenIShouldSeeTheFollowingSubheading(string should, string subheading)
@@ -519,6 +526,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"the Data Consent Tier: (.*) should be set to: (on|off)")]
+		public void DataConsentTierShouldBeSetTo(string tier, string onOff)
+		{
+			var toggle = onOff == "on";
+			Report.IsTrue(new RetailParntersDetails().GetDataConsentTier(tier) == toggle,
+				"The Data Consent Tier: " + tier + " was not set to: " + onOff,
+				"The Data Consent Tier: " + tier + " was set to " + onOff);
+		}
 		[StepDefinition(@"I (should|should not) be able to edit Tier (.*)")]
 		public void DataUsageTierEditing(string should, string tier)
 		{
@@ -581,42 +596,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I click the Save Changes button")]
 		public void GivenClickTheSaveChangesButton()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click the Save Changes button");
-			try
-			{
-				Report.Info("Click the Save Changes button");
-
-				var selRetailDetails = new RetailParntersDetails();
-
-				Report.IsTrue(selRetailDetails.ClickSaveChanges(), "Failed to click 'Save Changes'", "Successfully clicked 'Save Changes'");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Click the Save Changes button");
+			var selRetailDetails = new RetailParntersDetails();
+			Report.IsTrue(selRetailDetails.ClickSaveChanges(), "Failed to click 'Save Changes'", "Successfully clicked 'Save Changes'");
 		}
 
 		[StepDefinition(@"I click close on the Save Changes popup dialog")]
 		public void ClickCloseOnSavePopupDialog()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Closing the Save Changes popup dialog");
-			try
-			{
-				Report.Info("Closing the Save Changes popup dialog");
+			Report.Info("Closing the Save Changes popup dialog");
 
-				var selDataEntryChanges = new DataEntryNotification();
-				if (selDataEntryChanges.Wait_for_load())
-				{
-					selDataEntryChanges.ClickClose();
-				}
-				Report.Success("Clicked close successfully!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
+			var selDataEntryChanges = new DataEntryNotification();
+			if (selDataEntryChanges.Wait_for_load())
 			{
-				Report.Failure(ex.Message);
-				throw;
+				Report.IsTrue(selDataEntryChanges.ClickClose(), "Failed to click close", "Clicked close successfully!");
 			}
 		}
 
@@ -643,7 +636,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 			}
 		}
+
 		[StepDefinition(@"the following warning message should be showing: (.*)")]
+
+		[StepDefinition(@"the warning message in the Retail Partners details page should contain the following:")]
+		public void WarningMessagesRetailPartnersShouldContain(Table warning)
+		{
+			var expected = new List<string>();
+			warning.Rows.ForEach(x => expected.Add(x["Message"]));
+			var displayed = new RetailParntersDetails().WarningMessages();
+			var differences = expected.Except(displayed);
+			Report.IsTrue(!differences.Any(),
+				"The warning message did not match the expected text. Displayed is: " + string.Join("; ", displayed) + ". Expected is: " + string.Join("; ", expected),
+				"The warning message matched the expected text.");
+
+		}
 		public void ThenTheFollowingWarningMessageShouldBeShowing(string expected)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Correct warning message is showing");
@@ -667,10 +674,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"Confirm the NOTE: message below the Data Consent Tiers Heading is NOT shown")]
+		[StepDefinition(@"I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown")]
 		public void ThenConfirmTheNoteMessageBelowTheDataConsentTiersHeadingIsNotShown()
 		{
-			ScenarioContext.Current.Pending();
+			var displayed = new RetailParntersDetails().WarningMessages();
+			Report.IsTrue(!displayed.Any(x => x.Contains("NOTE")),
+				"The NOTE error message was displayed under the Data Cosent Tiers Heading",
+				"The NOTE error message was not diplayed under the Data Consent Tiers Heading");
 		}
 
 

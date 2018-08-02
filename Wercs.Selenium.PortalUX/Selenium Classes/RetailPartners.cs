@@ -282,12 +282,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSaveChanges()
 		{
-			return containerElement.FindElement(By.XPath(".//p/a[contains(@class,'btn') and not(contains(style,'display: none'))]"), 2).TryClick();
+			return containerElement.FindElement(By.XPath(".//p/a[contains(@class,'btn') and not(contains(style,'display: none'))]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public string WarningMessage()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'alert-warning') and contains(@data-bind,'additionalInfo')]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'alert-warning') and contains(@data-bind,'additionalInfo')]"), 2)?.Text;
+		}
+
+		public List<string> WarningMessages()
+		{
+			var messages = containerElement.FindElements(By.XPath(".//div[contains(@class,'alert-warning') and contains(@data-bind,'additionalInfo')]/p"), 2);
+			if (messages.Count == 0)
+			{
+				return new List<string>();
+			}
+			return messages.Select(x => x.Text.Trim()).ToList();
 		}
 
 		public string GetSelectedRetailer()
@@ -329,7 +339,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickClose()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 
