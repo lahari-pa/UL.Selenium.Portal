@@ -34,24 +34,24 @@ namespace WERCSmart
 				{
 					case ("local"):
 					case ("development"):
-					{
-						GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
-						GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
+						{
+							GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
+							GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
 							break;
-					}
+						}
 					case ("staging"):
-					{
-						GlobalParameters.TestUrl = @"https://staging.thewercs.com/Wercs.SHA.MVCWebV1/";
-						GlobalParametersPortal.SHAUrl = @"http://66.194.55.181/Wercs.Studio.Web/logon.aspx?ReturnUrl=%2fWercs.Studio.Web";
-						break;
-					}
-						
+						{
+							GlobalParameters.TestUrl = @"https://staging.thewercs.com/Wercs.SHA.MVCWebV1/";
+							GlobalParametersPortal.SHAUrl = @"http://66.194.55.181/Wercs.Studio.Web/logon.aspx?ReturnUrl=%2fWercs.Studio.Web";
+							break;
+						}
+
 					default:
-					{
-						GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
-						GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
-						break;
-					}
+						{
+							GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
+							GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
+							break;
+						}
 				}
 			}
 		}

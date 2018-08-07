@@ -45,6 +45,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			optionLink.Click();
 			return true;
 		}
+
+
+	}
+
+	class LandingPageFooter : BaseObject
+	{
+		public const string BasePath = "//footer/div[@class='container']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+		public bool ClickGetStartedNow()
+		{
+			return containerElement.FindElement(By.XPath(".//a[text()='Get started now']"), 2).TryClick();
+		}
+
+		public bool ClickTermsOfUse()
+		{
+			return containerElement.FindElement(By.XPath(".//a[contains(text(),'Terms')]"), 2).TryClick();
+		}
 	}
 
 	class ManufacturersInfo : BaseObject

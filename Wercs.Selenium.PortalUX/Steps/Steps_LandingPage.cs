@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -193,6 +194,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I click the Get Started Now link")]
+		public void ClickGetStartedNow()
+		{
+			var selLandingPageFooter = new LandingPageFooter();
+			Report.IsTrue(selLandingPageFooter.ClickGetStartedNow(), "Failed to click Get Started Now", "Successfully clicked Get Started Now");
+		}
+		[StepDefinition(@"I click the Terms of Use link in the Landing Page footer")]
+		public void ClickTermsOfUse()
+		{
+			var selLandingPageFooter = new LandingPageFooter();
+			Report.IsTrue(selLandingPageFooter.ClickTermsOfUse(), "Failed to click Terms of Use", "Successfully clicked Terms of Use");
+		}
+
+		[StepDefinition(@"I confirm the WERCSmart Terms of Use page has loaded")]
+		public void TermsOfUsePageHasLoaded()
+		{
+			Report.IsTrue(SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[contains(text(),'Terms of Use')]"), 30) != null,
+				"The WERCSmart Terms of Use Page did not load after 30 seconds!",
+				"The WERCSmart Terms of Use Page loaded as expected");
 		}
 	}
 }

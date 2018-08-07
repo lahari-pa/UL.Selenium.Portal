@@ -498,3 +498,15 @@ Given In the Live Help dialog I enter name: John Smith
 Given In the Live Help dialog I enter email: johnsmithtest@test.co.uk
 Given In the Live Help dialog I click on the x to close
 
+Scenario: [56829] More Filters
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+
+Then The home screen should load
+
+And I should see an option for More Filters
+
+Given I click More Filters in the products grid
+
+# Confirm that you are able to search with combinations  (example : UPC and Retailer , UPC and Additional Programs , UPC and Brand,  UPC-Brand-Retailer-Additional Programs)
+
