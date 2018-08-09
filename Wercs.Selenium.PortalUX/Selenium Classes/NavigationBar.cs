@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -25,9 +28,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var elementClosed = !element.GetAttribute("class").Contains("closed");
 				if (elementClosed && expand || !elementClosed && !expand)
 				{
-					element.Click();
+					return element.TryClick();
 				}
-
 				return true;
 			}
 			catch
@@ -66,6 +68,41 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var expandedOption = expandedIcons.FirstOrDefault(x => x.Text.Contains(item));
 
 			return (expandedOption != null && expandedOption.Displayed);
+		}
+
+		public bool AllNavigationLabelsAreHidden()
+		{
+			var allItems = new List<string> {
+				"Home",
+				"Register New Product",
+				"My Messages",
+				"Retail Partners",
+				"Supplier Reports",
+				"UL Solution Center",
+				"Support"
+			};
+			var expandedLabels = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'sidemenu-links') and not(contains(@class,'closed'))]"), 2);
+			return expandedLabels == null;
+		}
+
+		public bool IconTextDisplayedOnHover(string icon, string item)
+		{
+			var sideIcons = this.containerElement.FindElements(By.XPath(".//div[@class='sidemenu-icons']//a/i"), 2);
+			if (sideIcons == null)
+			{
+				Report.Failure("Unable to find navigation icon bar");
+				return false;
+			}
+			// Fetch the icon with class matching the expected logo (eg. fa fa-home)
+			var iconEl = sideIcons.FirstOrDefault(x => x.GetAttribute("class").Contains(icon.ToLower()));
+			if (iconEl == null)
+			{
+				Report.Failure("Unable to find navigation icon: " + icon);
+				return false;
+			}
+			//The tooltip displays the title attribute of the a element. Compare this to the expected outcome in the table
+			var iconTitle = iconEl.FindElement(By.XPath("./parent::a"), 2)?.GetAttribute("title");
+			return iconTitle?.Contains(item) ?? false;
 		}
 
 		//Home, Register, Retail Partners, Supplier Reports, Solution Center, Shopping Cart, Support

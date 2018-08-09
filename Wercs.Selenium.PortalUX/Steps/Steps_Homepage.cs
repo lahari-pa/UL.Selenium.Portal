@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Castle.Core.Internal;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -457,6 +458,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 		}
 
+		[StepDefinition(@"the navigation labels should be hidden")]
+		public void NavigationLabelsShouldBeHidden()
+		{
+			Report.IsTrue(new NavigationBar().AllNavigationLabelsAreHidden(),
+				"The navigation labels (Home, Register New Product..) were not hidden!",
+				"The navigation labels (Home, Register New Product..) were hidden as expected");
+		}
+
 		[StepDefinition(@"I click the User Icon")]
 		public void ThenIClickTheUserIcon()
 		{
@@ -852,5 +861,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new LiveHelp().ClickCloseX(), "Failed to click x to close", "Clicked x to close");
 		}
 
+		[StepDefinition(@"the hover over text is as expected for the following navigation icons")]
+		public void HoverOverIconsAndConfirmTheTitleAppears(Table icons)
+		{
+			foreach (var row in icons.Rows)
+			{
+				var icon = row["Icon"];
+				var text = row["Text"];
+				Report.IsTrue(new NavigationBar().IconTextDisplayedOnHover(icon, text),
+					"Title text: " + text + " did not appear on hover for icon: " + icon,
+					"Title text: " + text + " appeared on hover for icon: " + icon + " as expected", false, false);
+			}
+		}
 	}
 }

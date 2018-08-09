@@ -41,12 +41,14 @@ Then Click No on the inactivity popup
 And the landing page should load
 #verify the wait time is 15 min for each click on popup (yes/no)
 
+@tfsdesign
 Scenario: [50772] Get Started Now Button
 
 Given I click the Get Started Now link
 
 Then the login page should appear
 
+@tfsdesign
 Scenario: [50775] Terms of Use
 
 Given I click the Terms of Use link in the Landing Page footer

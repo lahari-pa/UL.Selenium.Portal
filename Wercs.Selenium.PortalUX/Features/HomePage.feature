@@ -448,7 +448,7 @@ Then Product Line or Brand (optional) should be showing the value: SuperBrand(TM
 
 
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
-#in the development environment
+#in the development environment - It will work in staging.
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -510,3 +510,66 @@ Given I click More Filters in the products grid
 
 # Confirm that you are able to search with combinations  (example : UPC and Retailer , UPC and Additional Programs , UPC and Brand,  UPC-Brand-Retailer-Additional Programs)
 
+# Couldn't find the test case in TFS folder heirarchy, placing it in home page
+Scenario: [66335] Main Menu - expanded
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+
+Then The home screen should load
+
+And I should see the navigation menu icon in the navigation bar
+
+Given I expand the Navigation Menu
+
+Then the Navigation Menu should be expanded
+
+And the following icons and labels should be found in the navigation bar
+| Item                 |
+| Home                 |
+| Register New Product |
+| My Messages          |
+| Retail Partners      |
+| Supplier Reports     |
+| UL Solution Center   |
+| Shopping Cart        |
+| Support              |
+
+Given I collapse the Navigation Menu
+
+Then the following icons should be found in the navigation bar
+| Item                 |
+| Home                 |
+| Register New Product |
+| My Messages          |
+| Retail Partners      |
+| Supplier Reports     |
+| UL Solution Center   |
+| Shopping Cart        |
+| Support              |
+
+And the navigation labels should be hidden
+
+Scenario: [66336] Main Menu - collapsed
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+
+Then The home screen should load
+
+Given I expand the Navigation Menu
+
+Then the Navigation Menu should be expanded
+
+Given I collapse the Navigation Menu
+
+Then the Navigation Menu should be collapsed
+
+Given the hover over text is as expected for the following navigation icons
+| Icon       | Text                 |
+| Home       | Home                 |
+| Flask      | Register New Product |
+| Envelope   | My Messages          |
+| Handshake  | Retail Partners      |
+| Cloud      | Supplier Reports     |
+| Bulb       | UL Solution Center   |
+| Cart       | Shopping Cart        |
+| Life-Saver | Support              |
