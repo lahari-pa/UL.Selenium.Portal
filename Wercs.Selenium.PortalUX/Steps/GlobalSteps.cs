@@ -34,17 +34,30 @@ namespace WERCSmart
 				{
 					case ("local"):
 					case ("development"):
-						{
-							GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
-							GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
-							break;
-						}
+					{
+						GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
+						GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
+						GlobalParametersPortal.SHAUser = "QASHA";
+						GlobalParametersPortal.SHAPassword = "Welcome1!";
+						break;
+					}
 					case ("staging"):
-						{
-							GlobalParameters.TestUrl = @"https://staging.thewercs.com/Wercs.SHA.MVCWebV1/";
-							GlobalParametersPortal.SHAUrl = @"http://66.194.55.181/Wercs.Studio.Web/logon.aspx?ReturnUrl=%2fWercs.Studio.Web";
-							break;
-						}
+					{
+						GlobalParameters.TestUrl = @"https://staging.thewercs.com/Wercs.SHA.MVCWebV1/";
+						GlobalParametersPortal.SHAUrl = @"http://66.194.55.181/Wercs.Studio.Web/logon.aspx?ReturnUrl=%2fWercs.Studio.Web";
+						GlobalParametersPortal.SHAUser = "QASHA";
+						GlobalParametersPortal.SHAPassword = "Welcome2@";
+					break;
+					}
+
+					case ("production"):
+					{
+						GlobalParameters.TestUrl = @"";
+						GlobalParametersPortal.SHAUrl = @"http://66.194.55.180/Wercs.Studio.Web/logon.aspx";
+						GlobalParametersPortal.SHAUser = "QASHA";
+						GlobalParametersPortal.SHAPassword = "Welcome1!";
+					break;
+					}
 
 					default:
 						{
@@ -68,7 +81,8 @@ namespace WERCSmart
 			TestReport.BeginTestModule(ResourcePool.GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator");
 			try
 			{
-				GivenILogInWithEmailXAndPasswordY(GlobalParameters.Admin1, GlobalParameters.AdminPassword1);
+				//GivenILogInWithEmailXAndPasswordY(GlobalParameters.Admin1, GlobalParameters.AdminPassword1);
+				GivenLoginIntoWERCSmartPortal_AdminRoleProducts();
 			}
 			catch (Exception ex)
 			{

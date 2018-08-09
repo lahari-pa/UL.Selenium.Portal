@@ -1870,12 +1870,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I (see|only see|do not see) the following sections")]
 		public void CheckDisplayedSections(string condition, Table sections)
 		{
+			Report.Info("Beginning I " + condition + " the following sections");
 			var expectedSections = new List<string>();
 			foreach (var Row in sections.Rows)
 			{
 				expectedSections.Add(Row["Section"]);
 			}
 			var ActualSections = new NewProduct().GetDisplayedSections().Select(x => x.Trim()).ToList();
+			Report.Info("Actual sections: " + string.Join(",", ActualSections));
 			if (condition == "only see")
 			{
 				List<string> mismatch = new List<string>();

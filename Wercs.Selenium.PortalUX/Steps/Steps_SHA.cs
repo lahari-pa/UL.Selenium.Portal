@@ -37,8 +37,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenILoginToStudioAsAdministrator()
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
-			thisStudioLogin.Username = "QASHA";
-			thisStudioLogin.Password = "Welcome1!";
+			thisStudioLogin.Username = GlobalParametersPortal.SHAUser;
+			thisStudioLogin.Password = GlobalParametersPortal.SHAPassword;
 			thisStudioLogin.ClickSignIn();
 			StudioDesktop thisStudioDesktop = new StudioDesktop();
 			Report.IsTrue(thisStudioDesktop.Wait_for_load(), "Studio desktop is not showing as expected.",
@@ -119,6 +119,137 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully closed messages dialog");
 		}
 
+		[Given(@"In SHA Manager Page I select status: (.*)")]
+		public void GivenInSHAManagerPageISelectStatus(string status)
+		{
+			StudioSHAManager thisShaManager = new StudioSHAManager();
+			Report.IsTrue(thisShaManager.SelectFromStatusFilter(status), "Failed to select status: " + status,
+				"Successfully selected status: " + status);
+		}
+
+
+
+
+
+		//|Status|Client|SearchPattern|ProductId|ProductName|DateRange|LastActivityDate|Supplier|User|Reviewer|OnSuspended|RecertificationActive|GGOnlyProducts|ECommFlowProducts|TReg|OrderNo|SubmissionDate|UPC|ParentUPC|
+
+		[Given(@"In SHA Manager ProductSearch page I run search:")]
+		public void GivenInSHAManagerPageIRunSearch(TechTalk.SpecFlow.Table table)
+		{
+			StudioSHAManagerProductSearch thisProductSearch = new StudioSHAManagerProductSearch();
+			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded",
+				"Product search page has loaded as expected");
+			var x = table.Rows.ToDictionary(r => r[0], r => r[1]);
+			for (int i=0; i<x.Count; i++)
+			{
+				switch (x.Keys.ElementAt(i))
+				{
+					case "Status":
+						Report.IsTrue(thisProductSearch.SelectFromStatusFilter(x.Values.ElementAt(i)),
+							"Failed to set status", "Successfully set status");
+						break;
+					case "Client":
+						Report.IsTrue(thisProductSearch.SelectFromClientFilter(x.Values.ElementAt(i)),
+							"Failed to set client", "Successfully set client");
+						break;
+					case "SearchPattern":
+						Report.IsTrue(thisProductSearch.SelectFromSearchPatternFilter(x.Values.ElementAt(i)),
+							"Failed to set search pattern", "Successfully set search pattern");
+						break;
+					case "ProductID":
+					case "ProductId":
+						Report.IsTrue(thisProductSearch.EnterProductID(x.Values.ElementAt(i)),
+							"Failed to set product id", "Successfully set product id");
+						break;
+					case "ProductName":
+						Report.IsTrue(thisProductSearch.EnterProductName(x.Values.ElementAt(i)),
+							"Failed to set product name", "Successfully set product name");
+						break;
+					case "DateRange":
+						Report.IsTrue(thisProductSearch.SelectFromDateRangeFilter(x.Values.ElementAt(i)),
+							"Failed to set date range", "Successfully set date range");
+						break;
+					case "DateFrom":
+						Report.IsTrue(thisProductSearch.EnterDateFrom(x.Values.ElementAt(i)),
+							"Failed to set date range", "Successfully set date range");
+						break;
+					case "DateTo":
+						Report.IsTrue(thisProductSearch.EnterDateTo(x.Values.ElementAt(i)),
+							"Failed to set date range", "Successfully set date range");
+						break;
+					case "LastActivityDate":
+						Report.IsTrue(thisProductSearch.EnterLastActivityDate(x.Values.ElementAt(i)),
+							"Failed to set activity date", "Successfully set activity date");
+						break;
+					case "Supplier":
+						Report.IsTrue(thisProductSearch.EnterSupplier(x.Values.ElementAt(i)),
+							"Failed to set supplier", "Successfully set supplier");
+						break;
+					case "User":
+						Report.IsTrue(thisProductSearch.EnterUser(x.Values.ElementAt(i)),
+							"Failed to set user", "Successfully set user");
+						break;
+					case "Reviewer":
+						Report.IsTrue(thisProductSearch.EnterReviewer(x.Values.ElementAt(i)),
+							"Failed to set reviewer", "Successfully set reviewer");
+						break;
+					case "OnSuspended":
+						Report.IsTrue(thisProductSearch.CheckOnSuspended(x.Values.ElementAt(i)=="true"),
+							"Failed to set on suspended", "Successfully set on suspended");
+						break;
+					case "RecertificationActive":
+						Report.IsTrue(thisProductSearch.CheckRecertificationActive(x.Values.ElementAt(i)=="true"),
+							"Failed to set recertification active", "Successfully set recertification active");
+						break;
+					case "GGOnlyProducts":
+						Report.IsTrue(thisProductSearch.CheckGoodGuideOnlyProducts(x.Values.ElementAt(i)=="true"),
+							"Failed to set Good Guide only products", "Successfully set Good Guide only products");
+						break;
+					case "ECommFlowProducts":
+						Report.IsTrue(thisProductSearch.CheckECommFlowProducts(x.Values.ElementAt(i)=="true"),
+							"Failed to set EComm flow products", "Successfully set EComm flow products");
+						break;
+					case "TReg":
+						Report.IsTrue(thisProductSearch.SelectFromTRegFilter(x.Values.ElementAt(i)),
+							"Failed to set TReg", "Successfully set TReg");
+						break;
+					case "OrderNo":
+						Report.IsTrue(thisProductSearch.EnterOrderNo(x.Values.ElementAt(i)),
+							"Failed to set order no", "Successfully set order no");
+						break;
+					case "SubmissionDate":
+						Report.IsTrue(thisProductSearch.EnterSubmissionDate(x.Values.ElementAt(i)),
+							"Failed to set submission date", "Successfully set submission date");
+						break;
+					case "UPC":
+						Report.IsTrue(thisProductSearch.EnterUPC(x.Values.ElementAt(i)),
+							"Failed to set upc", "Successfully set upc");
+						break;
+					case "ParentUPC":
+						Report.IsTrue(thisProductSearch.EnterParentUPC(x.Values.ElementAt(i)),
+							"Failed to set parent upc", "Successfully set parent upc");
+						break;
+					default:
+						throw new Exception("Invalid column name");
+				}
+			}
+			Report.Screenshot();
+			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find");
+
+			//takes a very long time for product search page to close
+			Report.IsTrue(thisProductSearch.Wait_for_close(120), "Product search page has not closed.",
+				"Product search page has closed.");
+			}
+
+		[Given(@"In the SHA manager grid I see the WPS ID I have saved and its status is: (.*)")]
+		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAndItsStatusIs(string status)
+		{
+			var ProductDetails = (ProductInformation)Context.GetFromContext("TestCase75335");
+			var ID = ProductDetails.Id;
+		}
+
 
 	}
+
+	
 }

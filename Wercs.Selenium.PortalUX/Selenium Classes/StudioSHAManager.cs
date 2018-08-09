@@ -20,12 +20,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool WaitForProductList(int secondsToWait)
 		{
+			Report.Info("Beginning wait for product list");
 			if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
 			{
 				SeleniumBrowser.ExitIFrame();
 				if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
 				{
-					Report.Error("Could nto switch to iframe");
+					Report.Error("Could not switch to iframe");
 				}
 			}
 			for (int i = 0; i < secondsToWait; i++)
@@ -46,6 +47,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			return false;
+		}
+
+		public List<Product> GetTopXProducts(int topX)
+		{
+			var ListOfProducts =
+				SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr"));
+
+			var ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x=>x.GetValue().Trim());
+			return new List<Product>();
+
 		}
 
 		public bool ClickTopMenuItem(string option)
@@ -100,5 +111,285 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 		}
+
+		public bool SelectFromStatusFilter(string option)
+		{
+			try
+			{
+				var statusSelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//select[@id='status']"));
+				statusSelect.Select(option);
+				return statusSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
+
+		//Delete, Search (Srch), Status, Reject Submission, Create Group, Review
+		public bool ClickBottomMenuOption(string option)
+		{
+			if (option.ToLower() == "search")
+			{
+				option = "Srch";
+			}
+			var listOfOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@class,'navtable')]//td[not(contains(@class, 'disabled')) and not(contains(@style, 'none'))]/div"));
+			var matchingOption = listOfOptions.FirstOrDefault(x => x.GetValue().ToLower().Contains(option.ToLower()));
+			if (matchingOption == null)
+			{
+				Report.Info("No matching menu option found: " + option);
+				return false;
+			}
+
+			return matchingOption.TryClick();
+		}
+	}
+
+	class StudioSHAManagerProductSearch : BaseObject
+	{
+		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+		
+
+		public bool SelectStatus(string option)
+		{
+			try
+			{
+				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='searchstatus']"));
+				statusSelect.Select(option);
+				return statusSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+			return false;
+		}
+		
+		public bool SelectFromStatusFilter(string option)
+		{
+			try
+			{
+				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='status']"));
+				statusSelect.Select(option);
+				return statusSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public bool SelectFromClientFilter(string option)
+		{
+			try
+			{
+				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='searchclient']"));
+				statusSelect.Select(option);
+				return statusSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public bool SelectFromSearchPatternFilter(string option)
+		{
+			try
+			{
+				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='drpSearchPattern']"));
+				statusSelect.Select(option);
+				return statusSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
+
+		public bool SelectFromDateRangeFilter(string option)
+		{
+			try
+			{
+				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='ddFilterByDateType']"));
+				statusSelect.Select(option);
+				return statusSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
+
+		public bool SelectFromTRegFilter(string option)
+		{
+			try
+			{
+				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='ddTReg']"));
+				statusSelect.Select(option);
+				return statusSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
+
+		public bool EnterProductID(string iD)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtSearchProduct']"));
+			enterField.EnterText(iD);
+			return (enterField.GetValue() == iD);
+		}
+
+		public bool EnterProductName(string name)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtSearchName']"));
+			enterField.EnterText(name);
+			return (enterField.GetValue() == name);
+		}
+
+		//format - mm/dd/yy
+		public bool EnterLastActivityDate(string date)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtLastDate']"));
+			enterField.EnterText(date);
+			return (enterField.GetValue() == date);
+		}
+
+		public bool EnterDateFrom(string date)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='fromDatepicker']"));
+			enterField.EnterText(date);
+			return (enterField.GetValue() == date);
+		}
+
+		public bool EnterDateTo(string date)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='toDatepicker']"));
+			enterField.EnterText(date);
+			return (enterField.GetValue() == date);
+		}
+
+		public bool EnterSubmissionDate(string date)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtSearchDate']"));
+			enterField.EnterText(date);
+			return (enterField.GetValue() == date);
+		}
+
+		public bool EnterSupplier(string supplier)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtSearchSupplier']"));
+			enterField.EnterText(supplier);
+			return (enterField.GetValue() == supplier);
+		}
+
+		public bool EnterUPC(string upc)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtSearchUPC']"));
+			enterField.EnterText(upc);
+			return (enterField.GetValue() == upc);
+		}
+
+		public bool EnterParentUPC(string upc)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtSearchPUPC']"));
+			enterField.EnterText(upc);
+			return (enterField.GetValue() == upc);
+		}
+
+		public bool EnterUser(string user)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtSearchUser']"));
+			enterField.EnterText(user);
+			return (enterField.GetValue() == user);
+		}
+
+		public bool EnterReviewer(string user)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtSearchReviewer']"));
+			enterField.EnterText(user);
+			return (enterField.GetValue() == user);
+		}
+
+		public bool EnterOrderNo(string orderNo)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtSearchOrder']"));
+			enterField.EnterText(orderNo);
+			return (enterField.GetValue() == orderNo);
+		}
+
+		public bool CheckOnSuspended(bool check)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='chkOnHold']"));
+			enterField.Check(check);
+			return enterField.Checked() == check;
+		}
+
+		public bool CheckRecertificationActive(bool check)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='chkIsRecertActive']"));
+			enterField.Check(check);
+			return enterField.Checked() == check;
+		}
+
+		public bool CheckGoodGuideOnlyProducts(bool check)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='chkGGOnly']"));
+			enterField.Check(check);
+			return enterField.Checked() == check;
+		}
+
+		public bool CheckECommFlowProducts(bool check)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='chkeCommProduct']"));
+			enterField.Check(check);
+			return enterField.Checked() == check;
+		}
+
+		public bool ClickButton(string button)
+		{
+			var buttonList = containerElement.FindElements(By.XPath(".//button"));
+			var matchingButton = buttonList.FirstOrDefault(x => x.FindElement(By.XPath(".//span")).GetValue().Trim() == button);
+			if (matchingButton == null)
+			{
+				Report.Info("no matching button was found");
+				return false;
+			}
+			else
+			{
+				return matchingButton.TryClick();
+			}
+		}
+	}
+
+	class Product
+	{
+		public string ID { get; set; }
+		public string Name { get; set; }
+		public string Supplier { get; set; }
+		public string User { get; set; }
+		public string Status { get; set; }
+		public DateTime OriginalSubmission { get; set; }
+		public DateTime CurrenDateTimeSubmission { get; set; }
+		public DateTime LastActivityDate { get; set; }
+		public DateTime DueDate { get; set; }
+		public string Reviewer { get; set; }
+		public bool SDS { get; set; }
+		public bool CanadaSDS { get; set; }
+		public string Clients { get; set; }
+		public string TReg { get; set; }
+		public string GHS { get; set; }
+		public DateTime LsatPubDate { get; set; }
+		public bool Refeed { get; set; }
 	}
 }

@@ -1718,7 +1718,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)");
 			tableFirst.AddRow(
 				"Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
-			TestReport.StartStep("I only the following sections");
+			TestReport.StartStep("I only see the following sections");
 			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
 			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
 			TestReport.StartStep(
@@ -3695,8 +3695,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Steps_SHA MyStepsSHA = new Steps_SHA();
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			StudioSHAManager thisStudioShaManager = new StudioSHAManager();
-
-			Report.IsTrue(thisStudioShaManager.WaitForProductList(60), "Product list is showing",
+			Report.Info("Waiting for product list to be loaded....");
+			Report.IsTrue(thisStudioShaManager.WaitForProductList(120), "Product list is showing",
 				"Product list is not showing");
 		}
 
@@ -3862,5 +3862,60 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click continue in the new product registration");
 			stepsNewProduct.ClickContinueProductRegistration();
 		}
+
+		[Given(@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\)")]
+		public void GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue()
+		{
+			TestReport.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("In the Select Retailers popup I select the retailer: Rite Aid");
+			selStepsNewProduct.ThenISelectTheRetailer_InTheWindow("Rite Aid");
+			TestReport.StartStep("I click continue");
+			selStepsNewProduct.ClickContinue();
+			if (new NewProduct().ErrorMessage() == "This is a required field.")
+			{
+				Report.Failure("Required field error was showing on continue. Attempting to enter Private Label field (not specified by shared step)");
+				TestReport.StartStep("I enter private label as 'This Private Label'");
+				selStepsNewProduct.ThenInTheRetailersTabIEnterPrivateLabelNameAs("This Private Label");
+				TestReport.StartStep("I click continue");
+				selStepsNewProduct.ClickContinue();
+			}
+		}
+
+		[Given(@"I call Shared 65080 \(Login to Studio and Open SHA manager\)")]
+		public void GivenICallShared65080LoginToStudioAndOpenSHAManager()
+		{
+			TestReport.UseSubSteps = true;
+			Steps_SHA myStepsSha = new Steps_SHA();
+			myStepsSha.GivenINavigateToStudio();
+			myStepsSha.GivenILoginToStudioAsAdministrator();
+			GivenICallSharedStep59066GoToSHAManager();
+		}
+
+		[Given(@"I call Shared 49841 \(SHA - Search for exact WPS ID in ALL Status\)")]
+		public void GivenICallSharedSHA_SearchForExactWPSIDInALLStatus()
+		{
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			TestReport.UseSubSteps = true;
+			Steps_SHA myStepsSha = new Steps_SHA();
+			var ProductDetails = (ProductInformation)Context.GetFromContext("TestCase75335");
+			var ID = ProductDetails.Id;
+
+			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+				"SearchTerm",
+				"SearchValue"});
+			table.AddRow(new string[] {
+				"ProductID",
+				ID});
+			table.AddRow(new string[] {
+				"Status",
+				"ALL"});
+			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+
+		}
+
+
+
 	}
 }

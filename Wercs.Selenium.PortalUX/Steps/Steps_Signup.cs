@@ -551,6 +551,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 							case ("production"):
 								emailFrom = "wercsmart.notifications@ulnotification.com";
 								break;
+							//changed to lower case
+							case ("live"):
+								emailFrom = "wercsmartnotifications@ul.com";
+								break;
 							default: //Local
 								emailFrom = "wercsmartcustomer@ul.com";
 								break;
@@ -570,6 +574,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 
 				Report.Info("Checking for email differences");
+
+				Delay.Seconds(60);
 				if (EmailFunctions.WaitForInboxDifferences(user.Email))
 				{
 					CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");

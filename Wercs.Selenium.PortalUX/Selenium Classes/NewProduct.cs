@@ -1243,6 +1243,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string ProductType {
 			set
 			{
+				Report.Info("Setting product type");
 				var el = this.containerElement.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 2);
 				el.Click();
 				var inputField = this.containerElement.FindElement(By.XPath("//span[contains(@class,'select2-container')]//input"), 2);
@@ -1337,10 +1338,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
-					var savedUPC = Context
-						.GetFromContext(info.UpcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
-						.ToString();
-					info.UpcNumber = savedUPC;
+					try
+					{
+						var savedUPC = Context
+							.GetFromContext(info.UpcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+							.ToString();
+						info.UpcNumber = savedUPC;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Failed to find saved item in context: " + info.UpcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+						throw;
+					}
+					
 				}
 				upcNumberField.EnterText(info.UpcNumber);
 
