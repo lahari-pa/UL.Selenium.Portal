@@ -596,45 +596,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"I should see the empty shopping cart pop up")]
+		[StepDefinition(@"I should see the empty shopping cart pop up")]
 		public void ThenIShouldSeeTheEmptyShoppingCartPopUp()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I should see the empty shopping cart pop up");
-			Delay.Seconds(5);
-			try
-			{
-
-				ShoppingCart thisShoppingCart = new ShoppingCart();
-				Report.IsTrue(thisShoppingCart.Exists, "The shopping cart pop up is not showing as expected.",
-					"As expected, the shopping cart popup is showing.");
-				Report.Screenshot();
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			var selEmptyCart = new EmptyCart();
+			Report.IsTrue(selEmptyCart.Exists, "The shopping cart pop up is not showing as expected.",
+				"As expected, the shopping cart popup is showing.");
 		}
 
-		[StepDefinition(@"I click on Close in the shopping cart")]
+		[StepDefinition(@"I close the Empty Cart pop up")]
 		public void GivenIClickOnCloseInTheShoppingCart()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click on Close in the shopping cart");
-			Delay.Seconds(5);
-			try
-			{
-				ShoppingCart thisShoppingCart = new ShoppingCart();
-				// TODO: Does this function need re-including?
-				// ThisShoppingCart.ClickClose();
-				Delay.Seconds(2);
+			var selEmptyCart = new EmptyCart();
+			Report.IsTrue(selEmptyCart.ClickClose() && GeneralUtilities.Wait_for_load_finish(),
+				"Failed to close the Empty Cart pop up!",
+				"Successfully closed the Empty Cart pop up");
+		}
 
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+		[StepDefinition(@"the Empty Cart pop up message reads: (.*)")]
+		public void EmptyCartPopUpText(string value)
+		{
+			var actualMessage = new EmptyCart().BodyMessage();
+			Report.IsTrue(actualMessage == value,
+				"The Empty Cart pop up message text did not match the expected value. Expected: '" + value + "'. Actual: '" + actualMessage + "'",
+				"The Emoty Cart pop up message text matched the expected value: '" + value + "'");
 		}
 
 		[When(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]

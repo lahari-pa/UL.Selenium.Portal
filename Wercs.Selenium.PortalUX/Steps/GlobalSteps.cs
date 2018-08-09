@@ -215,6 +215,22 @@ namespace WERCSmart
 			GivenIfAModalDialogOpensICloseIt();
 		}
 
+		[StepDefinition(@"I log in with the subscription without products account")]
+		public void LogInWithTheSubscriptionWithoutProductsAccount()
+		{
+			var username = @"subcart.kxxyxunf@mailosaur.io";
+			var password = "Welcome1!";
+			GivenILogInWithEmailXAndPasswordY(username, password);
+		}
+
+		[StepDefinition(@"I log in with the without subscription without products account")]
+		public void LogInWithTheWithoutSubscriptionWithoutProductsAccount()
+		{
+			var username = @"productsincart.kxxyxunf@mailosaur.io";
+			var password = "Welcome1!";
+			GivenILogInWithEmailXAndPasswordY(username, password);
+		}
+
 
 		[StepDefinition(@"I logout")]
 		public void GivenILogout()

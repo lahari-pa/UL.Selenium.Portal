@@ -105,7 +105,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var el = containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//i[contains(@class,'info-circle')]"), 2);
 			var actions = new Actions(SeleniumBrowser.WebBrowser);
 			actions.MoveToElement(el).Build().Perform();
-			Delay.Seconds(Delay.SpeedFactor*3);
+			Delay.Seconds(Delay.SpeedFactor * 3);
 			return true;
 		}
 
@@ -347,6 +347,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost per Product: ']/strong")).Text.Trim();
 
+		}
+
+		public string GetAlertMessage()
+		{
+			return containerElement.FindElement(By.XPath(".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 2)?.Text;
 		}
 
 
@@ -1164,5 +1169,5 @@ class SubscriptionPopup : BaseDialog
 		}
 		return el.Text;
 	}
-	
+
 }
