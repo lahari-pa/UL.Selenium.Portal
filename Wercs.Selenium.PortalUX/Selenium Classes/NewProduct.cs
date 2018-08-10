@@ -3485,7 +3485,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> GetDisplayedSections()
 		{
 			var DisplayedSections = new List<string>();
-			var els = containerElement.FindElements(By.XPath(@"//div[starts-with(@class,'form-group')]/div/label"));
+			var els = containerElement.FindElements(By.XPath(@"//div[starts-with(@class,'form-group')]/div/label"), 2);
 			DisplayedSections = els.Select(x => x.Text).ToList();
 			return DisplayedSections;
 		}
@@ -3501,7 +3501,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 				var el = containerElement.FindElement(By.XPath(xPath), 2);
-				return (el != null && el.Displayed);
+				return el != null && el.Displayed;
 			}
 			catch (Exception e)
 			{
