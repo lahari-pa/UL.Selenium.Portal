@@ -3916,6 +3916,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-
+		[StepDefinition(
+			@"I call Shared Step 78801 \(Additional Documents to Provide - VOC and Product Label\)")]
+		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			MyNewProduct.UploadPDFFileSectionAndType("Product Label",
+				"Volatile Organic Compounds", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
+				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep("In the Additional Documents to Provide page I click Continue");
+			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
+		}
 	}
 }

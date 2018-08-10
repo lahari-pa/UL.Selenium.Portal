@@ -230,7 +230,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Growth regulator
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant Growth regulator (Liquid or Solid)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57646
 

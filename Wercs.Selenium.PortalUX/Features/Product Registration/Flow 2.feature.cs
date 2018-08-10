@@ -610,8 +610,8 @@ testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additi
 #line 231
 testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 233
-testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Growt" +
-                    "h regulator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant" +
+                    " Growth regulator (Liquid or Solid)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 235
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase57646", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
