@@ -2595,9 +2595,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Failure("Did not see the Required field error message, but the new page was not loaded");
 			Report.Screenshot();
 		}
-		//Checks next page has loaded on Continue. If not, look for 'this is a required field' error. If yes, throw excpt. The test is now out of sync, so further steps will only report junk.
-		[StepDefinition(@"I click Continue in product registration")]
-		public void ClickContinueProductRegistration()
+		//Checks a new page has loaded on Continue click. If not, look for 'this is a required field' error. If yes, throw excpt. The test is now out of sync, so further steps will only report junk.
+		[StepDefinition(@"I continue to the next screen in the product registration")]
+		public void ContinueInTheProductRegistration()
 		{
 			var selNewProduct = new NewProduct();
 			Report.Info("Checking new product is loaded");
@@ -2611,22 +2611,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click the Continue button",
 				"Successfully clicked the Continue button");
 			Report.Info("Checking for 'required field' error and if new page hasn't loaded");
-			if (selNewProduct.WaitForSection(currentPage, 30))
+			int wait = 0;
+			while (wait < 30)
 			{
-				if (selNewProduct.ErrorMessage() == "This is a required field.")
+				if (selNewProduct.ActivePanelHeading() != currentPage)
 				{
-					var section = selNewProduct.SectionWithRequiredFieldError();
-					Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
+					Report.Success("New page was loaded");
 					Report.Screenshot();
-					throw new Exception("New page did not load on Continue - required field.");
+					Report.Info("Current page is: " + selNewProduct.ActivePanelHeading());
+					return;
 				}
-				Report.Failure("New page was not loaded.");
-				Report.Screenshot();
-				throw new Exception("New page did not load on Continue.");
+				wait++;
+				Delay.Seconds(1);
 			}
-			Report.Success("New page was loaded");
+			Report.Info("New page did not load. Checking for 'required field' error message.");
+			if (selNewProduct.ErrorMessage() == "This is a required field.")
+			{
+				var section = selNewProduct.SectionWithRequiredFieldError();
+				Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
+				Report.Screenshot();
+				throw new Exception("New page did not load on Continue - required field.");
+			}
+			Report.Failure("New page did not load as expected, however 'Required Field' error message was not displayed.");
 			Report.Screenshot();
-			Report.Info("Current page is: " + selNewProduct.ActivePanelHeading());
+			throw new Exception("New page did not load on Continue.");
 		}
 
 		[StepDefinition(@"I click close in the 'Select Retailers' window")]

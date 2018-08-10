@@ -244,6 +244,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 6.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Lithium Battery Transport Informarion.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lithium Battery Transport Informarion.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -592,6 +597,10 @@
     <None Include="Features\Product Registration\Flow 6.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 6.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Lithium Battery Transport Informarion.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Lithium Battery Transport Informarion.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

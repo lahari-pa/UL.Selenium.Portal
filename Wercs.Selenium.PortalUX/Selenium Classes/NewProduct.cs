@@ -727,7 +727,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						}
 						catch (Exception e)
 						{
-							SafewareReporting.Report.Info(e.Message);
+							Report.Info(e.Message);
 						}
 
 						Delay.Seconds(1);
@@ -741,25 +741,36 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 					var enterManufacturer = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//span[contains(@class, 'select2')]//input"));
 					enterManufacturer.EnterText(thisBattery.Manufacturer);
-					Delay.Seconds(5);
-
-					var selectDropDown = enterManufacturer.FindElement(By.XPath("../following-sibling::span"));
-
-					if (selectDropDown != null)
+					Delay.Seconds(2);
+					int count = 0;
+					bool foundResult = false;
+					IWebElement selectDropDown = null;
+					while (count < 30 && !foundResult)
 					{
-						selectDropDown.FindElements(By.XPath(".//ul/li")).FirstOrDefault().Click();
-						Delay.Seconds(3);
+						selectDropDown = enterManufacturer.FindElement(By.XPath("../following-sibling::span"), 2);
+						foundResult = selectDropDown != null;
+						if (foundResult)
+						{
+							Report.Info("Found search results. Clicking the first option.");
+							if (selectDropDown.FindElements(By.XPath(".//ul/li")).First().TryClick())
+							{
+								break;
+							}
+							Report.Info("Failed to click first search result option. Trying again...");
+						}
+						count++;
+						Delay.Seconds(1);
 					}
-					else
+					if (!foundResult)
 					{
 						throw new Exception("Manufacturer drop down could not be found");
 					}
+					//var selectDropDown = enterManufacturer.FindElement(By.XPath("../following-sibling::span"));
 					var perPackage = listOfRows.FirstOrDefault().FindElement(By.XPath(".//td[" + perPackageIndex.ToString() + "]//input"));
 					perPackage.EnterText(thisBattery.NumberPerPackage.ToString());
 					var batteriesRequired = listOfRows.FirstOrDefault().FindElement(By.XPath(".//td[" + batteriesRequiredIndex.ToString() + "]//input"));
 					batteriesRequired.EnterText(thisBattery.RequiredToRun.ToString());
 				}
-
 			}
 		}
 
@@ -1350,7 +1361,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Info("Failed to find saved item in context: " + info.UpcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
 						throw;
 					}
-					
+
 				}
 				upcNumberField.EnterText(info.UpcNumber);
 
@@ -3452,7 +3463,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> GetErrorsForSection(string section)
 		{
 
-			var els = containerElement.FindElements(By.XPath(".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),'" + section + "')])]"), 2);
+			var els = containerElement.FindElements(By.XPath(@".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2);
 			return els.Select(x => x.GetElementText()).ToList();
 		}
 
@@ -3674,14 +3685,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public int RadioButtonCountInSection(string section)
 		{
-			var xpath = @"//div[./label[contains(text(), '" + section + "')]]/following-sibling::div//div[@class='radio']";
+			var xpath = @"//div[./label[contains(text(), """ + section + @""")]]/following-sibling::div//div[@class='radio']";
 			var radios = containerElement.FindElements(By.XPath(xpath), 2);
-			return radios == null ? 0 : radios.Count;
+			return radios?.Count ?? 0;
 		}
 
 		public List<string> RadioButtonsInSection(string section)
 		{
-			var xpath = @"//div[./label[contains(text(), '" + section + "')]]/following-sibling::div//div[@class='radio']//span";
+			var xpath = @"//div[./label[contains(text(), """ + section + @""")]]/following-sibling::div//div[@class='radio']//span";
 			var radios = containerElement.FindElements(By.XPath(xpath), 2);
 			if (radios.Count == 0)
 			{

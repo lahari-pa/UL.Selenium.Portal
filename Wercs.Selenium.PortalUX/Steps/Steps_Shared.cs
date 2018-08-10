@@ -431,8 +431,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("Toxicity Characteristic Leaching Procedure (TCLP)");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristic Leaching Procedure (TCLP)");
+			TestReport.StartStep("I set the Product has had TCLP testing to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing", "No");
+			TestReport.StartStep("I set all Metal presence values to No");
 			MyStepsNewProduct.GivenISetAllTheMetalPresenceValueTo("No");
+			TestReport.StartStep("I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Toxicity Characteristic Leaching Procedure (TCLP)");
 		}
@@ -442,10 +445,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Electronic Equipment page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Electronic Equipment");
+			TestReport.StartStep("I set the Contains Circuit Board option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Contains Circuit Board", "No");
+			TestReport.StartStep("I set the Has a Cathode Ray Tube option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Has a Cathode Ray Tube", "No");
+			TestReport.StartStep("I set the Has a LCD or Plasma Display option to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Has a LCD or Plasma Display", "No");
+			TestReport.StartStep("I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Electronic equipment");
 		}
 
@@ -1081,8 +1089,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
 			TestReport.StartStep("I click Continue in the product registration");
-			//MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
-			MyNewProduct.ClickContinueProductRegistration();
+			MyNewProduct.ContinueInTheProductRegistration();
 		}
 
 		[StepDefinition(
@@ -1970,8 +1977,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the Product contains the following artificial dye(s) option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following artificial dye(s)",
 				"None of the Above");
-			TestReport.StartStep("I click continue");
-			MyStepsNewProduct.ClickContinueProductRegistration();
+			TestReport.StartStep("I continue to the next screen in the new product registration");
+			MyStepsNewProduct.ContinueInTheProductRegistration();
 		}
 
 		[StepDefinition(
@@ -3859,8 +3866,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			stepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Open cup method");
 			TestReport.StartStep("I set the Select the best Water Solubility description option to: Dispersible");
 			stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
-			TestReport.StartStep("I click continue in the new product registration");
-			stepsNewProduct.ClickContinueProductRegistration();
+			TestReport.StartStep("I continue to the next screen in the new product registration");
+			stepsNewProduct.ContinueInTheProductRegistration();
 		}
 
 		[Given(@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\)")]
