@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using NPOI.SS.Formula.Functions;
 using ResourcePool;
@@ -41,8 +42,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStudioLogin.Password = GlobalParametersPortal.SHAPassword;
 			thisStudioLogin.ClickSignIn();
 			StudioDesktop thisStudioDesktop = new StudioDesktop();
-			Report.IsTrue(thisStudioDesktop.Wait_for_load(), "Studio desktop is not showing as expected.",
+			Report.IsTrue(thisStudioDesktop.Wait_for_load(120), "Studio desktop is not showing as expected.",
 				"Studio desktop is showing as expected");
+			StudioTopMenu thisStudioTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
 		[Given(@"I click top menu item: (.*) and submenu item: (.*)")]
@@ -142,11 +145,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var x = table.Rows.ToDictionary(r => r[0], r => r[1]);
 			for (int i=0; i<x.Count; i++)
 			{
+				Delay.Seconds(1);
 				switch (x.Keys.ElementAt(i))
 				{
 					case "Status":
 						Report.IsTrue(thisProductSearch.SelectFromStatusFilter(x.Values.ElementAt(i)),
-							"Failed to set status", "Successfully set status");
+							"Failed to set status to: " + x.Values.ElementAt(i), "Successfully set status");
 						break;
 					case "Client":
 						Report.IsTrue(thisProductSearch.SelectFromClientFilter(x.Values.ElementAt(i)),
@@ -234,22 +238,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 			}
 			Report.Screenshot();
+			Delay.Seconds(1);
 			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find");
+			Delay.Seconds(10);
+		
+		}
 
-			//takes a very long time for product search page to close
-			Report.IsTrue(thisProductSearch.Wait_for_close(120), "Product search page has not closed.",
-				"Product search page has closed.");
-			}
-
-		[Given(@"In the SHA manager grid I see the WPS ID I have saved and its status is: (.*)")]
-		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAndItsStatusIs(string status)
+		[Given(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
+		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(string productSavedAs, string status)
 		{
-			var ProductDetails = (ProductInformation)Context.GetFromContext("TestCase75335");
+			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			var ID = ProductDetails.Id;
+			Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+			Report.IsTrue(topProduct.ID == ID, "Expected: " + ID + " but got: " + topProduct.ID, "IDs match");
+			Report.IsTrue(topProduct.Status == status, "Expected: " + status + " but got: " + topProduct.Status, "Statuses match");
 		}
 
 
 	}
 
-	
+
 }

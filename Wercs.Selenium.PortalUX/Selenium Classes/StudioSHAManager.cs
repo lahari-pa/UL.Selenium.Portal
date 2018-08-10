@@ -49,16 +49,157 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-		public List<Product> GetTopXProducts(int topX)
+		public bool WaitForIDToTurnBlue(string id, int secondsToWait)
 		{
-			var ListOfProducts =
-				SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr"));
+			//get index of id column
+			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a=>a=="Product");
+			for(int i = 0;i < secondsToWait; i++)
+			{
+				var matchingTD = SeleniumBrowser.WebBrowser
+					.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index+1).ToString() + "]"))
+					.FirstOrDefault(x => x.GetValue().Trim() == id);
 
-			var ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x=>x.GetValue().Trim());
-			return new List<Product>();
+				string colour = matchingTD.FindElement(By.XPath(".//span")).GetCssValue("color").ToString();
+				if ( colour == "rgba(0, 0, 255, 1)")
+				{
+					return true;
+				}
 
+				Delay.Seconds(1);
+			}
+
+			return false;
 		}
 
+		public List<Product> GetTopXProducts(int topX)
+		{
+			var ListOfProductRows =
+				SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr"));
+
+			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x=>x.GetValue().Trim()).ToList();
+			List<Product> ListOfProducts = new List<Product>();
+
+			//ignore first row because it is empty
+			for (int j = 1; j < Math.Min(ListOfProductRows.Count, topX+1); j++)
+			{
+				Product thisProduct = new Product();
+				//start indexing from 1 because the first column is a checkbox
+				int addIndex = 1;
+				for (int i = 0; i < ListOfHeaders.Count(); i++)
+				{
+					switch (ListOfHeaders[i])
+					{
+						case "Product":
+							string pValue = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue();
+							if (pValue.Trim().Length != 0)
+							{
+								thisProduct.ID = pValue.Trim();
+							}
+							break;
+						case "Name":
+							string pName = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							if (pName.Trim().Length != 0)
+							{
+								thisProduct.Name = pName;
+							}
+							break;
+						case "Supplier":
+							thisProduct.Supplier = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							break;
+						case "User":
+							thisProduct.User = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							break;
+						case "Status":
+							thisProduct.Status = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							break;
+						case "Original Submission":
+							string pOS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							if (pOS.Length > 0)
+							{
+								thisProduct.OriginalSubmission = Convert.ToDateTime(pOS);
+							}
+							break;
+						case "Current Submission":
+							string pCS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							if (pCS.Length > 0)
+							{
+								thisProduct.CurrentSubmission = Convert.ToDateTime(pCS);
+							}
+							break;
+						case "Last ActivityDate":
+							string pAD = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							if (pAD.Length > 0)
+							{
+								thisProduct.LastActivityDate = Convert.ToDateTime(pAD);
+							}
+							break;
+						case "Due Date":
+							string pDD = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							if (pDD.Length > 0)
+							{
+								thisProduct.DueDate = Convert.ToDateTime(pDD);
+							}
+							break;
+						case "Reviewer":
+							thisProduct.Reviewer = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							break;
+						case "SDS":
+							thisProduct.SDS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim()=="Yes";
+							break;
+						case "Canada SDS":
+							thisProduct.CanadaSDS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim()=="Yes";
+							break;
+						case "Clients":
+							thisProduct.Clients = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							break;
+						case "T. Reg":
+							thisProduct.TReg = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim()=="Yes";
+							break;
+						case "Last Pub Date":
+							thisProduct.LastPubDate = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							break;
+						case "GHS":
+							thisProduct.GHS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim();
+							break;
+						case "Refeed":
+							thisProduct.Refeed = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
+								.GetValue().Trim()=="Yes";
+							break;
+						default:
+							//ignore this column, either empty or not of interest
+							break;
+
+					}
+				}
+
+				ListOfProducts.Add(thisProduct);
+			}
+
+			return ListOfProducts;
+		}
+
+		public bool TopRowProductsTableMatchesId(string id)
+		{
+			return GetTopXProducts(1).FirstOrDefault().ID == id;
+		}
+
+		
 		public bool ClickTopMenuItem(string option)
 		{
 			try
@@ -102,7 +243,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Info("Matching menu option has not been found");
 					return false;
 				}
-				
+
 			}
 			catch (Exception e)
 			{
@@ -136,9 +277,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			var listOfOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@class,'navtable')]//td[not(contains(@class, 'disabled')) and not(contains(@style, 'none'))]/div"));
 			var matchingOption = listOfOptions.FirstOrDefault(x => x.GetValue().ToLower().Contains(option.ToLower()));
+			
 			if (matchingOption == null)
 			{
-				Report.Info("No matching menu option found: " + option);
+				Report.Info("No matching menu option found: " + option + ". Available options: " + string.Join(",", listOfOptions));
 				return false;
 			}
 
@@ -152,7 +294,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
-		
+
 
 		public bool SelectStatus(string option)
 		{
@@ -169,12 +311,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return false;
 		}
-		
+
 		public bool SelectFromStatusFilter(string option)
 		{
 			try
 			{
-				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='status']"));
+				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='searchstatus']"));
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
@@ -370,6 +512,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return matchingButton.TryClick();
 			}
 		}
+
+		
 	}
 
 	class Product
@@ -380,16 +524,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string User { get; set; }
 		public string Status { get; set; }
 		public DateTime OriginalSubmission { get; set; }
-		public DateTime CurrenDateTimeSubmission { get; set; }
+		public DateTime CurrentSubmission { get; set; }
 		public DateTime LastActivityDate { get; set; }
 		public DateTime DueDate { get; set; }
 		public string Reviewer { get; set; }
 		public bool SDS { get; set; }
 		public bool CanadaSDS { get; set; }
 		public string Clients { get; set; }
-		public string TReg { get; set; }
+		public bool TReg { get; set; }
 		public string GHS { get; set; }
-		public DateTime LsatPubDate { get; set; }
+		public string LastPubDate { get; set; }
 		public bool Refeed { get; set; }
 	}
 }

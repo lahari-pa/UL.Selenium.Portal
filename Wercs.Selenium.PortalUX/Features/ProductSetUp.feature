@@ -5,7 +5,7 @@
 @wercsmart
 @NewProduct
 @ProductGrid
-@DataSummarySheet
+@SHA
 @wercsmart
 @RetailPartners
 @run_Flow12
@@ -33,12 +33,15 @@ Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Option
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I call Shared 54796 (Purchase Summary)
+Given If purchase details are showing click confirm order
+
+Scenario: Test
+Given I save the context product information as: TestCase75335 where id is: 1501245 and product name is: test
 Given I call Shared 65080 (Login to Studio and Open SHA manager)
-Given I call Shared 49841 (SHA - Search for exact WPS ID in ALL Status)
-Given In the SHA manager grid I see the WPS ID I have saved and its status is: Assigned
-Given I call Shared 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete)
-Given I call Shared 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue)
+Given I call Shared 49841 (SHA - Search for exact WPS ID in ALL Status for saved as: TestCase75335)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
+Given I call Shared 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
+Given I call Shared 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
 Given I call Shared 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS)
 Given I call Shared 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete)
 

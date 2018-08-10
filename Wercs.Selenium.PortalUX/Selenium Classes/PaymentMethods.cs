@@ -1350,7 +1350,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Beginning Purchase_Header_Correct");
 
 			IWebElement myHeader = containerElement
-				.FindElements(By.XPath(".//div[@class='header-with-back']/h2[text()='Purchase Summary']"), 10).FirstOrDefault();
+				.FindElements(By.XPath(".//div[@class='header-with-back']//h2[contains(text(),'Purchase Summary')]"), 10).FirstOrDefault();
 
 			if (myHeader == null)
 			{

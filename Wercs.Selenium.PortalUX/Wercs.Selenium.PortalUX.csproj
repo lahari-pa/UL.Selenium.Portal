@@ -475,7 +475,9 @@
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />
     <Compile Include="Selenium Classes\StudioDesktop.cs" />
+    <Compile Include="Selenium Classes\StudioJobQueue.cs" />
     <Compile Include="Selenium Classes\StudioManageGlobalMessages.cs" />
+    <Compile Include="Selenium Classes\StudioPowerDesignerPlus.cs" />
     <Compile Include="Selenium Classes\StudioSHAManager.cs" />
     <Compile Include="Selenium Classes\StudioTopMenu.cs" />
     <Compile Include="Selenium Classes\SubscriptionEnrollment.cs" />

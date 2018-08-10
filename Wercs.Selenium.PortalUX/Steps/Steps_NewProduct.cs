@@ -420,6 +420,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Success("Product Information saved!");
 		}
 
+		[Given(@"I save the context product information as: (.*) where id is: (.*) and product name is: (.*)")]
+		public void GivenISaveTheContextProductInformationAsTestCaseWhereIdIsAndProductNameIsTest(string savedas, string id, string name)
+		{
+			var prodDetails = new ProductInformation() { Id = id, Name = name};
+			Context.AddToContext(savedas, prodDetails);
+			Report.Success("Product Information saved!");
+		}
+
 		[StepDefinition(@"I should see the (.*) Page")]
 		public void GivenIShouldSeeXPage(string page)
 		{
@@ -3467,5 +3475,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Message is not displayed as expected. Expected: " + alert + " but got: " + string.Join(",", actualAlerts),
 				"Message: '" + alert + "' is displayed as expected");
 		}
+
+		[Given(@"If purchase details are showing click confirm order")]
+		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
+		{
+			Steps_PaymentMethods MyStepsPaymentMethods = new Steps_PaymentMethods();
+			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
+			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+		}
+
 	}
 }

@@ -3703,8 +3703,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			StudioSHAManager thisStudioShaManager = new StudioSHAManager();
 			Report.Info("Waiting for product list to be loaded....");
-			Report.IsTrue(thisStudioShaManager.WaitForProductList(120), "Product list is showing",
-				"Product list is not showing");
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioShaManager.WaitForProductList(120), "Product list is not showing",
+				"Product list is showing");
 		}
 
 		[Given(@"I call shared step 59728 \(Go to Manage Global Messages\)")]
@@ -3899,15 +3900,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			GivenICallSharedStep59066GoToSHAManager();
 		}
 
-		[Given(@"I call Shared 49841 \(SHA - Search for exact WPS ID in ALL Status\)")]
-		public void GivenICallSharedSHA_SearchForExactWPSIDInALLStatus()
+		[Given(@"I call Shared 49841 \(SHA - Search for exact WPS ID in ALL Status for saved as: (.*)\)")]
+		public void GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus(string savedAs)
 		{
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			myStudioShaManager.ClickBottomMenuOption("Search");
 			TestReport.UseSubSteps = true;
 			Steps_SHA myStepsSha = new Steps_SHA();
-			var ProductDetails = (ProductInformation)Context.GetFromContext("TestCase75335");
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var ID = ProductDetails.Id;
+
+			Report.Info("Searching for: " + ID);
 
 			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
 				"SearchTerm",
@@ -3917,11 +3920,47 @@ namespace Wercs.Selenium.PortalUX.Steps
 				ID});
 			table.AddRow(new string[] {
 				"Status",
-				"ALL"});
+				"All"});
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+			//Waiting a long time here because the search results are sometimes taking over one minute
+			Delay.Seconds(30);
 
 		}
 
+		[Given(@"I call Shared 55662 \(WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*)\)")]
+		public void GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(string savedAs)
+		{
+			StudioTopMenu thisTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			thisTopMenu.ClickSubMenu("System", "Job Queue");
+			StudioJobQueue thisStudioJobQueue = new StudioJobQueue();
+			Delay.Seconds(2);
+			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
+				"Job queue has loaded");
+			List<Job> ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
+			Report.IsTrue(thisStudioJobQueue.ClickJobQueueMenuItem("Job Queue"), "Failed to navigate to job queue",
+				"Navigated to job queue");
+			var MatchingJob = ListOfJobs.FirstOrDefault(x =>
+				x.UserName == "SHAMANAGER" && x.DateStarted.Date == DateTime.Today.Date &&
+				x.Class == "Wercs.Core.BLLPortal.ImportProcessRules");
+			Report.IsTrue(MatchingJob != null,
+				"No matching job has been found with username=SHAMANAGER, date=" + DateTime.Today.Date.ToString() +
+				", class=Wercs.Core.BLLPortal.ImportProcessRules", "Matching job has been found");
+			GivenICallSharedStep59066GoToSHAManager();
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var ID = ProductDetails.Id;
+			Report.IsTrue(myStudioShaManager.WaitForIDToTurnBlue(ID, 120), "ID has not turned blue", "ID is blue");
+
+		}
+
+		[Given(@"I call Shared 68969 \(WPS Studio - Open PD\+, edit existing with specific product > Click Continue for product saved as: (.*)\)")]
+		public void GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(string savedAs)
+		{
+			StudioTopMenu thisTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus");
+		}
 
 		[StepDefinition(
 			@"I call Shared Step 78801 \(Additional Documents to Provide - VOC and Product Label\)")]
