@@ -184,6 +184,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+
 		public bool ClickActions(int row)
 		{
 			return containerElement.FindElement(By.XPath(".//table//tbody//tr[" + row + "]//button[contains(@class,'ellipsis-button')]"), 2).TryClick();
@@ -217,6 +218,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			el.Click();
 			return true;
+		}
+
+		public string GetFirstProductIDNotNeedsAttention()
+		{
+			var productRows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
+			foreach (var row in productRows)
+			{
+				if (row.FindElement(By.XPath(".//li[@class='abr']"), 2) != null)
+				{
+					return row.FindElement(By.XPath(".//small"), 2)?.Text.Trim();
+				}
+			}
+			return null;
 		}
 
 		public ProductGridItem FirstProductInGrid()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Mailosaur;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -21,6 +22,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> ListOfButtons()
 		{
 			return containerElement.FindElements(By.XPath(".//button")).Select(x => x.GetValue()).ToList();
+		}
+		public string UPCNumber()
+		{
+			return containerElement.FindElement(By.XPath(@"//div[./h2[starts-with(text(),""Provide the product's UPC(s)"")]]//tr/td[1]/div"), 2)?.Text.Trim();
+		}
+		public string ProductID()
+		{
+			var headerText = containerElement.FindElement(By.XPath(".//span[contains(@data-bind,'text: dataEntry.pname')]"), 2)?.Text;
+			if (headerText == null)
+			{
+				return null;
+			}
+			var bracketsMatch = Regex.Match(headerText, @"\(\d+\)");
+			if (!bracketsMatch.Success)
+			{
+				return null;
+			}
+			return bracketsMatch.ToString().Trim().TrimStart('(').TrimEnd(')');
 		}
 	}
 }

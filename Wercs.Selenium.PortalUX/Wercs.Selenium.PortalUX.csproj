@@ -515,6 +515,7 @@
     <Compile Include="Steps\Steps_Signup.cs" />
     <Compile Include="Steps\Steps_SubscriptionEnrollment.cs" />
     <Compile Include="Steps\Steps_SubscriptionUpgrade.cs" />
+    <Compile Include="Steps\Steps_Summary.cs" />
     <Compile Include="Steps\Steps_SupplierReports.cs" />
     <Compile Include="Steps\Steps_ULSC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

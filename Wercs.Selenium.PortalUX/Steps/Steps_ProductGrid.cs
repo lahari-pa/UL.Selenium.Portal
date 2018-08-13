@@ -225,6 +225,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I should only see one product in the grid, with Product ID matching that saved as: (.*)")]
+		public void IShouldOnlySeeOneProductWithUPC(string savedAs)
+		{
+			var selProductsGrid = new ProductsGrid();
+			var searchID = Context.GetFromContext(savedAs)?.ToString();
+			if (searchID == null)
+			{
+				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
+				return;
+			}
+			var firstID = selProductsGrid.GetIdInFirstGridRow();
+			var productsCount = selProductsGrid.ProductsCount();
+			Report.IsTrue(productsCount == 1 && firstID == searchID,
+				"Product with ID: " + searchID + " was not the only result returned! There were " + productsCount + " products in the grid and the first ID showing was: " + firstID,
+				"Product with ID: " + searchID + " was the only result returned as expected");
+		}
+
 		[StepDefinition(@"I (should|should not) see products in the Product Grid")]
 		public void ProductsPresentInGrid(string shouldOrNot)
 		{
@@ -688,7 +705,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 					break;
 				}
 			}
-
 			foreach (string url in OpenBrowsers)
 			{
 				SeleniumBrowser.SwitchToTabWithURL(url);
@@ -757,7 +773,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Homepage myHomepage = new Homepage();
 			int currentProductCount = myHomepage.PieChartProductsTotal();
-			int savedProductcount = Convert.ToInt16( Context.GetFromContext("ProductCount"));
+			int savedProductcount = Convert.ToInt16(Context.GetFromContext("ProductCount"));
 			Report.IsTrue(currentProductCount == (savedProductcount - 1),
 				"Current count is: " + currentProductCount.ToString() + " saved count is: " +
 				savedProductcount.ToString(),
@@ -786,6 +802,54 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Message centre page is not showing as expected.", "Message centre page is showing");
 		}
 
+		[StepDefinition(@"I click Row Actions for the first product not in the 'Needs Your Attention' status")]
+		public void ClickRowActionsForTheFirstProductNotNeedsYourAttention()
+		{
+			Report.Info("Getting product ID for first product without the Needs Your Attention status");
+			var selProdGrid = new ProductsGrid();
+			if (selProdGrid.ProductsCount() == 0)
+			{
+				Report.Failure("No products present! Cannot click Row Actions!");
+				Report.Screenshot();
+				return;
+			}
+			string productID = selProdGrid.GetFirstProductIDNotNeedsAttention();
+			if (productID == null)
+			{
+				Report.Failure("No products were found that were not in the Needs Your Attention status");
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("Filtering on product id: " + productID);
+			selProdGrid.ProductIdField = productID;
+			Report.Info("clicking Actions for first row in the grid");
+			Report.IsTrue(selProdGrid.ClickActionsForFirstResultInGrid(), "Failed to click first Action Button!", "Successfully clicked the first Action Button!");
+		}
 
+		[StepDefinition(@"I search for UPC number saved as: (.*)")]
+		public void SearchForUPCSavedAs(string savedAs)
+		{
+			var upc = Context.GetFromContext(savedAs)?.ToString();
+			if (upc == null)
+			{
+				Report.Failure("Could not find UPC number in context saved as: " + savedAs);
+				return;
+			}
+			var selProductGrid = new ProductsGrid();
+			selProductGrid.UpcNumber = upc;
+			if (!Report.IsTrue(selProductGrid.UpcNumber == upc,
+				"Value: " + upc + " was not inputted into the UPC field correctly!",
+				"Value: " + upc + " was correctly inputted into the UPC field", false, false))
+			{
+				return;
+			}
+			if (!Report.IsTrue(selProductGrid.ClickUpcNumberSearchButton(),
+				"Failed to click the UPC Search button!",
+				"Successfully clicked the UPC Search button!", false, false))
+			{
+				return;
+			}
+			GeneralUtilities.Wait_for_load_finish();
+		}
 	}
 }

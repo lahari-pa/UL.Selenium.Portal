@@ -16,6 +16,7 @@
 @Solutions
 @ReviewDocuments
 @SHA
+@SummaryPage
 
 
 Feature: Home Page
@@ -448,12 +449,44 @@ Then Product Line or Brand (optional) should be showing the value: SuperBrand(TM
 
 
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
-#in the development environment - It will work in staging.
+#in the development environment.
+# JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
+
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
 Then The home screen should load
+
 Given I filter the products by: Accepted by Retailers
-Given I edit the first product in results
+
+Given I click Row Actions for the first product not in the 'Needs Your Attention' status
+
+And I click on the Row Action: View
+
+Then A Summary page should open in a new browser tab
+
+Given in the Summary page I save the UPC number to context as: Summary - UPC - 71188
+
+Given in the Summary page I save the Product ID to context as: Summary - Product ID - 71188
+
+Given I close the browser tab with the Summary page
+
+Given I filter the products by: All
+
+Given I search for UPC number saved as: Summary - UPC - 71188
+
+Then I should only see one product in the grid, with Product ID matching that saved as: Summary - Product ID - 71188
+
+Given I click Row Actions for the first product returned
+
+And I click on the Row Action: View
+
+Then A Summary page should open in a new browser tab
+
+And in the Summary page the UPC number should match that saved as: Summary - UPC - 71188
+
+Given I close the browser tab with the Summary page
+
 
 Scenario: [65617] Correct Order of Statuses
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -510,7 +543,7 @@ Given I click More Filters in the products grid
 
 # Confirm that you are able to search with combinations  (example : UPC and Retailer , UPC and Additional Programs , UPC and Brand,  UPC-Brand-Retailer-Additional Programs)
 
-# Couldn't find the test case in TFS folder heirarchy, placing it in home page
+# Couldn't find the test case in TFS folders, placing it in home page
 Scenario: [66335] Main Menu - expanded
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
