@@ -30,7 +30,7 @@ Given I define the user: SignupUser with the following parameters:
 | City                 | City Name      |
 | State                | Florida        |
 | Zip                  | 999            |
-| CompanyName          | Company 1      |
+| CompanyName          | Wercs QA Automated test      |
 | CompanyPhone         | 123-456-7889   |
 | EmergencyPhoneNumber | 123-456-7789   |
 | SupplierType         | Manufacturer   |
@@ -216,7 +216,7 @@ Then the email should contain a link to set up the WERCSmart account
 When I click on the link I should see the WERCSmart new account page
 And I enter the information into the new user form for user saved as: 63297
 And In the new user form I click on continue
-Then I should be on the Security questions page of the form
+Then I should be on the Security Questions page of the form
 And I enter the following into the Security Questions window for user saved as: 63297
 And I enter the pin for user saved as: 63297
 When In the new user form I click on continue
@@ -224,92 +224,22 @@ Given I go to the WERCSmart Log in
 Given I login as user: 63297
 Given If terms of use page appears I accept
 Then the WERCSmart homepage should load
-
-# Create the product
-Given I generate a random UPC number and save as: UPC63684
-And I click the Register New Product icon in the Navigation Pane
-And I should see the header New Product
-And I Select the Create a New Registration radio button
-And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Chalk in the Product Name text field
-And In the Product Type tab of the New Product Page, I enter: Chalk in the Type of Product select field
-And in the New Product page I click Continue
-
-# Product Characteristics Page
-And I should see the Product Characteristics Page
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I save the product information as: TestCase63297
-And I should only see the following options for Primary Physical State:
-| State |
-| Solid |
-And I set the Secondary Physical State field to: Solid
-And I set the When mixed with an equal amount of water field to: No
-And I set the Select the best Water Solubility description field to: Appreciable
-And in the New Product page I click Continue
-
-# Additional Product Information Page
-And In the Additional Information Page the check box for: United States should be: checked
-And I set the Product is marketed for use by, or on, a child option to: No
-And I set the Product has been classified using OSHA option to: No
-And I set the Product is shipped directly by supplier to the consumer option to: No
-And I set the Product is a Retailer's Private Label or Brand option to: No
-And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
-And in the New Product page I click Continue
-
-# Ingredients Page
-And I should see the Ingredients Page
-Then I add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Formaldehyde  | 100     | false               | false       |            |
-Given in the New Product page I click Continue
-
-# Regulatory 1 Page Details
-And I should see the Regulatory Information 1 Page
-And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
-Given in the New Product page I click Continue
-
-# Retailers Page
-Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
-And I should see the Retailer Page
-Given in the New Product page I click Continue
-
-# Regulatory Documents to Provide
-And I should see the Regulatory Documents to Provide Page
-And I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
-Then in the New Product page I click Continue
-
-# Additional Documents to Provide Page
-And I should see the Additional Documents to Provide Page
-Then in the New Product page I click Continue
-
-# Optional Reports and Documents Available for Purchase Page
-And I should see the Optional Reports and Documents Available for Purchase Page
-Then in the New Product page I click Continue
-
-# Safety Data Sheet Authoring - Additional Data (Optional) Page
-And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
-And I set the below options for field: Personal Protection Equipment Recommended
-| Option                         |
-| Mask                           |
-And I set the Autoignition Temperature (°C) field to: 20
-And I set the Minimum Ignition Energy (mJ) field to: 20
-And I set the Viscosity field to: 20
-And I set the Appearance field to: Brown
-And I set the Odor field to: Banana
-And I set the Odor Threshold field to: Not applicable
-And I set the Partition Coefficient field to: 20
-Then in the New Product page I click Continue
-
-# Comments Page
-And I should see the Comments Page
-Then the comments field should appear
-And I enter the following into the comments field: Comments Field Text
-Given in the New Product page I click Continue
-
-# Data Acceptance Page [Step 22]
-And I should see the Data Acceptance Page
-Given In the Data Acceptance page I select Yes, Agreed
-Given In the Data Acceptance page I click on the Accept button
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 
 # Subscription Enrollment - Section 1 Checks
 Then In the Subscription Enrollment screen I confirm heading as Subscription  Enrollment
@@ -370,7 +300,7 @@ And In the Subscription Enrollment screen I confirm that under the Premium Plan 
 | Waste Classification Regulatory Support          | Many retailers are now passing the costs of hazardous waste disposal on to manufacturers like you! Understanding hazardous waste classification requirements and the basis for your products classifications is more important than ever. Rely on UL's regulatory experts to review and provide guidance to minimize your costs.                                                                              |
 | VOC Classification Regulatory Support            | Regulations around VOC are growing in size and complexity. Our regulatory experts will work with you to ensure your organizations products are compliant in the markets you serve.                                                                                                                                                                                                                            |
 | Draft OSHA-Compliant Safety Data Sheet           | Effect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved format for each of your active products.                                                                                                                                                                                                                                                                                         |
-
+														
 And In the Subscription Enrollment screen I confirm that under the Standard Plan I see the following items and further details
 | Item                      | Further details                                                                                                                                                                                                                                                                                                                              |
 | Bronze Agent Support Plan | In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform. |
@@ -449,6 +379,7 @@ Then In the Payment Methods screen I confirm the following payment options are a
 | Options       |
 | Credit Card   |
 | ACH           |
+| PayPal        |
 | Wire Transfer |
 Then In the Payment Methods screen I confirm that the Contact Information is correct for Account saved as 63297
 Then In the Payment Methods screen I confirm that the Billing Address is correct for Account saved as 63297
@@ -491,6 +422,8 @@ Then In the Payment Methods screen I confirm the ACH fields are correct
 | Account Holder Name |
 Then In the Payment Methods screen I select Payment Method: Wire Transfer
 Then In the Payment Methods screen I confirm the following warning message appears: Wire Transfer subscription payment will result in the WERCSmart account being locked with regard to registration, UPC updates, and recertifications until funds are received and applied to the subscription balance due. No grace period for receipt of funds is provided for Wire Transfer payments. If you need immediate access to these functions, please select a different payment option before finalizing subscription.
+Then In the Payment Methods screen I select Payment Method: PayPal
+Then In the Payment Methods screen I confirm the following text message appears for PayPal: In order to successfully subscribe with PayPal, please click continue. When you click "Continue", you will be redirected to PayPal to establish the payment agreement.
 Then In the Payment Methods screen I select Payment Method: Credit Card
 Then In the Payment Methods screen I click Continue
 Then In the Payment Methods screen I confirm Credit Card error messages for the following fields are displayed
@@ -522,7 +455,7 @@ Then In the Purchase Summary screen I confirm the Prices and Payment section con
 Then In the Purchase Summary screen I confirm the following statement is shown: By clicking "Confirm Order" you will be enrolled in our subscription plan.
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I check the Header is correct
-#Then In the Thank You screen I confirm the following statement is shown: Thank you for enrolling in a subscription plan. You’ve successfully submitted your first registration for assessment! What happens now? Our team of Assessment Professionals will review your product’s data and provide information to your recipient for proper handling, transport and storage. The assessment process takes about two (2) business days to finalize and then is transferred to your recipient. Your product’s registration data remains in our database. The UL WERCSmart team works with you to provide over 40 retailers critical product information to on-board your products while keeping the recipient’s employees, consumers and the environment safe. UL is committed to helping you monitor and manage your product’s data needs with the highest standard of confidentiality and service. Should you need any assistance regarding your registration, please visit the Support area’s Solution Center, or contact one of our professional Support Team Representatives.
+Then In the Thank You screen I confirm the following statement is shown: Thank you for enrolling in a subscription plan. You’ve successfully submitted your first registration for assessment! What happens now? Our team of Assessment Professionals will review your product’s data and provide information to your recipient for proper handling, transport and storage. The assessment process takes about two (2) business days to finalize and then is transferred to your recipient. Your product’s registration data remains in our database. The UL WERCSmart team works with you to provide over 40 retailers critical product information to on-board your products while keeping the recipient’s employees, consumers and the environment safe. UL is committed to helping you monitor and manage your product’s data needs with the highest standard of confidentiality and service. Should you need any assistance regarding your registration, please visit the Support area’s Solution Center, or contact one of our professional Support Team Representatives.
 #Then In the Thank You screen I click Home
 Given I click on My Account
 Then In the My Account screen I navigate to the Subscription Information page

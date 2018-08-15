@@ -592,6 +592,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		//==================PayPal text
+		public string Paypal_text()
+		{
+			return containerElement.FindElement(By.XPath("//div[@class='alert alert-info']")).Text.Trim();
+		}
 
 		//Continue Button
 		[FindsBy(How = How.Id, Using = "continueButton")]

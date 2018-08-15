@@ -130,6 +130,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
 												  "')]/following-sibling::div/p/a")).Text;
+			Delay.Seconds(1);
 		}
 
 		public void Click_Extra_Text_Link(string subHeader, string link)
@@ -650,7 +651,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Report.Info(featurePlan + " Plan Found - Attempting to Select");
-			myFeature.Click();
+			myFeature.TryClick();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			Report.Success(featurePlan + " Feature Plan Selected");
 			Report.Screenshot();

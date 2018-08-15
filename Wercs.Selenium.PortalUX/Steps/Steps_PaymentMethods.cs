@@ -495,6 +495,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"In the Payment Methods screen I confirm the following text message appears for PayPal: (.*)")]
+		public void ThenIConfirmTheFollowingTextMessageAppearsForPayPal(string textMsg)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I confirm the PayPal text message appears");
+			try
+			{
+				var myPay = new PaymentMethods();
+				string actualText = myPay.Paypal_text();
+				Report.IsTrue(actualText == textMsg, "Expected text >>" + textMsg + "<< but got text: >>" + actualText,
+					"PayPal text is showing as expected: " + actualText);
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 		[StepDefinition(@"In the Payment Methods screen I confirm (Credit Card|ACH) error messages for the following fields are displayed")]
 		public void ThenIConfirmErrorMessagesForTheFollowingFieldsAreDisplayed(string payMethod, Table table)
 		{
@@ -756,7 +774,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Thank You screen I confirm the following statement is shown: (.*)")]
 		public void ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX(string ty_text)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Thank You screen I check the Header is correct");
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Thank You screen I check the Confirmation statement is correct");
 			try
 			{
 				var myPay = new PaymentMethods_Thank_You();
@@ -764,7 +782,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("Thank You Text = " + ty_text);
 
 				Report.IsTrue(myPay.Thank_You_Text(ty_text), "Thank You Text is Incorrect",
-					"Thank You Header is Correct");
+					"Thank You text is Correct");
 			}
 			catch (Exception ex)
 			{
@@ -780,7 +798,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var myPay = new PaymentMethods_Thank_You();
-
 				Report.IsTrue(myPay.Home_click(), "Failed to Click Home Button",
 					"Home Button Clicked");
 
