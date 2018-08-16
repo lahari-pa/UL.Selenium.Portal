@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Castle.Core.Internal;
+using iTextSharp.text.pdf;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -127,7 +129,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				selProdGrid.ProductIdField = productToSearch.ProductId;
 				GeneralUtilities.Wait_for_load_finish();
 				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + productToSearch.ProductId + "'!", "Product was returned!");
-				Report.Screenshot();
 			}
 			catch (Exception ex)
 			{
@@ -272,7 +273,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Info("Filtering Product Grid by " + filter);
 				var selProdGrid = new ProductsGrid();
-				Report.IsTrue(selProdGrid.ClickFilterOption(filter), "Failed to click filter option: '" + filter + "'", "Successfully filtered grid by: '" + filter + "'");
+				Report.IsTrue(selProdGrid.ClickStatusFilter(filter), "Failed to click filter option: '" + filter + "'", "Successfully filtered grid by: '" + filter + "'");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -850,6 +851,270 @@ namespace Wercs.Selenium.PortalUX.Steps
 				return;
 			}
 			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[StepDefinition(@"I enter combinations of More Filters and should see the product ID: (.*) only for the correct combinations")]
+		public void EnterCombinationsOfMoreFilters(string savedAs, Table moreFilters)
+		{
+			TestReport.UseSubSteps = true;
+			var selProductsGrid = new ProductsGrid();
+			var selMoreFilters = new MoreFilters();
+			var filters = new List<KeyValuePair<string, string>>();
+			foreach (var row in moreFilters.Rows)
+			{
+				filters.Add(new KeyValuePair<string, string>(
+					row["Filter"],
+					row["Match"]));
+			}
+			// Cycles through every possible combination of 2 filters
+			TestReport.StartStep("I enter combinations of 2 filters selected");
+			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
+			int N = 4;
+			int Q = 2;
+			for (int i = 0; i < N - 1; i++)
+			{
+				// The filter at index i and j are the targets for this action
+				// Fix i and iterate j to the end then repeat for i + 1 etc
+				for (int j = i + 1; j < N - i; j++)
+				{
+					var filtersToDo = new List<KeyValuePair<string, string>>{
+						filters[i],
+						filters[j]};
+					// A true match is the filter option which matches the target product
+					bool[] match = { true, true };
+					int z = 0;
+					// For every filter pair, there are 2^Q = 4 combinations of true/false filter options
+					// eg. T/T, T/F, F/T, F/F
+					for (int k = 0; k < Math.Pow(2, Q); k++)
+					{
+						// Only expect to see the product returned if every match condition is true
+						bool productReturned = match.All(x => x);
+						for (int l = 0; l < filtersToDo.Count; l++)
+						{
+							var filter = filtersToDo[l];
+							var filterType = filter.Key;
+							var options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+							var option = match[l] ? filter.Value : options.First(x => x != filter.Value);
+							switch (filterType)
+							{
+								case "UPC":
+									selProductsGrid.UpcNumber = option;
+									selProductsGrid.ClickUpcNumberSearchButton();
+									break;
+								case "Brand":
+									selMoreFilters.Brand = option;
+									break;
+								case "Retailer":
+									selMoreFilters.Retailer = option;
+									break;
+								case "Additional Programs":
+									selMoreFilters.AdditionalPrograms = option;
+									break;
+							}
+							Report.Info("I set the " + filterType + " to: " + option);
+						}
+						GeneralUtilities.Wait_for_load_finish();
+						Report.Info("Looking for product ID: " + savedAs);
+						Report.IsTrue(selProductsGrid.AllIDsInGrid().Contains(savedAs) == productReturned,
+							"The product ID: " + savedAs + (productReturned ? " did not appear " : " appeared") + " when it " + (productReturned ? "should have" : "should not not have"),
+							"The product ID: " + savedAs + (productReturned ? " appeared" : " did not appear") + " in the grid as expected");
+						Report.Info("Clearing search criteria");
+						selProductsGrid.UpcNumber = "";
+						selProductsGrid.ClickUpcNumberSearchButton();
+						selProductsGrid.ClickClear();
+						GeneralUtilities.Wait_for_load_finish();
+						// Alternate between flipping the first and second 'match' condition
+						z = 1 - z;
+						match[z] = !match[z];
+					}
+				}
+			}
+			TestReport.StartStep("I enter combinations of 3 filters selected");
+			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
+			// Cycles through every combination of 3 filters
+			Q = 3;
+			for (int i = 0; i < N; i++)
+			{
+				var filtersToDo = filters.Where(x => filters.IndexOf(x) != i).ToList();
+				bool[] match = { true, true, true };
+				int z = 1;
+				int k = 0;
+				for (int j = 0; j < Math.Pow(2, Q); j++)
+				{
+					bool productReturned = match.All(x => x);
+					for (int l = 0; l < filtersToDo.Count; l++)
+					{
+						var filter = filtersToDo[l];
+						var filterType = filter.Key;
+						var options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+						var option = match[l] ? filter.Value : options.First(x => x != filter.Value);
+						switch (filterType)
+						{
+							case "UPC":
+								selProductsGrid.UpcNumber = option;
+								break;
+							case "Brand":
+								selMoreFilters.Brand = option;
+								break;
+							case "Retailer":
+								selMoreFilters.Retailer = option;
+								break;
+							case "Additional Programs":
+								selMoreFilters.AdditionalPrograms = option;
+								break;
+						}
+						Report.Info("I set the " + filterType + " to: " + option);
+					}
+					GeneralUtilities.Wait_for_load_finish();
+					Report.Info("Looking for product ID: " + savedAs);
+					Report.IsTrue(selProductsGrid.AllIDsInGrid().Contains(savedAs) == productReturned,
+						"The product ID: " + savedAs + (productReturned ? " did not appear " : " appeared") + " when it " + (productReturned ? "should have" : "should not not have"),
+						"The product ID: " + savedAs + (productReturned ? " appeared" : " did not appear") + " in the grid as expected");
+					Report.Info("Clearing search criteria");
+					selProductsGrid.UpcNumber = "";
+					selProductsGrid.ClickClear();
+					GeneralUtilities.Wait_for_load_finish();
+					match[k] = !match[k];
+					k = k + z;
+					z = k % 2 == 0 || k == 0 ? z * -1 : z;
+				}
+			}
+			TestReport.StartStep("I enter combinations of 4 filters selected");
+			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
+			// Cycles through every combination of 4 filters
+			Q = 4;
+			for (int i = Q - 1; i < N; i++)
+			{
+				bool[] match = { true, true, true, true };
+				int z = 1;
+				int k = 0;
+				for (int j = 0; j < Math.Pow(2, Q); j++)
+				{
+					bool productReturned = match.All(x => x);
+					for (int l = 0; l < filters.Count; l++)
+					{
+						var filter = filters[l];
+						var filterType = filter.Key;
+						var options = filterType == "UPC" ? new List<string> { "0718103888608" } : selMoreFilters.Options(filterType);
+						var option = match[l] ? filter.Value : options.First(x => x != filter.Value);
+						switch (filterType)
+						{
+							case "UPC":
+								selProductsGrid.UpcNumber = option;
+								break;
+							case "Brand":
+								selMoreFilters.Brand = option;
+								break;
+							case "Retailer":
+								selMoreFilters.Retailer = option;
+								break;
+							case "Additional Programs":
+								selMoreFilters.AdditionalPrograms = option;
+								break;
+						}
+						Report.Info("I set the " + filterType + " to: " + option);
+					}
+					GeneralUtilities.Wait_for_load_finish();
+					Report.Info("Looking for product ID: " + savedAs);
+					Report.IsTrue(selProductsGrid.AllIDsInGrid().Contains(savedAs) == productReturned,
+						"The product ID: " + savedAs + (productReturned ? " did not appear " : " appeared") + " when it " + (productReturned ? "should have" : "should not not have"),
+						"The product ID: " + savedAs + (productReturned ? " appeared" : " did not appear") + " in the grid as expected");
+					Report.Info("Clearing search criteria");
+					selProductsGrid.UpcNumber = "";
+					selProductsGrid.ClickClear();
+					GeneralUtilities.Wait_for_load_finish();
+					match[k] = !match[k];
+					k = k + z;
+					z = k % 3 == 0 || k == 0 ? z * -1 : z;
+				}
+			}
+		}
+
+		[StepDefinition(@"I confirm the product exists with Product ID: (.*) and Name: (.*)")]
+		public void ProductExistsWithIDAndName(string id, string name)
+		{
+			var selProdGrid = new ProductsGrid();
+			selProdGrid.ProductIdField = id;
+			GeneralUtilities.Wait_for_load_finish();
+			var firstProduct = selProdGrid.FirstProductInGrid();
+			Report.IsTrue(firstProduct != null && firstProduct.ProductName == name,
+				"Product with ID: " + id + " and name: " + name + " was not returned in the product grid",
+				"Product with ID: " + id + " and name: " + name + " was returned in the product grid");
+			selProdGrid.ProductIdField = "";
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[StepDefinition(@"I enter combinations of Status and More Filters and should see the product ID: (.*) only for the correct combinations")]
+		public void EnterCombinationsOfStatusAndMoreFilters(string id, Table statusAndFilters)
+		{
+			var selProductsGrid = new ProductsGrid();
+			var selMoreFilters = new MoreFilters();
+			var filters = new List<KeyValuePair<string, string>>();
+			var statuses = new List<string> {
+				"Not Yet Submitted",
+				"Assessment in Progress",
+				"Sending to Retailers",
+				"Accepted by Retailers",
+				"Needs Your Attention"
+			};
+			foreach (var row in statusAndFilters.Rows)
+			{
+				filters.Add(new KeyValuePair<string, string>(
+					row["Filter"],
+					row["Match"]));
+			}
+			var status = filters.FirstOrDefault(x => x.Key == "Status");
+			filters.RemoveAll(x => x.Key == "Status");
+			for (int i = 0; i < filters.Count; i++)
+			{
+				var filtersToDo = new List<KeyValuePair<string, string>>{
+					status,
+					filters[i]};
+				bool[] match = { true, true };
+				int z = 0;
+				// For every filter pair, there are 2^Q = 4 combinations of true/false filter options
+				// eg. T/T, T/F, F/T, F/F
+				for (int k = 0; k < Math.Pow(2, 2); k++)
+				{
+					// Only expect to see the product returned if every match condition is true
+					bool productReturned = match.All(x => x);
+					for (int l = 0; l < filtersToDo.Count; l++)
+					{
+						var filter = filtersToDo[l];
+						var filterType = filter.Key;
+						var options = filterType == "Status" ? statuses : selMoreFilters.Options(filterType);
+						var option = match[l] ? filter.Value : options.First(x => x != filter.Value);
+						switch (filterType)
+						{
+							case "Status":
+								selProductsGrid.ClickStatusFilter(option);
+								break;
+							case "Brand":
+								selMoreFilters.Brand = option;
+								break;
+							case "Retailer":
+								selMoreFilters.Retailer = option;
+								break;
+							case "Additional Programs":
+								selMoreFilters.AdditionalPrograms = option;
+								break;
+						}
+						Report.Info("I set the " + filterType + " to: " + option);
+					}
+					GeneralUtilities.Wait_for_load_finish();
+					Report.Info("Looking for product ID: " + id);
+					Report.IsTrue(selProductsGrid.AllIDsInGrid().Contains(id) == productReturned,
+						"The product ID: " + id + (productReturned ? " did not appear " : " appeared") + " when it " + (productReturned ? "should have" : "should not not have"),
+						"The product ID: " + id + (productReturned ? " appeared" : " did not appear") + " in the grid as expected");
+					Report.Info("Clearing search criteria");
+					selProductsGrid.ClickStatusFilter("All");
+					selProductsGrid.ClickClear();
+					GeneralUtilities.Wait_for_load_finish();
+					// Alternate between flipping the first and second 'match' condition
+					z = 1 - z;
+					match[z] = !match[z];
+				}
+			}
 		}
 	}
 }

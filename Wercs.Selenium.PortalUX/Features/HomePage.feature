@@ -533,7 +533,7 @@ Given In the Live Help dialog I click on the x to close
 
 Scenario: [56829] More Filters
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
@@ -541,7 +541,22 @@ And I should see an option for More Filters
 
 Given I click More Filters in the products grid
 
-# Confirm that you are able to search with combinations  (example : UPC and Retailer , UPC and Additional Programs , UPC and Brand,  UPC-Brand-Retailer-Additional Programs)
+Given I confirm the product exists with Product ID: 1501253 and Name: More Filters Test Product
+
+Given I enter combinations of More Filters and should see the product ID: 1501253 only for the correct combinations
+| Filter              | Match                   |
+| UPC                 | 0601215310023           |
+| Brand               | More Filters Test Brand |
+| Retailer            | CVS                     |
+| Additional Programs | Kit Registrations       |
+
+Given I enter combinations of Status and More Filters and should see the product ID: 1501253 only for the correct combinations
+| Filter              | Match                   |
+| Status              | Assessment in Progress  |
+| Brand               | More Filters Test Brand |
+| Retailer            | CVS                     |
+| Additional Programs | Kit Registrations       |
+
 
 # Couldn't find the test case in TFS folders, placing it in home page
 Scenario: [66335] Main Menu - expanded

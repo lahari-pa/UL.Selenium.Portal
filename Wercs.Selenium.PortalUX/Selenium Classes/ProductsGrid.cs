@@ -89,25 +89,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-		public bool ClickFilterOption(string option)
+		public bool ClickStatusFilter(string option)
 		{
-			try
-			{
-				var allFilters = this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2);
-				var requiredFilter = allFilters.FirstOrDefault(x => x.Text.Contains(option));
-				if (requiredFilter == null)
-				{
-					return false;
-				}
-
-				requiredFilter.Click();
-				GeneralUtilities.Wait_for_load_finish();
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
+			var allFilters = this.containerElement.FindElements(By.XPath(".//ul[contains(@class,'status-filters')]//a"), 2);
+			var requiredFilter = allFilters.FirstOrDefault(x => x.Text.Contains(option));
+			return requiredFilter.TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public bool MoreFiltersOptionPresent()
@@ -144,6 +130,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetIdInFirstGridRow()
 		{
 			return this.containerElement.FindElement(By.XPath(".//tbody//tr/td[1]//small"), 2).Text;
+		}
+
+		public List<string> AllIDsInGrid()
+		{
+			return containerElement.FindElements(By.XPath(".//tbody//tr/td//small"), 2).Select(x => x.Text).ToList();
 		}
 
 		public bool NavigateToNextPage()
@@ -236,11 +227,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public ProductGridItem FirstProductInGrid()
 		{
 			var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
-
-			var productElement = new ProductGridItem();
-			productElement.ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
-			productElement.ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim();
-			productElement.DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
+			if (productRow == null || !productRow.Displayed)
+			{
+				return null;
+			}
+			var productElement = new ProductGridItem() {
+				ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
+				ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
+				DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim()
+			};
 			return productElement;
 		}
 
@@ -276,6 +271,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool ClickClear()
+		{
+			return containerElement.FindElement(By.XPath(".//a[contains(@class,'clear-filters')]"), 2).TryClick();
+		}
 		public bool ClickUpcNumberSearchButton()
 		{
 			var el = containerElement.FindElement(By.XPath(".//input[@placeholder='UPC Number']/..//span[contains(@data-bind,'searchProducts')]"), 2);

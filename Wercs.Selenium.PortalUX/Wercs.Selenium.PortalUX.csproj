@@ -106,13 +106,13 @@
       <HintPath>packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ResourcePool, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.2.3.2\lib\net45\ResourcePool.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.3.0.0\lib\net45\ResourcePool.dll</HintPath>
     </Reference>
     <Reference Include="SafewareReportingPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.2.3.2\lib\net45\SafewareReportingPlugin.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.3.0.0\lib\net45\SafewareReportingPlugin.dll</HintPath>
     </Reference>
     <Reference Include="SafewareSeleniumUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.2.3.2\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.3.0.0\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -125,16 +125,18 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="TechTalk.SpecFlow, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
-      <HintPath>packages\SpecFlow.2.2.1\lib\net45\TechTalk.SpecFlow.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="TechTalk.SpecFlow, Version=2.3.2.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>packages\SpecFlow.2.3.2\lib\net45\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="TestStack.White, Version=0.13.0.0, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
       <HintPath>packages\TestStack.White.0.13.3\lib\net40\TestStack.White.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.2.3.2\lib\net45\TReVor.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.3.0.0\lib\net45\TReVor.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>packages\Selenium.WebDriver.3.5.2\lib\net40\WebDriver.dll</HintPath>
@@ -775,11 +777,13 @@ del *.dll
 taskkill /f /im chromedriver.exe /fi "memusage gt 40" 2&gt;NUL
 taskkill /f /im IEDriverServer.exe /fi "memusage gt 40" 2&gt;NUL</PreBuildEvent>
   </PropertyGroup>
-  <Import Project="packages\Safeware.SeleniumUtilities.2.3.2\build\Safeware.SeleniumUtilities.targets" Condition="Exists('packages\Safeware.SeleniumUtilities.2.3.2\build\Safeware.SeleniumUtilities.targets')" />
+  <Import Project="packages\SpecFlow.2.3.2\build\SpecFlow.targets" Condition="Exists('packages\SpecFlow.2.3.2\build\SpecFlow.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Safeware.SeleniumUtilities.2.3.2\build\Safeware.SeleniumUtilities.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Safeware.SeleniumUtilities.2.3.2\build\Safeware.SeleniumUtilities.targets'))" />
+    <Error Condition="!Exists('packages\SpecFlow.2.3.2\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SpecFlow.2.3.2\build\SpecFlow.targets'))" />
+    <Error Condition="!Exists('packages\Safeware.SeleniumUtilities.3.0.0\build\Safeware.SeleniumUtilities.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Safeware.SeleniumUtilities.3.0.0\build\Safeware.SeleniumUtilities.targets'))" />
   </Target>
+  <Import Project="packages\Safeware.SeleniumUtilities.3.0.0\build\Safeware.SeleniumUtilities.targets" Condition="Exists('packages\Safeware.SeleniumUtilities.3.0.0\build\Safeware.SeleniumUtilities.targets')" />
 </Project>
