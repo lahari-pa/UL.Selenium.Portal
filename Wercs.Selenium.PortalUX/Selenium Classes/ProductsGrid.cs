@@ -627,7 +627,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			get
 			{
 				var el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
-				return el == null ? null : el.SelectedOption();
+				return el?.SelectedOption();
 			}
 			set
 			{
@@ -651,7 +651,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			get
 			{
 				var el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
-				return el == null ? null : el.SelectedOption();
+				return el?.SelectedOption();
 			}
 			set
 			{
@@ -659,5 +659,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				el?.Select(value);
 			}
 		}
+
+		public bool MoreFiltersDisplayed()
+		{
+			var moreFilters = new List<IWebElement>() {
+				containerElement.FindElement(By.XPath(".//label[@id='brandAddOn']"), 2),
+				containerElement.FindElement(By.XPath(".//label[@id='retailerAddOn']"), 2),
+				containerElement.FindElement(By.XPath(".//label[@id='additionalProgramAddOn']"), 2)
+			};
+			return moreFilters.All(x => x.Displayed);
+		}
+
 	}
 }

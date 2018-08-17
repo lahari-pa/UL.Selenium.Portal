@@ -3975,5 +3975,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
+
+		[StepDefinition(@"I call Shared Step 75852 \(Transportation Details 1 - Yes only shown, Select DOT any shipping method, Continue\)")]
+		public void GivenICallSharedTransportationDetails1YesOnlyShownSelectDOTAnyShippingMethodContinue()
+		{
+			TestReport.UseSubSteps = true;
+			var selNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I confirm the Transportation Details 1 page is shown");
+			selNewProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
+			TestReport.StartStep("I should see a total of 1 radio button for section: Product is Regulated for Transport");
+			selNewProductSteps.RadioButtonCountInSection("a total of", "1", "Product is Regulated for Transport");
+			var buttons = new Table("Button");
+			buttons.AddRow("Yes");
+			TestReport.StartStep("I should see the following radio buttons for section 'Product is Regulated for Transport': Yes");
+			selNewProductSteps.CheckRadioButtonsInSectionAndOrder("Product is Regulated for Transport", buttons);
+			TestReport.StartStep("I set the Product is Regulated for Transport field to: Yes");
+			selNewProductSteps.SetTheSectionOptionTo("Product is Regulated for Transport", "Yes");
+			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for option to: DOT");
+			selNewProductSteps.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "DOT");
+			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for option to: Shipping with limited quantity");
+			selNewProductSteps.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "Shipping with limited quantity");
+			TestReport.StartStep("I click continue");
+			selNewProductSteps.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
+
+		}
 	}
 }

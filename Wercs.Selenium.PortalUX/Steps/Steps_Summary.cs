@@ -37,5 +37,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The actual UPC number did not match the expected value! Expected: " + expectedUPC + ". Actual: " + actualUPC,
 				"The actual UPC number matched the expected value: " + expectedUPC);
 		}
+
+		[StepDefinition(@"the Summary page loads with no errors")]
+		public void TheSummaryPageLoadsWithNoErrors()
+		{
+			var selSummaryPage = new SummaryPage();
+			Report.IsTrue(GeneralUtilities.WaitForSpinnerToDisappear(selSummaryPage.LoadingSpinner()),
+				"The Summary page did not complete loading",
+				"The Summary page completed loading");
+
+		}
 	}
 }

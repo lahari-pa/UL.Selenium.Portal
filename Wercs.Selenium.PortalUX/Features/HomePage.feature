@@ -531,7 +531,10 @@ Given In the Live Help dialog I enter name: John Smith
 Given In the Live Help dialog I enter email: johnsmithtest@test.co.uk
 Given In the Live Help dialog I click on the x to close
 
+@run56829
 Scenario: [56829] More Filters
+
+# Consider creating the test product from scratch every time?
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -557,6 +560,17 @@ Given I enter combinations of Status and More Filters and should see the product
 | Retailer            | CVS                     |
 | Additional Programs | Kit Registrations       |
 
+Given I click More Filters in the products grid
+
+Then the 'More Filters' options are not displayed
+
+Given I click More Filters in the products grid
+
+Then the 'More Filters' options are displayed
+
+Given I click More Filters in the products grid
+
+Then the 'More Filters' options are not displayed
 
 # Couldn't find the test case in TFS folders, placing it in home page
 Scenario: [66335] Main Menu - expanded

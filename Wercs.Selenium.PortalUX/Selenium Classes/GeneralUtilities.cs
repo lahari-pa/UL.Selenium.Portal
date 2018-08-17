@@ -54,5 +54,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) != null;
 		}
+
+		public static bool WaitForSpinnerToDisappear(IWebElement button, int waitMax = 60)
+		{
+			var spinner = button.FindElement(By.XPath(".//i[contains(@class,'fa fa-spinner')]"), 2);
+			if (spinner == null || !spinner.Displayed)
+			{
+				return true;
+			}
+			int i = 0;
+			while ((spinner != null && spinner.Displayed) && i < waitMax)
+			{
+				spinner = button.FindElement(By.XPath(".//i[contains(@class,'fa fa-spinner')]"), 2);
+				Delay.Seconds(1);
+				i++;
+			}
+			return spinner == null || !spinner.Displayed;
+		}
 	}
 }

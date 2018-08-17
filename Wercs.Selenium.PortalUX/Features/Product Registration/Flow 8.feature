@@ -8,6 +8,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@SummaryPage
 @run_Flow8
 
 Feature: Flow 8
@@ -1784,3 +1785,69 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Training aid repellant
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57709
+
+Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I generate a random UPC number and save as: UPC75840
+
+Given I delete all products with UPC Number: saved as UPC75840
+
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Single Purpose Cleaner
+
+Given I save the product information as: TestCase75840
+
+Given I call Shared 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
+
+Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared Step 75852 (Transportation Details 1 - Yes only shown, Select DOT any shipping method, Continue)
+
+Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Then I should see the Additional Documents to Provide Page
+
+Given in the Additional Documents to Provide page I click Continue
+
+Then I should see the Optional Reports and Documents Available for Purchase Page
+
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
+| Gloves                        | 200                      | 5.55                    | 10.5      | Brown      | Orange | No data available | 4.3205                | Aerosol                     |
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+
+Then The Data Acceptance page should appear
+
+Then I confirm error message is displayed: Select at least one of the options
+
+Then In the Data Acceptance page I select Yes, Agreed
+
+Given I click the Summary button in the Data Acceptance window
+
+Then I switch to the Data Summary page
+
+And the Summary page loads with no errors
+
+And I close the Data Summary tab
+
+#Then I switch to Data Acceptance page
+
+Then I navigate to the home page
+
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase75840

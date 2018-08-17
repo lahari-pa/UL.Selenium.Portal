@@ -1116,5 +1116,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 			}
 		}
+
+		[StepDefinition(@"the 'More Filters' options (are|are not) displayed")]
+		public void TheMoreFiltersOptionsDisplayed(string displayed)
+		{
+			if (displayed == "are")
+			{
+				Report.IsTrue(new MoreFilters().MoreFiltersDisplayed(),
+					"More Filters options were not displayed when they were expected to be!",
+					"More Filters options were displayed as expected");
+			}
+			if (displayed == "are not")
+			{
+				Report.IsFalse(new MoreFilters().MoreFiltersDisplayed(),
+					"More Filters options were displayed when they were not expected to be!",
+					"More Filters options were not displayed as expected");
+			}
+		}
 	}
 }

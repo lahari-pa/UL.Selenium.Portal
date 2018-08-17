@@ -41,5 +41,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return bracketsMatch.ToString().Trim().TrimStart('(').TrimEnd(')');
 		}
+
+		public IWebElement LoadingSpinner()
+		{
+			return containerElement.FindElement(By.XPath(@".//span[contains(@data-bind,""dataEntry.pname() === 'undefined (undefined)"") and contains(text(),'Loading')]"), 2);
+		}
 	}
 }
