@@ -1909,7 +1909,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I should see the Retailer Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Retailer");
 			TestReport.StartStep("The selected retailers on the Retailer page should be:");
-			MyNewProductSteps.SelectedRetailersShouldBe(new List<string> { retailer });
+			var retailers = new Table("Retailer");
+			retailers.AddRow(retailer);
+			MyNewProductSteps.SelectedRetailersShouldBe(retailers);
 			TestReport.StartStep("In the Retailer page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Retailer");
 		}

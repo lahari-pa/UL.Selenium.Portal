@@ -1,0 +1,58 @@
+﻿@LandingPage
+@Login
+@Homepage
+@Signup
+@wercsmart
+@NewProduct
+@ProductGrid
+@DataSummarySheet
+@wercsmart
+@RetailPartners
+@run_RetailerSelection
+
+Feature: Retailer Selection
+
+Scenario: [78933] Select Retailers - Show List View
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+
+Then I save the product information as: TestCase78933
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+# Failing on 'child' question
+Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Chlorine      | 100     | false               | false       |            |
+
+Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Then the 'Select Retailers' window appears
+
+Given I click the List view retailers option in the Select Retailers popup
+
+Then I confirm that retailers are displayed in list view with checkboxes next to each
+
+Given I select the following retailers in the Select Retailers popup list view:
+| Retailer |
+| CVS      |
+| Staples  |
+
+Given I click Done in the Select Retailers popup
+
+Then The selected retailers on the Retailer page should be:
+| Retailer |
+| CVS      |
+| Staples  |
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78933

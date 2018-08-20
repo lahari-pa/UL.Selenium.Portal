@@ -71,5 +71,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return allSelected.Select(x => x.FindElement(By.XPath("./following-sibling::span[contains(@data-bind,'retailer.description')]")).Text).ToList();
 		}
+
+		public bool ClickRetailerOption(string option)
+		{
+			switch (option.ToLower())
+			{
+				case "list view":
+					return containerElement.FindElement(By.XPath(".//div[@id='select-retailers-dialog']//a[@class='small-link' and contains(@data-bind,'toggleRetailerListView')]"), 2).TryClick();
+				case "select all":
+					return containerElement.FindElement(By.XPath(".//div[@id='select-retailers-dialog']//a[@class='small-link' and contains(@data-bind,'selectAll')]"), 2).TryClick();
+				default:
+					return false;
+			}
+		}
+
+		public bool RetailersShownInListView()
+		{
+			return containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//input[@type='checkbox']]"), 2) != null;
+		}
+		public bool SelectRetailerFromListView(string retailer)
+		{
+			return containerElement.FindElement(By.XPath(@".//div[contains(@class,'list-view') and .//span[contains(text(),"" + retailer + @"")]]//input"),2).TryClick();
+		}
 	}
 }

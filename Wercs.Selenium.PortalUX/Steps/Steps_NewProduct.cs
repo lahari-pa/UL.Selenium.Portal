@@ -423,7 +423,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I save the context product information as: (.*) where id is: (.*) and product name is: (.*)")]
 		public void GivenISaveTheContextProductInformationAsTestCaseWhereIdIsAndProductNameIsTest(string savedas, string id, string name)
 		{
-			var prodDetails = new ProductInformation() { Id = id, Name = name};
+			var prodDetails = new ProductInformation() { Id = id, Name = name };
 			Context.AddToContext(savedas, prodDetails);
 			Report.Success("Product Information saved!");
 		}
@@ -2499,8 +2499,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"The selected retailers on the Retailer page should be:")]
-		public void SelectedRetailersShouldBe(List<string> expectedRetailers)
+		public void SelectedRetailersShouldBe(Table retailers)
 		{
+			List<string> expectedRetailers = new List<string>();
+			retailers.Rows.ForEach(x => expectedRetailers.Add(x["Retailer"]));
 			var actualRetailers = new NewProduct().SelectedRetailers();
 			Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
 		}
@@ -2638,7 +2640,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var section = selNewProduct.SectionWithRequiredFieldError();
 				Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
 				Report.Screenshot();
-				throw new Exception("New page did not load on Continue - required field.");
+				Report.Info("Selecting the first option for the required field");
+				var option = selNewProduct.GetAllOptionsForSection(section).First();
+				selNewProduct.SetOptionInSection(section, option);
+				Report.Info("Clicking continue");
+				Report.IsTrue(selNewProduct.ClickContinue(),
+					"Failed to click the Continue button",
+					"Successfully clicked the Continue button");
+				return;
 			}
 			Report.Failure("New page did not load as expected, however 'Required Field' error message was not displayed.");
 			Report.Screenshot();
@@ -3482,6 +3491,36 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Steps_PaymentMethods MyStepsPaymentMethods = new Steps_PaymentMethods();
 			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
 			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+		}
+
+		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
+		public void ClickRetailersOptionInTheSelectRetailersPopup(string option)
+		{
+			Report.IsTrue(new SelectRetailers().ClickRetailerOption(option), "Failed to click the retailers option: " + option, "Successfully clicked the retailers option: " + option);
+		}
+
+		[StepDefinition(@"I confirm that retailers are displayed in list view with checkboxes next to each")]
+		public void ConfirmRetailersAreDisplayedInListView()
+		{
+			Report.IsTrue(new SelectRetailers().RetailersShownInListView(), "Retailers were not shown in list view with checkboxes!", "Retailers were shown in list view with checkboxes");
+		}
+
+		[StepDefinition(@"I select the following retailers in the Select Retailers popup list view:")]
+		public void SelectRetailersInSelectRetailersPopupListView(Table retailers)
+		{
+			var retailersToSelect = new List<string>();
+			var selSelectRetailers = new SelectRetailers();
+			retailers.Rows.ForEach(x => retailersToSelect.Add(x["Retailer"]));
+			foreach (var retailer in retailersToSelect)
+			{
+				Report.IsTrue(selSelectRetailers.SelectRetailerFromListView(retailer), "Failed to select retailer: " + retailer + " from the Select Retailers list view", "Successfully selected the retailer: " + retailer + " from the Select Retailers list view");
+			}
+		}
+
+		[StepDefinition(@"I click Done in the Select Retailers popup")]
+		public void ClickDoneInSelectRetailers()
+		{
+			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done in the Select Retailers pop up!", "Successfully clicked Done in the Select Retailers pop up");
 		}
 
 	}

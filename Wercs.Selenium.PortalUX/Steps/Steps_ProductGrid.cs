@@ -874,7 +874,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			for (int i = 0; i < N - 1; i++)
 			{
 				// The filter at index i and j are the targets for this action
-				// Fix i and iterate j to the end then repeat for i + 1 etc
+				// Fix i and iterate j from i + 1 to the end then repeat for i++ etc
 				for (int j = i + 1; j < N - i; j++)
 				{
 					var filtersToDo = new List<KeyValuePair<string, string>>{
@@ -933,6 +933,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
 			// Cycles through every combination of 3 filters
 			Q = 3;
+			// The filters at every index apart from i are the target for this action.
+			// Iterate i to the end to get all combinations of 3 filters
 			for (int i = 0; i < N; i++)
 			{
 				var filtersToDo = filters.Where(x => filters.IndexOf(x) != i).ToList();
@@ -983,6 +985,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Testing against reference product with filter values: " + string.Join(", ", filters.Select(x => x.Key + " = " + x.Value).ToList()));
 			// Cycles through every combination of 4 filters
 			Q = 4;
+			// only executes one loop
 			for (int i = Q - 1; i < N; i++)
 			{
 				bool[] match = { true, true, true, true };
