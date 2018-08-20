@@ -736,7 +736,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Report.Info("Attempting to Select General Support Services Plan");
-			_selectGenSupport.Click();
+			_selectGenSupport.TryClick();
 			return true;
 		}
 

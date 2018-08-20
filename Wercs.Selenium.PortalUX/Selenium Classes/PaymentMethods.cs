@@ -1619,5 +1619,108 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	}
 
+	class PaymentMethods_PayPal : BaseDialog
+	{
+		public const string BasePath = "//div[@class='main']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+
+		public string EmailField {
+			get { return this.containerElement.FindElement(By.Id("email"), 2).Text; }
+			set { this.containerElement.FindElement(By.Id("email"), 2).EnterText(value); }
+		}
+
+
+		public void Click_Next()
+		{
+			IWebElement nextButton =
+				this.containerElement.FindElement(By.Id("btnNext"), 2);
+
+			if (nextButton != null)
+			{
+				nextButton.ClickWithScroll();
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			else
+			{
+				throw new Exception("Next button was not found");
+			}
+		}
+
+		public string PasswordField {
+			get { return this.containerElement.FindElement(By.Id("password"), 2).Text; }
+			set
+			{
+				IWebElement pw = this.containerElement.FindElement(By.Id("password"), 2);
+				pw.EnterText(value);
+				pw.SendKeys(Keys.Tab);
+
+			}
+		}
+
+		public void Click_Login()
+		{
+			IWebElement loginButton =
+				this.containerElement.FindElement(By.Id("btnLogin"), 2);
+
+			if (loginButton != null)
+			{
+				loginButton.ClickWithScroll();
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			else
+			{
+				throw new Exception("Login button was not found");
+			}
+		}
+	}
+
+	class PaymentMethods_PayPal_MemberReview : BaseDialog
+	{
+		public const string BasePath = "memberReview";
+		[FindsBy(How = How.Id, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		//Spinner element
+		[FindsBy(How = How.Id, Using = "preloaderSpinner")]
+		private IWebElement _spinnerFinder;
+
+		public bool WaitForSpinner()
+		{
+			var spinner = _spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
+			if (spinner == null)
+			{
+				return true;
+			}
+
+			while (spinner != null && spinner.Displayed)
+			{
+				spinner = _spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
+				Delay.Seconds(Delay.SpeedFactor * 1);
+			}
+
+			return true;
+		}
+
+		public void Click_AgreeAndContinue()
+		{
+			WaitForSpinner();
+			IWebElement continueButton =
+				this.containerElement.FindElement(By.Id("confirmButtonTop"), 2);
+
+			if (continueButton != null)
+			{
+
+				continueButton.ClickWithScroll();
+				GeneralUtilities.Wait_for_load_finish();
+			}
+			else
+			{
+				throw new Exception("Agree & Continue button was not found");
+			}
+		}
+	}
+
 
 }

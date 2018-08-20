@@ -411,6 +411,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Cart.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Subscription.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Subscription.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\SupplierReports.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -739,6 +744,10 @@
     <None Include="Features\Cart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Cart.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Subscription.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Subscription.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SupplierReports.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

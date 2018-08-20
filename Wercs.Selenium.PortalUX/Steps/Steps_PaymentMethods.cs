@@ -815,6 +815,54 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(@"the PayPal page should load")]
+		public void ThenThePayPalPageShouldLoad()
+		{
+			PaymentMethods_PayPal MyPP = new PaymentMethods_PayPal();
+			Report.IsTrue(MyPP.Wait_for_load(60), "PayPal page is not showing",
+				"PayPal page is showing.");
+		}
 
+		[StepDefinition(@"the Purchase Summary should load")]
+		[StepDefinition(@"the Purchase Summary should be loaded")]
+		public void ThenThePurchaseSummaryShouldLoad()
+		{
+			try
+			{
+				Report.Info("Making sure that the Purchase Summary is loaded");
+				var mySub = new PaymentMethods_Subscription_Billing();
+
+				Report.IsTrue(mySub.Wait_for_load(), "Purchase Summary failed to load!", "Purchase Summary loaded successfully!");
+				GeneralUtilities.Wait_for_load_finish();
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I log into PayPal with email: (.*) and password: (.*) and click Continue")]
+		public void GivenILogInWithEmailAndPassword(string username, string password)
+		{
+
+			var selPaypal = new PaymentMethods_PayPal();
+			Report.IsTrue(selPaypal.Wait_for_load(), "PayPal login page did not load!", "PayPal login page loaded successfully!");
+
+			Report.Info("Entering Email: '" + username + "'");
+			selPaypal.EmailField = username;
+			selPaypal.Click_Next();
+
+			Report.Info("Entering Password: '" + password + "'");
+			selPaypal.PasswordField = password;
+
+			Report.Info("Clicking login");
+			selPaypal.Click_Login();
+
+			Report.Info("Clicking AgreeAndContinue");
+			var reviewPayPal = new PaymentMethods_PayPal_MemberReview();
+			reviewPayPal.Click_AgreeAndContinue();
+		}
 	}
 }
