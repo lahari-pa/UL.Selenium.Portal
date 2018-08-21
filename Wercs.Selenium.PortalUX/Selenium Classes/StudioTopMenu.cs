@@ -17,7 +17,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait)
+		public bool Wait_for_load(int secondsToWait=60)
 		{
 			try
 			{

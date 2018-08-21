@@ -385,21 +385,13 @@ Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57520
 
 Scenario: [57522] Pesticide question shows in Additional Product Information for Flow 2-S
-
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
-
 Given I save the product information as: TestCase57522
-
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-
 Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
-
 Given I navigate to the home page
-
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57522
 
 Scenario: [57527] Pesticide question shows in Additional Product Information for Flow 6-A

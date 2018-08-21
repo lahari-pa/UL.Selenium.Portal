@@ -46,6 +46,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSignIn()
 		{
+			var currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("BaseWindow", currentWindow);
 			return this.containerElement.FindElement(By.XPath(".//input[@id='cmdLogin']"), 2).TryClick();
 		}
 

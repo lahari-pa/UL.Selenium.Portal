@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -240,22 +241,83 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 			Delay.Seconds(1);
 			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find");
-			Delay.Seconds(10);
-		
+			Delay.Seconds(1);
+			Report.Info("Waiting for spinner");
+			GeneralUtilities.StudioWaitForSpinner();
+			Report.Info("Finished waiting for spinner");
+
 		}
 
 		[Given(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(string productSavedAs, string status)
 		{
+			TestReport.UseSubSteps = true;
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			var ID = ProductDetails.Id;
-			Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
-			Report.IsTrue(topProduct.ID == ID, "Expected: " + ID + " but got: " + topProduct.ID, "IDs match");
-			Report.IsTrue(topProduct.Status == status, "Expected: " + status + " but got: " + topProduct.Status, "Statuses match");
+			
+			//rerun search until status is as expected or give up
+			int counter = 0;
+
+			while (counter < 5)
+			{
+				Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+
+				if (topProduct == null || !(topProduct.Status == status && topProduct.ID == ID))
+				{
+					Report.Info("Re-running search");
+					StudioSHAManager myStudioShaManager = new StudioSHAManager();
+
+					myStudioShaManager.ClickBottomMenuOption("Search");
+
+					Steps_SHA myStepsSha = new Steps_SHA();
+
+					TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+						"SearchTerm",
+						"SearchValue"});
+					table.AddRow(new string[] {
+						"ProductID",
+						ID});
+					table.AddRow(new string[] {
+						"Status",
+						"Submitted"});
+					myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+
+					Delay.Seconds(2);
+					StudioSHAManager mySHAManager = new StudioSHAManager();
+					mySHAManager.WaitForProductList(120);
+					/*
+					topProduct = mySHAManager.GetTopXProducts(1).FirstOrDefault();
+					if (topProduct != null)
+					{
+						if (topProduct.ID == ID && topProduct.Status == status)
+						{
+							Report.Info("Got match");
+							break;
+						}
+						
+						Report.Info(counter + ": status is: " + status);
+					}
+					*/
+					Delay.Seconds(2);
+					counter++;
+				}
+				else
+				{
+					break;
+				}
+				
+			}
+
+			var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+			if (topProductnew != null)
+			{
+				Report.IsTrue(topProductnew.ID==ID && topProductnew.Status == status, "Expected: id=" + ID + " and status " + status + " but got: " + topProductnew.ID + " and " + topProductnew.Status, "Statuses match");
+			}
+			else
+			{
+				Report.Failure("No products found");
+			}
+				
 		}
-
-
 	}
-
-
 }

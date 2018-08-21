@@ -13,13 +13,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
 	class StudioSHAManager : BaseObject
 	{
-		public const string BasePath = "//iframe[@id='Widget1FRAME']";
+		public const string BasePath = "//div[@id='Widget1']";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
 		public bool WaitForProductList(int secondsToWait)
 		{
+			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
 			Report.Info("Beginning wait for product list");
 			if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
 			{
@@ -31,15 +32,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			for (int i = 0; i < secondsToWait; i++)
 			{
+				Report.Info(i.ToString());
 				try
 				{
-					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[@id='list']")) != null)
+					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']"),60) != null)
 					{
+						Report.Info("Found table");
 						return true;
 					}
 				}
 				catch (Exception e)
 				{
+					Report.Error("Caught error" + e.Message);
+					continue;
 					//do nothing
 				}
 				Delay.Seconds(1);
@@ -55,6 +60,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a=>a=="Product");
 			for(int i = 0;i < secondsToWait; i++)
 			{
+				StudioSHAManager mySHAManager = new StudioSHAManager();
+
+				if (mySHAManager.GetCurrentStatusFilter() == "Assigned")
+				{
+					mySHAManager.SelectFromStatusFilter("All");
+					StudioSHAManagerProductSearch myProductSearch = new StudioSHAManagerProductSearch();
+					myProductSearch.Wait_for_load(3);
+					myProductSearch.ClickButton("Find");
+					mySHAManager.WaitForProductList(30);
+				}
+				else
+				{
+					mySHAManager.SelectFromStatusFilter("Assigned");
+				}
+
+				Delay.Seconds(5);
 				var matchingTD = SeleniumBrowser.WebBrowser
 					.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index+1).ToString() + "]"))
 					.FirstOrDefault(x => x.GetValue().Trim() == id);
@@ -71,22 +92,73 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool SelectProductByID(string id)
+		{
+			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			
+			var matchingTD = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+				.FirstOrDefault(x => x.GetValue().Trim() == id);
+
+			if (matchingTD != null)
+			{
+				var checkbox = matchingTD.FindElement(By.XPath("../td/input"));
+				if (checkbox != null)
+				{
+					checkbox.Check(true);
+					return checkbox.Checked();
+				}
+			}
+
+			return false;
+		}
+
+		public bool ProductTableIsEmpty()
+		{
+			try
+			{
+				var ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']//tr"), 3).ToList();
+				if (ListOfProductRows == null || ListOfProductRows.Count == 1)
+				{
+					//count of 1 row means only headers so table is empty
+					return true;
+				}
+			}
+			catch (Exception e)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		public List<Product> GetTopXProducts(int topX)
 		{
-			var ListOfProductRows =
-				SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@id='list']//tr"));
+			//Report.Info("Getting top " + topX.ToString() + " products");
+			List<IWebElement> ListOfProductRows = null;
 
-			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x=>x.GetValue().Trim()).ToList();
+			if (this.ProductTableIsEmpty())
+			{
+				return new List<Product>();
+			}
+			
+			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']//tr"), 3).ToList();
+				
+			Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
+			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x=>x.GetValue().Trim()).ToList();
+			Report.Info("Got list of headers");
 			List<Product> ListOfProducts = new List<Product>();
 
 			//ignore first row because it is empty
 			for (int j = 1; j < Math.Min(ListOfProductRows.Count, topX+1); j++)
 			{
+				Report.Info("Looking at row: " + j.ToString());
 				Product thisProduct = new Product();
 				//start indexing from 1 because the first column is a checkbox
 				int addIndex = 1;
 				for (int i = 0; i < ListOfHeaders.Count(); i++)
 				{
+					//Report.Info("Looking at column: " + ListOfHeaders[i]);
 					switch (ListOfHeaders[i])
 					{
 						case "Product":
@@ -199,7 +271,109 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return GetTopXProducts(1).FirstOrDefault().ID == id;
 		}
 
-		
+		public bool ClickProcessProductData()
+		{
+			try
+			{
+				var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkProcess']"));
+				return button.TryClick();
+			}
+			catch (Exception e)
+			{
+				Report.Error("process product data button was not found");
+				return false;
+			}
+			
+		}
+
+		public bool ClickReports()
+		{
+			var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkReports']"));
+			return button.TryClick();
+		}
+
+		public bool ClickExport()
+		{
+			var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkExport']"));
+			return button.TryClick();
+		}
+
+		public bool ClickDataCodeExport()
+		{
+			var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkDataCodeExport']"));
+			return button.TryClick();
+		}
+
+		public bool ClickAutoAssign()
+		{
+			var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkAutoAssign']"));
+			return button.TryClick();
+		}
+
+		public bool SetAutoAssignRegulatorySpecialisttoProduct(bool set)
+		{
+			var enterField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='chkAutoAssignUser']"));
+			enterField.Check(set);
+			return enterField.Checked() == set;
+		}
+
+		public bool SelectRegulatorySpecialist(string name)
+		{
+			var select = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='regulatoryusers']"));
+			select.Select(name);
+			return (select.SelectedOption() == name);
+		}
+
+		public bool SetAutoRedirectToClientsIfConditionMatch(bool set)
+		{
+			var enterField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='chkAutoRedirect']"));
+			enterField.Check(set);
+			return enterField.Checked() == set;
+		}
+
+		public bool ClickContinueInProcessProducts()
+		{
+			var buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='dialog-product']/..//button"));
+			var continueButton =
+				buttons.FirstOrDefault(x => x.FindElement(By.XPath(".//span")).GetValue().Trim() == "Continue");
+			if (continueButton != null)
+			{
+				return continueButton.TryClick();
+			}
+
+			return false;
+		}
+
+		public bool WaitForProductToAppearOnProcessedList(string id, int secondsToWait)
+		{
+			for (int i=0; i<secondsToWait; i++)
+			{
+				var processedList =
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='dialog-product']//div[@id='message']"));
+				var products = processedList.FindElements(By.XPath(".//span"));
+				var matchingProduct = products.FirstOrDefault(x => x.GetValue().Trim().Contains(id));
+				if (matchingProduct != null)
+				{
+					return true;
+				}
+				Delay.Seconds(1);
+			}
+
+			return false;
+		}
+
+		public bool ClickCloseInProcessProducts()
+		{
+			var buttons = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='dialog-product']/..//button"));
+			var closeButton =
+				buttons.FirstOrDefault(x => x.FindElement(By.XPath(".//span")).GetValue().Trim() == "Close");
+			if (closeButton != null)
+			{
+				return closeButton.TryClick();
+			}
+
+			return false;
+		}
 		public bool ClickTopMenuItem(string option)
 		{
 			try
@@ -253,16 +427,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public string GetCurrentStatusFilter()
+		{
+			var statusSelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='status']"));
+			return statusSelect.SelectedOption();
+		}
+
 		public bool SelectFromStatusFilter(string option)
 		{
+			//Report.Info("Beinnign select from status filter: " + option);
 			try
 			{
-				var statusSelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//select[@id='status']"));
+				var statusSelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='status']"));
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
 			catch (Exception e)
 			{
+				Report.Info("Did not find status select");
 				return false;
 			}
 
@@ -498,10 +680,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return enterField.Checked() == check;
 		}
 
+		
+
+		
 		public bool ClickButton(string button)
 		{
-			var buttonList = containerElement.FindElements(By.XPath(".//button"));
-			var matchingButton = buttonList.FirstOrDefault(x => x.FindElement(By.XPath(".//span")).GetValue().Trim() == button);
+			var buttonList = containerElement.FindElements(By.XPath(".//button/span"));
+			var matchingButton = buttonList.FirstOrDefault(x=>x.GetValue().Trim() == button);
 			if (matchingButton == null)
 			{
 				Report.Info("no matching button was found");

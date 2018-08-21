@@ -7,6 +7,7 @@ using Castle.Core.Internal;
 using iTextSharp.text;
 using ResourcePool;
 using System.IO;
+using OpenQA.Selenium;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -416,6 +417,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void SaveProductInformation(string savedas)
 		{
 			var prodDetails = new NewProduct().GetCurrentProductInformation();
+			Report.Info("SAving product: " + prodDetails.Id + ",  " + prodDetails.Name);
 			Context.AddToContext(savedas, prodDetails);
 			Report.Success("Product Information saved!");
 		}

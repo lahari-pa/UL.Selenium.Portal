@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using System.Linq;
+using OpenQA.Selenium;
 using ResourcePool;
 using SeleniumUtilities;
 
@@ -8,19 +10,36 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
 	public static class GeneralUtilities
 	{
+		public static bool StudioWaitForSpinner()
+		{
+			try
+			{
+				var spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+				while (spinner.Any(x => x.Displayed))
+				{
+					Delay.Seconds(Delay.SpeedFactor * 1);
+					spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+				}
+
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public static bool Wait_for_load_finish()
 		{
 			Delay.Seconds(Delay.SpeedFactor * 1);
-			var bodyElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2);
-			if (bodyElement == null)
+			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2) == null)
 			{
 				return true;
 			}
 
-			while (bodyElement.GetAttribute("class").Contains("pace-running"))
+			while (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2).GetAttribute("class").Contains("pace-running"))
 			{
 				Delay.Seconds(Delay.SpeedFactor * 1);
-				bodyElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2);
 			}
 
 			return true;
