@@ -182,6 +182,163 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[78936] Select Retailers - Show Logo Tile View")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Retailer Selection")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerSelection")]
+        public virtual void _78936SelectRetailers_ShowLogoTileView()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[78936] Select Retailers - Show Logo Tile View", ((string[])(null)));
+#line 60
+this.ScenarioSetup(scenarioInfo);
+#line 62
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 64
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 66
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 68
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Soap (Bar, Liquid) for Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 70
+testRunner.Then("I save the product information as: TestCase78936", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 72
+testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
+                    "Solid - State&Subcat - Mixed&Water -random - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 75
+testRunner.Given("I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direc" +
+                    "t Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table4.AddRow(new string[] {
+                        "Chlorine",
+                        "100",
+                        "false",
+                        "false",
+                        ""});
+#line 77
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table4, "Given ");
+#line 81
+testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 83
+testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+                    "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 85
+testRunner.Then("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 87
+testRunner.Given("I click the Logo tile view retailers option in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 89
+testRunner.Then("I confirm that retailers are displayed in tile view with checkboxes next to each", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 91
+testRunner.Given("In the \'Select Retailers\' window I select the retailer: Petco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Retailer"});
+            table5.AddRow(new string[] {
+                        "Petco"});
+#line 93
+testRunner.Then("The selected retailers on the Retailer page should be:", ((string)(null)), table5, "Then ");
+#line 97
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase78936", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[78937] Select Retailers - Select All")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Retailer Selection")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerSelection")]
+        public virtual void _78937SelectRetailers_SelectAll()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[78937] Select Retailers - Select All", ((string[])(null)));
+#line 99
+this.ScenarioSetup(scenarioInfo);
+#line 101
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 103
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 105
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 107
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Soap (Bar, Liquid) for Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 109
+testRunner.Then("I save the product information as: TestCase78937", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 111
+testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
+                    "Solid - State&Subcat - Mixed&Water -random - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 114
+testRunner.Given("I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direc" +
+                    "t Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table6.AddRow(new string[] {
+                        "Chlorine",
+                        "100",
+                        "false",
+                        "false",
+                        ""});
+#line 116
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table6, "Given ");
+#line 120
+testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 122
+testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+                    "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 124
+testRunner.Then("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 126
+testRunner.Given("I click the Select all retailers option in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 128
+testRunner.Then("all retailers are selected in the Select Retailers window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 130
+testRunner.Given("I save all retailers in the Select Retailers window in alphabetical order as: All" +
+                    "SelectRetailers78937", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 132
+testRunner.Given("I click Done in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 134
+testRunner.Then("the selected retailers on the Retailer page should match the retailer list saved " +
+                    "as AllSelectRetailers78937", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 136
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase78937", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

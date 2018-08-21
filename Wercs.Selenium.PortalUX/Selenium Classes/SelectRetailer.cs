@@ -72,26 +72,65 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return allSelected.Select(x => x.FindElement(By.XPath("./following-sibling::span[contains(@data-bind,'retailer.description')]")).Text).ToList();
 		}
 
+		public List<string> AllRetailers()
+		{
+			var allRetailers = containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).ToList();
+			if (allRetailers.IsNullOrEmpty())
+			{
+				return new List<string>();
+			}
+			allRetailers.LastOrDefault().ScrollElementIntoView();
+			return allRetailers.Select(x => x.FindElement(By.XPath("./following-sibling::span")).Text).Distinct().ToList();
+
+		}
+
 		public bool ClickRetailerOption(string option)
 		{
+			var toggleEl = containerElement.FindElement(By.XPath(".//a[@class='small-link' and contains(@data-bind,'toggleRetailerListView')]"), 2);
 			switch (option.ToLower())
 			{
 				case "list view":
-					return containerElement.FindElement(By.XPath(".//div[@id='select-retailers-dialog']//a[@class='small-link' and contains(@data-bind,'toggleRetailerListView')]"), 2).TryClick();
+					if (toggleEl != null && toggleEl.Text.ToLower().Contains("logo tile view"))
+					{
+						Report.Info("The Select Retailers option was already set to: " + option);
+						return true;
+					}
+					return toggleEl.TryClick();
+				case "logo tile view":
+					if (toggleEl != null && toggleEl.Text.ToLower().Contains("list view"))
+					{
+						Report.Info("The Select Retailers option was already set to: " + option);
+						return true;
+					}
+					return toggleEl.TryClick();
 				case "select all":
-					return containerElement.FindElement(By.XPath(".//div[@id='select-retailers-dialog']//a[@class='small-link' and contains(@data-bind,'selectAll')]"), 2).TryClick();
+					return containerElement.FindElement(By.XPath(".//a[@class='small-link' and contains(@data-bind,'selectAll')]"), 2).TryClick();
 				default:
 					return false;
 			}
 		}
 
-		public bool RetailersShownInListView()
+		public bool RetailersShownInViewType(string viewType)
 		{
-			return containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//input[@type='checkbox']]"), 2) != null;
+			if (viewType == "list")
+			{
+				return containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//input[@type='checkbox']]"), 2) != null;
+			}
+			if (viewType == "tile")
+			{
+				return containerElement.FindElement(By.XPath(".//div[contains(@class,'control-group') and .//input[@type='checkbox']]"), 2) != null;
+			}
+			Report.Info("List type must be specified as either 'list' or 'tile'");
+			return false;
 		}
 		public bool SelectRetailerFromListView(string retailer)
 		{
-			return containerElement.FindElement(By.XPath(@".//div[contains(@class,'list-view') and .//span[contains(text(),"" + retailer + @"")]]//input"),2).TryClick();
+			return containerElement.FindElement(By.XPath(@".//div[contains(@class,'list-view') and .//span[contains(text(),"" + retailer + @"")]]//input"), 2).TryClick();
+		}
+
+		public List<string> RetailersNotSelected()
+		{
+			return containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span")).Text).ToList();
 		}
 	}
 }

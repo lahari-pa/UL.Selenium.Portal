@@ -3496,13 +3496,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
 		public void ClickRetailersOptionInTheSelectRetailersPopup(string option)
 		{
-			Report.IsTrue(new SelectRetailers().ClickRetailerOption(option), "Failed to click the retailers option: " + option, "Successfully clicked the retailers option: " + option);
+			Report.IsTrue(new SelectRetailers().ClickRetailerOption(option) && GeneralUtilities.Wait_for_load_finish(), "Failed to click the retailers option: " + option, "Successfully clicked the retailers option: " + option);
 		}
 
-		[StepDefinition(@"I confirm that retailers are displayed in list view with checkboxes next to each")]
-		public void ConfirmRetailersAreDisplayedInListView()
+		[StepDefinition(@"I confirm that retailers are displayed in (list|tile) view with checkboxes next to each")]
+		public void ConfirmRetailersAreDisplayedInViewType(string viewType)
 		{
-			Report.IsTrue(new SelectRetailers().RetailersShownInListView(), "Retailers were not shown in list view with checkboxes!", "Retailers were shown in list view with checkboxes");
+			Report.IsTrue(new SelectRetailers().RetailersShownInViewType(viewType),
+				"Retailers were not shown in " + viewType + " view with checkboxes!",
+				"Retailers were shown in " + viewType + " view with checkboxes");
 		}
 
 		[StepDefinition(@"I select the following retailers in the Select Retailers popup list view:")]
@@ -3523,5 +3525,60 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done in the Select Retailers pop up!", "Successfully clicked Done in the Select Retailers pop up");
 		}
 
+		[StepDefinition(@"the following retailers are selected in the Select Retailers window")]
+		public void SelectedRetailersInSelectRetailersWindow(Table retailers)
+		{
+			var selSelectRetailers = new SelectRetailers();
+			var expectedSelected = new List<string>();
+			retailers.Rows.ForEach(x => expectedSelected.Add(x["Retailer"]));
+			var actualSelected = selSelectRetailers.SelectedRetailers();
+			Report.IsTrue(expectedSelected.All(x => actualSelected.Contains(x)),
+				"Not all of the expected retailers were selected!",
+				"All of the expected retailers were selected");
+		}
+
+		[StepDefinition(@"all retailers are selected in the Select Retailers window")]
+		public void AllRetailersAreSelectedInSelectRetailersWindow()
+		{
+			var selSelectRetailers = new SelectRetailers();
+			var notSelected = selSelectRetailers.RetailersNotSelected();
+			if (notSelected.Count > 0)
+			{
+				Report.Failure("Some retailers were not selected: " + string.Join(", ", notSelected));
+				Report.Screenshot();
+				return;
+			}
+			Report.Success("All retailers were selected as expected");
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I save all retailers in the Select Retailers window in alphabetical order as: (.*)")]
+		public void SaveAllRetailersInSelectRetailersWindowAlphabetical(string savedAs)
+		{
+			var selSelectRetailers = new SelectRetailers();
+			var allRetailers = selSelectRetailers.AllRetailers().OrderBy(x => x).ToList();
+			Context.AddToContext(savedAs, allRetailers);
+		}
+
+		[StepDefinition(@"the selected retailers on the Retailer page should match the retailer list saved as (.*)")]
+		public void SelectedRetailersOnRetailerPageShouldMatchSavedAs(string savedAs)
+		{
+			var retailerList = (List<string>)Context.GetFromContext(savedAs);
+			if (retailerList == null)
+			{
+				Report.Failure("No retailer list saved as: " + savedAs + " was found in context!");
+				return;
+			}
+			var actualRetailers = new NewProduct().SelectedRetailers();
+			bool match = !retailerList.Except(actualRetailers).Any() && retailerList.Count == actualRetailers.Count;
+			if (match)
+			{
+				Report.Success("The actual list of retailers matched the expected retailers.");
+				Report.Screenshot();
+				return;
+			}
+			Report.Failure("The actual list of retailers did not match the expected retailers! The differences were: " + string.Join(", ", retailerList.Except(actualRetailers)));
+			Report.Screenshot();
+		}
 	}
 }
