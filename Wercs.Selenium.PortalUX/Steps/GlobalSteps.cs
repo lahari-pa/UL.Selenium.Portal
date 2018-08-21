@@ -37,16 +37,12 @@ namespace WERCSmart
 						{
 							GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
 							GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
-							GlobalParametersPortal.SHAUser = "QASHA";
-							GlobalParametersPortal.SHAPassword = "Welcome1!";
 							break;
 						}
 					case ("staging"):
 						{
 							GlobalParameters.TestUrl = @"https://staging.thewercs.com/Wercs.SHA.MVCWebV1/";
 							GlobalParametersPortal.SHAUrl = @"http://66.194.55.181/Wercs.Studio.Web/logon.aspx?ReturnUrl=%2fWercs.Studio.Web";
-							GlobalParametersPortal.SHAUser = "QASHA";
-							GlobalParametersPortal.SHAPassword = "Welcome2@";
 							break;
 						}
 
@@ -54,8 +50,6 @@ namespace WERCSmart
 						{
 							GlobalParameters.TestUrl = @"";
 							GlobalParametersPortal.SHAUrl = @"http://66.194.55.180/Wercs.Studio.Web/logon.aspx";
-							GlobalParametersPortal.SHAUser = "QASHA";
-							GlobalParametersPortal.SHAPassword = "Welcome1!";
 							break;
 						}
 

@@ -39,8 +39,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenILoginToStudioAsAdministrator()
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
-			thisStudioLogin.Username = GlobalParametersPortal.SHAUser;
-			thisStudioLogin.Password = GlobalParametersPortal.SHAPassword;
+			var shaUser = TReVor.TestUsers.GetUserSavedAs("SHAUser");
+			thisStudioLogin.Username = shaUser.Username;
+			thisStudioLogin.Password = shaUser.Password;
 			thisStudioLogin.ClickSignIn();
 			StudioDesktop thisStudioDesktop = new StudioDesktop();
 			Report.IsTrue(thisStudioDesktop.Wait_for_load(120), "Studio desktop is not showing as expected.",
