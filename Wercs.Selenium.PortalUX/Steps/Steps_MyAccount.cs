@@ -825,6 +825,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				string adminName = thisRow["Admin Name"];
 				Report.Info("Admin Name = '" + adminName + "'");
 				string emailAddress = thisRow["Email Address"];
+
+				if (emailAddress.StartsWith("<") && emailAddress.EndsWith(">"))
+				{
+					emailAddress = TReVor.TestUsers.GetUserSavedAs(emailAddress.TrimStart('<').TrimEnd('>')).Username;
+				}
+
 				Report.Info("Email Address = '" + emailAddress + "'");
 				string supplierType = thisRow["Supplier Type"];
 				Report.Info("Supplier Type = '" + supplierType + "'");

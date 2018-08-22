@@ -1760,8 +1760,7 @@ testRunner.Then("In the Payment Methods screen I click Continue", ((string)(null
 #line 617
 testRunner.Then("the PayPal page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 618
-testRunner.Given("I log into PayPal with email: subpp2.kxxyxunf@mailosaur.io and password: Thewercs" +
-                    "2@ and click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I log into PayPal with user saved as: PayPal and click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 619
 testRunner.Given("the Purchase Summary should be loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 620

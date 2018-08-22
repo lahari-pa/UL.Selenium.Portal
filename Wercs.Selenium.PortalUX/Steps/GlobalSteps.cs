@@ -65,94 +65,67 @@ namespace WERCSmart
 
 
 
-		[StepDefinition(@"I login into the WERCSmart Portal - Administrator Role")]
 		[StepDefinition(@"I login as the administrator")]
 		[StepDefinition(@"I login as the administrator")]
 		[When(@"I login as the administrator")]
 		[Then(@"I login as the administrator")]
 		public void GivenILoginAsTheAdministrator()
 		{
-			TestReport.BeginTestModule(ResourcePool.GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator");
-			try
-			{
-				//GivenILogInWithEmailXAndPasswordY(GlobalParameters.Admin1, GlobalParameters.AdminPassword1);
-				GivenLoginIntoWERCSmartPortal_AdminRoleProducts();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			LoginToAccount("ProductAccount");
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs Visual Account")]
-		public void GivenLoginIntoWERCSmartPortal_AdministratorRole()
+		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account)")]
+		public void LoginToWERCSmartAdmin(string type)
 		{
-			var username = @"automatedcompany1.kxxyxunf@mailosaur.io";
-			var password = "Welcome1!";
-			GivenILogInWithEmailXAndPasswordY(username, password);
+			switch (type)
+			{
+				case ("WERCs Visual Account"):
+					LoginToAccount("VisualAccount");
+					break;
+				case ("WERCs Premium Subscription Account"):
+					LoginToAccount("PremiumSubscriptionAccount");
+					break;
+				case ("WERCs Product Account"):
+					LoginToAccount("ProductAccount");
+					break;
+				case ("WERCs ULSC Account"):
+					LoginToAccount("ULSCAccount");
+					break;
+			}
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account")]
-		public void GivenLoginIntoWERCSmartPortal_AutomatedPremium()
+		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role)")]
+		public void LoginToWERCSmart(string type)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal asPremium Subscription Account into the WERCs Account");
-			try
+			switch (type)
 			{
-				var username = @"AutomatedPremium.kxxyxunf@mailosaur.io";
-				var password = "Welcome1!";
-				GivenILogInWithEmailXAndPasswordY(username, password);
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
+				case ("data consent Account"):
+					LoginToAccount("DataConsentAccount");
+					break;
+				case ("Division Account"):
+					LoginToAccount("DivisionAccount");
+					break;
+				case ("Administrator Role"):
+					LoginToAccount("ProductAccount");
+					break;
 			}
 		}
 
-		[Given(@"I Login into WERCSmart Portal - data consent Account")]
-		public void GivenILoginIntoWERCSmartPortal_DataConsentAccount()
+		[StepDefinition(@"I log in with the (subscription|without subscription) without products account")]
+		public void LoginWithSubscriptionType(string type)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal using data consent Account");
-			try
+			switch (type)
 			{
-
-				var username = @"dataconsent.kxxyxunf@mailosaur.io";
-				var password = "Welcome1!";
-				GivenILogInWithEmailXAndPasswordY(username, password);
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
+				case ("subscription"):
+					LoginToAccount("SubCart");
+					break;
+				case ("without subscription"):
+					LoginToAccount("ProductsInCart");
+					break;
 			}
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs Product Account")]
-		public void GivenLoginIntoWERCSmartPortal_AdminRoleProducts()
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator into the WERCs Account");
-			try
-			{
-				var username = @"AllRetailersProductsCompany.kxxyxunf@mailosaur.io"; /*@"AllRetailersProductsCompany.kxxyxunf@mailosaur.io";*/
-																					 //var username = @"dataconsentalwaysdisplay.kxxyxunf@mailosaur.io";
-				var password = "Welcome1!";
-				GivenILogInWithEmailXAndPasswordY(username, password);
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Division Account")]
-		public void GivenLoginIntoWERCSmartPortal_DivisionAccount()
-		{
-			var username = @"automateddivision.kxxyxunf@mailosaur.io";
-			var password = "Welcome1!";
-			GivenILogInWithEmailXAndPasswordY(username, password);
-		}
 
 		[Then(@"The home screen should load")]
 		public void ThenTheHomeScreenShouldLoad()
@@ -162,23 +135,12 @@ namespace WERCSmart
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-
-
-
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account")]
-		public void GivenLoginIntoWERCSmartPortal_AdminUlscRole()
+		public void LoginToAccount(string accountSavedAs)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Log into WERCSmart Portal as Administrator into the WERCs ULSC Account");
-			try
+			var user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs);
+			if(Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
 			{
-				var username = @"automatedULSC.kxxyxunf@mailosaur.io ";
-				var password = "Welcome1!";
-				GivenILogInWithEmailXAndPasswordY(username, password);
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
+				GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 			}
 		}
 
@@ -206,22 +168,6 @@ namespace WERCSmart
 			Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 			GeneralUtilities.Wait_for_load_finish();
 			GivenIfAModalDialogOpensICloseIt();
-		}
-
-		[StepDefinition(@"I log in with the subscription without products account")]
-		public void LogInWithTheSubscriptionWithoutProductsAccount()
-		{
-			var username = @"subcart.kxxyxunf@mailosaur.io";
-			var password = "Welcome1!";
-			GivenILogInWithEmailXAndPasswordY(username, password);
-		}
-
-		[StepDefinition(@"I log in with the without subscription without products account")]
-		public void LogInWithTheWithoutSubscriptionWithoutProductsAccount()
-		{
-			var username = @"productsincart.kxxyxunf@mailosaur.io";
-			var password = "Welcome1!";
-			GivenILogInWithEmailXAndPasswordY(username, password);
 		}
 
 

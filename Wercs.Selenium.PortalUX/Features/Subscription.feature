@@ -615,7 +615,7 @@ Then In the Payment Methods screen I select Payment Method: PayPal
 Then In the Payment Methods screen I confirm the following text message appears for PayPal: In order to successfully subscribe with PayPal, please click continue. When you click "Continue", you will be redirected to PayPal to establish the payment agreement.
 Then In the Payment Methods screen I click Continue
 Then the PayPal page should load
-Given I log into PayPal with email: subpp2.kxxyxunf@mailosaur.io and password: Thewercs2@ and click Continue
+Given I log into PayPal with user saved as: PayPal and click Continue
 Given the Purchase Summary should be loaded
 Then In the Purchase Summary screen I check the Subscription Billing header is correct
 Then In the Purchase Summary screen I confirm the Yearly Radio Option is selected

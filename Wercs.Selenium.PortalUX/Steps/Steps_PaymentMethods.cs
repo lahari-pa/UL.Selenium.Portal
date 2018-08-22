@@ -843,6 +843,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+
+		[StepDefinition(@"I log into PayPal with user saved as: (.*) and click Continue")]
+		public void GivenILogInWithEmailAndPassword(string savedAs)
+		{
+			var user = TReVor.TestUsers.GetUserSavedAs(savedAs);
+			GivenILogInWithEmailAndPassword(user.Username, user.Password);
+		}
+
 		[StepDefinition(@"I log into PayPal with email: (.*) and password: (.*) and click Continue")]
 		public void GivenILogInWithEmailAndPassword(string username, string password)
 		{

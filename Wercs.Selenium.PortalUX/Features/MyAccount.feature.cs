@@ -353,7 +353,7 @@ testRunner.Given("In the My Account page I navigate to the Company Information p
             table2.AddRow(new string[] {
                         "Visual",
                         "Automated, Visual Company",
-                        "automatedcompany1.kxxyxunf@mailosaur.io",
+                        "<VisualAccount>",
                         "Manufacturer",
                         "United States",
                         "31 British American Blvd",

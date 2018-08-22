@@ -98,6 +98,6 @@ Given I click on My Account
 Given In the My Account page I navigate to the Company Information page
 
 Then In the Company Information page I confirm the Company Information is correct
-| Company Name | Admin Name                | Email Address                           | Supplier Type | Country       | Address                  | City   | State | Zip Code | Country Code | Phone        |
-| Visual       | Automated, Visual Company | automatedcompany1.kxxyxunf@mailosaur.io | Manufacturer  | United States | 31 British American Blvd | Latham | NY    | 12110    | 1            | 555-555-5555 |
+| Company Name | Admin Name                | Email Address   | Supplier Type | Country       | Address                  | City   | State | Zip Code | Country Code | Phone        |
+| Visual       | Automated, Visual Company | <VisualAccount> | Manufacturer  | United States | 31 British American Blvd | Latham | NY    | 12110    | 1            | 555-555-5555 |
 
