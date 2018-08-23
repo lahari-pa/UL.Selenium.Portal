@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using ResourcePool;
 using SafewareReporting;
+using SeleniumUtilities;
 using TechTalk.SpecFlow;
 
 using Wercs.Selenium.PortalUX.Selenium_Classes;
@@ -106,6 +108,139 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I enter the text: (.*) in the 'Search by WPS ID or Product Name' field")]
+		public void EnterTextInSearchByIDOrProductNameField(string value)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.EnterTextToSearchField(value),
+				"Failed to enter text: " + value + " to the search field",
+				"Successfully entered text: " + value + " to the search field");
+			Delay.Seconds(2);
+		}
+
+		[StepDefinition(@"I click continue on the Forward Product Registration page")]
+		public void ClickContinueForwardProductRegistration()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ClickContinue() && GeneralUtilities.Wait_for_load_finish(),
+				"Failed to click continue", "Successfully clicked continue");
+		}
+
+		[StepDefinition(@"I select the first product under the Select Products tab")]
+		public void SelectTheFirstProduct()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ClickTheFirstProductCheckbox(),
+				"Failed to select the first returned product!",
+				"Successfully selected the first returned product");
+			Delay.Seconds(2);
+		}
+		[StepDefinition(@"I select the first product under the Select UPCs tab")]
+		public void SelectTheFirstProductSelectUPCs()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectFirstProduct_SelectUPCs(),
+				"Failed to select the first returned product!",
+				"Successfully selected the first returned product");
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"in the Select Retailers tab under Forward Product Registration I select the retailer: (.*)")]
+		public void SelectRetailer(string retailer)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectRetailer(retailer),
+				"Failed to select retailer: " + retailer,
+				"Successfully selected retailer: " + retailer);
+		}
+
+		[StepDefinition(@"I confirm that all Walmart affiliate retail parters are selected")]
+		public void AllWalmartAffiliatesSelected()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.AllWalMartAffiliatesSelected(),
+				"Not all Walmart affiliate partners were selected!",
+				"All Walart affiliate partners were selected");
+		}
+
+		[StepDefinition(@"I confirm the active Forward Product Registration tab is: (.*)")]
+		public void ActiveTabIsCorrect(string expectedTab)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			var actualTab = selForwardProdReg.ActiveTab();
+			if (actualTab == null)
+			{
+				Report.Failure("Could not find an active tab in the Forward Product Registration page");
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(actualTab == expectedTab,
+				"The actual active tab did not match the expected tab! Expected: " + expectedTab + ". Actual: " + actualTab,
+				"The actual active tab matched the expected tab: " + actualTab);
+		}
+
+		[StepDefinition(@"I select the Vendor option: (.*) for the first product displayed under the Select UPCs tab")]
+		public void SelectVendor(string value)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.FirstProductSelectVendor(value),
+				"Failed to select vendor: " + value,
+				"Successfully selected vendor: " + value);
+		}
+
+		[StepDefinition(@"I select the first UPC in the grid under the Select UPCs tab")]
+		public void SelectFirstUPC()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectFirstUPC(),
+				"Failed to select the first UPC",
+				"Successfully selecte the first UPC");
+		}
+
+		[StepDefinition(@"I confirm that: (.*) is displayed in the Destination Retailers column under Select UPCs")]
+		public void ConfirmDestinationRetailersColumnSelectUPCs(string value)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			var upcs = selForwardProdReg.GetUPCs();
+			if (upcs.Count == 0)
+			{
+				Report.Failure("No UPC rows were found in the grid");
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("There were: " + upcs.Count + " UPCs to check");
+			if (upcs.All(x => x.UPCInfo.DestinationRetailers == value))
+			{
+				Report.Success("The Destination Retailers column was showing: " + value + " as expected");
+				Report.Screenshot();
+				return;
+			}
+			Report.Failure("The following UPCs were not showing the value: " + value + " under Destination Retailers! - " + string.Join(", ", upcs.Where(x => x.UPCInfo.DestinationRetailers != value).Select(x => x.UPCInfo.UPCNumber).ToList()));
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm that: (.*) is displayed in the Destination Retailers column under Product Results")]
+		public void ConfirmDestinationRetailersColumnProductResults(string value)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			var prodResults = selForwardProdReg.GetProductResults();
+			if (prodResults.Count == 0)
+			{
+				Report.Failure("No product rows were found on the Product Results page!");
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("There were: " + prodResults.Count + " product results to check");
+			if (prodResults.All(x => x.UPCs.All(y => y.DestinationRetailers == value)))
+			{
+				Report.Success("The Destination Retailers column was showing: " + value + " as expected");
+				Report.Screenshot();
+				return;
+			}
+			Report.Failure("The following product results were not showing the value: " + value + " under Destination Retailers! - " + string.Join(", ", prodResults.Where(x => x.UPCs.Any(y => y.DestinationRetailers != value)).Select(x => x.ProductHeader).ToList()));
+			Report.Screenshot();
 		}
 	}
 }

@@ -365,7 +365,42 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var selNav = new NavigationBar();
 				GeneralUtilities.Wait_for_load_finish();
 				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
+				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I click the Home navigation icon and (accept|dismiss) the alert popup")]
+		public void ThenINavigateToTheHomePage(string alertAction)
+		{
+			try
+			{
+				Report.Info("Navigating to the Home Page");
+				var selNav = new NavigationBar();
+				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!");
+				// Screenshot throws exception while an alert is open - selenium utils needs updating
+				//Report.Screenshot();
+				if (alertAction == "accept")
+				{
+					Report.Info("Accepting the pop up alert");
+					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				}
+
+				if (alertAction == "dismiss")
+				{
+					Report.Info("Dismissing the pop up alert");
+					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Dismiss();
+				}
+				GeneralUtilities.Wait_for_load_finish();
+				var selHomepage = new Homepage();
+				Report.IsTrue(selHomepage.Wait_for_load(),
+					"Homepage did not load after clicking the Home icon!",
+					"Homepage successfully loaded after clicking the home icon");
 			}
 			catch (Exception ex)
 			{

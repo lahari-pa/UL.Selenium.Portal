@@ -442,19 +442,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I click (Forward Product Registration|Sync Products|Accept Documents|Download Reports|Delete Products) in the Bulk Actions window")]
 		public void GivenIClickForwardProductRegistrationInTheBulkActionsWindow(string option)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking " + option + " in the Bulk Actions window");
-			try
-			{
-				Report.Info("Clicking " + option + " in the Bulk Actions window");
-				var selBulkActions = new BulkActions();
-				Report.IsTrue(selBulkActions.ClickOption(option), "Failed to click option: '" + option + "'", "Successfully clicked option: '" + option + "'");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Clicking " + option + " in the Bulk Actions window");
+			var selBulkActions = new BulkActions();
+			Report.IsTrue(selBulkActions.ClickOption(option) && GeneralUtilities.Wait_for_load_finish(),
+				"Failed to click option: '" + option + "'",
+				"Successfully clicked option: '" + option + "'");
 		}
 
 		/// <summary>

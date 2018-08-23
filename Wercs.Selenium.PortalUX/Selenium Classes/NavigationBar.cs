@@ -115,9 +115,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Info("Icons found: " + string.Join(",", allIcons.ToList().Select(x => x.GetAttribute("title").Trim())));
 				return false;
 			}
-			icon.FindElement(By.XPath(".."), 2).Click();
-			GeneralUtilities.Wait_for_load_finish();
-			return true;
+			return icon.FindElement(By.XPath(".."), 2).TryClick();
 		}
 	}
 

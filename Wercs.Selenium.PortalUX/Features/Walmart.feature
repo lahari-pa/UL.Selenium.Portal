@@ -8,6 +8,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@ForwardProductRegistration
 @run_Walmart
 
 Feature: Walmart
@@ -156,7 +157,6 @@ Given I check that Walmart and all of its affiliates are not available
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74133
 
-@test74017
 Scenario: [74017] Walmart Affiliates when Adding a UPC
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -203,7 +203,6 @@ Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Ty
 # select Wal-mart/ SAMs CLUB
 # confirm WM under Destination Retailers
 
-@test73919
 Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -238,3 +237,53 @@ Then the 'Select Retailers' window appears
 Given I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73919
+
+Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click Bulk Actions in the Products Grid
+
+Then I should see a popup with header Bulk Actions
+
+Given I click Forward Product Registration in the Bulk Actions window
+
+Then I should see the header: Forward Product Registration on the Forward Product Registration window
+
+And I confirm the active Forward Product Registration tab is: Select Products
+
+Given I enter the text: 1 in the 'Search by WPS ID or Product Name' field
+
+Given I select the first product under the Select Products tab
+
+Given I click continue on the Forward Product Registration page
+
+Then I confirm the active Forward Product Registration tab is: Select Retailers
+
+Given in the Select Retailers tab under Forward Product Registration I select the retailer: Wal-Mart/SAM'S CLUB
+
+Then I confirm that all Walmart affiliate retail parters are selected
+
+Given I click continue on the Forward Product Registration page
+
+Then I confirm the active Forward Product Registration tab is: Select UPCs
+
+# 'Private Label' dropdown is a required field for some products
+
+Given I select the first product under the Select UPCs tab
+
+Given I select the Vendor option: test for the first product displayed under the Select UPCs tab
+
+Given I select the first UPC in the grid under the Select UPCs tab
+
+Then I confirm that: WM is displayed in the Destination Retailers column under Select UPCs
+
+Given I click continue on the Forward Product Registration page
+
+Then I confirm the active Forward Product Registration tab is: Product Results
+
+And I confirm that: WM is displayed in the Destination Retailers column under Product Results
+
+Given I click the Home navigation icon and accept the alert popup

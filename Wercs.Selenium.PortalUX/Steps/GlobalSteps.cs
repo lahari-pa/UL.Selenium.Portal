@@ -765,5 +765,21 @@ namespace WERCSmart
 			Report.Failure("Failed to find the correct tab!");
 			Report.Screenshot();
 		}
+
+		[StepDefinition("I (accept|dismiss) the alert pop up")]
+		public void ConfirmThealertPopup(string action)
+		{
+			if (action == "accept")
+			{
+				Report.Info("Accepting the pop up alert");
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+
+			if (action == "dismiss")
+			{
+				Report.Info("Dismissing the pop up alert");
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Dismiss();
+			}
+		}
 	}
 }
