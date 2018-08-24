@@ -65,7 +65,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//a[@data-bind='click: next']"), 2).TryClick();
 		}
 
-		public bool ClickTheFirstProductCheckbox()
+		public bool SelectProducts_ClickTheFirstProductCheckbox()
 		{
 			var productRows = containerElement.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
 			if (productRows.Count == 0)
@@ -81,6 +81,79 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 			}
 			return false;
+		}
+
+		public bool SelectProducts_ClickProductByID(string id)
+		{
+			var productRow = containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
+			if (productRow == null)
+			{
+				Report.Info("Could not find product row for product ID: " + id);
+				return false;
+			}
+			return productRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2).TryClick();
+		}
+		public void SelectProducts_ClickProductByID_(string id)
+		{
+			var productRow = containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
+			if (productRow == null)
+			{
+				Report.Info("Could not find product row for product ID: " + id);
+				return;
+			}
+			productRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2).Click();
+			Report.Screenshot();
+		}
+
+		public string SelectProducts_FirstProductID()
+		{
+			var productRows = containerElement.FindElements(By.XPath(".//table[contains(@data-bind,'searchResults')]/tbody/tr"), 2).ToList();
+			if (productRows.Count == 0)
+			{
+				Report.Info("No product rows were returned!");
+				return null;
+			}
+			foreach (var row in productRows)
+			{
+				if (row.FindElement(By.XPath(".//input[@type='checkbox']"), 2) != null)
+				{
+					return row.FindElement(By.XPath(".//label[contains(@data-bind,'wpsid')]"), 2)?.Text;
+				}
+			}
+			return null;
+		}
+
+		public bool SelectProducts_ProductIsChecked(string id)
+		{
+			var productRow = containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
+			if (productRow == null)
+			{
+				Report.Info("Could not find product row for product ID: " + id);
+				return false;
+			}
+			return productRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2).Checked();
+		}
+		public bool SelectProducts_ProductCheckboxDisabled(bool disabledCheck)
+		{
+			var inputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox']"), 2);
+			if (!inputs.Any())
+			{
+				return false;
+			}
+			var disabledInputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
+			int timer = 0;
+			bool disabled = !disabledCheck;
+			while (timer < 100 && disabled != disabledCheck)
+			{
+				if (disabledInputs.Any())
+				{
+					disabled = disabledCheck;
+				}
+				Delay.Seconds(0.1);
+				disabledInputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
+				timer++;
+			}
+			return disabled;
 		}
 
 		public bool SelectRetailer(string retailer)
@@ -105,10 +178,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var retailerInput = retailers.Select(x => x.FindElement(By.XPath(".//input"), 2)).ToList();
 			return retailerInput.All(x => x.Checked());
 		}
+
 		public string ActiveTab()
 		{
 			return containerElement.FindElement(By.XPath(".//div[@class='prog-step active']"), 2)?.Text;
 		}
+
 		public bool FirstProductSelectVendor(string option)
 		{
 			var products = this.GetProducts();
@@ -166,6 +241,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return rUPCs;
 		}
+
 		public List<SelectProducts> GetProducts()
 		{
 			var rProducts = new List<SelectProducts>();
@@ -240,26 +316,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					select.Select(value);
 				}
 			}
-			public string PrivateLabel { get; set; }
 			public bool ClickProduct()
 			{
 				var row = containerElement.FindElement(By.XPath(".//tr[@id='" + InternalID + "']"), 2);
 				return row.TryClick() && row.GetAttribute("class") == "active";
 			}
-			public bool ClickAction(string action)
-			{
-				var row = containerElement.FindElement(By.XPath(".//tr[@id='" + InternalID + "']"), 2);
-				if (action.ToLower() == "edit")
-				{
-					return row.FindElement(By.XPath(".//a[contains(@data-bind,'toggleEdit')]"), 2).TryClick();
-				}
-				if (action.ToLower() == "remove")
-				{
-					return row.FindElement(By.XPath(".//a[contains(@data-bind,'removeProd')]"), 2).TryClick();
-				}
-				return false;
-			}
 		}
+
 		public class SelectUPCs : ForwardProductRegistration
 		{
 			public UPC UPCInfo { get; set; }

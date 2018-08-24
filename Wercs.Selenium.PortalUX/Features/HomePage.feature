@@ -276,40 +276,6 @@ And I click Row Actions for the most recent product returned
 Then I click on the Row Action: UPC Update
 And UNDER DEVELOPMENT
 
-#pass - staging 4.10
-Scenario: [56223] Bulk Actions - Forward Product Registration navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then the WERCSmart homepage should load
-Given I click Bulk Actions in the Products Grid
-And I click Forward Product Registration in the Bulk Actions window
-Then I should see the header: Forward Product Registration on the Forward Product Registration window
-And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
-
-#pass - staging 4.10
-#This test cases uses the ULSC account
-Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
-Then the WERCSmart homepage should load
-Given I click Bulk Actions in the Products Grid
-And I click Sync Products in the Bulk Actions window
-And I should see the header: Sync Products to ULSC on the Sync Products to ULSC window
-Then I click on the cancel button on the ULSC Sync popup
-And I should see the Subheading Alerts in the main window
-
-Scenario: [56225] Bulk Actions - Accept Documents navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-Then the WERCSmart homepage should load
-Given I click Bulk Actions in the Products Grid
-And I click Accept Documents in the Bulk Actions window
-And I should see the header: Document Acceptance on the Document Acceptance window
-
-Scenario: [56227] Bulk Actions  Delete Products navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-Then the WERCSmart homepage should load
-Given I click Bulk Actions in the Products Grid
-And I click Delete Products in the Bulk Actions window
-And I should see the header: Delete Active Products on the Delete Active Product window
-
 Scenario: [56280] Document is created and is ready for review
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then clicking on the top Alert should direct me to the My Messages page

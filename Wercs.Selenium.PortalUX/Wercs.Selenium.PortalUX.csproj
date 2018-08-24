@@ -151,6 +151,11 @@
     <Compile Include="Classes\GlobalParametersPortal.cs" />
     <Compile Include="Classes\Mailosaur.cs" />
     <Compile Include="Classes\User.cs" />
+    <Compile Include="Features\BulkActions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BulkActions.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ChooseGoodGuide.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -539,6 +544,10 @@
     <None Include=".editorconfig" />
     <None Include="app.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\BulkActions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>BulkActions.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ChooseGoodGuide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
