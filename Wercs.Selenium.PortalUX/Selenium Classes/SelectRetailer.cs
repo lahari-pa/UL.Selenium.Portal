@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
 using SafewareReporting;
+using Global = SeleniumUtilities.Global;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
@@ -132,5 +133,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span")).Text).ToList();
 		}
+	}
+
+	class NoRetailerWarningPopup : BaseDialog
+	{
+		public const string BasePath = "//div[@class='modal fade in']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool ClickOk()
+		{
+			return containerElement.FindElements(By.XPath("//div[@class='modal fade in']//button[contains(text(), 'Ok')]")).FirstOrDefault().TryClick();
+		}
+
 	}
 }

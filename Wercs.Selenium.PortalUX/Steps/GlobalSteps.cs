@@ -45,7 +45,12 @@ namespace WERCSmart
 							GlobalParametersPortal.SHAUrl = @"http://66.194.55.181/Wercs.Studio.Web/logon.aspx?ReturnUrl=%2fWercs.Studio.Web";
 							break;
 						}
-
+					case ("local prod"):
+						{
+							GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/prod/Wercs.SHA.MVCWebV1/";
+							GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3.Prod/logon.aspx";
+							break;
+						}
 					case ("production"):
 						{
 							GlobalParameters.TestUrl = @"";

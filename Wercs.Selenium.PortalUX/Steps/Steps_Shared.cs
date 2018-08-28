@@ -1809,12 +1809,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NoRetailerWarningPopup WarningPopup = new NoRetailerWarningPopup();
 			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
 			MyStepsNewProduct.ThenISelectTheRetailer_InTheWindow("No Retailer/No UPC Product");
 			TestReport.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			TestReport.StartStep("In the Retailer page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
+
+			/* --As per TFS70787 warning popup displays for NR  --- */
+			//Delay.Seconds(1);
+			TestReport.StartStep("In the UPCs Warning popup I click Ok");
+			WarningPopup.ClickOk();
 		}
 
 		[StepDefinition(
@@ -2051,7 +2057,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
 			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
 			TestReport.StartStep(
-				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+				"I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
 			selNewProduct.Prop65 = false;
 			Delay.Seconds(1);
 			Report.IsTrue(!selNewProduct.Prop65, "The Prop 65 option was not set to 'No'", "The Prop 65 option was set to: 'No'");
@@ -4124,5 +4130,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(@"I call Shared 0000 \(Enter Regulatory Information - Not Prop 65\)")]
+		public void GivenICallSharedEnterRegulatoryInformation_No()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Regulatory Information 1 Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
+			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
+			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
+			TestReport.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986", "No");
+			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
 	}
 }
