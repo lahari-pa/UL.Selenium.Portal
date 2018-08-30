@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ResourcePool;
 using SafewareReporting;
@@ -249,9 +250,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var selForwardProdReg = new ForwardProductRegistration();
 			if (Report.IsTrue(selForwardProdReg.SelectProducts_ProductCheckboxDisabled(true), "The product checkbox was not disabled after selecting it", "The product checkbox was disabled after selecting it"))
 			{
-				Report.IsTrue(GeneralUtilities.Wait_for_load_finish() && selForwardProdReg.SelectProducts_ProductCheckboxDisabled(false),
-					"The product checkbox was not re-enabled after the page finished working",
-					"The product checkbox was re-enabled after the page finished working");
+				int counter = 0;
+				while (counter < 120)
+				{
+					var disabled = selForwardProdReg.SelectProducts_ProductCheckboxIsDisabled();
+					var loadingActive = GeneralUtilities.Loading_Active();
+					if (disabled && loadingActive)
+					{
+						counter++;
+						Delay.Seconds(0.5);
+						continue;
+					}
+					if (!disabled && loadingActive)
+					{
+						Report.Failure("The select product option was re-enabled before the page finished working! It is possible to select the product twice");
+						Report.Screenshot();
+						return;
+					}
+
+					if (disabled)
+					{
+						Report.Failure("The select product was still disabled after the page finished loading");
+						Report.Screenshot();
+						return;
+					}
+					counter++;
+					Delay.Seconds(0.5);
+				}
+				Report.IsFalse(selForwardProdReg.SelectProducts_ProductCheckboxIsDisabled() && GeneralUtilities.Loading_Active(), "The page did not refresh after 60 seconds", "The product selection was disabled until the page finished loading as expected");
 			}
 			// test case : confirm the right hand side is disabled while the page is working. I can't verify this manually..
 		}
@@ -274,15 +300,46 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void SelectProductByIDSavedAs(string savedAs)
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
-			var id = Context.GetFromContext(savedAs)?.ToString();
-			if (id == null)
+			if (savedAs.ToLower().Contains("list"))
 			{
-				Report.Failure("Could not find product ID in context saved as: " + savedAs);
-				return;
+				var ids = (List<string>)Context.GetFromContext(savedAs);
+				if (ids == null)
+				{
+					Report.Failure("Could not find product IDs in context saved as: " + savedAs);
+					return;
+				}
+				bool clicked = false;
+				foreach (var id_ in ids)
+				{
+					Report.Info("Attempting to select product with id: " + id_);
+					EnterTextInSearchByIDOrProductNameField(id_);
+					if (selForwardProductReg.SelectProducts_ClickProductByID(id_))
+					{
+						Report.Success("Successfully selected product with ID: " + id_);
+						Report.Screenshot();
+						clicked = true;
+						break;
+					}
+				}
+				if (!clicked)
+				{
+					Report.Failure("Failed to select any of the products with ID in the list saved as: " + savedAs);
+					Report.Screenshot();
+				}
 			}
-			Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
-				"Failed to select the product with ID: " + id + "!",
-				"Successfully selected the product with ID: " + id);
+			else
+			{
+				var id = Context.GetFromContext(savedAs)?.ToString();
+				if (id == null)
+				{
+					Report.Failure("Could not find product ID in context saved as: " + savedAs);
+					return;
+				}
+				EnterTextInSearchByIDOrProductNameField(id);
+				Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
+					"Failed to select the product with ID: " + id + "!",
+					"Successfully selected the product with ID: " + id);
+			}
 		}
 
 		[StepDefinition(@"I confirm I am unable to select the product with ID saved as: (.*) under the Select Products tab")]
@@ -312,16 +369,74 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I select the product with ID saved as: " + savedAs + " under the Select Products tab");
 			var selForwardProductReg = new ForwardProductRegistration();
-			var id = Context.GetFromContext(savedAs)?.ToString();
-			if (id == null)
+			if (savedAs.ToLower().Contains("list"))
 			{
-				Report.Failure("Could not find product ID in context saved as: " + savedAs);
-				return;
+				var ids = (List<string>)Context.GetFromContext(savedAs);
+				if (ids == null)
+				{
+					Report.Failure("Could not find product ID in context saved as: " + savedAs);
+					return;
+				}
+				foreach (var id_ in ids)
+				{
+					Report.Info("Clicking product checkbox with ID: " + id_);
+					if (selForwardProductReg.SelectProducts_ClickProductByID_(id_))
+					{
+						TestReport.StartStep("I confirm the checkbox is disabled while the page is working");
+						ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
+						break;
+					}
+				}
 			}
-			Report.Info("Clicking product checkbox with ID: " + id);
-			selForwardProductReg.SelectProducts_ClickProductByID_(id);
-			TestReport.StartStep("I confirm the checkbox is disabled while the page is working");
-			ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
+			else
+			{
+				var id = Context.GetFromContext(savedAs)?.ToString();
+				if (id == null)
+				{
+					Report.Failure("Could not find product ID in context saved as: " + savedAs);
+					return;
+				}
+				Report.Info("Clicking product checkbox with ID: " + id);
+				selForwardProductReg.SelectProducts_ClickProductByID_(id);
+				TestReport.StartStep("I confirm the checkbox is disabled while the page is working");
+				ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
+			}
+
+		}
+
+		[StepDefinition(@"I click the Add UPC button under the Select UPCs tab")]
+		public void ClickAddUPCsButtonUnderSelectUPCsTab()
+		{
+			var selForwardProductReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProductReg.ClickAddUPC(),
+				"Failed to click the Add UPC button!",
+				"Successfully clicked the Add UPC button");
+		}
+
+		[StepDefinition(@"I click the Add To No Retailer button under the Select UPCs tab")]
+		public void ClickAddToNoRetailerButtonUnderSelectUPCsTab()
+		{
+			var selForwardProductReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProductReg.ClickAddToNoRetailer(),
+				"Failed to click the Add To No Retailer button!",
+				"Successfully clicked the Add To No Retailer button");
+		}
+
+		[StepDefinition(@"I select the UPC row: 'No UPC'/ 'No Retailer'")]
+		public void SelectUPCRowNoUPCNoRetailer()
+		{
+			Report.IsTrue(new ForwardProductRegistration().SelectUPCNoUPC(),
+				"Failed to select UPC row: No UPC",
+				"Successfully selected UPC row: No UPC");
+		}
+
+		[StepDefinition(@"I select the (true|false) radio for the 'Are Statements True' question under the Review and Submit tab")]
+		public void SelectRadioAreStatementsTrueReviewSubmitTab(string option)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.ReviewAndSubmit_AreStatementsTrue(option),
+				"Failed to set the 'Are Statements True' radio to: " + option,
+				"Successfully set the 'Are Statements True' radio to: " + option);
 		}
 	}
 }

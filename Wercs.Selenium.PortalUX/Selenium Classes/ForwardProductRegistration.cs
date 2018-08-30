@@ -93,16 +93,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return productRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2).TryClick();
 		}
-		public void SelectProducts_ClickProductByID_(string id)
+		public bool SelectProducts_ClickProductByID_(string id)
 		{
 			var productRow = containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
 			if (productRow == null)
 			{
 				Report.Info("Could not find product row for product ID: " + id);
-				return;
+				return false;
 			}
-			productRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2).Click();
+			var inputEl = productRow.FindElement(By.XPath(".//input[@type='checkbox']"));
+			if (inputEl == null)
+			{
+				return false;
+			}
+			inputEl.Click();
 			Report.Screenshot();
+			return true;
 		}
 
 		public string SelectProducts_FirstProductID()
@@ -135,7 +141,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 		public bool SelectProducts_ProductCheckboxDisabled(bool disabledCheck)
 		{
-			var inputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox']"), 2);
+			var inputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox']"));
 			if (!inputs.Any())
 			{
 				return false;
@@ -154,6 +160,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				timer++;
 			}
 			return disabled;
+		}
+		public bool SelectProducts_ProductCheckboxIsDisabled()
+		{
+			var inputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox']"));
+			if (!inputs.Any())
+			{
+				return false;
+			}
+			var disabledInputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
+			return disabledInputs.Any();
 		}
 
 		public bool SelectRetailer(string retailer)
@@ -279,7 +295,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickAddUPC()
 		{
-			return containerElement.FindElement(By.XPath(".//button[@id='add-new-row-btn']"), 2).TryClick();
+			return containerElement.FindElement(By.XPath(".//button[@id='add-new-row-btn' and contains(@data-bind,'addNewRow')]"), 2).TryClick();
+		}
+
+		public bool ClickAddToNoRetailer()
+		{
+			return containerElement.FindElement(By.XPath(".//button[@id='add-new-row-btn' and contains(@data-bind,'addToNoRetailer')]"), 2).TryClick();
+		}
+
+		public bool SelectUPCNoUPC()
+		{
+			return containerElement.FindElement(By.XPath(".//td[./following-sibling::td[./strong[text()='No UPC']]]/input"), 2).TryClick();
+		}
+
+		public bool ReviewAndSubmit_AreStatementsTrue(string value)
+		{
+			if (value.ToLower() != "true" && value.ToLower() != "false")
+			{
+				Report.Info("Are statements true option must be 'true' or 'false'");
+				return false;
+			}
+			return containerElement.FindElement(By.XPath(".//input[@name='areStatementsTrue' and @value='" + value + "']"), 2).TryClick();
 		}
 
 		public class SelectProducts : ForwardProductRegistration

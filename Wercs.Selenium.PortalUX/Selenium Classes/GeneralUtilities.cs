@@ -45,7 +45,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
-
+		public static bool Loading_Active()
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]")) != null;
+		}
 
 		public static void ScrollToBottomOfPage()
 		{

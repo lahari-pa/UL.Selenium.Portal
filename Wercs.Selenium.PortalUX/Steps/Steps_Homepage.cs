@@ -893,5 +893,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Title text: " + text + " appeared on hover for icon: " + icon + " as expected", false, false);
 			}
 		}
+
+		[StepDefinition(@"I save the list of Product IDs displayed on the page as: (.*)")]
+		public void SaveListOfIDsDisplayedOnThePageAs(string savedAs)
+		{
+			var selProductsGrid = new ProductsGrid();
+			var prodIDs = selProductsGrid.AllIDsInGrid();
+			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
+			Context.AddToContext(savedAs, prodIDs);
+		}
 	}
 }
