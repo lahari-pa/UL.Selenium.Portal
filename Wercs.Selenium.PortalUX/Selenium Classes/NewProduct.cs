@@ -4063,14 +4063,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetEPATableError()
 		{
-			try
-			{
-				return containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table/following-sibling::div/p[@class='form-error']/span"), 15).Text;
-			}
-			catch (Exception e)
-			{
-				return "";
-			}
+			return containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table/following-sibling::div/p[@class='form-error']/span"), 15)?.Text;
 		}
 
 		public bool EPASelectExpirationDateFromCalendar(string state, DateTime date)
@@ -4656,7 +4649,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return el.TryClick();
 		}
-
+		public bool Ingredients_ClickRegulated(string ingredientName)
+		{
+			var row = IngredientRow(ingredientName);
+			return row.FindElement(By.XPath(".//a[contains(@data-bind,'openRegulation')]"), 2).TryClick();
+		}
 		public bool IngredientOrderbY(string orderBy)
 		{
 			switch (orderBy.ToLower())
@@ -4904,7 +4901,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string PublicName { get; set; }
 		public bool TradeSecretEnabled { get; set; }
 		public bool PublicDisclosureEnabled { get; set; }
-
 		public bool PublicNameEnabled { get; set; }
 	}
 
@@ -4973,5 +4969,40 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string ExpirationDate { get; set; }
 		public string ExpirationDateByKelly { get; set; }
 		public bool IsKellyData { get; set; }
+	}
+
+	class RegulatoryList : BaseDialog
+	{
+		public const string BasePath = "//div[@class='modal fade in']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public string Heading()
+		{
+			return containerElement.FindElement(By.XPath(".//h3"), 2)?.Text;
+		}
+
+		public bool ClickClose()
+		{
+			return containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).TryClick();
+		}
+		public class RegulatoryListItem
+		{
+			public string RegulatoryCode { get; set; }
+			public string Classification { get; set; }
+		}
+		public List<RegulatoryListItem> GetRegulatoryListRows()
+		{
+			var rList = new List<RegulatoryListItem>();
+			var rows = containerElement.FindElements(By.XPath(".//tbody/tr"));
+			foreach (var row in rows)
+			{
+				rList.Add(new RegulatoryListItem {
+					Classification = row.FindElement(By.XPath("./td[@class = 'col-xs-3']"), 2)?.Text,
+					RegulatoryCode = row.FindElement(By.XPath("./td[@class = 'col-xs-9']"), 2)?.Text
+				});
+			}
+			return rList;
+		}
 	}
 }

@@ -3582,5 +3582,49 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Failure("The actual list of retailers did not match the expected retailers! The differences were: " + string.Join(", ", retailerList.Except(actualRetailers)));
 			Report.Screenshot();
 		}
+
+		[StepDefinition(@"I click the Regulated button for ingredient: (.*) in the Ingredients section")]
+		public void ClickRegulatedButtonForIngredient(string name)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.Ingredients_ClickRegulated(name),
+				"Failed to click the Regulated button for ingredient: " + name,
+				"Successfully clicked the Regulated button for ingredient: " + name);
+		}
+
+		[StepDefinition(@"the 'Regulatory List' window opens")]
+		public void RegulatoryListWindowOpens()
+		{
+			var header = new RegulatoryList().Heading();
+			if (header == null)
+			{
+				Report.Failure("Regulatory List pop up was not displayed");
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(header == "Regulatory List", "The pop up header text was not 'Regulatory List' as expected!", "The pop up header text was 'Regulatory List' as expected");
+		}
+
+		[StepDefinition(@"I confirm that a list of regulations associated with the component is displayed")]
+		public void ConfirmListOfRegulationsAssociatedWithComponentDisplayed()
+		{
+			var selRegulatoryList = new RegulatoryList();
+			var regulatoryListData = selRegulatoryList.GetRegulatoryListRows();
+			if (regulatoryListData.Count > 0)
+			{
+				Report.IsTrue(!regulatoryListData.Any(x => x.Classification.IsNullOrEmpty() || x.RegulatoryCode.IsNullOrEmpty()),
+					"There was some empty data in the Regulatory List pop up table",
+					"There was data in the Regulatory List pop up table");
+			}
+		}
+
+		[StepDefinition(@"I close the Regulatory List window")]
+		public void CloseTheRegulatoryListWindow()
+		{
+			var selRegulatoryList = new RegulatoryList();
+			Report.IsTrue(selRegulatoryList.ClickClose(),
+				"Failed to close the Regulatory List pop up",
+				"Successfully closed the Regulatory List pop up");
+		}
 	}
 }

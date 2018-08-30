@@ -215,3 +215,35 @@ Then on the Neonicotinoid Warning Page I should see a link with text: EPA websit
 Then in the Neonicotinoid Warning page I click Continue
 And I should see the Regulatory Information 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
+
+Scenario: [74142] Pop up that Informs the regulations the components are associated
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
+
+Then I save the product information as: TestCase74142
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+
+Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Chlorine      | 100     | false               | false       |            |
+
+Given I click the Regulated button for ingredient: Chlorine in the Ingredients section
+
+Then the 'Regulatory List' window opens
+
+Given I confirm that a list of regulations associated with the component is displayed
+
+Given I close the Regulatory List window
+
+Given I navigate to the home page
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
