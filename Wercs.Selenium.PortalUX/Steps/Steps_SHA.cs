@@ -22,7 +22,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I navigate to Studio")]
 		public void GivenINavigateToStudio()
 		{
-			SeleniumBrowser.WebBrowser.Url = GlobalParametersPortal.SHAUrl;
+			SeleniumBrowser.WebBrowser.Url = TReVor.TestVariables.GetVariableSavedAs("SHAUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		
 		}

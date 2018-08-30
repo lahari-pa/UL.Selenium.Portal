@@ -620,7 +620,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Success("The user: " + user + " was found in the My Account user grid");
 			Report.Screenshot();
-			var adminEmail = GlobalParameters.Admin1;
+			var adminEmail = TReVor.TestVariables.GetVariableSavedAs("AdministratorEmailAddress");
+
 			Report.IsTrue(userMatch.Email == adminEmail,
 				string.Format("The user: '{0}' was not associated with the email address: '{1}'",
 					user, adminEmail),

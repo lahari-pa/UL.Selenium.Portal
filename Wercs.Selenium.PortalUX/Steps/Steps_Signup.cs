@@ -540,31 +540,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				if (emailFrom.ToLower() == "<sitenotification>")
 				{
-					if (System.Configuration.ConfigurationManager.AppSettings.AllKeys.Contains("SiteType"))
-					{
-						var siteType = System.Configuration.ConfigurationManager.AppSettings["SiteType"];
-						switch (siteType.ToLower())
-						{
-							case ("staging"):
-								emailFrom = "ulscn.notifications@ulnotification.com";
-								break;
-							case ("production"):
-								emailFrom = "wercsmart.notifications@ulnotification.com";
-								break;
-							//changed to lower case
-							case ("live"):
-								emailFrom = "wercsmartnotifications@ul.com";
-								break;
-							default: //Local
-								emailFrom = "wercsmartcustomer@ul.com";
-								break;
-						}
-					}
-					else
-					{
-						emailFrom = "wercsmartcustomer@ul.com";
-					}
+					emailFrom = TReVor.TestVariables.GetVariableSavedAs("NotificationEmail");
 				}
+
 				Report.Info("Expecting email from: " + emailFrom);
 				
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);

@@ -25,50 +25,11 @@ namespace WERCSmart
 	[Binding]
 	public class GlobalSteps
 	{
-		[BeforeTestRun(Order = 1)]
+		[BeforeFeature(Order = 1)]
 		public static void SetTestURL()
 		{
-			if (ConfigurationManager.AppSettings.AllKeys.Contains("SiteType"))
-			{
-				switch (ConfigurationManager.AppSettings["SiteType"].ToLower())
-				{
-					case ("local"):
-					case ("development"):
-						{
-							GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
-							GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
-							break;
-						}
-					case ("staging"):
-						{
-							GlobalParameters.TestUrl = @"https://staging.thewercs.com/Wercs.SHA.MVCWebV1/";
-							GlobalParametersPortal.SHAUrl = @"http://66.194.55.181/Wercs.Studio.Web/logon.aspx?ReturnUrl=%2fWercs.Studio.Web";
-							break;
-						}
-					case ("local prod"):
-						{
-							GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/prod/Wercs.SHA.MVCWebV1/";
-							GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3.Prod/logon.aspx";
-							break;
-						}
-					case ("production"):
-						{
-							GlobalParameters.TestUrl = @"";
-							GlobalParametersPortal.SHAUrl = @"http://66.194.55.180/Wercs.Studio.Web/logon.aspx";
-							break;
-						}
-
-					default:
-						{
-							GlobalParameters.TestUrl = @"https://wps.thewercs.com/dbsplit/dev/Wercs.SHA.MVCWebV1/";
-							GlobalParametersPortal.SHAUrl = @"http://wercsdeviis01.thewercs.local/Releases/6.1.v25/WPSV3/logon.aspx?ReturnUrl=%2fReleases%2f6.1.v25%2fWPSV3%2fprivate%2fdesktop.aspx";
-							break;
-						}
-				}
-			}
+			GlobalParameters.TestUrl = TReVor.TestVariables.GetVariableSavedAs("TestURL");
 		}
-
-
 
 		[StepDefinition(@"I login as the administrator")]
 		[StepDefinition(@"I login as the administrator")]
@@ -481,34 +442,12 @@ namespace WERCSmart
 		[StepDefinition(@"there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
 			{
 				if (emailFrom.ToLower() == "<sitenotification>")
 				{
-					if (System.Configuration.ConfigurationManager.AppSettings.AllKeys.Contains("SiteType"))
-					{
-						var siteType = System.Configuration.ConfigurationManager.AppSettings["SiteType"];
-						switch (siteType.ToLower())
-						{
-							case ("staging"):
-								emailFrom = "ulscn.notifications@ulnotification.com";
-								break;
-							case ("production"):
-								emailFrom = "wercsmart.notifications@ulnotification.com";
-								break;
-							case ("local prod"):
-								emailFrom = "WERCSmartCustomer@ul.com";
-								break;
-							default: //Local
-								emailFrom = "wercsmartcustomer@ul.com";
-								break;
-						}
-					}
-					else
-					{
-						emailFrom = "wercsmartcustomer@ul.com";
-					}
+					emailFrom = TReVor.TestVariables.GetVariableSavedAs("NotificationEmail");
 				}
 
 				var email = string.Empty;
