@@ -143,7 +143,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickOk()
 		{
-			return containerElement.FindElements(By.XPath("//div[@class='modal fade in']//button[contains(text(), 'Ok')]")).FirstOrDefault().TryClick();
+			//return containerElement.FindElements(By.XPath("//div[@class='modal fade in']//button[contains(text(), 'Ok')]")).FirstOrDefault().TryClick();
+			try
+			{
+				var el = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//button[contains(text(), 'Ok')]"), 2);
+				if (el == null)
+				{
+					return false;
+				}
+
+				el.TryClick();
+				Report.Screenshot();
+				GeneralUtilities.WaitForRefreshToDisappear(el);
+				GeneralUtilities.Wait_for_load_finish();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
 		}
 
 	}
