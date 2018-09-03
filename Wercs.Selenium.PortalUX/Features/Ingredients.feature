@@ -247,3 +247,53 @@ Given I close the Regulatory List window
 Given I navigate to the home page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
+
+Scenario: [69796] Aerosol Warning Message on Ingredient page
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
+
+Then I save the product information as: TestCase69796
+
+Then I should see the Product Characteristics Page
+
+Given I set the Primary Physical State option to: Aerosol
+
+Given I set the Secondary Physical State option to: Bag-on-valve (BOV)
+
+Given I set the pH option to: 5
+
+Given I set the Select the best Water Solubility option to: Appreciable
+
+Given I select the first option in section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then
+
+Given I click continue
+
+Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I click continue
+
+Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+
+Given I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Water         | 80      | false               | false       |            |
+
+Given I click continue
+
+Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+
+Given I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Pentane       | 19      | false               | false       |            |
+
+Given I click continue
+
+Then I should see an error message: Formulation must total or exceed 100%.
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796

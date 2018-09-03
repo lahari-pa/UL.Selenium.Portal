@@ -914,6 +914,108 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[69796] Aerosol Warning Message on Ingredient page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _69796AerosolWarningMessageOnIngredientPage()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69796] Aerosol Warning Message on Ingredient page", ((string[])(null)));
+#line 251
+this.ScenarioSetup(scenarioInfo);
+#line 253
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 255
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 257
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 259
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Hair Styling Product - Aerosol and Pump Spray", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 261
+testRunner.Then("I save the product information as: TestCase69796", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 263
+testRunner.Then("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 265
+testRunner.Given("I set the Primary Physical State option to: Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 267
+testRunner.Given("I set the Secondary Physical State option to: Bag-on-valve (BOV)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 269
+testRunner.Given("I set the pH option to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 271
+testRunner.Given("I set the Select the best Water Solubility option to: Appreciable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 273
+testRunner.Given("I select the first option in section: When the product has a flammable propellant" +
+                    ", or contains ingredients with a flash point below 60⁰C then", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 275
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 277
+testRunner.Given("I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direc" +
+                    "t Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 279
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 281
+testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
+                    "pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
+                    "clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table18.AddRow(new string[] {
+                        "Water",
+                        "80",
+                        "false",
+                        "false",
+                        ""});
+#line 283
+testRunner.Given("I add the following ingredients:", ((string)(null)), table18, "Given ");
+#line 287
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 289
+testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
+                    "pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
+                    "clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table19.AddRow(new string[] {
+                        "Pentane",
+                        "19",
+                        "false",
+                        "false",
+                        ""});
+#line 291
+testRunner.Given("I add the following ingredients:", ((string)(null)), table19, "Given ");
+#line 295
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 297
+testRunner.Then("I should see an error message: Formulation must total or exceed 100%.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 299
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase69796", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
