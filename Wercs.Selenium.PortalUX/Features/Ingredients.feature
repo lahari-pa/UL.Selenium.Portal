@@ -335,3 +335,43 @@ And In the Ingredients page I confirm the Publicly Disclosed Transparency Score 
 Given I navigate to the home page
 
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
+
+Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denominator, not included in Numerator
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+
+Then I save the product information as: TestCase80720
+
+Then I should see the Product Characteristics Page
+
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+Then I should see the Ingredients Page
+
+And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 0
+
+And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
+
+Given I call Shared 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: shared79431
+| CASNumber | ComponentName |
+| FLAVOR    | FLAVOR        |
+
+Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
+
+And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
+
+Given In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient saved as: shared79431
+
+Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
+
+Given I navigate to the home page
+
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80720

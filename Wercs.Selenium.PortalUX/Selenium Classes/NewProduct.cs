@@ -1894,9 +1894,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					return false;
 				}
-				var MatchingCasValues = Matches.Where(x => x.FindElement(By.XPath(".//span[@class='text-muted']"), 2).GetValue().Trim() == ingredient.CASNumber.Trim());
-				var matchText = Matches.Select(x => x.FindElement(By.XPath(".//span[@class='text-muted']"), 2).GetValue().Trim()).ToList();
-				if (MatchingCasValues.Count() == 0)
+				//var MatchingCasValues = new List<IWebElement>();
+				var MatchingCasValues = Matches.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='text-muted']"), 2).Text.Trim() == ingredient.CASNumber.Trim());
+				//foreach (var match in Matches)
+				//{
+				//	var match_ = match.FindElement(By.XPath(".//span[@class='text-muted']"), 2);
+				//	if (match == null)
+				//	{
+				//		continue;
+				//	}
+
+				//	if (match_.Text == ingredient.CASNumber)
+				//	{
+				//		MatchingCasValues.Add(match_);
+				//		break;
+				//	}
+				//}
+				//var matchText = Matches.Select(x => x.FindElement(By.XPath(".//span[@class='text-muted']"), 2).GetValue().Trim()).ToList();
+				if (!MatchingCasValues.Any())
 				{
 					MatchedEntry = Matches.FirstOrDefault();
 					ingredient.CASNumber = MatchedEntry.FindElement(By.XPath(".//span[2]"), 2).GetValue();
@@ -1906,7 +1921,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				else
 				{
 					// In this case we have entries with matching CAS Numbers, so we should double check that our product name matches?
-					if (ingredient.ComponentName == "" || ingredient.ComponentName == null)
+					if (string.IsNullOrEmpty(ingredient.ComponentName))
 					{
 						// No Component name was specified, so we just take the first value with a matching CAS Number!
 						MatchedEntry = MatchingCasValues.FirstOrDefault();
@@ -1915,7 +1930,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					else
 					{
 						// Component name was defined, so just check to see if there is a match
-						var matchingNames = MatchingCasValues.FirstOrDefault(x => x.FindElement(By.XPath(".//span[1]"), 2).GetValue().Trim() == ingredient.ComponentName.Trim());
+						var matchingNames = MatchingCasValues.FirstOrDefault(x => x.FindElement(By.XPath(".//span[@class='component-name' and text() = '" + ingredient.ComponentName + "']"), 2) != null);
 						if (matchingNames == null)
 						{
 							// No match was found, so just take the first entry!
@@ -1926,7 +1941,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						{
 							// Matching entry was found, so taking this instead!
 							MatchedEntry = matchingNames;
-							Report.Info("Clicking result in smart search with CAS number: " + MatchedEntry.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
+							Report.Info("Found the matched search result. Clicking result in smart search with CAS number: " + ingredient.CASNumber + " and name: " + ingredient.ComponentName);
 						}
 					}
 				}

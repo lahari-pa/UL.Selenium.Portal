@@ -4158,7 +4158,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 				PublicallyDisclosed = true,
 				PublicName = "Undisclosed Ingredient"
 			};
-			Report.IsTrue(new NewProduct().AddIngredient(ingredient), "Failed to add ingredient: " + (ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!", "Successfully added ingredient: " + (ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
+			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+				"Failed to add ingredient: " + (ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
+				"Successfully added ingredient: " + (ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
+			Context.AddToContext(savedAs, ingredient);
+		}
+
+		[StepDefinition(@"I call Shared 79431 \(Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name\) and save ingredients as: (.*)")]
+		public void IngredientsAddFlavorComponentPubliclyDisclosedYesSelectPublicName(string savedAs, Table component)
+		{
+			var ingredient = new Ingredient {
+				CASNumber = component.Rows.First()["CASNumber"],
+				ComponentName = component.Rows.First()["ComponentName"],
+				Percent = "100",
+				PublicallyDisclosed = true,
+				PublicName = "Undisclosed Ingredient"
+			};
+			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+				"Failed to add ingredient: " + (ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
+				"Successfully added ingredient: " + (ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
 			Context.AddToContext(savedAs, ingredient);
 		}
 	}

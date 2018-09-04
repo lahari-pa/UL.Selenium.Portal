@@ -250,6 +250,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 6.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Kits - Flow 13.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Kits - Flow 13.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Lithium Battery Transport Informarion.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -623,6 +628,10 @@
     <None Include="Features\Product Registration\Flow 6.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 6.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Kits - Flow 13.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Kits - Flow 13.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Lithium Battery Transport Informarion.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
