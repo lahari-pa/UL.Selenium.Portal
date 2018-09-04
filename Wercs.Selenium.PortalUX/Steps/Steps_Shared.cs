@@ -7,6 +7,7 @@ using NPOI.SS.Formula.Functions;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using WERCSmart;
 
@@ -3901,7 +3902,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStepsSha.GivenINavigateToStudio();
 			myStepsSha.GivenILoginToStudioAsAdministrator();
 			GivenICallSharedStep59066GoToSHAManager();
-			
+
 		}
 
 		[Given(@"I call Shared 49841 \(SHA - Search for exact WPS ID in (.*) Status for saved as: (.*)\)")]
@@ -3914,7 +3915,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStudioShaManager.WaitForProductList(60);
 			TestReport.UseSubSteps = true;
 			myStudioShaManager.ClickBottomMenuOption("Search");
-			
+
 			Steps_SHA myStepsSha = new Steps_SHA();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
@@ -3931,7 +3932,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Status",
 				status});
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
-			
+
 			Delay.Seconds(1);
 			Report.Info("Waiting for product list");
 			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing");
@@ -4113,14 +4114,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA","rule name");
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
 			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
-			
+
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"product\alias");
@@ -4143,6 +4144,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986", "No");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
+		}
+
+		[StepDefinition(@"I call Shared 79436 \(Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name\) and save ingredient as: (.*)")]
+		public void CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			var ingredient = new Ingredient {
+				CASNumber = "FRAGRANCE",
+				ComponentName = "Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2",
+				Percent = "100",
+				PublicallyDisclosed = true,
+				PublicName = "Undisclosed Ingredient"
+			};
+			Report.IsTrue(new NewProduct().AddIngredient(ingredient), "Failed to add ingredient: " + (ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!", "Successfully added ingredient: " + (ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
+			Context.AddToContext(savedAs, ingredient);
 		}
 	}
 }

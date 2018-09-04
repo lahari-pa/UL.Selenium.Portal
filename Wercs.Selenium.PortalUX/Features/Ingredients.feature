@@ -297,3 +297,41 @@ Given I click continue
 Then I should see an error message: Formulation must total or exceed 100%.
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
+
+Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Denominator, not included in Numerator
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+
+Then I save the product information as: TestCase80728
+
+Then I should see the Product Characteristics Page
+
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+Then I should see the Ingredients Page
+
+And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 0
+
+And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
+
+Given I call Shared 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: shared79436
+
+Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
+
+And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
+
+Then In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient saved as: shared79436
+
+And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
+
+Given I navigate to the home page
+
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728

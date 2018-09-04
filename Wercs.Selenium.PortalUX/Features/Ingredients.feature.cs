@@ -1016,6 +1016,79 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Deno" +
+            "minator, not included in Numerator")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _80728Ingredients_TransparencyRatio_FRAGRANCEComponent_IncludedInDenominatorNotIncludedInNumerator()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Deno" +
+                    "minator, not included in Numerator", ((string[])(null)));
+#line 301
+this.ScenarioSetup(scenarioInfo);
+#line 303
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 305
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 307
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 309
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 311
+testRunner.Then("I save the product information as: TestCase80728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 313
+testRunner.Then("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 315
+testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
+                    "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 317
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 319
+testRunner.Then("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 321
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
+                    "umerator: 0 and denominator: 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 323
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
+                    "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 325
+testRunner.Given("I call Shared 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = " +
+                    "Yes,  Select Public Name) and save ingredient as: shared79436", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 327
+testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
+                    "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 329
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
+                    "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 331
+testRunner.Then("In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient s" +
+                    "aved as: shared79436", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 333
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
+                    "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 335
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 337
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase80728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

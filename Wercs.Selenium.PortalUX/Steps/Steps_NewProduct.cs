@@ -2482,10 +2482,65 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().ClickIngredientPubliclyDisclosedCheckbox(chemicalName), "The Trade Secret checkbox was not clicked successfully", "The Trade Secret checkbox was clicked successfully");
 		}
 
+		[StepDefinition(@"In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient saved as: (.*)")]
+		public void IngredientClickPubliclyDisclosedSavedAs(string savedAs)
+		{
+			var selNewProduct = new NewProduct();
+			var ingredients = selNewProduct.GetIngredients();
+			var ingredientSavedAs = Context.GetFromContext(savedAs);
+			if (ingredientSavedAs == null)
+			{
+				Report.Failure("Could not find ingredient in context saved as: " + savedAs);
+				return;
+			}
+			var ingredient = (Ingredient)ingredientSavedAs;
+			var targetIngredient = ingredients.First(x => x.CASNumber == ingredient.CASNumber && x.ComponentName == ingredient.ComponentName);
+			if (targetIngredient == null)
+			{
+				Report.Failure("Could not find the ingredient on the page which matched the target ingredient: " + ingredient.ComponentName + "(" + ingredient.CASNumber + ")");
+				Report.Screenshot();
+				return;
+			}
+			var disclosed = targetIngredient.PublicallyDisclosed;
+			Report.Info("Setting Publicly Disclosed as: " + (disclosed ? "false" : "true"));
+			Report.IsTrue(selNewProduct.SetIngredientPubliclyDisclosed(ingredient.ComponentName, !disclosed),
+				"Failed to set Publicly Disclosed checkbox to: " + (disclosed ? "false" : "true"),
+				"Successfully set the Publicly Disclosed checkbox to: " + (disclosed ? "false" : "true"));
+		}
+
 		[StepDefinition(@"In the Ingredients page I check there are (.*) Publicly Disclosed ingredients in the Total section")]
 		public void IngredientsPubliclyDisclosedTotalIsCorrect(string total)
 		{
 			Report.IsTrue(new NewProduct().PubliclyDisclosedTotalIsCorrect(total), "The Publicly Disclosed summary text did not match the expected: " + total, "The Publicaly Disclosed summary text matched the expected: " + total);
+		}
+
+		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: (.*) and denominator: (.*)")]
+		public void IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing(string numerator, string denominator)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.TransparencyScoreNumerator() == numerator,
+				"The Transparency Score numerator did not match the expected: " + numerator,
+				"The Transparency Score numerator matched the expected: " + numerator);
+			Report.IsTrue(selNewProduct.TransparencyScoreDenominator() == denominator,
+				"The Transparency Score denominator did not match the expected: " + denominator,
+				"The Transparency Score denominator matched the expected: " + denominator);
+		}
+
+		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a (warning|success)")]
+		public void IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed(string flag)
+		{
+			if (flag == "warning")
+			{
+				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "danger",
+					"The Transparency Score label was not highlighted red (warning)!",
+					"The Transparency Score label was highlighted red (warning) as expected");
+			}
+			if (flag == "success")
+			{
+				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "success",
+					"The Transparency Score label was not highlighted green (success)!",
+					"The Transparency Score label was highlighted green (success) as expected");
+			}
 		}
 
 		[StepDefinition(@"I confirm 'Quantity' is visible in the UPC header")]

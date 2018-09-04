@@ -4352,6 +4352,34 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public string TransparencyScoreNumerator()
+		{
+			var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
+			var pattern = @"(\d)\s\/\s(\d)";
+			var regMatch = Regex.Match(pubDisSummary, pattern);
+			if (!regMatch.Success || regMatch.Groups.Count != 3)
+			{
+				return null;
+			}
+			return regMatch.Groups[1].ToString();
+		}
+		public string TransparencyScoreDenominator()
+		{
+			var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
+			var pattern = @"(\d)\s\/\s(\d)";
+			var regMatch = Regex.Match(pubDisSummary, pattern);
+			if (!regMatch.Success || regMatch.Groups.Count != 3)
+			{
+				return null;
+			}
+			return regMatch.Groups[2].ToString();
+		}
+
+		public string TransparencyScoreStatus()
+		{
+			var transparencyScoreEl = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2);
+			return transparencyScoreEl?.GetAttribute("class").Replace("label label-", "");
+		}
 		public bool ClickUseMyIngredients()
 		{
 			return containerElement.FindElement(By.XPath(".//button[starts-with(@data-bind,'click: openMyIngredients')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
@@ -4703,8 +4731,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Ingredient thisIngredient = new Ingredient();
 				thisIngredient.ComponentName =
 					thisRow.FindElement(By.XPath(".//td[@class='component-name']//div[@class='chemical-name']")).Text;
+				thisIngredient.CASNumber = thisRow.FindElement(By.XPath(".//div[@class = 'cas-number']/small"), 2)?.Text;
 				thisIngredient.Percent =
-					thisRow.FindElement(By.XPath(".//td[@class='percent-comp']//input")).Text;
+					thisRow.FindElement(By.XPath(".//td[@class='percent-comp']//input")).GetAttribute("value");
 				thisIngredient.PublicallyDisclosed =
 					thisRow.FindElement(By.XPath(".//td[@class='transparency']//input")).Checked();
 				thisIngredient.TradeSecret =
