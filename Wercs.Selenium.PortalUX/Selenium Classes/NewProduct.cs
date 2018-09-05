@@ -4644,7 +4644,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
-			var el = containerElement.FindElement(By.XPath(xPath), 2);
+			var el = this.containerElement.FindElement(By.XPath(xPath), 2);
 
 			if (el == null)
 			{
@@ -4652,11 +4652,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Report.Info("Entering value of: '" + value + "' in section: '" + section + "'");
+
 			if (el.GetAttribute("type") == "text")
 			{
 				el.EnterText(value);
 				return el.GetValue() == value;
 			}
+
 			if (el.TagName.ToLower() == "select")
 			{
 				int i = 0;
@@ -4677,19 +4679,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return el.SelectedOption() == value;
 			}
 
-			try
+			if (el.GetAttribute("type") == "checkbox")
 			{
-				if (el.GetAttribute("type") == "checkbox")
-				{
-					el.Check(true);
-					return el.Checked();
-				}
-
+				el.TryCheck(true);
+				return el.Checked();
 			}
-			catch (Exception e)
-			{
 
-			}
 			return el.TryClick();
 		}
 		public bool Ingredients_ClickRegulated(string ingredientName)

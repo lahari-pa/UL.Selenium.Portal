@@ -5,6 +5,7 @@
 @run_LandingPage
 
 Feature: Landing Page
+
 @singlerun
 Scenario: [50769] Navigation
 #Given I navigate to the URL: https://staging.thewercs.com/Wercs.SHA.MVCWebV1/
