@@ -517,6 +517,7 @@
     <Compile Include="Steps\Steps_ChooseGoodGuide.cs" />
     <Compile Include="Steps\Steps_ConflictMinerals.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />
+    <Compile Include="Steps\Steps_DocumentAcceptance.cs" />
     <Compile Include="Steps\Steps_MyIngredients.cs" />
     <Compile Include="Steps\Steps_MyMessages.cs" />
     <Compile Include="Steps\Steps_PackagingTypes.cs" />

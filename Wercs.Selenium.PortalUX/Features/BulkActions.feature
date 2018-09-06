@@ -155,3 +155,27 @@ Given I click continue on the Forward Product Registration page
 # Confirm product has been forward properly (Message: Thank you for registering your product on WERCSmart for assessment.)
 
 Given I navigate to the home page
+
+Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
+
+Given I login as the administrator
+
+Then The home screen should load
+
+Given I click Bulk Actions in the Products Grid
+
+Then I should see a popup with header Bulk Actions
+
+Given I click Accept Documents in the Bulk Actions window
+
+Then I should see the header: Document Acceptance on the Document Acceptance window
+
+Then I confirm there are products listed under My Products on the Document Acceptance page
+
+# Search and Select a product from My Products list (specially one that has types of documents)
+
+# Confirm that on the right side of the screen a Documents list appears for the selected product
+
+# Confirm the Subformat column appears as part of the Documents Information
+
+# Under the Actions column click on View

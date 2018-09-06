@@ -774,7 +774,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				" is one less than saved count");
 		}
 
-		[Given(@"I should see the header: Document Acceptance on the Document Acceptance window")]
+		[StepDefinition(@"I should see the header: Document Acceptance on the Document Acceptance window")]
 		public void GivenIShouldSeeTheHeaderDocumentAcceptanceOnTheDocumentAcceptanceWindow()
 		{
 			Report.IsTrue(new DocumentAcceptance().Wait_for_load(),

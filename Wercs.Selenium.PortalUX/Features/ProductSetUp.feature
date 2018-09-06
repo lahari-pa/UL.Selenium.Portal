@@ -54,6 +54,4 @@ Given I call Shared 75347 (WPS Studio - PD+ - set all data and publish using rul
 
 Given I call Shared 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete)
 
-
-
-
+#Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
