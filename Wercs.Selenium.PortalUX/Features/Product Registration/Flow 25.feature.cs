@@ -169,6 +169,9 @@ testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comm
                     "ments Text 60642. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
                     "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 53
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Engin" +
+                    "e Parts and Components with Battery Included", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 55
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase60642", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -192,28 +195,28 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         public virtual void _60643CamerasCamcordersWBattery_RU000932()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60643] Cameras / Camcorders w/Battery - RU000932", ((string[])(null)));
-#line 57
-this.ScenarioSetup(scenarioInfo);
 #line 59
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 61
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 63
-testRunner.Given("I generate a random UPC number and save as: UPC60643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 65
-testRunner.Given("I delete all products with UPC Number: saved as UPC60643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I generate a random UPC number and save as: UPC60643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 67
+testRunner.Given("I delete all products with UPC Number: saved as UPC60643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 69
 testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 69
+#line 71
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Camera w/Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 71
-testRunner.Then("I save the product information as: TestCase60643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 73
+testRunner.Then("I save the product information as: TestCase60643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 75
 testRunner.Given("I call Shared Step 70393 (Additional Product Information - With marketed for use " +
                     "by a Child - Direct Ship - Private Label questions only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 75
+#line 77
 testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -226,27 +229,30 @@ testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 6
                         "L1028F",
                         "6",
                         "6"});
-#line 77
+#line 79
 testRunner.Given("I call Shared 48367 (Product Includes Battery > any type)", ((string)(null)), table2, "Given ");
-#line 81
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 83
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 85
 testRunner.Given("I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No" +
                     " to ALL With Copper)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 85
+#line 87
 testRunner.Given("I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode" +
                     " Ray - No to all)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 87
+#line 89
 testRunner.Given("I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
                     "Path) and select the retailer: Genuine Parts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 89
+#line 91
 testRunner.Then("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
                     "ze Only) for UPC: saved as UPC60643, container type: Aerosol Can and size: 33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 91
+#line 93
 testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Com" +
                     "ments Text 60643. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
                     "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 93
+#line 95
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Camer" +
+                    "a w/Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 97
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase60643", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden

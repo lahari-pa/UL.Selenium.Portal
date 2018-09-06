@@ -27,6 +27,8 @@ Given I call Shared 57753 (Create a New Registration via Register New Product (e
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
 
+Then I save the product information as: TestCase60017
+
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
 Given I call Shared Step 60026 (Additional Product Information - US - Battery - No to all)
@@ -58,7 +60,10 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60017. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithium Primary/Metal Batteries
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60017
+
 
 @tfs_design
 Scenario: [60018] Lithium Ion Battery - RU000345
@@ -66,6 +71,10 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
+
+Given I generate a random UPC number and save as: UPC60018
+
+Given I delete all products with UPC Number: saved as UPC60018
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
@@ -89,7 +98,9 @@ Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Hap
 
 Given I call Shared Step 60096 (Lithium Battery Transportation)
 
-Given I confirm that the default selected retailer is: No Retailer/No UPC Product then click Continue
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+
+Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC60018 with container type: Plastic Container size: 50.0 and quantity: 1000
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -103,22 +114,6 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60018. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-# Removed step
-
-#Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
-
-# New steps
-
-Given In the Data Acceptance page I select Yes, Agreed
-
-Given I click the Summary button in the Data Acceptance window
-
-And I switch to the Data Summary page
-
-Then I should not see any error messages
-
-And I close the Data Summary tab
-
-Then I should see the Data Acceptance Page
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: LITHIUM ION BATTERIES
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018

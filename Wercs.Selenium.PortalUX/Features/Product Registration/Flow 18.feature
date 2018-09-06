@@ -66,5 +66,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60116. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Aerosol
+
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60116
 

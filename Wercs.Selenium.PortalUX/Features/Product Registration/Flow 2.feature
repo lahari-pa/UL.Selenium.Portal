@@ -319,7 +319,7 @@ Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No
 
 Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 

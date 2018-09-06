@@ -29,7 +29,9 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60617
 
-Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
 
 Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
@@ -46,7 +48,9 @@ Then I confirm the Label Information section on the Regulatory Information 3 pag
 
 Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+
+Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
 Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
@@ -85,15 +89,12 @@ Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Option
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance               | Odor  | Odor Threshold    | Partition Coefficient |
 | Goggles                       | 66                       | 51.5                    | 10.92     | Clear to hazy, colorless | Berry | No data available | 2                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: test
 
-Then I should see the Data Acceptance Page
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Non-aerosol
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60617
 
-Given I navigate to the home page
-
-Then I delete the product: TestCase60617
 
 @tfs_design
 Scenario: [60637] Deodorant - Non-Aerosol - RU000760(Solid)
@@ -114,7 +115,9 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Then I save the product information as: TestCase60637
 
 #By default, the Solid radio button should be preselected for Physical State <-- this is not the case. Setting it to Solid after reporting the fail to allow the test to continue.
-Given I call Shared Step 37857 (Enter Physical Property - Solid)
+#Given I call Shared Step 37857 (Enter Physical Property - Solid)
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 
@@ -128,14 +131,13 @@ Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
+#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+
+#Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+
 Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
-#Added in (between Step 10 and 11 TFS) because Transportation Details 3 page shows
-Given I should see the Transportation Details 2 Page
-And I set the below options for field: International Shipping when DOT Exemption taken?
-| Option                                                             |
-| I do not ship internationally and I do not know the classification |
-And in the Transportation Details 2 page I click Continue
+Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
 Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
@@ -161,9 +163,10 @@ Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Option
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Non-aerosol
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60637
+
 
 @tfs_design
 Scenario: [60619] Deodorant - Aerosol - RU000758
@@ -226,5 +229,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Aerosol
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60619

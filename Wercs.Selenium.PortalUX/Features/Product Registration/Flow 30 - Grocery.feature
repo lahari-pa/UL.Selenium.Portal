@@ -55,14 +55,9 @@ Then in the Optional Reports and Documents Available for Purchase page I click C
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baked Goods, Crackers
 
-Then the Subscription Enrollment page should load
-
-#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
-#Given I call Shared 54796 (Purchase Summary)
-Given I navigate to the home page
-Then I delete the product: TestCase60725
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60725
 
 
 Scenario: [60724] Condiments, Sauces - RU001454
@@ -107,14 +102,9 @@ Then in the Optional Reports and Documents Available for Purchase page I click C
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condiments, Sauces
 
-Then the Subscription Enrollment page should load
-
-#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
-#Given I call Shared 54796 (Purchase Summary)
-Given I navigate to the home page
-Then I delete the product: TestCase60724
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724
 
 
 Scenario: [60723] Jelly, Jam or Preserves - RU001456
@@ -159,14 +149,9 @@ Then in the Optional Reports and Documents Available for Purchase page I click C
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Jelly, Jam or Preserves
 
-Then the Subscription Enrollment page should load
-
-#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
-#Given I call Shared 54796 (Purchase Summary)
-Given I navigate to the home page
-Then I delete the product: TestCase60723
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60723
 
 @tfs_design
 Scenario: [60722] Nut Butters - RU001455
@@ -211,14 +196,9 @@ Then in the Optional Reports and Documents Available for Purchase page I click C
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut Butters
 
-Then the Subscription Enrollment page should load
-
-#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
-#Given I call Shared 54796 (Purchase Summary)
-Given I navigate to the home page
-Then I delete the product: TestCase60722
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60722
 
 
 Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens and Harbor Freight

@@ -31,7 +31,9 @@ Then I save the product information as: TestCase58736
 
 Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 
-Given I call Shared Step 73223 (Enter Physical Property - Solid - Without Secondary Physical State)
+#Given I call Shared Step 73223 (Enter Physical Property - Solid - Without Secondary Physical State)
+
+Given I call Shared Step 37857 (Enter Physical Property - Solid)
 
 Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 
@@ -85,7 +87,11 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase58738
 
-Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
+#Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
+
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
 
 Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 
@@ -102,11 +108,13 @@ Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EP
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
-Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data): UN Number: 1992, Proper Shipping Name: Aerosols, Technical Name: Technical Test Name, Hazard Class: 2.1, Packing Group: None
+#Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data): UN Number: 1992, Proper Shipping Name: Aerosols, Technical Name: Technical Test Name, Hazard Class: 2.1, Packing Group: None
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
+Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58736, container type: Aerosol Can and size: 33
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+
+Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58738, container type: Aerosol Can and size: 33
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 

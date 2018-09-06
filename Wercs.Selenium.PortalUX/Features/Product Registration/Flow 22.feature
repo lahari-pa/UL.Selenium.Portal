@@ -62,6 +62,8 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60544. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Weld-Through Primer - Aerosol
+
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60544
 
 
@@ -120,6 +122,8 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60545. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Photograph Coating - Aerosol
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60545
 
@@ -182,6 +186,8 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Glass Coating - Aerosol
+
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60546
 
 
@@ -240,6 +246,8 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60547. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60547
 

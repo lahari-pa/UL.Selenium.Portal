@@ -57,7 +57,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59273. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-#Given I call Shared Step 69358 (Data Acceptance - Click Summary Button)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alkaline battery
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
@@ -106,6 +106,8 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59274. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Battery Containing Mercury
+
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59274
 
 @tfs_design
@@ -152,6 +154,8 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59276. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut Lead Acid Battery - No Acid Included
+
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
 
 @tfs_design
@@ -196,7 +200,9 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59277. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Magnesium Battery
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59277
 
 @tfs_design
 Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
@@ -241,7 +247,10 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59278. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel Metal Hydride (NiMH) Battery
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59278
+
 
 @tfs_design
 Scenario: [59279] Nickel-Cadmium Battery - RU000346
@@ -286,7 +295,10 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59279. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel-Cadmium Battery
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59279
+
 
 Scenario: [59280] Silver Battery - RU000698
 
@@ -380,7 +392,10 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59281. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Water-Charged Cell
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59281
+
 
 @tfs_design
 Scenario: [59282] Zinc Air - RU001205
@@ -425,7 +440,10 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59282. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Zinc Air
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
+
 
 @tfs_design
 Scenario: [59275] Carbon Zinc Battery - RU000727
@@ -470,4 +488,6 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59275. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Carbon Zinc Battery
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59275

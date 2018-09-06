@@ -60,14 +60,9 @@ Then in the Optional Reports and Documents Available for Purchase page I click C
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Seasonings, Spices or Flavoring for Food - Salts
 
-Then the Subscription Enrollment page should load
-
-#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
-#Given I call Shared 54796 (Purchase Summary)
-Given I navigate to the home page
-Then I delete the product: TestCase60737
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60737
 
 
 

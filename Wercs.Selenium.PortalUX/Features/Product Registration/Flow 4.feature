@@ -48,7 +48,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -101,7 +101,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -156,7 +156,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -209,7 +209,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -262,7 +262,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -315,7 +315,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -370,7 +370,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -424,7 +424,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -480,7 +480,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -533,7 +533,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -587,7 +587,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -642,7 +642,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -695,7 +695,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -748,7 +748,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -801,7 +801,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -854,7 +854,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
@@ -907,7 +907,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: No Retailer/No UPC Product
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 

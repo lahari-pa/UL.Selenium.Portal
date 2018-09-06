@@ -51,6 +51,8 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Wine
+
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
 
 Scenario: [60695] Juice and Juice Drinks - RU001413
@@ -93,6 +95,8 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Juice and Juice Drinks
+
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60695
 
 Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
@@ -127,5 +131,7 @@ Then In the 'Select retailers' window I should only see the following retailers:
 | No Retailer/No UPC Product |
 
 Given I click close in the 'Select Retailers' window
+
+#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut Butters
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73085

@@ -1982,14 +1982,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is manufactured in a facility that processes, or contains",
 				"Dairy or products containing dairy or milk");
 			TestReport.StartStep("I set the Product is verified and sold as option to: None of the Above");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is verified and sold as", "None of the Above ");
 			TestReport.StartStep("I set the Product contains the following sweeteners option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following sweeteners", "None of the Above");
 			TestReport.StartStep("I set the Product contains the following artificial dye(s) option to: None of the Above");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product contains the following artificial dye(s)",
 				"None of the Above");
-			TestReport.StartStep("I continue to the next screen in the new product registration");
-			MyStepsNewProduct.ContinueInTheProductRegistration();
+			TestReport.StartStep("In the Product Characteristics page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
 		[StepDefinition(

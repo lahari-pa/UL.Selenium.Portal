@@ -50,6 +50,8 @@ Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Typ
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60642. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine Parts and Components with Battery Included
+
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60642
 
 
@@ -89,5 +91,7 @@ Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue -
 Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60643, container type: Aerosol Can and size: 33
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60643. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Camera w/Battery
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60643

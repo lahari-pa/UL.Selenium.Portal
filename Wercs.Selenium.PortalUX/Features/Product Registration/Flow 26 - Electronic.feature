@@ -43,7 +43,7 @@ Given I call Shared 61449 Toxicity Characteristic Leaching Procedure (TCLP) - se
 
 Given I call Shared 58189 Answer Electronic Equipment questions - With Cathode Ray - No to all
 
-Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
