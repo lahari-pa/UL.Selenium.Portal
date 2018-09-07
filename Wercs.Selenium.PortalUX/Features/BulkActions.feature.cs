@@ -451,7 +451,27 @@ testRunner.Given("I click Accept Documents in the Bulk Actions window", ((string
 testRunner.Then("I should see the header: Document Acceptance on the Document Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 173
 testRunner.Then("I confirm there are products listed under My Products on the Document Acceptance " +
-                    "page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                    "page and save as: DocumentAcceptanceProducts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 175
+testRunner.Given("I select the first product from My Products saved as: DocumentAcceptanceProducts " +
+                    "which contains a document", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 177
+testRunner.Given("I save the displayed Documents on the Document Acceptance page as: DocumentAccept" +
+                    "anceDocuments", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 179
+testRunner.Then("I confirm the Subformat column appears as part of the Documents Information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 181
+testRunner.Given("I click on View under Actions for the first document from the list saved as: Docu" +
+                    "mentAcceptanceDocuments", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 183
+testRunner.Then("I confirm a new window opens displaying the document", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 186
+testRunner.Given("I confirm the subformat type at the top of the document matches the vaulue in the" +
+                    " Documents table for the first document I viewed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 188
+testRunner.Given("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 190
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

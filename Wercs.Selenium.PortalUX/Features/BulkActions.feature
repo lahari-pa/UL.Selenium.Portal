@@ -170,12 +170,21 @@ Given I click Accept Documents in the Bulk Actions window
 
 Then I should see the header: Document Acceptance on the Document Acceptance window
 
-Then I confirm there are products listed under My Products on the Document Acceptance page
+Then I confirm there are products listed under My Products on the Document Acceptance page and save as: DocumentAcceptanceProducts
 
-# Search and Select a product from My Products list (specially one that has types of documents)
+Given I select the first product from My Products saved as: DocumentAcceptanceProducts which contains a document
 
-# Confirm that on the right side of the screen a Documents list appears for the selected product
+Given I save the displayed Documents on the Document Acceptance page as: DocumentAcceptanceDocuments
 
-# Confirm the Subformat column appears as part of the Documents Information
+Then I confirm the Subformat column appears as part of the Documents Information
 
-# Under the Actions column click on View
+Given I click on View under Actions for the first document from the list saved as: DocumentAcceptanceDocuments
+
+Then I confirm a new window opens displaying the document
+
+# This is currently blocked - downloading pdf through chrome viewer is not reliable so need to fetch the file directly from the API
+Given I confirm the subformat type at the top of the document matches the vaulue in the Documents table for the first document I viewed
+
+Given I close the window that opened
+
+Given I navigate to the home page

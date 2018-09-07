@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 using Mailosaur;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -26,7 +29,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return false;
 		}
-		public bool UserGridNavigation(string navOption)
+		public bool ProductGridNavigation(string navOption)
 		{
 			IWebElement navEl;
 			switch (navOption)
@@ -102,20 +105,89 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<MyProductsItem> GetProducts()
 		{
 			var rList = new List<MyProductsItem>();
-			var rows = containerElement.FindElements(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr"), 2);
-			foreach (var row in rows)
+			ClickPage("1");
+			int pageNumber = GetPage("current");
+			var ingredientNumber = 1;
+			if (pageNumber == -1)
 			{
-				var productsItem = new MyProductsItem();
-				productsItem.WPSID = row.FindElement(By.XPath("./td[contains(@data-bind,'ProductID')]"), 2)?.Text;
-				productsItem.ProductName = row.FindElement(By.XPath("./td[contains(@data-bind,'Name')]"), 2)?.Text;
-				rList.Add(productsItem);
+				Report.Failure("Could not get current page number from the grid");
+				return rList;
+			}
+			int lastPageNumber = GetPage("last");
+			while (pageNumber <= lastPageNumber && pageNumber != -1)
+			{
+				var rows = containerElement.FindElements(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr"), 2);
+				foreach (var row in rows)
+				{
+					var productsItem = new MyProductsItem {
+						WPSID = row.FindElement(By.XPath("./td[contains(@data-bind,'ProductID')]"), 2)?.Text,
+						ProductName = row.FindElement(By.XPath("./td[contains(@data-bind,'Name')]"), 2)?.Text
+					};
+					rList.Add(productsItem);
+				}
+				if (NextDisabled())
+				{
+					Report.Info("Found a total of: " + rList.Count + " ingredients");
+					ClickPage("1");
+					return rList;
+				}
+				ProductGridNavigation("next");
+				pageNumber = GetPage("current");
 			}
 			return rList;
 		}
+		public List<string> DocumentsGridHeadings()
+		{
+			var rList = new List<string>();
+			var headings = containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//thead//th"), 2);
+			return headings.Select(x => x.Text).ToList();
+		}
 		public List<DocumentsItem> GetDocuments()
 		{
-			return new List<DocumentsItem>();
+			var rList = new List<DocumentsItem>();
+			var rows = containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//tbody/tr"), 2);
+			int i = 1;
+			foreach (var row in rows)
+			{
+				var documentsItem = new DocumentsItem() {
+					FileName = row.FindElement(By.XPath("./td[contains(@data-bind,'FileName')]"), 2)?.Text,
+					Subformat = row.FindElement(By.XPath("./td[contains(@data-bind,'Subformat')]"), 2)?.Text,
+					Language = row.FindElement(By.XPath("./td[contains(@data-bind,'Language')]"), 2)?.Text,
+					Row = i
+				};
+				rList.Add(documentsItem);
+				i++;
+			}
+			return rList;
 		}
+
+		public bool DocumentWindowOpen()
+		{
+			Report.Info("Switch to Wercs Document window");
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in handles)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("ViewWercsDocument"))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public string DocumentText(string address)
+		{
+			PdfReader reader = new PdfReader(address);
+			StringWriter output = new StringWriter();
+			for (int i = 1; i <= reader.NumberOfPages; i++)
+			{
+				output.WriteLine(PdfTextExtractor.GetTextFromPage(reader, i, new SimpleTextExtractionStrategy()));
+			}
+			return output.ToString();
+		}
+
 		public class MyProductsItem : DocumentAcceptance
 		{
 			public string WPSID { get; set; }
@@ -126,12 +198,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + WPSID + "']]"), 2).TryClick();
 			}
 		}
-		public class DocumentsItem
+		public class DocumentsItem : DocumentAcceptance
 		{
+			public int Row { get; set; }
 			public string FileName { get; set; }
 			public string Subformat { get; set; }
 			public string Language { get; set; }
 
+			public bool ClickAction(string action)
+			{
+				switch (action.ToLower())
+				{
+					case "view":
+						return containerElement.FindElement(By.XPath(".//div[./h3[contains(text(),'Documents')]]//tbody/tr[" + Row + "]//a[text()='View']"), 2).TryClick();
+				}
+				return false;
+			}
 		}
 	}
 }
