@@ -25,6 +25,7 @@ CLF - Currently blocked because of access to SHA:
 
 
 #Blocked
+@tfs_design
 Scenario: [58753] Hair Color Kit - RU000724
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 

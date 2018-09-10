@@ -1871,9 +1871,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I set the (.*) option to: (.*)")]
 		public void SetTheSectionOptionTo(string section, string option)
 		{
-			Report.IsTrue(new NewProduct().SetOptionInSection(section, option),
-				"Failed to set the input to " + option + " in section: " + section,
-				"Successfully set the input to " + option + " in section: " + section);
+			Report.IsTrue(new NewProduct().SetOptionInSection(section.Trim(), option.Trim()),
+				"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
+				"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
 			Delay.Seconds(1);
 		}
 
