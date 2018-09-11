@@ -3148,92 +3148,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//label[text()='VOC content in grams ozone per gram']/../following-sibling::div//span"), 2).Text;
 		}
 
+		// JS - consolidated  multiple methods to fetch CARB, MVOC etc. value text into one
 		/// <summary>
-		/// Gets date VOC Analysis Date (Today's Date)
+		/// Gets value from Volatile Organic Compound Summary page below the state table. EG. CARB, HVOC, MVOC, OTC Model Rule, VOC Grams Ozone, VOC Analysis
 		/// </summary>
-		public string GetVocAnalysisDate()
+		public string GetValueVOCSummary(string category)
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'VOC Analysis')]//b"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'" + category + "')]//b"), 2)?.Text;
 		}
 
+		// JS - consolidated multiple methods to fetch statement text (eg. VOC limits, restrictive VOC limit etc) into one
 		/// <summary>
-		/// Gets VOC Grams Ozone-Grams Product value
+		/// Gets statement text from VOC Summary page
 		/// </summary>
-		public string GetVocGramOzone()
+		public string GetVocSummaryStatementText(string category)
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'VOC Grams Ozone')]//b"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets HVOC value
-		/// </summary>
-		public string GetHvocValue()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'HVOC')]//b"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets CARB value
-		/// </summary>
-		public string GetCARBValue()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'CARB')]//b"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets MVOC value
-		/// </summary>
-		public string GetMvocValue()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'MVOC')]//b"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets limits specified statement
-		/// </summary>
-		public string LimitsSpecified()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified')]"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets limits specified by CARB statement
-		/// </summary>
-		public string LimitsSpecifiedByCARB()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified by CARB')]"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets limits specified by OTC statement
-		/// </summary>
-		public string LimitsSpecifiedByOTC()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified by OTC')]"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets limits specified in the California Consumer Products Regulation statement
-		/// </summary>
-		public string LimitsSpecifiedCaliforniaConsumerProductsRegulation()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified in the California Consumer Products Regulation')]"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets limits specified by the Ozone Transport Commission statement
-		/// </summary>
-		public string LimitsSpecifiedOzoneTransportCommission()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'limits specified by the Ozone Transport Commission')]"), 2).Text;
-		}
-
-		/// <summary>
-		/// Gets Based on the type of product, this must comply with the most restrictive VOC limit. statement
-		/// </summary>
-		public string BasedOnTypeOfProductComplyWithVOCLimit()
-		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'Based on the type of product')]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field') and contains(text(),'" + category + "')]"), 2)?.Text;
 		}
 
 		/// <summary>
@@ -3255,23 +3185,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 
 			var retList = new List<VocLimits>();
-			var tableElement = containerElement.FindElement(By.XPath(".//table[@class='table table-hover table-fixed']"), 2);
+			var tableElement = containerElement.FindElement(By.XPath(".//div[./div[text()='Limits']]/following-sibling::table"), 2);
 			if (tableElement == null)
 			{
 				return null;
 			}
-
 			var rows = tableElement.FindElements(By.XPath(".//tbody//tr"), 2);
 			foreach (var row in rows)
 			{
 				var use = row.FindElement(By.XPath(".//td[1]"), 2).GetValue();
 				var voccompliancelimit = row.FindElement(By.XPath(".//td[2]"), 2).GetValue();
 				var regulation = row.FindElement(By.XPath(".//td[3]"), 2).GetValue();
-				retList.Add(new VocLimits() { Use = use, VocComplianceLimit = voccompliancelimit, Regulation = regulation });
+				retList.Add(new VocLimits{
+					Use = use,
+					VocComplianceLimit = voccompliancelimit,
+					Regulation = regulation });
 			}
-
 			return retList;
-
 		}
 
 		public List<VocLimitsWithUnits> GetDisplayedVocLimitsWithUnits()
@@ -3314,14 +3244,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 
 			var retList = new List<VocPercentForStates>();
-			//var container = containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'description') and contains(text(),'VOC content as weight percentage of total formula')]"), 2);
-			//var tableElement = container.FindElement(By.XPath(".//table[@class='table table-hover table-fixed']"), 2);
 			var tableElement = containerElement.FindElement(By.XPath("//div[text()='VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.']//parent::div//parent::div//following-sibling::table"), 2);
 			if (tableElement == null)
 			{
 				return null;
 			}
-
 			var rows = tableElement.FindElements(By.XPath(".//tbody//tr"), 2);
 			foreach (var row in rows)
 			{
@@ -3330,7 +3257,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var vocvalue = row.FindElement(By.XPath(".//td[3]"), 2).GetValue();
 				var statevocthreshold = row.FindElement(By.XPath(".//td[4]"), 2).GetValue();
 				var message = row.FindElement(By.XPath(".//td[5]"), 2).GetValue();
-				retList.Add(new VocPercentForStates() { State = state, Regulation = regulation, VocValue = vocvalue, StateVocThreshold = statevocthreshold, Message = message });
+				retList.Add(new VocPercentForStates {
+					State = state,
+					Regulation = regulation,
+					VocValue = vocvalue,
+					StateVocThreshold = statevocthreshold,
+					Message = message
+				});
 			}
 
 			return retList;

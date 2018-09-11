@@ -184,14 +184,14 @@ And I should see the following Voc Limits present:
 And I should see the following Voc percent for each state:
 | State  | Regulation          | VOC Value        |  State VOC Threshold   | Message   |
 And I confirm that I see the following CARB value: 1
-And I confirm that I see the following comply with restrictive VOC statement: Based on the type of product, this must comply with the most restrictive VOC limit.
-And I confirm that I see the following limits statement: Does not exceed the limits specified in the California Consumer Products Regulation
+And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm statement: limits specified shows the text: Does not exceed the limits specified in the California Consumer Products Regulation
 
 # Change the CARB value
 Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
 And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB field to: 70
 And in the New Product page I click Continue
-And I confirm that I see the following limits statement: Exceeds the limits specified in the California Consumer Products Regulation
+And I confirm statement: limits specified shows the text: Exceeds the limits specified in the California Consumer Products Regulation
 And in the New Product page I click Continue
 
 # Retailers Page
@@ -322,17 +322,17 @@ And I should see the following Voc Limits with units  present:
 | Use                       | VOC Compliance Limit | Units      | Regulation           |
 | Charcoal Lighter Material | 0.02                 | lb / start | OTC Model rule limit |
 | Charcoal Lighter Material | 0.02                 | lb / start | CARB limit           |
-And I confirm that I see the following comply with restrictive VOC statement: Based on the type of product, this must comply with the most restrictive VOC limit.
-And I confirm that I see the following limits specified by CARB statement: Exceeds the limits specified by CARB
-And I confirm that I see the following limits specified by OTC statement: Exceeds the limits specified by OTC Model Rule
+And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm statement: limits specified by CARB shows the text: Exceeds the limits specified by CARB
+And I confirm statement: limits specified by OTC shows the text: Exceeds the limits specified by OTC Model Rule
 
 # Change the CARB  and OTC threshold options
 Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
 And I set the Verify VOC content is below the threshold of 0.02lb/start of CARB option to: Yes
 And I set the Verify VOC content is below the threshold of 0.02lb/start of OTC option to: Yes
 And in the New Product page I click Continue
-And I confirm that I see the following limits specified by CARB statement: Does not exceed the limits specified by CARB
-And I confirm that I see the following limits specified by OTC statement: Does not exceed the limits specified by OTC Model Rule
+And I confirm statement: limits specified by CARB shows the text: Does not exceed the limits specified by CARB
+And I confirm statement: limits specified by OTC shows the text: Does not exceed the limits specified by OTC Model Rule
 And in the New Product page I click Continue
 
 # Retailers Page
@@ -493,17 +493,17 @@ And I should see the following Voc percent for each state:
 | Virginia        | State Allowable Limit | 1         | 5                   | Does not exceed the State Limits    |
 | Vermont         | State Allowable Limit | 1         | 5                   | Does not exceed the State Limits    |
 And I confirm that I see the following CARB value: 1
-And I confirm that I see the following comply with restrictive VOC statement: Based on the type of product, this must comply with the most restrictive VOC limit.
-And I confirm that I see the following limits specified in the California Consumer Products Regulation statement: Does not exceed the limits specified in the California Consumer Products Regulation
-And I confirm that I see the following limits specified by the Ozone Transport Commission statement: Does not exceed the limits specified by the Ozone Transport Commission
+And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm statement: limits specified in the California Consumer Products Regulation shows the text: Does not exceed the limits specified in the California Consumer Products Regulation
+And I confirm statement: limits specified by the Ozone Transport Commission shows the text: Does not exceed the limits specified by the Ozone Transport Commission
 
 # Change the CARB  and OTC Model Rule value
 Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
 And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB field to: 5
 And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule field to: 5
 And in the New Product page I click Continue
-And I confirm that I see the following limits specified in the California Consumer Products Regulation statement: Exceeds the limits specified in the California Consumer Products Regulation
-And I confirm that I see the following limits specified by the Ozone Transport Commission statement: Exceeds the limits specified by the Ozone Transport Commission
+And I confirm statement: limits specified in the California Consumer Products Regulation shows the text: Exceeds the limits specified in the California Consumer Products Regulation
+And I confirm statement: limits specified by the Ozone Transport Commission shows the text: Exceeds the limits specified by the Ozone Transport Commission
 And in the New Product page I click Continue
 
 # Retailers Page
@@ -628,17 +628,18 @@ And I should see the following Voc Limits present:
 | Use                               | VOC Compliance Limit         | Regulation                                                    |
 | Antiperspirants - Non-aerosol     | 0                         | HVOC CARB and OTC Model Rule limit                               |
 | Antiperspirants - Non-aerosol     | 0                         | MVOC CARB and OTC Model Rule limit                               |
-And I confirm that I see the following HVOC: 1
-And I confirm that I see the following MVOC: 1
-And I confirm that I see the following comply with restrictive VOC statement: Based on the type of product, this must comply with the most restrictive VOC limit.
-And I confirm that I see the following limits statement: Exceeds the limits specified by CARB and OTC Model Rule
+And I confirm that I see the following HVOC value: 1
+And I confirm that I see the following MVOC value: 1
+And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm statement: limits specified shows the text: Exceeds the limits specified by CARB and OTC Model Rule
 
 #change the HVOC and MVOC value
 Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
 And I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 0
 And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 0
 And in the New Product page I click Continue
-And I confirm that I see the following limits statement: Does not exceed the limits specified by CARB and OTC Model Rule
+And I confirm statement: limits specified shows the text: Does not exceed the limits specified by CARB and OTC Model Rule
+
 And in the New Product page I click Continue
 
 # Retailers Page
@@ -769,15 +770,15 @@ And I confirm that I see the following VOC-OTC-CARB statement4: Based on your se
 And I should see the following Voc Limits present:
 | Use                         | VOC Compliance Limit         | Regulation                                                |
 | Clear Coating - Aerosol     | 0.85                         | Aerosol Coatings CARB limit                               |
-And I confirm that I see the following VOC Grams Ozone Grams Product: 0.5
-And I confirm that I see the following limits statement: Does not exceed the limits specified in the Aerosol Coatings by the CARB
-And I confirm that I see the following comply with restrictive VOC statement: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm that I see the following VOC Grams Ozone value: 0.5
+And I confirm statement: limits specified shows the text: Does not exceed the limits specified in the Aerosol Coatings by the CARB
+And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
 
 #change the VOC grams value
 Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
 And I set the VOC content in grams ozone per gram field to: 1
 And in the New Product page I click Continue
-And I confirm that I see the following limits statement: Exceeds the limits specified in the Aerosol Coatings by the CARB
+And I confirm statement: limits specified shows the text: Exceeds the limits specified in the Aerosol Coatings by the CARB
 And in the New Product page I click Continue
 
 # Retailers Page

@@ -3791,17 +3791,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStep57817VOCResults_ConfirmVOCLimitsTableShowsCorrectValuesOTCCARB_HappyPath(string use)
 		{
 			List<VocLimitsWithUnits> LimitsTable = new NewProduct().GetDisplayedVocLimitsWithUnits();
-
-			Report.IsTrue(LimitsTable.Where(x => x.Regulation.Trim() == "OTC Model rule limit").Count() == 1, "Limits table does not contain one and only one OTC Model rule limit. Count is: " + LimitsTable.Where(x => x.Regulation.Trim() == "OTC Model rule limit").Count().ToString(), "Limits table contains one and only one OTC Model rule limit");
-			Report.IsTrue(LimitsTable.Where(x => x.Regulation == "CARB limit").Count() == 1, "Limits table does not contain one and only one CARB limit", "Limits table contains one and only one CARB limit");
+			var regulationOtcLimit = LimitsTable.Where(x => x.Regulation.Trim() == "OTC Model rule limit").ToList();
+			var regulationCarbLimit = LimitsTable.Where(x => x.Regulation == "CARB limit").ToList();
+			Report.IsTrue(regulationOtcLimit.Count == 1,
+				"The Limits table does not contain only a single OTC Model rule. Count is: " + regulationOtcLimit.Count,
+				"The Limits table contains only a single OTC Model rule limit as expected");
+			Report.IsTrue(regulationCarbLimit.Count == 1,
+				"The Limits table does not contain only a single row for CARB. Count is: " + regulationCarbLimit.Count,
+				"The Limits table contains only a single row for CARB as expected");
 			foreach (VocLimitsWithUnits thisLimit in LimitsTable)
 			{
-				Report.IsTrue(thisLimit.Use == use, "Use is not showing as: " + use, "Use is showing correctly");
-				Report.IsTrue(thisLimit.VocComplianceLimit.Length > 0, "VOC Compliance Limit column is not showing a value", "VOC Compliance Limit column is showing a value: " + thisLimit.VocComplianceLimit);
-				Report.IsTrue(thisLimit.Units == null, "Units column is showing incorrectly",
-					"Units column is not showing");
+				Report.IsTrue(thisLimit.Use == use,
+					"Use is not showing as: " + use,
+					"Use is showing correctly: " + use);
+				Report.IsTrue(thisLimit.VocComplianceLimit.Length > 0,
+					"VOC Compliance Limit column is not showing a value when it was expected to!",
+					"VOC Compliance Limit column is showing a value as expected: " + thisLimit.VocComplianceLimit);
+				Report.IsTrue(thisLimit.Units == null,
+					"Units column is showing when it was not expected to!",
+					"Units column is not showing as expected");
 			}
-
 		}
 
 		[StepDefinition(@"I call shared step 74202 \(CVS Pharmacy - Yes, I wish to Continue\)")]

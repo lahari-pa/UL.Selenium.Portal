@@ -12,6 +12,7 @@ using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using TechTalk.SpecFlow.Bindings;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -23,6 +24,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"the Product Editor page should be loaded")]
 		public void ProductTypePageLoaded()
 		{
+
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Product Type page should be loaded");
 			try
 			{
@@ -1171,7 +1173,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var date = DateTime.Now.ToString("MM/dd/yyyy");
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetVocAnalysisDate();
+			var found = newProductpage.GetValueVOCSummary("VOC Analysis");
 
 			Report.IsTrue(found.Trim() == date.Trim(),
 				"date was not as expected! Expected: " + date + ", but found: " + found + "!",
@@ -1198,146 +1200,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
 				"statement was showing: " + statement + ", as expected!");
 		}
-
-
-		/// <summary>
-		/// Confirm VOC Grams Ozone/Grams Product
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC Grams Ozone Grams Product: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingVOCGramsOzoneGramsProduct(string statement)
+		//JS - consolidated HVOC, CARB etc value steps into one because they were calling identical code
+		[StepDefinition(@"I confirm that I see the following (CARB|MVOC|HVOC|VOC Grams Ozone|OTC Model Rule) value: (.*)")]
+		public void ThenIConfirmThatISeeTheFollowingCARBValue(string category, string expectedValue)
 		{
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetVocGramOzone();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"statement was showing: " + statement + ", as expected!");
+			var foundValue = newProductpage.GetValueVOCSummary(category);
+			Report.IsTrue(foundValue?.Trim() == expectedValue.Trim(),
+				"value was not as expected! Expected: " + expectedValue + ", but found: " + foundValue + "!",
+				"value was showing: " + expectedValue + ", as expected!");
 		}
 
+		// JS - consolidated multiple steps to one which used the same code but different element text
 		/// <summary>
-		/// Confirm HVOC value
+		/// Confirm VOC Summary statement text matches expected
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following HVOC: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingHVOC(string statement)
+		[StepDefinition(@"I confirm statement: (.*) shows the text: (.*)")]
+		public void IConfirmStatementShowsTheText(string category, string value)
 		{
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetHvocValue();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"value was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"value was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm CARB value
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following CARB value: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingCARBValue(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.GetCARBValue();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"value was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"value was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm MVOC value
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following MVOC: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingMVOC(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.GetMvocValue();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"value was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"value was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm limits statement
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following limits statement: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingLimitsStatement(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.LimitsSpecified();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"statement was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm limits specified in the California Consumer Products Regulation statement
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following limits specified in the California Consumer Products Regulation statement: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingLimitsSpecifiedInTheCaliforniaConsumerProductsRegulationStatement(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.LimitsSpecifiedCaliforniaConsumerProductsRegulation();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"statement was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm imits specified by CARB statement
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following limits specified by CARB statement: (.*)")]
-		public void LimitsSpecificedByCARBStatement(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.LimitsSpecifiedByCARB();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"statement was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm imits specified by OTC Model Rule statement
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following limits specified by OTC statement: (.*)")]
-		public void LimitsSpecificedByOTCStatement(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.LimitsSpecifiedByOTC();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"statement was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm limits specified by the Ozone Transport Commission statement
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following limits specified by the Ozone Transport Commission statement: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingLimitsSpecifiedByTheOzoneTransportCommissionStatement(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.LimitsSpecifiedOzoneTransportCommission();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"statement was showing: " + statement + ", as expected!");
-		}
-
-		/// <summary>
-		/// Confirm Based on the type of product, this must comply with the most restrictive VOC limit statement
-		/// </summary>
-		[StepDefinition(@"I confirm that I see the following comply with restrictive VOC statement: (.*)")]
-		public void ThenIConfirmThatISeeTheFollowingComplyWithRestrictiveVOCStatement(string statement)
-		{
-			var newProductpage = new NewProduct();
-			var found = newProductpage.BasedOnTypeOfProductComplyWithVOCLimit();
-
-			Report.IsTrue(found.Trim() == statement.Trim(),
-				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
-				"statement was showing: " + statement + ", as expected!");
+			var found = newProductpage.GetVocSummaryStatementText(category);
+			Report.IsTrue(found.Trim() == value.Trim(),
+				"Statement was not as expected! Expected: " + value + ", but found: " + found + "!",
+				"Statement was showing: " + value + ", as expected!");
 		}
 
 		/// <summary>
@@ -3680,6 +3565,53 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selRegulatoryList.ClickClose(),
 				"Failed to close the Regulatory List pop up",
 				"Successfully closed the Regulatory List pop up");
+		}
+		[StepDefinition(@"I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted (CARB|OTC) value: (.*)")]
+		public void ConfirmExceedsStatementIsCorrectBasedOnCarb(string carbOtc, string value)
+		{
+			var selNewProduct = new NewProduct();
+			string category;
+			double complianceLimit;
+			var limits = selNewProduct.GetDisplayedVocLimits();
+			if (limits.IsNullOrEmpty())
+			{
+				Report.Failure("Failed to find Compliance Limits on the VOC summary page");
+				return;
+			}
+			switch (carbOtc)
+			{
+				case "CARB":
+					category = "California Consumer Products Regulation";
+					complianceLimit = Convert.ToDouble(limits.First(x => x.Regulation == "CARB limit").VocComplianceLimit.Trim());
+					break;
+				case "OTC":
+					category = "Ozone Transport Commission";
+					complianceLimit = Convert.ToDouble(limits.First(x => x.Regulation == "OTC Model rule limit").VocComplianceLimit.Trim());
+					break;
+				default:
+					Report.Failure("Must specify VOC value type: CARB or OTC only");
+					return;
+			}
+			var phrase = selNewProduct.GetVocSummaryStatementText(category);
+			if (phrase == null)
+			{
+				Report.Failure("Unable to find statement phrase for: " + category + " on the VOC summary page");
+				return;
+			}
+			Report.Info("The CARB exceeds phrase was showing: " + phrase);
+			var valueNum = Convert.ToDouble(value);
+			if (valueNum > complianceLimit)
+			{
+				Report.Info("The " + carbOtc + " is expected to exceed the compliance limit");
+				Report.IsTrue(phrase.Contains("Exceeds the limits"),
+					"The " + carbOtc + " exceeds/ does not exceed statement did not match the expected phrase! Expected 'Exceeds the limits..' but found: " + phrase + "'",
+					"The " + carbOtc + " exceeds/ does not exceed statement matched the expected phrase");
+				return;
+			}
+			Report.Info("The " + carbOtc + " is not expected to exceed the compliance limit");
+			Report.IsTrue(phrase.Contains("Does not exceed the limits"),
+				"The " + carbOtc + " exceeds/ does not exceed statement did not match the expected phrase! Expected 'Does not exceed the limits..' but found: '" + phrase + "'",
+				"The " + carbOtc + " exceeds/ does not exceed statement matched the expected phrase");
 		}
 	}
 }
