@@ -114,26 +114,54 @@ namespace WERCSmart
 		public void GivenILogInWithEmailXAndPasswordY(string username, string password)
 		{
 			var selLandingPage = new LandingPage();
-			if (selLandingPage.Wait_for_load(10))
+			if (selLandingPage.Wait_for_load(5))
 			{
 				Report.Info("Clicking 'Log In' on the Landing Page");
 				selLandingPage.Click_Login();
 			}
 
-			var selLogin = new Login();
-			Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
-
-			Report.Info("Entering Email: '" + username + "'");
-			selLogin.EmailField = username;
-			Report.Info("Entering Password: '" + password + "'");
-			selLogin.PasswordField = password;
-			Report.Info("Clicking login");
-			selLogin.Click_Login();
-
 			var selHomepage = new Homepage();
-			Report.IsTrue(selHomepage.Wait_for_load(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
-			GeneralUtilities.Wait_for_load_finish();
-			GivenIfAModalDialogOpensICloseIt();
+			int i = 0;
+			while (!selHomepage.Wait_for_load(1) && i < 5)
+			{
+				Report.Info("========== Login Attempt: " + i + " ==========");
+				var selLogin = new Login();
+				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
+
+				Report.Info("Entering Email: '" + username + "'");
+				selLogin.EmailField = username;
+				Report.Info("Entering Password: '" + password + "'");
+				selLogin.PasswordField = password;
+				Report.Info("Clicking login");
+				selLogin.Click_Login();
+
+				selHomepage = new Homepage();
+				if (selHomepage.Wait_for_load(30))
+				{
+					Report.Success("Successfully logged in!");
+					GeneralUtilities.Wait_for_load_finish();
+					return;
+				}
+
+				var modalDialog = new ModalDialog();
+				if (modalDialog.Wait_for_load(1))
+				{
+					modalDialog.Click_Closex();
+					Delay.Seconds(Delay.SpeedFactor*1);
+
+					selHomepage = new Homepage();
+					if (selHomepage.Wait_for_load(10))
+					{
+						Report.Success("Successfully logged in!");
+						GeneralUtilities.Wait_for_load_finish();
+						return;
+					}
+				}
+
+				i++;
+			}
+
+			Report.Failure("Failed to log in!");
 		}
 
 
