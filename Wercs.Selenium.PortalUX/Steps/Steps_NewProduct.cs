@@ -1724,15 +1724,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SelectYesAgreedRadio(), "Failed to select Yes Agreed", "Clicked Yes Agreed");
 		}
 
-		[Given(@"In the Data Acceptance page I click on the Accept button")]
+		[StepDefinition(@"In the Data Acceptance page I click on the Accept button")]
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
 			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to Click accept button", "Clicked accept button");
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-
-
+		[StepDefinition(@"In the Data Acceptance page I see the Accept button")]
+		public void GivenInTheDataAcceptancePageISeeTheAcceptButton()
+		{
+			Report.IsTrue(new NewProduct().AcceptButtonDisplayed(),
+				"The Accept button was not displayed!",
+				"The Accept button was displayed as expected");
+		}
 
 		[StepDefinition(@"I click the Summary button in the Data Acceptance window")]
 		public void GivenIClickTheSummaryButtonInTheDataAcceptanceWindow()
@@ -3060,10 +3065,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"(.*) should not be showing any error messages")]
 		public void ErrorMessagesShouldNotBeShowingForItem(string section)
 		{
-			Delay.Seconds(5 * Delay.SpeedFactor);
+			Delay.Seconds(1);
 			var errorMessages = new NewProduct().GetErrorsForSection(section);
-			Report.IsTrue(errorMessages.Count == 0, "No error message should be showing", "As expected, no error messages are showing");
-
+			Report.IsTrue(errorMessages.Count == 0, "No error message should be showing for section: " + section + " but found: " + string.Join(", ", errorMessages),
+				"As expected, no error messages were showing for section: " + section);
 		}
 
 		[Then(@"For every field in the table I should see the following error: (.*)")]

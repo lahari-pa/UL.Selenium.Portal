@@ -1461,10 +1461,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			return el.TryClick();
-
 		}
 
-
+		public bool AcceptButtonDisplayed()
+		{
+			var el = containerElement.FindElement(By.XPath(".//a[text()='Accept']"), 2);
+			return el != null && el.Displayed;
+		}
 
 		public bool ClickSummaruButtonInDataAcceptance()
 		{
@@ -3196,10 +3199,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var use = row.FindElement(By.XPath(".//td[1]"), 2).GetValue();
 				var voccompliancelimit = row.FindElement(By.XPath(".//td[2]"), 2).GetValue();
 				var regulation = row.FindElement(By.XPath(".//td[3]"), 2).GetValue();
-				retList.Add(new VocLimits{
+				retList.Add(new VocLimits {
 					Use = use,
 					VocComplianceLimit = voccompliancelimit,
-					Regulation = regulation });
+					Regulation = regulation
+				});
 			}
 			return retList;
 		}
@@ -3412,9 +3416,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetErrorsForSection(string section)
 		{
-
 			var els = containerElement.FindElements(By.XPath(@".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2);
-			return els.Select(x => x.GetElementText()).ToList();
+			return els.Count == 0 ? new List<string>() : els.Select(x => x.Text).ToList();
 		}
 
 		public bool SetAdditionalOptionInSection(string section, string value)
@@ -3658,7 +3661,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Delay.Seconds(1);
 			Report.Info("Beginning get all options for section.");
 			var optionsText = new List<string>();
-			var matchingElements = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[starts-with(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
+			var matchingElements = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[contains(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
 			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
 			{
 				optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();

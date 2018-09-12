@@ -14,86 +14,104 @@ Feature: VOC
 
 
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
+
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+
 Then The home screen should load
-And I click the Register New Product icon in the Navigation Pane
-And I should see the header New Product
-And I Select the Create a New Registration radio button
-And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Fabric Softener - Single Use Dryer Product Only in the Product Name text field
-And In the Product Type tab of the New Product Page, I enter: Fabric Softener - Single Use Dryer Product Only in the Type of Product select field
-And in the New Product page I click Continue
+
+Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Softener - Single Use Dryer Product Only
+
 Then I save the product information as: TestCase56475
-And I should only see the following options for Primary Physical State:
-| State |
-| Solid |
 
-And I set the Secondary Physical State to be: Granular
-And I set the water mixture question to: Yes
-And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
-And I should see the Additional Product Information Page
-And In the Additional Information Page the check box for: United States should be: checked
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 
-# Adapted to use the generic method
-And I set the Product has been classified using OSHA (US) option to: No
-And I set the Product is shipped directly by supplier to the consumer. option to: No
-And I set the Product is a Retailer's Private Label or Brand option to: No
-And I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
+Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+
+Then I confirm that I see the following VOC-OTC-CARB statement1: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+
+Then The following options should be displayed for section: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+| Option |
+| Yes    |
+| No     |
+
 And in the New Product page I click Continue
 
-# Setting Ingredient Information
-Then I add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Formaldehyde  | 100     | false               | false       |            |
-And in the New Product page I click Continue
-And I should see the Regulatory Information 1 Page
-And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
-And in the New Product page I click Continue
-And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
-And I confirm that I see the following VOC-OTC-CARB statement1: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
-And I confirm that I see the following VOC-OTC-CARB statement2: Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
-And in the New Product page I click Continue
-Then I should see an error message: This is a required field.
-# Moved these to the new 'generic' format for easier editing down the road!
-And I set the Product has been granted an Alternative Control Plan option to: No
-And I set the Product does not contain more than 0.05 grams of VOC per use option to: Disagree
-#And In the Product Characteristics tab of the New Product Page, for Product does not contain more than grams of VOC per use I select: Disagree
-And in the New Product page I click Continue
-Given the 'Select Retailers' window appears
-Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
-And in the New Product page I click Continue
-And I should see the Regulatory Documents to Provide Page
-And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
-And in the New Product page I click Continue
-And I should see the Additional Documents to Provide Page
-And in the New Product page I click Continue
+Then Product has been granted an Alternative Control Plan should be showing the error messages: This is a required field.
+
+Given I set the Product has been granted an Alternative Control Plan option to: No
+
+Then I confirm that I see the following VOC-OTC-CARB statement2: Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
+
+Then I should see a total of 2 radio buttons for the section: Product does not contain more than 0.05 grams
+
+Then The following options should be displayed for section: Product does not contain more than 0.05 grams
+| Option   |
+| Agree    |
+| Disagree |
+
+Given in the New Product page I click Continue
+
+Then Product does not contain more than 0.05 grams of VOC per use should be showing the error messages: This is a required field.
+
+Given I set the Product does not contain more than 0.05 grams of VOC per use option to: Disagree
+
+Given in the New Product page I click Continue
+
+# Confirm the VOC Summary page is NOT shown (because there are no results for show for this RU)
+
+# If the Ecologo step is shown run the shared step below - if not continue at step 35
+
+# Shared 57712
+
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Then I should see the Additional Documents to Provide Page
+
+# Confirm the Volatile Organic Compounds - Product label document upload control is shown along with the TCLP file control updates
+Then I see the following sections
+| Section                                           |
+| Volatile Organic Compounds                        |
+| Toxicity Characteristic Leaching Procedure (TCLP) |
+
+Given in the New Product page I click Continue
+
 Then I should see an error message: Document is required: Product Label
-#And In the Review and Submit tab of the New Product Page for Volatile Organic Compounds I upload pdf file
-And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
-And in the New Product page I click Continue
-And I should see the Optional Reports and Documents Available for Purchase Page
-And in the New Product page I click Continue
-And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
-And in the Review and Submit tab of the New Product Page for Appearance I select: Buff
-And in the Review and Submit tab of the New Product Page for Odor I select: Roasted soy
-And in the Review and Submit tab of the New Product Page for Odor Threshold I select: No data available
-And in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: 5.5
-And in the New Product page I click Continue
-And I should see the Comments Page
-And in the New Product page I click Continue
-And I should see the Data Acceptance Page
-Then The Data Acceptance page should appear
-Given I click the Summary button in the Data Acceptance window
-Then I switch to the Data Summary page
-And I confirm that I see the following option for Product has been granted an Alternative Control Plan question: No
-And I confirm that I see the following option for Product does not contain more than grams of VOC per use question: Disagree
-Then I switch to Data Acceptance page
-Given I navigate to the home page
-Then I delete the product: TestCase56475
 
+Then Toxicity Characteristic Leaching Procedure (TCLP) should not be showing any error messages
+
+Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+Then I should see the Optional Reports and Documents Available for Purchase Page
+
+Given in the New Product page I click Continue
+
+Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+
+Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Goggles                       | 500                      | 45                      | 15.0      | Black      | Odorless | No data available | 5                     |
+
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Then I should see the Data Acceptance Page
+
+Then The Data Acceptance page should appear
+
+Given In the Data Acceptance page I select Yes, Agreed
+
+Then In the Data Acceptance page I see the Accept button
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
 
 Scenario: [56476] VOC checks for Personal Fragrance product
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
