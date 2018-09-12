@@ -3136,11 +3136,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// Gets statement Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are:
+		/// Gets statement Based on your selection, you have verified your product contains VOC with intended uses as follows... the CARB VOC compliance limit(s) for the intended use you identified is/are:
 		/// </summary>
-		public string GetVocContentWithIntendedUsesAerosolCoatingStatement()
+		public string GetCarbVocComplianceLimitStatement()
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field')]//b[contains(text(),'Aerosol Coatings by the CARB VOC')]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@data-bind,'field.field')]//b[contains(text(),'CARB VOC compliance limit')]"), 2)?.Text;
 		}
 
 		/// <summary>

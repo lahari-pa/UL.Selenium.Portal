@@ -52,7 +52,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
 			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
-				"AAA WERCS Test " + type.Replace("/", " "));
+				"AAA WERCS Test " + type.Replace("/", " ").Replace("%", ""));
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
 								 " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
@@ -1351,9 +1351,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.ThenIConfirmThatTheVOCAnalysisDateIsShowing();
 			TestReport.StartStep("I confirm that I see todays VOC Analysis Date");
 			MyNewProduct.ThenIConfirmThatISeeTodaysVOCAnalysisDate();
-
-			//TestReport.StartStep("In the Volatile Organic Compound Summary page I click Continue");
-			//MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compound Summary");
 		}
 
 		[StepDefinition(@"I call Shared Step 42214 \(Delete a Product from the Product grid\) to delete product: (.*)")]
@@ -3812,6 +3809,39 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Units column is not showing as expected");
 			}
 		}
+
+		[StepDefinition(@"I call shared step 57819 \(VOC Results - Confirm VOC Limits table shows correct values \(CARB only\) - Happy Path\): (.*)")]
+		public void SharedStep57819_VOCResults_ConfirmVOCLimitsTableShowsCorrectValues_CarbOnly(string use)
+		{
+			TestReport.UseSubSteps = true;
+			List<VocLimitsWithUnits> LimitsTable = new NewProduct().GetDisplayedVocLimitsWithUnits();
+			var regulationOtcLimit = LimitsTable.Where(x => x.Regulation.Trim() == "OTC Model rule limit");
+			var regulationCarbLimit = LimitsTable.Where(x => x.Regulation == "CARB limit").ToList();
+			TestReport.StartStep("I confirm the VOC Limits table shows an entry for CARB only");
+			Report.IsTrue(regulationCarbLimit.Count == 1,
+				"The Limits table does not contain only a single row for CARB. Count is: " + regulationCarbLimit.Count,
+				"The Limits table contains only a single row for CARB as expected");
+			TestReport.StartStep("I confirm the Regulation column does not show an entry for OTC Model Rule");
+			Report.IsTrue(regulationOtcLimit.Count() == 0,
+				"The Limits table contains a row for OTC Model rule when it should not!",
+				"The Limits table does not contains a row for OTC Model rule limit as expected");
+			foreach (VocLimitsWithUnits thisLimit in LimitsTable)
+			{
+				TestReport.StartStep("I confirm the VOC Limits table shows an entry in the Use column with phrase matching the product's RU");
+				Report.IsTrue(thisLimit.Use == use,
+					"Use is not showing as: " + use,
+					"Use is showing correctly: " + use);
+				TestReport.StartStep("I confirm the VOC Limits table shows a value in the VOC Compliance Limit column ");
+				Report.IsTrue(thisLimit.VocComplianceLimit.Length > 0,
+					"VOC Compliance Limit column is not showing a value when it was expected to!",
+					"VOC Compliance Limit column is showing a value as expected: " + thisLimit.VocComplianceLimit);
+				TestReport.StartStep("I confirm the table does NOT show a Units column ");
+				Report.IsTrue(thisLimit.Units == null,
+					"Units column is showing when it was not expected to!",
+					"Units column is not showing as expected");
+			}
+		}
+
 
 		[StepDefinition(@"I call shared step 74202 \(CVS Pharmacy - Yes, I wish to Continue\)")]
 		public void SharedCVSPharmacy_YesIWishToContinue()

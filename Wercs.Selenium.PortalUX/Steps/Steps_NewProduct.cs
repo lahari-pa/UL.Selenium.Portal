@@ -1157,8 +1157,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenIConfirmThatISeeTheFollowingVOC_OTC_CARBStatement4(string statement)
 		{
 			var newProductpage = new NewProduct();
-			var found = newProductpage.GetVocContentWithIntendedUsesAerosolCoatingStatement();
-
+			var found = newProductpage.GetCarbVocComplianceLimitStatement();
 			Report.IsTrue(found.Trim() == statement.Trim(),
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
 				"statement was showing: " + statement + ", as expected!");
