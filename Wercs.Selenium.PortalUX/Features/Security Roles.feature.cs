@@ -113,14 +113,14 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
 #line 17
 testRunner.Given("I login as the administrator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
-testRunner.Then("I should see username: Richard Smith in the right corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see username: AllRetailers, ProductsCompany in the right corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 21
 testRunner.Given("I navigate to the MyAccount page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 23
 testRunner.Given("I save all the users in the User Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 25
-testRunner.Then("In Your Company User Accounts the user Richard Smith is associated with the admin" +
-                    "istrator email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In Your Company User Accounts the user AllRetailers, ProductsCompany is associate" +
+                    "d with the administrator email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 27
 testRunner.Given("I click the User Icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29

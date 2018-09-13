@@ -12,7 +12,6 @@
 
 Feature: Flow 16
 
-@tfs_design
 Scenario: [59273] Alkaline Battery - RU000344
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -61,7 +60,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
-@tfs_design
+
 Scenario: [59274] Battery Containing Mercury - RU000729
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -110,7 +109,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59274
 
-@tfs_design
+
 Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -158,7 +157,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
 
-@tfs_design
+
 Scenario: [59277] Magnesium Battery - RU000728
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -172,6 +171,8 @@ Given I delete all products with UPC Number: saved as UPC59277
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Magnesium Battery
+
+Given I save the product information as: TestCase59277
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
@@ -204,7 +205,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59277
 
-@tfs_design
+
 Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -218,6 +219,8 @@ Given I delete all products with UPC Number: saved as UPC59278
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
+
+Given I save the product information as: TestCase59278
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
@@ -252,7 +255,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59278
 
 
-@tfs_design
+
 Scenario: [59279] Nickel-Cadmium Battery - RU000346
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -266,6 +269,8 @@ Given I delete all products with UPC Number: saved as UPC59279
 Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel-Cadmium Battery
+
+Given I save the product information as: TestCase59279
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
@@ -348,7 +353,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase59280
 
-@tfs_design
+
 Scenario: [59281] Water-Charged Cell - RU001543
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -362,6 +367,8 @@ Given I delete all products with UPC Number: saved as UPC59281
 Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Water-Charged Cell
+
+Given I save the product information as: TestCase59281
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
@@ -397,7 +404,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59281
 
 
-@tfs_design
+
 Scenario: [59282] Zinc Air - RU001205
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -411,6 +418,8 @@ Given I delete all products with UPC Number: saved as UPC59282
 Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Zinc Air
+
+Given I save the product information as: TestCase59282
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
@@ -445,7 +454,6 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
 
 
-@tfs_design
 Scenario: [59275] Carbon Zinc Battery - RU000727
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -459,6 +467,8 @@ Given I delete all products with UPC Number: saved as UPC59275
 Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Carbon Zinc Battery
+
+Given I save the product information as: TestCase59275
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 

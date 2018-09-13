@@ -41,7 +41,7 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol)
 
-Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given in the Additional Documents to Provide page I click Continue
 
@@ -55,6 +55,9 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
 
+
+@tfs_design
+#Retailers section needs to be confirmed! 
 Scenario: [60695] Juice and Juice Drinks - RU001413
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -99,6 +102,8 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60695
 
+@tfs_design
+#Retailers section needs to be confirmed! 
 Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

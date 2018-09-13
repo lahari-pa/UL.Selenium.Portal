@@ -213,6 +213,7 @@ Then the Product Type page should be loaded
 And the product saved as: FirstProduct should be visible in editor
 
 #Design
+@tfs_design
 Scenario: [56214] My Products grid Actions - Submit Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -222,6 +223,7 @@ When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Submit
 And UNDER DEVELOPMENT
 
+@tfs_design
 Scenario: [56216] My Products grid Actions - Delete Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -252,7 +254,7 @@ Then I should not seen an Accept button
 Given I close the browser tab with the Summary page
 
 
-
+@tfs_design
 Scenario: [56219] My Products grid Actions - Documents navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -267,6 +269,7 @@ Given I close the document
 
 
 #Design
+@tfs_design
 Scenario: [56220] My Products grid Actions - Edit UPCs
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -276,6 +279,7 @@ And I click Row Actions for the most recent product returned
 Then I click on the Row Action: UPC Update
 And UNDER DEVELOPMENT
 
+@tfs_design
 Scenario: [56280] Document is created and is ready for review
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then clicking on the top Alert should direct me to the My Messages page
@@ -288,7 +292,6 @@ Then I click More below the Alerts Panel
 And I should see the header: Message Center on the Message Center window
 
 Scenario: [64854] Navigation Settings
-
 # Sign in and expand the menu, checking the correct items are showing
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then I expand the Navigation Menu
@@ -400,6 +403,7 @@ Given I click ... in the products grid
 
 Given I enter the down arrow into the products grid page navigation input then the correct page is shown
 
+@tfs_design
 # NB this test requires pre set up products with a Brand/ Product Line added in the 'The Product' section
 Scenario: [68388] More Filters - Brand
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

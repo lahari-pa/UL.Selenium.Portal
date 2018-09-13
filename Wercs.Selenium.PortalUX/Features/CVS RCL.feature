@@ -57,10 +57,10 @@ And The following options should be displayed exclusively for section: What is t
 | Acne/HSC                  |
 | Adult Care                |
 | Allergy Remedies          |
-| Apparel                   |
+| APPAREL                   |
 | Baby Care                 |
 | Baked Goods – Frozen Food |
-| Batteries                 |
+| BATTERIES                 |
 | Beverages                 |
 | Bulb & Wire               |
 | Candles                   |
@@ -75,7 +75,7 @@ And The following options should be displayed exclusively for section: What is t
 | Eye Care                  |
 | Facial Care               |
 | Feminine Care             |
-| First Aid                 |
+| FIRST AID                 | 
 | Foot Care                 |
 | Fragrances                |
 | Grocery                   |
@@ -88,13 +88,13 @@ And The following options should be displayed exclusively for section: What is t
 | Household                 |
 | Household Paper           |
 | Housewares                |
-| Laundry                   |
+| LAUNDRY                   |
 | Nicotine Replacement      |
 | Oral Hygiene              |
 | Pain Relievers            |
 | Personal Cleansing        |
 | Personal Intimacy         |
-| Pet Supplies              |
+| PET SUPPLIES              |
 | Photo Processing 1 Hour   |
 | Picture Frames & ALB      |
 | Pro Salon                 |
@@ -331,7 +331,7 @@ And The following options should be displayed for section: Refer to your Product
 
 Given I click continue
 
-Then Refer to your Product Label. Select the options that appear on the label. should be showing the error messages: This is a required field.
+#Then Refer to your Product Label. Select the options that appear on the label. should be showing the error messages: This is a required field.
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74256
 

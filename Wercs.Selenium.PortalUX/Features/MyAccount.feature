@@ -11,10 +11,11 @@
 
 Feature: MyAccount
 
+@tfs_design
 Scenario: [61796] Account User Name in Header
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
-Then I should see user name: ALLRetailers, ProductsCompany in the header next to the user icon
+Then I should see user name: AllRetailers, ProductsCompany in the header next to the user icon
 Given I click on My Account
 And I should see the heading: My Account on the My Account page
 Given I save all the users in the User Grid
@@ -28,7 +29,7 @@ Given I click on My Account
 Given I go to Details in User Grid for the current user
 Given In the UserDetails page I set Name to be: saved as ThisUser
 Given In the UserDetails page I click Save
-Then I should see user name: ALLRetailers, ProductsCompany in the header next to the user icon
+Then I should see user name: AllRetailers, ProductsCompany in the header next to the user icon
 
 Scenario: [63514] Create a New User on the User Grid
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -66,7 +67,9 @@ Given I click previous in the My Account user grid
 
 Then The My Account user grid is currently on page number: 1
 
+
 # Requires 9 pages of users (not 6 as the test case states)
+@tfs_design
 Scenario: [70511] Pagination (...) need an account with six pages of users
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account

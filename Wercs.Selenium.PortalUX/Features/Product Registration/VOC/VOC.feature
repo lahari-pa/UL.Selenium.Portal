@@ -1,5 +1,4 @@
-﻿@LandingPage
-@Login
+﻿@Login
 @Homepage
 @Signup
 @wercsmart
@@ -101,15 +100,9 @@ Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Option
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Goggles                       | 500                      | 45                      | 15.0      | Black      | Odorless | No data available | 5                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared 57883 (Comments - Happy Path) and enter the comment: test data
 
-Then I should see the Data Acceptance Page
-
-Then The Data Acceptance page should appear
-
-Given In the Data Acceptance page I select Yes, Agreed
-
-Then In the Data Acceptance page I see the Accept button
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Softener - Single Use Dryer Product Only
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
 
@@ -306,10 +299,7 @@ And I confirm statement: limits specified by CARB shows the text: Does not excee
 And I confirm statement: limits specified by OTC shows the text: Does not exceed the limits specified by OTC Model Rule
 And in the New Product page I click Continue
 
-# Retailers Page
-Given the 'Select Retailers' window appears
-Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
-And in the New Product page I click Continue
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 # Regulatory Documents to Provide Page
 And I should see the Regulatory Documents to Provide Page
@@ -476,10 +466,7 @@ And I confirm statement: limits specified in the California Consumer Products Re
 And I confirm statement: limits specified by the Ozone Transport Commission shows the text: Exceeds the limits specified by the Ozone Transport Commission
 And in the New Product page I click Continue
 
-# Retailers Page
-Given the 'Select Retailers' window appears
-Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
-And in the New Product page I click Continue
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 # Regulatory Documents to Provide Page
 And I should see the Regulatory Documents to Provide Page
@@ -611,10 +598,7 @@ And I confirm statement: limits specified shows the text: Does not exceed the li
 
 And in the New Product page I click Continue
 
-# Retailers Page
-Given the 'Select Retailers' window appears
-Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
-And in the New Product page I click Continue
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 # Regulatory Documents to Provide Page
 And I should see the Regulatory Documents to Provide Page
@@ -749,10 +733,7 @@ And in the New Product page I click Continue
 And I confirm statement: limits specified shows the text: Exceeds the limits specified in the Aerosol Coatings by the CARB
 And in the New Product page I click Continue
 
-# Retailers Page
-Given the 'Select Retailers' window appears
-Then In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product
-And in the New Product page I click Continue
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 # Regulatory Documents to Provide Page
 And I should see the Regulatory Documents to Provide Page

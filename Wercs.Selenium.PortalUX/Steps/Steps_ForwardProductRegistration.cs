@@ -336,6 +336,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					return;
 				}
 				EnterTextInSearchByIDOrProductNameField(id);
+				Report.Screenshot();
 				Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
 					"Failed to select the product with ID: " + id + "!",
 					"Successfully selected the product with ID: " + id);
@@ -346,21 +347,48 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ConfirmIAmUnableToSelectProductWithIDSavedAs(string savedAs)
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
-			var id = Context.GetFromContext(savedAs)?.ToString();
-			if (id == null)
+			if (savedAs.ToLower().Contains("list"))
 			{
-				Report.Failure("Could not find product ID in context saved as: " + savedAs);
-				return;
+				var ids = (List<string>)Context.GetFromContext(savedAs);
+				if (ids == null) 
+				{
+					Report.Failure("Could not find product IDs in context saved as: " + savedAs);
+					return;
+				}
+
+				foreach (var id_ in ids)
+				{
+					bool isChecked_ = selForwardProductReg.SelectProducts_ProductIsChecked(id_);
+					Report.Info("Product with ID: " + id_ + " is " + (isChecked_ ? "selected" : "not selected"));
+					Report.Info("Clicking the checkbox for product with ID: " + id_);
+					Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id_),
+						"Failed to select the product with ID: " + id_ + "!",
+						"Successfully selected the product with ID: " + id_);
+					Report.IsTrue(selForwardProductReg.SelectProducts_ProductIsChecked(id_) == isChecked_,
+						"I was able to " + (isChecked_ ? "deselect" : "select") + " product with ID: " + id_ + " when it should be disabled!",
+						"I was not able to " + (isChecked_ ? "deselect" : "select") + " product with ID: " + id_ + " as expected");
+					return;
+				}
 			}
-			bool isChecked_ = selForwardProductReg.SelectProducts_ProductIsChecked(id);
-			Report.Info("Product with ID: " + id + " is " + (isChecked_ ? "selected" : "not selected"));
-			Report.Info("Clicking the checkbox for product with ID: " + id);
-			Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
-				"Failed to select the product with ID: " + id + "!",
-				"Successfully selected the product with ID: " + id);
-			Report.IsTrue(selForwardProductReg.SelectProducts_ProductIsChecked(id) == isChecked_,
-				"I was able to " + (isChecked_ ? "deselect" : "select") + " product with ID: " + id + " when it should be disabled!",
-				"I was not able to " + (isChecked_ ? "deselect" : "select") + " product with ID: " + id + " as expected");
+			else
+			{
+				var id = Context.GetFromContext(savedAs)?.ToString();
+				if (id == null)
+				{
+					Report.Failure("Could not find product ID in context saved as: " + savedAs);
+					return;
+				}
+				bool isChecked_ = selForwardProductReg.SelectProducts_ProductIsChecked(id);
+				Report.Info("Product with ID: " + id + " is " + (isChecked_ ? "selected" : "not selected"));
+				Report.Info("Clicking the checkbox for product with ID: " + id);
+				Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
+					"Failed to select the product with ID: " + id + "!",
+					"Successfully selected the product with ID: " + id);
+				Report.IsTrue(selForwardProductReg.SelectProducts_ProductIsChecked(id) == isChecked_,
+					"I was able to " + (isChecked_ ? "deselect" : "select") + " product with ID: " + id + " when it should be disabled!",
+					"I was not able to " + (isChecked_ ? "deselect" : "select") + " product with ID: " + id + " as expected");
+			}
+			
 		}
 
 		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab and the checkbox is disabled while the page is working")]

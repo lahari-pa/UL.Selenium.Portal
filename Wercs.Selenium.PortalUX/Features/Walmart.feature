@@ -157,6 +157,8 @@ Given I check that Walmart and all of its affiliates are not available
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74133
 
+
+@tfs_design
 Scenario: [74017] Walmart Affiliates when Adding a UPC
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -203,6 +205,8 @@ Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Ty
 # select Wal-mart/ SAMs CLUB
 # confirm WM under Destination Retailers
 
+
+@tfs_design
 Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

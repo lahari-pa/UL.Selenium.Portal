@@ -81,12 +81,19 @@ Then I save the product information as: TestCase58098
 
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
 
-Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+#Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 Given I add the following ingredients:
 | ComponentName    | Percent |
 | Aqua             | 50      |
 | Sodium hydroxide | 50      |
+
+#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+#| ComponentName           | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+#| Aqua                    | 50      | false               | false       |            |
+#| Sodium hydroxide        | 50      | false               | false       |            |
 
 Given In the Ingredients Page I select the first Public Name dropdown option for ingredient: Aqua
 
@@ -143,8 +150,8 @@ Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance  | Odor      | Odor Threshold    | Partition Coefficient |
-| Apron                         | 190                      | 40.0                    | 20.20001  | Light brown | Chocolate | No data available | 13.335                |
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
@@ -154,6 +161,8 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I navigate to the home page
 Then I delete the product: TestCase58078
 
+
+@tfs_design
 Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -177,10 +186,8 @@ Given I call Shared Step 37857 (Enter Physical Property - Solid) with the follow
 Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName   |
-| Cocoa Powder        | 15.629  | true                | false       | Cocoa Powder |
-| Banana powder       | 20.3    | false               | true        |              |
-| Oat flour (Oatmeal) | 64.071  | false               | false       |              |
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Cocoa butter  | 100     | false               | false       |            |
 
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
@@ -196,7 +203,7 @@ Given in the Optional Reports and Documents Available for Purchase page I click 
 
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-| Apron                         | 550                      | 63.625                  | 33.333    | Brown      | Banana | No data available | 30                    |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 

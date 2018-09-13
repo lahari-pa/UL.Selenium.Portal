@@ -136,9 +136,11 @@ testRunner.Given("I click the Shopping Cart icon in the Navigation Pane", ((stri
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Cart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
         public virtual void _63323RemoveSingleProductFromCart()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63323] Remove single product from cart", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63323] Remove single product from cart", new string[] {
+                        "tfs_design"});
 #line 22
 this.ScenarioSetup(scenarioInfo);
 #line 11
@@ -158,21 +160,34 @@ testRunner.Then("I save the product information as: TestCase63323", ((string)(nu
 #line 28
 testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
-testRunner.Given("I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direc" +
-                    "t Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 30
-testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: 63323", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table1.AddRow(new string[] {
+                        "Propane",
+                        "100",
+                        "false",
+                        "false",
+                        ""});
 #line 31
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table1, "Given ");
+#line 34
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 32
+#line 35
 testRunner.Given("I call Shared Step 63219 (Retailer Association - Select No Retailer - Click conti" +
                     "nue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 33
+#line 36
 testRunner.Given("I call Shared 57881 (Regulatory Documents to Provide - US only - request authorin" +
                     "g - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 38
+#line 41
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase63323", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -192,23 +207,23 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         public virtual void _74837ShoppingCartNavigationWithSubscriptionWithoutProducts()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74837] Shopping Cart navigation with subscription without products", ((string[])(null)));
-#line 40
+#line 43
 this.ScenarioSetup(scenarioInfo);
 #line 11
 this.FeatureBackground();
-#line 42
+#line 45
 testRunner.Given("I log in with the subscription without products account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 44
+#line 47
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 46
+#line 49
 testRunner.Given("I click the Shopping Cart icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 48
+#line 51
 testRunner.Then("I should see the empty shopping cart pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 50
+#line 53
 testRunner.And("the Empty Cart pop up message reads: There are no items in the shopping cart.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
+#line 55
 testRunner.Given("I close the Empty Cart pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 54
+#line 57
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -227,19 +242,19 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
         public virtual void _74919ShoppingCartNavigationWithProductsInCartWithoutSubscription()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74919] Shopping cart navigation with products in cart without subscription", ((string[])(null)));
-#line 57
+#line 60
 this.ScenarioSetup(scenarioInfo);
 #line 11
 this.FeatureBackground();
-#line 59
+#line 62
 testRunner.Given("I log in with the without subscription without products account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 64
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 63
+#line 66
 testRunner.Given("I click the Shopping Cart icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 65
+#line 68
 testRunner.Then("the Subscription Enrollment page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 67
+#line 70
 testRunner.And(@"I see the alert message with text: Subscription enrollment is required to submit your registration for assessment. Please enroll at this time. Once you purchase your subscription, the registration data will transfer for assessment. under Subscription Enrollment", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

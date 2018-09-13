@@ -107,9 +107,11 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow4A")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
         public virtual void _74825AirFreshener_DualPurposeDisinfectant_Aerosol_RU001539()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74825] Air Freshener-Dual Purpose/Disinfectant-Aerosol - RU001539", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74825] Air Freshener-Dual Purpose/Disinfectant-Aerosol - RU001539", new string[] {
+                        "tfs_design"});
 #line 17
 this.ScenarioSetup(scenarioInfo);
 #line 19
@@ -125,7 +127,7 @@ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Regist
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-                    "duct): Air Freshener-Dual Purpose/Disinfectant – Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "duct): Air Freshener-Dual Purpose/Disinfectant-Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 31
 testRunner.Given("I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue" +
                     " - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

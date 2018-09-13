@@ -77,8 +77,8 @@ Given I call Shared Step 70393 (Additional Product Information - With marketed f
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared 48367 (Product Includes Battery > any type)
-| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
-| Alkaline     | L1028F       | 6                               | 6                                  |
+| Battery Type | Manufacturer                                                   | Number of batteries per package | How many batteries required to run |
+| Alkaline     | Alkaline battery23A by Shenzhen AllKey Battery Co., Ltd.       | 6                               | 6                                  |
 
 Given I click continue
 
@@ -86,7 +86,7 @@ Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCL
 
 Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Genuine Parts
+Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
 Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60643, container type: Aerosol Can and size: 33
 

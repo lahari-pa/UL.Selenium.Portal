@@ -230,6 +230,8 @@ Given I click Delete in the Delete Product pop up
 
 Then I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
 
+
+@tfs_design
 Scenario: [70539] Add an Ingredient (Basic) and remove
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -285,6 +287,8 @@ Given I click: YES in the 'Remove Component from My Ingredients' pop up
 
 Then I confirm My Ingredient saved as: water70539 in My Library has been removed from the grid
 
+
+@tfs_design
 Scenario: [70556] Add an Ingredient (Trade secret) and remove
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -342,6 +346,8 @@ Given I click: YES in the 'Remove Component from My Ingredients' pop up
 
 Then I confirm My Ingredient saved as: water70556 in My Library has been removed from the grid
 
+
+@tfs_design
 Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -406,6 +412,8 @@ Given I click: YES in the 'Remove Component from My Ingredients' pop up
 
 Then I confirm My Ingredient saved as: formaldehyde70567 in My Library has been removed from the grid
 
+
+@tfs_design
 Scenario: [73329] Edit Ingredient
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -548,6 +556,8 @@ And I confirm the ingredients for page 3 saved as: My Library Ingredients Pagina
 
 And I navigate to the home page
 
+
+@tfs_design
 Scenario: [73326] Searching an Ingredient
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

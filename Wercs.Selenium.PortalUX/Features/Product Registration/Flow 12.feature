@@ -31,7 +31,6 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Nitric acid     | 55      | false               | false       |            |
 
 Given I call Shared Step 48948 (Formulation > 3rd Party - Select all)
-
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
@@ -60,11 +59,15 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase58605
 
-Given I call Shared Step 37857 (Enter Physical Property - Solid)
+#Given I call Shared Step 37857 (Enter Physical Property - Solid)
 
-Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I check the new page has loaded with no required field error. Navigating from: Additional Product Information to: Ingredients
+#Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+#Given I check the new page has loaded with no required field error. Navigating from: Additional Product Information to: Ingredients
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -76,7 +79,9 @@ Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
 Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
@@ -157,9 +162,11 @@ Then I save the product information as: TestCase58606
 
 Given I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
 
-Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
+#Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
 
-Given I check the new page has loaded with no required field error. Navigating from: Additional Product Information to: Ingredients
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+#Given I check the new page has loaded with no required field error. Navigating from: Additional Product Information to: Ingredients
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -170,24 +177,32 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 
 Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+#Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
 Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
-Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 
 # Regulatory Documents to Provide page is showing
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+#Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Additional Documents to Provide page I click Continue
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58606. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Medicinal Liquids
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58606

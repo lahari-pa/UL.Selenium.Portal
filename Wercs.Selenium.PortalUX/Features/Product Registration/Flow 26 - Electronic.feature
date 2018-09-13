@@ -37,7 +37,11 @@ Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
 
 #In the step below, confirm that the following text is visible on the TCLP screen, "Please answer the following question with regards to your product, not the battery contained in your product." on the TCLP screen.
 
-Given I call Shared 48367 Product Includes Battery > any type
+#Given I call Shared 48367 Product Includes Battery > any type
+
+Given I call Shared 48367 (Product Includes Battery > any type)
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+| Alkaline     | L1028F       | 6                               | 6                                  |
 
 Given I call Shared 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 

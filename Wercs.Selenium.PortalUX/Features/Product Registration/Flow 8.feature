@@ -208,7 +208,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58187
 
-
+#check RU number and name 
 Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -224,8 +224,8 @@ Then I save the product information as: TestCase58293
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 
 Given I call Shared Step 63804 (Additional Product Information - enter options)
-| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-| No                                                             | No                            | No                         | No                         |
+| Product is marketed for use | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+| No                          | No                                                             | No                            | No                         | No                         |
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -302,9 +302,9 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: test data
 
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Absorbent Solid
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fireworks
 
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57295
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58297
 
 Scenario: [57088] Engine (motor) oil for Auto or Boat
 
@@ -475,6 +475,8 @@ Given in the New Product page I click Continue
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
+Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
@@ -524,8 +526,6 @@ Given in the New Product page I click Continue
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -968,7 +968,7 @@ Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared Step 75852 (Transportation Details 1 - Yes only shown, Select DOT any shipping method, Continue)
+Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
@@ -990,22 +990,6 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Then The Data Acceptance page should appear
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Training aid repellant
 
-Then I confirm error message is displayed: Select at least one of the options
-
-Then In the Data Acceptance page I select Yes, Agreed
-
-Given I click the Summary button in the Data Acceptance window
-
-Then I switch to the Data Summary page
-
-And the Summary page loads with no errors
-
-And I close the Data Summary tab
-
-#Then I switch to Data Acceptance page
-
-Then I navigate to the home page
-
-And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase75840
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57709

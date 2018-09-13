@@ -73,11 +73,7 @@ Then I add the following ingredients:
 | Butane        | 100     | false               | false       |            |
 And in the Ingredients page I click Continue
 
-# Regulatory Information 1 Page
-And I should see the Regulatory Information 1 Page
-And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-And I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No
-Then in the Regulatory Information 1 page I click Continue
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 # ====== Following the steps from 'Shared Step' 57506 ====== #
 And I should see the Transportation Details 1 Page
@@ -125,11 +121,11 @@ Then in the Optional Reports and Documents Available for Purchase page I click C
 # ====== Following the steps from 'Shared Step' 57883 ====== #
 And I should see the Comments Page
 And I enter the following into the comments field: Comments Field Text
-Given in the Comments page I click Continue
+Then in the Comments page I click Continue
 
-# ====== Following the steps from 'Shared Step' 42214 ====== #
-Given I navigate to the home page
-Then I delete the product: TestCase60774
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Food Item Dispensed by Compressed Gas - Dairy Topping
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60774
 
 
 Scenario: [60775] Cooking Oil, Non-Aerosol - RU000942
@@ -187,11 +183,7 @@ Then in the Optional Reports and Documents Available for Purchase page I click C
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cooking oil - Non-Aerosol
 
-Then the Subscription Enrollment page should load
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60775
 
-#CLF 30/5/2018 Subsciptional Enrollment page shows rather than Purchase summary
-#Given I call Shared 54796 (Purchase Summary)
-Given I navigate to the home page
-Then I delete the product: TestCase60775

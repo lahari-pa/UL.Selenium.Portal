@@ -349,6 +349,8 @@ And in the New Product page I click Continue
 Given I navigate to the home page
 Then I delete the product: TestCase63663
 
+
+@tfs_design
 Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Available for Purchase screen
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 

@@ -53,7 +53,7 @@ Given Under the Supplier Reports menu I choose: Battery-containing products repo
 Then In the Supplier Reports screen the current page should be: Battery-containing products report
 Given In the Supplier Reports screen I click on the Download button
 Given I click on close in the Report Download dialog
-Given I confirm that an excel file is produced called Battery-containing products report.xlsx and save as 68422
+Given I confirm that an excel file is produced called Batterycontaining products report.xlsx and save as 68422
 Then I confirm that the excel file saved as: 68422 contains the following columns:
 
 | Column        |
@@ -79,10 +79,11 @@ Then I confirm that the excel file saved as: 68423 contains the following column
 | Product Name        |
 | Formulated          |
 | Articles            |
-| Enhanced            |
+| Enhanced Articles   |
 | 3rd Party Formula   |
 | ULGHS Document Only |
 
+@tfs_design
 Scenario: [73082] UPC Report for All Products with Retailer
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -104,6 +105,7 @@ Then I confirm that the excel file saved as: 73082 contains the following column
 Then I confirm that the excel file saved as: 73082 in column: Container Type there are no numbers
 
 #NOT WORKING BECAUSE 1500001 IS NOT FOUND
+@tfs_design
 Scenario: [73225] Kits that Contain a specific Product
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -121,6 +123,7 @@ Then I confirm that the excel file saved as: 73225 contains the following column
 | Kit Name            |
 
 #NOT WORKING BECAUSE 1500009 IS NOT FOUND
+@tfs_design
 Scenario: [73228] Products that are Associated with a specific Kit
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -139,6 +142,7 @@ Then I confirm that the excel file saved as: 73228 contains the following column
 
 #Fail - report is downloading as html not xls and with no results.
 @bug73226
+@tfs_design
 Scenario: [73226] Pesticide Certificate Report
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -205,6 +209,7 @@ Then I confirm that the excel file saved as: 73227 contains the following column
 | WPSID          |
 | Product Name   |
 
+@tfs_design
 Scenario: [73230] UPC Report for Specific Product with Retailer
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -225,6 +230,7 @@ Then I confirm that the excel file saved as: 73230 contains the following column
 
 
 #Not finished because no data is currently downloading
+@tfs_design
 Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -274,6 +280,7 @@ Then I confirm that the excel file saved as: excel76551 contains the following c
 And I delete the Supplier Report file saved as excel76551
 
 # broken because it is downloading an empty html file. Same as: 73226
+@tfs_design
 Scenario: [76759] Waste Classification Summary Report
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

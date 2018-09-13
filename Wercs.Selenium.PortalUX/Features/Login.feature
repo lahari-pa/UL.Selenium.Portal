@@ -54,8 +54,8 @@ Given I ensure that the email input field is not populated
 And I populate the password input field with: incorrectpassword
 When I select the Login button
 Then I should see the following error message for email: This is a required field.
-Given I populate the email input field with: SeleniumAdmin01@thewercs.com
-And I populate the password input field with: Selenium1!
+Given I populate the email input field with: AllRetailersProductsCompany.kxxyxunf@mailosaur.io
+And I populate the password input field with: Welcome1!
 When I select the Login button
 Then the WERCSmart homepage should load
 

@@ -13,7 +13,7 @@
 
 Feature: Flow 4-A
 
-
+@tfs_design
 Scenario: [74825] Air Freshener-Dual Purpose/Disinfectant-Aerosol - RU001539
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -26,7 +26,7 @@ Given I delete all products with UPC Number: saved as UPC74825
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Air Freshener-Dual Purpose/Disinfectant – Aerosol
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Air Freshener-Dual Purpose/Disinfectant-Aerosol
 
 Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 

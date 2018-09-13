@@ -67,6 +67,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60544
 
 
+@tfs_design
 Scenario: [60545] Photograph Coating - Aerosol - RU001067
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -128,6 +129,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60545
 
 
+@tfs_design
 Scenario: [60546] Glass Coating - Aerosol - RU001037
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

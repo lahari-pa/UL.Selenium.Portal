@@ -221,9 +221,10 @@ testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFl
 #line 56
 testRunner.Then("I should see the following error message for email: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 57
-testRunner.Given("I populate the email input field with: SeleniumAdmin01@thewercs.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I populate the email input field with: AllRetailersProductsCompany.kxxyxunf@mailo" +
+                    "saur.io", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 58
-testRunner.And("I populate the password input field with: Selenium1!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I populate the password input field with: Welcome1!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 59
 testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 60

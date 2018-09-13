@@ -169,13 +169,13 @@ testRunner.Then("the question: What is the CVS merchandising category for this p
             table1.AddRow(new string[] {
                         "Allergy Remedies"});
             table1.AddRow(new string[] {
-                        "Apparel"});
+                        "APPAREL"});
             table1.AddRow(new string[] {
                         "Baby Care"});
             table1.AddRow(new string[] {
                         "Baked Goods – Frozen Food"});
             table1.AddRow(new string[] {
-                        "Batteries"});
+                        "BATTERIES"});
             table1.AddRow(new string[] {
                         "Beverages"});
             table1.AddRow(new string[] {
@@ -205,7 +205,7 @@ testRunner.Then("the question: What is the CVS merchandising category for this p
             table1.AddRow(new string[] {
                         "Feminine Care"});
             table1.AddRow(new string[] {
-                        "First Aid"});
+                        "FIRST AID"});
             table1.AddRow(new string[] {
                         "Foot Care"});
             table1.AddRow(new string[] {
@@ -231,7 +231,7 @@ testRunner.Then("the question: What is the CVS merchandising category for this p
             table1.AddRow(new string[] {
                         "Housewares"});
             table1.AddRow(new string[] {
-                        "Laundry"});
+                        "LAUNDRY"});
             table1.AddRow(new string[] {
                         "Nicotine Replacement"});
             table1.AddRow(new string[] {
@@ -243,7 +243,7 @@ testRunner.Then("the question: What is the CVS merchandising category for this p
             table1.AddRow(new string[] {
                         "Personal Intimacy"});
             table1.AddRow(new string[] {
-                        "Pet Supplies"});
+                        "PET SUPPLIES"});
             table1.AddRow(new string[] {
                         "Photo Processing 1 Hour"});
             table1.AddRow(new string[] {
@@ -649,9 +649,6 @@ testRunner.And("The following options should be displayed for section: Refer to 
                     "l. Select the options that appear on the label.", ((string)(null)), table2, "And ");
 #line 332
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 334
-testRunner.Then("Refer to your Product Label. Select the options that appear on the label. should " +
-                    "be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 336
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase74256", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

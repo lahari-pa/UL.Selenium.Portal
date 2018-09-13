@@ -226,7 +226,7 @@ testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 6
                         "How many batteries required to run"});
             table2.AddRow(new string[] {
                         "Alkaline",
-                        "L1028F",
+                        "Alkaline battery23A by Shenzhen AllKey Battery Co., Ltd.",
                         "6",
                         "6"});
 #line 79
@@ -241,7 +241,7 @@ testRunner.Given("I call Shared Step 71955 (Answer Electronic Equipment question
                     " Ray - No to all)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 89
 testRunner.Given("I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
-                    "Path) and select the retailer: Genuine Parts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "Path) and select the retailer: Amazon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 91
 testRunner.Then("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
                     "ze Only) for UPC: saved as UPC60643, container type: Aerosol Can and size: 33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

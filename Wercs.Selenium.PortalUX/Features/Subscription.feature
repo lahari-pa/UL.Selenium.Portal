@@ -14,7 +14,6 @@
 @WERCSmart_Signup
 @MyAccount
 @run_Signup
-
 @run_Subscription
 
 Feature: Subscription

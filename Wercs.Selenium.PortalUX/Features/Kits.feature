@@ -16,6 +16,7 @@ Given I go to the WERCSmart Log in
 
 
 #NOT COMPLETED
+@tfs_design
 Scenario: [63521] Kit Product - One or more inputs is regulated for transport - Transportation step does NOT shows Not regulated option
 Given I login into the WERCSmart Portal - Administrator Role
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

@@ -80,6 +80,10 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
+Given I filter the products by: Sending to Retailers
+
+Given I save the list of Product IDs displayed on the page as: ProductInProgressList74634
+
 Given I click Bulk Actions in the Products Grid
 
 Then I should see a popup with header Bulk Actions
@@ -88,17 +92,29 @@ Given I click Forward Product Registration in the Bulk Actions window
 
 Then I should see the header: Forward Product Registration on the Forward Product Registration window
 
-Given I enter the text: 1 in the 'Search by WPS ID or Product Name' field
+And I confirm the active Forward Product Registration tab is: Select Products
 
-Given I save first selectable Product ID as: SelectProductsID74634 under the Select Products tab
+Given I select the product with ID saved as: ProductInProgressList74634 under the Select Products tab
 
-Given I select the product with ID saved as: SelectProductsID74634 under the Select Products tab and the checkbox is disabled while the page is working
+#Given I click Bulk Actions in the Products Grid
+
+#Then I should see a popup with header Bulk Actions
+
+#Given I click Forward Product Registration in the Bulk Actions window
+
+#Then I should see the header: Forward Product Registration on the Forward Product Registration window
+
+#Given I enter the text: 1 in the 'Search by WPS ID or Product Name' field
+
+#Given I save first selectable Product ID as: SelectProductsID74634 under the Select Products tab
+
+#Given I select the product with ID saved as: SelectProductsID74634 under the Select Products tab and the checkbox is disabled while the page is working
 
 #Given I select the product with ID saved as: SelectProductsID74634 under the Select Products tab
 
 #Then I confirm that the product checkbox is disabled while the page is working
 
-And I confirm I am unable to select the product with ID saved as: SelectProductsID74634 under the Select Products tab
+And I confirm I am unable to select the product with ID saved as: ProductInProgressList74634 under the Select Products tab
 
 Given I click the Home navigation icon and accept the alert popup
 
@@ -156,6 +172,7 @@ Given I click continue on the Forward Product Registration page
 
 Given I navigate to the home page
 
+@tfs_design
 Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 
 Given I login as the administrator
