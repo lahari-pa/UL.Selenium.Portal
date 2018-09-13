@@ -143,6 +143,7 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
+@tfs_design
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -272,6 +273,7 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
+@tfs_design
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -402,6 +402,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58104
 
 
+@tfs_design
 Scenario: [57344] Artists Solvent-Thinner - 8-L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -477,9 +478,11 @@ Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65
 
 Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
-Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+#Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+
+Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
@@ -990,6 +993,6 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Training aid repellant
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Single Purpose Cleaner
 
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57709
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75840

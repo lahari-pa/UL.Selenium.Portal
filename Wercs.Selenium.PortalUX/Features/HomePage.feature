@@ -371,6 +371,7 @@ Given I confirm the WERCSmart Terms of Use page opened in a new tab and navigate
 
 And I close the window that opened
 
+@tfs_design
 Scenario: [65886] My Products - Pagination
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -478,6 +479,8 @@ And I should see the following filters in the following order under My products:
 | Needs Your Attention   |
 | Canceled               |
 
+
+@tfs_design
 Scenario: [59732] Announcements - Add
 Given I navigate to Studio
 Given I call shared step 53542 (Login with Administrator Role Continue 2 (2nd login shared step))
@@ -502,6 +505,7 @@ Given In the Live Help dialog I enter email: johnsmithtest@test.co.uk
 Given In the Live Help dialog I click on the x to close
 
 @run56829
+@tfs_design
 Scenario: [56829] More Filters
 
 # Consider creating the test product from scratch every time?

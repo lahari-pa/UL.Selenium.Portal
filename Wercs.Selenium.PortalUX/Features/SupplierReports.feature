@@ -46,6 +46,7 @@ Then I confirm that the excel file saved as: 68421 contains the following column
 
 
 @tfstestcase:68422
+@tfs_design
 Scenario: [68422] Battery-containing products report
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -64,6 +65,7 @@ Then I confirm that the excel file saved as: 68422 contains the following column
 | Battery Mfg   |
 
 
+@tfs_design
 Scenario: [68423] Formulated vs Articles Report
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -177,6 +179,7 @@ Then I confirm that the excel file saved as: excel73226 contains the following c
 And I delete the excel file saved as excel73226
 
 
+@tfs_design
 Scenario: [73229] Products with VOCs
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -192,6 +195,7 @@ Then I confirm that the excel file saved as: 73229 contains the following column
 | WPSID        |
 | Product Name |
 
+@tfs_design
 Scenario: [73227] Products and Recommended Use Report
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane

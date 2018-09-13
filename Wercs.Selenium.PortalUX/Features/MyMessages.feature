@@ -50,6 +50,7 @@ And I confirm the number of rows in the file saved as excel72582 matches the num
 And I delete the excel file saved as excel72582
 
 # Need to check how to archive messages - there are none archived in the products account
+@tfs_design
 Scenario: [72586] Archive Export Report
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

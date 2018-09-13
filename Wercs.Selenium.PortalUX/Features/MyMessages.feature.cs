@@ -192,27 +192,29 @@ testRunner.And("I delete the excel file saved as excel72582", ((string)(null)), 
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyMessages")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_MyMessages")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
         public virtual void _72586ArchiveExportReport()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[72586] Archive Export Report", ((string[])(null)));
-#line 53
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[72586] Archive Export Report", new string[] {
+                        "tfs_design"});
+#line 54
 this.ScenarioSetup(scenarioInfo);
-#line 55
+#line 56
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 57
+#line 58
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 59
+#line 60
 testRunner.Given("I click the My Messages icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 62
 testRunner.Given("I save the messages in Message Center as messages72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 63
+#line 64
 testRunner.Given("I click the \'Show Archived\' checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 67
+#line 68
 testRunner.Then("I confirm that additional messages were displayed since they were saved as messag" +
                     "es72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 69
+#line 70
 testRunner.Given("I click the Export button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 71
+#line 72
 testRunner.Given("I confirm an excel file is downloaded then close the Report Download popup. I sav" +
                     "e the file as excel72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -232,13 +234,13 @@ testRunner.Given("I confirm an excel file is downloaded then close the Report Do
                         "Details"});
             table2.AddRow(new string[] {
                         "Status"});
-#line 73
+#line 74
 testRunner.Then("I confirm that the exported excel file saved as: excel72586 contains the followin" +
                     "g columns:", ((string)(null)), table2, "Then ");
-#line 83
+#line 84
 testRunner.Then("I confirm that the text: Archived is displayed under the Status column for file s" +
                     "aved as excel72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 85
+#line 86
 testRunner.And("I delete the excel file saved as excel72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

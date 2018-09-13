@@ -143,10 +143,12 @@ testRunner.And("I confirm that if the Retailer logo is not shown, then the Retai
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
         public virtual void _56909RetailerDetailPage_RetailerDoesNotRequireSupplierIDButDoesRequireDataConsentTiers()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56909] Retailer Detail Page - Retailer does not require Supplier ID but does req" +
-                    "uire Data Consent Tiers", ((string[])(null)));
+                    "uire Data Consent Tiers", new string[] {
+                        "tfs_design"});
 #line 30
 this.ScenarioSetup(scenarioInfo);
 #line 31

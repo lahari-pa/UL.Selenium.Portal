@@ -62,6 +62,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 
 And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
+@tfs_design
 Scenario: [70536] Edit Brand - Deactivate
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

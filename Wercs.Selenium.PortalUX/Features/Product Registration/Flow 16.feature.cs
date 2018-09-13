@@ -441,8 +441,8 @@ testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comm
                     "ments Text 59276. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
                     "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 156
-testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut L" +
-                    "ead Acid Battery - No Acid Included", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead " +
+                    "Acid Battery - No Acid Included", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 158
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase59276", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -802,7 +802,7 @@ testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comm
                     "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 303
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Nicke" +
-                    "l-Cadmium Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "l-cadmium battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 305
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase59279", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

@@ -51,6 +51,7 @@ And I should see the header New Product
 Given I click the Register New Product icon in the Navigation Pane
 When I click continue
 
+@tfs_design
 Scenario: [63705] New Product - BCP
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -127,6 +128,7 @@ Then I close the Data Summary tab
 Given I navigate to the home page
 Then I delete the product: TestCase63705
 
+@tfs_design
 Scenario: [63724] Add New product - Single Battery Product
 # UPC: 630509616084
 # DPCI: 087-06-680
