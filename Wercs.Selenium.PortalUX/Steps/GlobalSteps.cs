@@ -60,6 +60,7 @@ namespace WERCSmart
 			}
 		}
 
+		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role)")]
 		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role)")]
 		public void LoginToWERCSmart(string type)
 		{

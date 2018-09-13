@@ -185,7 +185,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-		
+
 	}
 
 	class StudioPowerDesignerPlusDesignMode : BaseObject
@@ -453,7 +453,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						return "na";
 					}
 				}
-				
+
 			}
 			return "";
 		}
@@ -489,7 +489,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					button = dataCodes.FirstOrDefault(x => x.FindElement(By.XPath("./span")).GetAttribute("name") == "DPQAWS");
 					break;
 				case "DCQAPF":
-					button = dataCodes.FirstOrDefault(x => x.FindElement(By.XPath("./span")).GetAttribute("name") == "DPQAPF");
+					button = dataCodes.FirstOrDefault(x => x.FindElement(By.XPath("./span")).GetAttribute("name") == "DCQAPF");
 					break;
 				case "VCQA":
 				case "VOCQAPF":
@@ -612,7 +612,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
-		
+
 
 		public bool SelectGraphic(string graphicName)
 		{
@@ -627,7 +627,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					return matchingGraphic.TryClick();
 				}
-			
+
 			}
 
 			return false;
@@ -674,7 +674,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
-		
+
 		public bool Wait_for_load(int secondsToWait=60)
 		{
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -796,7 +796,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Info(e.Message);
 					return matchingElement.Checked(setChecked);
 				}
-				
+
 			}
 			else
 			{
@@ -861,7 +861,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			SeleniumBrowser.WebBrowser.Close();
 		}
-		
+
 		public bool SetCheckBox(string name, bool setChecked)
 		{
 			try
@@ -886,7 +886,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Error(e.Message);
 				return false;
 			}
-			
+
 		}
 
 		public bool ClickSave()
@@ -912,7 +912,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Info(e.Message);
 				return false;
 			}
-			
+
 		}
 
 		public bool ClickCancel()
@@ -1118,7 +1118,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		
+
 
 		public bool EnterInputProductGroup(string sInput)
 		{
@@ -1179,7 +1179,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 		}
-		
+
 		public bool ClickButton(string name)
 		{
 			try
@@ -1215,7 +1215,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 		}
-		
+
 
 	}
 
@@ -1263,7 +1263,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 			if (base.Wait_for_load(30))
 			{
-				return true;
+				if (WaitForClickFilterButton(30))
+				{
+					return true;
+				}
+
 			}
 
 			return false;
@@ -1273,7 +1277,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			SeleniumBrowser.WebBrowser.Close();
 		}
-		
+
+		public bool WaitForClickFilterButton(int secondsToWait)
+		{
+			for (int i = 0; i < secondsToWait; i++)
+			{
+				var button = containerElement.FindElement(By.XPath(".//a[@id='Selectrecord1_lnkFilter']"), 2);
+				if (button != null)
+				{
+					return true;
+				}
+				Delay.Seconds(1);
+			}
+
+			return false;
+
+		}
+
 		public bool ClickFilterButton()
 		{
 			var button = containerElement.FindElement(By.XPath(".//a[@id='Selectrecord1_lnkFilter']"), 2);
@@ -1302,7 +1322,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-		
+
 	}
 
 	class SelectRulesFilter : BaseObject
@@ -1311,7 +1331,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
-		
+
 		public void Close()
 		{
 			SeleniumBrowser.WebBrowser.Close();
@@ -1359,7 +1379,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Error("Found select box but unable to select option: " + value);
 				return false;
 			}
-			
+
 			return matchingSelect.SelectedOption() == value;
 		}
 
@@ -1522,6 +1542,89 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public List<Document> GetAllDocuments()
+		{
+			List<Document> DocumentList = new List<Document>();
+
+			var rowList =
+				SeleniumBrowser.WebBrowser.FindElements(
+					By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@id, 'DocumentQueue')]"));
+
+			List < string > documentQueueHeaders = GetDocumentQueueTableHeaders();
+
+			List<string> propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
+
+			if (documentQueueHeaders.Count == 0)
+			{
+				Report.Error("Unable to get document queue headers");
+				return DocumentList;
+			}
+
+			if (propertiesInDocument.Count == 0)
+			{
+				Report.Error("Unable to get property headers for Document object");
+				return DocumentList;
+			}
+
+
+			foreach (var row in rowList)
+			{
+				for (int i=0; i<documentQueueHeaders.Count; i++)
+				{
+					//properties in Document class
+					string currentHeader = documentQueueHeaders[i];
+
+					if (currentHeader == @"Product\Alias")
+					{
+						currentHeader = "ProductOrAlias";
+					}
+					if (!propertiesInDocument.Select(x=>x.ToLower().Replace(" ",string.Empty)).Contains(currentHeader))
+					{
+						Report.Error("Header: " + currentHeader + " is not in the Document class");
+					}
+					else
+					{
+						string thisProperty = propertiesInDocument.Select(x => x.ToLower().Replace(" ", string.Empty))
+							.FirstOrDefault(y => y == currentHeader);
+						Document thisDocument = new Document();
+						try
+						{
+							string valueToAdd = row.FindElement(By.XPath(".//td[" + (i + 1).ToString() + "]")).GetValue();
+							thisDocument.GetType().GetProperty(thisProperty).SetValue(thisDocument,valueToAdd);
+							Report.Info("Added value: " + valueToAdd + " to property: " + currentHeader);
+
+							DocumentList.Add(thisDocument);
+						}
+						catch (Exception e)
+						{
+							Report.Error("Error adding Document property: " + currentHeader + ": " + e.Message);
+						}
+
+					}
+				}
+			}
+
+			return DocumentList;
+		}
+
+		public List<string> GetDocumentQueueTableHeaders()
+		{
+			try
+			{
+				var headerRow =
+					containerElement.FindElement(
+						By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@class, 'Header')]"));
+				return headerRow.FindElements(By.XPath(".//td//a")).Select(x => x.GetValue()).ToList();
+			}
+			catch (Exception e)
+			{
+				Report.Error("No header row was found");
+				return new List<string>();
+			}
+
+
+		}
+
 		public bool SelectTopItem()
 		{
 			var rowList =
@@ -1535,7 +1638,88 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool CheckSelectAllCheckbox()
+		{
+			var checkbox = containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+			if (checkbox != null)
+			{
+				checkbox.Check(true);
+				return checkbox.Checked(true);
+			}
+			else
+			{
+				Report.Error("Did not find checkbox to click");
+				return false;
+			}
+		}
 
+		public bool ClickDeleteSelected()
+		{
+			var button = containerElement.FindElement(By.XPath(".//input[@id='btnDelete']"), 2);
+			if (button != null)
+			{
+				return button.TryClick();
+			}
+			else
+			{
+				Report.Error("Did not find button to click");
+				return false;
+			}
+		}
+
+		public bool ClickCloneSelectedRow()
+		{
+			var button = containerElement.FindElement(By.XPath(".//input[@id='btnClone']"), 2);
+			if (button != null)
+			{
+				return button.TryClick();
+			}
+			else
+			{
+				Report.Error("Did not find button to click");
+				return false;
+			}
+		}
+
+		public bool ClickProcessDocuments()
+		{
+			var button = containerElement.FindElement(By.XPath(".//input[@id='btnProcessToPublish']"), 2);
+			if (button != null)
+			{
+				return button.TryClick();
+			}
+			else
+			{
+				Report.Error("Did not find button to click");
+				return false;
+			}
+		}
+
+		public void ClickClose()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+
+	}
+
+	public class Document
+	{
+		public string Item { get; set; }
+		public string Status { get; set; }
+		public string ProductOrAlias { get; set; }
+		public string Generic { get; set; }
+		public string Plant { get; set; }
+		public string Format { get; set; }
+		public string Subformat { get; set; }
+		public string Language { get; set; }
+		public string DocType { get; set; }
+		public string Authorized { get; set; }
+		public string FormatAuthorization { get; set; }
+		public string FormulatAuthorization { get; set; }
+		public string ClearRFR { get; set; }
+		public string DisplayRevs { get; set; }
+		public string DateAdded { get; set; }
 	}
 
 	class SelectDocumentQueueFilter : BaseObject
@@ -1706,13 +1890,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					matchingInput = listOfSelects.FirstOrDefault(x =>
 						x.GetAttribute("id") == "DocumentQueue_grdFilters_ctl16_txtFilter");
 					break;
-				
+
 				default:
 					Report.Error("Please provide valid select box name. You provided: " + textBox);
 					return false;
 			}
 
-				
+
 			matchingInput.EnterText(value);
 			return matchingInput.GetValue() == value;
 		}
@@ -1751,7 +1935,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							{
 								return false;
 							}
-							
+
 						}
 					}
 				}
@@ -1818,6 +2002,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 		}
+
+
 	}
 
 	class SelectDateRangePage : BaseObject
@@ -1993,7 +2179,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					selectedMonth = DateTime.ParseExact(curMonth, "MMMM", CultureInfo.InvariantCulture).Month;
 					nextMonthButton = containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[3]/a"), 2);
 					previousMonthButton = containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[1]/a"), 2);
-					
+
 					if (selectedMonth < month)
 					{
 						nextMonthButton.TryClick();
@@ -2002,7 +2188,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						previousMonthButton.TryClick();
 					}
-					
+
 				}
 
 				var days = containerElement.FindElements(
@@ -2017,7 +2203,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
-			
+
 
 
 		}
@@ -2090,7 +2276,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
-			
+
 
 
 		}

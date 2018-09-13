@@ -36,22 +36,32 @@ Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User ad
 Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 
+
 #Scenario: Test
-#Given I save the context product information as: TestCase75335 where id is: 1501259 and product name is: test
 Given I call Shared 65080 (Login to Studio and Open SHA manager)
+#Given I save the context product information as: TestCase75335 where id is: 1521642 and product name is: test
 Given I call Shared 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
 Given I call Shared 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 Given I call Shared 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
 Given I call Shared 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
-
-#Scenario: Test
-#Given I save the context product information as: TestCase75335 where id is: 1501266 and product name is: test
-Given I call Shared 65080 (Login to Studio and Open SHA manager)
 Given I call Shared 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
 Given I call Shared 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase75335
 
-Given I call Shared 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete)
+#Scenario: Test
+#Given I save the context product information as: TestCase75335 where id is: 1383967 and product name is: test
+#Given I call Shared 65080 (Login to Studio and Open SHA manager)
+Given I navigate to power designer plus
+#Commented out the below step because it always fails due to the job already being completed
+Given I call Shared 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
+Given I call shared step 59066 (Go to SHA Manager)
+Given I call Shared 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Accepted
+Given I call Shared 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)
+Given I call Shared 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75335)
+Given I call Shared 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
+
 
 #Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed

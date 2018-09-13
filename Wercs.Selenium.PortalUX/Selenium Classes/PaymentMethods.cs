@@ -1557,8 +1557,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Confirm_Order_click()
 		{
 			Report.Info("Attempting to Click Confirm Order Button");
-			_btn_confirm.Click();
-			return true;
+			return _btn_confirm.TryClick();
 		}
 
 

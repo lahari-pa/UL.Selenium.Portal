@@ -44,6 +44,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSubMenu(string menuItem, string submenuItem)
 		{
+			
 			var navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
 			var ListOfOptions = containerElement.FindElements(By.XPath(".//li//a"));

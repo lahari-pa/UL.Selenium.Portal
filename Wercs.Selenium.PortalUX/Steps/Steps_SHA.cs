@@ -43,9 +43,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStudioLogin.Username = shaUser.Username;
 			thisStudioLogin.Password = shaUser.Password;
 			thisStudioLogin.ClickSignIn();
+			Delay.Seconds(3);
 			StudioDesktop thisStudioDesktop = new StudioDesktop();
-			Report.IsTrue(thisStudioDesktop.Wait_for_load(120), "Studio desktop is not showing as expected.",
+			Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
 				"Studio desktop is showing as expected");
+			Report.Info("Studio desktop is loaded");
 			StudioTopMenu thisStudioTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
@@ -280,7 +282,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						ID});
 					table.AddRow(new string[] {
 						"Status",
-						"Submitted"});
+						status});
 					myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 
 					Delay.Seconds(2);

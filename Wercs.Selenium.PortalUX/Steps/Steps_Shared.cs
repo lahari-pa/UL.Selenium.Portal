@@ -3950,19 +3950,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I call Shared 49841 \(SHA - Search for exact WPS ID in (.*) Status for saved as: (.*)\)")]
 		public void GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus(string status, string savedAs)
 		{
+
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
 			myStudioShaManager.WaitForProductList(60);
-			TestReport.UseSubSteps = true;
-			myStudioShaManager.ClickBottomMenuOption("Search");
-
-			Steps_SHA myStepsSha = new Steps_SHA();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
-
-			Report.Info("Searching for: " + id);
 
 			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
 				"SearchTerm",
@@ -3973,20 +3968,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			table.AddRow(new string[] {
 				"Status",
 				status});
-			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 
-			Delay.Seconds(1);
-			Report.Info("Waiting for product list");
-			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing");
-			if (!myStudioShaManager.TopRowProductsTableMatchesId(id))
+			TestReport.UseSubSteps = true;
+
+			bool Found = false;
+			int counter = 0;
+
+			while (!Found && counter < 5)
 			{
-				//run the search again.
 				myStudioShaManager.ClickBottomMenuOption("Search");
+				Steps_SHA myStepsSha = new Steps_SHA();
+				Report.Info("Searching for: " + id);
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
-				Delay.Seconds(2);
-				Report.IsTrue(myStudioShaManager.TopRowProductsTableMatchesId(id),
-					"expected id is not found in first row", "Expected id: " + id + " is found in first row");
-
+				Delay.Seconds(1);
+				Report.Info("Waiting for product list");
+				Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found", "Product list is showing");
+				if (!myStudioShaManager.TopRowProductsTableMatchesId(id))
+				{
+					counter++;
+				}
+				else
+				{
+					Found = true;
+				}
 			}
 
 		}
@@ -4001,20 +4005,33 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(2);
 			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
 				"Job queue has loaded");
-			List<Job> ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
 			Report.IsTrue(thisStudioJobQueue.ClickJobQueueMenuItem("Job Queue"), "Failed to navigate to job queue",
 				"Navigated to job queue");
 			GeneralUtilities.StudioWaitForSpinner();
+			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
+				"Job queue has loaded");
+			List<Job> ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
 			var MatchingJob = ListOfJobs.FirstOrDefault(x =>
 				x.UserName == "SHAMANAGER" && x.DateStarted.Date == DateTime.Today.Date &&
 				x.Class == "Wercs.Core.BLLPortal.ImportProcessRules");
+
+			if (MatchingJob == null)
+			{
+				//try again...
+				ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
+				MatchingJob = ListOfJobs.FirstOrDefault(x =>
+					x.UserName == "SHAMANAGER" && x.DateStarted.Date == DateTime.Today.Date &&
+					x.Class == "Wercs.Core.BLLPortal.ImportProcessRules");
+			}
 			Report.IsTrue(MatchingJob != null,
 				"No matching job has been found with username=SHAMANAGER, date=" + DateTime.Today.Date.ToString() +
-				", class=Wercs.Core.BLLPortal.ImportProcessRules", "Matching job has been found");
+				", class=Wercs.Core.BLLPortal.ImportProcessRules", "Matching job has been found with username=SHAMANAGER, date=" + DateTime.Today.Date.ToString() +
+				                                                   ", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			GivenICallSharedStep59066GoToSHAManager();
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
+			Report.Info("Waiting for id to turn blue");
 			Report.IsTrue(myStudioShaManager.WaitForIDToTurnBlue(id, 120), "ID has not turned blue", "ID is blue");
 
 		}
@@ -4024,14 +4041,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
-			thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus");
+			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"), "Failed to navigate to power designer plus", "Navigated to power designer plus");
+			Report.Screenshot();
+			Delay.Seconds(3);
 			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
-			thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)");
-			thisPowerDesignerPlus.EnterSubFormatFilter("CKLT");
-			thisPowerDesignerPlus.SelectFormat("CKLT", "MTR");
-			thisPowerDesignerPlus.SelectProductIDOption("edit");
+			Report.Info("Setting power designer plus options...");
+			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option", "Set language option");
+			Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter("CKLT"), "Failed to set subformat option", "Set subformat option");
+			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("CKLT", "MTR"), "Failed to set format option", "Set format option");
+			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option", "Set action option");
 			Report.Screenshot();
 			Delay.Seconds(1);
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -4066,7 +4086,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Error("Studio SHA Manager is not showing");
 			}
-			myStudioShaManager.SelectFromStatusFilter("Submitted");
+
+			Report.IsTrue(myStudioShaManager.SelectFromStatusFilter("Submitted"), "Failed to select from status filter",
+				"Selected from status filter");
+			Delay.Seconds(3);
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
 			Report.IsTrue(myStudioShaManager.SelectProductByID(id), "Failed to select product with id: " + id,
@@ -4135,8 +4162,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			GeneralUtilities.StudioWaitForSpinner();
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
-
+			GeneralUtilities.StudioWaitForSpinner();
 			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
 				"Text",
 				"Should Show"});
@@ -4160,7 +4188,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
+			Delay.Seconds(3);
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+			Delay.Seconds(3);
+
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
 			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
 
@@ -4168,7 +4199,48 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var id = productDetails.Id;
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"product\alias");
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"product\alias");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
+			Delay.Seconds(3);
+			Report.Screenshot();
+			TechTalk.SpecFlow.Table tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
+				"ProductOrAlias",
+				"Format",
+				"Subformat",
+				"DocType"});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as TestCase75335",
+				"SBCS",
+				"EN",
+				"PDF"});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as TestCase75335",
+				"NGHS",
+				"EN",
+				"PDF"});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as TestCase75335",
+				"NGHS",
+				"EN",
+				"RTF"});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as TestCase75335",
+				"CKLT",
+				"EN",
+				"PDF"});
+			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
+			Delay.Seconds(3);
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
+			Delay.Seconds(3);
+			Report.Screenshot();
 
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
+			Report.Screenshot();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+			Report.Screenshot();
+			GeneralUtilities.StudioWaitForSpinner();
+			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+			thisStepsStudio.ICloseAlert();
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 
 		}
 
@@ -4221,5 +4293,73 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully added ingredient: " + (ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
 			Context.AddToContext(savedAs, ingredient);
 		}
+
+		[Given(@"I call Shared 55663 \(WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*)\)")]
+		public void GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+			StudioTopMenu thisTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			thisTopMenu.ClickSubMenu("System", "Job Queue");
+			GeneralUtilities.StudioWaitForSpinner();
+			StudioJobQueue thisStudioJobQueue = new StudioJobQueue();
+			Delay.Seconds(2);
+			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
+				"Job queue has loaded");
+			List<Job> ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = productDetails.Id;
+			var shaUser = TReVor.TestUsers.GetUserSavedAs("SHAUser");
+			Job matchingJob = ListOfJobs.FirstOrDefault(x => x.RecordID == id && x.Method == "PublishMultiple" && x.UserName== shaUser.Username);
+			if (matchingJob == null)
+			{
+				Report.Error("Did not find matching job");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Success("Found job with id: " + id.ToString() + " as expected");
+				Report.Screenshot();
+				//Wait for job to not appear in the list
+				for (int i = 0; i < 120; i++)
+				{
+					thisStudioJobQueue = new StudioJobQueue();
+					ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
+					matchingJob = ListOfJobs.FirstOrDefault(x => x.RecordID == id && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
+					if (matchingJob == null)
+					{
+						Report.Info("Job is no longer found so assume it has completed");
+						Report.Screenshot();
+					}
+					Delay.Seconds(1);
+				}
+			}
+
+		}
+
+		[Given(@"I call Shared 51664 \(SHA - Accepted Product - set Retailers to Completed for saved as: (.*)\)")]
+		public void GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer"});
+			table2.AddRow(new string[] {
+				"Rite Aid"});
+
+			Steps_Studio thisStepsStudio = new Steps_Studio();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = productDetails.Id;
+			thisStepsStudio.InSHAManagerISelectProductById(id);
+			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(table2);
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Completed");
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
+
+		}
+
+
 	}
 }

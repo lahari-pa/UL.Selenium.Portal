@@ -9,6 +9,7 @@ using NUnit.Framework.Constraints;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -19,7 +20,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I click on publish this Document to open current document popup")]
 		public void IClickOnPublishThisDocumentToOpenCurrentDocumentPopup()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("publish"),
@@ -33,7 +35,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in Power Designer Plus page I click on tab: (.*)")]
 		public void GivenInPowerDesignerPlusPageIClickOnTab(string tab)
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickTabOption(tab), "Failed to click tab: " + tab,
 				"Clicked tab: " + tab);
 		}
@@ -41,7 +44,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on edit button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickEditButton(), "Failed to click edit button",
 				"Clicked edit button");
 			PDEditPage thisPdEditPage = new PDEditPage();
@@ -51,31 +55,38 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on apply rules button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickApplyRulesButton(), "Failed to click apply rules button",
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickApplyRulesButton(),
+				"Failed to click apply rules button",
 				"Clicked apply rules button");
 			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
-			Report.IsTrue(thisApplyRulesPage.Wait_for_load(60), "Apply rules page has failed to load", "Apply rules page has loaded");
+			Report.IsTrue(thisApplyRulesPage.Wait_for_load(60), "Apply rules page has failed to load",
+				"Apply rules page has loaded");
 		}
 
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on document queue button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("document queue"), "Failed to click document queue button",
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("document queue"),
+				"Failed to click document queue button",
 				"Clicked document queue button");
 			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
-			Report.IsTrue(thisDocumentQueuePage.Wait_for_load(60), "Document queue page has failed to load", "Document queue page has loaded");
+			Report.IsTrue(thisDocumentQueuePage.Wait_for_load(60), "Document queue page has failed to load",
+				"Document queue page has loaded");
 		}
 
 		[StepDefinition(@"In Current Document Popup select checkbox: (.*)")]
 		public void InCurrentDocumentPageSelectCheckbox(string checkbox)
 		{
 			CurrentDocument thisCurrentDocument = new CurrentDocument();
-			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded");
-			thisCurrentDocument.SetCheckBox(checkbox, true);
+			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load",
+				"Current document loaded");
+			Report.IsTrue(thisCurrentDocument.SetCheckBox(checkbox, true), "Failed to set checkbox: " + checkbox, "Set checkbox: " + checkbox);
 		}
 
 		[StepDefinition(@"I close Current Document")]
@@ -91,7 +102,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			CurrentDocument thisCurrentDocument = new CurrentDocument();
 			//Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load","Current document loaded");
-			string alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
+			string alertText =
+				thisCurrentDocument.GetAlertText(
+					"The following subformat(s) cannot be authorized because required data is missing.");
 			string regExPattern = @"\s[ABCDEFGHIJKLMNOPQRSTUVWZYZ1234567890]{3,7}[\,\\r]?";
 			MatchCollection mc = Regex.Matches(alertText, regExPattern);
 			List<string> codes = new List<string>();
@@ -100,7 +113,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				foreach (Capture capture in match.Captures)
 				{
-					codes.Add(capture.Value.Replace(",","").Trim());
+					codes.Add(capture.Value.Replace(",", "").Trim());
 				}
 
 			}
@@ -125,16 +138,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I set the Datacodes as follows:")]
 		public void GivenISetTheDatacodesAsFollows(Table table)
 		{
-			foreach(TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
-				StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+				StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+					new StudioPowerDesignerPlusDesignMode();
 				thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
 				Delay.Seconds(1);
 				GraphicEditor thisGraphicEditor = new GraphicEditor();
 				Report.IsTrue(thisGraphicEditor.Wait_for_load(60), "Graphic editor has not loaded",
 					"Graphic editor has loaded.");
 				string valueToSearchFor = "";
-				
+
 				Report.Info("Attempting to set value: " + thisRow["value"] + " for graphic: " + thisRow["datacode"]);
 				switch (thisRow["value"].ToLower())
 				{
@@ -157,8 +171,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 						throw new Exception("you must provide a valid value");
 						break;
 				}
-				Report.IsTrue(thisGraphicEditor.SelectGraphic(valueToSearchFor), "Failed to select graphic: " + valueToSearchFor, "Set graphic: " + valueToSearchFor);
-				Report.IsTrue(thisGraphicEditor.ClickButton("save"), "Failed to click save button", "Clicked save button");
+
+				Report.IsTrue(thisGraphicEditor.SelectGraphic(valueToSearchFor),
+					"Failed to select graphic: " + valueToSearchFor, "Set graphic: " + valueToSearchFor);
+				Report.IsTrue(thisGraphicEditor.ClickButton("save"), "Failed to click save button",
+					"Clicked save button");
 				Delay.Seconds(1);
 				thisGraphicEditor.Wait_for_close();
 				Delay.Seconds(1);
@@ -198,14 +215,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void InApplyRulesPageIClickOnTheFollowingApplyRadioButton(string button)
 		{
 			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
-			Report.IsTrue(thisApplyRulesPage.SetApplyOption(button), "Failed to click " + button + " button","Clicked " + button);
+			Report.IsTrue(thisApplyRulesPage.SetApplyOption(button), "Failed to click " + button + " button",
+				"Clicked " + button);
 		}
 
 		[StepDefinition(@"In Apply Rules Page I click on the single rule ellipsis button")]
 		public void InApplyRulesPageIClickOnTheSingleRulesEllipsisButton()
 		{
 			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
-			Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis", "Clicked single rules ellipsis");
+			Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
+				"Clicked single rules ellipsis");
 			SelectRulesPage thisSelectRulesPage = new SelectRulesPage();
 			Report.IsTrue(thisSelectRulesPage.Wait_for_load(), "Select rules page has not loaded",
 				"Select rules page has loaded");
@@ -215,7 +234,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void InSelectRulesPageIClickOnFilterIcon()
 		{
 			SelectRulesPage thisSelectRulesPage = new SelectRulesPage();
-			Report.IsTrue(thisSelectRulesPage.ClickFilterButton(), "Failed to click filter button", "Clicked filter button");
+			Report.IsTrue(thisSelectRulesPage.ClickFilterButton(), "Failed to click filter button",
+				"Clicked filter button");
 			SelectRulesFilter thisSelectRulesFilter = new SelectRulesFilter();
 			Report.IsTrue(thisSelectRulesFilter.Wait_for_load(), "Select rules popup has not loaded",
 				"Select rules popup has loaded");
@@ -262,7 +282,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.Error("Failed to provide valid button name to click - must be apply, cancel or clear");
 					break;
 			}
-			
+
 		}
 
 		[StepDefinition(@"In Select Rules Popup Page I click first record to select")]
@@ -280,7 +300,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				//do nothing
 			}
-			
+
 		}
 
 		[StepDefinition(@"In Apply Rules Page I click on the button: (.*)")]
@@ -303,14 +323,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					//alert did not appear
 				}
-				
+
 			}
 		}
 
 		[StepDefinition(@"I click on document queue to open document queue popup")]
 		public void IClickOnPublishThisDocumentToOpenDocumentQueuePopup()
 		{
-			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("document queue"),
@@ -357,9 +378,215 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to entry " + value + " in entry box: " + entryBox,
 				"Entered " + value + " in entry box: " + entryBox);
 
-			thisSelectDocumentQueueFilter.SelectDateAdded(2017, 12, 1, 2018, 8, 21);
+		}
+
+		[StepDefinition(@"In document queue filter page I click on apply")]
+		public void InDocumentQueueFilterPageIClickOnApply()
+		{
+			SelectDocumentQueueFilter thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
+			Report.IsTrue(thisSelectDocumentQueueFilter.ClickApply(), "Failed to click on apply",
+				"Click on apply");
+		}
+
+		[StepDefinition(@"In document queue filter page I click on select all checkbox")]
+		public void InDocumentQueueFilterPageIClickOnSelectAllCheckbox()
+		{
+			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			Report.IsTrue(thisDocumentQueuePage.CheckSelectAllCheckbox(), "Failed to click select all checkbox",
+				"Clicked select all checkbox");
+		}
+
+		[StepDefinition(@"In document queue filter page I click on process documents")]
+		public void InDocumentQueueFilterPageIClickOnProcessDocuments()
+		{
+			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			Report.IsTrue(thisDocumentQueuePage.ClickProcessDocuments(), "Failed to click process documents",
+				"Clicked process documents");
+		}
+
+		[StepDefinition(@"In document queue filter page I click on clone selected row")]
+		public void InDocumentQueueFilterPageIClickOnCloneSelectedRow()
+		{
+			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			Report.IsTrue(thisDocumentQueuePage.ClickCloneSelectedRow(), "Failed to click clone selected row",
+				"Clicked clone selected row");
+		}
+
+		[StepDefinition(@"In document queue filter page I click on delete selected")]
+		public void InDocumentQueueFilterPageIClickOnDeleteSelected()
+		{
+			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			Report.IsTrue(thisDocumentQueuePage.ClickDeleteSelected(), "Failed to click delete selected",
+				"Clicked delete selected");
+		}
+
+		[StepDefinition(@"In document queue filter page I click on close")]
+		public void InDocumentQueueFilterPageIClickOnClose()
+		{
+			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			thisDocumentQueuePage.ClickClose();
+
 
 		}
 
+		[StepDefinition(@"I navigate to power designer plus")]
+		public void NavigateToPowerDesignerPlus()
+		{
+			StudioTopMenu thisTopMenu = new StudioTopMenu();
+			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus");
+			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			thisPowerDesignerPlus.ClickContinueButton();
+		}
+
+		[StepDefinition(@"I should see an alert with the following message: (.*)")]
+		public void IShouldSeeAnAlertAsFollows(string expectedAlertText)
+		{
+			CurrentDocument thisCurrentDocument = new CurrentDocument();
+			string alertText =
+				thisCurrentDocument.GetAlertText("");
+
+			Report.IsTrue(alertText.Contains(expectedAlertText),
+				"Alert text is not as expected. Expected: " + expectedAlertText + " but got: " + alertText,
+				"Alert text is showing as expected: " + expectedAlertText);
+
+		}
+
+		[StepDefinition(@"I close alert")]
+		public void ICloseAlert()
+		{
+			try
+			{
+				SeleniumBrowser.Alert.WaitForAlert(3);
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+			catch (Exception e)
+			{
+				Report.Info("Alert is not showing");
+			}
+
+		}
+
+		[StepDefinition(@"I check the following items are showing in the Document Queue table")]
+		public void GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(Table table)
+		{
+			List<string> tableHeaders = table.Header.ToList();
+
+			DocumentQueuePage newDocumentQueuePage = new DocumentQueuePage();
+			Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
+				"Document queue page loaded");
+			List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
+			Report.Info(listOfDocuments.Count.ToString() + " documents found");
+
+			List<string> propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
+
+
+			List<string> notFoundInDocument = tableHeaders.Except(propertiesInDocument).ToList();
+			if (notFoundInDocument.Count() > 0)
+			{
+				throw new Exception("Not all items listed are in the document object model: " + string.Join(",", notFoundInDocument));
+			}
+
+
+			foreach (TableRow thisRow in table.Rows)
+			{
+				List<string> actualHeaders = new List<string>();
+
+				//for each column in the table
+				foreach (string header in tableHeaders)
+				{
+					string value = thisRow[header];
+					if(value.Contains("saved as"))
+					{
+						value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase)
+							.Trim()).ToString();
+					}
+					actualHeaders.Add(value);
+
+					listOfDocuments = listOfDocuments.Where(x =>
+						x.GetType().GetProperty(header).GetValue(x, null).ToString() == value).ToList();
+				}
+
+				if (listOfDocuments.Count == 0)
+				{
+
+					Report.Error("Not all documents match. This combination was not found: " +
+					             string.Join(",", actualHeaders));
+				}
+			}
+		}
+
+
+		[StepDefinition(@"In SHA Manager I select product by id: (.*)")]
+		public void InSHAManagerISelectProductById(string idToSelect)
+		{
+			try
+			{
+				if (idToSelect.ToLower().Contains("saved as"))
+				{
+					var productDetails = (ProductInformation)Context.GetFromContext(idToSelect.Replace("saved as","").Trim());
+					idToSelect = productDetails.Id;
+				}
+
+				StudioSHAManager thisStudioShaManager = new StudioSHAManager();
+				Report.IsTrue(thisStudioShaManager.SelectProductByID(idToSelect),
+					"Failed to select item by id: " + idToSelect, "Selected item with id: " + idToSelect);
+			}
+			catch (Exception e)
+			{
+				Report.Info("Alert is not showing");
+			}
+		}
+
+		[StepDefinition(@"In SHA Manager I click on bottom menu item: (.*)")]
+		public void InSHAManagerIClickOnBottomMenuItem(string menuItem)
+		{
+			try
+			{
+				StudioSHAManager thisStudioShaManager = new StudioSHAManager();
+				Report.IsTrue(thisStudioShaManager.ClickBottomMenuOption(menuItem), "Failed to click: " + menuItem,
+					"Clicked menu item: " + menuItem);
+			}
+			catch (Exception e)
+			{
+				Report.Info("Alert is not showing");
+			}
+		}
+
+		[Given(@"In the Process Products popup in SHAManager I select the following retailers")]
+		public void GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(Table table)
+		{
+			ProcessProducts thisProcessProducts = new ProcessProducts();
+			Report.IsTrue(thisProcessProducts.Wait_for_load(30), "Process products screen is not showing",
+				"Process products screen is showing");
+			foreach (TableRow thisRetailer in table.Rows)
+			{
+				Report.IsTrue(thisProcessProducts.SelectRetailer(thisRetailer["Retailer"]),
+					"Failed to select retailer: " + thisRetailer["Retailer"],
+					"Selected retailer: " + thisRetailer["Retailer"]);
+			}
+		}
+
+		[Given(@"In the Process Products popup in SHAManager I set the new status drop down list to be: (.*)")]
+		public void GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo(string status)
+		{
+			ProcessProducts thisProcessProducts = new ProcessProducts();
+			Report.IsTrue(thisProcessProducts.Wait_for_load(30), "Process products screen is not showing",
+				"Process products screen is showing");
+			Report.IsTrue(thisProcessProducts.SelectNewStatus(status), "Failed to select new status: " + status,
+				"Selected new status: " + status);
+		}
+
+		[Given(@"In the Process Products popup in SHAManager I click on update status button")]
+		public void GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton()
+		{
+			ProcessProducts thisProcessProducts = new ProcessProducts();
+			Report.IsTrue(thisProcessProducts.Wait_for_load(30), "Process products screen is not showing",
+				"Process products screen is showing");
+			Report.IsTrue(thisProcessProducts.ClickUpdateStatus(), "Failed to click update status",
+				"Clicked update status");
+		}
 	}
 }

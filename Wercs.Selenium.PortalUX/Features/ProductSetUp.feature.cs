@@ -189,35 +189,55 @@ testRunner.Given("I call Shared 57885 (Data Acceptance - Click Accept - Happy Pa
 testRunner.Given("If purchase details are showing click confirm order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 41
 testRunner.Given("I call Shared 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
+#line 43
 testRunner.Given("I call Shared 49841 (SHA - Search for exact WPS ID in All Status for saved as: Te" +
                     "stCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 43
+#line 44
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 a" +
                     "nd its status is: Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 44
+#line 45
 testRunner.Given("I call Shared 40657 (SHA Manager - Submitted - Select product > process product d" +
                     "ata for product saved as: TestCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 45
+#line 46
 testRunner.Given("I call Shared 49841 (SHA - Search for exact WPS ID in All Status for saved as: Te" +
                     "stCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
+#line 47
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 a" +
                     "nd its status is: Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 47
+#line 48
 testRunner.Given("I call Shared 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to " +
                     "complete for product saved as: TestCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
-testRunner.Given("I call Shared 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
+#line 49
 testRunner.Given("I call Shared 68969 (WPS Studio - Open PD+, edit existing with specific product >" +
                     " Click Continue for product saved as: TestCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
+#line 50
 testRunner.Given("I call Shared 75347 (WPS Studio - PD+ - set all data and publish using rule and D" +
                     "oc queue - CKLT, NGHS and SBCS) for product saved as: TestCase75335", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 55
+testRunner.Given("I navigate to power designer plus", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
 testRunner.Given("I call Shared 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to " +
-                    "complete)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "complete for product saved as: TestCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 58
+testRunner.Given("I call shared step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 59
+testRunner.Given("I call Shared 49841 (SHA - Search for exact WPS ID in All Status for saved as: Te" +
+                    "stCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 60
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 a" +
+                    "nd its status is: Accepted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 61
+testRunner.Given("I call Shared 49841 (SHA - Search for exact WPS ID in Accepted Status for saved a" +
+                    "s: TestCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 62
+testRunner.Given("I call Shared 51664 (SHA - Accepted Product - set Retailers to Completed for save" +
+                    "d as: TestCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 63
+testRunner.Given("I call Shared 49841 (SHA - Search for exact WPS ID in All Status for saved as: Te" +
+                    "stCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 64
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 a" +
+                    "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

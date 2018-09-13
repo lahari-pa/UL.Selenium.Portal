@@ -13,7 +13,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
 	class StudioJobQueue : BaseObject
 	{
-		public const string BasePath = "//iframe[@id='Widget2FRAME']";
+		public const string BasePath = "//iframe[@id='Widget3FRAME']";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
@@ -21,12 +21,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool WaitForJobInformationList(int secondsToWait)
 		{
 			Report.Info("Beginning wait for job list");
-			if (!SeleniumBrowser.SwitchToIFrame("Widget2FRAME"))
+			if (!SeleniumBrowser.SwitchToIFrame("Widget3FRAME"))
 			{
 				SeleniumBrowser.ExitIFrame();
-				if (!SeleniumBrowser.SwitchToIFrame("Widget2FRAME"))
+				if (!SeleniumBrowser.SwitchToIFrame("Widget3FRAME"))
 				{
-					Report.Error("Could not switch to iframe");
+					if (!SeleniumBrowser.SwitchToIFrame("Widget2FRAME"))
+					{
+						Report.Error("Could not switch to iframe");
+					}
 				}
 			}
 			for (int i = 0; i < secondsToWait; i++)

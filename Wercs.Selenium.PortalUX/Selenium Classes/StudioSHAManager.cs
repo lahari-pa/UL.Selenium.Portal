@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
@@ -13,10 +14,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
 	class StudioSHAManager : BaseObject
 	{
-		public const string BasePath = "//div[@id='Widget1']";
+		public const string BasePath = "//div[@id='main']";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load(int secondsToWait = 30)
+		{
+			//get the window
+			StudioUtilites.SwitchToWindow("Wercs Studio");
+			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+			IWebElement frame =
+				SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='Widget1']//iframe"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			return base.Wait_for_load(30);
+		}
 
 		public bool WaitForProductList(int secondsToWait)
 		{
@@ -94,20 +107,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectProductByID(string id)
 		{
+			Delay.Seconds(3);
+			Report.Info("Attemping to select product by id: " + id);
 			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
-			
+
 			var matchingTD = SeleniumBrowser.WebBrowser
 				.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
 				.FirstOrDefault(x => x.GetValue().Trim() == id);
 
 			if (matchingTD != null)
 			{
+				Report.Info("Found matching cell");
 				var checkbox = matchingTD.FindElement(By.XPath("../td/input"));
 				if (checkbox != null)
 				{
 					checkbox.Check(true);
 					return checkbox.Checked();
 				}
+			}
+			else
+			{
+				Report.Info("Failed to find matching table cell for id: " + id);
 			}
 
 			return false;
@@ -141,9 +161,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return new List<Product>();
 			}
-			
+
 			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']//tr"), 3).ToList();
-				
+
 			Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
 			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x=>x.GetValue().Trim()).ToList();
 			Report.Info("Got list of headers");
@@ -283,7 +303,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Error("process product data button was not found");
 				return false;
 			}
-			
+
 		}
 
 		public bool ClickReports()
@@ -459,7 +479,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			var listOfOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@class,'navtable')]//td[not(contains(@class, 'disabled')) and not(contains(@style, 'none'))]/div"));
 			var matchingOption = listOfOptions.FirstOrDefault(x => x.GetValue().ToLower().Contains(option.ToLower()));
-			
+
 			if (matchingOption == null)
 			{
 				Report.Info("No matching menu option found: " + option + ". Available options: " + string.Join(",", listOfOptions));
@@ -680,9 +700,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return enterField.Checked() == check;
 		}
 
-		
 
-		
+
+
 		public bool ClickButton(string button)
 		{
 			var buttonList = containerElement.FindElements(By.XPath(".//button/span"));
@@ -698,8 +718,115 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		
+
 	}
+
+	class ProcessProducts : BaseObject
+	{
+		public const string BasePath = "//div[@id='dialog-status-update']";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+
+		public List<string> GetAllRetailers()
+		{
+			var retailerSpan = containerElement.FindElement(By.XPath(".//input[@id='clients']/..")).GetInnerHTML();
+			string regexSplitPattern = @"\<input\stype.*?value=.*?\>";
+
+			List<string> Retailers = Regex.Split(retailerSpan, regexSplitPattern)
+				.Select(x => Regex.Replace(x, regexSplitPattern, "").Replace("<br>", "").Trim()).ToList();
+
+			return Retailers;
+		}
+
+		public bool SelectRetailer(string retailerName)
+		{
+			var retailerSpan = containerElement.FindElement(By.XPath(".//input[@id='clients']/..")).GetInnerHTML();
+			List<string> splitOnBr = Regex.Split(retailerSpan, @"\<br\>").ToList();
+			var matchingInputString = splitOnBr.FirstOrDefault(x => x.Contains(retailerName));
+
+			string regexSplitPattern = @"value=(.*)\>";
+			Regex regex = new Regex(regexSplitPattern);
+			Match match = regex.Match(matchingInputString);
+			if (match.Success)
+			{
+				string regexIDPattern =
+					@"[a-z 0-9]{4,12}\-[a-z 0-9]{4,12}\-[a-z 0-9]{4,12}\-[a-z 0-9]{4,12}\-[a-z 0-9]{4,12}";
+				regex = new Regex(regexIDPattern);
+				Match matchID = regex.Match(match.Value);
+				if (matchID.Success)
+				{
+					string validID = matchID.Value;
+					var matchInput = containerElement.FindElement(By.XPath(".//input[@value='" + validID + "']"));
+					if (matchInput != null)
+					{
+						return matchInput.TryCheck();
+					}
+					else
+					{
+						Report.Info("Failed to find matching input for value: " + validID);
+					}
+				}
+				else
+				{
+					Report.Info("Failed to find match for regex pattern: " + regexIDPattern + " in string: " +
+					            match.Value);
+				}
+			}
+			else
+			{
+				Report.Info("Failed to find match for regex pattern: " + regexSplitPattern + " in string: " +
+				            matchingInputString);
+			}
+
+			return false;
+		}
+
+		public bool SelectNewStatus(string status)
+		{
+			try
+			{
+				var statusDD = containerElement.FindElement(By.XPath(".//select[@id='statusupdate']"));
+				statusDD.Select(status);
+				return statusDD.SelectedOption() == status;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+			
+		}
+
+		public bool ClickUpdateStatus()
+		{
+			try
+			{
+				var updateStatusButton = containerElement.FindElement(By.XPath(".//select[@id='statusupdate']/following-sibling::a"));
+				return updateStatusButton.TryClick();
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+			
+		}
+
+		public bool ClickRefeedToClient()
+		{
+			try
+			{
+				var refeedToClient = containerElement.FindElement(By.XPath(".//fieldset[@id='fldFeedClient']/a"));
+				return refeedToClient.TryClick();
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
+	}
+
 
 	class Product
 	{

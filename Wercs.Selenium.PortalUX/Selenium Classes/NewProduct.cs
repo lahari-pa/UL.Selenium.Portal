@@ -3522,7 +3522,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
-			var el = containerElement.FindElement(By.XPath(xPath), 2);
+			var el = containerElement.FindElement(By.XPath(xPath), 10);
 
 
 			if (el == null)
@@ -3580,7 +3580,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					return true;
 				}
 			}
-			return el.FindElement(By.XPath("./input"), 2).TryClick();
+			return el.FindElement(By.XPath("./input"), 10).TryClick();
 		}
 
 		public bool ClickSelectForSection(string section)
