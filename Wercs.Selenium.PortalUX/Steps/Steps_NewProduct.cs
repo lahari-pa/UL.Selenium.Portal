@@ -1876,6 +1876,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"(.*) (should|should not) be showing the error messages: (.*)")]
 		public void ErrorMessagesAreShowingForItem(string section, string should, string pipeDelimitedErrorMessages)
 		{
+			Delay.Seconds(1);
 			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
 			var errorMessages = new NewProduct().GetErrorsForSection(section);
 			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
@@ -1912,6 +1913,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(showing.Contains(expec), "Failed to find the selected value: " + expec + " in the section: " + section + "!", string.Format("Successfully found {0} in section: {1}", expec, section), false, false);
 			}
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm the VOC limits table has an entry for Regulation: (OTC|CARB)")]
+		public void VOCLimitsTableHasEntryForRegulation(string regulation)
+		{
+			var selNewProduct = new NewProduct();
+			var displayed = selNewProduct.GetDisplayedVocLimits();
+			var expectedRegulation = "";
+			if (regulation == "OTC")
+			{
+				expectedRegulation = "OTC Model rule limit";
+			}
+			if (regulation == "CARB")
+			{
+				expectedRegulation = "CARB limit";
+			}
+			Report.IsTrue(displayed.Any(x => x.Regulation == expectedRegulation),
+				"There was no entry in the VOC limits table for regulation " + regulation + "!",
+				"There was an entry in the VOC limits table for regulation " + regulation + " as expected");
 		}
 
 		[StepDefinition(@"I should see the following Voc Limits present:")]
@@ -2001,6 +2021,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 				Report.IsTrue(passed, "Voc percent data did not match for state: " + expectedinfo.State, "Voc percent data matched for state: " + expectedinfo.State);
 			}
+		}
+
+		[StepDefinition(@"I should see data for States in the 'VOC Content as weight percentage of total formula' table")]
+		public void DataForStatesInVOCContentAsWeightPercentageTable()
+		{
+			var selNewProduct = new NewProduct();
+			var displayed = selNewProduct.GetDisplayedVocPercentForEachState();
+			Report.IsTrue(displayed.Count > 0 && displayed.All(x => !x.State.IsNullOrEmpty() && !x.VocValue.IsNullOrEmpty() && !x.StateVocThreshold.IsNullOrEmpty()),
+				"There was not data displayed for all states in the VOC Cotent As Weight table!",
+				"There was data displayed for all states in the VOC Content As Weight table as expected");
 		}
 
 		/// <summary>
