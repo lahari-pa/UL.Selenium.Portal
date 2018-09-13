@@ -9,7 +9,6 @@
 Feature: Cart
 
 Background:
-
 Given I go to the WERCSmart Log in
 
 @mytag
