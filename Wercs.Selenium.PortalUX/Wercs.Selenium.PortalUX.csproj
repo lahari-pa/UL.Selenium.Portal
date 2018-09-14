@@ -435,6 +435,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Test.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\UL Solution Center.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UL Solution Center.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\UL Toys.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -777,6 +782,10 @@
     <None Include="Features\Test.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Test.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\UL Solution Center.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UL Solution Center.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\UL Toys.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

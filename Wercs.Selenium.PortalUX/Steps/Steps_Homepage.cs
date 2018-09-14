@@ -582,27 +582,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"Confirm that you are taken to the (.*) page")]
+		[Then(@"I confirm that the (.*) page is loaded")]
 		public void ThenConfirmThatYouAreTakenToTheSpecifiedPage(string pageTitle)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that you are taken to the " + pageTitle + " page");
-			Delay.Seconds(5);
-			try
+			switch (pageTitle)
 			{
-				switch (pageTitle)
-				{
-					case "UL Solution Center":
-						UlSolutionCenter ulSolution = new UlSolutionCenter();
-						Report.IsTrue(ulSolution.Exists, "UL Solutions page does not exist as expected.", "UL Solutions page exists as expected.");
-						break;
-					default:
-						break;
-				}
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
+				case "UL Solution Center":
+					var selUlSolution = new UlSolutionCenter();
+					Report.IsTrue(selUlSolution.Wait_for_load(),
+						"The UL Solutions Center page did not load!",
+						"The UL Solutions Center page loaded as expected");
+					break;
+				default:
+					Report.Info("A valid page navigation was not specified");
+					return;
 			}
 		}
 
@@ -677,6 +670,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) link in the expanded navigation side menu")]
+		public void ClickItemInNavigationSideMenu(string item)
+		{
+			Report.Info("Selecting " + item + " in the Navigation Pane");
+			var selNav = new NavigationBar();
+			Report.IsTrue(selNav.Click_ExpandedMenuLink(item),
+				$"Failed to click the {item} link in the expanded navigation menu!",
+				$"Successfully clicked the {item} link in the expanded navigation menu");
 		}
 
 		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]

@@ -167,8 +167,8 @@ Scenario: [56161] UL Solution Center navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Then I click the UL Solution Center icon in the Navigation Pane
-Then Confirm that you are taken to the UL Solution Center page
-Then Confirm in the UL Solution Center page you see sections for:
+Then I confirm that the UL Solution Center page is loaded
+Then I confirm the following sections are displayed in the UL Solution Center page:
 | Sections                 |
 | ECOLOGO                  |
 | Prospector               |

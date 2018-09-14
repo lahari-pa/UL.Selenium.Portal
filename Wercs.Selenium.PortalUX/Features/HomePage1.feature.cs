@@ -539,7 +539,7 @@ testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTa
 #line 169
 testRunner.Then("I click the UL Solution Center icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 170
-testRunner.Then("Confirm that you are taken to the UL Solution Center page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sections"});
@@ -556,7 +556,7 @@ testRunner.Then("Confirm that you are taken to the UL Solution Center page", ((s
             table7.AddRow(new string[] {
                         "ULGHS"});
 #line 171
-testRunner.Then("Confirm in the UL Solution Center page you see sections for:", ((string)(null)), table7, "Then ");
+testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table7, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

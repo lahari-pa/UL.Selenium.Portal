@@ -117,6 +117,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return icon.FindElement(By.XPath(".."), 2).TryClick();
 		}
-	}
 
+		public bool Click_ExpandedMenuLink(string destination)
+		{
+			var allLinks = containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-link')]//a[not(contains(@class,'spacer'))]"), 2);
+			if (allLinks.Count == 0)
+			{
+				Report.Info("No links were found in the expanded navigation menu");
+				return false;
+			}
+			var icon = allLinks.FirstOrDefault(x => x.Text.Trim().Contains(destination));
+			if (icon == null)
+			{
+				Report.Info("Navigation menu link found: " + string.Join(",", allLinks.ToList().Select(x => x.Text.Trim())));
+				return false;
+			}
+			return icon.TryClick();
+		}
+	}
 }
