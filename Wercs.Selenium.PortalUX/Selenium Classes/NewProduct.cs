@@ -3562,7 +3562,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				if (el.GetAttribute("type") == "checkbox")
 				{
-					el.Check(true);
+					TryCheck(el, true);
 					return el.Checked();
 				}
 
@@ -3582,7 +3582,54 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return el.FindElement(By.XPath("./input"), 10).TryClick();
 		}
+		public static bool TryCheck(IWebElement element, bool checked_ = true)
+		{
+			if (element.Selected == checked_)
+			{
+				return true;
+			}
 
+			try
+			{
+				element.Click();
+				if (element.Selected != checked_)
+				{
+					throw new Exception();
+				}
+
+				return true;
+			}
+			catch (Exception)
+			{
+				try
+				{
+					element.SendKeys(Keys.Space);
+					if (element.Selected != checked_)
+					{
+						throw new Exception();
+					}
+
+					return true;
+				}
+				catch (Exception)
+				{
+					IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)SeleniumBrowser.WebBrowser;
+					jsExecutor.ExecuteScript(@"$(arguments[0])[0].checked = " + checked_, element);
+					if (element.Selected == checked_)
+					{
+						return true;
+					}
+
+					element.TryClick();
+					if (element.Selected == checked_)
+					{
+						return true;
+					}
+
+					return false;
+				}
+			}
+		}
 		public bool ClickSelectForSection(string section)
 		{
 			return containerElement.FindElement(By.XPath(@".//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2).TryClick();

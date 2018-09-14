@@ -10,7 +10,7 @@ Background:
 
 Given I go to the WERCSmart Log in
 
-@singlerun
+@tfs_design
 Scenario: [50820] Language Selector - Japanese
 
 When From the Language drop down I select Japanese
@@ -26,6 +26,7 @@ And I should see for the password label: Password
 And I should see for the forgotten password: Forgot your Password?
 And I should see for the login button: Login
 
+@tfs_design
 Scenario: [50828] Language Selector - Chinese
 
 When From the Language drop down I select Chinese
@@ -40,6 +41,7 @@ And I should see for the email label: Email
 And I should see for the password label: Password
 And I should see for the forgotten password: Forgot your Password?
 And I should see for the login button: Login
+
 
 Scenario: [50830] Validation - Error Messages
 

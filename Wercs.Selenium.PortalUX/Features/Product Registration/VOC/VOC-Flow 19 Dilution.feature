@@ -121,7 +121,6 @@ Then in the VOC Summary page I should see the following noneditable statements
 | Based on your previous selections, the product has the following intended use: The OTC Model Rule and CARB limits for this intended use are: |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
 
-
 @tfs_design
 Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution = No to Dilution checking warning message shown
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -138,6 +137,6 @@ Then the VOC concentration question shows a yes and a no button
 Given in the VOC page I click Continue
 Then For the VOC concentration question field I should see the following error: This is a required field.
 Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: No
-Then For the VOC page I should see the following error: Please ensure that you have selected the correct Recommended Use for your product. For further questions, please refer to the VOC User's Guide.
+Then For the VOC page I should see the following error: Need help? Regulatory services are included in Premium Subscription. Upgrade now!,Please be sure you have selected the correct product type.  For further questions, please contact Support.
 Given in the VOC page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56478
