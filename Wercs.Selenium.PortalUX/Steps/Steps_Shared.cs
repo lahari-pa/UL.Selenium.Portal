@@ -1105,7 +1105,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC)");
 		}
 
-		[StepDefinition(@"I call Shared 60631 \(VOC - HVOC and MVOC - add values - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 60631 \(VOC - HVOC and MVOC - add values - Continue - Happy Path\)")]
 		public void GivenICallSharedVOC__HVOCAndMVOC_AddValues_Continue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -2902,7 +2902,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"I call Shared 65181 \(Retailer Association - Add Private Label Information and Select Vendor ID\) and select the retailer: (.*) and enter the name: (.*) and select Vendor id: (.*)")]
+		[StepDefinition(@"I call Shared Step 65181 \(Retailer Association - Add Private Label Information and Select Vendor ID\) and select the retailer: (.*) and enter the name: (.*) and select Vendor id: (.*)")]
 		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId(string retailer, string name, string option)
 		{
 			TestReport.UseSubSteps = true;

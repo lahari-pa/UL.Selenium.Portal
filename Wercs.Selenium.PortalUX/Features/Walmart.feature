@@ -106,7 +106,7 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: test
+Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: test
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC63684, container type: Plastic Container and size: 3.6
 

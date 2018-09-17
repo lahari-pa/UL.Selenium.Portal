@@ -224,7 +224,8 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
 			testRunner.Then("MVOC (microbial volatile organic compound) content as weight percentage of the to" +
 								"tal formulation should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 68
-			testRunner.Given("I call Shared 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+			testRunner.Given("I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Pat" +
+								"h)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 70
 			testRunner.Then("HVOC (high volatile organic compound) content as weight percent of the total form" +
 								"ulation should not be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -372,7 +373,8 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
 			testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUE" +
 								"STION ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 144
-			testRunner.Given("I call Shared 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+			testRunner.Given("I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Pat" +
+								"h)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 146
 			testRunner.Given("I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis da" +
 								"te is shown - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -497,7 +499,8 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
 			testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUE" +
 								"STION ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 213
-			testRunner.Given("I call Shared 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+			testRunner.Given("I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Pat" +
+								"h)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 215
 			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 217

@@ -65,7 +65,7 @@ Then HVOC (high volatile organic compound) content as weight percent of the tota
 
 Then MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
 
-Given I call Shared 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
+Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 
 Then HVOC (high volatile organic compound) content as weight percent of the total formulation should not be showing the error messages: This is a required field.
 
@@ -141,7 +141,7 @@ Given I call Shared Step 62536 (Transportation Details 2 > I do not ship interna
 
 Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
-Given I call Shared 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
+Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 
 Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
 
@@ -210,7 +210,7 @@ Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classifi
 
 Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
-Given I call Shared 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
+Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 
 Given I click continue
 
