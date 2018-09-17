@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
@@ -21,19 +22,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool WaitForJobInformationList(int secondsToWait)
 		{
 			Report.Info("Beginning wait for job list");
-			if (!SeleniumBrowser.SwitchToIFrame("Widget3FRAME"))
+
+			//get all iframes, try them on by one for the table
+			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+			var iframes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//iframe[@id]"));
+			var iframeIds = iframes.Select(x => x.GetAttribute("id")).ToList();
+
+			foreach (var iframeId in iframeIds)
 			{
-				SeleniumBrowser.ExitIFrame();
-				if (!SeleniumBrowser.SwitchToIFrame("Widget3FRAME"))
-				{
-					if (!SeleniumBrowser.SwitchToIFrame("Widget2FRAME"))
-					{
-						Report.Error("Could not switch to iframe");
-					}
-				}
-			}
-			for (int i = 0; i < secondsToWait; i++)
-			{
+				SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+				SeleniumBrowser.WebBrowser.SwitchTo().Frame(iframeId);
 				try
 				{
 					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='jobListGrid-grid']")) != null)
@@ -43,43 +41,51 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				catch (Exception e)
 				{
-					//do nothing
+					Report.Info(iframeId.ToString() + " is not the right one.");
 				}
-				Delay.Seconds(1);
-				i++;
 			}
-
 			return false;
 		}
 
 		public List<Job> GetFirstXJobs(int firstX)
 		{
-			var tableRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='jobListGrid-grid']//tr[not(@class='jqgfirstrow')]"));
+			Report.Info("Get first " + firstX.ToString() + " jobs.");
+			var tableRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='jobListGrid-grid']//tr[not(@class='jqgfirstrow')]"),10);
+			Report.Info("Found " + tableRows.Count.ToString() + " rows");
 			List<Job> listOfJobs = new List<Job>();
 			for (int i = 0; i < Math.Min(tableRows.Count, firstX); i++)
 			{
-				Job myJob = new Job();
-				var rowTDs = tableRows[0].FindElements(By.XPath(".//td"));
-				myJob.RecordID = rowTDs[2].GetValue();
-				myJob.Class = rowTDs[3].GetValue();
-				myJob.Method = rowTDs[4].GetValue();
-				myJob.Status = rowTDs[5].GetValue();
-				myJob.Frequency = rowTDs[7].GetValue();
-				if (rowTDs[8].GetValue().Trim().Length > 0)
+				Report.Info("Adding job: " + i.ToString());
+				try
 				{
-					myJob.DateCreated = Convert.ToDateTime(rowTDs[8].GetValue());
-				}
-				if (rowTDs[9].GetValue().Trim().Length > 0)
-				{
-					myJob.DateStarted = Convert.ToDateTime(rowTDs[9].GetValue());
-				}
-				if (rowTDs[10].GetValue().Trim().Length > 0)
-				{
-					myJob.DateComplete = Convert.ToDateTime(rowTDs[10].GetValue());
-				}
-				myJob.UserName = rowTDs[11].GetValue();
+					Job myJob = new Job();
+					var rowTDs = tableRows[0].FindElements(By.XPath(".//td"));
+					myJob.RecordID = rowTDs[2].GetValue();
+					myJob.Class = rowTDs[3].GetValue();
+					myJob.Method = rowTDs[4].GetValue();
+					myJob.Status = rowTDs[5].GetValue();
+					myJob.Frequency = rowTDs[7].GetValue();
+					if (rowTDs[8].GetValue().Trim().Length > 0)
+					{
+						myJob.DateCreated = Convert.ToDateTime(rowTDs[8].GetValue());
+					}
+					if (rowTDs[9].GetValue().Trim().Length > 0)
+					{
+						myJob.DateStarted = Convert.ToDateTime(rowTDs[9].GetValue());
+					}
+					if (rowTDs[10].GetValue().Trim().Length > 0)
+					{
+						myJob.DateComplete = Convert.ToDateTime(rowTDs[10].GetValue());
+					}
+					myJob.UserName = rowTDs[11].GetValue();
 
-				listOfJobs.Add(myJob);
+					listOfJobs.Add(myJob);
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to add job: " + e.Message);
+				}
+
 			}
 
 			return listOfJobs;
@@ -88,16 +94,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickJobQueueMenuItem(string option)
 		{
-			var ListJobOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//ul[@id='jobListSelector']/li/span"));
-
-			var matchingOption = ListJobOptions.FirstOrDefault(x => x.GetValue().Trim() == option);
-
-			if (matchingOption == null)
+			Report.Info("Beginning click job queue menu option: " + option);
+			try
 			{
-				Report.Info("No matching menu option has been found: " + option);
+				var ListJobOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//ul[@id='jobListSelector']/li/span"));
+
+				var matchingOption = ListJobOptions.FirstOrDefault(x => x.GetValue().Trim() == option);
+
+				if (matchingOption == null)
+				{
+					Report.Info("No matching menu option has been found: " + option);
+				}
+
+				return matchingOption.TryClick();
+			}
+			catch (Exception e)
+			{
+				return false;
 			}
 
-			return matchingOption.TryClick();
 		}
 	}
 

@@ -333,6 +333,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (matchingLink != null)
 			{
+				Report.Info("Found matching link on tool bar to click");
 				return matchingLink.TryClick();
 			}
 			else
@@ -618,15 +619,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				var Graphics = containerElement.FindElements(By.XPath("//div[@id='subsectionGrphEditor']//table//img"));
-
-				var matchingGraphic =
-					Graphics.FirstOrDefault(x => x.GetAttribute("title").ToLower().Contains(graphicName.ToLower()));
-
-				if (matchingGraphic != null)
+				try
 				{
-					return matchingGraphic.TryClick();
+					var Graphics = containerElement.FindElements(By.XPath("//div[@id='subsectionGrphEditor']//table//img"));
+
+					var matchingGraphic =
+						Graphics.FirstOrDefault(x => x.GetAttribute("title").ToLower().Contains(graphicName.ToLower()));
+
+					if (matchingGraphic != null)
+					{
+						return matchingGraphic.TryClick();
+					}
+
 				}
+				catch (Exception e)
+				{
+					Report.Info("Exception was logged: " + e.Message);
+				}
+
+				Delay.Seconds(1);
 
 			}
 
@@ -891,11 +902,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSave()
 		{
-			try
+			for (int i = 0 ;i < 5; i++)
 			{
-				for (int i = 0 ;i < 5; i++)
+				try
 				{
-					if (containerElement.FindElement(By.XPath(".//input[@id='btnSave']")).TryClick())
+					if (containerElement.FindElement(By.XPath(".//input[@id='btnSave']"),10).TryClick())
 					{
 						return true;
 					}
@@ -904,14 +915,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Delay.Seconds(1);
 					}
 				}
+				catch (Exception e)
+				{
+					Report.Info(e.Message);
+					return false;
+				}
+			}
 
-				return false;
-			}
-			catch (Exception e)
+			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='btnSave']"), 10).TryClick())
 			{
-				Report.Info(e.Message);
-				return false;
+				return true;
 			}
+
+			return false;
 
 		}
 
@@ -1536,8 +1552,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			else
 			{
-				Report.Error("Did not find single button to click");
-				return false;
+				button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='DocumentQueue_lnkFilter']"), 2);
+				if (button != null)
+				{
+					return button.TryClick();
+				}
+				else
+				{
+					Report.Error("Did not find single button to click");
+					return false;
+				}
 			}
 
 		}
@@ -1569,6 +1593,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			foreach (var row in rowList)
 			{
+				Document thisDocument = new Document();
 				for (int i=0; i<documentQueueHeaders.Count; i++)
 				{
 					//properties in Document class
@@ -1578,22 +1603,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						currentHeader = "ProductOrAlias";
 					}
-					if (!propertiesInDocument.Select(x=>x.ToLower().Replace(" ",string.Empty)).Contains(currentHeader))
+					if (!propertiesInDocument.Select(x=>x.ToLower().Replace(" ",string.Empty)).Contains(currentHeader.ToLower().Replace(" ", string.Empty)))
 					{
 						Report.Error("Header: " + currentHeader + " is not in the Document class");
 					}
 					else
 					{
-						string thisProperty = propertiesInDocument.Select(x => x.ToLower().Replace(" ", string.Empty))
-							.FirstOrDefault(y => y == currentHeader);
-						Document thisDocument = new Document();
+						string thisPropertyName = propertiesInDocument.FirstOrDefault(x =>
+							x.ToLower().Replace(" ", string.Empty) == currentHeader.ToLower().Replace(" ", string.Empty));
+
+
 						try
 						{
-							string valueToAdd = row.FindElement(By.XPath(".//td[" + (i + 1).ToString() + "]")).GetValue();
-							thisDocument.GetType().GetProperty(thisProperty).SetValue(thisDocument,valueToAdd);
+							string valueToAdd = row.FindElement(By.XPath(".//td[" + (i +2).ToString() + "]")).GetValue();
+							var thisProperty = thisDocument.GetType().GetProperty(thisPropertyName);
+
+							thisProperty.SetValue(thisDocument,valueToAdd);
+
 							Report.Info("Added value: " + valueToAdd + " to property: " + currentHeader);
 
-							DocumentList.Add(thisDocument);
+
 						}
 						catch (Exception e)
 						{
@@ -1602,6 +1631,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 					}
 				}
+				DocumentList.Add(thisDocument);
 			}
 
 			return DocumentList;
@@ -1716,7 +1746,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string DocType { get; set; }
 		public string Authorized { get; set; }
 		public string FormatAuthorization { get; set; }
-		public string FormulatAuthorization { get; set; }
+		public string FormulaAuthorization { get; set; }
 		public string ClearRFR { get; set; }
 		public string DisplayRevs { get; set; }
 		public string DateAdded { get; set; }

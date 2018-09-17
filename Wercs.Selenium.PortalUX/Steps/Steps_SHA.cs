@@ -24,7 +24,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			SeleniumBrowser.WebBrowser.Url = TReVor.TestVariables.GetVariableSavedAs("SHAUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
-		
+
 		}
 
 		[Given(@"I navigate to Portal")]
@@ -257,11 +257,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			var ID = ProductDetails.Id;
-			
+
 			//rerun search until status is as expected or give up
 			int counter = 0;
 
-			while (counter < 5)
+			while (counter < 100)
 			{
 				Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
 
@@ -297,7 +297,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 							Report.Info("Got match");
 							break;
 						}
-						
+
 						Report.Info(counter + ": status is: " + status);
 					}
 					*/
@@ -308,7 +308,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					break;
 				}
-				
+
 			}
 
 			var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
@@ -320,7 +320,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Failure("No products found");
 			}
-				
+
 		}
 	}
 }

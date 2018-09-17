@@ -225,8 +225,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
 			Report.IsTrue(thisApplyRulesPage.ClickSingleRuleEllipsis(), "Failed to click single rules ellipsis",
 				"Clicked single rules ellipsis");
+			Delay.Seconds(3);
 			SelectRulesPage thisSelectRulesPage = new SelectRulesPage();
-			Report.IsTrue(thisSelectRulesPage.Wait_for_load(), "Select rules page has not loaded",
+			Report.IsTrue(thisSelectRulesPage.Wait_for_load(120), "Select rules page has not loaded",
 				"Select rules page has loaded");
 		}
 
@@ -334,8 +335,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
-			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("document queue"),
-				"Failed to click document queue tool bar option", "Clicked document queue tool bar option");
+			//Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("document queue"),
+			//	"Failed to click document queue tool bar option", "Clicked document queue tool bar option");
+
+			if (!thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("document queue"))
+			{
+				Report.Info("There may have been a problem clicking the document queue tool bar option...");
+			}
 
 			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
 			Report.IsTrue(thisDocumentQueuePage.Wait_for_load(60), "Document Queue page failed to load",
@@ -482,13 +488,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			List<string> propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
 
-
 			List<string> notFoundInDocument = tableHeaders.Except(propertiesInDocument).ToList();
 			if (notFoundInDocument.Count() > 0)
 			{
 				throw new Exception("Not all items listed are in the document object model: " + string.Join(",", notFoundInDocument));
 			}
-
 
 			foreach (TableRow thisRow in table.Rows)
 			{
@@ -498,22 +502,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 				foreach (string header in tableHeaders)
 				{
 					string value = thisRow[header];
-					if(value.Contains("saved as"))
+
+					if (value == "ProductOrAlias")
 					{
-						value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase)
-							.Trim()).ToString();
+						value = @"Product\Alias";
+					}
+					if(value.ToLower().Contains("saved as"))
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+						value = productDetails.Id;
 					}
 					actualHeaders.Add(value);
 
+					//get this header as it appears in the document object
+					string thisPropertyName = propertiesInDocument.FirstOrDefault(x =>
+						x.ToLower().Replace(" ", string.Empty) == header.ToLower().Replace(" ", string.Empty));
+
 					listOfDocuments = listOfDocuments.Where(x =>
-						x.GetType().GetProperty(header).GetValue(x, null).ToString() == value).ToList();
+						x.GetType().GetProperty(thisPropertyName).GetValue(x, null).ToString() == value).ToList();
 				}
 
 				if (listOfDocuments.Count == 0)
 				{
 
-					Report.Error("Not all documents match. This combination was not found: " +
-					             string.Join(",", actualHeaders));
+					Report.Error("Not all documents match. This combination was not found: " + string.Join(",", actualHeaders));
 				}
 			}
 		}
