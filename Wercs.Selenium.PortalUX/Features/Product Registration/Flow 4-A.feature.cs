@@ -129,10 +129,10 @@ testRunner.Given("I call Shared Step 57408 (Create a New Registration via Regist
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Air Freshener-Dual Purpose/Disinfectant-Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 31
-testRunner.Given("I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue" +
+testRunner.Given("I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue" +
                     " - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 33
-testRunner.Given("I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direc" +
+testRunner.Given("I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direc" +
                     "t Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 35
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

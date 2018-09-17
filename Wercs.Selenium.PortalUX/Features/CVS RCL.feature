@@ -22,7 +22,7 @@ Given I save the UPC number 050428290231 as: UPC74208
 
 Given I delete all products with UPC Number: saved as UPC74208
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -30,21 +30,21 @@ Then I save the product information as: TestCase74208
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Camphor
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Needs 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74208, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74208, container type: Plastic Container and size: 10
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Given I set the What is the CVS Store Brand associated to this product? option to: Beauty 360 (CVS Pharmacy)
 
@@ -75,7 +75,7 @@ And The following options should be displayed exclusively for section: What is t
 | Eye Care                  |
 | Facial Care               |
 | Feminine Care             |
-| FIRST AID                 | 
+| FIRST AID                 |
 | Foot Care                 |
 | Fragrances                |
 | Grocery                   |
@@ -130,7 +130,7 @@ Given I save the UPC number 050428156483 as: UPC74253
 
 Given I delete all products with UPC Number: saved as UPC74253
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -138,21 +138,21 @@ Then I save the product information as: TestCase74253
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Camphor
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74253, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74253, container type: Plastic Container and size: 10
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Given I set the What is the CVS Store Brand associated to this product? option to: Beauty 360 (CVS Pharmacy)
 
@@ -178,7 +178,7 @@ Given I save the UPC number 050428285367 as: UPC74254
 
 Given I delete all products with UPC Number: saved as UPC74254
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -186,21 +186,21 @@ Then I save the product information as: TestCase74254
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74254, container type: Plastic Container and size: 15.025
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74254, container type: Plastic Container and size: 15.025
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Given I set the What is the CVS Store Brand associated to this product? option to: CVS Health (CVS Pharmacy)
 
@@ -228,7 +228,7 @@ Given I save the UPC number 050428285367 as: UPC74255
 
 Given I delete all products with UPC Number: saved as UPC74255
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -236,21 +236,21 @@ Then I save the product information as: TestCase74255
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74255, container type: Plastic Container and size: 28.95
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74255, container type: Plastic Container and size: 28.95
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Given I set the What is the CVS Store Brand associated to this product? option to: CVS Health (CVS Pharmacy)
 
@@ -280,7 +280,7 @@ Given I save the UPC number 050428290231 as: UPC74256
 
 Given I delete all products with UPC Number: saved as UPC74256
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -288,21 +288,21 @@ Then I save the product information as: TestCase74256
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Glycerin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74256, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74256, container type: Plastic Container and size: 2.10
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Given I set the What is the CVS Store Brand associated to this product? option to: CVS Health (CVS Pharmacy)
 
@@ -345,7 +345,7 @@ Given I save the UPC number 050428290231 as: UPC74257
 
 Given I delete all products with UPC Number: saved as UPC74257
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -353,21 +353,21 @@ Then I save the product information as: TestCase74257
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Glycerin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74257, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74257, container type: Plastic Container and size: 2.10
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Given I set the What is the CVS Store Brand associated to this product? option to: CVS Health (CVS Pharmacy)
 
@@ -399,7 +399,7 @@ Given I save the UPC number 050428290231 as: UPC74259
 
 Given I delete all products with UPC Number: saved as UPC74259
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -407,21 +407,21 @@ Then I save the product information as: TestCase74259
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Glycerin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74259, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74259, container type: Plastic Container and size: 2.10
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Given I set the What is the CVS Store Brand associated to this product? option to: CVS Health (CVS Pharmacy)
 
@@ -457,7 +457,7 @@ Given I save the UPC number 050428290231 as: UPC74260
 
 Given I delete all products with UPC Number: saved as UPC74260
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -465,21 +465,21 @@ Then I save the product information as: TestCase74260
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Glycerin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74260, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74260, container type: Plastic Container and size: 2.10
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Given I set the What is the CVS Store Brand associated to this product? option to: CVS Health (CVS Pharmacy)
 
@@ -513,7 +513,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
 Then I ensure the Data Consent Tier Sliders are set as follows:
 | Tier | State |
@@ -528,7 +528,7 @@ Given I save the UPC number 050428290231 as: UPC74188
 
 Given I delete all products with UPC Number: saved as UPC74188
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -536,21 +536,21 @@ Then I save the product information as: TestCase74188
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74188, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74188, container type: Plastic Container and size: 2.10
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Then the question: What is the CVS Store Brand associated to this product? is displayed at position: 1
 
@@ -606,7 +606,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
 Then I ensure the Data Consent Tier Sliders are set as follows:
 | Tier | State |
@@ -621,7 +621,7 @@ Given I save the UPC number 050428290231 as: UPC74207
 
 Given I delete all products with UPC Number: saved as UPC74207
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -629,21 +629,21 @@ Then I save the product information as: TestCase74207
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 # Requires 'Indicate full name of product, as sold, via this retailer (eg. Private Label Asprin)' in Retailer page - in shared 74201
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74207, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74207, container type: Plastic Container and size: 2.10
 
-Given I call shared step 74202 (CVS Pharmacy - Yes, I wish to Continue)
+Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
 Given I set the What is the CVS Store Brand associated to this product? option to: Live Better
 
@@ -663,7 +663,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
 Then I ensure the Data Consent Tier Sliders are set as follows:
 | Tier | State |
@@ -678,7 +678,7 @@ Given I save the UPC number 050428075661 as: UPC74270
 
 Given I delete all products with UPC Number: saved as UPC74270
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -686,17 +686,17 @@ Then I save the product information as: TestCase74270
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Lanolin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call shared step 74269 (Select Retailers - Rite Aid)
+Given I call Shared Step 74269 (Select Retailers - Rite Aid)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74270, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74270, container type: Plastic Container and size: 10
 
 Then I should not see the CVS RCL Page
 
@@ -710,7 +710,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
 Then I ensure the Data Consent Tier Sliders are set as follows:
 | Tier | State |
@@ -725,7 +725,7 @@ Given I save the UPC number 0043396824430 as: UPC74272
 
 Given I delete all products with UPC Number: saved as UPC74272
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -733,17 +733,17 @@ Then I save the product information as: TestCase74272
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Glycerin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74272, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74272, container type: Plastic Container and size: 10
 
 Then I should not see the CVS RCL Page
 
@@ -757,7 +757,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call shared step 57205 (Go to Retail Partners - Select CVS)
+Given I call Shared Step 57205 (Go to Retail Partners - Select CVS)
 
 Then I ensure the Data Consent Tier Sliders are set as follows:
 | Tier | State |
@@ -772,7 +772,7 @@ Given I save the UPC number 050428075661 as: UPC74261
 
 Given I delete all products with UPC Number: saved as UPC74261
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 
@@ -780,17 +780,17 @@ Then I save the product information as: TestCase74261
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
-Given I call shared step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Glycerin
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call shared step 74201 (Select Retailers - CVS)
+Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74261, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74261, container type: Plastic Container and size: 10
 
 And I confirm the page heading shows the CVS Logo with the title 'CVS Own Brand Registration' below the logo
 

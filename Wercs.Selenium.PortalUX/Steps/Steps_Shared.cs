@@ -42,8 +42,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// </summary>
 
 		//Seems to be identical to 57500
-		[StepDefinition(
-			@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
+		[StepDefinition(@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type)
 		{
 			TestReport.UseSubSteps = true;
@@ -84,8 +83,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"None of the Above");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
-
-
 
 		[StepDefinition(@"I call Shared Step 60747 \(Select Primary Physical Property - Liquid - With Ingredients\)")]
 		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
@@ -128,7 +125,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[Given(@"I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only")]
+		[StepDefinition(@"I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only")]
 		public void GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -140,9 +137,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-
-		[StepDefinition(
-			@"I call shared step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
+		[StepDefinition(@"I call Shared Step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
 		public void GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -215,8 +210,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		//	MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		//}
 
-		[StepDefinition(
-			@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
+		[StepDefinition(@"I call Shared Step 60935 \(Additional Product Information - US - Direct Ship - Private Label Only\)")]
 		public void SharedAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
 			TestReport.UseSubSteps = true;
@@ -238,8 +232,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 70393 \(Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only\)")]
+		[StepDefinition(@"I call Shared Step 70393 \(Additional Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only\)")]
 		public void
 			GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_DirectShip_PrivateLabelQuestionsOnly()
 		{
@@ -389,7 +382,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 		}
 
-		[StepDefinition(@"I call Shared 60685 Fuel Container Regulatory Details - Yes")]
+		[StepDefinition(@"I call Shared Step 60685 Fuel Container Regulatory Details - Yes")]
 		public void GivenICallSharedFuelContainerRegulatoryDetails_Yes()
 		{
 			TestReport.UseSubSteps = true;
@@ -401,33 +394,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Fuel Container Regulatory Details");
 		}
 
-		[StepDefinition(@"I call Shared 48367 Product Includes Battery > any type")]
-		public void GivenICallSharedProductIncludesBatteryAnyType()
-		{
-			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct
-				.GivenInTheProductCharacteristicsTabOfTheNewProductPageForIndicateHowBatteryIsPackagedISelectX(
-					"Installed in the product");
-
-			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-				"Battery Type",
-				"Manufacturer",
-				"Number of batteries per package",
-				"How many batteries required to run"
-			});
-			table2.AddRow(new string[] {
-				"Alkaline",
-				"L1028F",
-				"6",
-				"6"
-			});
-			MyStepsNewProduct.GivenInTheProductCharacteristicsTabOfTheNewProductPageIAddTheFollowingBatteries(table2);
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Includes Battery");
-		}
-
-		[StepDefinition(
-			@"I call Shared 61449 Toxicity Characteristic Leaching Procedure \(TCLP\) - select No to all - Click Continue - Happy Path")]
+		[StepDefinition(@"I call Shared Step 61449 Toxicity Characteristic Leaching Procedure \(TCLP\) - select No to all - Click Continue - Happy Path")]
 		public void
 			GivenICallShared61449ToxicityCharacteristicLeachingProcedureTCLP_SelectNoToAll_ClickContinue_HappyPath()
 		{
@@ -444,7 +411,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Toxicity Characteristic Leaching Procedure (TCLP)");
 		}
 
-		[Given(@"I call Shared 58189 Answer Electronic Equipment questions - With Cathode Ray - No to all")]
+		[StepDefinition(@"I call Shared Step 58189 Answer Electronic Equipment questions - With Cathode Ray - No to all")]
 		public void GivenICallShared58189AnswerElectronicEquipmentQuestions_WithCathodeRay_NoToAll()
 		{
 			TestReport.UseSubSteps = true;
@@ -461,8 +428,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Electronic equipment");
 		}
 
-
-		[StepDefinition(@"I call Shared 57571 \(Enter Regulatory Information - Not Prop 65\)")]
+		[StepDefinition(@"I call Shared Step 57571 \(Enter Regulatory Information - Not Prop 65\)")]
 		public void GivenICallSharedEnterRegulatoryInformation_NotProp()
 		{
 			TestReport.UseSubSteps = true;
@@ -481,7 +447,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
-		[StepDefinition(@"I call Shared 48367 \(Product Includes Battery > any type\)")]
+		[StepDefinition(@"I call Shared Step 48367 \(Product Includes Battery > any type\)")]
 		public void GivenICallSharedProductIncludesBatteryAnyType(Table table)
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -536,9 +502,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - U.S.");
 		}
 
-
-		[StepDefinition(
-			@"I call Shared Step 48369 \(Toxicity Characteristics Leaching Procedure \(TCLP\) - No to ALL With Copper\)")]
+		[StepDefinition(@"I call Shared Step 48369 \(Toxicity Characteristics Leaching Procedure \(TCLP\) - No to ALL With Copper\)")]
 		public void GivenICallSharedStepToxicityCharacteristicsLeachingProcedureTCLP_NoToALLWithCopper()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -569,8 +533,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Toxicity Characteristic Leaching Procedure (TCLP) Product Report");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 71955 \(Answer Electronic Equipment questions - Without Cathode Ray - No to all\)")]
+		[StepDefinition(@"I call Shared Step 71955 \(Answer Electronic Equipment questions - Without Cathode Ray - No to all\)")]
 		public void GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -580,8 +543,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Electronic Equipment");
 		}
 
-		[StepDefinition(
-			@"I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path")]
+		[StepDefinition(@"I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path")]
 		public void GivenICallSharedRegulatoryInformation_DrugFactsPanel_NoneOfTheAbove_Continue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -596,8 +558,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 3");
 		}
 
-		[StepDefinition(
-			@"I call Shared 57506 \(Transportation Details 1 - Regulated for Transport\(No\) - Exemption\(Random\) - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57506 \(Transportation Details 1 - Regulated for Transport\(No\) - Exemption\(Random\) - Continue - Happy Path\)")]
 		public void GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -607,8 +568,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
 
-		[Given(
-			@"I call Shared 69682 \(Retailer Association - Add Private Label Information\) and select the retailer: (.*) and enter the name: (.*)")]
+		[StepDefinition(@"I call Shared Step 69682 \(Retailer Association - Add Private Label Information\) and select the retailer: (.*) and enter the name: (.*)")]
 		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformation(string retailer, string name)
 		{
 			TestReport.UseSubSteps = true;
@@ -623,8 +583,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57980 \(Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57980 \(Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path\)")]
 		public void
 			GivenICallSharedStepTransportationDetails_YesOnlyOption_SelectIMDGFullyRegulated_Continue_HappyPath()
 		{
@@ -637,8 +596,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57981 \(Transportation Details - UN Number Water \(IMDG\) - Enter UN Number and select other data - Continue - Happy Path\) : (.*)")]
+		[StepDefinition(@"I call Shared Step 57981 \(Transportation Details - UN Number Water \(IMDG\) - Enter UN Number and select other data - Continue - Happy Path\) : (.*)")]
 		public void
 			GivenICallSharedStepTransportationDetails_UNNumberWaterIMDG_EnterUNNumberAndSelectOtherData_Continue_HappyPath(
 				string unNo)
@@ -662,9 +620,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"U. S. Department of Transportation (DOT) Classification");
 		}
 
-
-		[Given(
-			@"I call Shared Step 57794 \(Confirm VOC \(SCAQMD\) step title, Confirm ACP question shown  - Select No - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57794 \(Confirm VOC \(SCAQMD\) step title, Confirm ACP question shown  - Select No - Happy Path\)")]
 		public void GivenICallSharedStepConfirmVOCSCAQMDStepTitleConfirmACPQuestionShown_SelectNo_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -681,8 +637,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"No");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57678 \(Confirm Volatile Organic Compounds \(VOC OTC/CARB\) step title - Select No to all questions - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57678 \(Confirm Volatile Organic Compounds \(VOC OTC/CARB\) step title - Select No to all questions - Happy Path\)")]
 		public void
 			GivenICallSharedStepConfirmVolatileOrganicCompoundsVOCOTCCARBStepTitle_SelectNoToAllQuestions_HappyPath()
 		{
@@ -726,9 +681,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("VOC");
 		}
 
-
-		[StepDefinition(
-			@"I call Shared 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: (.*)")]
+		[StepDefinition(@"I call Shared Step 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: (.*)")]
 		public void GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath(string retailer)
 		{
 			TestReport.UseSubSteps = true;
@@ -753,8 +706,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		// Enter UPC string in the form: "Equals"+upcNumber where upcNumber is the exact number to input, rather than using the randomly generated step from context
-		[StepDefinition(
-			@"I call Shared 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		[StepDefinition(@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc,
 			string containerType, string size)
 		{
@@ -783,8 +735,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		[StepDefinition(@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmQuantity(string upc,
 			string containerType, string size)
 		{
@@ -816,8 +767,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
 		}
 
-
-		[StepDefinition(@"I call Shared 60567 \(Upload Product Label only\) : (.*)")]
+		[StepDefinition(@"I call Shared Step 60567 \(Upload Product Label only\) : (.*)")]
 		public void GivenICallSharedUploadProductLabelOnly(string docPath)
 		{
 			TestReport.UseSubSteps = true;
@@ -829,7 +779,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared 60567 \(Upload Product Label only\) for section: (.*)")]
+		[StepDefinition(@"I call Shared Step 60567 \(Upload Product Label only\) for section: (.*)")]
 		public void GivenICallSharedUploadProductLabelOnlySectionSpecific(string section)
 		{
 			TestReport.UseSubSteps = true;
@@ -842,7 +792,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared 57883 \(Comments - Happy Path\) and enter the comment: (.*)")]
+		[StepDefinition(@"I call Shared Step 57883 \(Comments - Happy Path\) and enter the comment: (.*)")]
 		public void GivenICallSharedCommentsHappyPath(string comments)
 		{
 			TestReport.UseSubSteps = true;
@@ -855,7 +805,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Comments");
 		}
 
-		[StepDefinition(@"I call Shared 54796 \(Purchase Summary\)")]
+		[StepDefinition(@"I call Shared Step 54796 \(Purchase Summary\)")]
 		public void GivenICallSharedPurchaseSummary()
 		{
 			Steps_PaymentMethods MyStepsPaymentMethods = new Steps_PaymentMethods();
@@ -863,9 +813,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 		}
 
-
-		[StepDefinition(
-			@"I call Shared 57753 \(Create a New Registration via Register New Product \(expanded menu\)\)")]
+		[StepDefinition(@"I call Shared Step 57753 \(Create a New Registration via Register New Product \(expanded menu\)\)")]
 		public void GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu()
 		{
 			TestReport.UseSubSteps = true;
@@ -881,8 +829,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared 57884 \(Safety Data Sheet Authoring - Additional Data \(Optional\) step - add any random data for all fields - Happy path\) and enter the following:")]
+		[StepDefinition(@"I call Shared Step 57884 \(Safety Data Sheet Authoring - Additional Data \(Optional\) step - add any random data for all fields - Happy path\) and enter the following:")]
 		public void GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
 			Table table)
 		{
@@ -928,7 +875,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(@"I call Shared 57441 \(Product Characteristics - Primary Physical Property - Liquid\)")]
+		[StepDefinition(@"I call Shared Step 57441 \(Product Characteristics - Primary Physical Property - Liquid\)")]
 		public void GivenICallSharedProductCharacteristics_PrimaryPhysicalProperty_Liquid()
 		{
 			// Secondary Physical State, Specific Gravity (value), pH (range), Boiling Point (range), Water Solubility description can be any value.
@@ -961,7 +908,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[Given(@"I call Shared Step 57111 \(Enter Product Data for Physical State - Aerosol only\)")]
+		[StepDefinition(@"I call Shared Step 57111 \(Enter Product Data for Physical State - Aerosol only\)")]
 		public void GivenICallSharedStepEnterProductDataForPhysicalState_AerosolOnly()
 		{
 			TestReport.UseSubSteps = true;
@@ -1029,10 +976,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-
-
-		[StepDefinition(
-			@"I call Shared 57528 \(Product Characteristics - Aerosol Only - add data - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57528 \(Product Characteristics - Aerosol Only - add data - Continue - Happy Path\)")]
 		public void ICallSharedProductCharacteristics_AerosolOnly_AddData_Continue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -1066,8 +1010,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(
-			@"I call Shared 57401 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
 		public void GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -1096,8 +1039,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.ContinueInTheProductRegistration();
 		}
 
-		[StepDefinition(
-			@"I call Shared 57881 \(Regulatory Documents to Provide - US only - request authoring - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57881 \(Regulatory Documents to Provide - US only - request authoring - Happy Path\)")]
 		public void GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -1110,8 +1052,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60931 \(Additional Documents to Provide - Exemption - Special Permit - Product Label\)")]
+		[StepDefinition(@"I call Shared Step 60931 \(Additional Documents to Provide - Exemption - Special Permit - Product Label\)")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_SpecialPermit_ProductLabel()
 		{
 			TestReport.UseSubSteps = true;
@@ -1126,9 +1067,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-
-		[StepDefinition(
-			@"I call Shared 62710 \(Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 62710 \(Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path\)")]
 		public void GivenICallSharedConfirmVOCHeadingAndSelectNoToFirstQuestionOnly_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -1155,9 +1094,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC)");
 		}
 
-
-		[StepDefinition(
-			@"I call Shared Step 60552 \(VOC - AERO Question \(ozone\) enter value - Click Continue - Happy Path\): (.*)")]
+		[StepDefinition(@"I call Shared Step 60552 \(VOC - AERO Question \(ozone\) enter value - Click Continue - Happy Path\): (.*)")]
 		public void GivenICallSharedStepVOC_AEROQuestionOzoneEnterValue_ClickContinue_HappyPath(string value)
 		{
 			TestReport.UseSubSteps = true;
@@ -1186,7 +1123,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC)");
 		}
 
-		[StepDefinition(@"I call Shared 57885 \(Data Acceptance - Click Accept - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57885 \(Data Acceptance - Click Accept - Happy Path\)")]
 		public void GivenICallSharedDataAcceptance_ClickAccept_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -1304,8 +1241,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57865 \(Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57865 \(Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path\)")]
 		public void
 			GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
 		{
@@ -1338,9 +1274,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-
-		[StepDefinition(
-			@"I call Shared Step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
 		public void GivenICallSharedConfirmVOCSummaryStepConfirmVOCAnalysisDate_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -1363,8 +1297,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			new StepsProductGrid().ThenIDeleteTheProduct(savedAs);
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57727 \(Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57727 \(Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path\)")]
 		public void GivenICallSharedTransportationDetails1_YesOption_SelectDOTLimitedQuantity()
 		{
 			TestReport.UseSubSteps = true;
@@ -1387,8 +1320,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 65705 \(Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue\)")]
+		[StepDefinition(@"I call Shared Step 65705 \(Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue\)")]
 		public void
 			GivenICallSharedStepTransportation_DOTUNStep_EnterUNSelectAerosolsNoneAddTechnicalNameClickContinue()
 		{
@@ -1413,8 +1345,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"U. S. Department of Transportation (DOT) Classification");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 34455 \(U\. S\. Department of Transportation \(DOT\) Classification - Enter all valid data\)")]
+		[StepDefinition(@"I call Shared Step 34455 \(U\. S\. Department of Transportation \(DOT\) Classification - Enter all valid data\)")]
 		public void GivenICallSharedStepU_S_DepartmentOfTransportationDOTClassification_EnterAllValidData()
 		{
 			TestReport.UseSubSteps = true;
@@ -1438,8 +1369,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"U. S. Department of Transportation (DOT) Classification");
 		}
 
-		[Given(
-			@"I call Shared Step 34455 \(U\. S\. Department of Transportation \(DOT\) Classification - Enter all valid data\): UN Unmber: (.*), Proper Shipping Name: (.*), Technical Name: (.*), Hazard Class: (.*), Packing Group: (.*)")]
+		[StepDefinition(@"I call Shared Step 34455 \(U\. S\. Department of Transportation \(DOT\) Classification - Enter all valid data\): UN Unmber: (.*), Proper Shipping Name: (.*), Technical Name: (.*), Hazard Class: (.*), Packing Group: (.*)")]
 		public void
 			GivenICallSharedStepU_S_DepartmentOfTransportationDOTClassification_EnterAllValidDataUNUnmberUNProperShippingNameNonanesTechniacalNameTechnicalTestNameHazardClassPackingGroupIII(
 				string unNo, string psnName, string techName, string hazClass, string packClass)
@@ -1465,9 +1395,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"U. S. Department of Transportation (DOT) Classification");
 		}
 
-
-		[StepDefinition(
-			@"I call Shared Step 57728 \(U.S. Department of Transportation \(DOT\) Classification - Enter UN1950 \(Aerosol\) - Select data - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57728 \(U.S. Department of Transportation \(DOT\) Classification - Enter UN1950 \(Aerosol\) - Select data - Continue - Happy Path\)")]
 		public void GivenICallSharedUSDepartmentofTransportationDOTClassification_EnterUN1950Aerosol_SelectData()
 		{
 			TestReport.UseSubSteps = true;
@@ -1534,7 +1462,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Liquid Core Product");
 		}
 
-
 		[StepDefinition(@"I call Shared Step 00000 \(Liquid Core Product - select Yes - Happy Path\)")]
 		public void GivenICallSharedStepLiquidCoreProduct_SelectYes_HappyPath()
 		{
@@ -1551,9 +1478,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Liquid Core Product");
 		}
 
-
-		[StepDefinition(
-			@"I call Shared Step 57507 \(Transportation Details 1- Not Regulated - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57507 \(Transportation Details 1- Not Regulated - Continue - Happy Path\)")]
 		public void ICallSharedTransportationDetails1_NotRegulated()
 		{
 			TestReport.UseSubSteps = true;
@@ -1597,8 +1522,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product is Regulated for Transport");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57502 \(Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57502 \(Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
 		public void ICallSharedAdditionalProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse()
 		{
 			TestReport.UseSubSteps = true;
@@ -1680,8 +1604,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue\)")]
+		[StepDefinition(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue\)")]
 		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectSolid_StateAndSubcat_MixedAndWater_Random()
 		{
 			TestReport.UseSubSteps = true;
@@ -1710,8 +1633,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 59680 \(Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 59680 \(Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
 		public void ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
 		{
 			TestReport.UseSubSteps = true;
@@ -1782,8 +1704,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenIShouldSeeXPage("Regulatory Information 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
 		{
 			TestReport.UseSubSteps = true;
@@ -1804,8 +1725,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 29206 \(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 29206 \(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\)")]
 		public void ICallSharedRetailer_SelectNoRetailer_ClickDone()
 		{
 			TestReport.UseSubSteps = true;
@@ -1824,8 +1744,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			WarningPopup.ClickOk();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 59042 \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
+		[StepDefinition(@"I call Shared Step 59042 \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
 		public void ICallSharedBrowseForFileSelectClickOpen(string type, string pdfFile)
 		{
 			TestReport.UseSubSteps = true;
@@ -1834,8 +1753,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60533 \(Additional Documents to Provide - Flash Point and Product Label only\) : (.*)")]
+		[StepDefinition(@"I call Shared Step 60533 \(Additional Documents to Provide - Flash Point and Product Label only\) : (.*)")]
 		public void ICallSharedAdditionalDocumentsToProvide_FlashPointAndProductLabelOnly(string docPath)
 		{
 			TestReport.UseSubSteps = true;
@@ -1850,8 +1768,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 62678 \(Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path\)")]
+		[StepDefinition(@"I call Shared Step 62678 \(Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path\)")]
 		public void ICallSharedAdditionalProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -1907,7 +1824,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-
 		[StepDefinition(@"I confirm that the default selected retailer is: (.*) then click Continue")]
 		public void CustomConfirmDefaultSelectedRetailer_ClickContinue(string retailer)
 		{
@@ -1941,8 +1857,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 58189 \(Answer Electronic Equipment questions - With Cathode Ray - No to all\)")]
+		[StepDefinition(@"I call Shared Step 58189 \(Answer Electronic Equipment questions - With Cathode Ray - No to all\)")]
 		public void SharedAnswerElectronicEquipmentQuestions_WithCathodeRay_NoToAll()
 		{
 			TestReport.UseSubSteps = true;
@@ -1991,8 +1906,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(
-			@"I call shared step 69687 \(Additional Product Information - US, No\(PL\)\)")]
+		[StepDefinition(@"I call Shared Step 69687 \(Additional Product Information - US, No\(PL\)\)")]
 		public void GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -2000,7 +1914,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			// was failing on country of origin so adding if statement.
-			// Flagging a fail because this condition doesn't exactly match the test case. If Origin Q. is expected here, should use a different shared step?
+			// Flagging a fail because this condition doesn't exactly match the test case. If Origin Q. is expected here, should use a different Shared Step?
 			if (new NewProduct().GetDisplayedSections().Contains("Select the product's Country of Origin"))
 			{
 				TestReport.StartStep("I set the Select the product's Country of Origin option to: United States of America");
@@ -2013,9 +1927,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-
-		[StepDefinition(
-			@"I call Shared Step 65511 \(Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
+		[StepDefinition(@"I call Shared Step 65511 \(Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
 		public void ICallSharedAdditionalProductInformation_NoChildNoDirectShipNoPLClickContinue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2040,8 +1952,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57503 \(Regulatory Information 1- TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57503 \(Regulatory Information 1- TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2066,8 +1977,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 59927 \(Primary Physical State > Solid only available – Without Water Solubility question\)")]
+		[StepDefinition(@"I call Shared Step 59927 \(Primary Physical State > Solid only available – Without Water Solubility question\)")]
 		public void SharedPrimaryPhysicalStateSolidOnlyAvailable_WithoutWaterSolubilityQuestion()
 		{
 			TestReport.UseSubSteps = true;
@@ -2085,8 +1995,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical Properties");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity \) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
+		[StepDefinition(@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity \) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
 		public void SharedEnterUniversalProductCodeUPC_Battery_ConfirmQuantity(string upc, string containerType,
 			string size, string quantity)
 		{
@@ -2267,8 +2176,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		// Duplicate of Shared step 60026
-		[StepDefinition(
-			@"I call Shared Step 65493 \(Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue\)")]
+		[StepDefinition(@"I call Shared Step 65493 \(Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue\)")]
 		public void SharedAdditionalProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse()
 		{
 			TestReport.UseSubSteps = true;
@@ -2298,9 +2206,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-
-
-		[StepDefinition(@"I call Shared 56808 Regulatory Information - Prop 65 - No - Continue")]
+		[StepDefinition(@"I call Shared Step 56808 Regulatory Information - Prop 65 - No - Continue")]
 		public void GivenICallShared56808RegulatoryInformation_Prop_No_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2314,8 +2220,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
-
-		[Given(@"I call Shared 60715 \(Additional Documents to Provide - OSHA SDS - only\) : (.*)")]
+		[StepDefinition(@"I call Shared Step 60715 \(Additional Documents to Provide - OSHA SDS - only\) : (.*)")]
 		public void GivenICall60715SharedAdditionalDocumentsToProvide_OSHASDS_OnlyCDependenciesWERCSmartTestdoc_Pdf(
 			string docPath)
 		{
@@ -2384,7 +2289,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//}
 			//else
 			//{
-			//	Report.Failure("Secondary physical state is not showing as specified by shared step");
+			//	Report.Failure("Secondary physical state is not showing as specified by Shared Step");
 			//}
 			TestReport.StartStep(
 				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
@@ -2418,8 +2323,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Pesticide Details");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57508 \(VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all States - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57508 \(VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all States - Continue - Happy Path\)")]
 		public void SharedVOCSCAQMDCanada_YesLowSolidYesApplyToAllStates_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2444,8 +2348,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("VOC SCAQMD/Canada");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57798 \(Additional Product Information- Pesticide, Canada Only - No to everything else, Continue\)")]
+		[StepDefinition(@"I call Shared Step 57798 \(Additional Product Information- Pesticide, Canada Only - No to everything else, Continue\)")]
 		public void SharedAdditionalProductInformation_Pesticide_CanadaOnly_NoToAll_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2520,8 +2423,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 2");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60933 \(Additional Documents to Provide - Product Label and OSHA SDS only\)")]
+		[StepDefinition(@"I call Shared Step 60933 \(Additional Documents to Provide - Product Label and OSHA SDS only\)")]
 		public void SharedAdditionalDocumentsToProvide_ProductLabelAndOSHASDSOnly()
 		{
 			TestReport.UseSubSteps = true;
@@ -2576,9 +2478,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
 
-
-		[StepDefinition(
-			@"I call Shared Step 73629 \(Product Characteristics - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
+		[StepDefinition(@"I call Shared Step 73629 \(Product Characteristics - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
 		public void ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -2624,8 +2524,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 73748 \(Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
+		[StepDefinition(@"I call Shared Step 73748 \(Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
 		public void GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -2674,8 +2573,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 70675 \(Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue\)")]
+		[StepDefinition(@"I call Shared Step 70675 \(Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue\)")]
 		public void SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2712,8 +2610,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
 		public void SharedTransportationDetails2_DoNotShipInternationally_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2745,7 +2642,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//	myNewProduct.SetOptionInSection("Primary Physical State", "Liquid");
 			//}
 			TestReport.StartStep("I set the Primary Physical State to: 'Liquid'");
-			myStepsNewProduct.SetTheSectionOptionTo("Primary Physical State","Liquid");
+			myStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Specific Gravity",
 				"10"));
@@ -2795,8 +2692,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Beverage Regulatory Details");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 71618 \(U. S. Department of Transportation \(DOT\) Classification - For Alcohol\)")]
+		[StepDefinition(@"I call Shared Step 71618 \(U. S. Department of Transportation \(DOT\) Classification - For Alcohol\)")]
 		public void SharedUSDepartmentOfTransportationDOTClassification_ForAlcohol()
 		{
 			TestReport.UseSubSteps = true;
@@ -2833,7 +2729,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 73956 \(Go to Summary and verify data\) with product type: (.*)")]
-
 		public void SharedGoToSummaryAndVerifyData(string typeOfProduct)
 		{
 			TestReport.UseSubSteps = true;
@@ -2855,8 +2750,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			new StepsHomepage().ThenINavigateToTheHomePage();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 43758 \(Product Grid- Filter for Product- Select Product - Delete\) for product: (.*)")]
+		[StepDefinition(@"I call Shared Step 43758 \(Product Grid- Filter for Product- Select Product - Delete\) for product: (.*)")]
 		public void SharedProductGrid_FilterForProduct_SelectProduct_Delete(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -2924,8 +2818,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - U.S.");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 56967 \(Confirm Retailer & You information is shown correctly\) for retailer: (.*)")]
+		[StepDefinition(@"I call Shared Step 56967 \(Confirm Retailer & You information is shown correctly\) for retailer: (.*)")]
 		public void GivenICallSharedStepConfirmRetailerYouInformationIsShownCorrectlyForRetailer(string retailer)
 		{
 			TestReport.UseSubSteps = true;
@@ -2941,7 +2834,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Confirm you see the "It's been <y> good long years since <Date>" statement below the Thumbs up icon
 		}
 
-		[Given(@"I call Shared Step 56968 \(Confirm - Data Consent Tiers not required \)")]
+		[StepDefinition(@"I call Shared Step 56968 \(Confirm - Data Consent Tiers not required \)")]
 		public void GivenICallSharedStepConfirm_DataConsentTiersNotRequired()
 		{
 			TestReport.UseSubSteps = true;
@@ -2952,9 +2845,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-
-		[StepDefinition(
-			@"I call Shared Step 63804 \(Additional Product Information - enter options\)")]
+		[StepDefinition(@"I call Shared Step 63804 \(Additional Product Information - enter options\)")]
 		public void ICallSharedStepAdditionalProductInformationEnterOptions(Table table)
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -3011,8 +2902,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[Given(
-			@"I call Shared 65181 \(Retailer Association - Add Private Label Information and Select Vendor ID\) and select the retailer: (.*) and enter the name: (.*) and select Vendor id: (.*)")]
+		[StepDefinition(@"I call Shared 65181 \(Retailer Association - Add Private Label Information and Select Vendor ID\) and select the retailer: (.*) and enter the name: (.*) and select Vendor id: (.*)")]
 		public void GivenICallSharedRetailerAssociation_AddPrivateLabelInformationAndVendorId(string retailer, string name, string option)
 		{
 			TestReport.UseSubSteps = true;
@@ -3028,20 +2918,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
 
-
-		[Given(@"I call Shared Step 57753 \(Create a New Registration via Register New Product \(expanded menu\)\)")]
-		public void GivenICallSharedStep57753CreateANewRegistrationViaRegisterNewProductExpandedMenu()
-		{
-			StepsHomepage MyStepsHomePage = new StepsHomepage();
-			MyStepsHomePage.ClickItemInNavigationPanel("Register New Product");
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("New Product");
-			MyStepsNewProduct.SetTheSectionOptionTo("Select the type of product", "Create a New Registration");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
-		}
-
-		[StepDefinition(
-			@"I call Shared Step 74760 \(Product Characteristics - Select Liquid as primary physical state and enter all required data\)")]
+		[StepDefinition(@"I call Shared Step 74760 \(Product Characteristics - Select Liquid as primary physical state and enter all required data\)")]
 		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -3093,7 +2970,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[Given(@"I call shared step 74123 \(Additional Product Information - Grocery - US - Random Country - No\(PL\)\)")]
+		[StepDefinition(@"I call Shared Step 74123 \(Additional Product Information - Grocery - US - Random Country - No\(PL\)\)")]
 		public void GivenICallSharedStepAdditionalProductInformation_Grocery_US_RandomCountry_NoPL()
 		{
 			TestReport.UseSubSteps = true;
@@ -3116,8 +2993,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 74981 \(Product Characteristics - gas\)")]
+		[StepDefinition(@"I call Shared Step 74981 \(Product Characteristics - gas\)")]
 		public void ICallSharedProductCharacteristics_Gas(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -3139,8 +3015,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57923 \(Volatile Organic Compound \(VOC\) Step - enter OTC and CARB - Yes for state values\)")]
+		[StepDefinition(@"I call Shared Step 57923 \(Volatile Organic Compound \(VOC\) Step - enter OTC and CARB - Yes for state values\)")]
 		public void ICallSharedProductCharacteristics_EnterVocAndCarbSelectStateValue(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -3204,13 +3079,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[Given(@"I call Shared Step 57500 \(The Product- Enter name, select product type - Continue - Happy Path\): (.*)")]
+		[StepDefinition(@"I call Shared Step 57500 \(The Product- Enter name, select product type - Continue - Happy Path\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option)
 		{
 			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option);
 		}
 
-		[Given(@"I call Shared Step 63460 \(Additional Product Information - SOLD = US, No\(PL\), No\(GNFR\) only shown \(mainly kits\) Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 63460 \(Additional Product Information - SOLD = US, No\(PL\), No\(GNFR\) only shown \(mainly kits\) Happy Path\)")]
 		public void GivenICallSharedStepAdditionalProductInformation_SOLDUSNoPLNoGNFROnlyShownMainlyKitsHappyPath()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -3224,7 +3099,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[Given(@"I call Shared Step 74339 \(Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH\)")]
+		[StepDefinition(@"I call Shared Step 74339 \(Product Characteristics - Select Liquid and enter only Secondary state, Specific gravity, pH\)")]
 		public void GivenICallSharedStepProductCharacteristics_SelectLiquidAndEnterOnlySecondaryStateSpecificGravityPH()
 		{
 			TestReport.UseSubSteps = true;
@@ -3237,7 +3112,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
 		}
 
-		[Given(@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
+		[StepDefinition(@"I call Shared Step 74340 \(Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue\)")]
 		public void GivenICallSharedStepAdditionalProductInformation_PesticideNotConsideredSOLDUSEverythingElseNo_Continue()
 		{
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
@@ -3287,8 +3162,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 		*/
 
-
-		[Given(@"I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue")]
+		[StepDefinition(@"I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue")]
 		public void GivenICallSharedStepIngredients_AddAnyChemical_DONotClickContinue(Table ingredientsTable)
 		{
 			TestReport.UseSubSteps = true;
@@ -3299,8 +3173,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.AddIngredients(ingredientsTable);
 		}
 
-		[StepDefinition(
-			@"I call Shared 57539 \(Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57539 \(Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path\)")]
 		public void ICallSharedProductCharacteristics_AerosolAndLiquidSelectAerosol_Continue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -3336,7 +3209,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(@"I call Shared 57932 \(Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57932 \(Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path\)")]
 		public void GivenICallSharedEnterRegulatoryInformation_YesToProp()
 		{
 			TestReport.UseSubSteps = true;
@@ -3378,8 +3251,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57980 \(Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57980 \(Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path\)")]
 		public void GivenICallSharedTransportationDetails1_YesOption_SelectIMDGLimitedQuantity()
 		{
 			TestReport.UseSubSteps = true;
@@ -3398,8 +3270,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Transportation Details 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57981 \(Transportation - IMDG UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue\)")]
+		[StepDefinition(@"I call Shared Step 57981 \(Transportation - IMDG UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue\)")]
 		public void
 			GivenICallSharedStepTransportation_IMDGUNStep_EnterUNSelectAerosolsNoneAddTechnicalNameClickContinue()
 		{
@@ -3424,8 +3295,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"International Marine (IMDG) Classification");
 		}
 
-		[StepDefinition(
-			@"I call Shared 57978 \(Product Characteristics - All select Gas - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57978 \(Product Characteristics - All select Gas - Continue - Happy Path\)")]
 		public void ICallSharedProductCharacteristics_AllSelectGas_Continue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -3459,7 +3329,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[Given(@"I call Shared Step 63226 \(Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path\)")]
+		[StepDefinition(@"I call Shared Step 63226 \(Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path\)")]
 		public void GivenICallSharedStepPesticideDate_YesRegistered_EnterEPANumberNotOnKelly_ClickContinue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -3471,8 +3341,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Pesticide Details - U.S.");
 		}
 
-
-
 		DateTime GetRandomDate(DateTime dtStart, DateTime dtEnd)
 		{
 			Random rand = new Random();
@@ -3480,9 +3348,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			return dtStart.AddDays(rand.NextDouble() * cdayRange);
 		}
 
-
 		//CLF - turns out to work the data has be after today!
-		[Given(@"I call Shared Step 55819 \(EPA expiration date - enter current year - NOT Dec 31st\) for state: (.*)")]
+		[StepDefinition(@"I call Shared Step 55819 \(EPA expiration date - enter current year - NOT Dec 31st\) for state: (.*)")]
 		public void GivenICallSharedStepEPAExpirationDate_EnterCurrentYear_NOTDecSt(string state)
 		{
 			TestReport.UseSubSteps = true;
@@ -3510,7 +3377,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		//CLF - From test plans - Confirm that an error shows "State IA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable."
 		// in fact it seems that the date has to be after October 1st.
-		[Given(@"I call Shared Step 55820 \(EPA expiration date - enter next year - NOT Dec 31st\) for state: (.*)")]
+		[StepDefinition(@"I call Shared Step 55820 \(EPA expiration date - enter next year - NOT Dec 31st\) for state: (.*)")]
 		public void GivenICallSharedStepEPAExpirationDate_EnterNextYear_NOTDecStForState(string state)
 		{
 			TestReport.UseSubSteps = true;
@@ -3539,7 +3406,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Pesticide Details - State Registration Details");
 		}
 
-		[Given(@"I call Shared Step 55821 \(EPA expiration date - enter Dec 31st of Next year\) for state: (.*)")]
+		[StepDefinition(@"I call Shared Step 55821 \(EPA expiration date - enter Dec 31st of Next year\) for state: (.*)")]
 		public void GivenICallSharedStep55821ExpirationDate31DecNextYear(string state)
 		{
 			TestReport.UseSubSteps = true;
@@ -3560,7 +3427,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Pesticide Details - State Registration Details");
 		}
 
-		[Given(@"I call Shared Step 55822 \(EPA expiration date - enter Dec 31st of Current year\) for state: (.*)")]
+		[StepDefinition(@"I call Shared Step 55822 \(EPA expiration date - enter Dec 31st of Current year\) for state: (.*)")]
 		public void GivenICallSharedStep55822ExpirationDate31DecthisYear(string state)
 		{
 			TestReport.UseSubSteps = true;
@@ -3581,7 +3448,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Pesticide Details - State Registration Details");
 		}
 
-		[Given(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP\)")]
+		[StepDefinition(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP\)")]
 		public void GivenICallSharedStep57501ProductCharacteristics_MoreThanOneState_SelectSolid_StateSubcat_MixedWater_Random_Continue_HP()
 		{
 			TestReport.UseSubSteps = true;
@@ -3618,39 +3485,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[Given(@"I call Shared Step 57528 \(Product Characteristics - Aerosol Only - add data - Continue - Happy Path\)")]
-		public void GivenICallSharedStep57528ProductCharacteristics_AerosolOnly_AddData_Continue_HappyPath()
-		{
-			TestReport.UseSubSteps = true;
-			NewProduct MyNewProduct = new NewProduct();
-			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
-			TestReport.StartStep("I should see the Product Characteristics Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
-			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
-			TestReport.StartStep("Primary Physical State should be showing the value: Aerosol");
-			MyNewProductSteps.CheckingFieldInputIsCorrect("Primary Physical State", "Aerosol");
-			NewProduct thisNewProduct = new NewProduct();
-			if (thisNewProduct.OptionExists("Secondary Physical State"))
-			{
-				TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
-				MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
-			}
-			else
-			{
-				Report.Info("Secondary physical state is not showing");
-			}
-			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
-
-			TestReport.StartStep(
-				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			MyNewProductSteps.SelectFirstOptionInSection(
-				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			TestReport.StartStep("In the Product Characteristics page I click Continue");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
-		}
-
-
-		[Given(@"I call Shared Step 57911 \(Regulatory Information 1 - CEPA only shown - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57911 \(Regulatory Information 1 - CEPA only shown - Continue - Happy Path\)")]
 		public void GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -3665,7 +3500,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
-		[Given(@"I call Shared Step 56494 \(Pesticide Details - Canada > Province Code confirmation/validation and selection\) for province: (.*) expected error: (.*)")]
+		[StepDefinition(@"I call Shared Step 56494 \(Pesticide Details - Canada > Province Code confirmation/validation and selection\) for province: (.*) expected error: (.*)")]
 		public void GivenICallSharedStep56494PesticideDetailsCanadaProvinceCodeconfirmationvalidationAndSelectionForProvince(string province, string error)
 		{
 			TestReport.UseSubSteps = true;
@@ -3675,7 +3510,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.ErrorMessagesShouldNotBeShowingForItem(province);
 		}
 
-		[Given(@"I call Shared Step 69388 \(Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 69388 \(Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path\)")]
 		public void GivenICallSharedStepRetailer_CanadaOnly_SelectNoRetailerNoUPCProductDoneContinue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -3688,7 +3523,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
 
-		[Given(@"I call Shared Step 69389 \(Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue\)")]
+		[StepDefinition(@"I call Shared Step 69389 \(Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue\)")]
 		public void GivenICallSharedStepRegulatoryDocumentsToProvide_CanadaOnly_ConfirmQuestions_RequestAuthorAddLabelAndTodaysDate_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -3703,7 +3538,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
-		[Given(@"I call shared step 53542 \(Login with Administrator Role Continue 2 \(2nd login shared step\)\)")]
+		[StepDefinition(@"I call Shared Step 53542 \(Login with Administrator Role Continue 2 \(2nd login Shared Step\)\)")]
 		public void GivenICallSharedStep53542LoginWithAdministratorRoleContinue2NdLoginSharedStep()
 		{
 			TestReport.UseSubSteps = true;
@@ -3713,7 +3548,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"I call shared step 59066 \(Go to SHA Manager\)")]
+		[StepDefinition(@"I call Shared Step 59066 \(Go to SHA Manager\)")]
 		public void GivenICallSharedStep59066GoToSHAManager()
 		{
 			Steps_SHA MyStepsSHA = new Steps_SHA();
@@ -3725,7 +3560,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Product list is showing");
 		}
 
-		[Given(@"I call shared step 59728 \(Go to Manage Global Messages\)")]
+		[StepDefinition(@"I call Shared Step 59728 \(Go to Manage Global Messages\)")]
 		public void GivenICallSharedStep59728GoToManageGlobalMessages()
 		{
 			Steps_SHA MyStepsSHA = new Steps_SHA();
@@ -3733,7 +3568,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsSHA.GivenInSHAManagerPageIClickSubMenuItem("Manage Global Messages");
 		}
 
-		[StepDefinition(@"I call shared step 63860 \(Additional Product Information - US, No\(child\), No\(OSHA\), No\(DSV\), Yes\(PLP\), No\(GNFR\)\)")]
+		[StepDefinition(@"I call Shared Step 63860 \(Additional Product Information - US, No\(child\), No\(OSHA\), No\(DSV\), Yes\(PLP\), No\(GNFR\)\)")]
 		public void SharedAdditionalProductInformation_US_No_Child_OSHA_DSV_Yes_PLP_No_GNFR()
 		{
 			TestReport.UseSubSteps = true;
@@ -3769,7 +3604,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"I call shared step 74201 \(Select Retailers - CVS\)")]
+		[StepDefinition(@"I call Shared Step 74201 \(Select Retailers - CVS\)")]
 		public void SelectRetailers_CVS()
 		{
 			TestReport.UseSubSteps = true;
@@ -3781,7 +3616,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
 		}
-		[Given(@"I call shared step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
+
+		[StepDefinition(@"I call Shared Step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
 		public void GivenICallSharedStep57801ConfirmVOCSummaryStepShownConfirmVOCAnalysisDateIsShown_HappyPath()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -3791,7 +3627,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table1);
 		}
 
-		[Given(@"I call shared step 57817 \(VOC Results - Confirm VOC Limits table shows correct values \(OTC & CARB\) - Happy Path\): (.*)")]
+		[StepDefinition(@"I call Shared Step 57817 \(VOC Results - Confirm VOC Limits table shows correct values \(OTC & CARB\) - Happy Path\): (.*)")]
 		public void GivenICallSharedStep57817VOCResults_ConfirmVOCLimitsTableShowsCorrectValuesOTCCARB_HappyPath(string use)
 		{
 			List<VocLimitsWithUnits> LimitsTable = new NewProduct().GetDisplayedVocLimitsWithUnits();
@@ -3817,7 +3653,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I call shared step 57819 \(VOC Results - Confirm VOC Limits table shows correct values \(CARB only\) - Happy Path\): (.*)")]
+		[StepDefinition(@"I call Shared Step 57819 \(VOC Results - Confirm VOC Limits table shows correct values \(CARB only\) - Happy Path\): (.*)")]
 		public void SharedStep57819_VOCResults_ConfirmVOCLimitsTableShowsCorrectValues_CarbOnly(string use)
 		{
 			TestReport.UseSubSteps = true;
@@ -3849,8 +3685,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
-		[StepDefinition(@"I call shared step 74202 \(CVS Pharmacy - Yes, I wish to Continue\)")]
+		[StepDefinition(@"I call Shared Step 74202 \(CVS Pharmacy - Yes, I wish to Continue\)")]
 		public void SharedCVSPharmacy_YesIWishToContinue()
 		{
 			TestReport.UseSubSteps = true;
@@ -3866,7 +3701,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selNewProductSteps.ClickContinue();
 		}
 
-		[StepDefinition(@"I call shared step 57205 \(Go to Retail Partners - Select CVS\)")]
+		[StepDefinition(@"I call Shared Step 57205 \(Go to Retail Partners - Select CVS\)")]
 		public void SharedGoToRetailPartners_SelectCVS()
 		{
 			TestReport.UseSubSteps = true;
@@ -3878,7 +3713,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			new StepsRetailPartners().SelectRetailer("CVS");
 		}
 
-		[StepDefinition(@"I call shared step 74269 \(Select Retailers - Rite Aid\)")]
+		[StepDefinition(@"I call Shared Step 74269 \(Select Retailers - Rite Aid\)")]
 		public void SharedSelectRetailers_RiteAid()
 		{
 			//TestReport.UseSubSteps = true;
@@ -3889,7 +3724,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//selStepsNewProduct.ClickContinue();
 			//if (new NewProduct().ErrorMessage() == "This is a required field.")
 			//{
-			//	Report.Failure("Required field error was showing on continue. Attempting to enter Private Label field (not specified by shared step)");
+			//	Report.Failure("Required field error was showing on continue. Attempting to enter Private Label field (not specified by Shared Step)");
 			//	TestReport.StartStep("I enter private label as 'This Private Label'");
 			//	selStepsNewProduct.ThenInTheRetailersTabIEnterPrivateLabelNameAs("This Private Label");
 			//	TestReport.StartStep("I click continue");
@@ -3905,7 +3740,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selStepsNewProduct.ClickContinue();
 		}
 
-		[StepDefinition(@"I call shared step 77711 \(Product Characteristics - Primary \(L/S\), 2nd - any, Enter Gravity, pH, Boiling Point, Flash Point, Flash Point Test - any, Water - any\)")]
+		[StepDefinition(@"I call Shared Step 77711 \(Product Characteristics - Primary \(L/S\), 2nd - any, Enter Gravity, pH, Boiling Point, Flash Point, Flash Point Test - any, Water - any\)")]
 		public void SharedProductCharacteristics_PrimaryLS_Any_EnterGravity_pH_BoilingPoint_FlashPointTestAny_WaterAny()
 		{
 			TestReport.UseSubSteps = true;
@@ -3932,7 +3767,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			stepsNewProduct.ContinueInTheProductRegistration();
 		}
 
-		[Given(@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\)")]
+		[StepDefinition(@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\)")]
 		public void GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue()
 		{
 			TestReport.UseSubSteps = true;
@@ -3943,7 +3778,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selStepsNewProduct.ClickContinue();
 			if (new NewProduct().ErrorMessage() == "This is a required field.")
 			{
-				Report.Failure("Required field error was showing on continue. Attempting to enter Private Label field (not specified by shared step)");
+				Report.Failure("Required field error was showing on continue. Attempting to enter Private Label field (not specified by Shared Step)");
 				TestReport.StartStep("I enter private label as 'This Private Label'");
 				selStepsNewProduct.ThenInTheRetailersTabIEnterPrivateLabelNameAs("This Private Label");
 				TestReport.StartStep("I click continue");
@@ -3951,7 +3786,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"I call Shared 65080 \(Login to Studio and Open SHA manager\)")]
+		[StepDefinition(@"I call Shared Step 65080 \(Login to Studio and Open SHA manager\)")]
 		public void GivenICallShared65080LoginToStudioAndOpenSHAManager()
 		{
 			TestReport.UseSubSteps = true;
@@ -3962,7 +3797,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"I call Shared 49841 \(SHA - Search for exact WPS ID in (.*) Status for saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 49841 \(SHA - Search for exact WPS ID in (.*) Status for saved as: (.*)\)")]
 		public void GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus(string status, string savedAs)
 		{
 
@@ -4010,7 +3845,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"I call Shared 55662 \(WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 55662 \(WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*)\)")]
 		public void GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(string savedAs)
 		{
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
@@ -4041,7 +3876,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(MatchingJob != null,
 				"No matching job has been found with username=SHAMANAGER, date=" + DateTime.Today.Date.ToString() +
 				", class=Wercs.Core.BLLPortal.ImportProcessRules", "Matching job has been found with username=SHAMANAGER, date=" + DateTime.Today.Date.ToString() +
-				                                                   ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+																   ", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			GivenICallSharedStep59066GoToSHAManager();
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -4051,7 +3886,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"I call Shared 68969 \(WPS Studio - Open PD\+, edit existing with specific product > Click Continue for product saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 68969 \(WPS Studio - Open PD\+, edit existing with specific product > Click Continue for product saved as: (.*)\)")]
 		public void GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(string savedAs)
 		{
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
@@ -4078,8 +3913,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button", "Clicked continue button");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 78801 \(Additional Documents to Provide - VOC and Product Label\)")]
+		[StepDefinition(@"I call Shared Step 78801 \(Additional Documents to Provide - VOC and Product Label\)")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
 		{
 			TestReport.UseSubSteps = true;
@@ -4092,7 +3926,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[Given(@"I call Shared 40657 \(SHA Manager - Submitted - Select product > process product data for product saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 40657 \(SHA Manager - Submitted - Select product > process product data for product saved as: (.*)\)")]
 		public void GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -4125,7 +3959,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"I call Shared 75347 \(WPS Studio - PD\+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS\) for product saved as: (.*)")]
+		[StepDefinition(@"I call Shared Step 75347 \(WPS Studio - PD\+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS\) for product saved as: (.*)")]
 		public void GivenICallSharedWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSAndSBCS(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -4259,8 +4093,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-
-		[StepDefinition(@"I call Shared 0000 \(Enter Regulatory Information - Not Prop 65\)")]
+		[StepDefinition(@"I call Shared Step 0000 \(Enter Regulatory Information - Not Prop 65\)")]
 		public void GivenICallSharedEnterRegulatoryInformation_No()
 		{
 			TestReport.UseSubSteps = true;
@@ -4275,7 +4108,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
-		[StepDefinition(@"I call Shared 79436 \(Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name\) and save ingredient as: (.*)")]
+		[StepDefinition(@"I call Shared Step 79436 \(Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name\) and save ingredient as: (.*)")]
 		public void CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -4293,7 +4126,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Context.AddToContext(savedAs, ingredient);
 		}
 
-		[StepDefinition(@"I call Shared 79431 \(Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name\) and save ingredients as: (.*)")]
+		[StepDefinition(@"I call Shared Step 79431 \(Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name\) and save ingredients as: (.*)")]
 		public void IngredientsAddFlavorComponentPubliclyDisclosedYesSelectPublicName(string savedAs, Table component)
 		{
 			var ingredient = new Ingredient {
@@ -4309,7 +4142,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Context.AddToContext(savedAs, ingredient);
 		}
 
-		[Given(@"I call Shared 55663 \(WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 55663 \(WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*)\)")]
 		public void GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -4328,7 +4161,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
 			var shaUser = TReVor.TestUsers.GetUserSavedAs("SHAUser");
-			Job matchingJob = ListOfJobs.FirstOrDefault(x => x.RecordID == id && x.Method == "PublishMultiple" && x.UserName== shaUser.Username);
+			Job matchingJob = ListOfJobs.FirstOrDefault(x => x.RecordID == id && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
 			if (matchingJob == null)
 			{
 				Report.Error("Did not find matching job");
@@ -4355,7 +4188,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"I call Shared 51664 \(SHA - Accepted Product - set Retailers to Completed for saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 51664 \(SHA - Accepted Product - set Retailers to Completed for saved as: (.*)\)")]
 		public void GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(string savedAs)
 		{
 			TestReport.UseSubSteps = true;

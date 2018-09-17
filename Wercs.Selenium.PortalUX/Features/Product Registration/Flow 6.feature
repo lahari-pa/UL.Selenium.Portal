@@ -36,7 +36,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -50,11 +50,11 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78731, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78731, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
 
@@ -64,7 +64,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
 
@@ -95,9 +95,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -111,11 +111,11 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57711, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57711, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
 
@@ -125,7 +125,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Antifungal - Aerosol
 

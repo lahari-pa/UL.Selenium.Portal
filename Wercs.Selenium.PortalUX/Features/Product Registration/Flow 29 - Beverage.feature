@@ -33,7 +33,7 @@ Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water
 
 Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 49818 (Beverage Regulatory Details)
 
@@ -49,7 +49,7 @@ Then The message with text: Additional documents are not subject to standard two
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Wine
 
@@ -68,15 +68,15 @@ Given I generate a random UPC number and save as: UPC60695
 
 Given I delete all products with UPC Number: saved as UPC60695
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Juice and Juice Drinks
 
 Then I save the product information as: TestCase60695
 
-Given I call shared step 69687 (Additional Product Information - US, No(PL))
+Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 49818 (Beverage Regulatory Details)
 
@@ -84,9 +84,9 @@ Then In the 'Select retailers' window I should not see the following retailers:
 | Retailer             |
 | Autozone             |
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60695, container type: Plastic Container and size: 3.5
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60695, container type: Plastic Container and size: 3.5
 
 Then I should see the Additional Documents to Provide Page
 
@@ -96,7 +96,7 @@ Then I should see the Optional Reports and Documents Available for Purchase Page
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60694. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Juice and Juice Drinks
 
@@ -120,7 +120,7 @@ Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water
 
 Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 49818 (Beverage Regulatory Details)
 

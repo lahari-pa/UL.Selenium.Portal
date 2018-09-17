@@ -40,7 +40,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Propylene Glycol | 19.8    | false               | false       |            |
 | Butane           | 25.06   | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -48,11 +48,11 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57367, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57367, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -62,7 +62,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Spill Clean Up Agent (Mitigation Agent)
 
@@ -93,7 +93,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -101,11 +101,11 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57403, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57403, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -115,7 +115,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Septic system maintainer
 
@@ -151,19 +151,19 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
-Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
 Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57439, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57439, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -173,7 +173,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Transpirant
 
@@ -208,7 +208,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -216,11 +216,11 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57646, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57646, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -230,7 +230,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant Growth regulator (Liquid or Solid)
 
@@ -261,7 +261,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -269,11 +269,11 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57648, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57648, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -283,7 +283,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Trap and/or Bait Station
 
@@ -313,17 +313,17 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
 Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given in the Additional Documents to Provide page I click Continue
 
@@ -333,7 +333,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cosmetics
 
@@ -367,9 +367,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -377,11 +377,11 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57708, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57708, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -391,7 +391,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 
@@ -422,9 +422,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -432,11 +432,11 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57731, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57731, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -446,7 +446,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 
@@ -479,7 +479,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -487,11 +487,11 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57910, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57910, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -501,7 +501,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Septic system maintainer
 

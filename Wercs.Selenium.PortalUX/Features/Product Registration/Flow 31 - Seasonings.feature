@@ -42,13 +42,13 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 
 #Given I Confirm the following error message is not visible " ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding."
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60737, container type: Aerosol Can and size: 20
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60737, container type: Aerosol Can and size: 20
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
@@ -58,7 +58,7 @@ Then in the Additional Documents to Provide page I click Continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Seasonings, Spices or Flavoring for Food - Salts
 
@@ -94,13 +94,13 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 
 #Given I Confirm the following error message is not visible " ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding."
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60738, container type: Aerosol Can and size: 20
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60738, container type: Aerosol Can and size: 20
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
@@ -110,7 +110,7 @@ Then in the Additional Documents to Provide page I click Continue
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Seasonings, Spices or Flavoring for Food - Salts
 

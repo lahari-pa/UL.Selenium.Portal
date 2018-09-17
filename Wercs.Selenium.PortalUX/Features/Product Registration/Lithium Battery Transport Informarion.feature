@@ -38,7 +38,7 @@ Given in the Product Characteristics tab of the New Product Page I add the follo
 
 Given I continue to the next screen in the product registration
 
-Given I call Shared 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 
@@ -136,7 +136,7 @@ Given in the Product Characteristics tab of the New Product Page I add the follo
 
 Given I continue to the next screen in the product registration
 
-Given I call Shared 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 
@@ -235,7 +235,7 @@ Given in the Product Characteristics tab of the New Product Page I add the follo
 
 Given I continue to the next screen in the product registration
 
-Given I call Shared 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 
@@ -335,7 +335,7 @@ Given in the Product Characteristics tab of the New Product Page I add the follo
 
 Given I continue to the next screen in the product registration
 
-Given I call Shared 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 

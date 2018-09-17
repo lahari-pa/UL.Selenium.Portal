@@ -32,28 +32,28 @@ Then I save the product information as: TestCase60725
 
 Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
 
-Given I call shared step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
+Given I call Shared Step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 #Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
 
-Given I call Shared 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60725, container type: Aerosol Can and size: 20
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60725, container type: Aerosol Can and size: 20
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
 
-Given I call Shared 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Optional Reports and Documents Available for Purchase Page
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baked Goods, Crackers
 
@@ -79,28 +79,28 @@ Then I save the product information as: TestCase60724
 
 Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
 
-Given I call shared step 69687 (Additional Product Information - US, No(PL))
+Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 #Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
 
-Given I call Shared 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Aerosol Can and size: 20
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60724, container type: Aerosol Can and size: 20
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
 
-Given I call Shared 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Optional Reports and Documents Available for Purchase Page
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condiments, Sauces
 
@@ -126,28 +126,28 @@ Then I save the product information as: TestCase60723
 
 Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
 
-Given I call shared step 69687 (Additional Product Information - US, No(PL))
+Given I call Shared Step 69687 (Additional Product Information - US, No(PL))
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 #Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
 
-Given I call Shared 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Aerosol Can and size: 20
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60723, container type: Aerosol Can and size: 20
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
 
-Given I call Shared 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Optional Reports and Documents Available for Purchase Page
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Jelly, Jam or Preserves
 
@@ -173,28 +173,28 @@ Then I save the product information as: TestCase60722
 
 Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
 
-Given I call shared step 74123 (Additional Product Information - Grocery - US - Random Country - No(PL))
+Given I call Shared Step 74123 (Additional Product Information - Grocery - US - Random Country - No(PL))
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 #Confirm that "Auto Zone" is not listed as a retailer on the Select Retailers pop up
 
-Given I call Shared 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
+Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Walgreens and enter the name: Private Label Aspirin
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60722, container type: Aerosol Can and size: 20
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60722, container type: Aerosol Can and size: 20
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Additional Documents to Provide Page
 And I should see the Additional Documents to Provide Page
 
-Given I call Shared 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60715 (Additional Documents to Provide - OSHA SDS - only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Optional Reports and Documents Available for Purchase Page
 And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut Butters
 
@@ -220,9 +220,9 @@ Then I save the product information as: TestCase73041
 
 Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
 
-Given I call shared step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
+Given I call Shared Step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Then In the 'Select retailers' window I should see the following retailers:
 | Retailer             |

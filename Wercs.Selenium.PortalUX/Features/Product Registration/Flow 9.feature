@@ -21,7 +21,7 @@ Given I generate a random UPC number and save as: UPC58072
 
 Given I delete all products with UPC Number: saved as UPC58072
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Baby/infant/Adult Care/Cleansing Wipes
 
@@ -41,17 +41,17 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Cetearyl alcohol | 40.4    | false               | false       |            |
 | Glycerin         | 20.1    | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58072, container type: Plastic Container and size: 10.0
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58072, container type: Plastic Container and size: 10.0
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given in the Additional Documents to Provide page I click Continue
 
@@ -61,7 +61,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 150                      | 25.0                    | 11.2      | White      | Floral | No data available | 10                    |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58072. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58072. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baby/infant/Adult Care/Cleansing Wipes
 
@@ -73,7 +73,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 
@@ -119,7 +119,7 @@ Given I generate a random UPC number and save as: UPC58078
 
 Given I delete all products with UPC Number: saved as UPC58078
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Energy or Nutritional Bars
 
@@ -129,21 +129,21 @@ Given I call Shared Step 37857 (Enter Physical Property - Solid) with the follow
 | Secondary Physical State | Water Solubility     |
 | Grainy                   | Soluble in hot water |
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Cocoa butter  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
 
 Given I set the OSHA-compliant Safety Data Sheet, English field to: Request to author
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Additional Documents to Provide page I click Continue
 
@@ -153,7 +153,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
 
@@ -183,21 +183,21 @@ Given I call Shared Step 37857 (Enter Physical Property - Solid) with the follow
 | Secondary Physical State | Water Solubility |
 | Flaked                   | Soluble in water |
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Cocoa butter  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Save Mart Supermarkets
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Save Mart Supermarkets
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58079, container type: Plastic bag and size: 8
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58079, container type: Plastic bag and size: 8
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -205,7 +205,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Powder/Mix
 
@@ -223,7 +223,7 @@ Given I generate a random UPC number and save as: UPC58073
 
 Given I delete all products with UPC Number: saved as UPC58073
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear - Gel Insert
 
@@ -233,7 +233,7 @@ Given I call Shared Step 37857 (Enter Physical Property - Solid) with the follow
 | Secondary Physical State | Water Solubility |
 | Solid Gel Consistency    | Emulsifies       |
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -242,15 +242,15 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | POLOXAMER 181 | 10      | false               | false       |            |
 | Aqua          | 40      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58073, container type: Plastic bag and size: 8
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58073, container type: Plastic bag and size: 8
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -258,7 +258,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 800                      | 99                      | 60        | Clear      | Odorless | No data available | 11.2                  |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58073. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58073. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear - Gel Insert
 
@@ -284,7 +284,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Vitam
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
@@ -340,22 +340,22 @@ Then I save the product information as: TestCase58091
 
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Polyisoprene  | 90      | false               | false       |            |
 | Ethanol       | 10      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58091, container type: Plastic Container and size: 37
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58091, container type: Plastic Container and size: 37
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -363,7 +363,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 400                      | 60                      | 2.2       | White      | Odorless | No data available | 1.5                   |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58091. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58091. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Latex gloves
 
@@ -386,7 +386,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplement for Infants - Liquid
 
-Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
+Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
 Given I call Shared Step 65511 (Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
 
@@ -401,11 +401,11 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 
 #Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58075, container type: Plastic Container and size: 100
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58075, container type: Plastic Container and size: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60533 (Additional Documents to Provide - Flash Point and Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
@@ -415,9 +415,9 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance    | Odor  | Odor Threshold    | Partition Coefficient |
 | Apron                         | 250                      | 11.11                   | 4.288     | Yellow-orange | Lemon | No data available | 3.354                 |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58075. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58075. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 @tfs_design
 Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
@@ -430,15 +430,15 @@ Given I generate a random UPC number and save as: UPC58089
 
 Given I delete all products with UPC Number: saved as UPC58089
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplements for Domesticated Animals
 
 Then I save the product information as: TestCase58089
 
-Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
+Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -450,13 +450,13 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 
 Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Petco
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Petco
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58089, container type: Plastic Container and size: 100
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58089, container type: Plastic Container and size: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -464,9 +464,9 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor  | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 510                      | 15                      | 30.5      | Yellow     | Lemon | No data available | 10.0                  |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58089. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58089. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 Scenario: [58097] Ingredient Search in Registration
 
@@ -474,7 +474,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Paint balls
 
@@ -484,7 +484,7 @@ Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 
 Given I call Shared Step 37857 (Enter Physical Property - Solid)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 #enter CAS 18618-43-4, confirm match is top of filter list
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
@@ -505,7 +505,7 @@ Given I generate a random UPC number and save as: UPC58094
 
 Given I delete all products with UPC Number: saved as UPC58094
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Suppository, Laxative, Stool-Softener
 
@@ -513,9 +513,9 @@ Then I save the product information as: TestCase58094
 
 # Missing from TFS test case
 
-#Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
+#Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -523,17 +523,17 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Magnesium hydroxide | 15      | false               | false       |            |
 | Aqua                | 70      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58094, container type: Plastic Container and size: 100
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58094, container type: Plastic Container and size: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -541,11 +541,11 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 340                      | 12                      | 20.5      | Clear      | Odorless | No data available | 5.0                   |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58094. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58094. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
-And I call Shared 54796 (Purchase Summary)
+And I call Shared Step 54796 (Purchase Summary)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58094
 
@@ -576,15 +576,15 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Citric acid   | 30      | false               | false       |            |
 | Vitamin E     | 10      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58081, container type: Plastic Container and size: 5.2621
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58081, container type: Plastic Container and size: 5.2621
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -592,6 +592,6 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58081. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58081. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
-Given I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

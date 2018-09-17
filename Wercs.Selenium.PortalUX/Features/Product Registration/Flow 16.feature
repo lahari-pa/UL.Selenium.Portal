@@ -22,7 +22,7 @@ Given I generate a random UPC number and save as: UPC59273
 
 Given I delete all products with UPC Number: saved as UPC59273
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 
@@ -30,7 +30,7 @@ Then I save the product information as: TestCase59273
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -38,13 +38,13 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Zinc chloride       | 9.5     | false               | false       |            |
 | Aqua                | 70      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59273 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given in the Additional Documents to Provide page I click Continue
 
@@ -54,7 +54,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59273. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59273. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alkaline battery
 
@@ -79,7 +79,7 @@ Then I save the product information as: TestCase59274
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -87,13 +87,13 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Cadmium acetate | 14.7    | false               | false       |            |
 | Aqua            | 70.1    | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59274 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given in the Additional Documents to Provide page I click Continue
 
@@ -103,7 +103,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59274. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59274. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Battery Containing Mercury
 
@@ -128,20 +128,20 @@ Then I save the product information as: TestCase59276
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Lead sulfate  | 50      | false               | false       |            |
 | Aqua          | 50      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59276 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given in the Additional Documents to Provide page I click Continue
 
@@ -151,7 +151,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59276. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59276. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid Battery - No Acid Included
 
@@ -176,22 +176,22 @@ Given I save the product information as: TestCase59277
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Magnesium     | 50      | false               | false       |            |
 | Sulfuric acid | 50      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59277 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -199,7 +199,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Mask                          | 555                      | 65.0                    | 2.9009    | Black      | Acidic | No data available | 1.104                 |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59277. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59277. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Magnesium Battery
 
@@ -224,7 +224,7 @@ Given I save the product information as: TestCase59278
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -232,15 +232,15 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Lanthanum     | 1       | false               | false       |            |
 | Aqua          | 90      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59278 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -248,7 +248,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Mask                          | 1000                     | 55.0                    | 10.77611  | Black      | Acidic | No data available | 9.1000223             |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59278. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59278. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel Metal Hydride (NiMH) Battery
 
@@ -266,7 +266,7 @@ Given I generate a random UPC number and save as: UPC59279
 
 Given I delete all products with UPC Number: saved as UPC59279
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel-Cadmium Battery
 
@@ -274,7 +274,7 @@ Given I save the product information as: TestCase59279
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -282,15 +282,15 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Cadmium sulfide | 12.75   | false               | false       |            |
 | Aqua            | 76.13   | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59279 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -298,7 +298,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 772                      | 0.223                   | 4.79701   | Black      | Acidic | No data available | 1.0009                |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59279. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59279. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel-cadmium battery
 
@@ -315,7 +315,7 @@ Given I generate a random UPC number and save as: UPC59280
 
 Given I delete all products with UPC Number: saved as UPC59280
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Silver Battery
 
@@ -323,7 +323,7 @@ Given I save the product information as: TestCase59280
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -331,15 +331,15 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Zinc          | 5.18    | false               | false       |            |
 | Aqua          | 75.3    | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59280 with container type: Metal Container size: 10.0 and quantity: 1
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -347,7 +347,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 555.1                    | 0.5                     | 5.701     | Black      | Acidic | No data available | 2.1008                |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59280. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59280. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Silver Battery
 
@@ -364,7 +364,7 @@ Given I generate a random UPC number and save as: UPC59281
 
 Given I delete all products with UPC Number: saved as UPC59281
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Water-Charged Cell
 
@@ -372,7 +372,7 @@ Given I save the product information as: TestCase59281
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -381,15 +381,15 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Magnesium       | 5.30    | false               | false       |            |
 | Aqua            | 56.67   | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59281 with container type: Metal Container size: 30.0 and quantity: 50
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -397,7 +397,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 555.1                    | 0.5                     | 5.701     | Black      | Acidic | No data available | 2.1008                |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59281. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59281. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Water-Charged Cell
 
@@ -415,7 +415,7 @@ Given I generate a random UPC number and save as: UPC59282
 
 Given I delete all products with UPC Number: saved as UPC59282
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Zinc Air
 
@@ -423,7 +423,7 @@ Given I save the product information as: TestCase59282
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -431,15 +431,15 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Carbon        | 15      | false               | false       |            |
 | Aqua          | 55      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59282 with container type: Metal Container size: 40.0 and quantity: 100
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -447,7 +447,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Goggles                       | 950                      | 0.7                     | 10.001    | Black      | Acidic | No data available | 9.189                 |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59282. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59282. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Zinc Air
 
@@ -464,7 +464,7 @@ Given I generate a random UPC number and save as: UPC59275
 
 Given I delete all products with UPC Number: saved as UPC59275
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Carbon Zinc Battery
 
@@ -472,7 +472,7 @@ Given I save the product information as: TestCase59275
 
 Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -480,15 +480,15 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Carbon        | 15      | false               | false       |            |
 | Aqua          | 55      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
 
 Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59275 with container type: Metal Container size: 20.0 and quantity: 10
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -496,7 +496,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Goggles                       | 950                      | 0.200                   | 2.999     | Black      | Acidic | No data available | 9.229                 |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59275. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 59275. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Carbon Zinc Battery
 

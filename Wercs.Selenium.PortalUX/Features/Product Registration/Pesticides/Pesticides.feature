@@ -19,7 +19,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -33,7 +33,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodiu
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 And I should see the Pesticide Details - U.S. Page
 
@@ -74,7 +74,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -88,7 +88,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodiu
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 And I should see the Pesticide Details - U.S. Page
 
@@ -136,7 +136,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -181,7 +181,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -195,7 +195,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodiu
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Then I should see the Pesticide Details - U.S. Page
 
@@ -243,7 +243,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -257,7 +257,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodiu
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Given I call Shared Step 57505 (Pesticide Data - U.S. - EPA reg #(No) - EPA Exempt # (Random) - Continue - Happy Path)
 
@@ -265,7 +265,7 @@ Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Contin
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Then I should see the Additional Documents to Provide Page
 
@@ -292,7 +292,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -306,7 +306,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodiu
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Then I should see the Pesticide Details - U.S. Page
 
@@ -404,7 +404,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Given I save the product information as: TestCase57527
 
-Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
 Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
 
@@ -476,7 +476,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Given I save the product information as: TestCase57546
 
-Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
 Given I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
 
@@ -571,7 +571,7 @@ Then Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identifi
 Then Field exists: Product's packaging includes a Poison Danger symbol
 Given I set the Product's packaging includes a Poison Danger symbol field to: No
 Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
-Then For every field in the table I call shared step 56494 expecting error: This is a required field.
+Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
 | Field                |
 | Alberta              |
 | British Columbia     |
@@ -608,7 +608,7 @@ Given I call Shared Step 57514 (Product Characteristics - Liquid Only available 
 Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 And I should see the Pesticide Details - U.S. Page
 And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 Given in the New Product page I click Continue
@@ -629,7 +629,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -643,7 +643,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodiu
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Then I should see the Pesticide Details - U.S. Page
 
@@ -686,7 +686,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -700,7 +700,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodiu
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Then I should see the Pesticide Details - U.S. Page
 
@@ -755,7 +755,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -769,7 +769,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodiu
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Then I should see the Pesticide Details - U.S. Page
 
@@ -805,7 +805,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 
@@ -819,7 +819,7 @@ Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodiu
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Then I should see the Pesticide Details - U.S. Page
 

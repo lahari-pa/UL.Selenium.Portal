@@ -23,7 +23,7 @@ Given I generate a random UPC number and save as: UPC60617
 
 Given I delete all products with UPC Number: saved as UPC60617
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
 
@@ -33,7 +33,7 @@ Given I call Shared Step 74760 (Product Characteristics - Select Liquid as prima
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -42,17 +42,17 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Propylene Glycol | 19.8    | false               | false       |            |
 | Butane           | 25.06   | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Then I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Nutritional and Supplement Labels
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
 Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
-Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
 Given I see the following sections
 | Section                                                                                          |
@@ -75,21 +75,21 @@ Then I should see the Volatile Organic Compound Summary Page
 
 And in the New Product page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60617, container type: Aerosol Can and size: 14
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60617, container type: Aerosol Can and size: 14
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) for section: Volatile Organic Compounds
+Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 
 And in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance               | Odor  | Odor Threshold    | Partition Coefficient |
 | Goggles                       | 66                       | 51.5                    | 10.92     | Clear to hazy, colorless | Berry | No data available | 2                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: test
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Non-aerosol
 
@@ -127,19 +127,19 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Propylene Glycol | 5       | false               | false       |            |
 | Water            | 15      | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 #Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
 #Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
 Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
-Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
 Given I call Shared 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 
@@ -147,21 +147,21 @@ Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC anal
 
 Given in the Volatile Organic Compound Summary page I click Continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Dick's Sporting Goods
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Dick's Sporting Goods
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60637, container type: Aerosol Can and size: 9.99
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60637, container type: Aerosol Can and size: 9.99
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) for section: Volatile Organic Compounds
+Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 
 And in the Optional Reports and Documents Available for Purchase page I click Continue
 
-Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor  | Odor Threshold    | Partition Coefficient |
 | Mask                          | 120                      | 70.5                    | 5         | Cloudy     | Fresh | No data available | 10                    |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Non-aerosol
 
@@ -186,7 +186,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60619
 
-Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
 Given I call Shared Step 60310 (Additional Product Information - Without Child question)
 
@@ -198,9 +198,9 @@ Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 
 #Then I should not see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
-Given I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -208,19 +208,19 @@ Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classifi
 
 #Given I call Shared Step 49621 (Volatile Organic Compounds (VOC) for OTC and CARB - No)
 
-Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
 Given I call Shared 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 
 Given I click continue
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60619, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60619, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) for section: Volatile Organic Compounds
+Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 
 And in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -228,7 +228,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Aerosol
 

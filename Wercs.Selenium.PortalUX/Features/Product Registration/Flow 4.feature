@@ -26,7 +26,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57922
 
-Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
 Given I call Shared Step 63804 (Additional Product Information - enter options)
 | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -36,7 +36,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -50,9 +50,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -60,7 +60,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Odor Remover/Eliminator - Aerosol
 
@@ -79,7 +79,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57924
 
-Given I call Shared 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
+Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
 
 Given I call Shared Step 63804 (Additional Product Information - enter options)
 | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -89,7 +89,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -103,9 +103,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -113,7 +113,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Penetrants
 
@@ -144,7 +144,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -158,9 +158,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -168,7 +168,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Floor Maintenance Product - Non-Aerosol
 
@@ -197,7 +197,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -211,9 +211,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -221,7 +221,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Floor Wax - Wood
 
@@ -240,7 +240,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57931
 
-Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
 Given I call Shared Step 63804 (Additional Product Information - enter options)
 | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -250,7 +250,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -264,9 +264,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -274,7 +274,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Hair Styling Product - Mousse
 
@@ -293,7 +293,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57933
 
-Given I call Shared 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
+Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
 
 Given I call Shared Step 63804 (Additional Product Information - enter options)
 | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -303,7 +303,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -317,9 +317,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -327,7 +327,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Hair Styling Product - Aerosol and Pump Spray
 
@@ -358,7 +358,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -372,9 +372,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -382,7 +382,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Conditioner - Leave In
 
@@ -412,7 +412,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -426,9 +426,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -436,7 +436,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Hair Styling Gel
 
@@ -456,19 +456,19 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57958
 
-Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
 #Given I call Shared Step 63804 (Additional Product Information - enter options)
 #| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 #| No                                                             | No                           | No                     | No                  |
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
+Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -482,9 +482,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -492,7 +492,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Adhesive - Aerosol Web Spray
 
@@ -511,7 +511,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57977
 
-Given I call Shared 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
+Given I call Shared Step 57539 (Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path)
 
 Given I call Shared Step 63804 (Additional Product Information - enter options)
 | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -521,7 +521,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
+Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -535,9 +535,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -545,7 +545,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding
 
@@ -565,7 +565,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57982
 
-Given I call Shared 57978 (Product Characteristics - All select Gas - Continue - Happy Path)
+Given I call Shared Step 57978 (Product Characteristics - All select Gas - Continue - Happy Path)
 
 Given I call Shared Step 63804 (Additional Product Information - enter options)
 | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -575,7 +575,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
+Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
 
@@ -589,9 +589,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -599,7 +599,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bonding agent
 
@@ -630,7 +630,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
+Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -644,9 +644,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -654,7 +654,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lubricant, Multi-Purpose, Not for Personal Use
 
@@ -673,7 +673,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57985
 
-Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
 Given I call Shared Step 63804 (Additional Product Information - enter options)
 | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -683,7 +683,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
+Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -697,9 +697,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -707,7 +707,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - Aerosol
 
@@ -726,7 +726,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57986
 
-Given I call Shared 57978 (Product Characteristics - All select Gas - Continue - Happy Path)
+Given I call Shared Step 57978 (Product Characteristics - All select Gas - Continue - Happy Path)
 
 Given I call Shared Step 63804 (Additional Product Information - enter options)
 | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
@@ -736,7 +736,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
+Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
 
@@ -750,9 +750,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -760,7 +760,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - All other forms
 
@@ -791,7 +791,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane  | 100     | false               | false       |            |
 
-Given I call Shared 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
+Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
 Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 
@@ -803,9 +803,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -813,7 +813,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Non-Aerosol
 
@@ -842,7 +842,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -856,9 +856,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -866,7 +866,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - Solid
 
@@ -895,7 +895,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 
@@ -909,9 +909,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -919,7 +919,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Glue sticks for glue guns
 

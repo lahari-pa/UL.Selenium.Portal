@@ -133,7 +133,7 @@ testRunner.Then("I save the product information as: TestCase60671", ((string)(nu
 testRunner.Given("I call Shared Step 60935 Additional Product Information - US - Direct Ship - Priv" +
                     "ate Label Only", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
-testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
@@ -146,18 +146,19 @@ testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 6
                         "6",
                         "6"});
 #line 42
-testRunner.Given("I call Shared 48367 (Product Includes Battery > any type)", ((string)(null)), table1, "Given ");
+testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table1, "Given ");
 #line 46
-testRunner.Given("I call Shared 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No" +
-                    " to all - Click Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - sele" +
+                    "ct No to all - Click Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 48
-testRunner.Given("I call Shared 58189 Answer Electronic Equipment questions - With Cathode Ray - No" +
-                    " to all", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 58189 Answer Electronic Equipment questions - With Cathode Ray" +
+                    " - No to all", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 50
 testRunner.Given("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 52
-testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment T" +
+                    "ext", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 54
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Compu" +
                     "ter (Combination of Monitor + Desktop)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

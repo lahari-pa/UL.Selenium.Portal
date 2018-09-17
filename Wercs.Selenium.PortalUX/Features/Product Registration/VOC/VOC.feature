@@ -18,7 +18,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Softener - Single Use Dryer Product Only
 
@@ -26,7 +26,7 @@ Then I save the product information as: TestCase56475
 
 Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
 
@@ -66,13 +66,13 @@ Given in the New Product page I click Continue
 
 # Confirm the VOC Summary page is NOT shown (because there are no results for show for this RU)
 
-# If the Ecologo step is shown run the shared step below - if not continue at step 35
+# If the Ecologo step is shown run the Shared Step below - if not continue at step 35
 
 # Shared 57712
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Then I should see the Additional Documents to Provide Page
 
@@ -88,7 +88,7 @@ Then I should see an error message: Document is required: Product Label
 
 Then Toxicity Characteristic Leaching Procedure (TCLP) should not be showing any error messages
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Then I should see the Optional Reports and Documents Available for Purchase Page
 
@@ -96,11 +96,11 @@ Given in the New Product page I click Continue
 
 Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
 
-Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Goggles                       | 500                      | 45                      | 15.0      | Black      | Odorless | No data available | 5                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: test data
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Softener - Single Use Dryer Product Only
 
@@ -120,17 +120,17 @@ Then I save the product information as: TestCase56476
 
 Given I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Acetone
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
 Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
-Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
 Then I see the following sections
 | Section                                                                                                             |
@@ -152,7 +152,7 @@ Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC anal
 
 Then I confirm that I see the following VOC-OTC-CARB statement4: Based on your selection, you have verified your product contains VOC with intended uses as follows. The CARB VOC compliance limit(s) for the intended use you identified is/are:
 
-Given I call shared step 57819 (VOC Results - Confirm VOC Limits table shows correct values (CARB only) - Happy Path): Personal Fragrance Product (more than 20% fragrance)
+Given I call Shared Step 57819 (VOC Results - Confirm VOC Limits table shows correct values (CARB only) - Happy Path): Personal Fragrance Product (more than 20% fragrance)
 
 And I confirm that I see the following VOC content as weight percentage for each state statement: VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.
 
@@ -166,7 +166,7 @@ Given in the New Product page I click Continue
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Then I should see the Additional Documents to Provide Page
 
@@ -178,7 +178,7 @@ Given in the New Product page I click Continue
 
 Then I should see an error message: Document is required: Product Label
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Then I should see the Optional Reports and Documents Available for Purchase Page
 
@@ -186,11 +186,11 @@ Given in the New Product page I click Continue
 
 Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
 
-Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Goggles                       | 200                      | 25                      | 12.2      | Black      | Odorless | No data available | 5                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance)
 
@@ -339,7 +339,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
 
@@ -347,17 +347,17 @@ Then I save the product information as: TestCase56481
 
 Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
 
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
-Given I call Shared 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 
 Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 
-Given I call Shared 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
 Then I see the following sections
 | Section                                                                                                                      |
@@ -412,11 +412,11 @@ And I confirm the Exceeds/Does not exceed statement is shown and is correct base
 
 Given in the New Product page I click Continue
 
-# If your supplier account is on Premium subscription you will see the Ecologo step - perform the shared step below if you do, if not skip to step 43
+# If your supplier account is on Premium subscription you will see the Ecologo step - perform the Shared Step below if you do, if not skip to step 43
 
 Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Then I should see the Additional Documents to Provide Page
 
@@ -428,7 +428,7 @@ Given in the New Product page I click Continue
 
 Then I should see an error message: Document is required: Product Label
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 Then I should see the Optional Reports and Documents Available for Purchase Page
 
@@ -436,11 +436,11 @@ Given in the New Product page I click Continue
 
 Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
 
-Given I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                      | 100                      | 250                      | 1200      | Black      | Odorless | No data available | 50                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Then The Data Acceptance page should appear
 
@@ -725,7 +725,7 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
 
@@ -737,7 +737,7 @@ Given I call Shared Step 57865 (Additional Product Information - Pesticide shown
 
 Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 

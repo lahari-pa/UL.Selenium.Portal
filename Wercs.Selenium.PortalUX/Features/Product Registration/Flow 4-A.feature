@@ -28,9 +28,9 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Air Freshener-Dual Purpose/Disinfectant-Aerosol
 
-Given I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
+Given I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue - Happy Path)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I click continue
 

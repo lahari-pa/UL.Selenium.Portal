@@ -483,9 +483,9 @@ And I should see the following filters in the following order under My products:
 @tfs_design
 Scenario: [59732] Announcements - Add
 Given I navigate to Studio
-Given I call shared step 53542 (Login with Administrator Role Continue 2 (2nd login shared step))
-Given I call shared step 59066 (Go to SHA Manager)
-Given I call shared step 59728 (Go to Manage Global Messages)
+Given I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Shared Step))
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 59728 (Go to Manage Global Messages)
 Given In the the Manage Global Messages dialog I add and save the following messages:
 | Title    | Message   | Type          | Active | Level   |
 | My title | generated | GlobalMessage | true   | Warning |

@@ -44,7 +44,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Propylene Glycol | 19.8    | false               | false       |            |
 | Butane           | 25.06   | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -52,11 +52,11 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58736, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58736, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -66,7 +66,7 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58736. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58736. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58736
 
@@ -87,7 +87,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase58738
 
-#Given I call Shared 57441 (Product Characteristics - Primary Physical Property - Liquid)
+#Given I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
 Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
@@ -102,7 +102,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Propylene Glycol | 19.8    | false               | false       |            |
 | Butane           | 25.06   | false               | false       |            |
 
-Given I call Shared 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 
@@ -112,11 +112,11 @@ Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select D
 
 Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 
-Given I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
-Then I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58738, container type: Aerosol Can and size: 33
+Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58738, container type: Aerosol Can and size: 33
 
-Given I call Shared 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 
 Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 
@@ -126,6 +126,6 @@ Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58738. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58738. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58738

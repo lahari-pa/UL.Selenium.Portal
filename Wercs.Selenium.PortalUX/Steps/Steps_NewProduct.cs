@@ -2645,7 +2645,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				string.Format("The message: '{0}' was visble on the '{1}' page as expected.", message, page));
 		}
 
-		// Custom 'shared step' so we can use the data omEPARegistration class in one go
+		// Custom 'Shared Step' so we can use the data omEPARegistration class in one go
 		[StepDefinition("I confirm data for EPA Registration: (.*) is complete")]
 		public void ConfirmDataForEPARegistrationIsComplete(string epaNumber)
 		{
@@ -3110,7 +3110,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"For every field in the table I call shared step 56494 expecting error: (.*)")]
+		[Then(@"For every field in the table I call Shared Step 56494 expecting error: (.*)")]
 		public void ThenForEveryFieldInTheTableICallSharedStep56494ExpecingError(string error, Table table)
 		{
 			Steps_Shared thisStepShared = new Steps_Shared();

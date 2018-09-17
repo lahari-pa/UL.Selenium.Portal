@@ -271,7 +271,7 @@ testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Rando
 testRunner.Given("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 78
-testRunner.Given("I call Shared 57881 (Regulatory Documents to Provide - US only - request authorin" +
+testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authorin" +
                     "g - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 79
 testRunner.Given("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -298,14 +298,14 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "No data available",
                         "10"});
 #line 81
-testRunner.Given("I call Shared 57884 (Safety Data Sheet Authoring - Additional Data (Optional) ste" +
+testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) ste" +
                     "p - add any random data for all fields - Happy path) and enter the following:", ((string)(null)), table2, "Given ");
 #line 84
-testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Com" +
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Com" +
                     "ments Text 57863. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
                     "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 85
-testRunner.Given("I call Shared 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 88
 testRunner.Then("In the Subscription Enrollment screen I confirm heading as Subscription  Enrollme" +
                     "nt", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

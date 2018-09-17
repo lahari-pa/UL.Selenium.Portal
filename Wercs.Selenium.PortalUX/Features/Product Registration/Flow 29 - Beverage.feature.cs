@@ -135,7 +135,7 @@ testRunner.Given("I call Shared Step 62686 (Enter Physical Property - Liquid - W
 testRunner.Given("I call Shared Step 59922 (Additional Product Information - Private Label or Brand" +
                     " only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
-testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 38
 testRunner.Given("I call Shared Step 49818 (Beverage Regulatory Details)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 40
@@ -157,9 +157,9 @@ testRunner.Then("The message with text: Additional documents are not subject to 
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 52
-testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Com" +
-                    "ments Text 60694. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
-                    "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+                    "d Comments Text 60694. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
+                    " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 54
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Wine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 56
@@ -199,17 +199,17 @@ testRunner.Given("I generate a random UPC number and save as: UPC60695", ((strin
 #line 69
 testRunner.Given("I delete all products with UPC Number: saved as UPC60695", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 71
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
-                    " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 73
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Juice and Juice Drinks", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 75
 testRunner.Then("I save the product information as: TestCase60695", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 77
-testRunner.Given("I call shared step 69687 (Additional Product Information - US, No(PL))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 69687 (Additional Product Information - US, No(PL))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 79
-testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 81
 testRunner.Given("I call Shared Step 49818 (Beverage Regulatory Details)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -220,12 +220,12 @@ testRunner.Given("I call Shared Step 49818 (Beverage Regulatory Details)", ((str
 #line 83
 testRunner.Then("In the \'Select retailers\' window I should not see the following retailers:", ((string)(null)), table1, "Then ");
 #line 87
-testRunner.Given("I call Shared 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
-                    "Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 89
-testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
-                    "ze Only) for UPC: saved as UPC60695, container type: Plastic Container and size:" +
-                    " 3.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC60695, container type: Plastic Container and " +
+                    "size: 3.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 91
 testRunner.Then("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 93
@@ -236,9 +236,9 @@ testRunner.Then("I should see the Optional Reports and Documents Available for P
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 99
-testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: User added Com" +
-                    "ments Text 60694. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
-                    "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+                    "d Comments Text 60694. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
+                    " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 101
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Juice" +
                     " and Juice Drinks", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -289,7 +289,7 @@ testRunner.Given("I call Shared Step 62686 (Enter Physical Property - Liquid - W
 testRunner.Given("I call Shared Step 59922 (Additional Product Information - Private Label or Brand" +
                     " only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 123
-testRunner.Given("I call Shared 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 125
 testRunner.Given("I call Shared Step 49818 (Beverage Regulatory Details)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 127

@@ -1554,12 +1554,12 @@ this.ScenarioSetup(scenarioInfo);
 #line 485
 testRunner.Given("I navigate to Studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 486
-testRunner.Given("I call shared step 53542 (Login with Administrator Role Continue 2 (2nd login sha" +
-                    "red step))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Sha" +
+                    "red Step))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 487
-testRunner.Given("I call shared step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 488
-testRunner.Given("I call shared step 59728 (Go to Manage Global Messages)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59728 (Go to Manage Global Messages)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",

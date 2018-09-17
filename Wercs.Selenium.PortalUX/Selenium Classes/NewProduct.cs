@@ -4438,7 +4438,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return box.TryClick();
 		}
 
-		// If a shared step does not specify a compulsory field input, fetch that section name so we can select an option and continue test after reporting the fail
+		// If a Shared Step does not specify a compulsory field input, fetch that section name so we can select an option and continue test after reporting the fail
 		public string SectionWithRequiredFieldError()
 		{
 			try

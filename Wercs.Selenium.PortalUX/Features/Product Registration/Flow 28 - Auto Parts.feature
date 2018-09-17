@@ -31,19 +31,19 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60673
 
-Given I call shared step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
+Given I call Shared Step 60726 (Additional Product Information - Country and Private Label or Brand - Yes)
 
-Given I call Shared 56808 Regulatory Information - Prop 65 - No - Continue
+Given I call Shared Step 56808 Regulatory Information - Prop 65 - No - Continue
 
-Given I call Shared 60685 Fuel Container Regulatory Details - Yes
+Given I call Shared Step 60685 Fuel Container Regulatory Details - Yes
 
-Given I call Shared 69682 (Retailer Association - Add Private Label Information) and select the retailer: Harbor Freight Tools and enter the name: Private Label Gasoline
+Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Harbor Freight Tools and enter the name: Private Label Gasoline
 
-Given I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60673, container type: Aerosol Can and size: 20
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60673, container type: Aerosol Can and size: 20
 
-Given I call Shared 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
-Given I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Gasoline Container, Portable
 

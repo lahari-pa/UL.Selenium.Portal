@@ -134,24 +134,26 @@ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and
 #line 32
 testRunner.Then("I save the product information as: TestCase60673", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 34
-testRunner.Given("I call shared step 60726 (Additional Product Information - Country and Private La" +
+testRunner.Given("I call Shared Step 60726 (Additional Product Information - Country and Private La" +
                     "bel or Brand - Yes)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
-testRunner.Given("I call Shared 56808 Regulatory Information - Prop 65 - No - Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 56808 Regulatory Information - Prop 65 - No - Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 38
-testRunner.Given("I call Shared 60685 Fuel Container Regulatory Details - Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60685 Fuel Container Regulatory Details - Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 40
-testRunner.Given("I call Shared 69682 (Retailer Association - Add Private Label Information) and se" +
-                    "lect the retailer: Harbor Freight Tools and enter the name: Private Label Gasoli" +
-                    "ne", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 69682 (Retailer Association - Add Private Label Information) a" +
+                    "nd select the retailer: Harbor Freight Tools and enter the name: Private Label G" +
+                    "asoline", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 42
-testRunner.Given("I call Shared 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
-                    "ze Only) for UPC: saved as UPC60673, container type: Aerosol Can and size: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC60673, container type: Aerosol Can and size: " +
+                    "20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 44
-testRunner.Given("I call Shared 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\testd" +
-                    "oc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\" +
+                    "testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 46
-testRunner.Given("I call Shared 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment T" +
+                    "ext", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 48
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Gasol" +
                     "ine Container, Portable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

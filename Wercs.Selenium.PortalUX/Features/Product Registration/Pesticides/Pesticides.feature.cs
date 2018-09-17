@@ -119,7 +119,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 20
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 22
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 24
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -139,7 +139,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 38
 testRunner.And("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -206,7 +206,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 75
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 77
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 79
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -226,7 +226,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 91
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 93
 testRunner.And("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -304,7 +304,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 137
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 139
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 141
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -387,7 +387,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 182
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 184
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 186
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -407,7 +407,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 198
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 200
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -484,7 +484,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 244
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 246
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 248
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -504,7 +504,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 260
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 262
 testRunner.Given("I call Shared Step 57505 (Pesticide Data - U.S. - EPA reg #(No) - EPA Exempt # (R" +
@@ -516,7 +516,7 @@ testRunner.Given("I call Shared Step 57507 (Transportation Details 1- Not Regula
 testRunner.Given("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 268
-testRunner.Given("I call Shared 57881 (Regulatory Documents to Provide - US only - request authorin" +
+testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authorin" +
                     "g - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 270
 testRunner.Then("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -573,7 +573,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 293
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 295
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 297
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -593,7 +593,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 309
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 311
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -831,7 +831,7 @@ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and
 #line 405
 testRunner.Given("I save the product information as: TestCase57527", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 407
-testRunner.Given("I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue" +
+testRunner.Given("I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue" +
                     " - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 409
 testRunner.Given("I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide " +
@@ -1009,7 +1009,7 @@ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and
 #line 477
 testRunner.Given("I save the product information as: TestCase57546", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 479
-testRunner.Given("I call Shared 57528 (Product Characteristics - Aerosol Only - add data - Continue" +
+testRunner.Given("I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Continue" +
                     " - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 481
 testRunner.Given("I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide " +
@@ -1276,7 +1276,7 @@ testRunner.Then("Product\'s packaging includes a Poison Danger symbol should not
             table5.AddRow(new string[] {
                         "Yukon Territory"});
 #line 574
-testRunner.Then("For every field in the table I call shared step 56494 expecting error: This is a " +
+testRunner.Then("For every field in the table I call Shared Step 56494 expecting error: This is a " +
                     "required field.", ((string)(null)), table5, "Then ");
 #line 589
 testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -1351,7 +1351,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 611
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 612
 testRunner.And("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1414,7 +1414,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 630
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 632
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 634
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -1434,7 +1434,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 646
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 648
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -1516,7 +1516,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 687
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 689
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 691
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -1536,7 +1536,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 703
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 705
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -1628,7 +1628,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 756
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 758
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 760
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -1648,7 +1648,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 772
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 774
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -1714,7 +1714,7 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 806
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 808
-testRunner.Given("I call Shared 57753 (Create a New Registration via Register New Product (expanded" +
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (expanded" +
                     " menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 810
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
@@ -1734,7 +1734,7 @@ testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 822
-testRunner.Given("I call Shared 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
+testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the abo" +
                     "ve - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 824
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

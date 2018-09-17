@@ -355,7 +355,7 @@ Then I save the product information as: TestCase74142
 
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -399,7 +399,7 @@ Given I select the first option in section: When the product has a flammable pro
 
 Given I click continue
 
-Given I call Shared 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
 Given I click continue
 
@@ -447,7 +447,7 @@ And In the Ingredients page I confirm the Publicly Disclosed Transparency Score 
 
 And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 
-Given I call Shared 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: shared79436
+Given I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: shared79436
 
 Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
 
@@ -467,7 +467,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I call Shared 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 
@@ -485,7 +485,7 @@ And In the Ingredients page I confirm the Publicly Disclosed Transparency Score 
 
 And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 
-Given I call Shared 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: shared79431
+Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: shared79431
 | CASNumber | ComponentName |
 | FLAVOR    | FLAVOR        |
 
