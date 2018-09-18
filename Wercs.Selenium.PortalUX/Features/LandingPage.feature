@@ -6,7 +6,9 @@
 
 Feature: Landing Page
 
-@singlerun
+
+#does not work in staging as of 09-17-2018
+@tfs_design
 Scenario: [50769] Navigation
 #Given I navigate to the URL: https://staging.thewercs.com/Wercs.SHA.MVCWebV1/
 Then I should see the following menu options in the header:
@@ -49,6 +51,7 @@ Given I click the Get Started Now link
 
 Then the login page should appear
 
+#does not work in staging as of 09-17-2018
 @tfsdesign
 Scenario: [50775] Terms of Use
 

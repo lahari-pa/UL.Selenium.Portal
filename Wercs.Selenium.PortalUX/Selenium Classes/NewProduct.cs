@@ -1369,7 +1369,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 				containsType.Select(info.ContainerType);
 
-				var sizeField = container.FindElement(By.XPath(".//input[@placeholder='Size (Ounces)']"), 2);
+				var sizeField = container.FindElement(By.XPath(".//input[@placeholder='Size (Ounces)' or @placeholder='Size']"), 2);
 				sizeField.EnterText(info.Size);
 
 				if (info.Dpci.Length > 0)
