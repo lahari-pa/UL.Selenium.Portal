@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Castle.Core.Internal;
 using NPOI.SS.Formula.Functions;
+using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -4235,6 +4236,60 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[StepDefinition(@"I call Shared Step 23195 \(Login into WERCSmart Portal - Administrator Role\)")]
+		public void Shared23195_LoginToWercSmartPortal_AdministratorRole()
+		{
+			var selGlobalSteps = new GlobalSteps();
+			selGlobalSteps.LoginToAccount("ProductAccount");
+			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+		}
 
+		[StepDefinition(@"I call Shared Step 67823 \(Login to WERCSmart - Products Automation Account\)")]
+		public void Shared67823_LoginToWercSmart_ProductsAutomationAccount()
+		{
+			var selGlobalSteps = new GlobalSteps();
+			selGlobalSteps.LoginToAccount("ProductAccount");
+			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+		}
+
+		[StepDefinition(@"I call Shared Step 67284 \(Login into WERCSmart Portal - Visual Automation Account\)")]
+		public void Shared67284_LoginToWercSmartPortal_VisualAutomationAccount()
+		{
+			var selGlobalSteps = new GlobalSteps();
+			selGlobalSteps.LoginToAccount("VisualAccount");
+			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+		}
+
+		[StepDefinition(@"I call Shared Step 74834 \(Login to WERCSmart - with subscription without products account\)")]
+		public void Shared74834_LoginToWercSmart_WithSubscriptionWithoutProductsAccount()
+		{
+			var selGlobalSteps = new GlobalSteps();
+			selGlobalSteps.LoginToAccount("SubCart");
+			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+		}
+
+		[StepDefinition(@"I call Shared Step 74916 \(Login to WERCSmart - without products in cart  and without  subscription account\)")]
+		public void Shared74916_LoginToWercSmart_WithoutProductsInCartAndWithoutSubscriptionAccount()
+		{
+			var selGlobalSteps = new GlobalSteps();
+			selGlobalSteps.LoginToAccount("ProductsInCart");
+			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+		}
+
+		[StepDefinition(@"I call Shared Step 67038 \(Login into WERCSmart Portal - ULSC Role\)")]
+		public void Shared67038_LoginToWercSmartPortal_UlscRole()
+		{
+			var selGlobalSteps = new GlobalSteps();
+			selGlobalSteps.LoginToAccount("ULSCAccount");
+			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+		}
+
+		[StepDefinition(@"I call Shared Step 68210 \(Login to WERCSmart - Premium Account\)")]
+		public void Shared68210_LoginToWercSmart_PremiumAccount()
+		{
+			var selGlobalSteps = new GlobalSteps();
+			selGlobalSteps.LoginToAccount("PremiumSubscriptionAccount");
+			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+		}
 	}
 }

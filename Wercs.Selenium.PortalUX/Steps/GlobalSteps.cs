@@ -105,7 +105,7 @@ namespace WERCSmart
 		public void LoginToAccount(string accountSavedAs)
 		{
 			var user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs);
-			if(Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
+			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
 			{
 				GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 			}
@@ -148,7 +148,7 @@ namespace WERCSmart
 				if (modalDialog.Wait_for_load(1))
 				{
 					modalDialog.Click_Closex();
-					Delay.Seconds(Delay.SpeedFactor*1);
+					Delay.Seconds(Delay.SpeedFactor * 1);
 
 					selHomepage = new Homepage();
 					if (selHomepage.Wait_for_load(10))
@@ -752,6 +752,16 @@ namespace WERCSmart
 			{
 				Report.Info("Dismissing the pop up alert");
 				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Dismiss();
+			}
+		}
+
+		[StepDefinition(@"I delete Products with the UPC number if one has been created for this test")]
+		public void DeleteProductWithUPCNumberIfOneHasBeenGenerated()
+		{
+			var testCaseId = GlobalParameters.TestCaseId;
+			if (testCaseId != null && Context.GetFromContext($"UPC{testCaseId}") != null)
+			{
+				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", Context.GetFromContext($"UPC{testCaseId}").ToString());
 			}
 		}
 	}

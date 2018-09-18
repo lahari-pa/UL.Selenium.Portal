@@ -208,7 +208,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58187
 
-#check RU number and name 
+#check RU number and name
 Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -893,13 +893,9 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
-Then The home screen should load
-
 Given I generate a random UPC number and save as: UPC57709
 
-Given I delete all products with UPC Number: saved as UPC57709
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
@@ -910,7 +906,6 @@ Then I save the product information as: TestCase57709
 Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
-
 
 Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
