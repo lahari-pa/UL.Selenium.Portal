@@ -99,5 +99,52 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Failure($"The section with header {sectionHeader} was not found on the UL Soltuion Center page! The displayed sections were: " + string.Join(", ", sections.Select(x => $"'{x.Header}'")));
 			Report.Screenshot();
 		}
+
+		[StepDefinition(@"I switch to the (.*) information tab")]
+		public void SwitchToTheTab(string sectionTab)
+		{
+			string[] urls = { "" };
+			switch (sectionTab)
+			{
+				case "ECOLOGO":
+					urls = new[] { "https://industries.ul.com/environment/certificationvalidation-marks/ecologo-product-certification" };
+					break;
+				case "Prospector":
+					urls = new[] { "https://www.ulprospector.com/en/eu", "https://www.ulprospector.com/en/na" };
+					break;
+				case "ULGHS":
+					urls = new[] { "https://www.ulghs.com/" };
+					break;
+				case "UL Secure Connect (ULSC)":
+					urls = new[] { "https://psi.ul.com/en/products/wercs-studio/" };
+					break;
+				case "GoodGuide for Suppliers":
+					urls = new[] { "https://choosegoodguide.com/" };
+					break;
+				case "GoodGuide for Consumers":
+					urls = new[] { "https://www.goodguide.com/" };
+					break;
+			}
+			Report.Info("Switch to Tab: " + string.Join(", ", urls));
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				SeleniumBrowser.WebBrowser.WaitForPageLoad();
+				foreach (var url in urls)
+				{
+					if (SeleniumBrowser.WebBrowser.Url.Contains(url))
+					{
+						Report.Success("Successfully Switch to Tab: " + url + "!");
+						Report.Screenshot();
+						return;
+					}
+				}
+			}
+			Report.Failure("Failed to find tab with url: " + string.Join(", ", urls));
+			Report.Screenshot();
+		}
 	}
 }
