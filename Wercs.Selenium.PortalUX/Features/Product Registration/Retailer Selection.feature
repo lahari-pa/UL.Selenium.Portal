@@ -11,7 +11,7 @@
 @run_RetailerSelection
 
 Feature: Retailer Selection
-@tfs_design
+
 Scenario: [78933] Select Retailers - Show List View
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -59,7 +59,7 @@ Then The selected retailers on the Retailer page should be:
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78933
 
-@tfs_design
+
 Scenario: [78936] Select Retailers - Show Logo Tile View
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -75,7 +75,9 @@ Then I save the product information as: TestCase78936
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 # Failing on 'child' question
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -100,7 +102,6 @@ Then The selected retailers on the Retailer page should be:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78936
 
 
-@tfs_design
 Scenario: [78937] Select Retailers - Select All
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -116,7 +117,9 @@ Then I save the product information as: TestCase78937
 Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 
 # Failing on 'child' question
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
