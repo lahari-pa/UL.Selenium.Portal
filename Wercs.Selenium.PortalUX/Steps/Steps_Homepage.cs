@@ -582,7 +582,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"I confirm that the (.*) page is loaded")]
+		[StepDefinition(@"I confirm that the (.*) page is loaded")]
 		public void ThenConfirmThatYouAreTakenToTheSpecifiedPage(string pageTitle)
 		{
 			switch (pageTitle)

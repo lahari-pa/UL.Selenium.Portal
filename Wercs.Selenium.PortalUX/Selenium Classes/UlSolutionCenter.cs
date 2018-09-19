@@ -74,6 +74,38 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			this.containerElement.FindElement(By.XPath(".//a[contains(@class,'btn btn-default pull-right') and @href='https://www.ulghs.com/']"), 2);
 		}
-	}
 
+		public List<UlSection> GetSections {
+			get
+			{
+				var rList = new List<UlSection>();
+				var sections = containerElement.FindElements(By.XPath(".//div[@class='col-md-6']"), 2);
+				foreach (var section in sections)
+				{
+					var header = section.FindElement(By.XPath(".//h3"), 2)?.Text;
+					var statement = section.FindElement(By.XPath(".//p[not(.//a[@role='button'])]"), 2)?.Text;
+					var logoEl = section.FindElement(By.XPath(".//div[@class='media-left']//img"), 2);
+					var learnMoreEl = section.FindElement(By.XPath(".//a[@role='button' and text()='Learn More']"), 2);
+					rList.Add(new UlSection {
+						Header = header,
+						Statement = statement,
+						LogoDisplayed = logoEl != null && logoEl.Displayed,
+						LearnMoreDisplayed = learnMoreEl != null && learnMoreEl.Displayed
+					});
+				}
+				return rList;
+			}
+		}
+	}
+	class UlSection : UlSolutionCenter
+	{
+		public string Header;
+		public string Statement;
+		public bool LogoDisplayed;
+		public bool LearnMoreDisplayed;
+		public bool ClickLearnMore()
+		{
+			return containerElement.FindElement(By.XPath(@".//div[@class='col-md-6' and .//h3[text()=""" + this.Header + @"""]]//a[@role='button' and text()='Learn More']"), 2).TryClick();
+		}
+	}
 }

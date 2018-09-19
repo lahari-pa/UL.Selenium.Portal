@@ -619,7 +619,8 @@ namespace WERCSmart
 				foreach (var handle in allHandles)
 				{
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-					if (SeleniumBrowser.WebBrowser.Url != url)
+					SeleniumBrowser.WebBrowser.WaitForPageLoad();
+					if (SeleniumBrowser.WebBrowser.Url == url)
 					{
 						Report.Success("Successfully Switch to Tab: " + url + "!");
 						Report.Screenshot();
