@@ -310,6 +310,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57570 \(Enter Ingredients\) and add the following ingredients:")]
+		//| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		public void GivenICallSharedStepEnterIngredients(Table ingredientsTable)
 		{
 			TestReport.UseSubSteps = true;
@@ -449,6 +450,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 48367 \(Product Includes Battery > any type\)")]
+		// | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
 		public void GivenICallSharedProductIncludesBatteryAnyType(Table table)
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -1171,6 +1173,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\) with the following inputs:")]
+		//| Secondary Physical State | Water Solubility |
 		public void GivenICallSharedEnterPhysicalProperty_SolidParameters(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -1561,6 +1564,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		// Duplicate with Shared Step 57884
 		[StepDefinition(@"I call Shared Step 59663 \(Safety Data Sheet Authoring - Additional Data \(Optional\)\)")]
+		//| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor | Odor Threshold | Partition Coefficient | Product's Dispensing Method |
 		public void ICallSharedSafetyDataSheetAuthoring_AdditionalDataOptional(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -2480,6 +2484,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 73629 \(Product Characteristics - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
+		//| Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		public void ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -2847,6 +2852,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 63804 \(Additional Product Information - enter options\)")]
+		//| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
 		public void ICallSharedStepAdditionalProductInformationEnterOptions(Table table)
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -2920,6 +2926,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 74760 \(Product Characteristics - Select Liquid as primary physical state and enter all required data\)")]
+		//| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -2995,6 +3002,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 74981 \(Product Characteristics - gas\)")]
+		//| Secondary Physical State | Select the best Water Solubility description |
 		public void ICallSharedProductCharacteristics_Gas(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -3017,6 +3025,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57923 \(Volatile Organic Compound \(VOC\) Step - enter OTC and CARB - Yes for state values\)")]
+		//| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		public void ICallSharedProductCharacteristics_EnterVocAndCarbSelectStateValue(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -3164,6 +3173,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		*/
 
 		[StepDefinition(@"I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue")]
+		//| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		public void GivenICallSharedStepIngredients_AddAnyChemical_DONotClickContinue(Table ingredientsTable)
 		{
 			TestReport.UseSubSteps = true;
@@ -3618,15 +3628,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selStepsNewProduct.ClickContinue();
 		}
 
-		[StepDefinition(@"I call Shared Step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
-		public void GivenICallSharedStep57801ConfirmVOCSummaryStepShownConfirmVOCAnalysisDateIsShown_HappyPath()
-		{
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			MyStepsNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
-			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] { "Statement" });
-			table1.AddRow(new string[] { "VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy") });
-			MyStepsNewProduct.ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table1);
-		}
+		//[StepDefinition(@"I call Shared Step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
+		//public void GivenICallSharedStep57801ConfirmVOCSummaryStepShownConfirmVOCAnalysisDateIsShown_HappyPath()
+		//{
+		//	StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+		//	MyStepsNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
+		//	TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] { "Statement" });
+		//	table1.AddRow(new string[] { "VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy") });
+		//	MyStepsNewProduct.ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table1);
+		//}
 
 		[StepDefinition(@"I call Shared Step 57817 \(VOC Results - Confirm VOC Limits table shows correct values \(OTC & CARB\) - Happy Path\): (.*)")]
 		public void GivenICallSharedStep57817VOCResults_ConfirmVOCLimitsTableShowsCorrectValuesOTCCARB_HappyPath(string use)
@@ -3877,17 +3887,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 					x.UserName == "SHAMANAGER" && x.DateStarted.Date == DateTime.Today.Date &&
 					x.Class == "Wercs.Core.BLLPortal.ImportProcessRules");
 			}
-			if(MatchingJob != null)
+			if (MatchingJob != null)
 			{
 				Report.Success("Matching job has been found with username=SHAMANAGER, date=" +
-				               DateTime.Today.Date.ToString() +
-				               ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+							   DateTime.Today.Date.ToString() +
+							   ", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 			else
 			{
 				Report.Info("No matching job has been found with username=SHAMANAGER, date=" +
-				            DateTime.Today.Date.ToString() +
-				            ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+							DateTime.Today.Date.ToString() +
+							", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 
 			GivenICallSharedStep59066GoToSHAManager();
@@ -4151,6 +4161,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 79431 \(Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name\) and save ingredients as: (.*)")]
+		//| CASNumber | ComponentName |
 		public void IngredientsAddFlavorComponentPubliclyDisclosedYesSelectPublicName(string savedAs, Table component)
 		{
 			var ingredient = new Ingredient {

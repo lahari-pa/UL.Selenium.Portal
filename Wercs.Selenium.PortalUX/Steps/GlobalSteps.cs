@@ -11,6 +11,7 @@ using Wercs.Selenium.PortalUX.Selenium_Classes;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Castle.Core.Internal;
 using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReportingPlugin;
@@ -92,7 +93,11 @@ namespace WERCSmart
 			}
 		}
 
-
+		[StepDefinition(@"I log in with the account saved in TReVor as: (.*)")]
+		public void ILogInWithTheAccountSavedInTrevorAs(string accountSavedAs)
+		{
+			LoginToAccount(accountSavedAs);
+		}
 
 		[Then(@"The home screen should load")]
 		public void ThenTheHomeScreenShouldLoad()
@@ -120,22 +125,23 @@ namespace WERCSmart
 				Report.Info("Clicking 'Log In' on the Landing Page");
 				selLandingPage.Click_Login();
 			}
-
+			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
-			while (!selHomepage.Wait_for_load(1) && i < 5)
+			while ((!selHomepage.Wait_for_load(1) || !selTopMenuBar.Wait_for_load(1)) && i < 5)
 			{
 				Report.Info("========== Login Attempt: " + i + " ==========");
 				var selLogin = new Login();
-				Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!");
-
+				if (!Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
+				{
+					break;
+				}
 				Report.Info("Entering Email: '" + username + "'");
 				selLogin.EmailField = username;
 				Report.Info("Entering Password: '" + password + "'");
 				selLogin.PasswordField = password;
 				Report.Info("Clicking login");
 				selLogin.Click_Login();
-
 				selHomepage = new Homepage();
 				if (selHomepage.Wait_for_load(30))
 				{
@@ -143,7 +149,6 @@ namespace WERCSmart
 					GeneralUtilities.Wait_for_load_finish();
 					return;
 				}
-
 				var modalDialog = new ModalDialog();
 				if (modalDialog.Wait_for_load(1))
 				{
@@ -158,10 +163,9 @@ namespace WERCSmart
 						return;
 					}
 				}
-
 				i++;
+				Delay.Seconds(1);
 			}
-
 			Report.Failure("Failed to log in!");
 		}
 
@@ -169,17 +173,8 @@ namespace WERCSmart
 		[StepDefinition(@"I logout")]
 		public void GivenILogout()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
-			try
-			{
-				TopMenuBar thisTopMenuBar = new TopMenuBar();
-				Assert.That(thisTopMenuBar.ClickSignOut());
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			TopMenuBar thisTopMenuBar = new TopMenuBar();
+			Report.IsTrue(thisTopMenuBar.ClickSignOut(), "Failed to click sign out", "Successfully clicked sign out");
 		}
 
 		[StepDefinition(@"I create a new email address and save as: (.*)")]
@@ -191,9 +186,6 @@ namespace WERCSmart
 			Context.AddToContext(saveAs, myEmail);
 			Report.Info("Saved email: " + myEmail);
 		}
-
-
-
 
 		[StepDefinition(@"If not already created, I create a user: (.*) with the following parameters:")]
 		public void GivenIfNotAlreadyCreatedICreateAUserXWithTheFollowingParameters(string savedAs, Table parameters)
@@ -763,6 +755,81 @@ namespace WERCSmart
 			if (testCaseId != null && Context.GetFromContext($"UPC{testCaseId}") != null)
 			{
 				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", Context.GetFromContext($"UPC{testCaseId}").ToString());
+			}
+		}
+
+		[StepDefinition("I save the TReVor test user: (.*) to context as 'TReVorTestUser'")]
+		public void ISaveTheWercSmartUserStoredInTrevorAs(string savedAs)
+		{
+			var user = TReVor.TestUsers.GetUserSavedAs(savedAs);
+			if (user == null)
+			{
+				Report.Failure("Failed to find a user stored in TReVor: " + savedAs);
+				return;
+			}
+			Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
+		}
+
+		[StepDefinition(@"I update the password for the following TReVor test users:")]
+		public void IUpdateThePasswordForTheFollowingTrevorTestUsers(Table users)
+		{
+			var usersSavedAs = new List<string>();
+			TestReport.UseSubSteps = true;
+			users.Rows.ForEach(x => usersSavedAs.Add(x["User"]));
+			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
+			foreach (var savedAs in usersSavedAs)
+			{
+				TestReport.StartStep($"I update the password for user: {savedAs}");
+				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				var selMyAccount = new StepsMyAccount();
+				Report.Info("Navigating to My Account from the homepage");
+				selMyAccount.GivenINavigateToTheMyAccountPage();
+				Report.Info("Clicking Reset Password for the current logged in user");
+				selMyAccount.GivenIGoToActionInUserGrid("Reset Password");
+				Report.Info("Updating the password for test user " + savedAs);
+				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
+				Report.Info("Logging out");
+				GivenILogout();
+				Report.Info("Checking I can log in with the new credentials");
+				TReVor.TestUsers.CacheRefreshed = false;
+				TReVor.TestUsers.UpdateCache();
+				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				Report.Info("Logging out");
+				GivenILogout();
+			}
+		}
+
+		[StepDefinition(@"I update the password for all TReVor Test Users within the current branch")]
+		public void IUpdateThePasswordForAllTrevorTestUsersWithinCurrentBranch()
+		{
+			TestReport.UseSubSteps = true;
+			var allUsers = TReVor.TestUsers.GetAllUsers();
+			var usersSavedAs = allUsers.Select(x => x.SavedAs).ToList();
+			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
+			foreach (var savedAs in usersSavedAs)
+			{
+				TestReport.StartStep($"I update the password for user: {savedAs}");
+				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				if (!new Homepage().Wait_for_load())
+				{
+					Report.Error("Failed to log in with user: " + savedAs + ". Expected to land on the home page");
+					continue;
+				}
+				var selMyAccount = new StepsMyAccount();
+				Report.Info("Navigating to My Account from the homepage");
+				selMyAccount.GivenINavigateToTheMyAccountPage();
+				Report.Info("Clicking Reset Password for the current logged in user");
+				selMyAccount.GivenIGoToActionInUserGrid("Reset Password");
+				Report.Info("Updating the password for test user " + savedAs);
+				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
+				Report.Info("Logging out");
+				GivenILogout();
+				Report.Info("Checking I can log in with the new credentials");
+				TReVor.TestUsers.CacheRefreshed = false;
+				TReVor.TestUsers.UpdateCache();
+				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				Report.Info("Logging out");
+				GivenILogout();
 			}
 		}
 	}

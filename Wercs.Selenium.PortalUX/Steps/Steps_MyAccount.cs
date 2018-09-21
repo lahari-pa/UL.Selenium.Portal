@@ -96,26 +96,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
 		[StepDefinition(@"I navigate to the MyAccount page")]
 		public void GivenINavigateToTheMyAccountPage()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I navigate to the MyAccount page");
-			try
-			{
-				Report.Info("Navigating to the My Account page");
-				TopMenuBar thisTopMenuBar = new TopMenuBar();
-				thisTopMenuBar.ClickMyAccount();
-				Report.IsTrue(new MyAccount().Wait_for_load(),
-					"The My Account page did not load",
-					"The My Account page was loaded");
-				GeneralUtilities.Wait_for_load_finish();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Navigating to the My Account page");
+			TopMenuBar thisTopMenuBar = new TopMenuBar();
+			thisTopMenuBar.ClickMyAccount();
+			Report.IsTrue(new MyAccount().Wait_for_load(),
+				"The My Account page did not load",
+				"The My Account page was loaded");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 		[StepDefinition(@"I save all the users in the User Grid")]
@@ -170,31 +160,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
 		[StepDefinition(@"I go to (.*) in User Grid for the current user")]
 		public void GivenIGoToActionInUserGrid(string action)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I go to " + action + " in User Grid");
-			try
-			{
-				Delay.Seconds(1);
-				var selMyAccount = new MyAccount();
-				var selTopMenuBar = new TopMenuBar();
-
-				//get name of currently signed in
-				string username = selTopMenuBar.GetCurrentUser();
-
-				Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
-					"Failed to click action: " + action + " for user: " + username,
-					"Successfully clicked action: " + action + " for user: " + username);
-
-				Delay.Seconds(1);
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Delay.Seconds(1);
+			var selMyAccount = new MyAccount();
+			var selTopMenuBar = new TopMenuBar();
+			//get name of currently signed in
+			string username = selTopMenuBar.GetCurrentUser();
+			Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
+				"Failed to click action: " + action + " for user: " + username,
+				"Successfully clicked action: " + action + " for user: " + username);
+			Delay.Seconds(1);
 		}
 
 		[StepDefinition(@"In the UserDetails screen I save the current User as: (.*)")]
@@ -278,7 +255,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
-
 
 		[StepDefinition(@"I click Save in My Account")]
 		public void GivenIClickSaveInMyAccount()
@@ -762,6 +738,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Pressing the enter key");
 			selMyAccount.KeyToUserGridNavPageInput("enter");
 		}
+
 		[StepDefinition(@"I should see the following tabs in the My Library page")]
 		public void TabsShowingInMyLibrary(Table tabs)
 		{
@@ -782,7 +759,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to navigate to the :" + tab + " tab",
 				"Successfully navigated to the :" + tab + " tab");
 		}
+
 		[StepDefinition(@"I confirm the current active tab on the My Library page is: (.*)")]
+
 		public void CurrentActiveTabMyLibrary(string expectedTab)
 		{
 			var selMyLibrary = new MyAccount_MyLibrary();
@@ -861,11 +840,63 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Report.IsTrue(new AddUserThankYouDialog().Updated_User_Thank_You_Close(), "Failed to click Close in Thank You pop up", "Successfully clicked Close in the Thank You pop up");
 		}
+
 		[StepDefinition(@"I close the 'Thank You' user added dialog")]
 		public void CloseThankYouCreated()
 		{
 			Report.IsTrue(new AddUserThankYouDialog().Add_User_Thank_You(), "Failed to click Close in Thank You pop up", "Successfully clicked Close in the Thank You pop up");
 		}
+
+		[StepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup")]
+		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
+		{
+			// Get user credentials from TReVor based on saved as ID
+			var user = TReVor.TestUsers.GetUserSavedAs(savedAs);
+			if (user == null)
+			{
+				Report.Failure("Unable to find TReVor test user saved as: " + savedAs);
+				return;
+			}
+			var oldPassword = user.Password;
+			var newPassword = "";
+			// If the current password ends in a character, append with a 1 for the new password
+			if (!char.IsDigit(oldPassword.Last()))
+			{
+				newPassword = oldPassword + "1";
+			}
+			else
+			{
+				var passwordChr = oldPassword.ToCharArray();
+				var result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
+				newPassword = oldPassword.TrimEnd(result) + (Convert.ToInt32(result) + 1);
+			}
+			var selModal = new ModalDialog();
+			Report.IsTrue(selModal.Wait_for_load(), "Expected a modal dialog to load!", "Modal dialog loaded as expected");
+			Report.Info("Entering current password in the input: " + oldPassword);
+			selModal.EnterLoginPassword(oldPassword);
+			Report.Info("Clicking continue in the Change Password popup");
+			Report.IsTrue(selModal.ClickContinue(),
+				"Failed to click continue in Change Password",
+				"Successfully clicked continue in Change Password");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Entering new password in New Password input: " + newPassword);
+			selModal.EnterNewPassword(newPassword);
+			Report.Info("Entering new password in Verify Password input: " + newPassword);
+			selModal.EnterVerifyPassword(newPassword);
+			Report.Info("Clicking save in the Change Password popup");
+			Report.IsTrue(selModal.ClickSave(),
+				"Failed to click save in Change Password",
+				"Successfully clicked save in Change Password");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Clicking close in the Change Password popup");
+			Report.IsTrue(selModal.Click_Close(),
+				"Failed to click close in Change Password",
+				"Successfully clicked clse in Change Password");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Updating the password in TReVor Test Users");
+			TReVor.TestUsers.UpdatePassword(savedAs, newPassword);
+		}
+
 
 	}
 }

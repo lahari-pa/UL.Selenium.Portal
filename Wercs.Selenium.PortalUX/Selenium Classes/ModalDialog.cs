@@ -18,13 +18,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public void Click_OK()
 		{
 			this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
-				.FirstOrDefault(x =>x.Text == "OK").TryClick();
+				.FirstOrDefault(x => x.Text == "OK").TryClick();
 		}
 
 		public bool Click_Cancel()
 		{
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 				.FirstOrDefault(x => x.Text == "CANCEL").TryClick();
+		}
+
+		public bool Click_Close()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+				.FirstOrDefault(x => x.Text.ToLower() == "close").TryClick();
 		}
 
 		public bool Click_Skip()
@@ -63,6 +69,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElements(By.XPath("//*[@class='modal-title']")).FirstOrDefault(x => x.Displayed)
 				.Text;
+		}
+
+		public void EnterLoginPassword(string password)
+		{
+			containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2).EnterText(password);
+		}
+
+		public void EnterNewPassword(string password)
+		{
+			containerElement.FindElement(By.XPath(".//input[@id='newPassword']"), 2).EnterText(password);
+		}
+
+		public void EnterVerifyPassword(string password)
+		{
+			containerElement.FindElement(By.XPath(".//input[@id='verifyPassword']"), 2).EnterText(password);
+		}
+
+		public bool ClickContinue()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/a"), 2)
+				.FirstOrDefault(x => x.Text.ToLower() == "continue").TryClick();
+		}
+
+		public bool ClickSave()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/a"), 2)
+				.FirstOrDefault(x => x.Text.ToLower() == "save").TryClick();
 		}
 	}
 }

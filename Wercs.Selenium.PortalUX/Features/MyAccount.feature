@@ -6,7 +6,6 @@
 @SubEnrollment
 @LandingPage
 @PaymentMethods
-
 @run_MyAccount
 
 Feature: MyAccount
