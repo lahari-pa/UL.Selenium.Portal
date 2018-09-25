@@ -48,7 +48,8 @@ Given I define the user: 63297 with the following parameters:
 | Pin                  | 1234           |
 
 Given I save the current emails in the inbox for user saved as: 63297
-Given I click on the New to WERCSmart Link
+#Given I click on the New to WERCSmart Link
+Given I select the Sign Up link
 Then the signup page should appear
 Given I enter signup email for user: 63297
 And I confirm signup email for user: 63297
@@ -513,7 +514,7 @@ Then In the Subscription Enrollment screen I confirm that when you hover over (i
 Then In the Subscription Enrollment screen I confirm that the option showing in the Enhanced Articles dropdown is: Choose...
 Then In the Subscription Enrollment screen I confirm that you see Formulated Products dropdown
 Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Formulated Products you see following heading: What Are Formulated Products?
-Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Enhanced Articles you see following statement: During the WERCSmart registration process, information about ingredients (e.g., water, ethanol, phosphoric acid) are collected.
+Then In the Subscription Enrollment screen I confirm that when you hover over (i) for Formulated Products you see following statement: During the WERCSmart registration process, information about ingredients (e.g., water, ethanol, phosphoric acid) are collected.
 Then In the Subscription Enrollment screen I confirm that the option showing in the Formulated Products dropdown is: Choose...
 Then In the Subscription Enrollment screen I confirm that I see the following Plans
 | Plan Type | Plan Name    | Plan Subtext                                     | Best Value | Selected |
