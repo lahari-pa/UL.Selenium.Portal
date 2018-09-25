@@ -136,7 +136,7 @@ testRunner.Given("I update the password for the following TReVor test users:", (
 #line 20
 this.ScenarioSetup(scenarioInfo);
 #line 22
- testRunner.Given("I update the password for all TReVor Test Users within the current branch", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I update the password for all TReVor Test Users within the current branch", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

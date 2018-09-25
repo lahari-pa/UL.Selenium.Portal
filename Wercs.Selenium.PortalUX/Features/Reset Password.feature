@@ -19,4 +19,4 @@ Given I update the password for the following TReVor test users:
 @TrevorUsers
 Scenario: Reset password for TReVor test user accounts
 
- Given I update the password for all TReVor Test Users within the current branch
+Given I update the password for all TReVor Test Users within the current branch

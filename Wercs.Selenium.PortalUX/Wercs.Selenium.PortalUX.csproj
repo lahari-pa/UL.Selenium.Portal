@@ -380,6 +380,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Retailer Selection.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Transportation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transportation.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -743,6 +748,10 @@
     <None Include="Features\Product Registration\Retailer Selection.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Retailer Selection.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Transportation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Transportation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\VOC\VOC-Flow 19 Dilution.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

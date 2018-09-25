@@ -72,4 +72,3 @@ When I select the Login button
 Given I populate the password input field with: ccccc
 When I select the Login button
 Then I should see a server error with message: Your account is locked and will unlock after 30 minutes.
-

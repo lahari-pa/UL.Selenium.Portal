@@ -58,6 +58,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			MyStepsNewProduct.SaveProductInformation($"TestCase{GlobalParameters.TestCaseId}");
 		}
 
 		[StepDefinition(@"I call Shared Step 60779 \(Enter Liquid - Cooking Oil - Non-Aerosol\)")]
@@ -4301,6 +4302,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var selGlobalSteps = new GlobalSteps();
 			selGlobalSteps.LoginToAccount("PremiumSubscriptionAccount");
 			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+		}
+
+		[StepDefinition(@"I call Shared Step 65698 \(Transport - Select DOT & Limited Shipping - No Continue\)")]
+		public void Shared65698_Transport_SelectDotAndLimitedShipping_NoContinue()
+		{
+			TestReport.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for field to: DOT");
+			selStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "DOT");
+			TestReport.StartStep("I set the section 'Select all modes of transport that you've classified the product for' subsection 'DOT' field to: Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "DOT", "Shipping with limited quantity");
+		}
+
+		[StepDefinition(@"I call Shared Step 65700 \(Transportation Details 1 - Select IATA & Limited Shipping\)")]
+		public void Shared65700_TransportDetails1_SelectIataAndLimitedShipping()
+		{
+			TestReport.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for field to: IATA");
+			selStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "IATA");
+			TestReport.StartStep("I set the section: 'Select all modes of transport that you've classified the product for' subsection: 'IATA' field to: Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "IATA", "Shipping with limited quantity");
 		}
 	}
 }

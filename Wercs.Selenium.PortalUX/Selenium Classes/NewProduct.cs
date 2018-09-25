@@ -3512,7 +3512,42 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
+		public bool SetOptionInSectionSubSection(string section, string subSection, string value)
+		{
+			var xPath = $@"//div[preceding-sibling::div[./label[contains(text(),""{section}"")]]]//div[@class='form-subgroup' and preceding-sibling::div[.//span[contains(text(),'{subSection}')]]]//input[./following-sibling::span[contains(text(),'{value}')]]";
+			var el = containerElement.FindElement(By.XPath(xPath), 10);
+			if (el == null)
+			{
+				Report.Info($"Unable to find the input under section {section} and subsection {subSection} option {value}");
+				return false;
+			}
+			if (el.GetAttribute("type") == "checkbox")
+			{
+				el.TryCheck();
+				return el.Checked();
+			}
+			Report.Info("Method only applicable to checkbox type input");
+			return false;
+		}
 
+		public bool CheckStandaloneCheckbox(string description)
+		{
+			var el = this.StandaloneCheckbox(description);
+			var check = el.TryCheck();
+			Delay.Seconds(1);
+			return check && el.Checked();
+		}
+
+		public IWebElement StandaloneCheckbox(string description)
+		{
+			var el = containerElement.FindElement(By.XPath($@".//div[@class='checkbox' and (.//span[contains(text(),""{description}"")])]/label/input"), 2);
+			if (el == null)
+			{
+				Report.Info($"Could not find checkbox with description: '{description}'");
+				return null;
+			}
+			return el;
+		}
 
 		public bool SetOptionInSection(string section, string value)
 		{
@@ -3562,7 +3597,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				if (el.GetAttribute("type") == "checkbox")
 				{
-					TryCheck(el, true);
+					el.TryCheck();
 					return el.Checked();
 				}
 
@@ -3581,54 +3616,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 			}
 			return el.FindElement(By.XPath("./input"), 10).TryClick();
-		}
-		public static bool TryCheck(IWebElement element, bool checked_ = true)
-		{
-			if (element.Selected == checked_)
-			{
-				return true;
-			}
-
-			try
-			{
-				element.Click();
-				if (element.Selected != checked_)
-				{
-					throw new Exception();
-				}
-
-				return true;
-			}
-			catch (Exception)
-			{
-				try
-				{
-					element.SendKeys(Keys.Space);
-					if (element.Selected != checked_)
-					{
-						throw new Exception();
-					}
-
-					return true;
-				}
-				catch (Exception)
-				{
-					IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)SeleniumBrowser.WebBrowser;
-					jsExecutor.ExecuteScript(@"$(arguments[0])[0].checked = " + checked_, element);
-					if (element.Selected == checked_)
-					{
-						return true;
-					}
-
-					element.TryClick();
-					if (element.Selected == checked_)
-					{
-						return true;
-					}
-
-					return false;
-				}
-			}
 		}
 		public bool ClickSelectForSection(string section)
 		{

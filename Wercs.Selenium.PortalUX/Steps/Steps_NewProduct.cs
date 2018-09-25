@@ -419,7 +419,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void SaveProductInformation(string savedas)
 		{
 			var prodDetails = new NewProduct().GetCurrentProductInformation();
-			Report.Info("SAving product: " + prodDetails.Id + ",  " + prodDetails.Name);
+			Report.Info("Saving product: " + prodDetails.Id + ",  " + prodDetails.Name);
 			Context.AddToContext(savedas, prodDetails);
 			Report.Success("Product Information saved!");
 		}
@@ -1764,6 +1764,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
 				"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
 			Delay.Seconds(1);
+		}
+
+		// JS a solution specifically for Transportation page where you have nested checkbox sections eg. DOT, IATA
+		[StepDefinition(@"I set the section: (.*) subsection: (.*) option to: (.*)")]
+		[StepDefinition(@"I set the section: (.*) subsection: (.*) field to: (.*)")]
+		public void SetTheOptionSubOptionTo(string section, string subSection, string option)
+		{
+			Report.IsTrue(new NewProduct().SetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
+				$"Failed to set the input to: '{option}' in section: '{section}' and subection: '{subSection}'",
+				$"Successfully set the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
 		}
 
 		[StepDefinition(@"I (see|only see|do not see) the following sections")]
@@ -3646,6 +3656,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(phrase.Contains("Does not exceed the limits"),
 				"The " + carbOtc + " exceeds/ does not exceed statement did not match the expected phrase! Expected 'Does not exceed the limits..' but found: '" + phrase + "'",
 				"The " + carbOtc + " exceeds/ does not exceed statement matched the expected phrase");
+		}
+		[StepDefinition(@"I confirm the checkbox with description: (.*) is displayed")]
+		public void IConfirmCheckboxWithDescriptionIsDisplayed(string description)
+		{
+			Report.IsTrue(new NewProduct().StandaloneCheckbox(description) != null,
+				$"The checkbox with description: '{description}' was not displayed!",
+				$"The checkbox with description: '{description}' was displayed as expected");
+		}
+
+		[StepDefinition(@"I check the checkbox with description: (.*)")]
+		public void ICheckTheCheckboxWithDescription(string description)
+		{
+			Report.IsTrue(new NewProduct().CheckStandaloneCheckbox(description),
+				$"Failed to check the checkbox with description: '{description}'!",
+				$"Successfully checked the checkbox with description: '{description}'");
 		}
 	}
 }
