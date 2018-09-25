@@ -4325,5 +4325,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the section: 'Select all modes of transport that you've classified the product for' subsection: 'IATA' field to: Shipping with limited quantity");
 			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "IATA", "Shipping with limited quantity");
 		}
+		[StepDefinition(@"I call Shared Step 65699 \(Transport - Select IMDG & Limited Shipping - No Continue\)")]
+		public void Shared65699_Transport_SelectImdgAndLimitedShipping_NoContinue()
+		{
+			TestReport.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for field to: IMDG");
+			selStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "IMDG");
+			TestReport.StartStep("I set the section: 'Select all modes of transport that you've classified the product for' subsection: 'IMDG' field to: Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "IMDG", "Shipping with limited quantity");
+		}
+		//65701
+		[StepDefinition(@"I call Shared Step 65701 \(Transport - Select TDG & Limited Shipping - No Continue\)")]
+		public void Shared65701_Transport_SelectTdgAndLimitedShipping_NoContinue()
+		{
+			TestReport.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for field to: TDG");
+			selStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "TDG");
+			TestReport.StartStep("I set the section: 'Select all modes of transport that you've classified the product for' subsection: 'TDG' field to: Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "TDG", "Shipping with limited quantity");
+		}
 	}
 }
