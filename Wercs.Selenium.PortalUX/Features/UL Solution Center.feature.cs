@@ -395,12 +395,8 @@ testRunner.And("I confirm the Learn More button is displayed for section: GoodGu
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 138
 testRunner.Given("I click the Learn More button for section: GoodGuide for Suppliers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 140
-testRunner.Given("I switch to the GoodGuide for Suppliers information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 142
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 144
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I check that the current URL contains: https://choosegoodguide.com/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -429,28 +425,28 @@ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string
         public virtual void _59660ULSolutionCenterShowsCorrectEntries_ULSecureConnectSection()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59660] UL Solution Center shows correct entries - UL Secure Connect section", ((string[])(null)));
-#line 146
-this.ScenarioSetup(scenarioInfo);
 #line 148
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 150
-testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 152
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 154
-testRunner.Then("I Confirm the UL Secure Connect (ULSC) heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 156
-testRunner.And(@"I Confirm the information statement for section: UL Secure Connect (ULSC) reads: Get additional insights from your data with UL Secure Connect, a data generation tool. ULSC allows you to generate additional valuable data, and receive that data in an editable format which you can analyze and import into your internal systems.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I Confirm the UL Secure Connect (ULSC) heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 158
+testRunner.And(@"I Confirm the information statement for section: UL Secure Connect (ULSC) reads: Get additional insights from your data with UL Secure Connect, a data generation tool. ULSC allows you to generate additional valuable data, and receive that data in an editable format which you can analyze and import into your internal systems.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 160
 testRunner.And("I confirm the Learn More button is displayed for section: UL Secure Connect (ULSC" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 160
-testRunner.Given("I click the Learn More button for section: UL Secure Connect (ULSC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 162
-testRunner.Given("I switch to the UL Secure Connect (ULSC) information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click the Learn More button for section: UL Secure Connect (ULSC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 164
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I switch to the UL Secure Connect (ULSC) information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 166
+testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 168
 testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -480,28 +476,24 @@ testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string
         public virtual void _59661ULSolutionCenterShowsCorrectEntries_ULGHSSection()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59661] UL Solution Center shows correct entries - ULGHS section", ((string[])(null)));
-#line 168
-this.ScenarioSetup(scenarioInfo);
 #line 170
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 172
-testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 174
-testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 176
-testRunner.Then("I Confirm the ULGHS heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 178
-testRunner.And(@"I Confirm the information statement for section: ULGHS reads: ULGHS is a right-sized SDS authoring tool for small to mid-sized companies that produce products that contain chemicals. Powered by UL WERCSmart, ULGHS – SDS Authoring Tool is a first of its kind, automated GHS-compliant SDS authoring solution.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 180
-testRunner.And("I confirm the Learn More button is displayed for section: ULGHS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 182
-testRunner.Given("I click the Learn More button for section: ULGHS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 184
-testRunner.Given("I switch to the ULGHS information tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 186
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 188
 testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 178
+testRunner.Then("I Confirm the ULGHS heading is displayed next to an icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 180
+testRunner.And(@"I Confirm the information statement for section: ULGHS reads: ULGHS is a right-sized SDS authoring tool for small to mid-sized companies that produce products that contain chemicals. Powered by UL WERCSmart, ULGHS – SDS Authoring Tool is a first of its kind, automated GHS-compliant SDS authoring solution.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 182
+testRunner.And("I confirm the Learn More button is displayed for section: ULGHS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 184
+testRunner.Given("I click the Learn More button for section: ULGHS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 188
+testRunner.Then("I check that the current URL contains: https://www.ulghs.com/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

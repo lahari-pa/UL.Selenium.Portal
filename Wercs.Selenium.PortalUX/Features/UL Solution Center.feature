@@ -137,11 +137,13 @@ And I confirm the Learn More button is displayed for section: GoodGuide for Supp
 
 Given I click the Learn More button for section: GoodGuide for Suppliers
 
-Given I switch to the GoodGuide for Suppliers information tab
+#Given I switch to the GoodGuide for Suppliers information tab
 
-And I close the window that opened
+Then I check that the current URL contains: https://choosegoodguide.com/
 
-Then I confirm that the UL Solution Center page is loaded
+#And I close the window that opened
+
+#Then I confirm that the UL Solution Center page is loaded
 
 Scenario: [59660] UL Solution Center shows correct entries - UL Secure Connect section
 
@@ -181,8 +183,10 @@ And I confirm the Learn More button is displayed for section: ULGHS
 
 Given I click the Learn More button for section: ULGHS
 
-Given I switch to the ULGHS information tab
+#Given I switch to the ULGHS information tab
 
-And I close the window that opened
+Then I check that the current URL contains: https://www.ulghs.com/
 
-Then I confirm that the UL Solution Center page is loaded
+#And I close the window that opened
+
+#Then I confirm that the UL Solution Center page is loaded
