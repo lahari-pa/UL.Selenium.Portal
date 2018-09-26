@@ -2406,61 +2406,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		/// <summary>
-		/// UN Number text box
-		/// </summary>
-		public bool UNnumber(string text)
-		{
-			//get
-			//{
-			//	var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-			//		.FirstOrDefault(x => x.Text.Contains("UN Number"));
 
-			//	if (lbl != null)
-			//	{
-			//		var input = lbl.FindElement(By.XPath("../..//input"));
-			//		return input.Text;
-			//	}
-			//	else
-			//	{
-			//		throw new Exception("Label not found as expected.");
-			//	}
 
-			//}
-			//set
-			//{
-			//	var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-			//		.FirstOrDefault(x => x.Text.Contains("UN Number"));
-
-			//	if (lbl != null)
-			//	{
-			//		var input = lbl.FindElement(By.XPath("../..//input"));
-			//		input.EnterText(value);
-			//	}
-			//	else
-			//	{
-			//		throw new Exception("Label not found as expected.");
-			//	}
-
-			//}
-
-			try
-			{
-				var el = containerElement.FindElement(By.XPath(".//label[text()='UN Number']/../following-sibling::div//input"), 2);
-
-				if (el != null)
-				{
-					el.EnterText(text);
-					return true;
-				}
-
-				return false;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
 
 		/// <summary>
 		/// Technical Name (if applicable) text box
@@ -3533,9 +3480,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool CheckStandaloneCheckbox(string description)
 		{
 			var el = this.StandaloneCheckbox(description);
-			var check = el.TryCheck();
-			Delay.Seconds(1);
-			return check && el.Checked();
+			return el.TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public IWebElement StandaloneCheckbox(string description)
@@ -3643,9 +3588,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (matchingElements.FirstOrDefault().GetAttribute("type").ToLower() == "text")
 			{
-				return new List<string> { matchingElements.FirstOrDefault().Text };
+				var rText = "";
+				if (!matchingElements.First().Text.IsNullOrEmpty())
+				{
+					rText = matchingElements.First().Text;
+				}
+				else if (!matchingElements.First().GetValue().IsNullOrEmpty())
+				{
+					rText = matchingElements.First().GetValue();
+				}
+				return new List<string> { rText };
 			}
-
 			return null;
 		}
 

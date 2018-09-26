@@ -7,6 +7,7 @@ using Castle.Core.Internal;
 using iTextSharp.text;
 using ResourcePool;
 using System.IO;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -911,29 +912,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForSelectAllModesOfTransportISelect(string selections)
 		{
 			Report.IsTrue(new NewProduct().AllModesOfTransport(selections), "Failed to set option to: " + selections, "Successfully set option to: " + selections);
-		}
-
-		/// <summary>
-		/// Enter in UN Number textbox
-		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the UN Number text field")]
-		public void GivenInTheProductCharacteristicsTabIEnterInTheUNNumberTextField(string text)
-		{
-			//var selNewProduct = new NewProduct();
-			//Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-			//	"Product type tab is loaded.");
-			//selNewProduct.UNnumber = option;
-
-			Report.IsTrue(new NewProduct().UNnumber(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
-		}
-
-		/// <summary>
-		/// Select Hazard Class from dropdown
-		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I set Hazard Class to be: (.*)")]
-		public void GivenInTheProductCharacteristicsTabISetHazardClassToBe(string option)
-		{
-			Report.IsTrue(new NewProduct().HazardClassSelect(option), "Failed to set the option to be: " + option, "Successfully set option to be: " + option);
 		}
 
 		/// <summary>
@@ -3165,8 +3143,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"The following options should be (displayed|displayed exclusively) for section: (.*)")]
-		public void CheckOptionsInSection(string exclusivity, string section, Table expected)
+		[StepDefinition(@"The following options (should|should not) be (displayed|displayed exclusively) for section: (.*)")]
+		public void CheckOptionsInSection(string should, string exclusive, string section, Table expected)
 		{
 			var expectedOptions = new List<string>();
 			var differences = new List<string>();
@@ -3174,19 +3152,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var expectedOptionsLower = expectedOptions.Select(x => x.ToLower()).ToList();
 			var displayedOptions = new NewProduct().GetAllOptionsForSection(section);
 			var displayedOptionsLower = displayedOptions.Select(x => x.ToLower()).ToList();
-			if (exclusivity == "displayed")
+			if (exclusive == "displayed")
 			{
-				differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
-				Report.IsTrue(expectedOptions.All(x => displayedOptionsLower.Contains(x.ToLower())),
-					"All expected options were not displayed under section: " + section + ". The differences were: " + string.Join(", ", differences.Select(x => "'" + x + "'").ToList()) + ". The displayed options were: " + string.Join(", ", displayedOptions),
-					"All expected options were displayed under section: " + section + ": " + string.Join(", ", displayedOptions));
+				if (should == "should")
+				{
+					differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
+					Report.IsTrue(expectedOptions.All(x => displayedOptionsLower.Contains(x.ToLower())),
+						"All expected options were not displayed under section: " + section + ". The differences were: " + string.Join(", ", differences.Select(x => "'" + x + "'").ToList()) + ". The displayed options were: " + string.Join(", ", displayedOptions),
+						"All expected options were displayed under section: " + section + ": " + string.Join(", ", displayedOptions));
+
+				}
+				else if (should == "should not")
+				{
+					Report.IsTrue(!expectedOptionsLower.Any(x => displayedOptionsLower.Contains(x)),
+						$"The following options were available for section: '{section}' when they were not expected!: '{string.Join(", ", expectedOptions)}'",
+						$"The following options were not available for section: '{section}' as expected: {string.Join(", ", expectedOptions)}");
+				}
 			}
-			if (exclusivity == "displayed exclusively")
+			else if (exclusive == "displayed exclusively")
 			{
 				differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
-				Report.IsTrue(expectedOptionsLower.Equals(displayedOptionsLower),
-					"The actual options for section: " + section + " did not match the expected options. The differences were: " + string.Join(", ", differences.Select(x => "'" + x + "'").ToList()),
-					"The actual options for section: " + section + " matched the expected options.");
+				Report.IsTrue(differences.Count == 0,
+					$"The actual options for section: {section} did not match the expected options. The differences were: {string.Join(", ", differences.Select(x => "'" + x + "'").ToList())}",
+					$"The actual options for section: {section} matched the expected options: {string.Join(", ", expectedOptions)}");
 			}
 		}
 
@@ -3665,12 +3653,35 @@ namespace Wercs.Selenium.PortalUX.Steps
 				$"The checkbox with description: '{description}' was displayed as expected");
 		}
 
-		[StepDefinition(@"I check the checkbox with description: (.*)")]
-		public void ICheckTheCheckboxWithDescription(string description)
+		[StepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
+		public void ICheckTheCheckboxWithDescription(string check, string description)
 		{
-			Report.IsTrue(new NewProduct().CheckStandaloneCheckbox(description),
+			var selNewProduct = new NewProduct();
+			var toCheck = false;
+			if (check == "check")
+			{
+				toCheck = true;
+			}
+			else if (check == "uncheck")
+			{
+				toCheck = false;
+			}
+			else
+			{
+				throw new Exception("Specflow paramater must be equal to 'check' or 'uncheck'");
+			}
+			var isChecked = selNewProduct.StandaloneCheckbox(description).Checked();
+			if (isChecked == toCheck)
+			{
+				Report.Failure($"The checkbox was already {check}ed");
+				return;
+			}
+			Report.IsTrue(selNewProduct.CheckStandaloneCheckbox(description),
 				$"Failed to check the checkbox with description: '{description}'!",
 				$"Successfully checked the checkbox with description: '{description}'");
+			Report.IsTrue(selNewProduct.StandaloneCheckbox(description).Checked() == toCheck,
+				$"The checkbox was is {check}ed after",
+				$"The checkbox is {check}ed as expected");
 		}
 	}
 }

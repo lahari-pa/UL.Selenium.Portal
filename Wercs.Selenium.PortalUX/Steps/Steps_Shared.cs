@@ -4346,5 +4346,35 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the section: 'Select all modes of transport that you've classified the product for' subsection: 'TDG' field to: Shipping with limited quantity");
 			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "TDG", "Shipping with limited quantity");
 		}
+		[StepDefinition(@"I call Shared Step 65939 \(Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE\)")]
+		public void Shared65939_GoToTransportDotStep_EnterUn1966ConfirmData_NoContinue()
+		{
+			var selStepsNewProduct = new StepsNewProduct();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the 'U.S. Department of Transportation (DOT) Classification' tab");
+			selStepsNewProduct.GivenInTheNewProductPageIClickSection("U. S. Department of Transportation (DOT) Classification");
+			TestReport.StartStep("I enter the Un Number 'UN1966'");
+			selStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN1966");
+			TestReport.StartStep("I confirm 'Hydroden, refrigerated liquid' is showing for the Proper Shipping Name");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Proper Shipping Name", "Hydrogen, refrigerated liquid");
+			TestReport.StartStep("I confirm no other options are available for the Proper Shipping Name drop down list");
+			var options = new Table("Option");
+			options.AddRow("Hydrogen, refrigerated liquid");
+			selStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Proper Shipping Name", options);
+			TestReport.StartStep("I enter the phrase 'Technical Name Test' into the Technical Name field");
+			selStepsNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Name Test");
+			TestReport.StartStep("I confirm '2.1' is selected for section: Hazard Class (select)");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Hazard Class (select)", "2.1");
+			TestReport.StartStep("I confirm '2.1' is the only available option for section: Hazard Class (select)");
+			options = new Table("Option");
+			options.AddRow("2.1");
+			selStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Hazard Class (select)", options);
+			TestReport.StartStep("I confirm 'None' is selected for section 'Packing Group'");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group", "None");
+			TestReport.StartStep("I confirm 'None' is the only available option for section 'Packing Group'");
+			options = new Table("Option");
+			options.AddRow("None");
+			selStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Packing Group", options);
+		}
 	}
 }
