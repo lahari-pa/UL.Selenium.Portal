@@ -200,6 +200,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyMessages.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\NewProduct.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewProduct.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 12.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -604,6 +609,10 @@
     <None Include="Features\MyMessages.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MyMessages.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\NewProduct.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>NewProduct.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 12.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
