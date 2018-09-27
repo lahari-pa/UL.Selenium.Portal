@@ -4362,7 +4362,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			options.AddRow("Hydrogen, refrigerated liquid");
 			selStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Proper Shipping Name", options);
 			TestReport.StartStep("I enter the phrase 'Technical Name Test' into the Technical Name field");
-			selStepsNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical Name Test");
+			selStepsNewProduct.SetTheSectionOptionTo("Technical Name", "Technical Name Test");
 			TestReport.StartStep("I confirm '2.1' is selected for section: Hazard Class (select)");
 			selStepsNewProduct.CheckingFieldInputIsCorrect("Hazard Class (select)", "2.1");
 			TestReport.StartStep("I confirm '2.1' is the only available option for section: Hazard Class (select)");

@@ -143,3 +143,106 @@ And Hazard Class (select) should be showing the value: 2.1
 And Packing Group should be showing the value: None
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65754
+
+# Assigned to Beverly Barrett
+# Created by Beverly Barrett
+Scenario: [65940] Transportation - Copy information from my U.S. Department of Transportation data check box &  IMDG data
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+And I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport field to: Yes
+And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
+And I click continue
+And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+And I should see the International Marine (IMDG) Classification Page
+And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+And UN Number should be showing the value: UN1950
+And Proper Shipping Name should be showing the value: Aerosols
+And Hazard Class (select) should be showing the value: 2
+And The following options should be displayed exclusively for section: Hazard Class (select)
+| Option |
+| 2      |
+And Packing Group (select) should be showing the value: None
+And The following options should be displayed exclusively for section: Packing Group (select)
+| Option |
+| None   |
+And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
+And I click continue
+And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
+And UN Number should be showing the value: UN1950
+And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
+And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+And UN Number should be showing the value: UN1966
+And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
+And Technical Name should be showing the value: Technical Name Test
+And Hazard Class (select) should be showing the value: 2.1
+And Packing Group should be showing the value: None
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65940
+
+# Assigned to Beverly Barrett
+# Created by Beverly Barrett
+Scenario: [65944] Transportation - Copy information from my U.S. Department of Transportation data check box &  IMDG data
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+And I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
+And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport field to: Yes
+And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
+And I click continue
+And I should see the U. S. Department of Transportation (DOT) Classification Page
+And I set the UN Number field to: UN1975
+And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixtures
+And The following options should be displayed exclusively for section: Proper Shipping Name
+| Option                                         |
+| Nitric oxide and dinitrogen tetroxide mixtures |
+And I set the Technical Name field to: Technical Test Name
+And Hazard Class (select) should be showing the value: 2.3
+And The following options should be displayed exclusively for section: Hazard Class (select)
+| Option |
+| 2.3    |
+And Packing Group (select) should be showing the value: None
+And The following options should be displayed exclusively for section: Packing Group (select)
+| Option |
+| None   |
+And I click continue
+And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
+And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+And UN Number should be showing the value: UN1975
+And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixtures
+And Hazard Class (select) should be showing the value: 2.3, (5.1), (8)
+And The following options should be displayed exclusively for section: Hazard Class (select)
+| Option          |
+| 2.3, (5.1), (8) |
+And Packing Group (select) should be showing the value: None
+And The following options should be displayed exclusively for section: Packing Group (select)
+| Option |
+| None   |
+And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
+And I click continue
+And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
+And UN Number should be showing the value: UN1975
+And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
+And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+And UN Number should be showing the value: UN1966
+And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
+And Technical Name should be showing the value: Technical Name Test
+And Hazard Class (select) should be showing the value: 2.1
+And Packing Group should be showing the value: None
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65944
