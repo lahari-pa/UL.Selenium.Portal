@@ -72,7 +72,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Select_Payment_Method: " + payment_method);
 			RefindContainerElement();
-			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div"),2).ToList();
+			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div"), 2).ToList();
 
 			foreach (var method in allProducts)
 			{
@@ -1394,6 +1394,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Report.Success("Correct Page Opened - Subscription Billing");
 			return true;
+		}
+
+		public bool Product_Billing_Header_Displayed()
+		{
+			IWebElement myHeader = containerElement
+				.FindElements(By.XPath(".//div/h3[text()='Product Billing']"), 10).FirstOrDefault();
+			return myHeader != null && myHeader.Displayed;
 		}
 
 		public bool Yearly_Option_Selected()

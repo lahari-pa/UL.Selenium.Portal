@@ -27,7 +27,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			while (spinner != null && spinner.Displayed)
 			{
 				spinner = containerElement.FindElement(By.XPath(".//i[contains(@class,'fa-spinner')]"), 2);
-				Delay.Seconds(Delay.SpeedFactor*1);
+				Delay.Seconds(Delay.SpeedFactor * 1);
 			}
 
 			return true;
@@ -50,7 +50,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var batteryManufacturer = row.FindElement(By.XPath(".//td[2]"), 2).GetValue();
 				var batteryCellsInPackage = row.FindElement(By.XPath(".//td[3]"), 2).GetValue();
 				var batteryCellsRequired = row.FindElement(By.XPath(".//td[4]"), 2).GetValue();
-				retList.Add(new Battery(){BatteryType = batteryType, Manufacturer = batteryManufacturer, NumberPerPackage = Convert.ToInt32(batteryCellsInPackage), RequiredToRun = Convert.ToInt32(batteryCellsRequired)});
+				retList.Add(new Battery() { BatteryType = batteryType, Manufacturer = batteryManufacturer, NumberPerPackage = Convert.ToInt32(batteryCellsInPackage), RequiredToRun = Convert.ToInt32(batteryCellsRequired) });
 			}
 
 			return retList;
@@ -64,7 +64,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetPrivateLabelStatement()
 		{
 			WaitForSpinner();
-			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'Private Label')]/../p[1]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'Private Label')]/../p[1]"), 2).Text;
 		}
 
 		/// <summary>
@@ -73,7 +73,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetAlternativeControlPlanQuestion()
 		{
 			WaitForSpinner();
-			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'Alternative Control Plan')]/../p[1]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'Alternative Control Plan')]/../p[1]"), 2).Text;
 		}
 
 		/// <summary>
@@ -82,14 +82,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetGramsOfVocPerUseAsDefinedCaliforniaConsumerProductsQuestion()
 		{
 			WaitForSpinner();
-			return this.containerElement.FindElement(By.XPath(".//h4[@class='summary-question' and contains(text(),'California Consumer Products Regulation')]/../p[1]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'California Consumer Products Regulation')]/../p[1]"), 2).Text;
 		}
 
 		public List<string> GetInfoForSectionOption(string section, string option)
 		{
 			WaitForSpinner();
-			var els = containerElement.FindElements(By.XPath(".//h4[@class='summary-question' and contains(text(),'" + section + "')]/../p[contains(text(),'" + option + "')]"), 2);
-			
+			var els = containerElement.FindElements(By.XPath(".//h3[@class='summary-question' and contains(text(),'" + section + "')]/../p[contains(text(),'" + option + "')]"), 2);
+
 			return els.Select(x => x.GetElementText()).ToList();
 		}
 	}

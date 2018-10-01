@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Castle.Core.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
@@ -48,7 +49,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Info(i.ToString());
 				try
 				{
-					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']"),60) != null)
+					var table = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']"), 60);
+					if (table != null && table.Displayed)
 					{
 						Report.Info("Found table");
 						return true;
@@ -70,8 +72,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool WaitForIDToTurnBlue(string id, int secondsToWait)
 		{
 			//get index of id column
-			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a=>a=="Product");
-			for(int i = 0;i < secondsToWait; i++)
+			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			for (int i = 0; i < secondsToWait; i++)
 			{
 				StudioSHAManager mySHAManager = new StudioSHAManager();
 
@@ -90,11 +92,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				Delay.Seconds(5);
 				var matchingTD = SeleniumBrowser.WebBrowser
-					.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index+1).ToString() + "]"))
+					.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
 					.FirstOrDefault(x => x.GetValue().Trim() == id);
 
 				string colour = matchingTD.FindElement(By.XPath(".//span")).GetCssValue("color").ToString();
-				if ( colour == "rgba(0, 0, 255, 1)")
+				if (colour == "rgba(0, 0, 255, 1)")
 				{
 					return true;
 				}
@@ -165,12 +167,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']//tr"), 3).ToList();
 
 			Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
-			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x=>x.GetValue().Trim()).ToList();
+			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList();
 			Report.Info("Got list of headers");
 			List<Product> ListOfProducts = new List<Product>();
 
 			//ignore first row because it is empty
-			for (int j = 1; j < Math.Min(ListOfProductRows.Count, topX+1); j++)
+			for (int j = 1; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
 			{
 				Report.Info("Looking at row: " + j.ToString());
 				Product thisProduct = new Product();
@@ -247,11 +249,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							break;
 						case "SDS":
 							thisProduct.SDS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim()=="Yes";
+								.GetValue().Trim() == "Yes";
 							break;
 						case "Canada SDS":
 							thisProduct.CanadaSDS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim()=="Yes";
+								.GetValue().Trim() == "Yes";
 							break;
 						case "Clients":
 							thisProduct.Clients = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -259,7 +261,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							break;
 						case "T. Reg":
 							thisProduct.TReg = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim()=="Yes";
+								.GetValue().Trim() == "Yes";
 							break;
 						case "Last Pub Date":
 							thisProduct.LastPubDate = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -271,7 +273,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							break;
 						case "Refeed":
 							thisProduct.Refeed = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim()=="Yes";
+								.GetValue().Trim() == "Yes";
 							break;
 						default:
 							//ignore this column, either empty or not of interest
@@ -288,7 +290,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool TopRowProductsTableMatchesId(string id)
 		{
-			return GetTopXProducts(1).FirstOrDefault().ID == id;
+			// JS. possible null exception - GetTopXProducts() can return a list with 0 items
+			//return GetTopXProducts(1).FirstOrDefault().ID == id;
+			var products = this.GetTopXProducts(1);
+			if (products == null || products.Count == 0)
+			{
+				return false;
+			}
+			return products.FirstOrDefault().ID == id;
 		}
 
 		public bool ClickProcessProductData()
@@ -366,7 +375,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool WaitForProductToAppearOnProcessedList(string id, int secondsToWait)
 		{
-			for (int i=0; i<secondsToWait; i++)
+			for (int i = 0; i < secondsToWait; i++)
 			{
 				var processedList =
 					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='dialog-product']//div[@id='message']"));
@@ -706,7 +715,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickButton(string button)
 		{
 			var buttonList = containerElement.FindElements(By.XPath(".//button/span"));
-			var matchingButton = buttonList.FirstOrDefault(x=>x.GetValue().Trim() == button);
+			var matchingButton = buttonList.FirstOrDefault(x => x.GetValue().Trim() == button);
 			if (matchingButton == null)
 			{
 				Report.Info("no matching button was found");
@@ -771,13 +780,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				else
 				{
 					Report.Info("Failed to find match for regex pattern: " + regexIDPattern + " in string: " +
-					            match.Value);
+								match.Value);
 				}
 			}
 			else
 			{
 				Report.Info("Failed to find match for regex pattern: " + regexSplitPattern + " in string: " +
-				            matchingInputString);
+							matchingInputString);
 			}
 
 			return false;
@@ -795,7 +804,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
-			
+
 		}
 
 		public bool ClickUpdateStatus()
@@ -809,7 +818,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
-			
+
 		}
 
 		public bool ClickRefeedToClient()

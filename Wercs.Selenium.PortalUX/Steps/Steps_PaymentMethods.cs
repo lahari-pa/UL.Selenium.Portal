@@ -753,6 +753,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"In the Purchase Summary screen if Product Billing is displayed I click Confirm Order")]
+		public void ThenInThePurchaseSummaryScreenIfProductBillingIsShownIClickConfirmOrder()
+		{
+			var mySub = new PaymentMethods_Subscription_Billing();
+			if (mySub.Product_Billing_Header_Displayed())
+			{
+				Report.Info("The Product Billing section was displayed, so trying to click 'Confirm Order'");
+				Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
+				Delay.Seconds(10);
+			};
+			Report.Info("The Product Billing section was not displayed, so not clicking 'Confirm Order'");
+
+		}
+
 		[StepDefinition(@"In the Thank You screen I check the Header is correct")]
 		public void ThenInTheThankYouScreenICheckTheHeaderIsCorrect()
 		{

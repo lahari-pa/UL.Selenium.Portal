@@ -2750,6 +2750,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return null;
 			}
 		}
+
+		public string SectionColour(string section)
+		{
+			var xPath = @"//div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]";
+			var el = containerElement.FindElement(By.XPath(xPath), 2);
+			var colour = el?.GetCssValue("color");
+
+			return colour;
+		}
+
 		/// <summary>
 		/// Product label specifies a dilution ratio option
 		/// </summary>

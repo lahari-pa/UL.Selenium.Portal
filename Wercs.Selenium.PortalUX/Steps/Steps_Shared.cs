@@ -54,7 +54,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
 				"AAA WERCS Test " + type.Replace("/", " ").Replace("%", ""));
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
-								 " in the Type of Product select field");
+			                     " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -724,7 +724,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (upc.Contains("Equals"))
 			{
 				var upc_ = upc.Replace("Equals", "");
-				var upcInfo = new UpcInformation { ContainerType = containerType, Size = size, UpcNumber = upc_ };
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_
+				};
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
 			}
 			else
@@ -735,6 +739,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				upcTable.AddRow("Size", size);
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
+
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
 		}
@@ -789,7 +794,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section +
-								 @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+			                     @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section,
 				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
@@ -834,8 +839,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57884 \(Safety Data Sheet Authoring - Additional Data \(Optional\) step - add any random data for all fields - Happy path\) and enter the following:")]
-		public void GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
-			Table table)
+		public void GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(Table table)
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
@@ -848,7 +852,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(
 					table.Rows[0]["Personal Protection Equipment"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " +
-								 table.Rows[0]["Autoignition Temperature"]);
+			                     table.Rows[0]["Autoignition Temperature"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(
 				table.Rows[0]["Autoignition Temperature"]);
 			TestReport.StartStep(
@@ -857,17 +861,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(
 				table.Rows[0]["Minimum Ignition Energy"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-								 table.Rows[0]["Viscosity"]);
+			                     table.Rows[0]["Viscosity"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
-								 table.Rows[0]["Appearance"]);
+			                     table.Rows[0]["Appearance"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(
 				table.Rows[0]["Appearance"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " +
-								 table.Rows[0]["Odor"]);
+			                     table.Rows[0]["Odor"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(table.Rows[0]["Odor"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " +
-								 table.Rows[0]["Odor Threshold"]);
+			                     table.Rows[0]["Odor Threshold"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(
 				table.Rows[0]["Odor Threshold"]);
 			TestReport.StartStep(
@@ -1167,6 +1171,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyNewProduct.SetTheSectionOptionTo("Secondary Physical State",
 					"Solid");
 			}
+
 			//TestReport.StartStep("I set the Secondary Physical State option to: Solid");
 			//MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Solid");
 			TestReport.StartStep("In the New Product page I click Continue");
@@ -1192,7 +1197,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (waterSolubility != null && waterSolubility != "N/A")
 			{
 				TestReport.StartStep("I set the Select the best Water Solubility description option to: " +
-									 waterSolubility);
+				                     waterSolubility);
 				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", waterSolubility);
 			}
 			else
@@ -1896,6 +1901,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo(
 					"When mixed with an equal amount of water, will this produce a solution with a pH", "Yes");
 			}
+
 			TestReport.StartStep("I set the Select all ingredients included in this product option to: Dairy");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select all ingredients included in this product", "Dairy");
 			TestReport.StartStep("I set the Product is manufactured in a facility that processes, or contains option to: Dairy or products containing dairy or milk");
@@ -2282,12 +2288,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
 				Report.Screenshot();
 			}
+
 			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
 			{
 				TestReport.StartStep(
 					"Selecting the first option for section: Secondary Physical Stater");
 				MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
 			}
+
 			//if (thisNewProduct.OptionExists("Secondary Physical State"))
 			//{
 			//	TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
@@ -2753,8 +2761,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myGlobalSteps.CloseDataSummaryTab();
 			TestReport.StartStep("I should see the Data Acceptance Page");
 			myStepsNewProduct.GivenIShouldSeeXPage("Data Acceptance");
-			TestReport.StartStep("I navigate to the home page");
-			new StepsHomepage().ThenINavigateToTheHomePage();
+			// Nav to home not specified by the TFS item. I checked and it shouldn't break any other tests. Always end of test or delete shared step (which navs to home)
+			//TestReport.StartStep("I navigate to the home page");
+			//new StepsHomepage().ThenINavigateToTheHomePage();
 		}
 
 		[StepDefinition(@"I call Shared Step 43758 \(Product Grid- Filter for Product- Select Product - Delete\) for product: (.*)")]
@@ -2797,6 +2806,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"100g/100ml"));
 				myStepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "100g/100ml");
 			}
+
 			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
 			{
 				TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
@@ -2804,6 +2814,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Liquid"));
 				myStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			}
+
 			TestReport.StartStep("In the Product Characteristics page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
@@ -2869,6 +2880,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)",
 					table.Rows[0]["Product is marketed for use"]);
 			}
+
 			if (myNewProduct.SectionExists(
 				"Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)"))
 			{
@@ -2878,6 +2890,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)",
 					table.Rows[0]["Classified using OSHA (US) Globally Harmonized Standards (GHS)"]);
 			}
+
 			if (myNewProduct.SectionExists(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns."))
 			{
@@ -2887,6 +2900,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 					table.Rows[0]["Shipped directly by supplier"]);
 			}
+
 			if (myNewProduct.SectionExists(
 				"Product is a Retailer's Private Label or Brand"))
 			{
@@ -2896,6 +2910,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand",
 					table.Rows[0]["Private Label or Brand"]);
 			}
+
 			if (myNewProduct.SectionExists(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)"))
 			{
@@ -2905,6 +2920,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 					table.Rows[0]["Good Not for resale"]);
 			}
+
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			TestReport.StartStep("In the Additional Product Information page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
@@ -3117,7 +3133,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
 			TestReport.StartStep("I should see the Product Characteristics Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
-			MyNewProductSteps.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
+			// From TFS - Note: In local only the Liquid option is shown - in staging and production we show Liquid and Sold hence the presence of this step
+			if (GlobalParameters.SiteType == "Development")
+			{
+				MyNewProductSteps.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
+			}
+			else
+			{
+				MyNewProductSteps.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			}
+
 			MyNewProductSteps.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
 			MyNewProductSteps.SetTheSectionOptionTo("Specific Gravity", "20");
 			MyNewProductSteps.SetTheSectionOptionTo("pH", "7");
@@ -3823,13 +3848,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
 				"SearchTerm",
-				"SearchValue"});
+				"SearchValue"
+			});
 			table.AddRow(new string[] {
 				"ProductID",
-				id});
+				id
+			});
 			table.AddRow(new string[] {
 				"Status",
-				status});
+				status
+			});
 
 			TestReport.UseSubSteps = true;
 
@@ -3888,17 +3916,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 					x.UserName == "SHAMANAGER" && x.DateStarted.Date == DateTime.Today.Date &&
 					x.Class == "Wercs.Core.BLLPortal.ImportProcessRules");
 			}
+
 			if (MatchingJob != null)
 			{
 				Report.Success("Matching job has been found with username=SHAMANAGER, date=" +
-							   DateTime.Today.Date.ToString() +
-							   ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+				               DateTime.Today.Date.ToString() +
+				               ", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 			else
 			{
 				Report.Info("No matching job has been found with username=SHAMANAGER, date=" +
-							DateTime.Today.Date.ToString() +
-							", class=Wercs.Core.BLLPortal.ImportProcessRules");
+				            DateTime.Today.Date.ToString() +
+				            ", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 
 			GivenICallSharedStep59066GoToSHAManager();
@@ -3959,6 +3988,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Error("Studio SHA Manager is not showing");
 			}
+
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
 
@@ -3978,6 +4008,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					selectedID = true;
 					break;
 				}
+
 				Delay.Seconds(3);
 			}
 
@@ -4012,35 +4043,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
 				"datacode",
-				"value"});
+				"value"
+			});
 			table2.AddRow(new string[] {
 				"DPQAPF",
-				"pass"});
+				"pass"
+			});
 			table2.AddRow(new string[] {
 				"DCQAPF",
-				"pass"});
+				"pass"
+			});
 			table2.AddRow(new string[] {
 				"VCQA",
-				"pass"});
+				"pass"
+			});
 			table2.AddRow(new string[] {
 				"RSQAPF",
-				"pass"});
+				"pass"
+			});
 			table2.AddRow(new string[] {
 				"RSQHADPF",
-				"pass"});
+				"pass"
+			});
 
 			Steps_Studio thisStepsStudio = new Steps_Studio();
 			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
 			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
 			TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-				"Item"});
+				"Item"
+			});
 			table3.AddRow(new string[] {
-				"Current Document (Publish)"});
+				"Current Document (Publish)"
+			});
 			table3.AddRow(new string[] {
-				"Document Queue"});
+				"Document Queue"
+			});
 			table3.AddRow(new string[] {
-				"Apply rules"});
+				"Apply rules"
+			});
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
 
@@ -4051,16 +4092,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			GeneralUtilities.StudioWaitForSpinner();
 			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
 				"Text",
-				"Should Show"});
+				"Should Show"
+			});
 			table4.AddRow(new string[] {
 				"CKLT",
-				"False"});
+				"False"
+			});
 			table4.AddRow(new string[] {
 				"NGHS",
-				"False"});
+				"False"
+			});
 			table4.AddRow(new string[] {
 				"SBCS",
-				"False"});
+				"False"
+			});
 			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
 			thisStepsStudio.GivenICloseCurrentDocument();
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
@@ -4090,27 +4135,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ProductOrAlias",
 				"Format",
 				"Subformat",
-				"DocType"});
+				"DocType"
+			});
 			tblCheckDocument.AddRow(new string[] {
 				"saved as TestCase75335",
 				"SBCS",
 				"EN",
-				"PDF"});
+				"PDF"
+			});
 			tblCheckDocument.AddRow(new string[] {
 				"saved as TestCase75335",
 				"NGHS",
 				"EN",
-				"PDF"});
+				"PDF"
+			});
 			tblCheckDocument.AddRow(new string[] {
 				"saved as TestCase75335",
 				"NGHS",
 				"EN",
-				"RTF"});
+				"RTF"
+			});
 			tblCheckDocument.AddRow(new string[] {
 				"saved as TestCase75335",
 				"CKLT",
 				"EN",
-				"PDF"});
+				"PDF"
+			});
 			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
 			Delay.Seconds(3);
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
@@ -4222,6 +4272,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						Report.Info("Job is no longer found so assume it has completed");
 						Report.Screenshot();
 					}
+
 					Delay.Seconds(1);
 				}
 			}
@@ -4233,9 +4284,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-				"Retailer"});
+				"Retailer"
+			});
 			table2.AddRow(new string[] {
-				"Rite Aid"});
+				"Rite Aid"
+			});
 
 			Steps_Studio thisStepsStudio = new Steps_Studio();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -4312,7 +4365,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for field to: DOT");
 			selStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "DOT");
 			TestReport.StartStep("I set the section 'Select all modes of transport that you've classified the product for' subsection 'DOT' field to: Shipping with limited quantity");
-			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "DOT", "Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Shipping with limited quantity", "Select all modes of transport that you've classified the product for", "DOT");
 		}
 
 		[StepDefinition(@"I call Shared Step 65700 \(Transportation Details 1 - Select IATA & Limited Shipping\)")]
@@ -4323,8 +4376,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for field to: IATA");
 			selStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "IATA");
 			TestReport.StartStep("I set the section: 'Select all modes of transport that you've classified the product for' subsection: 'IATA' field to: Shipping with limited quantity");
-			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "IATA", "Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Shipping with limited quantity", "Select all modes of transport that you've classified the product for", "IATA");
 		}
+
 		[StepDefinition(@"I call Shared Step 65699 \(Transport - Select IMDG & Limited Shipping - No Continue\)")]
 		public void Shared65699_Transport_SelectImdgAndLimitedShipping_NoContinue()
 		{
@@ -4333,8 +4387,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for field to: IMDG");
 			selStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "IMDG");
 			TestReport.StartStep("I set the section: 'Select all modes of transport that you've classified the product for' subsection: 'IMDG' field to: Shipping with limited quantity");
-			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "IMDG", "Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Shipping with limited quantity", "Select all modes of transport that you've classified the product for", "IMDG");
 		}
+
 		//65701
 		[StepDefinition(@"I call Shared Step 65701 \(Transport - Select TDG & Limited Shipping - No Continue\)")]
 		public void Shared65701_Transport_SelectTdgAndLimitedShipping_NoContinue()
@@ -4344,8 +4399,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the Select all modes of transport that you've classified the product for field to: TDG");
 			selStepsNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for", "TDG");
 			TestReport.StartStep("I set the section: 'Select all modes of transport that you've classified the product for' subsection: 'TDG' field to: Shipping with limited quantity");
-			selStepsNewProduct.SetTheOptionSubOptionTo("Select all modes of transport that you've classified the product for", "TDG", "Shipping with limited quantity");
+			selStepsNewProduct.SetTheOptionSubOptionTo("Shipping with limited quantity", "Select all modes of transport that you've classified the product for", "TDG");
 		}
+
 		[StepDefinition(@"I call Shared Step 65939 \(Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE\)")]
 		public void Shared65939_GoToTransportDotStep_EnterUn1966ConfirmData_NoContinue()
 		{
@@ -4375,6 +4431,66 @@ namespace Wercs.Selenium.PortalUX.Steps
 			options = new Table("Option");
 			options.AddRow("None");
 			selStepsNewProduct.CheckOptionsInSection("should", "displayed exclusively", "Packing Group", options);
+		}
+
+		// In progress - PD + page not loading in studio
+		[StepDefinition(@"I call Shared Step 65969 \(Go to PD+ - Select your product & CKLT - Continue\)")]
+		public void Shared65969_GoToPdPlus_SelectYourProductAndCklt_Continue()
+		{
+			var selStepsSha = new Steps_SHA();
+			selStepsSha.GivenIClickTopMenuItemAndSubMenuItem("Authoring", "Power Designer Plus");
+			GeneralUtilities.StudioWaitForSpinner();
+			// Filter for your product
+			// Make sure CKLT (Checklist) is selected as the Subformat
+			// Click Continue
+		}
+
+		[StepDefinition(@"I call Shared Step 81310 \(UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue\)")]
+		public void Shared81310_UNNumber_EnterUN1950SelectAerosolAndHazClassConfirmPackingGroup_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I enter UN1950 in the UN Number field");
+			selStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN1950");
+			TestReport.StartStep("I select Aerosols from the Proper Shipping Name drop down");
+			selStepsNewProduct.SetTheSectionOptionTo("Proper Shipping Name", "Aerosols");
+			TestReport.StartStep("I select the first option from: Hazard Class (select)");
+			selStepsNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
+			TestReport.StartStep("I confirm the Packing Group (select) option is set to: None");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group (select)", "None");
+			TestReport.StartStep("I click continue");
+			selStepsNewProduct.ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 81311 \(UN Number - enter UN1206 - confirm pre-populated select radio button - Continue\)")]
+		public void Shared81311_UNNumber_EnterUn1206_ConfirmPrePopulatedSelectRadioButton_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			var selStepsNewProduct = new StepsNewProduct();
+			var selNewProduct = new NewProduct();
+			TestReport.StartStep("I enter UN1206 in the UN Number field");
+			selStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN1206");
+			TestReport.StartStep("I confirm the Proper Shipping Name is pre-populated with Heptanes");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Proper Shipping Name", "Heptanes");
+			TestReport.StartStep("I confirm the Hazard Class drop down is pre-populated with 3");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Hazard Class (select)", "3");
+			TestReport.StartStep("I confirm the Packing group drop down is pre-populated with II");
+			selStepsNewProduct.CheckingFieldInputIsCorrect("Packing Group (select)", "II");
+			// Some notes from TFS:
+			// At times an additional question is now shown if you see it then perform this step and step 6 - otherwise ignore these two steps
+			// I really do not think this is not correct as I do not have these values set on the product so I have re-emailed Courtney with details of testing and questions - for now this step is left in - but it may need to me removed/changed at some point
+			var sections = selNewProduct.GetDisplayedSections();
+			if (sections.Any(x => x.ToLower().Contains("boiling point")))
+			{
+				TestReport.StartStep(@"Confirm an additional question is shown which reads ""Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.""");
+				var table = new Table("Section");
+				table.AddRow("Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.");
+				selStepsNewProduct.CheckDisplayedSections("see", table);
+				TestReport.StartStep("I select the first option in the Packing Group additional question");
+				selStepsNewProduct.SelectFirstOptionInSection("Product has a boiling point of");
+			}
+			TestReport.StartStep("I click continue");
+			selStepsNewProduct.ClickContinue();
 		}
 	}
 }

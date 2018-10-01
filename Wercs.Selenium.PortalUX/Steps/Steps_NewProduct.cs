@@ -1745,9 +1745,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		// JS a solution specifically for Transportation page where you have nested checkbox sections eg. DOT, IATA
-		[StepDefinition(@"I set the section: (.*) subsection: (.*) option to: (.*)")]
-		[StepDefinition(@"I set the section: (.*) subsection: (.*) field to: (.*)")]
-		public void SetTheOptionSubOptionTo(string section, string subSection, string option)
+		[StepDefinition(@"I select option: (.*) under section: (.*) and subsection: (.*)")]
+		public void SetTheOptionSubOptionTo(string option, string section, string subSection)
 		{
 			Report.IsTrue(new NewProduct().SetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
 				$"Failed to set the input to: '{option}' in section: '{section}' and subection: '{subSection}'",
@@ -1763,7 +1762,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				expectedSections.Add(Row["Section"]);
 			}
-			var ActualSections = new NewProduct().GetDisplayedSections().Select(x => x.Trim()).ToList();
+			var expectedNormalised = expectedSections.Select(x => x.Replace(" ", "")).ToList();
+			var ActualSections = new NewProduct().GetDisplayedSections().Select(x => x).ToList();
+			var actualNormalised = ActualSections.Select(x => x.Replace(" ", "")).ToList();
 			Report.Info("Actual sections: " + string.Join(",", ActualSections));
 			if (condition == "only see")
 			{
@@ -1780,7 +1781,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			if (condition == "see")
 			{
-				Report.IsTrue(expectedSections.All(ActualSections.Contains), "The displayed sections: '" + string.Join("; ", ActualSections) + "' did not match the expected sections: '" + string.Join("; ", expectedSections) + "'", "The displayed sections: '" + string.Join("; ", ActualSections) + "' matched the expected sections");
+				Report.IsTrue(expectedNormalised.All(actualNormalised.Contains), "The displayed sections: '" + string.Join("; ", ActualSections) + "' did not match the expected sections: '" + string.Join("; ", expectedSections) + "'", "The displayed sections: '" + string.Join("; ", ActualSections) + "' matched the expected sections");
 				return;
 			}
 			if (condition == "do not see")
@@ -1872,7 +1873,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				foreach (var item in errorMessagesExpected)
 				{
-					Report.IsTrue(errorMessages.Contains(item.Trim()),
+					Report.IsTrue(errorMessages.Any(e => e.Contains(item)),
 						"Failed to find the error message: " + item + " under section: " + section + "!",
 						"Successfully found the error message: " + item + " for section: " + section, false, false);
 				}
@@ -1901,6 +1902,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(showing.Contains(expec), "Failed to find the selected value: " + expec + " in the section: " + section + "!", string.Format("Successfully found {0} in section: {1}", expec, section), false, false);
 			}
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm that: (.*) is not the only option for section: (.*)")]
+		public void ConfirmThatIsNotTheOnlyOptionForSection(string option, string section)
+		{
+			var selNewProduct = new NewProduct();
+			var options = selNewProduct.GetAllOptionsForSection(section);
+			if (!options.Contains(option))
+			{
+				Report.Failure($"Option: '{option}' was not available in section: '{section}'!");
+				Report.Screenshot();
+			}
+			else if (options.Count == 1)
+			{
+				Report.Failure($"Option: '{option}' was the only available option in section: '{section}'!");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Success($"Option: '{option}' was not the only available option in section: {section} as expected");
+				Report.Screenshot();
+			}
 		}
 
 		[StepDefinition(@"I confirm the VOC limits table has an entry for Regulation: (OTC|CARB)")]
@@ -3682,6 +3705,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selNewProduct.StandaloneCheckbox(description).Checked() == toCheck,
 				$"The checkbox was is {check}ed after",
 				$"The checkbox is {check}ed as expected");
+		}
+
+		[StepDefinition(@"section: (.*) is highlighed in red indicating an error")]
+		public void SectionIsHighlightedInRedIndicatingAnError(string section)
+		{
+			var selNewProduct = new NewProduct();
+			var colour = selNewProduct.SectionColour(section);
+			// Not the best. Will break if the exact shade changes (hex #A9443F, rgb 169, 68, 66) and verified it is intended
+			var expected = "rgba(169, 68, 66, 1)";
+			Report.IsTrue(colour == expected,
+				$"Section '{section}' colour was not the expected red! The colour is: {colour}",
+				$"Section '{section}' colour was red as expected");
 		}
 	}
 }
