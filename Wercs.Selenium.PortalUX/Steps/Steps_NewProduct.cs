@@ -3718,5 +3718,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 				$"Section '{section}' colour was not the expected red! The colour is: {colour}",
 				$"Section '{section}' colour was red as expected");
 		}
+
+		[StepDefinition(@"I should see following statement: (.*)")]
+		public void SectionStatement(string option)
+		{
+			Report.Info("Checking statement");
+			var selNewProduct = new NewProduct();
+			var found = selNewProduct.GetDisplayedSections();
+
+			Report.IsTrue(found.Contains(option),
+				"statement was not as expected! Expected: " + option + ", but found: " + found + "!",
+				"statement was showing: " + option + ", as expected!");
+		}
 	}
 }
