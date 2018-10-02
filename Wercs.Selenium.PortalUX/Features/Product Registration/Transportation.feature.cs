@@ -768,7 +768,7 @@ testRunner.And("I check the checkbox with description: Copy information from my 
 testRunner.And("UN Number should be showing the value: UN1975", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 228
 testRunner.And("Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tet" +
-                    "roxide mixtures", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "roxide mixture", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 229
 testRunner.And("Hazard Class (select) should be showing the value: 2.3, (5.1), (8)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

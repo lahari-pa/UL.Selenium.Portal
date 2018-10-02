@@ -225,7 +225,7 @@ And I click continue
 And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN1975
-And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixtures
+And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixture
 And Hazard Class (select) should be showing the value: 2.3, (5.1), (8)
 And The following options should be displayed exclusively for section: Hazard Class (select)
 | Option          |
