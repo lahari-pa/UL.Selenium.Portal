@@ -391,3 +391,6 @@ And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select
 And I Confirm the lower portion of the table shows 1
 And I Repeat steps 107 and 108 for data codes IATACP and TDGCP
 And I Click My WERCS &gt; Logout
+
+# Assigned to Beverly Barrett
+# Created by Beverly Barrett
