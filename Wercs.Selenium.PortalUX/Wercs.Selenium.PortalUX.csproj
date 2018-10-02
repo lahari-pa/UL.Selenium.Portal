@@ -405,6 +405,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VOC.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\ProductCharacteristics.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductCharacteristics.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ProductSetUp.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -778,6 +783,10 @@
     <None Include="Features\Product Registration\VOC\VOC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>VOC.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ProductCharacteristics.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProductCharacteristics.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ProductSetUp.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
