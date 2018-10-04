@@ -54,7 +54,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
 				"AAA WERCS Test " + type.Replace("/", " ").Replace("%", ""));
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
-			                     " in the Type of Product select field");
+								 " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -794,7 +794,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section +
-			                     @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+								 @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section,
 				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
@@ -852,7 +852,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(
 					table.Rows[0]["Personal Protection Equipment"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " +
-			                     table.Rows[0]["Autoignition Temperature"]);
+								 table.Rows[0]["Autoignition Temperature"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(
 				table.Rows[0]["Autoignition Temperature"]);
 			TestReport.StartStep(
@@ -861,17 +861,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(
 				table.Rows[0]["Minimum Ignition Energy"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-			                     table.Rows[0]["Viscosity"]);
+								 table.Rows[0]["Viscosity"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
-			                     table.Rows[0]["Appearance"]);
+								 table.Rows[0]["Appearance"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(
 				table.Rows[0]["Appearance"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " +
-			                     table.Rows[0]["Odor"]);
+								 table.Rows[0]["Odor"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(table.Rows[0]["Odor"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " +
-			                     table.Rows[0]["Odor Threshold"]);
+								 table.Rows[0]["Odor Threshold"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(
 				table.Rows[0]["Odor Threshold"]);
 			TestReport.StartStep(
@@ -1197,7 +1197,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (waterSolubility != null && waterSolubility != "N/A")
 			{
 				TestReport.StartStep("I set the Select the best Water Solubility description option to: " +
-				                     waterSolubility);
+									 waterSolubility);
 				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", waterSolubility);
 			}
 			else
@@ -3920,14 +3920,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (MatchingJob != null)
 			{
 				Report.Success("Matching job has been found with username=SHAMANAGER, date=" +
-				               DateTime.Today.Date.ToString() +
-				               ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+							   DateTime.Today.Date.ToString() +
+							   ", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 			else
 			{
 				Report.Info("No matching job has been found with username=SHAMANAGER, date=" +
-				            DateTime.Today.Date.ToString() +
-				            ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+							DateTime.Today.Date.ToString() +
+							", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 
 			GivenICallSharedStep59066GoToSHAManager();
@@ -4434,15 +4434,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		// In progress - PD + page not loading in studio
-		[StepDefinition(@"I call Shared Step 65969 \(Go to PD+ - Select your product & CKLT - Continue\)")]
+		[StepDefinition(@"I call Shared Step 65969 \(Go to Power Designer Plus - Select your product & CKLT - Continue\)")]
 		public void Shared65969_GoToPdPlus_SelectYourProductAndCklt_Continue()
 		{
+			TestReport.UseSubSteps = true;
 			var selStepsSha = new Steps_SHA();
+			var selStepsStudio = new Steps_Studio();
+			TestReport.StartStep("I navigate to Power Designer Plus");
 			selStepsSha.GivenIClickTopMenuItemAndSubMenuItem("Authoring", "Power Designer Plus");
 			GeneralUtilities.StudioWaitForSpinner();
-			// Filter for your product
-			// Make sure CKLT (Checklist) is selected as the Subformat
-			// Click Continue
+			TestReport.StartStep("I filter by product ID");
+			if (GlobalParameters.TestCaseId.IsNullOrEmpty())
+			{
+				throw new Exception("Needs the test case ID to fetch the product ID to continue!");
+			}
+			var id = Context.GetFromContext("TestCase" + GlobalParameters.TestCaseId).ToString();
+			if (id == null)
+			{
+				throw new Exception($"Needs the product ID to be saved to context as 'TestCase{GlobalParameters.TestCaseId}'!");
+			}
+			selStepsStudio.PowerDesignerPlusWelcomeIEnterSelectSourceProduct(id);
+			TestReport.StartStep("I confirm CKLT (Checklist) is selected as the subformat");
+			selStepsStudio.IConfirmTheSelectedSubformatInThePdPlusPopupIs("CKLT / Checklist");
+			TestReport.StartStep("I click continue");
+			selStepsStudio.ClickContinueInThePowerDesignerPlusPopup();
 		}
 
 		[StepDefinition(@"I call Shared Step 81310 \(UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue\)")]

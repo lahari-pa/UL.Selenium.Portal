@@ -2728,6 +2728,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				TestReport.UseSubSteps = true;
 				var selSelectRetailers = new SelectRetailers();
 				var selNewProduct = new NewProduct();
+				if (!selSelectRetailers.RetailersShownInViewType("tile"))
+				{
+					Report.Info("Clicking 'logo tile view' option because Select Retailers is shown in list view");
+					Report.IsTrue(selSelectRetailers.ClickRetailerOption("logo tile view"), "Failed to click 'logo tile view'", "Successfully clicked 'logo tile view'");
+				}
 				TestReport.StartStep(GlobalParameters.StepCount + " - I select retailer: " + retailer.Value);
 				GlobalParameters.StepCount++;
 				Report.Info("Clicking the checkbox for retailer with logo: " + retailer.Key);
@@ -3713,8 +3718,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var selNewProduct = new NewProduct();
 			var colour = selNewProduct.SectionColour(section);
 			// Not the best. Will break if the exact shade changes (hex #A9443F, rgb 169, 68, 66) and verified it is intended
-			var expected = "rgba(169, 68, 66, 1)";
-			Report.IsTrue(colour == expected,
+			var expected = "(169, 68, 66, 1)";
+			Report.IsTrue(colour.Contains(expected),
 				$"Section '{section}' colour was not the expected red! The colour is: {colour}",
 				$"Section '{section}' colour was red as expected");
 		}

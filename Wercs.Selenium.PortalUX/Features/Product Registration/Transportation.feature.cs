@@ -1142,7 +1142,8 @@ testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select produ
 testRunner.And("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules jo" +
                     "b to complete for product saved as: TestCase65947)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 369
-testRunner.And("[Shared Step 65969 - Go to PD+ - Select your product & CKLT - Continue]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT " +
+                    "- Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 370
 testRunner.And("I In the shared step below search for data code DOTUN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 371

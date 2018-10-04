@@ -90,6 +90,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public string SelectedSubFormat()
+		{
+			return containerElement.FindElement(By.XPath("//div[contains(@class, 'container')]//div[@id='tree']/ul//li/span[contains(@class,'active')]/span[contains(@class,'title')]"), 2)?.Text;
+		}
 		public bool SelectFormat(string subformat, string format)
 		{
 			var tree = containerElement.FindElement(By.XPath(".//div[@id='tree']/ul"), 2);

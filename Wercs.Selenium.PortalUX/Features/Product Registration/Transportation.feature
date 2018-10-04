@@ -366,7 +366,7 @@ And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase65947)
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase65947)
 And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase65947)
-And [Shared Step 65969 - Go to PD+ - Select your product & CKLT - Continue]
+And I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
 And I In the shared step below search for data code DOTUN
 And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
 And I Confirm the lower portion of the table shows UN2762

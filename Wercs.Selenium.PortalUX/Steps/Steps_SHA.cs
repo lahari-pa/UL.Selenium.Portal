@@ -65,7 +65,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInSHAManagerPageIClickTopMenuItem(string menuItem)
 		{
 			StudioSHAManager thisShaManager = new StudioSHAManager();
-			Report.IsTrue(thisShaManager.ClickTopMenuItem(menuItem),"Failed to click: " + menuItem,
+			Report.IsTrue(thisShaManager.ClickTopMenuItem(menuItem), "Failed to click: " + menuItem,
 				"Successfully clicked: " + menuItem);
 		}
 
@@ -147,7 +147,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded",
 				"Product search page has loaded as expected");
 			var x = table.Rows.ToDictionary(r => r[0], r => r[1]);
-			for (int i=0; i<x.Count; i++)
+			for (int i = 0; i < x.Count; i++)
 			{
 				Delay.Seconds(1);
 				switch (x.Keys.ElementAt(i))
@@ -202,19 +202,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 							"Failed to set reviewer", "Successfully set reviewer");
 						break;
 					case "OnSuspended":
-						Report.IsTrue(thisProductSearch.CheckOnSuspended(x.Values.ElementAt(i)=="true"),
+						Report.IsTrue(thisProductSearch.CheckOnSuspended(x.Values.ElementAt(i) == "true"),
 							"Failed to set on suspended", "Successfully set on suspended");
 						break;
 					case "RecertificationActive":
-						Report.IsTrue(thisProductSearch.CheckRecertificationActive(x.Values.ElementAt(i)=="true"),
+						Report.IsTrue(thisProductSearch.CheckRecertificationActive(x.Values.ElementAt(i) == "true"),
 							"Failed to set recertification active", "Successfully set recertification active");
 						break;
 					case "GGOnlyProducts":
-						Report.IsTrue(thisProductSearch.CheckGoodGuideOnlyProducts(x.Values.ElementAt(i)=="true"),
+						Report.IsTrue(thisProductSearch.CheckGoodGuideOnlyProducts(x.Values.ElementAt(i) == "true"),
 							"Failed to set Good Guide only products", "Successfully set Good Guide only products");
 						break;
 					case "ECommFlowProducts":
-						Report.IsTrue(thisProductSearch.CheckECommFlowProducts(x.Values.ElementAt(i)=="true"),
+						Report.IsTrue(thisProductSearch.CheckECommFlowProducts(x.Values.ElementAt(i) == "true"),
 							"Failed to set EComm flow products", "Successfully set EComm flow products");
 						break;
 					case "TReg":
@@ -314,7 +314,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
 			if (topProductnew != null)
 			{
-				Report.IsTrue(topProductnew.ID==ID && topProductnew.Status == status, "Expected: id=" + ID + " and status " + status + " but got: " + topProductnew.ID + " and " + topProductnew.Status, "Statuses match");
+				Report.IsTrue(topProductnew.ID == ID && topProductnew.Status == status, "Expected: id=" + ID + " and status " + status + " but got: " + topProductnew.ID + " and " + topProductnew.Status, "Statuses match");
 			}
 			else
 			{
@@ -322,5 +322,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 		}
+
 	}
 }

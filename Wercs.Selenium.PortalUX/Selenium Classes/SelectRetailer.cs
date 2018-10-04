@@ -124,9 +124,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("List type must be specified as either 'list' or 'tile'");
 			return false;
 		}
+
 		public bool SelectRetailerFromListView(string retailer)
 		{
-			return containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//span[text()='"+ retailer +"']]//input"), 2).TryClick();
+			return containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//span[text()='" + retailer + "']]//input"), 2).TryClick();
 		}
 
 		public List<string> RetailersNotSelected()

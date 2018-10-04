@@ -507,7 +507,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					{
 						value = @"Product\Alias";
 					}
-					if(value.ToLower().Contains("saved as"))
+					if (value.ToLower().Contains("saved as"))
 					{
 						var productDetails = (ProductInformation)Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 						value = productDetails.Id;
@@ -538,7 +538,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				if (idToSelect.ToLower().Contains("saved as"))
 				{
-					var productDetails = (ProductInformation)Context.GetFromContext(idToSelect.Replace("saved as","").Trim());
+					var productDetails = (ProductInformation)Context.GetFromContext(idToSelect.Replace("saved as", "").Trim());
 					idToSelect = productDetails.Id;
 				}
 
@@ -599,6 +599,41 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Process products screen is showing");
 			Report.IsTrue(thisProcessProducts.ClickUpdateStatus(), "Failed to click update status",
 				"Clicked update status");
+		}
+		[StepDefinition(@"In the Power Designer Plus Welcome page I enter Select Source Product: (.*)")]
+		public void PowerDesignerPlusWelcomeIEnterSelectSourceProduct(string productID)
+		{
+			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(thisPowerDesignerPlus.EnterSourceProduct(productID), $"Failed to enter {productID} into the Select Source Product field!", $"Successfully entered {productID} into the Select Source Product field");
+			Report.Info("Clicking Refresh");
+			thisPowerDesignerPlus.ClickRefreshButton();
+		}
+
+		[StepDefinition(@"I confirm the selected Subformat in the Power Designer Plus popup is: (.*)")]
+		public void IConfirmTheSelectedSubformatInThePdPlusPopupIs(string subFormat)
+		{
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var selectedSubFormat = selStudioPowerDesignerPlus.SelectedSubFormat();
+			if (selectedSubFormat != null)
+			{
+				Report.IsTrue(selStudioPowerDesignerPlus.SelectedSubFormat() == "CKLT / Checklist",
+					"The selected subformat was not CKLT / Checklist as expected! The selected subformat was: " + selectedSubFormat,
+					"The selected subformat was CKLT / Checklist as expected");
+			}
+			else
+			{
+				Report.Failure("No selected subformats were found");
+				Report.Screenshot();
+			}
+		}
+
+		[StepDefinition(@"I click continue in the Power Designer Plus popup")]
+		public void ClickContinueInThePowerDesignerPlusPopup()
+		{
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(selStudioPowerDesignerPlus.ClickContinueButton(),
+				"Failed to click Continue in the Power Designer Plus popup",
+				"Successfully clicked Continue in the Power Designer Plus popup");
 		}
 	}
 }
