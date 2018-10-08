@@ -600,6 +600,131 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisProcessProducts.ClickUpdateStatus(), "Failed to click update status",
 				"Clicked update status");
 		}
+
+
+		[Given(@"In the Product Formulation page I click button: (.*)")]
+		public void InTheProductForulationPageIClickButton(string button)
+		{
+			ProductFormulationPage thisFormulationPage = new ProductFormulationPage();
+			Report.IsTrue(thisFormulationPage.Wait_for_load(30), "Product formulation screen is not showing",
+				"Product formulation screen is showing");
+			Report.IsTrue(thisFormulationPage.ClickButton(button), "Failed to click button: " + button,
+				"Clicked button: " + button);
+		}
+
+		[Given(@"In the Create component page I add component")]
+		public void InTheCreateComponentPageIAddComponent(TechTalk.SpecFlow.Table component)
+		{
+			CreateComponentPage thisCreateComponentPage = new CreateComponentPage();
+			Report.IsTrue(thisCreateComponentPage.Wait_for_load(30), "Create component screen is not showing",
+				"Create component screen is showing");
+			if (component.ContainsColumn("Component CAS"))
+			{
+				if (component.Rows[0]["Component CAS"].Length > 0)
+				{
+					string CASNo = component.Rows[0]["Component CAS"];
+					if (CASNo.ToLower().Contains("saved as"))
+					{
+						var savedAsItem = Context.GetFromContext(CASNo.Replace("saved as", "").Trim());
+						if (savedAsItem.GetType() == typeof(string))
+						{
+							CASNo = savedAsItem.ToString();
+						}
+						else
+						{
+							CASNo = "WPS" + ((ProductInformation)savedAsItem).Id;
+						}
+					}
+					Report.IsTrue(thisCreateComponentPage.EnterCAS(CASNo),
+						"Failed to enter CAS number", "Entered CAS number");
+				}
+			}
+			if (component.ContainsColumn("Component ID"))
+			{
+				if (component.Rows[0]["Component ID"].Length > 0)
+				{
+					Report.IsTrue(thisCreateComponentPage.EnterComponentID(component.Rows[0]["Component ID"]),
+						"Failed to enter Component ID", "Entered Component ID");
+				}
+			}
+			if (component.ContainsColumn("Chemical Name"))
+			{
+				if (component.Rows[0]["Chemical Name"].Length > 0)
+				{
+					string chemName = component.Rows[0]["Chemical Name"];
+					if (chemName.ToLower().Contains("saved as"))
+					{
+						var savedAsItem = Context.GetFromContext(chemName.Replace("saved as", "").Trim());
+						if (savedAsItem.GetType() == typeof(string))
+						{
+							chemName = savedAsItem.ToString();
+						}
+						else
+						{
+							chemName = ((ProductInformation)savedAsItem).Name;
+						}
+					}
+					Report.IsTrue(thisCreateComponentPage.EnterChemicalName(chemName),
+						"Failed to enter Chemical Name", "Entered Chemical Name");
+				}
+			}
+
+			if (component.ContainsColumn("Trade secret name"))
+			{
+				if (component.Rows[0]["Trade secret name"].Length > 0)
+				{
+					Report.IsTrue(thisCreateComponentPage.EnterTradeSecretName(component.Rows[0]["Trade secret name"]),
+						"Failed to enter Trade secret name", "Entered Trade secret name");
+				}
+			}
+
+			if (component.ContainsColumn("Add to Formulation Now"))
+			{
+				if (component.Rows[0]["Add to Formulation Now"].Length > 0)
+				{
+					Report.IsTrue(thisCreateComponentPage.AddToFormulationNowCheckboxChecked(component.Rows[0]["Add to Formulation Now"].ToLower()=="true"),
+						"Failed to enter Add to Formulation Now", "Entered Add to Formulation Now");
+				}
+			}
+
+			if (component.ContainsColumn("Load Regulation Data now"))
+			{
+				if (component.Rows[0]["Load Regulation Data now"].Length > 0)
+				{
+					Report.IsTrue(thisCreateComponentPage.AddToFormulationNowCheckboxChecked(component.Rows[0]["Load Regulation Data now"].ToLower() == "true"),
+						"Failed to enter Load Regulation Data now", "Entered Load Regulation Data now");
+				}
+			}
+
+			if (component.ContainsColumn("Load chemical name translations"))
+			{
+				if (component.Rows[0]["Load chemical name translations"].Length > 0)
+				{
+					Report.IsTrue(thisCreateComponentPage.AddToFormulationNowCheckboxChecked(component.Rows[0]["Load chemical name translations"].ToLower() == "true"),
+						"Failed to enter Load chemical name translations", "Entered Load chemical name translations");
+				}
+			}
+
+			Report.IsTrue(thisCreateComponentPage.ClickButton("Save"), "Failed to click save", "Clicked save");
+
+			if (SeleniumBrowser.Alert.WaitForAlert(2))
+			{
+				string alertText = SeleniumBrowser.Alert.GetText();
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				Report.Info("Got an alert: " + alertText);
+			}
+			Delay.Seconds(5);
+		}
+
+		[Given(@"I close the Product Formulation page")]
+		public void GivenICloseTheProductFormulationPage()
+		{
+			ProductFormulationPage thisFormulationPage = new ProductFormulationPage();
+			Report.IsTrue(thisFormulationPage.Wait_for_load(30), "Product formulation screen is not showing",
+				"Product formulation screen is showing");
+			thisFormulationPage.ClickClose();
+		}
+
 		[StepDefinition(@"In the Power Designer Plus Welcome page I enter Select Source Product: (.*)")]
 		public void PowerDesignerPlusWelcomeIEnterSelectSourceProduct(string productID)
 		{
@@ -616,9 +741,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var selectedSubFormat = selStudioPowerDesignerPlus.SelectedSubFormat();
 			if (selectedSubFormat != null)
 			{
-				Report.IsTrue(selStudioPowerDesignerPlus.SelectedSubFormat() == "CKLT / Checklist",
-					"The selected subformat was not CKLT / Checklist as expected! The selected subformat was: " + selectedSubFormat,
-					"The selected subformat was CKLT / Checklist as expected");
+				Report.IsTrue(selStudioPowerDesignerPlus.SelectedSubFormat() == subFormat,
+					"The selected subformat was not " + subFormat + " as expected! The selected subformat was: " + selectedSubFormat,
+					"The selected subformat was " + subFormat + " as expected");
 			}
 			else
 			{
@@ -635,5 +760,109 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click Continue in the Power Designer Plus popup",
 				"Successfully clicked Continue in the Power Designer Plus popup");
 		}
+
+		[StepDefinition(@"In Power Designer I (left|right|double) click on section: (.*)")]
+		public void GivenInPowerDesignerIClickOnSection(string click, string section)
+		{
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
+				"Studio power designer is open");
+			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection(section, click),
+				"Failed to " + click + " click section: " + section,
+				"Successfully " + click + " clicked " + section);
+
+		}
+
+		[StepDefinition(@"In Power Designer I double click on category: (.*)")]
+		public void GivenInPowerDesignerIDoubleClickOnCategory(string category)
+		{
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(selStudioPowerDesignerPlus.DoubleClickCategoryToEdit(category),
+				"Failed to double click category: " + category,
+				"Successfully clicked " + category);
+		}
+
+		[StepDefinition(@"In Power Designer the phrase selector screen should open")]
+		public void ThenInPowerDesignerThePhraseSelectorScreenShouldOpen()
+		{
+			PhraseEditor thisPhraseEditor = new PhraseEditor();
+			Report.IsTrue(thisPhraseEditor.Wait_for_load(60), "Phrase editor has not opened.",
+				"Phrase editor has opened");
+		}
+
+		[StepDefinition(@"In the phrase selector screen I select phrases:")]
+		public void ThenInThePhraseSelectorScreenISelectPhrases(Table table)
+		{
+			bool addedSuccessfully = true;
+			PhraseEditor thisPhraseEditor = new PhraseEditor();
+			if (!thisPhraseEditor.Wait_for_load(60))
+			{
+				throw new Exception("Phrase editor is not loaded");
+			}
+
+			List<Phrase> SelectedPhrases = thisPhraseEditor.GetSelectedPhrases();
+			List<Phrase> FilteredPhrases = SelectedPhrases;
+			foreach (TableRow thisPhrase in table.Rows)
+			{
+				if (table.ContainsColumn("Code"))
+				{
+					FilteredPhrases = FilteredPhrases.Where(x => x.Code == thisPhrase["Code"]).ToList();
+				}
+				if (table.ContainsColumn("Text"))
+				{
+					FilteredPhrases = FilteredPhrases.Where(x => x.Text == thisPhrase["Text"]).ToList();
+				}
+				if (table.ContainsColumn("Type"))
+				{
+					FilteredPhrases = FilteredPhrases.Where(x => x.Text == thisPhrase["Type"]).ToList();
+				}
+				if (table.ContainsColumn("Notes"))
+				{
+					FilteredPhrases = FilteredPhrases.Where(x => x.Text == thisPhrase["Notes"]).ToList();
+				}
+				if (FilteredPhrases.Count == 1)
+				{
+					Report.Info("Phrase is already added: " + FilteredPhrases.FirstOrDefault().Code);
+				}
+				else
+				{
+					if (FilteredPhrases.Count > 1)
+					{
+						Report.Error("Multiple matching phrases are already added");
+					}
+					else
+					{
+						if (!thisPhraseEditor.SelectItem("Code", FilteredPhrases.FirstOrDefault().Code))
+						{
+							Report.Info("Failed to add phrase: " + FilteredPhrases.FirstOrDefault().Code);
+							addedSuccessfully = false;
+						}
+						else
+						{
+							Report.Success("Added phase: " + FilteredPhrases.FirstOrDefault().Code);
+						}
+					}
+				}
+
+				Delay.Seconds(1);
+			}
+
+			Report.IsTrue(addedSuccessfully, "Failed to add all phrases successfully", "Added phrases successfully");
+		}
+
+		//save, clear, cancel, previous, next
+		[StepDefinition(@"In the phrase selector screen I click button: (.*)")]
+		public void ThenInThePhraseSelectorScreenIClickButton(string button)
+		{
+			PhraseEditor thisPhraseEditor = new PhraseEditor();
+			if (!thisPhraseEditor.Wait_for_load(60))
+			{
+				throw new Exception("Phrase editor is not loaded");
+			}
+
+			Report.IsTrue(thisPhraseEditor.ClickButton(button), "Failed to click button: " + button,
+				"Clicked button: " + button);
+		}
+
 	}
 }

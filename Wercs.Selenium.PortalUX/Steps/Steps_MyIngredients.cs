@@ -459,5 +459,44 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"No search results were returned with CAS: " + cas + " and name: " + name + " in the top " + searchResults.Count + " results.",
 				"There was a search result with CAS: " + cas + " and name: " + name + " returned as expected");
 		}
+
+		[StepDefinition(@"The Formulation 3rd Party Step is shown")]
+		public void TheFormulationThirdPartyStepIsShown()
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			Report.IsTrue(thisNewProduct.ThirdPartyScreenAppears(), "The third party screen has not appeared", "The third party step is shown as expected");
+		}
+
+		[StepDefinition(@"In the Formulation 3rd Party screen I set Accept to (true|false)")]
+		public void InTheFormulationThirdPartySCreenISetAcceptTo(string trueOrFalse)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+
+			if (thisNewProduct.AcceptRadioIsSelected() == (trueOrFalse.ToLower() == "true"))
+			{
+				Report.Success("Accept is already set to: " + trueOrFalse);
+			}
+			else
+			{
+				Report.IsTrue(thisNewProduct.SelectAcceptRadio(), "Failed to set accept radio", "Set accept radio to: " + trueOrFalse);
+			}
+			
+		}
+
+		[StepDefinition(@"In the Formulation 3rd Party screen I set Granted to (true|false)")]
+		public void InTheFormulationThirdPartySCreenISetGrantedTo(string trueOrFalse)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+
+			if (thisNewProduct.GrantedRadioIsSelected() == (trueOrFalse.ToLower() == "true"))
+			{
+				Report.Success("Granted is already set to: " + trueOrFalse);
+			}
+			else
+			{
+				Report.IsTrue(thisNewProduct.SelectGrantedRadio(), "Failed to set granted radio", "Set granted radio to: " + trueOrFalse);
+			}
+
+		}
 	}
 }

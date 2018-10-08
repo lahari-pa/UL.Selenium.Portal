@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using iTextSharp.text;
 using iTextSharp.text.pdf.parser;
 using NPOI.HSSF.Record;
 using OpenQA.Selenium;
@@ -21,48 +22,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	[FindsBy(How = How.XPath, Using = BasePath)]
 	protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait=60)
+		public bool Wait_for_load(int secondsToWait = 30)
 		{
-			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
-			for (int i = 0; i < 30; i++)
-			{
-				urls = SeleniumBrowser.WebBrowser.WindowHandles;
-				if (urls.Count > 1)
-				{
-					break;
-				}
-
-				Delay.Seconds(1);
-			}
-
-			if (urls.Count < 2)
-			{
-				return false;
-			}
-
-			var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-
-			foreach (var handle in urls)
-			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Welcome"))
-				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
-					Report.Success("Found window containing title: Welcome");
-					Report.Screenshot();
-					break;
-				}
-			}
-
-			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			//get the window
+			StudioUtilites.SwitchToWindow("Wercs Studio");
+			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+			IWebElement frame =
+				SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'workspaceDesignMode')]"));
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-			if (base.Wait_for_load(30))
-			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
-				return true;
-			}
-
-			return false;
+			return base.Wait_for_load(30);
 		}
 
 
@@ -86,14 +55,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				subFormatInput.EnterText(subFormatFilter);
 				return (subFormatInput.GetValue() == subFormatFilter);
 			}
-
+			else
+			{
+				Report.Info("Failed to locate subformat input");
+			}
 			return false;
 		}
 
 		public string SelectedSubFormat()
 		{
-			return containerElement.FindElement(By.XPath("//div[contains(@class, 'container')]//div[@id='tree']/ul//li/span[contains(@class,'active')]/span[contains(@class,'title')]"), 2)?.Text;
+			return "";
 		}
+
 		public bool SelectFormat(string subformat, string format)
 		{
 			var tree = containerElement.FindElement(By.XPath(".//div[@id='tree']/ul"), 2);
@@ -108,6 +81,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
+			Report.Info("Found format");
 
 			var allFormats = results.FindElement(By.XPath("./following-sibling::ul"), 2);
 			if (allFormats == null)
@@ -116,6 +90,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			var el = allFormats.FindElement(By.XPath(".//li/span[(./span[contains(@class,'title') and starts-with(text(),'" + subformat + "')])]"), 2);
+
+			if (el == null)
+			{
+				Report.Info("Failed to find subformat");
+				return false;
+			}
+			Report.Info("Found format");
 			return el.TryClick();
 
 		}
@@ -189,6 +170,49 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool ClickLeftMenuSection(string section, string leftRightDouble = "left")
+		{
+			var listOfSections = containerElement.FindElements(By.XPath(".//ul[@id='sectionActionList']/li/span"), 2);
+			var matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
+			if (matchingSection == null)
+			{
+				Report.Info("Section was not found");
+				return false;
+			}
+
+			switch (leftRightDouble.ToLower())
+			{
+				case "left":
+					return matchingSection.TryClick();
+				case "right":
+					matchingSection.RightClick();
+					return true;
+				case "double":
+					matchingSection.DoubleClick();
+					return true;
+				default:
+					throw new Exception("Must provide valid button to click: left, right or double");
+
+			}
+		}
+
+		public bool DoubleClickCategoryToEdit(string category)
+		{
+			var listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='divDocument']//table"), 2);
+			var matchingCategory = listOfCategories.FirstOrDefault(x => x.GetAttribute("title") == category);
+			if (matchingCategory == null)
+			{
+				Report.Info("Category was not found");
+				return false;
+			}
+
+			matchingCategory.DoubleClick();
+			Delay.Seconds(5);
+
+			var editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
+			return editScreen != null;
+		}
+
 
 	}
 
@@ -209,6 +233,43 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 			return base.Wait_for_load(30);
+		}
+
+
+
+		//Menu items: Format/SubFormat, Products, Components, Phrases, Tools
+		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem)
+		{
+			var listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li)]/a"));
+
+			var matchingMenuItem = listOfMenuItems.FirstOrDefault(x => x.GetValue() == menuItem);
+
+			if (matchingMenuItem == null)
+			{
+				Report.Info("Failed to find menu item: " + menuItem);
+				return false;
+			}
+
+			if (!matchingMenuItem.TryClick())
+			{
+				Report.Info("Failed to click menu item: " + menuItem);
+			}
+
+			var matchingSubMenuItem = matchingMenuItem.FindElements(By.XPath("./../ul/li/a"))
+				.FirstOrDefault(x => x.GetValue() == submenuItem);
+
+			if (matchingSubMenuItem == null)
+			{
+				Report.Info("Failed to find sub menu item: " + submenuItem);
+				return false;
+			}
+
+			if (!matchingSubMenuItem.TryClick())
+			{
+				Report.Info("Failed to click sub menu item: " + submenuItem);
+			}
+
+			return true;
 		}
 
 		public bool ClickTabOption(string tabName)
@@ -296,6 +357,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickToolBarItem(string item)
 		{
 			var aLinks = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='divBtmToolbars']//a[not(contains(@style, 'none'))]"));
+
+			if (aLinks.Count == 0)
+			{
+				Report.Info("No toolbar items found.");
+				return false;
+			}
 			IWebElement matchingLink;
 			switch (item.ToLower())
 			{
@@ -343,6 +410,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			else
 			{
 				Report.Error("No matching link was found: " + item);
+				Report.Info("Found: " + string.Join(",", aLinks.Select(x => x.GetAttribute("id")).ToList()));
 				return false;
 			}
 		}
@@ -2318,5 +2386,411 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	}
 
+	class ProductFormulationPage : BaseObject
+	{
+		public const string BasePath = "//body";
 
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load(int secondsToWait = 60)
+		{
+			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			for (int i = 0; i < 30; i++)
+			{
+				urls = SeleniumBrowser.WebBrowser.WindowHandles;
+				if (urls.Count > 1)
+				{
+					break;
+				}
+
+				Delay.Seconds(1);
+			}
+
+			if (urls.Count < 2)
+			{
+				return false;
+			}
+
+			var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+
+			foreach (var handle in urls)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Product Formulation"))
+				{
+					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					Report.Success("Found window containing title: Product Formulation");
+					Report.Screenshot();
+					break;
+				}
+			}
+
+			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			if (base.Wait_for_load(30))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public void Close()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+		public bool ClickButton(string button)
+		{
+			var varButtons = containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
+			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
+			if (matchingButton == null)
+			{
+				Report.Info("Failed to find button: " + button);
+				return false;
+			}
+
+			return matchingButton.TryClick();
+		}
+
+		//Apply rules, EU Wizard, GHS Wizard, Regulation matrix
+		public bool ClickAuthoringButton(string button)
+		{
+			var varButtons = containerElement.FindElements(By.XPath(".//span[@id='authoring-buttons']/a"), 2);
+			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
+			if (matchingButton == null)
+			{
+				Report.Info("Failed to find button: " + button);
+				return false;
+			}
+
+			return matchingButton.TryClick();
+
+		}
+
+		public bool ClickIDSelect()
+		{
+			var matchingButton = containerElement.FindElement(By.XPath(".//input[@id='productSelectorselProd']"), 2);
+			if (matchingButton == null)
+			{
+				Report.Info("Failed to find button to open id select");
+				return false;
+			}
+
+			return matchingButton.TryClick();
+		}
+
+		public bool ClickSubFormatSelect()
+		{
+			var matchingButton = containerElement.FindElement(By.XPath(".//input[@id='formatSubformatSelectorselFormat']"), 2);
+			if (matchingButton == null)
+			{
+				Report.Info("Failed to find button to open subformat select");
+				return false;
+			}
+
+			return matchingButton.TryClick();
+		}
+
+		public bool EnterID(string id)
+		{
+			var input = containerElement.FindElement(By.XPath(".//input[@id='productSelectorselectProdTB']"));
+			if (input == null)
+			{
+				Report.Info("Failed to find id input");
+				return false;
+			}
+
+			input.EnterText(id);
+			return input.GetValue() == id;
+		}
+
+		public void ClickClose()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+
+	}
+
+
+	class CreateComponentPage : BaseObject
+	{
+		public const string BasePath = "//body";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load(int secondsToWait = 60)
+		{
+			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			for (int i = 0; i < 30; i++)
+			{
+				urls = SeleniumBrowser.WebBrowser.WindowHandles;
+				if (urls.Count > 1)
+				{
+					break;
+				}
+
+				Delay.Seconds(1);
+			}
+
+			if (urls.Count < 2)
+			{
+				return false;
+			}
+
+			var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+
+			foreach (var handle in urls)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("New CAS Component"))
+				{
+					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					Report.Success("Found window containing title: New CAS Component");
+					Report.Screenshot();
+					break;
+				}
+			}
+
+			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			if (base.Wait_for_load(30))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public void Close()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+		//Save, Submit
+		public bool ClickButton(string button)
+		{
+			var varButtons = containerElement.FindElements(By.XPath(".//input[@type='submit']"), 2);
+			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
+			if (matchingButton == null)
+			{
+				Report.Info("Failed to find button: " + button);
+				return false;
+			}
+
+			return matchingButton.TryClick();
+		}
+
+		public bool EnterCAS(string cas)
+		{
+			var input = containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"));
+			if (input == null)
+			{
+				Report.Info("Failed to find CAS input");
+				return false;
+			}
+
+			input.EnterText(cas);
+			return input.GetValue() == cas;
+		}
+
+		public bool EnterComponentID(string componentID)
+		{
+			var input = containerElement.FindElement(By.XPath(".//input[@id='txtCompID']"));
+			if (input == null)
+			{
+				Report.Info("Failed to find componentID input");
+				return false;
+			}
+
+			input.EnterText(componentID);
+			return input.GetValue() == componentID;
+		}
+
+		public bool EnterChemicalName(string chemicalName)
+		{
+			var input = containerElement.FindElement(By.XPath(".//input[@id='txtChemName']"));
+			if (input == null)
+			{
+				Report.Info("Failed to find chemical name input");
+				return false;
+			}
+
+			input.EnterText(chemicalName);
+			return input.GetValue() == chemicalName;
+		}
+
+		public bool EnterTradeSecretName(string tradeSelectName)
+		{
+			var input = containerElement.FindElement(By.XPath(".//input[@id='txtTradeSecName']"));
+			if (input == null)
+			{
+				Report.Info("Failed to find trade secret name input");
+				return false;
+			}
+
+			input.EnterText(tradeSelectName);
+			return input.GetValue() == tradeSelectName;
+		}
+
+		public bool AddToFormulationNowCheckboxChecked(bool check)
+		{
+			var input = containerElement.FindElement(By.XPath(".//input[@id='chkAddToFormula']"));
+			if (input.Checked() == check)
+			{
+				Report.Info("Add to Formulation Checkbox is already set correctly.");
+				return true;
+			}
+			else
+			{
+				return input.TryClick();
+			}
+
+		}
+
+		public bool LoadRegulationDataNowCheckboxChecked(bool check)
+		{
+			var input = containerElement.FindElement(By.XPath(".//input[@id='chkLoadRegulation']"));
+			if (input.Checked() == check)
+			{
+				Report.Info("Load Regulation Data Now Checkbox is already set correctly.");
+				return true;
+			}
+			else
+			{
+				return input.TryClick();
+			}
+
+		}
+
+
+		public void ClickClose()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+
+	}
+
+
+	class PhraseEditor : BaseObject
+	{
+		public const string BasePath = "//div[@id='editor-text-container']";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load(int secondsToWait = 60)
+		{
+			for (int i = 0; i < secondsToWait; i++)
+			{
+				var popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				if (popupEditor != null)
+				{
+					return true;
+				}
+				Delay.Seconds(1);
+			}
+			return false;
+
+		}
+
+		//Save, Clear, Cancel, Previous, Next
+		public bool ClickButton(string button)
+		{
+			var varButtons = containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
+			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
+			if (matchingButton == null)
+			{
+				Report.Info("Failed to find button: " + button);
+				return false;
+			}
+
+			return matchingButton.TryClick();
+		}
+
+		public List<string> GetHeaders()
+		{
+			return containerElement
+				.FindElements(By.XPath(".//div[@id='divPhrasesFamily']/table/thead[@class='Header']/tr/td"), 2).ToList()
+				.Select(x => x.GetValue()).ToList();
+
+		}
+
+		public bool SelectItem(string columnHeader, string value)
+		{
+			int indexOfHeader = this.GetHeaders().IndexOf(columnHeader);
+			var listOfColumnItems = containerElement
+				.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
+
+			var matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue() == value);
+
+			if (matchingItem == null)
+			{
+				Report.Info("Could not find matching item");
+				return false;
+			}
+			else
+			{
+				matchingItem.DoubleClick();
+				return true;
+			}
+		}
+
+		public List<Phrase> GetSelectedPhrases()
+		{
+			List<string> headers = this.GetHeaders();
+			var selectedRows = containerElement.FindElements(By.XPath(".//tbody[@id='sortable-list1']//tr"));
+			int indexOfCode = this.GetHeaders().IndexOf("Code");
+			int indexOfText = this.GetHeaders().IndexOf("Text");
+			int indexOfType = this.GetHeaders().IndexOf("Type");
+			int indexOfNotes = this.GetHeaders().IndexOf("Notes");
+			List<Phrase> listOfPhrases = new List<Phrase>();
+			foreach (var selectedPhrase in selectedRows)
+			{
+				Phrase thisPhrase = new Phrase();
+				thisPhrase.Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue();
+				thisPhrase.Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue();
+				thisPhrase.Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue();
+				thisPhrase.Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue();
+				listOfPhrases.Add(thisPhrase);
+			}
+
+			return listOfPhrases;
+		}
+
+		public List<Phrase> GetAvailablePhrases()
+		{
+			List<string> headers = this.GetHeaders();
+			var selectedRows = containerElement.FindElements(By.XPath(".//tbody[@id='sortable-list2']//tr"));
+			int indexOfCode = this.GetHeaders().IndexOf("Code");
+			int indexOfText = this.GetHeaders().IndexOf("Text");
+			int indexOfType = this.GetHeaders().IndexOf("Type");
+			int indexOfNotes = this.GetHeaders().IndexOf("Notes");
+			List<Phrase> listOfPhrases = new List<Phrase>();
+			foreach (var selectedPhrase in selectedRows)
+			{
+				Phrase thisPhrase = new Phrase();
+				thisPhrase.Code = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfCode + "]"), 2).GetValue();
+				thisPhrase.Text = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfText + "]"), 2).GetValue();
+				thisPhrase.Type = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue();
+				thisPhrase.Notes = selectedPhrase.FindElement(By.XPath(".//td[" + indexOfNotes + "]"), 2).GetValue();
+				listOfPhrases.Add(thisPhrase);
+			}
+
+			return listOfPhrases;
+		}
+
+
+	}
+	public class Phrase
+	{
+		public string Code { get; set; }
+		public string Text { get; set; }
+		public string Type { get; set; }
+		public string Notes { get; set; }
+	}
 }

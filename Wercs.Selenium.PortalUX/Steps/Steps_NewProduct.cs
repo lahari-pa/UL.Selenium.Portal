@@ -1698,7 +1698,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
-			Report.IsTrue(new NewProduct().SelectYesAgreedRadio(), "Failed to select Yes Agreed", "Clicked Yes Agreed");
+			NewProduct thisNewProduct = new NewProduct();
+			if (thisNewProduct.AcceptRadioIsSelected())
+			{
+				Report.Info("Yes agreed is already selected");
+			}
+			else
+			{
+				thisNewProduct.SelectYesAgreedRadio();
+			}
+			Report.IsTrue(thisNewProduct.AcceptRadioIsSelected(), "Failed to select Yes Agreed", "Yes Agreed is selected.");
 		}
 
 		[StepDefinition(@"In the Data Acceptance page I click on the Accept button")]

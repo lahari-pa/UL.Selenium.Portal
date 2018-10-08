@@ -1440,6 +1440,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.Displayed;
 		}
 
+		public List<string> Get3rdPartyPageAlerts()
+		{
+			var el = containerElement.FindElements(By.XPath(".//div[@class='alert alert-info']"), 2);
+			if (el.Count > 0)
+			{
+				return containerElement.FindElements(By.XPath(".//div[@class='alert alert-info']"), 2).Select(x=>x.GetValue()).ToList();
+			}
+			return new List<string>();
+		}
+
+		public bool ThirdPartyScreenAppears()
+		{
+			var el = containerElement.FindElement(By.XPath(".//h3[text()='Formulation > 3rd Party']"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.Displayed;
+		}
+
 		public bool SelectYesAgreedRadio()
 		{
 			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
@@ -1452,6 +1473,74 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public bool AcceptRadioIsSelected()
+		{
+			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Accept')]/../input"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.Selected;
+		}
+
+		public bool SelectAcceptRadio()
+		{
+			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Accept')]/../input"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+
+		}
+
+		public bool SelectGrantedRadio()
+		{
+			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Granted')]/../input"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+		}
+
+		public bool GrantedRadioIsSelected()
+		{
+			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Granted')]/../input"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.Selected;
+		}
+
+		public bool SelectDeclinedRadio()
+		{
+			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Declined')]/../input"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.TryClick();
+
+		}
+
+		public bool DeclinedRadioIsSelected()
+		{
+			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Declined')]/../input"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return el.Selected;
+		}
+
 		public bool ClickAcceptButton()
 		{
 			var el = containerElement.FindElement(By.XPath(".//a[text()='Accept']"), 2);
@@ -1462,6 +1551,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return el.TryClick();
 		}
+
+
 
 		public bool AcceptButtonDisplayed()
 		{

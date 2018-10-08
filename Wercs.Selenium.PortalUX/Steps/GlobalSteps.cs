@@ -832,5 +832,15 @@ namespace WERCSmart
 				GivenILogout();
 			}
 		}
+
+
+		[Given(@"I save to context name: (.*) and value: (.*)")]
+		public void GivenISaveToContextNameAndValue(string name, string value)
+		{
+			ProductInformation newProductInformation = new ProductInformation();
+			newProductInformation.Id = value;
+			Context.AddToContext(name, newProductInformation);
+		}
+
 	}
 }

@@ -447,7 +447,9 @@ And In the Ingredients page I confirm the Publicly Disclosed Transparency Score 
 
 And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 
-Given I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: shared79436
+And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: shared79436
+| CASNumber | ComponentName                                                                  | Percentage |
+| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 100        |
 
 Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
 
@@ -486,8 +488,8 @@ And In the Ingredients page I confirm the Publicly Disclosed Transparency Score 
 And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
 
 Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: shared79431
-| CASNumber | ComponentName |
-| FLAVOR    | FLAVOR        |
+| CASNumber | ComponentName | Percentage |
+| FLAVOR    | FLAVOR        | 100        |
 
 Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
 

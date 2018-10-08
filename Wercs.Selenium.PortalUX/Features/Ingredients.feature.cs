@@ -12,1161 +12,1173 @@
 #pragma warning disable
 namespace Wercs.Selenium.PortalUX.Features
 {
-	using TechTalk.SpecFlow;
-
-
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
-	[System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-	[Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-	public partial class IngredientsFeature
-	{
-
-		private static TechTalk.SpecFlow.ITestRunner testRunner;
-
-		private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
-
+    using TechTalk.SpecFlow;
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
+    public partial class IngredientsFeature
+    {
+        
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
+        
 #line 1 "Ingredients.feature"
 #line hidden
-
-		public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext {
-			get
-			{
-				return this._testContext;
-			}
-			set
-			{
-				this._testContext = value;
-			}
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
-		public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
-		{
-			testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-			TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Ingredients", "(Suite ID: 64740)", ProgrammingLanguage.CSharp, new string[] {
-						"LandingPage",
-						"Login",
-						"Homepage",
-						"Signup",
-						"wercsmart",
-						"NewProduct",
-						"ProductGrid",
-						"DataSummarySheet",
-						"wercsmart",
-						"RetailPartners",
-						"run_Ingredients"});
-			testRunner.OnFeatureStart(featureInfo);
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
-		public static void FeatureTearDown()
-		{
-			testRunner.OnFeatureEnd();
-			testRunner = null;
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
-		public virtual void TestInitialize()
-		{
-			if (((testRunner.FeatureContext != null)
-						&& (testRunner.FeatureContext.FeatureInfo.Title != "Ingredients")))
-			{
-				global::Wercs.Selenium.PortalUX.Features.IngredientsFeature.FeatureSetup(null);
-			}
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
-		public virtual void ScenarioTearDown()
-		{
-			testRunner.OnScenarioEnd();
-		}
-
-		public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
-		{
-			testRunner.OnScenarioStart(scenarioInfo);
-			testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
-		}
-
-		public virtual void ScenarioCleanup()
-		{
-			testRunner.CollectScenarioErrors();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[71985] Sorting Cas Number/ Chemical Name Ingredient page")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _71985SortingCasNumberChemicalNameIngredientPage()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[71985] Sorting Cas Number/ Chemical Name Ingredient page", ((string[])(null)));
+        
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
+        {
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Ingredients", "(Suite ID: 64740)", ProgrammingLanguage.CSharp, new string[] {
+                        "LandingPage",
+                        "Login",
+                        "Homepage",
+                        "Signup",
+                        "wercsmart",
+                        "NewProduct",
+                        "ProductGrid",
+                        "DataSummarySheet",
+                        "wercsmart",
+                        "RetailPartners",
+                        "run_Ingredients"});
+            testRunner.OnFeatureStart(featureInfo);
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
+        {
+            testRunner.OnFeatureEnd();
+            testRunner = null;
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
+        public virtual void TestInitialize()
+        {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "Ingredients")))
+            {
+                global::Wercs.Selenium.PortalUX.Features.IngredientsFeature.FeatureSetup(null);
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
+        public virtual void ScenarioTearDown()
+        {
+            testRunner.OnScenarioEnd();
+        }
+        
+        public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
+        {
+            testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
+        }
+        
+        public virtual void ScenarioCleanup()
+        {
+            testRunner.CollectScenarioErrors();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[71985] Sorting Cas Number/ Chemical Name Ingredient page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _71985SortingCasNumberChemicalNameIngredientPage()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[71985] Sorting Cas Number/ Chemical Name Ingredient page", ((string[])(null)));
 #line 16
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 18
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 20
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 22
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Mulch with Pesticide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Mulch with Pesticide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 24
-			testRunner.Then("I save the product information as: TestCase71985", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase71985", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 26
-			testRunner.And("I set the Secondary Physical State option to: Pellets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State option to: Pellets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
-			testRunner.And("I set the When mixed with an equal amount of water field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the When mixed with an equal amount of water field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
-			testRunner.Then("in the Product Characteristics page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Product Characteristics page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 32
-			testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
-								"ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
+                    "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table1.AddRow(new string[] {
-						"Wood dust",
-						"50.0",
-						"false",
-						"false",
-						""});
-			table1.AddRow(new string[] {
-						"RED 4",
-						"23.0",
-						"false",
-						"false",
-						""});
-			table1.AddRow(new string[] {
-						"Clothianidin",
-						"27.0",
-						"false",
-						"false",
-						""});
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table1.AddRow(new string[] {
+                        "Wood dust",
+                        "50.0",
+                        "false",
+                        "false",
+                        ""});
+            table1.AddRow(new string[] {
+                        "RED 4",
+                        "23.0",
+                        "false",
+                        "false",
+                        ""});
+            table1.AddRow(new string[] {
+                        "Clothianidin",
+                        "27.0",
+                        "false",
+                        "false",
+                        ""});
 #line 34
-			testRunner.Given("I add the following ingredients:", ((string)(null)), table1, "Given ");
+testRunner.Given("I add the following ingredients:", ((string)(null)), table1, "Given ");
 #line 40
-			testRunner.When("In the ingredients table I click Chemical Name to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("In the ingredients table I click Chemical Name to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-						"Name"});
-			table2.AddRow(new string[] {
-						"Clothianidin"});
-			table2.AddRow(new string[] {
-						"RED 4"});
-			table2.AddRow(new string[] {
-						"Wood dust"});
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name"});
+            table2.AddRow(new string[] {
+                        "Clothianidin"});
+            table2.AddRow(new string[] {
+                        "RED 4"});
+            table2.AddRow(new string[] {
+                        "Wood dust"});
 #line 42
-			testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table2, "Then ");
+testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table2, "Then ");
 #line 48
-			testRunner.When("In the ingredients table I click Chemical Name to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("In the ingredients table I click Chemical Name to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-			TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-						"Name"});
-			table3.AddRow(new string[] {
-						"Wood dust"});
-			table3.AddRow(new string[] {
-						"RED 4"});
-			table3.AddRow(new string[] {
-						"Clothianidin"});
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name"});
+            table3.AddRow(new string[] {
+                        "Wood dust"});
+            table3.AddRow(new string[] {
+                        "RED 4"});
+            table3.AddRow(new string[] {
+                        "Clothianidin"});
 #line 50
-			testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table3, "Then ");
+testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table3, "Then ");
 #line 56
-			testRunner.When("In the ingredients table I click CAS Number to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("In the ingredients table I click CAS Number to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-						"Name"});
-			table4.AddRow(new string[] {
-						"RED 4"});
-			table4.AddRow(new string[] {
-						"Clothianidin"});
-			table4.AddRow(new string[] {
-						"Wood dust"});
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name"});
+            table4.AddRow(new string[] {
+                        "RED 4"});
+            table4.AddRow(new string[] {
+                        "Clothianidin"});
+            table4.AddRow(new string[] {
+                        "Wood dust"});
 #line 58
-			testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table4, "Then ");
+testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table4, "Then ");
 #line 64
-			testRunner.When("In the ingredients table I click CAS Number to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("In the ingredients table I click CAS Number to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-			TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-						"Name"});
-			table5.AddRow(new string[] {
-						"Wood dust"});
-			table5.AddRow(new string[] {
-						"Clothianidin"});
-			table5.AddRow(new string[] {
-						"RED 4"});
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name"});
+            table5.AddRow(new string[] {
+                        "Wood dust"});
+            table5.AddRow(new string[] {
+                        "Clothianidin"});
+            table5.AddRow(new string[] {
+                        "RED 4"});
 #line 66
-			testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table5, "Then ");
+testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table5, "Then ");
 #line 72
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase71985", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase71985", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[71987] Sorting Percent on Ingredient page")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _71987SortingPercentOnIngredientPage()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[71987] Sorting Percent on Ingredient page", ((string[])(null)));
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[71987] Sorting Percent on Ingredient page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _71987SortingPercentOnIngredientPage()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[71987] Sorting Percent on Ingredient page", ((string[])(null)));
 #line 74
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 76
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 78
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 80
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Mulch with Pesticide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Mulch with Pesticide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 82
-			testRunner.Then("I save the product information as: TestCase71987", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase71987", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 84
-			testRunner.And("I set the Secondary Physical State option to: Pellets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State option to: Pellets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 86
-			testRunner.And("I set the When mixed with an equal amount of water field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the When mixed with an equal amount of water field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 88
-			testRunner.Then("in the Product Characteristics page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Product Characteristics page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 90
-			testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
-								"ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
+                    "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table6.AddRow(new string[] {
-						"Wood dust",
-						"70.0",
-						"false",
-						"false",
-						""});
-			table6.AddRow(new string[] {
-						"RED 4",
-						"5.0",
-						"false",
-						"false",
-						""});
-			table6.AddRow(new string[] {
-						"Clothianidin",
-						"25.0",
-						"false",
-						"false",
-						""});
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table6.AddRow(new string[] {
+                        "Wood dust",
+                        "70.0",
+                        "false",
+                        "false",
+                        ""});
+            table6.AddRow(new string[] {
+                        "RED 4",
+                        "5.0",
+                        "false",
+                        "false",
+                        ""});
+            table6.AddRow(new string[] {
+                        "Clothianidin",
+                        "25.0",
+                        "false",
+                        "false",
+                        ""});
 #line 92
-			testRunner.Given("I add the following ingredients:", ((string)(null)), table6, "Given ");
+testRunner.Given("I add the following ingredients:", ((string)(null)), table6, "Given ");
 #line 98
-			testRunner.When("In the ingredients table I click Percent to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("In the ingredients table I click Percent to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-			TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-						"Name"});
-			table7.AddRow(new string[] {
-						"RED 4"});
-			table7.AddRow(new string[] {
-						"Clothianidin"});
-			table7.AddRow(new string[] {
-						"Wood dust"});
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name"});
+            table7.AddRow(new string[] {
+                        "RED 4"});
+            table7.AddRow(new string[] {
+                        "Clothianidin"});
+            table7.AddRow(new string[] {
+                        "Wood dust"});
 #line 100
-			testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table7, "Then ");
+testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table7, "Then ");
 #line 106
-			testRunner.When("In the ingredients table I click Percent to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("In the ingredients table I click Percent to order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-			TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
-						"Name"});
-			table8.AddRow(new string[] {
-						"Wood dust"});
-			table8.AddRow(new string[] {
-						"Clothianidin"});
-			table8.AddRow(new string[] {
-						"RED 4"});
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name"});
+            table8.AddRow(new string[] {
+                        "Wood dust"});
+            table8.AddRow(new string[] {
+                        "Clothianidin"});
+            table8.AddRow(new string[] {
+                        "RED 4"});
 #line 108
-			testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table8, "Then ");
+testRunner.Then("In the ingredients table the ingredients should be in the following order", ((string)(null)), table8, "Then ");
 #line 114
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase71987", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase71987", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Dis" +
-			"closed check box- Trade secret is active")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _65469Ingredients_SelectPubliclyDisclosedCheckBox_Un_CheckPubliclyDisclosedCheckBox_TradeSecretIsActive()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Dis" +
-					"closed check box- Trade secret is active", ((string[])(null)));
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Dis" +
+            "closed check box- Trade secret is active")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _65469Ingredients_SelectPubliclyDisclosedCheckBox_Un_CheckPubliclyDisclosedCheckBox_TradeSecretIsActive()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Dis" +
+                    "closed check box- Trade secret is active", ((string[])(null)));
 #line 116
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 118
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 120
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 122
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 124
-			testRunner.Then("I save the product information as: TestCase65469", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase65469", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 126
-			testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
-								" all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 128
-			testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
-								"GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table9.AddRow(new string[] {
-						"Butane",
-						"100",
-						"true",
-						"false",
-						""});
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table9.AddRow(new string[] {
+                        "Butane",
+                        "100",
+                        "true",
+                        "false",
+                        ""});
 #line 130
-			testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table9, "Given ");
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table9, "Given ");
 #line 134
-			testRunner.Then("for ingredient: Butane the Trade Secret checkbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Trade Secret checkbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 136
-			testRunner.Given("for ingredient: Butane I set Public Disclosure checkbox to checked: false", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("for ingredient: Butane I set Public Disclosure checkbox to checked: false", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 138
-			testRunner.Then("for ingredient: Butane the Trade Secret checkbox is enabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Trade Secret checkbox is enabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 140
-			testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 142
-			testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 144
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase65469", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase65469", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check" +
-			" box - Publicly Disclosed & Public Name are active")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
-		public virtual void _65470Ingredients_SelectTradeSecretCheckBox_Un_CheckTradeSecretCheckBox_PubliclyDisclosedPublicNameAreActive()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check" +
-					" box - Publicly Disclosed & Public Name are active", new string[] {
-						"tfs_design"});
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check" +
+            " box - Publicly Disclosed & Public Name are active")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
+        public virtual void _65470Ingredients_SelectTradeSecretCheckBox_Un_CheckTradeSecretCheckBox_PubliclyDisclosedPublicNameAreActive()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check" +
+                    " box - Publicly Disclosed & Public Name are active", new string[] {
+                        "tfs_design"});
 #line 147
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 149
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 151
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 153
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 155
-			testRunner.Then("I save the product information as: TestCase65470", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase65470", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 157
-			testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
-								" all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 159
-			testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
-								"GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table10.AddRow(new string[] {
-						"Butane",
-						"100",
-						"false",
-						"true",
-						""});
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table10.AddRow(new string[] {
+                        "Butane",
+                        "100",
+                        "false",
+                        "true",
+                        ""});
 #line 161
-			testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table10, "Given ");
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table10, "Given ");
 #line 165
-			testRunner.Then("for ingredient: Butane the Publicly Disclosed checkbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Publicly Disclosed checkbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 167
-			testRunner.Then("for ingredient: Butane the Public Name selectbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Public Name selectbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 169
-			testRunner.Given("for ingredient: Butane I set Trade Secret checkbox to checked: false", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("for ingredient: Butane I set Trade Secret checkbox to checked: false", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 171
-			testRunner.Then("for ingredient: Butane the Publicly Disclosed checkbox is enabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Publicly Disclosed checkbox is enabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 173
-			testRunner.Then("for ingredient: Butane the Public Name selectbox is enabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Public Name selectbox is enabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 175
-			testRunner.Then("for ingredient: Butane the Public Name selectbox shows names", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Public Name selectbox shows names", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 177
-			testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 179
-			testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 181
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase65470", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase65470", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65459] Ingredients - Select Trade Secret check box - Publicly Disclosed & Public" +
-			" Name are not active")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _65459Ingredients_SelectTradeSecretCheckBox_PubliclyDisclosedPublicNameAreNotActive()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65459] Ingredients - Select Trade Secret check box - Publicly Disclosed & Public" +
-					" Name are not active", ((string[])(null)));
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65459] Ingredients - Select Trade Secret check box - Publicly Disclosed & Public" +
+            " Name are not active")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _65459Ingredients_SelectTradeSecretCheckBox_PubliclyDisclosedPublicNameAreNotActive()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65459] Ingredients - Select Trade Secret check box - Publicly Disclosed & Public" +
+                    " Name are not active", ((string[])(null)));
 #line 184
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 186
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 188
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 190
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 192
-			testRunner.Then("I save the product information as: TestCase65459", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase65459", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 194
-			testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
-								" all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 196
-			testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
-								"GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table11.AddRow(new string[] {
-						"Butane",
-						"100",
-						"false",
-						"true",
-						""});
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table11.AddRow(new string[] {
+                        "Butane",
+                        "100",
+                        "false",
+                        "true",
+                        ""});
 #line 198
-			testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table11, "Given ");
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table11, "Given ");
 #line 202
-			testRunner.Then("for ingredient: Butane the Publicly Disclosed checkbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Publicly Disclosed checkbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 204
-			testRunner.Then("for ingredient: Butane the Public Name selectbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Public Name selectbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 206
-			testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 208
-			testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 210
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase65459", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase65459", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65451] Ingredients - Select Publicly Disclosed check box - Public Name is requir" +
-			"ed, trade secret is not required")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _65451Ingredients_SelectPubliclyDisclosedCheckBox_PublicNameIsRequiredTradeSecretIsNotRequired()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65451] Ingredients - Select Publicly Disclosed check box - Public Name is requir" +
-					"ed, trade secret is not required", ((string[])(null)));
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65451] Ingredients - Select Publicly Disclosed check box - Public Name is requir" +
+            "ed, trade secret is not required")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _65451Ingredients_SelectPubliclyDisclosedCheckBox_PublicNameIsRequiredTradeSecretIsNotRequired()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65451] Ingredients - Select Publicly Disclosed check box - Public Name is requir" +
+                    "ed, trade secret is not required", ((string[])(null)));
 #line 212
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 214
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 216
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 218
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 220
-			testRunner.Then("I save the product information as: TestCase65451", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase65451", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 222
-			testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
-								" all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 224
-			testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
-								"GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table12.AddRow(new string[] {
-						"Butane",
-						"100",
-						"true",
-						"false",
-						""});
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table12.AddRow(new string[] {
+                        "Butane",
+                        "100",
+                        "true",
+                        "false",
+                        ""});
 #line 226
-			testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table12, "Given ");
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table12, "Given ");
 #line 231
-			testRunner.Then("for ingredient: Butane the Trade Secret checkbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane the Trade Secret checkbox is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 233
-			testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 235
-			testRunner.Then("for ingredient: Butane I should see an error below the public name column which r" +
-								"eads: Please select Public Name since you agreed on Publicly Disclosed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane I should see an error below the public name column which r" +
+                    "eads: Please select Public Name since you agreed on Publicly Disclosed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 237
-			testRunner.Then("for ingredient: Butane I select Public Name: Butane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane I select Public Name: Butane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 239
-			testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 241
-			testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 243
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase65451", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase65451", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not re" +
-			"quired fields")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _65448Ingredients_PubliclyDisclosedTradeSecretAndPublicNameAreNotRequiredFields()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not re" +
-					"quired fields", ((string[])(null)));
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not re" +
+            "quired fields")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _65448Ingredients_PubliclyDisclosedTradeSecretAndPublicNameAreNotRequiredFields()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not re" +
+                    "quired fields", ((string[])(null)));
 #line 245
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 247
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 249
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 251
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 253
-			testRunner.Then("I save the product information as: TestCase65448", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase65448", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 255
-			testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
-								" all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 257
-			testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
-								"GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table13.AddRow(new string[] {
-						"Butane",
-						"100",
-						"false",
-						"true",
-						""});
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table13.AddRow(new string[] {
+                        "Butane",
+                        "100",
+                        "false",
+                        "true",
+                        ""});
 #line 259
-			testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table13, "Given ");
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table13, "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
-						"Column",
-						"Input"});
-			table14.AddRow(new string[] {
-						"Percent",
-						"textbox"});
-			table14.AddRow(new string[] {
-						"Publicly Disclosed?",
-						"checkbox"});
-			table14.AddRow(new string[] {
-						"Trade Secret?",
-						"checkbox"});
-			table14.AddRow(new string[] {
-						"Public Name",
-						"select"});
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Column",
+                        "Input"});
+            table14.AddRow(new string[] {
+                        "Percent",
+                        "textbox"});
+            table14.AddRow(new string[] {
+                        "Publicly Disclosed?",
+                        "checkbox"});
+            table14.AddRow(new string[] {
+                        "Trade Secret?",
+                        "checkbox"});
+            table14.AddRow(new string[] {
+                        "Public Name",
+                        "select"});
 #line 263
-			testRunner.Given("In the ingredients table the following column titles and inputs are showing", ((string)(null)), table14, "Given ");
+testRunner.Given("In the ingredients table the following column titles and inputs are showing", ((string)(null)), table14, "Given ");
 #line 270
-			testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 272
-			testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 274
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase65448", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase65448", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[63321] Product Ingredients contains a third party component that requires updati" +
-			"ng for public disclosure")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
-		public virtual void _63321ProductIngredientsContainsAThirdPartyComponentThatRequiresUpdatingForPublicDisclosure()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63321] Product Ingredients contains a third party component that requires updati" +
-					"ng for public disclosure", new string[] {
-						"tfs_design"});
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[63321] Product Ingredients contains a third party component that requires updati" +
+            "ng for public disclosure")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
+        public virtual void _63321ProductIngredientsContainsAThirdPartyComponentThatRequiresUpdatingForPublicDisclosure()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63321] Product Ingredients contains a third party component that requires updati" +
+                    "ng for public disclosure", new string[] {
+                        "tfs_design"});
 #line 277
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 279
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 281
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 283
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Bubble Solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 285
-			testRunner.Then("I save the product information as: TestCase63321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase63321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 287
-			testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
-								" all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 289
-			testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
-								"GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 291
-			testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-			TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table15.AddRow(new string[] {
-						"WPS1434087",
-						"50",
-						"false",
-						"true",
-						""});
-			table15.AddRow(new string[] {
-						"Butane",
-						"50",
-						"false",
-						"true",
-						""});
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table15.AddRow(new string[] {
+                        "WPS1434087",
+                        "50",
+                        "false",
+                        "true",
+                        ""});
+            table15.AddRow(new string[] {
+                        "Butane",
+                        "50",
+                        "false",
+                        "true",
+                        ""});
 #line 293
-			testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table15, "Given ");
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table15, "Given ");
 #line 298
-			testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 300
-			testRunner.Then(@"a Warning popup dialog should appear with the message: Please be aware that your product contains a 3rd Party component that requires updating. We have sent a notification to your 3rd Party component supplier requesting that it update its component information relating to public disclosure of ingredients.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then(@"a Warning popup dialog should appear with the message: Please be aware that your product contains a 3rd Party component that requires updating. We have sent a notification to your 3rd Party component supplier requesting that it update its component information relating to public disclosure of ingredients.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 302
-			testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 304
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase63321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase63321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[71291] Product Ingredients contains a third party component that requires updati" +
-			"ng for public disclosure")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _71291ProductIngredientsContainsAThirdPartyComponentThatRequiresUpdatingForPublicDisclosure()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[71291] Product Ingredients contains a third party component that requires updati" +
-					"ng for public disclosure", ((string[])(null)));
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[71291] Product Ingredients contains a third party component that requires updati" +
+            "ng for public disclosure")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _71291ProductIngredientsContainsAThirdPartyComponentThatRequiresUpdatingForPublicDisclosure()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[71291] Product Ingredients contains a third party component that requires updati" +
+                    "ng for public disclosure", ((string[])(null)));
 #line 306
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 308
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 310
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 312
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Mulch with Pesticide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Mulch with Pesticide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 314
-			testRunner.Then("I save the product information as: TestCase71291", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase71291", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 316
-			testRunner.And("I set the Secondary Physical State option to: Pellets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State option to: Pellets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 318
-			testRunner.And("I set the When mixed with an equal amount of water field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the When mixed with an equal amount of water field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 320
-			testRunner.Then("in the Product Characteristics page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Product Characteristics page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 322
-			testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
-								"ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
+                    "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table16.AddRow(new string[] {
-						"Wood dust",
-						"75.0",
-						"false",
-						"false",
-						""});
-			table16.AddRow(new string[] {
-						"RED 4",
-						"20.0",
-						"false",
-						"false",
-						""});
-			table16.AddRow(new string[] {
-						"Clothianidin",
-						"5.0",
-						"false",
-						"false",
-						""});
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table16.AddRow(new string[] {
+                        "Wood dust",
+                        "75.0",
+                        "false",
+                        "false",
+                        ""});
+            table16.AddRow(new string[] {
+                        "RED 4",
+                        "20.0",
+                        "false",
+                        "false",
+                        ""});
+            table16.AddRow(new string[] {
+                        "Clothianidin",
+                        "5.0",
+                        "false",
+                        "false",
+                        ""});
 #line 324
-			testRunner.Given("I add the following ingredients:", ((string)(null)), table16, "Given ");
+testRunner.Given("I add the following ingredients:", ((string)(null)), table16, "Given ");
 #line 330
-			testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 332
-			testRunner.And("I should see the Neonicotinoid Warning Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Neonicotinoid Warning Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 334
-			testRunner.Then(@"I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then(@"I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 336
-			testRunner.Then("on the Neonicotinoid Warning Page I should see a link with text: EPA website whic" +
-								"h links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-p" +
-								"ollinators", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("on the Neonicotinoid Warning Page I should see a link with text: EPA website whic" +
+                    "h links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-p" +
+                    "ollinators", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 338
-			testRunner.Then("in the Neonicotinoid Warning page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Neonicotinoid Warning page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 340
-			testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 342
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase71291", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase71291", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[74142] Pop up that Informs the regulations the components are associated")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _74142PopUpThatInformsTheRegulationsTheComponentsAreAssociated()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74142] Pop up that Informs the regulations the components are associated", ((string[])(null)));
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[74142] Pop up that Informs the regulations the components are associated")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _74142PopUpThatInformsTheRegulationsTheComponentsAreAssociated()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74142] Pop up that Informs the regulations the components are associated", ((string[])(null)));
 #line 344
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 346
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 348
-			testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 350
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 352
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Mascara - Washable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Mascara - Washable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 354
-			testRunner.Then("I save the product information as: TestCase74142", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase74142", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 356
-			testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
-								"Solid - State&Subcat - Mixed&Water -random - Continue - HP)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
+                    "Solid - State&Subcat - Mixed&Water -random - Continue - HP)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 358
-			testRunner.Given("I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not " +
-								"Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not " +
+                    "Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table17.AddRow(new string[] {
-						"Chlorine",
-						"100",
-						"false",
-						"false",
-						""});
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table17.AddRow(new string[] {
+                        "Chlorine",
+                        "100",
+                        "false",
+                        "false",
+                        ""});
 #line 360
-			testRunner.Given("I add the following ingredients:", ((string)(null)), table17, "Given ");
+testRunner.Given("I add the following ingredients:", ((string)(null)), table17, "Given ");
 #line 364
-			testRunner.Given("I click the Regulated button for ingredient: Chlorine in the Ingredients section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click the Regulated button for ingredient: Chlorine in the Ingredients section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 366
-			testRunner.Then("the \'Regulatory List\' window opens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the \'Regulatory List\' window opens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 368
-			testRunner.Given("I confirm that a list of regulations associated with the component is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I confirm that a list of regulations associated with the component is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 370
-			testRunner.Given("I close the Regulatory List window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I close the Regulatory List window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 372
-			testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 374
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase74142", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase74142", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[69796] Aerosol Warning Message on Ingredient page")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _69796AerosolWarningMessageOnIngredientPage()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69796] Aerosol Warning Message on Ingredient page", ((string[])(null)));
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[69796] Aerosol Warning Message on Ingredient page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _69796AerosolWarningMessageOnIngredientPage()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69796] Aerosol Warning Message on Ingredient page", ((string[])(null)));
 #line 376
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 378
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 380
-			testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 382
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 384
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Hair Styling Product - Aerosol and Pump Spray", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Hair Styling Product - Aerosol and Pump Spray", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 386
-			testRunner.Then("I save the product information as: TestCase69796", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase69796", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 388
-			testRunner.Then("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 390
-			testRunner.Given("I set the Primary Physical State option to: Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I set the Primary Physical State option to: Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 392
-			testRunner.Given("I set the Secondary Physical State option to: Bag-on-valve (BOV)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I set the Secondary Physical State option to: Bag-on-valve (BOV)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 394
-			testRunner.Given("I set the pH option to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I set the pH option to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 396
-			testRunner.Given("I set the Select the best Water Solubility option to: Appreciable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I set the Select the best Water Solubility option to: Appreciable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 398
-			testRunner.Given("I select the first option in section: When the product has a flammable propellant" +
-								", or contains ingredients with a flash point below 60⁰C then", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I select the first option in section: When the product has a flammable propellant" +
+                    ", or contains ingredients with a flash point below 60⁰C then", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 400
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 402
-			testRunner.Given("I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not " +
-								"Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not " +
+                    "Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 404
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 406
-			testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
-								"pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
-								"clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
+                    "pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
+                    "clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-			TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table18.AddRow(new string[] {
-						"Water",
-						"80",
-						"false",
-						"false",
-						""});
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table18.AddRow(new string[] {
+                        "Water",
+                        "80",
+                        "false",
+                        "false",
+                        ""});
 #line 408
-			testRunner.Given("I add the following ingredients:", ((string)(null)), table18, "Given ");
+testRunner.Given("I add the following ingredients:", ((string)(null)), table18, "Given ");
 #line 412
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 414
-			testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
-								"pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
-								"clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
+                    "pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
+                    "clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-			TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
-						"ComponentName",
-						"Percent",
-						"PublicallyDisclosed",
-						"TradeSecret",
-						"PublicName"});
-			table19.AddRow(new string[] {
-						"Pentane",
-						"19",
-						"false",
-						"false",
-						""});
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table19.AddRow(new string[] {
+                        "Pentane",
+                        "19",
+                        "false",
+                        "false",
+                        ""});
 #line 416
-			testRunner.Given("I add the following ingredients:", ((string)(null)), table19, "Given ");
+testRunner.Given("I add the following ingredients:", ((string)(null)), table19, "Given ");
 #line 420
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 422
-			testRunner.Then("I should see an error message: Formulation must total or exceed 100%.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see an error message: Formulation must total or exceed 100%.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 424
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase69796", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase69796", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Deno" +
-			"minator, not included in Numerator")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _80728Ingredients_TransparencyRatio_FRAGRANCEComponent_IncludedInDenominatorNotIncludedInNumerator()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Deno" +
-					"minator, not included in Numerator", ((string[])(null)));
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Deno" +
+            "minator, not included in Numerator")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _80728Ingredients_TransparencyRatio_FRAGRANCEComponent_IncludedInDenominatorNotIncludedInNumerator()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Deno" +
+                    "minator, not included in Numerator", ((string[])(null)));
 #line 426
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 428
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 430
-			testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 432
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 434
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 436
-			testRunner.Then("I save the product information as: TestCase80728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase80728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 438
-			testRunner.Then("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 440
-			testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
-								"ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
+                    "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 442
-			testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
-								"GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 444
-			testRunner.Then("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 446
-			testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
-								"umerator: 0 and denominator: 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
+                    "umerator: 0 and denominator: 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 448
-			testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
-								"agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
+                    "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                        "CASNumber",
+                        "ComponentName",
+                        "Percentage"});
+            table20.AddRow(new string[] {
+                        "FRAGRANCE",
+                        "Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2",
+                        "100"});
 #line 450
-			testRunner.Given("I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclos" +
-								"ed = Yes,  Select Public Name) and save ingredient as: shared79436", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 452
-			testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
-								"umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclos" +
+                    "ed = Yes,  Select Public Name) and save ingredient as: shared79436", ((string)(null)), table20, "And ");
 #line 454
-			testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
-								"agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
+                    "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 456
-			testRunner.Then("In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient s" +
-								"aved as: shared79436", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
+                    "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 458
-			testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
-								"umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient s" +
+                    "aved as: shared79436", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 460
-			testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
+                    "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 462
-			testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
-								"te) for product: TestCase80728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denomin" +
-			"ator, not included in Numerator")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-		public virtual void _80720Ingredients_TransparencyRatio_FLAVORComponent_IncludedInDenominatorNotIncludedInNumerator()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denomin" +
-					"ator, not included in Numerator", ((string[])(null)));
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 464
-			this.ScenarioSetup(scenarioInfo);
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase80728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denomin" +
+            "ator, not included in Numerator")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _80720Ingredients_TransparencyRatio_FLAVORComponent_IncludedInDenominatorNotIncludedInNumerator()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denomin" +
+                    "ator, not included in Numerator", ((string[])(null)));
 #line 466
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 468
-			testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 470
-			testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-								"anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 472
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 474
-			testRunner.Then("I save the product information as: TestCase80720", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 476
-			testRunner.Then("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I save the product information as: TestCase80720", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 478
-			testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
-								"ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 480
-			testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
-								"GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
+                    "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 482
-			testRunner.Then("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 484
-			testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
-								"umerator: 0 and denominator: 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 486
-			testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
-								"agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-			TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
-						"CASNumber",
-						"ComponentName"});
-			table20.AddRow(new string[] {
-						"FLAVOR",
-						"FLAVOR"});
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
+                    "umerator: 0 and denominator: 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 488
-			testRunner.Given("I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed " +
-								"= Yes, Select Public Name) and save ingredients as: shared79431", ((string)(null)), table20, "Given ");
-#line 492
-			testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
-								"umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 494
-			testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
-								"agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 496
-			testRunner.Given("In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient s" +
-								"aved as: shared79431", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 498
-			testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
-								"umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 500
-			testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 502
-			testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
-								"te) for product: TestCase80720", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
+                    "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-	}
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                        "CASNumber",
+                        "ComponentName",
+                        "Percentage"});
+            table21.AddRow(new string[] {
+                        "FLAVOR",
+                        "FLAVOR",
+                        "100"});
+#line 490
+testRunner.Given("I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed " +
+                    "= Yes, Select Public Name) and save ingredients as: shared79431", ((string)(null)), table21, "Given ");
+#line 494
+testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
+                    "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 496
+testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
+                    "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 498
+testRunner.Given("In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient s" +
+                    "aved as: shared79431", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 500
+testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
+                    "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 502
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 504
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase80720", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+    }
 }
 #pragma warning restore
 #endregion

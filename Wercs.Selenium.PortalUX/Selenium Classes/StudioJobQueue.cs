@@ -55,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			List<Job> listOfJobs = new List<Job>();
 			for (int i = 0; i < Math.Min(tableRows.Count, firstX); i++)
 			{
-				Report.Info("Adding job: " + i.ToString());
+				//Report.Info("Adding job: " + i.ToString());
 				try
 				{
 					Job myJob = new Job();
