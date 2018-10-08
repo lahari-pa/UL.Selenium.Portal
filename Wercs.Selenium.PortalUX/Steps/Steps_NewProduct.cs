@@ -2825,6 +2825,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully added product: " + productToAdd + " to kit.");
 		}
 
+		[Given(@"In the Create the kit page I search for and select product saved as: (.*)")]
+		public void GivenInTheCreateTheKitPageISearchForAndSelectSavedAs(ProductInformation product)
+		{
+			Report.IsTrue(new NewProduct().AddItemToKitByNameAndID(product),
+				"Failed to add product: " + product.Id + " to kit.",
+				"Successfully added product: " + product.Id + " to kit.");
+		}
+
 		[Then(@"in the (.*) page I (should|should not) see the (.*) question")]
 		public void ThenInThePageIShouldOrShouldNotSeeQuestion(string page, string shouldOrNot, string question)
 		{

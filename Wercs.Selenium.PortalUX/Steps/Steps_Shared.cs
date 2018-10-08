@@ -33,6 +33,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Select the type of product to create",
 				"Create a New Registration");
 			TestReport.StartStep("In the New Product page I click Continue");
+			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
@@ -727,10 +728,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		// Enter UPC string in the form: "Equals"+upcNumber where upcNumber is the exact number to input, rather than using the randomly generated step from context
-		[StepDefinition(
-			@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
-		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc,
-			string containerType, string size)
+		[StepDefinition(@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc, string containerType, string size)
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -1626,7 +1625,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				table.Rows[0]["Personal Protection Equipment"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " +
-			                     table.Rows[0]["Autoignition Temperature"]);
+								 table.Rows[0]["Autoignition Temperature"]);
 			MyNewProduct.SetTheSectionOptionTo("Autoignition Temperature", table.Rows[0]["Autoignition Temperature"]);
 
 			TestReport.StartStep(
@@ -1635,19 +1634,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.SetTheSectionOptionTo("Minimum Ignition Energy", table.Rows[0]["Minimum Ignition Energy"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-			                     table.Rows[0]["Viscosity"]);
+								 table.Rows[0]["Viscosity"]);
 			MyNewProduct.SetTheSectionOptionTo("Viscosity", table.Rows[0]["Viscosity"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
-			                     table.Rows[0]["Appearance"]);
+								 table.Rows[0]["Appearance"]);
 			MyNewProduct.SetTheSectionOptionTo("Appearance", table.Rows[0]["Appearance"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " +
-			                     table.Rows[0]["Odor"]);
+								 table.Rows[0]["Odor"]);
 			MyNewProduct.SetTheSectionOptionTo("Odor", table.Rows[0]["Odor"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " +
-			                     table.Rows[0]["Odor Threshold"]);
+								 table.Rows[0]["Odor Threshold"]);
 			MyNewProduct.SetTheSectionOptionTo("Odor Threshold", table.Rows[0]["Odor Threshold"]);
 			// if Product's Dispensing Method is required enter any option
 
@@ -2365,8 +2364,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
 			{
-				TestReport.StartStep(
-					"Selecting the first option for section: Secondary Physical Stater");
+				TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
 				MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
 			}
 
@@ -2379,15 +2377,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//{
 			//	Report.Failure("Secondary physical state is not showing as specified by Shared Step");
 			//}
-			TestReport.StartStep(
-				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
 			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
 			{
-				TestReport.StartStep(
-					"I set the Select the best Water Solubility description option to: Soluble in water");
+				TestReport.StartStep("I set the Select the best Water Solubility description option to: Soluble in water");
 				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description",
 					"Soluble in water");
 			}
@@ -3806,8 +3802,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
-			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {"Statement"});
-			table1.AddRow(new string[] {"VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy")});
+			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] { "Statement" });
+			table1.AddRow(new string[] { "VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy") });
 			MyStepsNewProduct.ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table1);
 		}
 
@@ -4105,7 +4101,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (thisProductStatus.StatusName.ToLower().Contains("tparty"))
 			{
 				Report.Info("Waiting for id to change colour");
-				Report.IsTrue(myStudioShaManager.WaitForIDToBeStatus(id, 120, "Assigned", "tPartyForm",true), "ID has not turned required colour", "ID is required colour");
+				Report.IsTrue(myStudioShaManager.WaitForIDToBeStatus(id, 120, "Assigned", "tPartyForm", true), "ID has not turned required colour", "ID is required colour");
 			}
 
 
@@ -4752,7 +4748,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			foreach (TableRow thisRow in components.Rows)
 			{
 				thisStepsStudio.InTheProductForulationPageIClickButton("Create component");
-				string[] columnHeaders = components.Header.Select(x=>x.Trim()).ToArray();
+				string[] columnHeaders = components.Header.Select(x => x.Trim()).ToArray();
 				TechTalk.SpecFlow.Table tableRow = new TechTalk.SpecFlow.Table(columnHeaders);
 				tableRow.AddRow(thisRow);
 				thisStepsStudio.InTheCreateComponentPageIAddComponent(tableRow);
@@ -4964,6 +4960,98 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			TestReport.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 77872 \(Additional Product Information - Kit flow - US only, Direct Ship \(yes\), Continue\)")]
+		public void Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			var newProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information page");
+			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep("I confirm 'United States' is selected for the SOLD question");
+			newProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			TestReport.StartStep("I should only see the SOLD and Direct ship questions");
+			var sections = new Table("Section");
+			sections.AddRow("Select countries the product may be sold in");
+			sections.AddRow("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.");
+			newProductSteps.CheckDisplayedSections("only see", sections);
+			TestReport.StartStep("I select the Yes button for the 'Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.' question");
+			newProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "Yes");
+			TestReport.StartStep("I click continue");
+			newProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 31427 \(Create the Kit - Adding two products: product 1: (.*) and product 2: (.*)\)")]
+		public void Shared31427_CreateTheKit_AddingTwoProducts(string inputProduct1, string inputProduct2)
+		{
+			TestReport.UseSubSteps = true;
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var product1 = (ProductInformation)Context.GetFromContext(inputProduct1);
+			if (product1 == null)
+			{
+				throw new Exception("");
+			}
+			var product2 = (ProductInformation)Context.GetFromContext(inputProduct2);
+			if (product2 == null)
+			{
+				throw new Exception("");
+			}
+			TestReport.StartStep($"I add {product1.Id} to the kit");
+			newProductSteps.GivenInTheCreateTheKitPageISearchForAndSelectSavedAs(product1);
+			TestReport.StartStep($"I add {product2.Id} to the kit");
+			newProductSteps.GivenInTheCreateTheKitPageISearchForAndSelectSavedAs(product2);
+			TestReport.StartStep("I click continue");
+			newProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 77845 \(Retailer - Select WM, Done, Select Vendor ID, Continue\)")]
+		public void Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue()
+		{
+			var newProductSteps = new StepsNewProduct();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I should see the Select Retailers Popup");
+			newProductSteps.GivenIShouldSeeTheSelectRetailersPopUp();
+			TestReport.StartStep("I select the retailer: Wal-Mart/SAM'S CLUB and click Done");
+			newProductSteps.ThenISelectTheRetailer_InTheWindow("Wal-Mart/SAM'S CLUB");
+			TestReport.StartStep("I set the Vendor as: Testing");
+			newProductSteps.ThenInTheRetailersTabISelectVendorIdAs("Testing");
+			TestReport.StartStep("I click continue");
+			newProductSteps.ClickContinue();
+		}
+		[StepDefinition(@"I call Shared Step 42759 \(Portal - UPC Page - add 1 UPC\)")]
+		public void Shared42759_Portal_UpcPage_Add1Upc()
+		{
+			var newProductSteps = new StepsNewProduct();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the Add UPC button");
+			newProductSteps.ThenIClickTheAddUpcButton();
+			TestReport.StartStep("I set the UPC Number, Container Type and Size");
+			var upcTable = new Table("Field", "Value");
+			upcTable.AddRow("UPCNumber", $"saved as UPC{GlobalParameters.TestCaseId}");
+			upcTable.AddRow("ContainerType", "Aerosol Can");
+			upcTable.AddRow("Size", "20");
+			//upcTable.AddRow("DPCI", "087 - 16 - 0238");
+			newProductSteps.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			TestReport.StartStep("I click continue");
+			newProductSteps.ClickContinue();
+		}
+		[StepDefinition(@"I call Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code: (.*)")]
+		public void Shared81633_Wps_PdPlus_ProductAttributes_FilterForAndSpecificDataCode(string dataCode)
+		{
+			var studioSteps = new Steps_Studio();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("");
+
+		}
+
+		[StepDefinition(@"I call Shared Step 23195 \(Login into WERCSmart Portal - Administrator Role\)")]
+		public void Shared23195_LoginToWercSmartPortal_AdministratorRole()
+		{
+			var selGlobalSteps = new GlobalSteps();
+			selGlobalSteps.LoginToAccount("ProductAccount");
+			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
 		}
 	}
 }

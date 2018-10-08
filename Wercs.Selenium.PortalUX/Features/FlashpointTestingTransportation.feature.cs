@@ -1148,6 +1148,137 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[74368] Flash Point Range < 23 - Testing method shows closed cup only, Transporta" +
+            "tion shows Yes and No due to an exemption, Hazard class 3 must be used")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flash Point, testing method and Transportation (Suite ID: 74116)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ForgottenPassword")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        public virtual void _74368FlashPointRange23_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74368] Flash Point Range < 23 - Testing method shows closed cup only, Transporta" +
+                    "tion shows Yes and No due to an exemption, Hazard class 3 must be used", ((string[])(null)));
+#line 382
+this.ScenarioSetup(scenarioInfo);
+#line 14
+this.FeatureBackground();
+#line 383
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 384
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 385
+testRunner.And("I In the shared step below use Bleach as your product type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 386
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 387
+testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
+                    "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 388
+testRunner.And("I In the Boiling Point (in Celsius) field enter a value which is &gt; 35", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 389
+testRunner.And("I Select the \"I do not have exact Flash Point data available to me\" check box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 390
+testRunner.And("I Select the &lt;23C entry from the Flash Point (in Celsius) drop down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 391
+testRunner.And("I Confirm the Flash Point Testing Method Used question shows only the \"Closed cup" +
+                    " method\" radio button available for selection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 392
+testRunner.And("I Select the Closed cup method radio button for the Flash Point Testing Method Us" +
+                    "ed question", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 393
+testRunner.And("I Select any entry from the Select the best Water Solubility description drop dow" +
+                    "n list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 394
+testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 395
+testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
+                    "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 396
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 397
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 398
+testRunner.And("I The Transport Details 1 step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 399
+testRunner.And("I Confirm the only options shown for the Product is Regulated for Transport are:Y" +
+                    "esNo, due to an exemption or exception", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 400
+testRunner.And("I Select the Yes radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 401
+testRunner.And("I Select the DOT check box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 402
+testRunner.And("I Select the Shipping fully regulated check box below DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 403
+testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 404
+testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
+                    "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 405
+testRunner.And("I Confirm the UN Number is shown in red font indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 406
+testRunner.And(@"I Confirm the error shown below the UN number reads ""The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.The Flash Point (22C - less than or equal to 60C) must be used with Hazard Class 3.""This is because we selected &lt;23C in step 7 earlier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 407
+testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
+                    " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 408
+testRunner.And("I Confirm no errors are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 409
+testRunner.And("I You may see the Ecologo readiness step depending on your subscription.  If you " +
+                    "see the Ecologo step use the shared step below.  If you do not see it skip to st" +
+                    "ep 29", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 410
+testRunner.And("[Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue -" +
+                    " Happy Path]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 411
+testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
+                    "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 412
+testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 413
+testRunner.And("I The additional documents to provide step is shown - click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 414
+testRunner.And("I The Optional Reports and Documents Available for Purchase step is shown - click" +
+                    " continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Requires Table"});
+            table22.AddRow(new string[] {
+                        "Parameters"});
+#line 415
+testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
+                    ") step - add any random data for all fields - Happy path) and enter the followin" +
+                    "g:", ((string)(null)), table22, "And ");
+#line 418
+testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 419
+testRunner.And("I The Data Acceptance step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 420
+testRunner.And("I Click the Summary button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 421
+testRunner.And("I Confirm that no errors are shown for the product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 422
+testRunner.And("I Close the Summary window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 423
+testRunner.And("I Click the Home icon in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 424
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

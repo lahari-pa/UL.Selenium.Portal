@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
 using SafewareReporting;
-using Global = SeleniumUtilities.Global;
+//using Global = SeleniumUtilities.Global;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {

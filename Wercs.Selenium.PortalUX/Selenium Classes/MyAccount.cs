@@ -9,7 +9,7 @@ using Org.BouncyCastle.Asn1.Mozilla;
 using SafewareReporting;
 using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Classes;
-using Global = SeleniumUtilities.Global;
+//using Global = SeleniumUtilities.Global;
 
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -133,8 +133,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			//Actions drop down menu should now open
 
 			var dropDownMenu =
-				Global.Browser.FindElement(
-					By.XPath("//button[@aria-expanded='true']/following-sibling::ul[@class='dropdown-menu']"));
+				SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@aria-expanded='true']/following-sibling::ul[@class='dropdown-menu']"));
 
 			IWebElement actionLink = (IWebElement)dropDownMenu.FindElements(By.XPath("./li")).FirstOrDefault(x => x.Text == action);
 

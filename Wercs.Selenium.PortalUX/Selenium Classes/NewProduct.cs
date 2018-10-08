@@ -1954,6 +1954,43 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		// searches by name, matches by ID
+		public bool AddItemToKitByNameAndID(ProductInformation product)
+		{
+			try
+			{
+				var placeholderEl = containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
+				placeholderEl.TryClick();
+				IWebElement MatchedEntry = null;
+				var inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+				inputEl.EnterText(product.Name);
+				var searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+				int i = 0;
+				while (searching != null && i < 10)
+				{
+					Delay.Seconds(Delay.SpeedFactor * 1);
+					i++;
+					searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+				}
+				var Matches = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+				var MatchingByID = Matches.FirstOrDefault(x => x.GetValue().Trim().ToLower().Contains(product.Id.ToLower()));
+				if (MatchingByID == null)
+				{
+					// No matching name entry was found, so we take the first one just in case we are looking for a partial match!
+					MatchedEntry = Matches.FirstOrDefault();
+				}
+				else
+				{
+					MatchedEntry = MatchingByID;
+				}
+				return MatchedEntry.TryClick();
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
 
 		// ========= Add Ingredient Functions ========= //
 

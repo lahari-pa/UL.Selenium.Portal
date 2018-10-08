@@ -11,7 +11,7 @@ using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using Wercs.Selenium.PortalUX.Classes;
-using Global = SeleniumUtilities.Global;
+//using Global = SeleniumUtilities.Global;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {

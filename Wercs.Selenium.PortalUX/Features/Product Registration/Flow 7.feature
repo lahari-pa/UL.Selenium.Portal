@@ -89,6 +89,8 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: ABS Welding
 
+Given I navigate to the home page
+
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57863
 
 Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (RU001232)
@@ -173,6 +175,8 @@ Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (O
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Automotive Coating - SCAQMD Any Other Coating Type
+
+Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57905
 
