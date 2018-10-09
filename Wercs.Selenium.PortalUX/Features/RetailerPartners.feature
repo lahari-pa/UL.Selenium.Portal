@@ -26,47 +26,6 @@ And I confirm that if the Retailer logo is not shown, then the Retailer name is 
 # And Use the Stored Procedure GET_MOST_RECENT_RETAILERS to confirm that the retailers shown under Most Recent Retailers is correct NOTE: Parameters for the GET_MOST_RECENT_RETAILERS are @SUPPLIERGUID  - different for each supplier  @TOPPRODUCTS - use the number 8 @SOURCESERVICE - use the word PORTAL    Supplier GUID should be enclosed in single quotes   The word PORTAL for the SOURCESERVICE does not need single quotes
 # And Use this query to see the list of currently active retailers in Portal select * from t_client where f_active = 1 and ISNULL(f_config.value('(/Client/@Active)[1]','varchar(20)'),'true') = 'true'  order by f_name CONFIRM this list matches the list of retailers you see in the Retail Partners page
 
-@tfs_design
-Scenario: [56909] Retailer Detail Page - Retailer does not require Supplier ID but does require Data Consent Tiers
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then The home screen should load
-
-# Retail Partners Page
-And I click the Retail Partners icon in the Navigation Pane
-Then I should see the following heading Retail Partners
-And I select the retailer: Costco
-
-# Retailer Detail Page
-Then I should see the retailer heading: Costco
-And I confirm that there is a section labeled: Your Supplier IDs
-And Section: Your Supplier IDs should be showing text: This retailer does not support Supplier ID management
-And I confirm that there is a section labeled: Data Consent Tiers
-And I should see the button: What are the Data Usage Tiers? in section: Data Consent Tiers
-And I should see the button: Products in Scope in section: Data Consent Tiers
-And I confirm that there is a section labeled: Costco & You
-And The pie chart should be showing on the retailer details page
-And The pie chart footer text should contain: % of your product portfolio is associated with Costco
-
-
-Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tiers
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then The home screen should load
-
-# Retail Partners Page
-And I click the Retail Partners icon in the Navigation Pane
-Then I should see the following heading Retail Partners
-And I select the retailer: Wal-Mart
-
-# Retailer Detail Page
-Then I should see the retailer heading: Wal-Mart/SAM'S CLUB
-And I confirm that there is a section labeled: Your Supplier IDs
-And The Supplier ID Table should be showing
-And I confirm that there is a section labeled: Data Consent Tiers
-And I should see the button: What are the Data Usage Tiers? in section: Data Consent Tiers
-And I should see the button: Products in Scope in section: Data Consent Tiers
-And I confirm that there is a section labeled: Wal-Mart/SAM'S CLUB & You
-And The pie chart should be showing on the retailer details page
-And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
 
 
 Scenario: [56895] Retailer Partners - Main Page layout (New supplier)

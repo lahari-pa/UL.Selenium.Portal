@@ -73,58 +73,6 @@ Given I click each Wal-mart affiliate retailer and should be taken to the Wal-ma
 
 And I navigate to the home page
 
-Scenario: [63684] Walmart Private label product
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
-Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
-Then The home screen should load
-
-# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
-Given I generate a random UPC number and save as: UPC63684
-Given I delete all products with UPC Number: saved as UPC63684
-
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet shampoo
-
-Then I save the product information as: TestCase63684
-
-Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
-| Secondary Physical State | Specific Gravity | pH      | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used     | Select the best Water Solubility description |
-| Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
-
-
-Given I call Shared Step 63804 (Additional Product Information - enter options)
-| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-| No                                                             | No                            | Yes                         | No                         |
-
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Cocoa butter  | 100     | false               | false       |            |
-
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-
-Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-
-Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: test
-
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC63684, container type: Plastic Container and size: 3.6
-
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-
-Given in the Additional Documents to Provide page I click Continue
-
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-
-Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-| Apron                         | 550                      | 63.625                  | 33.333    | Brown      | Banana | No data available | 30                    |
-
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet shampoo
-
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
 
 Scenario: [74133] Walmart Product Type Electronics
 

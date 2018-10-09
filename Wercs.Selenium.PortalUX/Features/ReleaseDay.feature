@@ -13,6 +13,9 @@
 @SubEnrollment
 @WERCSmart_Signup
 @MyAccount
+@PackagingTypes
+@Brands
+@MyIngredients
 @run_ReleaseDay
 
 Feature: Release Day
@@ -463,6 +466,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
 
+
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -518,4 +522,1032 @@ Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase71051
 
 
+Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly when the Update WERCSmart data link is used
 
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+
+Then I save the product information as: TestCase62848
+
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+And I should see the Pesticide Details - U.S. Page
+
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+
+Given in the New Product page I click Continue
+
+Given I add the EPA registration number: 56228-10
+
+Given in the New Product page I click Continue
+
+And I should see the Pesticide Details - State Registration Details Page
+
+Given I confirm that there is data populated in the Expiration Date Column for some States
+
+And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
+
+Then I edit the Expiration Date to: 2019-12-31 for the State: AZ on the Pesticide State Registration Details page
+
+Given in the New Product page I click Continue
+
+Then in the New Product page I click section: Pesticide Details - U.S.
+
+And I should see the Pesticide Details - U.S. Page
+
+Given in the New Product page I click Continue
+
+And I should see the Pesticide Details - State Registration Details Page
+
+Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
+
+Given I click the Update Wercs Smart data with EPA data through Kelly Services link
+
+Then I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State
+
+Then I confirm the 'Is Kelly Data' field for State: AZ is checked
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
+
+
+Scenario: [56476] VOC checks for Personal Fragrance product
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Personal Fragrance Product (more than 20% fragrance)
+
+Then I save the product information as: TestCase56476
+
+Given I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
+
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Acetone
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+
+Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+
+Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+
+Then I see the following sections
+| Section                                                                                                             |
+| Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB |
+
+Then I do not see the following sections
+| Section                                                                                                                                                              |
+| Amount of VOC content (as a weight percentage (%) of the total formulation) contained in this product, excluding exempt compounds, as defined by the OTC Model Rule. |
+
+Given in the New Product page I click Continue
+
+Then Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should be showing the error messages: This is a required field.
+
+Given I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 20
+
+Given in the New Product page I click Continue
+
+Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
+
+Then I confirm that I see the following VOC-OTC-CARB statement4: Based on your selection, you have verified your product contains VOC with intended uses as follows. The CARB VOC compliance limit(s) for the intended use you identified is/are:
+
+Given I call Shared Step 57819 (VOC Results - Confirm VOC Limits table shows correct values (CARB only) - Happy Path): Personal Fragrance Product (more than 20% fragrance)
+
+And I confirm that I see the following VOC content as weight percentage for each state statement: VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.
+
+Then I confirm that I see the following CARB value: 20
+
+Then I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+
+And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted CARB value: 20
+
+Given in the New Product page I click Continue
+
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Then I should see the Additional Documents to Provide Page
+
+Then I see the following sections
+| Section                                           |
+| Volatile Organic Compounds                        |
+
+Given in the New Product page I click Continue
+
+Then I should see an error message: Document is required: Product Label
+
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+Then I should see the Optional Reports and Documents Available for Purchase Page
+
+Given in the New Product page I click Continue
+
+Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Goggles                       | 200                      | 25                      | 12.2      | Black      | Odorless | No data available | 5                     |
+
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance)
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
+
+
+Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Checking that the test will run correctly by handling extra screens
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# New Product Page
+And I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# The Product Page
+And I should see the The Product Page
+And I set the Product Name option to: Charcoal Lighter Material
+And In the Product Type tab of the New Product Page, I enter: Charcoal Lighter Material in the Type of Product select field
+And in the New Product page I click Continue
+
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase56477
+And I should only see the following options for Primary Physical State:
+| State |
+| Liquid |
+
+And I set the Secondary Physical State option to: Liquid
+And I set the Specific Gravity option to: 2
+And I set the pH option to: 2
+And I set the Boiling Point (in Celsius) option to: 2
+And I set the Flash Point (in Celsius) option to: 2
+And I set the Flash Point Testing Method Used option to: Closed cup method
+And I set the Select the best Water Solubility description option to: Very soluble
+And in the New Product page I click Continue
+
+# Additional Product Information page
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+# Ingredient Page
+And I should see the Ingredients Page
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: No, due to an exemption or exception
+And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(b)(3): Combustible liquid that does not sustain combustion
+Given in the New Product page I click Continue
+
+# Transportation Details 2 Page
+And I should see the Transportation Details 2 Page
+And I set the International Shipping when DOT Exemption taken? option to: I do not ship internationally and I do not know the classification
+Given in the New Product page I click Continue
+
+# Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No
+And I confirm that I see the following VOC Content below threshold CARB statement: Verify VOC content is below the threshold of 0.02lb/start of CARB
+And I confirm that I see the following VOC Content below threshold OTC statement: Verify VOC content is below the threshold of 0.02lb/start of OTC
+Given in the New Product page I click Continue
+Then Verify VOC content is below the threshold of 0.02lb/start of CARB should be showing the error messages: This is a required field.
+Then Verify VOC content is below the threshold of 0.02lb/start of OTC should be showing the error messages: This is a required field.
+And I set the Verify VOC content is below the threshold of 0.02lb/start of CARB option to: No
+Then Verify VOC content is below the threshold of 0.02lb/start of CARB should not be showing the error messages: This is a required field.
+And I set the Verify VOC content is below the threshold of 0.02lb/start of OTC option to: No
+Then Verify VOC content is below the threshold of 0.02lb/start of OTC should not be showing the error messages: This is a required field.
+Given in the New Product page I click Continue
+
+# Volatile Organic Compound Summary page
+And I should see the Volatile Organic Compound Summary Page
+And I confirm that I see todays VOC Analysis Date
+And I should see the following Voc Limits with units  present:
+| Use                       | VOC Compliance Limit | Units      | Regulation           |
+| Charcoal Lighter Material | 0.02                 | lb / start | OTC Model rule limit |
+| Charcoal Lighter Material | 0.02                 | lb / start | CARB limit           |
+And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm statement: limits specified by CARB shows the text: Exceeds the limits specified by CARB
+And I confirm statement: limits specified by OTC shows the text: Exceeds the limits specified by OTC Model Rule
+
+# Change the CARB  and OTC threshold options
+Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
+And I set the Verify VOC content is below the threshold of 0.02lb/start of CARB option to: Yes
+And I set the Verify VOC content is below the threshold of 0.02lb/start of OTC option to: Yes
+And in the New Product page I click Continue
+And I confirm statement: limits specified by CARB shows the text: Does not exceed the limits specified by CARB
+And I confirm statement: limits specified by OTC shows the text: Does not exceed the limits specified by OTC Model Rule
+And in the New Product page I click Continue
+
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+# Regulatory Documents to Provide Page
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
+And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+And in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 5
+And in the New Product page I click Continue
+
+# Comments Page
+And I should see the Comments Page
+And in the New Product page I click Continue
+
+# Data Acceptance Page and clean up
+And I should see the Data Acceptance Page
+Given I navigate to the home page
+Then I delete the product: TestCase56477
+
+
+Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB and OTC
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
+
+Then I save the product information as: TestCase56481
+
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+
+Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+
+Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+
+Then I see the following sections
+| Section                                                                                                                      |
+| Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB           |
+| Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule |
+| Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?                 |
+
+Then The following options should be displayed for section: Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?
+| Option                                                      |
+| Yes                                                         |
+| No, I would like to manually enter VOC values for each area. |
+
+Given in the New Product page I click Continue
+
+Then Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should be showing the error messages: This is a required field.
+
+Then Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule should be showing the error messages: This is a required field.
+
+Then Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? should be showing the error messages: This is a required field.
+
+Given I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 40
+
+Then Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should not be showing the error messages: This is a required field.
+
+Given I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule option to: 5
+
+Then Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule should not be showing the error messages: This is a required field.
+
+Given I set the Would you like to use the VOC percentages option to: Yes
+
+Then Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? should not be showing the error messages: This is a required field.
+
+Given in the New Product page I click Continue
+
+Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
+
+Then I confirm the VOC limits table has an entry for Regulation: CARB
+
+Then I confirm the VOC limits table has an entry for Regulation: OTC
+
+Then I should see data for States in the 'VOC Content as weight percentage of total formula' table
+
+Then I confirm that I see the following CARB value: 40
+
+Then I confirm that I see the following OTC Model Rule value: 5
+
+Then I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+
+And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted CARB value: 40
+
+And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted OTC value: 5
+
+Given in the New Product page I click Continue
+
+# If your supplier account is on Premium subscription you will see the Ecologo step - perform the Shared Step below if you do, if not skip to step 43
+
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Then I should see the Additional Documents to Provide Page
+
+Then I see the following sections
+| Section                                           |
+| Volatile Organic Compounds                        |
+
+Given in the New Product page I click Continue
+
+Then I should see an error message: Document is required: Product Label
+
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+
+Then I should see the Optional Reports and Documents Available for Purchase Page
+
+Given in the New Product page I click Continue
+
+Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Gloves                      | 100                      | 250                      | 1200      | Black      | Odorless | No data available | 50                     |
+
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Then The Data Acceptance page should appear
+
+Then In the Data Acceptance page I select Yes, Agreed
+
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Oven Cleaner - Pump Sprays
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
+
+Scenario: [56483] VOC - Antiperspirant and Deodorant checks
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Checking that the test will run correctly by handling extra screens
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# New Product Page
+And I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# The Product Page
+And I should see the The Product Page
+And I set the Product Name option to: Antiperspirants - Non-aerosol
+And In the Product Type tab of the New Product Page, I enter: Antiperspirants - Non-aerosol in the Type of Product select field
+And in the New Product page I click Continue
+
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase56483
+And I should only see the following options for Primary Physical State:
+| State |
+| Liquid |
+| Solid |
+And I set the Primary Physical State option to: Solid
+And I set the Secondary Physical State option to: Solid
+And I set the When mixed with an equal amount of water option to: No
+And I set the Select the best Water Solubility description option to: Very soluble
+And in the New Product page I click Continue
+
+# Additional Product Information page
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+# Ingredient Page
+And I should see the Ingredients Page
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+Given in the New Product page I click Continue
+
+# Regulatory 3 Page Details
+And I should see the Regulatory Information 3 Page
+And I set the below options for field: Refer to your Product Label
+| Option            |
+| None of the Above |
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport option to: Not Regulated
+Given in the New Product page I click Continue
+
+# Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No
+And in the New Product page I click Continue
+Then HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: This is a required field.
+Then MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
+And I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 1
+And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 1
+And in the New Product page I click Continue
+
+# Volatile Organic Compound Summary page
+And I should see the Volatile Organic Compound Summary Page
+And I confirm that I see todays VOC Analysis Date
+And I should see the following Voc Limits present:
+| Use                               | VOC Compliance Limit         | Regulation                                                    |
+| Antiperspirants - Non-aerosol     | 0                         | HVOC CARB and OTC Model Rule limit                               |
+| Antiperspirants - Non-aerosol     | 0                         | MVOC CARB and OTC Model Rule limit                               |
+And I confirm that I see the following HVOC value: 1
+And I confirm that I see the following MVOC value: 1
+And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm statement: limits specified shows the text: Exceeds the limits specified by CARB and OTC Model Rule
+
+#change the HVOC and MVOC value
+Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
+And I set the HVOC (high volatile organic compound) content as weight percent of the total formulation field to: 0
+And I set the MVOC (microbial volatile organic compound) content as weight percentage of the total formulation field to: 0
+And in the New Product page I click Continue
+And I confirm statement: limits specified shows the text: Does not exceed the limits specified by CARB and OTC Model Rule
+
+And in the New Product page I click Continue
+
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+# Regulatory Documents to Provide Page
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
+And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+And in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 5
+And in the New Product page I click Continue
+
+# Comments Page
+And I should see the Comments Page
+And in the New Product page I click Continue
+
+# Data Acceptance Page and clean up
+And I should see the Data Acceptance Page
+Given I navigate to the home page
+Then I delete the product: TestCase56483
+
+
+Scenario: [56484] VOC - Aero checks
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# Checking that the test will run correctly by handling extra screens
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# New Product Page
+And I click the Register New Product icon in the Navigation Pane
+And I should see the New Product Page
+And I set the Select the type of product to create option to: Create a New Registration
+And in the New Product page I click Continue
+
+# The Product Page
+And I should see the The Product Page
+And I set the Product Name option to: Clear Coating - Aerosol
+And In the Product Type tab of the New Product Page, I enter: Clear Coating - Aerosol in the Type of Product select field
+And in the New Product page I click Continue
+
+# Product Characteristics Page
+And I should see the Product Characteristics Page
+Then I save the product information as: TestCase56484
+And I should only see the following options for Primary Physical State:
+| State |
+| Aerosol |
+And I set the Secondary Physical State option to: Solid spray
+And I set the pH option to: 2
+And I set the Select the best Water Solubility description option to: Very soluble
+And I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then option to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
+And in the New Product page I click Continue
+
+# Additional Product Information page
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I set the Product is a Retailer's Private Label or Brand option to: No
+And I set the Product is sold to the Retailer solely for the Retailer's use option to: No
+And in the New Product page I click Continue
+
+# Ingredient Page
+And I should see the Ingredients Page
+Then I add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Butane  | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+# Regulatory 1 Page Details
+And I should see the Regulatory Information 1 Page
+And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+Given in the New Product page I click Continue
+
+# Transportation Details 1 Page
+And I should see the Transportation Details 1 Page
+And I set the Product is Regulated for Transport option to: Yes
+And I set the below options for field: Select all modes of transport that you've classified the product for
+| Option                           |
+| DOT                              |
+| Shipping with limited quantity   |
+| Shipping with consumer commodity |
+Given in the New Product page I click Continue
+
+# U. S. Department of Transportation (DOT) Classification Page
+Then I should see the U. S. Department of Transportation (DOT) Classification Page
+And I set the UN Number field to: UN1950
+And I set the Proper Shipping Name field to: Aerosols
+And I set the Technical Name (if applicable) field to: Clear Coating - Aerosol
+And I set the Hazard Class (select) field to: 2.1
+And I set the Packing Group (select) field to: None
+Given in the New Product page I click Continue
+
+# Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I confirm that I see the following VOC-OTC-CARB statement1: Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
+And I confirm that I see the following VOC-OTC-CARB statement3: VOC content in grams ozone per gram
+And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No
+And in the New Product page I click Continue
+Then VOC content in grams ozone per gram should be showing the error messages: This is a required field.
+And I set the VOC content in grams ozone per gram field to: 0.5
+And in the New Product page I click Continue
+
+# Volatile Organic Compound Summary page
+And I should see the Volatile Organic Compound Summary Page
+And I confirm that I see todays VOC Analysis Date
+And I confirm that I see the following VOC-OTC-CARB statement4: Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are:
+And I should see the following Voc Limits present:
+| Use                         | VOC Compliance Limit         | Regulation                                                |
+| Clear Coating - Aerosol     | 0.85                         | Aerosol Coatings CARB limit                               |
+And I confirm that I see the following VOC Grams Ozone value: 0.5
+And I confirm statement: limits specified shows the text: Does not exceed the limits specified in the Aerosol Coatings by the CARB
+And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+
+#change the VOC grams value
+Then in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
+And I set the VOC content in grams ozone per gram field to: 1
+And in the New Product page I click Continue
+And I confirm statement: limits specified shows the text: Exceeds the limits specified in the Aerosol Coatings by the CARB
+And in the New Product page I click Continue
+
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+# Regulatory Documents to Provide Page
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+And in the New Product page I click Continue
+
+# Additional Documents to Provide Page
+And I should see the Additional Documents to Provide Page
+And in the New Product page I click Continue
+Then Volatile Organic Compounds should be showing the error messages: Document is required: Product Label
+And I click the browse button for label: Product Label and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+And in the New Product page I click Continue
+
+# Optional Reports and Documents Available for Purchase Page
+And I should see the Optional Reports and Documents Available for Purchase Page
+And in the New Product page I click Continue
+
+# Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And I set the Appearance field to: Brown
+And I set the Odor field to: Banana
+And I set the Odor Threshold field to: Not applicable
+And I set the Partition Coefficient field to: 5
+#And in the New Product page I click Continue
+#Then Product's Dispensing Method should be showing the error messages: This is a required field.
+And I set the Product's Dispensing Method field to: Pump
+And in the New Product page I click Continue
+
+# Comments Page
+And I should see the Comments Page
+And in the New Product page I click Continue
+
+# Data Acceptance Page and clean up
+And I should see the Data Acceptance Page
+Given I navigate to the home page
+Then I delete the product: TestCase56484
+
+
+@tfs_design
+Scenario: [56909] Retailer Detail Page - Retailer does not require Supplier ID but does require Data Consent Tiers
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+
+# Retail Partners Page
+And I click the Retail Partners icon in the Navigation Pane
+Then I should see the following heading Retail Partners
+And I select the retailer: Costco
+
+# Retailer Detail Page
+Then I should see the retailer heading: Costco
+And I confirm that there is a section labeled: Your Supplier IDs
+And Section: Your Supplier IDs should be showing text: This retailer does not support Supplier ID management
+And I confirm that there is a section labeled: Data Consent Tiers
+And I should see the button: What are the Data Usage Tiers? in section: Data Consent Tiers
+And I should see the button: Products in Scope in section: Data Consent Tiers
+And I confirm that there is a section labeled: Costco & You
+And The pie chart should be showing on the retailer details page
+And The pie chart footer text should contain: % of your product portfolio is associated with Costco
+
+
+Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tiers
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+
+# Retail Partners Page
+And I click the Retail Partners icon in the Navigation Pane
+Then I should see the following heading Retail Partners
+And I select the retailer: Wal-Mart
+
+# Retailer Detail Page
+Then I should see the retailer heading: Wal-Mart/SAM'S CLUB
+And I confirm that there is a section labeled: Your Supplier IDs
+And The Supplier ID Table should be showing
+And I confirm that there is a section labeled: Data Consent Tiers
+And I should see the button: What are the Data Usage Tiers? in section: Data Consent Tiers
+And I should see the button: Products in Scope in section: Data Consent Tiers
+And I confirm that there is a section labeled: Wal-Mart/SAM'S CLUB & You
+And The pie chart should be showing on the retailer details page
+And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
+
+
+#Blocked
+@tfs_design
+Scenario: [58753] Hair Color Kit - RU000724
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+# This just double checks that the account has been set up correctly - chances are this step won't be actioned
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+#Create two products to go into the kit
+Given I generate a random UPC number and save as: UPC58753Kit1
+Given I delete all products with UPC Number: saved as UPC58753Kit1
+Given I navigate to the home page
+Given I generate a random UPC number and save as: UPC58753Kit2
+Given I delete all products with UPC Number: saved as UPC58753Kit2
+
+#####Kit item 1
+Then I click the Register New Product icon in the Navigation Pane
+And I Select the Create a New Registration radio button
+And in the New Product page I click Continue
+And In the Product Type tab of the New Product Page, I enter: KitItem1 in the Product Name text field
+And In the Product Type tab of the New Product Page, I enter: Hair Color Remover in the Type of Product select field
+And in the New Product page I click Continue
+Then I save the product information as: TestCase58753Kit1
+
+And I set the Primary Physical State to be: Liquid
+And I set the Secondary Physical State to be: Liquid
+And In the Product Characteristics tab, I enter: 2 in the Specific Gravity text field
+And In the product Characteristics tab, I enter: 2 in the pH text field
+And In the product Characteristics tab, I enter: 2 in the Boiling point (in Celsius) text field
+And In the product Characteristics tab, I enter: 2 in the Flash point (in Celsius) text field
+And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Closed cup method
+And I set the Select the best Water Solubility description to be: Very soluble
+And in the New Product page I click Continue
+
+# Following the steps from 'Shared Step' 69687
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And In the Additional Information Page for Product has been classified using OSHA I select: No
+And In the Additional Information Page for Product is shipped directly I select: No
+And In the Additional Information Page for Product is retailers private label or brand I select: Yes
+And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+And in the New Product page I click Continue
+
+# Setting Ingredient Information
+Then I add the following ingredients:
+| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Hydrogen Peroxide | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+#Regulatory Information 1
+And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And in the New Product page I click Continue
+And I should see the Transportation Details 1 Page
+And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: No, due to an exemption or exception
+And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(b)(3): Combustible liquid that does not sustain combustion
+Given in the New Product page I click Continue
+And I should see the Transportation Details 2 Page
+And In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: I do not ship internationally and I do not know the classification
+And in the New Product page I click Continue
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: Target
+And In the Retailers tab, I enter Private Label name as: Kit1
+And in the New Product page I click Continue
+
+#Enter UPC
+Given I click the 'Add UPC' button
+Then I add the following into the UPC Fields
+| Field         | Value                 |
+| UPCNumber     | saved as UPC58753Kit1 |
+| ContainerType | Aerosol Can           |
+| Size          | 20                    |
+| DPCI          | 087-16-0238           |
+And in the New Product page I click Continue
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+
+Given in the New Product page I click Continue
+Given in the New Product page I click Continue
+Given in the New Product page I click Continue
+
+#SaDS authoring - additional data
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And in the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: Gloves
+And in the Review and Submit tab of the New Product Page for Autoignition I enter: 55
+And in the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: 55
+And in the Review and Submit tab of the New Product Page for Viscosity I enter: 4.5
+And in the Review and Submit tab of the New Product Page for Appearance I select: Buff
+And in the Review and Submit tab of the New Product Page for Odor I select: Roasted soy
+And in the Review and Submit tab of the New Product Page for Odor Threshold I select: No data available
+And in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: 5.5
+Given in the New Product page I click Continue
+Then the comments field should appear
+And I enter the following into the comments field: Comments Field Text
+Given in the New Product page I click Continue
+Then The Data Acceptance page should appear
+Given In the Data Acceptance page I select Yes, Agreed
+Given In the Data Acceptance page I click on the Accept button
+Then the Subscription Enrollment page should load
+
+######## Kit item 2
+Then I click the Register New Product icon in the Navigation Pane
+And I Select the Create a New Registration radio button
+And in the New Product page I click Continue
+And In the Product Type tab of the New Product Page, I enter: KitItem2 in the Product Name text field
+And In the Product Type tab of the New Product Page, I enter: Hair Color Remover in the Type of Product select field
+And in the New Product page I click Continue
+Then I save the product information as: TestCase58753Kit1
+
+And I set the Primary Physical State to be: Liquid
+And I set the Secondary Physical State to be: Liquid
+And In the Product Characteristics tab, I enter: 2 in the Specific Gravity text field
+And In the product Characteristics tab, I enter: 2 in the pH text field
+And In the product Characteristics tab, I enter: 2 in the Boiling point (in Celsius) text field
+And In the product Characteristics tab, I enter: 2 in the Flash point (in Celsius) text field
+And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Closed cup method
+And I set the Select the best Water Solubility description to be: Very soluble
+And in the New Product page I click Continue
+
+# Following the steps from 'Shared Step' 69687
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And In the Additional Information Page for Product has been classified using OSHA I select: No
+And In the Additional Information Page for Product is shipped directly I select: No
+And In the Additional Information Page for Product is retailers private label or brand I select: Yes
+And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+And in the New Product page I click Continue
+
+# Setting Ingredient Information
+Then I add the following ingredients:
+| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Hydrogen Peroxide | 100     | false               | false       |            |
+Given in the New Product page I click Continue
+
+#Regulatory Information 1
+And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And in the New Product page I click Continue
+And I should see the Transportation Details 1 Page
+And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: No, due to an exemption or exception
+And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(b)(3): Combustible liquid that does not sustain combustion
+Given in the New Product page I click Continue
+And I should see the Transportation Details 2 Page
+And In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: I do not ship internationally and I do not know the classification
+And in the New Product page I click Continue
+Given the 'Select Retailers' window appears
+Then In the 'Select Retailers' window I select the retailer: Target
+And In the Retailers tab, I enter Private Label name as: Kit2
+And in the New Product page I click Continue
+#Enter UPC
+Given I click the 'Add UPC' button
+Then I add the following into the UPC Fields
+| Field         | Value                 |
+| UPCNumber     | saved as UPC58753Kit2 |
+| ContainerType | Aerosol Can           |
+| Size          | 20                    |
+| DPCI          | 087-16-0238           |
+And in the New Product page I click Continue
+And I should see the Regulatory Documents to Provide Page
+And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
+
+Given in the New Product page I click Continue
+Given in the New Product page I click Continue
+Given in the New Product page I click Continue
+
+#SaDS authoring - additional data
+And I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And in the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: Gloves
+And in the Review and Submit tab of the New Product Page for Autoignition I enter: 55
+And in the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: 55
+And in the Review and Submit tab of the New Product Page for Viscosity I enter: 4.5
+And in the Review and Submit tab of the New Product Page for Appearance I select: Buff
+And in the Review and Submit tab of the New Product Page for Odor I select: Roasted soy
+And in the Review and Submit tab of the New Product Page for Odor Threshold I select: No data available
+And in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: 5.5
+Given in the New Product page I click Continue
+Then the comments field should appear
+And I enter the following into the comments field: Comments Field Text
+Given in the New Product page I click Continue
+Then The Data Acceptance page should appear
+Given In the Data Acceptance page I select Yes, Agreed
+Given In the Data Acceptance page I click on the Accept button
+Then the Subscription Enrollment page should load
+###### Creating the Kit
+Then I click the Register New Product icon in the Navigation Pane
+And I Select the Create a New Registration radio button
+And in the New Product page I click Continue
+And In the Product Type tab of the New Product Page, I enter: Hair Color Kit in the Product Name text field
+And In the Product Type tab of the New Product Page, I enter: Hair Color Kit in the Type of Product select field
+And in the New Product page I click Continue
+Then I save the product information as: TestCase58753
+And I should see the Additional Product Information Page
+And In the Additional Information Page the check box for: United States should be: checked
+And In the Additional Information Page for Product is retailers private label or brand I select: Yes
+And In the Additional Information Page for Product is solely for the Retailer's use I select: Yes
+And in the New Product page I click Continue
+And in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substances Control Act (TSCA) status I select: Compliant
+And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And in the New Product page I click Continue
+And I should see the Create the Kit Page
+Given In the Create the Kit page I check the Product checkbox: true
+Given In the Create the Kit page I select the following products
+| Product                    |
+| saved as TestCase58753Kit1 |
+| saved as TestCase58753Kit2 |
+
+
+Scenario: [70516] Add and Remove Packaging Type
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I click on My Account
+
+Given In the My Account page I navigate to the My Library page
+
+Then I confirm the current active tab on the My Library page is: My Packaging Types
+
+Given I click 'Add New' in the My Packaging Types section of My Library
+
+Then I should see the Packaging Type Page
+
+Given I set the Package Type Name field to: Super Packaging Type (TM)
+
+Given I click continue
+
+Then I should see the Bill of Materials Page
+
+And I save the Packaging Type details as: ThisPackaging
+
+Given I click Add Row in the Bill Of Materials grid
+
+Given I select the option: Clear Glass for the My Packaging Materials field in the table
+
+Given I select the option: 99 for the My Packaging Weight (grams) field in the table
+
+Given I click continue
+
+Given In the Data Acceptance page I click on the Accept button
+
+Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
+
+Given I delete Packaging Type saved as: ThisPackaging
+
+Then I confirm the name and ID for Packaging Type saved as: ThisPackaging appear in the Delete Product pop up
+
+Given I click Delete in the Delete Product pop up
+
+And I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
+
+
+Scenario: [63684] Walmart Private label product
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+
+# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
+Given I generate a random UPC number and save as: UPC63684
+Given I delete all products with UPC Number: saved as UPC63684
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet shampoo
+
+Then I save the product information as: TestCase63684
+
+Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+| Secondary Physical State | Specific Gravity | pH      | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used     | Select the best Water Solubility description |
+| Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
+
+
+Given I call Shared Step 63804 (Additional Product Information - enter options)
+| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+| No                                                             | No                            | Yes                         | No                         |
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Cocoa butter  | 100     | false               | false       |            |
+
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: test
+
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC63684, container type: Plastic Container and size: 3.6
+
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+
+Given in the Additional Documents to Provide page I click Continue
+
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Apron                         | 550                      | 63.625                  | 33.333    | Brown      | Banana | No data available | 30                    |
+
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet shampoo
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
