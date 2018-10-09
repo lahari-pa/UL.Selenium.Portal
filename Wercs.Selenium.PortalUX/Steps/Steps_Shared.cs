@@ -60,6 +60,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			var prodDetails = new NewProduct().GetCurrentProductInformation();
+			Context.AddToContext($"TestCase{GlobalParameters.TestCaseId}", prodDetails);
 		}
 
 		[StepDefinition(@"I call Shared Step 60779 \(Enter Liquid - Cooking Oil - Non-Aerosol\)")]
