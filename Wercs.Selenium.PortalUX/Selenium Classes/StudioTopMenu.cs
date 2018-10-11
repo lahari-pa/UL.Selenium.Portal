@@ -17,21 +17,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait=60)
+		public bool Wait_for_load(int secondsToWait = 30)
 		{
-			try
-			{
-				SeleniumBrowser.ExitIFrame();
-			}
-			catch (Exception e)
-			{
-				//do nothing
-			}
-
-			return base.Wait_for_load(secondsToWait);
+			//get the window
+			StudioUtilites.SwitchToWindow("Wercs Studio");
+			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			return base.Wait_for_load(30);
 		}
 
-		
+
 		//My Wercs, UL Secure Connect, Authoring, Management, Distribution, System, Window, Help
 		public bool ClickTopMenuItem(string item)
 		{
@@ -44,7 +39,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSubMenu(string menuItem, string submenuItem)
 		{
-			
+
 			var navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
 			var ListOfOptions = containerElement.FindElements(By.XPath(".//li//a"));
@@ -56,6 +51,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return false;
 		}
-		
+
 	}
 }

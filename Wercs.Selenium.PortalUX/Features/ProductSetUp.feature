@@ -82,9 +82,6 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 #Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
 
-
-# Assigned to Beverly Barrett
-# Created by Beverly Barrett
 Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include generic component)- thru to Completed (includes adding WPSxxxxxx component)
 Given I generate a random UPC number and save as: UPC79428
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -114,6 +111,7 @@ And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 And I call Shared Step 73956 version 2 (Go to Summary and verify data) with product type: Raw material
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
+#************************** Switching to SHA Manager ********************
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase79428)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 and its status is: Submitted
@@ -121,9 +119,9 @@ Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > proce
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase79428)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 and its status is: Assigned
 
-Scenario: Test
-Given I save to context name: TestCase79428 and value: 1522570
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#Scenario: Test
+#Given I save to context name: TestCase79428 and value: 1523039
+#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase79428)
 Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase79428)
 And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
@@ -133,18 +131,51 @@ And In the phrase selector screen I select phrases:
 | Text |
 | Y    |
 And In the phrase selector screen I click button: Save
-
 And I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party product)
 | Component CAS          | Component ID | Chemical Name               |
 | saved as TestCase79428 | MIXTURE      | AAA WERCS Test Raw Material |
-
+Given I click on home to navigate back to editing specific product saved as TestCase79428
 And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase79428
 Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase79428)
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase79428)
-Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 and its status is: Accepted
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase79428)
-Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase79428)
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase79428)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 and its status is: Completed
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase79428
+
+Scenario: [84108] Create Battery (Stand alone) - process to Completed (Alkaline Battery)
+Given I generate a random UPC number and save as: UPC84108
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Alkaline battery
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: (.*)
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+And I With the Regulatory Documents to Provide step shown select the "I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and would like to upload it" radio button
+And I Use the shared step below to add a file for the TDS/BDS file upload control
+And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: (.*) and file: (.*)
+And I Check the check box for the TDS/BDS current version question
+And I Click Continue
+And I Click Continue
+And I Click Continue
+And I Click Continue
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And I The Purchase summary will be shown.  Depending on your subscription you will either see the Thank you message or your product details.  If your product details are shown click the Confirm order button
+And I Click Home
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I Use the shared step to search for the product you are working with
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm your product is in the Submitted status
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: (.*))
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm your product is in the assigned status
+And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*))
+And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: (.*))
+And [Shared Step 79500 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only]
+And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*))
+And I IN SHA manager
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm your product is shown in the Completed status

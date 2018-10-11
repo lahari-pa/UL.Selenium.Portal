@@ -4121,8 +4121,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 			Delay.Seconds(3);
 			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
-			//Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
-			//	"Power designer plus has loaded");
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
 			Report.Info("Setting power designer plus options...");
 			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
 				"Set language option");
@@ -4327,25 +4327,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"DocType"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as TestCase75335",
+				"saved as " + savedAs,
 				"SBCS",
 				"EN",
 				"PDF"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as TestCase75335",
+				"saved as " + savedAs,
 				"NGHS",
 				"EN",
 				"PDF"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as TestCase75335",
+				"saved as " + savedAs,
 				"NGHS",
 				"EN",
 				"RTF"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as TestCase75335",
+				"saved as " + savedAs,
 				"CKLT",
 				"EN",
 				"PDF"
@@ -4650,6 +4650,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
 
+			Report.Info("Going to do publishing");
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
 			GeneralUtilities.StudioWaitForSpinner();
@@ -4696,15 +4697,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ProductOrAlias",
 				"Format",
 				"Subformat",
+				"Language",
 				"DocType"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as TestCase75335", "SBCS",
+				"saved as " + savedAs,
+				"MTR",
+				"SBCS",
 				"EN",
 				"PDF"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as TestCase75335",
+				"saved as " + savedAs,
+				"MTR",
 				"CKLT",
 				"EN",
 				"PDF"
@@ -4750,13 +4755,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			foreach (TableRow thisRow in components.Rows)
 			{
 				thisStepsStudio.InTheProductForulationPageIClickButton("Create component");
-				string[] columnHeaders = components.Header.Select(x => x.Trim()).ToArray();
+				Delay.Seconds(3);
+				string[] columnHeaders = components.Header.Select(x=>x.Trim()).ToArray();
 				TechTalk.SpecFlow.Table tableRow = new TechTalk.SpecFlow.Table(columnHeaders);
 				tableRow.AddRow(thisRow);
 				thisStepsStudio.InTheCreateComponentPageIAddComponent(tableRow);
 			}
-
+			GeneralUtilities.StudioWaitForSpinner();
+			Delay.Seconds(1);
+			if (SeleniumBrowser.Alert.WaitForAlert(2))
+			{
+				Report.Info("Found an alert");
+				string alertText = SeleniumBrowser.Alert.GetText();
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				Report.Info("Got an alert: " + alertText);
+			}
+			else
+			{
+				Report.Info("Did not find an alert");
+			}
+			GeneralUtilities.StudioWaitForSpinner();
+			Report.Info("Closing formulation page");
 			thisStepsStudio.GivenICloseTheProductFormulationPage();
+			GeneralUtilities.StudioWaitForSpinner();
 
 		}
 

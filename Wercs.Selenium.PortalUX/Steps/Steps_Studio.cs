@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NPOI.OpenXmlFormats.Vml.Office;
 using NUnit.Framework.Constraints;
+using OpenQA.Selenium;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -30,6 +31,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			CurrentDocument thisCurrentDocument = new CurrentDocument();
 			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load",
 				"Current document loaded");
+
+			Delay.Seconds(3);
 		}
 
 		[StepDefinition(@"in Power Designer Plus page I click on tab: (.*)")]
@@ -83,10 +86,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In Current Document Popup select checkbox: (.*)")]
 		public void InCurrentDocumentPageSelectCheckbox(string checkbox)
 		{
+			Report.Info("Selecting checkbox: " + checkbox);
 			CurrentDocument thisCurrentDocument = new CurrentDocument();
-			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load",
-				"Current document loaded");
+			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded");
 			Report.IsTrue(thisCurrentDocument.SetCheckBox(checkbox, true), "Failed to set checkbox: " + checkbox, "Set checkbox: " + checkbox);
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I close Current Document")]
@@ -115,9 +119,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					codes.Add(capture.Value.Replace(",", "").Trim());
 				}
-
 			}
-
 
 			foreach (TableRow thisRow in table.Rows)
 			{
@@ -131,6 +133,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.IsTrue(!codes.Contains(thisRow["Text"]), "Alert text should not contain: " + thisRow["Text"],
 						"Alert text does not contain " + thisRow["Text"]);
 				}
+			}
+
+			try
+			{
+				SeleniumBrowser.Alert.WaitForAlert(3);
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+			catch
+			{
+				Report.Info("No alert found");
 			}
 		}
 
@@ -398,6 +410,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void InDocumentQueueFilterPageIClickOnSelectAllCheckbox()
 		{
 			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			thisDocumentQueuePage.Wait_for_load();
 			Report.IsTrue(thisDocumentQueuePage.CheckSelectAllCheckbox(), "Failed to click select all checkbox",
 				"Clicked select all checkbox");
 		}
@@ -406,6 +419,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void InDocumentQueueFilterPageIClickOnProcessDocuments()
 		{
 			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
+			thisDocumentQueuePage.Wait_for_load();
 			Report.IsTrue(thisDocumentQueuePage.ClickProcessDocuments(), "Failed to click process documents",
 				"Clicked process documents");
 		}
@@ -489,43 +503,67 @@ namespace Wercs.Selenium.PortalUX.Steps
 			List<string> propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
 
 			List<string> notFoundInDocument = tableHeaders.Except(propertiesInDocument).ToList();
+
 			if (notFoundInDocument.Count() > 0)
 			{
 				throw new Exception("Not all items listed are in the document object model: " + string.Join(",", notFoundInDocument));
 			}
+			Report.Info("All items listed are in the document object model");
 
+			//Checking all rows in the table
 			foreach (TableRow thisRow in table.Rows)
 			{
 				List<string> actualHeaders = new List<string>();
-
+				listOfDocuments = newDocumentQueuePage.GetAllDocuments();
 				//for each column in the table
 				foreach (string header in tableHeaders)
 				{
 					string value = thisRow[header];
+					Report.Info("Looking at item: " + value + " for header: " + header);
 
-					if (value == "ProductOrAlias")
-					{
-						value = @"Product\Alias";
-					}
 					if (value.ToLower().Contains("saved as"))
 					{
-						var productDetails = (ProductInformation)Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+						if (Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase)
+							.Trim()).GetType().ToString().ToLower().Contains("string"))
+						{
+							value = Context.GetFromContext(value
+								.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim()).ToString();
+						}
+						else
+						{
+							var productDetails = (ProductInformation)Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 						value = productDetails.Id;
+						}
+
 					}
-					actualHeaders.Add(value);
 
 					//get this header as it appears in the document object
 					string thisPropertyName = propertiesInDocument.FirstOrDefault(x =>
 						x.ToLower().Replace(" ", string.Empty) == header.ToLower().Replace(" ", string.Empty));
 
-					listOfDocuments = listOfDocuments.Where(x =>
-						x.GetType().GetProperty(thisPropertyName).GetValue(x, null).ToString() == value).ToList();
+					//filter the list of documents so that only the ones that match all remain
+					try
+					{
+						Report.Info("List of documents count before: " + listOfDocuments.Count);
+						listOfDocuments = listOfDocuments.Where(x =>
+							x.GetType().GetProperty(thisPropertyName).GetValue(x, null).ToString() == value).ToList();
+						Report.Info("List of documents count after: " + listOfDocuments.Count);
+					}
+					catch (Exception e)
+					{
+						Report.Error("Some problem with " + thisPropertyName + ": " + e.Message);
+					}
+
 				}
 
 				if (listOfDocuments.Count == 0)
 				{
 
-					Report.Error("Not all documents match. This combination was not found: " + string.Join(",", actualHeaders));
+					Report.Error("Not all documents match. This combination was not found: " + string.Join(",", thisRow.Values.ToList()));
+				}
+				else
+				{
+					Report.Success("All documents match.");
 				}
 			}
 		}
@@ -618,6 +656,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			CreateComponentPage thisCreateComponentPage = new CreateComponentPage();
 			Report.IsTrue(thisCreateComponentPage.Wait_for_load(30), "Create component screen is not showing",
 				"Create component screen is showing");
+			Report.IsTrue(thisCreateComponentPage.WaitForCAS(30), "CAS entry is not showing",
+				"CAS entry is showing");
+
 			if (component.ContainsColumn("Component CAS"))
 			{
 				if (component.Rows[0]["Component CAS"].Length > 0)
@@ -704,16 +745,46 @@ namespace Wercs.Selenium.PortalUX.Steps
 						"Failed to enter Load chemical name translations", "Entered Load chemical name translations");
 				}
 			}
+			Report.Info("Beginning click save in create component page.");
+			thisCreateComponentPage.ClickButton("Save");
 
-			Report.IsTrue(thisCreateComponentPage.ClickButton("Save"), "Failed to click save", "Clicked save");
+			//string currentURL = SeleniumBrowser.WebBrowser.Url;
 
+			Delay.Seconds(1);
+			//((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("ConfirmBadCAS(null)");
+			/*
+			Report.Info("Checking for alert - reloading");
+
+			try
+			{
+				if (SeleniumBrowser.Alert.ReloadAlert("CAS does not comply"))
+				{
+					Report.Info("Reloaded");
+				}
+				else
+				{
+					Report.Info("Failed to reload");
+				}
+			}
+			catch (Exception e)
+			{
+				Report.Info("Error on reloading alert: " + e.Message);
+			}
+			*/
+			Report.Info("Checking for the existence of an alert.");
 			if (SeleniumBrowser.Alert.WaitForAlert(2))
 			{
+				Report.Info("Found an alert");
 				string alertText = SeleniumBrowser.Alert.GetText();
 				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 				Report.Info("Got an alert: " + alertText);
 			}
-			Delay.Seconds(5);
+			else
+			{
+				Report.Info("Did not find an alert");
+			}
+			Delay.Seconds(1);
+
 		}
 
 		[Given(@"I close the Product Formulation page")]
@@ -764,19 +835,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In Power Designer I (left|right|double) click on section: (.*)")]
 		public void GivenInPowerDesignerIClickOnSection(string click, string section)
 		{
-			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
 			Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection(section, click),
 				"Failed to " + click + " click section: " + section,
 				"Successfully " + click + " clicked " + section);
+			Delay.Seconds(3);
 
 		}
 
 		[StepDefinition(@"In Power Designer I double click on category: (.*)")]
 		public void GivenInPowerDesignerIDoubleClickOnCategory(string category)
 		{
-			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(selStudioPowerDesignerPlus.DoubleClickCategoryToEdit(category),
 				"Failed to double click category: " + category,
 				"Successfully clicked " + category);
@@ -826,20 +898,40 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 				else
 				{
+
 					if (FilteredPhrases.Count > 1)
 					{
 						Report.Error("Multiple matching phrases are already added");
 					}
 					else
 					{
-						if (!thisPhraseEditor.SelectItem("Code", FilteredPhrases.FirstOrDefault().Code))
+						if (table.ContainsColumn("Text"))
 						{
-							Report.Info("Failed to add phrase: " + FilteredPhrases.FirstOrDefault().Code);
-							addedSuccessfully = false;
+							thisPhraseEditor.filterSelectPhrases(thisPhrase["Text"]);
+							if (!thisPhraseEditor.SelectItem("Text", thisPhrase["Text"]))
+							{
+								Report.Info("Failed to add phrase: " + thisPhrase["Text"]);
+								addedSuccessfully = false;
+							}
+							else
+							{
+								Report.Success("Added phase: " + thisPhrase["Text"]);
+							}
 						}
 						else
 						{
-							Report.Success("Added phase: " + FilteredPhrases.FirstOrDefault().Code);
+							if (table.ContainsColumn("Code"))
+							{
+								if (!thisPhraseEditor.SelectItem("Code", FilteredPhrases.FirstOrDefault().Code))
+								{
+									Report.Info("Failed to add phrase: " + FilteredPhrases.FirstOrDefault().Code);
+									addedSuccessfully = false;
+								}
+								else
+								{
+									Report.Success("Added phase: " + FilteredPhrases.FirstOrDefault().Code);
+								}
+							}
 						}
 					}
 				}
@@ -863,6 +955,39 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisPhraseEditor.ClickButton(button), "Failed to click button: " + button,
 				"Clicked button: " + button);
 		}
+
+		[Given(@"I click on home to navigate back to editing specific product saved as (.*)")]
+		public void GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(string savedAs)
+		{
+			StudioPowerDesignerPlusDesignMode thispd = new StudioPowerDesignerPlusDesignMode();
+			thispd.Wait_for_load(5);
+			thispd.ClickMenuAndSubmenuOptions("Home");
+			Delay.Seconds(3);
+			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+
+			Report.Info("Setting power designer plus options...");
+			Report.IsTrue(thisPowerDesignerPlus.SetLanguage("ENGLISH (USA)"), "Failed to set language option",
+				"Set language option");
+			Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter("CKLT"), "Failed to set subformat option",
+				"Set subformat option");
+			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("CKLT", "MTR"), "Failed to set format option",
+				"Set format option");
+			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
+				"Set action option");
+			Report.Screenshot();
+			Delay.Seconds(1);
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = productDetails.Id;
+			thisPowerDesignerPlus.EnterSourceProduct(id);
+			thisPowerDesignerPlus.ClickRefreshButton();
+			Delay.Seconds(1);
+			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
+			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
+				"Clicked continue button");
+		}
+
 
 	}
 }

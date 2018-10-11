@@ -22,16 +22,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	[FindsBy(How = How.XPath, Using = BasePath)]
 	protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait = 30)
+		public bool Wait_for_load(int secondsToWait=60)
 		{
-			//get the window
-			StudioUtilites.SwitchToWindow("Wercs Studio");
-			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			IWebElement frame =
-				SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'workspaceDesignMode')]"));
+			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
+
+			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+
+			foreach (var handle in urls)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Welcome"))
+				{
+					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					Report.Success("Found window containing title: Welcome");
+					Report.Screenshot();
+					break;
+				}
+			}
+
+			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-			return base.Wait_for_load(30);
+			if (base.Wait_for_load(30))
+			{
+				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				return true;
+			}
+
+			return false;
 		}
 
 
@@ -170,49 +187,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-		public bool ClickLeftMenuSection(string section, string leftRightDouble = "left")
-		{
-			var listOfSections = containerElement.FindElements(By.XPath(".//ul[@id='sectionActionList']/li/span"), 2);
-			var matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
-			if (matchingSection == null)
-			{
-				Report.Info("Section was not found");
-				return false;
-			}
-
-			switch (leftRightDouble.ToLower())
-			{
-				case "left":
-					return matchingSection.TryClick();
-				case "right":
-					matchingSection.RightClick();
-					return true;
-				case "double":
-					matchingSection.DoubleClick();
-					return true;
-				default:
-					throw new Exception("Must provide valid button to click: left, right or double");
-
-			}
-		}
-
-		public bool DoubleClickCategoryToEdit(string category)
-		{
-			var listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='divDocument']//table"), 2);
-			var matchingCategory = listOfCategories.FirstOrDefault(x => x.GetAttribute("title") == category);
-			if (matchingCategory == null)
-			{
-				Report.Info("Category was not found");
-				return false;
-			}
-
-			matchingCategory.DoubleClick();
-			Delay.Seconds(5);
-
-			var editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
-			return editScreen != null;
-		}
-
 
 	}
 
@@ -238,9 +212,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 		//Menu items: Format/SubFormat, Products, Components, Phrases, Tools
-		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem)
+		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem="")
 		{
-			var listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li)]/a"));
+			var listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
 
 			var matchingMenuItem = listOfMenuItems.FirstOrDefault(x => x.GetValue() == menuItem);
 
@@ -255,19 +229,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Info("Failed to click menu item: " + menuItem);
 			}
 
-			var matchingSubMenuItem = matchingMenuItem.FindElements(By.XPath("./../ul/li/a"))
-				.FirstOrDefault(x => x.GetValue() == submenuItem);
-
-			if (matchingSubMenuItem == null)
+			if (submenuItem.Length > 0)
 			{
-				Report.Info("Failed to find sub menu item: " + submenuItem);
-				return false;
+				var matchingSubMenuItem = matchingMenuItem.FindElements(By.XPath("./../ul/li/a"))
+					.FirstOrDefault(x => x.GetValue() == submenuItem);
+
+				if (matchingSubMenuItem == null)
+				{
+					Report.Info("Failed to find sub menu item: " + submenuItem);
+					return false;
+				}
+
+
+				if (!matchingSubMenuItem.TryClick())
+				{
+					Report.Info("Failed to click sub menu item: " + submenuItem);
+				}
 			}
 
-			if (!matchingSubMenuItem.TryClick())
-			{
-				Report.Info("Failed to click sub menu item: " + submenuItem);
-			}
 
 			return true;
 		}
@@ -677,6 +656,66 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return false;
 		}
+
+		public bool ClickLeftMenuSection(string section, string leftRightDouble = "left")
+		{
+			var listOfSections = containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
+			var matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
+			if (matchingSection == null)
+			{
+				Report.Info("Section was not found");
+				return false;
+			}
+
+			switch (leftRightDouble.ToLower())
+			{
+				case "left":
+					return matchingSection.TryClick();
+				case "right":
+					matchingSection.RightClick();
+					return true;
+				case "double":
+					matchingSection.DoubleClick();
+					return true;
+				default:
+					throw new Exception("Must provide valid button to click: left, right or double");
+
+			}
+		}
+
+		public bool DoubleClickCategoryToEdit(string category)
+		{
+			var listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='divDocument']//table//span"), 2);
+			var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
+			var matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
+			if (matchingCategory == null)
+			{
+				Report.Info("Category was not found");
+				return false;
+			}
+			Actions action = new Actions(SeleniumBrowser.WebBrowser);
+			action.MoveToElement(matchingCategory).Build().Perform();
+			matchingCategory.TryClick();
+			Delay.Seconds(1);
+			//nb, double click does not work so using 2 clicks
+
+			matchingCategory.Click();
+			matchingCategory.Click();
+			Delay.Seconds(5);
+			Report.Screenshot();
+			var editScreen = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='koPopup' and not(contains(@style,'display: none;'))]"), 2);
+			if (editScreen != null)
+			{
+				return true;
+			}
+			else
+			{
+				Report.Info("Popup was not found.");
+			}
+
+
+			return false;
+		}
 	}
 
 	class GraphicEditor:BaseObject
@@ -834,7 +873,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SetCheckBox(string name, bool setChecked)
 		{
-			var checkboxes = containerElement.FindElements(By.XPath(".//input[@type='checkbox']"));
+			Report.Info("Beginning set checkbox: " + name);
+			var checkboxes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input[@type='checkbox']"));
 			IWebElement matchingElement;
 			switch (name.ToLower())
 			{
@@ -872,12 +912,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				try
 				{
 					matchingElement.Check(setChecked);
-					return matchingElement.Checked(setChecked);
+					return true;
 				}
 				catch (Exception e)
 				{
 					Report.Info(e.Message);
-					return matchingElement.Checked(setChecked);
+					return false;
 				}
 
 			}
@@ -1677,7 +1717,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					}
 					if (!propertiesInDocument.Select(x=>x.ToLower().Replace(" ",string.Empty)).Contains(currentHeader.ToLower().Replace(" ", string.Empty)))
 					{
-						Report.Error("Header: " + currentHeader + " is not in the Document class");
+						Report.Info("Header: " + currentHeader + " is not in the Document class");
 					}
 					else
 					{
@@ -1692,8 +1732,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 							thisProperty.SetValue(thisDocument,valueToAdd);
 
-							Report.Info("Added value: " + valueToAdd + " to property: " + currentHeader);
-
+							//Report.Info("Added value: " + valueToAdd + " to property: " + currentHeader);
 
 						}
 						catch (Exception e)
@@ -1715,7 +1754,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				var headerRow =
 					containerElement.FindElement(
-						By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@class, 'Header')]"));
+						By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@class, 'ColHeader')]"));
 				return headerRow.FindElements(By.XPath(".//td//a")).Select(x => x.GetValue()).ToList();
 			}
 			catch (Exception e)
@@ -1746,7 +1785,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			if (checkbox != null)
 			{
 				checkbox.Check(true);
-				return checkbox.Checked(true);
+				Delay.Seconds(1);
+				checkbox = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+				return checkbox.Checked();
 			}
 			else
 			{
@@ -1785,6 +1826,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickProcessDocuments()
 		{
+			Report.Info("Beginning click process documents");
 			var button = containerElement.FindElement(By.XPath(".//input[@id='btnProcessToPublish']"), 2);
 			if (button != null)
 			{
@@ -2412,7 +2454,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 
 			foreach (var handle in urls)
 			{
@@ -2574,19 +2616,50 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickButton(string button)
 		{
 			var varButtons = containerElement.FindElements(By.XPath(".//input[@type='submit']"), 2);
-			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
+
+			if (varButtons == null)
+			{
+				Report.Info("No buttons were found");
+				return false;
+			}
+			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("value").ToLower() == button.ToLower());
 			if (matchingButton == null)
 			{
 				Report.Info("Failed to find button: " + button);
 				return false;
 			}
 
-			return matchingButton.TryClick();
+			try
+			{
+				matchingButton.Click();
+			}
+			catch (Exception e)
+			{
+				
+			}
+
+			return true;
+
+		}
+
+		public bool WaitForCAS(int secondsToWait)
+		{
+			for (int i = 0; i < secondsToWait; i++)
+			{
+				var input = containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"), 1);
+				if (input != null)
+				{
+					return true;
+				}
+				Delay.Seconds(1);
+			}
+
+			return false;
 		}
 
 		public bool EnterCAS(string cas)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"));
+			var input = containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"),2);
 			if (input == null)
 			{
 				Report.Info("Failed to find CAS input");
@@ -2714,19 +2787,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetHeaders()
 		{
-			return containerElement
-				.FindElements(By.XPath(".//div[@id='divPhrasesFamily']/table/thead[@class='Header']/tr/td"), 2).ToList()
+			Report.Info("Beginning get headers");
+			return SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath("//div[@id='divPhrasesFamily']/table/thead[@class='Header']/tr/td"), 2).ToList()
 				.Select(x => x.GetValue()).ToList();
 
 		}
 
 		public bool SelectItem(string columnHeader, string value)
 		{
-			int indexOfHeader = this.GetHeaders().IndexOf(columnHeader);
+			Report.Info("Selecting phrase: " + value + " in column: " + columnHeader);
+			List<string> rawHeaders = GetHeaders();
+			List<string> headers = rawHeaders.Select(x=>x.Replace("\r\n", string.Empty).Trim()).ToList();
+			int indexOfHeader = 0;
+			for (int i = 0; i < headers.Count; i++)
+			{
+				if (headers[i] == columnHeader)
+				{
+					indexOfHeader = i+1;
+					break;
+				}
+			}
+
 			var listOfColumnItems = containerElement
 				.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
-			var matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue() == value);
+			var sValues = listOfColumnItems.Select(x => x.GetValue().Trim()).ToList();
+			var matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
 
 			if (matchingItem == null)
 			{
@@ -2735,20 +2822,97 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			else
 			{
-				matchingItem.DoubleClick();
-				return true;
+
+				for (int i = 0; i < 5; i++)
+				{
+					Report.Info("Trying to select with double click");
+					listOfColumnItems = containerElement
+						.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
+
+					matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
+					//matchingItem.TryClick();
+					Delay.Seconds(1);
+					matchingItem.DoubleClick();
+					Delay.Seconds(2);
+					var listOfSelectedColumnItems = containerElement
+						.FindElements(By.XPath(".//table[@id='tblPicked']//tr/td[" + indexOfHeader + "]"), 2).ToList();
+
+					var matchingSelectedItem = listOfSelectedColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
+
+					if (matchingSelectedItem != null)
+					{
+						return true;
+					}
+
+				}
+				for (int i = 0; i < 5; i++)
+				{
+					listOfColumnItems = containerElement
+						.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
+
+					matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
+					//matchingItem.TryClick();
+					Delay.Seconds(1);
+					matchingItem.Click();
+					matchingItem.Click();
+					Delay.Seconds(2);
+					var listOfSelectedColumnItems = containerElement
+						.FindElements(By.XPath(".//table[@id='tblPicked']/tr/td[" + indexOfHeader + "]"), 2).ToList();
+
+					var matchingSelectedItem = listOfSelectedColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
+
+					if (matchingSelectedItem != null)
+					{
+						Report.Info("Required value is showing in selected list");
+						return true;
+					}
+
+				}
+				return false;
 			}
 		}
 
 		public List<Phrase> GetSelectedPhrases()
 		{
-			List<string> headers = this.GetHeaders();
-			var selectedRows = containerElement.FindElements(By.XPath(".//tbody[@id='sortable-list1']//tr"));
-			int indexOfCode = this.GetHeaders().IndexOf("Code");
-			int indexOfText = this.GetHeaders().IndexOf("Text");
-			int indexOfType = this.GetHeaders().IndexOf("Type");
-			int indexOfNotes = this.GetHeaders().IndexOf("Notes");
+			Report.Info("Beginning get selected phrases");
+			List<string> rawHeaders = GetHeaders();
+			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
+			Report.Info("Got " + headers.Count + " headers");
+			int indexOfCode = 0;
+			int indexOfText = 0;
+			int indexOfType = 0;
+			int indexOfNotes = 0;
+
+			for (int i = 0; i < headers.Count; i++)
+			{
+				if (headers[i] == "Code")
+				{
+					indexOfCode = i + 1;
+				}
+
+				if (headers[i] == "Text")
+				{
+					indexOfText = i + 1;
+				}
+
+				if (headers[i] == "Type")
+				{
+					indexOfType = i + 1;
+				}
+
+				if (headers[i] == "Notes")
+				{
+					indexOfNotes = i + 1;
+				}
+			}
+			var selectedRows = containerElement.FindElements(By.XPath(".//table[@id='tblPicked']//tr"),2);
 			List<Phrase> listOfPhrases = new List<Phrase>();
+			if (selectedRows == null)
+			{
+				Report.Info("No selected rows are showing");
+				return listOfPhrases;
+			}
+
 			foreach (var selectedPhrase in selectedRows)
 			{
 				Phrase thisPhrase = new Phrase();
@@ -2784,8 +2948,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return listOfPhrases;
 		}
 
+		public bool filterSelectPhrases(string filter)
+		{
+			var input = containerElement.FindElement(By.XPath(".//input[@id='AttrEditPager_txtPhraseFilter']"),2);
 
+			if (input == null)
+			{
+				Report.Info("Filter input could not be found");
+				return false;
+			}
+
+			input.EnterText(filter);
+			Delay.Seconds(3);
+			return input.GetValue() == filter;
+		}
 	}
+
 	public class Phrase
 	{
 		public string Code { get; set; }
