@@ -642,6 +642,152 @@ testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product gri
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[80768] Create a 3rd party product - with Tier 2 declined (no generic component) " +
+            "- thru to Completed (includes adding WPSxxxxxx component)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Product set up and process to specific statuses (Suite ID: 75359)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Studio")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ProductSetUp")]
+        public virtual void _80768CreateA3RdPartyProduct_WithTier2DeclinedNoGenericComponent_ThruToCompletedIncludesAddingWPSxxxxxxComponent()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[80768] Create a 3rd party product - with Tier 2 declined (no generic component) " +
+                    "- thru to Completed (includes adding WPSxxxxxx component)", ((string[])(null)));
+#line 187
+this.ScenarioSetup(scenarioInfo);
+#line 188
+testRunner.Given("I generate a random UPC number and save as: UPC80768", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 189
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 190
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 191
+testRunner.And("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Raw Material", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 192
+testRunner.Then("I save the product information as: TestCase80768", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "CASNumber",
+                        "ComponentName",
+                        "Percentage"});
+            table8.AddRow(new string[] {
+                        "50-00-0",
+                        "Formaldehyde",
+                        "100"});
+#line 193
+testRunner.And("I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclo" +
+                    "sed = Yes, select Name Continue) and save ingredient as: Ing79428NG", ((string)(null)), table8, "And ");
+#line 196
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 197
+testRunner.And("I call Shared Step 79491 (Formulation > 3rd Party - Accept formulation - Decline " +
+                    "Tier 2 - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 198
+testRunner.And("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 199
+testRunner.And("I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 201
+testRunner.Given("in the Aliases page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 202
+testRunner.Given("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 203
+testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 204
+testRunner.And("I call Shared Step 58610 (Confirm Restrict Use - Restrict)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 205
+testRunner.And("I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw m" +
+                    "aterial", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 206
+testRunner.Given("in the Comments page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 207
+testRunner.And("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 209
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 210
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase80768)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 211
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase80768 a" +
+                    "nd its status is: Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 212
+testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
+                    "uct data for product saved as: TestCase80768)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 213
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for sa" +
+                    "ved as: TestCase80768)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 214
+testRunner.And("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules jo" +
+                    "b to complete for product saved as: TestCase80768)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 215
+testRunner.And("I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific prod" +
+                    "uct > Click Continue for product saved as: TestCase80768)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 216
+testRunner.And("In Power Designer I left click on section: [SECT0077] Walmart Transportation Info" +
+                    "rmation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 217
+testRunner.And("In Power Designer I double click on category: Water Soluble?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 218
+testRunner.Then("In Power Designer the phrase selector screen should open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Text"});
+            table9.AddRow(new string[] {
+                        "Y"});
+#line 219
+testRunner.And("In the phrase selector screen I select phrases:", ((string)(null)), table9, "And ");
+#line 222
+testRunner.And("In the phrase selector screen I click button: Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Component CAS",
+                        "Component ID",
+                        "Chemical Name"});
+            table10.AddRow(new string[] {
+                        "saved as TestCase80768",
+                        "MIXTURE",
+                        "AAA WERCS Test Raw Material"});
+#line 223
+testRunner.And("I call Shared Step 79501 (WPS Studio - PD+ - Create Component for 3rd party produ" +
+                    "ct)", ((string)(null)), table10, "And ");
+#line 226
+testRunner.Given("I click on home to navigate back to editing specific product saved as TestCase807" +
+                    "68", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 227
+testRunner.And("I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule " +
+                    "and doc queue - CKLT and SBCS only) for product saved as: TestCase80768", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 228
+testRunner.And("I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multipl" +
+                    "e to complete for product saved as: TestCase80768)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 229
+testRunner.Given("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 230
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase80768)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 231
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase80768 a" +
+                    "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 232
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 233
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 234
+testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase80768", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

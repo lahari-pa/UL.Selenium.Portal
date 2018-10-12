@@ -498,5 +498,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 		}
+
+		[StepDefinition(@"In the Formulation 3rd Party screen I set Decline to (true|false)")]
+		public void InTheFormulationThirdPartySCreenISetDeclinedTo(string trueOrFalse)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+
+			if (thisNewProduct.DeclinedRadioIsSelected() == (trueOrFalse.ToLower() == "true"))
+			{
+				Report.Success("Declined is already set to: " + trueOrFalse);
+			}
+			else
+			{
+				Report.IsTrue(thisNewProduct.SelectDeclinedRadio(), "Failed to set declined radio", "Set declined radio to: " + trueOrFalse);
+			}
+
+		}
 	}
 }

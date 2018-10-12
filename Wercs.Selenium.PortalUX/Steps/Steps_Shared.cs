@@ -4278,6 +4278,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
 			GeneralUtilities.StudioWaitForSpinner();
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			Report.Info("Clicked apply, waiting");
+			Delay.Seconds(120);
+			Report.Info("Now going to wait for spinner");
 			GeneralUtilities.StudioWaitForSpinner();
 			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
 				"Text",
@@ -5076,5 +5079,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selGlobalSteps.LoginToAccount("ProductAccount");
 			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
 		}
+
+		[StepDefinition(@"I call Shared Step 79491 \(Formulation > 3rd Party - Accept formulation - Decline Tier 2 - Continue\)")]
+		public void ThenICallSharedStep79491FormulationRdParty_AcceptFormulation_DeclineTier_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			Steps_MyIngredients thisMyIngredients = new Steps_MyIngredients();
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetGrantedTo("true");
+			StepsNewProduct thisStepsNewProduct = new StepsNewProduct();
+			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
+		}
+
 	}
 }

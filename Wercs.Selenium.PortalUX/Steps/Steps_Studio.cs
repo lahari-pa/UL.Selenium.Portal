@@ -104,11 +104,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In Current Document I confirm that alert text matches")]
 		public void GivenInCurrentDocumentIConfirmThatAlertTextMatches(Table table)
 		{
+			Report.Info("Beginning confirm that alert matches what is expected.");
 			CurrentDocument thisCurrentDocument = new CurrentDocument();
 			//Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load","Current document loaded");
 			string alertText =
 				thisCurrentDocument.GetAlertText(
 					"The following subformat(s) cannot be authorized because required data is missing.");
+
+			Report.Info("Alert is showing as: " + alertText);
 			string regExPattern = @"\s[ABCDEFGHIJKLMNOPQRSTUVWZYZ1234567890]{3,7}[\,\\r]?";
 			MatchCollection mc = Regex.Matches(alertText, regExPattern);
 			List<string> codes = new List<string>();
