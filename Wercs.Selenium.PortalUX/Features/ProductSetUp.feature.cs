@@ -560,82 +560,85 @@ testRunner.And("I call Shared Step 57753 (Create a New Registration via Register
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Alkaline battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 152
+testRunner.Then("I save the product information as: TestCase84108", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 153
 testRunner.And("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 153
+#line 154
 testRunner.And("I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not " +
                     "Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 154
-testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 155
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
+                    "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 156
+#line 157
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 157
-testRunner.And("I With the Regulatory Documents to Provide step shown select the \"I do not have a" +
-                    "n OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) o" +
-                    "r Battery Data Sheet (BDS) and would like to upload it\" radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 158
-testRunner.And("I Use the shared step below to add a file for the TDS/BDS file upload control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I set the OSHA-compliant Safety Data Sheet, English field to: I do not have an OS" +
+                    "HA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Ba" +
+                    "ttery Data Sheet (BDS) and would like to upload it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 159
 testRunner.And("I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for" +
-                    " document type: (.*) and file: (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    " document type: Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and file:" +
+                    " C:\\Dependencies\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 160
-testRunner.And("I Check the check box for the TDS/BDS current version question", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I check the checkbox with description: I confirm that I have provided the most up" +
+                    "-to-date, TDS/BDS in this product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 161
-testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 162
-testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 163
-testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("in the Optional Reports and Dcouments Available For Purchase page I click Continu" +
+                    "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 164
-testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("in the Comments page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 165
 testRunner.And("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 166
-testRunner.And("I The Purchase summary will be shown.  Depending on your subscription you will ei" +
-                    "ther see the Thank you message or your product details.  If your product details" +
-                    " are shown click the Confirm order button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 167
-testRunner.And("I Click Home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 168
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 169
-testRunner.And("I Use the shared step to search for the product you are working with", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase84108)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 170
-testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
-                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase84108 a" +
+                    "nd its status is: Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 171
-testRunner.And("I Confirm your product is in the Submitted status", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 172
 testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
-                    "uct data for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "uct data for product saved as: TestCase84108)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 172
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for sa" +
+                    "ved as: TestCase84108)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 173
-testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
-                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 174
-testRunner.And("I Confirm your product is in the assigned status", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 175
 testRunner.And("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules jo" +
-                    "b to complete for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 176
+                    "b to complete for product saved as: TestCase84108)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 174
 testRunner.And("I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific prod" +
-                    "uct > Click Continue for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 177
-testRunner.And("[Shared Step 79500 - WPS Studio - PD+ - set all data and publish using rule and d" +
-                    "oc queue - CKLT and SBCS only]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 178
+                    "uct > Click Continue for product saved as: TestCase84108)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 175
+testRunner.And("I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule " +
+                    "and doc queue - CKLT and SBCS only) for product saved as: TestCase84108", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 176
 testRunner.And("I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multipl" +
-                    "e to complete for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "e to complete for product saved as: TestCase84108)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 177
+testRunner.Given("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 178
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase84108)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 179
-testRunner.And("I IN SHA manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase84108 a" +
+                    "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 180
-testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
-                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 181
-testRunner.And("I Confirm your product is shown in the Completed status", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 182
+testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase84108", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

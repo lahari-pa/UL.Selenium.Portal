@@ -3752,5 +3752,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was not as expected! Expected: " + option + ", but found: " + found + "!",
 				"statement was showing: " + option + ", as expected!");
 		}
+
+		[Given(@"I Check the check box for the TDS/BDS current version question")]
+		public void GivenICheckTheCheckBoxForTheTDSBDSCurrentVersionQuestion()
+		{
+			var selNewProduct = new NewProduct();
+		}
+
 	}
 }
