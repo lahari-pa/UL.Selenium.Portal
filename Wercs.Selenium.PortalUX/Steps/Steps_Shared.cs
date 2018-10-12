@@ -5086,7 +5086,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			Steps_MyIngredients thisMyIngredients = new Steps_MyIngredients();
 			thisMyIngredients.InTheFormulationThirdPartySCreenISetAcceptTo("true");
-			thisMyIngredients.InTheFormulationThirdPartySCreenISetGrantedTo("true");
+			thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
 			StepsNewProduct thisStepsNewProduct = new StepsNewProduct();
 			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
 		}
