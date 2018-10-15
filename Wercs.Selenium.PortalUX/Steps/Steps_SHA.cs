@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using Castle.Core.Internal;
 using NPOI.SS.Formula.Functions;
 using ResourcePool;
 using SafewareReporting;
@@ -145,7 +146,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StudioSHAManagerProductSearch thisProductSearch = new StudioSHAManagerProductSearch();
 			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded",
-				"Product search page has loaded as expected");
+				"Product search page has loaded as expected", false, false);
 			var x = table.Rows.ToDictionary(r => r[0], r => r[1]);
 			for (int i = 0; i < x.Count; i++)
 			{
@@ -154,96 +155,95 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					case "Status":
 						Report.IsTrue(thisProductSearch.SelectFromStatusFilter(x.Values.ElementAt(i)),
-							"Failed to set status to: " + x.Values.ElementAt(i), "Successfully set status");
+							"Failed to set status to: " + x.Values.ElementAt(i), "Successfully set status", false, false);
 						break;
 					case "Client":
 						Report.IsTrue(thisProductSearch.SelectFromClientFilter(x.Values.ElementAt(i)),
-							"Failed to set client", "Successfully set client");
+							"Failed to set client", "Successfully set client", false, false);
 						break;
 					case "SearchPattern":
 						Report.IsTrue(thisProductSearch.SelectFromSearchPatternFilter(x.Values.ElementAt(i)),
-							"Failed to set search pattern", "Successfully set search pattern");
+							"Failed to set search pattern", "Successfully set search pattern", false, false);
 						break;
 					case "ProductID":
 					case "ProductId":
 						Report.IsTrue(thisProductSearch.EnterProductID(x.Values.ElementAt(i)),
-							"Failed to set product id", "Successfully set product id");
+							"Failed to set product id", "Successfully set product id", false, false);
 						break;
 					case "ProductName":
 						Report.IsTrue(thisProductSearch.EnterProductName(x.Values.ElementAt(i)),
-							"Failed to set product name", "Successfully set product name");
+							"Failed to set product name", "Successfully set product name", false, false);
 						break;
 					case "DateRange":
 						Report.IsTrue(thisProductSearch.SelectFromDateRangeFilter(x.Values.ElementAt(i)),
-							"Failed to set date range", "Successfully set date range");
+							"Failed to set date range", "Successfully set date range", false, false);
 						break;
 					case "DateFrom":
 						Report.IsTrue(thisProductSearch.EnterDateFrom(x.Values.ElementAt(i)),
-							"Failed to set date range", "Successfully set date range");
+							"Failed to set date range", "Successfully set date range", false, false);
 						break;
 					case "DateTo":
 						Report.IsTrue(thisProductSearch.EnterDateTo(x.Values.ElementAt(i)),
-							"Failed to set date range", "Successfully set date range");
+							"Failed to set date range", "Successfully set date range", false, false);
 						break;
 					case "LastActivityDate":
 						Report.IsTrue(thisProductSearch.EnterLastActivityDate(x.Values.ElementAt(i)),
-							"Failed to set activity date", "Successfully set activity date");
+							"Failed to set activity date", "Successfully set activity date", false, false);
 						break;
 					case "Supplier":
 						Report.IsTrue(thisProductSearch.EnterSupplier(x.Values.ElementAt(i)),
-							"Failed to set supplier", "Successfully set supplier");
+							"Failed to set supplier", "Successfully set supplier", false, false);
 						break;
 					case "User":
 						Report.IsTrue(thisProductSearch.EnterUser(x.Values.ElementAt(i)),
-							"Failed to set user", "Successfully set user");
+							"Failed to set user", "Successfully set user", false, false);
 						break;
 					case "Reviewer":
 						Report.IsTrue(thisProductSearch.EnterReviewer(x.Values.ElementAt(i)),
-							"Failed to set reviewer", "Successfully set reviewer");
+							"Failed to set reviewer", "Successfully set reviewer", false, false);
 						break;
 					case "OnSuspended":
 						Report.IsTrue(thisProductSearch.CheckOnSuspended(x.Values.ElementAt(i) == "true"),
-							"Failed to set on suspended", "Successfully set on suspended");
+							"Failed to set on suspended", "Successfully set on suspended", false, false);
 						break;
 					case "RecertificationActive":
 						Report.IsTrue(thisProductSearch.CheckRecertificationActive(x.Values.ElementAt(i) == "true"),
-							"Failed to set recertification active", "Successfully set recertification active");
+							"Failed to set recertification active", "Successfully set recertification active", false, false);
 						break;
 					case "GGOnlyProducts":
 						Report.IsTrue(thisProductSearch.CheckGoodGuideOnlyProducts(x.Values.ElementAt(i) == "true"),
-							"Failed to set Good Guide only products", "Successfully set Good Guide only products");
+							"Failed to set Good Guide only products", "Successfully set Good Guide only products", false, false);
 						break;
 					case "ECommFlowProducts":
 						Report.IsTrue(thisProductSearch.CheckECommFlowProducts(x.Values.ElementAt(i) == "true"),
-							"Failed to set EComm flow products", "Successfully set EComm flow products");
+							"Failed to set EComm flow products", "Successfully set EComm flow products", false, false);
 						break;
 					case "TReg":
 						Report.IsTrue(thisProductSearch.SelectFromTRegFilter(x.Values.ElementAt(i)),
-							"Failed to set TReg", "Successfully set TReg");
+							"Failed to set TReg", "Successfully set TReg", false, false);
 						break;
 					case "OrderNo":
 						Report.IsTrue(thisProductSearch.EnterOrderNo(x.Values.ElementAt(i)),
-							"Failed to set order no", "Successfully set order no");
+							"Failed to set order no", "Successfully set order no", false, false);
 						break;
 					case "SubmissionDate":
 						Report.IsTrue(thisProductSearch.EnterSubmissionDate(x.Values.ElementAt(i)),
-							"Failed to set submission date", "Successfully set submission date");
+							"Failed to set submission date", "Successfully set submission date", false, false);
 						break;
 					case "UPC":
 						Report.IsTrue(thisProductSearch.EnterUPC(x.Values.ElementAt(i)),
-							"Failed to set upc", "Successfully set upc");
+							"Failed to set upc", "Successfully set upc", false, false);
 						break;
 					case "ParentUPC":
 						Report.IsTrue(thisProductSearch.EnterParentUPC(x.Values.ElementAt(i)),
-							"Failed to set parent upc", "Successfully set parent upc");
+							"Failed to set parent upc", "Successfully set parent upc", false, false);
 						break;
 					default:
 						throw new Exception("Invalid column name");
 				}
 			}
-			Report.Screenshot();
 			Delay.Seconds(1);
-			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find");
+			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
 			Delay.Seconds(1);
 			Report.Info("Waiting for spinner");
 			GeneralUtilities.StudioWaitForSpinner();
@@ -251,10 +251,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
+		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(string productSavedAs, string status)
 		{
-			TestReport.UseSubSteps = true;
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			var ID = ProductDetails.Id;
 
@@ -323,5 +322,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[StepDefinition(@"I Confirm the Product ID: (.*) is highlited yellow indicating that this is an e-comm/direct ship product")]
+		public void ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(string id)
+		{
+			StudioSHAManager selStudioShaManager = new StudioSHAManager();
+			Report.Info("Waiting for id to change colour");
+			Report.IsTrue(selStudioShaManager.WaitForIDToBeStatus(id, 120, "N/A", "N/A", true, "rgb(254,255,160)"), "ID has not turned required colour", "ID is required colour");
+		}
+		[StepDefinition(@"I Confirm the Product ID: (.*) is not highlited yellow indicating that this is not an e-comm/direct ship product")]
+		public void ConfirmProductIdIsNotHighlightedYellow_NotEcommDirectShipProduct(string id)
+		{
+			StudioSHAManager selStudioShaManager = new StudioSHAManager();
+			var colour = selStudioShaManager.ProductHighlight(id);
+			if (colour == null)
+			{
+				Report.Failure("Unable to get product status for product id: " + id);
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(colour != "rgb(254,255,160)", "Colour was highlighted with a yellow background when it was not expected to be!", "Product was not highlighted yellow background as expected");
+		}
 	}
 }

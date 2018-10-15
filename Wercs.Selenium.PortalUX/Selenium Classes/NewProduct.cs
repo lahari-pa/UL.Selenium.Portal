@@ -1445,7 +1445,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var el = containerElement.FindElements(By.XPath(".//div[@class='alert alert-info']"), 2);
 			if (el.Count > 0)
 			{
-				return containerElement.FindElements(By.XPath(".//div[@class='alert alert-info']"), 2).Select(x=>x.GetValue()).ToList();
+				return containerElement.FindElements(By.XPath(".//div[@class='alert alert-info']"), 2).Select(x => x.GetValue()).ToList();
 			}
 			return new List<string>();
 		}
@@ -1471,6 +1471,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return el.TryClick();
 
+		}
+
+		public bool YesAgreedIsSelected()
+		{
+			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+			return el.Selected;
 		}
 
 		public bool AcceptRadioIsSelected()

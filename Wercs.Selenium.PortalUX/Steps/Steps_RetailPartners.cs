@@ -988,6 +988,36 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Deleting file: " + file);
 			File.Delete(file);
 		}
+
+		[StepDefinition(@"I click the ""(.*)"" information button in the Retail Partners Details screen")]
+		public void ClickInformationButtonInDataTierDetails(string button)
+		{
+			Report.IsTrue(new RetailParntersDetails().ClickInfoButton(button), $"Failed to click the {button} button!", $"Successfully clicked the {button} button");
+		}
+		[StepDefinition(@"I click the ""(.*)"" tab in Data Tier Details")]
+		public void ClickTabInDataTierDetails(string tab)
+		{
+			Report.IsTrue(new DataTierDetails().ClickTab(tab), $"Failed to click the {tab} tab!", $"Successfully clicked the {tab} tab");
+		}
+
+		[StepDefinition(@"I close the Data Tier Details popup")]
+		public void ClickCloseDataTierDetails()
+		{
+			Report.IsTrue(new DataTierDetails().ClickClose(), "Failed to click close!", "Successfully clicked close");
+		}
+
+		[StepDefinition(@"I confirm the text displayed in the Data Tier Details popup contains: ""(.*)""")]
+		public void ConfirmTheTextDisplayedinDataTierDetialsPopupContains(string text)
+		{
+			var expectedParagraphs = text.Split('|').ToList();
+			var displayedParagraphs = new DataTierDetails().TabParagraphText();
+			foreach (var par in expectedParagraphs)
+			{
+				Report.IsTrue(displayedParagraphs.Any(x => x.Contains(par)),
+					$@"The text: ""{par}"" was not displayed as expected!",
+					$@"The text: ""{par}"" was displayed as expected");
+			}
+		}
 	}
 }
 

@@ -844,17 +844,17 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65947] Transportation - Copy information from DOT for all modes - confirm data i" +
                     "s shown in WPS Studio correctly", ((string[])(null)));
-#line 253
-this.ScenarioSetup(scenarioInfo);
 #line 254
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 255
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 256
 testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 256
+#line 257
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Fertilizer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 257
+#line 258
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -863,75 +863,75 @@ testRunner.And("I should see the Product Characteristics Page", ((string)(null))
                         "Liquid"});
             table13.AddRow(new string[] {
                         "Solid"});
-#line 258
+#line 259
 testRunner.And("The following options should be displayed for section: Primary Physical State", ((string)(null)), table13, "And ");
-#line 262
-testRunner.And("I set the Primary Physical State option to: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 263
-testRunner.And("I set the Secondary Physical State option to: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Primary Physical State option to: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 264
-testRunner.And("I set the Specific Gravity option to: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State option to: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 265
-testRunner.And("I set the pH option to: 10.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Specific Gravity option to: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 266
-testRunner.And("I set the Boiling Point (in Celsius) option to: 120", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the pH option to: 10.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 267
-testRunner.And("I set the Flash Point (in Celsius) option to: 23", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Boiling Point (in Celsius) option to: 120", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 268
-testRunner.And("I set the Flash Point Testing Method Used option to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Flash Point (in Celsius) option to: 23", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 269
-testRunner.And("I set the Select the best Water Solubility description option to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Flash Point Testing Method Used option to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 270
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Select the best Water Solubility description option to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 271
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 272
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 272
-testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 273
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 274
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 274
-testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 275
-testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 276
-testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
-                    "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 277
-testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
-                    "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 278
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 279
+#line 278
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 279
+testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
+                    "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 280
+testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
+                    "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 281
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: IMDG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 281
+#line 282
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: IMDG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 282
+#line 283
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: IATA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 283
+#line 284
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: IATA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 284
+#line 285
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: TDG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 285
+#line 286
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: TDG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 286
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 287
-testRunner.And("I should see the U. S. Department of Transportation (DOT) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 288
-testRunner.And("I set the UN Number field to: UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the U. S. Department of Transportation (DOT) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 289
+testRunner.And("I set the UN Number field to: UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 290
 testRunner.And("Proper Shipping Name should be showing the value: Ornganochlorine pesticides, liq" +
                     "uid, flammable, toxic", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -939,35 +939,35 @@ testRunner.And("Proper Shipping Name should be showing the value: Ornganochlorin
                         "Option"});
             table14.AddRow(new string[] {
                         "Ornganochlorine pesticides, liquid, flammable, toxic"});
-#line 290
+#line 291
 testRunner.And("The following options should be displayed exclusively for section: Proper Shippin" +
                     "g Name", ((string)(null)), table14, "And ");
-#line 293
-testRunner.And("I set the Technical Name field to: Technical Name UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 294
+testRunner.And("I set the Technical Name field to: Technical Name UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 295
 testRunner.And("Hazard Class (select) should be showing the value: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
             table15.AddRow(new string[] {
                         "3"});
-#line 295
+#line 296
 testRunner.And("The following options should be displayed exclusively for section: Hazard Class (" +
                     "select)", ((string)(null)), table15, "And ");
-#line 298
-testRunner.And("I set the Packing Group (select) field to: II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 299
-testRunner.And(@"I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Packing Group (select) field to: II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 300
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(@"I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 301
-testRunner.And("I should see the International Air Transport (IATA) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 302
+testRunner.And("I should see the International Air Transport (IATA) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 303
 testRunner.And("I check the checkbox with description: Copy information from my U.S. Department o" +
                     "f Transportation data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 303
-testRunner.And("UN Number should be showing the value: UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 304
+testRunner.And("UN Number should be showing the value: UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 305
 testRunner.And("Proper Shipping Name should be showing the value: Ornganochlorine pesticide, liqu" +
                     "id, flammable, toxic", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -975,40 +975,40 @@ testRunner.And("Proper Shipping Name should be showing the value: Ornganochlorin
                         "Option"});
             table16.AddRow(new string[] {
                         "Ornganochlorine pesticides, liquid, flammable, toxic"});
-#line 305
+#line 306
 testRunner.And("The following options should be displayed exclusively for section: Proper Shippin" +
                     "g Name", ((string)(null)), table16, "And ");
-#line 308
-testRunner.And("Technical Name should be showing the value: Technical Name UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 309
+testRunner.And("Technical Name should be showing the value: Technical Name UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 310
 testRunner.And("Hazard Class (select) should be showing the value: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
             table17.AddRow(new string[] {
                         "3"});
-#line 310
+#line 311
 testRunner.And("The following options should be displayed exclusively for section: Hazard Class (" +
                     "select)", ((string)(null)), table17, "And ");
-#line 313
-testRunner.And("Packing Group (select) should be showing the value: II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 314
-testRunner.And("I confirm that: II is not the only option for section: Packing Group (select)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("Packing Group (select) should be showing the value: II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 315
+testRunner.And("I confirm that: II is not the only option for section: Packing Group (select)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 316
 testRunner.And("I select the first option in section: Product has a boiling point of <=35⁰C and f" +
                     "lash point of >60⁰C. Packing Group selected is not consistent with this data.  V" +
                     "erify the data and transportation packing group.  If problem persists, please co" +
                     "ntact Support.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 316
+#line 317
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 318
-testRunner.And("I should see the International Marine (IMDG) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 319
+testRunner.And("I should see the International Marine (IMDG) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 320
 testRunner.And("I check the checkbox with description: Copy information from my U.S. Department o" +
                     "f Transportation data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 320
-testRunner.And("UN Number should be showing the value: UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 321
+testRunner.And("UN Number should be showing the value: UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 322
 testRunner.And("Proper Shipping Name should be showing the value: Ornganochlorine pesticide, liqu" +
                     "id, flammable, toxic", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1016,41 +1016,41 @@ testRunner.And("Proper Shipping Name should be showing the value: Ornganochlorin
                         "Option"});
             table18.AddRow(new string[] {
                         "Ornganochlorine pesticides, liquid, flammable, toxic"});
-#line 322
+#line 323
 testRunner.And("The following options should be displayed exclusively for section: Proper Shippin" +
                     "g Name", ((string)(null)), table18, "And ");
-#line 325
-testRunner.And("Technical Name should be showing the value: Technical Name UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 326
+testRunner.And("Technical Name should be showing the value: Technical Name UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 327
 testRunner.And("Hazard Class (select) should be showing the value: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
             table19.AddRow(new string[] {
                         "3"});
-#line 327
+#line 328
 testRunner.And("The following options should be displayed exclusively for section: Hazard Class (" +
                     "select)", ((string)(null)), table19, "And ");
-#line 330
-testRunner.And("Packing Group (select) should be showing the value: II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 331
-testRunner.And("I confirm that: II is not the only option for section: Packing Group (select)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("Packing Group (select) should be showing the value: II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 332
+testRunner.And("I confirm that: II is not the only option for section: Packing Group (select)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 333
 testRunner.And("I select the first option in section: Product has a boiling point of <=35⁰C and f" +
                     "lash point of >60⁰C. Packing Group selected is not consistent with this data.  V" +
                     "erify the data and transportation packing group.  If problem persists, please co" +
                     "ntact Support.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 333
+#line 334
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 335
+#line 336
 testRunner.And("I should see the Canada - Transportation of Dangerous Goods (TDG) Classification " +
                     "Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 336
+#line 337
 testRunner.And("I check the checkbox with description: Copy information from my U.S. Department o" +
                     "f Transportation data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 337
-testRunner.And("UN Number should be showing the value: UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 338
+testRunner.And("UN Number should be showing the value: UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 339
 testRunner.And("Proper Shipping Name should be showing the value: Ornganochlorine pesticide, liqu" +
                     "id, flammable, toxic", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1058,40 +1058,40 @@ testRunner.And("Proper Shipping Name should be showing the value: Ornganochlorin
                         "Option"});
             table20.AddRow(new string[] {
                         "Ornganochlorine pesticides, liquid, flammable, toxic"});
-#line 339
+#line 340
 testRunner.And("The following options should be displayed exclusively for section: Proper Shippin" +
                     "g Name", ((string)(null)), table20, "And ");
-#line 342
-testRunner.And("Technical Name should be showing the value: Technical Name UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 343
+testRunner.And("Technical Name should be showing the value: Technical Name UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 344
 testRunner.And("Hazard Class (select) should be showing the value: 3, (36.1)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
             table21.AddRow(new string[] {
                         "3, (36.1)"});
-#line 344
+#line 345
 testRunner.And("The following options should be displayed exclusively for section: Hazard Class (" +
                     "select)", ((string)(null)), table21, "And ");
-#line 347
-testRunner.And("Packing Group (select) should be showing the value: II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 348
-testRunner.And("I confirm that: II is not the only option for section: Packing Group (select)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("Packing Group (select) should be showing the value: II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 349
+testRunner.And("I confirm that: II is not the only option for section: Packing Group (select)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 350
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 351
+#line 352
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 352
+#line 353
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 353
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 354
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 355
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 356
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 357
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1112,93 +1112,93 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 357
+#line 358
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
                     "g:", ((string)(null)), table22, "And ");
-#line 360
+#line 361
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 361
+#line 362
 testRunner.And("I call Shared Step 73956 (Go to Summary and verify data) with product type: Ferti" +
                     "lizer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 362
-testRunner.And("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 363
+testRunner.And("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 364
 testRunner.And("In the Purchase Summary screen I confirm the Purchase Summary header is displayed" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 364
+#line 365
 testRunner.And("In the Purchase Summary screen if Product Billing is displayed I click Confirm Or" +
                     "der", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 365
-testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 366
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 367
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for s" +
                     "aved as: TestCase65947)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 367
+#line 368
 testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
                     "uct data for product saved as: TestCase65947)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 368
+#line 369
 testRunner.And("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules jo" +
                     "b to complete for product saved as: TestCase65947)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 369
+#line 370
 testRunner.And("I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT " +
                     "- Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 370
-testRunner.And("I In the shared step below search for data code DOTUN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 371
-testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
-                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I In the shared step below search for data code DOTUN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 372
-testRunner.And("I Confirm the lower portion of the table shows UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
+                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 373
-testRunner.And("I Repeat steps 88 and 89 for data codes UNT, UNM and  UNI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm the lower portion of the table shows UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 374
-testRunner.And("I In the shared step below search for data code HCT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Repeat steps 88 and 89 for data codes UNT, UNM and  UNI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 375
-testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
-                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I In the shared step below search for data code HCT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 376
-testRunner.And("I Confirm the lower portion of the table shows U3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 377
-testRunner.And("I Repeat steps 92 and 93 for data codes HCM, HCI, DOTHAZ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 378
-testRunner.And("I In the shared step below search for data code SNAME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 379
 testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
                     "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 377
+testRunner.And("I Confirm the lower portion of the table shows U3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 378
+testRunner.And("I Repeat steps 92 and 93 for data codes HCM, HCI, DOTHAZ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 379
+testRunner.And("I In the shared step below search for data code SNAME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 380
+testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
+                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 381
 testRunner.And("I Confirm the lower portion of the table shows Organochlorine pesticides, liquid," +
                     " flammable, toxic (this has the additional s in pesticides)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 381
-testRunner.And("I In the shared step below search for data code PGT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 382
-testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
-                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I In the shared step below search for data code PGT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 383
-testRunner.And("I Confirm the lower portion of the table shows II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 384
-testRunner.And("I Repeat steps 99 and 100 for data codes PGI, PGM, DOTPG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 385
-testRunner.And("I In the shared step below search for data code IMSN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 386
 testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
                     "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 384
+testRunner.And("I Confirm the lower portion of the table shows II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 385
+testRunner.And("I Repeat steps 99 and 100 for data codes PGI, PGM, DOTPG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 386
+testRunner.And("I In the shared step below search for data code IMSN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 387
+testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
+                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 388
 testRunner.And("I Confirm the lower portion of the table shows Organochlorine pesticide, liquid, " +
                     "flammable, toxic", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 388
-testRunner.And("I Repeat steps 103 and 104 for TDSN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 389
-testRunner.And("I In the shared step below search for data code IMDGCP", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Repeat steps 103 and 104 for TDSN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 390
+testRunner.And("I In the shared step below search for data code IMDGCP", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 391
 testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
                     "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 391
-testRunner.And("I Confirm the lower portion of the table shows 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 392
-testRunner.And("I Repeat steps 107 and 108 for data codes IATACP and TDGCP", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm the lower portion of the table shows 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 393
+testRunner.And("I Repeat steps 107 and 108 for data codes IATACP and TDGCP", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 394
 testRunner.And("I Click My WERCS &gt; Logout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

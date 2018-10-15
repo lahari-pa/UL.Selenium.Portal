@@ -248,6 +248,7 @@ And Packing Group should be showing the value: None
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65944
 
+# *** IN PROGRESS ***
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 Scenario: [65947] Transportation - Copy information from DOT for all modes - confirm data is shown in WPS Studio correctly

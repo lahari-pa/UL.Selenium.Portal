@@ -704,8 +704,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("VOC");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: (.*)")]
+		[StepDefinition(@"I call Shared Step 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: (.*)")]
 		public void GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath(string retailer)
 		{
 			TestReport.UseSubSteps = true;
@@ -2702,8 +2701,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
 		public void SharedTransportationDetails2_DoNotShipInternationally_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -3731,9 +3729,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 59066 \(Go to SHA Manager\)")]
 		public void GivenICallSharedStep59066GoToSHAManager()
 		{
+			TestReport.UseSubSteps = true;
 			Steps_SHA MyStepsSHA = new Steps_SHA();
+			TestReport.StartStep("I click Menu: 'My Wercs' and Submenu: 'SHA'");
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			StudioSHAManager thisStudioShaManager = new StudioSHAManager();
+			TestReport.StartStep("I confirm the product list is loaded");
 			Report.Info("Waiting for product list to be loaded....");
 			Delay.Seconds(1);
 			Report.IsTrue(thisStudioShaManager.WaitForProductList(120), "Product list is not showing",
@@ -3927,8 +3928,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selStepsNewProduct.ClickContinue();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 77711 \(Product Characteristics - Primary \(L/S\), 2nd - any, Enter Gravity, pH, Boiling Point, Flash Point, Flash Point Test - any, Water - any\)")]
+		[StepDefinition(@"I call Shared Step 77711 \(Product Characteristics - Primary \(L/S\), 2nd - any, Enter Gravity, pH, Boiling Point, Flash Point, Flash Point Test - any, Water - any\)")]
 		public void SharedProductCharacteristics_PrimaryLS_Any_EnterGravity_pH_BoilingPoint_FlashPointTestAny_WaterAny()
 		{
 			TestReport.UseSubSteps = true;
@@ -3955,8 +3955,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			stepsNewProduct.ContinueInTheProductRegistration();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\)")]
+		[StepDefinition(@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\)")]
 		public void
 			GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue()
 		{
@@ -3982,18 +3981,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			Steps_SHA myStepsSha = new Steps_SHA();
+			TestReport.StartStep("I navigate to Studio");
 			myStepsSha.GivenINavigateToStudio();
+			TestReport.StartStep("I log in to studio as administrator");
 			myStepsSha.GivenILoginToStudioAsAdministrator();
 			GivenICallSharedStep59066GoToSHAManager();
 
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 49841 \(SHA - Search for exact WPS ID in (.*) Status for saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 49841 \(SHA - Search for exact WPS ID in (.*) Status for saved as: (.*)\)")]
 		public void GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus(string status, string savedAs)
 		{
-
+			TestReport.UseSubSteps = true;
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			TestReport.StartStep("U set the status filter to All");
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
@@ -4013,16 +4014,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Status",
 				status
 			});
-
-			TestReport.UseSubSteps = true;
-
 			bool Found = false;
 			int counter = 0;
-
 			while (!Found && counter < 5)
 			{
+				TestReport.StartStep("I click Srch in the bottom menu list");
 				myStudioShaManager.ClickBottomMenuOption("Search");
 				Steps_SHA myStepsSha = new Steps_SHA();
+				TestReport.StartStep($"I enter ID: {id} in the Product ID box, change Status drop down to All, Click find");
 				Report.Info("Searching for: " + id);
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 				Delay.Seconds(1);
@@ -4041,15 +4040,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 55662 \(WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 55662 \(WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*)\)")]
 		public void GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(string savedAs)
 		{
+			TestReport.UseSubSteps = true;
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
+			TestReport.StartStep("I click System > Job Queue");
 			thisTopMenu.ClickSubMenu("System", "Job Queue");
 			Delay.Seconds(5);
 			GeneralUtilities.StudioWaitForSpinner();
+			TestReport.StartStep("I confirm there is an entry for UserName = SHAMANAGER, Date Started = Current Date, Class = Wercs.Core.BLLPortal.ImportProcessRules");
 			StudioJobQueue thisStudioJobQueue = new StudioJobQueue();
 			Report.IsTrue(thisStudioJobQueue.WaitForJobInformationList(30), "Job queue has not loaded",
 				"Job queue has loaded");
@@ -4086,40 +4087,59 @@ namespace Wercs.Selenium.PortalUX.Steps
 							DateTime.Today.Date.ToString() +
 							", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
-
+			TestReport.StartStep("I wait for this job to complete processing");
 			GivenICallSharedStep59066GoToSHAManager();
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			StudioSHAManagerProductSearch myProductSearch = new StudioSHAManagerProductSearch();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
-
 			ProductStatus thisProductStatus = myStudioShaManager.GetproductStatus(id);
-
+			// JS. status name (class) is initially 'boldrulerunning' and then changes to 'boldchem' after some time (turns blue). Previously dropping out of the scenario first time.
+			int count = 0;
+			bool runningRule = thisProductStatus.StatusName.Contains("rulerunning");
+			while (count < 100 && runningRule)
+			{
+				myStudioShaManager.ClickBottomMenuOption("search");
+				myProductSearch.Wait_for_load(5);
+				myProductSearch.ClickButton("Find");
+				Delay.Seconds(2);
+				GeneralUtilities.StudioWaitForSpinner();
+				myStudioShaManager.WaitForProductList(30);
+				thisProductStatus = myStudioShaManager.GetproductStatus(id);
+				runningRule = thisProductStatus.StatusName.Contains("rulerunning");
+				count++;
+				Delay.Seconds(1);
+			}
+			if (runningRule)
+			{
+				Report.Failure("Rule job was still running after waiting for 5 minutes");
+				Report.Screenshot();
+				return;
+			}
 			if (thisProductStatus.StatusName.ToLower().Contains("chem"))
 			{
 				Report.Info("Waiting for id to turn blue");
 				Report.IsTrue(myStudioShaManager.WaitForIDToTurnBlue(id, 120), "ID has not turned blue", "ID is blue");
 			}
-
 			if (thisProductStatus.StatusName.ToLower().Contains("tparty"))
 			{
 				Report.Info("Waiting for id to change colour");
 				Report.IsTrue(myStudioShaManager.WaitForIDToBeStatus(id, 120, "Assigned", "tPartyForm", true), "ID has not turned required colour", "ID is required colour");
 			}
-
-
-
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 68969 \(WPS Studio - Open PD\+, edit existing with specific product > Click Continue for product saved as: (.*)\)")]
+		[StepDefinition(@"I call Shared Step 68969 \(WPS Studio - Open PD\+, edit existing with specific product > Click Continue for product saved as: (.*)\)")]
 		public void GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(string savedAs)
 		{
+			TestReport.UseSubSteps = true;
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
+			TestReport.StartStep("I click the Authoring menu option and Select Power Designer Plus");
 			Report.IsTrue(thisTopMenu.Wait_for_load(60), "Top menu bar not showing", "Top menu bar is showing");
 			Report.IsTrue(thisTopMenu.ClickSubMenu("Authoring", "Power Designer Plus"),
 				"Failed to navigate to power designer plus", "Navigated to power designer plus");
 			Report.Screenshot();
 			Delay.Seconds(3);
+			TestReport.StartStep("I select EN as the Language, MTR/CKLT as the format/subformat");
 			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
@@ -4130,16 +4150,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Set subformat option");
 			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("CKLT", "MTR"), "Failed to set format option",
 				"Set format option");
+			TestReport.StartStep("I click the Edit Existing product radio button if not already selected");
 			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption("edit"), "Failed to set action option",
 				"Set action option");
 			Report.Screenshot();
 			Delay.Seconds(1);
+			TestReport.StartStep("I filter for the product");
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
 			thisPowerDesignerPlus.EnterSourceProduct(id);
 			thisPowerDesignerPlus.ClickRefreshButton();
 			Delay.Seconds(1);
 			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
+			TestReport.StartStep("I click Continue");
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
 		}
@@ -4759,7 +4782,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				thisStepsStudio.InTheProductForulationPageIClickButton("Create component");
 				Delay.Seconds(3);
-				string[] columnHeaders = components.Header.Select(x=>x.Trim()).ToArray();
+				string[] columnHeaders = components.Header.Select(x => x.Trim()).ToArray();
 				TechTalk.SpecFlow.Table tableRow = new TechTalk.SpecFlow.Table(columnHeaders);
 				tableRow.AddRow(thisRow);
 				thisStepsStudio.InTheCreateComponentPageIAddComponent(tableRow);
@@ -5078,6 +5101,39 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var selGlobalSteps = new GlobalSteps();
 			selGlobalSteps.LoginToAccount("ProductAccount");
 			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
+		}
+		[StepDefinition(@"I call Shared Step 60648 \(Additional Product Information - US, No \(Direct Ship\), No \(PL\), No \(GNFR\)\)")]
+		public void Shared60648_AdditionalProductInformation_Us_NoDirectShip_NoPl_NoGnfr()
+		{
+			TestReport.UseSubSteps = true;
+			var newProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I set the 'Product is shipped directly..' question to: 'No'");
+			newProductSteps.SetTheSectionOptionTo("Product is shipped directly by the supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns", "No");
+			TestReport.StartStep("I set the 'Product is a Retailer's Private Label or Brand' question to: 'No'");
+			newProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			TestReport.StartStep("I set the 'Product is sold to the Retailer..' question to: 'No'");
+			newProductSteps.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			TestReport.StartStep("I click continue");
+			newProductSteps.ClickContinue();
+		}
+		[StepDefinition(@"I call Shared Step 77883 \(Additional Product Information - Kit flow - US only, Direct Ship \(No\), Continue\)")]
+		public void Shared7783_AdditionalProductInformation_KitFlow_UsOnly_DirectShipNo_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			var newProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Additional Product Information page");
+			newProductSteps.GivenIShouldSeeXPage("Additional Product Information");
+			TestReport.StartStep("I confirm 'United States' is selected for the SOLD question");
+			newProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
+			TestReport.StartStep("I should only see the SOLD and Direct ship questions");
+			var sections = new Table("Section");
+			sections.AddRow("Select countries the product may be sold in");
+			sections.AddRow("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.");
+			newProductSteps.CheckDisplayedSections("only see", sections);
+			TestReport.StartStep("I select the No button for the 'Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.' question");
+			newProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
+			TestReport.StartStep("I click continue");
+			newProductSteps.ClickContinue();
 		}
 
 		[StepDefinition(@"I call Shared Step 79491 \(Formulation > 3rd Party - Accept formulation - Decline Tier 2 - Continue\)")]

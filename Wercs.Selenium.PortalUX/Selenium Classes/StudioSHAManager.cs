@@ -46,12 +46,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				Report.Info(i.ToString());
+				//Report.Info(i.ToString());
 				try
 				{
 					var table = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']"), 60);
 					if (table != null && table.Displayed)
 					{
+						Report.Info($"Product list was loaded after {i} seconds");
 						return true;
 					}
 				}
@@ -64,7 +65,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Delay.Seconds(1);
 				i++;
 			}
-
+			Report.Info($"Product list was not loaded after {secondsToWait} seconds!");
 			return false;
 		}
 
@@ -139,16 +140,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		//idStatus - tPartyForm, hold, elect, brandedcomp, docrequest, batt, kit, rulerunning, rulequeue, ruleerror, feederror,
-		public bool WaitForIDToBeStatus(string id, int secondsToWait, string tableStatus, string idStatus, bool expectingBold=false, string tableBackground="none")
+		public bool WaitForIDToBeStatus(string id, int secondsToWait, string tableStatus, string idStatus, bool expectingBold = false, string tableBackground = "none")
 		{
 			Report.Info("Beginning wait for id to be status");
+			var myProductSearch = new StudioSHAManagerProductSearch();
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				StudioSHAManager mySHAManager = new StudioSHAManager();
-
+				var mySHAManager = new StudioSHAManager();
 				mySHAManager.ClickBottomMenuOption("search");
-
-				StudioSHAManagerProductSearch myProductSearch = new StudioSHAManagerProductSearch();
 				myProductSearch.Wait_for_load(3);
 				myProductSearch.EnterProductID(id);
 				myProductSearch.SelectFromStatusFilter("All");
@@ -164,7 +163,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (myProductSearch.Wait_for_load(1))
 				{
 					Report.Info("Product search popup has not closed");
-					if(!myProductSearch.ClickButton("Cancel"))
+					if (!myProductSearch.ClickButton("Cancel"))
 					{
 						throw new Exception("Failed to click the cancel button");
 					}
@@ -181,50 +180,63 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					throw new Exception("Product list is not showing as expected");
 				}
 				Report.Info("Product list is showing");
-				ProductStatus thisProductStatus = new ProductStatus();
-				thisProductStatus = GetproductStatus(id);
+				var thisProductStatus = this.GetproductStatus(id);
 				if (thisProductStatus != null)
 				{
-					if (idStatus == thisProductStatus.StatusName && thisProductStatus.Bold == expectingBold &&
-					    (tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor))
+					if ((idStatus == thisProductStatus.StatusName || idStatus.ToLower() == "n/a") && thisProductStatus.Bold == expectingBold &&
+						(tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor))
 					{
 						return true;
 					}
+					var matchReport = "";
+					if (idStatus == thisProductStatus.StatusName)
+					{
+						matchReport += " status matched";
+					}
 					else
 					{
-						string matchReport = "";
-						if (idStatus == thisProductStatus.StatusName)
-						{
-							matchReport = matchReport + " status matched";
-						}
-						else
-						{
-							matchReport = matchReport + " status did not match. Expecting: " + idStatus + " but got: " + thisProductStatus.StatusName;
-						}
-						if (thisProductStatus.Bold == expectingBold)
-						{
-							matchReport = matchReport + " bolding matched";
-						}
-						else
-						{
-							matchReport = matchReport + " bolding did not match. Expecting: " + expectingBold.ToString() + " but got: " + thisProductStatus.Bold.ToString();
-						}
-						if (tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor)
-						{
-							matchReport = matchReport + " background as expected";
-						}
-						else
-						{
-							matchReport = matchReport + " background not as expected";
-						}
-
-						Report.Info(matchReport);
+						matchReport += " status did not match. Expecting: " + idStatus + " but got: " + thisProductStatus.StatusName;
 					}
-
+					if (thisProductStatus.Bold == expectingBold)
+					{
+						matchReport += " bolding matched";
+					}
+					else
+					{
+						matchReport += " bolding did not match. Expecting: " + expectingBold.ToString() + " but got: " + thisProductStatus.Bold.ToString();
+					}
+					if (tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor)
+					{
+						matchReport += " background as expected";
+					}
+					else
+					{
+						matchReport += " background not as expected";
+					}
+					Report.Info(matchReport);
 				}
 				Delay.Seconds(1);
 			}
 			return false;
+		}
+
+		public string ProductHighlight(string id)
+		{
+			Report.Info("Checking product background colour");
+			var myProductSearch = new StudioSHAManagerProductSearch();
+			var mySHAManager = new StudioSHAManager();
+			mySHAManager.ClickBottomMenuOption("search");
+			myProductSearch.Wait_for_load(3);
+			myProductSearch.EnterProductID(id);
+			myProductSearch.SelectFromStatusFilter("All");
+			Report.Screenshot();
+			var thisProductStatus = this.GetproductStatus(id);
+			if (thisProductStatus != null)
+			{
+				return thisProductStatus.CSSBackgroundColor;
+			}
+			Report.Info("Failed to get product status for id: " + id);
+			return null;
 		}
 
 		public bool WaitForIDToTurnBlue(string id, int secondsToWait)

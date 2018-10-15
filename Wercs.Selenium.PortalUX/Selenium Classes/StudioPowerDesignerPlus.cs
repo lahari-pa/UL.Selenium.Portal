@@ -17,10 +17,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
 	class StudioPowerDesignerPlus : BaseObject
 	{
-	public const string BasePath = "//div[contains(@class, 'container')]";
+		public const string BasePath = "//div[contains(@class, 'container')]";
 
-	[FindsBy(How = How.XPath, Using = BasePath)]
-	protected override IWebElement containerElement { get; set; }
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
 
 		public bool Wait_for_load(int secondsToWait=60)
 		{
@@ -54,19 +54,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SetLanguage(string language)
 		{
-			var languageSelect = containerElement.FindElement(By.XPath(".//select[@id='ucSelectLanguageddlLang']"));
+			var languageSelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='ucSelectLanguageddlLang']"), 2);
 			if (languageSelect != null)
 			{
 				languageSelect.Select(language);
 				return (languageSelect.SelectedOption() == language);
 			}
-
 			return false;
 		}
 
 		public bool EnterSubFormatFilter(string subFormatFilter)
 		{
-			var subFormatInput = containerElement.FindElement(By.XPath(".//input[@id='ftree']"));
+			var subFormatInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='ftree']"), 2);
 			if (subFormatInput != null)
 			{
 				subFormatInput.EnterText(subFormatFilter);
@@ -86,7 +85,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectFormat(string subformat, string format)
 		{
-			var tree = containerElement.FindElement(By.XPath(".//div[@id='tree']/ul"), 2);
+			var tree = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='tree']/ul"), 2);
 
 			if (tree == null)
 			{
@@ -139,7 +138,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetSourceProductName()
 		{
-			var label = containerElement.FindElement(By.XPath(".//label[@id='sourceproductSelectlblProductName']"),5);
+			var label = containerElement.FindElement(By.XPath(".//label[@id='sourceproductSelectlblProductName']"), 5);
 			if (label != null)
 			{
 				return label.GetValue().Trim();
@@ -158,7 +157,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//new, new from, edit, edit overwrite
 		public bool SelectProductIDOption(string option)
 		{
-			var selectProductDiv = containerElement.FindElement(By.XPath(".//div[@id='productSelect']"));
+			var selectProductDiv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='productSelect']"), 2);
+			if (selectProductDiv == null)
+			{
+				return false;
+			}
 			var labels = selectProductDiv.FindElements(By.XPath(".//input/following-sibling::label"));
 			IWebElement matchingLabel = null;
 			switch (option)
@@ -197,7 +200,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait=30)
+		public bool Wait_for_load(int secondsToWait = 30)
 		{
 			//get the window
 			StudioUtilites.SwitchToWindow("Wercs Studio");
@@ -488,7 +491,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (button != null)
 			{
-				var img = button.FindElement(By.XPath(".//img"),2);
+				var img = button.FindElement(By.XPath(".//img"), 2);
 				if (img != null)
 				{
 					string imgSrc = img.GetAttribute("src");
@@ -718,7 +721,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 	}
 
-	class GraphicEditor:BaseObject
+	class GraphicEditor : BaseObject
 	{
 		public const string BasePath = "//div[@id='koPopup']";
 
@@ -797,7 +800,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait=60)
+		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
@@ -865,7 +868,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			else
 			{
-				string alertText= SeleniumBrowser.Alert.GetText();
+				string alertText = SeleniumBrowser.Alert.GetText();
 				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 				return alertText;
 			}
@@ -937,7 +940,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait=60)
+		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
@@ -1014,11 +1017,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSave()
 		{
-			for (int i = 0 ;i < 5; i++)
+			for (int i = 0; i < 5; i++)
 			{
 				try
 				{
-					if (containerElement.FindElement(By.XPath(".//input[@id='btnSave']"),10).TryClick())
+					if (containerElement.FindElement(By.XPath(".//input[@id='btnSave']"), 10).TryClick())
 					{
 						return true;
 					}
@@ -1065,7 +1068,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait=60)
+		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
@@ -1265,7 +1268,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSingleRuleEllipsis()
 		{
-			var srEllipsis = containerElement.FindElement(By.XPath(".//input[@id='ucSelRule_cmdSelect']"),2);
+			var srEllipsis = containerElement.FindElement(By.XPath(".//input[@id='ucSelRule_cmdSelect']"), 2);
 			if (srEllipsis != null)
 			{
 				return srEllipsis.TryClick();
@@ -1354,7 +1357,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait=60)
+		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
@@ -1686,7 +1689,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				SeleniumBrowser.WebBrowser.FindElements(
 					By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@id, 'DocumentQueue')]"));
 
-			List < string > documentQueueHeaders = GetDocumentQueueTableHeaders();
+			List<string> documentQueueHeaders = GetDocumentQueueTableHeaders();
 
 			List<string> propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
 
@@ -1706,7 +1709,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			foreach (var row in rowList)
 			{
 				Document thisDocument = new Document();
-				for (int i=0; i<documentQueueHeaders.Count; i++)
+				for (int i = 0; i < documentQueueHeaders.Count; i++)
 				{
 					//properties in Document class
 					string currentHeader = documentQueueHeaders[i];
@@ -1715,7 +1718,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						currentHeader = "ProductOrAlias";
 					}
-					if (!propertiesInDocument.Select(x=>x.ToLower().Replace(" ",string.Empty)).Contains(currentHeader.ToLower().Replace(" ", string.Empty)))
+					if (!propertiesInDocument.Select(x => x.ToLower().Replace(" ", string.Empty)).Contains(currentHeader.ToLower().Replace(" ", string.Empty)))
 					{
 						Report.Info("Header: " + currentHeader + " is not in the Document class");
 					}
@@ -1727,10 +1730,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 						try
 						{
-							string valueToAdd = row.FindElement(By.XPath(".//td[" + (i +2).ToString() + "]")).GetValue();
+							string valueToAdd = row.FindElement(By.XPath(".//td[" + (i + 2).ToString() + "]")).GetValue();
 							var thisProperty = thisDocument.GetType().GetProperty(thisPropertyName);
 
-							thisProperty.SetValue(thisDocument,valueToAdd);
+							thisProperty.SetValue(thisDocument, valueToAdd);
 
 							//Report.Info("Added value: " + valueToAdd + " to property: " + currentHeader);
 
@@ -2073,7 +2076,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 								DateTime dtExpectedDateTo = new DateTime(yearTo, monthTo, dayTo);
 
 								return (dtDateFrom.Date == dtExpectedDateFrom.Date &&
-								        dtDateTo.Date == dtExpectedDateTo.Date);
+										dtDateTo.Date == dtExpectedDateTo.Date);
 							}
 							catch (Exception e)
 							{

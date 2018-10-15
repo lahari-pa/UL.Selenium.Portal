@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Castle.Components.DictionaryAdapter;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -228,6 +229,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='header-with-back']//a/i"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
+		public bool ClickInfoButton(string text)
+		{
+			return containerElement.FindElement(By.XPath($@".//a[@class='btn btn-info' and contains(text(),""{text}"")]"), 2).TryClick();
+		}
+
 		public List<string> GetAllDataConsentTiers()
 		{
 			try
@@ -357,6 +363,43 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 
+	}
+
+	public class DataTierDetails : BaseObject
+	{
+		public const string BasePath = "//div[@class='modal in' and @id='data-tiers-details']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool ClickTab(string option)
+		{
+			return this.containerElement.FindElement(By.XPath($@".//li[@role='presentation']/a[contains(text(),""{option}"")]"), 2).TryClick();
+		}
+
+		public string ActiveTab()
+		{
+			return this.containerElement.FindElement(By.XPath($@".//li[@class='active']/a]"), 2)?.Text;
+		}
+
+		public string Heading()
+		{
+			return this.containerElement.FindElement(By.XPath(".//h3[not(parent::div[@role])]"), 2)?.Text;
+		}
+
+		public string SubHeading()
+		{
+			return this.containerElement.FindElement(By.XPath(".//h3[(parent::div[@class='tab-pane active'])]"), 2)?.Text;
+		}
+
+		public List<string> TabParagraphText()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='tab-pane active']//li")).Select(x => x.Text).ToList();
+		}
+
+		public bool ClickClose()
+		{
+			return containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).TryClick();
+		}
 	}
 
 }

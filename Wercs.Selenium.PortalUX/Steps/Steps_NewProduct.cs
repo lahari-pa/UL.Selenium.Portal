@@ -1699,7 +1699,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
 			NewProduct thisNewProduct = new NewProduct();
-			if (thisNewProduct.AcceptRadioIsSelected())
+			if (thisNewProduct.YesAgreedIsSelected())
 			{
 				Report.Info("Yes agreed is already selected");
 			}
@@ -1707,7 +1707,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				thisNewProduct.SelectYesAgreedRadio();
 			}
-			//Report.IsTrue(thisNewProduct.AcceptRadioIsSelected(), "Failed to select Yes Agreed", "Yes Agreed is selected.");
+			Report.IsTrue(thisNewProduct.YesAgreedIsSelected(), "Failed to select Yes Agreed", "Yes Agreed is selected.");
 		}
 
 		[StepDefinition(@"In the Data Acceptance page I click on the Accept button")]
