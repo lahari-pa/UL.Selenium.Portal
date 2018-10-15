@@ -28,7 +28,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					return;
 				}
 				TopMenuBar thisTopMenuBar = new TopMenuBar();
-				string username = user.FirstName + ", " + user.LastName;
+				string username = user.FirstName + " " + user.LastName;
 				Report.Info("Looking for username: " + username);
 				Report.IsTrue(thisTopMenuBar.GetCurrentUser() == username,
 					"Username should have been showing as: " + username + " but is: " + thisTopMenuBar.GetCurrentUser(),

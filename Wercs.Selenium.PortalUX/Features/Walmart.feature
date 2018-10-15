@@ -239,3 +239,5 @@ Then I confirm the active Forward Product Registration tab is: Product Results
 And I confirm that: WM is displayed in the Destination Retailers column under Product Results
 
 Given I click the Home navigation icon and accept the alert popup
+
+

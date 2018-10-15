@@ -23,6 +23,7 @@ Then I confirm I am taken to the Retailers page
 Given I select the Subscription link
 Then I confirm I am taken to the Subscription page
 
+@singlerun
 Scenario: [50770] Sign Up Link
 Given I select the Sign Up link
 Then the signup page should appear

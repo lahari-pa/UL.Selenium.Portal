@@ -48,20 +48,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I select the Sign Up link")]
 		public void ClickSignUpLink()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " " + MethodBase.GetCurrentMethod().Name);
-			try
-			{
-				Report.Info("Beginning to click the Login button");
-				var selHomepage = new LandingPage();
-				selHomepage.Click_Signup();
-				Report.Screenshot();
-				Report.Success("Signup button clicked!");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Beginning to click the Login button");
+			var selHomepage = new LandingPage();
+			selHomepage.Click_Signup();
+			Report.Screenshot();
+			Report.Success("Signup button clicked!");
 		}
 
 		[StepDefinition(@"the login page should (appear|dissappear)")]
