@@ -287,7 +287,7 @@ And I select option: Shipping fully regulated under section: Select all modes of
 And I click continue
 And I should see the U. S. Department of Transportation (DOT) Classification Page
 And I set the UN Number field to: UN2762
-And Proper Shipping Name should be showing the value: Ornganochlorine pesticides, liquid, flammable, toxic
+And Proper Shipping Name should be showing the value: Organochlorine pesticides, liquid, flammable, toxic
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                               |
 | Ornganochlorine pesticides, liquid, flammable, toxic |
