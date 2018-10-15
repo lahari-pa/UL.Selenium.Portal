@@ -849,7 +849,7 @@ Then I see the following sections
 Then The following options should be displayed for section: Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?
 | Option                                                      |
 | Yes                                                         |
-| No, I would like to manually enter VOC values for each area. |
+| No, I would like to manually enter VOC value for each area. |
 
 Given in the New Product page I click Continue
 
