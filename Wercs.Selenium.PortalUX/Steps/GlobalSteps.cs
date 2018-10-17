@@ -808,11 +808,29 @@ namespace WERCSmart
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (var savedAs in usersSavedAs)
 			{
+				var user = TReVor.TestUsers.GetUserSavedAs(savedAs);
+				if (!user.Username.Contains("@"))
+				{
+					Report.Info($"The email did not contain an '@' so continuing to the next user.");
+				}
 				TestReport.StartStep($"I update the password for user: {savedAs}");
 				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				var alert = new RetailPartners().WarningMessage();
+				if (alert != null && alert.Contains("The recipients listed below have additional Data Consent requests"))
+				{
+					Report.Info("Account needs to be reviewed - data consent requests. Continuing to the next account");
+					Report.Info("Logging out");
+					GivenILogout();
+					continue;
+				}
 				if (!new Homepage().Wait_for_load())
 				{
-					Report.Error("Failed to log in with user: " + savedAs + ". Expected to land on the home page");
+					Report.Failure("Failed to log in with user: " + savedAs + ". Did not find the top menu bar!");
+					if (new TopMenuBar().Wait_for_load())
+					{
+						Report.Info("Logging out");
+						GivenILogout();
+					}
 					continue;
 				}
 				var selMyAccount = new StepsMyAccount();
@@ -830,6 +848,12 @@ namespace WERCSmart
 				ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
 				GivenILogout();
+				if (!new LandingPage().Wait_for_load())
+				{
+					Report.Info("Directed to an unexpected WercSmart landing page!");
+					Report.Info("Navigating to the landing page");
+					new GlobalSteps().NavigateToLandingPage();
+				}
 			}
 		}
 

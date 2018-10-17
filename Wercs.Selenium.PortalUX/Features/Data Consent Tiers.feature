@@ -67,7 +67,7 @@ Given I ensure the Data Consent Tier Sliders are set as follows:
 Then I click the Save Changes button
 And I click close on the Save Changes popup dialog
 
-And Confirm the NOTE: message below the Data Consent Tiers Heading is NOT shown
+And I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown
 And the save changes button is not shown
 
 # And Data Consent Tiers - Administrator Email Confirmation - Walmart

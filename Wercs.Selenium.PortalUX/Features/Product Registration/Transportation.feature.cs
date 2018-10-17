@@ -932,8 +932,8 @@ testRunner.And("I should see the U. S. Department of Transportation (DOT) Classi
 #line 289
 testRunner.And("I set the UN Number field to: UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 290
-testRunner.And("Proper Shipping Name should be showing the value: Ornganochlorine pesticides, liq" +
-                    "uid, flammable, toxic", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("Proper Shipping Name should be showing the value: Organochlorine pesticides, liqu" +
+                    "id, flammable, toxic", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
@@ -1144,62 +1144,6 @@ testRunner.And("I call Shared Step 55662 (WPS Studio - Job Queue - wait for Impo
 #line 370
 testRunner.And("I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT " +
                     "- Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 371
-testRunner.And("I In the shared step below search for data code DOTUN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 372
-testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
-                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 373
-testRunner.And("I Confirm the lower portion of the table shows UN2762", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 374
-testRunner.And("I Repeat steps 88 and 89 for data codes UNT, UNM and  UNI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 375
-testRunner.And("I In the shared step below search for data code HCT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 376
-testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
-                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 377
-testRunner.And("I Confirm the lower portion of the table shows U3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 378
-testRunner.And("I Repeat steps 92 and 93 for data codes HCM, HCI, DOTHAZ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 379
-testRunner.And("I In the shared step below search for data code SNAME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 380
-testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
-                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 381
-testRunner.And("I Confirm the lower portion of the table shows Organochlorine pesticides, liquid," +
-                    " flammable, toxic (this has the additional s in pesticides)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 382
-testRunner.And("I In the shared step below search for data code PGT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 383
-testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
-                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 384
-testRunner.And("I Confirm the lower portion of the table shows II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 385
-testRunner.And("I Repeat steps 99 and 100 for data codes PGI, PGM, DOTPG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 386
-testRunner.And("I In the shared step below search for data code IMSN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 387
-testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
-                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 388
-testRunner.And("I Confirm the lower portion of the table shows Organochlorine pesticide, liquid, " +
-                    "flammable, toxic", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 389
-testRunner.And("I Repeat steps 103 and 104 for TDSN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 390
-testRunner.And("I In the shared step below search for data code IMDGCP", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 391
-testRunner.And("[Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select spec" +
-                    "ific data code]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 392
-testRunner.And("I Confirm the lower portion of the table shows 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 393
-testRunner.And("I Repeat steps 107 and 108 for data codes IATACP and TDGCP", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 394
-testRunner.And("I Click My WERCS &gt; Logout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

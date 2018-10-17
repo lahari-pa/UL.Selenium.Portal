@@ -209,7 +209,7 @@ testRunner.Then("I click the Save Changes button", ((string)(null)), ((TechTalk.
 #line 68
 testRunner.And("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 70
-testRunner.And("Confirm the NOTE: message below the Data Consent Tiers Heading is NOT shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 71
 testRunner.And("the save changes button is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

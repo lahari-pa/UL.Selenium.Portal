@@ -368,30 +368,30 @@ And I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status 
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase65947)
 And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase65947)
 And I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
-And I In the shared step below search for data code DOTUN
-And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-And I Confirm the lower portion of the table shows UN2762
-And I Repeat steps 88 and 89 for data codes UNT, UNM and  UNI
-And I In the shared step below search for data code HCT
-And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-And I Confirm the lower portion of the table shows U3
-And I Repeat steps 92 and 93 for data codes HCM, HCI, DOTHAZ
-And I In the shared step below search for data code SNAME
-And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-And I Confirm the lower portion of the table shows Organochlorine pesticides, liquid, flammable, toxic (this has the additional s in pesticides)
-And I In the shared step below search for data code PGT
-And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-And I Confirm the lower portion of the table shows II
-And I Repeat steps 99 and 100 for data codes PGI, PGM, DOTPG
-And I In the shared step below search for data code IMSN
-And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-And I Confirm the lower portion of the table shows Organochlorine pesticide, liquid, flammable, toxic
-And I Repeat steps 103 and 104 for TDSN
-And I In the shared step below search for data code IMDGCP
-And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-And I Confirm the lower portion of the table shows 1
-And I Repeat steps 107 and 108 for data codes IATACP and TDGCP
-And I Click My WERCS &gt; Logout
+#And I In the shared step below search for data code DOTUN
+#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
+#And I Confirm the lower portion of the table shows UN2762
+#And I Repeat steps 88 and 89 for data codes UNT, UNM and  UNI
+#And I In the shared step below search for data code HCT
+#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
+#And I Confirm the lower portion of the table shows U3
+#And I Repeat steps 92 and 93 for data codes HCM, HCI, DOTHAZ
+#And I In the shared step below search for data code SNAME
+#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
+#And I Confirm the lower portion of the table shows Organochlorine pesticides, liquid, flammable, toxic (this has the additional s in pesticides)
+#And I In the shared step below search for data code PGT
+#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
+#And I Confirm the lower portion of the table shows II
+#And I Repeat steps 99 and 100 for data codes PGI, PGM, DOTPG
+#And I In the shared step below search for data code IMSN
+#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
+#And I Confirm the lower portion of the table shows Organochlorine pesticide, liquid, flammable, toxic
+#And I Repeat steps 103 and 104 for TDSN
+#And I In the shared step below search for data code IMDGCP
+#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
+#And I Confirm the lower portion of the table shows 1
+#And I Repeat steps 107 and 108 for data codes IATACP and TDGCP
+#And I Click My WERCS &gt; Logout
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett

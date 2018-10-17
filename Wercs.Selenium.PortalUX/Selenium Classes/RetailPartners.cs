@@ -73,7 +73,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Failure("No matching retailer for: " + retailer + " was found!");
 			return false;
 		}
-
+		public string WarningMessage()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'alert-warning')]"), 2)?.Text;
+		}
 		public bool ClickRetailerLogo(string retailerCode)
 		{
 			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).FirstOrDefault(x => x.GetCssValue("background-image").ToLower().Contains(retailerCode.ToLower())).TryClick() && GeneralUtilities.Wait_for_load_finish();
