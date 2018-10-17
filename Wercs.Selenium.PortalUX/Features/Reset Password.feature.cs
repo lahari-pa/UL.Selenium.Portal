@@ -110,9 +110,7 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "User"});
             table1.AddRow(new string[] {
-                        "ULSCAccount"});
-            table1.AddRow(new string[] {
-                        "DataConsentAccount"});
+                        "ProductAccount"});
 #line 14
 testRunner.Given("I update the password for the following TReVor test users:", ((string)(null)), table1, "Given ");
 #line hidden
@@ -133,9 +131,9 @@ testRunner.Given("I update the password for the following TReVor test users:", (
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Reset password for TReVor test user accounts", new string[] {
                         "TrevorUsers"});
-#line 20
+#line 19
 this.ScenarioSetup(scenarioInfo);
-#line 22
+#line 21
 testRunner.Given("I update the password for all TReVor Test Users within the current branch", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();

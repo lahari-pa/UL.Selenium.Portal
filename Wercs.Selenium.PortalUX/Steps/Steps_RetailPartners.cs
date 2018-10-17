@@ -1006,17 +1006,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new DataTierDetails().ClickClose(), "Failed to click close!", "Successfully clicked close");
 		}
 
-		[StepDefinition(@"I confirm the text displayed in the Data Tier Details popup contains: ""(.*)""")]
-		public void ConfirmTheTextDisplayedinDataTierDetialsPopupContains(string text)
+		[StepDefinition(@"I confirm the text displayed in the Data Tier Details popup matches for each section:")]
+		public void ConfirmTheTextDisplayedinDataTierDetialsPopupContains(Table paragraphText)
 		{
-			var expectedParagraphs = text.Split('|').ToList();
-			var displayedParagraphs = new DataTierDetails().TabParagraphText();
-			foreach (var par in expectedParagraphs)
+			var displayedParagraphs_ = new DataTierDetails().TabParagraphs();
+			foreach (var row in paragraphText.Rows)
 			{
-				Report.IsTrue(displayedParagraphs.Any(x => x.Contains(par)),
-					$@"The text: ""{par}"" was not displayed as expected!",
-					$@"The text: ""{par}"" was displayed as expected");
+				var expectedSection = row["Section"];
+				var expectedText = row["Text"];
+				Report.IsTrue(displayedParagraphs_.Any(x => x.Key == expectedSection && x.Value.Contains(expectedText)),
+					$"Did not find expected text in section: {expectedSection}! Expected: {expectedText}",
+					$"Found the expected text in section: {expectedSection}. Text: {expectedText}");
 			}
+		}
+
+		[StepDefinition(@"I confirm the Data Tier Details subheading reads: (.*)")]
+		public void ConfirmTheDataTierDetailsSubheadingReads(string expectedSubheading)
+		{
+			var actualSubHeading = new DataTierDetails().SubHeading().Trim();
+			Report.IsTrue(expectedSubheading.Trim() == actualSubHeading,
+				$"The Data Tier Details subheading did not match the expected text! Expected: '{expectedSubheading}'. Actual: '{actualSubHeading}'",
+				"The Data Tier Details subheading matched the expected text");
 		}
 	}
 }

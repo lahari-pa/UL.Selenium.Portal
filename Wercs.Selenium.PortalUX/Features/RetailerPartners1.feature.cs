@@ -568,30 +568,121 @@ testRunner.Then("I confirm the Add New Supplier ID pop up closes", ((string)(nul
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("jstest")]
         public virtual void _56927WhatAreTheDataUsageTiers_Tier1RegulatoryCompliance_WordingCheck()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56927] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - wording " +
-                    "check", new string[] {
-                        "jstest"});
-#line 230
+                    "check", ((string[])(null)));
+#line 188
 this.ScenarioSetup(scenarioInfo);
-#line 231
+#line 189
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 232
+#line 190
 testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 233
+#line 191
 testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 234
+#line 192
 testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
                     "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 235
+#line 193
 testRunner.And("I click the \"Tier 1: Regulatory Compliance\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 236
-testRunner.And(@"I confirm the text displayed in the Data Tier Details popup contains: ""Definition. ""Regulatory Support"" is any evaluation of Supplier's data that is required to assist any WERCSmart Recipient in complying with any statute or regulation applicable in the United States or other countries (including international laws and regulations), governing the sale, handling, transportation, storage or disposal of products containing chemicals. These evaluations are included in the “WERCSmart Results” which are provided to WERCSmart Recipients to support their regulatory compliance programs. WERCSmart Results are derived using both Public Data and Confidential Data submitted by a Direct Supplier (and its Third-Party Suppliers). WERCSmart Results also include the provision of product safety data sheets, whether authored by the Direct Supplier or by UL authoring services.|Disclosure of Confidential Data. All data elements defined as Confidential Data above will be treated as such and will not be provided to a WERCSmart Recipient, unless a local, state or federal statute requires that a specific element be treated as non-confidential.""", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 237
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Section",
+                        "Text"});
+            table3.AddRow(new string[] {
+                        "A",
+                        @"Definition. ""Regulatory Support"" is any evaluation of Supplier's data that is required to assist any WERCSmart Recipient in complying with any statute or regulation applicable in the United States or other countries (including international laws and regulations), governing the sale, handling, transportation, storage or disposal of products containing chemicals. These evaluations are included in the “WERCSmart Results” which are provided to WERCSmart Recipients to support their regulatory compliance programs. WERCSmart Results are derived using both Public Data and Confidential Data submitted by a Direct Supplier (and its Third-Party Suppliers). WERCSmart Results also include the provision of product safety data sheets, whether authored by the Direct Supplier or by UL authoring services."});
+            table3.AddRow(new string[] {
+                        "B",
+                        @"Disclosure of Confidential Data. All data elements defined as Confidential Data above will be treated as such and will not be provided to a WERCSmart Recipient, unless a local, state or federal statute requires that a specific element be treated as non-confidential."});
+#line 194
+testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
+                    "ion:", ((string)(null)), table3, "And ");
+#line 198
 testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 238
+#line 199
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[56929] What are the Data Usage Tiers? - Tier 2: Chemical Program Support - wordi" +
+            "ng check")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Retailer Partners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
+        public virtual void _56929WhatAreTheDataUsageTiers_Tier2ChemicalProgramSupport_WordingCheck()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56929] What are the Data Usage Tiers? - Tier 2: Chemical Program Support - wordi" +
+                    "ng check", ((string[])(null)));
+#line 201
+this.ScenarioSetup(scenarioInfo);
+#line 202
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 203
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 204
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 205
+testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
+                    "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 206
+testRunner.And("I click the \"Tier 2: Chemical Program Support\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 207
+testRunner.And("I confirm the Data Tier Details subheading reads: What does Chemical Program Supp" +
+                    "ort mean?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Section",
+                        "Text"});
+            table4.AddRow(new string[] {
+                        "A",
+                        "Definition. \"Chemical Program Support\" includes providing the following types of " +
+                            "information to Designated Recipient(s) only:"});
+            table4.AddRow(new string[] {
+                        "A1",
+                        @"Product Ingredient Lists. The Standard Chemical Names and Standard Chemical Numbers for each ingredient on a product’s Publicly Disclosed Ingredient List for each of a Supplier's products that a Designated Recipient sells. These data do not include any of the following Confidential Data elements:"});
+            table4.AddRow(new string[] {
+                        "A1a",
+                        "The chemical identity of any ingredient marked as not publicly disclosed or as a " +
+                            "trade secret on the WERCSmart Product Formulation page;"});
+            table4.AddRow(new string[] {
+                        "A1b",
+                        "The chemical identity of the ingredients of any Third-Party Component in a produc" +
+                            "t (unless those ingredients are marked as publicly disclosed on the WERCSmart Co" +
+                            "mponent Formulation page by the Third-Party Supplier of the component); and"});
+            table4.AddRow(new string[] {
+                        "A1c",
+                        "The percent by weight of any ingredient in a product."});
+            table4.AddRow(new string[] {
+                        "A1",
+                        @"This information is used by a Designated Recipient to search its product portfolio for chemicals of interest. The Public Name of an ingredient is insufficient for this purpose, because a Public Name may be ambiguous and fail to resolve to a specific Unique Chemical. Standard Chemical Names and/or Standard Chemical Numbers are required because these chemical identifiers are used to define which ingredients are included in the various regulatory, scientific or trade association lists that Designated Recipients use to identify chemicals of interest. The Designated Recipient is not authorized to publicly disclose this additional chemical identity data."});
+            table4.AddRow(new string[] {
+                        "A2",
+                        @"Transparency Ratios for each of a Supplier's products that a Designated Recipient sells. The ""Transparency Ratio"" is the number of ingredients on a product's Publicly Disclosed Ingredient List divided by the number of ingredients on a product’s Full Formulation Ingredient List. The ratios are used by a Designated Recipient to evaluate the visibility it has into the chemical composition of its product portfolio. The Designated Recipient is not authorized to publicly disclose product Transparency Ratios."});
+            table4.AddRow(new string[] {
+                        "A3",
+                        @"Chemical Screen Results. Product Chemical Screen results, where a product’s Full Formulation Ingredient List is screened against a Designated Recipient's restricted substance list (a “Chemical Screen”). The Designated Recipient is provided with an indication of whether the product passes or fails the screen. The Standard Chemical Name or Standard Chemical Number of the specific ingredient(s) failing the Chemical Screen shall only be provided if that ingredient is listed on a product’s Publicly Disclosed Ingredient List. Confidential Data may be used to derive Chemical Screen results (e.g., screen against a Full Formulation Ingredient List, or use percent formulation to demonstrate compliance with a restriction limit), provided there is no disclosure of any Confidential Data to the Designated Recipient. The Designated Recipient is not authorized to publicly disclose product-level results from its Chemical Screens."});
+            table4.AddRow(new string[] {
+                        "A4",
+                        @"Aggregate Chemical Usage Reports. ""Aggregate Chemical Usage Reports"" are reports which summarize the prevalence or volume of chemicals in a Designated Recipient's product portfolio. These reports track and characterize usage of chemicals to inform chemical policy development at the Designated Recipient. Confidential Data may be used to derive Aggregate Chemical Usage Reports (e.g., calculate prevalence of all chemicals on the Full Formulation Ingredient Lists of products in an assortment, or use percent formulation to calculate mass-weighted chemical usage), provided there is no disclosure of any Confidential Data to the Designated Recipient. The Designated Recipient is authorized to publicly disclose summary information from Aggregate Chemical Usage Reports, provided that such disclosure does not identify specific products or suppliers. If the Designated Recipient is reporting on the volume of chemicals in its assortment, for example, such results must be presented at the product category level, without identifying amounts per specific supplier or product."});
+            table4.AddRow(new string[] {
+                        "B",
+                        "Third Party Suppliers. All Third-Party Suppliers of components in a product shall" +
+                            " separately provide Tier 2 Data Use Consent to the use of their Confidential Dat" +
+                            "a for providing Chemical Program Support."});
+#line 208
+testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
+                    "ion:", ((string)(null)), table4, "And ");
+#line 220
+testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 221
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

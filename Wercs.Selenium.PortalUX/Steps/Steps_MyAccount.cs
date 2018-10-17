@@ -871,32 +871,66 @@ namespace Wercs.Selenium.PortalUX.Steps
 				newPassword = oldPassword.TrimEnd(result) + (Convert.ToInt32(result) + 1);
 			}
 			var selModal = new ModalDialog();
-			Report.IsTrue(selModal.Wait_for_load(), "Expected a modal dialog to load!", "Modal dialog loaded as expected");
+			if (!Report.IsTrue(selModal.Wait_for_load(), "Expected a modal dialog to load!", "Modal dialog loaded as expected"))
+			{
+				return;
+			}
 			Report.Info("Entering current password in the input: " + oldPassword);
 			selModal.EnterLoginPassword(oldPassword);
 			Report.Info("Clicking continue in the Change Password popup");
-			Report.IsTrue(selModal.ClickContinue(),
+			if (!Report.IsTrue(selModal.ClickContinue(),
 				"Failed to click continue in Change Password",
-				"Successfully clicked continue in Change Password");
+				"Successfully clicked continue in Change Password"))
+			{
+				if (selModal.Click_Close())
+				{
+					return;
+				}
+				throw new Exception("Failed to click continue in the change password modal, and failed to close it!");
+			}
 			GeneralUtilities.Wait_for_load_finish();
-			Report.Info("Entering new password in New Password input: " + newPassword);
-			selModal.EnterNewPassword(newPassword);
-			Report.Info("Entering new password in Verify Password input: " + newPassword);
-			selModal.EnterVerifyPassword(newPassword);
-			Report.Info("Clicking save in the Change Password popup");
-			Report.IsTrue(selModal.ClickSave(),
-				"Failed to click save in Change Password",
-				"Successfully clicked save in Change Password");
-			GeneralUtilities.Wait_for_load_finish();
-			Report.Info("Clicking close in the Change Password popup");
-			Report.IsTrue(selModal.Click_Close(),
-				"Failed to click close in Change Password",
-				"Successfully clicked clse in Change Password");
-			GeneralUtilities.Wait_for_load_finish();
-			Report.Info("Updating the password in TReVor Test Users");
-			TReVor.TestUsers.UpdatePassword(savedAs, newPassword);
+			int attempt = 0;
+			while (attempt < 10)
+			{
+				Report.Info("Entering new password in New Password input: " + newPassword);
+				selModal.EnterNewPassword(newPassword);
+				Report.Info("Entering new password in Verify Password input: " + newPassword);
+				selModal.EnterVerifyPassword(newPassword);
+				Report.Info("Clicking save in the Change Password popup");
+				Report.IsTrue(selModal.ClickSave(),
+					"Failed to click save in Change Password",
+					"Successfully clicked save in Change Password");
+				GeneralUtilities.Wait_for_load_finish();
+				if (selModal.GetAllText().Any(x => x.Contains("used too recently")))
+				{
+					Report.Info("The test attempted to assign a previously used password! Iterating the password suffix...");
+					Report.Info($"Current attempted password is: {newPassword}");
+					var passwordChr = newPassword.ToCharArray();
+					var result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
+					newPassword = newPassword.TrimEnd(result) + (Convert.ToInt32(result) + 1);
+					Report.Info($"New attempted password is: {newPassword}");
+					if (selModal.Click_Close())
+					{
+						Report.Info($"Attempt {attempt}. Trying again...");
+						attempt++;
+						continue;
+					}
+					throw new Exception("Failed to close the secondary password modal!");
+				}
+				Report.Info("Clicking close in the Change Password popup");
+				Report.IsTrue(selModal.Click_Close(),
+					"Failed to click close in Change Password",
+					"Successfully clicked clse in Change Password");
+				GeneralUtilities.Wait_for_load_finish();
+				if (selModal.Wait_for_close())
+				{
+					Report.Info("Updating the password in TReVor Test Users");
+					TReVor.TestUsers.UpdatePassword(savedAs, newPassword);
+					return;
+				}
+				throw new Exception("Modal dialog did not close!");
+			}
+			Report.Failure("Failed after 10 attempts to change the password!");
 		}
-
-
 	}
 }

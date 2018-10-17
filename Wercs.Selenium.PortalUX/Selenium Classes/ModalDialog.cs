@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -63,6 +64,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-body']")).FirstOrDefault(x => x.Displayed)
 				.Text;
+		}
+
+		public List<string> GetAllText()
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-body']")).Where(x => x.Displayed).Select(x => x.Text).ToList();
 		}
 
 		public string GetTitle()

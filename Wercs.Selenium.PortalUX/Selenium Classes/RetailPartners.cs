@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Castle.Components.DictionaryAdapter;
+using Castle.Core.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
@@ -391,9 +392,52 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//h3[(parent::div[@class='tab-pane active'])]"), 2)?.Text;
 		}
 
-		public List<string> TabParagraphText()
+		public List<KeyValuePair<string, string>> TabParagraphs()
 		{
-			return this.containerElement.FindElements(By.XPath("//div[@class='tab-pane active']//li")).Select(x => x.Text).ToList();
+			var chars_A = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			var chars_a = chars_A.ToLower();
+			var rList = new List<KeyValuePair<string, string>>();
+			var ol_A = this.containerElement.FindElement(By.XPath("//div[@class='tab-pane active']//ol[@type='A']"), 2);
+			string section = "";
+			// Get the paragraph/ section elements for A, B...
+			var lis_A = ol_A.FindElements(By.XPath("./li"));
+			for (int i = 0; i < lis_A.Count; i++)
+			{
+				var li_A = lis_A[i];
+				section = chars_A[i].ToString();
+				rList.Add(new KeyValuePair<string, string>(section, li_A.Text.Trim()));
+				// Look for child ol (section 1, 2...)
+				var ol_1 = li_A.FindElement(By.XPath("./ol[@type='1']"), 2);
+				if (ol_1 == null)
+				{
+					// Then the tree ends at A,B..
+					continue;
+				}
+				// Get the paragraph/ section elements for (A/B)1, (A/B)2...
+				var lis_1 = ol_1.FindElements(By.XPath("./li"));
+				for (int j = 0; j < lis_1.Count; j++)
+				{
+					section = chars_A[i].ToString() + (j + 1);
+					var li_1 = lis_1[j];
+					rList.Add(new KeyValuePair<string, string>(section, li_1.Text.Trim()));
+					// Look for child ol (a, b...)
+					var ol_a = li_1.FindElement(By.XPath("./ol"), 2);
+					if (ol_a == null)
+					{
+						// Then the tree ends at (A/B)1, (A/B)2..
+						continue;
+					}
+					// Get the paragraph/ section elements for (A/B)1, (A/B)2...
+					var lis_a = ol_a.FindElements(By.XPath("./li"));
+					for (int k = 0; k < lis_a.Count; k++)
+					{
+						section = chars_A[i].ToString() + (j + 1) + chars_a[k];
+						var li_a = lis_a[k];
+						rList.Add(new KeyValuePair<string, string>(section, li_a.Text.Trim()));
+					}
+				}
+			}
+			return rList;
 		}
 
 		public bool ClickClose()
