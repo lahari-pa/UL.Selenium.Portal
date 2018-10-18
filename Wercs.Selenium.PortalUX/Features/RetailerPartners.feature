@@ -26,8 +26,6 @@ And I confirm that if the Retailer logo is not shown, then the Retailer name is 
 # And Use the Stored Procedure GET_MOST_RECENT_RETAILERS to confirm that the retailers shown under Most Recent Retailers is correct NOTE: Parameters for the GET_MOST_RECENT_RETAILERS are @SUPPLIERGUID  - different for each supplier  @TOPPRODUCTS - use the number 8 @SOURCESERVICE - use the word PORTAL    Supplier GUID should be enclosed in single quotes   The word PORTAL for the SOURCESERVICE does not need single quotes
 # And Use this query to see the list of currently active retailers in Portal select * from t_client where f_active = 1 and ISNULL(f_config.value('(/Client/@Active)[1]','varchar(20)'),'true') = 'true'  order by f_name CONFIRM this list matches the list of retailers you see in the Retail Partners page
 
-
-
 Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 
@@ -97,8 +95,6 @@ And I check that the following retailers are showing:
 | Winco Foods            | WC    |
 | NewEgg                 | NE    |
 
-
-
 Scenario: [56903] Retailer Detail Page - Retailer does not require Supplier ID or Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -112,7 +108,6 @@ Then I should see the retailer heading: Lowe's
 And Section: Your Supplier IDs should be showing text: This retailer does not support Supplier ID management
 And I confirm that there is a section labeled: Data Consent Tiers
 And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time.
-
 
 Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but does not require Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -135,7 +130,6 @@ And I confirm that there is a section labeled: Data Consent Tiers
 And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time.
 Given I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) for retailer: Sears/K-Mart
 
-
 Scenario: [56981] Retailer & You - layout
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -146,7 +140,6 @@ And The pie chart should be showing on the retailer details page
 Given I see a percentage number in the middle of the pie chart
 Given I confirm that the color of the pie chart for the Retailer selected is Green
 And The pie chart footer text should contain: % of your product portfolio is associated with Walgreens
-
 
 #BLOCKED because requires database access
 Scenario: [56982] Retailer & You - validation of information shown
@@ -217,5 +210,38 @@ And I confirm the text displayed in the Data Tier Details popup matches for each
 | A3      | Chemical Screen Results. Product Chemical Screen results, where a product’s Full Formulation Ingredient List is screened against a Designated Recipient's restricted substance list (a “Chemical Screen”). The Designated Recipient is provided with an indication of whether the product passes or fails the screen. The Standard Chemical Name or Standard Chemical Number of the specific ingredient(s) failing the Chemical Screen shall only be provided if that ingredient is listed on a product’s Publicly Disclosed Ingredient List. Confidential Data may be used to derive Chemical Screen results (e.g., screen against a Full Formulation Ingredient List, or use percent formulation to demonstrate compliance with a restriction limit), provided there is no disclosure of any Confidential Data to the Designated Recipient. The Designated Recipient is not authorized to publicly disclose product-level results from its Chemical Screens.                                                                                                                                                    |
 | A4      | Aggregate Chemical Usage Reports. "Aggregate Chemical Usage Reports" are reports which summarize the prevalence or volume of chemicals in a Designated Recipient's product portfolio. These reports track and characterize usage of chemicals to inform chemical policy development at the Designated Recipient. Confidential Data may be used to derive Aggregate Chemical Usage Reports (e.g., calculate prevalence of all chemicals on the Full Formulation Ingredient Lists of products in an assortment, or use percent formulation to calculate mass-weighted chemical usage), provided there is no disclosure of any Confidential Data to the Designated Recipient. The Designated Recipient is authorized to publicly disclose summary information from Aggregate Chemical Usage Reports, provided that such disclosure does not identify specific products or suppliers. If the Designated Recipient is reporting on the volume of chemicals in its assortment, for example, such results must be presented at the product category level, without identifying amounts per specific supplier or product. |
 | B       | Third Party Suppliers. All Third-Party Suppliers of components in a product shall separately provide Tier 2 Data Use Consent to the use of their Confidential Data for providing Chemical Program Support.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+And I close the Data Tier Details popup
+And I navigate to the home page
+
+Scenario: [56931] What are the Data Usage Tiers? - Tier 3: Supplemental Reports - wording check
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: CVS
+And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
+And I click the "Tier 3: Supplemental Reports" tab in Data Tier Details
+And I confirm the Data Tier Details subheading reads: What does Supplemental Reports for Internal Buisness Use Only mean?
+And I confirm the text displayed in the Data Tier Details popup matches for each section:
+| Section | Text                                                                                                                                                                                                                                                                                                                                                                     |
+| A       | Definition. "Supplemental Reports" include providing data needed for sustainability evaluations, product qualification and rating programs, assortment curation programs, and supplier qualification programs operated by a Designated Recipient.                                                                                                                        |
+| A1      | Supplemental Reports will be derived using data submitted by a supplier as part of a supplier’s record, or as part of a product’s regulatory or supplemental record. Supplemental supplier and product records are populated from survey data, which may be collected from supplier via UL Supply Chain Network, WERCSmart, PurView, or as otherwise provided.           |
+| A2      | Confidential Data may be used to derive Supplemental Reports (e.g., as inputs for rules used to rate or qualify products), provided there is no disclosure of Confidential Data to the Designated Recipient. In limited cases, UL may designate specific data elements collected by a survey as confidential, and not disclose these elements to a Designated Recipient. |
+| B       | Third-Party Suppliers. In the event that the Confidential Data required to derive a Supplemental Report is controlled by a Third-Party Supplier, that party shall separately provide Tier 3 consent to the use of its Confidential Data for deriving Supplemental Reports.                                                                                               |
+And I close the Data Tier Details popup
+And I navigate to the home page
+
+# NB logged ticket for spelling error, waiting for correction
+Scenario: [56933] What are the Data Usage Tiers? - Tier 4: Public Disclosure Options - wording check
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: CVS
+And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
+And I click the "Tier 4: Public Disclosure Options" tab in Data Tier Details
+And I confirm the Data Tier Details subheading reads: What are my Public Disclosure Options?
+And I confirm the text displayed in the Data Tier Details popup matches for each section:
+| Section | Text                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| A       | Definition of Public Disclosure Options: Suppliers may opt to authorize a Designated Recipient to publicly disclose one or more of the following types of data for its external business purposes, which may include consumer-facing marketing and product or supplier information programs:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| A1      | Derived Results from Supplemental Reports (Tier 4.1). Derived Results include any qualification decisions or ratings the Designated Recipient derives based on the data in a regulatory or supplemental product record or in a supplier record. Qualification decisions are determinations that a supplier or product satisfies a set of criteria (e.g., a supplier exhibits a set of sustainability attributes, or a product does not contain certain types of chemicals). Ratings are scores assigned to a product or supplier based on an evaluative framework defined by a Designated Recipient. A Designated Recipient may publicly disclose information from Supplemental Reports only in a form that does not reveal the Confidential Data of any supplier. For example, a Designated Recipient may publish the results of a product qualification decision (e.g., the product meets a set of criteria), but it is prohibited from disclosing that a product exhibits a specific attribute that is Confidential Data. |
+| A2      | Product Ingredient Lists (Tier 4.2). A Designated Recipient may utilize the Public Names on a product’s Publicly Disclosed Ingredient List to publish such list on its website.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| A3      | Other Supplier-Provided Data (Tier 4.3). A Designated Recipient may publicly disclose any supplier-provided, non-confidential data elements from a product or supplier record. No Confidential Data elements may be publicly disclosed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 And I close the Data Tier Details popup
 And I navigate to the home page
