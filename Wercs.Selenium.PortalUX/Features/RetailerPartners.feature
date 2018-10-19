@@ -245,3 +245,18 @@ And I confirm the text displayed in the Data Tier Details popup matches for each
 | A3      | Other Supplier-Provided Data (Tier 4.3). A Designated Recipient may publicly disclose any supplier-provided, non-confidential data elements from a product or supplier record. No Confidential Data elements may be publicly disclosed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 And I close the Data Tier Details popup
 And I navigate to the home page
+
+Scenario: [56925] My Data & Recipients - General layout checks
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: CVS
+And I confirm the Retailer Details Page has loaded
+And I confirm that there is a section labeled: Data Consent Tiers
+And I confirm the Data Consent Tiers table is displayed
+And I should see the More Information hyperlink
+And I confirm the "What are the Data Usage Tiers?" information button is displayed on the Retail Partners Details screen
+And I confirm the "Products in Scope" information button is displayed on the Retail Partners Details screen
+And I confirm that row: 1 of the Data Consent Tiers table displays: "Tier 1: Regulatory Support"
+And the Data Consent Tier: Tier 1 should be set to: on
+And I should not be able to edit Tier Tier 1
+And I navigate to the home page

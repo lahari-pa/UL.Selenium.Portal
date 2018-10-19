@@ -810,6 +810,54 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[56925] My Data & Recipients - General layout checks")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Retailer Partners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
+        public virtual void _56925MyDataRecipients_GeneralLayoutChecks()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56925] My Data & Recipients - General layout checks", ((string[])(null)));
+#line 249
+this.ScenarioSetup(scenarioInfo);
+#line 250
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 251
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 252
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 253
+testRunner.And("I confirm the Retailer Details Page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 254
+testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 255
+testRunner.And("I confirm the Data Consent Tiers table is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 256
+testRunner.And("I should see the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 257
+testRunner.And("I confirm the \"What are the Data Usage Tiers?\" information button is displayed on" +
+                    " the Retail Partners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 258
+testRunner.And("I confirm the \"Products in Scope\" information button is displayed on the Retail P" +
+                    "artners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 259
+testRunner.And("I confirm that row: 1 of the Data Consent Tiers table displays: \"Tier 1: Regulato" +
+                    "ry Support\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 260
+testRunner.And("the Data Consent Tier: Tier 1 should be set to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 261
+testRunner.And("I should not be able to edit Tier Tier 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 262
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

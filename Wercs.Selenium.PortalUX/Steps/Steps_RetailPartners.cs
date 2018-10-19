@@ -129,13 +129,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
 		[StepDefinition(@"I should see the retailer heading: (.*)")]
 		public void CorrectRetailerShowing(string retailer)
 		{
 			Report.IsTrue(new RetailParntersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!");
 		}
-
 
 		[StepDefinition(@"I select the retailer: (.*)")]
 		public void SelectRetailer(string retailer)
@@ -173,29 +171,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I confirm that there is a section labeled: (.*)")]
 		public void ConfirmHeadingShowing(string header)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirming that there is a section labeled: " + header);
-			try
-			{
-				Report.Info("Confirming that there is a section labeled: " + header);
-
-				var selRetailDetails = new RetailParntersDetails();
-
-				if (!selRetailDetails.Wait_for_load(10))
-				{
-					throw new Exception("Page failed to load!");
-				}
-
-
-				Report.IsTrue(selRetailDetails.HeaderShowing(header),
-					"Header '" + header + "' was not showingon page!",
-					"Header '" + header + "' was showing, as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(new RetailParntersDetails().HeaderShowing(header),
+				"Header '" + header + "' was not showing on page!",
+				"Header '" + header + "' was showing, as expected!");
 		}
 
 		[StepDefinition(@"The Supplier ID Table (should|should not) be showing")]
@@ -332,7 +310,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
-
 
 		[StepDefinition(@"I click the More Information hyperlink")]
 		public void ClickMoreInformation()
@@ -651,6 +628,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The warning message matched the expected text.");
 
 		}
+
 		public void ThenTheFollowingWarningMessageShouldBeShowing(string expected)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Correct warning message is showing");
@@ -682,7 +660,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The NOTE error message was displayed under the Data Cosent Tiers Heading",
 				"The NOTE error message was not diplayed under the Data Consent Tiers Heading");
 		}
-
 
 		[StepDefinition(@"I confirm that none of the available Retailer Tiles are blank")]
 		public void NoRetailerTilesAreBlank()
@@ -904,8 +881,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
-
 		[StepDefinition(@"I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view")]
 		public void AllWalMartAffiliatesNavigateToSamsClub()
 		{
@@ -994,6 +969,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Report.IsTrue(new RetailParntersDetails().ClickInfoButton(button), $"Failed to click the {button} button!", $"Successfully clicked the {button} button");
 		}
+
+		[StepDefinition(@"I confirm the ""(.*)"" information button is displayed on the Retail Partners Details screen")]
+		public void ConfirmTheInfoButtonIsDisplayedOnRetailPartnersDetails(string button)
+		{
+			Report.IsTrue(new RetailParntersDetails().InfoButton(button) != null,
+				$@"The ""{button}"" button was not displayed!",
+				$@"The ""{button}"" was dipslayed as expected");
+		}
+
 		[StepDefinition(@"I click the ""(.*)"" tab in Data Tier Details")]
 		public void ClickTabInDataTierDetails(string tab)
 		{
@@ -1027,6 +1011,40 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(expectedSubheading.Trim() == actualSubHeading,
 				$"The Data Tier Details subheading did not match the expected text! Expected: '{expectedSubheading}'. Actual: '{actualSubHeading}'",
 				"The Data Tier Details subheading matched the expected text");
+		}
+
+		[StepDefinition(@"I confirm the Retailer Details Page has loaded")]
+		public void IConfirmTheRetailerDetailsPageHasLoaded()
+		{
+			Report.IsTrue(new RetailParntersDetails().Wait_for_load(), "The Retailer Details page was not loaded!", "The Retailer Details page was loaded as expected");
+		}
+
+		[StepDefinition(@"I confirm the Data Consent Tiers table is displayed")]
+		public void ConfirmTheDataConsentTiersTableIsDisplayed()
+		{
+			Report.IsTrue(new RetailParntersDetails().DataConsentTiersTable() != null,
+				"The Data Consent Tiers table was not displayed!",
+				"The Data Consent Tiers table was displayed as expected.");
+		}
+
+		[StepDefinition(@"I confirm that row: (.*) of the Data Consent Tiers table displays: ""(.*)""")]
+		public void ConfirmThatRowOfTheDataConsentTiersTableDisplaysText(string row, string text)
+		{
+			var selRetailPartnersDetails = new RetailParntersDetails();
+			var tierRows = selRetailPartnersDetails.GetAllDataConsentTiers();
+			if (int.TryParse(row, out var rowNum))
+			{
+				if (tierRows.Count < rowNum)
+				{
+					Report.Failure("Table contains fewer rows than the specified row: " + row);
+					return;
+				}
+				Report.IsTrue(tierRows[rowNum - 1] == text,
+					$@"Row {row} did not show text ""{text}""!",
+					$@"Row {row} showed text ""{text}"" as expected");
+				return;
+			}
+			Report.Failure($"Row number supplied ({row}) was not parsable as an int!");
 		}
 	}
 }

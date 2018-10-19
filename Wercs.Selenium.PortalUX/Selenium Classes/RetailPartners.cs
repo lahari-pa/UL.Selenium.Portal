@@ -235,7 +235,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickInfoButton(string text)
 		{
-			return containerElement.FindElement(By.XPath($@".//a[@class='btn btn-info' and contains(text(),""{text}"")]"), 2).TryClick();
+			return this.InfoButton(text).TryClick();
+		}
+
+		public IWebElement InfoButton(string text)
+		{
+			return this.containerElement.FindElement(By.XPath($@".//a[@class='btn btn-info' and contains(text(),""{text}"")]"), 2);
 		}
 
 		public List<string> GetAllDataConsentTiers()
@@ -255,40 +260,34 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SetDataConsentTier(string tier, bool trueFalse)
 		{
-			var dataConsentRows = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'data-consent')]//table//tbody//tr"), 2);
-			var correctRow = dataConsentRows.FirstOrDefault(x => x.FindElement(By.XPath(".//td[1]"), 2).Text.StartsWith(tier));
-			if (correctRow != null)
+			var dataConsentRows = this.DataConsentTiersTable()?.FindElements(By.XPath(".//tbody//tr"), 2);
+			var correctRow = dataConsentRows?.FirstOrDefault(x => x.FindElement(By.XPath(".//td[1]"), 2).Text.StartsWith(tier));
+			if (correctRow == null)
 			{
-				var checkbox = correctRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2);
-				var Checked = checkbox.Selected;
-				if (Checked != trueFalse)
-				{
-					correctRow.FindElement(By.XPath(".//label[@class='switch']"), 2).Click();
-				}
-
-				return true;
+				return false;
 			}
-			return false;
+			var checkbox = correctRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2);
+			var Checked = checkbox.Selected;
+			return Checked == trueFalse || correctRow.FindElement(By.XPath(".//label[@class='switch']"), 2).TryClick() && checkbox.Selected == trueFalse;
 		}
 
 		public bool GetDataConsentTier(string tier)
 		{
-			var dataConsentRows = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'data-consent')]//table//tbody//tr"), 2);
-			var correctRow = dataConsentRows.FirstOrDefault(x => x.FindElement(By.XPath(".//td[1]"), 2).Text.StartsWith(tier));
-			if (correctRow != null)
+			var dataConsentRows = this.DataConsentTiersTable()?.FindElements(By.XPath(".//tbody//tr"), 2);
+			var correctRow = dataConsentRows?.FirstOrDefault(x => x.FindElement(By.XPath(".//td[1]"), 2).Text.StartsWith(tier));
+			if (correctRow == null)
 			{
-				var checkbox = correctRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2);
-				var Checked = checkbox.Selected;
-				return Checked;
+				return false;
 			}
-			return false;
+			var checkbox = correctRow.FindElement(By.XPath(".//input[@type='checkbox']"), 2);
+			var Checked = checkbox.Selected;
+			return Checked;
 		}
 
 		public bool SaveChangesButtonShowing()
 		{
 			return this.containerElement.FindElement(By.XPath(".//p/a[contains(@class,'btn')]"), 2).Displayed;
 		}
-
 
 		public bool ClickSaveChanges()
 		{
@@ -338,6 +337,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var xPath = ".//p[contains(text(),'Walmart registrations')]/following-sibling::ul/li";
 			return containerElement.FindElements(By.XPath(xPath), 2).Select(x => x.Text.Trim()).ToList();
+		}
+
+		public IWebElement DataConsentTiersTable()
+		{
+			return this.containerElement.FindElement(By.XPath(".//table[./thead/tr/th[text()='Data Consent Tiers']]"), 2);
 		}
 	}
 
@@ -447,6 +451,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).TryClick();
 		}
+
 	}
 
 }
