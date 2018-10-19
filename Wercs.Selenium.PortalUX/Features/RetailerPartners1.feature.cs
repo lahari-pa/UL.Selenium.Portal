@@ -858,6 +858,55 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[56926] My Data & Recipients - What are the Data Usage Tiers - tab/headings")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Retailer Partners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
+        public virtual void _56926MyDataRecipients_WhatAreTheDataUsageTiers_TabHeadings()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56926] My Data & Recipients - What are the Data Usage Tiers - tab/headings", ((string[])(null)));
+#line 264
+this.ScenarioSetup(scenarioInfo);
+#line 265
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 266
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 267
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 268
+testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
+                    "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Tab"});
+            table7.AddRow(new string[] {
+                        "Tier1: Regulatory Support"});
+            table7.AddRow(new string[] {
+                        "Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage" +
+                            " Reports"});
+            table7.AddRow(new string[] {
+                        "Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparen" +
+                            "cy"});
+            table7.AddRow(new string[] {
+                        "Tier 3: Supplemental Reports"});
+            table7.AddRow(new string[] {
+                        "Tier 4.2: Publicly Disclose Product Ingredient Lists"});
+#line 269
+testRunner.And("The Data Tier Details popup shows the following tabs:", ((string)(null)), table7, "And ");
+#line 276
+testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 277
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

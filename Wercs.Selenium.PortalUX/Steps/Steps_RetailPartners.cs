@@ -984,6 +984,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new DataTierDetails().ClickTab(tab), $"Failed to click the {tab} tab!", $"Successfully clicked the {tab} tab");
 		}
 
+		[StepDefinition(@"The Data Tier Details popup shows the following tabs:")]
+		public void DataTierDetailsPopUpShowsTheFollowingTabs(Table tabs)
+		{
+			var expectedTabs = new List<string>();
+			tabs.Rows.ForEach(x => expectedTabs.Add(x["Tab"]));
+			var displayedTabs = new DataTierDetails().AllTabs();
+			Report.IsTrue(expectedTabs.All(x => displayedTabs.Contains(x)) && expectedTabs.Count == displayedTabs.Count,
+				$@"The displayed tabs did not match the expected tabs! Expected: ""{string.Join(", ", expectedTabs.Select(x => $"'{x}'"))}"". Found: ""{string.Join(", ", displayedTabs.Select(x => $"'{x}'"))}""",
+				"The displayed tabs matched the expected tabs.");
+		}
+
 		[StepDefinition(@"I close the Data Tier Details popup")]
 		public void ClickCloseDataTierDetails()
 		{

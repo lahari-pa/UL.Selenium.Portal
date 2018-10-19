@@ -260,3 +260,18 @@ And I confirm that row: 1 of the Data Consent Tiers table displays: "Tier 1: Reg
 And the Data Consent Tier: Tier 1 should be set to: on
 And I should not be able to edit Tier Tier 1
 And I navigate to the home page
+
+Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/headings
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: CVS
+And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
+And The Data Tier Details popup shows the following tabs:
+| Tab                                                                                       |
+| Tier1: Regulatory Support                                                                 |
+| Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports |
+| Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency       |
+| Tier 3: Supplemental Reports                                                              |
+| Tier 4.2: Publicly Disclose Product Ingredient Lists                                      |
+And I close the Data Tier Details popup
+And I navigate to the home page

@@ -389,6 +389,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath($@".//li[@class='active']/a]"), 2)?.Text;
 		}
 
+		public List<string> AllTabs()
+		{
+			return this.containerElement.FindElements(By.XPath($@".//li[@role='presentation']/a")).Select(x => x.Text).ToList();
+		}
+
 		public string Heading()
 		{
 			return this.containerElement.FindElement(By.XPath(".//h3[not(parent::div[@role])]"), 2)?.Text;
