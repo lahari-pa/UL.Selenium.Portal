@@ -247,6 +247,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 2.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Flow 33 - Cooking Oil Spray.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flow 33 - Cooking Oil Spray.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Flow 6.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -658,6 +663,10 @@
     <None Include="Features\Product Registration\Flow 2.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 2.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Flow 33 - Cooking Oil Spray.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Flow 33 - Cooking Oil Spray.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Flow 6.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -812,6 +812,7 @@ namespace WERCSmart
 				if (!user.Username.Contains("@"))
 				{
 					Report.Info($"The email did not contain an '@' so continuing to the next user.");
+					continue;
 				}
 				TestReport.StartStep($"I update the password for user: {savedAs}");
 				ILogInWithTheAccountSavedInTrevorAs(savedAs);

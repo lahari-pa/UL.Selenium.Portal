@@ -997,10 +997,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"UPC: " + upc + " has been deleted as expected.");
 		}
 
-
-
-
-
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Other DOT Exception I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForOtherDOTExceptionISelect(string selection)
 		{
@@ -1009,7 +1005,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selNewProduct.OtherDOTException == selection, "Failed to select: " + selection,
 				"Successfully selected: " + selection);
 		}
-
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, I enter: (.*) in the Provide Special Permit numbers text field")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIEnterInTheProvideSpecialPermitNumbersTextField(string permitNumber)
@@ -1029,8 +1024,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
-
-
 
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Prop65 I select: (No|Yes)")]
