@@ -267,11 +267,10 @@ And I click the Retail Partners icon in the Navigation Pane
 And I select the retailer: CVS
 And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 And The Data Tier Details popup shows the following tabs:
-| Tab                                                                                       |
-| Tier1: Regulatory Support                                                                 |
-| Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports |
-| Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency       |
-| Tier 3: Supplemental Reports                                                              |
-| Tier 4.2: Publicly Disclose Product Ingredient Lists                                      |
+| Tab                               |
+| Tier 1: Regulatory Compliance     |
+| Tier 2: Chemical Program Support  |
+| Tier Tier 3: Supplemental Reports |
+| Tier 4: Publicly Disclose Options |
 And I close the Data Tier Details popup
 And I navigate to the home page

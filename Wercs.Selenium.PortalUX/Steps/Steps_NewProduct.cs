@@ -3759,5 +3759,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var selNewProduct = new NewProduct();
 		}
 
+		[StepDefinition(@"I confirm the product name: ""(.*)"" is displayed in the header")]
+		public void ConfirmTheProductNameIsDisplayedInTheHeader(string name)
+		{
+			var header = new NewProduct().GetHeader();
+			var matches = Regex.Matches(header, @"\(\d*\)");
+			if (matches.Count == 0)
+			{
+				Report.Failure("Could not find product ID in the New Product header!");
+				Report.Screenshot();
+				return;
+			}
+			var bracketedValue = matches[matches.Count - 1].Groups[0].Value;
+			var headerName = header.TrimEnd(bracketedValue).Trim();
+			Report.IsTrue(headerName == name,
+				$@"The name displayed in the header did not match the expected value! Expected: ""{name}"" but got: ""{headerName}""",
+				$@"The name displayed in the header matcehd the expected value: ""{name}""");
+		}
 	}
 }

@@ -887,22 +887,18 @@ testRunner.And("I click the \"What are the Data Usage Tiers?\" information butto
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tab"});
             table7.AddRow(new string[] {
-                        "Tier1: Regulatory Support"});
+                        "Tier 1: Regulatory Compliance"});
             table7.AddRow(new string[] {
-                        "Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage" +
-                            " Reports"});
+                        "Tier 2: Chemical Program Support"});
             table7.AddRow(new string[] {
-                        "Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparen" +
-                            "cy"});
+                        "Tier Tier 3: Supplemental Reports"});
             table7.AddRow(new string[] {
-                        "Tier 3: Supplemental Reports"});
-            table7.AddRow(new string[] {
-                        "Tier 4.2: Publicly Disclose Product Ingredient Lists"});
+                        "Tier 4: Publicly Disclose Options"});
 #line 269
 testRunner.And("The Data Tier Details popup shows the following tabs:", ((string)(null)), table7, "And ");
-#line 276
+#line 275
 testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 277
+#line 276
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
