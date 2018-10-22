@@ -450,6 +450,221 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[31804] Product Characteristics - Gas only navigation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Product Characteristics")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SummaryPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ProductCharacteristics")]
+        public virtual void _31804ProductCharacteristics_GasOnlyNavigation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31804] Product Characteristics - Gas only navigation", ((string[])(null)));
+#line 120
+this.ScenarioSetup(scenarioInfo);
+#line 121
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 122
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 123
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 124
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Compressed gas", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 125
+testRunner.Then("I save the product information as: TestCase31804", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 126
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 127
+testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State"});
+            table5.AddRow(new string[] {
+                        "Gas"});
+#line 128
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table5, "And ");
+#line 131
+testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 132
+testRunner.And("I should see following statement: Select the best Water Solubility description", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 133
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase31804", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[31826] Product Characteristics - Gas only validation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Product Characteristics")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SummaryPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ProductCharacteristics")]
+        public virtual void _31826ProductCharacteristics_GasOnlyValidation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31826] Product Characteristics - Gas only validation", ((string[])(null)));
+#line 136
+this.ScenarioSetup(scenarioInfo);
+#line 137
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 138
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 139
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 140
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Compressed gas", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 141
+testRunner.Then("I save the product information as: TestCase31826", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 142
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 143
+testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 144
+testRunner.And("Secondary Physical State should be showing the error messages: This is a required" +
+                    " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 145
+testRunner.And("Select the best Water Solubility description should be showing the error messages" +
+                    ": This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 146
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase31826", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85157] Product Characteristics - All navigation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Product Characteristics")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SummaryPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ProductCharacteristics")]
+        public virtual void _85157ProductCharacteristics_AllNavigation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85157] Product Characteristics - All navigation", ((string[])(null)));
+#line 149
+this.ScenarioSetup(scenarioInfo);
+#line 150
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 151
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 152
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 153
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Bonding agent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 154
+testRunner.Then("I save the product information as: TestCase85157", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 155
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
+testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State"});
+            table6.AddRow(new string[] {
+                        "Aerosol"});
+            table6.AddRow(new string[] {
+                        "Gas"});
+            table6.AddRow(new string[] {
+                        "Liquid"});
+            table6.AddRow(new string[] {
+                        "Solid"});
+#line 157
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table6, "And ");
+#line 163
+testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 164
+testRunner.And("I should see following statement: Select the best Water Solubility description", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 165
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85157", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85158] Product Characteristics - All validation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Product Characteristics")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SummaryPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ProductCharacteristics")]
+        public virtual void _85158ProductCharacteristics_AllValidation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85158] Product Characteristics - All validation", ((string[])(null)));
+#line 168
+this.ScenarioSetup(scenarioInfo);
+#line 169
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 170
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 171
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 172
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Bonding agent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 173
+testRunner.Then("I save the product information as: TestCase85158", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 174
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 175
+testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 176
+testRunner.And("Primary Physical State should be showing the error messages: This is a required f" +
+                    "ield.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 177
+testRunner.And("Secondary Physical State should be showing the error messages: This is a required" +
+                    " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 178
+testRunner.And("Select the best Water Solubility description should be showing the error messages" +
+                    ": This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 179
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85158", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
