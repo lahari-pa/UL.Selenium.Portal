@@ -40,8 +40,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return 0;
 			}
-
-			return productsGrid.FindElements(By.XPath(".//tbody/tr"), 2).Count;
+			return productsGrid.FindElements(By.XPath(".//tbody/tr"), 2).Where(x => x.Displayed).ToList().Count;
 		}
 
 		public List<string> GetAllFilters()
@@ -175,7 +174,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-
 		public bool ClickActions(int row)
 		{
 			return containerElement.FindElement(By.XPath(".//table//tbody//tr[" + row + "]//button[contains(@class,'ellipsis-button')]"), 2).TryClick();
@@ -239,6 +237,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return productElement;
 		}
 
+		public ProductGridItem ProductInRow(int row)
+		{
+			var productRow = this.containerElement.FindElement(By.XPath($".//tbody/tr[{row}]"), 2);
+			if (productRow == null || !productRow.Displayed)
+			{
+				return null;
+			}
+			var thisProduct = new ProductGridItem() {
+				ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
+				ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
+				DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
+				Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
+			};
+			return thisProduct;
+		}
+
 		public bool RowsAreFoundInProductGrid()
 		{
 			try
@@ -275,6 +289,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElement(By.XPath(".//a[contains(@class,'clear-filters')]"), 2).TryClick();
 		}
+
 		public bool ClickUpcNumberSearchButton()
 		{
 			var el = containerElement.FindElement(By.XPath(".//input[@placeholder='UPC Number']/..//span[contains(@data-bind,'searchProducts')]"), 2);
@@ -356,12 +371,28 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string ActivePage()
 		{
 			var el = containerElement.FindElement(By.XPath(".//li[@class='active']/span"), 2);
-			if (el == null)
+			return el?.Text;
+		}
+
+		public string LastPage()
+		{
+			var lastControl = containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[@class='page-link']"), 2);
+			if (lastControl.Count == 0)
 			{
-				return null;
+				Report.Info("Last page is: 1");
+				return "1";
 			}
-			//el.ScrollElementIntoView();
-			return el.Text;
+			return lastControl.Last().Text;
+		}
+
+		public bool ClickPage(string page)
+		{
+			if (this.ActivePage() == page)
+			{
+				return false;
+			}
+			Report.Info("Clicking page: " + page);
+			return containerElement.FindElement(By.XPath(".//a[@class='page-link' and text()= '" + page + "']"), 2).TryClick();
 		}
 
 		public bool GridNavigation(string navOption)
@@ -391,6 +422,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			//navEl.ScrollElementIntoView();
 			return navEl.TryClick();
+		}
+
+		public bool NextDisabled()
+		{
+			return containerElement.FindElement(By.XPath(".//span[@class='current next' and parent::li[@class='disabled']]"), 2) != null;
 		}
 
 		public IWebElement GridNavigationInput()
@@ -475,13 +511,105 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
 			return containerElement != null;
 		}
+
+		public List<ProductGridItem> GetAllProducts()
+		{
+			var rList = new List<ProductGridItem>();
+			var lastPageText = this.LastPage();
+			if (!int.TryParse(lastPageText, out int lastPage))
+			{
+				return null;
+			}
+			var activeText = this.ActivePage();
+			if (!int.TryParse(activeText, out int activePage))
+			{
+				return null;
+			}
+			while (activePage <= lastPage)
+			{
+				Report.Info("Getting products on page: " + activePage);
+				var productCount = this.ProductsCount();
+				Report.Info("There are " + productCount + " products on this page");
+				for (int i = 1; i <= productCount; i++)
+				{
+					var thisProduct = ProductInRow(i);
+					rList.Add(thisProduct);
+				}
+				if (!this.NextDisabled() && GridNavigation("next"))
+				{
+					Report.Info("Getting produts from the next page");
+					GeneralUtilities.Wait_for_load_finish();
+					activePage++;
+					continue;
+				}
+				break;
+			}
+			Report.Info("Returning to the first page in the products grid");
+			ClickPage("1");
+			GeneralUtilities.Wait_for_load_finish();
+			return rList;
+		}
+
+		public bool ClickFirstActionsEditUpc()
+		{
+			var lastPageText = this.LastPage();
+			if (!int.TryParse(lastPageText, out int lastPage))
+			{
+				return false;
+			}
+			var activeText = this.ActivePage();
+			if (!int.TryParse(activeText, out int activePage))
+			{
+				return false;
+			}
+			bool clicked = false;
+			while (activePage <= lastPage)
+			{
+				Report.Info("Looking for product with 'Edit UPC' Actions on page: " + activePage);
+				var el = this.containerElement.FindElement(By.XPath(".//button[contains(@class,'ellipsis')]/following-sibling::ul/li//a[not(@style='display: none;') and text()='Edit UPCs']"), 2);
+				if (el == null)
+				{
+					Report.Info("No Edit UPC actions on page " + activePage + ". Clicking next.");
+					if (!this.NextDisabled() && GridNavigation("next"))
+					{
+						GeneralUtilities.Wait_for_load_finish();
+						activePage++;
+						continue;
+					}
+					break;
+				}
+				Report.Info("Clicking More Actions");
+				var actionsEl = el.FindElement(By.XPath("./../../preceding-sibling::button"), 2);
+				if (actionsEl.TryClick())
+				{
+					Report.Info("Clicking Edit UPCs");
+					clicked = el.TryClick();
+					GeneralUtilities.Wait_for_load_finish();
+				}
+				break;
+			}
+			if (!clicked)
+			{
+				Report.Info("Returning to the first page in the products grid");
+				ClickPage("1");
+				GeneralUtilities.Wait_for_load_finish();
+				return false;
+			}
+			return true;
+		}
 	}
 
-	public class ProductGridItem
+	class ProductGridItem : ProductsGrid
 	{
 		public string ProductId { get; set; }
 		public string ProductName { get; set; }
 		public string DateCreated { get; set; }
+		public List<string> Retailers { get; set; }
+
+		public bool ClickActions()
+		{
+			return this.containerElement.FindElement(By.XPath(".//table//tr[.//small[text()='" + this.ProductId + "']]//button[contains(@class,'ellipsis-button')]"), 2).TryClick();
+		}
 	}
 
 	class BulkActions : BaseObject
@@ -670,5 +798,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return moreFilters.All(x => x.Displayed);
 		}
 
+		public List<string> MoreFilterLabels()
+		{
+			return this.containerElement.FindElements(By.XPath(".//div[@id='more-filters-panel']//label")).Select(x => x.Text).ToList();
+		}
 	}
 }

@@ -3769,5 +3769,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 				$@"The name displayed in the header did not match the expected value! Expected: ""{name}"" but got: ""{headerName}""",
 				$@"The name displayed in the header matcehd the expected value: ""{name}""");
 		}
+
+		[StepDefinition(@"I confirm that retailer ""(.*)"" is present under the 'Destination Retailers' column in the UPC table")]
+		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer)
+		{
+			var displayedRetailers = new NewProduct().GetAllUPCDestinationRetailers();
+			Report.IsTrue(displayedRetailers.Contains(retailer),
+				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
+				$@"Retailer ""{retailer}"" is present under Destination Retailers");
+		}
 	}
 }

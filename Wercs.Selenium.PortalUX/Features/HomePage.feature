@@ -154,7 +154,6 @@ Then I click on the Row Action: Edit
 Then the Product Type page should be loaded
 And the product saved as: FirstProduct should be visible in editor
 
-#Design
 @tfs_design
 Scenario: [56214] My Products grid Actions - Submit Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -195,7 +194,6 @@ Then A Summary page should open in a new browser tab
 Then I should not seen an Accept button
 Given I close the browser tab with the Summary page
 
-
 @tfs_design
 Scenario: [56219] My Products grid Actions - Documents navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -209,8 +207,6 @@ Given I click on the View link of the first document in Supplier Uploaded
 Then a document should open
 Given I close the document
 
-
-#Design
 @tfs_design
 Scenario: [56220] My Products grid Actions - Edit UPCs
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -346,7 +342,6 @@ Given I click ... in the products grid
 
 Given I enter the down arrow into the products grid page navigation input then the correct page is shown
 
-@tfs_design
 # NB this test requires pre set up products with a Brand/ Product Line added in the 'The Product' section
 Scenario: [68388] More Filters - Brand
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -359,7 +354,6 @@ And I click on the Row Action: Edit
 Given In the New Product page I click tab: Product Type
 And in the New Product page I click section: The Product
 Then Product Line or Brand (optional) should be showing the value: SuperBrand(TM)
-
 
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
 #in the development environment.
@@ -400,7 +394,6 @@ And in the Summary page the UPC number should match that saved as: Summary - UPC
 
 Given I close the browser tab with the Summary page
 
-
 Scenario: [65617] Correct Order of Statuses
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 And I should see a Pie Chart and Legend under Product Information
@@ -421,7 +414,6 @@ And I should see the following filters in the following order under My products:
 | Needs Your Attention   |
 | Canceled               |
 
-
 @tfs_design
 Scenario: [59732] Announcements - Add
 Given I navigate to Studio
@@ -436,7 +428,6 @@ Given I navigate to Portal
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then In the announcements area I should see my saved messages
 
-
 Scenario: [58579] Live Help - Chat Feature
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Given I click on the Live Help button on the upper right
@@ -446,8 +437,6 @@ Given In the Live Help dialog I enter name: John Smith
 Given In the Live Help dialog I enter email: johnsmithtest@test.co.uk
 Given In the Live Help dialog I click on the x to close
 
-@run56829
-@tfs_design
 Scenario: [56829] More Filters
 
 # Consider creating the test product from scratch every time?
@@ -551,3 +540,73 @@ Given the hover over text is as expected for the following navigation icons
 | Bulb       | UL Solution Center   |
 | Cart       | Shopping Cart        |
 | Life-Saver | Support              |
+
+# Assigned to Amanda Coutant
+# Created by Amanda Coutant
+
+Scenario: [68413] More Filters - Retailer
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I click More Filters in the products grid
+And I confirm the filter with label: "Retailer" is displayed and default option: "All Retailers"
+And I should see the following options for the Retailer filter
+| Option                 |
+| Ahold                  |
+| Albertsons Companies   |
+| Amazon                 |
+| Autozone               |
+| Bed Bath and Beyond    |
+| Canadian Tire          |
+| Costco                 |
+| CVS                    |
+| Delhaize               |
+| Dick's Sporting Goods  |
+| Dollar General         |
+| Dollar Tree            |
+| Essendant              |
+| Family Dollar          |
+| Genuine Parts          |
+| Harbor Freight Tools   |
+| HD Supply              |
+| HyVee                  |
+| Kohl's                 |
+| Kroger                 |
+| Lowes                  |
+| McLane                 |
+| Meijer                 |
+| Michaels               |
+| New Egg                |
+| Northgate Market       |
+| Office Depot           |
+| O'Reilly Auto Parts    |
+| Petco                  |
+| Price Chopper          |
+| Publix                 |
+| Rite Aid               |
+| Save Mart Supermarkets |
+| Schnucks               |
+| Sears K Mart           |
+| Smart & Final          |
+| Staples                |
+| SuperValue             |
+| Target                 |
+| The Home Depot         |
+| Topco                  |
+| Tractor Value Supply   |
+| Ultra Standard         |
+| Unified                |
+| Wakefren               |
+| Walgreens              |
+| BONBONS                |
+| Walmart.com            |
+| Hayneedle              |
+| Jet                    |
+| MODCLOTH               |
+| Moosejaw               |
+| Shoes.com              |
+| Walmart                |
+| Winco Foods            |
+And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
+And I confirm all products in the grid contain either the the text "WM" or "All" under the 'Retailers' column
+And I click the first instance of Actions - Edit UPC in the products grid
+Then I should see the Universal Product Code (UPC) Page
+And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table

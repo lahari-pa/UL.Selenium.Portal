@@ -13,12 +13,10 @@
 Feature: Flow 33 - Cooking Oil Spray
 
 # Created by Aaron Caton
-
 Scenario: [69577] Cooking Oil Spray - Aerosol
 Given I generate a random UPC number and save as: UPC69577
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-# And I Enter "Cooking Oil Spray - Aerosol" in Type of Product smart search field
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cooking Oil Spray - Aerosol
 And I call Shared Step 60778 (Primary Physical Property - Packaged in gas cylinder)
 And I call Shared Step 60756 (Additional Product Information with Country and every option)

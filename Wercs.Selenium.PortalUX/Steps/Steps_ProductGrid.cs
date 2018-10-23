@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
 using iTextSharp.text.pdf;
+using NPOI.HSSF.Record;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -1127,6 +1128,67 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"More Filters options were displayed when they were not expected to be!",
 					"More Filters options were not displayed as expected");
 			}
+		}
+
+		[StepDefinition(@"I should see the following options for the (Retailer|Brand|Additional Programs) filter")]
+		public void ShouldSeeTheFollowingOptionsMoreFilters(string filter, Table table)
+		{
+			var displayedOptions = new MoreFilters().Options(filter);
+			var expectedOptions = new List<string>();
+			table.Rows.ForEach(x => expectedOptions.Add(x["Option"]));
+			Report.IsTrue(expectedOptions.All(x => displayedOptions.Contains(x)) && expectedOptions.Count == displayedOptions.Count,
+				$"The displayed options for filter {filter} did not match the expected options! Expected: {string.Join(", ", expectedOptions.Select(x => $"'{x}'").ToList())}. Actual: {string.Join(", ", displayedOptions.Select(x => $"'{x}'").ToList())}",
+				$"The displayed options for filter: {filter}' matched the expected options.");
+		}
+
+		[StepDefinition(@"I confirm the filter with label: ""(.*)"" is displayed and default option: ""(.*)""")]
+		public void ConfirmFilterDisplayedWithLabelAndDefaultOption(string label, string option)
+		{
+			var selMoreFilters = new MoreFilters();
+			var displayedLabels = selMoreFilters.MoreFilterLabels();
+			Report.IsTrue(displayedLabels.Contains(label),
+				$@"The label ""{label}"" was not displayed under More Filters! Displayed labels: {string.Join(", ", displayedLabels.Select(x => $"'{x}'"))}",
+				$@"The label ""{label}"" was displayed under More Filters as expected");
+			string labelOption = null;
+			switch (label)
+			{
+				case "Retailer":
+					labelOption = selMoreFilters.Retailer;
+					break;
+				case "Brand":
+					labelOption = selMoreFilters.Brand;
+					break;
+				case "Additional Programs":
+					labelOption = selMoreFilters.AdditionalPrograms;
+					break;
+			}
+			if (labelOption == null)
+			{
+				Report.Failure($@"Specified label: ""{label}"" was unexpected! Expect 'Retailer', 'Brand' or 'Additional Programs'");
+				return;
+			}
+			Report.Info("Label option for label  is: " + labelOption);
+			Report.IsTrue(labelOption == option,
+				$@"The option for label ""{label}"" was did not match the expected value! Expected ""{option}""  but found ""{labelOption}""",
+				$@"The option for label ""{label}"" matched the expected value: ""{option}""");
+		}
+
+		[StepDefinition(@"I confirm all products in the grid contain either the the text ""(.*)"" or ""All"" under the 'Retailers' column")]
+		public void ConfirmAllProductsInGridContainTextInRetailersColumn(string retailer)
+		{
+			var allProducts = new ProductsGrid().GetAllProducts();
+			var idsFail = allProducts.Where(x => !x.Retailers.Contains(retailer) && !x.Retailers.Contains("All")).Select(x => x.ProductId).ToList();
+			Report.IsTrue(idsFail.Count == 0,
+				$@"Not all products in the grid contained either ""{retailer}"" or ""All"". Product Ids: {string.Join(", ", idsFail.Select(x => $"'{x}'").ToList())}",
+				$@"All products in the grid contained either ""{retailer}"" or ""All""");
+		}
+
+		[StepDefinition(@"I click the first instance of Actions - Edit UPC in the products grid")]
+		public void ClickFirstInstanceOfActionsEditUpcInProductsGrid()
+		{
+			Report.IsTrue(new ProductsGrid().ClickFirstActionsEditUpc(),
+				"Failed to click Actions - Edit UPC",
+				"Successfully clicked Actions - Edit UPC");
 		}
 	}
 }

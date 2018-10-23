@@ -1340,6 +1340,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).Select(x => x.Text).ToList();
 		}
 
+		public List<string> GetAllUPCDestinationRetailers()
+		{
+			var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			return container.FindElements(By.XPath(".//span[contains(@data-bind,'identifier')]"), 2).Select(x => x.Text).ToList();
+		}
+
 		public bool InputUpcInformation(UpcInformation info)
 		{
 			try
@@ -1404,6 +1410,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return rList;
 		}
+
 		public bool CommentsAreaShowing()
 		{
 			var el = containerElement.FindElement(By.XPath(".//h3[text()='Comments']/../../../..//textarea"), 2);
