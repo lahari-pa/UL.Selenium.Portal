@@ -147,6 +147,11 @@
   <ItemGroup>
     <Compile Include="Classes\Mailosaur.cs" />
     <Compile Include="Classes\User.cs" />
+    <Compile Include="Features\AdditionalProductInformation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdditionalProductInformation.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\BulkActions.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -585,6 +590,10 @@
     <None Include=".editorconfig" />
     <None Include="app.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\AdditionalProductInformation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AdditionalProductInformation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\BulkActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

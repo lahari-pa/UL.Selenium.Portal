@@ -1,0 +1,73 @@
+﻿@LandingPage
+@Login
+@Homepage
+@Signup
+@wercsmart
+@NewProduct
+@ProductGrid
+@DataSummarySheet
+@wercsmart
+@RetailPartners
+@SummaryPage
+@run_AdditionalProductInformation
+
+Feature: Additional Product Information
+
+Scenario: [31352] Additional Product Information - navigation
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
+Then I save the product information as: TestCase31352
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
+And I should see the Additional Product Information Page
+And I should see following statement: Select countries the product may be sold in
+And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
+And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31352
+
+
+Scenario: [31359] Additional Product Information - validation
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
+Then I save the product information as: TestCase31359
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
+When I click continue
+And Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) should be showing the error messages: This is a required field.
+And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31359
+
+
+Scenario: [85242] Additional Product Information with marketed child question- navigation
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Then I save the product information as: TestCase85242
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I should see the Additional Product Information Page
+And I should see following statement: Select countries the product may be sold in
+And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
+And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
+And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85242
+
+
+Scenario: [85244] Additional Product Information with marketed child question- validation
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Then I save the product information as: TestCase85244
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+When I click continue
+And Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) should be showing the error messages: This is a required field.
+And Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) should be showing the error messages: This is a required field.
+And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85244
