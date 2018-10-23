@@ -3778,5 +3778,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
 				$@"Retailer ""{retailer}"" is present under Destination Retailers");
 		}
+		[Then(@"I click (Save|Cancel) in The Product Page")]
+		public void ThenIClickSaveOrCancelInTheProductPage(string saveOrCancel)
+		{
+			NewProduct selNewProduct = new NewProduct();
+
+			if (saveOrCancel.ToLower() == "save")
+			{
+				Report.IsTrue(selNewProduct.ClickSaveButton(),
+					"Failed to click the save button",
+					"Clicked the save button");
+			}
+			else
+			{
+				Report.IsTrue(selNewProduct.ClickCancelButton(),
+					"Failed to click the cancel button",
+					"Clicked the cancel button");
+			}
+
+		}
+
+		
+
 	}
 }

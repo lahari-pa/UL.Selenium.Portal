@@ -8,11 +8,12 @@
 @SHA
 @wercsmart
 @RetailPartners
+@CreateProducts
 @Studio
 @run_ProductSetUp
 
 Feature:  Product set up and process to specific statuses (Suite ID: 75359)
-
+@Test1
 Scenario: [75335] Create a new simple product (Chalk) and submit thru to Completed status (NGHS only)
 Given I login into the WERCSmart Portal - Administrator Role
 Given I generate a random UPC number and save as: UPC75335
@@ -53,6 +54,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
 
+@Test2
 Scenario: [75142] Create a new simple product (Chalk) and submit thru to SHA - Status = Submitted
 Given I login into the WERCSmart Portal - Administrator Role
 Given I generate a random UPC number and save as: UPC75142
@@ -82,6 +84,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 #Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
 
+@Test3
 Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include generic component)- thru to Completed (includes adding WPSxxxxxx component)
 Given I generate a random UPC number and save as: UPC79428
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -110,6 +113,7 @@ And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 And I call Shared Step 73956 version 2 (Go to Summary and verify data) with product type: Raw material
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
 
 #************************** Switching to SHA Manager ********************
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -144,6 +148,7 @@ Given I navigate to the landing page
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase79428
 
+@Test4
 Scenario: [84108] Create Battery (Stand alone) - process to Completed (Alkaline Battery)
 Given I generate a random UPC number and save as: UPC84108
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -164,7 +169,7 @@ Given in the Optional Reports and Dcouments Available For Purchase page I click 
 Given in the Comments page I click Continue
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 #And I The Purchase summary will be shown.  Depending on your subscription you will either see the Thank you message or your product details.  If your product details are shown click the Confirm order button
-
+Given If purchase details are showing click confirm order
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84108)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84108 and its status is: Submitted
@@ -181,9 +186,7 @@ Given I navigate to the landing page
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84108
 
-# Assigned to Beverly Barrett
-# Created by Beverly Barrett
-
+@Test5
 Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic component) - thru to Completed (includes adding WPSxxxxxx component)
 Given I generate a random UPC number and save as: UPC80768
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -192,7 +195,7 @@ And I call Shared Step 57561 (The Product - Enter Product Name and select Type o
 Then I save the product information as: TestCase80768
 And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
 | CASNumber | ComponentName | Percentage |
-| 50-00-0   | Formaldehyde  | 100         |
+| 50-00-0   | Formaldehyde  | 100        |
 Then in the Ingredients page I click Continue
 And I call Shared Step 79491 (Formulation > 3rd Party - Accept formulation - Decline Tier 2 - Continue)
 And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
@@ -205,6 +208,7 @@ And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 Given in the Comments page I click Continue
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
 
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80768)
@@ -233,10 +237,7 @@ Given I navigate to the landing page
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80768
 
-
-# Assigned to Beverly Barrett
-# Created by Beverly Barrett
-
+@Test6
 Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include generic component) - thru to Completed (includes adding WPSxxxxxx component)
 Given I generate a random UPC number and save as: UPC80763
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -265,6 +266,7 @@ And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Raw material
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
 
 #************************** Switching to SHA Manager ********************
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -273,7 +275,6 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase80763)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80763)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80763 and its status is: Assigned
-
 And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80763)
 And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80763)
 And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
@@ -295,3 +296,189 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Given I navigate to the landing page
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80763
+
+@Test7
+Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+Then I save the product information as: TestCase80089
+And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+And call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: Ing800891
+| CASNumber | ComponentName | Percentage |
+| 100-41-4  | Ethylbenzene  | 35         |
+Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing800892
+| CASNumber  | ComponentName | Percentage |
+| RR-38669-6 | FLAVORS       | 35         |
+And call Shared Step 80091 - Ingredients - Add Non-generic component - set percentage - not publicly disclosed and save ingredient as: Ing800893
+| CASNumber | ComponentName | Percentage |
+| 108-95-2  | Phenol        | 30         |
+Then in the Ingredients page I click Continue
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+And I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+And I should see the Additional Documents to Provide Page
+And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+Then in the Additional documents page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+
+#************************** Switching to SHA Manager ********************
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80089)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80089 and its status is: Submitted
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase80089)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80089)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80089 and its status is: Assigned
+And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80089)
+And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80089)
+And I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase80763
+And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase80089)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80089)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80089 and its status is: Completed
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80089
+
+@Test8
+Scenario: [84109] Create Electronic - process to Completed (Answering machine, no battery included)
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Answering machine, No battery included
+Then I save the product information as: TestCase84109
+And I call Shared Step 69687 (Additional Product Information - US, No(PL))
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
+And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+And I should see the Additional Documents to Provide Page
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84109)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 and its status is: Submitted
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase84109)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84109)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 and its status is: Assigned
+And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase84109)
+
+#Note: In Staging and Production - Electronic products are automatically published by the ImportProcessRules so if you are running in either of these sites you can skip to step 28
+	And I check whether the current environment is Staging or Production and if it is I skip the next three steps
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase84109)
+	And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase84109
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase84109)
+
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84109)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 and its status is: Completed
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84109
+
+@Test9
+Scenario: [84511] Electronic Product from Completed status to Recertification
+#If you are using this test case you already have a product you are working with and it is in a Completed status for 1 or more retailers.
+Given I create an electronic product and save it as: TestCase84511
+Given I navigate to the landing page
+Given I login into the WERCSmart Portal - Administrator Role
+Given I search for the product saved as: TestCase84511
+Given For product saved as: TestCase84511 the status is: Completed
+And I click Row Actions for the first product returned
+And I click on the Row Action: Update Data
+#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+And I should see the The Product Page
+Then I click Save in The Product Page
+#Scenario: Test
+#Given I save to context name: TestCase84511 and value: 1524214
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Completed
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its font is red indicating a recertification
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase84511
+And In the Product Recertification History popup I should see the following entry
+| Product ID             | Active | Recertification Reason                           |
+| saved as TestCase84511 | true   | Recertification of Product by WERCSmart Customer |
+And I Close the Product Recertification History pop up
+#Scenario: Test
+#Given I save to context name: TestCase84511 and value: 1524214
+Given I navigate to the landing page
+Given I login into the WERCSmart Portal - Administrator Role
+Given I search for the product saved as: TestCase84511
+Given For product saved as: TestCase84511 the status is: Needs Your Attention
+And I click Row Actions for the first product returned
+And I click on the Row Action: Update Required
+#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+And I should see the The Product Page
+And In the New Product page I click tab: Product Characteristics
+And in the New Product page I click section: Toxicity Characteristic Leaching Procedure (TCLP)
+And I set the Lead option to: Yes
+And I set the Mercury option to: Yes
+And I set the Silver option to: Yes
+Then I click Save in The Product Page
+And In the New Product page I click tab: Review and Submit
+And in the New Product page I click section: Data Acceptance
+And In the Data Acceptance page I click on the Accept button
+Given If purchase details are showing click confirm order
+And I navigate to the home page
+And I search for the product saved as: TestCase84511
+Given For product saved as: TestCase84511 the status is: Assessment in Progress
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Recertification
+#And I Confirm your product is shown in the Recertification status without the red recertification font color
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase84511
+And In the Product Recertification History popup I should see the following entry
+| Product ID             | Active | Recertification Reason                           |
+| saved as TestCase84511 | false  | Recertification of Product by WERCSmart Customer |
+And I Close the Product Recertification History pop up
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84511
+
+@Test10
+Scenario: [75410] Product from Completed status to Recertification
+Given I If you are using this test case you already have a product you are working with and it is in a Completed status for 1 or more retailers.
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I Filter for the product you are using
+And I Confirm the product is shown in Completed status - green color on the retailer icons
+And I Click the ... icon in the Actions column for your product
+And I Click Update Data
+And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+And I The "The Product" step will be shown
+And I IN SHA Managersearch for your product ID using the shared step below
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm the product is shown in Completed status with the red font indicating a recertification is present
+And [Shared Step 51351 - SHA > Select Product > View Recertification History]
+And I Confirm the Product Recertification History pop up shows an entry for "Recertification of product by WERCSmart Customer" and that the Active Column shows "true"
+And I Close the Product Recertification History pop up
+And I In Portal
+And I Click the Product Characteristics step heading
+And I Change the Secondary Physical State drop down from its current selection to a new selection
+And I Click Save
+And I Click the Reviewand Submit tab heading
+And I Click the Data Acceptance step heading
+And I Click Accept
+And I You will see the Purchase Summary page - depending on your subscription you will either see the Thank You message or you will see you product details and the Confirm order button.  If the confirm order button is shown Click it.
+And I Click the Home button
+And I Filter for your product and confirm the retailers shown are shown in the orange Assessment in progress color
+And I IN SHA manager - use the shared step below to search for your product ID
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm your product is shown in the Recertification status without the red recertification font color
+And [Shared Step 51351 - SHA > Select Product > View Recertification History]
+And I Confirm the Recertification of product by WERCSmart Customer entry shows "false" in the Active column of the Product recertification History
+And I Close the Product Recertification History pop up

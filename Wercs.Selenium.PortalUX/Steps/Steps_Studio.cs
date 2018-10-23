@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using NPOI.OpenXmlFormats.Vml.Office;
 using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
+using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -105,8 +106,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInCurrentDocumentIConfirmThatAlertTextMatches(Table table)
 		{
 			Report.Info("Beginning confirm that alert matches what is expected.");
+			Delay.Seconds(2);
 			CurrentDocument thisCurrentDocument = new CurrentDocument();
-			//Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load","Current document loaded");
+			Report.Info("Get alert text");
 			string alertText =
 				thisCurrentDocument.GetAlertText(
 					"The following subformat(s) cannot be authorized because required data is missing.");
@@ -305,6 +307,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void InSelectRulesPageIClickOnFirstRecord()
 		{
 			SelectRulesPage thisSelectRulesPage = new SelectRulesPage();
+			thisSelectRulesPage.Wait_for_load(30);
 			Report.IsTrue(thisSelectRulesPage.SelectTopRule(), "Failed to select first rule", "Selected first rule");
 			Delay.Seconds(3);
 			try
@@ -392,6 +395,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In document queue filter page I enter value: (.*) in entry box: (.*)")]
 		public void InDocumentQueueFilterPageIEnterValueInEntryBox(string value, string entryBox)
 		{
+			if (value.ToLower().Contains("saved as"))
+			{
+				var productDetails = (ProductInformation)Context.GetFromContext(value.Replace("saved as","",StringComparison.OrdinalIgnoreCase).Trim());
+				value = productDetails.Id;
+			}
 			SelectDocumentQueueFilter thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
 			Report.IsTrue(thisSelectDocumentQueueFilter.Wait_for_load(60), "Document Queue filter page failed to load",
 				"Document queue filter page loaded");
@@ -991,6 +999,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Clicked continue button");
 		}
 
-
+		[Given(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]
+		public void GivenICheckWhetherTheCurrentEnvironmentIsStagingOrProductionAndIfItIsISkipTheNextThreeSteps()
+		{
+			if (GlobalParameters.SiteType == "Staging" || GlobalParameters.SiteType == "Local Production" ||
+			    GlobalParameters.SiteType == "Production")
+			{
+				Report.Info("Setting context of electronic product");
+				Context.AddToContext("ElectronicProduct","true");
+			}
+		}
 	}
 }

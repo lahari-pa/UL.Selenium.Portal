@@ -168,7 +168,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					case "ProductID":
 					case "ProductId":
 						Report.IsTrue(thisProductSearch.EnterProductID(x.Values.ElementAt(i)),
-							"Failed to set product id", "Successfully set product id", false, false);
+							"Failed to set product id", "Successfully set product id",false, false);
 						break;
 					case "ProductName":
 						Report.IsTrue(thisProductSearch.EnterProductName(x.Values.ElementAt(i)),
@@ -266,7 +266,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				if (topProduct == null || !(topProduct.Status == status && topProduct.ID == ID))
 				{
-					Report.Info("Re-running search");
 					StudioSHAManager myStudioShaManager = new StudioSHAManager();
 
 					myStudioShaManager.ClickBottomMenuOption("Search");
@@ -286,21 +285,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 					Delay.Seconds(2);
 					StudioSHAManager mySHAManager = new StudioSHAManager();
-					mySHAManager.WaitForProductList(120);
-					/*
-					topProduct = mySHAManager.GetTopXProducts(1).FirstOrDefault();
-					if (topProduct != null)
-					{
-						if (topProduct.ID == ID && topProduct.Status == status)
-						{
-							Report.Info("Got match");
-							break;
-						}
-
-						Report.Info(counter + ": status is: " + status);
-					}
-					*/
-					Delay.Seconds(2);
+					mySHAManager.WaitForProductList(10);
 					counter++;
 				}
 				else
@@ -321,6 +306,133 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 		}
+
+		[Given(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is red indicating a recertification")]
+		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedIndicatingARecertification(string productSavedAs)
+		{
+			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
+			var ID = ProductDetails.Id;
+
+			Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+
+			if (topProduct == null || topProduct.ID != ID)
+			{
+				StudioSHAManager myStudioShaManager = new StudioSHAManager();
+
+				myStudioShaManager.ClickBottomMenuOption("Search");
+
+				Steps_SHA myStepsSha = new Steps_SHA();
+
+				TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+					"SearchTerm",
+					"SearchValue"});
+				table.AddRow(new string[] {
+					"ProductID",
+					ID});
+				table.AddRow(new string[] {
+					"Status",
+					"All"});
+				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+
+				Delay.Seconds(2);
+				StudioSHAManager mySHAManager = new StudioSHAManager();
+				mySHAManager.WaitForProductList(10);
+			}
+
+			var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+			if (topProductnew != null)
+			{
+				Report.IsTrue(topProductnew.ID == ID && topProductnew.ColourRGB == "rgb(205, 10, 10)", "Expected: id=" + ID + " and colour: rgb(205, 10, 10) but got: " + topProductnew.ID + " and " + topProductnew.ColourRGB, "Colours match");
+			}
+			else
+			{
+				Report.Failure("No products found");
+			}
+		}
+
+		[Given(@"In the SHA manager grid I right click against product saved as: (.*)")]
+		public void GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(string savedAs)
+		{
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var ID = ProductDetails.Id;
+
+			Report.IsTrue(new StudioSHAManager().RightClickProductByID(ID), "Failed to rightclick against: " + ID,
+				"Right clicked against: " + ID);
+		}
+
+		[Given(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
+		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string Option)
+		{
+			RightClickProductMenu thisContextMenu = new RightClickProductMenu();
+			Report.IsTrue(thisContextMenu.SelectOption(Option), "Failed to select option: " + Option,
+				"Selected option: " + Option);
+		}
+
+		[Given(@"In the Product Recertification History popup I should see the following entry")]
+		public void GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(Table table)
+		{
+			ProductRecertificationHistory thisProductRecertificationHistory = new ProductRecertificationHistory();
+
+			List<Product> ListOfRecertificationProducts = thisProductRecertificationHistory.GetProducts();
+
+			bool allPassed = true;
+
+			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			{
+				string id = "";
+				if (thisRow["Product ID"].ToLower().Contains("saved as"))
+				{
+					var productDetails = (ProductInformation)Context.GetFromContext(thisRow["Product ID"].Replace("saved as", "").Trim());
+					id = productDetails.Id;
+				}
+				else
+				{
+					id = thisRow["Product ID"];
+				}
+
+				Product thisProduct = ListOfRecertificationProducts.FirstOrDefault(x => x.ID == id);
+				if (thisProduct == null)
+				{
+					Report.Error("Product with id: " + id + " was not found");
+					allPassed = false;
+				}
+				else
+				{
+					Report.Info("Product with id: " + id + " was found");
+
+					if (thisProduct.Active == (thisRow["Active"] == "true"))
+					{
+						Report.Info("Active matched: " + thisRow["Active"]);
+					}
+					else
+					{
+						Report.Info("Active did not match. Expected: " + thisRow["Active"] + " but got: " + thisProduct.Active);
+						allPassed = false;
+					}
+					if (thisProduct.RecertificationReason == thisRow["Recertification Reason"])
+					{
+						Report.Info("Recertification matched: " + thisRow["Recertification Reason"]);
+					}
+					else
+					{
+						Report.Info("Recertification reason did not match. Expected: " + thisRow["Recertification Reason"] + " but got: " + thisProduct.RecertificationReason);
+						allPassed = false;
+					}
+					;
+				}
+			}
+
+			Report.IsTrue(allPassed, "Not all products were as expected", "All products listed were as expected");
+		}
+
+		[Given(@"I Close the Product Recertification History pop up")]
+		public void GivenICloseTheProductRecertificationHistoryPopUp()
+		{
+			ProductRecertificationHistory thisProductRecertificationHistory = new ProductRecertificationHistory();
+			thisProductRecertificationHistory.ClickButton("Close");
+			Delay.Seconds(2);
+		}
+
 
 		[StepDefinition(@"I Confirm the Product ID: (.*) is highlited yellow indicating that this is an e-comm/direct ship product")]
 		public void ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(string id)

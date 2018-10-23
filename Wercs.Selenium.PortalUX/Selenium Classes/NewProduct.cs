@@ -187,7 +187,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				var sec = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//h3"), 2).FirstOrDefault(x => x.Text.Contains(section));
+				//var list = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//h3")).Select(x=>x.GetValue());
+				var sec = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//h3"), 2).FirstOrDefault(x => x.GetValue().Contains(section));
 
 				if (sec != null)
 				{
@@ -227,6 +228,52 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 		}
+
+		public bool ClickCancelButton()
+		{
+			try
+			{
+				var el = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'cancel-button')]"), 2);
+				if (el == null)
+				{
+					return false;
+				}
+
+				el.TryClick();
+				GeneralUtilities.WaitForRefreshToDisappear(el);
+				GeneralUtilities.Wait_for_load_finish();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool ClickSaveButton()
+		{
+			try
+			{
+				var listSaveButtons = this.containerElement.FindElements(By.XPath(".//a[contains(@class,'save-button')]"), 2);
+
+				var el = listSaveButtons.FirstOrDefault(x => x.Displayed);
+				if (el == null)
+				{
+					return false;
+				}
+
+				if(!el.TryClick())
+				GeneralUtilities.WaitForRefreshToDisappear(el);
+				GeneralUtilities.Wait_for_load_finish();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+
 
 		public bool ClickContinueNoError()
 		{
@@ -2838,12 +2885,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Entering file name with path: " + pdfFilePath);
 			GeneralFunctions.EnterFilename(pdfFilePath);
 			int i = 0;
-			while (containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Remove']"), 2) == null && i < 10)
+			while (containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[contains(text(), 'View')]"), 2) == null && i < 10)
 			{
 				i++;
 				Delay.Seconds(Delay.SpeedFactor * 1);
 			}
-			return true;
+
+			return (!(containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[contains(text(), 'View')]"), 2) == null));
 		}
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)
 		public bool UploadFileForSectionAndType(string label, string section, string pdfFilePath)

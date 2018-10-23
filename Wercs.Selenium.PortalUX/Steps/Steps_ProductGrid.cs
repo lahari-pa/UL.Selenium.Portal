@@ -124,12 +124,44 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				Report.Info("Searching for Product Saved as " + savedAs);
-				var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
-				Report.Info("Searching for product with ID: '" + productToSearch.ProductId + "'");
+
+				if (!Context.Contains(savedAs))
+				{
+					Report.Failure("The reference: " + savedAs + " was not found in context");
+				}
+
+				string id = "";
+
+				try
+				{
+					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
+					id = productToSearch.ProductId;
+				}
+				catch (Exception e)
+				{
+					//do nothing
+				}
+
+				//if we didn't get the id try a different object type
+				if (id == "")
+				{
+					try
+					{
+						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+						id = productDetails.Id;
+					}
+					catch (Exception e)
+					{
+						//do nothing
+					}
+
+				}
+
+				Report.Info("Searching for product with ID: '" + id + "'");
 				var selProdGrid = new ProductsGrid();
-				selProdGrid.ProductIdField = productToSearch.ProductId;
+				selProdGrid.ProductIdField = id;
 				GeneralUtilities.Wait_for_load_finish();
-				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + productToSearch.ProductId + "'!", "Product was returned!");
+				Report.IsTrue(selProdGrid.ProductsCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
 			}
 			catch (Exception ex)
 			{
@@ -1190,5 +1222,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click Actions - Edit UPC",
 				"Successfully clicked Actions - Edit UPC");
 		}
+
+		[StepDefinition(@"For product saved as: (.*) the status is: (.*)")]
+		public void GivenForProductSavedAsTestCaseTheStatusIsCompleted(string savedAs, string status)
+		{
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = productDetails.Id;
+
+			ProductsGrid thisProductsGrid = new ProductsGrid();
+
+			string statusColour = thisProductsGrid.GetRetailersStatusByID(id);
+
+			if (status.ToLower() == "completed")
+			{
+				status = "Accepted by Retailers";
+			}
+
+			Report.IsTrue(statusColour == status, "Status is not correct. Expected: " + status + " but found: " + statusColour, "Status is as expected");
+		}
+
 	}
 }

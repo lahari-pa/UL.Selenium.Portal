@@ -138,6 +138,7 @@ namespace WERCSmart
 				}
 				Report.Info("Entering Email: '" + username + "'");
 				selLogin.EmailField = username;
+				Delay.Seconds(1);
 				Report.Info("Entering Password: '" + password + "'");
 				selLogin.PasswordField = password;
 				Report.Info("Clicking login");
@@ -165,6 +166,26 @@ namespace WERCSmart
 				}
 				i++;
 				Delay.Seconds(1);
+			}
+			var selLogin2 = new Login();
+			if (!Report.IsTrue(selLogin2.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
+			{
+				Report.Failure("Failed to log in!");
+				return;
+			}
+			Report.Info("Entering Email: '" + username + "'");
+			selLogin2.EmailField = username;
+
+			Report.Info("Entering Password: '" + password + "'");
+			selLogin2.PasswordField = password;
+			Report.Info("Clicking login");
+			selLogin2.Click_Login();
+			selHomepage = new Homepage();
+			if (selHomepage.Wait_for_load(30))
+			{
+				Report.Success("Successfully logged in!");
+				GeneralUtilities.Wait_for_load_finish();
+				return;
 			}
 			Report.Failure("Failed to log in!");
 		}

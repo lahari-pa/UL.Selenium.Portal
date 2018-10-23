@@ -1781,6 +1781,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I upload document type: " + type + " using the Browse and Open");
+			Delay.Seconds(2);
 			new NewProduct().UploadFileForSection(type, pdfFile);
 
 		}
@@ -3908,6 +3909,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus(string status, string savedAs)
 		{
 			TestReport.UseSubSteps = true;
+			Report.Info("Beginning shared step: 49841");
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			TestReport.StartStep("U set the status filter to All");
 			myStudioShaManager.WaitForProductList(60);
@@ -4046,6 +4048,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 68969 \(WPS Studio - Open PD\+, edit existing with specific product > Click Continue for product saved as: (.*)\)")]
 		public void GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(string savedAs)
 		{
+
+			if (Context.GetFromContext("ElectronicProduct")!=null)
+			{
+				Report.Info("Skipping step because this is an electronic product");
+				return;
+			}
 			TestReport.UseSubSteps = true;
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
 			TestReport.StartStep("I click the Authoring menu option and Select Power Designer Plus");
@@ -4215,7 +4223,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			GeneralUtilities.StudioWaitForSpinner();
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
 			Report.Info("Clicked apply, waiting");
-			Delay.Seconds(120);
+			Delay.Seconds(60);
 			Report.Info("Now going to wait for spinner");
 			GeneralUtilities.StudioWaitForSpinner();
 			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4367,6 +4375,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 55663 \(WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*)\)")]
 		public void GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(string savedAs)
 		{
+			if (Context.GetFromContext("ElectronicProduct") != null)
+			{
+				Report.Info("Skipping step because this is an electronic product");
+				return;
+			}
 			TestReport.UseSubSteps = true;
 			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
@@ -4521,6 +4534,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(
 			string savedAs)
 		{
+			if (Context.GetFromContext("ElectronicProduct") != null)
+			{
+				Report.Info("Skipping step because this is an electronic product");
+				return;
+			}
 			TestReport.UseSubSteps = true;
 			Report.Info("In power tools workspace setting edit to true");
 			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
@@ -4607,6 +4625,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+			Delay.Seconds(3);
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
 			Delay.Seconds(3);
@@ -5049,6 +5068,62 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisMyIngredients.InTheFormulationThirdPartySCreenISetDeclinedTo("true");
 			StepsNewProduct thisStepsNewProduct = new StepsNewProduct();
 			thisStepsNewProduct.GivenInTheNewProductPageIClickContinue("Third party");
+		}
+
+		[StepDefinition(@"call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: (.*)")]
+		public void ThenCallSharedStep80090_Ingredients_AddNon_GenericChemicalSetToPubliclyDisclosedSelectPublicNameAndSaveIngredientAsIng(string savedAs, Table component)
+		{
+			var ingredient = new Ingredient {
+				CASNumber = component.Rows.First()["CASNumber"],
+				ComponentName = component.Rows.First()["ComponentName"],
+				Percent = component.Rows.First()["Percentage"],
+				PublicallyDisclosed = true,
+				PublicName = component.Rows.First()["ComponentName"]
+			};
+			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+				"Failed to add ingredient: " +
+				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
+				"Successfully added ingredient: " +
+				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
+			Context.AddToContext(savedAs, ingredient);
+		}
+
+		[StepDefinition(@"call Shared Step 80091 - Ingredients - Add Non-generic component - set percentage - not publicly disclosed and save ingredient as: (.*)")]
+		public void ThenCallSharedStep80091_Ingredients_AddNon_GenericChemicalSetToPubliclyDisclosedSelectPublicNameAndSaveIngredientAsIng(string savedAs, Table component)
+		{
+			var ingredient = new Ingredient {
+				CASNumber = component.Rows.First()["CASNumber"],
+				ComponentName = component.Rows.First()["ComponentName"],
+				Percent = component.Rows.First()["Percentage"],
+				PublicallyDisclosed = false,
+				PublicName = component.Rows.First()["ComponentName"]
+			};
+			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+				"Failed to add ingredient: " +
+				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
+				"Successfully added ingredient: " +
+				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
+			Context.AddToContext(savedAs, ingredient);
+		}
+
+		//If your subscription is set to Premium you will see the ECOLOGO Readiness step - if you do perform the shared step below - if you do not see it skip to step 17
+		[StepDefinition(@"I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path")]
+		public void ThenICallSharedStep_ECOLOGOReadinessAssessment_NotAtThisTime_Continue_HappyPath()
+		{
+			//Select the not at this time radio button
+			//Click continue
+		}
+
+		[Given(@"I call Shared Step 51351 \(SHA > Select Product > View Recertification History\) for product saved as: (.*)")]
+		public void GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(string savedAs)
+		{
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = productDetails.Id;
+			Steps_SHA thisStepsSha = new Steps_SHA();
+			thisStepsSha.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
+			Delay.Seconds(3);
+			thisStepsSha.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("Recertification History");
 		}
 
 		[StepDefinition(@"I call Shared Step 60778 \(Primary Physical Property - Packaged in gas cylinder\)")]

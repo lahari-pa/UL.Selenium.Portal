@@ -1566,6 +1566,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return _btn_confirm.TryClick();
 		}
 
+		public bool ConfirmOrderButtonExists()
+		{
+			try
+			{
+				return this._btn_confirm.Displayed;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
+
 
 	}
 

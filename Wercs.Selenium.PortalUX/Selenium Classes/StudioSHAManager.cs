@@ -46,14 +46,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				//Report.Info(i.ToString());
 				try
 				{
 					var table = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']"), 60);
-					if (table != null && table.Displayed)
+					if (table != null )
 					{
-						Report.Info($"Product list was loaded after {i} seconds");
-						return true;
+						if (table.Displayed || table.FindElements(By.XPath(".//tr")).Count == 1)
+						{
+							return true;
+						}
 					}
 				}
 				catch (Exception e)
@@ -305,6 +306,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool RightClickProductByID(string id)
+		{
+			Delay.Seconds(3);
+			Report.Info("Attemping to rightclick product by id: " + id);
+			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+
+			var matchingTD = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+				.FirstOrDefault(x => x.GetValue().Trim() == id);
+
+			if (matchingTD != null)
+			{
+				Report.Info("Found matching cell");
+				matchingTD.RightClick();
+				return true;
+			}
+			else
+			{
+				Report.Info("Failed to find matching table cell for id: " + id);
+			}
+
+			return false;
+		}
+
 		public bool ProductTableIsEmpty()
 		{
 			try
@@ -336,15 +361,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']//tr"), 3).ToList();
 
-			Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
+			//Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
 			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList();
-			Report.Info("Got list of headers");
+			//Report.Info("Got list of headers");
 			List<Product> ListOfProducts = new List<Product>();
 
 			//ignore first row because it is empty
 			for (int j = 1; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
 			{
-				Report.Info("Looking at row: " + j.ToString());
+				//Report.Info("Looking at row: " + j.ToString());
 				Product thisProduct = new Product();
 				//start indexing from 1 because the first column is a checkbox
 				int addIndex = 1;
@@ -380,6 +405,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						case "Status":
 							thisProduct.Status = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
 								.GetValue().Trim();
+
+							thisProduct.ColourRGB = ListOfProductRows[j]
+								.FindElement(By.XPath(".//td[" + (i + addIndex) + "]")).GetCssValue("Color");
 							break;
 						case "Original Submission":
 							string pOS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -1006,6 +1034,40 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 	}
 
+	class RightClickProductMenu : BaseObject
+	{
+		public const string BasePath = "//div[@id='jqContextMenu']";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool MenuExists()
+		{
+			return containerElement.Displayed;
+		}
+
+		public List<string> GetAllOptions()
+		{
+			return containerElement.FindElements(By.XPath(".//li[not(contains(@style, 'none'))]")).Select(x=>x.GetValue()).ToList();
+		}
+
+		public bool SelectOption(string selectOption)
+		{
+			var listOfOptions = containerElement.FindElements(By.XPath(".//li[not(contains(@style, 'none'))]"));
+			var matchingOption = listOfOptions.FirstOrDefault(x => x.GetValue().Contains(selectOption));
+			if (matchingOption == null)
+			{
+				List<string> Options = GetAllOptions();
+				Report.Error("No matching option was found. Options were: " + string.Join(",", Options));
+				return false;
+			}
+
+			return matchingOption.TryClick();
+		}
+
+
+	}
+
 
 	class Product
 	{
@@ -1026,5 +1088,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GHS { get; set; }
 		public string LastPubDate { get; set; }
 		public bool Refeed { get; set; }
-	}
+		public string ColourRGB { get; set; }
+		public bool Active { get; set; }
+		public DateTime RecertificationDate { get; set; }
+		public string RecertificationReason { get; set; }
+
+}
 }

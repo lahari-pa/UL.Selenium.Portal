@@ -597,6 +597,46 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return true;
 		}
+
+
+		public string GetRetailersStatusByID(string ID)
+		{
+			var listOfProducts = containerElement.FindElements(By.XPath(".//td//small"));
+			var matchingProduct = listOfProducts.FirstOrDefault(x => x.GetValue().Contains(ID));
+			if (matchingProduct == null)
+			{
+				Report.Error("No matching product has been found for ID: " + ID);
+				return "";
+			}
+
+			var retailerLi =
+				matchingProduct.FindElement(By.XPath("../../..//ul[@class='list-inline retailers']/li"), 2);
+
+			if(retailerLi==null)
+			{
+				Report.Error("No matching retailer colour has been found for ID: " + ID);
+				return "";
+			}
+
+			string borderColour = retailerLi.GetCssValue("border-color");
+
+			switch (borderColour)
+			{
+				case "rgb(30, 143, 31)":
+					return "Accepted by Retailers";
+				case "rgb(239, 157, 14)":
+					return "Assessment in Progress";
+				case "rgb(75, 82, 87)":
+					return "Not Yet Submitted";
+				case "rgb(0, 152, 255)":
+					return "Sending to Retailers";
+				case "rgb(207, 58, 83)":
+					return "Needs Your Attention";
+				default:
+					return "";
+			}
+
+		}
 	}
 
 	class ProductGridItem : ProductsGrid
