@@ -512,7 +512,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement != null;
 		}
 
-		public List<ProductGridItem> GetAllProducts()
+		public List<ProductGridItem> GetAllProducts(bool firstPage = false)
 		{
 			var rList = new List<ProductGridItem>();
 			var lastPageText = this.LastPage();
@@ -524,6 +524,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			if (!int.TryParse(activeText, out int activePage))
 			{
 				return null;
+			}
+
+			if (firstPage)
+			{
+
 			}
 			while (activePage <= lastPage)
 			{
@@ -791,6 +796,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					return new List<string>();
 			}
 		}
+
 		public string Brand {
 			get
 			{
@@ -803,6 +809,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				el?.Select(value);
 			}
 		}
+
 		public string Retailer {
 			get
 			{
@@ -815,6 +822,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				el?.Select(value);
 			}
 		}
+
 		public string AdditionalPrograms {
 			get
 			{

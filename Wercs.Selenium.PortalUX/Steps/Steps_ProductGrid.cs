@@ -674,6 +674,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void SetMoreFilterOption(string option, string filter)
 		{
 			var selMoreFilters = new MoreFilters();
+			if (option.StartsWith("~saved as"))
+			{
+				var savedAs = option.Replace("~saved as", "").Trim();
+				option = Context.GetFromContext(savedAs)?.ToString();
+				if (option == null)
+				{
+					throw new Exception("Could not find item in context: " + savedAs + " for more filters option!");
+				}
+			}
 			Context.AddToContext("Filter Option", option);
 			Report.Info("Selecting option: " + option + " for filter drop down: " + filter);
 			if (filter == "Brand")

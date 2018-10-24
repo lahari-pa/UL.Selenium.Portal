@@ -1154,7 +1154,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
 			MyNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Solid");
-			var showing = new NewProduct().GetOptionsForSection("Primary Physical State");
+			var showing = new NewProduct().SelectedOptionsForSection("Primary Physical State");
 			if (!showing.Contains("Solid"))
 			{
 				TestReport.StartStep("I set the Primary Physical State option to: Solid");
@@ -1506,7 +1506,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the Product is Regulated for Transport field to: Not Regulated");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is Regulated for Transport", "Not Regulated");
 			//MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in", "United States");
-			var showing = MyNewProduct.GetOptionsForSection("Product is Regulated for Transport");
+			var showing = MyNewProduct.SelectedOptionsForSection("Product is Regulated for Transport");
 			bool selected = false;
 			int wait = 0;
 			while (!selected && !showing.Contains("Not Regulated") && wait <= 10)
@@ -2302,7 +2302,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("There should only be one option available for Primary Physical State");
 			MyNewProductSteps.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
 			TestReport.StartStep("Primary Physical State should be showing the value: Solid");
-			if (!thisNewProduct.GetOptionsForSection("Primary Physical State").Contains("Solid"))
+			if (!thisNewProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
 			{
 				Report.Failure("The Primary Physical State was not set to Solid by default.");
 				Report.Screenshot();
@@ -2316,22 +2316,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
 				Report.Screenshot();
 			}
-
 			if (new NewProduct().GetDisplayedSections().Contains("Secondary Physical State"))
 			{
 				TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
 				MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
 			}
-
-			//if (thisNewProduct.OptionExists("Secondary Physical State"))
-			//{
-			//	TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
-			//	MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
-			//}
-			//else
-			//{
-			//	Report.Failure("Secondary physical state is not showing as specified by Shared Step");
-			//}
 			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
@@ -2342,7 +2331,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description",
 					"Soluble in water");
 			}
-
 			TestReport.StartStep("Clicking continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
@@ -2396,7 +2384,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I should see the Additional Product Information Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			TestReport.StartStep("Make sure the United States check box is NOT selected, if it is uncheck it");
-			var countrySold = MyNewProduct.GetOptionsForSection("Select countries the product may be sold in");
+			var countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
 			if (countrySold.Contains("United States"))
 			{
 				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
@@ -2757,13 +2745,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Packing Group (select)",
 				"III"));
 			myStepsNewProduct.SetTheSectionOptionTo("Packing Group (select)", "II");
-			if (myNewProduct.GetOptionsForSection("Packing Group (select)").Contains("Choose..."))
+			if (myNewProduct.SelectedOptionsForSection("Packing Group (select)").Contains("Choose..."))
 			{
 				Report.Info(
 					"Option 'III' was not available in section: 'Packing Group (select)' so selecting the first valid option");
 				myStepsNewProduct.SelectFirstOptionInSection("Packing Group (select)");
 			}
-
 			TestReport.StartStep(
 				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue(

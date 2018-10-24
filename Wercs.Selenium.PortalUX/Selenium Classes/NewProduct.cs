@@ -172,14 +172,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickTab(string tabName)
 		{
+			// if the tab is currently active, we don't need to click it
+			var active = containerElement.FindElement(By.XPath($".//div[@class='prog-wizard']//div[contains(@class, 'in-progress active') and ./span[text()='{tabName}']]"), 2);
+			if (active != null)
+			{
+				Report.Info($"Tab: {tabName} was already active");
+				return true;
+			}
 			var tab = containerElement.FindElements(By.XPath(".//div[@class='prog-wizard']//div[contains(@class, 'prog-step')]//a/span"), 2)
 				.FirstOrDefault(x => x.Text.Contains(tabName));
-
 			if (tab != null)
 			{
+				Report.Info("Clicking tab: " + tabName);
 				return tab.FindElement(By.XPath("../../a")).TryClick();
 			}
-
 			return false;
 		}
 
@@ -3758,19 +3764,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			if (el.FindElement(By.XPath("./span/a[contains(@href,'http')]"), 2) == null && el.TryClick())
 			{
 				Delay.Seconds(1);
-				if (GetOptionsForSection(section).Contains(value))
+				if (SelectedOptionsForSection(section).Contains(value))
 				{
 					return true;
 				}
 			}
 			return el.FindElement(By.XPath("./input"), 10).TryClick();
 		}
+
 		public bool ClickSelectForSection(string section)
 		{
 			return containerElement.FindElement(By.XPath(@".//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2).TryClick();
 		}
-		// Returns the SELECTED option(s) for section. See GetAllOptionsForSection to return all available options for a section
-		public List<string> GetOptionsForSection(string section)
+
+		public List<string> SelectedOptionsForSection(string section)
 		{
 			var matchingElements = containerElement.FindElements(By.XPath(@".//div[contains(@class,'form-group') and .//label[starts-with(text(),""" + section + @""")]]//*[name()='input' or name()='select']"), 2);
 			if (matchingElements.Count == 0)
@@ -3817,7 +3824,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
-		//JamesFix
 		public string VocAnalysisDateStatement()
 		{
 			var vocAnalysisDateStatement =
@@ -4296,6 +4302,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return epaRow.GetCssValue("background-color");
 		}
+
 		public bool SelectIngredientPublicName(string chemicalName)
 		{
 			var publicNameText = IngredientRow(chemicalName).FindElements(By.XPath(".//td[contains(@class,'inci-name')]//option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
@@ -4342,6 +4349,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var rows = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//td[@class='component-name']]"), 2);
 			return rows.Count;
 		}
+
 		public bool ClickIngredientTradeSecretCheckbox(string chemicalName)
 		{
 			var tradeSecretInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
@@ -4421,7 +4429,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-
 		public bool ClickIngredientPubliclyDisclosedCheckbox(string chemicalName)
 		{
 			var publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
@@ -4447,6 +4454,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("The Publicly Disclosed box has been unchecked");
 			return true;
 		}
+
 		public bool PublicNameOptionIsEnabled(string chemicalName)
 		{
 			var publicNameOption = IngredientRow(chemicalName).FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
@@ -4490,6 +4498,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return regMatch.Groups[1].ToString();
 		}
+
 		public string TransparencyScoreDenominator()
 		{
 			var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
@@ -4507,10 +4516,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var transparencyScoreEl = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2);
 			return transparencyScoreEl?.GetAttribute("class").Replace("label label-", "");
 		}
+
 		public bool ClickUseMyIngredients()
 		{
 			return containerElement.FindElement(By.XPath(".//button[starts-with(@data-bind,'click: openMyIngredients')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
+
 		public bool ClickAddARetailers()
 		{
 			try
@@ -4799,11 +4810,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return el.TryClick();
 		}
+
 		public bool Ingredients_ClickRegulated(string ingredientName)
 		{
 			var row = IngredientRow(ingredientName);
 			return row.FindElement(By.XPath(".//a[contains(@data-bind,'openRegulation')]"), 2).TryClick();
 		}
+
 		public bool IngredientOrderbY(string orderBy)
 		{
 			switch (orderBy.ToLower())
@@ -4979,6 +4992,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			}
 		}
+
 		public bool SectionLogoDisplayed(string logo, int secondsToWait = 30)
 		{
 			int counter = 0;

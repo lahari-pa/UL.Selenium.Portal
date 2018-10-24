@@ -15,7 +15,7 @@ using WERCSmart;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
-	[Binding]
+	[Binding, Scope(Tag = "ProductSetUp")]
 	class Steps_ProductSetup : TechTalk.SpecFlow.Steps
 	{
 		[StepDefinition(@"I create a product and take to completed using Test Case 75335 \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
@@ -182,6 +182,38 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+		}
+
+		[StepDefinition(@"I create a new product of type: Bleach, with a Product Line/ Brand added")]
+		public void CreateProductWithProductLineBrand()
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var newProductSteps = new StepsNewProduct();
+			// 57408 (Create a New Registration via Register New Product icon)
+			TestReport.StartStep("I create a new registration with the beaker icon");
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			TestReport.StartStep("I should see the The Product Page");
+			newProductSteps.GivenIShouldSeeXPage("The Product");
+			var testCaseId = GlobalParameters.TestCaseId;
+			if (testCaseId == null)
+			{
+				throw new Exception("Unable to locate a test case ID in global parameters which is required!");
+			}
+			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: Brand Product " + testCaseId);
+			newProductSteps.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
+				"Brand Product " + testCaseId);
+			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: Bleach in the Type of Product select field");
+			newProductSteps.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField("Bleach");
+			TestReport.StartStep("I select the first option in the 'Product Line or Brand' drop down and save as: Brand" + testCaseId);
+			newProductSteps.SelectFirstOptionInBrandDropDown();
+			TestReport.StartStep("I click Continue");
+			newProductSteps.ClickContinue();
+			TestReport.StartStep("I save the product information as TestCase" + testCaseId);
+			var prodDetails = new NewProduct().GetCurrentProductInformation();
+			Context.AddToContext($"TestCase{testCaseId}", prodDetails);
+			TestReport.StartStep("Navigate to the home page");
+			new StepsHomepage().ThenINavigateToTheHomePage();
 		}
 
 	}

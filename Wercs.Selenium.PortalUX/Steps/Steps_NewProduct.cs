@@ -969,9 +969,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in the New Product page I click section: (.*)")]
 		public void GivenInTheNewProductPageIClickSection(string section)
 		{
+			TestReport.UseSubSteps = true;
 			NewProduct selNewProduct = new NewProduct();
-			Delay.Seconds(1);
+			TestReport.StartStep("I click section header " + section);
 			Report.IsTrue(selNewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
+			GeneralUtilities.Wait_for_load_finish();
+			TestReport.StartStep("I should see page has loaded: " + section);
 			GivenIShouldSeeXPage(section);
 		}
 
@@ -1378,20 +1381,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I should only see the following options for Primary Physical State:")]
-		public void PrimaryPhysicalOptionsShowingCorrectly(Table expected)
+		public void PrimaryPhysicalOptionsShowingCorrectly(Table table)
 		{
+			var expected = new List<string>();
 			var found = new NewProduct().ListOfPrimaryPhysicalStates();
 			Report.Info("Primary Physical States found: " + string.Join(", ", found));
-
-			foreach (var row in expected.Rows)
+			foreach (var state in expected)
 			{
-				if (Report.IsTrue(found.Contains(row["State"]), "Failed to find state: " + row["State"] + " in the list!", row["State"] + " was successfully found!"))
+				if (Report.IsTrue(found.Contains(state), "Failed to find state: " + state + " in the list!", state + " was successfully found!"))
 				{
-					found.Remove(row["State"]);
+					found.Remove(state);
 				}
 			}
-
-			Report.IsTrue(found.Count == 0, "Not all Physical States were found! Remaining were: " + string.Join(", ", found), "All primary physical states were found successfully!");
+			Report.IsTrue(found.Count == 0,
+				$@"There were physical states displayed which were not expected! Only expected: ""{string.Join(", ", expected.Select(x => $"'{x}'").ToList())}"". Also displaued were: ""{string.Join(", ", found.Select(x => $"'{x}'").ToList())}""" + string.Join(", ", found),
+				$@"Only the expected physical states: ""{string.Join(", ", expected.Select(x => $"'{x}'").ToList())}"" were displayed.");
 		}
 
 		[StepDefinition(@"I set the Primary Physical State to be: (.*)")]
@@ -1896,7 +1900,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"(.*) should be showing the value: (.*)")]
 		public void CheckingFieldInputIsCorrect(string section, string value)
 		{
-			var showing = new NewProduct().GetOptionsForSection(section);
+			if (value.StartsWith("~saved as"))
+			{
+				var savedAs = value.Replace("~saved as", "").Trim();
+				value = Context.GetFromContext(savedAs)?.ToString();
+				if (value == null)
+				{
+					throw new Exception("Could not find item in context: " + savedAs + " for checking field input is correct value!");
+				}
+			}
+			var showing = new NewProduct().SelectedOptionsForSection(section);
 			Report.Info("Value(s) showing were: " + string.Join(", ", showing));
 			var expected = value.Split('|').Select(x => x.Trim()).ToList();
 			foreach (var expec in expected)
@@ -3800,5 +3813,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		
 
+
+		[StepDefinition(@"I select the first option in the 'Product Line or Brand' drop down and save as Brand{TestCaseId}")]
+		public void SelectFirstOptionInBrandDropDown()
+		{
+			var testCaseId = GlobalParameters.TestCaseId;
+			if (testCaseId == null)
+			{
+				throw new Exception("Unable to locate a test case ID in global parameters which is required!");
+			}
+			Report.Info("Current test case ID: " + testCaseId);
+			var newProduct = new NewProduct();
+			var options = newProduct.AllProductLineOrBrandOptions();
+			if (options.Count == 0)
+			{
+				// test can't continue
+				throw new Exception("No Brands were available to add to the product, which is required by the test!");
+			}
+			Report.Info($"There are {options.Count} brand options. Selecting the first one");
+			var brand = options.First();
+			Report.Info($"Selecting the brand: {brand}");
+			Report.IsTrue(newProduct.SetOptionInSection("Product Line or Brand (optional)", brand),
+				$"Failed to set the Product Line or Brand option to: {brand}!");
+			Report.Info($@"Saving brand ""{brand}"" to context as: Brand{testCaseId}");
+			Context.AddToContext($"Brand{testCaseId}", brand);
+		}
 	}
 }

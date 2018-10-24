@@ -17,6 +17,7 @@
 @ReviewDocuments
 @SHA
 @SummaryPage
+@ProductSetUp
 
 
 Feature: Home Page
@@ -346,14 +347,18 @@ Given I enter the down arrow into the products grid page navigation input then t
 Scenario: [68388] More Filters - Brand
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
+# I create a product with brand. save the brand to context
+Given I create a new product of type: Bleach, with a Product Line/ Brand added
 And I should see an option for More Filters
 Given I click More Filters in the products grid
-Given I select the SuperBrand(TM) option in the Brand More Filters drop down
+# change to use context
+Given I select the ~saved as Brand68388 option in the Brand More Filters drop down
 Given I click Row Actions for the first product returned
 And I click on the Row Action: Edit
 Given In the New Product page I click tab: Product Type
 And in the New Product page I click section: The Product
-Then Product Line or Brand (optional) should be showing the value: SuperBrand(TM)
+Then Product Line or Brand (optional) should be showing the value: ~saved as Brand68388
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
 
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
 #in the development environment.
