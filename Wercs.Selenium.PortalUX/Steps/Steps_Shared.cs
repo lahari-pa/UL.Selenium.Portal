@@ -4036,7 +4036,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(string savedAs)
 		{
 
-			if (Context.GetFromContext("ElectronicProduct")!=null)
+			if (Context.GetFromContext("ElectronicProduct") != null)
 			{
 				Report.Info("Skipping step because this is an electronic product");
 				return;
@@ -5140,6 +5140,31 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selNewProductSteps.SelectFirstOptionInSection("Product contains the following artificial dye(s)");
 			TestReport.StartStep("I click continue");
 			selNewProductSteps.ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 84554 \(Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path\)")]
+		public void Shared84554_ProductCharacteristics_LiquidAndSolid_EnterAllData_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			var newProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I set the Primary Physical State option to: Liquid");
+			newProductSteps.SetTheSectionOptionTo("Primary Physical State", "Liquid");
+			TestReport.StartStep("I set the Secondary Physical State option to: Liquid");
+			newProductSteps.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
+			TestReport.StartStep("I set the Specific Gravity field to: 1");
+			newProductSteps.SetTheSectionOptionTo("Specific Gravity", "1");
+			TestReport.StartStep("I set the pH option to: 10");
+			newProductSteps.SetTheSectionOptionTo("pH", "10");
+			TestReport.StartStep("I set the Boiling Point option to: '30'");
+			newProductSteps.SetTheSectionOptionTo("Boiling Point (in Celsius)", "30");
+			TestReport.StartStep("I set the Flash Point (in Celsius) option to: 100");
+			newProductSteps.SetTheSectionOptionTo("Flash Point (in Celsius)", "100");
+			TestReport.StartStep("I set the Flash Point Determination method option to: Not applicable/available");
+			newProductSteps.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
+			TestReport.StartStep("I set the Select the best Water Solubility description option to: Soluble in water");
+			newProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description", "Soluble in water");
+			TestReport.StartStep("I click continue");
+			newProductSteps.ClickContinue();
 		}
 	}
 }

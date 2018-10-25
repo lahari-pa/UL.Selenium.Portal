@@ -49,7 +49,7 @@ Scenario: [65703] Transportation - Transportation - Confirm Copy information fro
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 84554 (Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path)
 And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -77,7 +77,7 @@ Scenario: [65706] Transportation - Confirm Copy information from my U.S. Departm
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 84554 (Product Characteristics - Liquid & Solid - Enter all data - Continue - Happy Path)
 And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -251,6 +251,8 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # *** IN PROGRESS ***
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+#NB using tfsdesign to prevent running/reporting in regression as it is still in progress (SHA)
+@tfsdesign
 Scenario: [65947] Transportation - Copy information from DOT for all modes - confirm data is shown in WPS Studio correctly
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -290,7 +292,7 @@ And I set the UN Number field to: UN2762
 And Proper Shipping Name should be showing the value: Organochlorine pesticides, liquid, flammable, toxic
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                               |
-| Ornganochlorine pesticides, liquid, flammable, toxic |
+| Organochlorine pesticides, liquid, flammable, toxic |
 And I set the Technical Name field to: Technical Name UN2762
 And Hazard Class (select) should be showing the value: 3
 And The following options should be displayed exclusively for section: Hazard Class (select)
@@ -302,10 +304,10 @@ And I click continue
 And I should see the International Air Transport (IATA) Classification Page
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN2762
-And Proper Shipping Name should be showing the value: Ornganochlorine pesticide, liquid, flammable, toxic
+And Proper Shipping Name should be showing the value: Organochlorine pesticides, liquid, flammable, toxic
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                               |
-| Ornganochlorine pesticides, liquid, flammable, toxic |
+| Organochlorine pesticides, liquid, flammable, toxic |
 And Technical Name should be showing the value: Technical Name UN2762
 And Hazard Class (select) should be showing the value: 3
 And The following options should be displayed exclusively for section: Hazard Class (select)
@@ -319,10 +321,10 @@ And I click continue
 And I should see the International Marine (IMDG) Classification Page
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN2762
-And Proper Shipping Name should be showing the value: Ornganochlorine pesticide, liquid, flammable, toxic
+And Proper Shipping Name should be showing the value: Organochlorine pesticides, liquid, flammable, toxic
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                               |
-| Ornganochlorine pesticides, liquid, flammable, toxic |
+| Organochlorine pesticides, liquid, flammable, toxic |
 And Technical Name should be showing the value: Technical Name UN2762
 And Hazard Class (select) should be showing the value: 3
 And The following options should be displayed exclusively for section: Hazard Class (select)
@@ -336,10 +338,10 @@ And I click continue
 And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN2762
-And Proper Shipping Name should be showing the value: Ornganochlorine pesticide, liquid, flammable, toxic
+And Proper Shipping Name should be showing the value: Organochlorine pesticides, liquid, flammable, toxic
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                               |
-| Ornganochlorine pesticides, liquid, flammable, toxic |
+| Organochlorine pesticides, liquid, flammable, toxic |
 And Technical Name should be showing the value: Technical Name UN2762
 And Hazard Class (select) should be showing the value: 3, (36.1)
 And The following options should be displayed exclusively for section: Hazard Class (select)
