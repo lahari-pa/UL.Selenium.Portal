@@ -6,7 +6,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class AddNewSupplier: ModalDialog
+	class AddNewSupplier : ModalDialog
 	{
 		public bool EnterSupplierID(string supplierID)
 		{
@@ -15,12 +15,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return SupplierID.GetValue() == supplierID;
 		}
 
-		
+
 		public bool EnterSupplierIDExists()
 		{
 			try
 			{
-				var SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID']"), 2);
+				var SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID' and ./preceding-sibling::label[text()='Supplier ID']]"), 2);
 				return (SupplierID.Enabled && SupplierID.Displayed);
 			}
 			catch (Exception e)
@@ -31,17 +31,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterCompanyOrBrandName(string companyOrBrandName)
 		{
-			var Company = this.containerElement.FindElement(By.XPath("//input[@id='description']"), 2);
-			Company.EnterText(companyOrBrandName);
-			return Company.GetValue() == companyOrBrandName;
+			var Company = this.containerElement.FindElement(By.XPath("//select[@id='description']"), 2);
+			Company.Select(companyOrBrandName);
+			return Company.SelectedOption() == companyOrBrandName;
 		}
 
 		public bool EnterCompanyOrBrandNameExists()
 		{
 			try
 			{
-				var Company = this.containerElement.FindElement(By.XPath("//input[@id='description']"), 2);
-				return (Company.Enabled && Company.Displayed);
+				var companyInput = this.containerElement.FindElement(By.XPath("//select[@id='description' and ./preceding-sibling::label[text()='Company or Brand Name']]"), 2);
+				if (companyInput == null)
+				{
+					return false;
+				}
+				return companyInput.Enabled && companyInput.Displayed;
 			}
 			catch (Exception e)
 			{
