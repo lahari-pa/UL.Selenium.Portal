@@ -97,5 +97,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[@class='modal-body']"), 2).Text;
 		}
+
+		public bool ClickClose()
+		{
+			return this.containerElement.FindElement(By.XPath(".//button[@class='btn btn-default']"), 2).TryClick();
+		}
 	}
 }

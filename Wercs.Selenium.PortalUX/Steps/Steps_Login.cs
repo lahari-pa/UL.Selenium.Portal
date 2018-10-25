@@ -231,8 +231,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
-
 		[StepDefinition(@"I populate the (email|password) input field with: (.*)")]
 		public void GivenIPopulateTheInputFieldWith(string inputField, string text)
 		{
@@ -310,6 +308,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Failure(ex.Message);
 				throw;
+			}
+		}
+
+		[StepDefinition(@"I popupate the (email|password) input field with credientials for account: (.*)")]
+		public void PopulateTheInputFieldWithCredentialsForTrevorUser(string inputField, string accountSavedAs)
+		{
+			try
+			{
+				var selLogin = new Login();
+				var user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs);
+				if (user == null)
+				{
+					throw new Exception("The user saved as: " + accountSavedAs + " could not be located in TReVor!");
+				}
+				string value = "";
+				switch (inputField)
+				{
+					case ("email"):
+						value = user.Username;
+						selLogin.EmailField = value;
+						break;
+					case ("password"):
+						value = user.Password;
+						selLogin.PasswordField = value;
+						break;
+				}
+				Report.Success("Text: '" + value + "' was inputted into the input field: '" + inputField + "'");
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
 			}
 		}
 	}

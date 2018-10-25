@@ -165,7 +165,6 @@ When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Submit
 And UNDER DEVELOPMENT
 
-@tfs_design
 Scenario: [56216] My Products grid Actions - Delete Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -310,7 +309,6 @@ Given I confirm the WERCSmart Terms of Use page opened in a new tab and navigate
 
 And I close the window that opened
 
-@tfs_design
 Scenario: [65886] My Products - Pagination
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -343,20 +341,19 @@ Given I click ... in the products grid
 
 Given I enter the down arrow into the products grid page navigation input then the correct page is shown
 
-# NB this test requires pre set up products with a Brand/ Product Line added in the 'The Product' section
 Scenario: [68388] More Filters - Brand
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
-# I create a product with brand. save the brand to context
 Given I create a new product of type: Bleach, with a Product Line/ Brand added
 And I should see an option for More Filters
 Given I click More Filters in the products grid
-# change to use context
+# step accepts '~saved as...' and will fetch the value from context
 Given I select the ~saved as Brand68388 option in the Brand More Filters drop down
 Given I click Row Actions for the first product returned
 And I click on the Row Action: Edit
 Given In the New Product page I click tab: Product Type
 And in the New Product page I click section: The Product
+# step accepts '~saved as...' and will fetch the value from context
 Then Product Line or Brand (optional) should be showing the value: ~saved as Brand68388
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
 
@@ -419,7 +416,6 @@ And I should see the following filters in the following order under My products:
 | Needs Your Attention   |
 | Canceled               |
 
-@tfs_design
 Scenario: [59732] Announcements - Add
 Given I navigate to Studio
 Given I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Shared Step))

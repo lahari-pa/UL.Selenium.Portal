@@ -56,15 +56,13 @@ Given I ensure that the email input field is not populated
 And I populate the password input field with: incorrectpassword
 When I select the Login button
 Then I should see the following error message for email: This is a required field.
-Given I populate the email input field with: AllRetailersProductsCompany.kxxyxunf@mailosaur.io
-And I populate the password input field with: Welcome1!
-When I select the Login button
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then the WERCSmart homepage should load
 
 
 Scenario: [50831] Account Lockout
 
-Given I populate the email input field with: a@a.com
+Given I popupate the email input field with credientials for account: AccountLockOut
 And I populate the password input field with: aaaaa
 When I select the Login button
 Given I populate the password input field with: bbbbb
