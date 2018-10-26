@@ -3140,9 +3140,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57500 \(The Product- Enter name, select product type - Continue - Happy Path\): (.*)")]
-		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option, string name="")
+		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option)
 		{
+			string name = "";
 			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option,name);
+		}
+
+		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option, string name)
+		{
+			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option, name);
 		}
 
 		[StepDefinition(@"I call Shared Step 63460 \(Additional Product Information - SOLD = US, No\(PL\), No\(GNFR\) only shown \(mainly kits\) Happy Path\)")]
