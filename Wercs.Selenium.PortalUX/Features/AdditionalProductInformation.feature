@@ -105,3 +105,37 @@ And Which one best describes your product should be showing the error messages: 
 And Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) should be showing the error messages: This is a required field.
 And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85368
+
+
+Scenario: [85488] Private Label and Goods Not for Resale question - navigation
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
+Then I save the product information as: TestCase85488
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+And I should see following statement: Product is a Retailer's Private Label or Brand
+And I should see following statement: Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85488
+
+
+
+Scenario: [85489] Private Label and Goods Not for Resale question - validation
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
+Then I save the product information as: TestCase85489
+Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
+And I set the Product has been classified using OSHA (US) option to: No
+And I set the Product is shipped directly by supplier to the consumer option to: No
+When I click continue
+And Product is a Retailer's Private Label or Brand should be showing the error messages: This is a required field.
+And Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) should be showing the error messages: This is a required field.
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85489

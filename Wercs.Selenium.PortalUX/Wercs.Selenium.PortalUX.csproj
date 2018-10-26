@@ -417,6 +417,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductSetUp.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\RegulatoryInformation1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegulatoryInformation1.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reset Password.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -806,6 +811,10 @@
     <None Include="Features\ProductSetUp.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ProductSetUp.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\RegulatoryInformation1.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RegulatoryInformation1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Reset Password.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
