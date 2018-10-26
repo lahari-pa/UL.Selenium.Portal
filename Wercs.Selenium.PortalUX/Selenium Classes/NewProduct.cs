@@ -2879,8 +2879,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var el = containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[text()='Browse']"), 2);
 			Report.Info("Clicking Browse for document type: " + section);
+			Report.Screenshot();
 			if (el == null)
 			{
+				Report.Error("The browse button was not found!! - Looking for xpath: //span[text()='" + section + "']//parent::div//a[text()='Browse']");
 				return false;
 			}
 
@@ -3776,6 +3778,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElement(By.XPath(@".//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2).TryClick();
 		}
+
 
 		public List<string> SelectedOptionsForSection(string section)
 		{

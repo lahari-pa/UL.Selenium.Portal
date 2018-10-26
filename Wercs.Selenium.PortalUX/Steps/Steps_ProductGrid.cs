@@ -1233,7 +1233,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"For product saved as: (.*) the status is: (.*)")]
-		public void GivenForProductSavedAsTestCaseTheStatusIsCompleted(string savedAs, string status)
+		public void GivenForProductSavedAsTestCaseTheStatusIs(string savedAs, string status)
 		{
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;

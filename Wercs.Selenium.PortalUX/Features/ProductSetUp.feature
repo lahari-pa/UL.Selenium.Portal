@@ -10,6 +10,7 @@
 @RetailPartners
 @CreateProducts
 @Studio
+@ProductSetUp
 @run_ProductSetUp
 
 Feature:  Product set up and process to specific statuses (Suite ID: 75359)
@@ -25,7 +26,9 @@ Given I call Shared Step 26897 (Product Characteristics - Solid only available -
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer |
+| CVS      |
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Given in the Additional Documents to Provide page I click Continue
@@ -50,7 +53,9 @@ Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Accepted
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)
-Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75335)
+Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75335) for
+| Retailer |
+| CVS      |
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
 
@@ -66,7 +71,9 @@ Given I call Shared Step 26897 (Product Characteristics - Solid only available -
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer |
+| CVS      |
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75142, container type: Metal Container and size: 40
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Given in the Additional Documents to Provide page I click Continue
@@ -452,33 +459,95 @@ Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete
 
 @Test10
 Scenario: [75410] Product from Completed status to Recertification
-Given I If you are using this test case you already have a product you are working with and it is in a Completed status for 1 or more retailers.
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-And I Filter for the product you are using
-And I Confirm the product is shown in Completed status - green color on the retailer icons
-And I Click the ... icon in the Actions column for your product
-And I Click Update Data
-And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
-And I The "The Product" step will be shown
-And I IN SHA Managersearch for your product ID using the shared step below
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And I Confirm the product is shown in Completed status with the red font indicating a recertification is present
-And [Shared Step 51351 - SHA > Select Product > View Recertification History]
-And I Confirm the Product Recertification History pop up shows an entry for "Recertification of product by WERCSmart Customer" and that the Active Column shows "true"
-And I Close the Product Recertification History pop up
-And I In Portal
-And I Click the Product Characteristics step heading
+Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
+
+#Scenario: Test
+#Given I save to context name: TestCase75410 and value: 1524399
+Given I navigate to the landing page
+Given I login into the WERCSmart Portal - Administrator Role
+Given I search for the product saved as: TestCase75410
+Given For product saved as: TestCase75410 the status is: Completed
+And I click Row Actions for the first product returned
+And I click on the Row Action: Update Data
+#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+And I should see the The Product Page
+Then I click Save in The Product Page
+
+#Scenario: Test
+#Given I save to context name: TestCase75410 and value: 1524399
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75410)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its status is: Completed
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its font is red indicating a recertification
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase75410
+And In the Product Recertification History popup I should see the following entry
+| Product ID             | Active | Recertification Reason                           |
+| saved as TestCase75410 | true   | Recertification of Product by WERCSmart Customer |
+
+Given I navigate to the landing page
+Given I login into the WERCSmart Portal - Administrator Role
+Given I search for the product saved as: TestCase75410
+Given For product saved as: TestCase75410 the status is: Needs Your Attention
+And I click Row Actions for the first product returned
+And I click on the Row Action: Update Required
+#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+And I should see the The Product Page
+And in the New Product page I click section: Product Characteristics
 And I Change the Secondary Physical State drop down from its current selection to a new selection
-And I Click Save
-And I Click the Reviewand Submit tab heading
-And I Click the Data Acceptance step heading
-And I Click Accept
-And I You will see the Purchase Summary page - depending on your subscription you will either see the Thank You message or you will see you product details and the Confirm order button.  If the confirm order button is shown Click it.
-And I Click the Home button
-And I Filter for your product and confirm the retailers shown are shown in the orange Assessment in progress color
-And I IN SHA manager - use the shared step below to search for your product ID
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And I Confirm your product is shown in the Recertification status without the red recertification font color
-And [Shared Step 51351 - SHA > Select Product > View Recertification History]
-And I Confirm the Recertification of product by WERCSmart Customer entry shows "false" in the Active column of the Product recertification History
+Then I click Save in The Product Page
+And In the New Product page I click tab: Review and Submit
+And in the New Product page I click section: Data Acceptance
+And In the Data Acceptance page I click on the Accept button
+Given If purchase details are showing click confirm order
+And I navigate to the home page
+And I search for the product saved as: TestCase75410
+Given For product saved as: TestCase75410 the status is: Assessment in Progress
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its status is: Recertification
+#And I Confirm your product is shown in the Recertification status without the red recertification font color
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: TestCase75410
+And In the Product Recertification History popup I should see the following entry
+| Product ID             | Active | Recertification Reason                           |
+| saved as TestCase75410 | false  | Recertification of Product by WERCSmart Customer |
 And I Close the Product Recertification History pop up
+Given I navigate to the landing page
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75410
+
+
+Scenario: [84507] Recertification > Process recertification > Process multiple products
+Given I create a product with name: 8450712 and take to completed using Test Case 84108 and save as: TestCase845072
+Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072
+Given I create a product with name: 8450713 and take to completed using Test Case 84109 and save as: TestCase845073
+Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845073
+Given I create a product with name: 8450711 and take to completed using Test Case 75335 and save as: TestCase845071
+Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845071
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Recertification Status for saved as: TestCase84511)
+Given In SHA Manager ProductSearch page I run search:
+| Status          | SearchPattern | ProductName |
+| Recertification | Contains      | 845071      |
+Given In SHA Manager I select the following products:
+| ProductID               |
+| saved as TestCase845071 |
+| saved as TestCase845072 |
+| saved as TestCase845073 |
+And I Click the Process Recertification button
+And I Confirm the Recertification pop up is shown
+And I Uncheck the Auto Assign Regulatory Specialist to Product check box
+And I Select your name from the drop down list for "Select Regulatory Specialist"
+And I Click Continue
+And I The Continue button will no longer be shown
+And I After a short interval the Progress bar will show as grey hatching indicating processing of the first product has finished
+And I After each product is processed the progress bar will move along until it it shown in complete grey color
+And I Confirm The Product Processed area shows your three products WPS ID and name
+And I Confirm you see Product: &lt;wps id&gt; successfully assigned for each of the three productsWhere &lt;wps id&gt; shows the ID of the product you are working with
+And I Click Cancel
+And I Confirm the Recertification pop up is closed
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm the product is shown in the Assigned status
+And I Automation can stop here, unless you are using the existing products.  If you are manually testing please reset the products you are working with to Completed status using the steps below
+And I Use Test case 84518 to process the formulated product back to Completed
+And I Use Test case 84524 to process the Battery Stand alone product back to Completed
+And I Use test case 84524 to process the Electronic product back to completed
+

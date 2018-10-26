@@ -45,15 +45,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		//Seems to be identical to 57500
 		[StepDefinition(@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
-		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type)
+		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type, string name="")
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the The Product Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
 			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
-			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
-				"AAA WERCS Test " + type.Replace("/", " ").Replace("%", ""));
+
+			if (name == "")
+			{
+				name = "AAA WERCS Test " + type.Replace("/", " ").Replace("%", "");
+			}
+			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", name);
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
 								 " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
@@ -3136,9 +3140,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 57500 \(The Product- Enter name, select product type - Continue - Happy Path\): (.*)")]
-		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option)
+		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option, string name="")
 		{
-			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option);
+			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option,name);
 		}
 
 		[StepDefinition(@"I call Shared Step 63460 \(Additional Product Information - SOLD = US, No\(PL\), No\(GNFR\) only shown \(mainly kits\) Happy Path\)")]
@@ -3858,14 +3862,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			stepsNewProduct.ContinueInTheProductRegistration();
 		}
 
-		[StepDefinition(@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\)")]
-		public void
-			GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue()
+		[Given(@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\) for")]
+		public void GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(TechTalk.SpecFlow.Table Retailers)
 		{
 			TestReport.UseSubSteps = true;
 			var selStepsNewProduct = new StepsNewProduct();
-			TestReport.StartStep("In the Select Retailers popup I select the retailer: Rite Aid");
-			selStepsNewProduct.ThenISelectTheRetailer_InTheWindow("Rite Aid");
+
+			foreach (TechTalk.SpecFlow.TableRow thisRetailer in Retailers.Rows)
+			{
+				TestReport.StartStep("In the Select Retailers popup I select the retailer: " + thisRetailer["Retailer"]);
+				selStepsNewProduct.ThenISelectTheRetailer_InTheWindow(thisRetailer["Retailer"]);
+			}
+
 			TestReport.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
 			if (new NewProduct().ErrorMessage() == "This is a required field.")
@@ -4071,6 +4079,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisPowerDesignerPlus.EnterSourceProduct(id);
 			thisPowerDesignerPlus.ClickRefreshButton();
 			Delay.Seconds(1);
+
 			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
 			TestReport.StartStep("I click Continue");
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
@@ -4212,7 +4221,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Clicked apply, waiting");
 			Delay.Seconds(60);
 			Report.Info("Now going to wait for spinner");
-			GeneralUtilities.StudioWaitForSpinner();
+			if (!GeneralUtilities.StudioWaitForSpinner(30))
+			{
+				if (SeleniumBrowser.Alert.WaitForAlert())
+				{
+					Report.Info("Spinner is still showing but alert is there.");
+				}
+			}
+
 			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
 				"Text",
 				"Should Show"
@@ -4249,15 +4265,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
-			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"product\alias");
-			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"product\alias");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
 			Delay.Seconds(3);
 			Report.Screenshot();
 			TechTalk.SpecFlow.Table tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
 				"ProductOrAlias",
-				"Format",
 				"Subformat",
+				"Language",
 				"DocType"
 			});
 			tblCheckDocument.AddRow(new string[] {
@@ -4417,23 +4433,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 51664 \(SHA - Accepted Product - set Retailers to Completed for saved as: (.*)\)")]
-		public void GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(string savedAs)
+		[StepDefinition(@"I call Shared Step 51664 \(SHA - Accepted Product - set Retailers to Completed for saved as: (.*)\) for")]
+		public void GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(string savedAs, TechTalk.SpecFlow.Table Retailers)
 		{
 			TestReport.UseSubSteps = true;
-			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-				"Retailer"
-			});
-			table2.AddRow(new string[] {
-				"Rite Aid"
-			});
 
 			Steps_Studio thisStepsStudio = new Steps_Studio();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
 			thisStepsStudio.InSHAManagerISelectProductById(id);
 			thisStepsStudio.InSHAManagerIClickOnBottomMenuItem("Status");
-			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(table2);
+			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(Retailers);
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo("Completed");
 			thisStepsStudio.GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton();
 

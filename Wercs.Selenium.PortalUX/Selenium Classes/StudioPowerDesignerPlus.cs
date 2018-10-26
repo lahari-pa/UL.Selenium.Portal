@@ -833,6 +833,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						Report.Info("Problems with maximising");
 					}
+					if (!GeneralUtilities.StudioWaitForSpinner(120))
+					{
+						throw new Exception("Spinner is still showing");
+					}
 					Report.Success("Found window containing title: Current Document");
 					Report.Screenshot();
 					break;
@@ -1070,6 +1074,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
+			Delay.Seconds(2);
+			Report.Info("Wait for apply load rules page");
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
 			{
@@ -1116,10 +1122,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			SeleniumBrowser.WebBrowser.Close();
 		}
 
+		/*
 		public bool WaitForSpinner()
 		{
 			try
 			{
+
 				var spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[id='progress_proc_img' ]"), 2);
 				while (spinner.Any(x => x.Displayed))
 				{
@@ -1128,6 +1136,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 
 				return true;
+	}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+		*/
+
+		public bool WaitForSpinner(int secondsToWait = 120)
+		{
+			try
+			{
+				for (int i = 0; i < secondsToWait; i++)
+				{
+					var spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+					if (!spinner.Any(x => x.Displayed))
+					{
+						Report.Info("Waited " + i + " cycles....");
+						return true;
+					}
+					Delay.Seconds(Delay.SpeedFactor * 1);
+				}
+				Report.Info("Waited " + secondsToWait + " cycles....");
+				return false;
 			}
 			catch (Exception)
 			{
@@ -1867,6 +1899,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string ClearRFR { get; set; }
 		public string DisplayRevs { get; set; }
 		public string DateAdded { get; set; }
+
 	}
 
 	class SelectDocumentQueueFilter : BaseObject
@@ -1883,6 +1916,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectFromSelectBox(string selectBox, string value)
 		{
+			Report.Info("Select from select box: " + selectBox + " value: " + value);
 			var listOfSelects = containerElement.FindElements(By.XPath(".//select"));
 			IWebElement matchingSelect;
 			switch (selectBox.ToLower())
@@ -2638,7 +2672,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			catch (Exception e)
 			{
-				
+
 			}
 
 			return true;

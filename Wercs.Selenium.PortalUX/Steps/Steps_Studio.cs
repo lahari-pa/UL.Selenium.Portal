@@ -109,9 +109,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(2);
 			CurrentDocument thisCurrentDocument = new CurrentDocument();
 			Report.Info("Get alert text");
-			string alertText =
-				thisCurrentDocument.GetAlertText(
-					"The following subformat(s) cannot be authorized because required data is missing.");
+			string alertText = "";
+			try
+			{
+				alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
+			}
+			catch (Exception e)
+			{
+				try
+				{
+					alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
+				}
+				catch (Exception ex)
+				{
+					Report.Error("Failed to get alert text: " + ex.Message);
+				}
+			}
 
 			Report.Info("Alert is showing as: " + alertText);
 			string regExPattern = @"\s[ABCDEFGHIJKLMNOPQRSTUVWZYZ1234567890]{3,7}[\,\\r]?";
@@ -325,23 +338,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In Apply Rules Page I click on the button: (.*)")]
 		public void InApplyRulesPageIClickOnButton(string button)
 		{
+			Report.Info("Beginning: In Apply Rules Page I click on the button: " + button);
 			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
 			thisApplyRulesPage.Wait_for_load(60);
 			Delay.Seconds(1);
 			Report.IsTrue(thisApplyRulesPage.ClickButton(button), "Failed to click " + button, "Clicked " + button);
 			if (button.ToLower() == "apply")
 			{
+				Report.Info("As button was apply, waiting for spinner and alert");
 				Delay.Seconds(10);
-				thisApplyRulesPage.WaitForSpinner();
-				try
+				if (!thisApplyRulesPage.WaitForSpinner(30))
 				{
-					SeleniumBrowser.Alert.WaitForAlert(3);
-					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+					if (SeleniumBrowser.Alert.WaitForAlert(3))
+					{
+						SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+					}
+					else
+					{
+						if (!thisApplyRulesPage.WaitForSpinner())
+						{
+							if (SeleniumBrowser.Alert.WaitForAlert(3))
+							{
+								SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+							}
+							else
+							{
+								throw new Exception("Spinner is still showing");
+							}
+						}
+					}
 				}
-				catch (Exception e)
-				{
-					//alert did not appear
-				}
+
 
 			}
 		}
@@ -530,7 +557,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				foreach (string header in tableHeaders)
 				{
 					string value = thisRow[header];
-					Report.Info("Looking at item: " + value + " for header: " + header);
+					//Report.Info("Looking at item: " + value + " for header: " + header);
 
 					if (value.ToLower().Contains("saved as"))
 					{
@@ -555,10 +582,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 					//filter the list of documents so that only the ones that match all remain
 					try
 					{
-						Report.Info("List of documents count before: " + listOfDocuments.Count);
+						//Report.Info("List of documents count before: " + listOfDocuments.Count);
 						listOfDocuments = listOfDocuments.Where(x =>
 							x.GetType().GetProperty(thisPropertyName).GetValue(x, null).ToString() == value).ToList();
-						Report.Info("List of documents count after: " + listOfDocuments.Count);
+						//Report.Info("List of documents count after: " + listOfDocuments.Count);
 					}
 					catch (Exception e)
 					{
@@ -1009,5 +1036,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Context.AddToContext("ElectronicProduct","true");
 			}
 		}
+
+		[Given(@"In the SHA Manager product search I run the following search:")]
+		public void GivenInTheSHAManagerProductSearchIRunTheFollowingSearch(Table table)
+		{
+			ScenarioContext.Current.Pending();
+		}
+
 	}
 }

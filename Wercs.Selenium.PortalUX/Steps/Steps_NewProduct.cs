@@ -3811,7 +3811,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		
+		[Given(@"I Change the Secondary Physical State drop down from its current selection to a new selection")]
+		public void GivenIChangeTheSecondaryPhysicalStateDropDownFromItsCurrentSelectionToANewSelection()
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			string currentlySelected = thisNewProduct.SelectedOptionsForSection("Secondary Physical State").FirstOrDefault();
+			List<string> available = thisNewProduct.GetAllOptionsForSection("Secondary Physical State");
+
+			var newOption = available.FirstOrDefault(x => x != currentlySelected);
+
+			Report.IsTrue(thisNewProduct.SelectSecondaryPhysicalState(newOption), "Failed to select: " + newOption,
+				"Selected: " + newOption);
+
+		}
+
 
 
 		[StepDefinition(@"I select the first option in the 'Product Line or Brand' drop down and save as Brand{TestCaseId}")]

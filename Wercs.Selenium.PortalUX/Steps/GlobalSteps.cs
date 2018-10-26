@@ -144,7 +144,7 @@ namespace WERCSmart
 				Report.Info("Clicking login");
 				selLogin.Click_Login();
 				selHomepage = new Homepage();
-				if (selHomepage.Wait_for_load(30))
+				if (selHomepage.Wait_for_load(60))
 				{
 					Report.Success("Successfully logged in!");
 					GeneralUtilities.Wait_for_load_finish();

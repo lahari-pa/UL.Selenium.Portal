@@ -29,6 +29,28 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public static bool StudioWaitForSpinner(int maxSecondsToWait)
+		{
+			try
+			{
+				for (int i = 0; i < maxSecondsToWait; i++)
+				{
+					var spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+					if (!spinner.Any(x => x.Displayed))
+					{
+						return true;
+					}
+					Delay.Seconds(Delay.SpeedFactor * 1);
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public static bool Wait_for_load_finish()
 		{
 			Delay.Seconds(Delay.SpeedFactor * 1);

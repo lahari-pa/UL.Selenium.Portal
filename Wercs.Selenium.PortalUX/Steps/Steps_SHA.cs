@@ -141,7 +141,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		//|Status|Client|SearchPattern|ProductId|ProductName|DateRange|LastActivityDate|Supplier|User|Reviewer|OnSuspended|RecertificationActive|GGOnlyProducts|ECommFlowProducts|TReg|OrderNo|SubmissionDate|UPC|ParentUPC|
 
-		[Given(@"In SHA Manager ProductSearch page I run search:")]
+		[StepDefinition(@"In SHA Manager ProductSearch page I run search:")]
 		public void GivenInSHAManagerPageIRunSearch(TechTalk.SpecFlow.Table table)
 		{
 			StudioSHAManagerProductSearch thisProductSearch = new StudioSHAManagerProductSearch();
@@ -155,20 +155,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					case "Status":
 						Report.IsTrue(thisProductSearch.SelectFromStatusFilter(x.Values.ElementAt(i)),
-							"Failed to set status to: " + x.Values.ElementAt(i), "Successfully set status", false, false);
+							"Failed to set status to: " + x.Values.ElementAt(i), "Successfully set status to: " + x.Values.ElementAt(i), false, false);
 						break;
 					case "Client":
 						Report.IsTrue(thisProductSearch.SelectFromClientFilter(x.Values.ElementAt(i)),
-							"Failed to set client", "Successfully set client", false, false);
+							"Failed to set client", "Successfully set client to: " + x.Values.ElementAt(i), false, false);
 						break;
 					case "SearchPattern":
 						Report.IsTrue(thisProductSearch.SelectFromSearchPatternFilter(x.Values.ElementAt(i)),
-							"Failed to set search pattern", "Successfully set search pattern", false, false);
+							"Failed to set search pattern", "Successfully set search pattern to: " + x.Values.ElementAt(i), false, false);
 						break;
 					case "ProductID":
 					case "ProductId":
 						Report.IsTrue(thisProductSearch.EnterProductID(x.Values.ElementAt(i)),
-							"Failed to set product id", "Successfully set product id",false, false);
+							"Failed to set product id", "Successfully set product id to: " + x.Values.ElementAt(i),false, false);
 						break;
 					case "ProductName":
 						Report.IsTrue(thisProductSearch.EnterProductName(x.Values.ElementAt(i)),
@@ -254,13 +254,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(string productSavedAs, string status)
 		{
+
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
 			var ID = ProductDetails.Id;
+			Report.Info("Searching for id: " + ID + " and status: " + status);
 
 			//rerun search until status is as expected or give up
 			int counter = 0;
 
-			while (counter < 100)
+			while (counter < 200)
 			{
 				Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
 
@@ -454,5 +456,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.IsTrue(colour != "rgb(254,255,160)", "Colour was highlighted with a yellow background when it was not expected to be!", "Product was not highlighted yellow background as expected");
 		}
+
+		[Given(@"In SHA Manager I select the following products:")]
+		public void GivenInSHAManagerISelectTheFollowingProducts(Table table)
+		{
+			string ID = "";
+			foreach (TechTalk.SpecFlow.TableRow thisProduct in table.Rows)
+			{
+				if (thisProduct["ProductID"].ToLower().Contains("saved as"))
+				{
+					var ProductDetails = (ProductInformation)Context.GetFromContext(thisProduct["ProductID"].Replace("saved as","",StringComparison.InvariantCultureIgnoreCase).Trim());
+					ID = ProductDetails.Id;
+				}
+			}
+
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			thisStudioSHAManager.SelectProductByID(ID);
+		}
+
 	}
 }
