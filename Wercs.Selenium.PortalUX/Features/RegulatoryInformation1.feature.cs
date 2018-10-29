@@ -162,6 +162,159 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85693] Regulatory Information 1 - validation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Regulatory Information 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SummaryPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RegulatoryInformation1")]
+        public virtual void _85693RegulatoryInformation1_Validation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85693] Regulatory Information 1 - validation", ((string[])(null)));
+#line 34
+this.ScenarioSetup(scenarioInfo);
+#line 35
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 36
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 37
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 38
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 39
+testRunner.Then("I save the product information as: TestCase85693", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 40
+testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
+                    "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 41
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table2.AddRow(new string[] {
+                        "Propane",
+                        "100",
+                        "false",
+                        "false",
+                        ""});
+#line 42
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table2, "Given ");
+#line 45
+testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 46
+testRunner.And("U.S. Toxic Substances Control Act (TSCA) status should be showing the error messa" +
+                    "ges: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
+testRunner.And("Does the product carry an exposure warning required by the California Safe Drinki" +
+                    "ng Water and Toxic Enforcement Act of 1986 (commonly known as California Proposi" +
+                    "tion 65)? should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 48
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85693", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85695] California Proposition 65 - select Yes - navigation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Regulatory Information 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SummaryPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RegulatoryInformation1")]
+        public virtual void _85695CaliforniaProposition65_SelectYes_Navigation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85695] California Proposition 65 - select Yes - navigation", ((string[])(null)));
+#line 52
+this.ScenarioSetup(scenarioInfo);
+#line 53
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 55
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 56
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
+testRunner.Then("I save the product information as: TestCase85695", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 58
+testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
+                    "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 59
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table3.AddRow(new string[] {
+                        "Propane",
+                        "100",
+                        "false",
+                        "false",
+                        ""});
+#line 60
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table3, "Given ");
+#line 63
+testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
+testRunner.And("I set the Does the product carry an exposure warning required by the California S" +
+                    "afe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as Californ" +
+                    "ia Proposition 65)? option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 65
+testRunner.And("I should see following statement: Is the need to warn triggered by", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 66
+testRunner.And("I should see following statement: How is the exposure warning transmitted? For mo" +
+                    "re information, see Notice of Adoption Article", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 67
+testRunner.And("I should see following statement: Is your exposure warning compliant with Proposi" +
+                    "tion 65 regulations applicable to products manufactured", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+testRunner.And("I should see following statement: If the product carries a safe-harbor short-form" +
+                    " warning, indicate which of the following is provided:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 69
+testRunner.And("I should see following statement: If the product carries a safe-harbor long-form " +
+                    "warning, indicate which of the following is used and enter the names of the Prop" +
+                    "osition 65 chemicals included in the warning:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 70
+testRunner.And("I should see following statement: If the product carries a custom warning, please" +
+                    " provide the exact text that is being used:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 71
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85695", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
