@@ -32,6 +32,24 @@ namespace WERCSmart
 			GlobalParameters.TestUrl = TReVor.TestVariables.GetVariableSavedAs("TestURL");
 		}
 
+		[BeforeStep(Order = 1)]
+		public static void GetFullyQualifiedTestName()
+		{
+			if (GlobalParameters.CollectTestRunData && string.IsNullOrEmpty(GlobalParameters.FullyQualifiedTestName))
+			{
+				var testContext = ScenarioContext.Current.ScenarioContainer.Resolve<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>();
+				var tst = testContext.FullyQualifiedTestClassName + "." + testContext.TestName;
+				if (!string.IsNullOrEmpty(tst))
+				{
+					GlobalParameters.FullyQualifiedTestName = tst;
+					if (!TReVor.Classes.Database_Functions.UpdateFullyQualifiedName(GlobalParameters.FullyQualifiedTestName))
+					{
+						GlobalParameters.FullyQualifiedTestName = "";
+					}
+				}
+			}
+		}
+
 		[StepDefinition(@"I login as the administrator")]
 		[StepDefinition(@"I login as the administrator")]
 		[When(@"I login as the administrator")]
