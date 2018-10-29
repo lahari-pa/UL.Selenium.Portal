@@ -132,7 +132,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 Then I save the product information as: TestCase85489
 Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
+|  Liquid                | Liquid                   | 3                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
 And I set the Product has been classified using OSHA (US) option to: No
 And I set the Product is shipped directly by supplier to the consumer option to: No
 When I click continue

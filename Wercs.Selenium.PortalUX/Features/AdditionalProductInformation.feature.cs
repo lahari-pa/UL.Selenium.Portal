@@ -583,7 +583,7 @@ testRunner.Then("I save the product information as: TestCase85489", ((string)(nu
             table5.AddRow(new string[] {
                         "Liquid",
                         "Liquid",
-                        "2",
+                        "3",
                         "2",
                         "2",
                         "66",
