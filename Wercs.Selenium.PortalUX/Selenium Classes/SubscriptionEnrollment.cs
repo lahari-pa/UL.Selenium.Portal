@@ -1120,14 +1120,41 @@ class AgencyServiceAgreementDlg : BaseDialog
 	[FindsBy(How = How.Id, Using = "showAgencyServiceAgreement")]
 	protected override IWebElement containerElement { get; set; }
 
+	[FindsBy(How = How.CssSelector, Using = "#showAgencyServiceAgreement > div > div > div.modal-body")]
+	IWebElement Agencypopuptext { get; set; }
+
+	[FindsBy(How = How.CssSelector, Using = "#showAgencyServiceAgreement > div > div > div.modal-footer > button")]
+	IWebElement PopupCloseButton { get; set; }
+
 	public string GetBodyText()
 	{
 		return containerElement.FindElement(By.XPath("//div[@class='modal-body']")).Text.Trim();
 	}
 
+	public string AgencyPopupText()
+	{
+		var el = Agencypopuptext;
+
+		if (el == null)
+		{
+			Report.Error("Could not find body in popup dialog");
+			return "";
+		}
+		return el.Text;
+	}
+
 	public void ClickCloseButton()
 	{
-		containerElement.FindElement(By.XPath("//div[@class='modal-footer']/button")).TryClick();
+		//containerElement.FindElement(By.XPath("#showAgencyServiceAgreement > div > div > div.modal-footer > button")).TryClick();
+
+		var el = PopupCloseButton;
+
+		if (el == null)
+		{
+			return;
+		}
+
+		el.Click();
 	}
 }
 

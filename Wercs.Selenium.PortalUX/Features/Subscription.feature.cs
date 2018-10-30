@@ -459,8 +459,8 @@ testRunner.Then("In the Subscription Enrollment screen I confirm that I see the 
                             "arkets you serve."});
             table9.AddRow(new string[] {
                         "Draft OSHA-Compliant Safety Data Sheet",
-                        "Effect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved form" +
-                            "at for each of your active products."});
+                        "Elect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved forma" +
+                            "t for each of your active products."});
 #line 138
 testRunner.And("In the Subscription Enrollment screen I confirm that under the Premium Plan I see" +
                     " the following items and further details", ((string)(null)), table9, "And ");
@@ -1513,8 +1513,8 @@ testRunner.Then("In the Subscription Enrollment screen I confirm that I see the 
                             "arkets you serve."});
             table44.AddRow(new string[] {
                         "Draft OSHA-Compliant Safety Data Sheet",
-                        "Effect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved form" +
-                            "at for each of your active products."});
+                        "Elect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved forma" +
+                            "t for each of your active products."});
 #line 528
 testRunner.Then("In the Subscription Enrollment screen I confirm that under the Premium Plan I see" +
                     " the following items and further details", ((string)(null)), table44, "Then ");

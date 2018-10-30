@@ -158,7 +158,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenAgencyServiceAgreementPopupContainsTheFollowingText(string text)
 		{
 			AgencyServiceAgreementDlg MyASA = new AgencyServiceAgreementDlg();
-			string actualText = MyASA.GetBodyText();
+			//string actualText = MyASA.GetBodyText();
+			//Report.IsTrue(actualText == text, "Expected text >>" + text + "<< but got text: >>" + actualText,
+			//	"Agency Service Agreement pop is showing as expected: " + actualText);
+			string actualText = MyASA.AgencyPopupText();
 			Report.IsTrue(actualText == text, "Expected text >>" + text + "<< but got text: >>" + actualText,
 				"Agency Service Agreement pop is showing as expected: " + actualText);
 		}

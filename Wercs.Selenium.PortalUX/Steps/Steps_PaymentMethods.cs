@@ -665,7 +665,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var mySub = new PaymentMethods_Subscription_Billing();
-
+				Delay.Seconds(5 * Delay.SpeedFactor);
 				Report.IsTrue(mySub.Column_Headings_Correct(column_1, column_2, column_3), "Column Headers Incorrect",
 					"Column Headers Correct");
 			}
