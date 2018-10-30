@@ -611,3 +611,40 @@ And I confirm all products in the grid contain either the the text "WM" or "All"
 And I click the first instance of Actions - Edit UPC in the products grid
 Then I should see the Universal Product Code (UPC) Page
 And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
+
+# HomePage/ Actions/ Edit UPCs
+
+@run64528
+Scenario: [64528] Edit UPCs - Click Link check status in SHA
+
+Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
+
+Given I navigate to the landing page
+
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+And I search for the product saved as: ProductSetup64528
+
+And I click Row Actions for the first product returned
+
+Then I click on the Row Action: Edit UPCs
+
+And I should see the Universal Product Code (UPC) Page
+
+# And .. with your product details shown
+
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in ALL Status for saved as: ProductSetup64528)
+
+#And I Confirm your product is shown in red font indicating a recertification is present
+
+#And [Shared Step 51351 - SHA > Select Product > View Recertification History]
+
+#And I Confirm the Product Recertification History table shows an entry for 2.0 Specfic UPC Update and that the active column shows true
+
+#And I Close the Recertification history pop up
+
+#And I In Portal
+
+#And I Click Home
