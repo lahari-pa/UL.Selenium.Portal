@@ -242,6 +242,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 						throw new Exception("Invalid column name");
 				}
 			}
+
+			Report.Info("Going to click find");
 			Delay.Seconds(1);
 			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
 			Delay.Seconds(1);

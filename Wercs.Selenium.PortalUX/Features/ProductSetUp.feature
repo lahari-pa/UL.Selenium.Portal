@@ -340,7 +340,7 @@ And I call Shared Step 73956 (Go to Summary and verify data) with product type: 
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
 
-#************************** Switching to SHA Manager ********************
+#************************** Switching to SHA Manager **********************
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80089)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80089 and its status is: Submitted
