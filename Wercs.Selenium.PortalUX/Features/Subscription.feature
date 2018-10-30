@@ -290,6 +290,7 @@ Then In the Payment Methods screen I enter Credit Card details
 | Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
 Then In the Payment Methods screen I click Continue
 #Purchase Summary
+Then the Purchase Summary should be loaded
 Then In the Purchase Summary screen I check the Subscription Billing header is correct
 Then In the Purchase Summary screen I confirm the Yearly Radio Option is selected
 Then In the Purchase Summary screen I confirm the column headings are correct: Plan Selected, Service Date, Amount
