@@ -45,7 +45,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		//Seems to be identical to 57500
 		[StepDefinition(@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
-		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type, string name = "")
+		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type)
+		{
+			Step57561(type,"");
+		}
+
+		public void Step57561(string type, string name="")
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -59,7 +64,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", name);
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
-								 " in the Type of Product select field");
+			                     " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -3143,12 +3148,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option)
 		{
 			string name = "";
-			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option, name);
+			Step57561(option, name);
 		}
 
 		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option, string name)
 		{
-			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option, name);
+			Step57561(option, name);
 		}
 
 		[StepDefinition(@"I call Shared Step 63460 \(Additional Product Information - SOLD = US, No\(PL\), No\(GNFR\) only shown \(mainly kits\) Happy Path\)")]
