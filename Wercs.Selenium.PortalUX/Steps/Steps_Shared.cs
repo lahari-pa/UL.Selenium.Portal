@@ -45,7 +45,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		//Seems to be identical to 57500
 		[StepDefinition(@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
-		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type, string name="")
+		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type, string name = "")
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -3143,7 +3143,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option)
 		{
 			string name = "";
-			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option,name);
+			GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(option, name);
 		}
 
 		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option, string name)
@@ -5182,5 +5182,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click continue");
 			newProductSteps.ClickContinue();
 		}
+		// test push
 	}
 }
