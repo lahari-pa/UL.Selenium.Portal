@@ -106,7 +106,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[Given(@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
-		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCase75335(string name, string savedAs)
+		public void GivenICreateProductUsingTestCase75335(string name, string savedAs)
 		{
 			this.CreateProductUsingTestCase75335(savedAs, name);
 		}
@@ -223,176 +223,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[Given(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
-		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCaseAndSaveAsTestCase(string name, string savedAs)
+		public void GivenITakeProductFromCompletedToRecertification84108(string name, string savedAs)
 		{
-			TakeProductFromCompletedToRecertification84108(savedAs, name);
+			this.TakeProductFromCompletedToRecertification84108(savedAs, name);
 		}
 
 		[StepDefinition(@"I create a product and take to completed using Test Case 84108 and save as: (.*)")]
-		public void TakeProductFromCompletedToRecertification84108(string savedAs, string name = "Alkaline battery")
+		public void GivenITakeProductFromCompletedToRecertification84108(string savedAs)
 		{
-
-			TestReport.UseSubSteps = true;
-			var sharedSteps = new Steps_Shared();
-			var productsGridSteps = new StepsProductGrid();
-			var newProductSteps = new StepsNewProduct();
-			var newProduct = new NewProduct();
-			var shaSteps = new Steps_SHA();
-			var thisGlobalSteps = new GlobalSteps();
-			thisGlobalSteps.NavigateToLandingPage();
-			// Log in to administrator role
-			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
-			// Generate UPC number and delete duplicates
-			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC84108");
-			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC84108");
-			//And I call Shared Step 57753 (Create a New Registration via Register New Product(expanded menu))
-			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
-			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Alkaline battery
-			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Alkaline battery", name);
-			// Save product to context
-			newProductSteps.SaveProductInformation(savedAs);
-			//And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
-			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
-			//And I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
-			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
-			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
-			//And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
-			//Given I set the  field to: I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and would like to upload it
-			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and would like to upload it");
-			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("Technical Data Sheet (TDS) or Battery Data Sheet (BDS)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
-			//And I check the checkbox with description: I confirm that I have provided the most up-to-date, TDS/BDS in this product registration
-			newProductSteps.ICheckTheCheckboxWithDescription("check", "I confirm that I have provided the most up-to-date, TDS/BDS in this product registration");
-			//Given in the Regulatory Documents to Provide page I click Continue
-			newProductSteps.ClickContinue();
-			//Given in the Additional Documents to Provide page I click Continue
-			newProductSteps.ClickContinue();
-			//Given in the Optional Reports and Dcouments Available For Purchase page I click Continue
-			newProductSteps.ClickContinue();
-			//Given in the Comments page I click Continue
-			newProductSteps.ClickContinue();
-			// 57885 (Data Acceptance - Click Accept - Happy Path)
-			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
-			// If purchase details are showing click confirm order
-			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
-			// 65080 (Login to Studio and Open SHA manager)
-			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
-			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
-			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Submitted");
-			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
-			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
-			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
-			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Assigned");
-			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
-			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
-			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
-			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
-			//And I call Shared Step 79500(WPS Studio - PD + -set all data and publish using rule and doc queue -CKLT and SBCS only) for product saved as: TestCase84108
-			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
-			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
-			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
-			// 59066(Go to SHA Manager)
-			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
-			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X)
-			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.Info(
-				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
-
+			this.TakeProductFromCompletedToRecertification84108(savedAs, "Alkaline battery");
 		}
 
 		[Given(@"I create a product with name: (.*) and take to completed using Test Case 84109 and save as: (.*)")]
-		public void GivenICreateAProductWithNameAndTakeToCompletedUsing84109(string name, string savedAs)
+		public void GivenITakeProductFromCompletedToRecertification84109(string name, string savedAs)
 		{
-			TakeProductFromCompletedToRecertification84109(savedAs, name);
+			this.TakeProductFromCompletedToRecertification84109(savedAs, name);
 		}
 
-
 		[StepDefinition(@"I create a product and take to completed using Test Case 84109 and save as: (.*)")]
-		public void TakeProductFromCompletedToRecertification84109(string savedAs, string name = "Alkaline battery")
+		public void GivenITakeProductFromCompletedToRecertification84109(string savedAs)
 		{
-
-			TestReport.UseSubSteps = true;
-			var sharedSteps = new Steps_Shared();
-			var productsGridSteps = new StepsProductGrid();
-			var newProductSteps = new StepsNewProduct();
-			var newProduct = new NewProduct();
-			var shaSteps = new Steps_SHA();
-			var stepsStudio = new Steps_Studio();
-			var thisGlobalSteps = new GlobalSteps();
-
-			thisGlobalSteps.NavigateToLandingPage();
-			// Log in to administrator role
-			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
-			//And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
-			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Alkaline battery
-			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Alkaline battery", name);
-			// Save product to context
-			newProductSteps.SaveProductInformation(savedAs);
-			//And I call Shared Step 69687(Additional Product Information - US, No(PL))
-			sharedSteps.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
-			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
-			//And I call Shared Step 48369(Toxicity Characteristics Leaching Procedure(TCLP) - No to ALL With Copper)
-			sharedSteps.GivenICallSharedStepToxicityCharacteristicsLeachingProcedureTCLP_NoToALLWithCopper();
-			//And I call Shared Step 71955(Answer Electronic Equipment questions - Without Cathode Ray - No to all)
-			sharedSteps.GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll();
-			//And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
-
-			//And I should see the Additional Documents to Provide Page
-			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
-			//Given in the Additional Documents to Provide page I click Continue
-			newProductSteps.ClickContinue();
-			//Given in the Optional Reports and Documents Available for Purchase page I click Continue
-			newProductSteps.ClickContinue();
-			//	And I call Shared Step 57883(Comments - Happy Path) and enter the comment: test
-			sharedSteps.GivenICallSharedCommentsHappyPath("test");
-			// 57885 (Data Acceptance - Click Accept - Happy Path)
-			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
-			// If purchase details are showing click confirm order
-			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
-			// 65080 (Login to Studio and Open SHA manager)
-			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
-			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
-			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Submitted");
-			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
-			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
-			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
-			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Assigned");
-			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
-			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
-
-			//# Note: In Staging and Production - Electronic products are automatically published by the ImportProcessRules so if you are running in either of these sites you can skip to step 28
-			//And I check whether the current environment is Staging or Production and if it is I skip the next three steps
-			stepsStudio.GivenICheckWhetherTheCurrentEnvironmentIsStagingOrProductionAndIfItIsISkipTheNextThreeSteps();
-			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: X)
-			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
-			//And I call Shared Step 79500(WPS Studio - PD + -set all data and publish using rule and doc queue -CKLT and SBCS only) for product saved as: TestCase84108
-			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
-			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
-			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
-			// 59066(Go to SHA Manager)
-			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
-			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X)
-			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.Info(
-				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
-
+			this.TakeProductFromCompletedToRecertification84109(savedAs, "Alkaline battery");
 		}
 
 		public void CreateProductUsingTestCase75335(string savedAs, string name)
@@ -512,6 +363,162 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Failure("Failed to create product and process through to completed.");
 			}
+
+		}
+
+		public void TakeProductFromCompletedToRecertification84108(string savedAs, string name)
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			thisGlobalSteps.NavigateToLandingPage();
+			// Log in to administrator role
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			// Generate UPC number and delete duplicates
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC84108");
+			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC84108");
+			//And I call Shared Step 57753 (Create a New Registration via Register New Product(expanded menu))
+			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
+			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Alkaline battery
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Alkaline battery", name);
+			// Save product to context
+			newProductSteps.SaveProductInformation(savedAs);
+			//And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			//And I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+			sharedSteps.GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue();
+			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			//And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
+			//Given I set the  field to: I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and would like to upload it
+			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and would like to upload it");
+			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("Technical Data Sheet (TDS) or Battery Data Sheet (BDS)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			//And I check the checkbox with description: I confirm that I have provided the most up-to-date, TDS/BDS in this product registration
+			newProductSteps.ICheckTheCheckboxWithDescription("check", "I confirm that I have provided the most up-to-date, TDS/BDS in this product registration");
+			//Given in the Regulatory Documents to Provide page I click Continue
+			newProductSteps.ClickContinue();
+			//Given in the Additional Documents to Provide page I click Continue
+			newProductSteps.ClickContinue();
+			//Given in the Optional Reports and Dcouments Available For Purchase page I click Continue
+			newProductSteps.ClickContinue();
+			//Given in the Comments page I click Continue
+			newProductSteps.ClickContinue();
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Submitted");
+			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Assigned");
+			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
+			//And I call Shared Step 79500(WPS Studio - PD + -set all data and publish using rule and doc queue -CKLT and SBCS only) for product saved as: TestCase84108
+			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
+			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
+			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
+			// 59066(Go to SHA Manager)
+			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			Report.Info(
+				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+
+		}
+
+		public void TakeProductFromCompletedToRecertification84109(string savedAs, string name)
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var stepsStudio = new Steps_Studio();
+			var thisGlobalSteps = new GlobalSteps();
+
+			thisGlobalSteps.NavigateToLandingPage();
+			// Log in to administrator role
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Alkaline battery
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Alkaline battery", name);
+			// Save product to context
+			newProductSteps.SaveProductInformation(savedAs);
+			//And I call Shared Step 69687(Additional Product Information - US, No(PL))
+			sharedSteps.GivenICallSharedStepAdditionalProductInformation_CountryAndPrivateLabelOrBrand_No();
+			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			//And I call Shared Step 48369(Toxicity Characteristics Leaching Procedure(TCLP) - No to ALL With Copper)
+			sharedSteps.GivenICallSharedStepToxicityCharacteristicsLeachingProcedureTCLP_NoToALLWithCopper();
+			//And I call Shared Step 71955(Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+			sharedSteps.GivenICallSharedStepAnswerElectronicEquipmentQuestions_WithoutCathodeRay_NoToAll();
+			//And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
+
+			//And I should see the Additional Documents to Provide Page
+			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
+			//Given in the Additional Documents to Provide page I click Continue
+			newProductSteps.ClickContinue();
+			//Given in the Optional Reports and Documents Available for Purchase page I click Continue
+			newProductSteps.ClickContinue();
+			//	And I call Shared Step 57883(Comments - Happy Path) and enter the comment: test
+			sharedSteps.GivenICallSharedCommentsHappyPath("test");
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Submitted");
+			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Assigned");
+			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
+
+			//# Note: In Staging and Production - Electronic products are automatically published by the ImportProcessRules so if you are running in either of these sites you can skip to step 28
+			//And I check whether the current environment is Staging or Production and if it is I skip the next three steps
+			stepsStudio.GivenICheckWhetherTheCurrentEnvironmentIsStagingOrProductionAndIfItIsISkipTheNextThreeSteps();
+			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: X)
+			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
+			//And I call Shared Step 79500(WPS Studio - PD + -set all data and publish using rule and doc queue -CKLT and SBCS only) for product saved as: TestCase84108
+			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
+			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
+			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
+			// 59066(Go to SHA Manager)
+			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			Report.Info(
+				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
 
 		}
 	}

@@ -597,7 +597,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 					GeneralUtilities.Wait_for_load_finish();
 					if (!ProductGrid.RowsAreFoundInProductGrid())
 					{
-
+						Report.Failure($"No products with ID '{Product.Id}' were found in the grid!");
+						return;
 					}
 					var firstProduct = ProductGrid.FirstProductInGrid();
 					if (Report.IsTrue(firstProduct.ProductName.StartsWith(Product.Name) && firstProduct.ProductId == Product.Id, "First product did not match the required paremeters!", "Product was showing at the top of the grid, as expected!"))

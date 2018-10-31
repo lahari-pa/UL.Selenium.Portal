@@ -168,7 +168,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					case "ProductID":
 					case "ProductId":
 						Report.IsTrue(thisProductSearch.EnterProductID(x.Values.ElementAt(i)),
-							"Failed to set product id", "Successfully set product id to: " + x.Values.ElementAt(i),false, false);
+							"Failed to set product id", "Successfully set product id to: " + x.Values.ElementAt(i), false, false);
 						break;
 					case "ProductName":
 						Report.IsTrue(thisProductSearch.EnterProductName(x.Values.ElementAt(i)),
@@ -311,7 +311,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is red indicating a recertification")]
+		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is red indicating a recertification")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedIndicatingARecertification(string productSavedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
@@ -467,14 +467,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				if (thisProduct["ProductID"].ToLower().Contains("saved as"))
 				{
-					var ProductDetails = (ProductInformation)Context.GetFromContext(thisProduct["ProductID"].Replace("saved as","",StringComparison.InvariantCultureIgnoreCase).Trim());
+					var ProductDetails = (ProductInformation)Context.GetFromContext(thisProduct["ProductID"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
 					ID = ProductDetails.Id;
 				}
 			}
-
 			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
 			thisStudioSHAManager.SelectProductByID(ID);
 		}
-
+		[StepDefinition(@"In SHA Manager I select the first product")]
+		public void GivenInSHAManagerISelectTheProduct(string savedAs)
+		{
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			thisStudioSHAManager.SelectProductByID(id);
+		}
 	}
 }

@@ -614,7 +614,6 @@ And I confirm that retailer "WM" is present under the 'Destination Retailers' co
 
 # HomePage/ Actions/ Edit UPCs
 
-@run64528
 Scenario: [64528] Edit UPCs - Click Link check status in SHA
 
 Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
@@ -631,20 +630,18 @@ Then I click on the Row Action: Edit UPCs
 
 And I should see the Universal Product Code (UPC) Page
 
-# And .. with your product details shown
+And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
 
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in ALL Status for saved as: ProductSetup64528)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64528)
 
-#And I Confirm your product is shown in red font indicating a recertification is present
+And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64528 and its font is red indicating a recertification
 
-#And [Shared Step 51351 - SHA > Select Product > View Recertification History]
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64528
 
-#And I Confirm the Product Recertification History table shows an entry for 2.0 Specfic UPC Update and that the active column shows true
+Given In the Product Recertification History popup I should see the following entry
+| Product ID                 | Recertification Reason | Active |
+| saved as ProductSetup64528 | 2.0 Specfic UPC Update | true   |
 
-#And I Close the Recertification history pop up
-
-#And I In Portal
-
-#And I Click Home
+Given I Close the Product Recertification History pop up

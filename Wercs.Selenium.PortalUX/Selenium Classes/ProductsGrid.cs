@@ -350,9 +350,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool DeleteFirstRow()
 		{
 			var row = containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-
 			var toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
-
 			if (toggleButton.TryClick())
 			{
 				var deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 2);
@@ -362,10 +360,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					delDialog.Wait_for_load();
 					delDialog.ClickDelete();
 					GeneralUtilities.Wait_for_load_finish();
+					row = containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+					return row == null;
 				}
+				return false;
 			}
-
-			return true;
+			return false;
 		}
 
 		public string ActivePage()
@@ -617,7 +617,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var retailerLi =
 				matchingProduct.FindElement(By.XPath("../../..//ul[@class='list-inline retailers']/li"), 2);
 
-			if(retailerLi==null)
+			if (retailerLi == null)
 			{
 				Report.Error("No matching retailer colour has been found for ID: " + ID);
 				return "";

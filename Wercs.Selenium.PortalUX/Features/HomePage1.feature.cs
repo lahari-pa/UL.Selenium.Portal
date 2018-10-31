@@ -1985,33 +1985,53 @@ testRunner.And("I confirm that retailer \"WM\" is present under the \'Destinatio
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SummaryPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductSetUp")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run64528")]
         public virtual void _64528EditUPCs_ClickLinkCheckStatusInSHA()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64528] Edit UPCs - Click Link check status in SHA", new string[] {
-                        "run64528"});
-#line 618
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64528] Edit UPCs - Click Link check status in SHA", ((string[])(null)));
+#line 617
 this.ScenarioSetup(scenarioInfo);
-#line 620
+#line 619
 testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: Produ" +
                     "ctSetup64528", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 622
+#line 621
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 624
+#line 623
 testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 626
+#line 625
 testRunner.And("I search for the product saved as: ProductSetup64528", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 628
+#line 627
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 630
+#line 629
 testRunner.Then("I click on the Row Action: Edit UPCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 632
+#line 631
 testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 636
+#line 633
+testRunner.And("I confirm that retailer \"CV\" is present under the \'Destination Retailers\' column " +
+                    "in the UPC table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 635
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 638
-testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in ALL Status for saved a" +
+#line 637
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: ProductSetup64528)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 639
+testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup645" +
+                    "28 and its font is red indicating a recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 641
+testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
+                    "r product saved as: ProductSetup64528", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Product ID",
+                        "Recertification Reason",
+                        "Active"});
+            table17.AddRow(new string[] {
+                        "saved as ProductSetup64528",
+                        "2.0 Specfic UPC Update",
+                        "true"});
+#line 643
+testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table17, "Given ");
+#line 647
+testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

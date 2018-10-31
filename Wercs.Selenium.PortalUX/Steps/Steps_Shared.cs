@@ -5187,6 +5187,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click continue");
 			newProductSteps.ClickContinue();
 		}
-		// test push
+		[StepDefinition(@"I call Shared Step 51351 \(SHA > Select Product > View Recertification History\) for product saved as: (.*)")]
+		public void Shared51351_SHA_SelectProduct_ViewRecertificationHistory(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			TestReport.StartStep("I select  product in the SHA grid saved as " + savedAs);
+			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
+			TestReport.StartStep("I right click the product");
+			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
+			TestReport.StartStep("I click 'Recertification History'");
+			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("Recertification History");
+		}
 	}
 }
