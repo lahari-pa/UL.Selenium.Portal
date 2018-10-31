@@ -2026,12 +2026,114 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "Active"});
             table17.AddRow(new string[] {
                         "saved as ProductSetup64528",
-                        "2.0 Specfic UPC Update",
+                        "2.0 Specific UPC Update",
                         "true"});
 #line 643
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table17, "Given ");
 #line 647
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 649
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 651
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remov" +
+            "e UPC Update")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Home Page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("UlSolutionCenter")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ForwardProductRegistration")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MessageCenter")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DocumentAcceptance")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DeleteActiveProducts")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Solutions")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ReviewDocuments")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SummaryPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductSetUp")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run64529")]
+        public virtual void _64529EditUPCs_Home_ActionsLinksShouldShowProcessUPCUpdateAndRemoveUPCUpdate()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remov" +
+                    "e UPC Update", new string[] {
+                        "run64529"});
+#line 657
+this.ScenarioSetup(scenarioInfo);
+#line 659
+testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: Produ" +
+                    "ctSetup64529", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 661
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 663
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 665
+testRunner.And("I search for the product saved as: ProductSetup64529", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 667
+testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 669
+testRunner.Then("I click on the Row Action: Edit UPCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 671
+testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 673
+testRunner.And("I confirm that retailer \"CV\" is present under the \'Destination Retailers\' column " +
+                    "in the UPC table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 675
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 677
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: ProductSetup64529)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 679
+testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup645" +
+                    "29 and its font is red indicating a recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 681
+testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
+                    "r product saved as: ProductSetup64529", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Product ID",
+                        "Recertification Reason",
+                        "Active"});
+            table18.AddRow(new string[] {
+                        "saved as ProductSetup64529",
+                        "2.0 Specific UPC Update",
+                        "true"});
+#line 683
+testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table18, "Given ");
+#line 687
+testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 689
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 691
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 693
+testRunner.And("I search for the product saved as: ProductSetup64529", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 695
+testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Option"});
+            table19.AddRow(new string[] {
+                        "View"});
+            table19.AddRow(new string[] {
+                        "View UPCs"});
+            table19.AddRow(new string[] {
+                        "Process UPC Update"});
+            table19.AddRow(new string[] {
+                        "Remove UPC Update"});
+#line 697
+testRunner.And("I should see the following Actions options", ((string)(null)), table19, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

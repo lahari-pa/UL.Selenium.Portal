@@ -641,7 +641,62 @@ And In the SHA manager grid I see the WPS ID I have saved as product: ProductSet
 And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64528
 
 Given In the Product Recertification History popup I should see the following entry
-| Product ID                 | Recertification Reason | Active |
-| saved as ProductSetup64528 | 2.0 Specfic UPC Update | true   |
+| Product ID                 | Recertification Reason  | Active |
+| saved as ProductSetup64528 | 2.0 Specific UPC Update | true   |
 
 Given I Close the Product Recertification History pop up
+
+Given I navigate to the landing page
+
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+
+@run64529
+Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remove UPC Update
+
+Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64529
+
+Given I navigate to the landing page
+
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+And I search for the product saved as: ProductSetup64529
+
+And I click Row Actions for the first product returned
+
+Then I click on the Row Action: Edit UPCs
+
+And I should see the Universal Product Code (UPC) Page
+
+And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
+
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64529)
+
+And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64529 and its font is red indicating a recertification
+
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64529
+
+Given In the Product Recertification History popup I should see the following entry
+| Product ID                 | Recertification Reason  | Active |
+| saved as ProductSetup64529 | 2.0 Specific UPC Update | true   |
+
+Given I Close the Product Recertification History pop up
+
+Given I navigate to the landing page
+
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+And I search for the product saved as: ProductSetup64529
+
+And I click Row Actions for the first product returned
+
+And I should see the following Actions options
+| Option             |
+| View               |
+| View UPCs          |
+| Process UPC Update |
+| Remove UPC Update  |

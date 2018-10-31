@@ -18,7 +18,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 	[Binding, Scope(Tag = "ProductSetUp")]
 	class Steps_ProductSetup : TechTalk.SpecFlow.Steps
 	{
-		[StepDefinition(@"I create a product and take to completed using Test Case 75335 \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
+		[StepDefinition(@"I create a Walmart product and take to completed using Test Case 75335 \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
 		public void CreateProductUsingTestCase75335Walmart(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -311,8 +311,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
-			Report.Info(
-				"75347 (WPS) Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase75335");
+			Report.Info("75347 (WPS) Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase75335");
 			sharedSteps.GivenICallSharedWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSAndSBCS(savedAs);
 			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);

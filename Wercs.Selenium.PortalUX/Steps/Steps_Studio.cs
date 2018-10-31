@@ -424,7 +424,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			if (value.ToLower().Contains("saved as"))
 			{
-				var productDetails = (ProductInformation)Context.GetFromContext(value.Replace("saved as","",StringComparison.OrdinalIgnoreCase).Trim());
+				var productDetails = (ProductInformation)Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
 				value = productDetails.Id;
 			}
 			SelectDocumentQueueFilter thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
@@ -503,13 +503,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void IShouldSeeAnAlertAsFollows(string expectedAlertText)
 		{
 			CurrentDocument thisCurrentDocument = new CurrentDocument();
-			string alertText =
-				thisCurrentDocument.GetAlertText("");
-
+			string alertText = thisCurrentDocument.GetAlertText("");
+			if (alertText == null)
+			{
+				Report.Failure("Could not find alert text!");
+				Report.Screenshot();
+				return;
+			}
 			Report.IsTrue(alertText.Contains(expectedAlertText),
 				"Alert text is not as expected. Expected: " + expectedAlertText + " but got: " + alertText,
-				"Alert text is showing as expected: " + expectedAlertText);
-
+				"Alert text is showing as expected: " + expectedAlertText, false, false);
 		}
 
 		[StepDefinition(@"I close alert")]
@@ -570,7 +573,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						else
 						{
 							var productDetails = (ProductInformation)Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
-						value = productDetails.Id;
+							value = productDetails.Id;
 						}
 
 					}
@@ -761,7 +764,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				if (component.Rows[0]["Add to Formulation Now"].Length > 0)
 				{
-					Report.IsTrue(thisCreateComponentPage.AddToFormulationNowCheckboxChecked(component.Rows[0]["Add to Formulation Now"].ToLower()=="true"),
+					Report.IsTrue(thisCreateComponentPage.AddToFormulationNowCheckboxChecked(component.Rows[0]["Add to Formulation Now"].ToLower() == "true"),
 						"Failed to enter Add to Formulation Now", "Entered Add to Formulation Now");
 				}
 			}
@@ -1030,10 +1033,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICheckWhetherTheCurrentEnvironmentIsStagingOrProductionAndIfItIsISkipTheNextThreeSteps()
 		{
 			if (GlobalParameters.SiteType == "Staging" || GlobalParameters.SiteType == "Local Production" ||
-			    GlobalParameters.SiteType == "Production")
+				GlobalParameters.SiteType == "Production")
 			{
 				Report.Info("Setting context of electronic product");
-				Context.AddToContext("ElectronicProduct","true");
+				Context.AddToContext("ElectronicProduct", "true");
 			}
 		}
 

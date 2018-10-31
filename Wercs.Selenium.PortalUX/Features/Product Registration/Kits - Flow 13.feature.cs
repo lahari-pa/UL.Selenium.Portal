@@ -119,13 +119,13 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
 #line 24
 this.ScenarioSetup(scenarioInfo);
 #line 26
-testRunner.Given("I create a product and take to completed using Test Case 75335 (SOLD set to US on" +
-                    "ly with Walmart as retailer) and save as: 77862_KitProduct1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I create a Walmart product and take to completed using Test Case 75335 (SOLD set " +
+                    "to US only with Walmart as retailer) and save as: 77862_KitProduct1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 27
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 28
-testRunner.Given("I create a product and take to completed using Test Case 75335 (SOLD set to US on" +
-                    "ly with Walmart as retailer) and save as: 77862_KitProduct2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I create a Walmart product and take to completed using Test Case 75335 (SOLD set " +
+                    "to US only with Walmart as retailer) and save as: 77862_KitProduct2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 30

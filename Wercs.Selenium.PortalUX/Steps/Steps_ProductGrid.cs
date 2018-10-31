@@ -382,7 +382,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the following options")]
+		[StepDefinition(@"I should see the following Actions options")]
 		public void ThenIShouldSeeTheFollowingOptions(Table table)
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - The following Row Actions should show");

@@ -22,7 +22,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait=60)
+		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 
@@ -215,7 +215,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 		//Menu items: Format/SubFormat, Products, Components, Phrases, Tools
-		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem="")
+		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem = "")
 		{
 			var listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
 
@@ -862,7 +862,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetAlertText(string searchText)
 		{
 			//Putting this in because standard get alert functionality does not work in this page.
-			if (!SeleniumBrowser.Alert.WaitForAlert(5))
+			if (!SeleniumBrowser.Alert.WaitForAlert(10))
 			{
 				SeleniumBrowser.Alert.ReloadAlert(searchText);
 			}
@@ -870,12 +870,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return null;
 			}
-			else
-			{
-				string alertText = SeleniumBrowser.Alert.GetText();
-				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
-				return alertText;
-			}
+			string alertText = SeleniumBrowser.Alert.GetText();
+			Report.Screenshot();
+			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			return alertText;
 		}
 
 		public bool SetCheckBox(string name, bool setChecked)
@@ -2696,7 +2694,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterCAS(string cas)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"),2);
+			var input = containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"), 2);
 			if (input == null)
 			{
 				Report.Info("Failed to find CAS input");
@@ -2835,13 +2833,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Selecting phrase: " + value + " in column: " + columnHeader);
 			List<string> rawHeaders = GetHeaders();
-			List<string> headers = rawHeaders.Select(x=>x.Replace("\r\n", string.Empty).Trim()).ToList();
+			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfHeader = 0;
 			for (int i = 0; i < headers.Count; i++)
 			{
 				if (headers[i] == columnHeader)
 				{
-					indexOfHeader = i+1;
+					indexOfHeader = i + 1;
 					break;
 				}
 			}
@@ -2942,7 +2940,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					indexOfNotes = i + 1;
 				}
 			}
-			var selectedRows = containerElement.FindElements(By.XPath(".//table[@id='tblPicked']//tr"),2);
+			var selectedRows = containerElement.FindElements(By.XPath(".//table[@id='tblPicked']//tr"), 2);
 			List<Phrase> listOfPhrases = new List<Phrase>();
 			if (selectedRows == null)
 			{
@@ -2987,7 +2985,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool filterSelectPhrases(string filter)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='AttrEditPager_txtPhraseFilter']"),2);
+			var input = containerElement.FindElement(By.XPath(".//input[@id='AttrEditPager_txtPhraseFilter']"), 2);
 
 			if (input == null)
 			{

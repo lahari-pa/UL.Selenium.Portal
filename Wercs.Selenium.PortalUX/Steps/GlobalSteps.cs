@@ -882,18 +882,18 @@ namespace WERCSmart
 				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
 				Report.Info("Logging out");
 				GivenILogout();
-				Report.Info("Checking I can log in with the new credentials");
-				TReVor.TestUsers.CacheRefreshed = false;
-				TReVor.TestUsers.UpdateCache();
-				ILogInWithTheAccountSavedInTrevorAs(savedAs);
-				Report.Info("Logging out");
-				GivenILogout();
 				if (!new LandingPage().Wait_for_load())
 				{
 					Report.Info("Directed to an unexpected WercSmart landing page!");
 					Report.Info("Navigating to the landing page");
 					new GlobalSteps().NavigateToLandingPage();
 				}
+				Report.Info("Checking I can log in with the new credentials");
+				TReVor.TestUsers.CacheRefreshed = false;
+				TReVor.TestUsers.UpdateCache();
+				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				Report.Info("Logging out");
+				GivenILogout();
 			}
 		}
 

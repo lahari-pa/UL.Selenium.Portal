@@ -47,10 +47,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type)
 		{
-			Step57561(type,"");
+			Step57561(type, "");
 		}
 
-		public void Step57561(string type, string name="")
+		public void Step57561(string type, string name = "")
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -64,7 +64,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", name);
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
-			                     " in the Type of Product select field");
+								 " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -4164,7 +4164,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			string savedAs)
 		{
 			TestReport.UseSubSteps = true;
-			Report.Info("In power tools workspace setting edit to true");
+			TestReport.StartStep("I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic");
+			Report.Info("In power tools workspace I set edit to true");
 			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
@@ -4177,7 +4178,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
-
 			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
 				"datacode",
 				"value"
@@ -4202,7 +4202,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"RSQHADPF",
 				"pass"
 			});
-
 			Steps_Studio thisStepsStudio = new Steps_Studio();
 			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
 			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
@@ -4224,10 +4223,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			});
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
-
+			TestReport.StartStep("I open the Current Document pop up using the tool bar icons");
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+			TestReport.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
 			GeneralUtilities.StudioWaitForSpinner();
+			TestReport.StartStep("Select the Apply to all subformats check box ");
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
 			Report.Info("Clicked apply, waiting");
 			Delay.Seconds(60);
@@ -4239,7 +4240,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.Info("Spinner is still showing but alert is there.");
 				}
 			}
-
+			TestReport.StartStep("I confirm CKLT, NGHS and SBCS are not shown in the pop up message and click OK");
 			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
 				"Text",
 				"Should Show"
@@ -4257,30 +4258,41 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"False"
 			});
 			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
+			TestReport.StartStep("I close the current document pop up");
 			thisStepsStudio.GivenICloseCurrentDocument();
+			TestReport.StartStep("I select the Apply Rules icon from the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
+			TestReport.StartStep("I select the Single rule radio button");
 			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
+			TestReport.StartStep("I click the three ... icon to open the Select Rule pop up");
 			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
+			TestReport.StartStep("I click the filter icon");
 			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
 			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
+			TestReport.StartStep("In the rule name filter box I enter the studio user name");
 			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+			TestReport.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
+			TestReport.StartStep("I click Apply");
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
 			Delay.Seconds(3);
+			TestReport.StartStep("I close the Apply Rules pop up");
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
 			Delay.Seconds(3);
-
+			TestReport.StartStep("I click the Document queue icon in the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+			TestReport.StartStep("I click the filter icon");
 			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
-
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
+			TestReport.StartStep("I enter the product id in the Product/Alias area of the filter and click Apply");
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
 			Delay.Seconds(3);
 			Report.Screenshot();
+			TestReport.StartStep("I confirm the product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF");
 			TechTalk.SpecFlow.Table tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
 				"ProductOrAlias",
 				"Subformat",
@@ -4319,11 +4331,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
 			Report.Screenshot();
+			TestReport.StartStep("I click Process Documents");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+			Delay.Seconds(2);
 			Report.Screenshot();
-			GeneralUtilities.StudioWaitForSpinner();
+			GeneralUtilities.StudioWaitForSpinner(60);
+			TestReport.StartStep("I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
 			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+			TestReport.StartStep("I click OK ");
 			thisStepsStudio.ICloseAlert();
+			TestReport.StartStep("I close the Document queue window");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 
 		}

@@ -422,7 +422,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 						Report.Info("Recertification reason did not match. Expected: " + thisRow["Recertification Reason"] + " but got: " + thisProduct.RecertificationReason);
 						allPassed = false;
 					}
-					;
 				}
 			}
 
