@@ -12,561 +12,560 @@
 #pragma warning disable
 namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
 {
-	using TechTalk.SpecFlow;
-
-
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
-	[System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-	[Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-	public partial class Flow22Feature
-	{
-
-		private static TechTalk.SpecFlow.ITestRunner testRunner;
-
-		private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
-
+    using TechTalk.SpecFlow;
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
+    public partial class Flow22Feature
+    {
+        
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
+        
 #line 1 "Flow 22.feature"
 #line hidden
-
-		public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext {
-			get
-			{
-				return this._testContext;
-			}
-			set
-			{
-				this._testContext = value;
-			}
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
-		public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
-		{
-			testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-			TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Flow 22", null, ProgrammingLanguage.CSharp, new string[] {
-						"LandingPage",
-						"Login",
-						"Homepage",
-						"Signup",
-						"wercsmart",
-						"NewProduct",
-						"ProductGrid",
-						"DataSummarySheet",
-						"wercsmart",
-						"RetailPartners",
-						"run_Flow22"});
-			testRunner.OnFeatureStart(featureInfo);
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
-		public static void FeatureTearDown()
-		{
-			testRunner.OnFeatureEnd();
-			testRunner = null;
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
-		public virtual void TestInitialize()
-		{
-			if (((testRunner.FeatureContext != null)
-						&& (testRunner.FeatureContext.FeatureInfo.Title != "Flow 22")))
-			{
-				global::Wercs.Selenium.PortalUX.Features.ProductRegistration.Flow22Feature.FeatureSetup(null);
-			}
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
-		public virtual void ScenarioTearDown()
-		{
-			testRunner.OnScenarioEnd();
-		}
-
-		public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
-		{
-			testRunner.OnScenarioStart(scenarioInfo);
-			testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
-		}
-
-		public virtual void ScenarioCleanup()
-		{
-			testRunner.CollectScenarioErrors();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[60544] Weld-Through Primer - Aerosol - RU001050")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 22")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow22")]
-		public virtual void _60544Weld_ThroughPrimer_Aerosol_RU001050()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60544] Weld-Through Primer - Aerosol - RU001050", ((string[])(null)));
+        
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
+        {
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Flow 22", null, ProgrammingLanguage.CSharp, new string[] {
+                        "LandingPage",
+                        "Login",
+                        "Homepage",
+                        "Signup",
+                        "wercsmart",
+                        "NewProduct",
+                        "ProductGrid",
+                        "DataSummarySheet",
+                        "wercsmart",
+                        "RetailPartners",
+                        "run_Flow22"});
+            testRunner.OnFeatureStart(featureInfo);
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
+        {
+            testRunner.OnFeatureEnd();
+            testRunner = null;
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
+        public virtual void TestInitialize()
+        {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "Flow 22")))
+            {
+                global::Wercs.Selenium.PortalUX.Features.ProductRegistration.Flow22Feature.FeatureSetup(null);
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
+        public virtual void ScenarioTearDown()
+        {
+            testRunner.OnScenarioEnd();
+        }
+        
+        public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
+        {
+            testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
+        }
+        
+        public virtual void ScenarioCleanup()
+        {
+            testRunner.CollectScenarioErrors();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[60544] Weld-Through Primer - Aerosol - RU001050")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 22")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow22")]
+        public virtual void _60544Weld_ThroughPrimer_Aerosol_RU001050()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60544] Weld-Through Primer - Aerosol - RU001050", ((string[])(null)));
 #line 15
-			this.ScenarioSetup(scenarioInfo);
+this.ScenarioSetup(scenarioInfo);
 #line 17
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
-			testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 21
-			testRunner.Given("I generate a random UPC number and save as: UPC60544", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I generate a random UPC number and save as: UPC60544", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 23
-			testRunner.Given("I delete all products with UPC Number: saved as UPC60544", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I delete all products with UPC Number: saved as UPC60544", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 25
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 27
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Weld-Through Primer - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Weld-Through Primer - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29
-			testRunner.Then("I save the product information as: TestCase60544", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 31
-			testRunner.Given("I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Con" +
-								"tinue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I save the product information as: TestCase60544", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 33
-			testRunner.Given("I call Shared Step 60310 (Additional Product Information - Without Child question" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 35
-			testRunner.Given("I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60310 (Additional Product Information - Without Child question" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 37
-			testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 39
-			testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Lim" +
-								"ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 41
-			testRunner.Given("I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aer" +
-								"osols,  2.1, None, add technical name, Click Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Lim" +
+                    "ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 43
-			testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUE" +
-								"STION ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aer" +
+                    "osols,  2.1, None, add technical name, Click Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 45
-			testRunner.Given("I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continu" +
-								"e - Happy Path): 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUE" +
+                    "STION ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 47
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continu" +
+                    "e - Happy Path): 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 49
-			testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
-								"appy Path) and select the retailer: Staples", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 51
-			testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-								" - Size Only) for UPC: saved as UPC60544, container type: Aerosol Can and size: " +
-								"33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Staples", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 53
-			testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
-								"horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC60544, container type: Aerosol Can and size: " +
+                    "33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 55
-			testRunner.Given("I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organi" +
-								"c Compounds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 57
-			testRunner.And("in the Optional Reports and Documents Available for Purchase page I click Continu" +
-								"e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-						"Personal Protection Equipment",
-						"Autoignition Temperature",
-						"Minimum Ignition Energy",
-						"Viscosity",
-						"Appearance",
-						"Odor",
-						"Odor Threshold",
-						"Partition Coefficient",
-						"Product\'s Dispensing Method"});
-			table1.AddRow(new string[] {
-						"Mask",
-						"150",
-						"44",
-						"10.7",
-						"White",
-						"Floral",
-						"No data available",
-						"12",
-						"Aerosol"});
+testRunner.Given("I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organi" +
+                    "c Compounds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 59
-			testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
-								"))", ((string)(null)), table1, "Given ");
-#line 63
-			testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
-								"d Comments Text 60544. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
-								" information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("in the Optional Reports and Documents Available for Purchase page I click Continu" +
+                    "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Personal Protection Equipment",
+                        "Autoignition Temperature",
+                        "Minimum Ignition Energy",
+                        "Viscosity",
+                        "Appearance",
+                        "Odor",
+                        "Odor Threshold",
+                        "Partition Coefficient",
+                        "Product\'s Dispensing Method"});
+            table1.AddRow(new string[] {
+                        "Mask",
+                        "150",
+                        "44",
+                        "10.7",
+                        "White",
+                        "Floral",
+                        "No data available",
+                        "12",
+                        "Aerosol"});
+#line 61
+testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
+                    "))", ((string)(null)), table1, "Given ");
 #line 65
-			testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Weld-" +
-								"Through Primer - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+                    "d Comments Text 60544. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
+                    " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 67
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase60544", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Weld-" +
+                    "Through Primer - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 69
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase60544", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[60545] Photograph Coating - Aerosol - RU001067")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 22")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow22")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
-		public virtual void _60545PhotographCoating_Aerosol_RU001067()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60545] Photograph Coating - Aerosol - RU001067", new string[] {
-						"tfs_design"});
-#line 71
-			this.ScenarioSetup(scenarioInfo);
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[60545] Photograph Coating - Aerosol - RU001067")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 22")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow22")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
+        public virtual void _60545PhotographCoating_Aerosol_RU001067()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60545] Photograph Coating - Aerosol - RU001067", new string[] {
+                        "tfs_design"});
 #line 73
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 75
-			testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 77
-			testRunner.Given("I generate a random UPC number and save as: UPC60545", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 79
-			testRunner.Given("I delete all products with UPC Number: saved as UPC60545", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I generate a random UPC number and save as: UPC60545", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 81
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I delete all products with UPC Number: saved as UPC60545", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 83
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Photograph Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 85
-			testRunner.Then("I save the product information as: TestCase60545", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Photograph Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 87
-			testRunner.Given("I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I save the product information as: TestCase60545", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 89
-			testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
-								"ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 91
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
+                    "ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 93
-			testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
-								"pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
-								"clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 95
-			testRunner.Given("I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 99
-			testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
+                    "pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
+                    "clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 97
+testRunner.Given("I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 101
-			testRunner.Given("I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG," +
-								" Fully regulated - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 103
-			testRunner.Given("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
-								"- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG," +
+                    " Fully regulated - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 105
-			testRunner.Given("I call Shared Step 57794 (Confirm VOC (SCAQMD) step title, Confirm ACP question s" +
-								"hown  - Select No - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
+                    "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 107
-			testRunner.Given("I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continu" +
-								"e - Happy Path): 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57794 (Confirm VOC (SCAQMD) step title, Confirm ACP question s" +
+                    "hown  - Select No - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 109
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continu" +
+                    "e - Happy Path): 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 111
-			testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
-								"appy Path) and select the retailer: Staples", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 113
-			testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-								" - Size Only) for UPC: saved as UPC60545, container type: Aerosol Can and size: " +
-								"33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Staples", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 115
-			testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
-								"horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC60545, container type: Aerosol Can and size: " +
+                    "33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 117
-			testRunner.Given("I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organi" +
-								"c Compounds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 119
-			testRunner.And("in the Optional Reports and Documents Available for Purchase page I click Continu" +
-								"e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-						"Personal Protection Equipment",
-						"Autoignition Temperature",
-						"Minimum Ignition Energy",
-						"Viscosity",
-						"Appearance",
-						"Odor",
-						"Odor Threshold",
-						"Partition Coefficient",
-						"Product\'s Dispensing Method"});
-			table2.AddRow(new string[] {
-						"Mask",
-						"150",
-						"44",
-						"10.7",
-						"White",
-						"Floral",
-						"No data available",
-						"12",
-						"Aerosol"});
+testRunner.Given("I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organi" +
+                    "c Compounds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 121
-			testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
-								"))", ((string)(null)), table2, "Given ");
-#line 125
-			testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
-								"d Comments Text 60545. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
-								" information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("in the Optional Reports and Documents Available for Purchase page I click Continu" +
+                    "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Personal Protection Equipment",
+                        "Autoignition Temperature",
+                        "Minimum Ignition Energy",
+                        "Viscosity",
+                        "Appearance",
+                        "Odor",
+                        "Odor Threshold",
+                        "Partition Coefficient",
+                        "Product\'s Dispensing Method"});
+            table2.AddRow(new string[] {
+                        "Mask",
+                        "150",
+                        "44",
+                        "10.7",
+                        "White",
+                        "Floral",
+                        "No data available",
+                        "12",
+                        "Aerosol"});
+#line 123
+testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
+                    "))", ((string)(null)), table2, "Given ");
 #line 127
-			testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Photo" +
-								"graph Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+                    "d Comments Text 60545. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
+                    " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 129
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase60545", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Photo" +
+                    "graph Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 131
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase60545", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[60546] Glass Coating - Aerosol - RU001037")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 22")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow22")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
-		public virtual void _60546GlassCoating_Aerosol_RU001037()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60546] Glass Coating - Aerosol - RU001037", new string[] {
-						"tfs_design"});
-#line 133
-			this.ScenarioSetup(scenarioInfo);
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[60546] Glass Coating - Aerosol - RU001037")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 22")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow22")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
+        public virtual void _60546GlassCoating_Aerosol_RU001037()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60546] Glass Coating - Aerosol - RU001037", new string[] {
+                        "tfs_design"});
 #line 135
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 137
-			testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 139
-			testRunner.Given("I generate a random UPC number and save as: UPC60546", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 141
-			testRunner.Given("I delete all products with UPC Number: saved as UPC60546", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I generate a random UPC number and save as: UPC60546", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 143
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I delete all products with UPC Number: saved as UPC60546", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 145
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Glass Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 147
-			testRunner.Then("I save the product information as: TestCase60546", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Glass Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 149
-			testRunner.Given("I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I save the product information as: TestCase60546", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 151
-			testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
-								"ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 153
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
+                    "ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 155
-			testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
-								"pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
-								"clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 157
-			testRunner.Given("I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 161
-			testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
+                    "pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
+                    "clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 159
+testRunner.Given("I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 163
-			testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Lim" +
-								"ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 165
-			testRunner.Given("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
-								"- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Lim" +
+                    "ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 167
-			testRunner.Given("I call Shared Step 57678 (Confirm Volatile Organic Compounds (VOC OTC/CARB) step " +
-								"title - Select No to all questions - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
+                    "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 169
-			testRunner.Given("I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continu" +
-								"e - Happy Path): 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57678 (Confirm Volatile Organic Compounds (VOC OTC/CARB) step " +
+                    "title - Select No to all questions - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 171
-			testRunner.Given("I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis da" +
-								"te is shown - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continu" +
+                    "e - Happy Path): 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 173
-			testRunner.Given("in the Volatile Organic Compound Summary page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis da" +
+                    "te is shown - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 175
-			testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
-								"appy Path) and select the retailer: Dick\'s Sporting Goods", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the Volatile Organic Compound Summary page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 177
-			testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-								" - Size Only) for UPC: saved as UPC60546, container type: Aerosol Can and size: " +
-								"9.99", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Dick\'s Sporting Goods", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 179
-			testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
-								"horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC60546, container type: Aerosol Can and size: " +
+                    "9.99", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 181
-			testRunner.Given("I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organi" +
-								"c Compounds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 183
-			testRunner.And("in the Optional Reports and Documents Available for Purchase page I click Continu" +
-								"e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-			TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-						"Personal Protection Equipment",
-						"Autoignition Temperature",
-						"Minimum Ignition Energy",
-						"Viscosity",
-						"Appearance",
-						"Odor",
-						"Odor Threshold",
-						"Partition Coefficient",
-						"Product\'s Dispensing Method"});
-			table3.AddRow(new string[] {
-						"Mask",
-						"150",
-						"44",
-						"10.7",
-						"White",
-						"Floral",
-						"No data available",
-						"12",
-						"Aerosol"});
+testRunner.Given("I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organi" +
+                    "c Compounds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 185
-			testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
-								"))", ((string)(null)), table3, "Given ");
-#line 189
-			testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
-								"d Comments Text. !\"£$%^&*() 1234567890 (Provide any additional comments or infor" +
-								"mation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("in the Optional Reports and Documents Available for Purchase page I click Continu" +
+                    "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Personal Protection Equipment",
+                        "Autoignition Temperature",
+                        "Minimum Ignition Energy",
+                        "Viscosity",
+                        "Appearance",
+                        "Odor",
+                        "Odor Threshold",
+                        "Partition Coefficient",
+                        "Product\'s Dispensing Method"});
+            table3.AddRow(new string[] {
+                        "Mask",
+                        "150",
+                        "44",
+                        "10.7",
+                        "White",
+                        "Floral",
+                        "No data available",
+                        "12",
+                        "Aerosol"});
+#line 187
+testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
+                    "))", ((string)(null)), table3, "Given ");
 #line 191
-			testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Glass" +
-								" Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+                    "d Comments Text. !\"£$%^&*() 1234567890 (Provide any additional comments or infor" +
+                    "mation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 193
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase60546", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Glass" +
+                    " Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 195
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase60546", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol - RU001043")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 22")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-		[Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow22")]
-		public virtual void _60547CorrosionResistantBrassBronzeOrCopperCoating_Aerosol_RU001043()
-		{
-			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol - RU001043", ((string[])(null)));
-#line 196
-			this.ScenarioSetup(scenarioInfo);
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol - RU001043")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Flow 22")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow22")]
+        public virtual void _60547CorrosionResistantBrassBronzeOrCopperCoating_Aerosol_RU001043()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol - RU001043", ((string[])(null)));
 #line 198
-			testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 200
-			testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 202
-			testRunner.Given("I generate a random UPC number and save as: UPC60547", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 204
-			testRunner.Given("I delete all products with UPC Number: saved as UPC60547", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I generate a random UPC number and save as: UPC60547", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 206
-			testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-								")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I delete all products with UPC Number: saved as UPC60547", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 208
-			testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-								"duct): Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 210
-			testRunner.Then("I save the product information as: TestCase60547", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 212
-			testRunner.Given("I call Shared Step 57528 (Product Characteristics - Aerosol Only - add data - Con" +
-								"tinue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 214
-			testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
-								"ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I save the product information as: TestCase60547", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 216
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 218
-			testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
-								"pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
-								"clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
+                    "ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 220
-			testRunner.Given("I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 222
+testRunner.Then("I should see an error message: ALERT! The ingredient table does not include a com" +
+                    "pressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to in" +
+                    "clude the propellant before proceeding.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 224
-			testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 226
-			testRunner.Given("I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG," +
-								" Fully regulated - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 228
-			testRunner.Given("I call Shared Step 57981 (Transportation Details - UN Number Water (IMDG) - Enter" +
-								" UN Number and select other data - Continue - Happy Path) : 1954", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 230
-			testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUE" +
-								"STION ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG," +
+                    " Fully regulated - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 232
-			testRunner.Given("I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continu" +
-								"e - Happy Path): 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57981 (Transportation Details - UN Number Water (IMDG) - Enter" +
+                    " UN Number and select other data - Continue - Happy Path) : 1954", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 234
-			testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUE" +
+                    "STION ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 236
-			testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
-								"appy Path) and select the retailer: Staples", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60552 (VOC - AERO Question (ozone) enter value - Click Continu" +
+                    "e - Happy Path): 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 238
-			testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-								" - Size Only) for UPC: saved as UPC60547, container type: Aerosol Can and size: " +
-								"33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 240
-			testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
-								"horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Staples", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 242
-			testRunner.Given("I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organi" +
-								"c Compounds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC60547, container type: Aerosol Can and size: " +
+                    "33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 244
-			testRunner.And("in the Optional Reports and Documents Available for Purchase page I click Continu" +
-								"e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-						"Personal Protection Equipment",
-						"Autoignition Temperature",
-						"Minimum Ignition Energy",
-						"Viscosity",
-						"Appearance",
-						"Odor",
-						"Odor Threshold",
-						"Partition Coefficient",
-						"Product\'s Dispensing Method"});
-			table4.AddRow(new string[] {
-						"Mask",
-						"150",
-						"44",
-						"10.7",
-						"White",
-						"Floral",
-						"No data available",
-						"12",
-						"Aerosol"});
+testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 246
-			testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
-								"))", ((string)(null)), table4, "Given ");
-#line 250
-			testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
-								"d Comments Text 60547. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
-								" information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 252
-			testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Corro" +
-								"sion Resistant Brass, Bronze or Copper Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 254
-			testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-								"ct: TestCase60547", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organi" +
+                    "c Compounds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 248
+testRunner.And("in the Optional Reports and Documents Available for Purchase page I click Continu" +
+                    "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-			this.ScenarioCleanup();
-		}
-	}
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Personal Protection Equipment",
+                        "Autoignition Temperature",
+                        "Minimum Ignition Energy",
+                        "Viscosity",
+                        "Appearance",
+                        "Odor",
+                        "Odor Threshold",
+                        "Partition Coefficient",
+                        "Product\'s Dispensing Method"});
+            table4.AddRow(new string[] {
+                        "Mask",
+                        "150",
+                        "44",
+                        "10.7",
+                        "White",
+                        "Floral",
+                        "No data available",
+                        "12",
+                        "Aerosol"});
+#line 250
+testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
+                    "))", ((string)(null)), table4, "Given ");
+#line 254
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+                    "d Comments Text 60547. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
+                    " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 256
+testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Corro" +
+                    "sion Resistant Brass, Bronze or Copper Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 258
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase60547", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+    }
 }
 #pragma warning restore
 #endregion
