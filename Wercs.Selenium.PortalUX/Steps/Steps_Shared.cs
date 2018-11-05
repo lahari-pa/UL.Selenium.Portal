@@ -1297,8 +1297,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(@"I call Shared Step 57801 \(Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path\)")]
-		public void GivenICallSharedConfirmVOCSummaryStepConfirmVOCAnalysisDate_HappyPath()
+		[StepDefinition(@"I call Shared Step 57801 \(Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path\)")]
+		public void GivenICallSharedConfirmVOCSummaryAndVOCAnalysisDate_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();

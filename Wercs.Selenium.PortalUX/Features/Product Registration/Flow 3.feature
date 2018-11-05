@@ -106,7 +106,7 @@ Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC
 | Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 | No                                       | 2                     | 2                          | Yes            |
 
-Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
+Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
 
 Given I call Shared Step 57817 (VOC Results - Confirm VOC Limits table shows correct values (OTC & CARB) - Happy Path): Wipes, Cleaning (with Chemical)
 

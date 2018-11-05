@@ -926,8 +926,8 @@ testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Silve" +
                     "r Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 354
-testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
-                    "te) for product: TestCase59280", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase59280", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
