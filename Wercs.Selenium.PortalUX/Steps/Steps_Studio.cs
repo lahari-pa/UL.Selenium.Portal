@@ -456,6 +456,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In document queue filter page I click on process documents")]
 		public void InDocumentQueueFilterPageIClickOnProcessDocuments()
 		{
+			Report.Info("Beginning: In document queue filter page I click on process documents");
 			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
 			thisDocumentQueuePage.Wait_for_load();
 			Report.IsTrue(thisDocumentQueuePage.ClickProcessDocuments(), "Failed to click process documents",

@@ -1154,6 +1154,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheDataAcceptancePageISelectYesAgreed();
 			TestReport.StartStep("In the Data Acceptance page I click on the Accept button");
 			MyNewProduct.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			GeneralUtilities.StudioWaitForSpinner();
 		}
 
 		[StepDefinition(@"I call Shared Step 37857 \(Enter Physical Property - Solid\)")]
@@ -3656,7 +3657,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click Menu: 'My Wercs' and Submenu: 'SHA'");
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("My Wercs", "SHA");
 			StudioSHAManager thisStudioShaManager = new StudioSHAManager();
-			TestReport.StartStep("I confirm the product list is loaded");
+			Report.Info("I confirm the product list is loaded");
 			Report.Info("Waiting for product list to be loaded....");
 			Delay.Seconds(1);
 			Report.IsTrue(thisStudioShaManager.WaitForProductList(120), "Product list is not showing",
@@ -3914,10 +3915,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 49841 \(SHA - Search for exact WPS ID in (.*) Status for saved as: (.*)\)")]
 		public void GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus(string status, string savedAs)
 		{
+
 			TestReport.UseSubSteps = true;
-			Report.Info("Beginning shared step: 49841");
+			TestReport.StartStep("Beginning shared step: 49841");
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
-			TestReport.StartStep("U set the status filter to All");
+			TestReport.StartStep("I set the status filter to All");
 			myStudioShaManager.WaitForProductList(60);
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
@@ -4017,19 +4019,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
 			ProductStatus thisProductStatus = myStudioShaManager.GetproductStatus(id);
+			Report.Info("Status is: " + thisProductStatus.StatusName);
 			// JS. status name (class) is initially 'boldrulerunning' and then changes to 'boldchem' after some time (turns blue). Previously dropping out of the scenario first time.
 			int count = 0;
 			bool runningRule = thisProductStatus.StatusName.Contains("rulerunning");
 			while (count < 100 && runningRule)
 			{
+				Report.Info("Running a search: " + count);
 				myStudioShaManager.ClickBottomMenuOption("search");
 				myProductSearch.Wait_for_load(5);
-				myProductSearch.ClickButton("Find");
-				Delay.Seconds(2);
+				Report.Info("Clicking find");
+				if (!myProductSearch.ClickButton("Find"))
+				{
+					Report.Info("Failed to click find button");
+				}
+				Delay.Seconds(5);
 				GeneralUtilities.StudioWaitForSpinner();
-				myStudioShaManager.WaitForProductList(30);
-				thisProductStatus = myStudioShaManager.GetproductStatus(id);
-				runningRule = thisProductStatus.StatusName.Contains("rulerunning");
+				if (myStudioShaManager.WaitForProductList(30))
+				{
+					thisProductStatus = myStudioShaManager.GetproductStatus(id);
+					if (thisProductStatus == null)
+					{
+						Report.Info("There was a problem with getting product status. Trying again...");
+
+						thisProductStatus = myStudioShaManager.GetproductStatus(id);
+						if (thisProductStatus == null)
+						{
+							Report.Info("There was a problem with getting product status.");
+							break;
+						}
+
+					}
+					runningRule = thisProductStatus.StatusName.Contains("rulerunning");
+				}
+				else
+				{
+					Report.Info("Product list was not found");
+				}
+
+				Report.Screenshot();
 				count++;
 				Delay.Seconds(1);
 			}
@@ -4055,10 +4083,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(string savedAs)
 		{
 
-			if (Context.GetFromContext("ElectronicProduct") != null)
+			if (Context.Contains("ElectronicProduct"))
 			{
-				Report.Info("Skipping step because this is an electronic product");
-				return;
+				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
+				{
+					Report.Info("Skipping step because this is an electronic product");
+					return;
+				}
+
 			}
 			TestReport.UseSubSteps = true;
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
@@ -4070,6 +4102,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(3);
 			TestReport.StartStep("I select EN as the Language, MTR/CKLT as the format/subformat");
 			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			if (!thisPowerDesignerPlus.Wait_for_load(30))
+			{
+				StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+					new StudioPowerDesignerPlusDesignMode();
+				thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Home");
+				Delay.Seconds(3);
+			}
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 			Report.Info("Setting power designer plus options...");
@@ -4144,7 +4184,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Delay.Seconds(3);
 			}
 
-			Report.IsTrue(selectedID, "Selected product with id: " + id, "Failed to select product with id: " + id);
+			Report.IsTrue(selectedID, "Failed to select product with id: " + id, "Selected product with id: " + id );
 			myStudioShaManager.ClickProcessProductData();
 			Report.IsTrue(myStudioShaManager.SetAutoAssignRegulatorySpecialisttoProduct(false),
 				"Failed to deselect Auto assign regulatory specialist", "Deselected auto assign regulatory specialist");
@@ -4406,10 +4446,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 55663 \(WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*)\)")]
 		public void GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(string savedAs)
 		{
-			if (Context.GetFromContext("ElectronicProduct") != null)
+			if (Context.Contains("ElectronicProduct"))
 			{
-				Report.Info("Skipping step because this is an electronic product");
-				return;
+				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
+				{
+					Report.Info("Skipping step because this is an electronic product");
+					return;
+				}
+
 			}
 			TestReport.UseSubSteps = true;
 			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
@@ -4559,10 +4603,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(
 			string savedAs)
 		{
-			if (Context.GetFromContext("ElectronicProduct") != null)
+			if (Context.Contains("ElectronicProduct"))
 			{
-				Report.Info("Skipping step because this is an electronic product");
-				return;
+				if (Context.GetFromContext("ElectronicProduct").ToString() == "true")
+				{
+					Report.Info("Skipping step because this is an electronic product");
+					return;
+				}
+
 			}
 			TestReport.UseSubSteps = true;
 			Report.Info("In power tools workspace setting edit to true");
@@ -4660,8 +4708,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
 			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
 
+
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
+
+
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"product\alias");
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"product\alias");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
@@ -5139,15 +5190,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Click continue
 		}
 
-		[Given(@"I call Shared Step 51351 \(SHA > Select Product > View Recertification History\) for product saved as: (.*)")]
+		[StepDefinition (@"I call Shared Step 51351 \(SHA > Select Product > View Recertification History\) for product saved as: (.*)")]
 		public void GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(string savedAs)
 		{
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
 			Steps_SHA thisStepsSha = new Steps_SHA();
+			TestReport.StartStep("I select  product in the SHA grid saved as " + savedAs);
 			thisStepsSha.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
 			Delay.Seconds(3);
+			TestReport.StartStep("I click 'Recertification History'");
 			thisStepsSha.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("Recertification History");
 		}
 
@@ -5204,17 +5257,253 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click continue");
 			newProductSteps.ClickContinue();
 		}
-		[StepDefinition(@"I call Shared Step 51351 \(SHA > Select Product > View Recertification History\) for product saved as: (.*)")]
-		public void Shared51351_SHA_SelectProduct_ViewRecertificationHistory(string savedAs)
+
+		[StepDefinition(@"I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue")]
+		public void ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(TechTalk.SpecFlow.Table retailers)
 		{
 			TestReport.UseSubSteps = true;
-			var shaSteps = new Steps_SHA();
-			TestReport.StartStep("I select  product in the SHA grid saved as " + savedAs);
-			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
-			TestReport.StartStep("I right click the product");
-			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
-			TestReport.StartStep("I click 'Recertification History'");
-			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("Recertification History");
+			var selStepsNewProduct = new StepsNewProduct();
+
+			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
+			{
+
+				TestReport.StartStep("In the Select Retailers popup I select the retailer: " + thisRetailer["Retailer"]);
+				selStepsNewProduct.ThenISelectTheRetailer_InTheWindow(thisRetailer["Retailer"]);
+			}
+
+			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
+			{
+				TestReport.StartStep("In the Select Retailers popup I add PL information");
+				selStepsNewProduct.ThenIAddAdditionaRequirmentsInfoForRetailer(thisRetailer["Retailer"], "Additional requirements: " + thisRetailer["Retailer"]);
+			}
+
+			TestReport.StartStep("I click continue");
+			selStepsNewProduct.ClickContinue();
+			if (new NewProduct().ErrorMessage() == "This is a required field.")
+			{
+				Report.Failure(
+					"Required field error was showing on continue. Attempting to enter Private Label field (not specified by Shared Step)");
+				TestReport.StartStep("I enter private label as 'This Private Label'");
+				selStepsNewProduct.ThenInTheRetailersTabIEnterPrivateLabelNameAs("This Private Label");
+				TestReport.StartStep("I click continue");
+				selStepsNewProduct.ClickContinue();
+			}
+		}
+
+
+		[StepDefinition (@"I call Shared Step 85983 - WPS Studio - PD\\\+ PLP with NGHS only - set all data and publish using rule and DOC queue for product saved as: (.*)")]
+		public void GivenICallSharedStep_WPSStudio_PDPLPWithNGHSOnly_SetAllDataAndPublishUsingRuleAndDOCQueue(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+
+			//Given I Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic(filename is DPQA_PASS[1].png)Do this by double clicking on the graphic and selecting the green check mark graphic from the available list and click save
+			TestReport.StartStep("I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic");
+			Report.Info("In power tools workspace I set edit to true");
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
+				"Power designer has opened");
+			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
+			Delay.Seconds(1);
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
+				"Document options panel has not opened",
+				"Document options panel has opened");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
+				"Successfully set edit to true");
+			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+				"datacode",
+				"value"
+			});
+			table2.AddRow(new string[] {
+				"DPQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"DCQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"VCQA",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQAPF",
+				"pass"
+			});
+			table2.AddRow(new string[] {
+				"RSQHADPF",
+				"pass"
+			});
+			Steps_Studio thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenISetTheDatacodesAsFollows(table2);
+			//	And I Open the Current Document pop up using the tool bar icons
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
+			TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+				"Item"
+			});
+			table3.AddRow(new string[] {
+				"Current Document (Publish)"
+			});
+			table3.AddRow(new string[] {
+				"Formulation"
+			});
+			table3.AddRow(new string[] {
+				"Document Queue"
+			});
+			table3.AddRow(new string[] {
+				"Apply rules"
+			});
+			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
+			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+			TestReport.StartStep("I open the Current Document pop up using the tool bar icons");
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+			//And I Select the Authorize Formula and Attributes for publishing check box
+			TestReport.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
+			GeneralUtilities.StudioWaitForSpinner();
+			//	And I If an error is shown you will need to add data to the data codes that are shown before you can continue-close the pop up - add all data and re-open the current document pop up
+			//	And I Select the Apply to all subformats check box
+			TestReport.StartStep("Select the Apply to all subformats check box ");
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
+			Report.Info("Clicked apply, waiting");
+			Delay.Seconds(60);
+			Report.Info("Now going to wait for spinner");
+			if (!GeneralUtilities.StudioWaitForSpinner(30))
+			{
+				if (SeleniumBrowser.Alert.WaitForAlert())
+				{
+					Report.Info("Spinner is still showing but alert is there.");
+				}
+			}
+			//	And I Confirm CKLT, NGHS and SBCS are not shownin the pop up messageand click OK
+			TestReport.StartStep("I confirm CKLT, NGHS and SBCS are not shown in the pop up message and click OK");
+			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+				"Text",
+				"Should Show"
+			});
+			table4.AddRow(new string[] {
+				"CKLT",
+				"False"
+			});
+			table4.AddRow(new string[] {
+				"NGHS",
+				"False"
+			});
+			table4.AddRow(new string[] {
+				"SBCS",
+				"False"
+			});
+			thisStepsStudio.GivenInCurrentDocumentIConfirmThatAlertTextMatches(table4);
+			//	And I Close the current document pop up
+			TestReport.StartStep("I close the current document pop up");
+			thisStepsStudio.GivenICloseCurrentDocument();
+			//	And I Select the Wizards tab
+			//	And I Select the Apply Rules icon from the tool bar
+			TestReport.StartStep("I select the Apply Rules icon from the tool bar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton();
+			//And I Select the Single rule radio button
+			TestReport.StartStep("I select the Single rule radio button");
+			thisStepsStudio.InApplyRulesPageIClickOnTheFollowingApplyRadioButton("single rule");
+			//And I Click the three ... icon to open the Select Rule pop up
+			TestReport.StartStep("I click the three ... icon to open the Select Rule pop up");
+			thisStepsStudio.InApplyRulesPageIClickOnTheSingleRulesEllipsisButton();
+			//	And I Click the filter icon
+			TestReport.StartStep("I click the filter icon");
+			thisStepsStudio.InSelectRulesPageIClickOnFilterIcon();
+
+			//And I In the rule name filter box enter your studio user name(you will already have a publishing rule set up with your name)and click apply
+			//	And I The Select rule pop up will show only rules which start with the characters you entered in the filter -select the rule you require to publish documents Note: The rule name will be in the format xxxx - CREATE ADDITIONAL DOC TO QUEUE-FOR XXXXWhere the xxxx is replaced by your Studio user name
+			//And I Select the rule by clicking on it
+			//	And I Check that the Product group radio button is selected
+			//	And I Click Apply
+			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("Starts with...", "rule name");
+			TestReport.StartStep("In the rule name filter box I enter the studio user name");
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
+			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+			TestReport.StartStep("I select the rule  by clicking on it");
+			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
+			TestReport.StartStep("I click Apply");
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
+			Delay.Seconds(3);
+			//	And I The Completed Successfully pop up is shown, click okNote: in Staging the completed successful pop up does not show till you try to close the Apply rules pop up
+			//	And I Close the Apply Rules pop up
+			TestReport.StartStep("I close the Apply Rules pop up");
+			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+			Delay.Seconds(3);
+			//	And I Select the Product tab
+			//	And I Click the Document queue icon in the tool bar
+			TestReport.StartStep("I click the Document queue icon in the tool bar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+			//	And I Click the filter icon
+			TestReport.StartStep("I click the filter icon");
+			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
+			//	And I Enter you product id in the Product/ Alias area of the filter and click Apply
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = productDetails.Id;
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
+			TestReport.StartStep("I enter the product id in the Product/Alias area of the filter and click Apply");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
+			Delay.Seconds(3);
+			Report.Screenshot();
+			//	And I Confirm your product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF, you will see entries for the product and its aliases(Private Label products have aliases in WPS Studio).
+			TestReport.StartStep("I confirm the product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF");
+			TechTalk.SpecFlow.Table tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
+				"ProductOrAlias",
+				"Subformat",
+				"Language",
+				"DocType"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"SBCS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"NGHS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"NGHS",
+				"EN",
+				"RTF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"CKLT",
+				"EN",
+				"PDF"
+			});
+			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
+			Delay.Seconds(3);
+			//And I Click the check box in the table header row of the document queue window
+			//	And I Click Process Documents
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
+			Delay.Seconds(3);
+			Report.Screenshot();
+
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
+			Report.Screenshot();
+			TestReport.StartStep("I click Process Documents");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+			Delay.Seconds(2);
+			Report.Screenshot();
+			GeneralUtilities.StudioWaitForSpinner(60);
+			//And I Pop up shows with message indicating the queued documents were sent for publishing
+			TestReport.StartStep("I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
+			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+			//	And I Click OK
+			TestReport.StartStep("I click OK ");
+			thisStepsStudio.ICloseAlert();
+			//	And I Close the Document queue window
+			TestReport.StartStep("I close the Document queue window");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 		}
 	}
 }

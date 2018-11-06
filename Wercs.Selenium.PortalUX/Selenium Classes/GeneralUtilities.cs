@@ -2,6 +2,7 @@
 using System.Linq;
 using OpenQA.Selenium;
 using ResourcePool;
+using SafewareReporting;
 using SeleniumUtilities;
 
 
@@ -84,19 +85,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public static bool WaitForRefreshToDisappear(IWebElement button, int maxWaitTime = 60)
 		{
-			if (button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh')]"), 2) == null)
+			try
 			{
+				if (button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh')]"), 2) == null)
+				{
+					return true;
+				}
+
+				int i = 0;
+				while (button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh')]"), 2) != null && i < maxWaitTime)
+				{
+					Delay.Seconds(Delay.SpeedFactor * 1);
+					Report.Info("Waiting: " + i.ToString());
+					i++;
+				}
+
+				return button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) != null;
+			}
+			catch (Exception e)
+			{
+				if (button.IsElementStale())
+				{
+					Report.Info("Element is stale");
+				}
 				return true;
 			}
-
-			int i = 0;
-			while (button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) != null && i < maxWaitTime)
-			{
-				Delay.Seconds(Delay.SpeedFactor * 1);
-				i++;
-			}
-
-			return button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) != null;
 		}
 
 		public static bool WaitForSpinnerToDisappear(IWebElement button, int waitMax = 60)
@@ -115,5 +128,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return spinner == null || !spinner.Displayed;
 		}
+
+
 	}
 }

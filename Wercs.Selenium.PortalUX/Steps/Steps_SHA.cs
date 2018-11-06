@@ -266,7 +266,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			while (counter < 200)
 			{
-				Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+				var thisStudioManager = new StudioSHAManager();
+				thisStudioManager.Wait_for_load();
+				Product topProduct = thisStudioManager.GetTopXProducts(1).FirstOrDefault();
 
 				if (topProduct == null || !(topProduct.Status == status && topProduct.ID == ID))
 				{
@@ -469,9 +471,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 					var ProductDetails = (ProductInformation)Context.GetFromContext(thisProduct["ProductID"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
 					ID = ProductDetails.Id;
 				}
+				StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+				Report.IsTrue(thisStudioSHAManager.SelectProductByID(ID), "Failed to select: " + ID, "Selected: " + ID);
 			}
-			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
-			thisStudioSHAManager.SelectProductByID(ID);
+
 		}
 		[StepDefinition(@"In SHA Manager I select the first product")]
 		public void GivenInSHAManagerISelectTheProduct(string savedAs)
@@ -485,5 +488,108 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
 			thisStudioSHAManager.SelectProductByID(id);
 		}
+
+		[StepDefinition(@"I Click the Process Recertification button")]
+		public void GivenIClickTheProcessRecertificationButton()
+		{
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			Report.IsTrue(thisStudioSHAManager.ClickProcessRecertification(), "Failed to click process recertification",
+				"Clicked process recertification");
+		}
+
+		[StepDefinition(@"I Confirm the Recertification pop up is shown")]
+		public void GivenIConfirmTheRecertificationPopUpIsShown()
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(thisRecertificationPopup.WaitForLoad(60), "Recertification popup is not showing",
+				"Recertification popup is showing");
+		}
+
+		[StepDefinition(@"I Uncheck the Auto Assign Regulatory Specialist to Product check box")]
+		public void GivenIUncheckTheAutoAssignRegulatorySpecialistToProductCheckBox()
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(thisRecertificationPopup.SetAutoAssignRegulatorySpecialistToProduct(false), "Failed to uncheck the Auto Assign Regulatory Specialist to Product check box",
+				"Unchecked the Auto Assign Regulatory Specialist to Product check box");
+		}
+
+		[StepDefinition(@"I Select (.*) from the drop down list for Select Regulatory Specialist")]
+		public void GivenISelectAutomatedQAShaFromTheDropDownListFor(string specialist)
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(thisRecertificationPopup.SelectRegulatorySpecialist(specialist), "Failed to select: " + specialist,
+				"Selected: " + specialist);
+		}
+
+		[StepDefinition(@"In the Recertification popup I click (.*)")]
+		public void GivenInTheRecertificationPopupIClick(string button)
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(thisRecertificationPopup.ClickButton(button), "Failed to click " + button ,
+				"Clicked " + button);
+		}
+
+		[StepDefinition(@"In the Recertification popup the (.*) button will no longer be shown")]
+		public void GivenInTheRecertificationPopupTheButtonWillNoLongerBeShown(string button)
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(!thisRecertificationPopup.ButtonExists(button), "Button is showing which should not be",
+				"As expected button is not showing");
+		}
+
+		[StepDefinition(@"in the Recertification popup I wait for all processing to be completed")]
+		public void GivenInTheRecertificationPopupIWaitForAllProcessingToBeCompleted()
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(!thisRecertificationPopup.WaitForProcessing(240), "Processing has not completed as expected",
+				"Processing has completed as expected");
+		}
+
+		[StepDefinition(@"in the Recertification popup I should see the following products as successfully assigned")]
+		public void GivenInTheRecertificationPopupIShouldSeeTheFollowingProductsAsSuccessfullyAssigned(TechTalk.SpecFlow.Table productsExpected)
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			bool passedAll = true;
+			List<string> processedInfo = thisRecertificationPopup.GetProcessingMessages();
+
+			string ID = "";
+			string expectedString = "";
+			List<ProductInformation> ListOfProducts = new List<ProductInformation>();
+			foreach (TechTalk.SpecFlow.TableRow thisProduct in productsExpected.Rows)
+			{
+				if (thisProduct["ProductID"].ToLower().Contains("saved as"))
+				{
+					var ProductDetails = (ProductInformation)Context.GetFromContext(thisProduct["ProductID"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
+					ListOfProducts.Add(ProductDetails);
+					ID = ProductDetails.Id;
+				}
+
+				expectedString = "Product: " + ID + " succesfully assigned";
+
+				var match = processedInfo.FirstOrDefault(x => x.Contains(expectedString));
+				if (match == null)
+				{
+					Report.Info("No match was found for: " + expectedString);
+					passedAll = false;
+
+				}
+				else
+				{
+					Report.Info("Found: " + match);
+				}
+
+			}
+
+			Report.IsTrue(passedAll, "Not all expected messages were found", "All expected messages were found");
+		}
+
+		[StepDefinition(@"I Confirm the Recertification pop up is closed")]
+		public void GivenIConfirmTheRecertificationPopUpIsClosed()
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(!thisRecertificationPopup.WaitForLoad(1), "Recertification popup is not closed",
+				"Recertification popup is closed");
+		}
+
 	}
 }

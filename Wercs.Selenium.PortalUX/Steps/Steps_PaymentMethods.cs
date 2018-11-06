@@ -741,10 +741,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var mySub = new PaymentMethods_Subscription_Billing();
+				for (int i = 0; i < 60; i++)
+				{
+					if (mySub.ConfirmOrderButtonExists())
+					{
+						break;
+					}
+					Delay.Seconds(1);
+				}
+
 				if (mySub.ConfirmOrderButtonExists())
 				{
 					Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
 					Delay.Seconds(20 * Delay.SpeedFactor);
+				}
+				else
+				{
+					Report.Info("Confirm order button does not exist");
+					Report.Screenshot();
 				}
 
 

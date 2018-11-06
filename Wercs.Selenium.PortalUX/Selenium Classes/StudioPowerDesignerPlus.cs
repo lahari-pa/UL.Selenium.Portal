@@ -27,7 +27,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 
 			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-
+			bool foundPopup = false;
 			foreach (var handle in urls)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Welcome"))
@@ -35,8 +35,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Welcome");
 					Report.Screenshot();
+					foundPopup = true;
 					break;
 				}
+			}
+
+			if (!foundPopup)
+			{
+				return false;
 			}
 
 			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));

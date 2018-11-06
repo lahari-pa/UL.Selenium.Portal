@@ -347,6 +347,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenISelectTheRetailer_InTheWindow(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();
+			if (!selectRetailers.Wait_for_load(1))
+			{
+				var thisNewProduct = new NewProduct();
+				thisNewProduct.ClickAddARetailers();
+				Delay.Seconds(1);
+			}
+			if (!selectRetailers.Wait_for_load(1))
+			{
+				throw new Exception("Select retailers popup is not showing as expected");
+			}
 			Report.IsTrue(selectRetailers.SelectRetailer(retailer), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
 			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
 		}
@@ -1710,8 +1720,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Data Acceptance page I click on the Accept button")]
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
-			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to Click accept button", "Clicked accept button");
-			GeneralUtilities.Wait_for_load_finish();
+			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button",true);
 		}
 
 		[StepDefinition(@"In the Data Acceptance page I see the Accept button")]
@@ -3515,6 +3524,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Steps_PaymentMethods MyStepsPaymentMethods = new Steps_PaymentMethods();
 			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
+			GeneralUtilities.StudioWaitForSpinner();
 			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
 		}
 
@@ -3814,6 +3824,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I Change the Secondary Physical State drop down from its current selection to a new selection")]
 		public void GivenIChangeTheSecondaryPhysicalStateDropDownFromItsCurrentSelectionToANewSelection()
 		{
+			Report.Info("Changing secondary physical state");
 			NewProduct thisNewProduct = new NewProduct();
 			string currentlySelected = thisNewProduct.SelectedOptionsForSection("Secondary Physical State").FirstOrDefault();
 			List<string> available = thisNewProduct.GetAllOptionsForSection("Secondary Physical State");
@@ -3850,6 +3861,35 @@ namespace Wercs.Selenium.PortalUX.Steps
 				$"Failed to set the Product Line or Brand option to: {brand}!");
 			Report.Info($@"Saving brand ""{brand}"" to context as: Brand{testCaseId}");
 			Context.AddToContext($"Brand{testCaseId}", brand);
+		}
+
+		[StepDefinition(@"Data Acceptance page should not show")]
+		public void DataAcceptancePageShouldNotShow()
+		{
+			bool pageHasDisappeared = false;
+			NewProduct thisNewProduct = new NewProduct();
+			for (int i = 0; i < 120; i++)
+			{
+				if (!thisNewProduct.YesAgreedExists())
+				{
+					pageHasDisappeared = true;
+					break;
+				}
+
+				Delay.Seconds(1);
+			}
+
+			Report.IsTrue(pageHasDisappeared, "Data acceptance page is still showing",
+				"Data acceptance page has gone as expected");
+		}
+
+		[StepDefinition(@"For retailer: (.*) I add additional requirements: (.*)")]
+		public void ThenIAddAdditionaRequirmentsInfoForRetailer(string retailer, string additionalRequirements)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			Report.IsTrue(thisNewProduct.EnterAdditionalRequirement(retailer, additionalRequirements),
+				"Failed to enter additional requirements: " + additionalRequirements + " for retailer: " + retailer,
+				"Added additional requirements for retailer: " + retailer);
 		}
 	}
 }

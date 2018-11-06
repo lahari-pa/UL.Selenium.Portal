@@ -1543,6 +1543,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.Selected;
 		}
 
+		public bool YesAgreedExists()
+		{
+			try
+			{
+				var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Yes, Agreed')]/../input"), 2);
+				if (el == null)
+				{
+					return false;
+				}
+				return true;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
 		public bool AcceptRadioIsSelected()
 		{
 			var el = containerElement.FindElement(By.XPath(".//span[contains(text(), 'Accept')]/../input"), 2);
@@ -1619,7 +1636,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			return el.TryClick();
+			if (el.TryClick())
+			{
+				Delay.Seconds(1);
+				Report.Info("Clicked accept button. Beginning wait for loading to finish");
+				return GeneralUtilities.WaitForRefreshToDisappear(el, 120);
+			}
+			else
+			{
+				Report.Info("Failed to click accept button");
+				return false;
+			}
 		}
 
 
@@ -4553,6 +4580,29 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return null;
 			}
+		}
+
+		public bool EnterAdditionalRequirement(string retailerName, string valueToEnter)
+		{
+			var selectedRetailersNames = containerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
+			var matchingRetailer = selectedRetailersNames.FirstOrDefault(x => x.GetValue().Trim().ToLower() == retailerName.ToLower());
+			if (matchingRetailer == null)
+			{
+				Report.Info("No matching retailer was found in selected retailers: " + retailerName);
+				return false;
+			}
+
+			var additionalRequirementInput = matchingRetailer.FindElement(By.XPath("..//input[@type='text']"),2);
+			if (additionalRequirementInput == null)
+			{
+				Report.Info("No input was found for retailer: " + retailerName);
+				return false;
+			}
+
+			additionalRequirementInput.EnterText(valueToEnter);
+
+			return additionalRequirementInput.GetValue() == valueToEnter;
+
 		}
 
 		public string VOCContentInGPerL()

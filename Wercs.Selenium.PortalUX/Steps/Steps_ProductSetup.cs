@@ -18,7 +18,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 	[Binding, Scope(Tag = "ProductSetUp")]
 	class Steps_ProductSetup : TechTalk.SpecFlow.Steps
 	{
-		[StepDefinition(@"I create a Walmart product and take to completed using Test Case 75335 \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
+		[StepDefinition(
+			@"I create a Walmart product and take to completed using Test Case 75335 \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
 		public void CreateProductUsingTestCase75335Walmart(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -48,7 +49,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// Select Walmart as the retailer and continue
 			sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
 			// 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335", "Metal Container", "40");
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335",
+				"Metal Container", "40");
 			// 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
 			// Click continue
@@ -56,9 +58,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// Click continue
 			newProductSteps.ClickContinue();
 			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
 			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
-			sharedSteps.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(sdsTable);
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
 			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -70,13 +76,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Submitted");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Assigned");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Assigned");
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
@@ -90,19 +98,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Accepted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Accepted");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Accepted");
 			// 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", savedAs);
 			// 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75335)
 			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-				"Retailer"});
+				"Retailer"
+			});
 			table4.AddRow(new string[] {
-				"CVS"});
+				"CVS"
+			});
 			sharedSteps.GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(savedAs, table4);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Completed");
 		}
 
 		[Given(@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
@@ -133,12 +145,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				throw new Exception("Unable to locate a test case ID in global parameters which is required!");
 			}
-			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: Brand Product " + testCaseId);
+
+			TestReport.StartStep(
+				"I set the Product Name as it a appears on the Package Label option to: Brand Product " + testCaseId);
 			newProductSteps.SetTheSectionOptionTo("Product Name as it a appears on the Package Label",
 				"Brand Product " + testCaseId);
-			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: Bleach in the Type of Product select field");
+			TestReport.StartStep(
+				"In the Product Type tab of the New Product Page, I enter: Bleach in the Type of Product select field");
 			newProductSteps.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField("Bleach");
-			TestReport.StartStep("I select the first option in the 'Product Line or Brand' drop down and save as: Brand" + testCaseId);
+			TestReport.StartStep(
+				"I select the first option in the 'Product Line or Brand' drop down and save as: Brand" + testCaseId);
 			newProductSteps.SelectFirstOptionInBrandDropDown();
 			TestReport.StartStep("I click Continue");
 			newProductSteps.ClickContinue();
@@ -171,18 +187,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			newProductSteps.ThenIClickSaveOrCancelInTheProductPage("Save");
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Completed");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedIndicatingARecertification(savedAs);
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 
 			TechTalk.SpecFlow.Table recertification = new TechTalk.SpecFlow.Table(new string[] {
 				"Product ID",
 				"Active",
-				"Recertification Reason"});
+				"Recertification Reason"
+			});
 			recertification.AddRow(new string[] {
 				"saved as " + savedAs,
 				"true",
-				"Recertification of Product by WERCSmart Customer"});
+				"Recertification of Product by WERCSmart Customer"
+			});
 			shaSteps.GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(recertification);
 			shaSteps.GivenICloseTheProductRecertificationHistoryPopUp();
 			thisGlobalSteps.NavigateToLandingPage();
@@ -193,6 +212,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsProductGrid.ClickRowAction("Update Required");
 			//#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 			newProductSteps.GivenIShouldSeeXPage("The Product");
+			//newProductSteps.GivenInTheNewProductPageIClickTab("Product Characteristics");
 			newProductSteps.GivenInTheNewProductPageIClickSection("Product Characteristics");
 			newProductSteps.GivenIChangeTheSecondaryPhysicalStateDropDownFromItsCurrentSelectionToANewSelection();
 			newProductSteps.ThenIClickSaveOrCancelInTheProductPage("Save");
@@ -206,28 +226,31 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsProductGrid.GivenForProductSavedAsTestCaseTheStatusIs(savedAs, "Assessment in Progress");
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Recertification");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Recertification");
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 
 			TechTalk.SpecFlow.Table recertification2 = new TechTalk.SpecFlow.Table(new string[] {
 				"Product ID",
 				"Active",
-				"Recertification Reason"});
+				"Recertification Reason"
+			});
 			recertification2.AddRow(new string[] {
 				"saved as " + savedAs,
 				"false",
-				"Recertification of Product by WERCSmart Customer"});
+				"Recertification of Product by WERCSmart Customer"
+			});
 			shaSteps.GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(recertification2);
 			shaSteps.GivenICloseTheProductRecertificationHistoryPopUp();
 
 		}
-
+		/*
 		[Given(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
-		public void GivenITakeProductFromCompletedToRecertification84108(string name, string savedAs)
+		public void GivenITakeProductWithNameFromCompletedToRecertification84108(string name, string savedAs)
 		{
 			this.TakeProductFromCompletedToRecertification84108(savedAs, name);
 		}
-
+		*/
 		[StepDefinition(@"I create a product and take to completed using Test Case 84108 and save as: (.*)")]
 		public void GivenITakeProductFromCompletedToRecertification84108(string savedAs)
 		{
@@ -278,7 +301,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 57510 \(Retailer Association - Select A Retailer - Continue - Happy Path\) and select the retailer: CVS
 			sharedSteps.GivenICallSharedRetailerAssociation_SelectARetailer_Continue_HappyPath("CVS");
 			// 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335", "Metal Container", "40");
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75335",
+				"Metal Container", "40");
 			// 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
 			// Click continue
@@ -286,9 +310,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// Click continue
 			newProductSteps.ClickContinue();
 			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature", "Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold", "Partition Coefficient");
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
 			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
-			sharedSteps.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(sdsTable);
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
 			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
 			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
 			// 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -300,18 +328,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Submitted");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Assigned");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Assigned");
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
-			Report.Info("75347 (WPS) Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase75335");
+			Report.Info(
+				"75347 (WPS) Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase75335");
 			sharedSteps.GivenICallSharedWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSAndSBCS(savedAs);
 			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
@@ -321,19 +352,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Accepted");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Accepted");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Accepted");
 			Report.Info("49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", savedAs);
 			Report.Info("51664 (SHA - Accepted); Product - set Retailers to Completed for saved as: TestCase75335)");
 			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-				"Retailer"});
+				"Retailer"
+			});
 			table4.AddRow(new string[] {
-				"CVS"});
+				"CVS"
+			});
 			sharedSteps.GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(savedAs, table4);
 			Report.Info("(SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			Report.Info("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+			Report.Info(
+				"In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Completed");
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var ID = ProductDetails.Id;
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
@@ -344,13 +380,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			string status = "Completed";
 			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
 				"SearchTerm",
-				"SearchValue"});
+				"SearchValue"
+			});
 			table.AddRow(new string[] {
 				"ProductID",
-				ID});
+				ID
+			});
 			table.AddRow(new string[] {
 				"Status",
-				status});
+				status
+			});
 			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 
 			Delay.Seconds(2);
@@ -365,9 +404,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		public void TakeProductFromCompletedToRecertification84108(string savedAs, string name)
+		[Given(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
+		public void TakeProductFromCompletedToRecertification84108(string name, string savedAs)
 		{
-			TestReport.UseSubSteps = true;
+			if (Context.Contains("ElectronicProduct"))
+			{
+				Context.AddToContext("ElectronicProduct","false");
+			}
+
+		TestReport.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -444,7 +489,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		public void TakeProductFromCompletedToRecertification84109(string savedAs, string name)
+
+		[StepDefinition(@"I create a product and take to completed using Test Case 84109 and save as: (.*)")]
+		public void TakeProductFromCompletedToRecertification84109(string savedAs, string name = "Answering machine, No battery included")
 		{
 			TestReport.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
@@ -460,8 +507,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
 			//And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
-			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Alkaline battery
-			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Alkaline battery", name);
+			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Answering machine, No battery included
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
 			//And I call Shared Step 69687(Additional Product Information - US, No(PL))
@@ -520,5 +567,125 @@ namespace Wercs.Selenium.PortalUX.Steps
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
 
 		}
+
+		[Given(@"I take a product from completed to recertification using Test Case 84511 saved: (.*)")]
+		public void GivenITakeAProductFromCompletedToRecertificationUsingTestCaseSavedTestCase(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var newProductSteps = new StepsNewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			var thisStepsProductGrid = new StepsProductGrid();
+			var thisStepsHomePage = new StepsHomepage();
+
+			//Given I navigate to the landing page
+			thisGlobalSteps.NavigateToLandingPage();
+			//Given I login into the WERCSmart Portal - Administrator Role
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//Given I search for the product saved as: TestCase84511
+			thisStepsProductGrid.GivenISearchForTheProductSavedAs(savedAs);
+			//Given For product saved as: TestCase84511 the status is: Completed
+			thisStepsProductGrid.GivenForProductSavedAsTestCaseTheStatusIs(savedAs, "Completed");
+			//And I click Row Actions for the first product returned
+			thisStepsProductGrid.WhenIClickRowActionsForTheFirstProductReturned();
+			//And I click on the Row Action: Update Data
+			thisStepsProductGrid.ClickRowAction("Update Data");
+			//#And If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+			//And I should see the The Product Page
+			newProductSteps.GivenIShouldSeeXPage("The Product");
+			//Then I click Save in The Product Page
+			newProductSteps.ThenIClickSaveOrCancelInTheProductPage("Save");
+			//Given I call Shared Step 65080(Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			//Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Completed
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its font is red indicating a recertification
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedIndicatingARecertification(savedAs);
+			//And I call Shared Step 51351(SHA > Select Product > View Recertification History) for product saved as: TestCase84511
+			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
+			//And In the Product Recertification History popup I should see the following entry
+			//| Product ID | Active | Recertification Reason |
+			//| saved as TestCase84511 | true | Recertification of Product by WERCSmart Customer |
+			TechTalk.SpecFlow.Table recertification = new TechTalk.SpecFlow.Table(new string[] {
+				"Product ID",
+				"Active",
+				"Recertification Reason"});
+			recertification.AddRow(new string[] {
+				"saved as " + savedAs,
+				"true",
+				"Recertification of Product by WERCSmart Customer"});
+			shaSteps.GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(recertification);
+			//And I Close the Product Recertification History pop up
+			shaSteps.GivenICloseTheProductRecertificationHistoryPopUp();
+
+			//Given I navigate to the landing page
+			thisGlobalSteps.NavigateToLandingPage();
+			//Given I login into the WERCSmart Portal - Administrator Role
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//Given I search for the product saved as: TestCase84511
+			thisStepsProductGrid.GivenISearchForTheProductSavedAs(savedAs);
+			//Given For product saved as: TestCase84511 the status is: Needs Your Attention
+			thisStepsProductGrid.GivenForProductSavedAsTestCaseTheStatusIs(savedAs, "Needs Your Attention");
+			//And I click Row Actions for the first product returned
+			thisStepsProductGrid.WhenIClickRowActionsForTheFirstProductReturned();
+			//And I click on the Row Action: Update Required
+			thisStepsProductGrid.ClickRowAction("Update Required");
+			//#And if you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
+			//And I should see the The Product Page
+			newProductSteps.GivenIShouldSeeXPage("The Product");
+			//And In the New Product page I click tab: Product Characteristics
+			newProductSteps.GivenInTheNewProductPageIClickTab("Product Characteristics");
+			//And in the New Product page I click section: Toxicity Characteristic Leaching Procedure(TCLP)
+			newProductSteps.GivenInTheNewProductPageIClickSection("Toxicity Characteristic Leaching Procedure (TCLP)");
+			//And I set the Lead option to: Yes
+			newProductSteps.SetTheSectionOptionTo("Lead", "Yes");
+			//And I set the Mercury option to: Yes
+			newProductSteps.SetTheSectionOptionTo("Mercury", "Yes");
+			//And I set the Silver option to: Yes
+			newProductSteps.SetTheSectionOptionTo("Silver", "Yes");
+			//Then I click Save in The Product Page
+			newProductSteps.ThenIClickSaveOrCancelInTheProductPage("Save");
+			//And In the New Product page I click tab: Review and Submit
+			newProductSteps.GivenInTheNewProductPageIClickTab("Review and Submit");
+			//And in the New Product page I click section: Data Acceptance
+			newProductSteps.GivenInTheNewProductPageIClickSection("Data Acceptance");
+			//And In the Data Acceptance page I click on the Accept button
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+			//Given If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			//And I navigate to the home page
+			thisStepsHomePage.ThenINavigateToTheHomePage();
+			//And I search for the product saved as: TestCase84511
+			thisStepsProductGrid.GivenISearchForTheProductSavedAs(savedAs);
+			//Given For product saved as: TestCase84511 the status is: Assessment in Progress
+			thisStepsProductGrid.GivenForProductSavedAsTestCaseTheStatusIs(savedAs, "Assessment in Progress");
+			//Given I call Shared Step 65080(Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			//Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Recertification
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Recertification");
+			//# And I Confirm your product is shown in the Recertification status without the red recertification font color
+			//And I call Shared Step 51351(SHA > Select Product > View Recertification History) for product saved as: TestCase84511
+			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
+			//And In the Product Recertification History popup I should see the following entry
+			//| Product ID | Active | Recertification Reason |
+			//| saved as TestCase84511 | false | Recertification of Product by WERCSmart Customer |
+			TechTalk.SpecFlow.Table recertification2 = new TechTalk.SpecFlow.Table(new string[] {
+				"Product ID",
+				"Active",
+				"Recertification Reason"});
+			recertification2.AddRow(new string[] {
+				"saved as " + savedAs,
+				"false",
+				"Recertification of Product by WERCSmart Customer"});
+			shaSteps.GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(recertification2);
+			//And I Close the Product Recertification History pop up
+			shaSteps.GivenICloseTheProductRecertificationHistoryPopUp();
+		}
+
 	}
 }

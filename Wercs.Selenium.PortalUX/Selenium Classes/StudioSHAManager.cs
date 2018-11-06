@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
@@ -74,11 +75,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			ProductStatus thisProductStatus = new ProductStatus();
 			Report.Info("Beginning get product status by id: " + id);
-			int idIndex = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
 
 			try
 			{
+				int idIndex = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+
 				StudioSHAManager mySHAManager = new StudioSHAManager();
+				mySHAManager.Wait_for_load();
 				var matchingProduct = mySHAManager.GetTopXProducts(1).FirstOrDefault(x => x.ID == id);
 
 				if (matchingProduct == null)
@@ -291,11 +294,46 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			if (matchingTD != null)
 			{
 				Report.Info("Found matching cell");
+				matchingTD = SeleniumBrowser.WebBrowser
+					.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+					.FirstOrDefault(x => x.GetValue().Trim() == id);
 				var checkbox = matchingTD.FindElement(By.XPath("../td/input"));
 				if (checkbox != null)
 				{
-					checkbox.Check(true);
-					return checkbox.Checked();
+					if (checkbox.Checked())
+					{
+						Report.Info("Checkbox is already checked");
+						return true;
+					}
+					checkbox.TryClick();
+					if (checkbox.Checked())
+					{
+						Report.Screenshot();
+						return true;
+					}
+					else
+					{
+						Report.Info("Attempted to check checkbox but failed.");
+						return false;
+					}
+				}
+				else
+				{
+					Report.Info("Checkbox has not been found");
+					matchingTD = SeleniumBrowser.WebBrowser
+						.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+						.FirstOrDefault(x => x.GetValue().Trim() == id);
+					checkbox = matchingTD.FindElement(By.XPath("../td/input"));
+					if (checkbox != null)
+					{
+						checkbox.Check(true);
+						Report.Screenshot();
+						return true;
+					}
+					else
+					{
+						Report.Error("Checkbox has not been found");
+					}
 				}
 			}
 			else
@@ -695,6 +733,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return matchingOption.TryClick();
 		}
+
+		public bool ClickProcessRecertification()
+		{
+			try
+			{
+				var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkRecertification']"));
+				return button.TryClick();
+			}
+			catch (Exception e)
+			{
+				Report.Error("process recertification button was not found");
+				return false;
+			}
+
+		}
+
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -1068,6 +1122,197 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	}
 
+	class RecertificationPopup : BaseObject
+	{
+		public const string BasePath = "//div[@id='dialog-recertification']";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool WaitForLoad(int secondsToWait)
+		{
+			for (int i = 0; i < secondsToWait; i++)
+			{
+				try
+				{
+					if (this.PopupExists())
+					{
+						return true;
+					}
+				}
+				catch (Exception e)
+				{
+					//do nothing
+				}
+				Delay.Seconds(1);
+			}
+
+			return false;
+		}
+
+		public bool PopupExists()
+		{
+			return containerElement.Displayed;
+		}
+
+		public bool SetAutoAssignRegulatorySpecialistToProduct(bool setChecked)
+		{
+			var checkBox =
+				SeleniumBrowser.WebBrowser.FindElement(
+					By.XPath("//div[@id='dialog-recertification']//input[@id='chkAutoAssignUserRecert']"), 2);
+
+			if (checkBox != null)
+			{
+				if (checkBox.Checked())
+				{
+					if (setChecked)
+					{
+						Report.Info("Checkbox is already checked");
+						return true;
+					}
+					else
+					{
+						return checkBox.TryClick();
+
+					}
+				}
+				else
+				{
+					if(!setChecked )
+					{
+						Report.Info("Checkbox is already unchecked");
+						return true;
+					}
+					else
+					{
+						return checkBox.TryClick();
+
+					}
+				}
+
+			}
+
+			return false;
+		}
+
+		public bool ClickButton(string buttonName)
+		{
+			var buttons =
+				SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='dialog-recertification']/..//button"));
+
+			var matchingButton =
+				buttons.FirstOrDefault(x => x.FindElement(By.XPath("./span")).GetValue().Contains(buttonName));
+
+			if (matchingButton == null)
+			{
+				Report.Info("Could not find button: " + buttonName);
+				return false;
+			}
+
+			return matchingButton.TryClick();
+		}
+
+		public bool ButtonExists(string buttonName)
+		{
+			var buttons =
+				SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='dialog-recertification']/..//button"));
+			var matchingButton =
+				buttons.FirstOrDefault(x => x.FindElement(By.XPath("./span")).GetValue().Contains(buttonName));
+
+			if (matchingButton == null)
+			{
+				Report.Info("Could not find button: " + buttonName);
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool SelectRegulatorySpecialist(string specialistName)
+		{
+			var selectSpecialist =
+				SeleniumBrowser.WebBrowser.FindElement(
+					By.XPath("//div[@id='dialog-recertification']//select[@id='regUsers']"), 2);
+
+			if (selectSpecialist == null)
+			{
+				Report.Info("Select box was not found");
+				return false;
+			}
+
+			var ListOfSpecialists= SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath("//div[@id='dialog-recertification']//select[@id='regUsers']/option"), 2);
+
+			var matchingItem = ListOfSpecialists.FirstOrDefault(x => x.GetValue().Contains(specialistName));
+
+			if (matchingItem == null)
+			{
+				Report.Info("Specialist: " + specialistName + " was not found in the list", "Found specialist");
+				return false;
+			}
+
+			return matchingItem.TryClick();
+		}
+
+		public bool WaitForProcessing(int secondsToWait)
+		{
+			string progress = "0";
+			for (int i = 0; i < secondsToWait; i++)
+			{
+				var progressBar =
+					SeleniumBrowser.WebBrowser.FindElement(
+						By.XPath("//div[@id='dialog-recertification']//div[@id='progBarRecertification']"), 2);
+
+				if (progressBar != null)
+				{
+					progress = progressBar.GetProperty("aria-valuenow");
+
+					if (progress == "100")
+					{
+						return true;
+					}
+					else
+					{
+						Report.Info("Progress is: " + progress);
+					}
+				}
+				else
+				{
+					Report.Info("Progress bar was not found");
+					return false;
+				}
+
+				Delay.Seconds(1);
+			}
+
+			return false;
+
+		}
+
+		public List<string> GetProcessingMessages()
+		{
+			var progressMessage =
+				SeleniumBrowser.WebBrowser.FindElement(
+					By.XPath("//div[@id='dialog-recertification']//span[@id='msgRecertification']"), 2);
+
+			if (progressMessage == null)
+			{
+				Report.Info("Progress message was not found");
+				return new List<string>();
+			}
+
+			var progressMessages = progressMessage.FindElements(By.XPath("./span"));
+			if (progressMessages.Count == 0)
+			{
+				Report.Info("Progress messages not found");
+				return new List<string>();
+			}
+
+			return progressMessages.Select(x => x.GetValue()).ToList();
+
+		}
+
+	}
 
 	class Product
 	{

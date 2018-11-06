@@ -349,7 +349,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80089 and its status is: Assigned
 And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80089)
 And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80089)
-And I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase80763
+And I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase80089
 And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase80089)
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80089)
@@ -474,7 +474,7 @@ And I should see the The Product Page
 Then I click Save in The Product Page
 
 #Scenario: Test
-#Given I save to context name: TestCase75410 and value: 1524399
+#Given I save to context name: TestCase75410 and value: 1524479
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75410)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its status is: Completed
@@ -514,15 +514,17 @@ Given I navigate to the landing page
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75410
 
-
+@Test11
 Scenario: [84507] Recertification > Process recertification > Process multiple products
 Given I create a product with name: 8450712 and take to completed using Test Case 84108 and save as: TestCase845072
 Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072
-Given I create a product with name: 8450713 and take to completed using Test Case 84109 and save as: TestCase845073
-Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845073
 Given I create a product with name: 8450711 and take to completed using Test Case 75335 and save as: TestCase845071
 Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845071
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I create a product with name: 8450713 and take to completed using Test Case 84109 and save as: TestCase845073
+Given I take a product from completed to recertification using Test Case 84511 saved: TestCase845073
+
+#Scenario: Test
+#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Recertification Status for saved as: TestCase84511)
 Given In SHA Manager ProductSearch page I run search:
 | Status          | SearchPattern | ProductName |
@@ -535,19 +537,71 @@ Given In SHA Manager I select the following products:
 And I Click the Process Recertification button
 And I Confirm the Recertification pop up is shown
 And I Uncheck the Auto Assign Regulatory Specialist to Product check box
-And I Select your name from the drop down list for "Select Regulatory Specialist"
-And I Click Continue
-And I The Continue button will no longer be shown
-And I After a short interval the Progress bar will show as grey hatching indicating processing of the first product has finished
-And I After each product is processed the progress bar will move along until it it shown in complete grey color
-And I Confirm The Product Processed area shows your three products WPS ID and name
-And I Confirm you see Product: &lt;wps id&gt; successfully assigned for each of the three productsWhere &lt;wps id&gt; shows the ID of the product you are working with
-And I Click Cancel
+And I Select AutomatedQASha  from the drop down list for Select Regulatory Specialist
+And In the Recertification popup I click Continue
+And In the Recertification popup the Continue button will no longer be shown
+#And I After a short interval the Progress bar will show as grey hatching indicating processing of the first product has finished
+#And I After each product is processed the progress bar will move along until it it shown in complete grey color
+And in the Recertification popup I wait for all processing to be completed
+And in the Recertification popup I should see the following products as successfully assigned
+| ProductID               |
+| saved as TestCase845071 |
+| saved as TestCase845072 |
+| saved as TestCase845073 |
+And In the Recertification popup I click Continue
 And I Confirm the Recertification pop up is closed
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And I Confirm the product is shown in the Assigned status
-And I Automation can stop here, unless you are using the existing products.  If you are manually testing please reset the products you are working with to Completed status using the steps below
-And I Use Test case 84518 to process the formulated product back to Completed
-And I Use Test case 84524 to process the Battery Stand alone product back to Completed
-And I Use test case 84524 to process the Electronic product back to completed
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase845072)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845071 and its status is: Assigned
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase845072)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845072 and its status is: Assigned
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase845072)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase845073 and its status is: Assigned
 
+
+@Test12
+Scenario: [85965] Create a new simple product (Chalk) with SOLD = US Only, PL = Yes and submit thru to Completed status (NGHS only)
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I generate a random UPC number and save as: UPC85965
+Given I delete all products with UPC Number: saved as UPC85965
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase85965
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
+| Retailer       |
+| CVS            |
+| Dollar General |
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC85965, container type: Metal Container and size: 40
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Depending on your subscription you will either see the Purchase summary success message or you will see the Purchase summary with you product details shown.  If the product details are shown click Confirm order
+Given If purchase details are showing click confirm order
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85965)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85965 and its status is: Submitted
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase85965)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85965)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85965 and its status is: Assigned
+And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase85965)
+And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase85965)
+Given I call Shared Step 85983 - WPS Studio - PD\+ PLP with NGHS only - set all data and publish using rule and DOC queue for product saved as: TestCase85965
+And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase85965)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85965)
+#Note: If the retailer you selected does not have a feed then the retailer will be shown in Completed status
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85965 and its status is: Accepted
+Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase85965) for
+| Retailer       |
+| CVS            |
+| Dollar General |
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85965)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85965 and its status is: Completed
