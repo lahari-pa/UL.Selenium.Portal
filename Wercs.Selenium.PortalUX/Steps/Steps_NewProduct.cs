@@ -1394,6 +1394,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void PrimaryPhysicalOptionsShowingCorrectly(Table table)
 		{
 			var expected = new List<string>();
+			table.Rows.ForEach(x => expected.Add(x["State"]));
 			var found = new NewProduct().ListOfPrimaryPhysicalStates();
 			Report.Info("Primary Physical States found: " + string.Join(", ", found));
 			foreach (var state in expected)
