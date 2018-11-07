@@ -5418,7 +5418,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//And I Select the rule by clicking on it
 			//	And I Check that the Product group radio button is selected
 			//	And I Click Apply
-			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("Starts with...", "rule name");
+			thisStepsStudio.InSelectRulesFilterPopupISelectFromSelectBox("...Contains...", "rule name");
 			TestReport.StartStep("In the rule name filter box I enter the studio user name");
 			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
@@ -5442,13 +5442,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//	And I Enter you product id in the Product/ Alias area of the filter and click Apply
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
-			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Starts with...", @"Product\Alias");
 			TestReport.StartStep("I enter the product id in the Product/Alias area of the filter and click Apply");
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
 			Delay.Seconds(3);
 			Report.Screenshot();
-			//	And I Confirm your product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF, you will see entries for the product and its aliases(Private Label products have aliases in WPS Studio).
+			//	And I Confirm your product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF,
+			// you will see entries for the product and its aliases(Private Label products have aliases in WPS Studio).
 			TestReport.StartStep("I confirm the product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF");
 			TechTalk.SpecFlow.Table tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
 				"ProductOrAlias",
@@ -5457,25 +5458,73 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"DocType"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
+				id,
 				"SBCS",
 				"EN",
 				"PDF"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
+				id,
 				"NGHS",
 				"EN",
 				"PDF"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
+				id,
 				"NGHS",
 				"EN",
 				"RTF"
 			});
 			tblCheckDocument.AddRow(new string[] {
-				"saved as " + savedAs,
+				id,
+				"CKLT",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				id + "_CV",
+				"SBCS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				id + "_CV",
+				"NGHS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				id + "_CV",
+				"NGHS",
+				"EN",
+				"RTF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				id + "_CV",
+				"CKLT",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				id + "_DG",
+				"SBCS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				id + "_DG",
+				"NGHS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				id + "_DG",
+				"NGHS",
+				"EN",
+				"RTF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				id + "_DG",
 				"CKLT",
 				"EN",
 				"PDF"

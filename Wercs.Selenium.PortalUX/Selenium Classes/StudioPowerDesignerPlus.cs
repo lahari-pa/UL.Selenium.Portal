@@ -1349,38 +1349,62 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickButton(string name)
 		{
-			try
-			{
-				var buttonList = containerElement.FindElements(By.XPath(".//table[@id='Table2']//a"));
-				IWebElement matchingButton;
 
-				switch (name.ToLower())
+				for (int i = 0; i < 60; i++)
 				{
-					case "preview":
-						matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkPreview");
-						break;
-					case "apply":
-						matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkApply");
-						break;
-					case "preview in word":
-						matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkPreviewInWord");
-						break;
-					case "close":
-						matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkClose");
-						break;
-					default:
-						Report.Error("You must provide a valid button name. You supplied: " + name);
-						return false;
+					try
+					{
+						var buttonList = containerElement.FindElements(By.XPath(".//table[@id='Table2']//a"));
+
+						IWebElement matchingButton;
+
+						switch (name.ToLower())
+						{
+							case "preview":
+								matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkPreview");
+								break;
+							case "apply":
+								matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkApply");
+								break;
+							case "preview in word":
+								matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkPreviewInWord");
+								break;
+							case "close":
+								matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkClose");
+								break;
+							default:
+								Report.Error("You must provide a valid button name. You supplied: " + name);
+								return false;
+						}
+
+						if (matchingButton != null)
+						{
+							if (matchingButton.TryClick())
+							{
+								Delay.Seconds(2);
+								return true;
+							}
+							else
+							{
+								Report.Info("Failed to click button although it was found");
+							}
+
+						}
+						else
+						{
+							Report.Info("No matching buttons found");
+						}
+
+					}
+					catch (Exception e)
+					{
+						Report.Info("List of buttons not found");
+					}
+					Delay.Seconds(1);
 				}
 
-				return matchingButton.TryClick();
 
-			}
-			catch (Exception e)
-			{
-				return false;
-			}
-
+			return false;
 		}
 
 

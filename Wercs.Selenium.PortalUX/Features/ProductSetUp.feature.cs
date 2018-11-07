@@ -549,13 +549,6 @@ testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All
 #line 153
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 a" +
                     "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 154
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 155
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 156
-testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase79428", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -669,13 +662,6 @@ testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All
 #line 191
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase84108 a" +
                     "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 192
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 193
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 194
-testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84108", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -821,13 +807,6 @@ testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All
 #line 242
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase80768 a" +
                     "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 243
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 244
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 245
-testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase80768", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1009,13 +988,6 @@ testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All
 #line 302
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase80763 a" +
                     "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 303
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 304
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 305
-testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase80763", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1199,13 +1171,6 @@ testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All
 #line 356
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase80089 a" +
                     "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 357
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 358
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 359
-testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase80089", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1313,13 +1278,6 @@ testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All
 #line 395
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 a" +
                     "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 396
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 397
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 398
-testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84109", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1458,13 +1416,6 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
 testRunner.And("In the Product Recertification History popup I should see the following entry", ((string)(null)), table24, "And ");
 #line 455
 testRunner.And("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 456
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 457
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 458
-testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase84511", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1593,13 +1544,6 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
 testRunner.And("In the Product Recertification History popup I should see the following entry", ((string)(null)), table26, "And ");
 #line 512
 testRunner.And("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 513
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 514
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 515
-testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase75410", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

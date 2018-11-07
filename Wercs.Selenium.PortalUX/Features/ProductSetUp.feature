@@ -151,9 +151,9 @@ Given I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish 
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase79428)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase79428 and its status is: Completed
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase79428
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase79428
 
 @Test4
 Scenario: [84108] Create Battery (Stand alone) - process to Completed (Alkaline Battery)
@@ -189,9 +189,9 @@ And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Mu
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84108)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84108 and its status is: Completed
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84108
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84108
 
 @Test5
 Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic component) - thru to Completed (includes adding WPSxxxxxx component)
@@ -240,9 +240,9 @@ And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Mu
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80768)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80768 and its status is: Completed
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80768
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80768
 
 @Test6
 Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include generic component) - thru to Completed (includes adding WPSxxxxxx component)
@@ -300,9 +300,9 @@ And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Mu
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80763)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80763 and its status is: Completed
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80763
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80763
 
 @Test7
 Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
@@ -354,9 +354,9 @@ And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Mu
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80089)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80089 and its status is: Completed
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80089
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80089
 
 @Test8
 Scenario: [84109] Create Electronic - process to Completed (Answering machine, no battery included)
@@ -393,9 +393,9 @@ And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRul
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase84109)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84109 and its status is: Completed
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84109
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84109
 
 @Test9
 Scenario: [84511] Electronic Product from Completed status to Recertification
@@ -453,9 +453,9 @@ And In the Product Recertification History popup I should see the following entr
 | Product ID             | Active | Recertification Reason                           |
 | saved as TestCase84511 | false  | Recertification of Product by WERCSmart Customer |
 And I Close the Product Recertification History pop up
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84511
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84511
 
 @Test10
 Scenario: [75410] Product from Completed status to Recertification
@@ -510,9 +510,9 @@ And In the Product Recertification History popup I should see the following entr
 | Product ID             | Active | Recertification Reason                           |
 | saved as TestCase75410 | false  | Recertification of Product by WERCSmart Customer |
 And I Close the Product Recertification History pop up
-Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75410
+#Given I navigate to the landing page
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75410
 
 @Test11
 Scenario: [84507] Recertification > Process recertification > Process multiple products
