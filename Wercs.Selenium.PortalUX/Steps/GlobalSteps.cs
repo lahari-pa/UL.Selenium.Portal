@@ -908,6 +908,7 @@ namespace WERCSmart
 		{
 			ProductInformation newProductInformation = new ProductInformation();
 			newProductInformation.Id = value;
+			newProductInformation.Name = value;
 			Context.AddToContext(name, newProductInformation);
 		}
 

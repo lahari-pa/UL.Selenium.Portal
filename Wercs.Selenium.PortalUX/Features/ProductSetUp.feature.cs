@@ -1828,6 +1828,107 @@ testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as produ
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted " +
+            "status 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Product set up and process to specific statuses (Suite ID: 75359)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("CreateProducts")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Studio")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductSetUp")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ProductSetUp")]
+        public virtual void _77859CreateAKit_DirectShipYesRetailerNotWalmartThruToSubmittedStatus1()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted " +
+                    "status 1", ((string[])(null)));
+#line 609
+this.ScenarioSetup(scenarioInfo);
+#line 614
+testRunner.Given("I create a product with name: 778591 and take to completed using Test Case 75335 " +
+                    "and save as: TestCase778591", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 615
+testRunner.Given("I create a product with name: 778592 and take to completed using Test Case 75335 " +
+                    "and save as: TestCase778592", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 616
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 621
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 622
+testRunner.Given("I generate a random UPC number and save as: UPC77859", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 623
+testRunner.Given("I delete all products with UPC Number: saved as UPC77859", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 624
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 626
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Personal Care kit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 627
+testRunner.Then("I save the product information as: TestCase77859", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 628
+testRunner.And("I call Shared Step 77872 (Additional Product Information - Kit flow - US only, Di" +
+                    "rect Ship (yes), Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 629
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 631
+testRunner.And("I call Shared Step 31427 (Create the Kit - Adding two products: product 1: TestCa" +
+                    "se778591  and product 2: TestCase778592)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 632
+testRunner.And("I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Ha" +
+                    "ppy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Retailer"});
+            table33.AddRow(new string[] {
+                        "CVS"});
+#line 634
+testRunner.Given("I call Shared Step 75146 (Retailer - Select one or more retailers that do not req" +
+                    "uire vendor ID or additional UPC information, Click Done, Click Continue) for", ((string)(null)), table33, "Given ");
+#line 637
+testRunner.And("I call Shared Step 42759 (Portal - UPC Page - add 1 UPC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 638
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+                    "d Comments Text 57863. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
+                    " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 639
+testRunner.Given("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 640
+testRunner.Given("If purchase details are showing click confirm order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 641
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 642
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase77859)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 643
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase77859 a" +
+                    "nd its status is: Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 645
+testRunner.And("I Confirm the Product ID: TestCase77859 is not highlited yellow indicating that t" +
+                    "his is not an e-comm/direct ship product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 646
+testRunner.And("I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific prod" +
+                    "uct > Click Continue for product saved as: TestCase77859)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 647
+testRunner.And("I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP " +
+                    "(Maxed Out)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 648
+testRunner.And("[Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 649
+testRunner.And("I Confirm no records are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

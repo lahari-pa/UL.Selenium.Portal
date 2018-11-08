@@ -327,6 +327,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			Report.Info(
+				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
 				"Submitted");
@@ -334,6 +336,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			Report.Info(
+				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
 				"Assigned");

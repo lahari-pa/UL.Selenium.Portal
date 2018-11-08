@@ -100,7 +100,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					i++;
 				}
 
-				return button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) != null;
+				return button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) == null;
 			}
 			catch (Exception e)
 			{

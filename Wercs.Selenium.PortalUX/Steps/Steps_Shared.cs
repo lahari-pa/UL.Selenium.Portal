@@ -5019,7 +5019,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I should only see the SOLD and Direct ship questions");
 			var sections = new Table("Section");
 			sections.AddRow("Select countries the product may be sold in");
-			sections.AddRow("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.");
+			sections.AddRow("Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.");
 			newProductSteps.CheckDisplayedSections("only see", sections);
 			TestReport.StartStep("I select the Yes button for the 'Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.' question");
 			newProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "Yes");
@@ -5033,15 +5033,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
 			var newProduct = new NewProduct();
-			var product1 = (ProductInformation)Context.GetFromContext(inputProduct1);
+			var product1 = (ProductInformation)Context.GetFromContext(inputProduct1.Trim());
 			if (product1 == null)
 			{
-				throw new Exception("");
+				throw new Exception("Failed to find product: " + inputProduct1);
 			}
-			var product2 = (ProductInformation)Context.GetFromContext(inputProduct2);
+			var product2 = (ProductInformation)Context.GetFromContext(inputProduct2.Trim());
 			if (product2 == null)
 			{
-				throw new Exception("");
+				throw new Exception("Failed to find product: " + inputProduct2);
 			}
 			TestReport.StartStep($"I add {product1.Id} to the kit");
 			newProductSteps.GivenInTheCreateTheKitPageISearchForAndSelectSavedAs(product1);
@@ -5635,5 +5635,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Accepted");
 
 		}
+
+		[Given(@"I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP \(Maxed Out\)")]
+		public void GivenICallSharedStep20375GoToProductAttributesViaAuthoringTabInPDPPAPMaxedOut()
+		{
+			TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+				"Item"
+			});
+			table3.AddRow(new string[] {
+				"Product Attributes"
+			});
+			new Steps_SHA().GivenIEditMyToolbarToAddTheFollowingOptions(table3);
+		}
 	}
+
+
+
 }

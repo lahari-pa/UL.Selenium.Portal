@@ -1041,10 +1041,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Given(@"In the SHA Manager product search I run the following search:")]
-		public void GivenInTheSHAManagerProductSearchIRunTheFollowingSearch(Table table)
+		[StepDefinition(@"I click on Product Attributes to open product attribute popup")]
+		public void IClickOnProductAttributesToOpenProductAttributePopup()
 		{
-			ScenarioContext.Current.Pending();
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30), "Studio power designer is not open",
+				"Studio power designer is open");
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("prodattributes"),
+				"Failed to click product attribute tool bar option", "Clicked product attribute tool bar option");
+
+
+
+			Delay.Seconds(3);
 		}
 
 	}

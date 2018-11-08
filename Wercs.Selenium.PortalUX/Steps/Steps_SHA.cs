@@ -648,5 +648,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[Given(@"I edit My Toolbar to add the following options")]
+		public void GivenIEditMyToolbarToAddTheFollowingOptions(Table table)
+		{
+			Steps_Studio thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
+			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table);
+			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
+		}
+
+
 	}
 }
