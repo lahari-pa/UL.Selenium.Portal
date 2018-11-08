@@ -40,6 +40,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return 0;
 			}
+
 			return productsGrid.FindElements(By.XPath(".//tbody/tr"), 2).Where(x => x.Displayed).ToList().Count;
 		}
 
@@ -219,6 +220,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					return row.FindElement(By.XPath(".//small"), 2)?.Text.Trim();
 				}
 			}
+
 			return null;
 		}
 
@@ -229,6 +231,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return null;
 			}
+
 			var productElement = new ProductGridItem() {
 				ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
 				ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
@@ -244,6 +247,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return null;
 			}
+
 			var thisProduct = new ProductGridItem() {
 				ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
 				ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
@@ -281,6 +285,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Error("UPC Number field could not be found!");
 					return;
 				}
+
 				el.EnterText(value);
 			}
 		}
@@ -363,8 +368,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					row = containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
 					return row == null;
 				}
+
 				return false;
 			}
+
 			return false;
 		}
 
@@ -382,6 +389,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Info("Last page is: 1");
 				return "1";
 			}
+
 			return lastControl.Last().Text;
 		}
 
@@ -391,6 +399,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
+
 			Report.Info("Clicking page: " + page);
 			return containerElement.FindElement(By.XPath(".//a[@class='page-link' and text()= '" + page + "']"), 2).TryClick();
 		}
@@ -415,11 +424,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
 					return false;
 			}
+
 			if (navEl == null)
 			{
 				Report.Info("Could not locate the navigation button element for: " + navOption);
 				return false;
 			}
+
 			//navEl.ScrollElementIntoView();
 			return navEl.TryClick();
 		}
@@ -440,6 +451,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				GridNavigation("...");
 			}
+
 			return GridNavigationInput() != null;
 		}
 
@@ -451,11 +463,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				GridNavigation("...");
 				inputEl = GridNavigationInput();
 			}
+
 			if (inputEl == null)
 			{
 				Report.Failure("The navigation input box could not be found");
 				return;
 			}
+
 			switch (action)
 			{
 				case "up":
@@ -503,6 +517,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Failure("The navigation input box could not be found");
 				return null;
 			}
+
 			return inputEl.GetAttribute("value");
 		}
 
@@ -520,6 +535,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return null;
 			}
+
 			var activeText = this.ActivePage();
 			if (!int.TryParse(activeText, out int activePage))
 			{
@@ -530,6 +546,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 
 			}
+
 			while (activePage <= lastPage)
 			{
 				Report.Info("Getting products on page: " + activePage);
@@ -540,6 +557,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					var thisProduct = ProductInRow(i);
 					rList.Add(thisProduct);
 				}
+
 				if (!this.NextDisabled() && GridNavigation("next"))
 				{
 					Report.Info("Getting produts from the next page");
@@ -547,8 +565,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					activePage++;
 					continue;
 				}
+
 				break;
 			}
+
 			Report.Info("Returning to the first page in the products grid");
 			ClickPage("1");
 			GeneralUtilities.Wait_for_load_finish();
@@ -562,11 +582,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
+
 			var activeText = this.ActivePage();
 			if (!int.TryParse(activeText, out int activePage))
 			{
 				return false;
 			}
+
 			bool clicked = false;
 			while (activePage <= lastPage)
 			{
@@ -581,8 +603,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						activePage++;
 						continue;
 					}
+
 					break;
 				}
+
 				Report.Info("Clicking More Actions");
 				var actionsEl = el.FindElement(By.XPath("./../../preceding-sibling::button"), 2);
 				if (actionsEl.TryClick())
@@ -591,8 +615,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					clicked = el.TryClick();
 					GeneralUtilities.Wait_for_load_finish();
 				}
+
 				break;
 			}
+
 			if (!clicked)
 			{
 				Report.Info("Returning to the first page in the products grid");
@@ -600,6 +626,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				GeneralUtilities.Wait_for_load_finish();
 				return false;
 			}
+
 			return true;
 		}
 
@@ -704,6 +731,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	class DeleteDialog : BaseObject
 	{
 		public const string BasePath = "//h3[text()='Delete Product']/../..";
+
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
@@ -725,6 +753,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return null;
 			}
+
 			return itemName.Text + "(" + itemID.Text + ")";
 		}
 	}
@@ -735,6 +764,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	class SyncUlscProductsDialog : BaseObject
 	{
 		public const string BasePath = "//h3[text()='Sync Products to ULSC']/../..";
+
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
@@ -777,6 +807,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						return new List<string>();
 					}
+
 					return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "All Brands").ToList();
 				case "Retailer":
 					el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: retailers"")]"), 2);
@@ -784,6 +815,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						return new List<string>();
 					}
+
 					return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "All Retailers").ToList();
 				case "Additional Programs":
 					el = containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: additionalPrograms"")]"), 2);
@@ -791,6 +823,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						return new List<string>();
 					}
+
 					return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "None").ToList();
 				default:
 					return new List<string>();
@@ -851,4 +884,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElements(By.XPath(".//div[@id='more-filters-panel']//label")).Select(x => x.Text).ToList();
 		}
 	}
+
+	class RemoveUpcUpdate : ModalDialog
+	{
+		public List<string> AlertWarningRows()
+		{
+			return this.containerElement.FindElements(By.XPath(".//div[@class='alert alert-warning']/p"), 2).Select(x => x.Text).ToList();
+		}
+	}
+
 }

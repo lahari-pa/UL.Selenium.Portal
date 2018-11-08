@@ -3430,11 +3430,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			NewProduct MyNewProduct = new NewProduct();
-			MyStepsNewProduct.SetTheSectionOptionTo(
-				"Product has an Environmental Protection Agency (EPA) Registration Number", "Yes");
+			TestReport.StartStep("I set the 'Product has an Environmental Protection Agency (EPA) Registration Number' option to: 'Yes'");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "Yes");
+			TestReport.StartStep("I add the EPA number: TEST-1234");
 			MyStepsNewProduct.IAddTheEPARegistrationNumber("TEST-1234");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
-				"Pesticide Details - U.S.");
+			TestReport.StartStep("I click continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - U.S.");
 		}
 
 		DateTime GetRandomDate(DateTime dtStart, DateTime dtEnd)

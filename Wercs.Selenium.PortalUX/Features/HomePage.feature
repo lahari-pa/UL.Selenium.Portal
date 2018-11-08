@@ -770,3 +770,65 @@ And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Complete
 #And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: debug64530)
 #
 #And I call Shared Step 55637 (SHA - Process UPC Update for Specific product) saved as: debug64530
+
+@run64531
+Scenario: [64531] Remove UPC Update - Cancel
+
+Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64531
+
+Given I navigate to the landing page
+
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+And I search for the product saved as: ProductSetup64531
+
+And I click Row Actions for the first product returned
+
+Then I click on the Row Action: Edit UPCs
+
+And I should see the Universal Product Code (UPC) Page
+
+And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
+
+And I navigate to the home page
+
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64531)
+
+And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64531 and its font is red indicating a recertification
+
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64531
+
+Given In the Product Recertification History popup I should see the following entry
+| Product ID                 | Recertification Reason  | Active |
+| saved as ProductSetup64531 | 2.0 Specific UPC Update | true   |
+
+Given I Close the Product Recertification History pop up
+
+Given I navigate to the landing page
+
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+And I search for the product saved as: ProductSetup64531
+
+And I click Row Actions for the first product returned
+
+Then I click on the Row Action: Remove UPC Update
+
+And I confirm the Remove UPC Update popup displays the warning: Are you sure you want to restore the following Product ?
+
+And I confirm the Remove UPC Update popup displays the name and ID for product saved as: ProductSetup64531
+
+Given in the modal dialog I click cancel
+
+And I confirm the Remove UPC Update popup has closed
+
+And I click Row Actions for the first product returned
+
+And I should see the following Actions options
+| Option             |
+| View               |
+| View UPCs          |
+| Process UPC Update |
+| Remove UPC Update  |

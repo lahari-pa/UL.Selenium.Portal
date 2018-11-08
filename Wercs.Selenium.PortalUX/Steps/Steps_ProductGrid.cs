@@ -170,7 +170,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
 		[StepDefinition(@"I clear the Search Criteria")]
 		public void ClearSearchCriteria()
 		{
@@ -236,7 +235,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
-
 
 		[StepDefinition(@"I (should|should not) see the product returned in the search results")]
 		public void ThenIShouldSeeTheProductReturnedInTheSearchResults(string shouldOrNot)
@@ -542,7 +540,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Generated UPC No: " + uPCNo);
 		}
 
-
 		[StepDefinition(@"I delete all products with (UPC Number): (.*)")]
 		public void DeleteAllProductsMatchingCriteria(string option, string value)
 		{
@@ -609,7 +606,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
 		[StepDefinition(@"The current page in the products grid is: (.*)")]
 		public void CurrentPageProductsGrid(string expectedPage)
 		{
@@ -618,6 +614,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The current page in the products grid did not match the expected page",
 				"The current page in the products grid matched the expected page");
 		}
+
 		[StepDefinition(@"I click (next|previous|...) in the products grid")]
 		public void NavigateInProductsGrid(string navOption)
 		{
@@ -625,6 +622,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to navigate in the products grid with action: " + navOption,
 				"Successfully navigated in the products grid with action: " + navOption);
 		}
+
 		[StepDefinition(@"I should see the products grid navigation input with up and down arrows")]
 		public void PageInputNumber()
 		{
@@ -632,6 +630,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The products grid page navigation number input was not visible",
 				"The products grid page navigation number input was visible as expected");
 		}
+
 		[StepDefinition(@"I type the number (.*) into the products grid page navigation box and press the enter key")]
 		public void TypeNumberGridNavigationInputAndPressEnter(string pageNum)
 		{
@@ -641,6 +640,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Pressing the enter key");
 			selProductsGrid.KeyToGridNavigationInput("enter");
 		}
+
 		[StepDefinition(@"I enter the (up|down) arrow into the products grid page navigation input then the correct page is shown")]
 		public void EnterArrowUserGridNavigationBox(string direction)
 		{
@@ -702,8 +702,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				GeneralUtilities.Wait_for_load_finish();
 			}
 		}
-
-
 
 		[StepDefinition(@"I edit the product with ID: (.*)")]
 		public void EditFirstProductForRetailer(string id)
@@ -1251,5 +1249,67 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(statusColour == status, "Status is not correct. Expected: " + status + " but found: " + statusColour, "Status is as expected");
 		}
 
+		[StepDefinition(@"I confirm the Remove UPC Update popup displays the warning: (.*)")]
+		public void IConfirmTheRemoveUpcUpdatePopupDisplaysTheWarning(string expectedWarning)
+		{
+			var removeUpc = new RemoveUpcUpdate();
+			if (!removeUpc.Wait_for_load())
+			{
+				Report.Failure("The UPC Update popup was not displayed!");
+				Report.Screenshot();
+				return;
+			}
+			var displayedWarnings = removeUpc.AlertWarningRows();
+			if (displayedWarnings.Count == 0)
+			{
+				Report.Failure("The UPC Update popup did not contain any body error text!");
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(displayedWarnings.Contains(expectedWarning),
+				$@"The expected warning: ""{expectedWarning}"" was not displayed in the Remove UPC Update popup! Displayed warnings: {string.Join(", ", displayedWarnings.Select(x => $@"""{x}""").ToList())}",
+				$@"The warning: ""{expectedWarning}"" was displayed as expected on the UPC Update popup");
+		}
+
+		[StepDefinition(@"I confirm the Remove UPC Update popup displays the name and ID for product saved as: (.*)")]
+		public void IConfirmTheRemoveUpcUpdatePopupDisplaysTheNameAndIDForProductSavedAs(string savedAs)
+		{
+			var removeUpc = new RemoveUpcUpdate();
+			if (!removeUpc.Wait_for_load())
+			{
+				Report.Failure("The UPC Update popup was not displayed!");
+				Report.Screenshot();
+				return;
+			}
+			var displayedWarnings = removeUpc.AlertWarningRows();
+			if (displayedWarnings.Count == 0)
+			{
+				Report.Failure("The UPC Update popup did not contain any body error text!");
+				Report.Screenshot();
+				return;
+			}
+			var product = (ProductInformation)Context.GetFromContext(savedAs);
+			if (product == null)
+			{
+				Report.Failure("Unable to find product saved in context as: " + savedAs);
+				return;
+			}
+			Report.IsTrue(displayedWarnings.Any(x => x.Contains(product.Name) && x.Contains($"({product.Id})")),
+				$@"The product name: ""{product.Name}"" and ID: ""{product.Id}"" were not dipslayed in the the Remove UPC Update popup! Displayed warnings: {string.Join(", ", displayedWarnings.Select(x => $@"""{x}""").ToList())}",
+				$@"The product name: ""{product.Name}"" and ID: ""{product.Id}"" were displayed as expected on the UPC Update popup");
+		}
+
+		[StepDefinition(@"I confirm the Remove UPC Update popup has closed")]
+		public void IConfirmTheUpcUpdatePopupHasClosed()
+		{
+			var upcUpdate = new RemoveUpcUpdate();
+			if (!Report.IsTrue(upcUpdate.Wait_for_close(), "The modal dialog did not close!", "The modal dialog closed as expected"))
+			{
+				if (upcUpdate.GetTitle() == "Remove UPC Update")
+				{
+					Report.Failure("The Remove UPC Update popup is still displayed");
+				}
+			}
+		}
 	}
 }
