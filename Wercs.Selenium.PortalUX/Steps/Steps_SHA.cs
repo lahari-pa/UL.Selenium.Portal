@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using Castle.Core.Internal;
 using NPOI.SS.Formula.Functions;
+using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -34,7 +35,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			SeleniumBrowser.WebBrowser.Url = GlobalParameters.TestUrl;
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
-
 
 		[Given(@"I login to Studio as Administrator")]
 		public void GivenILoginToStudioAsAdministrator()
@@ -134,10 +134,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisShaManager.SelectFromStatusFilter(status), "Failed to select status: " + status,
 				"Successfully selected status: " + status);
 		}
-
-
-
-
 
 		//|Status|Client|SearchPattern|ProductId|ProductName|DateRange|LastActivityDate|Supplier|User|Reviewer|OnSuspended|RecertificationActive|GGOnlyProducts|ECommFlowProducts|TReg|OrderNo|SubmissionDate|UPC|ParentUPC|
 
@@ -438,7 +434,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(2);
 		}
 
-
 		[StepDefinition(@"I Confirm the Product ID: (.*) is highlited yellow indicating that this is an e-comm/direct ship product")]
 		public void ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(string id)
 		{
@@ -446,6 +441,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Waiting for id to change colour");
 			Report.IsTrue(selStudioShaManager.WaitForIDToBeStatus(id, 120, "N/A", "N/A", true, "rgb(254,255,160)"), "ID has not turned required colour", "ID is required colour");
 		}
+
 		[StepDefinition(@"I Confirm the Product ID: (.*) is not highlited yellow indicating that this is not an e-comm/direct ship product")]
 		public void ConfirmProductIdIsNotHighlightedYellow_NotEcommDirectShipProduct(string id)
 		{
@@ -525,7 +521,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheRecertificationPopupIClick(string button)
 		{
 			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
-			Report.IsTrue(thisRecertificationPopup.ClickButton(button), "Failed to click " + button ,
+			Report.IsTrue(thisRecertificationPopup.ClickButton(button), "Failed to click " + button,
 				"Clicked " + button);
 		}
 
@@ -589,6 +585,67 @@ namespace Wercs.Selenium.PortalUX.Steps
 			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(!thisRecertificationPopup.WaitForLoad(1), "Recertification popup is not closed",
 				"Recertification popup is closed");
+		}
+
+
+		[StepDefinition(@"I confirm UPC number saved as: ""UPC(.*)"" is displayed in the SHA Manager Product UPC list")]
+		public void ConfirmUpcIsDisplayedInShaManagerProductUpcList(string savedAs)
+		{
+			try
+			{
+				// Switch to window
+				var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (var handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
+				// Get Displayed UPCs
+				var displayedUpcs = new StudioSHAManager().GetUPCs();
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the Product UPC window!");
+					Report.Screenshot();
+					return;
+				}
+				// Confirm match
+				var upc = Context.GetFromContext("UPC" + savedAs).ToString();
+				Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber == upc),
+					$@"UPC number ""{upc}"" did not appear on the Product UPC list! UPC numbers were: {string.Join(", ", displayedUpcs)}",
+					$@"UPC number: ""{upc}"" appeared on the Product UPC list as expected");
+			}
+			catch (NoSuchWindowException)
+			{
+				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
+
+		[StepDefinition(@"I close the SHA Manager Product UPC window")]
+		public void CloseSHAManagerProductUPCWindow()
+		{
+
 		}
 
 	}

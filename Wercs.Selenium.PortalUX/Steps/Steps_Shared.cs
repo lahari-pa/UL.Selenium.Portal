@@ -4184,7 +4184,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Delay.Seconds(3);
 			}
 
-			Report.IsTrue(selectedID, "Failed to select product with id: " + id, "Selected product with id: " + id );
+			Report.IsTrue(selectedID, "Failed to select product with id: " + id, "Selected product with id: " + id);
 			myStudioShaManager.ClickProcessProductData();
 			Report.IsTrue(myStudioShaManager.SetAutoAssignRegulatorySpecialisttoProduct(false),
 				"Failed to deselect Auto assign regulatory specialist", "Deselected auto assign regulatory specialist");
@@ -5190,7 +5190,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Click continue
 		}
 
-		[StepDefinition (@"I call Shared Step 51351 \(SHA > Select Product > View Recertification History\) for product saved as: (.*)")]
+		[StepDefinition(@"I call Shared Step 51351 \(SHA > Select Product > View Recertification History\) for product saved as: (.*)")]
 		public void GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(string savedAs)
 		{
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
@@ -5291,7 +5291,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[StepDefinition (@"I call Shared Step 85983 - WPS Studio - PD\\\+ PLP with NGHS only - set all data and publish using rule and DOC queue for product saved as: (.*)")]
+		[StepDefinition(@"I call Shared Step 85983 - WPS Studio - PD\\\+ PLP with NGHS only - set all data and publish using rule and DOC queue for product saved as: (.*)")]
 		public void GivenICallSharedStep_WPSStudio_PDPLPWithNGHSOnly_SetAllDataAndPublishUsingRuleAndDOCQueue(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -5553,6 +5553,87 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//	And I Close the Document queue window
 			TestReport.StartStep("I close the Document queue window");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+		}
+		[StepDefinition(@"I call Shared Step 75307 \(Edit UPC - Add UPC and all data - Click Save\) for UPC Number saved as: ""UPC(.*)"", container type: ""(.*)"", size: ""(.*)""")]
+		public void Shared75307_EditUpc_AddUpcAndAllData(string upc, string containerType, string size)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			TestReport.StartStep("I add the following into the UPC Fields");
+			Table upcTable = new Table("Field", "Value");
+			upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+			upcTable.AddRow("ContainerType", containerType);
+			upcTable.AddRow("Size", size);
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			//If shown select an entry from the Packaging type drop down
+			//If needed add any Retailer specific UPC data (for example OMSID, DPCI, part number etc)
+			TestReport.StartStep("I click save");
+			MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
+		}
+		[StepDefinition(@"I call Shared Step 75309 \(SHA > Select Product > UPC List\) for product saved as: (.*)")]
+		public void Shared75309_SHA_SelectProduct_UpcList(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			TestReport.StartStep("I select  product in the SHA grid saved as " + savedAs);
+			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
+			TestReport.StartStep("I right click the product");
+			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
+			TestReport.StartStep("I click 'UPC List'");
+			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC List");
+		}
+		[StepDefinition(@"I call Shared Step 55637 \(SHA - Process UPC Update for Specific product\) saved as: (.*)")]
+		public void Shared55637_SHA_ProcessUPCUpdateForSpecificProduct(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			var shaSteps = new Steps_SHA();
+			var shaManager = new StudioSHAManager();
+			var processUI = new ProcessUIDialog();
+			TestReport.StartStep("I confirm the product saved as is shown in the UPC Update status");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "UPC Update");
+			TestReport.StartStep("I select  product in the SHA grid saved as " + savedAs);
+			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
+			TestReport.StartStep("I click the UPC link at the bottom of the SHA page");
+			shaManager.ClickBottomMenuOption("UPC");
+			TestReport.StartStep("I uncheck the Auto Assign Regulatory Specialist to Product check box");
+			var el = processUI.ProcessCheckbox("Auto Assign");
+			if (el == null)
+			{
+				Report.Screenshot();
+				throw new Exception("Unable to find input for 'Auto Assign Regulatory Specialist and process the product!'");
+			}
+			if (el.Checked())
+			{
+				Report.IsTrue(el.TryClick() && !el.Checked(), "Failed to uncheck option 'Auto Assign Regulatory Specialist'", "Successfully unchecked option: 'Auto Assign Regulatory Specialist");
+			}
+			else
+			{
+				Report.Info("Option 'Auto Assign Regulatory Specialist to Product' was already unchecked!");
+				Report.Screenshot();
+			}
+			TestReport.StartStep("I select regulatory specialist: Automated QASha");
+			Report.IsTrue(processUI.SelectRegulatorySpecialist("Automated QASha"), "Failed to select regulatory specialist: Automated QASha", "Successfully selected regulatory specialist: Automated QASha");
+			TestReport.StartStep("I click continue");
+			Report.IsTrue(processUI.ClickContinue(), "Failed to click continue!", "Successfully clicked continue");
+			TestReport.StartStep("I click Find in the Product Search popup");
+			Delay.Seconds(5);
+			var productSearch = new StudioSHAManagerProductSearch();
+			if (!productSearch.Wait_for_load())
+			{
+				Report.Screenshot();
+				throw new Exception("Product search did not load!");
+			}
+			Report.IsTrue(productSearch.ClickButton("Find"), "Failed to click Find in product search", "Successfully clicked Find in product search");
+			TestReport.StartStep("I close the Process Products pop up");
+			processUI = new ProcessUIDialog();
+			Report.IsTrue(processUI.ClickClose(), "Failed to close the Process Products popup", "Successfully closed the Process Products popup");
+			TestReport.StartStep("I confirm the product saved as is shown in the Accepted status");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Accepted");
+
 		}
 	}
 }

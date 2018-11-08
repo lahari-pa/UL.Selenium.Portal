@@ -17,6 +17,7 @@
 @ReviewDocuments
 @SHA
 @SummaryPage
+@PaymentMethods
 @ProductSetUp
 
 
@@ -653,7 +654,6 @@ And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 # Assigned to Barrett, Beverly
 # Created by Barrett, Beverly
 
-@run64529
 Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remove UPC Update
 
 Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64529
@@ -700,3 +700,73 @@ And I should see the following Actions options
 | View UPCs          |
 | Process UPC Update |
 | Remove UPC Update  |
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+Scenario: [64530] Process UPC Update
+
+Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64530
+
+Given I generate a random UPC number and save as: UPC64530
+
+Given I navigate to the landing page
+
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+And I search for the product saved as: ProductSetup64530
+
+And I click Row Actions for the first product returned
+
+Then I click on the Row Action: Edit UPCs
+
+And I should see the Universal Product Code (UPC) Page
+
+And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
+
+And I navigate to the home page
+
+And I search for the product saved as: ProductSetup64530
+
+And I click Row Actions for the first product returned
+
+Then I click on the Row Action: Process UPC Update
+
+And I should see the Universal Product Code (UPC) Page
+
+And I call Shared Step 75307 (Edit UPC - Add UPC and all data - Click Save) for UPC Number saved as: "UPC64530", container type: "Plastic Container", size: "10"
+
+And I should see the Data Acceptance Page
+
+Then In the Data Acceptance page I select Yes, Agreed
+
+And In the Data Acceptance page I click on the Accept button
+
+And the Purchase Summary should load
+
+And I navigate to the home page
+
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64530)
+
+And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: ProductSetup64530
+
+And I confirm UPC number saved as: "UPC64530" is displayed in the SHA Manager Product UPC list
+
+And I close the window that opened
+
+And I call Shared Step 55637 (SHA - Process UPC Update for Specific product) saved as: ProductSetup64530
+
+And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: ProductSetup64530) for
+| Retailer |
+| CVS      |
+
+#Scenario: debug64530
+#
+#Given I save to context name: debug64530 and value: 1525087
+#
+#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#
+#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: debug64530)
+#
+#And I call Shared Step 55637 (SHA - Process UPC Update for Specific product) saved as: debug64530

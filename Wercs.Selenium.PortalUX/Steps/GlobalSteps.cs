@@ -853,6 +853,11 @@ namespace WERCSmart
 					Report.Info($"The email did not contain an '@' so continuing to the next user.");
 					continue;
 				}
+				if (user.SavedAs == "PayPal")
+				{
+					Report.Info($"We do not need to update the PayPal password");
+					continue;
+				}
 				TestReport.StartStep($"I update the password for user: {savedAs}");
 				ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				var alert = new RetailPartners().WarningMessage();

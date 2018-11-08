@@ -45,12 +45,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Error("Could not switch to iframe");
 				}
 			}
+
 			for (int i = 0; i < secondsToWait; i++)
 			{
 				try
 				{
 					var table = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']"), 60);
-					if (table != null )
+					if (table != null)
 					{
 						if (table.Displayed || table.FindElements(By.XPath(".//tr")).Count == 1)
 						{
@@ -64,9 +65,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					continue;
 					//do nothing
 				}
+
 				Delay.Seconds(1);
 				i++;
 			}
+
 			Report.Info($"Product list was not loaded after {secondsToWait} seconds!");
 			return false;
 		}
@@ -99,6 +102,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							throw new Exception("Failed to click the find button");
 						}
 					}
+
 					Delay.Seconds(1);
 					if (myProductSearch.Wait_for_load(1))
 					{
@@ -107,6 +111,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						{
 							throw new Exception("Failed to click the cancel button");
 						}
+
 						Delay.Seconds(1);
 					}
 
@@ -119,6 +124,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						throw new Exception("Product list is not showing as expected");
 					}
+
 					Report.Info("Product list is showing");
 				}
 
@@ -163,6 +169,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						throw new Exception("Failed to click the find button");
 					}
 				}
+
 				Delay.Seconds(1);
 				if (myProductSearch.Wait_for_load(1))
 				{
@@ -171,6 +178,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						throw new Exception("Failed to click the cancel button");
 					}
+
 					Delay.Seconds(1);
 				}
 
@@ -183,6 +191,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					throw new Exception("Product list is not showing as expected");
 				}
+
 				Report.Info("Product list is showing");
 				var thisProductStatus = this.GetproductStatus(id);
 				if (thisProductStatus != null)
@@ -192,6 +201,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						return true;
 					}
+
 					var matchReport = "";
 					if (idStatus == thisProductStatus.StatusName)
 					{
@@ -201,6 +211,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						matchReport += " status did not match. Expecting: " + idStatus + " but got: " + thisProductStatus.StatusName;
 					}
+
 					if (thisProductStatus.Bold == expectingBold)
 					{
 						matchReport += " bolding matched";
@@ -209,6 +220,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						matchReport += " bolding did not match. Expecting: " + expectingBold.ToString() + " but got: " + thisProductStatus.Bold.ToString();
 					}
+
 					if (tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor)
 					{
 						matchReport += " background as expected";
@@ -217,10 +229,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						matchReport += " background not as expected";
 					}
+
 					Report.Info(matchReport);
 				}
+
 				Delay.Seconds(1);
 			}
+
 			return false;
 		}
 
@@ -239,6 +254,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return thisProductStatus.CSSBackgroundColor;
 			}
+
 			Report.Info("Failed to get product status for id: " + id);
 			return null;
 		}
@@ -305,6 +321,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Info("Checkbox is already checked");
 						return true;
 					}
+
 					checkbox.TryClick();
 					if (checkbox.Checked())
 					{
@@ -423,6 +440,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							{
 								thisProduct.ID = pValue.Trim();
 							}
+
 							break;
 						case "Name":
 							string pName = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -431,6 +449,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							{
 								thisProduct.Name = pName;
 							}
+
 							break;
 						case "Supplier":
 							thisProduct.Supplier = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -454,6 +473,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							{
 								thisProduct.OriginalSubmission = Convert.ToDateTime(pOS);
 							}
+
 							break;
 						case "Current Submission":
 							string pCS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -462,6 +482,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							{
 								thisProduct.CurrentSubmission = Convert.ToDateTime(pCS);
 							}
+
 							break;
 						case "Last ActivityDate":
 							string pAD = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -470,6 +491,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							{
 								thisProduct.LastActivityDate = Convert.ToDateTime(pAD);
 							}
+
 							break;
 						case "Due Date":
 							string pDD = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -478,6 +500,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							{
 								thisProduct.DueDate = Convert.ToDateTime(pDD);
 							}
+
 							break;
 						case "Reviewer":
 							thisProduct.Reviewer = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -485,11 +508,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							break;
 						case "SDS":
 							thisProduct.SDS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim() == "Yes";
+												  .GetValue().Trim() == "Yes";
 							break;
 						case "Canada SDS":
 							thisProduct.CanadaSDS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim() == "Yes";
+														.GetValue().Trim() == "Yes";
 							break;
 						case "Clients":
 							thisProduct.Clients = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -497,7 +520,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							break;
 						case "T. Reg":
 							thisProduct.TReg = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim() == "Yes";
+												   .GetValue().Trim() == "Yes";
 							break;
 						case "Last Pub Date":
 							thisProduct.LastPubDate = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
@@ -509,7 +532,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							break;
 						case "Refeed":
 							thisProduct.Refeed = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim() == "Yes";
+													 .GetValue().Trim() == "Yes";
 							break;
 						default:
 							//ignore this column, either empty or not of interest
@@ -533,6 +556,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
+
 			return products.FirstOrDefault().ID == id;
 		}
 
@@ -621,6 +645,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					return true;
 				}
+
 				Delay.Seconds(1);
 			}
 
@@ -639,6 +664,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return false;
 		}
+
 		public bool ClickTopMenuItem(string option)
 		{
 			try
@@ -669,6 +695,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						return false;
 					}
 				}
+
 				var ListOfTopMenuOptions =
 					SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//ul[@id='ddsubmenu1']/li/a"));
 				IWebElement menuOption = ListOfTopMenuOptions.FirstOrDefault(x => x.GetValue(true).ToLower() == option.ToLower());
@@ -722,6 +749,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				option = "Srch";
 			}
+
 			var listOfOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@class,'navtable')]//td[not(contains(@class, 'disabled')) and not(contains(@style, 'none'))]/div"));
 			var matchingOption = listOfOptions.FirstOrDefault(x => x.GetValue().ToLower().Contains(option.ToLower()));
 
@@ -733,6 +761,44 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return matchingOption.TryClick();
 		}
+
+
+		public List<SHAManagerProdcutUPC> GetUPCs()
+		{
+			var rList = new List<SHAManagerProdcutUPC>();
+			var rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tr[not(@class='DarkBack')]"), 2);
+			var headerRow = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//tr[@class='DarkBack']"), 2);
+			if (headerRow == null)
+			{
+				Report.Info("Could not locate 'dark back' header row");
+				return null;
+			}
+
+			var headers = headerRow.FindElements(By.XPath("./td"), 2);
+			var upcPosition = headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'UPC Number')]"))) + 1;
+			var pkgTypePosition = headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Type')]"))) + 1;
+			var pkgSizePosition = headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Size')]"))) + 1;
+			// IndexOf() returns -1 if el not found in the row. position()= 0 will fail to get the correct td
+			if (upcPosition == 0 || pkgTypePosition == 0 || pkgSizePosition == 0)
+			{
+				Report.Info("Could not locate 'UPC Number', 'Pkg Type' or 'Pkg Size' in header row!");
+				return null;
+			}
+
+			foreach (var row in rows)
+			{
+				var thisUpc = new SHAManagerProdcutUPC {
+					UPCNumber = row.FindElement(By.XPath($"./td[position()= {upcPosition}]"), 2)?.Text,
+					PackagingType = row.FindElement(By.XPath($"./td[position()= {pkgTypePosition}]"), 2)?.Text,
+					PackagingSize = row.FindElement(By.XPath($"./td[position()= {pkgSizePosition}]"), 2)?.Text
+				};
+				rList.Add(thisUpc);
+			}
+
+			Report.Info($"Found {rList.Count} UPCs");
+			return rList;
+		}
+
 
 		public bool ClickProcessRecertification()
 		{
@@ -970,13 +1036,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var matchingButton = buttonList.FirstOrDefault(x => x.GetValue().Trim() == button);
 			if (matchingButton == null)
 			{
-				Report.Info("no matching button was found");
-				return false;
-			}
-			else
-			{
+				matchingButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button/span[text()='Find']"), 2);
+				if (matchingButton == null)
+				{
+					Report.Info("no matching button was found");
+					return false;
+				}
 				return matchingButton.TryClick();
 			}
+			return matchingButton.TryClick();
 		}
 
 
@@ -1102,7 +1170,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetAllOptions()
 		{
-			return containerElement.FindElements(By.XPath(".//li[not(contains(@style, 'none'))]")).Select(x=>x.GetValue()).ToList();
+			return containerElement.FindElements(By.XPath(".//li[not(contains(@style, 'none'))]")).Select(x => x.GetValue()).ToList();
 		}
 
 		public bool SelectOption(string selectOption)
@@ -1178,7 +1246,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				else
 				{
-					if(!setChecked )
+					if (!setChecked)
 					{
 						Report.Info("Checkbox is already unchecked");
 						return true;
@@ -1240,7 +1308,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			var ListOfSpecialists= SeleniumBrowser.WebBrowser.FindElements(
+			var ListOfSpecialists = SeleniumBrowser.WebBrowser.FindElements(
 				By.XPath("//div[@id='dialog-recertification']//select[@id='regUsers']/option"), 2);
 
 			var matchingItem = ListOfSpecialists.FirstOrDefault(x => x.GetValue().Contains(specialistName));
@@ -1338,5 +1406,56 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public DateTime RecertificationDate { get; set; }
 		public string RecertificationReason { get; set; }
 
-}
+	}
+
+	class SHAManagerProdcutUPC
+	{
+		public string UPCNumber { get; set; }
+		public string PackagingType { get; set; }
+		public string PackagingSize { get; set; }
+	}
+
+	class ProcessUIDialog : BaseObject
+	{
+		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public IWebElement ProcessCheckbox(string option)
+		{
+			switch (option)
+			{
+				case "Auto Assign":
+					return this.containerElement.FindElement(By.XPath(".//tr[@id='trAutoAssignUser']/td/input"), 2);
+				case "Auto Redirect":
+					return this.containerElement.FindElement(By.XPath(".//tr[@id='trAutoRedirectChbx']/td/input"), 2);
+				default:
+					Report.Info("Only Auto Assign and Auto Redirect are valid for Process Products checkboxes! Specified option: " + option);
+					return null;
+			}
+		}
+
+		public bool SelectRegulatorySpecialist(string specialist)
+		{
+			var el = containerElement.FindElement(By.XPath(".//select[@id='regulatoryusers']"), 2);
+			el.Select(specialist);
+			return el.SelectedOption() == specialist;
+		}
+
+		public bool ClickContinue()
+		{
+			return containerElement.FindElement(By.XPath(".//span[text()='Continue']"), 2).TryClick();
+		}
+
+		public bool ClickCancel()
+		{
+			return containerElement.FindElement(By.XPath(".//span[text()='Cancel']"), 2).TryClick();
+		}
+
+		public bool ClickClose()
+		{
+			return containerElement.FindElement(By.XPath(".//span[text()='Close']"), 2).TryClick();
+		}
+	}
 }

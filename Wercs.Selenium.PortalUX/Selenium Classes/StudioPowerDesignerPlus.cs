@@ -24,8 +24,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
+			// if Home/ Welcome has not opened by default, open it
+			//StudioPowerDesignerPlusDesignMode pdPlusDMode = new StudioPowerDesignerPlusDesignMode();
+			//if (pdPlusDMode.Wait_for_load(5))
+			//{
+			//	pdPlusDMode.ClickMenuAndSubmenuOptions("Home");
+			//}
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
-
 			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			bool foundPopup = false;
 			foreach (var handle in urls)
@@ -48,7 +53,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-			if (base.Wait_for_load(30))
+			if (base.Wait_for_load(secondsToWait))
 			{
 				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
 				return true;
@@ -224,8 +229,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickMenuAndSubmenuOptions(string menuItem, string submenuItem = "")
 		{
 			var listOfMenuItems = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='navmenu']//ul[@id='navmenu-h']/li[(./ul/li or ./a[@id='aHomeMenuItem'])]/a"));
-
-			var matchingMenuItem = listOfMenuItems.FirstOrDefault(x => x.GetValue() == menuItem);
+			var matchingMenuItem = listOfMenuItems.FirstOrDefault(x => x.GetValue().Contains(menuItem));
 
 			if (matchingMenuItem == null)
 			{

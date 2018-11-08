@@ -244,11 +244,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					return false;
 				}
-
-				el.TryClick();
-				GeneralUtilities.WaitForRefreshToDisappear(el);
-				GeneralUtilities.Wait_for_load_finish();
-				return true;
+				return el.TryClick() && GeneralUtilities.WaitForRefreshToDisappear(el) && GeneralUtilities.Wait_for_load_finish();
 			}
 			catch (Exception)
 			{
@@ -267,11 +263,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					return false;
 				}
-
-				if(!el.TryClick())
-				GeneralUtilities.WaitForRefreshToDisappear(el);
-				GeneralUtilities.Wait_for_load_finish();
-				return true;
+				return el.TryClick() && GeneralUtilities.WaitForRefreshToDisappear(el) && GeneralUtilities.Wait_for_load_finish();
 			}
 			catch (Exception)
 			{
