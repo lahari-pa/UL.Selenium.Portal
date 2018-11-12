@@ -1511,6 +1511,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
 			NewProduct MyNewProduct = new NewProduct();
+			Delay.Seconds(2);
 			TestReport.StartStep("I should see the Transportation Details 1 Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Transportation Details 1");
 			TestReport.StartStep("I set the Product is Regulated for Transport field to: Not Regulated");

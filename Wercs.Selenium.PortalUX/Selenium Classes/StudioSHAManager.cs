@@ -304,16 +304,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
 
 			var matchingTD = SeleniumBrowser.WebBrowser
-				.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+				.FindElements(By.XPath("//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
 				.FirstOrDefault(x => x.GetValue().Trim() == id);
 
 			if (matchingTD != null)
 			{
 				Report.Info("Found matching cell");
 				matchingTD = SeleniumBrowser.WebBrowser
-					.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+					.FindElements(By.XPath("//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
 					.FirstOrDefault(x => x.GetValue().Trim() == id);
 				var checkbox = matchingTD.FindElement(By.XPath("../td/input"));
+				Report.Info("Found checkbox");
 				if (checkbox != null)
 				{
 					if (checkbox.Checked())

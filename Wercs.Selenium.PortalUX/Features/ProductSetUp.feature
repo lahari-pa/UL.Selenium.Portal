@@ -615,6 +615,7 @@ Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to
 Given I create a product with name: 778591 and take to completed using Test Case 75335 and save as: TestCase778591
 Given I create a product with name: 778592 and take to completed using Test Case 75335 and save as: TestCase778592
 Given I navigate to the landing page
+
 #Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status
 #Given I save to context name: TestCase778591 and value: 1525307
 #Given I save to context name: TestCase778592 and value: 1525308

@@ -1697,10 +1697,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			foreach (var handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Alias Attributes Edit"))
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Product Attribute Screen"))
 				{
 					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
-					Report.Success("Found window containing title: Alias Attributes Edit");
+					Report.Success("Found window containing title: Product Attribute Screen");
 					Report.Screenshot();
 					break;
 				}
@@ -1711,7 +1711,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 			if (base.Wait_for_load(30))
 			{
-				return true;
+				return WaitForFilterButtonLoad();
+			}
+
+			return false;
+		}
+
+		public bool WaitForFilterButtonLoad()
+		{
+			for (int i = 0; i < 30; i++)
+			{
+				var linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_lnkFilter']"), 2);
+
+				if (linkToClick.Displayed)
+				{
+					return true;
+				}
+
+				Delay.Seconds(1);
 			}
 
 			return false;
