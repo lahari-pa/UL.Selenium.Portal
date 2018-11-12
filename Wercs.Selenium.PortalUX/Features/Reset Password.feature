@@ -1,4 +1,5 @@
-﻿@LandingPage
+﻿@admin
+@LandingPage
 @Login
 @Homepage
 @wercsmart

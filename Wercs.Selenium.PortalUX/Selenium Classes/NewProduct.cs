@@ -223,11 +223,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					return false;
 				}
-
-				el.TryClick();
-				GeneralUtilities.WaitForRefreshToDisappear(el);
-				GeneralUtilities.Wait_for_load_finish();
-				return true;
+				if (el.TryClick())
+				{
+					GeneralUtilities.WaitForRefreshToDisappear(el);
+					GeneralUtilities.Wait_for_load_finish();
+					var attempt = 0;
+					var ajax = true;
+					while (attempt < 15 && ajax)
+					{
+						Report.Info("Attempt: " + attempt);
+						if (!GeneralUtilities.AjaxPopupExists())
+						{
+							ajax = false;
+						}
+						else
+						{
+							Report.Error("Ajax error was displayed! Clicking Close.");
+							GeneralUtilities.CloseAjaxPopup();
+							el.TryClick();
+							GeneralUtilities.WaitForRefreshToDisappear(el);
+							GeneralUtilities.Wait_for_load_finish();
+							attempt++;
+							Delay.Seconds(2);
+						}
+					}
+					return !ajax;
+				}
+				return false;
 			}
 			catch (Exception)
 			{
@@ -4607,7 +4629,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			var additionalRequirementInput = matchingRetailer.FindElement(By.XPath("..//input[@type='text']"),2);
+			var additionalRequirementInput = matchingRetailer.FindElement(By.XPath("..//input[@type='text']"), 2);
 			if (additionalRequirementInput == null)
 			{
 				Report.Info("No input was found for retailer: " + retailerName);

@@ -10,6 +10,7 @@ using SeleniumUtilities;
 using TechTalk.SpecFlow;
 
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using WERCSmart;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
@@ -380,32 +381,46 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the following Actions options")]
-		public void ThenIShouldSeeTheFollowingOptions(Table table)
+		[StepDefinition(@"I should (see|only see|not see) the following Actions options")]
+		public void ThenIShouldSeeTheFollowingOptions(string seeCondition, Table table)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - The following Row Actions should show");
-			try
+			Report.Info("Checking Row Actions");
+			var selProdGrid = new ProductsGrid();
+			if (selProdGrid.ProductsCount() == 0)
 			{
-				Report.Info("Checking Row Actions");
-				var selProdGrid = new ProductsGrid();
-				if (selProdGrid.ProductsCount() == 0)
-				{
-					Report.Failure("No products present! Cannot click examine Row Actions!");
-					return;
-				}
-
-				var rowActions = selProdGrid.ActionsAvailableInDropDown();
-				Report.IsTrue(rowActions != null, "No row actions were found!", "Row actions were found!");
-
-				foreach (var row in table.Rows)
-				{ Report.IsTrue(rowActions.Contains(row["Option"].Trim()), row["Option"] + " was not found in the list of Row Actions!", row["Option"] + " was found in the list of Row Actions!"); }
-
+				Report.Failure("No products present! Cannot click examine Row Actions!");
 				Report.Screenshot();
+				return;
 			}
-			catch (Exception ex)
+			var rowActions = selProdGrid.ActionsAvailableInDropDown();
+			if (rowActions == null)
 			{
-				Report.Failure(ex.Message);
-				throw;
+				Report.Failure("No row actions were found!");
+				Report.Screenshot();
+				return;
+			}
+			var expectedActions = new List<string>();
+			table.Rows.ForEach(x => expectedActions.Add(x["Option"]));
+			switch (seeCondition)
+			{
+				case "see":
+					Report.IsTrue(expectedActions.All(rowActions.Contains),
+						$@"Not all of the expected row actions were displayed! Expected: {string.Join(", ", expectedActions)}. Found: {string.Join(", ", rowActions)}",
+						"All of the expected row actions were displayed: " + string.Join(", ", expectedActions));
+					break;
+				case "only see":
+					Report.IsTrue(expectedActions.All(rowActions.Contains) && expectedActions.Count == rowActions.Count,
+						$@"The displayed actions did not match exactly to the expected actions! Expected only: {string.Join(", ", expectedActions)}. Found: {string.Join(", ", rowActions)}",
+						"The displayed actions matched exactly to the expected actions");
+					break;
+				case "not see":
+					Report.IsTrue(!expectedActions.Any(rowActions.Contains),
+						$"The following row actions should not be displayed but they were found! => {string.Join(", ", expectedActions)}. Found: {string.Join(", ", rowActions)}",
+						"The following row actions were not displayed as expected: " + string.Join(", ", expectedActions));
+					break;
+				default:
+					Report.Info("The 'showing' criteria did not match! Must be: see, only see, not see");
+					return;
 			}
 		}
 
@@ -452,14 +467,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking Bulk Actions Options");
 			try
 			{
-				Report.Info("Checking Bulk Actions Options");
-				var selBulkActions = new BulkActions();
-				var availableOptions = selBulkActions.OptionsAvailable();
-				foreach (var row in table.Rows)
-				{
-					if (Report.IsTrue(availableOptions.Contains(row["Options"]), "Option: '" + row["Options"] + "' was not found in the actions list!", "Option: '" + row["Options"] + "' was found in the list of actions!"))
-					{ Report.IsTrue(selBulkActions.OptionChangesOnHover(row["Options"]), "Option '" + row["Options"] + "' did not alter when hovered over!", "Option '" + row["Options"] + "' changed on hover as expected!"); }
-				}
 
 				Report.Screenshot();
 			}
@@ -1311,5 +1318,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 			}
 		}
+
 	}
 }

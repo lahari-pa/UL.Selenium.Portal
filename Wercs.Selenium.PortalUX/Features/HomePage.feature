@@ -479,6 +479,7 @@ Given I click More Filters in the products grid
 
 Then the 'More Filters' options are not displayed
 
+
 # Couldn't find the test case in TFS folders, placing it in home page
 Scenario: [66335] Main Menu - expanded
 
@@ -771,7 +772,6 @@ And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Complete
 #
 #And I call Shared Step 55637 (SHA - Process UPC Update for Specific product) saved as: debug64530
 
-@run64531
 Scenario: [64531] Remove UPC Update - Cancel
 
 Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64531
@@ -832,3 +832,68 @@ And I should see the following Actions options
 | View UPCs          |
 | Process UPC Update |
 | Remove UPC Update  |
+
+Scenario: [64532] Remove UPC Update - Remove
+
+Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64532
+
+Given I navigate to the landing page
+
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+And I search for the product saved as: ProductSetup64532
+
+And I click Row Actions for the first product returned
+
+Then I click on the Row Action: Edit UPCs
+
+And I should see the Universal Product Code (UPC) Page
+
+And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
+
+And I navigate to the home page
+
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64532)
+
+And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64532 and its font is red indicating a recertification
+
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64532
+
+Given In the Product Recertification History popup I should see the following entry
+| Product ID                 | Recertification Reason  | Active |
+| saved as ProductSetup64532 | 2.0 Specific UPC Update | true   |
+
+Given I Close the Product Recertification History pop up
+
+Given I navigate to the landing page
+
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+And I search for the product saved as: ProductSetup64532
+
+And I click Row Actions for the first product returned
+
+Then I click on the Row Action: Remove UPC Update
+
+And in the modal dialog I click the "REMOVE" button
+
+And I confirm the Remove UPC Update popup has closed
+
+And I should not see the following Actions options
+| Option             |
+| Process UPC Update |
+| Remove UPC Update  |
+
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64532)
+
+And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64532 and its font is not red indicating a recertification
+
+And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64532
+
+And I confirm there is no product entry listed with Recertification Reason: 2.0 Specific UPC Update
+
+Given I Close the Product Recertification History pop up

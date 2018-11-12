@@ -189,7 +189,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
 				"Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedIndicatingARecertification(savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification("red", savedAs);
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 
 			TechTalk.SpecFlow.Table recertification = new TechTalk.SpecFlow.Table(new string[] {
@@ -413,10 +413,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			if (Context.Contains("ElectronicProduct"))
 			{
-				Context.AddToContext("ElectronicProduct","false");
+				Context.AddToContext("ElectronicProduct", "false");
 			}
 
-		TestReport.UseSubSteps = true;
+			TestReport.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -607,7 +607,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Completed
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its font is red indicating a recertification
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedIndicatingARecertification(savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification("red", savedAs);
 			//And I call Shared Step 51351(SHA > Select Product > View Recertification History) for product saved as: TestCase84511
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 			//And In the Product Recertification History popup I should see the following entry

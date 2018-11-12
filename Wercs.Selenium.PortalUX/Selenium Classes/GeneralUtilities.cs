@@ -129,6 +129,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return spinner == null || !spinner.Displayed;
 		}
 
+		public static bool CloseAjaxPopup()
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button[@data-dismiss = 'modal' and text()='Close']"), 2).TryClick();
+		}
+
+		public static bool AjaxPopupExists()
+		{
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'There was an error processing your request. Please try again.')]"), 2) != null;
+		}
 
 	}
 }

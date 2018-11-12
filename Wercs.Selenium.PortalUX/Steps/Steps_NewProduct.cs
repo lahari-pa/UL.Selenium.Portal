@@ -319,11 +319,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"in the (.*) page I click Continue")]
-		public void GivenInTheNewProductPageIClickContinue(string dummyVariable)
+		public void GivenInTheNewProductPageIClickContinue(string page)
 		{
 			var selNewProduct = new NewProduct();
+			Report.Info("Checking the New Product page is open");
 			Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
-			selNewProduct.ClickContinue();
+			if (!selNewProduct.WaitForSection(page))
+			{
+				Report.Error($@"The page title did not match expected! Expected ""{page}""");
+			}
+			Report.Info("Clicking Continue");
+			Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
 		}
 
 		[StepDefinition(@"I should see the Select Retailers pop up")]
@@ -1721,7 +1727,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Data Acceptance page I click on the Accept button")]
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
-			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button",true);
+			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button", true);
 		}
 
 		[StepDefinition(@"In the Data Acceptance page I see the Accept button")]

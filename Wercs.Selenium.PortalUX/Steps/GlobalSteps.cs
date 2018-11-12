@@ -741,6 +741,14 @@ namespace WERCSmart
 			}
 		}
 
+		[StepDefinition(@"in the modal dialog I click the ""(.*)"" button")]
+		public void GivenInTheModalDialogIClickButton(string button)
+		{
+			Report.IsTrue(new ModalDialog().ClickButton(button),
+				$@"Failed to click ""{button}"" button",
+				$@"Successfully clicked the ""{button}"" button");
+		}
+
 
 		[StepDefinition(@"I click the Terms of Use link in the footer")]
 		public void ClickTermsOfUseFooter()

@@ -45,6 +45,7 @@ namespace Wercs.Selenium.PortalUX.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Reset Passwords", null, ProgrammingLanguage.CSharp, new string[] {
+                        "admin",
                         "LandingPage",
                         "Login",
                         "Homepage",
@@ -91,6 +92,7 @@ namespace Wercs.Selenium.PortalUX.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Reset password for specific TReVor test user accounts")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Reset Passwords")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("admin")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
@@ -104,14 +106,14 @@ namespace Wercs.Selenium.PortalUX.Features
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Reset password for specific TReVor test user accounts", new string[] {
                         "testaccount",
                         "tfs_design"});
-#line 12
+#line 13
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "User"});
             table1.AddRow(new string[] {
                         "ProductAccount"});
-#line 14
+#line 15
 testRunner.Given("I update the password for the following TReVor test users:", ((string)(null)), table1, "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -120,6 +122,7 @@ testRunner.Given("I update the password for the following TReVor test users:", (
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Reset password for TReVor test user accounts")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Reset Passwords")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("admin")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
@@ -131,9 +134,9 @@ testRunner.Given("I update the password for the following TReVor test users:", (
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Reset password for TReVor test user accounts", new string[] {
                         "TrevorUsers"});
-#line 19
+#line 20
 this.ScenarioSetup(scenarioInfo);
-#line 21
+#line 22
 testRunner.Given("I update the password for all TReVor Test Users within the current branch", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();

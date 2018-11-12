@@ -15,10 +15,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-
-		public void Click_OK()
+		public bool Click_OK()
 		{
-			this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 				.FirstOrDefault(x => x.Text == "OK").TryClick();
 		}
 
@@ -102,6 +101,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/a"), 2)
 				.FirstOrDefault(x => x.Text.ToLower() == "save").TryClick();
+		}
+
+		public bool ClickButton(string button)
+		{
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2).FirstOrDefault(x => x.Text == button).TryClick();
 		}
 	}
 }

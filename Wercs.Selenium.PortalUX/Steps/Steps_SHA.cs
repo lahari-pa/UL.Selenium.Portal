@@ -309,42 +309,53 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is red indicating a recertification")]
-		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedIndicatingARecertification(string productSavedAs)
+		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is (red|not red) indicating a recertification")]
+		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(string productSavedAs, string isRed)
 		{
-			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
-			var ID = ProductDetails.Id;
-
-			Product topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
-
-			if (topProduct == null || topProduct.ID != ID)
+			Report.Info("Getting product from context: " + productSavedAs);
+			var productDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
+			if (productDetails == null)
 			{
-				StudioSHAManager myStudioShaManager = new StudioSHAManager();
-
+				Report.Failure("Could not find product in context: " + productSavedAs);
+				return;
+			}
+			var id = productDetails.Id;
+			Report.Info("Product ID: " + id);
+			var topProduct = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+			if (topProduct == null || topProduct.ID != id)
+			{
+				var myStudioShaManager = new StudioSHAManager();
+				Report.Info("Clicking search");
 				myStudioShaManager.ClickBottomMenuOption("Search");
-
-				Steps_SHA myStepsSha = new Steps_SHA();
-
-				TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
-					"SearchTerm",
-					"SearchValue"});
-				table.AddRow(new string[] {
-					"ProductID",
-					ID});
-				table.AddRow(new string[] {
-					"Status",
-					"All"});
+				var myStepsSha = new Steps_SHA();
+				var table = new Table("SearchTerm", "SearchValue");
+				table.AddRow("ProductID", id);
+				table.AddRow("Status", "All");
 				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
-
 				Delay.Seconds(2);
-				StudioSHAManager mySHAManager = new StudioSHAManager();
+				var mySHAManager = new StudioSHAManager();
 				mySHAManager.WaitForProductList(10);
 			}
-
 			var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
 			if (topProductnew != null)
 			{
-				Report.IsTrue(topProductnew.ID == ID && topProductnew.ColourRGB == "rgb(205, 10, 10)", "Expected: id=" + ID + " and colour: rgb(205, 10, 10) but got: " + topProductnew.ID + " and " + topProductnew.ColourRGB, "Colours match");
+				Report.Info("Found top product");
+				if (isRed == "red")
+				{
+					Report.Info("The text for product " + id + " should be red because a recertification is active");
+					Report.IsTrue(topProductnew.ID == id && topProductnew.ColourRGB == "rgb(205, 10, 10)", "Expected: id=" + id + " and colour: rgb(205, 10, 10) but got: " + topProductnew.ID + " and " + topProductnew.ColourRGB, "Colours match");
+				}
+				else if (isRed == "not red")
+				{
+					Report.Info("The text for product " + id + " should be not red because no recertification is active");
+					Report.IsTrue(topProductnew.ID == id && topProductnew.ColourRGB != "rgb(205, 10, 10)",
+						"Expected: id=" + id + " and NOT colour red: rgb(205, 10, 10) but got: " + topProductnew.ID + " and " + topProductnew.ColourRGB,
+						"Text colour for ID " + id + " was not red as expected");
+				}
+				else
+				{
+					Report.Info("The text colour condition parameter must be either 'red' or 'not red' for this step!");
+				}
 			}
 			else
 			{
@@ -426,12 +437,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(allPassed, "Not all products were as expected", "All products listed were as expected");
 		}
 
-		[Given(@"I Close the Product Recertification History pop up")]
+		[StepDefinition(@"I Close the Product Recertification History pop up")]
 		public void GivenICloseTheProductRecertificationHistoryPopUp()
 		{
-			ProductRecertificationHistory thisProductRecertificationHistory = new ProductRecertificationHistory();
-			thisProductRecertificationHistory.ClickButton("Close");
-			Delay.Seconds(2);
+			var thisProductRecertificationHistory = new ProductRecertificationHistory();
+			Report.IsTrue(thisProductRecertificationHistory.ClickButton("Close"), "Failed to click close on the recertification history popup", "Successfully clicked close on the recertification history popup");
+		}
+
+		[StepDefinition(@"I confirm there is no product entry listed with Recertification Reason: (.*)")]
+		public void IDoNotSeeAnEntryWithRecertificationReason(string reason)
+		{
+			var recertificationProducts = new ProductRecertificationHistory().GetProducts();
+			Report.IsTrue(recertificationProducts.All(x => x.RecertificationReason != reason),
+				"There was a product with Recertification Reason: " + reason + " which was not expected!",
+				"As expected there were no products in the list with Recerficiation Reason: " + reason);
 		}
 
 		[StepDefinition(@"I Confirm the Product ID: (.*) is highlited yellow indicating that this is an e-comm/direct ship product")]
