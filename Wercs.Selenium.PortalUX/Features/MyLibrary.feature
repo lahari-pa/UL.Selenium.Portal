@@ -28,9 +28,10 @@ Given In the My Account page I navigate to the My Library page
 Then I should see the following tabs in the My Library page
 | Tab                |
 | My Packaging Types |
-| My Brands          |
-| My Distributors    |
-| My Ingredients     |
+| My Brands                      |
+| My Distributors                    |
+| My Ingredients                     |
+| Contact Information per SDS(s)     |
 
 Scenario: [70535] Add Brand
 
@@ -111,7 +112,7 @@ Given I navigate to the My Brands tab in the My Library page
 
 Given I click 'Add New' in the My Brands section of My Library
 
-Given I enter the Brand Name: NewBrand(TM) in the input field on the expanded row
+Given I enter the Brand Name: NewTestBrand(TM) in the input field on the expanded row
 
 Then I confirm the 'Active' input is checked on the expanded row in the My Brands grid
 
@@ -119,7 +120,7 @@ Given I click Save on the expanded row in the My Brands grid
 
 Given I click Edit in the My Brands grid for the last saved brand
 
-Given I enter the Brand Name: NewBrandEdited(TM) in the input field on the expanded row
+Given I enter the Brand Name: NewTestBrandEdited(TM) in the input field on the expanded row
 
 Given I click Save on the expanded row in the My Brands grid
 
