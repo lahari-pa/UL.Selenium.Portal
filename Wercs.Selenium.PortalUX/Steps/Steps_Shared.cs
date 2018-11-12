@@ -5675,11 +5675,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I call Shared Step 78799 - WPS PD\+ - Product Attributes - Filter for CNTXT")]
 		public void GivenICallSharedStep78799_WPSPD_ProductAttributes_FilterForCNTXT()
 		{
+			Steps_Studio thisStepsStudio = new Steps_Studio();
 			//Click the filter icon
+			thisStepsStudio.InProductAttributePageIClickOnFilterIcon();
 			//Enter CNTXT in code
+			thisStepsStudio.InProductAttributeFilterPopupISelectFromSelectBox("...Contains...", "Code");
+			thisStepsStudio.InProductAttributeFilterPopupIEnterValueInTextBox("CNTXT", "Code");
 			//Click apply
+			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
 		}
-
 
 	}
 

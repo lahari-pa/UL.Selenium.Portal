@@ -1717,15 +1717,202 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool ClickToolbarItem(string toolbarItem)
+		{
+			IWebElement linkToClick=null;
+			switch (toolbarItem.ToLower())
+			{
+				case "filter":
+					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_lnkFilter']"),2);
+					break;
+				case "new":
+					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdNew']"),2);
+					break;
+				case "edit":
+				case "editselected":
+					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdEdit']"), 2);
+					break;
+				case "delete":
+				case "deleteSelected":
+					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdDelete']"), 2);
+					break;
+				default:
+					Report.Info("You have not provided a valid toolbar item to click.");
+					return false;
+			}
+
+			if (linkToClick == null)
+			{
+				Report.Info("No link was found");
+				return false;
+			}
+			return linkToClick.TryClick();
+		}
+
+		public int getRecordCount()
+		{
+			var spanCount = containerElement.FindElement(By.XPath(".//span[@id='AttributesGrid_litRecordCount']"), 2);
+			if (spanCount == null)
+			{
+				Report.Info("Record count was not found");
+				return -1;
+			}
+			else
+			{
+				try
+				{
+					string itemCount = spanCount.GetValue();
+					return Convert.ToInt16(itemCount.Substring(0, itemCount.IndexOf(" ")));
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to extract a number from: " + spanCount.GetValue());
+					return -1;
+				}
+
+			}
+		}
+
 		public void Close()
 		{
 			SeleniumBrowser.WebBrowser.Close();
 		}
 
-		
+
 		public void ClickClose()
 		{
 			SeleniumBrowser.WebBrowser.Close();
+		}
+
+
+	}
+
+
+	class ProductAttributesFilter : BaseObject
+	{
+		public const string BasePath = "//table[@id='AttributesGrid_tblSelectRecord']";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public void Close()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+		public bool SelectFromSelectBox(string selectBox, string value)
+		{
+			Report.Info("Select from select box: " + selectBox + " value: " + value);
+			var listOfSelects = containerElement.FindElements(By.XPath(".//select"));
+			IWebElement matchingSelect;
+			switch (selectBox.ToLower())
+			{
+				case "code":
+					matchingSelect = listOfSelects.FirstOrDefault(x =>
+						x.GetAttribute("id") == "AttributesGrid_grdFilters_ctl02_ddlFilterType");
+					break;
+				case "description":
+					matchingSelect = listOfSelects.FirstOrDefault(x =>
+						x.GetAttribute("id") == "AttributesGrid_grdFilters_ctl03_ddlFilterType");
+					break;
+				case "usage type":
+					matchingSelect = listOfSelects.FirstOrDefault(x =>
+						x.GetAttribute("id") == "AttributesGrid_grdFilters_ctl04_ddlFilterType");
+					break;
+				default:
+					Report.Error("Please provide valid select box name. You provided: " + selectBox);
+					return false;
+			}
+
+			if (matchingSelect == null)
+			{
+				Report.Error("No matching select was found");
+				return false;
+			}
+
+			try
+			{
+				matchingSelect.Select(value);
+			}
+			catch (Exception e)
+			{
+				Report.Error("Found select box but unable to select option: " + value);
+				return false;
+			}
+
+			return matchingSelect.SelectedOption() == value;
+		}
+
+		public bool EnterInTextBox(string textBox, string value)
+		{
+			var listOfInputs = containerElement.FindElements(By.XPath(".//input"));
+			IWebElement matchingInput;
+			switch (textBox.ToLower())
+			{
+				case "code":
+					matchingInput = listOfInputs.FirstOrDefault(x =>
+						x.GetAttribute("id") == "AttributesGrid_grdFilters_ctl02_txtFilter");
+					break;
+				case "description":
+					matchingInput = listOfInputs.FirstOrDefault(x =>
+						x.GetAttribute("id") == "AttributesGrid_grdFilters_ctl03_txtFilter");
+					break;
+				case "usage type":
+					matchingInput = listOfInputs.FirstOrDefault(x =>
+						x.GetAttribute("id") == "AttributesGrid_grdFilters_ctl04_txtFilter");
+					break;
+
+				default:
+					Report.Error("Please provide valid input name. You provided: " + textBox);
+					return false;
+			}
+
+			matchingInput.EnterText(value);
+			return matchingInput.GetValue() == value;
+		}
+
+
+		public bool ClickApply()
+		{
+			var button = containerElement.FindElement(By.XPath(".//input[@id='AttributesGrid_cmdApply']"), 2);
+			if (button != null)
+			{
+				return button.TryClick();
+			}
+			else
+			{
+				Report.Error("Did not find button to click");
+				return false;
+			}
+
+		}
+
+		public bool ClickCancel()
+		{
+			var button = containerElement.FindElement(By.XPath(".//input[@id='AttributesGrid_btnCancel']"), 2);
+			if (button != null)
+			{
+				return button.TryClick();
+			}
+			else
+			{
+				Report.Error("Did not find button to click");
+				return false;
+			}
+		}
+
+		public bool ClickClear()
+		{
+			var button = containerElement.FindElement(By.XPath(".//input[@id='AttributesGrid_cmdClear']"), 2);
+			if (button != null)
+			{
+				return button.TryClick();
+			}
+			else
+			{
+				Report.Error("Did not find button to click");
+				return false;
+			}
 		}
 
 

@@ -606,6 +606,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85965)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85965 and its status is: Completed
 
+@Test13
 Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status 1
 #For this test case you will need two input products in completed status which have SOLD set to US only
 #and make sure to add any retailer except Walmart as the retailer for these products.
@@ -614,10 +615,9 @@ Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to
 Given I create a product with name: 778591 and take to completed using Test Case 75335 and save as: TestCase778591
 Given I create a product with name: 778592 and take to completed using Test Case 75335 and save as: TestCase778592
 Given I navigate to the landing page
-
 #Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status
-#Given I save to context name: TestCase778591 and value: 1525069
-#Given I save to context name: TestCase778592 and value: 1525072
+#Given I save to context name: TestCase778591 and value: 1525307
+#Given I save to context name: TestCase778592 and value: 1525308
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I generate a random UPC number and save as: UPC77859
 Given I delete all products with UPC Number: saved as UPC77859
@@ -638,23 +638,22 @@ And I call Shared Step 42759 (Portal - UPC Page - add 1 UPC)
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
-
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77859)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77859 and its status is: Submitted
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase77859)
 
-Scenario: test
-Given I save to context name: TestCase77859 and value: 1525212
+#Scenario: test
+#Given I save to context name: TestCase77859 and value: 1525212
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase77859 and its status is: Assigned
 And I Confirm the Product ID: saved as TestCase77859 is not highlited yellow indicating that this is not an e-comm/direct ship product
 And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase77859)
 And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
 And I call Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT
-And I Confirm no records are shown
+And In Product Attributes Popup Page I should see 0 results
 
-
+@Test14
 Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing
 Given I generate a random UPC number and save as: UPC80821
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

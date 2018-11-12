@@ -1066,9 +1066,71 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("prodattributes"),
 				"Failed to click product attribute tool bar option", "Clicked product attribute tool bar option");
 
-
-
 			Delay.Seconds(3);
+		}
+
+		[StepDefinition(@"In Product Attributes Popup Page I click on the filter icon")]
+		public void InProductAttributePageIClickOnFilterIcon()
+		{
+			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
+			Report.IsTrue(thisProductAttributePage.ClickToolbarItem("Filter"), "Failed to click filter button",
+				"Clicked filter button");
+			ProductAttributesFilter thisProductAttributesFilter = new ProductAttributesFilter();
+			Report.IsTrue(thisProductAttributesFilter.Wait_for_load(), "Product attribute popup has not loaded",
+				"Product attributes popup has loaded");
+		}
+
+		[StepDefinition(@"In Product Attributes Filter Popup Page I enter the following: (.*) in textbox: (.*)")]
+		public void InProductAttributeFilterPopupIEnterValueInTextBox(string value, string textbox)
+		{
+			ProductAttributesFilter thisProductAttributesFilter = new ProductAttributesFilter();
+			Report.IsTrue(thisProductAttributesFilter.EnterInTextBox(textbox, value),
+				"Failed to enter value: " + value + " in textbox: " + textbox,
+				"Succeeded in entering value: " + value + " in textbox: " + textbox);
+		}
+
+		[StepDefinition(@"In Product Attributes Filter Popup Page I select the following: (.*) from selectbox: (.*)")]
+		public void InProductAttributeFilterPopupISelectFromSelectBox(string value, string selectbox)
+		{
+			ProductAttributesFilter thisProductAttributesFilter = new ProductAttributesFilter();
+			Report.IsTrue(thisProductAttributesFilter.SelectFromSelectBox(selectbox, value),
+				"Failed to enter value: " + value + " in selectbox: " + selectbox,
+				"Succeeded in entering value: " + value + " in selectbox: " + selectbox);
+		}
+
+		[StepDefinition(@"In Product Attributes Filter Popup Page I click button: (.*)")]
+		public void InProductAttributeFilterPopupIClickButton(string button)
+		{
+			ProductAttributesFilter thisProductAttributesFilter = new ProductAttributesFilter();
+
+			switch (button.ToLower())
+			{
+				case "apply":
+					Report.IsTrue(thisProductAttributesFilter.ClickApply(), "Failed to click apply button",
+						"Clicked apply button");
+					break;
+				case "cancel":
+					Report.IsTrue(thisProductAttributesFilter.ClickCancel(), "Failed to click cancel button",
+						"Clicked cancel button");
+					break;
+				case "clear":
+					Report.IsTrue(thisProductAttributesFilter.ClickClear(), "Failed to click clear button",
+						"Clicked clear button");
+					break;
+				default:
+					Report.Error("Failed to provide valid button name to click - must be apply, cancel or clear");
+					break;
+			}
+
+		}
+
+		[StepDefinition(@"In Product Attributes Popup Page I should see (\d+) results")]
+		public void InProductAttributePageIShouldSeeXResults(int expectedResults)
+		{
+			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
+			Report.IsTrue(thisProductAttributePage.getRecordCount()==expectedResults, "Reults were not as expected",
+				"Results count was as expected");
+
 		}
 
 	}
