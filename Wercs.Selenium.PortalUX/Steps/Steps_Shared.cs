@@ -5637,7 +5637,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP \(Maxed Out\)")]
+		[StepDefinition(@"I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP \(Maxed Out\)")]
 		public void GivenICallSharedStep20375GoToProductAttributesViaAuthoringTabInPDPPAPMaxedOut()
 		{
 			TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5647,7 +5647,40 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Product Attributes"
 			});
 			new Steps_SHA().GivenIEditMyToolbarToAddTheFollowingOptions(table3);
+			new Steps_Studio().GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentAttributesButton();
+
 		}
+
+		[StepDefinition(@"I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: (.*)")]
+
+		public void ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(string savedAs, Table component)
+		{
+			TestReport.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			var ingredient = new Ingredient {
+				CASNumber = component.Rows.First()["CASNumber"],
+				ComponentName = component.Rows.First()["ComponentName"],
+				Percent = component.Rows.First()["Percentage"],
+				PublicallyDisclosed = component.Rows.First()["Publicly Disclosed"].ToLower()=="yes",
+				PublicName = component.Rows.First()["Public Name"]
+			};
+			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+				"Failed to add ingredient: " +
+				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
+				"Successfully added ingredient: " +
+				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
+			Context.AddToContext(savedAs, ingredient);
+		}
+
+		[Given(@"I call Shared Step 78799 - WPS PD\+ - Product Attributes - Filter for CNTXT")]
+		public void GivenICallSharedStep78799_WPSPD_ProductAttributes_FilterForCNTXT()
+		{
+			//Click the filter icon
+			//Enter CNTXT in code
+			//Click apply
+		}
+
+
 	}
 
 

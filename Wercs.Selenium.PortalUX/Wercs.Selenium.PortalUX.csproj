@@ -262,6 +262,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flow 6.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Ingredients\TransparencyRationCalculation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransparencyRationCalculation.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Kits - Flow 13.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -406,6 +411,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VOC.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\SHA Manager\Home Page\Suspended.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Suspended.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\ProductCharacteristics.feature.cs">
       <AutoGen>True</AutoGen>
@@ -688,6 +698,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Flow 6.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Product Registration\Ingredients\TransparencyRationCalculation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TransparencyRationCalculation.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Product Registration\Kits - Flow 13.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Kits - Flow 13.feature.cs</LastGenOutput>
@@ -803,6 +817,10 @@
     <None Include="Features\Product Registration\VOC\VOC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>VOC.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\SHA Manager\Home Page\Suspended.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Suspended.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ProductCharacteristics.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -10,6 +10,7 @@
 @RetailPartners
 @PaymentMethods
 @SHA
+@ProductSetUp
 @run_KitsFlow13
 
 Feature: Kits - Flow 13

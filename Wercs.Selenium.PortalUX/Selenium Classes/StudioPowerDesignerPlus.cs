@@ -266,6 +266,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickTabOption(string tabName)
 		{
+
 			var listOfTabs = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//ul[@id='navmenu-h']/li[(./a[@class='first'])]"));
 			IWebElement tab;
 			switch (tabName.ToLower())
@@ -1665,6 +1666,69 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 		}
+	}
+	class ProductAttributePage : BaseObject
+	{
+		public const string BasePath = "//body";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load(int secondsToWait = 60)
+		{
+			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			for (int i = 0; i < 30; i++)
+			{
+				urls = SeleniumBrowser.WebBrowser.WindowHandles;
+				if (urls.Count > 1)
+				{
+					break;
+				}
+
+				Delay.Seconds(1);
+			}
+
+			if (urls.Count < 2)
+			{
+				return false;
+			}
+
+			var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+
+			foreach (var handle in urls)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Alias Attributes Edit"))
+				{
+					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					Report.Success("Found window containing title: Alias Attributes Edit");
+					Report.Screenshot();
+					break;
+				}
+			}
+
+			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			if (base.Wait_for_load(30))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public void Close()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+		
+		public void ClickClose()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+
 	}
 
 	class DocumentQueuePage : BaseObject

@@ -445,6 +445,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I Confirm the Product ID: (.*) is not highlited yellow indicating that this is not an e-comm/direct ship product")]
 		public void ConfirmProductIdIsNotHighlightedYellow_NotEcommDirectShipProduct(string id)
 		{
+			if(id.ToLower().Contains("saved as"))
+			{
+				string savedAs = id.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim();
+				if (Context.Contains(savedAs))
+				{
+					var savedItem = (ProductInformation)Context.GetFromContext(savedAs);
+					id = savedItem.Id;
+				}
+				else
+				{
+					throw new Exception(savedAs + " was not found");
+				}
+			}
 			StudioSHAManager selStudioShaManager = new StudioSHAManager();
 			var colour = selStudioShaManager.ProductHighlight(id);
 			if (colour == null)

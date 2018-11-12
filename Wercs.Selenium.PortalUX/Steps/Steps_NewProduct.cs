@@ -2481,20 +2481,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The Transparency Score denominator matched the expected: " + denominator);
 		}
 
-		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a (warning|success)")]
+		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a (warning|success|danger)")]
 		public void IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed(string flag)
 		{
+			//orange is warning, red is danger, green is success
 			if (flag == "warning")
 			{
-				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "danger",
-					"The Transparency Score label was not highlighted red (warning)!",
-					"The Transparency Score label was highlighted red (warning) as expected");
+				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "warning",
+					"The Transparency Score label was not highlighted orange (warning) as expected",
+					"The Transparency Score label was highlighted orange (warning) as expected");
 			}
 			if (flag == "success")
 			{
 				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "success",
 					"The Transparency Score label was not highlighted green (success)!",
 					"The Transparency Score label was highlighted green (success) as expected");
+			}
+			if (flag == "danger")
+			{
+				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "danger",
+					"The Transparency Score label was not highlighted red (warning)!",
+					"The Transparency Score label was highlighted red (warning) as expected");
 			}
 		}
 

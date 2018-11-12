@@ -41,6 +41,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
+			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickTabOption(tab), "Failed to click tab: " + tab,
 				"Clicked tab: " + tab);
 		}
@@ -82,6 +83,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			DocumentQueuePage thisDocumentQueuePage = new DocumentQueuePage();
 			Report.IsTrue(thisDocumentQueuePage.Wait_for_load(60), "Document queue page has failed to load",
 				"Document queue page has loaded");
+		}
+
+		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on the product attributes button")]
+		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentAttributesButton()
+		{
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("attributes"),
+				"Failed to click the product attributes button",
+				"Clicked the product attributes button");
+			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
+			Report.IsTrue(thisProductAttributePage.Wait_for_load(60), "Product attribute page has failed to load",
+				"Product attribute page has loaded");
 		}
 
 		[StepDefinition(@"In Current Document Popup select checkbox: (.*)")]
