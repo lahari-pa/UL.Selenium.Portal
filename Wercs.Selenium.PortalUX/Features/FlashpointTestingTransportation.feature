@@ -7,7 +7,7 @@
 @RetailPartners
 @wercsmart
 @Signup
-@run_SupplierReports
+@run_FlashPointTestingMethodAndTransportation
 
 Feature: Flash Point, testing method and Transportation (Suite ID: 74116)
 
@@ -195,7 +195,7 @@ And I select option: Shipping fully regulated under section: Select all modes of
 And I click continue
 And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
 And section: UN Number is highlighed in red indicating an error
-And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (80C - greater than or equal to 60C) must not be used with Hazard Class 3
+And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (80C - greater than 60C) must not be used with Hazard Class 3
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
@@ -250,7 +250,7 @@ And I select option: Shipping fully regulated under section: Select all modes of
 And I click continue
 And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
 And section: UN Number is highlighed in red indicating an error
-And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (80C - greater than or equal to 60C) must not be used with Hazard Class 3
+And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (80C - greater than 60C) must not be used with Hazard Class 3
 And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
 And I should not see any error messages
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28

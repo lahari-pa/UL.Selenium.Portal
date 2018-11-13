@@ -54,7 +54,7 @@ namespace Wercs.Selenium.PortalUX.Features
                         "RetailPartners",
                         "wercsmart",
                         "Signup",
-                        "run_SupplierReports"});
+                        "run_FlashPointTestingMethodAndTransportation"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -113,7 +113,7 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74337FlashPoint60C_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74337] Flash Point < 60°C - Testing method shows closed cup only, Transportation" +
@@ -265,7 +265,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74349FlashPoint60C_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74349] Flash Point = 60°C - Testing method shows closed cup only, Transportation" +
@@ -417,7 +417,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74357FlashPoint60C_TestingMethodShowsClosedCupOnlyTransportationSelectNoDueToAnExemption()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74357] Flash Point < 60°C - Testing method shows closed cup only, Transportation" +
@@ -555,7 +555,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74346FlashPoint60C_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74346] Flash Point > 60°C - Testing method shows all, Transportation shows all, " +
@@ -634,7 +634,7 @@ testRunner.And("section: UN Number is highlighed in red indicating an error", ((
 #line 198
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (80C - great" +
-                    "er than or equal to 60C) must not be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "er than 60C) must not be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 199
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -710,7 +710,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74364FlashPoint60C_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74364] Flash Point > 60°C - Testing method shows all, Transportation shows all, " +
@@ -789,7 +789,7 @@ testRunner.And("section: UN Number is highlighed in red indicating an error", ((
 #line 253
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (80C - great" +
-                    "er than or equal to 60C) must not be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "er than 60C) must not be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 254
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -865,7 +865,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74365FlashPoint60C_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74365] Flash Point > 60°C - Testing method shows all, Transportation shows all, " +
@@ -1021,7 +1021,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74366FlashPoint60C_TestingMethodShowsClosedCupOnlyTransportationSelectNoDueToAnExemption()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74366] Flash Point = 60°C - Testing method shows closed cup only, Transportation" +
@@ -1162,7 +1162,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74368FlashPointRange23_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74368] Flash Point Range < 23 - Testing method shows closed cup only, Transporta" +
@@ -1317,7 +1317,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74372FlashPointRange23And38_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74372] Flash Point Range >=23 and <38 - Testing method shows closed cup only, Tr" +
@@ -1473,7 +1473,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74374FlashPointRange38And60_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74374] Flash Point Range >=38 and <=60  - Testing method shows closed cup only, " +
@@ -1629,7 +1629,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74376FlashPointRange60And93_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74376] Flash Point Range > 60 and < 93 - Testing method shows all, Transportatio" +
@@ -1790,7 +1790,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74379FlashPointRange93And815_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74379] Flash Point Range >=93 and <=815 - Testing method shows all, Transportati" +
@@ -1952,7 +1952,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74380FlashPointRangeNotTested_TestingMethodShowsNotApplicableAvailableTransportationShowsAllUNPageShows_FPIsRequiredWithHazardClass3()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74380] Flash Point Range Not Tested - Testing method shows Not Applicable/availa" +
@@ -2110,7 +2110,7 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SupplierReports")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_FlashPointTestingMethodAndTransportation")]
         public virtual void _74382FlashPointRangeNoneNoFlashPoint_TestingMethodShowsNotApplicableAvailableTransportationShowsAllUNPageShows_FPIsRequiredWithHazardClass3()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74382] Flash Point Range None, No Flash Point- Testing method shows Not Applicab" +
