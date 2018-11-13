@@ -2952,18 +2952,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (!el.TryClick())
 			{
+				Report.Error("Failed to click the Browse button!");
 				return false;
 			}
+			Delay.Seconds(2);
 			Report.Info("Entering file name with path: " + pdfFilePath);
-			GeneralFunctions.EnterFilename(pdfFilePath);
+			Report.IsTrue(GeneralFunctions.EnterFilename(pdfFilePath), "Failed to enter file name!", "Successfully entered file name");
 			int i = 0;
-			while (containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[contains(text(), 'View')]"), 2) == null && i < 10)
+			var viewEl = this.containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[contains(text(), 'View')]"), 2);
+			while ((viewEl == null || !viewEl.Displayed) && i < 10)
 			{
 				i++;
-				Delay.Seconds(Delay.SpeedFactor * 1);
+				Delay.Seconds(1);
+				viewEl = this.containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[contains(text(), 'View')]"), 2);
 			}
-
-			return (!(containerElement.FindElement(By.XPath(".//span[text()='" + section + "']//parent::div//a[contains(text(), 'View')]"), 2) == null));
+			return (viewEl != null && viewEl.Displayed);
 		}
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)
 		public bool UploadFileForSectionAndType(string label, string section, string pdfFilePath)

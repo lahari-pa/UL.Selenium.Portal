@@ -324,7 +324,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var selNewProduct = new NewProduct();
 			Report.Info("Checking the New Product page is open");
 			Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
-			if (!selNewProduct.WaitForSection(page))
+			if (page.ToLower() != "new product" && !selNewProduct.WaitForSection(page))
 			{
 				Report.Error($@"The page title did not match expected! Expected ""{page}""");
 			}
