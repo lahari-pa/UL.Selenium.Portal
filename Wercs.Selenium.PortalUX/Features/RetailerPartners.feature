@@ -63,7 +63,6 @@ And I check that the following retailers are showing:
 | Lowes                  | LW    |
 | McLane                 | ML    |
 | Meijer                 | MJ    |
-| Michaels               | MI    |
 | Northgate Market       | NM    |
 | Office Depot           | OD    |
 | O'Reilly Auto Parts    | OR    |
@@ -219,7 +218,7 @@ And I click the Retail Partners icon in the Navigation Pane
 And I select the retailer: CVS
 And I click the "What are the Data Usage Tiers?" information button in the Retail Partners Details screen
 And I click the "Tier 3: Supplemental Reports" tab in Data Tier Details
-And I confirm the Data Tier Details subheading reads: What does Supplemental Reports for Internal Buisness Use Only mean?
+And I confirm the Data Tier Details subheading reads: What does Supplemental Reports for Internal Business Use Only mean?
 And I confirm the text displayed in the Data Tier Details popup matches for each section:
 | Section | Text                                                                                                                                                                                                                                                                                                                                                                     |
 | A       | Definition. "Supplemental Reports" include providing data needed for sustainability evaluations, product qualification and rating programs, assortment curation programs, and supplier qualification programs operated by a Designated Recipient.                                                                                                                        |

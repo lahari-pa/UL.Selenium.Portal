@@ -84,7 +84,9 @@ Given I click continue
 
 Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 
-Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+#Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+
+Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 
