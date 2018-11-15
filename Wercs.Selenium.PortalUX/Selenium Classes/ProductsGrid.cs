@@ -883,6 +883,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElements(By.XPath(".//div[@id='more-filters-panel']//label")).Select(x => x.Text).ToList();
 		}
+
+		public bool SelectBrandByValue(MyBrands.Brand brand)
+		{
+			var el = this.containerElement.FindElement(By.XPath(@".//select[contains(@data-bind,""options: productLineModel.productLines"")]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+			el.SelectByValue(brand.ID);
+			return el.SelectedOption() == brand.Name;
+		}
 	}
 
 	class RemoveUpcUpdate : ModalDialog

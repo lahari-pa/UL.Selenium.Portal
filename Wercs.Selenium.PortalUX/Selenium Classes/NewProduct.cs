@@ -3841,6 +3841,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.FindElement(By.XPath("./input"), 10).TryClick();
 		}
 
+
+		// NB only works fr select/option
+		public bool SetOptionInSectionByValue(string section, string value, string text)
+		{
+			var xPath = @"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])]";
+			var el = containerElement.FindElement(By.XPath(xPath), 2);
+			try
+			{
+				el.SelectByValue(value);
+				Delay.Seconds(1);
+				return el.SelectedOption() == text;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
 		public bool ClickSelectForSection(string section)
 		{
 			return containerElement.FindElement(By.XPath(@".//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2).TryClick();
@@ -4841,15 +4859,39 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(xPath), 2).TryClick();
 		}
 
-		public List<string> AllProductLineOrBrandOptions()
+		/// <summary>
+		/// New Product - The Product. Return name and ID of all options under Product Line or Brand
+		/// </summary>
+		//public List<string> AllProductLineOrBrandOptions()
+		//{
+		//	var el = containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Line')]/../following-sibling::div//select"), 2);
+		//	if (el == null)
+		//	{
+		//		Report.Failure("Could not locate the Product Line or Brand option");
+		//		return new List<string>();
+		//	}
+		//	return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+		//}
+
+		/// <summary>
+		/// New Product - The Product. Return name and ID of all options under Product Line or Brand
+		/// </summary>
+		public List<MyBrands.Brand> AllProductLineOrBrandOptions()
 		{
+			var rList = new List<MyBrands.Brand>();
 			var el = containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Line')]/../following-sibling::div//select"), 2);
 			if (el == null)
 			{
 				Report.Failure("Could not locate the Product Line or Brand option");
-				return new List<string>();
+				return null;
 			}
-			return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+			var options =  el.FindElements(By.XPath("./option"), 2).Where(x => x.Text != "Choose...").ToList();
+			foreach (var option in options)
+			{
+				var brand = new MyBrands.Brand{ID = option.GetAttribute("value"), Name = option.Text};
+				rList.Add(brand);
+			}
+			return rList;
 		}
 
 		public bool SetSubOptionInSection(string section, string subsection, string value)

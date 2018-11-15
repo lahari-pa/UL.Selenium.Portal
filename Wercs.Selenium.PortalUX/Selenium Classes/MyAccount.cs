@@ -1324,6 +1324,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return textEl.Text;
 		}
+
+		public class Brand
+		{
+			public string Name { get; set; }
+			public string ID { get; set; }
+		}
 	}
 	class MyIngredients : MyAccount_MyLibrary
 	{

@@ -2841,7 +2841,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				return;
 			}
 			var productLineOptions = new NewProduct().AllProductLineOrBrandOptions();
-			Report.IsTrue(!productLineOptions.Except(activeBrands).Any() && productLineOptions.Count == activeBrands.Count,
+			Report.IsTrue(!productLineOptions.Select(x => x.Name).ToList().Except(activeBrands).Any() && productLineOptions.Count == activeBrands.Count,
 				"The 'Product Line or Brand' drop down options were not limited exclusively to saved active brands. The options showing were: " + string.Join(", ", productLineOptions),
 				"The 'Product Line or Brand' drop down options were limited exclusively to saved active brands as expected. The options showing were: " + string.Join(", ", productLineOptions));
 		}
@@ -3867,14 +3867,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				// test can't continue
 				throw new Exception("No Brands were available to add to the product, which is required by the test!");
+				// instead.. go to create a new brand (My Account - My Library)
 			}
 			Report.Info($"There are {options.Count} brand options. Selecting the first one");
 			var brand = options.First();
-			Report.Info($"Selecting the brand: {brand}");
-			Report.IsTrue(newProduct.SetOptionInSection("Product Line or Brand (optional)", brand),
-				$"Failed to set the Product Line or Brand option to: {brand}!");
-			Report.Info($@"Saving brand ""{brand}"" to context as: Brand{testCaseId}");
+			Report.Info($"Selecting the brand: {brand.Name}");
+			Report.IsTrue(newProduct.SetOptionInSectionByValue("Product Line or Brand (optional)", brand.ID, brand.Name),
+				$"Failed to set the Product Line or Brand option to: {brand.Name} ({brand.ID})!",
+				$"Successfully set the Product Line or Brand option to: {brand.Name} ({brand.ID})");
+			Report.Info($@"Saving brand ""{brand.Name}"" to context as: Brand{testCaseId}");
 			Context.AddToContext($"Brand{testCaseId}", brand);
+			Context.AddToContext($"BrandName{testCaseId}", brand.Name);
 		}
 
 		[StepDefinition(@"Data Acceptance page should not show")]

@@ -348,14 +348,13 @@ Then The home screen should load
 Given I create a new product of type: Bleach, with a Product Line/ Brand added
 And I should see an option for More Filters
 Given I click More Filters in the products grid
-# step accepts '~saved as...' and will fetch the value from context
-Given I select the ~saved as Brand68388 option in the Brand More Filters drop down
+Given I select the More Filters - Brand saved as: Brand68388 by ID
 Given I click Row Actions for the first product returned
 And I click on the Row Action: Edit
 Given In the New Product page I click tab: Product Type
 And in the New Product page I click section: The Product
 # step accepts '~saved as...' and will fetch the value from context
-Then Product Line or Brand (optional) should be showing the value: ~saved as Brand68388
+Then Product Line or Brand (optional) should be showing the value: ~saved as BrandName68388
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
 
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter

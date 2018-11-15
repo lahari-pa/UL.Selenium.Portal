@@ -710,6 +710,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I select the More Filters - Brand saved as: (.*) by ID")]
+		public void SelectMoreFiltersBrandSavedAs(string savedAs)
+		{
+			var selMoreFilters = new MoreFilters();
+			var brand = (MyBrands.Brand)Context.GetFromContext(savedAs);
+			if (brand == null)
+			{
+				throw new Exception("Could not find brand saved as: " + savedAs + " in context!");
+			}
+			Report.IsTrue(selMoreFilters.SelectBrandByValue(brand), $"Failed to select brand: {brand.Name} ({brand.ID})", $"Successfully selected brand: {brand.Name} ({brand.ID})");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
 		[StepDefinition(@"I edit the product with ID: (.*)")]
 		public void EditFirstProductForRetailer(string id)
 		{
