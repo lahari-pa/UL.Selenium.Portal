@@ -2479,18 +2479,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing(string numerator, string denominator)
 		{
 			var selNewProduct = new NewProduct();
+
+			if (numerator.ToLower().Contains("saved as"))
+			{
+				numerator = Context.GetFromContext(numerator.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim()).ToString();
+			}
 			Report.IsTrue(selNewProduct.TransparencyScoreNumerator() == numerator,
-				"The Transparency Score numerator did not match the expected: " + numerator,
+				"The Transparency Score numerator did not match the expected: " + numerator + " it is showing as: " + selNewProduct.TransparencyScoreNumerator(),
 				"The Transparency Score numerator matched the expected: " + numerator);
 			Report.IsTrue(selNewProduct.TransparencyScoreDenominator() == denominator,
 				"The Transparency Score denominator did not match the expected: " + denominator,
 				"The Transparency Score denominator matched the expected: " + denominator);
 		}
 
-		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a (warning|success|danger)")]
+		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a (warning|success|danger|info)")]
 		public void IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed(string flag)
 		{
-			//orange is warning, red is danger, green is success
+			//orange is warning, red is danger, green is success, blue is info
 			if (flag == "warning")
 			{
 				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "warning",
@@ -2508,6 +2513,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "danger",
 					"The Transparency Score label was not highlighted red (warning)!",
 					"The Transparency Score label was highlighted red (warning) as expected");
+			}
+			if (flag == "info")
+			{
+				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "info",
+					"The Transparency Score label was not highlighted blue (info)",
+					"The Transparency Score label was highlighted blue (info) as expected");
 			}
 		}
 
@@ -3907,6 +3918,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisNewProduct.EnterAdditionalRequirement(retailer, additionalRequirements),
 				"Failed to enter additional requirements: " + additionalRequirements + " for retailer: " + retailer,
 				"Added additional requirements for retailer: " + retailer);
+		}
+
+		[StepDefinition(@"In the ingredients page I search for and select product saved as: (.*)")]
+		public void InTheIngredientsPageISearchForAndSelectProductSavedAs(string savedAs)
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			var id = "";
+			if (Context.Contains(savedAs))
+			{
+				ProductInformation thisProduct = (ProductInformation)Context.GetFromContext(savedAs);
+				id = thisProduct.Id;
+			}
+
+			Ingredient thisIngredient = new Ingredient();
+			thisIngredient.CASNumber = "WPS" + id;
+			thisNewProduct.AddIngredient(thisIngredient);
 		}
 	}
 }

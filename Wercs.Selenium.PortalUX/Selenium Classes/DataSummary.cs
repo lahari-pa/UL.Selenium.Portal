@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using SafewareReporting;
 using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -58,7 +60,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		/// <summary>
-		/// Get Private label option 
+		/// Get Private label option
 		/// </summary>
 		/// <returns></returns>
 		public string GetPrivateLabelStatement()
@@ -92,5 +94,135 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return els.Select(x => x.GetElementText()).ToList();
 		}
+
+		public List<Ingredient> GetIngredients()
+		{
+			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"),2);
+			List<Ingredient> listOfIngredients = new List<Ingredient>();
+			if (ingredientsTable == null)
+			{
+				Report.Error("Failed to find ingredients table");
+				return listOfIngredients;
+			}
+
+			var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr"));
+
+			if(ingredientsRows.Count==0)
+			{
+				Report.Info("There are no ingredients in the able");
+				return listOfIngredients;
+			}
+
+			for (int i = 0; i < ingredientsRows.Count - 1; i++)
+			{
+				var row = ingredientsRows[i];
+				var rowColumns = row.FindElements(By.XPath(".//td"));
+				Ingredient thisIngredient = new Ingredient();
+				string CASAndNaME = rowColumns[0].GetValue();
+				var pattern = @"(.*)\w(.*)";
+				var regMatch = Regex.Match(CASAndNaME, pattern);
+				if (!regMatch.Success || regMatch.Groups.Count != 3)
+				{
+					throw new Exception("pattern not found");
+				}
+				thisIngredient.CASNumber = regMatch.Groups[1].ToString();
+				thisIngredient.ComponentName = regMatch.Groups[2].ToString();
+				thisIngredient.Percent = rowColumns[1].GetValue();
+				thisIngredient.PublicallyDisclosed = rowColumns[2].GetValue() == "Yes";
+				thisIngredient.TradeSecret = rowColumns[3].GetValue() == "Yes";
+				thisIngredient.PublicName = rowColumns[4].GetValue();
+				listOfIngredients.Add(thisIngredient);
+			}
+			return listOfIngredients;
+		}
+
+		public void ScrollToIngredients()
+		{
+			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+			if (ingredientsTable == null)
+			{
+				Report.Error("Failed to find ingredients table");
+			}
+
+			ingredientsTable.TryClick();
+		}
+
+		public decimal GetTransparencyRatio()
+		{
+			try
+			{
+				var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+
+				if (ingredientsTable == null)
+				{
+					Report.Error("Failed to find ingredients table");
+					return -1;
+				}
+
+				List<IWebElement> ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+
+				if (ingredientsRows.Count == 0)
+				{
+					Report.Info("There are no ingredients in the able");
+					return -1;
+				}
+
+				var ratioRow = ingredientsRows[(ingredientsRows.Count - 1)];
+				string sRatio = ratioRow.FindElements(By.XPath(".//td"))[2].GetValue();
+				Report.Info("Ratio: " + sRatio);
+
+				var pattern = @"(\d)\s\/\s(\d)";
+				var regMatch = Regex.Match(sRatio, pattern);
+				if (!regMatch.Success || regMatch.Groups.Count != 3)
+				{
+					return -1;
+				}
+				string numerator = regMatch.Groups[1].ToString();
+				string denominator = regMatch.Groups[2].ToString();
+
+				var calcRatio =  Convert.ToSingle(numerator) / Convert.ToSingle(denominator);
+				return (decimal)calcRatio;
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+				return -1;
+			}
+
+		}
+
+		public string sGetTransparencyRatio()
+		{
+			try
+			{
+				var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+
+				if (ingredientsTable == null)
+				{
+					Report.Error("Failed to find ingredients table");
+					return null;
+				}
+
+				List<IWebElement> ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr")).ToList();
+
+				if (ingredientsRows.Count == 0)
+				{
+					Report.Info("There are no ingredients in the able");
+					return null;
+				}
+
+				var ratioRow = ingredientsRows[(ingredientsRows.Count - 1)];
+				string sRatio = ratioRow.FindElements(By.XPath(".//td"))[2].GetValue();
+				Report.Info("Ratio is: " + sRatio);
+				return sRatio.Trim();
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+				return null;
+			}
+
+		}
+
 	}
 }

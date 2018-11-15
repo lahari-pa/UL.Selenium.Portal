@@ -4577,26 +4577,52 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string TransparencyScoreNumerator()
 		{
-			var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
-			var pattern = @"(\d)\s\/\s(\d)";
+			Report.Info("Beginning get Transparency score numerator");
+			var pubDisSummaryspan = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2);
+			if (pubDisSummaryspan == null)
+			{
+				pubDisSummaryspan = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2);
+				if (pubDisSummaryspan == null)
+				{
+					Report.Error("The transparency score is not found");
+					return null;
+				}
+			}
+
+			var pubDisSummary = pubDisSummaryspan.GetValue();
+			var pattern = @"([0123456789\.]*)\s\/\s([0123456789\.]*)";
 			var regMatch = Regex.Match(pubDisSummary, pattern);
 			if (!regMatch.Success || regMatch.Groups.Count != 3)
 			{
 				return null;
 			}
-			return regMatch.Groups[1].ToString();
+			return regMatch.Groups[1].ToString().Trim();
 		}
 
 		public string TransparencyScoreDenominator()
 		{
-			var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
-			var pattern = @"(\d)\s\/\s(\d)";
-			var regMatch = Regex.Match(pubDisSummary, pattern);
-			if (!regMatch.Success || regMatch.Groups.Count != 3)
+			try
 			{
+				Report.Info("Beginning get Transparency score denominator");
+				var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2).Text;
+				if (pubDisSummary == null)
+				{
+					pubDisSummary=SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2).Text;
+				}
+				var pattern = @"([0123456789\.]*)\s\/\s([0123456789\.]*)";
+				var regMatch = Regex.Match(pubDisSummary, pattern);
+				if (!regMatch.Success || regMatch.Groups.Count != 3)
+				{
+					return null;
+				}
+				return regMatch.Groups[2].ToString();
+			}
+			catch (Exception e)
+			{
+				Report.Error(e.Message);
 				return null;
 			}
-			return regMatch.Groups[2].ToString();
+
 		}
 
 		public string TransparencyScoreStatus()
@@ -5156,6 +5182,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 	{
 		public string Name { get; set; }
 		public string Id { get; set; }
+
+		public List<Ingredient> ListOfIngredients { get; set; }
 	}
 
 	public class Battery

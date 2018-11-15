@@ -39,6 +39,7 @@ Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (O
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given If purchase details are showing click confirm order
+
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
@@ -726,7 +727,6 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Assigned
 And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80821)
 And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80821)
-Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase80821)
 And In Power Designer I left click on section: [SECT0077] Walmart Transportation Information
 And In Power Designer I double click on category: Water Soluble?
 Then In Power Designer the phrase selector screen should open

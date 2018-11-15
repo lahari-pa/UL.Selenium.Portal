@@ -206,7 +206,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			el.Click();
+			el.TryClick();
 			return true;
 		}
 

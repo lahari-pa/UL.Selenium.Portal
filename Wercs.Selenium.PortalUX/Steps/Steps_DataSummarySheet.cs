@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Web.Administration;
 using ResourcePool;
 using SafewareReporting;
+using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
@@ -88,9 +89,68 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(found.Contains(option),
 					"option was not as expected! Expected: " + option + " in section: " + section,
 					"option was showing: " + option + " in section: " + section);
-		
+
 		//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
-	}
+		}
+
+		[StepDefinition(@"The data summary window should be showing")]
+		public void TheDataSummaryWindowShouldBeShowing()
+		{
+			var dataSummarySheet = new DataSummary();
+			Report.IsTrue(dataSummarySheet.WaitForSpinner(), "Data summary screen is not showing",
+				"Data summary screen is showing");
+		}
+
+		[StepDefinition(@"Get Ingredients from Data Summary Window and add to product saved as (.*)")]
+		public void GetIngredientsFromDataSummaryWindowAndAddToProductSavedAs(string savedAs)
+		{
+			if (Context.Contains(savedAs))
+			{
+				ProductInformation thisProductInformation = (ProductInformation)Context.GetFromContext(savedAs);
+				thisProductInformation.ListOfIngredients = new DataSummary().GetIngredients();
+			}
+			else
+			{
+				Report.Failure("Product saved as: " + savedAs + " was not found.");
+			}
+		}
+
+		[StepDefinition(@"Get transparency ratio and save as (.*)")]
+		public void GetTransparencyRatioAndSaveAs(string saveAs)
+		{
+			var transparencyRatio = new DataSummary().GetTransparencyRatio();
+			if (transparencyRatio > -1)
+			{
+				Context.AddToContext(saveAs, transparencyRatio);
+			}
+
+			Report.IsTrue(transparencyRatio > -1, "Failed to get tranparency ratio", "Saved transparency ratio");
+		}
+
+		[StepDefinition(@"Confirm that transparency ratio is (.*) / (.*)")]
+		public void GivenConfirmThatTransparencyRatioSavedAsTRAfterIs(string numerator, string denominator)
+		{
+			DataSummary thisDataSummary = new DataSummary();
+			string actualRatio = thisDataSummary.sGetTransparencyRatio();
+			string pattern = @"([0123456789\.]*)\s*\/\s*([0123456789\.]*)";
+			var regMatch = System.Text.RegularExpressions.Regex.Match(actualRatio, pattern);
+			if (!regMatch.Success || regMatch.Groups.Count != 3)
+			{
+				Report.Failure("Actual ratio was not as expected. It is: " + actualRatio);
+			}
+			Report.IsTrue(regMatch.Groups[1].ToString()==numerator, "Numerator was expected to be: " + numerator + " but is: " + regMatch.Groups[1].ToString(), "As expected, numerator is: " + numerator);
+			Report.IsTrue(regMatch.Groups[2].ToString() == denominator, "Denominator was expected to be: " + denominator + " but is: " + regMatch.Groups[1].ToString(), "As expected, denominator is: " + denominator);
+
+		}
+
+		[StepDefinition(@"I take a screenshot of the ingredients")]
+		public void GivenITakeAScreenshotOfTheIngredients()
+		{
+			DataSummary thisDataSummary = new DataSummary();
+			thisDataSummary.WaitForSpinner();
+			thisDataSummary.ScrollToIngredients();
+			Report.Screenshot();
+		}
 
 	}
 }

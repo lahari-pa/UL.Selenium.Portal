@@ -5657,13 +5657,50 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
-			var ingredient = new Ingredient {
-				CASNumber = component.Rows.First()["CASNumber"],
-				ComponentName = component.Rows.First()["ComponentName"],
-				Percent = component.Rows.First()["Percentage"],
-				PublicallyDisclosed = component.Rows.First()["Publicly Disclosed"].ToLower()=="yes",
-				PublicName = component.Rows.First()["Public Name"]
-			};
+			string CASNo = "";
+			if(component.Rows.First()["CASNumber"].Contains("WPS"))
+			{
+				string casSavedAs = "";
+				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))
+				{
+					ProductInformation CASProd =
+						(ProductInformation)Context.GetFromContext(component.Rows.First()["CASNumber"].Split(' ')[2]
+							.Trim());
+					CASNo = "WPS" + CASProd.Id;
+				}
+			}
+			else
+			{
+				CASNo = component.Rows.First()["CASNumber"];
+			}
+
+			var ingredient = new Ingredient();
+
+			if (CASNo.Length > 0)
+			{
+				ingredient.CASNumber = CASNo;
+			}
+
+			if (component.ContainsColumn("ComponentName"))
+			{
+				ingredient.ComponentName = component.Rows.First()["ComponentName"];
+			}
+
+			if (component.ContainsColumn("Percentage"))
+			{
+				ingredient.Percent = component.Rows.First()["Percentage"];
+			}
+
+			if (component.ContainsColumn("Publicly Disclosed"))
+			{
+				ingredient.PublicallyDisclosed = component.Rows.First()["Publicly Disclosed"].ToLower() == "yes";
+			}
+
+			if (component.ContainsColumn("Public Name"))
+			{
+				ingredient.PublicName = component.Rows.First()["Public Name"];
+			}
+
 			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
 				"Failed to add ingredient: " +
 				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
@@ -5672,7 +5709,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Context.AddToContext(savedAs, ingredient);
 		}
 
-		[Given(@"I call Shared Step 78799 - WPS PD\+ - Product Attributes - Filter for CNTXT")]
+		[StepDefinition(@"I call Shared Step 78799 - WPS PD\+ - Product Attributes - Filter for CNTXT")]
 		public void GivenICallSharedStep78799_WPSPD_ProductAttributes_FilterForCNTXT()
 		{
 			Steps_Studio thisStepsStudio = new Steps_Studio();
@@ -5685,8 +5722,101 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
 		}
 
+		[StepDefinition(@"I call Shared Step 80780 - My Products - Filter for product - View - Note transparency ratio - close summary for product saved as: (.*)")]
+		public void GivenICallSharedStep_MyProducts_FilterForProduct_View_NoteTransparencyRatio_CloseSummary(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I filter for the product: " + savedAs);
+			StepsProductGrid thisStepsProductGrid = new StepsProductGrid();
+			StepsDataSummarySheet thisStepsDataSummarySheet = new StepsDataSummarySheet();
+			GlobalSteps myGlobalSteps = new GlobalSteps();
+
+			thisStepsProductGrid.GivenISearchForTheProductSavedAs(savedAs);
+			thisStepsProductGrid.WhenIClickRowActionsForTheFirstProductReturned();
+
+			thisStepsProductGrid.ClickRowAction("View");
+			TestReport.StartStep("I switch to the Data Summary page");
+			myGlobalSteps.SwitchToDataSumaryTab();
+			thisStepsDataSummarySheet.GetIngredientsFromDataSummaryWindowAndAddToProductSavedAs(savedAs);
+			thisStepsDataSummarySheet.GetTransparencyRatioAndSaveAs("TransparencyRatio");
+			TestReport.StartStep("I close the Data Summary tab");
+			myGlobalSteps.CloseDataSummaryTab();
+
+
+			//Scroll till you see the Ingredients list - make a note of the transparency ratio shown
+			//The transparency ratio is the number shown below the Yes/ No entries in the Publicly Disclosed? column of the table and will be in the format of x/ y
+
+			//Calculate the number that the transparency ratio is as a decimal (for example if the Transparency ratio shown is 1/2 this would be 0.5 as a decimal, if the transparency ration is 3/8 this would be 0.375 as a decimal) - you will need this later in your test case
+
+			//Close the Summary view and return to the WERCSmart products page
+		}
+
+		[StepDefinition(@"I call Shared Step 80784 - Ingredients - Search for 3rd party component product saved as: (.*)")]
+		public void GivenICallSharedStep_Ingredients_SearchForRdPartyComponentProductByProductSavedAs(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			TestReport.StartStep("I should see the Ingredients Page");
+			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
+			MyNewProductSteps.InTheIngredientsPageISearchForAndSelectProductSavedAs(savedAs);
+
+
+
+		}
+
+		[StepDefinition(@"I call Shared Step 80824 - Ingredients - Add FLAVOR component, not Publicly Disclosed and save as (.*)")]
+		public void ThenICallSharedStep_Ingredients_AddFLAVORComponentNotPubliclyDisclosed(string savedAs, TechTalk.SpecFlow.Table component)
+		{
+			string CASNo = "";
+			if (component.Rows.First()["CASNumber"].Contains("WPS"))
+			{
+				string casSavedAs = "";
+				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))
+				{
+					ProductInformation CASProd =
+						(ProductInformation)Context.GetFromContext(component.Rows.First()["CASNumber"].Split(' ')[2]
+							.Trim());
+					CASNo = "WPS" + CASProd.Id;
+				}
+			}
+			else
+			{
+				CASNo = component.Rows.First()["CASNumber"];
+			}
+
+			var ingredient = new Ingredient();
+
+			if (CASNo.Length > 0)
+			{
+				ingredient.CASNumber = CASNo;
+			}
+
+			if (component.ContainsColumn("ComponentName"))
+			{
+				ingredient.ComponentName = component.Rows.First()["ComponentName"];
+			}
+
+			if (component.ContainsColumn("Percentage"))
+			{
+				ingredient.Percent = component.Rows.First()["Percentage"];
+			}
+
+			if (component.ContainsColumn("Publicly Disclosed"))
+			{
+				ingredient.PublicallyDisclosed = component.Rows.First()["Publicly Disclosed"].ToLower() == "yes";
+			}
+
+			if (component.ContainsColumn("Public Name"))
+			{
+				ingredient.PublicName = component.Rows.First()["Public Name"];
+			}
+
+			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+				"Failed to add ingredient: " +
+				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
+				"Successfully added ingredient: " +
+				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
+			Context.AddToContext(savedAs, ingredient);
+		}
 	}
-
-
-
 }
