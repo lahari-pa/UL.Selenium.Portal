@@ -918,7 +918,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
 			TestReport.StartStep("I set the Flash Point (in Celsius) field to: >=23C and <38C");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=23C and <38C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=93C and <815C");
 			TestReport.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			TestReport.StartStep("I set the Select the best Water Solubility description field to: 100g/100ml");
@@ -5658,7 +5658,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
 			string CASNo = "";
-			if(component.Rows.First()["CASNumber"].Contains("WPS"))
+			if (component.Rows.First()["CASNumber"].Contains("WPS"))
 			{
 				string casSavedAs = "";
 				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))

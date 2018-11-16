@@ -11,14 +11,13 @@
 @run_Flow24_Deodorant
 
 Feature: Flow 24 - Deodorant
-@tfs_design
+@james
 Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-# Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist
 Given I generate a random UPC number and save as: UPC60617
 
 Given I delete all products with UPC Number: saved as UPC60617
@@ -29,9 +28,7 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase60617
 
-Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-|  Liquid                | Liquid                   | 2                 | 2   | 2                           | 66                         |  Closed cup method         | Appreciable                                  |
+And I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
 
 Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 
@@ -48,9 +45,7 @@ Then I confirm the Label Information section on the Regulatory Information 3 pag
 
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-
-Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 
 Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 
@@ -91,81 +86,53 @@ Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (O
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Non-aerosol
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+
+And I call Shared Step 54796 (Purchase Summary)
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60617
 
 
 @tfs_design
-Scenario: [60637] Deodorant - Non-Aerosol - RU000760(Solid)
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
-Then The home screen should load
-
-# Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist
+Scenario: [60637] Summary View - Hyperlink for Document Uploads
 Given I generate a random UPC number and save as: UPC60637
-
-Given I delete all products with UPC Number: saved as UPC60637
-
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
-
-Then I save the product information as: TestCase60637
-
-#By default, the Solid radio button should be preselected for Physical State <-- this is not the case. Setting it to Solid after reporting the fail to allow the test to continue.
-#Given I call Shared Step 37857 (Enter Physical Property - Solid)
-
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
-
-Given I call Shared Step 60310 (Additional Product Information - Without Child question)
-
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+# And I Enter "Deodorant - Non-Aerosol" in Type of Product smart search field
+And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-Aerosol
+And I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
+| Water Solubility | Secondary Physical State |
+| Soluble          | Solid                    |
+And I call Shared Step 60310 (Additional Product Information - Without Child question)
+And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Sodium hydroxide | 80      | false               | false       |            |
 | Propylene Glycol | 5       | false               | false       |            |
 | Water            | 15      | false               | false       |            |
-
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-
-Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-
-#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-
-#Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-
-Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-
-Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-
-Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-
-Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
-
-Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
-
-Given in the Volatile Organic Compound Summary page I click Continue
-
-Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Dick's Sporting Goods
-
-Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60637, container type: Aerosol Can and size: 9.99
-
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-
-Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
-
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+And I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+And I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
+And I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
+And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: (.*)
+And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60637, container type: (.*) and size: (.*)
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 And in the Optional Reports and Documents Available for Purchase page I click Continue
-
-Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor  | Odor Threshold    | Partition Coefficient |
 | Mask                          | 120                      | 70.5                    | 5         | Cloudy     | Fresh | No data available | 10                    |
-
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Non-aerosol
-
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60637
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+#And I Click the Summary button the the Data Acceptance screen
+#And I Click the View button on the Summary screen to view the uploaded document
+#And I Confirm the link opens the document that was uploaded in Step 17
+#And I Click the "X" to close the document popup
+#And I Click the hyperlink for uploaded documents on the Summary screen
+#And I Confirm the link opens the document that was uploaded in Step 17
+#And I Click the "X" to close the documentpopup
+#And I Click the "X" to close the Summary screen
+And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60637
 
 
 @tfs_design
