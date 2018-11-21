@@ -18,7 +18,7 @@ namespace Wercs.Selenium.PortalUX.Features.SHAManager.HomePage
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class SuspendedFeature
+    public partial class SuspendedSuiteID69545Feature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -44,7 +44,7 @@ namespace Wercs.Selenium.PortalUX.Features.SHAManager.HomePage
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Suspended", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Suspended (Suite ID: 69545)", null, ProgrammingLanguage.CSharp, new string[] {
                         "LandingPage",
                         "Login",
                         "Homepage",
@@ -55,6 +55,8 @@ namespace Wercs.Selenium.PortalUX.Features.SHAManager.HomePage
                         "DataSummarySheet",
                         "wercsmart",
                         "RetailPartners",
+                        "SHA",
+                        "Studio",
                         "run_Suspended"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -70,9 +72,9 @@ namespace Wercs.Selenium.PortalUX.Features.SHAManager.HomePage
         public virtual void TestInitialize()
         {
             if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Suspended")))
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "Suspended (Suite ID: 69545)")))
             {
-                global::Wercs.Selenium.PortalUX.Features.SHAManager.HomePage.SuspendedFeature.FeatureSetup(null);
+                global::Wercs.Selenium.PortalUX.Features.SHAManager.HomePage.SuspendedSuiteID69545Feature.FeatureSetup(null);
             }
         }
         
@@ -95,7 +97,7 @@ namespace Wercs.Selenium.PortalUX.Features.SHAManager.HomePage
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[69547] Suspend a Product - Formula - Other")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Suspended")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Suspended (Suite ID: 69545)")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
@@ -106,51 +108,78 @@ namespace Wercs.Selenium.PortalUX.Features.SHAManager.HomePage
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Studio")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Suspended")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
         public virtual void _69547SuspendAProduct_Formula_Other()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69547] Suspend a Product - Formula - Other", ((string[])(null)));
-#line 15
-this.ScenarioSetup(scenarioInfo);
-#line 16
-testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
-testRunner.And("I Select the checkbox of a product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69547] Suspend a Product - Formula - Other", new string[] {
+                        "SHA"});
 #line 18
-testRunner.And("I Select Suspended (in bottom menu)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 19
-testRunner.And("I Select the All checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 20
-testRunner.And("I From the Select Regulatory Specialist drop down chooseyour name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
-testRunner.And("I From the Select Subject drop down choose Formula - Other", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
-testRunner.And("I Confirm that you see The issue with the composition data is: ____________ in th" +
-                    "e Supplier Message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
-testRunner.And("I Add text to the Supplier Message input field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
+                    "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 24
-testRunner.And("I Add different text to the Internal Product Note input field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
-testRunner.And("I Click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
-testRunner.And("I Right Click on the product you selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
-testRunner.And("I ChooseNotification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
-testRunner.And("I Confirm that under the Type column you see Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
-testRunner.And("I Confirm that under Notification Date you see today\'s date", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
-testRunner.And("I Confirm that under Subject, you see Formula - Other", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
-testRunner.And("I Select the notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
-testRunner.And("I Confirm that in the Message area you see: The issue with composition data is: a" +
-                    "nd the extra text you added.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
-testRunner.And("I Close the Notification History for Product # popup by clicking the Close button" +
+testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Formula – Other" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+testRunner.And("In the Suspended dialog in the Supplier Message field I should see: The issue wit" +
+                    "h the composition data is: _________", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 26
+testRunner.And("In the Suspended dialog in the Supplier Message field I add the following text: s" +
+                    "upplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
+testRunner.And("In the Suspended dialog in the Internal Product Note field I should see: The issu" +
+                    "e with the composition data is: _________", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
+testRunner.And("In the Suspended dialog in the Internal Product Note field I add the following te" +
+                    "xt: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 29
+testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
+testRunner.And("I close alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
+                    "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 32
+testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 33
+testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
+                    ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "Notification Date",
+                        "Subject"});
+            table1.AddRow(new string[] {
+                        "Suspended",
+                        "Today",
+                        "Formula – Other"});
+#line 34
+testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table1, "Then ");
+#line 37
+testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Subject",
+                        "Message",
+                        "Notification Date"});
+            table2.AddRow(new string[] {
+                        "Formula – Other",
+                        "supplier message input",
+                        "Today"});
+#line 38
+testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table2, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

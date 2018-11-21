@@ -297,6 +297,52 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public string SelectFirstProduct()
+		{
+			Delay.Seconds(3);
+			Report.Info("Attemping to select first product");
+			var checkbox = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath("//table[@id='list']//tr//input"))
+				.FirstOrDefault(x => x != null);
+			Report.Info("Found checkbox");
+
+			//get id no
+			var idTD = checkbox.FindElement(By.XPath("../../td[2]"), 2);
+			string id = "";
+			if (idTD == null)
+			{
+				return "";
+			}
+			else
+			{
+				id = idTD.GetValue();
+			}
+
+			if (checkbox != null)
+			{
+				if (checkbox.Checked())
+				{
+					Report.Info("Checkbox is already checked");
+					Report.Screenshot();
+					return id;
+				}
+
+				checkbox.TryClick();
+				if (checkbox.Checked())
+				{
+					Report.Screenshot();
+					return id;
+				}
+				else
+				{
+					Report.Info("Attempted to check checkbox but failed.");
+					return "";
+				}
+			}
+
+			return "";
+		}
+
 		public bool SelectProductByID(string id)
 		{
 			Delay.Seconds(3);
@@ -846,6 +892,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
+				Report.Info("Beginning select from status filter");
 				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='searchstatus']"));
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
@@ -1382,6 +1429,135 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 	}
+
+	class StudioSHAManagerProductSuspend : BaseObject
+	{
+		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+
+		public bool SelectRegulatorySpecialist(string option)
+		{
+			try
+			{
+				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='regulatoryusershold']"));
+				statusSelect.Select(option);
+				return statusSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+			return false;
+		}
+
+		public bool SelectSubject(string option)
+		{
+			try
+			{
+				var statusSelect = containerElement.FindElement(By.XPath(".//select[@id='txtHoldSubject']"));
+				statusSelect.Select(option);
+				return statusSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public bool EnterSupplierMessage(string message)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']"));
+			enterField.EnterText(message);
+			return (enterField.GetValue() == message);
+		}
+
+		public string GetSupplierMessage()
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']"));
+			return enterField.GetValue();
+		}
+
+		public bool EnterInternalProductNote(string note)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldNote']"));
+			enterField.EnterText(note);
+			return (enterField.GetValue() == note);
+		}
+
+		public string GetInternalProductNote()
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldNote']"));
+			return enterField.GetValue();
+		}
+
+		public bool SelectClients(List<string> clientList)
+		{
+			bool allSucceeded = true;
+			//uncheck all checkboxes
+			var checkboxes = containerElement.FindElements(By.XPath(".//div[@id='holdcheckboxes']//input[@type='checkbox']"),2);
+
+			foreach (var thisCheckbox in checkboxes)
+			{
+				thisCheckbox.Check(false);
+			}
+
+			var optionLabels = containerElement.FindElements(By.XPath("(.//div[@id='holdcheckboxes']//label)|(.//div[@id='holdcheckboxes']//span)"));
+
+			foreach (string client in clientList)
+			{
+				IWebElement checkbox=null;
+				IWebElement matchingLabel = optionLabels.FirstOrDefault(x => x.GetValue().Contains(client));
+				if (matchingLabel != null)
+				{
+					if (matchingLabel.TagName == "label")
+					{
+						checkbox = matchingLabel.FindElement(By.XPath(".//input"), 2);
+					}
+					else
+					{
+						checkbox = matchingLabel.FindElement(By.XPath(".//preceding-sibling::input[@type='checkbox']"), 2);
+					}
+				}
+
+				if (checkbox != null)
+				{
+					checkbox.Check(true);
+					if (!checkbox.Checked())
+					{
+						allSucceeded = false;
+					}
+				}
+			}
+
+			return allSucceeded;
+		}
+
+
+		public bool ClickButton(string button)
+		{
+			var buttonList = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]//button/span"));
+			Report.Info(buttonList.Count + " buttons found");
+			var matchingButton = buttonList.FirstOrDefault(x => x.GetValue().Trim() == button);
+			if (matchingButton == null)
+			{
+				matchingButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button/span[text()='Find']"), 2);
+				if (matchingButton == null)
+				{
+					Report.Info("no matching button was found");
+					return false;
+				}
+				return matchingButton.TryClick();
+			}
+			return matchingButton.TryClick();
+		}
+
+
+	}
+
 
 	class Product
 	{

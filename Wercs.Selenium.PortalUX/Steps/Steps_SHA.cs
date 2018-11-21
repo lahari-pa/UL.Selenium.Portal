@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using Castle.Core.Internal;
 using NPOI.SS.Formula.Functions;
@@ -504,7 +505,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 		}
-		[StepDefinition(@"In SHA Manager I select the first product")]
+		[StepDefinition(@"In SHA Manager I select the first product saved as: (.*)")]
 		public void GivenInSHAManagerISelectTheProduct(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -680,7 +681,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[Given(@"I edit My Toolbar to add the following options")]
+		[StepDefinition(@"I edit My Toolbar to add the following options")]
 		public void GivenIEditMyToolbarToAddTheFollowingOptions(Table table)
 		{
 			Steps_Studio thisStepsStudio = new Steps_Studio();
@@ -690,6 +691,183 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
 		}
 
+		//Search, UPC, Pst/UPC, Status, Reject Submission, Review
+		[StepDefinition(@"I click the following option in the bottom menu: (.*)")]
+		public void IClickTheFollowingOptionInTheBottomMenu(string option)
+		{
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			Report.IsTrue(myStudioShaManager.ClickBottomMenuOption(option), "Failed to click option: " + option, "Clicked option: " + option);
+		}
+
+		//Comma delimited
+		[StepDefinition(@"In the Suspended dialog I Select the following clients: (.*)")]
+		public void GivenInTheSuspendedDialogISelectTheFollowingClients(string clientsList)
+		{
+			List<string> clients = clientsList.Split(',').Select(x => x.Trim()).ToList();
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			thisStudioSHAManagerProductSuspend.Wait_for_load(30);
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectClients(clients),
+				"Failed to select clients: " + clientsList, "Selected: " + clientsList);
+		}
+
+		[StepDefinition(@"In the Suspended dialog in the Select Regulatory Specialist drop down I choose: (.*)")]
+		public void GivenInTheSuspendedDialogInTheSelectRegulatorySpecialistDropDownIChoose(string regulatorySpecialist)
+		{
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectRegulatorySpecialist(regulatorySpecialist),
+				"Failed to select regulatory specialist: " + regulatorySpecialist, "Selected: " + regulatorySpecialist);
+
+		}
+
+		[StepDefinition(@"In the Suspended dialog in the Select Subject drop down I choose: (.*)")]
+		public void GivenInTheSuspendedDialogInTheSelectSubjectDropDownIChoose(string subject)
+		{
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.SelectSubject(subject),
+				"Failed to select subject: " + subject, "Selected: " + subject);
+		}
+
+		[StepDefinition(@"In SHA Manager I select the first product")]
+		public void GivenInSHAManagerISelectTheProduct()
+		{
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			string id = thisStudioSHAManager.SelectFirstProduct();
+			Report.IsTrue(id.Length > 0, "Product " + id + " has not been selected",
+				"Product " + id + " has been selected");
+			ProductInformation thisProductInformation = new ProductInformation();
+			thisProductInformation.Id = id;
+			Context.AddToContext("ID", thisProductInformation);
+		}
+
+		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I should see: (.*)")]
+		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
+		{
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			string actualMessage = thisStudioSHAManagerProductSuspend.GetSupplierMessage();
+			Report.IsTrue(actualMessage == shouldSee,
+				"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+		}
+
+		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I add the following text: (.*)")]
+		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIAddTheFollowingText(string textToAdd)
+		{
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.EnterSupplierMessage(textToAdd),
+				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
+		}
+
+		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I should see: (.*)")]
+		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIShouldSee(string shouldSee)
+		{
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			string actualMessage = thisStudioSHAManagerProductSuspend.GetInternalProductNote();
+			Report.IsTrue(actualMessage == shouldSee,
+				"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+		}
+
+		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I add the following text: (.*)")]
+		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIAddTheFollowingText(string textToAdd)
+		{
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.EnterInternalProductNote(textToAdd),
+				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
+		}
+
+		[StepDefinition(@"In the Suspended dialog I click (.*)")]
+		public void GivenInTheSuspendedDialogIClick(string button)
+		{
+			Delay.Seconds(1);
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.ClickButton(button),
+				"Failed to click button: " + button, "Clicked button: " + button);
+		}
+
+		//| Type | Notification Date | Subject |
+		[StepDefinition(@"In the Notification History Screen I confirm that one of the rows is as follows:")]
+		public void ThenInTheNotificationHistoryScreenIConfirmThatOneOfTheRowsIsAsFollows(Table table)
+		{
+			ProductNotificationHistory thisProductNotificationHistory = new ProductNotificationHistory();
+			List<Notification> ListOfNotifications = thisProductNotificationHistory.GetNotifications();
+			if (table.ContainsColumn("Type"))
+			{
+				ListOfNotifications = ListOfNotifications.Where(x => x.Type.ToLower() == table.Rows[0]["Type"].ToLower()).ToList();
+				if (ListOfNotifications.Count == 0)
+				{
+					Report.Info("No notifications of type: " + table.Rows[0]["Type"].ToLower() + "have been found");
+				}
+			}
+
+			if (table.ContainsColumn("Notification Date"))
+			{
+				string expectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+				if (table.Rows[0]["Notification Date"].ToLower() != "today")
+				{
+					expectedDate = Convert.ToDateTime(table.Rows[0]["Notification Date"]).ToString("yyyy-MM-dd");
+				}
+				ListOfNotifications = ListOfNotifications.Where(x => x.NotificationDate.ToString("yyyy-MM-dd") == expectedDate).ToList();
+				if (ListOfNotifications.Count == 0)
+				{
+					Report.Info("No notifications of date: " + expectedDate + "have been found");
+				}
+			}
+
+			if (table.ContainsColumn("Subject"))
+			{
+				ListOfNotifications = ListOfNotifications.Where(x => x.Subject == table.Rows[0]["Subject"]).ToList();
+				if (ListOfNotifications.Count == 0)
+				{
+					Report.Info("No notifications of subject: " + table.Rows[0]["Subject"]);
+				}
+			}
+
+			Report.IsTrue(ListOfNotifications.Count == 1, "Matching row was not found as expected",
+				"Row was found as expected");
+		}
+
+		[StepDefinition(@"In the Notification History Screen I click on the most recent notification")]
+		public void ThenInTheNotificationHistoryScreenIClickOnTheMostRecentNotification()
+		{
+			ProductNotificationHistory thisProductNotificationHistory = new ProductNotificationHistory();
+			thisProductNotificationHistory.OrderNotificationsByDate("desc");
+			Delay.Seconds(1);
+			Report.IsTrue(thisProductNotificationHistory.ClickTopItem(), "Failed to click most recent notification",
+				"Clicked most recent notification");
+
+		}
+
+		//| Subject | Message| Notification Date |
+		[Then(@"In the Notification History Detail Screen I confirm that details are as follows")]
+		public void ThenInTheNotificationHistoryDetailScreenIConfirmThatDetailsAreAsFollows(Table table)
+		{
+			ProductNotificationHistory thisProductNotificationHistory = new ProductNotificationHistory();
+			Notification thisNotification = thisProductNotificationHistory.GetNotificationDetails();
+
+			if (table.ContainsColumn("Subject"))
+			{
+				Report.IsTrue(table.Rows[0]["Subject"] == thisNotification.Subject,
+					"Expected subject: " + table.Rows[0]["Subject"] + " but got: " + thisNotification.Subject,
+					"As expected, subject was: " + table.Rows[0]["Subject"]);
+			}
+
+			if (table.ContainsColumn("Notification Date"))
+			{
+				string expectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+				if (table.Rows[0]["Notification Date"].ToLower() != "today")
+				{
+					expectedDate = Convert.ToDateTime(table.Rows[0]["Notification Date"]).ToString("yyyy-MM-dd");
+				}
+				Report.IsTrue(expectedDate == thisNotification.NotificationDate.ToString("yyyy-MM-dd"),
+					"Expected date: " + expectedDate + " but got: " + thisNotification.NotificationDate.ToString("yyyy-MM-dd"),
+					"As expected, date was: " + expectedDate);
+			}
+
+			if (table.ContainsColumn("Message"))
+			{
+				Report.IsTrue(table.Rows[0]["Message"] == thisNotification.Message,
+					"Expected message: " + table.Rows[0]["Message"] + " but got: " + thisNotification.Message,
+					"As expected, message was: " + table.Rows[0]["Message"]);
+			}
+		}
 
 	}
 }

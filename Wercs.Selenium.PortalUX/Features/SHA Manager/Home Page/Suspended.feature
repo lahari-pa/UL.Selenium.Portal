@@ -8,26 +8,33 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@SHA
+@Studio
 @run_Suspended
 
-Feature: Suspended
+Feature: Suspended (Suite ID: 69545)
 
+@SHA
 Scenario: [69547] Suspend a Product - Formula - Other
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-And I Select the checkbox of a product
-And I Select Suspended (in bottom menu)
-And I Select the All checkbox
-And I From the Select Regulatory Specialist drop down chooseyour name
-And I From the Select Subject drop down choose Formula - Other
-And I Confirm that you see The issue with the composition data is: ____________ in the Supplier Message
-And I Add text to the Supplier Message input field
-And I Add different text to the Internal Product Note input field
-And I Click Save
-And I Right Click on the product you selected
-And I ChooseNotification History
-And I Confirm that under the Type column you see Suspended
-And I Confirm that under Notification Date you see today's date
-And I Confirm that under Subject, you see Formula - Other
-And I Select the notification
-And I Confirm that in the Message area you see: The issue with composition data is: and the extra text you added.
-And I Close the Notification History for Product # popup by clicking the Close button
+And In SHA Manager I select the first product
+And I click the following option in the bottom menu: Suspended
+And In the Suspended dialog I Select the following clients: All
+And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: Automated QASha
+And In the Suspended dialog in the Select Subject drop down I choose: Formula – Other
+And In the Suspended dialog in the Supplier Message field I should see: The issue with the composition data is: _________
+And In the Suspended dialog in the Supplier Message field I add the following text: supplier message input
+And In the Suspended dialog in the Internal Product Note field I should see: The issue with the composition data is: _________
+And In the Suspended dialog in the Internal Product Note field I add the following text: internal product note input
+And In the Suspended dialog I click Save
+And I close alert
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for saved as: ID)
+And In the SHA manager grid I right click against product saved as: ID
+And In the SHA manager grid when the right click context menu is open I select option: Notification History
+Then In the Notification History Screen I confirm that one of the rows is as follows:
+| Type      | Notification Date | Subject         |
+| Suspended | Today             | Formula – Other |
+And In the Notification History Screen I click on the most recent notification
+And In the Notification History Detail Screen I confirm that details are as follows
+| Subject         | Message                | Notification Date |
+| Formula – Other | supplier message input | Today             |

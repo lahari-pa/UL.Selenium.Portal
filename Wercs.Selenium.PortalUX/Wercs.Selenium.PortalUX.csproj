@@ -529,6 +529,7 @@
     <Compile Include="Selenium Classes\Homepage.cs" />
     <Compile Include="Selenium Classes\InactivityPopup.cs" />
     <Compile Include="Selenium Classes\LandingPage.cs" />
+    <Compile Include="Selenium Classes\SHAProductNotificationHistory.cs" />
     <Compile Include="Selenium Classes\SHAProductRecertificationHistory.cs" />
     <Compile Include="Selenium Classes\StudioLegends.cs" />
     <Compile Include="Selenium Classes\LiveHelp.cs" />

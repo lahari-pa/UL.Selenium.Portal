@@ -538,6 +538,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				SeleniumBrowser.Alert.WaitForAlert(3);
 				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				Delay.Seconds(1);
 			}
 			catch (Exception e)
 			{
