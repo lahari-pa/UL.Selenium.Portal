@@ -38,3 +38,28 @@ And In the Notification History Screen I click on the most recent notification
 And In the Notification History Detail Screen I confirm that details are as follows
 | Subject         | Message                | Notification Date |
 | Formula – Other | supplier message input | Today             |
+
+@SHA
+Scenario: [69549] Suspend a Product - Formula - Document Issue
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And In SHA Manager I select the first product
+And I click the following option in the bottom menu: Suspended
+And In the Suspended dialog I Select the following clients: All
+And In the Suspended dialog in the Select Regulatory Specialist drop down I choose: Automated QASha
+And In the Suspended dialog in the Select Subject drop down I choose: Formula – Document Issue
+And In the Suspended dialog in the Supplier Message field I should see: The composition data provided does not match information listed on the document.  You may either provide a corrected document, or correct the composition data to resolve this issue.
+And In the Suspended dialog in the Supplier Message field I add the following text: supplier message input
+And In the Suspended dialog in the Internal Product Note field I should see: The composition data provided does not match information listed on the document. You may either provide a corrected document, or correct the composition data to resolve this issue.
+And In the Suspended dialog in the Internal Product Note field I add the following text: internal product note input
+And In the Suspended dialog I click Save
+And I close alert
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for saved as: ID)
+And In the SHA manager grid I right click against product saved as: ID
+And In the SHA manager grid when the right click context menu is open I select option: Notification History
+Then In the Notification History Screen I confirm that one of the rows is as follows:
+| Type      | Notification Date | Subject                  |
+| Suspended | Today             | Formula – Document Issue |
+And In the Notification History Screen I click on the most recent notification
+And In the Notification History Detail Screen I confirm that details are as follows
+| Subject                  | Message                | Notification Date |
+| Formula – Document Issue | supplier message input | Today             |

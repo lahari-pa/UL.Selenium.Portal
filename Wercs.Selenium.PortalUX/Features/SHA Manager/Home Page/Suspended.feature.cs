@@ -183,6 +183,99 @@ testRunner.And("In the Notification History Detail Screen I confirm that details
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[69549] Suspend a Product - Formula - Document Issue")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Suspended (Suite ID: 69545)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Studio")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Suspended")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        public virtual void _69549SuspendAProduct_Formula_DocumentIssue()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69549] Suspend a Product - Formula - Document Issue", new string[] {
+                        "SHA"});
+#line 43
+this.ScenarioSetup(scenarioInfo);
+#line 44
+testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 45
+testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 46
+testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
+testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 48
+testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
+                    "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 49
+testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Formula – Docum" +
+                    "ent Issue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
+testRunner.And("In the Suspended dialog in the Supplier Message field I should see: The compositi" +
+                    "on data provided does not match information listed on the document.  You may eit" +
+                    "her provide a corrected document, or correct the composition data to resolve thi" +
+                    "s issue.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
+testRunner.And("In the Suspended dialog in the Supplier Message field I add the following text: s" +
+                    "upplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 52
+testRunner.And("In the Suspended dialog in the Internal Product Note field I should see: The comp" +
+                    "osition data provided does not match information listed on the document. You may" +
+                    " either provide a corrected document, or correct the composition data to resolve" +
+                    " this issue.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
+testRunner.And("In the Suspended dialog in the Internal Product Note field I add the following te" +
+                    "xt: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
+testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 55
+testRunner.And("I close alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 56
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
+                    "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
+testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
+                    ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "Notification Date",
+                        "Subject"});
+            table3.AddRow(new string[] {
+                        "Suspended",
+                        "Today",
+                        "Formula – Document Issue"});
+#line 59
+testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table3, "Then ");
+#line 62
+testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Subject",
+                        "Message",
+                        "Notification Date"});
+            table4.AddRow(new string[] {
+                        "Formula – Document Issue",
+                        "supplier message input",
+                        "Today"});
+#line 63
+testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table4, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
