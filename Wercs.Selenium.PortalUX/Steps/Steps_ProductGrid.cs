@@ -1332,5 +1332,43 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I click 'All' under Retailers for the first product returned")]
+		public void ClickAllRetailersForFirstProduct()
+		{
+			Report.IsTrue(new ProductsGrid().ClickRetailerFirstRow("All"),
+				"Failed to click 'All' under Retailers for the first product!",
+				"Successfully clicked 'All' under Retailers for the first product");
+		}
+
+		[StepDefinition(@"I confirm the Retailers popup is (displayed|not displayed)")]
+		public void ConfirmRetailerPopupIsDisplayedNotDisplayed(string isDisplayed)
+		{
+			var displayed = new ProductsGrid().RetailerPopupDisplayed();
+			switch (isDisplayed)
+			{
+				case "displayed":
+					Report.IsTrue(displayed,
+						"The retailers popup was not displayed when it was expected to be!",
+						"The retailers popup was displayed as expected");
+					return;
+				case "not displayed":
+					Report.IsTrue(!displayed,
+						"The retailers popup was displayed when it was not expected to be!",
+						"The retailers popup was not displayed as expected");
+					return;
+				default:
+					Report.Info("The parameter did not match expected: 'displayed' or 'not displayed'");
+					return;
+			}
+		}
+
+		[StepDefinition(@"I click the products grid container")]
+		public void ClickProductsGridContainer()
+		{
+			Report.Info("Refocus by clicking container element for products grid");
+			new ProductsGrid().ClickContainer();
+			Report.Screenshot();
+		}
+
 	}
 }

@@ -431,6 +431,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SelectVendorId(option), "Failed to set the vendor id to be: " + option, "Successfully set vendor id to be: " + option);
 		}
 
+		/// <summary>
+		/// Select an option for vendor id  dropdown for specific retailer.
+		/// </summary>
+		[StepDefinition(@"In the Retailers tab, for retailer: (.*) I select Vendor id as: (.*)")]
+		public void ThenInTheRetailersTabISelectVendorIdAsForRetailer(string retailer, string option)
+		{
+			Report.IsTrue(new NewProduct().SelectVendorIdForRetailer(retailer, option),
+				"Failed to set the vendor id to be: " + option + " for retailer: " + retailer,
+				"Successfully set vendor id to be: " + option + " for retailer: " + retailer);
+		}
+
+		/// <summary>
+		/// Select the first vendor id option for specific retailer
+		/// </summary>
+		[StepDefinition(@"In the Retailers tab, I select the first Vendor option for retailer: (.*)")]
+		public void ThenInTheRetailersTabISelectVendorIdAsForRetailer(string retailer)
+		{
+			Report.IsTrue(new NewProduct().SelectVendorIdForRetailer(retailer, "", true),
+				"Failed to set the first vendor option for retailer: " + retailer,
+				"Successfully set the first vendor option for retailer: " + retailer);
+		}
+
 
 		[StepDefinition(@"I save the product information as: (.*)")]
 		public void SaveProductInformation(string savedas)

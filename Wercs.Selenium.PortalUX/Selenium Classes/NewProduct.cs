@@ -1418,7 +1418,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			try
 			{
 				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-
+				var textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 
 				if (info.UpcNumber.ToLower().Contains("saved as"))
@@ -1438,11 +1438,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				}
 				upcNumberField.EnterText(info.UpcNumber);
-
 				var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
 				containsType.Select(info.ContainerType);
-
-				var sizeField = container.FindElement(By.XPath(".//input[@placeholder='Size (Ounces)' or @placeholder='Size']"), 2);
+				var regex = @"(.*)\((.*)\)";
+				var sizeField = (from input in textInputs
+								 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
+								 where match.Success && match.Groups[1].Value.StartsWith("Size") && match.Groups[2].Value.Contains("Ounces")
+								 select input).FirstOrDefault();
+				if (sizeField == null)
+				{
+					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
+					return false;
+				}
+				//var sizeField = container.FindElement(By.XPath(".//input[@placeholder='Size (Ounces)' or @placeholder='Size']"), 2);
 				sizeField.EnterText(info.Size);
 
 				if (info.Dpci.Length > 0)
@@ -2300,7 +2308,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 		/// <summary>
-		/// Select vendor id from dropdown
+		/// Select first vendor id from dropdown
 		/// </summary>
 		public bool SelectVendorId(string item)
 		{
@@ -2311,6 +2319,46 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
 				el.Select(item);
 				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+
+		/// <summary>
+		/// Select vendor id from dropdown for a specific retailer
+		/// </summary>
+		public bool SelectVendorIdForRetailer(string retailer, string item, bool selectFirst = false)
+		{
+			try
+			{
+				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+				var el = container.FindElement(By.XPath($@".//tr[./td[text()=""{retailer}""]]//label[text()='Select Vendor']/..//select"), 2);
+				if (el == null)
+				{
+					Report.Info("Vendor was not selectable for retailer: " + retailer);
+					return false;
+				}
+				if (selectFirst)
+				{
+					var options = el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+					if (options.Count == 0)
+					{
+						Report.Info("There were no vendor options available for retailer " + retailer);
+						return false;
+					}
+					Report.Info("Selecting the first vendor option for retailer: " + retailer);
+					var firstOption = options.First();
+					Report.Info("First vendor option is: " + firstOption);
+					el.Select(firstOption);
+					Delay.Seconds(1);
+					return el.SelectedOption() == firstOption;
+				}
+				el.Select(item);
+				Delay.Seconds(1);
+				return el.SelectedOption() == item;
 			}
 			catch (Exception)
 			{
@@ -4607,7 +4655,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2).Text;
 				if (pubDisSummary == null)
 				{
-					pubDisSummary=SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2).Text;
+					pubDisSummary = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2).Text;
 				}
 				var pattern = @"([0123456789\.]*)\s\/\s([0123456789\.]*)";
 				var regMatch = Regex.Match(pubDisSummary, pattern);
@@ -4911,10 +4959,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Failure("Could not locate the Product Line or Brand option");
 				return null;
 			}
-			var options =  el.FindElements(By.XPath("./option"), 2).Where(x => x.Text != "Choose...").ToList();
+			var options = el.FindElements(By.XPath("./option"), 2).Where(x => x.Text != "Choose...").ToList();
 			foreach (var option in options)
 			{
-				var brand = new MyBrands.Brand{ID = option.GetAttribute("value"), Name = option.Text};
+				var brand = new MyBrands.Brand { ID = option.GetAttribute("value"), Name = option.Text };
 				rList.Add(brand);
 			}
 			return rList;

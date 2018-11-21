@@ -669,6 +669,40 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 		}
+
+		public bool ClickRetailerFirstRow(string retailer)
+		{
+			var row = containerElement.FindElement(By.XPath("//tbody/tr[position() = 1]"), 2);
+			if (row == null)
+			{
+				Report.Info("No rows were found in the products grid");
+				return false;
+			}
+			if (retailer.ToLower() == "all")
+			{
+				row.FindElement(By.XPath(@"//button[@title='All Retailers']"), 2).Click();
+				return true;
+			}
+			return row.FindElement(By.XPath($@".//li[@title=""{retailer}""]/span"), 2).TryClick();
+		}
+
+		public bool RetailerPopupDisplayed()
+		{
+			Report.Info("Checking if Retailer popup is displayed");
+			var popoverId = containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
+			if (popoverId == "")
+			{
+				return false;
+			}
+			Report.Info("Popup id is: " + popoverId);
+			var popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+			return popover != null;
+		}
+
+		public void ClickContainer()
+		{
+			containerElement.Click();
+		}
 	}
 
 	class ProductGridItem : ProductsGrid

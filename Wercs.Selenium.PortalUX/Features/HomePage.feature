@@ -441,7 +441,7 @@ Given In the Live Help dialog I click on the x to close
 
 Scenario: [56829] More Filters
 
-# Consider creating the test product from scratch every time?
+# Consider creating the test product from scratch every time? nb kit 13 58753
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -897,3 +897,62 @@ And I call Shared Step 51351 (SHA > Select Product > View Recertification Histor
 And I confirm there is no product entry listed with Recertification Reason: 2.0 Specific UPC Update
 
 Given I Close the Product Recertification History pop up
+
+# Assigned to Amanda Coutant
+# Created by Amanda Coutant
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\Home Page
+Scenario: [85275] Select All - Popup closes
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+
+Then I save the product information as: TestCase85275
+
+Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+
+# Failing on 'child' question. was using 59680 to make it work but now wait on bug ticket #87627 to be resolved.
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+#Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Chlorine      | 100     | false               | false       |            |
+
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+Then the 'Select Retailers' window appears
+
+Given I click the Select all retailers option in the Select Retailers popup
+
+Then all retailers are selected in the Select Retailers window
+
+Given I click Done in the Select Retailers popup
+
+Given In the Retailers tab, I select the first Vendor option for retailer: O'Reilly
+
+Given In the Retailers tab, I select the first Vendor option for retailer: Sears/K-Mart
+
+Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+
+And I click continue
+
+And I navigate to the home page
+
+And I search for the product saved as: TestCase85275
+
+And I click 'All' under Retailers for the first product returned
+
+Then I confirm the Retailers popup is displayed
+
+And I click the products grid container
+
+Then I confirm the Retailers popup is not displayed
+
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
