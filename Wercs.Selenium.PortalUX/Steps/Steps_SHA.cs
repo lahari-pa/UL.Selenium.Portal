@@ -113,8 +113,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				thisMessage.Active = (thisRow["Active"].ToLower() == "true");
 				thisMessage.Level = thisRow["Level"];
 				ListOfMessages.Add(thisMessage);
-				Report.IsTrue(thisStudioManageGlobalMessages.AddMessage(thisMessage), "Successfully added message",
-					"Failed to add message");
+				Report.IsTrue(thisStudioManageGlobalMessages.AddMessage(thisMessage), "Failed to add message",
+					"Successfully added message");
 			}
 
 			Context.AddToContext("Messages", ListOfMessages);
@@ -465,7 +465,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I Confirm the Product ID: (.*) is not highlited yellow indicating that this is not an e-comm/direct ship product")]
 		public void ConfirmProductIdIsNotHighlightedYellow_NotEcommDirectShipProduct(string id)
 		{
-			if(id.ToLower().Contains("saved as"))
+			if (id.ToLower().Contains("saved as"))
 			{
 				string savedAs = id.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim();
 				if (Context.Contains(savedAs))

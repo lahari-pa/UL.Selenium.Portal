@@ -417,6 +417,7 @@ And I should see the following filters in the following order under My products:
 | Needs Your Attention   |
 | Canceled               |
 
+@jamesfixtest
 Scenario: [59732] Announcements - Add
 Given I navigate to Studio
 Given I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Shared Step))

@@ -1450,22 +1450,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
 					return false;
 				}
-				//var sizeField = container.FindElement(By.XPath(".//input[@placeholder='Size (Ounces)' or @placeholder='Size']"), 2);
 				sizeField.EnterText(info.Size);
-
 				if (info.Dpci.Length > 0)
 				{
 					var dpciField = container.FindElement(By.XPath(".//input[contains(@data-bind,'value.field')]"), 2);
 					dpciField.EnterText(info.Dpci);
 				}
-
-
 				if (info.Quantity.Length > 0)
 				{
 					var quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity']"), 2);
 					quantityField.EnterText(info.Quantity);
 				}
-
 				return true;
 			}
 			catch (Exception ex)

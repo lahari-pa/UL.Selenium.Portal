@@ -93,14 +93,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-		public void ClickArrowNextToProductInformation(bool expand)
+		public bool ClickArrowNextToProductInformation(bool expand)
 		{
-			var element = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'collapse-control') and @href='#at-a-glance']"), 2);
-			var expanded = element.GetAttribute("aria-expanded") == null ? true : Convert.ToBoolean(element.GetAttribute("aria-expanded"));
-			if (!expanded && expand || (expanded && !expand))
+			try
 			{
-				element.Click();
+				var element = this.containerElement.FindElement(By.XPath("./div[@id='homeHeader']//a[contains(@class,'collapse-control')]"), 2);
+				var expanded = element.GetAttribute("aria-expanded") == null || Convert.ToBoolean(element.GetAttribute("aria-expanded"));
+				return expanded == expand || element.TryClick();
 			}
+			catch (Exception ex)
+			{
+				Report.Info("Exception: " + ex.Message);
+				return false;
+			}
+
 		}
 
 		public bool PieChartShowingInProductInformation()
@@ -215,7 +221,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Info(e.Message);
 				return -1;
 			}
-			
+
 		}
 	}
 

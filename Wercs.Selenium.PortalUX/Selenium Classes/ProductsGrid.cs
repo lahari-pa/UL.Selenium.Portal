@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Castle.Core.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
@@ -506,6 +507,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				GridNavigation("...");
 				GridNavigationInput().EnterText(pageNumber);
 			}
+			catch (Exception ex)
+			{
+				Report.Info("Exception: " + ex.Message);
+			}
 
 		}
 
@@ -680,6 +685,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (retailer.ToLower() == "all")
 			{
+				// NB TryClick seems to refocus the page which closes the popup, so use the standard Click method
 				row.FindElement(By.XPath(@"//button[@title='All Retailers']"), 2).Click();
 				return true;
 			}
@@ -689,12 +695,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool RetailerPopupDisplayed()
 		{
 			Report.Info("Checking if Retailer popup is displayed");
+			// The ID is generated every time the popup is opened. Fetch from the button's attribute (only exists when popup is open)
 			var popoverId = containerElement.FindElement(By.XPath("//li[@class='more-retailers']/button"), 2).GetAttribute("aria-describedby");
-			if (popoverId == "")
+			if (popoverId.IsNullOrEmpty())
 			{
 				return false;
 			}
 			Report.Info("Popup id is: " + popoverId);
+			// Use the ID to find the popup container (if it exists)
 			var popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
 			return popover != null;
 		}

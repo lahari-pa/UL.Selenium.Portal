@@ -223,21 +223,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I click on the triangle next to Product Information to (expand|collapse) the section")]
 		public void WhenIClickOnTheTraingleNextToProductInformation(string expandCollapse)
 		{
-			try
-			{
-				Report.Info("Clicking on Triangle next to Product Information to " + expandCollapse + " the section");
-				var selHomepage = new Homepage();
-				selHomepage.ClickArrowNextToProductInformation(expandCollapse == "expand");
-				GeneralUtilities.Wait_for_load_finish();
-				Delay.Seconds(Delay.SpeedFactor * 2);
-				Report.Screenshot();
-				Report.Success("Triangle clicked successfully!");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Clicking on Triangle next to Product Information to " + expandCollapse + " the section");
+			var selHomepage = new Homepage();
+			Report.IsTrue(selHomepage.ClickArrowNextToProductInformation(expandCollapse == "expand"), "Failed to click the traiangle next to Product Information to " + expandCollapse, "Successfully clicked the triangle next to Product Information to " + expandCollapse);
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 		[StepDefinition(@"the (Product Information|Alerts|Announcements) dialog should be (visible|hidden)")]
@@ -806,13 +795,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Homepage myHomepage = new Homepage();
 			List<Message> ListOfMessages = (List<Message>)Context.GetFromContext("Messages");
 			List<string> MessagesOnHomepage = myHomepage.GetAnnouncements();
-
 			foreach (string thisMessage in ListOfMessages.Select(x => x.MessageBody).ToList())
 			{
-				Report.IsTrue(MessagesOnHomepage.Contains(thisMessage), thisMessage + " is not showing in Announcements",
-					"Is showing in Announcements as expected.");
+				int counter = 0;
+				bool found = false;
+				Report.Info("Looking for message: " + thisMessage + " in announcements");
+				// The refresh from SHA to WS can take several minutes so do a loop. waits 25 mins, 10s refresh
+				while (counter < 150 && !found)
+				{
+					if (MessagesOnHomepage.Contains(thisMessage))
+					{
+						found = true;
+					}
+					else
+					{
+						Delay.Seconds(10);
+						counter++;
+						SeleniumBrowser.WebBrowser.Navigate().Refresh();
+						GeneralUtilities.Wait_for_load_finish();
+						MessagesOnHomepage = myHomepage.GetAnnouncements();
+					}
+				}
+				Report.IsTrue(found, $@"""{thisMessage}"" was not displayed in Announcements after waiting for 30 minutes!",
+					thisMessage + $@"After waiting {counter * 10} seconds, the message ""{thisMessage}"" was displayed in Announcements as expected.");
 			}
-
 			int ActualMessageCount = myHomepage.GetAnnouncementCount();
 			Report.IsTrue(ActualMessageCount == MessagesOnHomepage.Count,
 				"Listed count is: " + ActualMessageCount.ToString() + " but number of messages is: " +
