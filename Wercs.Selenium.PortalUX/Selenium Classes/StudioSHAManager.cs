@@ -1508,6 +1508,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return (enterField.GetValue() == message);
 		}
 
+		public bool AddSupplierMessage(string message)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']"));
+			string originalMessage = this.GetSupplierMessage();
+			enterField.SendKeys(" " +message);
+			return (enterField.GetValue() == originalMessage + " " + message);
+		}
+
 		public string GetSupplierMessage()
 		{
 			var enterField = containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']"));
@@ -1520,6 +1528,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			enterField.EnterText(note);
 			return (enterField.GetValue() == note);
 		}
+
+		public bool AddInternalProductNote(string note)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldNote']"));
+			string originalMessage = this.GetInternalProductNote();
+			enterField.SendKeys(" " + note);
+			return (enterField.GetValue() == originalMessage + " " + note);
+		}
+
+
 
 		public string GetInternalProductNote()
 		{

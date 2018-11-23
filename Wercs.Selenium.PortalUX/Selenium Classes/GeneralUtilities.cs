@@ -139,5 +139,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'There was an error processing your request. Please try again.')]"), 2) != null;
 		}
 
+		
 	}
 }

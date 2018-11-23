@@ -782,9 +782,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIAddTheFollowingText(string textToAdd)
 		{
 			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.AddSupplierMessage(textToAdd),
+				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
+		}
+
+		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I enter the following text: (.*)")]
+		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIEnterTheFollowingText(string textToAdd)
+		{
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.EnterSupplierMessage(textToAdd),
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
+
 
 		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIShouldSee(string shouldSee)
@@ -822,6 +831,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I add the following text: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIAddTheFollowingText(string textToAdd)
+		{
+			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+			Report.IsTrue(thisStudioSHAManagerProductSuspend.AddInternalProductNote(textToAdd),
+				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
+		}
+
+		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I enter the following text: (.*)")]
+		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIEnterTheFollowingText(string textToAdd)
 		{
 			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			Report.IsTrue(thisStudioSHAManagerProductSuspend.EnterInternalProductNote(textToAdd),
@@ -918,9 +935,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			if (table.ContainsColumn("Message"))
 			{
-				Report.IsTrue(table.Rows[0]["Message"] == thisNotification.Message,
-					"Expected message: " + table.Rows[0]["Message"] + " but got: " + thisNotification.Message,
-					"As expected, message was: " + table.Rows[0]["Message"]);
+				string actualMessage = thisNotification.Message;
+				string shouldSee = table.Rows[0]["Message"];
+
+				actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
+
+				RegexOptions options = RegexOptions.None;
+				Regex regex = new Regex("[ ]{2,}", options);
+				actualMessage = regex.Replace(actualMessage, " ");
+
+				Report.Info("Actual message length is: " + actualMessage.Length.ToString() + " expected message length is: " + shouldSee.Trim().Length);
+				if (actualMessage.Trim() != shouldSee.Trim())
+				{
+					StringBuilder builder = new StringBuilder();
+					char[] ar1 = actualMessage.ToArray();
+					for (int i = 0; i < ar1.Length; i++)
+					{
+						if (actualMessage.Length > i + 1 && ar1[i].Equals(shouldSee[i]))
+						{
+							builder.Append(ar1[i]);
+						}
+						else
+						{
+							Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + shouldSee[i]);
+							break;
+						}
+					}
+					Report.Info("Matched up to " + builder);
+					Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
+						"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+				}
+
 			}
 		}
 

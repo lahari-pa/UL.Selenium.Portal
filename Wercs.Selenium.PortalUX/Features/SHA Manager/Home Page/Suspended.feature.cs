@@ -176,7 +176,7 @@ testRunner.And("In the Notification History Screen I click on the most recent no
                         "Notification Date"});
             table2.AddRow(new string[] {
                         "Formula – Other",
-                        "supplier message input",
+                        "The issue with the composition data is: _________ supplier message input",
                         "Today"});
 #line 38
 testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table2, "And ");
@@ -223,9 +223,9 @@ testRunner.And("In the Suspended dialog in the Select Subject drop down I choose
                     "ent Issue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 50
 testRunner.And("In the Suspended dialog in the Supplier Message field I should see: The compositi" +
-                    "on data provided does not match information listed on the document.  You may eit" +
-                    "her provide a corrected document, or correct the composition data to resolve thi" +
-                    "s issue.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "on data provided does not match information listed on the document. You may eith" +
+                    "er provide a corrected document, or correct the composition data to resolve this" +
+                    " issue.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
 testRunner.And("In the Suspended dialog in the Supplier Message field I add the following text: s" +
                     "upplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -269,7 +269,9 @@ testRunner.And("In the Notification History Screen I click on the most recent no
                         "Notification Date"});
             table4.AddRow(new string[] {
                         "Formula – Document Issue",
-                        "supplier message input",
+                        "The composition data provided does not match information listed on the document. " +
+                            "You may either provide a corrected document, or correct the composition data to " +
+                            "resolve this issue. supplier message input",
                         "Today"});
 #line 63
 testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table4, "And ");
@@ -358,7 +360,7 @@ testRunner.And("In the Notification History Screen I click on the most recent no
                         "Notification Date"});
             table6.AddRow(new string[] {
                         "Registration Suspension for Product Name",
-                        "supplier message input",
+                        @"Your recent registration is suspended, awaiting your update and resubmission, so that you may update the Product Name on the registration. Retailers require the Product Name in the WERCSmart registration be specific enough so that an employee may find the product in their systems when no UPC or other identifier is available. It is possible that the packaging may be unavailable as well. Because of this, the Product Name in the WERCSmart system should closely match the product's registered UPCs with the Retailer's on-boarding system. As a Product Name, although you may include Model Numbers or other identifying information, the Product Name cannot solely be the product's model number, nor should it be overly generic in nature. Retailers have indicated that Product Names that are not appropriate are to be suspended and the vendor is to correct the information. Please log into your WERCSmart account and review your Suspended Items in the My Messages area so that you may update and resubmit the information. This will allow the Assessment process to proceed and minimize further delay in meeting your Retailer's requirements with regard to WERCSmart registration. If you have questions about this process you may refer to our Support Center, or contact a Support Representative (WERCSmartCustomer@UL.com). Thank you for your prompt attention to this matter. The WERCSmart Assessment Team supplier message input",
                         "Today"});
 #line 89
 testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table6, "And ");
@@ -394,6 +396,87 @@ testRunner.Then("in the Add Product to Recertification screen only the following
 #line 102
 testRunner.Then("in the Add Product to Recertification screen only the following allow users check" +
                     "boxes are selected:", ((string)(null)), table9, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[69550] Suspend a Product - Delete Supplier Message")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Suspended (Suite ID: 69545)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Studio")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Suspended")]
+        public virtual void _69550SuspendAProduct_DeleteSupplierMessage()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69550] Suspend a Product - Delete Supplier Message", ((string[])(null)));
+#line 106
+this.ScenarioSetup(scenarioInfo);
+#line 107
+testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 108
+testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 109
+testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 110
+testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 111
+testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
+                    "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 112
+testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Formula – Docum" +
+                    "ent Issue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 113
+testRunner.And("In the Suspended dialog in the Supplier Message field I enter the following text:" +
+                    " supplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 114
+testRunner.And("In the Suspended dialog in the Internal Product Note field I enter the following " +
+                    "text: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 115
+testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 116
+testRunner.And("I close alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 117
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
+                    "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 118
+testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 119
+testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
+                    ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "Notification Date",
+                        "Subject"});
+            table10.AddRow(new string[] {
+                        "Suspended",
+                        "Today",
+                        "Formula – Document Issue"});
+#line 120
+testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table10, "Then ");
+#line 123
+testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Subject",
+                        "Message",
+                        "Notification Date"});
+            table11.AddRow(new string[] {
+                        "Formula – Document Issue",
+                        "supplier message input",
+                        "Today"});
+#line 124
+testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table11, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
