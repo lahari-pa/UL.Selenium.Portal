@@ -162,12 +162,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			foreach (var thisRow in selectedRows)
 			{
 				Notification thisNotification = new Notification();
-				thisNotification.SupplierName = thisRow.FindElement(By.XPath(".//td[" + indexOfSupplierName + "]"), 2).GetValue();
-				thisNotification.Type = thisRow.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue();
-				thisNotification.SubType = thisRow.FindElement(By.XPath(".//td[" + indexOfSubtype + "]"), 2).GetValue();
-				thisNotification.Active = thisRow.FindElement(By.XPath(".//td[" + indexOfActive + "]"), 2).GetValue();
-				thisNotification.ActionBy = thisRow.FindElement(By.XPath(".//td[" + indexOfActionBy + "]"), 2).GetValue();
-				string rD = thisRow.FindElement(By.XPath(".//td[" + indexOfNotificationDate + "]"), 2).GetValue();
+				thisNotification.SupplierName = thisRow.FindElement(By.XPath(".//td[" + indexOfSupplierName + "]"), 2).GetValue().Trim();
+				thisNotification.Type = thisRow.FindElement(By.XPath(".//td[" + indexOfType + "]"), 2).GetValue().Trim();
+				thisNotification.SubType = thisRow.FindElement(By.XPath(".//td[" + indexOfSubtype + "]"), 2).GetValue().Trim();
+				thisNotification.Active = thisRow.FindElement(By.XPath(".//td[" + indexOfActive + "]"), 2).GetValue().Trim();
+				thisNotification.ActionBy = thisRow.FindElement(By.XPath(".//td[" + indexOfActionBy + "]"), 2).GetValue().Trim();
+				string rD = thisRow.FindElement(By.XPath(".//td[" + indexOfNotificationDate + "]"), 2).GetValue().Trim();
 				if (rD.Trim().Length > 0)
 				{
 					thisNotification.NotificationDate = Convert.ToDateTime(rD);
@@ -275,6 +275,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				.FirstOrDefault(x => x.FindElement(By.XPath("./td[1]")).GetValue().Contains("Message"))
 				.FindElement(By.XPath("./td[2]/textarea")).GetValue();
 			return thisNotification;
+		}
+
+		public bool ClickButtonInNotificationDetails(string button)
+		{
+			var varButtons = containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']/../..//button/span"), 2);
+			var matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
+			if (matchingButton == null)
+			{
+				Report.Info("Failed to find button: " + button);
+				return false;
+			}
+
+			return matchingButton.TryClick();
 		}
 	}
 

@@ -301,6 +301,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Delay.Seconds(3);
 			Report.Info("Attemping to select first product");
+			Report.Screenshot();
 			var checkbox = SeleniumBrowser.WebBrowser
 				.FindElements(By.XPath("//table[@id='list']//tr//input"))
 				.FirstOrDefault(x => x != null);
@@ -318,29 +319,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				id = idTD.GetValue();
 			}
 
-			if (checkbox != null)
+			Report.Info("id = " + id);
+			if (SelectProductByID(id))
 			{
-				if (checkbox.Checked())
-				{
-					Report.Info("Checkbox is already checked");
-					Report.Screenshot();
-					return id;
-				}
-
-				checkbox.TryClick();
-				if (checkbox.Checked())
-				{
-					Report.Screenshot();
-					return id;
-				}
-				else
-				{
-					Report.Info("Attempted to check checkbox but failed.");
-					return "";
-				}
+				return id;
 			}
-
-			return "";
+			else
+			{
+				return "";
+			}
 		}
 
 		public bool SelectProductByID(string id)
@@ -594,6 +581,46 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return ListOfProducts;
 		}
 
+		public bool ProductWithIDHasRedBorders(string id)
+		{
+			Delay.Seconds(3);
+			Report.Info("Attemping to select product by id: " + id);
+			int index = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+
+			var matchingTD = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath("//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+				.FirstOrDefault(x => x.GetValue().Trim() == id);
+
+			if (matchingTD != null)
+			{
+				Report.Info("Found matching cell");
+				matchingTD = SeleniumBrowser.WebBrowser
+					.FindElements(By.XPath("//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+					.FirstOrDefault(x => x.GetValue().Trim() == id);
+
+				var bottomBorderColour = matchingTD.GetCssValue("border-bottom-color");
+				Report.Info("Bottom border colour: " + bottomBorderColour);
+				var leftBorderColour = matchingTD.GetCssValue("border-left-color");
+				var rightBorderColour = matchingTD.GetCssValue("border-right-color");
+
+				if (bottomBorderColour == "rgba(205, 10, 10, 1)" && leftBorderColour == "rgba(205, 10, 10, 1)" &&
+				    rightBorderColour == "rgba(205, 10, 10, 1)")
+				{
+					return true;
+				}
+
+			}
+			else
+			{
+				Report.Error("Could not find matching cell for product with id: " + id);
+			}
+
+			return false;
+		}
+
 		public bool TopRowProductsTableMatchesId(string id)
 		{
 			// JS. possible null exception - GetTopXProducts() can return a list with 0 items
@@ -643,6 +670,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickAutoAssign()
 		{
 			var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkAutoAssign']"));
+			return button.TryClick();
+		}
+
+		public bool ClickAddToRecertification()
+		{
+			var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkAddToRecertify']"));
 			return button.TryClick();
 		}
 
@@ -1490,6 +1523,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetInternalProductNote()
 		{
+			Report.Info("Beginning get internal product note");
 			var enterField = containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldNote']"));
 			return enterField.GetValue();
 		}
@@ -1633,6 +1667,143 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickClose()
 		{
 			return containerElement.FindElement(By.XPath(".//span[text()='Close']"), 2).TryClick();
+		}
+	}
+
+	class AddProductToRecertificationDialog : BaseObject
+	{
+		public const string BasePath = "//div[@id='dialog-addToRecertification']";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load(int secondsToWait = 30)
+		{
+			//get the window
+			StudioUtilites.SwitchToWindow("Wercs Studio");
+			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+			IWebElement frame =
+				SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='Widget1']//iframe"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			return base.Wait_for_load(30);
+			;
+		}
+
+		public List<string> GetReasons()
+		{
+			List<string> reasons = new List<string>();
+			var reasonTD = containerElement.FindElements(By.XPath(".//table[@id='tblReasons']//tr[(.//input)]/td[3]"));
+			if (reasonTD.Count == 0)
+			{
+				Report.Error("No reasons have been found");
+			}
+			else
+			{
+				reasons = reasonTD.Select(x => x.GetValue()).ToList();
+			}
+
+			return reasons;
+		}
+
+		public List<string> GetSelectedReasons()
+		{
+			List<string> reasons = new List<string>();
+			var reasonTD = containerElement.FindElements(By.XPath(".//table[@id='tblReasons']//tr[(.//input[@checked='checked'])]/td[3]"));
+			if (reasonTD.Count == 0)
+			{
+				Report.Info("No selected reasons have been found");
+			}
+			else
+			{
+				reasons = reasonTD.Select(x => x.GetValue()).ToList();
+			}
+
+			return reasons;
+		}
+
+		public bool SelectReasonByNumber(int no)
+		{
+			List<string> availableReasons = GetReasons();
+			string pattern = @"^\d.0?";
+			Regex regex = new Regex(pattern);
+
+			foreach (string thisReason in availableReasons)
+			{
+				Match match = regex.Match(thisReason);
+				if (match.Success)
+				{
+					if(Convert.ToInt16(match.Value)==no)
+					{
+						return SelectReasonbyText(thisReason);
+					}
+				}
+			}
+
+			return false;
+		}
+
+		public bool SelectReasonbyText(string reason)
+		{
+			var reasonTD = containerElement.FindElements(By.XPath(".//table[@id='tblReasons']//tr[(.//input[@checked='checked'])]/td[3]"));
+			var matchingTD = reasonTD.FirstOrDefault(x => x.GetValue().Contains(reason));
+			if (matchingTD == null)
+			{
+				Report.Info("No matching reason has been found");
+				return false;
+			}
+
+			var matchingInput = matchingTD.FindElement(By.XPath("../..//input"), 2);
+			if (matchingInput == null)
+			{
+				Report.Info("No matching checkbox has been found");
+				return false;
+			}
+
+			if (matchingInput.Checked())
+			{
+				Report.Info("Checkbox is already checked");
+				return true;
+			}
+
+			if (matchingInput.TryClick())
+			{
+				return matchingInput.Checked();
+			}
+
+			return false;
+		}
+
+		public List<string> GetListOfAllowUserCheckboxesChecked()
+		{
+			List<string> selected = new List<string>();
+			var updateInputs = containerElement.FindElements(By.XPath(".//input[contains(@id, 'update')]"));
+			foreach (var thisInput in updateInputs)
+			{
+				if (thisInput.Checked())
+				{
+					selected.Add(thisInput.FindElement(By.XPath("./.."), 2).GetValue().Trim());
+				}
+			}
+
+			return selected;
+		}
+
+		public bool ClickButton(string button)
+		{
+			var buttonList = containerElement.FindElements(By.XPath(".//button/span"));
+			var matchingButton = buttonList.FirstOrDefault(x => x.GetValue().Trim() == button);
+			if (matchingButton == null)
+			{
+				matchingButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button/span[text()='" +  button + "']"), 2);
+				if (matchingButton == null)
+				{
+					Report.Info("no matching button was found");
+					return false;
+				}
+				return matchingButton.TryClick();
+			}
+			return matchingButton.TryClick();
 		}
 	}
 }

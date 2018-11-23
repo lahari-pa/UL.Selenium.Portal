@@ -5,8 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Remoting.Lifetime;
 using System.Text;
+using System.Text.RegularExpressions;
 using Castle.Core.Internal;
-using NPOI.SS.Formula.Functions;
 using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReporting;
@@ -15,6 +15,7 @@ using TechTalk.SpecFlow;
 using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using WERCSmart;
+using Match = NPOI.SS.Formula.Functions.Match;
 
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -731,6 +732,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInSHAManagerISelectTheProduct()
 		{
 			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			Delay.Seconds(1);
 			string id = thisStudioSHAManager.SelectFirstProduct();
 			Report.IsTrue(id.Length > 0, "Product " + id + " has not been selected",
 				"Product " + id + " has been selected");
@@ -743,9 +745,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
 		{
 			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
+
 			string actualMessage = thisStudioSHAManagerProductSuspend.GetSupplierMessage();
-			Report.IsTrue(actualMessage == shouldSee,
-				"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			Report.Screenshot();
+
+			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
+
+			RegexOptions options = RegexOptions.None;
+			Regex regex = new Regex("[ ]{2,}", options);
+			actualMessage = regex.Replace(actualMessage, " ");
+
+			Report.Info("Actual message length is: " + actualMessage.Length.ToString() + " expected message length is: " + shouldSee.Trim().Length);
+			if (actualMessage.Trim() != shouldSee.Trim())
+			{
+				StringBuilder builder = new StringBuilder();
+				char[] ar1 = actualMessage.ToArray();
+				for (int i = 0; i < ar1.Length; i++)
+				{
+					if (actualMessage.Length > i + 1 && ar1[i].Equals(shouldSee[i]))
+					{
+						builder.Append(ar1[i]);
+					}
+					else
+					{
+						Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + shouldSee[i]);
+						break;
+					}
+				}
+				Report.Info("Matched up to " + builder);
+				Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
+					"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			}
 		}
 
 		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I add the following text: (.*)")]
@@ -761,8 +791,33 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StudioSHAManagerProductSuspend thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
 			string actualMessage = thisStudioSHAManagerProductSuspend.GetInternalProductNote();
-			Report.IsTrue(actualMessage == shouldSee,
-				"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			actualMessage = actualMessage.Replace(System.Environment.NewLine, " ");
+
+			RegexOptions options = RegexOptions.None;
+			Regex regex = new Regex("[ ]{2,}", options);
+			actualMessage = regex.Replace(actualMessage, " ");
+
+			Report.Info("Actual message length is: " + actualMessage.Length.ToString() + " expected message length is: " + shouldSee.Trim().Length);
+			if (actualMessage.Trim() != shouldSee.Trim())
+			{
+				StringBuilder builder = new StringBuilder();
+				char[] ar1 = actualMessage.ToArray();
+				for (int i = 0; i < ar1.Length; i++)
+				{
+					if (actualMessage.Length > i + 1 && ar1[i].Equals(shouldSee[i]))
+					{
+						builder.Append(ar1[i]);
+					}
+					else
+					{
+						Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + shouldSee[i]);
+						break;
+					}
+				}
+				Report.Info("Matched up to " + builder);
+				Report.IsTrue(actualMessage.Trim() == shouldSee.Trim(),
+					"Expected to see: " + shouldSee + " but got: " + actualMessage, "Got message " + actualMessage);
+			}
 		}
 
 		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I add the following text: (.*)")]
@@ -867,6 +922,140 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Expected message: " + table.Rows[0]["Message"] + " but got: " + thisNotification.Message,
 					"As expected, message was: " + table.Rows[0]["Message"]);
 			}
+		}
+
+
+		[Given(@"In SHA Manager I set the filter for status to : (.*)")]
+		public void GivenInSHAManagerISetTheFilterForStatusTo(string status)
+		{
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			TestReport.StartStep("I set the status filter to " + status);
+			myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter(status);
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			Delay.Seconds(3);
+			//Wait for top n items to be status Assigned
+			int n = 10;
+			for (int i = 0; i < 30; i++)
+			{
+				List<Product> topFive = myStudioShaManager.GetTopXProducts(n);
+				if (topFive.Select(x => x.Status == status).ToList().Count == n)
+				{
+					break;
+				}
+
+				Delay.Seconds(1);
+			}
+
+			Report.Screenshot();
+		}
+
+		[Given(@"I verify the product saved as: (.*) displays in red with a red box around it")]
+		public void GivenIVerifyTheProductDisplaysInRedWithARedBoxAroundIt(string savedAs)
+		{
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var ID = ProductDetails.Id;
+			Report.IsTrue(myStudioShaManager.ProductWithIDHasRedBorders(ID), "Product does not have red borders",
+				"Product has red borders");
+
+		}
+
+		[StepDefinition(@"In the Notification History Detail Screen I click on: (.*)")]
+		public void ThenInTheNotificationHistoryDetailScreenIClickOn(string button)
+		{
+			ProductNotificationHistory thisProductNotificationHistory = new ProductNotificationHistory();
+			thisProductNotificationHistory.ClickButtonInNotificationDetails(button);
+		}
+
+		[StepDefinition(@"In SHA Manager grid I click the following top menu item: (.*)")]
+		public void GivenInSHAManagerGridIClickTheFollowingTopMenuItem(string item)
+		{
+			StudioSHAManager thiStudioShaManager = new StudioSHAManager();
+			switch (item)
+			{
+				case "Add to Recertification":
+					Report.IsTrue(thiStudioShaManager.ClickAddToRecertification(), "Failed to click add to recertification button", "Clicked add to recertification button");
+					break;
+				case "Reports":
+					Report.IsTrue(thiStudioShaManager.ClickReports(), "Failed to click reports button", "Clicked reports button");
+					break;
+				case "Export":
+					Report.IsTrue(thiStudioShaManager.ClickExport(), "Failed to click exports button", "Clicked exports button");
+					break;
+				case "DataCode Export":
+					Report.IsTrue(thiStudioShaManager.ClickDataCodeExport(), "Failed to click data code export button", "Clicked data code exports button");
+					break;
+				case "Auto Assign":
+					Report.IsTrue(thiStudioShaManager.ClickAutoAssign(), "Failed to click auto assign button", "Clicked auto assign button");
+					break;
+				default:
+					throw new Exception("The menu item you passed in is not currently available");
+
+			}
+		}
+
+		[Then(@"The Add Product to Recertification screen should be showing")]
+		public void ThenTheAddProductToRecertificationScreenShouldBeShowing()
+		{
+			AddProductToRecertificationDialog thisAddProductToRecertificationDialog = new AddProductToRecertificationDialog();
+			Report.IsTrue(thisAddProductToRecertificationDialog.Wait_for_load(30), "Add Product to Recertification screen has failed to load", "Add Product to Recertification screen has loaded");
+		}
+
+		[Then(@"in the Add Product to Recertification screen only the following Reasons are selected:")]
+		public void ThenInTheAddProductToRecertificationScreenOnlyTheFollowingReasonsAreSelected(Table table)
+		{
+			AddProductToRecertificationDialog thisAddProductToRecertificationDialog = new AddProductToRecertificationDialog();
+			List<string> selectedReasons = thisAddProductToRecertificationDialog.GetSelectedReasons();
+			string pattern = @"^\d.0?";
+			Regex regex = new Regex(pattern);
+			bool matched = false;
+			bool matchedAll = true;
+			foreach (TableRow thisRow in table.Rows)
+			{
+				System.Text.RegularExpressions.Match matchRow = regex.Match(thisRow["Reason"]);
+				if (!matchRow.Success)
+				{
+					throw new Exception("Row value is not valid: " + thisRow["Reason"]);
+				}
+				matched = false;
+				foreach (string thisReason in selectedReasons)
+				{
+					System.Text.RegularExpressions.Match match = regex.Match(thisReason);
+					if (match.Success)
+					{
+						Report.Info(match.Value + " " + matchRow.Value);
+						if (Convert.ToInt16(match.Value) == Convert.ToInt16(matchRow.Value))
+						{
+							Report.Info("Found match for " + thisRow["Reason"]);
+							matched = true;
+							break;
+						}
+					}
+				}
+
+				if (!matched)
+				{
+					Report.Error("Failed to match: " + thisRow["Reason"]);
+					matchedAll = false;
+				}
+
+			}
+
+			Report.IsTrue(matchedAll, "Failed to match all", "Matched all as expected");
+
+		}
+
+		[StepDefinition(@"in the Add Product to Recertification screen only the following allow users checkboxes are selected:")]
+		public void ThenInTheAddProductToRecertificationScreenOnlyTheFollowingAllowUsersCheckboxesAreSelected(Table table)
+		{
+			AddProductToRecertificationDialog thisAddProductToRecertificationDialog = new AddProductToRecertificationDialog();
+			List<string> selectedCheckboxes =
+				thisAddProductToRecertificationDialog.GetListOfAllowUserCheckboxesChecked();
+
+			Report.IsTrue(selectedCheckboxes.OrderBy(x => x).SequenceEqual(table.Rows.Select(row => row["Checkbox"]).ToList().OrderBy(y => y)),
+				"Selected options are not as expected", "Selected options are expected");
 		}
 
 	}

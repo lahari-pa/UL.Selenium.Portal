@@ -276,6 +276,127 @@ testRunner.And("In the Notification History Detail Screen I confirm that details
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[86014] Suspend a Product - Product Name")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Suspended (Suite ID: 69545)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Studio")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Suspended")]
+        public virtual void _86014SuspendAProduct_ProductName()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[86014] Suspend a Product - Product Name", ((string[])(null)));
+#line 67
+this.ScenarioSetup(scenarioInfo);
+#line 68
+testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 69
+testRunner.And("In SHA Manager I set the filter for status to : Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 70
+testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 71
+testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 72
+testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 73
+testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
+                    "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 74
+testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Registration Su" +
+                    "spension for Product Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
+testRunner.And(@"In the Suspended dialog in the Supplier Message field I should see: Your recent registration is suspended, awaiting your update and resubmission, so that you may update the Product Name on the registration. Retailers require the Product Name in the WERCSmart registration be specific enough so that an employee may find the product in their systems when no UPC or other identifier is available. It is possible that the packaging may be unavailable as well. Because of this, the Product Name in the WERCSmart system should closely match the product's registered UPCs with the Retailer's on-boarding system. As a Product Name, although you may include Model Numbers or other identifying information, the Product Name cannot solely be the product's model number, nor should it be overly generic in nature. Retailers have indicated that Product Names that are not appropriate are to be suspended and the vendor is to correct the information. Please log into your WERCSmart account and review your Suspended Items in the My Messages area so that you may update and resubmit the information. This will allow the Assessment process to proceed and minimize further delay in meeting your Retailer's requirements with regard to WERCSmart registration. If you have questions about this process you may refer to our Support Center, or contact a Support Representative (WERCSmartCustomer@UL.com). Thank you for your prompt attention to this matter. The WERCSmart Assessment Team", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 76
+testRunner.And("In the Suspended dialog in the Supplier Message field I add the following text: s" +
+                    "upplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
+testRunner.And(@"In the Suspended dialog in the Internal Product Note field I should see: Your recent registration is suspended, awaiting your update and resubmission, so that you may update the Product Name on the registration. Retailers require the Product Name in the WERCSmart registration be specific enough so that an employee may find the product in their systems when no UPC or other identifier is available. It is possible that the packaging may be unavailable as well. Because of this, the Product Name in the WERCSmart system should closely match the product's registered UPCs with the Retailer's on-boarding system. As a Product Name, although you may include Model Numbers or other identifying information, the Product Name cannot solely be the product's model number, nor should it be overly generic in nature. Retailers have indicated that Product Names that are not appropriate are to be suspended and the vendor is to correct the information. Please log into your WERCSmart account and review your Suspended Items in the My Messages area so that you may update and resubmit the information. This will allow the Assessment process to proceed and minimize further delay in meeting your Retailer's requirements with regard to WERCSmart registration. If you have questions about this process you may refer to our Support Center, or contact a Support Representative (WERCSmartCustomer@UL.com). Thank you for your prompt attention to this matter. The WERCSmart Assessment Team", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
+testRunner.And("In the Suspended dialog in the Internal Product Note field I add the following te" +
+                    "xt: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 79
+testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 80
+testRunner.And("I check alert text contains recertification and dismiss", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 81
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
+                    "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 82
+testRunner.And("I verify the product saved as: ID displays in red with a red box around it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 83
+testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 84
+testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
+                    ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "Notification Date",
+                        "Subject"});
+            table5.AddRow(new string[] {
+                        "Suspended",
+                        "Today",
+                        "Registration Suspension for Product Name"});
+#line 85
+testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table5, "Then ");
+#line 88
+testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Subject",
+                        "Message",
+                        "Notification Date"});
+            table6.AddRow(new string[] {
+                        "Registration Suspension for Product Name",
+                        "supplier message input",
+                        "Today"});
+#line 89
+testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table6, "And ");
+#line 92
+testRunner.And("In the Notification History Detail Screen I click on: Close", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 93
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
+                    "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ProductID"});
+            table7.AddRow(new string[] {
+                        "saved as ID"});
+#line 94
+testRunner.Given("In SHA Manager I select the following products:", ((string)(null)), table7, "Given ");
+#line 97
+testRunner.And("In SHA Manager grid I click the following top menu item: Add to Recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 98
+testRunner.Then("The Add Product to Recertification screen should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Reason"});
+            table8.AddRow(new string[] {
+                        "20."});
+#line 99
+testRunner.Then("in the Add Product to Recertification screen only the following Reasons are selec" +
+                    "ted:", ((string)(null)), table8, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Checkbox"});
+            table9.AddRow(new string[] {
+                        "Allow user update Product NAME on Recertification"});
+#line 102
+testRunner.Then("in the Add Product to Recertification screen only the following allow users check" +
+                    "boxes are selected:", ((string)(null)), table9, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

@@ -920,5 +920,24 @@ namespace WERCSmart
 			Context.AddToContext(name, newProductInformation);
 		}
 
+		[Given(@"I check alert text contains (.*) and dismiss")]
+		public void GivenICheckAlertTextContainsXAndDismiss(string searchText)
+		{
+			//Putting this in because standard get alert functionality does not work in this page.
+			if (!SeleniumBrowser.Alert.WaitForAlert(10))
+			{
+				SeleniumBrowser.Alert.ReloadAlert(searchText);
+			}
+			if (!SeleniumBrowser.Alert.WaitForAlert())
+			{
+				Report.Error("Alert did not appear");
+			}
+			string alertText = SeleniumBrowser.Alert.GetText();
+			Report.IsTrue(alertText.Contains(searchText), "Alert text was not as expected. Found: " + alertText,
+				"Alert text was as expected");
+			Report.Screenshot();
+			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+		}
+
 	}
 }
