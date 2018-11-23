@@ -480,6 +480,96 @@ testRunner.And("In the Notification History Detail Screen I confirm that details
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[69548] Suspend a Product - Transportation Classification")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Suspended (Suite ID: 69545)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Studio")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Suspended")]
+        public virtual void _69548SuspendAProduct_TransportationClassification()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69548] Suspend a Product - Transportation Classification", ((string[])(null)));
+#line 128
+this.ScenarioSetup(scenarioInfo);
+#line 129
+testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 130
+testRunner.And("In SHA Manager I set the filter for status to : Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 131
+testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 132
+testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 133
+testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 134
+testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
+                    "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 135
+testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Transportation " +
+                    "Classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 136
+testRunner.And(@"In the Suspended dialog in the Supplier Message field I should see: Please ensure the following is provided, even if exemption or exception applies; UN number, proper shipping name, technical name (if applicable), packing group and if Limited quantity or consumer commodity is being applied.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 137
+testRunner.And("In the Suspended dialog in the Supplier Message field I add the following text: s" +
+                    "upplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 138
+testRunner.And(@"In the Suspended dialog in the Internal Product Note field I should see: Please ensure the following is provided, even if exemption or exception applies; UN number, proper shipping name, technical name (if applicable), packing group and if Limited quantity or consumer commodity is being applied.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 139
+testRunner.And("In the Suspended dialog in the Internal Product Note field I add the following te" +
+                    "xt: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 140
+testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 141
+testRunner.And("I close alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 142
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
+                    "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 143
+testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 144
+testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
+                    ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "Notification Date",
+                        "Subject"});
+            table12.AddRow(new string[] {
+                        "Suspended",
+                        "Today",
+                        "Transportation Classification"});
+#line 145
+testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table12, "Then ");
+#line 148
+testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Subject",
+                        "Message",
+                        "Notification Date"});
+            table13.AddRow(new string[] {
+                        "Transportation Classification",
+                        "Please ensure the following is provided, even if exemption or exception applies; " +
+                            "UN number, proper shipping name, technical name (if applicable), packing group a" +
+                            "nd if Limited quantity or consumer commodity is being applied. supplier message " +
+                            "input",
+                        "Today"});
+#line 149
+testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table13, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
