@@ -1659,6 +1659,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 		}
 
+		[StepDefinition(@"I should see the following checkbox:")]
+		public void ShouldSeeCheboxes(Table expected)
+		{
+			var selNewProduct = new NewProduct();
+			var checkboxShowing = selNewProduct.Checkboxes();
+			foreach (var row in expected.Rows)
+			{
+				var button = row["Checkbox"];
+				Report.Info("Checking that I see the checkbox '" + button + "'");
+				Report.IsTrue(checkboxShowing.Contains(button.Trim()),
+					"Checkbox was not showing as expected! Expected: '" + button + "', but found: '" + string.Join("', '", checkboxShowing) + "'!",
+					"Checkbox was showing: '" + button + "', as expected!");
+			}
+			Report.Screenshot();
+		}
+
 		[StepDefinition(@"I should see (a total of|at least) (.*) radio buttons for the section: (.*)")]
 		public void RadioButtonCountInSection(string condition, string count, string section)
 		{

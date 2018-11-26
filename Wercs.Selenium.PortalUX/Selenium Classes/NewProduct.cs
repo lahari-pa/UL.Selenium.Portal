@@ -62,6 +62,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElements(By.XPath(".//form//input[@type='radio']/../span"), 2).Select(x => x.Text.Trim()).ToList();
 		}
 
+		public List<string> Checkboxes()
+		{
+			return this.containerElement.FindElements(By.XPath(".//form//input[@type='checkbox']/../span"), 2).Select(x => x.Text.Trim()).ToList();
+		}
+
 		public string ErrorMessage()
 		{
 			this.RefreshContainer();

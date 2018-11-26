@@ -417,6 +417,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VOC.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\RegulatoryInformation3.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegulatoryInformation3.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\SHA Manager\Home Page\Suspended.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -827,6 +832,10 @@
     <None Include="Features\Product Registration\VOC\VOC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>VOC.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\RegulatoryInformation3.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RegulatoryInformation3.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SHA Manager\Home Page\Suspended.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
