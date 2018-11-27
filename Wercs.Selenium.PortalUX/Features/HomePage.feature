@@ -417,7 +417,6 @@ And I should see the following filters in the following order under My products:
 | Needs Your Attention   |
 | Canceled               |
 
-@jamesfixtest
 Scenario: [59732] Announcements - Add
 Given I navigate to Studio
 Given I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Shared Step))
@@ -910,23 +909,19 @@ Then The home screen should load
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 
 Then I save the product information as: TestCase85275
 
-Given I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
 
-# Failing on 'child' question. was using 59680 to make it work but now wait on bug ticket #87627 to be resolved.
-Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-#Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Chlorine      | 100     | false               | false       |            |
 
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-
-Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
 Then the 'Select Retailers' window appears
 

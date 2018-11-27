@@ -8,6 +8,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@SHA
 @run_Pesticides
 
 Feature: Pesticides
@@ -747,3 +748,65 @@ Then I confirm that the EPA table row for state: WA is highlighted with the colo
 Given I navigate to the home page
 
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62799
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides
+Scenario: [56502] Pesticide Data - United States - EPA Exempt
+Given I generate a random UPC number and save as: UPC56502
+And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with pest control
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+Then I should see the Pesticide Details - U.S. Page
+Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No
+Given I see the following sections
+| Section                         |
+| Select the applicable exemption |
+And The following radio buttons should be displayed for section: Select the applicable exemption
+| Button                                               |
+| Product is FIFRA 25(b) Exempt                        |
+| Food Based Pesticides - Exempt from EPA Registration |
+| Device based products - Exempt from EPA Registration |
+| Pheromone Traps – Exempt from EPA Registration       |
+And I click continue
+Then Select the applicable exemption should be showing the error messages: This is a required field.
+And I set the Select the applicable exemption option to: Food Based Pesticides - Exempt from EPA Registration
+Then Select the applicable exemption should not be showing the error messages: This is a required field.
+And I click continue
+And I should see the Transportation Details 1 Page
+And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Then I should see the Additional Documents to Provide Page
+And I click continue
+Then Provide Full Product Label (required) should be showing the error messages: Document is required: Please upload a PDF of the product label (full label).
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: C:\Dependencies\WERCSmart\testdoc.pdf
+Given I click continue
+Then I should see the Optional Reports and Documents Available for Purchase Page
+And I click continue
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
+And I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet Shampoo with pest control
+Then In the Data Acceptance page I select Yes, Agreed
+And In the Data Acceptance page I click on the Accept button
+Given If purchase details are showing click confirm order
+#And I Confirm the Purchase summary step is shown, depending on your subscription you will see either the success message or the product details and the Confirm order button.  If the product is shown click Confirm order
+And I navigate to the home page
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#And I Use the shared step below to search for your product - you may have to wait a few minutes for the product to show in submitted (the Zuora process)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase56502)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase56502 and its status is: Submitted
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase56502)
+And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase56502)
+#And I Go to the State Pesticide Section of MTR/CKLT SECT0127
+#And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
+#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56502

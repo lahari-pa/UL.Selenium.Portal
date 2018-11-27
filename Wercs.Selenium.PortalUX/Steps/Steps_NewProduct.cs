@@ -374,6 +374,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selectRetailers.ClickDone();
 		}
 
+		[Given(@"In the select retailers window I click (Done|Close)")]
+		public void GivenInTheSelectRetailersWindowIClickDone(string toDo)
+		{
+			var selectRetailers = new SelectRetailers();
+			switch (toDo)
+			{
+				case "Done":
+					Report.IsTrue(selectRetailers.ClickDone(), "Failed to click 'Done' in the select retailers window", "Successfully clicked 'Done' in the select retailers window");
+					break;
+				case "Close":
+					Report.IsTrue(selectRetailers.ClickClose(), "Failed to click 'Close' in the select retailers window", "Successfully clicked 'Close' in the select retailers window");
+					break;
+			}
+		}
+
 		// Added 'should only' parameter to check an exclusive list of Retailers
 		[StepDefinition(@"In the 'Select retailers' window I (should|should only|should not) see the following retailers:")]
 		public void CheckingCorrectRetailersAreShowing(string should, Table expected)
@@ -3585,6 +3600,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
 		{
+			// if subscription upgrade - Proceed ?
 			Steps_PaymentMethods MyStepsPaymentMethods = new Steps_PaymentMethods();
 			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
 			GeneralUtilities.StudioWaitForSpinner();

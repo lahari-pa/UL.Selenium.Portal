@@ -157,6 +157,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BulkActions.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Canadian Tire - Blue Box Program\New Product Registration\1 Account has no Canada Data %28Suite ID 85307%29.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>1 Account has no Canada Data %28Suite ID 85307%29.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ChooseGoodGuide.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -624,6 +629,10 @@
     <None Include="Features\BulkActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>BulkActions.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire - Blue Box Program\New Product Registration\1 Account has no Canada Data %28Suite ID 85307%29.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>1 Account has no Canada Data %28Suite ID 85307%29.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ChooseGoodGuide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -917,8 +917,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "20.1C (68.1F) - 35C (95F)");
 			TestReport.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			TestReport.StartStep("I set the Flash Point (in Celsius) field to: >=23C and <38C");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=93C and <815C");
+			TestReport.StartStep("I set the Flash Point (in Celsius) field to: >=93C and <=815C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=93C and <=815C");
 			TestReport.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			TestReport.StartStep("I set the Select the best Water Solubility description field to: 100g/100ml");

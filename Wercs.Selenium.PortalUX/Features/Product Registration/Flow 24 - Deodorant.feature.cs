@@ -107,11 +107,11 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow24_Deodorant")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("james")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("upctest")]
         public virtual void _60617Deodorant_Non_Aerosol_RU000760Liquid()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60617] Deodorant - Non-Aerosol - RU000760(Liquid)", new string[] {
-                        "james"});
+                        "upctest"});
 #line 15
 this.ScenarioSetup(scenarioInfo);
 #line 17
