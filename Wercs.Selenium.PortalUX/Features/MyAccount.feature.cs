@@ -373,6 +373,48 @@ testRunner.Then("In the Company Information page I confirm the Company Informati
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[87304] Video link How to Subscribe")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MyAccount")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SubEnrollment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_MyAccount")]
+        public virtual void _87304VideoLinkHowToSubscribe()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[87304] Video link How to Subscribe", ((string[])(null)));
+#line 111
+this.ScenarioSetup(scenarioInfo);
+#line 112
+testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 113
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 114
+testRunner.And("I click the \'How to Subscribe\' link in My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 115
+testRunner.Given("I switch to the tab: https://wercsmart.freshdesk.com/en/support/solutions/article" +
+                    "s/25000014513-wercsmart-2-0-subscription-enrollment-and-management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 116
+testRunner.And("I save the current window as: Subscription Enrollment and Management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 117
+testRunner.And("In the \"WERCSmart 2.0 - Subscription Enrollment and Management\" WercSmart Solutio" +
+                    "ns article, I click the link for \'To view a video... click here\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 118
+testRunner.And("I confirm a new tab opens to YouTube with a video titled: WERCSmart Subscription " +
+                    "Overview", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 119
+testRunner.And("I close the window saved as: YouTube", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 120
+testRunner.And("I close the window saved as: Subscription Enrollment and Management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

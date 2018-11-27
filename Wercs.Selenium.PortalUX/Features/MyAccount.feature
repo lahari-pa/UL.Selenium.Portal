@@ -104,3 +104,17 @@ Then In the Company Information page I confirm the Company Information is correc
 | Company Name | Admin Name                | Email Address   | Supplier Type | Country       | Address                  | City   | State | Zip Code | Country Code | Phone        |
 | Visual       | Automated, Visual Company | <VisualAccount> | Manufacturer  | United States | 31 British American Blvd | Latham | NY    | 12110    | 1            | 555-555-5555 |
 
+# Assigned to Paulina Mata
+# Created by Larkin, Steve
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\My Account\Subscription Information
+Scenario: [87304] Video link How to Subscribe
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I click on My Account
+And I click the 'How to Subscribe' link in My Account
+Given I switch to the tab: https://wercsmart.freshdesk.com/en/support/solutions/articles/25000014513-wercsmart-2-0-subscription-enrollment-and-management
+And I save the current window as: Subscription Enrollment and Management
+And In the "WERCSmart 2.0 - Subscription Enrollment and Management" WercSmart Solutions article, I click the link for 'To view a video... click here'
+And I confirm a new tab opens to YouTube with a video titled: WERCSmart Subscription Overview
+And I close the window saved as: YouTube
+And I close the window saved as: Subscription Enrollment and Management

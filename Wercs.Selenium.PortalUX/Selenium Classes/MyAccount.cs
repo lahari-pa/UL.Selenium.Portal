@@ -682,6 +682,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return inputEl.GetAttribute("value");
 		}
+
+		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-3 subscription']")]
+		private IWebElement _subscriptioncontainer;
+
+		public string SubscriptionLevel()
+		{
+			return this._subscriptioncontainer.FindElement(By.XPath(".//h3[position()=1]"), 2).Text;
+		}
+
+		public bool ClickSubscriptionAction(string action)
+		{
+			switch (action.ToLower())
+			{
+				case "upgrade":
+					return this._subscriptioncontainer.FindElement(By.XPath(".//a[text()='Upgrade']"), 2).TryClick();
+				case "renew":
+					return this._subscriptioncontainer.FindElement(By.XPath(".//a[text()='Renew']"), 2).TryClick();
+				default:
+					return false;
+			}
+		}
+		public bool ClickHowToSubscribeLink()
+		{
+			return this._subscriptioncontainer.FindElement(By.XPath(".//a[./small[contains(text(),'How to Subscribe')]]"), 2).TryClick();
+		}
 	}
 	class MyAccount_CompanyInfo : BaseObject
 	{

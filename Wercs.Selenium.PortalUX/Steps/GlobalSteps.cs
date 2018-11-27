@@ -208,7 +208,6 @@ namespace WERCSmart
 			Report.Failure("Failed to log in!");
 		}
 
-
 		[StepDefinition(@"I logout")]
 		public void GivenILogout()
 		{
@@ -298,7 +297,6 @@ namespace WERCSmart
 			}
 		}
 
-
 		[StepDefinition(@"I scroll to the (top|bottom) of the page")]
 		public void ThenIScrollToTheOfThePage(string topbottom)
 		{
@@ -385,7 +383,9 @@ namespace WERCSmart
 			{
 				var mainWindowHandle = SeleniumUtilities.Context.GetFromContext("MainWindowHandle");
 				if (mainWindowHandle == null)
-				{ Report.Error("No Main Window Handle found!"); }
+				{
+					throw new Exception("No Main Window Handle found in context!");
+				}
 				Report.Info("Attempting to close the current window");
 				SeleniumBrowser.WebBrowser.Close();
 				Report.Info("Current window closed, switching to the MainWindowHandle");
@@ -399,8 +399,6 @@ namespace WERCSmart
 				throw;
 			}
 		}
-
-
 
 		[StepDefinition(@"UNDER DEVELOPMENT")]
 		public void Underdevelopment()
@@ -466,8 +464,6 @@ namespace WERCSmart
 
 		}
 
-
-
 		[StepDefinition(@"I create a new email address")]
 		public void ThenICreateANewEmailAddress()
 		{
@@ -497,7 +493,6 @@ namespace WERCSmart
 		//{
 
 		//}
-
 
 		[StepDefinition(@"there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
@@ -614,7 +609,6 @@ namespace WERCSmart
 			}
 		}
 
-
 		/// <summary>
 		/// Back button click in the browser
 		/// </summary>
@@ -658,15 +652,45 @@ namespace WERCSmart
 						return;
 					}
 				}
-
-				Report.Failure("Failed to find tab with url: " + url);
 				Report.Screenshot();
+				throw new Exception("Failed to find tab with url: " + url);
 			}
 			catch (Exception ex)
 			{
 				Report.Failure(ex.Message);
 				throw;
 			}
+		}
+
+		[StepDefinition(@"I save the current window as: (.*)")]
+		public void SaveTheCurrentWindowAs(string savedAs)
+		{
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext(savedAs, currentHandle);
+		}
+
+		[StepDefinition(@"I close the window saved as: (.*)")]
+		public void SwitchBackToMainWindow(string savedAs)
+		{
+			var handleToClose = Context.GetFromContext(savedAs)?.ToString();
+			if (handleToClose == null)
+			{
+				Report.Failure("Unable to find window saved as: " + savedAs + " in context to close!");
+				return;
+			}
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			var handleMatch = allHandles.First(x => x == handleToClose);
+			if (handleMatch == null)
+			{
+				Report.Failure("There was no window matching open matching: " + savedAs);
+				return;
+			}
+			Report.Info("Found window to close: " + savedAs);
+			SeleniumBrowser.WebBrowser.SwitchTo().Window(handleMatch);
+			Report.Screenshot();
+			Report.Info("Closing window");
+			SeleniumBrowser.WebBrowser.Close();
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I switch to the Data Summary page")]
@@ -689,7 +713,6 @@ namespace WERCSmart
 			Report.Screenshot();
 		}
 
-
 		[StepDefinition(@"I switch to Data Acceptance page")]
 		public void ThenISwitchToDataAcceptancePage()
 		{
@@ -707,8 +730,6 @@ namespace WERCSmart
 			}
 			Report.Failure("Failed to find the correct tab!");
 		}
-
-
 
 		[StepDefinition(@"I close the Data Summary tab")]
 		public void CloseDataSummaryTab()
@@ -748,7 +769,6 @@ namespace WERCSmart
 				$@"Failed to click ""{button}"" button",
 				$@"Successfully clicked the ""{button}"" button");
 		}
-
 
 		[StepDefinition(@"I click the Terms of Use link in the footer")]
 		public void ClickTermsOfUseFooter()
@@ -909,7 +929,6 @@ namespace WERCSmart
 				GivenILogout();
 			}
 		}
-
 
 		[Given(@"I save to context name: (.*) and value: (.*)")]
 		public void GivenISaveToContextNameAndValue(string name, string value)

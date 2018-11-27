@@ -9,6 +9,7 @@ using TechTalk.SpecFlow;
 using TestStack.White.UIItems.WindowItems;
 using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using WERCSmart;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
@@ -932,5 +933,51 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Failure("Failed after 10 attempts to change the password!");
 		}
+
+		[StepDefinition(@"I click the 'How to Subscribe' link in My Account")]
+		public void ClickHowToSubscribeLinkInMyAccount()
+		{
+			Report.IsTrue(new MyAccount().ClickHowToSubscribeLink(), "Failed to click the 'How to Subscribe' link!", "Successfully clicked the 'How to Subscribe' link");
+		}
+
+		[StepDefinition(@"In the ""(.*)"" WercSmart Solutions article, I click the link for 'To view a video... click here'")]
+		public void InWercSmartSolutionArticleIClickViewVideoHere(string articleHeading)
+		{
+			var displayedArticle = new WercSmartSolutionsArticle().ArticleHeading();
+			if (Report.IsTrue(displayedArticle == articleHeading, "The correct article was not displayed! Expected: " + articleHeading + " but got: " + displayedArticle, "The correct article heading was dipslayed: " + articleHeading))
+			{
+				Report.IsTrue(new SubscriptionEnrollmentManagement().ClickViewVideo(), "Failed to click 'View Video here' on the Subscription Enrollment and Management article!", "Successfully clicked 'View Video here' on the Subscription Enrollment and Management article");
+			}
+		}
+
+		[StepDefinition(@"I confirm a new tab opens to YouTube with a video titled: (.*)")]
+		public void ConfirmANewTabOpensToYouTubeWithVideoTitled(string videoTitle)
+		{
+			var selYoutube = new YouTube();
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (selYoutube.Wait_for_load(10))
+				{
+					Report.Success("The YouTube tab was opened");
+					Report.Screenshot();
+					Report.Info("Saving YouTube window to context");
+					new GlobalSteps().SaveTheCurrentWindowAs("YouTube");
+					if (selYoutube.VideoDisplayed())
+					{
+						var actualTitle = selYoutube.VideoTitle();
+						Report.IsTrue(actualTitle == videoTitle, "The video title did not match the expected text! Expected: " + videoTitle + " but found: " + actualTitle, "A video was displayed with the title: " + videoTitle + " as expected");
+						return;
+					}
+					Report.Failure("There was no video displayed on YouTube!");
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("The YouTube tab did not open as expected!");
+			Report.Screenshot();
+		}
+
 	}
 }
