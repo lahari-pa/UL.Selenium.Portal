@@ -131,11 +131,11 @@ Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Con
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Butane        | 100     | true                | false       |            |
 
-Then for ingredient: Butane the Trade Secret checkbox is disabled
+Then for ingredient: Butane the Trade Secret field is disabled
 
 Given for ingredient: Butane I set Public Disclosure checkbox to checked: false
 
-Then for ingredient: Butane the Trade Secret checkbox is enabled
+Then for ingredient: Butane the Trade Secret field is enabled
 
 Then in the Ingredients page I click Continue
 
@@ -143,7 +143,6 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
-@tfs_design
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -162,15 +161,15 @@ Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Con
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Butane        | 100     | false                | true       |            |
 
-Then for ingredient: Butane the Publicly Disclosed checkbox is disabled
+Then for ingredient: Butane the Publicly Disclosed field is disabled
 
-Then for ingredient: Butane the Public Name selectbox is disabled
+Then for ingredient: Butane the Public Name field is disabled
 
 Given for ingredient: Butane I set Trade Secret checkbox to checked: false
 
-Then for ingredient: Butane the Publicly Disclosed checkbox is enabled
+Then for ingredient: Butane the Publicly Disclosed field is enabled
 
-Then for ingredient: Butane the Public Name selectbox is enabled
+Then for ingredient: Butane the Public Name field is enabled
 
 Then for ingredient: Butane the Public Name selectbox shows names
 
@@ -199,9 +198,9 @@ Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Con
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Butane        | 100     | false                | true       |            |
 
-Then for ingredient: Butane the Publicly Disclosed checkbox is disabled
+Then for ingredient: Butane the Publicly Disclosed field is disabled
 
-Then for ingredient: Butane the Public Name selectbox is disabled
+Then for ingredient: Butane the Public Name field is disabled
 
 Then in the Ingredients page I click Continue
 
@@ -228,7 +227,7 @@ Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Con
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Butane        | 100     | true                | false       |            |
 
-Then for ingredient: Butane the Trade Secret checkbox is disabled
+Then for ingredient: Butane the Trade Secret field is disabled
 
 Then in the Ingredients page I click Continue
 
@@ -273,7 +272,6 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
-@tfs_design
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -297,7 +295,7 @@ Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Con
 
 Then in the Ingredients page I click Continue
 
-Then a Warning popup dialog should appear with the message: Please be aware that your product contains a 3rd Party component that requires updating. We have sent a notification to your 3rd Party component supplier requesting that it update its component information relating to public disclosure of ingredients.
+Then a Warning popup dialog should appear with the message: Your product registration contains a 3rd-Party Formula that needs to be updated for it to be included in chemical-policy or sustainability assessments conducted by retailers or in GoodGuide ratings. We have sent a notification to your 3rd-Party Formulator requesting that the ingredient's Data Use Tier consent, and the public disclosure status of its ingredients, be updated. Please continue with this product registration, but not that the chemical-policy or sustainability assessment results may change if, and when, your 3rd-Party Formulator authorizes its ingredient to be included in such programs.
 
 And I should see the Regulatory Information 1 Page
 
@@ -445,7 +443,7 @@ Then I should see the Ingredients Page
 
 And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 0
 
-And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
+And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 
 And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: shared79436
 | CASNumber | ComponentName                                                                  | Percentage |
@@ -453,7 +451,7 @@ And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Di
 
 Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
 
-And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
+And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 
 Then In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient saved as: shared79436
 
@@ -485,7 +483,7 @@ Then I should see the Ingredients Page
 
 And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 0
 
-And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
+And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 
 Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: shared79431
 | CASNumber | ComponentName | Percentage |
@@ -493,7 +491,7 @@ Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Dis
 
 Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
 
-And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
+And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 
 Given In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient saved as: shared79431
 
@@ -502,3 +500,34 @@ Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score
 Given I navigate to the home page
 
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80720
+
+# Assigned to Paulina Mata
+# Created by Paulina Mata
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
+Scenario: [87301] Ingredients - - Selecting a Public Label Name Automatically Initiates Publicly Disclosed Indicator
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Sodium hydroxide | 33      | false               | false       |            |
+And In the Ingredients Page I select the first Public Name dropdown option for ingredient: Sodium hydroxide
+And In the Ingredients page I confirm the Publicly Disclosed checkbox is: checked for ingredient: Sodium hydroxide
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Water         | 33      | false               | false        |            |
+And In the Ingredients Page I select the Trade Secret checkbox for ingredient: Water
+Then for ingredient: Water the Public Name field is disabled
+Then for ingredient: Water the Publicly Disclosed field is disabled
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Boric acid         | 34      | false               | false        |            |
+And In the Ingredients Page I select the first Public Name dropdown option for ingredient: Boric acid
+And In the Ingredients Page I select the Trade Secret checkbox for ingredient: Boric acid
+Then for ingredient: Boric acid the Public Name field is disabled
+Then for ingredient: Boric acid the Publicly Disclosed field is disabled
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87301

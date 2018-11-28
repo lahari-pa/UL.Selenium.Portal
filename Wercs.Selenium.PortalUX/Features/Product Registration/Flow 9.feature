@@ -99,7 +99,7 @@ Given In the Ingredients Page I select the first Public Name dropdown option for
 
 Given In the Ingredients Page I select the Trade Secret checkbox for ingredient: Aqua
 
-Given In the Ingredients Page I confirm the Public Name option is disabled for ingredient: Aqua
+Given for ingredient: Aqua the Publicly Disclosed field is disabled
 
 Given In the Ingredients Page I select the Trade Secret checkbox for ingredient: Aqua
 

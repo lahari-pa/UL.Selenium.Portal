@@ -2476,19 +2476,41 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().ClickIngredientTradeSecretCheckbox(name), "The Trade Secret checkbox was not clicked successfully", "The Trade Secret checkbox was clicked successfully");
 		}
 
-		[StepDefinition(@"In the Ingredients Page I confirm the Public Name option is (enabled|disabled) for ingredient: (.*)")]
-		public void IngredientPublicNameIsEnabledDisabled(string condition, string chemicalName)
-		{
-			if (condition == "enabled")
-			{
-				Report.IsTrue(new NewProduct().PublicNameOptionIsEnabled(chemicalName), "The Public Name option was disabled for ingredient: " + chemicalName + " when it was expected to be enabled", "The Public Name option for ingredient: " + chemicalName + " was enabled as expected");
-			}
+		[StepDefinition(@"In the Ingredients page I confirm the (Publicly Disclosed|Trade Secret) checkbox is: (checked|unchecked) for ingredient: (.*)")]
 
-			if (condition == "disabled")
+		public void IngredientsConfirmCheckboxState(string option, string checkState, string chemicalName)
+		{
+			var ingredients = new NewProduct().GetIngredients();
+			var thisIngredient = ingredients.First(x => x.ComponentName == chemicalName);
+			if (thisIngredient == null)
 			{
-				Report.IsFalse(new NewProduct().PublicNameOptionIsEnabled(chemicalName), "The Public Name option was enabled for ingredient: " + chemicalName + " when it was expected to be disabled", "The Public Name option for ingredient: " + chemicalName + " was disabled as expected");
+				Report.Failure("Could not find ingredient with name: " + chemicalName + "!");
+				return;
+			}
+			var expectChecked = false;
+			if (checkState == "checked")
+			{
+				expectChecked = true;
+			}
+			else if (checkState != "unchecked")
+			{
+				Report.Failure("Valid 'check state' parameter must be either 'checked' or 'unchecked'!");
+				return;
+			}
+			switch (option)
+			{
+				case "Trade Secret":
+					Report.IsTrue(thisIngredient.TradeSecret == expectChecked, "The Trade Secret checkbox should be: " + expectChecked + " but it was " + thisIngredient.TradeSecret, "The Trade Secret checbox was: " + expectChecked + " as expected");
+					break;
+				case "Publicly Disclosed":
+					Report.IsTrue(thisIngredient.PublicallyDisclosed == expectChecked, "The Publicly Disclosed checkbox should be: " + expectChecked + " but it was " + thisIngredient.PublicallyDisclosed, "The Publicly Disclosed checbox was: " + expectChecked + " as expected");
+					break;
+				default:
+					Report.Failure("Valid 'option' parameter must be either 'Trade Secret' or 'Publicly Disclosed'");
+					return;
 			}
 		}
+
 
 		[StepDefinition(@"In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient: (.*)")]
 		public void IngredientClickPubliclyDisclosedCheckbox(string chemicalName)
@@ -2754,8 +2776,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var actualMessages = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(actualMessages.Any(x => x.Contains(message)),
-				string.Format("The message: '{0}' was not visble on the '{1}' page.", message, page),
-				string.Format("The message: '{0}' was visble on the '{1}' page as expected.", message, page));
+				$"The message: '{message}' was not visble on the '{page}' page.",
+				$"The message: '{message}' was visble on the '{page}' page as expected.");
 		}
 
 		// Custom 'Shared Step' so we can use the data omEPARegistration class in one go
@@ -2847,9 +2869,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var allSelected = new List<string>();
 				foreach (var selected in selSelectRetailers.SelectedRetailers(true))
 				{
-					string[] parts = selected.Split('/');
-					string filename = parts[parts.Length - 1].Split('?')[0];
-					allSelected.Add(Path.GetFileNameWithoutExtension(filename).ToLower());
+					var parts = selected.Split('/');
+					var filename = parts[parts.Length - 1].Split('?')[0];
+					allSelected.Add(Path.GetFileNameWithoutExtension(filename)?.ToLower());
 				}
 				var allExpected = retailerInfo.Select(x => x.Key.ToLower()).ToList();
 				Report.IsTrue(!allSelected.Except(allExpected).Any() && allExpected.Count == allSelected.Count,
@@ -2863,7 +2885,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				TestReport.StartStep(GlobalParameters.StepCount + " - I confirm the only retailer selected is: 'Wal-Mart/SAM'S CLUB' ");
 				GlobalParameters.StepCount++;
 				var actualRetailers = selNewProduct.SelectedRetailers();
-				var expectedRetailers = new List<string>() { @"Wal-Mart/SAM'S CLUB" };
+				var expectedRetailers = new List<string> { @"Wal-Mart/SAM'S CLUB" };
 				Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count,
 					"The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers),
 					" The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
@@ -2937,7 +2959,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			Report.IsTrue(thisNewProduct.SectionExists(question) == (shouldOrNot == "should"),
 				"Question is not showing as expected", "Question is showing or not as expected");
-
 		}
 
 		[When(@"In the ingredients table I click (CAS Number|Chemical Name|Percent|Publicly Disclosed|Trade Secret|Public Name) to order")]
@@ -2984,10 +3005,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 		}
 
-		[Then(@"for ingredient: (.*) the (Trade Secret|Publicly Disclosed) checkbox is (enabled|disabled)")]
-		public void ThenForIngredientTheTradeSecretCheckboxIsDisabledOrEndabled(string ingredient, string checkbox, string enabledOrDisabled)
+		[StepDefinition(@"for ingredient: (.*) the (Trade Secret|Publicly Disclosed|Public Name) field is (enabled|disabled)")]
+		public void ThenForIngredientTheTradeSecretCheckboxIsDisabledOrEnabled(string ingredient, string checkbox, string enabledOrDisabled)
 		{
-			NewProduct thisNewProduct = new NewProduct();
+			var thisNewProduct = new NewProduct();
 			switch (checkbox)
 			{
 				case "Publicly Disclosed":
@@ -3002,23 +3023,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 						(enabledOrDisabled.ToLower() == "enabled"), "Trade secret checkbox is not showing as expected.",
 						"Trade secret is showing as expected.");
 					break;
+				case "Public Name":
+					Report.IsTrue(thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).PublicNameEnabled ==
+								  (enabledOrDisabled.ToLower() == "enabled"), "Public name select box is not showing as expected.",
+						"Public name select box is showing as expected.");
+					break;
+
 				default:
-					throw new Exception("Please provide valid checkbox name");
-
+					Report.Failure("Step requires a valid field option: 'Publicly Disclosed', 'Trade Secret' or 'Public Name'");
+					return;
 			}
-
 		}
-
-		[Then(@"for ingredient: (.*) the Public Name selectbox is (enabled|disabled)")]
-		public void ThenForIngredientThePublicNameSelectboxIsEnabledDisabled(string ingredient, string enabledOrDisabled)
-		{
-			NewProduct thisNewProduct = new NewProduct();
-			Report.IsTrue(
-				thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).PublicNameEnabled ==
-				(enabledOrDisabled.ToLower() == "enabled"), "Public name select box is not showing as expected.",
-				"Public name select box is showing as expected.");
-		}
-
 
 		[Given(@"for ingredient: (.*) I set (Public Disclosure|Trade Secret) checkbox to checked: (true|false)")]
 		public void GivenForIngredientISetPublicDisclosureCheckboxToCheckedTrueFalse(string ingredient, string checkbox, string checkedTrueFalse)
@@ -3039,8 +3054,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 					throw new Exception("Please provide valid checkbox name");
 
 			}
-
-
 		}
 
 		[Then(@"for ingredient: (.*) the Public Name selectbox shows names")]
@@ -3085,9 +3098,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Title is showing as" + title);
 			Report.IsTrue(thisModalDialog.GetText() == message, "Expected message: " + message + " but got: " + thisModalDialog.GetText(),
 				"Title is showing as expected: " + message);
+			Report.Info("Clicking OK in the popup");
 			thisModalDialog.Click_OK();
 			Delay.Seconds(1);
-
 		}
 
 		[Then(@"I should see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
@@ -3098,7 +3111,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisAlert.Title == title, "Title is not as expected", "Title matches");
 			Report.IsTrue(thisAlert.SubTitle.Contains(subtitle), "SubTitle is not as expected. Expected " + subtitle + " but got: " + thisAlert.SubTitle, "SubTitle matches");
 			Report.IsTrue(thisAlert.Text == text, "Text is not as expected. Expected " + text + " but got: " + thisAlert.Text, "Text matches");
-
 		}
 
 		[Then(@"on the Neonicotinoid Warning Page I should see a link with text: (.*) which links to page: (.*)")]
@@ -3145,12 +3157,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				GivenInTheNewProductPageIClickSection("Pesticide Details - State Registration Details");
 				//If the current date is > Oct 1st confirm the Transportation Details 1 step is shown and Click the Pesticide Details -State Registration Details heading
 			}
-
-
 		}
-
-
-
 
 		[StepDefinition(@"I click the 'Use My Ingredients' button")]
 		public void ClickUseMyIngredients()
@@ -3214,7 +3221,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Field does not exist",
 				"Field exists");
 			Delay.Seconds(1);
-
 		}
 
 		[StepDefinition(@"(.*) should not be showing any error messages")]
@@ -3298,7 +3304,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.IsTrue(expectedOptions.All(x => displayedOptionsLower.Contains(x.ToLower())),
 						"All expected options were not displayed under section: " + section + ". The differences were: " + string.Join(", ", differences.Select(x => "'" + x + "'").ToList()) + ". The displayed options were: " + string.Join(", ", displayedOptions),
 						"All expected options were displayed under section: " + section + ": " + string.Join(", ", displayedOptions));
-
 				}
 				else if (should == "should not")
 				{

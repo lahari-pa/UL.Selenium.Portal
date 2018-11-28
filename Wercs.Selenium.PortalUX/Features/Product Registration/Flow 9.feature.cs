@@ -287,8 +287,7 @@ testRunner.Given("In the Ingredients Page I select the first Public Name dropdow
 #line 100
 testRunner.Given("In the Ingredients Page I select the Trade Secret checkbox for ingredient: Aqua", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 102
-testRunner.Given("In the Ingredients Page I confirm the Public Name option is disabled for ingredie" +
-                    "nt: Aqua", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("for ingredient: Aqua the Publicly Disclosed field is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 104
 testRunner.Given("In the Ingredients Page I select the Trade Secret checkbox for ingredient: Aqua", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 106

@@ -4591,16 +4591,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return true;
 		}
 
-		public bool PublicNameOptionIsEnabled(string chemicalName)
-		{
-			var publicNameOption = IngredientRow(chemicalName).FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
-			if (publicNameOption.Enabled)
-			{
-				return true;
-			}
-			return false;
-		}
-
 		// Checks the running total of publically disclosed ingredients (eg. "1 / 3")
 		public bool PubliclyDisclosedTotalIsCorrect(string total)
 		{
