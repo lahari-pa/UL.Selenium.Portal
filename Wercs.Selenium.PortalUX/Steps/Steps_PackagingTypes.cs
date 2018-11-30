@@ -148,5 +148,47 @@ namespace Wercs.Selenium.PortalUX.Steps
 				string.Format("Successfully clicked 'edit' for Packaging Type with ID '{0}' and name '{1}'",
 					packagingType.ID, packagingType.Name));
 		}
+
+		[Given(@"Save the top packaging id as (.*) if there are no packacking types listed add a new packing type as follows")]
+		public void GivenSaveTheTopPackagingIdAsMPIIfThereAreNoPackackingTypesListedAddANewPackingTypeAsFollows(string saveAs, Table table)
+		{
+			StepsMyAccount myAccountSteps = new StepsMyAccount();
+			StepsNewProduct newProductSteps = new StepsNewProduct();
+
+			MyPackagingTypes thisMyAccount_MyLibrary = new MyPackagingTypes();
+
+			/*
+			MyPackagingTypes.PackagingTypeItem thisPTI = thisMyAccount_MyLibrary.GetRandomPackagingTypeInGrid();
+			if (thisPTI != null)
+			{
+				Context.AddToContext("PackagingTypeID_" + saveAs, thisPTI.ID);
+				Context.AddToContext("PackagingTypeName_" + saveAs, thisPTI.Name);
+				Report.Success("Saved details for packing type with id: " + thisPTI.ID);
+				return;
+			}
+			*/
+			myAccountSteps.ClickAddNewMyLibrary("My Packaging Types");
+			newProductSteps.GivenIShouldSeeXPage("Packaging Type");
+			//| Name | Materials   | Weight | Contact with food or drink | CONEG Certificate | CONEG contain | Recyclable Number | Email         |
+			newProductSteps.SetTheSectionOptionTo("Package Type Name", table.Rows[0]["Name"]);
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
+			SavePackagingTypeDetails(saveAs);
+			ClickAddRowBillOfMaterials();
+			SelectOptionForFieldInTable(table.Rows[0]["Materials"], "My Packaging Materials");
+			SelectOptionForFieldInTable(table.Rows[0]["Weight"], "My Packaging Weight(grams)");
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container or any", table.Rows[0]["Contact with food or drink"]);
+			newProductSteps.SetTheSectionOptionTo("Does you have a CONEG", table.Rows[0]["CONEG Certificate"]);
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("CONEG");
+			newProductSteps.SetTheSectionOptionTo("Does your container contain the following", table.Rows[0]["CONEG contain"]);
+			newProductSteps.SetTheSectionOptionTo("Packaging Component Recyclable Number", table.Rows[0]["Recyclable Number"]);
+			newProductSteps.ClickContinue();
+			newProductSteps.GivenIShouldSeeXPage("Data Acceptance");
+			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
+		}
+
 	}
 }

@@ -834,18 +834,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Save button exists as expected");
 		}
 
-		[Then(@"I confirm the pop up shows a Cancel button")]
+		[StepDefinition(@"I confirm the pop up shows a Cancel button")]
 		public void ThenIConfirmThePopUpShowsACancelButton()
 		{
 			Report.IsTrue(new AddNewSupplier().CancelButtonExists(), "Cancel button does not exist as expected",
 				"Cancel button exists as expected");
 		}
 
-		[Given(@"in the modal dialog I click cancel")]
-		public void GivenInTheModalDialogIClickCancel()
+		[StepDefinition(@"in the modal dialog I click (cancel|save)")]
+		public void GivenInTheModalDialogIClickButton(string cancelOrSave)
 		{
-			Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
-				"Successfully clicked cancel");
+			if (cancelOrSave == "cancel")
+			{
+				Report.IsTrue(new ModalDialog().Click_Cancel(), "Failed to click cancel button",
+					"Successfully clicked cancel");
+			}
+			else
+			{
+				Report.IsTrue(new ModalDialog().ClickSave(), "Failed to click save button",
+					"Successfully clicked save");
+			}
 		}
 
 		[Then(@"I confirm the Add New Supplier ID pop up closes")]
@@ -1057,6 +1065,89 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Failure($"Row number supplied ({row}) was not parsable as an int!");
 		}
+
+		[StepDefinition(@"in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: (.*)")]
+		public void GivenIConfirmAnErrorShowsBelowTheSupplierIDQuestion(string expectedError)
+		{
+			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			string actualError = thisAddNewSupplier.GetSupplierError();
+			if (actualError == null)
+			{
+				actualError = "";
+			}
+
+			Report.IsTrue(actualError == expectedError, "Expected error: " + expectedError + " but got: " + actualError,
+				"Error is showing as expected");
+		}
+
+		[StepDefinition(@"in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: (.*)")]
+		public void GivenIConfirmAnErrorShowsBelowTheCompanyQuestion(string expectedError)
+		{
+			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			string actualError = thisAddNewSupplier.GetCompanyNameError();
+			if (actualError == null)
+			{
+				actualError = "";
+			}
+
+			Report.IsTrue(actualError == expectedError, "Expected error: " + expectedError + " but got: " + actualError,
+				"Error is showing as expected");
+		}
+
+		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Supplier ID input: (.*)")]
+		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput(string supplierIDInput)
+		{
+			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(thisAddNewSupplier.EnterSupplierID(supplierIDInput), "Failed to add supplier ID input",
+				"Entered supplier ID value");
+		}
+
+		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: (.*)")]
+		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput(string companyInput)
+		{
+			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(companyInput), "Failed to add company or brand name input",
+				"Entered company or brand name value");
+		}
+
+		[StepDefinition(@"in the Add New Supplier Dialog I Confirm that no error shows below Company or Brand Name question")]
+		public void GivenInTheAddNewSupplierDialogIConfirmThatNoErrorShowsBelowCompanyOrBrandNameQuestion()
+		{
+			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(!thisAddNewSupplier.CompanyNameErrorExists(), "Company or brand name error is incorrectly showing",
+				"As expected no error is showing below Company or Brand name question");
+		}
+
+		[StepDefinition(@"in the Add New Supplier Dialog I Confirm that no error shows below Supplier ID question")]
+		public void GivenInTheAddNewSupplierDialogIConfirmThatNoErrorShowsBelowSupplierIDQuestion()
+		{
+			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			Report.IsTrue(!thisAddNewSupplier.SupplierIDErrorExists(), "Supplier ID error is incorrectly showing",
+				"As expected no error is showing below Supplier ID question");
+		}
+
+		//| Supplier ID | Company or Brand Name |
+		[Then(@"I confirm that in the Supplier IDS list the following row exists")]
+		public void ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(Table table)
+		{
+			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
+
+			string expectedSupplierID = table.Rows[0]["Supplier ID"];
+			string expectedCompany = table.Rows[0]["Company or Brand Name"];
+			Supplier matchingSupplier = allSuppliers.FirstOrDefault(x=>x.SupplierID== expectedSupplierID && x.CompanyOrBrandName==expectedCompany);
+
+			Report.IsTrue(matchingSupplier != null, "No matching row was found in the list",
+				"Matching row as found as expected");
+		}
+		[StepDefinition(@"in the Add New Supplier Dialog I click save")]
+		public void GivenInTheAddNewSupplierDialogIClickSave()
+		{
+			AddNewSupplier thisAddNewSupplier = new AddNewSupplier();
+			thisAddNewSupplier.ClickSave();
+			Delay.Seconds(2);
+		}
+
+
 	}
 }
 

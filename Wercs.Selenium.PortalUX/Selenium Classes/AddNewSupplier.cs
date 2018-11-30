@@ -29,6 +29,58 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
+		public bool SupplierIDErrorExists()
+		{
+			try
+			{
+				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
+				return (SupplierError.Enabled && SupplierError.Displayed);
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public string GetSupplierError()
+		{
+			try
+			{
+				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']/span"), 2);
+				return SupplierError.GetValue();
+			}
+			catch (Exception e)
+			{
+				return null;
+			}
+		}
+
+		public bool CompanyNameErrorExists()
+		{
+			try
+			{
+				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
+				return (SupplierError.Enabled && SupplierError.Displayed);
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public string GetCompanyNameError()
+		{
+			try
+			{
+				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']/span"), 2);
+				return SupplierError.GetValue();
+			}
+			catch (Exception e)
+			{
+				return null;
+			}
+		}
+
 		public bool EnterCompanyOrBrandName(string companyOrBrandName)
 		{
 			var Company = this.containerElement.FindElement(By.XPath("//select[@id='description']"), 2);
@@ -80,6 +132,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 				.FirstOrDefault(x => x.Text == "SAVE").TryClick();
 		}
+
 
 		public bool SaveButtonExists()
 		{

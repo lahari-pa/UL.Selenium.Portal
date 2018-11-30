@@ -273,3 +273,42 @@ And The Data Tier Details popup shows the following tabs:
 | Tier 4: Publicly Disclose Options |
 And I close the Data Tier Details popup
 And I navigate to the home page
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Retail Partners\Supplier ID\Supplier ID validation - retailer specific
+# NetProjects10\WercsSmart Portal\WERCSmart\Retail Partners\Supplier ID
+
+# ******* Blocked because cannot run database queries on staging, also the query appears to be wrong or the database string is.
+@TFS_design
+Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New Supplier ID - Save  - DB validation is only for local
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: O'Reilly
+And I confirm the Retailer Details Page has loaded
+And I confirm that there is a section labeled: Your Supplier IDs
+And The Supplier ID Table should be showing
+Given I click on the Add new Supplier ID link
+And in the Add New Supplier Dialog I click save
+And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: This is a required field
+And in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: This is a required field
+And in the Add New Supplier Dialog I enter the following in the Supplier ID input: abc
+And in the Add New Supplier Dialog I click save
+And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id
+And in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: This is a required field
+And in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: Automated
+And in the Add New Supplier Dialog I click save
+And in the Add New Supplier Dialog I Confirm that no error shows below Company or Brand Name question
+And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id
+And in the Add New Supplier Dialog I enter the following in the Supplier ID input: 12
+And in the Add New Supplier Dialog I click save
+And in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: You must enter valid O'Reilly Vendor id
+And in the Add New Supplier Dialog I enter the following in the Supplier ID input: 654327
+And in the Add New Supplier Dialog I click save
+Then I confirm that in the Supplier IDS list the following row exists
+| Supplier ID | Company or Brand Name |
+| 654327      | Automated             |
+And I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: Reilly and Supplier: Products Automation Account
+And I Confirm the Supplier ID you added is shown in the result for the query on the t_vendor table
+And [Shared Step 58828 - Delete Supplier ID]

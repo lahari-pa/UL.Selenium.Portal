@@ -438,9 +438,34 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public int GetProductCount()
+		{
+			var pageCount = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='listPager_right']/div"),2);
+			if (pageCount == null)
+			{
+				Report.Info("No page count has been found");
+				return -1;
+			}
+
+			string pattern = @"of\s\d+";
+			Regex regex = new Regex(pattern);
+			Match match = regex.Match(pageCount.GetValue());
+			if (match.Success)
+			{
+				return Convert.ToInt16(match.Value);
+			}
+			else
+			{
+				Report.Info("No matching pattern has been found");
+			}
+
+			return -1;
+		}
+
 		public List<Product> GetTopXProducts(int topX)
 		{
-			//Report.Info("Getting top " + topX.ToString() + " products");
+			Delay.Seconds(1);
+			Report.Info("Getting top " + topX.ToString() + " products");
 			List<IWebElement> ListOfProductRows = null;
 
 			if (this.ProductTableIsEmpty())
@@ -448,28 +473,56 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return new List<Product>();
 			}
 
-			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']//tr"), 3).ToList();
+			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
 
-			//Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
+			Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
 			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList();
-			//Report.Info("Got list of headers");
-			List<Product> ListOfProducts = new List<Product>();
 
-			//ignore first row because it is empty
-			for (int j = 1; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
+			for (int index = 0; index < ListOfHeaders.Count; index++)
 			{
+				bool nullOrEmpty = string.IsNullOrEmpty(ListOfHeaders[index]);
+				if (nullOrEmpty)
+				{
+					ListOfHeaders[index] = "Distributor";
+				}
+			}
+
+			Report.Info("Got list of headers");
+			List<Product> ListOfProducts = new List<Product>();
+			//get all columns
+			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
+			for (int j =1; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
+			{
+				List<string> rowValues = new List<string>();
 				//Report.Info("Looking at row: " + j.ToString());
+				bool gotRow = false;
+				int counter = 0;
+				while(!gotRow && counter <10)
+				{
+					try
+					{
+						ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
+						rowValues = ListOfProductRows[j].FindElements(By.XPath(".//td"),2).Select(x => x.GetValue()).ToList();
+						gotRow = true;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Try " + counter + "Failed to get row values for row " + j);
+					}
+					Delay.Seconds(1);
+					counter++;
+				}
+
+
 				Product thisProduct = new Product();
-				//start indexing from 1 because the first column is a checkbox
-				int addIndex = 1;
+				int addIndex = 2;
 				for (int i = 0; i < ListOfHeaders.Count(); i++)
 				{
 					//Report.Info("Looking at column: " + ListOfHeaders[i]);
 					switch (ListOfHeaders[i])
 					{
 						case "Product":
-							string pValue = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue();
+							string pValue = rowValues[i];
 							if (pValue.Trim().Length != 0)
 							{
 								thisProduct.ID = pValue.Trim();
@@ -477,32 +530,41 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 							break;
 						case "Name":
-							string pName = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							string pName = rowValues[i];
 							if (pName.Trim().Length != 0)
 							{
 								thisProduct.Name = pName;
 							}
 
 							break;
+						case "Distributor":
+							thisProduct.Distributor = rowValues[i];
+							break;
 						case "Supplier":
-							thisProduct.Supplier = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							thisProduct.Supplier = rowValues[i];
 							break;
 						case "User":
-							thisProduct.User = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							thisProduct.User = rowValues[i].Trim();
 							break;
 						case "Status":
-							thisProduct.Status = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							thisProduct.Status = rowValues[i].Trim();
+							try
+							{
+								var status = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']//tr[" + j + "]//td[" + (i + addIndex) + "]"), 2);
+								if (status != null)
+								{
+									thisProduct.ColourRGB =status.GetCssValue("Color");
+								}
 
-							thisProduct.ColourRGB = ListOfProductRows[j]
-								.FindElement(By.XPath(".//td[" + (i + addIndex) + "]")).GetCssValue("Color");
+							}
+							catch (Exception e)
+							{
+								Report.Info("There was a problem with getting status colour: " + e.Message);
+							}
+
 							break;
 						case "Original Submission":
-							string pOS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							string pOS = rowValues[i].Trim();
 							if (pOS.Length > 0)
 							{
 								thisProduct.OriginalSubmission = Convert.ToDateTime(pOS);
@@ -510,8 +572,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 							break;
 						case "Current Submission":
-							string pCS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							string pCS = rowValues[i].Trim();
 							if (pCS.Length > 0)
 							{
 								thisProduct.CurrentSubmission = Convert.ToDateTime(pCS);
@@ -519,8 +580,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 							break;
 						case "Last ActivityDate":
-							string pAD = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							string pAD = rowValues[i].Trim();
 							if (pAD.Length > 0)
 							{
 								thisProduct.LastActivityDate = Convert.ToDateTime(pAD);
@@ -528,8 +588,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 							break;
 						case "Due Date":
-							string pDD = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							string pDD = rowValues[i].Trim();
 							if (pDD.Length > 0)
 							{
 								thisProduct.DueDate = Convert.ToDateTime(pDD);
@@ -537,36 +596,28 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 							break;
 						case "Reviewer":
-							thisProduct.Reviewer = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							thisProduct.Reviewer = rowValues[i].Trim();
 							break;
 						case "SDS":
-							thisProduct.SDS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-												  .GetValue().Trim() == "Yes";
+							thisProduct.SDS = rowValues[i].Trim() == "Yes";
 							break;
 						case "Canada SDS":
-							thisProduct.CanadaSDS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-														.GetValue().Trim() == "Yes";
+							thisProduct.CanadaSDS = rowValues[i].Trim() == "Yes";
 							break;
 						case "Clients":
-							thisProduct.Clients = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							thisProduct.Clients = rowValues[i].Trim();
 							break;
 						case "T. Reg":
-							thisProduct.TReg = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-												   .GetValue().Trim() == "Yes";
+							thisProduct.TReg = rowValues[i].Trim() == "Yes";
 							break;
 						case "Last Pub Date":
-							thisProduct.LastPubDate = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							thisProduct.LastPubDate = rowValues[i].Trim();
 							break;
 						case "GHS":
-							thisProduct.GHS = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-								.GetValue().Trim();
+							thisProduct.GHS = rowValues[i].Trim();
 							break;
 						case "Refeed":
-							thisProduct.Refeed = ListOfProductRows[j].FindElement(By.XPath(".//td[" + (i + addIndex) + "]"))
-													 .GetValue().Trim() == "Yes";
+							thisProduct.Refeed = rowValues[i].Trim() == "Yes";
 							break;
 						default:
 							//ignore this column, either empty or not of interest
@@ -1108,8 +1159,56 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return enterField.Checked() == check;
 		}
 
+		public bool SelectFromRecommendedUseFilter(string option)
+		{
+			try
+			{
+				var recUseSelect = containerElement.FindElement(By.XPath(".//select[@id='searchru']"));
+				recUseSelect.Select(option);
+				return recUseSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
 
+		}
 
+		public bool SelectFromFlashPointRangeFilter(string option)
+		{
+			try
+			{
+				var flashPtSelect = containerElement.FindElement(By.XPath(".//select[@id='searchfp']"));
+				flashPtSelect.Select(option);
+				return flashPtSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
+
+		public bool SelectFromPHRangeFilter(string option)
+		{
+			try
+			{
+				var phSelect = containerElement.FindElement(By.XPath(".//select[@id='searchph']"));
+				phSelect.Select(option);
+				return phSelect.SelectedOption() == option;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
+		public bool EnterUNNumber(string unNumber)
+		{
+			var enterField = containerElement.FindElement(By.XPath(".//input[@id='txtUNNumber']"));
+			enterField.EnterText(unNumber);
+			return (enterField.GetValue() == unNumber);
+		}
 
 		public bool ClickButton(string button)
 		{
@@ -1610,6 +1709,48 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	}
 
+	class StudioSHAManagerProductUPC : BaseObject
+	{
+		public const string BasePath = "//h3[contains(text(),'SHA Manager Product UPC')]";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load(int secondsToWait)
+		{
+			// Switch to window
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			Report.Info("Looking for SHA Manager Product UPC window");
+			bool foundWindow = false;
+			foreach (var handle in allHandles)
+			{
+				Report.Info("Checking handle: " + handle);
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+				{
+					Report.Success("Tab was switched successfully!");
+					Report.Screenshot();
+					foundWindow = true;
+					break;
+				}
+			}
+			if (!foundWindow)
+			{
+				Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+				Report.Screenshot();
+			}
+			return base.Wait_for_load(30);
+
+
+		}
+
+	}
+
+
+
+
 
 	class Product
 	{
@@ -1634,6 +1775,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Active { get; set; }
 		public DateTime RecertificationDate { get; set; }
 		public string RecertificationReason { get; set; }
+
+		public string Distributor { get; set; }
 
 	}
 

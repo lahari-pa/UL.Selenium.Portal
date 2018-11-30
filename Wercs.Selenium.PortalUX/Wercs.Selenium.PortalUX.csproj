@@ -147,12 +147,19 @@
   <ItemGroup>
     <Compile Include="Classes\Mailosaur.cs" />
     <Compile Include="Classes\User.cs" />
+    <Compile Include="Database Functions\dbRetailers.cs" />
+    <Compile Include="Database Functions\dbUtils.cs" />
     <Compile Include="Features\AdditionalProductInformation.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AdditionalProductInformation.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\BulkActions.feature.cs">
+    <Compile Include="Features\Canadian Tire - Blue Box Program\Forwarding\AccountHasStewardship.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountHasStewardship.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Home page\BulkActions.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BulkActions.feature</DependentUpon>
@@ -427,6 +434,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RegulatoryInformation3.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\SHA Manager\Home Page\SHAManagerHomePage.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SHAManagerHomePage.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\SHA Manager\Home Page\Suspended.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -461,6 +473,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Security Roles.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\SHA Manager\LowerOptions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LowerOptions.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Signup1.feature.cs">
       <AutoGen>True</AutoGen>
@@ -628,7 +645,11 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AdditionalProductInformation.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\BulkActions.feature">
+    <None Include="Features\Canadian Tire - Blue Box Program\Forwarding\AccountHasStewardship.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AccountHasStewardship.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Home page\BulkActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>BulkActions.feature.cs</LastGenOutput>
     </None>
@@ -848,6 +869,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>RegulatoryInformation3.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\SHA Manager\Home Page\SHAManagerHomePage.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SHAManagerHomePage.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\SHA Manager\Home Page\Suspended.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Suspended.feature.cs</LastGenOutput>
@@ -875,6 +900,10 @@
     <None Include="Features\Security Roles.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Security Roles.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\SHA Manager\LowerOptions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>LowerOptions.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Signup.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

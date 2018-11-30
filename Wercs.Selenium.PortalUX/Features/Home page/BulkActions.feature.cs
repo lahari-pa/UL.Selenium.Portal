@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Wercs.Selenium.PortalUX.Features
+namespace Wercs.Selenium.PortalUX.Features.HomePage
 {
     using TechTalk.SpecFlow;
     
@@ -79,7 +79,7 @@ namespace Wercs.Selenium.PortalUX.Features
             if (((testRunner.FeatureContext != null) 
                         && (testRunner.FeatureContext.FeatureInfo.Title != "BulkActions")))
             {
-                global::Wercs.Selenium.PortalUX.Features.BulkActionsFeature.FeatureSetup(null);
+                global::Wercs.Selenium.PortalUX.Features.HomePage.BulkActionsFeature.FeatureSetup(null);
             }
         }
         

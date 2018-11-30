@@ -213,14 +213,50 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 30)
 		{
-			//get the window
-			StudioUtilites.SwitchToWindow("Wercs Studio");
-			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			IWebElement frame =
-				SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'workspaceDesignMode')]"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-			return base.Wait_for_load(30);
+			try
+			{
+				//get the window
+				StudioUtilites.SwitchToWindow("Wercs Studio");
+				SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+				IWebElement frame =
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'workspaceDesignMode')]"));
+				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				return base.Wait_for_load(30);
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+
+		}
+
+		public bool QuickSearchExists()
+		{
+			try
+			{
+				var input = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='ucSelectProdselectProdTB']"), 2);
+				if (input != null)
+				{
+					return input.Displayed;
+				}
+
+				return false;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+			
+		}
+
+		public void QuickSearch(string id)
+		{
+			var input = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='ucSelectProdselectProdTB']"),2);
+			input.EnterText(id);
+			input.SendKeys(Keys.Return);
+			Delay.Seconds(5);
 		}
 
 
@@ -699,7 +735,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool DoubleClickCategoryToEdit(string category)
 		{
-			var listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='divDocument']//table//span"), 2);
+			var listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '"+category+"')]//span"),30);
 			var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
 			var matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
 			if (matchingCategory == null)
@@ -729,6 +765,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 			return false;
+		}
+
+		public string getCategoryValue(string category)
+		{
+			var listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
+			var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
+			var matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
+			if (matchingCategory == null)
+			{
+				Report.Info("Category was not found");
+				return null;
+			}
+			Actions action = new Actions(SeleniumBrowser.WebBrowser);
+			action.MoveToElement(matchingCategory).Build().Perform();
+			matchingCategory.TryClick();
+			Delay.Seconds(1);
+			//nb, double click does not work so using 2 clicks
+
+			matchingCategory.Click();
+			matchingCategory.Click();
+			Delay.Seconds(5);
+			Report.Screenshot();
+			ValueEditor thisValueEditor = new ValueEditor();
+			return thisValueEditor.GetSelectedValue();
+
 		}
 	}
 
@@ -3298,6 +3359,58 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			input.EnterText(filter);
 			Delay.Seconds(3);
 			return input.GetValue() == filter;
+		}
+	}
+
+	class ValueEditor : BaseObject
+	{
+		public const string BasePath = "//div[@id='koPopup']";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load(int secondsToWait = 60)
+		{
+			for (int i = 0; i < secondsToWait; i++)
+			{
+				var popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				if (popupEditor != null)
+				{
+					return true;
+				}
+				Delay.Seconds(1);
+			}
+			return false;
+
+		}
+
+		//Save, Clear, Cancel, Previous, Next
+		public bool ClickButton(string button)
+		{
+			var varButtons = containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
+			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
+			if (matchingButton == null)
+			{
+				Report.Info("Failed to find button: " + button);
+				return false;
+			}
+
+			return matchingButton.TryClick();
+		}
+
+		public string GetSelectedValue()
+		{
+			Report.Info("Beginning get selected value");
+			var oldValue = containerElement.FindElement(By.XPath(".//textarea[@id='oldValue']"), 2);
+			if (oldValue == null)
+			{
+				Report.Info("Value item was not found.");
+				return "";
+			}
+			else
+			{
+				return oldValue.GetValue();
+			}
 		}
 	}
 

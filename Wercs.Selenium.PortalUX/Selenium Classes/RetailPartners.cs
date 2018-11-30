@@ -343,6 +343,35 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(".//table[./thead/tr/th[text()='Data Consent Tiers']]"), 2);
 		}
+
+		public List<Supplier> GetAllSuppliers()
+		{
+			List<Supplier> supplierList = new List<Supplier>();
+			var supplierTable = containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2);
+			if (supplierTable == null)
+			{
+				Report.Info("Supplier table has not been found or is empty");
+				return supplierList;
+			}
+
+			var supplierRows = supplierTable.FindElements(By.XPath(".//tbody/tr"));
+
+			foreach (var thisRow in supplierRows)
+			{
+				Supplier newSupplier = new Supplier();
+				newSupplier.SupplierID = thisRow.FindElement(By.XPath(".//td[1]"), 2).GetValue();
+				newSupplier.CompanyOrBrandName = thisRow.FindElement(By.XPath(".//td[2]"), 2).GetValue();
+				newSupplier.IsActive = thisRow.FindElement(By.XPath(".//td[3]/i"), 2).GetAttribute("class")
+					.Contains("success");
+				newSupplier.IsDefault  = thisRow.FindElement(By.XPath(".//td[4]/i"), 2).GetAttribute("class")
+					.Contains("success");
+
+				supplierList.Add(newSupplier);
+
+			}
+
+			return supplierList;
+		}
 	}
 
 	public class DataEntryNotification : BaseObject
@@ -457,6 +486,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).TryClick();
 		}
 
+	}
+
+	public class Supplier
+	{
+		public string SupplierID { get; set; }
+		public string CompanyOrBrandName { get; set; }
+		public bool IsActive { get; set; }
+		public bool IsDefault { get; set; }
 	}
 
 }

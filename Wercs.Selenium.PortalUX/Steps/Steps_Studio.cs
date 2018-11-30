@@ -906,6 +906,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In Power Designer I double click on category: (.*)")]
 		public void GivenInPowerDesignerIDoubleClickOnCategory(string category)
 		{
+			Report.Info("Beginning double click on category to edit: " + category);
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(selStudioPowerDesignerPlus.DoubleClickCategoryToEdit(category),
 				"Failed to double click category: " + category,
@@ -1014,6 +1015,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Clicked button: " + button);
 		}
 
+		
+		
 		[Given(@"I click on home to navigate back to editing specific product saved as (.*)")]
 		public void GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(string savedAs)
 		{

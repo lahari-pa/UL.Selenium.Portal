@@ -1251,6 +1251,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return 1;
 		}
+
+		public PackagingTypeItem GetRandomPackagingTypeInGrid()
+		{
+			var rows = containerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']/tr"), 2);
+
+			if (rows.Count == 0)
+			{
+				return null;
+			}
+			Random r = new Random();
+			int rInt = r.Next(1, rows.Count+1); //for ints
+			var thisID = rows[rInt-1].FindElement(By.XPath("./td/div/small"), 2).Text;
+			var thisName = rows[rInt - 1].FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
+
+			PackagingTypeItem thisItem = new PackagingTypeItem();
+			thisItem.ID = thisID;
+			thisItem.Name = thisName;
+			return thisItem;
+		}
 		public class PackagingTypeItem
 		{
 			public string ID { get; set; }

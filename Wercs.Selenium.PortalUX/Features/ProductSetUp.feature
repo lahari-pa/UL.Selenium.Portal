@@ -709,3 +709,53 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 #Given I navigate to the landing page
 #And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80821
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
+
+Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product  - submit thru to Completed status
+Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I In the shared step below select Chalk as your product type
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): (.*)
+And I Make a note of the WPS ID shown at the top of the screen
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And [Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue]
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: (.*)
+And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+And I In the shared step below  be sure to select Canadian Tire as the retailer
+And [Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue]
+And [Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue]
+And [Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both]
+And I The Additional documents to provide step is shown
+And I Click Continue
+And I The Optional Reports and Documents Available for Purchase step is shown
+And I Click Continue
+And [Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path]
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Requires Table |
+| Parameters     |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: (.*)
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And I The Purchase summary page shows with you product details shown.  Confirm you see entries for your product for Chemical assessment, SDS authoring North American Combined GHS SDS ENGLISH (USA), Additional document Canada GHS SDS ENGLISH (USA) Additional document language Canada GHS SDS FRENCH (CANADA)
+And I Click Confirm Order
+And I Click Home
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I In the shared step below filter for your product
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm your product is shown in the Submitted status.Note this may take a few minutes for the Zuora process to process your product, if it is not shown in Submitted wait a minute or two and re-search for your product
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: (.*))
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm the product is shown in the Assigned status
+And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: (.*))
+And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: (.*))
+And [Shared Step 78877 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT, NGHS, HSGH (EN and CF) and SBCS]
+And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*))
+And I IN SHA Manager - use the step below to search for your product
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm the product is shown in Accepted or Completed status depending in the retailers selected
+And I If any retailer is shown in accepted status use the shared step below to set all to Completed
+And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: (.*))

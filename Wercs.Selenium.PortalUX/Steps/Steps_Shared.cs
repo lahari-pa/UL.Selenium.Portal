@@ -10,6 +10,7 @@ using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using Wercs.Selenium.PortalUX.Database_Functions;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using WERCSmart;
 
@@ -887,6 +888,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 								 table.Rows[0]["Odor Threshold"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(
 				table.Rows[0]["Odor Threshold"]);
+			Delay.Seconds(1);
 			TestReport.StartStep(
 				"In the Review and Submit tab of the New Product Page for Partition Coefficient I enter: " +
 				table.Rows[0]["Partition Coefficient"]);
@@ -917,8 +919,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "20.1C (68.1F) - 35C (95F)");
 			TestReport.StartStep("I check the 'I do not have exact' checkbox for field: Flash Point (in Celsius)");
 			MyNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			TestReport.StartStep("I set the Flash Point (in Celsius) field to: >=93C and <=815C");
-			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=93C and <=815C");
+			TestReport.StartStep("I set the Flash Point (in Celsius) field to: >=23C and <38C");
+			MyNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", ">=93C and <815C");
 			TestReport.StartStep("I set the Flash Point Testing Method Used option to: Closed cup method");
 			MyNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			TestReport.StartStep("I set the Select the best Water Solubility description field to: 100g/100ml");
@@ -4130,12 +4132,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var id = productDetails.Id;
 			thisPowerDesignerPlus.EnterSourceProduct(id);
 			thisPowerDesignerPlus.ClickRefreshButton();
-			Delay.Seconds(1);
+			Delay.Seconds(3);
 
 			Report.Info("Found label: " + thisPowerDesignerPlus.GetSourceProductName());
 			TestReport.StartStep("I click Continue");
 			Report.IsTrue(thisPowerDesignerPlus.ClickContinueButton(), "Failed to click continue button",
 				"Clicked continue button");
+			Delay.Seconds(3);
 		}
 
 		[StepDefinition(@"I call Shared Step 78801 \(Additional Documents to Provide - VOC and Product Label\)")]
@@ -5818,5 +5821,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber));
 			Context.AddToContext(savedAs, ingredient);
 		}
+
+		[StepDefinition(@"I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: (.*) and Supplier: (.*)")]
+		public void ThenICallSharedStep_DatabaseCheck_FindT_VendorRecordsForSpecificSupplierAndRetailer(string retailer, string supplier)
+		{
+			if (supplier == "Products Automation Account")
+			{
+				var user = TReVor.TestUsers.GetUserSavedAs("ProductAccount");
+				supplier = user.Username;
+			}
+
+			string retailerGUID = dbRetailers.getGUIDByRetailer(retailer);
+			string supplierGUID = dbRetailers.getSupplierGUIDByUsername(supplier);
+		}
+
+		[StepDefinition(@"I call Shared Step 62676 - Go to My Account")]
+		public void GivenICallSharedStep_GoToMyAccount()
+		{
+
+
+		}
+
+
 	}
 }

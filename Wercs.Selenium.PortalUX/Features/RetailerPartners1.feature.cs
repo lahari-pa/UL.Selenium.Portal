@@ -900,6 +900,103 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[57261] Retailer Detail Page (O\'Reilly) - Your Supplier ID - Add New Supplier ID " +
+            "- Save  - DB validation is only for local")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Retailer Partners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_RetailerPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("TFS_design")]
+        public virtual void _57261RetailerDetailPageOReilly_YourSupplierID_AddNewSupplierID_Save_DBValidationIsOnlyForLocal()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57261] Retailer Detail Page (O\'Reilly) - Your Supplier ID - Add New Supplier ID " +
+                    "- Save  - DB validation is only for local", new string[] {
+                        "TFS_design"});
+#line 285
+this.ScenarioSetup(scenarioInfo);
+#line 286
+testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 287
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 288
+testRunner.And("I select the retailer: O\'Reilly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 289
+testRunner.And("I confirm the Retailer Details Page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 290
+testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 291
+testRunner.And("The Supplier ID Table should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 292
+testRunner.Given("I click on the Add new Supplier ID link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 293
+testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 294
+testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID que" +
+                    "stion: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 295
+testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Na" +
+                    "me question: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 296
+testRunner.And("in the Add New Supplier Dialog I enter the following in the Supplier ID input: ab" +
+                    "c", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 297
+testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 298
+testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID que" +
+                    "stion: You must enter valid O\'Reilly Vendor id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 299
+testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Na" +
+                    "me question: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 300
+testRunner.And("in the Add New Supplier Dialog I enter the following in the Company or Brand Name" +
+                    " input: Automated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 301
+testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 302
+testRunner.And("in the Add New Supplier Dialog I Confirm that no error shows below Company or Bra" +
+                    "nd Name question", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 303
+testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID que" +
+                    "stion: You must enter valid O\'Reilly Vendor id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 304
+testRunner.And("in the Add New Supplier Dialog I enter the following in the Supplier ID input: 12" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 305
+testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 306
+testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID que" +
+                    "stion: You must enter valid O\'Reilly Vendor id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 307
+testRunner.And("in the Add New Supplier Dialog I enter the following in the Supplier ID input: 65" +
+                    "4327", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 308
+testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Supplier ID",
+                        "Company or Brand Name"});
+            table8.AddRow(new string[] {
+                        "654327",
+                        "Automated"});
+#line 309
+testRunner.Then("I confirm that in the Supplier IDS list the following row exists", ((string)(null)), table8, "Then ");
+#line 312
+testRunner.And("I call Shared Step 57247 - Database check - find t_vendor records for specific Re" +
+                    "tailer: Reilly and Supplier: Products Automation Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 313
+testRunner.And("I Confirm the Supplier ID you added is shown in the result for the query on the t" +
+                    "_vendor table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 314
+testRunner.And("[Shared Step 58828 - Delete Supplier ID]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
