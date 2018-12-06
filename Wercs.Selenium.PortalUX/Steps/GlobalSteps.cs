@@ -958,5 +958,12 @@ namespace WERCSmart
 			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 		}
 
+		[Given(@"I save to context name: (.*) and string value: (.*)")]
+		public void GivenISaveToContextNameAndStringValue(string name, string value)
+		{
+			
+			Context.AddToContext(name, value);
+		}
+
 	}
 }

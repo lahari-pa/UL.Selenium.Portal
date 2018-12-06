@@ -452,7 +452,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Match match = regex.Match(pageCount.GetValue());
 			if (match.Success)
 			{
-				return Convert.ToInt16(match.Value);
+				return Convert.ToInt16(match.Value.Replace("of ",""));
 			}
 			else
 			{
@@ -478,7 +478,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
 			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList();
 
-			for (int index = 0; index < ListOfHeaders.Count; index++)
+			for (int index = 1; index < ListOfHeaders.Count; index++)
 			{
 				bool nullOrEmpty = string.IsNullOrEmpty(ListOfHeaders[index]);
 				if (nullOrEmpty)
@@ -491,7 +491,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			List<Product> ListOfProducts = new List<Product>();
 			//get all columns
 			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
-			for (int j =1; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
+			for (int j =0; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
 			{
 				List<string> rowValues = new List<string>();
 				//Report.Info("Looking at row: " + j.ToString());

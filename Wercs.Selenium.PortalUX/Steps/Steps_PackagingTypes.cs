@@ -176,11 +176,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			SavePackagingTypeDetails(saveAs);
 			ClickAddRowBillOfMaterials();
 			SelectOptionForFieldInTable(table.Rows[0]["Materials"], "My Packaging Materials");
-			SelectOptionForFieldInTable(table.Rows[0]["Weight"], "My Packaging Weight(grams)");
+			SelectOptionForFieldInTable(table.Rows[0]["Weight"], "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
 			newProductSteps.SetTheSectionOptionTo("Does your container or any", table.Rows[0]["Contact with food or drink"]);
-			newProductSteps.SetTheSectionOptionTo("Does you have a CONEG", table.Rows[0]["CONEG Certificate"]);
+			newProductSteps.SetTheSectionOptionTo("Do you have a CONEG", table.Rows[0]["CONEG Certificate"]);
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
 			newProductSteps.SetTheSectionOptionTo("Does your container contain the following", table.Rows[0]["CONEG contain"]);

@@ -337,11 +337,9 @@ testRunner.And("I navigate to the My Packaging Types tab in the My Library page"
 #line 100
 testRunner.And("Save the top packaging id as MPI75034 if there are no packacking types listed add" +
                     " a new packing type as follows", ((string)(null)), table10, "And ");
-#line 103
+#line 106
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
-testRunner.And("In SHA Manager I set the filter for status to : All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 105
+#line 107
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -351,11 +349,11 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
                         "Status",
                         "All"});
             table11.AddRow(new string[] {
-                        "Product id",
+                        "ProductID",
                         "savedas PackagingTypeID_MPI75034"});
-#line 106
+#line 108
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table11, "And ");
-#line 110
+#line 112
 testRunner.And("In SHA Manager 1 record is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -368,9 +366,9 @@ testRunner.And("In SHA Manager 1 record is found", ((string)(null)), ((TechTalk.
                         "Name",
                         "savedas PackagingTypeName_MPI75034"});
             table12.AddRow(new string[] {
-                        "Distrbutor",
+                        "Distributor",
                         "P"});
-#line 111
+#line 113
 testRunner.And("In SHA Manager for the top record the values are as follows", ((string)(null)), table12, "And ");
 #line hidden
             this.ScenarioCleanup();

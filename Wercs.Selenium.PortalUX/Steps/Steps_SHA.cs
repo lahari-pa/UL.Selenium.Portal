@@ -175,7 +175,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 						string prodID = x.Values.ElementAt(i);
 						if (prodID.ToLower().Contains("savedas"))
 						{
-							prodID = Context.GetFromContext(prodID.Replace("savedas", "")).ToString().Trim();
+							string savedAsText = prodID.Replace("savedas", "").Trim();
+							prodID = Context.GetFromContext(savedAsText).ToString().Trim();
 						}
 
 						Report.IsTrue(thisProductSearch.EnterProductID(prodID),
@@ -1314,32 +1315,60 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		//| SearchTerm | SearchValue                        |
+		//| Product    | savedas PackagingTypeID_MPI75034   |
+		//| Name       | savedas PackagingTypeName_MPI75034 |
+		//| Distrbutor | P                                  |
 		[StepDefinition(@"In SHA Manager for the top record the values are as follows")]
 		public void GivenInSHAManagerForTheTopRecordTheValuesAreAsFollows(Table table)
 		{
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			Product myProduct = myStudioShaManager.GetTopXProducts(1).FirstOrDefault();
 			var x = table.Rows.ToDictionary(r => r[0], r => r[1]);
+			Report.Info("Checking " + x.Count + " attributes");
 			for (int i = 0; i < x.Count; i++)
 			{
+				Report.Info("Checking: " + x.Keys.ElementAt(i));
 				Delay.Seconds(1);
+				string expectedValue = "";
 				switch (x.Keys.ElementAt(i))
 				{
 					case "Product":
-						Report.IsTrue(myProduct.ID == x.Values.ElementAt(i),
-							"Product id was not as expected",
-							"Product id was as expected");
+						if (x.Values.ElementAt(i).ToLower().Contains("savedas"))
+						{
+							expectedValue = Context.GetFromContext(x.Values.ElementAt(i)
+								.Replace("savedas", "", StringComparison.OrdinalIgnoreCase).Trim()).ToString();
+						}
+						else
+						{
+							expectedValue = x.Values.ElementAt(i);
+						}
+						Report.IsTrue(myProduct.ID == expectedValue,
+							"Product id was not as expected. Expected " + expectedValue + " but got: " + myProduct.ID,
+							"Product id was as expected: " + expectedValue);
 						break;
 					case "Name":
-						Report.IsTrue(myProduct.Name == x.Values.ElementAt(i),
-							"Product name was not as expected",
-							"Product name was as expected");
+						if (x.Values.ElementAt(i).ToLower().Contains("savedas"))
+						{
+							expectedValue = Context.GetFromContext(x.Values.ElementAt(i)
+								.Replace("savedas", "", StringComparison.OrdinalIgnoreCase).Trim()).ToString();
+						}
+						else
+						{
+							expectedValue = x.Values.ElementAt(i);
+						}
+						Report.IsTrue(myProduct.Name == expectedValue,
+							"Product name was not as expected. Expected " + expectedValue + " but got: " + myProduct.Name,
+							"Product name was as expected " + expectedValue);
 						break;
 					case "Distributor":
 						Report.IsTrue(myProduct.Distributor == x.Values.ElementAt(i),
-							"Product distributor was not as expected",
-							"Product distributor was as expected");
+							"Product distributor was not as expected. Expected: " + x.Values.ElementAt(i) + " but got: " + myProduct.Distributor,
+							"Product distributor was as expected: " + x.Values.ElementAt(i));
 						break;
+
+					default:
+						throw new Exception("Looking for attribute that does not exist...");
 				}
 			}
 		}

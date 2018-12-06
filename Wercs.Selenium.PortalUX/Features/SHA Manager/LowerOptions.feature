@@ -100,17 +100,19 @@ And I navigate to the My Packaging Types tab in the My Library page
 And Save the top packaging id as MPI75034 if there are no packacking types listed add a new packing type as follows
 | Name | Materials   | Weight | Contact with food or drink | CONEG Certificate | CONEG contain     | Recyclable Number | Email         |
 | test | Clear Glass | 60     | No                         | No                | None of the above | 2                 | test@test.com |
+
+#Scenario: Test
+#Given I save to context name: PackagingTypeID_MPI75034 and string value: 1525307
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-And In SHA Manager I set the filter for status to : All
 And In SHA Manager I click on bottom menu item: Search
 And In SHA Manager ProductSearch page I run search:
 | SearchTerm | SearchValue                      |
 | Status     | All                              |
-| Product id | savedas PackagingTypeID_MPI75034 |
+| ProductID  | savedas PackagingTypeID_MPI75034 |
 And In SHA Manager 1 record is found
 And In SHA Manager for the top record the values are as follows
-| SearchTerm | SearchValue                        |
-| Product    | savedas PackagingTypeID_MPI75034   |
-| Name       | savedas PackagingTypeName_MPI75034 |
-| Distrbutor | P                                  |
+| SearchTerm  | SearchValue                        |
+| Product     | savedas PackagingTypeID_MPI75034   |
+| Name        | savedas PackagingTypeName_MPI75034 |
+| Distributor | P                                  |
 
