@@ -667,7 +667,8 @@ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO N
                         "Public Name",
                         "select"});
 #line 262
-testRunner.Given("In the ingredients table the following column titles and inputs are showing", ((string)(null)), table14, "Given ");
+testRunner.Given("I confirm the following column titles and inputs are displayed in the ingredients" +
+                    " table", ((string)(null)), table14, "Given ");
 #line 269
 testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 271
@@ -1176,8 +1177,8 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[87301] Ingredients - - Selecting a Public Label Name Automatically Initiates Pub" +
-            "licly Disclosed Indicator")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[87301] Ingredients - Selecting a Public Label Name Automatically Initiates Publi" +
+            "cly Disclosed Indicator")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
@@ -1190,10 +1191,10 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
-        public virtual void _87301Ingredients__SelectingAPublicLabelNameAutomaticallyInitiatesPubliclyDisclosedIndicator()
+        public virtual void _87301Ingredients_SelectingAPublicLabelNameAutomaticallyInitiatesPubliclyDisclosedIndicator()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[87301] Ingredients - - Selecting a Public Label Name Automatically Initiates Pub" +
-                    "licly Disclosed Indicator", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[87301] Ingredients - Selecting a Public Label Name Automatically Initiates Publi" +
+                    "cly Disclosed Indicator", ((string[])(null)));
 #line 508
 this.ScenarioSetup(scenarioInfo);
 #line 509
@@ -1247,7 +1248,7 @@ testRunner.And("In the Ingredients page I confirm the Publicly Disclosed checkbo
 #line 519
 testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table23, "Given ");
 #line 522
-testRunner.And("In the Ingredients Page I select the Trade Secret checkbox for ingredient: Water", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Trade Secret checkbox for ingredient: Water", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 523
 testRunner.Then("for ingredient: Water the Public Name field is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 524
@@ -1271,8 +1272,7 @@ testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO N
 testRunner.And("In the Ingredients Page I select the first Public Name dropdown option for ingred" +
                     "ient: Boric acid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 529
-testRunner.And("In the Ingredients Page I select the Trade Secret checkbox for ingredient: Boric " +
-                    "acid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Trade Secret checkbox for ingredient: Boric acid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 530
 testRunner.Then("for ingredient: Boric acid the Public Name field is disabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 531
@@ -1282,6 +1282,183 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
 #line 533
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase87301", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[84528] Ingredients - Allow to delete multiple ingredients in formulation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("jamesnew")]
+        public virtual void _84528Ingredients_AllowToDeleteMultipleIngredientsInFormulation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[84528] Ingredients - Allow to delete multiple ingredients in formulation", new string[] {
+                        "jamesnew"});
+#line 540
+this.ScenarioSetup(scenarioInfo);
+#line 541
+testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 542
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 543
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Soap (Bar, Liquid) for Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 544
+testRunner.And("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
+                    "Solid - State&Subcat - Mixed&Water -random - Continue - HP)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 545
+testRunner.And("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table25.AddRow(new string[] {
+                        "Boric acid",
+                        "10",
+                        "false",
+                        "false",
+                        ""});
+#line 548
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table25, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table26.AddRow(new string[] {
+                        "Sodium hydroxide",
+                        "10",
+                        "false",
+                        "false",
+                        ""});
+#line 551
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table26, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table27.AddRow(new string[] {
+                        "Dye X",
+                        "10",
+                        "false",
+                        "false",
+                        ""});
+#line 554
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table27, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table28.AddRow(new string[] {
+                        "Sodium chloride",
+                        "10",
+                        "false",
+                        "false",
+                        ""});
+#line 557
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table28, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table29.AddRow(new string[] {
+                        "Potassium sulfate",
+                        "10",
+                        "false",
+                        "false",
+                        ""});
+#line 560
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table29, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table30.AddRow(new string[] {
+                        "Water",
+                        "50",
+                        "false",
+                        "false",
+                        ""});
+#line 563
+testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table30, "Given ");
+#line 566
+testRunner.And("I click \'Select all\' in the Ingredients table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 567
+testRunner.And("I confirm that all ingredients in the table are selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 568
+testRunner.And("I confirm the \'Delete\' button is available in the Ingredients table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name"});
+            table31.AddRow(new string[] {
+                        "Water"});
+            table31.AddRow(new string[] {
+                        "Sodium chloride"});
+            table31.AddRow(new string[] {
+                        "Boric acid"});
+#line 569
+testRunner.And("I deselect the following ingredients:", ((string)(null)), table31, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name"});
+            table32.AddRow(new string[] {
+                        "Water"});
+            table32.AddRow(new string[] {
+                        "Sodium chloride"});
+            table32.AddRow(new string[] {
+                        "Boric acid"});
+#line 574
+testRunner.And("I confirm the following ingredients are unselected:", ((string)(null)), table32, "And ");
+#line 579
+testRunner.And("I confirm the \'Select all\' checkbox in the Ingredients table is unchecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 580
+testRunner.And("I click \'Select all\' in the Ingredients table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 581
+testRunner.And("I confirm that all ingredients in the table are selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 582
+testRunner.And("I click the \'Delete\' button in the Ingredients table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 583
+testRunner.And("I confirm the \'Remove selected components\' popup is displayed with message: Are y" +
+                    "ou sure you want to remove all selected components?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 584
+testRunner.And("in the modal dialog I click the \"Yes\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 585
+testRunner.And("I confirm there are a total of: 0 ingredients in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 586
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 587
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase84528", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

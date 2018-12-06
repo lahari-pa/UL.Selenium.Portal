@@ -3759,8 +3759,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-
-
 		public bool SectionExists(string section)
 		{
 			var xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" +
@@ -4486,33 +4484,41 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return rows.Count;
 		}
 
-		public bool ClickIngredientTradeSecretCheckbox(string chemicalName)
+		public bool ClickIngredientCheckbox(string input, string chemicalName)
 		{
-			var tradeSecretInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
-			if (tradeSecretInput == null)
+			var xPath = "";
+			switch (input.ToLower())
 			{
-				Report.Failure("Could not find the Trade Secret checkbox");
+				case "publicly disclosed":
+					xPath = ".//input[@class='public_disclosure']";
+					break;
+				case "trade secret":
+					xPath = ".//input[@class='trade_secret']";
+					break;
+				default:
+					Report.Info("invalid 'input' parameter was used. Valid inputs: 'Publicly Disclosed' or 'Trade Secret'");
+					return false;
+			}
+			var inputEl = this.IngredientRow(chemicalName)?.FindElement(By.XPath(xPath));
+			if (inputEl == null)
+			{
+				Report.Failure("Could not find the checkbox for input: " + input);
 				Report.Screenshot();
 				return false;
 			}
-			var ticked = tradeSecretInput.Checked();
-			tradeSecretInput.Click();
-			tradeSecretInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
-			if (tradeSecretInput.Checked() == ticked)
+			var ticked = inputEl.Checked();
+			if (inputEl.TryClick())
 			{
-				Report.Failure("The Trade Secret checkbox was displayed but it was not successfully selected");
-				Report.Screenshot();
-				return false;
+				if (inputEl.Checked() == ticked)
+				{
+					Report.Info($"Clicked the {input} checkbox but it was not successfully set to: {!ticked}");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Info($"The {input} checkbox has been {(ticked ? "unchecked" : "checked")}");
+				return true;
 			}
-			if (ticked == false)
-			{
-				Report.Info("The Trade Secret box has been checked");
-			}
-			else
-			{
-				Report.Info("The Trade Secret box has been unchecked");
-			}
-			return true;
+			return false;
 		}
 
 		public bool SetIngredientPubliclyDisclosed(string chemicalName, bool checked_)
@@ -4565,31 +4571,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		public bool ClickIngredientPubliclyDisclosedCheckbox(string chemicalName)
-		{
-			var publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
-			if (publiclyDisclosedInput == null)
-			{
-				Report.Failure("Could not find the Publicly Disclosed checkbox");
-				Report.Screenshot();
-				return false;
-			}
-			var ticked = publiclyDisclosedInput.Checked();
-			publiclyDisclosedInput.TryClick();
-			if (publiclyDisclosedInput.Checked() == ticked)
-			{
-				Report.Failure("The Publicly Disclosed checkbox was displayed but it was not successfully selected");
-				Report.Screenshot();
-				return false;
-			}
-			if (ticked == false)
-			{
-				Report.Info("The Publicly Disclosed box has been checked");
-				return true;
-			}
-			Report.Info("The Publicly Disclosed box has been unchecked");
-			return true;
-		}
 
 		// Checks the running total of publically disclosed ingredients (eg. "1 / 3")
 		public bool PubliclyDisclosedTotalIsCorrect(string total)
@@ -4686,6 +4667,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 		}
+
 		public List<string> SelectedRetailers()
 		{
 			try
@@ -4742,6 +4724,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return statements.Select(x => x.Text.Trim()).ToList();
 		}
+
 		public List<string> AllAdditionalStatementParagraphs()
 		{
 			var xPath = @".//div[@data-bind='html: field.field' and parent::div[@class='col-sm-12']]/p";
@@ -5078,11 +5061,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				thisIngredient.PublicDisclosureEnabled = thisRow.FindElement(By.XPath(".//td[@class='transparency']//input")).Enabled;
 				thisIngredient.PublicNameEnabled =
 					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select")).Enabled;
-
+				thisIngredient.Selected = thisRow.FindElement(By.XPath("./td[position()=1]/input[@type='checkbox']"), 2).Selected;
 				Ingredients.Add(thisIngredient);
 			}
 
 			return Ingredients;
+		}
+
+		public bool ClickSelectIngredient(string name)
+		{
+			var row = containerElement.FindElement(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[@class='chemical-name' and contains(text(), '" + name + "')]]"), 2);
+			if (row == null)
+			{
+				return false;
+			}
+			return row.FindElement(By.XPath("./td/input[@type='checkbox']"), 2).TryClick();
 		}
 
 		public List<string> GetIngredientPublicNameOptions(string chemicalName)
@@ -5214,6 +5207,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElement(By.XPath(".//div[@class='panel-heading']//h3"), 2).Text;
 		}
+
+		public bool ClickSelectAllIngredients()
+		{
+			return this.containerElement.FindElement(By.XPath(".//th[contains(text(), 'Select All')]/input[@type='checkbox']"), 2).TryClick();
+		}
+
+		public bool SelectAllIngredientsChecked()
+		{
+			return this.containerElement.FindElement(By.XPath(".//th[contains(text(), 'Select All')]/input[@type='checkbox']"), 2).Checked();
+		}
+
+		public bool DeleteIngredientsDisplayed()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//td[@class='remove']/button[contains(text(), 'Delete')]"), 2);
+			return el != null && el.Displayed;
+		}
+		public bool ClickDeleteIngredients()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//td[@class='remove']/button[contains(text(), 'Delete')]"), 2);
+			return el.TryClick();
+		}
 	}
 
 	public class ProductInformation
@@ -5268,6 +5282,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool TradeSecretEnabled { get; set; }
 		public bool PublicDisclosureEnabled { get; set; }
 		public bool PublicNameEnabled { get; set; }
+		public bool Selected { get; set; }
 	}
 
 	public class VocLimits

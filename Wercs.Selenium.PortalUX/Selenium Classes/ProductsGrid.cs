@@ -360,19 +360,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			if (toggleButton.TryClick())
 			{
 				var deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 2);
+				if (deleteButton == null)
+				{
+					Report.Info("Failed to find 'delete' element");
+					return false;
+				}
 				if (deleteButton.TryClick())
 				{
 					var delDialog = new DeleteDialog();
 					delDialog.Wait_for_load();
-					delDialog.ClickDelete();
-					GeneralUtilities.Wait_for_load_finish();
-					row = containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-					return row == null;
+					if (delDialog.ClickDelete())
+					{
+						Report.Info("Clicked 'delete'");
+						GeneralUtilities.Wait_for_load_finish();
+						Report.Info("Checking the products grid is empty");
+						row = containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
+						return row == null;
+					}
+					Report.Info("Failed to click 'Delete' in popup dialog");
+					return false;
 				}
-
+				Report.Info("Failed to click delete button from row actions");
 				return false;
 			}
-
+			Report.Info("Failed to click actions dropdown button");
 			return false;
 		}
 

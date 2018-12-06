@@ -259,7 +259,7 @@ Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Con
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Butane        | 100     | false                | true       |            |
 
-Given In the ingredients table the following column titles and inputs are showing
+Given I confirm the following column titles and inputs are displayed in the ingredients table
 | Column                   | Input    |
 | Percent                  | textbox  |
 | Publicly Disclosed?      | checkbox |
@@ -505,7 +505,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Paulina Mata
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
-Scenario: [87301] Ingredients - - Selecting a Public Label Name Automatically Initiates Publicly Disclosed Indicator
+Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Initiates Publicly Disclosed Indicator
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -519,15 +519,69 @@ And In the Ingredients page I confirm the Publicly Disclosed checkbox is: checke
 Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Water         | 33      | false               | false        |            |
-And In the Ingredients Page I select the Trade Secret checkbox for ingredient: Water
+And I click the Trade Secret checkbox for ingredient: Water
 Then for ingredient: Water the Public Name field is disabled
 Then for ingredient: Water the Publicly Disclosed field is disabled
 Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Boric acid         | 34      | false               | false        |            |
 And In the Ingredients Page I select the first Public Name dropdown option for ingredient: Boric acid
-And In the Ingredients Page I select the Trade Secret checkbox for ingredient: Boric acid
+And I click the Trade Secret checkbox for ingredient: Boric acid
 Then for ingredient: Boric acid the Public Name field is disabled
 Then for ingredient: Boric acid the Publicly Disclosed field is disabled
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87301
+
+# Assigned to Paulina Mata
+# Created by Paulina Mata
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
+@jamesnew
+Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulation
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+#And I Start typing in the component box
+#And I Add as many random ingredients as possible
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Boric acid    | 10      | false               | false       |            |
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Sodium hydroxide | 10      | false               | false       |            |
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Dye X         | 10      | false               | false       |            |
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Sodium chloride | 10      | false               | false       |            |
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Potassium sulfate | 10      | false               | false       |            |
+Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Water         | 50      | false               | false       |            |
+And I click 'Select all' in the Ingredients table
+And I confirm that all ingredients in the table are selected
+And I confirm the 'Delete' button is available in the Ingredients table
+And I deselect the following ingredients:
+| Name  |
+| Water           |
+| Sodium chloride |
+| Boric acid      |
+And I confirm the following ingredients are unselected:
+| Name  |
+| Water           |
+| Sodium chloride |
+| Boric acid      |
+And I confirm the 'Select all' checkbox in the Ingredients table is unchecked
+And I click 'Select all' in the Ingredients table
+And I confirm that all ingredients in the table are selected
+And I click the 'Delete' button in the Ingredients table
+And I confirm the 'Remove selected components' popup is displayed with message: Are you sure you want to remove all selected components?
+And in the modal dialog I click the "Yes" button
+And I confirm there are a total of: 0 ingredients in the table
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase84528

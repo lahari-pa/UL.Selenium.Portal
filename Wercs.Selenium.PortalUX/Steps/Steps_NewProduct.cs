@@ -41,8 +41,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
-
 		[StepDefinition(@"the product saved as: (.*) should be visible in editor")]
 		public void CorrectProductVisibleInEditor(string savedAs)
 		{
@@ -150,7 +148,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Warning message was showing: " + message + ", as expected!");
 		}
 
-
 		[StepDefinition(@"I should see an error message: (.*)")]
 		public void ErrorMessageSpecific(string message)
 		{
@@ -162,6 +159,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Error message was not as expected! Expected: " + message + ", but found: " + found + "!",
 				"Error message was showing: " + message + ", as expected!");
 		}
+
 		[StepDefinition(@"I should not see an error message: (.*)")]
 		public void NotErrorMessageSpecific(string message)
 		{
@@ -212,6 +210,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(label, section, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 
 		}
+
 		[StepDefinition(@"I purchase the following additional documents:")]
 		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
 		{
@@ -347,8 +346,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Retailer is not listed: " + retailer, "Retailer is listed as expected: " + retailer);
 		}
 
-
-
 		[StepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
 		public void ThenISelectTheRetailer_InTheWindow(string retailer)
 		{
@@ -367,14 +364,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
 		}
 
-		[Given(@"In the select retailers window I click cancel")]
+		[StepDefinition(@"In the select retailers window I click cancel")]
 		public void GivenInTheSelectRetailersWindowIClickCancel()
 		{
 			var selectRetailers = new SelectRetailers();
 			selectRetailers.ClickDone();
 		}
 
-		[Given(@"In the select retailers window I click (Done|Close)")]
+		[StepDefinition(@"In the select retailers window I click (Done|Close)")]
 		public void GivenInTheSelectRetailersWindowIClickDone(string toDo)
 		{
 			var selectRetailers = new SelectRetailers();
@@ -425,7 +422,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		/// <summary>
 		/// Select an option for Indicate full name of product, as sold, via this retailer (e.g.Private Label Aspirin) dropdown
 		/// </summary>
-		[Then(@"In the Retailers tab, I enter Private Label name as: (.*)")]
+		[StepDefinition(@"In the Retailers tab, I enter Private Label name as: (.*)")]
 		public void ThenInTheRetailersTabIEnterPrivateLabelNameAs(string option)
 		{
 			Report.IsTrue(new NewProduct().EnterPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
@@ -468,7 +465,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set the first vendor option for retailer: " + retailer);
 		}
 
-
 		[StepDefinition(@"I save the product information as: (.*)")]
 		public void SaveProductInformation(string savedas)
 		{
@@ -478,7 +474,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Success("Product Information saved!");
 		}
 
-		[Given(@"I save the context product information as: (.*) where id is: (.*) and product name is: (.*)")]
+		[StepDefinition(@"I save the context product information as: (.*) where id is: (.*) and product name is: (.*)")]
 		public void GivenISaveTheContextProductInformationAsTestCaseWhereIdIsAndProductNameIsTest(string savedas, string id, string name)
 		{
 			var prodDetails = new ProductInformation() { Id = id, Name = name };
@@ -502,7 +498,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selNewProduct.WaitForSection("Additional Product Information"), "Additional product information is not showing",
 				"The additional product information page is showing as expected");
 		}
-
 
 		[StepDefinition(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Product Name text field")]
 		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheProductNameTextField(string productName)
@@ -643,7 +638,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for U\.S\. Toxic Substances Control Act \(TSCA\) status I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForU_S_ToxicSubstancesControlActTSCAStatusISelectOption(string option)
 		{
@@ -657,7 +651,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to set TSCA status: " + option,
 				"Successfully set TSCA status: " + option);
 		}
-
 
 		[StepDefinition(@"In the Additional Information Page for Product is solely for the Retailer's use I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsSolelyForTheRetailerSUseISelectNoOrYes(string noOrYes)
@@ -723,7 +716,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
 		[StepDefinition(@"In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP; Report is available I select: (No|Yes)")]
 		public void GivenInTheToxicityCharacteristicsLeachingProcedurePageForProductHasHadTclpReportIsAvailableISelect(string noOrYes)
 		{
@@ -748,9 +740,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
-
-
-
 
 		[StepDefinition(@"In the Additional Information Page for Product is retailers private label or brand I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsRetailersPrivateLabelOrBrandISelectNoOrYes(string noOrYes)
@@ -806,7 +795,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
-
 
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: (No|Yes)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForContainsCircuitBoardISelectNoOrYes(string noOrYes)
@@ -960,7 +948,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().ProductIsRegulatedForTransport(selection), "Failed to set the Regulated Transport option to: " + selection, "Successfully set the Regulated Transport to: " + selection);
 		}
 
-
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Select all modes of transport I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForSelectAllModesOfTransportISelect(string selections)
 		{
@@ -991,15 +978,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().PackingGroupSelect(option), "Failed to set the option to be: " + option, "Successfully set option to be: " + option);
 		}
 
-
-
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTExceptionsISelect(string selections)
 		{
 
 			Report.IsTrue(new NewProduct().DotExcemptionIfApplicable(selections), "Failed to set the DOT Excemption option to: " + selections, "Successfully set the Regulated Transport to: " + selections);
 		}
-
 
 		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForInternationalShippingWhenDOTExemptionTakenISelect(string selection)
@@ -1009,7 +993,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selNewProduct.InternationalShippingDOTExemption == selection, "Failed to select: " + selection,
 				"Successfully selected: " + selection);
 		}
-
 
 		[StepDefinition(@"In the New Product page I click tab: (.*)")]
 		public void GivenInTheNewProductPageIClickTab(string tab)
@@ -1038,7 +1021,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selNewProduct.DeleteUPC(upc), "Failed to delete UPC:" + upc, "Successfully deleted: " + upc);
 		}
 
-		[Then(@"In the list of UPCs I should not see UPC: (.*)")]
+		[StepDefinition(@"In the list of UPCs I should not see UPC: (.*)")]
 		public void ThenInTheListOfUPCsIShouldNotSeeUPCSavedAsUPC(string upc)
 		{
 			NewProduct selNewProduct = new NewProduct();
@@ -1081,7 +1064,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
 		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Prop65 I select: (No|Yes)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForPropISelectNoOrYes(string noOrYes)
 		{
@@ -1109,7 +1091,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
-
 
 		/// <summary>
 		/// select product lable option for Refer to your Product Label. From the options, select those that appear on the Label.
@@ -1176,7 +1157,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was showing: " + statement + ", as expected!");
 		}
 
-
 		/// <summary>
 		/// Confirm Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are: statement
 		/// </summary>
@@ -1189,7 +1169,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
 				"statement was showing: " + statement + ", as expected!");
 		}
-
 
 		/// <summary>
 		/// Confirm VOC Analysis Date (Today's Date)
@@ -1226,6 +1205,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was not as expected! Expected: " + statement + ", but found: " + found + "!",
 				"statement was showing: " + statement + ", as expected!");
 		}
+
 		//JS - consolidated HVOC, CARB etc value steps into one because they were calling identical code
 		[StepDefinition(@"I confirm that I see the following (CARB|MVOC|HVOC|VOC Grams Ozone|OTC Model Rule) value: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingCARBValue(string category, string expectedValue)
@@ -1314,7 +1294,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set Product label specifies a dilution ratio to: " + noOrYes);
 		}
 
-
 		/// <summary>
 		/// Enter data in Product's VOC content as sold text box
 		/// </summary>
@@ -1338,9 +1317,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Product type tab is loaded.");
 			selNewProduct.ProductsVocContentAsUsed = contentAsUsed;
 		}
-
-
-
 
 		[StepDefinition(@"In the Additional Information Page for Product is shipped directly I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsShippedDirectlyISelectNoOrYes(string noOrYes)
@@ -1387,7 +1363,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully set product has been classified using OSHA value to: " + noOrYes);
 		}
 
-
 		[StepDefinition(@"In the Additional Information Page the check box for: (.*) should be: (checked|unchecked)")]
 		public void GivenInTheAdditionalInformationPageTheCheckBoxXShouldBeCheckedOrUnchecked(string country, string checkedOrUnchecked)
 		{
@@ -1420,8 +1395,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
-
-
 
 		[StepDefinition(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Type of Product select field")]
 		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(string typeOfProduct)
@@ -1458,22 +1431,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SelectPrimaryPhysicalState(state), "Failed to set the primary physical state to be: " + state, "Successfully set the Primary Physical State to be: " + state);
 		}
 
-
-
 		[StepDefinition(@"I set the Secondary Physical State to be: (.*)")]
 		public void ThenISetTheSecondaryPhysicalStateToBe(string state)
 		{
 			Report.IsTrue(new NewProduct().SelectSecondaryPhysicalState(state), "Failed to set the secondary physical state to be: " + state, "Successfully set the Secondary Physical State to be: " + state);
 		}
 
-		[Then(@"I set the water solubility description to: (.*)")]
+		[StepDefinition(@"I set the water solubility description to: (.*)")]
 		public void ThenISetTheWaterSolubilityDescriptionTo(string description)
 		{
 			NewProduct thisNewProduct = new NewProduct();
 			new NewProduct().WaterSolubility = description;
 			Report.IsTrue(thisNewProduct.WaterSolubility == description, "Failed to set the water solubility description to be: " + description, "Successfully set the water solubility description to be: " + description);
 		}
-
 
 		/// <summary>
 		/// Enter data in Specific Gravity text field
@@ -1592,7 +1562,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-
 		/// <summary>
 		/// Select an option for the best Water Solubility description dropdown
 		/// </summary>
@@ -1602,13 +1571,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SelectBestWaterSolubilityDescription(option), "Failed to set the best Water Solubility description to be: " + option, "Successfully set the best Water Solubility description to be: " + option);
 		}
 
-
-		[Then(@"In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: (.*)")]
+		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: (.*)")]
 		public void ThenInTheProductCharacteristicsTabOfTheNewProductPageForWhenTheProductHasAFlammablePropellantISelect(string option)
 		{
 			Report.IsTrue(new NewProduct().ProductHasFlammablePropellant(option), "Failed to set option to be: " + option, "Successfully set the option to be: " + option);
 		}
-
 
 		/// <summary>
 		/// Confirm the ecologo statement
@@ -1625,17 +1592,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ecologo statement was showing: " + statement + ", as expected!");
 		}
 
-
-
-
 		[StepDefinition(@"I set the water mixture question to: (Yes|No)")]
 		public void ThenISetTheWaterMixtureQuestionTo(string option)
 		{
 			new NewProduct().SetWaterSolutionQuestion = (option == "Yes");
 			Report.Success("Set water mixture question to: " + option);
 		}
-
-
 
 		[StepDefinition(@"I should see the radio button: (.*)")]
 		public void ShouldSeeTheRadioButton(string button)
@@ -1761,7 +1723,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().Data_Acceptance_Error(errorMsg), "Failed to confirm error message", "Confirmed error message displayed");
 		}
 
-
 		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
@@ -1807,7 +1768,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(new NewProduct().AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
 			}
 		}
-
 
 		[StepDefinition(@"I set the (.*) field to: (.*)")]
 		[StepDefinition(@"I set the (.*) option to: (.*)")]
@@ -2403,8 +2363,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(
-			@"I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State")]
+		[StepDefinition(@"I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State")]
 		public void IConfirmTheExpirationDateMatchesTheKellyValue()
 		{
 			var newProductPage = new NewProduct();
@@ -2449,8 +2408,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The Expiration Date Provided By Kelly field for state: " + state + " was blank as expected");
 		}
 
-		[StepDefinition(
-			@"I confirm the Label Information section on the Regulatory Information 3 page contains a link for: (.*)")]
+		[StepDefinition(@"I confirm the Label Information section on the Regulatory Information 3 page contains a link for: (.*)")]
 		public void IConfirmLabelInformationOnRegulatoryInformationPageContains(string labelLink)
 		{
 			var newProductPage = new NewProduct();
@@ -2470,14 +2428,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().SelectIngredientPublicName(name), "The Public Name option for ingredient: " + name + " was not changed", "The Public Name for ingredient: " + name + " was succesfully changed");
 		}
 
-		[StepDefinition(@"In the Ingredients Page I select the Trade Secret checkbox for ingredient: (.*)")]
-		public void IngredientClickTradeSecretCheckbox(string name)
-		{
-			Report.IsTrue(new NewProduct().ClickIngredientTradeSecretCheckbox(name), "The Trade Secret checkbox was not clicked successfully", "The Trade Secret checkbox was clicked successfully");
-		}
-
 		[StepDefinition(@"In the Ingredients page I confirm the (Publicly Disclosed|Trade Secret) checkbox is: (checked|unchecked) for ingredient: (.*)")]
-
 		public void IngredientsConfirmCheckboxState(string option, string checkState, string chemicalName)
 		{
 			var ingredients = new NewProduct().GetIngredients();
@@ -2509,13 +2460,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.Failure("Valid 'option' parameter must be either 'Trade Secret' or 'Publicly Disclosed'");
 					return;
 			}
-		}
-
-
-		[StepDefinition(@"In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient: (.*)")]
-		public void IngredientClickPubliclyDisclosedCheckbox(string chemicalName)
-		{
-			Report.IsTrue(new NewProduct().ClickIngredientPubliclyDisclosedCheckbox(chemicalName), "The Trade Secret checkbox was not clicked successfully", "The Trade Secret checkbox was clicked successfully");
 		}
 
 		[StepDefinition(@"In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient saved as: (.*)")]
@@ -2624,6 +2568,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var displayedStatements = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(displayedStatements.Contains(text), "The VOC Intended Use text was not as expected: '" + text + "'", "The VOC Intended Use text matched as expected: '" + text + "'");
 		}
+
 		[StepDefinition(@"in the VOC Limits table, the (Use|VOC Compliance Limit|Regulation) column should contain the value: (.*)")]
 		public void VOCLimitsTableContainsUse(string column, string valueExpected)
 		{
@@ -2662,6 +2607,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var statements = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(statements.Contains(value), "The statement with text: " + value + " was not showing on the VOC Summary page", "The statement with text: " + value + " was showing on the VOC summary page as expected.");
 		}
+
 		public void SelectTCLPElementOptionsToNo(List<string> elements)
 		{
 			var newProduct = new NewProduct();
@@ -2716,6 +2662,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Failure("Did not see the Required field error message, but the new page was not loaded");
 			Report.Screenshot();
 		}
+
 		//Checks a new page has loaded on Continue click. If not, look for 'this is a required field' error. If yes, throw excpt. The test is now out of sync, so further steps will only report junk.
 		[StepDefinition(@"I continue to the next screen in the product registration")]
 		public void ContinueInTheProductRegistration()
@@ -2932,7 +2879,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The 'Product Line or Brand' drop down options were limited exclusively to saved active brands as expected. The options showing were: " + string.Join(", ", productLineOptions));
 		}
 
-		[Given(@"In the Create the kit page I search for and select: (.*)")]
+		[StepDefinition(@"In the Create the kit page I search for and select: (.*)")]
 		public void GivenInTheCreateTheKitPageISearchForAndSelect(string productToAdd)
 		{
 			Report.IsTrue(new NewProduct().AddItemToKit(productToAdd),
@@ -2940,7 +2887,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully added product: " + productToAdd + " to kit.");
 		}
 
-		[Given(@"In the Create the kit page I search for and select product saved as: (.*)")]
+		[StepDefinition(@"In the Create the kit page I search for and select product saved as: (.*)")]
 		public void GivenInTheCreateTheKitPageISearchForAndSelectSavedAs(ProductInformation product)
 		{
 			Report.IsTrue(new NewProduct().AddItemToKitByNameAndID(product),
@@ -2948,7 +2895,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Successfully added product: " + product.Id + " to kit.");
 		}
 
-		[Then(@"in the (.*) page I (should|should not) see the (.*) question")]
+		[StepDefinition(@"in the (.*) page I (should|should not) see the (.*) question")]
 		public void ThenInThePageIShouldOrShouldNotSeeQuestion(string page, string shouldOrNot, string question)
 		{
 			NewProduct thisNewProduct = new NewProduct();
@@ -2961,14 +2908,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Question is not showing as expected", "Question is showing or not as expected");
 		}
 
-		[When(@"In the ingredients table I click (CAS Number|Chemical Name|Percent|Publicly Disclosed|Trade Secret|Public Name) to order")]
+		[StepDefinition(@"In the ingredients table I click (CAS Number|Chemical Name|Percent|Publicly Disclosed|Trade Secret|Public Name) to order")]
 		public void WhenInTheIngredientsTableIClickCASNumberChemicalNameToOrder(string orderBy)
 		{
 			Report.IsTrue(new NewProduct().IngredientOrderbY(orderBy),
 				"Failed to click " + orderBy, "Successfully clicked " + orderBy);
 		}
 
-		[Then(@"In the ingredients table the ingredients should be in the following order")]
+		[StepDefinition(@"In the ingredients table the ingredients should be in the following order")]
 		public void ThenInTheIngredientsTableTheIngredientsShouldBeInTheFollowingOrder(Table table)
 		{
 			NewProduct thisNewProduct = new NewProduct();
@@ -3003,91 +2950,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myDone.ClickDone();
 			Delay.Seconds(0.5);
 			Report.Screenshot();
-		}
-
-		[StepDefinition(@"for ingredient: (.*) the (Trade Secret|Publicly Disclosed|Public Name) field is (enabled|disabled)")]
-		public void ThenForIngredientTheTradeSecretCheckboxIsDisabledOrEnabled(string ingredient, string checkbox, string enabledOrDisabled)
-		{
-			var thisNewProduct = new NewProduct();
-			switch (checkbox)
-			{
-				case "Publicly Disclosed":
-					Report.IsTrue(
-						thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).PublicDisclosureEnabled ==
-						(enabledOrDisabled.ToLower() == "enabled"), "Public Disclosure checkbox is not showing as expected.",
-						"Public Disclosure is showing as expected.");
-					break;
-				case "Trade Secret":
-					Report.IsTrue(
-						thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).TradeSecretEnabled ==
-						(enabledOrDisabled.ToLower() == "enabled"), "Trade secret checkbox is not showing as expected.",
-						"Trade secret is showing as expected.");
-					break;
-				case "Public Name":
-					Report.IsTrue(thisNewProduct.GetIngredients().FirstOrDefault(x => x.ComponentName == ingredient).PublicNameEnabled ==
-								  (enabledOrDisabled.ToLower() == "enabled"), "Public name select box is not showing as expected.",
-						"Public name select box is showing as expected.");
-					break;
-
-				default:
-					Report.Failure("Step requires a valid field option: 'Publicly Disclosed', 'Trade Secret' or 'Public Name'");
-					return;
-			}
-		}
-
-		[Given(@"for ingredient: (.*) I set (Public Disclosure|Trade Secret) checkbox to checked: (true|false)")]
-		public void GivenForIngredientISetPublicDisclosureCheckboxToCheckedTrueFalse(string ingredient, string checkbox, string checkedTrueFalse)
-		{
-			switch (checkbox)
-			{
-				case "Public Disclosure":
-					Report.IsTrue(new NewProduct().SetIngredientPubliclyDisclosed(ingredient, checkedTrueFalse == "true"),
-						"Failed to set public disclosure checkbox to: " + checkedTrueFalse + " for ingredient: " + ingredient,
-						"Successfully set public disclosure checkbox to: " + checkedTrueFalse);
-					break;
-				case "Trade Secret":
-					Report.IsTrue(new NewProduct().SetIngredientTradeSecret(ingredient, checkedTrueFalse == "true"),
-						"Failed to set public disclosure checkbox to: " + checkedTrueFalse + " for ingredient: " + ingredient,
-						"Successfully set public disclosure checkbox to: " + checkedTrueFalse);
-					break;
-				default:
-					throw new Exception("Please provide valid checkbox name");
-
-			}
-		}
-
-		[Then(@"for ingredient: (.*) the Public Name selectbox shows names")]
-		public void ThenForIngredientThePublicNameSelectboxShowsNames(string ingredient)
-		{
-			Report.IsTrue(new NewProduct().GetIngredientPublicNameOptions(ingredient).Count > 1,
-				"No options are showing in public name select box", "options are showing in public name select box");
-		}
-
-		[Then(@"for ingredient: (.*) I should see an error below the public name column which reads: (.*)")]
-		public void ThenForIngredientIShouldSeeAnErrorBelowThePublicNameColumn(string ingredient, string error)
-		{
-			string actualError = new NewProduct().GetPublicNameErrorMessage(ingredient);
-			Report.IsTrue(actualError == error, "Expected error: " + error + " but got: " + actualError,
-				"Error was as expected: " + error);
-		}
-
-		[Then(@"for ingredient: (.*) I select Public Name: (.*)")]
-		public void ThenForIngredientISelectPublicName(string ingredient, string publicName)
-		{
-			Report.IsTrue(new NewProduct().SelectIngredientPublicName(ingredient, publicName), "Failed to set public name for ingredient: " + ingredient + " to: " + publicName, "Successfully set public name for ingredient: " + ingredient + " to: " + publicName);
-		}
-
-		[Given(@"In the ingredients table the following column titles and inputs are showing")]
-		public void GivenInTheIngredientsTableTheFollowingColumnTitlesAndInputsAreShowing(Table table)
-		{
-			NewProduct thisNewProduct = new NewProduct();
-			foreach (TableRow thisRow in table.Rows)
-			{
-				Report.IsTrue(
-					thisNewProduct.IngredientTableCheckInputByColumnTitle(thisRow["Column"], thisRow["Input"]),
-					"Column input did not apppear as expected: " + thisRow["Column"] + ":" + thisRow["Input"],
-					"Column input appeared as expected: " + thisRow["Column"] + ":" + thisRow["Input"]);
-			}
 		}
 
 		[Then(@"a (Danger & Warning|Warning) popup dialog should appear with the message: (.*)")]
@@ -3385,6 +3247,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click Add Row in the EPA Table",
 				"Successfully clicked Add Row in the EPA Table");
 		}
+
 		[StepDefinition(@"I check the State Pesticide Registration Number field matches the text: (.*)")]
 		public void CheckStatePesticideRegistrationNumber(string regNumText)
 		{
@@ -3530,7 +3393,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(actualErrors.Contains(error), "Error is not showing as expected. Expected: " + error + " but got: " + string.Join(",", actualErrors),
 				"Error is showing as expected");
 		}
-
 
 		[Given(@"I save the UPC number (.*) as: (.*)")]
 		public void SaveUpcNumberAs(string upc, string savedAs)
@@ -3743,6 +3605,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to close the Regulatory List pop up",
 				"Successfully closed the Regulatory List pop up");
 		}
+
 		[StepDefinition(@"I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted (CARB|OTC) value: (.*)")]
 		public void ConfirmExceedsStatementIsCorrectBasedOnCarb(string carbOtc, string value)
 		{
@@ -3790,6 +3653,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The " + carbOtc + " exceeds/ does not exceed statement did not match the expected phrase! Expected 'Does not exceed the limits..' but found: '" + phrase + "'",
 				"The " + carbOtc + " exceeds/ does not exceed statement matched the expected phrase");
 		}
+
 		[StepDefinition(@"I confirm the checkbox with description: (.*) is displayed")]
 		public void IConfirmCheckboxWithDescriptionIsDisplayed(string description)
 		{
@@ -3885,6 +3749,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				$@"Retailer ""{retailer}"" is not present under Destination Retailers! Retailers are: {string.Join(", ", displayedRetailers.Select(x => $"'{x}'").ToList())}",
 				$@"Retailer ""{retailer}"" is present under Destination Retailers");
 		}
+
 		[Then(@"I click (Save|Cancel) in The Product Page")]
 		public void ThenIClickSaveOrCancelInTheProductPage(string saveOrCancel)
 		{
@@ -3919,8 +3784,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Selected: " + newOption);
 
 		}
-
-
 
 		[StepDefinition(@"I select the first option in the 'Product Line or Brand' drop down and save as Brand{TestCaseId}")]
 		public void SelectFirstOptionInBrandDropDown()
@@ -3994,5 +3857,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisIngredient.CASNumber = "WPS" + id;
 			thisNewProduct.AddIngredient(thisIngredient);
 		}
+
 	}
 }

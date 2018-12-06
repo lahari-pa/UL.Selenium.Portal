@@ -67,6 +67,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58072
 
+@newproductstepstest
 Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -90,20 +91,15 @@ Given I add the following ingredients:
 | Aqua             | 50      |
 | Sodium hydroxide | 50      |
 
-#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-#| ComponentName           | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-#| Aqua                    | 50      | false               | false       |            |
-#| Sodium hydroxide        | 50      | false               | false       |            |
-
 Given In the Ingredients Page I select the first Public Name dropdown option for ingredient: Aqua
 
-Given In the Ingredients Page I select the Trade Secret checkbox for ingredient: Aqua
+Given I click the Trade Secret checkbox for ingredient: Aqua
 
 Given for ingredient: Aqua the Publicly Disclosed field is disabled
 
-Given In the Ingredients Page I select the Trade Secret checkbox for ingredient: Aqua
+Given I click the Trade Secret checkbox for ingredient: Aqua
 
-Given In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient: Aqua
+Given I click the Publicly Disclosed checkbox for ingredient: Aqua
 
 Given In the Ingredients page I check there are 1 Publicly Disclosed ingredients in the Total section
 

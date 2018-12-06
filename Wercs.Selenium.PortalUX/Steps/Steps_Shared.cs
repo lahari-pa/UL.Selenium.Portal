@@ -6,6 +6,7 @@ using System.Text;
 using Castle.Core.Internal;
 using NPOI.SS.Formula.Functions;
 using ResourcePool;
+using System.Text.RegularExpressions;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -61,7 +62,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			if (name == "")
 			{
-				name = "AAA WERCS Test " + type.Replace("/", " ").Replace("%", "");
+				var forbiddenChars = @"+{}^?|{}+%'""/".ToCharArray();
+				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", name);
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
