@@ -284,8 +284,7 @@ testRunner.Given("I call Shared Step 59680 (Additional Product Information - US 
 #line 89
 testRunner.Given("I add the following ingredients:", ((string)(null)), table3, "Given ");
 #line 94
-testRunner.Given("In the Ingredients Page I select the first Public Name dropdown option for ingred" +
-                    "ient: Aqua", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I select the first Public Name dropdown option for ingredient: Aqua", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 96
 testRunner.Given("I click the Trade Secret checkbox for ingredient: Aqua", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 98
@@ -295,8 +294,7 @@ testRunner.Given("I click the Trade Secret checkbox for ingredient: Aqua", ((str
 #line 102
 testRunner.Given("I click the Publicly Disclosed checkbox for ingredient: Aqua", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 104
-testRunner.Given("In the Ingredients page I check there are 1 Publicly Disclosed ingredients in the" +
-                    " Total section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I confirm there are 1 Publicly Disclosed ingredients in the Total section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 106
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase58098", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

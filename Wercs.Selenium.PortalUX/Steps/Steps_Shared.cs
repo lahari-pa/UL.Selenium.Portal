@@ -329,14 +329,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsNewProductIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			TestReport.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 			TestReport.StartStep("I should see the ingredients error message");
-			MyStepsNewProduct.IngredientsErrorMessageShowing("should");
+			stepsNewProductIngredients.IngredientsErrorMessageShowing("should");
 			TestReport.StartStep("I add the following ingredients:");
-			MyStepsNewProduct.AddIngredients(ingredientsTable);
+			stepsNewProductIngredients.AddIngredients(ingredientsTable);
 			TestReport.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 		}
@@ -346,6 +347,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsNewProductIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			TechTalk.SpecFlow.Table aerosolIngredients = new TechTalk.SpecFlow.Table(new string[] {
@@ -370,7 +372,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				""
 			});
 			TestReport.StartStep("I add the following ingredients (aerosol propellant):");
-			MyStepsNewProduct.AddIngredients(aerosolIngredients);
+			stepsNewProductIngredients.AddIngredients(aerosolIngredients);
 			TechTalk.SpecFlow.Table otherIngredients = new TechTalk.SpecFlow.Table(new string[] {
 				"ComponentName",
 				"Percent",
@@ -393,7 +395,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				""
 			});
 			TestReport.StartStep("I add the following ingredients (other):");
-			MyStepsNewProduct.AddIngredients(otherIngredients);
+			stepsNewProductIngredients.AddIngredients(otherIngredients);
 			TestReport.StartStep("In the Ingredients page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Ingredients");
 		}
@@ -1738,12 +1740,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsNewProductIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
 			TestReport.StartStep("I add the ingredient " + name + " at 100%");
 			var table = new Table("ComponentName", "Percent");
 			table.AddRow(name, "100");
-			MyNewProductSteps.AddIngredients(table);
+			stepsNewProductIngredients.AddIngredients(table);
 			TestReport.StartStep("In the Ingredients page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			TestReport.StartStep("I should see the Regulatory Information 1 Page");
@@ -3253,10 +3256,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsNewProductIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			TestReport.StartStep("I add the following ingredients:");
-			MyStepsNewProduct.AddIngredients(ingredientsTable);
+			stepsNewProductIngredients.AddIngredients(ingredientsTable);
 		}
 
 		[StepDefinition(@"I call Shared Step 57539 \(Product Characteristics - Aerosol & Liquid select Aerosol - Continue - Happy Path\)")]
@@ -5760,13 +5764,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStep_Ingredients_SearchForRdPartyComponentProductByProductSavedAs(string savedAs)
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			var stepsNewProduct = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsNewProductIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
-			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
-			MyNewProductSteps.InTheIngredientsPageISearchForAndSelectProductSavedAs(savedAs);
-
-
-
+			stepsNewProduct.GivenIShouldSeeXPage("Ingredients");
+			stepsNewProductIngredients.InTheIngredientsPageISearchForAndSelectProductSavedAs(savedAs);
 		}
 
 		[StepDefinition(@"I call Shared Step 80824 - Ingredients - Add FLAVOR component, not Publicly Disclosed and save as (.*)")]

@@ -447,7 +447,8 @@ testRunner.Then("for ingredient: Butane the Publicly Disclosed field is enabled"
 #line 172
 testRunner.Then("for ingredient: Butane the Public Name field is enabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 174
-testRunner.Then("for ingredient: Butane the Public Name selectbox shows names", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("for ingredient: Butane I confirm the Public Name selectbox contains names for sel" +
+                    "ection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 176
 testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 178
@@ -894,7 +895,7 @@ testRunner.Given("I call Shared Step 57401 (Additional Product Information - US 
 #line 358
 testRunner.Given("I add the following ingredients:", ((string)(null)), table17, "Given ");
 #line 362
-testRunner.Given("I click the Regulated button for ingredient: Chlorine in the Ingredients section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click the Regulated button for ingredient: Chlorine in the Ingredients table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 364
 testRunner.Then("the \'Regulatory List\' window opens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 366
@@ -1080,8 +1081,7 @@ testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transp
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a danger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 456
-testRunner.Then("In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient s" +
-                    "aved as: shared79436", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the Publicly Disclosed checkbox for ingredient saved as: shared79436", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 458
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1162,8 +1162,7 @@ testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transp
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a danger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 496
-testRunner.Given("In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient s" +
-                    "aved as: shared79431", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click the Publicly Disclosed checkbox for ingredient saved as: shared79431", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 498
 testRunner.Then("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 0 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -1227,11 +1226,10 @@ testRunner.And("I call Shared Step 59680 (Additional Product Information - US on
 #line 514
 testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table22, "Given ");
 #line 517
-testRunner.And("In the Ingredients Page I select the first Public Name dropdown option for ingred" +
-                    "ient: Sodium hydroxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I select the first Public Name dropdown option for ingredient: Sodium hydroxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 518
-testRunner.And("In the Ingredients page I confirm the Publicly Disclosed checkbox is: checked for" +
-                    " ingredient: Sodium hydroxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the Publicly Disclosed checkbox is: checked for ingredient: Sodium hydr" +
+                    "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
@@ -1269,8 +1267,7 @@ testRunner.Then("for ingredient: Water the Publicly Disclosed field is disabled"
 #line 525
 testRunner.Given("I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue", ((string)(null)), table24, "Given ");
 #line 528
-testRunner.And("In the Ingredients Page I select the first Public Name dropdown option for ingred" +
-                    "ient: Boric acid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I select the first Public Name dropdown option for ingredient: Boric acid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 529
 testRunner.And("I click the Trade Secret checkbox for ingredient: Boric acid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 530

@@ -62,7 +62,7 @@ And I should see the Data Acceptance Page
 
 Then The Data Acceptance page should appear
 
-Then I confirm error message is displayed: Select at least one of the options
+Then I confirm an error message is displayed with text: Select at least one of the options
 
 Then In the Data Acceptance page I select Yes, Agreed
 
@@ -150,7 +150,7 @@ And I should see the Data Acceptance Page
 
 Then The Data Acceptance page should appear
 
-Then I confirm error message is displayed: Select at least one of the options
+Then I confirm an error message is displayed with text: Select at least one of the options
 
 Then In the Data Acceptance page I select Yes, Agreed
 

@@ -193,7 +193,8 @@ testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((Tech
 #line 63
 testRunner.Then("The Data Acceptance page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 65
-testRunner.Then("I confirm error message is displayed: Select at least one of the options", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm an error message is displayed with text: Select at least one of the opt" +
+                    "ions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 67
 testRunner.Then("In the Data Acceptance page I select Yes, Agreed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 69
@@ -350,7 +351,8 @@ testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((Tech
 #line 151
 testRunner.Then("The Data Acceptance page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 153
-testRunner.Then("I confirm error message is displayed: Select at least one of the options", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm an error message is displayed with text: Select at least one of the opt" +
+                    "ions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 155
 testRunner.Then("In the Data Acceptance page I select Yes, Agreed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 157

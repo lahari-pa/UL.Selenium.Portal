@@ -73,6 +73,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2)?.Text;
 		}
 
+		public List<string> AllErrorMessages()
+		{
+			this.RefreshContainer();
+			return this.containerElement.FindElements(By.XPath(".//p[@class='form-error']//span"), 2)?.Select(x => x.Text).ToList();
+		}
+
 		public string BatteyWarning()
 		{
 			this.RefreshContainer();
@@ -298,8 +304,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-
-
 		public bool ClickContinueNoError()
 		{
 			try
@@ -326,7 +330,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return true;
 			}
 		}
-
 
 		public string ProductName {
 			get { return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Name') or contains(text(),'Product name')]/../following-sibling::div/input"), 2).Text.Trim(); }
@@ -1737,21 +1740,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-		public bool Data_Acceptance_Error(string errorMsg)
-		{
-			IWebElement myError =
-				containerElement.FindElement(By.XPath(".//p[@class='form-error']/span[text()='" + errorMsg + "']"), 2);
-
-			if (myError == null)
-			{
-				Report.Info("Failed to Find Error Message: '" + errorMsg + "'");
-				return false;
-			}
-			Report.Success("Message Displayed: '" + errorMsg + "'");
-			return true;
-		}
-
-
 		/// <summary>
 		/// Select all modes of transport that you've classified the product for checkbox options
 		/// </summary>
@@ -1830,7 +1818,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-
 		public List<string> DOTExceptions {
 			get
 			{
@@ -1890,7 +1877,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				el.EnterText(value);
 			}
 		}
-
 
 		public List<string> ListOfPrimaryPhysicalStates()
 		{
@@ -2018,7 +2004,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			}
 		}
-
 
 		public bool SetWaterSolutionQuestion {
 			set
@@ -2717,8 +2702,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 
-
-
 		/// <summary>
 		/// Technical Name (if applicable) text box
 		/// </summary>
@@ -2801,7 +2784,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-
 		/// <summary>
 		/// Packing Group (select) dropdown
 		/// </summary>
@@ -2819,7 +2801,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 		}
-
 
 		public string Viscosity {
 			get
@@ -3119,7 +3100,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-
 		/// <summary>
 		/// Product's VOC content as sold text box
 		/// </summary>
@@ -3252,7 +3232,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-
 		/// <summary>
 		/// Product's VOC content as used text box
 		/// </summary>
@@ -3323,7 +3302,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-
 		/// <summary>
 		/// Get Ecologo statement
 		/// </summary>
@@ -3332,7 +3310,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'UL ECOLOGO Readiness Assessment')]"), 2).Text;
 		}
 
-
 		/// <summary>
 		/// Gets statement - Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.
 		/// </summary>
@@ -3340,7 +3317,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product has been granted an Alternative Control Plan')]"), 2).Text;
 		}
-
 
 		/// <summary>
 		/// Gets statement - Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
@@ -4344,10 +4320,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return kellyExpirationDateInput.GetValue();
 		}
 
-		public string GetEPATableError()
-		{
-			return containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table/following-sibling::div/p[@class='form-error']/span"), 15)?.Text;
-		}
+		//public string GetEPATableError()
+		//{
+		//	return containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table/following-sibling::div/p[@class='form-error']/span"), 15)?.Text;
+		//}
 
 		public bool EPASelectExpirationDateFromCalendar(string state, DateTime date)
 		{
@@ -4437,11 +4413,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return epaRow.GetCssValue("background-color");
 		}
 
+		/// <summary>
+		/// Set the option 'Pubic name' for named ingredient. Enter overload for a specific public name, otherwise the first name is selected
+		/// </summary>
 		public bool SelectIngredientPublicName(string chemicalName)
 		{
-			var publicNameText = IngredientRow(chemicalName).FindElements(By.XPath(".//td[contains(@class,'inci-name')]//option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
+			var row = this.IngredientRow(chemicalName);
+			if (row == null)
+			{
+				Report.Info("The ingredient row was not found by chemical name: " + chemicalName);
+				Report.Screenshot();
+				return false;
+			}
+			var publicNameText = row.FindElements(By.XPath(".//td[contains(@class,'inci-name')]//option"), 2)?.Select(x => x.Text).Where(x => x != "Choose...").ToList();
+			if (publicNameText == null)
+			{
+				return false;
+			}
+			Report.Info("Getting the first public name from options");
 			var publicName = publicNameText[0];
-			var publicNameOption = IngredientRow(chemicalName).FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+			var publicNameOption = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+			if (publicNameOption == null)
+			{
+				Report.Info("The ingredient row was not found by chemical name: " + chemicalName);
+				Report.Screenshot();
+				return false;
+			}
 			publicNameOption.Select(publicName);
 			if (publicNameOption.SelectedOption() == publicName)
 			{
@@ -4452,9 +4449,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		/// <summary>
+		/// Set the option 'Pubic name' for named ingredient. Enter overload for a specific public name, otherwise the first name is selected
+		/// </summary>
 		public bool SelectIngredientPublicName(string chemicalName, string publicName)
 		{
-			var publicNameOption = IngredientRow(chemicalName).FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+			var publicNameOption = this.IngredientRow(chemicalName)?.FindElement(By.XPath(".//td[contains(@class,'inci-name')]//select[@class='form-control']"), 2);
+			if (publicNameOption == null)
+			{
+				Report.Info("The ingredient row was not found by chemical name: " + chemicalName);
+				Report.Screenshot();
+				return false;
+			}
 			publicNameOption.Select(publicName);
 			if (publicNameOption.SelectedOption() == publicName)
 			{
@@ -4467,14 +4473,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public IWebElement IngredientRow(string chemicalName)
 		{
-			var rows = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2);
+			var rows = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2);
 			var matchingRow = rows.FirstOrDefault(x => x.FindElement(By.XPath(".//div[@class = 'chemical-name']"), 2).GetValue().Trim() == chemicalName);
-			if (matchingRow == null)
-			{
-				Report.Failure("The ingredient row was not found by chemical name: " + chemicalName);
-				Report.Screenshot();
-				return null;
-			}
 			return matchingRow;
 		}
 
@@ -5064,7 +5064,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				thisIngredient.Selected = thisRow.FindElement(By.XPath("./td[position()=1]/input[@type='checkbox']"), 2).Selected;
 				Ingredients.Add(thisIngredient);
 			}
-
 			return Ingredients;
 		}
 
@@ -5094,7 +5093,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return "";
 			}
-
 		}
 
 		public List<string> GetIngredientTableColumnHeaders()

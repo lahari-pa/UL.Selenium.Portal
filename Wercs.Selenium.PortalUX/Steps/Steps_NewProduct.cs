@@ -8,6 +8,7 @@ using iTextSharp.text;
 using ResourcePool;
 using System.IO;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
 using SafewareReporting;
 using SeleniumUtilities;
@@ -1717,10 +1718,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().DataAcceptanceScreenAppears(), "Data Acceptance page did not appear!", "As expected, Data Acceptance page loaded successfully!");
 		}
 
-		[StepDefinition(@"I confirm error message is displayed: (.*)")]
-		public void ThenIConfirmErrorMessageIsDisplayedX(string errorMsg)
+		[StepDefinition(@"I confirm an error message is displayed with text: (.*)")]
+		public void ThenIConfirmErrorMessageMatches(string errorMsg)
 		{
-			Report.IsTrue(new NewProduct().Data_Acceptance_Error(errorMsg), "Failed to confirm error message", "Confirmed error message displayed");
+			var erros = new NewProduct().AllErrorMessages();
+			Report.IsTrue(erros.Contains(errorMsg), $"The error message {errorMsg} was not displayed!", $"The error message {errorMsg} was displayed as expected");
 		}
 
 		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
@@ -1756,17 +1758,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenIClickTheSummaryButtonInTheDataAcceptanceWindow()
 		{
 			Report.IsTrue(new NewProduct().ClickSummaruButtonInDataAcceptance(), "Failed to click the Summary button!", "Successfully clicked the Summary button!");
-		}
-
-		[StepDefinition(@"I add the following ingredients:")]
-		public void AddIngredients(Table ingredientInformation)
-		{
-			var Ingredients = ingredientInformation.CreateSet<Ingredient>();
-
-			foreach (var item in Ingredients)
-			{
-				Report.IsTrue(new NewProduct().AddIngredient(item), "Failed to add ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber) + "!", "Successfully added ingredient: " + (item.CASNumber == "" ? item.ComponentName : item.CASNumber));
-			}
 		}
 
 		[StepDefinition(@"I set the (.*) field to: (.*)")]
@@ -2170,24 +2161,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was showing: " + statement + ", as expected!");
 		}
 
-		[StepDefinition(@"I (should|should not) see the ingredients error message")]
-		public void IngredientsErrorMessageShowing(string should)
-		{
-			var expected = should == "should";
-			Report.IsTrue(expected == (new NewProduct().GetIngredientErrorMessage() != ""),
-				string.Format("{0} to see the ingredients error message!", expected ? "Did not expect" : "Expected"),
-				string.Format("Ingredients error message {0} showing!", expected ? "was" : "was not"));
-		}
-
-		[StepDefinition(@"The ingredients error message should be showing: (.*)")]
-		public void IngredientsErrorMessageShowingCorrectText(string text)
-		{
-			var showing = new NewProduct().GetIngredientErrorMessage();
-			Report.IsTrue(showing.Trim() == text.Trim(),
-				string.Format("Ingredients error message was not as expected. Expected: {0} but found {1}", text.Trim(), showing.Trim()),
-				string.Format("Ingredients error message was showing {0} as expected!", text.Trim()));
-		}
-
 		/// <summary>
 		/// Confirm VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states. statement
 		/// </summary>
@@ -2420,125 +2393,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void RegulatoryDocumentsConfirmDocumentTypeInSection(string page, string type, string section)
 		{
 			Report.IsTrue(new NewProduct().GetDocumentTypeForSection(section) == type, "On page: '" + page + "' the document type for section: '" + section + "' was not: '" + type + "' when it was expected to be", " On page: '" + page + "' the document type for section: '" + section + "' was: '" + type + "' as expected");
-		}
-
-		[StepDefinition(@"In the Ingredients Page I select the first Public Name dropdown option for ingredient: (.*)")]
-		public void IngredientSelectPublicName(string name)
-		{
-			Report.IsTrue(new NewProduct().SelectIngredientPublicName(name), "The Public Name option for ingredient: " + name + " was not changed", "The Public Name for ingredient: " + name + " was succesfully changed");
-		}
-
-		[StepDefinition(@"In the Ingredients page I confirm the (Publicly Disclosed|Trade Secret) checkbox is: (checked|unchecked) for ingredient: (.*)")]
-		public void IngredientsConfirmCheckboxState(string option, string checkState, string chemicalName)
-		{
-			var ingredients = new NewProduct().GetIngredients();
-			var thisIngredient = ingredients.First(x => x.ComponentName == chemicalName);
-			if (thisIngredient == null)
-			{
-				Report.Failure("Could not find ingredient with name: " + chemicalName + "!");
-				return;
-			}
-			var expectChecked = false;
-			if (checkState == "checked")
-			{
-				expectChecked = true;
-			}
-			else if (checkState != "unchecked")
-			{
-				Report.Failure("Valid 'check state' parameter must be either 'checked' or 'unchecked'!");
-				return;
-			}
-			switch (option)
-			{
-				case "Trade Secret":
-					Report.IsTrue(thisIngredient.TradeSecret == expectChecked, "The Trade Secret checkbox should be: " + expectChecked + " but it was " + thisIngredient.TradeSecret, "The Trade Secret checbox was: " + expectChecked + " as expected");
-					break;
-				case "Publicly Disclosed":
-					Report.IsTrue(thisIngredient.PublicallyDisclosed == expectChecked, "The Publicly Disclosed checkbox should be: " + expectChecked + " but it was " + thisIngredient.PublicallyDisclosed, "The Publicly Disclosed checbox was: " + expectChecked + " as expected");
-					break;
-				default:
-					Report.Failure("Valid 'option' parameter must be either 'Trade Secret' or 'Publicly Disclosed'");
-					return;
-			}
-		}
-
-		[StepDefinition(@"In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient saved as: (.*)")]
-		public void IngredientClickPubliclyDisclosedSavedAs(string savedAs)
-		{
-			var selNewProduct = new NewProduct();
-			var ingredients = selNewProduct.GetIngredients();
-			var ingredientSavedAs = Context.GetFromContext(savedAs);
-			if (ingredientSavedAs == null)
-			{
-				Report.Failure("Could not find ingredient in context saved as: " + savedAs);
-				return;
-			}
-			var ingredient = (Ingredient)ingredientSavedAs;
-			var targetIngredient = ingredients.First(x => x.CASNumber == ingredient.CASNumber && x.ComponentName == ingredient.ComponentName);
-			if (targetIngredient == null)
-			{
-				Report.Failure("Could not find the ingredient on the page which matched the target ingredient: " + ingredient.ComponentName + "(" + ingredient.CASNumber + ")");
-				Report.Screenshot();
-				return;
-			}
-			var disclosed = targetIngredient.PublicallyDisclosed;
-			Report.Info("Setting Publicly Disclosed as: " + (disclosed ? "false" : "true"));
-			Report.IsTrue(selNewProduct.SetIngredientPubliclyDisclosed(ingredient.ComponentName, !disclosed),
-				"Failed to set Publicly Disclosed checkbox to: " + (disclosed ? "false" : "true"),
-				"Successfully set the Publicly Disclosed checkbox to: " + (disclosed ? "false" : "true"));
-		}
-
-		[StepDefinition(@"In the Ingredients page I check there are (.*) Publicly Disclosed ingredients in the Total section")]
-		public void IngredientsPubliclyDisclosedTotalIsCorrect(string total)
-		{
-			Report.IsTrue(new NewProduct().PubliclyDisclosedTotalIsCorrect(total), "The Publicly Disclosed summary text did not match the expected: " + total, "The Publicaly Disclosed summary text matched the expected: " + total);
-		}
-
-		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: (.*) and denominator: (.*)")]
-		public void IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing(string numerator, string denominator)
-		{
-			var selNewProduct = new NewProduct();
-
-			if (numerator.ToLower().Contains("saved as"))
-			{
-				numerator = Context.GetFromContext(numerator.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim()).ToString();
-			}
-			Report.IsTrue(selNewProduct.TransparencyScoreNumerator() == numerator,
-				"The Transparency Score numerator did not match the expected: " + numerator + " it is showing as: " + selNewProduct.TransparencyScoreNumerator(),
-				"The Transparency Score numerator matched the expected: " + numerator);
-			Report.IsTrue(selNewProduct.TransparencyScoreDenominator() == denominator,
-				"The Transparency Score denominator did not match the expected: " + denominator,
-				"The Transparency Score denominator matched the expected: " + denominator);
-		}
-
-		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a (warning|success|danger|info)")]
-		public void IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed(string flag)
-		{
-			//orange is warning, red is danger, green is success, blue is info
-			if (flag == "warning")
-			{
-				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "warning",
-					"The Transparency Score label was not highlighted orange (warning) as expected",
-					"The Transparency Score label was highlighted orange (warning) as expected");
-			}
-			if (flag == "success")
-			{
-				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "success",
-					"The Transparency Score label was not highlighted green (success)!",
-					"The Transparency Score label was highlighted green (success) as expected");
-			}
-			if (flag == "danger")
-			{
-				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "danger",
-					"The Transparency Score label was not highlighted red (warning)!",
-					"The Transparency Score label was highlighted red (warning) as expected");
-			}
-			if (flag == "info")
-			{
-				Report.IsTrue(new NewProduct().TransparencyScoreStatus() == "info",
-					"The Transparency Score label was not highlighted blue (info)",
-					"The Transparency Score label was highlighted blue (info) as expected");
-			}
 		}
 
 		[StepDefinition(@"I confirm 'Quantity' is visible in the UPC header")]
@@ -2908,28 +2762,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Question is not showing as expected", "Question is showing or not as expected");
 		}
 
-		[StepDefinition(@"In the ingredients table I click (CAS Number|Chemical Name|Percent|Publicly Disclosed|Trade Secret|Public Name) to order")]
-		public void WhenInTheIngredientsTableIClickCASNumberChemicalNameToOrder(string orderBy)
-		{
-			Report.IsTrue(new NewProduct().IngredientOrderbY(orderBy),
-				"Failed to click " + orderBy, "Successfully clicked " + orderBy);
-		}
-
-		[StepDefinition(@"In the ingredients table the ingredients should be in the following order")]
-		public void ThenInTheIngredientsTableTheIngredientsShouldBeInTheFollowingOrder(Table table)
-		{
-			NewProduct thisNewProduct = new NewProduct();
-			List<Ingredient> ListOfIngedients = thisNewProduct.GetIngredients();
-			int i = 0;
-			foreach (TableRow thisRow in table.Rows)
-			{
-				Report.IsTrue(ListOfIngedients[i].ComponentName.Contains(thisRow["Name"]),
-					"Expected to see: " + thisRow["Name"] + " but got: " + ListOfIngedients[i].ComponentName,
-					" As expected, ingredient: " + thisRow["Name"] + " is showing");
-				i++;
-			}
-		}
-
 		[StepDefinition(@"I check that Walmart and all of its affiliates are not available")]
 		public void GivenICheckThatWalmartAndAllOfItsAffiliatesAreNotAvailable()
 		{
@@ -2997,8 +2829,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenInPagePesticideDetails_StateRegistrationDetailsIShouldSeeError(string error)
 		{
 			NewProduct thisNewProduct = new NewProduct();
-			string actualError = thisNewProduct.GetEPATableError();
-			Report.IsTrue(actualError == error, "Expected error: " + error + " but got: " + actualError,
+			var erros = thisNewProduct.AllErrorMessages();
+			Report.IsTrue(erros.Contains(error), "Expected error: " + error + " but got: " + string.Join(", ", erros),
 				"As expected, error is showing as: " + error);
 		}
 
@@ -3562,15 +3394,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I click the Regulated button for ingredient: (.*) in the Ingredients section")]
-		public void ClickRegulatedButtonForIngredient(string name)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.Ingredients_ClickRegulated(name),
-				"Failed to click the Regulated button for ingredient: " + name,
-				"Successfully clicked the Regulated button for ingredient: " + name);
-		}
-
 		[StepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()
 		{
@@ -3840,22 +3663,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisNewProduct.EnterAdditionalRequirement(retailer, additionalRequirements),
 				"Failed to enter additional requirements: " + additionalRequirements + " for retailer: " + retailer,
 				"Added additional requirements for retailer: " + retailer);
-		}
-
-		[StepDefinition(@"In the ingredients page I search for and select product saved as: (.*)")]
-		public void InTheIngredientsPageISearchForAndSelectProductSavedAs(string savedAs)
-		{
-			NewProduct thisNewProduct = new NewProduct();
-			var id = "";
-			if (Context.Contains(savedAs))
-			{
-				ProductInformation thisProduct = (ProductInformation)Context.GetFromContext(savedAs);
-				id = thisProduct.Id;
-			}
-
-			Ingredient thisIngredient = new Ingredient();
-			thisIngredient.CASNumber = "WPS" + id;
-			thisNewProduct.AddIngredient(thisIngredient);
 		}
 
 	}

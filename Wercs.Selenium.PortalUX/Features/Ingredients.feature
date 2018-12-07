@@ -171,7 +171,7 @@ Then for ingredient: Butane the Publicly Disclosed field is enabled
 
 Then for ingredient: Butane the Public Name field is enabled
 
-Then for ingredient: Butane the Public Name selectbox shows names
+Then for ingredient: Butane I confirm the Public Name selectbox contains names for selection
 
 Then in the Ingredients page I click Continue
 
@@ -359,7 +359,7 @@ Given I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Chlorine      | 100     | false               | false       |            |
 
-Given I click the Regulated button for ingredient: Chlorine in the Ingredients section
+Given I click the Regulated button for ingredient: Chlorine in the Ingredients table
 
 Then the 'Regulatory List' window opens
 
@@ -453,7 +453,7 @@ Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score
 
 And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 
-Then In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient saved as: shared79436
+Then I click the Publicly Disclosed checkbox for ingredient saved as: shared79436
 
 And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
 
@@ -493,7 +493,7 @@ Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score
 
 And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 
-Given In the Ingredients Page I select the Publicly Disclosed checkbox for ingredient saved as: shared79431
+Given I click the Publicly Disclosed checkbox for ingredient saved as: shared79431
 
 Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
 
@@ -514,8 +514,8 @@ And I call Shared Step 59680 (Additional Product Information - US only, No Child
 Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 | ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Sodium hydroxide | 33      | false               | false       |            |
-And In the Ingredients Page I select the first Public Name dropdown option for ingredient: Sodium hydroxide
-And In the Ingredients page I confirm the Publicly Disclosed checkbox is: checked for ingredient: Sodium hydroxide
+And I select the first Public Name dropdown option for ingredient: Sodium hydroxide
+And I confirm the Publicly Disclosed checkbox is: checked for ingredient: Sodium hydroxide
 Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Water         | 33      | false               | false        |            |
@@ -525,7 +525,7 @@ Then for ingredient: Water the Publicly Disclosed field is disabled
 Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Boric acid         | 34      | false               | false        |            |
-And In the Ingredients Page I select the first Public Name dropdown option for ingredient: Boric acid
+And I select the first Public Name dropdown option for ingredient: Boric acid
 And I click the Trade Secret checkbox for ingredient: Boric acid
 Then for ingredient: Boric acid the Public Name field is disabled
 Then for ingredient: Boric acid the Publicly Disclosed field is disabled

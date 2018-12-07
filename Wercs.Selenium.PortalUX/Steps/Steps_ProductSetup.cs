@@ -697,13 +697,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var newProductSteps = new StepsNewProduct();
+			var stepsNewProductIngredients = new StepsNewProductIngredients();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
 			var thisStepsProductGrid = new StepsProductGrid();
 			var thisStepsHomePage = new StepsHomepage();
 			var studioSteps = new Steps_Studio();
-
-
 			//Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing
 			//Given I generate a random UPC number and save as: UPC80821
 			new StepsProductGrid().GivenIGenerateARandomUPCNumberAndSaveAs("UPC" + savedAs);
@@ -735,9 +734,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Ing" + savedAs + "1", table34);
 
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
-			newProductSteps.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success
-			newProductSteps.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808212
 			//| CASNumber  | ComponentName | Percentage | Publicly Disclosed | Public Name            |
 			//| 37334-84-2 | Cellolyn 21   | 15         | No                 | Undisclosed Ingredient |
@@ -756,9 +755,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 				"Ing" + savedAs + "2", table35);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2
-			newProductSteps.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			newProductSteps.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing808213
 			//| CASNumber  | ComponentName    | Percentage |
 			//| RR-38384-6 | FRAGRANCE-HERBAL | 10         |
@@ -772,9 +771,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"10"});
 			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing" + savedAs + "5", table36);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 3
-			newProductSteps.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "3");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "3");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			newProductSteps.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing808214
 			//| CASNumber  | ComponentName    | Percentage |
 			//| RR-38213-8 | FRAGRANCE-BANANA | 10         |
@@ -788,9 +787,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"10"});
 			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing" + savedAs + "6", table37);
 			//Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4
-			newProductSteps.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
-			newProductSteps.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808215
 			//| CASNumber | ComponentName    | Percentage | Publicly Disclosed | Public Name            |
 			//| FLAVOR    | 611 Grape Flavor | 10         | No                 | Undisclosed Ingredient |
@@ -809,9 +808,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 				"Ing" + savedAs + "7", table38);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5
-			newProductSteps.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
-			newProductSteps.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808216
 			//| CASNumber | ComponentName                 | Percentage | Publicly Disclosed | Public Name            |
 			//| NA519     | Black Cherry - Natural Flavor | 10         | Yes                | Undisclosed Ingredient |
@@ -830,9 +829,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 				"Ing" + savedAs + "8", table39);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 6
-			newProductSteps.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			newProductSteps.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing808217
 			//| CASNumber | ComponentName                                                                                                       | Percentage |
 			//| FRAGRANCE | Fragrance - Birch Branch: Skin Irrit. 2, Eye Irrit. 2A, Skin Sens. 1, Repro Tox 2, Acute Aquatic 2, Chronic Acute 2 | 10         |
@@ -847,9 +846,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"10"});
 			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing" + savedAs + "9", table40);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 7
-			newProductSteps.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			newProductSteps.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808218
 			//| CASNumber | ComponentName | Percentage | Publicly Disclosed | Public Name            |
 			//| 7732-18-5 | Water         | 10         | Yes                | Undisclosed Ingredient |
@@ -868,9 +867,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 				"Ing" + savedAs + "10", table41);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 3 and denominator: 8
-			newProductSteps.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			newProductSteps.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//Then in the Ingredients page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			//And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)

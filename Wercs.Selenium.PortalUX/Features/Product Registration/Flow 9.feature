@@ -91,7 +91,7 @@ Given I add the following ingredients:
 | Aqua             | 50      |
 | Sodium hydroxide | 50      |
 
-Given In the Ingredients Page I select the first Public Name dropdown option for ingredient: Aqua
+Given I select the first Public Name dropdown option for ingredient: Aqua
 
 Given I click the Trade Secret checkbox for ingredient: Aqua
 
@@ -101,7 +101,7 @@ Given I click the Trade Secret checkbox for ingredient: Aqua
 
 Given I click the Publicly Disclosed checkbox for ingredient: Aqua
 
-Given In the Ingredients page I check there are 1 Publicly Disclosed ingredients in the Total section
+Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 
