@@ -578,8 +578,8 @@ testRunner.Then("In the Subscription Enrollment screen I confirm that I see the 
                             "arkets you serve."});
             table11.AddRow(new string[] {
                         "Draft OSHA-Compliant Safety Data Sheet",
-                        "Effect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved form" +
-                            "at for each of your active products."});
+                        "Elect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved forma" +
+                            "t for each of your active products."});
 #line 198
 testRunner.And("In the Subscription Enrollment screen I confirm that under the Premium Plan I see" +
                     " the following items and further details", ((string)(null)), table11, "And ");
@@ -589,7 +589,7 @@ testRunner.And("In the Subscription Enrollment screen I confirm that under the P
                         "Further details"});
             table12.AddRow(new string[] {
                         "Bronze Agent Support Plan",
-                        @"In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform."});
+                        @"Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services."});
 #line 207
 testRunner.And("In the Subscription Enrollment screen I confirm that under the Standard Plan I se" +
                     "e the following items and further details", ((string)(null)), table12, "And ");
@@ -601,9 +601,9 @@ testRunner.And("In the Subscription Enrollment screen I confirm that under the S
                         "Link url"});
             table13.AddRow(new string[] {
                         "PurView Sustainability Platform",
-                        @"Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services.",
+                        @"In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform.",
                         "Learn More",
-                        "https://www.ulpurview.com/"});
+                        "https://www.ulpurview.com"});
 #line 211
 testRunner.And("In the Subscription Enrollment screen I confirm that under the Limited Plus Plan " +
                     "I see the following items and further details", ((string)(null)), table13, "And ");
@@ -652,7 +652,7 @@ testRunner.Then("under subheading Select the Support Services Plan I should see 
 testRunner.Then("under subheading Select the Support Services Plan clicking on hyperlink: (View Ag" +
                     "ency Service Agreement) opens Agency Service Agreement popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 233
-testRunner.Then(@"Agency Service Agreement popup contains the following text: By enrolling in Additional Support Service Options (Bronze, Silver or Gold), you, on behalf of the account holder (You) hereby authorize UL Information and Insights Inc. (""We"" or ""Us"") to establish an Agent account in Your WERCSmart account for products entered, modified, or submitted for re-certification on your behalf (the ""Products"") and further appoint Us as Your designated agent (""Agent"") with respect to such Products.  You acknowledge that Agent shall have full authority in your WERCSmart account with respect to such Products as if it were You, including but not limited to, entering data, making any certifications required by the WERCSmart platform, and initiating, receiving and responding to any communications from us or any recipient of WERCSmart results.  You further acknowledge that You remain responsible for Agent's actions or inactions with respect to such Products.  You acknowledge that such authority shall continue until (i) You have withdrawn such authority by the submission of written notice of termination to use and (ii) We have acknowledged the receipt thereof.  This Authorization constitutes an amendment to the WERCSmart Terms of Use posted on the WERCSmart site, as amended from time to time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then(@"Agency Service Agreement popup contains the following text: By enrolling in Additional Support Service Options (Bronze, Silver or Gold), you, on behalf of the account holder (You) hereby authorize UL Information and Insights Inc. (""We"" or ""Us"") to establish an Agent account in Your WERCSmart account for products entered, modified, or submitted for re-certification on your behalf (the ""Products"") and further appoint Us as Your designated agent (""Agent"") with respect to such Products. You acknowledge that Agent shall have full authority in your WERCSmart account with respect to such Products as if it were You, including but not limited to, entering data, making any certifications required by the WERCSmart platform, and initiating, receiving and responding to any communications from us or any recipient of WERCSmart results. You further acknowledge that You remain responsible for Agent's actions or inactions with respect to such Products. You acknowledge that such authority shall continue until (i) You have withdrawn such authority by the submission of written notice of termination to use and (ii) We have acknowledged the receipt thereof. This Authorization constitutes an amendment to the WERCSmart Terms of Use posted on the WERCSmart site, as amended from time to time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 234
 testRunner.Then("on the Agency Service Agreement popup clicking Close closes the popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

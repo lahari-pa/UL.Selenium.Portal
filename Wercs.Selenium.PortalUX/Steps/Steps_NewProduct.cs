@@ -2912,8 +2912,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 
 			Report.IsTrue(new NewProduct().OptionExists(field),
-				"Field does not exist",
-				"Field exists");
+				"Field does not exist: " + field,
+				"Field exists: " + field);
 			Delay.Seconds(1);
 		}
 

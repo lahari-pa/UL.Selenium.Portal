@@ -300,11 +300,9 @@ testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("MyAccount")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PackagingTypes")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_SHALowerOptions")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("TFS_design")]
         public virtual void _75034Srch_IdentifierForPackagingTypes()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[75034] Srch - Identifier for Packaging Types", new string[] {
-                        "TFS_design"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[75034] Srch - Identifier for Packaging Types", ((string[])(null)));
 #line 95
 this.ScenarioSetup(scenarioInfo);
 #line 96
@@ -337,9 +335,9 @@ testRunner.And("I navigate to the My Packaging Types tab in the My Library page"
 #line 100
 testRunner.And("Save the top packaging id as MPI75034 if there are no packacking types listed add" +
                     " a new packing type as follows", ((string)(null)), table10, "And ");
-#line 106
+#line 103
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 107
+#line 104
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -351,9 +349,9 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table11.AddRow(new string[] {
                         "ProductID",
                         "savedas PackagingTypeID_MPI75034"});
-#line 108
+#line 105
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table11, "And ");
-#line 112
+#line 109
 testRunner.And("In SHA Manager 1 record is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -368,7 +366,7 @@ testRunner.And("In SHA Manager 1 record is found", ((string)(null)), ((TechTalk.
             table12.AddRow(new string[] {
                         "Distributor",
                         "P"});
-#line 113
+#line 110
 testRunner.And("In SHA Manager for the top record the values are as follows", ((string)(null)), table12, "And ");
 #line hidden
             this.ScenarioCleanup();

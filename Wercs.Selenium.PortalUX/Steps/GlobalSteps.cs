@@ -79,8 +79,9 @@ namespace WERCSmart
 			}
 		}
 
-		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role)")]
-		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role)")]
+
+		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account)")]
+		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account)")]
 		public void LoginToWERCSmart(string type)
 		{
 			switch (type)
@@ -93,6 +94,9 @@ namespace WERCSmart
 					break;
 				case ("Administrator Role"):
 					LoginToAccount("ProductAccount");
+					break;
+				case ("Canada has all data account"):
+					LoginToAccount("CanadaHasAllData");
 					break;
 			}
 		}
@@ -961,7 +965,7 @@ namespace WERCSmart
 		[Given(@"I save to context name: (.*) and string value: (.*)")]
 		public void GivenISaveToContextNameAndStringValue(string name, string value)
 		{
-			
+
 			Context.AddToContext(name, value);
 		}
 

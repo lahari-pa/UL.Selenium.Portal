@@ -263,25 +263,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 						if (infoLink != null)
 						{
+							Report.Info("Trying to click info link...");
 							if (!infoLink.TryClick())
 							{
 								throw new Exception("Failed to click info link.");
 							}
 							Delay.Seconds(1);
+							Report.Info("Clicked info link");
+							Report.Screenshot();
 							var expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
 							if (expandableDiv.GetAttribute("aria-expanded") == "true")
 							{
+								Report.Info("Got extra info. Trying to find url link.");
 								var link = expandableDiv.FindElements(By.XPath(".//a")).FirstOrDefault(x => x.Text.Trim() == linkText && x.GetAttribute("href").Contains(linkURL));
 								if (link == null)
 								{
-									Report.Info("Could not find matching link: " + linkText);
+									Report.Info("Could not find matching url: " + linkText);
 									return false;
 								}
-
-								link.TryClick();
+								Report.Info("Got url link trying to click");
+								if (!link.TryClick())
+								{
+									throw new Exception("Failed to click link in expanded info section");
+								}
 								bool tabFound = false;
 								int counter = 0;
-
+								Report.Info("Looking for new tab with url: " + linkURL);
 								while (!tabFound && counter < 10)
 								{
 									if (SeleniumBrowser.GetTabURLs().Contains(linkURL))
@@ -308,7 +315,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					}
 					catch (Exception e)
 					{
-						throw new Exception("No info link was found");
+						throw new Exception("No info link was found: " + e.Message);
 					}
 				}
 				else

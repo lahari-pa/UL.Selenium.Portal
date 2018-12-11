@@ -1421,6 +1421,42 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return container.FindElements(By.XPath(".//span[contains(@data-bind,'identifier')]"), 2).Select(x => x.Text).ToList();
 		}
 
+		public bool UPCPackageTypeFieldExists()
+		{
+			try
+			{
+				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				var packageTypeField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+				if (packageTypeField == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public string GetValidOptionForUPCPackageType()
+		{
+			if (!this.UPCPackageTypeFieldExists())
+			{
+				Report.Info("Package type field does not exist");
+				Report.Screenshot();
+				return null;
+			}
+			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var packageTypeField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+			List<string> selectOptions = packageTypeField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+			return selectOptions.FirstOrDefault(x => x != "Package Type");
+
+		}
+
 		public bool InputUpcInformation(UpcInformation info)
 		{
 			try
@@ -1468,6 +1504,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					var quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity']"), 2);
 					quantityField.EnterText(info.Quantity);
+				}
+
+				if (info.PackageType.Length > 0)
+				{
+					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+					packageField.Select(info.PackageType);
 				}
 				return true;
 			}
@@ -3700,6 +3742,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
 							@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and @type='text'] | " +
 							@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
+							@"//div[@class='dropzone' and (.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")])] | " +
 							@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 				var el = containerElement.FindElement(By.XPath(xPath), 2);
@@ -4123,7 +4166,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return 0;
 			}
-			var RowInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs-4')]/input"), 2);
+			var RowInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs')]/input"), 2);
 			if (RowInputs.Count == 0)
 			{
 				Report.Failure("There were no State Pesticide Registration rows visible on the Pesticide State Registration Details page");
@@ -5266,6 +5309,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string Size { get; set; } = "";
 		public string Dpci { get; set; } = "";
 		public string Quantity { get; set; } = "";
+		public string PackageType { get; set; } = "";
 
 	}
 

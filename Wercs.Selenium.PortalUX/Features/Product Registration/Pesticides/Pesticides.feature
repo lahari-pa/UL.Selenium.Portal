@@ -478,7 +478,7 @@ Then I should see the Additional Documents to Provide Page
 Then in the Additional Documents to Provide page I click Continue
 Then I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
-#CLF - from here the test outcomes to dnot seem to be as predicted.
+#CLF - from here the test outcomes to not seem to be as predicted.
 #I'm seeing Additional Documents -> Contact Information
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500

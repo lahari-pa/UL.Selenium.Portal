@@ -2153,122 +2153,146 @@ testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as produ
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Studio")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductSetUp")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ProductSetUp")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("TFSdesign")]
         public virtual void _86187CreateANewSimpleProductSOLDUSAndCanadaPLYesCanadianTireRetailerProduct_SubmitThruToCompletedStatus()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[86187] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire" +
-                    " Retailer Product  - submit thru to Completed status", ((string[])(null)));
-#line 719
-this.ScenarioSetup(scenarioInfo);
-#line 720
-testRunner.Given("[Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes)" +
-                    ", Stewardship (Full)]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " Retailer Product  - submit thru to Completed status", new string[] {
+                        "TFSdesign"});
 #line 721
+this.ScenarioSetup(scenarioInfo);
+#line 723
+testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 724
+testRunner.Given("I generate a random UPC number and save as: UPC86187", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 725
+testRunner.Given("I delete all products with UPC Number: saved as UPC86187", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 726
 testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 722
-testRunner.And("I In the shared step below select Chalk as your product type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 723
+#line 728
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
-                    " - Happy Path): (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 724
-testRunner.And("I Make a note of the WPS ID shown at the top of the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 725
+                    " - Happy Path): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 729
+testRunner.Then("I save the product information as: TestCase86187", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 731
 testRunner.And("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 726
-testRunner.And("[Shared Step 85284 - Additional Product Information - US & Canada, Child (No), OS" +
-                    "HA (No), DSV (No), PLP (YES), GNFR (No), Continue]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 727
-testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 728
+#line 732
+testRunner.And("I call Shared Step 85284 - Additional Product Information - US & Canada, Child (N" +
+                    "o), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 733
+testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
+                    "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 734
 testRunner.And("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PRO" +
                     "P 65 - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 729
-testRunner.And("I In the shared step below  be sure to select Canadian Tire as the retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 730
-testRunner.And("[Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL inf" +
-                    "ormation - Continue]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 731
-testRunner.And("[Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no ret" +
-                    "ailer data needed) - Continue]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 732
-testRunner.And("[Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request au" +
-                    "thoring for both]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 733
-testRunner.And("I The Additional documents to provide step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 734
-testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 735
-testRunner.And("I The Optional Reports and Documents Available for Purchase step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 736
-testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 737
-testRunner.And("[Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, " +
-                    "address, phone and emergency phone - Happy Path]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Requires Table"});
+                        "Retailer"});
             table44.AddRow(new string[] {
-                        "Parameters"});
-#line 738
-testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
-                    ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table44, "And ");
+                        "Canadian Tire"});
+#line 736
+testRunner.And("I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add " +
+                    "PL information - Continue", ((string)(null)), table44, "And ");
+#line 739
+testRunner.And("I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (" +
+                    "no retailer data needed) - Continue for UPC: saved as UPC86187, container type: " +
+                    "Metal Container and size: 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 740
+testRunner.And("I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Requ" +
+                    "est authoring for both", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 741
-testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: (.*)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 742
-testRunner.And("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
+                    "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 743
-testRunner.And(@"I The Purchase summary page shows with you product details shown.  Confirm you see entries for your product for Chemical assessment, SDS authoring North American Combined GHS SDS ENGLISH (USA), Additional document Canada GHS SDS ENGLISH (USA) Additional document language Canada GHS SDS FRENCH (CANADA)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
+                    "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Personal Protection Equipment",
+                        "Autoignition Temperature",
+                        "Minimum Ignition Energy",
+                        "Viscosity",
+                        "Appearance",
+                        "Odor",
+                        "Odor Threshold",
+                        "Partition Coefficient"});
+            table45.AddRow(new string[] {
+                        "Mask",
+                        "300",
+                        "1.005",
+                        "20",
+                        "Black",
+                        "Odorless",
+                        "No data available",
+                        "10"});
 #line 744
-testRunner.And("I Click Confirm Order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 745
-testRunner.And("I Click Home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 746
-testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
+                    ") step - add any random data for all fields - Happy path) and enter the followin" +
+                    "g:", ((string)(null)), table45, "Given ");
 #line 747
-testRunner.And("I In the shared step below filter for your product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comm" +
+                    "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 748
-testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
-                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 749
-testRunner.And("I Confirm your product is shown in the Submitted status.Note this may take a few " +
-                    "minutes for the Zuora process to process your product, if it is not shown in Sub" +
-                    "mitted wait a minute or two and re-search for your product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 750
-testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
-                    "uct data for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("If purchase details are showing click confirm order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 751
-testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
-                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 752
-testRunner.And("I Confirm the product is shown in the Assigned status", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase86187)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 753
-testRunner.And("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules jo" +
-                    "b to complete for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 a" +
+                    "nd its status is: Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 754
-testRunner.And("I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific prod" +
-                    "uct > Click Continue for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
+                    "uct data for product saved as: TestCase86187)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 755
-testRunner.And("[Shared Step 78877 - WPS Studio - PD+ - set all data and publish using rule and d" +
-                    "oc queue - CKLT, NGHS, HSGH (EN and CF) and SBCS]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for sa" +
+                    "ved as: TestCase86187)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 756
-testRunner.And("I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multipl" +
-                    "e to complete for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 a" +
+                    "nd its status is: Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 757
-testRunner.And("I IN SHA Manager - use the step below to search for your product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules jo" +
+                    "b to complete for product saved as: TestCase86187)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 758
-testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
-                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific prod" +
+                    "uct > Click Continue for product saved as: TestCase86187)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 759
-testRunner.And("I Confirm the product is shown in Accepted or Completed status depending in the r" +
-                    "etailers selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 78877 - WPS Studio - PD+ - set all data and publish using rule" +
+                    " and doc queue - CKLT, NGHS, HSGH (EN and CF) and SBCS for saved as: TestCase861" +
+                    "87", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 760
-testRunner.And("I If any retailer is shown in accepted status use the shared step below to set al" +
-                    "l to Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multipl" +
+                    "e to complete for product saved as: TestCase86187)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 761
-testRunner.And("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
-                    " saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 762
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 a" +
+                    "nd its status is: Accepted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 763
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for sa" +
+                    "ved as: TestCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Retailer"});
+            table46.AddRow(new string[] {
+                        "CVS"});
+#line 764
+testRunner.Given("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
+                    " saved as: TestCase75335) for", ((string)(null)), table46, "Given ");
+#line 767
+testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase75335)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 768
+testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 a" +
+                    "nd its status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

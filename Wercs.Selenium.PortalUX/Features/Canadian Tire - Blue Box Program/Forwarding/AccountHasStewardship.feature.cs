@@ -114,57 +114,57 @@ namespace Wercs.Selenium.PortalUX.Features.CanadianTire_BlueBoxProgram.Forwardin
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[87217] US & Canada - PL = Yes, Retailer is NOT Canadian Tire, no error re packag" +
                     "e type on forward", ((string[])(null)));
-#line 22
-this.ScenarioSetup(scenarioInfo);
 #line 23
+this.ScenarioSetup(scenarioInfo);
+#line 24
 testRunner.Given("I For this test case you will need a product which has SOLD = US and Canada, PL =" +
                     " Yes and is in completed status for Canadian Tire, use Test case 86187 to create" +
                     " a product in this status.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 24
+#line 25
 testRunner.And("[Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes)" +
                     ", Stewardship (Full)]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
-testRunner.And("I Click the Accepted by Retailers Filter heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 26
-testRunner.And("I Enter the product ID for the product you are working with and press enter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Click the Accepted by Retailers Filter heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
-testRunner.And("I Confirm the Retailers icon is shown in the green Accepted by Retailers color", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Enter the product ID for the product you are working with and press enter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
-testRunner.And("[Shared Step 75130 - Bulk Actions - Select Forward Product Registration]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm the Retailers icon is shown in the green Accepted by Retailers color", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
+testRunner.And("[Shared Step 75130 - Bulk Actions - Select Forward Product Registration]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
 testRunner.And("I In the Search by WPS ID or Product name start typing the WPS ID or product name" +
                     " of the product you are working with", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
-testRunner.And("I Confirm the product is shown for selection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
-testRunner.And("I Select the product by clicking on it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm the product is shown for selection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 32
-testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Select the product by clicking on it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 33
+testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 34
 testRunner.And("I Select a retailer other than Canadian Tire, make sure to select a retailer that" +
                     " does not require additional data (such as BB, DI, KG)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
-testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
-testRunner.And("I Add Information in the Private Label field for the retailer you selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
+testRunner.And("I Add Information in the Private Label field for the retailer you selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 37
 testRunner.And("[Shared Step 86824 - Forwarding - Select Existing UPC, Click Continue, No error f" +
                     "or Package type]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
-testRunner.And("I The Product Results step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 38
-testRunner.And("I Confirm no errors are shown for your product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I The Product Results step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
-testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm no errors are shown for your product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 40
-testRunner.And("I The Review and Submit step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
-testRunner.And("I Select the \"All of the above statements are true\" radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 42
 testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+testRunner.And("I The Review and Submit step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
+testRunner.And("I Select the \"All of the above statements are true\" radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 43
-testRunner.And(@"I Confirm the Purchase Summary page is shown with the success message shown"" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  """, ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 44
+testRunner.And(@"I Confirm the Purchase Summary page is shown with the success message shown"" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  """, ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 45
 testRunner.And("I Click Home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

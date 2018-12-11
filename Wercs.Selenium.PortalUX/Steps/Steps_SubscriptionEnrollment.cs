@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Castle.Components.DictionaryAdapter;
 using OpenQA.Selenium.Support.UI;
 using ResourcePool;
@@ -164,6 +165,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			string actualText = MyASA.AgencyPopupText();
 			Report.IsTrue(actualText == text, "Expected text >>" + text + "<< but got text: >>" + actualText,
 				"Agency Service Agreement pop is showing as expected: " + actualText);
+
+			Report.Info("Actual message length is: " + actualText.Length.ToString() +
+			            " expected message length is: " + text.Trim().Length);
+			if (actualText.Trim() != text.Trim())
+			{
+				StringBuilder builder = new StringBuilder();
+				char[] ar1 = actualText.ToArray();
+				for (int i = 0; i < ar1.Length; i++)
+				{
+					if (actualText.Length > i + 1 && ar1[i].Equals(text[i]))
+					{
+						builder.Append(ar1[i]);
+					}
+					else
+					{
+						Report.Info("Failed on actual is: " + ar1[i] + " and expected is: " + text[i]);
+						break;
+					}
+				}
+
+				Report.Info("Matched up to " + builder);
+			}
 		}
 
 		[StepDefinition(@"I set the (Articles|Enhanced Articles|Formulated Products) to be: (.*), then the Annual Cost should be: (.*)")]

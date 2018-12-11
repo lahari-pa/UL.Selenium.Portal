@@ -91,7 +91,7 @@ And In SHA Manager ProductSearch page I run search:
 
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\SHA Manager\Lower Options
-@TFS_design
+
 Scenario: [75034] Srch - Identifier for Packaging Types
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I navigate to the MyAccount page
@@ -100,9 +100,6 @@ And I navigate to the My Packaging Types tab in the My Library page
 And Save the top packaging id as MPI75034 if there are no packacking types listed add a new packing type as follows
 | Name | Materials   | Weight | Contact with food or drink | CONEG Certificate | CONEG contain     | Recyclable Number | Email         |
 | test | Clear Glass | 60     | No                         | No                | None of the above | 2                 | test@test.com |
-
-#Scenario: Test
-#Given I save to context name: PackagingTypeID_MPI75034 and string value: 1525307
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And In SHA Manager I click on bottom menu item: Search
 And In SHA Manager ProductSearch page I run search:
