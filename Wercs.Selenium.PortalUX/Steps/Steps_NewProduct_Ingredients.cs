@@ -455,5 +455,116 @@ namespace Wercs.Selenium.PortalUX.Steps
 			};
 			selNewProduct.AddIngredient(thisIngredient);
 		}
+
+		[StepDefinition(@"I enter text: (.*) in the component search box")]
+		public void EnterTextComponentSearchBox(string value)
+		{
+			var selNewProduct = new NewProduct();
+			selNewProduct.ClickComponentSearchPlaceholder();
+			Report.IsTrue(selNewProduct.EnterTextSearchComponent(value), $"Failed to enter text '{value}' in the component search box!", $"Successully entered text '{value}' in the component search box");
+		}
+
+		[StepDefinition(@"I select the component search result with (name|CAS) matching text: (.*) and save ingredient as: (.*)")]
+		public void SearchForAndSelectComponentIngredients(string identifier, string value, string savedAs)
+		{
+			var selNewProduct = new NewProduct();
+			var thisCas = "";
+			var thisName = "";
+			switch (identifier)
+			{
+				case "name":
+					Report.Info("Searching for component with name: " + value);
+					thisName = value;
+					break;
+				case "CAS":
+					Report.Info("Searching for component with CAS: " + value);
+					thisCas = value;
+					break;
+				default:
+					Report.Failure("Invalid 'identifier' parameter provided! Must be 'name' or 'CAS'!");
+					return;
+			}
+
+			var thisIngredient = new Ingredient {
+				CASNumber = thisCas,
+				ComponentName = thisName
+			};
+			Report.Info($"Clicking the first search result matching: {thisName} [{thisCas}]");
+			Report.IsTrue(selNewProduct.ClickIngredientFromSearchResults(thisIngredient, out Ingredient clickedIngredient), "Failed to click ingredient!", "Successfully clicked ingredient");
+			Report.Info("Saving clicked ingredient to context. Saved as: " + savedAs);
+			Context.AddToContext(savedAs, clickedIngredient);
+		}
+
+		[StepDefinition(@"I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: (.*) with hover over text: (.*)")]
+		public void ConfirmSustainabilityHintMatchesText(string savedAs, string text)
+		{
+			TestReport.StartStep($"I confirm that a Sustainability Hint button is displayed under ingredient saved as: {savedAs} with the correct hover over text");
+			var selNewProduct = new NewProduct();
+			var ingredient = (Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
+				return;
+			}
+			var actualText = selNewProduct.IngredientGenericWarningPopoverText(ingredient, "Sustainability Hint");
+			if (actualText == null)
+			{
+				Report.Failure("No Sustainability Hint message was found for ingredient saved as: " + savedAs + "!");
+				return;
+			}
+			Report.IsTrue(actualText.Replace(" ", "") == text.Replace(" ", ""),
+				$"The Sustainability Hint hover over message did not match the expected text! Expected: '{text}' but found: '{actualText}'",
+				"The Sustainability Hint hover over message matched the expected text: " + text);
+		}
+
+		[StepDefinition(@"I confirm that the 'Sustainability Hint' button (is displayed|is not displayed) under ingredient saved as: (.*)")]
+		public void ConfirmSustainabilityHintIsDisplayed(string expectDisplayed, string savedAs)
+		{
+			var selNewProduct = new NewProduct();
+			var ingredient = (Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
+				return;
+			}
+			var actualText = selNewProduct.IngredientGenericWarningPopoverText(ingredient, "Sustainability Hint");
+			if (expectDisplayed == "is displayed")
+			{
+				Report.IsTrue(actualText != null, "");
+				return;
+			}
+			if (expectDisplayed == "is not displayed")
+			{
+				Report.IsTrue(actualText == null, "");
+				return;
+			}
+			Report.Failure("Invalid step variable was provided! Must be either 'is displayed' or 'is not displayed'");
+		}
+
+		[StepDefinition(@"I click on the Sustainability Hint button under ingredient saved as: (.*)")]
+		public void ClickOnSustainabilityHintButton(string savedAs)
+		{
+			var ingredient = (Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
+				return;
+			}
+			Report.IsTrue(new NewProduct().ClickIngredientGenericWarningButton(ingredient, "Sustainability Hint"),
+				"Failed to click the Sustainability Hint button for ingredient saved as: " + savedAs, "Successfully clicked the Sustainability Hint button for the ingredient saved as: " + savedAs);
+		}
+
+		[StepDefinition(@"I confirm a 'Sustainability Hint' popover element is open under ingredient saved as: (.*)")]
+		public void ConfirmSutainabilityHintPopoverIsActive(string savedAs)
+		{
+			var ingredient = (Ingredient)Context.GetFromContext(savedAs);
+			if (ingredient == null)
+			{
+				Report.Failure("Unable to find ingredient in context saved as: " + savedAs);
+				return;
+			}
+			Report.IsTrue(new NewProduct().IngredientGernicWarningPopoverIsActive(ingredient, "Sutainability "), "The Sustainability Hint popover was not open!", "The Sustainability Hint popover was open as expected");
+		}
+
 	}
 }

@@ -1459,6 +1459,95 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Ingredients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Ingredients")]
+        public virtual void _81711Ingredients_InformationalMessageForFragranceAndFlavorIngredients()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients", ((string[])(null)));
+#line 595
+this.ScenarioSetup(scenarioInfo);
+#line 596
+testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 597
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 599
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Medicated Lotion or Soap", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 600
+testRunner.And("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
+                    "Solid - State&Subcat - Mixed&Water -random - Continue - HP)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 601
+testRunner.And("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 602
+testRunner.And("I enter text: FRAGRANCE in the component search box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 603
+testRunner.And("I select the component search result with CAS matching text: FRAGRANCE and save i" +
+                    "ngredient as: FragranceIngredient81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 604
+testRunner.And(@"I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FragranceIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 605
+testRunner.And("I enter text: FRAGRANCE in the component search box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 606
+testRunner.And("I select the component search result with CAS matching text: RR and save ingredie" +
+                    "nt as: FragranceRRIngredient81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 607
+testRunner.And(@"I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FragranceRRIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 608
+testRunner.And("I enter text: Flavor in the component search box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 609
+testRunner.And("I select the component search result with CAS matching text: FLAVOR and save ingr" +
+                    "edient as: FlavorIngredient81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 610
+testRunner.And(@"I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FlavorIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 611
+testRunner.And("I enter text: Flavor in the component search box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 612
+testRunner.And("I select the component search result with CAS matching text: RR and save ingredie" +
+                    "nt as: FlavorRRIngredient81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 613
+testRunner.And(@"I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FlavorRRIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 614
+testRunner.And("I enter text: N/A in the component search box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 615
+testRunner.And("I select the component search result with CAS matching text: N/A and save ingredi" +
+                    "ent as: NAIngredient81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 616
+testRunner.And("I confirm that the \'Sustainability Hint\' button is not displayed under ingredient" +
+                    " saved as: NAIngredient81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 617
+testRunner.And("I click on the Sustainability Hint button under ingredient saved as: FragranceIng" +
+                    "redient81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 618
+testRunner.And("I confirm a \'Sustainability Hint\' popover element is open under ingredient saved " +
+                    "as: FragranceIngredient81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 619
+testRunner.And("I move the mouse pointer by an offset of 100 in x and 100 in y", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 620
+testRunner.And("I confirm a \'Sustainability Hint\' popover element is open under ingredient saved " +
+                    "as: FragranceIngredient81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 621
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 622
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase81711", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

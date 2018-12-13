@@ -2327,6 +2327,111 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		/// <summary>
+		/// In the ingredients page, enter text to the component search box
+		/// </summary>
+		public bool EnterTextSearchComponent(string value)
+		{
+			Report.Info("Entering text to the search box input");
+			var inputEl = containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+			if (inputEl == null)
+			{
+				Report.Info("Could not find the search input element!");
+				return false;
+			}
+			inputEl.EnterText(value);
+			Delay.Seconds(1);
+			return inputEl.GetValue() == value;
+		}
+
+		public bool ClickComponentSearchPlaceholder()
+		{
+			Report.Info("Clicking the search box");
+			var placeholderEl = containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
+			return placeholderEl.TryClick();
+		}
+
+		/// <summary>
+		/// In the ingredients page, click the first search result matching on CAS, then name, from inputted ingredient. output the ingredient which was clicked
+		/// </summary>
+		public bool ClickIngredientFromSearchResults(Ingredient ingredient, out Ingredient ingredient_)
+		{
+			ingredient_ = new Ingredient();
+			IWebElement resultMatch;
+			//var inputEl = containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+			var searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+			int i = 0;
+			while (searching != null && i < 10)
+			{
+				Delay.Seconds(1);
+				i++;
+				searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+			}
+			if (!string.IsNullOrEmpty(ingredient.CASNumber))
+			{
+				// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
+				var results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+				if (!results.Any())
+				{
+					Report.Info("No results were returned on search");
+					return false;
+				}
+				int j = 0;
+				bool resultFound = false;
+				while (!resultFound && j < 10)
+				{
+					resultFound = results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) != null;
+					Delay.Seconds(1);
+					results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					j++;
+				}
+				if (!resultFound)
+				{
+					return false;
+				}
+				// Find every result row returned which match the CAS we are looking for, exluding the 'loading' row which appears at the bottom
+				var matchingCasResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='text-muted']"), 2).Text.Trim().StartsWith(ingredient.CASNumber.Trim()));
+				if (!matchingCasResults.Any())
+				{
+					return false;
+				}
+				// Add match to output ingredient
+				resultMatch = matchingCasResults.FirstOrDefault();
+				ingredient_.CASNumber = resultMatch.FindElement(By.XPath(".//span[@class='text-muted']"), 2)?.Text;
+				ingredient_.ComponentName = resultMatch.FindElement(By.XPath(".//span[@class='component-name']"), 2)?.Text;
+				return resultMatch.TryClick();
+			}
+			if (!string.IsNullOrEmpty(ingredient.ComponentName))
+			{
+				Report.Info("No CAS Number was assigned to the ingredient, so searching for the chemical by Component Name instead");
+				var results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+				i = 0;
+				while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) == null && i < 20)
+				{
+					if (containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2)?.Text == "No results found")
+					{
+						Report.Info("There were no results returned searching by Name!");
+						return false;
+					}
+					i++;
+					Delay.Seconds(1);
+					results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+				}
+				// Avoiding null reference exception on .GetValue() - "Loading more results" row at the bottom (no span with component-name)
+				var matchingNameResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text.Trim() == ingredient.ComponentName.Trim());
+				if (!matchingNameResults.Any())
+				{
+					return false;
+				}
+				resultMatch = matchingNameResults.FirstOrDefault();
+				Report.Info("Selecting the first search result which matched on chemical name: " + ingredient.ComponentName + " with CAS: " + ingredient.CASNumber);
+				ingredient_.CASNumber = resultMatch.FindElement(By.XPath(".//span[@class='text-muted']"), 2)?.Text;
+				ingredient_.ComponentName = resultMatch.FindElement(By.XPath(".//span[@class='component-name']"), 2)?.Text;
+				return resultMatch.TryClick();
+			}
+			return false;
+		}
+
 		public string GetIngredientErrorMessage()
 		{
 			var el = containerElement.FindElement(By.XPath(".//div[contains(@class,'formulation-grid')]//div[@role='alert']//span[starts-with(@data-bind,'text')]"), 2);
@@ -5268,6 +5373,87 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var el = this.containerElement.FindElement(By.XPath(".//td[@class='remove']/button[contains(text(), 'Delete')]"), 2);
 			return el.TryClick();
+		}
+
+		public string IngredientGenericWarningPopoverText(Ingredient ingredient, string title)
+		{
+			var cas = ingredient.CASNumber;
+			var name = ingredient.ComponentName;
+			IWebElement popover;
+			if (cas.IsNullOrEmpty())
+			{
+				if (name.IsNullOrEmpty())
+				{
+					return null;
+				}
+				popover = this.containerElement.FindElement(By.XPath($".//tr[.//div[@class='chemical-name' and contains(text(),'{name}')]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+				if (popover != null && popover.Text.Contains("Sustainability Hint"))
+				{
+					return popover.GetAttribute("data-content");
+				}
+				return null;
+			}
+			popover = this.containerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+			if (popover != null && popover.Text.Contains("Sustainability Hint"))
+			{
+				return popover.GetAttribute("data-content");
+			}
+			return null;
+		}
+
+		public bool ClickIngredientGenericWarningButton(Ingredient ingredient, string title)
+		{
+			IWebElement button;
+			var cas = ingredient.CASNumber;
+			var name = ingredient.ComponentName;
+			if (cas.IsNullOrEmpty())
+			{
+				if (name.IsNullOrEmpty())
+				{
+					return false;
+				}
+				button = this.containerElement.FindElement(By.XPath($".//tr[.//div[@class='chemical-name' and contains(text(),'{name}')]]//div[@class='generic-warning']"), 2);
+				if (button != null && button.Text.Contains("Sustainability Hint"))
+				{
+					return button.FindElement(By.XPath("./a"), 2).TryClick();
+				}
+				return false;
+			}
+			button = this.containerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']"), 2);
+			if (button != null && button.Text.Contains("Sustainability Hint"))
+			{
+				return button.FindElement(By.XPath("./a"), 2).TryClick();
+			}
+			return false;
+		}
+
+		public bool IngredientGernicWarningPopoverIsActive(Ingredient ingredient, string title)
+		{
+			var cas = ingredient.CASNumber;
+			var name = ingredient.ComponentName;
+			IWebElement popover;
+			var popoverId = "";
+			if (cas.IsNullOrEmpty())
+			{
+				if (name.IsNullOrEmpty())
+				{
+					return false;
+				}
+				popover = this.containerElement.FindElement(By.XPath($".//tr[.//div[@class='chemical-name' and contains(text(),'{name}')]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+				if (popover != null && popover.Text.Contains("Sustainability Hint"))
+				{
+					popoverId = popover.GetAttribute("aria-describedby");
+					return !popoverId.IsNullOrEmpty() && popoverId.StartsWith("popover");
+				}
+				return false;
+			}
+			popover = this.containerElement.FindElement(By.XPath($".//tr[.//div[@class='cas-number' and ./small[contains(text(),'{cas}')]]]//div[@class='generic-warning']/a[@data-toggle='popover']"), 2);
+			if (popover != null && popover.Text.Contains("Sustainability Hint"))
+			{
+				popoverId = popover.GetAttribute("aria-describedby");
+				return !popoverId.IsNullOrEmpty() && popoverId.StartsWith("popover");
+			}
+			return false;
 		}
 	}
 

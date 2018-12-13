@@ -585,3 +585,38 @@ And in the modal dialog I click the "Yes" button
 And I confirm there are a total of: 0 ingredients in the table
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase84528
+
+# Assigned to Paulina Mata
+# Created by Paulina Mata
+
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
+
+Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+# Temporarily using this product type instead of 'Soap (Bar, Liquid)' because of bug #88838
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Medicated Lotion or Soap
+And I call Shared Step 57501 (Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+And I enter text: FRAGRANCE in the component search box
+And I select the component search result with CAS matching text: FRAGRANCE and save ingredient as: FragranceIngredient81711
+And I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FragranceIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.
+And I enter text: FRAGRANCE in the component search box
+And I select the component search result with CAS matching text: RR and save ingredient as: FragranceRRIngredient81711
+And I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FragranceRRIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.
+And I enter text: Flavor in the component search box
+And I select the component search result with CAS matching text: FLAVOR and save ingredient as: FlavorIngredient81711
+And I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FlavorIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.
+And I enter text: Flavor in the component search box
+And I select the component search result with CAS matching text: RR and save ingredient as: FlavorRRIngredient81711
+And I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: FlavorRRIngredient81711 with hover over text: You have included a generic ingredient in your product. Be aware that this may impact chemical policy or sustainability assessments conducted by retailers or your GoodGuide ratings, if you participate in any of these programs. Such assessments are more accurate if they are derived from full formulations that list the specific components within a generic ingredient. It is an emerging transparency best-practice to avoid the use of generic ingredients and either (i) add these directly to your product's ingredients, or (ii) request that the third-party supplier providing your generic ingredient register it as a 3rd-Party Formula in WERCSmart and add the 3rd-Party ingredient to your registration. Using the 3rd-Party Formula registration process allows your third-party formulator to control whether its ingredient can be included in assessments of your product and to determine which ingredients, if any, can be publicly disclosed.
+And I enter text: N/A in the component search box
+And I select the component search result with CAS matching text: N/A and save ingredient as: NAIngredient81711
+And I confirm that the 'Sustainability Hint' button is not displayed under ingredient saved as: NAIngredient81711
+And I click on the Sustainability Hint button under ingredient saved as: FragranceIngredient81711
+And I confirm a 'Sustainability Hint' popover element is open under ingredient saved as: FragranceIngredient81711
+And I move the mouse pointer by an offset of 100 in x and 100 in y
+And I confirm a 'Sustainability Hint' popover element is open under ingredient saved as: FragranceIngredient81711
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase81711

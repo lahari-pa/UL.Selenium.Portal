@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using ResourcePool;
 using SafewareReportingPlugin;
 using TechTalk.SpecFlow.Assist;
@@ -965,8 +966,26 @@ namespace WERCSmart
 		[Given(@"I save to context name: (.*) and string value: (.*)")]
 		public void GivenISaveToContextNameAndStringValue(string name, string value)
 		{
-
 			Context.AddToContext(name, value);
+		}
+
+		[StepDefinition(@"I move the mouse pointer by an offset of (.*) in x and (.*) in y")]
+		public void MoveMousePointerByOffset(string offsetX, string offsetY)
+		{
+			if (!int.TryParse(offsetX, out var offsetXNum))
+			{
+				Report.Failure("The offset parameter must be parsable as an integer!");
+				return;
+			}
+			if (!int.TryParse(offsetY, out var offsetYNum))
+			{
+				Report.Failure("The offset parameter must be parsable as an integer!");
+				return;
+			}
+			Report.Info($"Doing action: Move By Offset ({offsetX}, {offsetY})");
+			var action = new Actions(SeleniumBrowser.WebBrowser);
+			action.MoveByOffset(offsetXNum, offsetYNum).Build().Perform();
+			Report.Info("Action performed");
 		}
 
 	}
