@@ -529,6 +529,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ULSC.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\UPC.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UPC.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Walmart.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -563,6 +568,8 @@
     <Compile Include="Selenium Classes\LandingPage.cs" />
     <Compile Include="Selenium Classes\SHAProductNotificationHistory.cs" />
     <Compile Include="Selenium Classes\SHAProductRecertificationHistory.cs" />
+    <Compile Include="Selenium Classes\UPC.cs" />
+    <Compile Include="Steps\Steps_UPC.cs" />
     <Compile Include="Selenium Classes\StudioLegends.cs" />
     <Compile Include="Selenium Classes\LiveHelp.cs" />
     <Compile Include="Selenium Classes\Login.cs" />
@@ -945,6 +952,10 @@
     <None Include="Features\ULSC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ULSC1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\UPC.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UPC.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Walmart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
