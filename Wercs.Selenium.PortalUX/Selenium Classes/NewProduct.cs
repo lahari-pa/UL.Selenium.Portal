@@ -4291,7 +4291,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			var RowInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs-4')]/input"), 2);
+			var RowInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs')]/input"), 2);
 			if (RowInputs.Count == 0)
 			{
 				Report.Failure("There were no State Pesticide Registration rows visible on the Pesticide State Registration Details page");
@@ -4313,7 +4313,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			var RowInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs-4')]/input"), 2);
+			var RowInputs = EPATable.FindElements(By.XPath(@".//ancestor::td[contains(@class,'col-xs')]/input"), 2);
 			if (RowInputs.Count == 0)
 			{
 				Report.Failure("There were no State Pesticide Registration rows visible on the Pesticide State Registration Details page");
@@ -4376,7 +4376,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			var stateRow = EPATable.FindElements(By.XPath(@".//tr[contains(@data-bind, 'css')]"), 2)[index];
+			var stateRow = containerElement.FindElements(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table/tbody/tr[contains(@data-bind, 'css')]"), 2)[index+1];
 			var kellyDataCheck = stateRow.FindElement(By.XPath(@".//td[5]/div[@class='fa fa-check' and not(contains(@style, 'display: none'))]"), 2);
 			if (kellyDataCheck == null)
 			{

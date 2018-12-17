@@ -490,6 +490,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selNewProduct.WaitForSection(page),
 				page + " is not showing when it was expected to",
 				page + " is showing as expected");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I should see the Additional Information Page")]
@@ -2250,47 +2251,38 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void IConfirmDataInExpirationDateColumnPesticideStates()
 		{
 			var newProductPage = new NewProduct();
-			var RowCount = newProductPage.CountPesticideRegRows();
-			var expirationDateIndexes = new List<int>();
+			var AllPesticideDetails = newProductPage.GetStatePesticideRegistrationDetails();
 			Report.Screenshot();
-			for (int i = 0; i < RowCount; i++)
-			{
-				if (newProductPage.ExpirationDateRowHasData(i))
-				{
-					var rowNumber = i + 1;
-					Report.Info("State at row number: " + rowNumber + " contained an Expiration Date");
-					expirationDateIndexes.Add(i);
-				}
-			}
-			Report.IsTrue(expirationDateIndexes.Count > 0,
+
+			Report.IsTrue(AllPesticideDetails.Select(x => x.ExpirationDate.Length > 0).ToList().Count() > 0,
 				"No States were found to contain data for Expiration Date on the Pesticide State Registration Details page",
 				"Some States contained data in Expiration Date column as expected");
 			// We add the indexes as a list to the scenario context to allow checking the 'Is Kelly Data Data' field in another step
-			Context.AddToContext("Expiration Date Indexes", expirationDateIndexes);
+			Context.AddToContext("AllPesticideDetails", AllPesticideDetails);
 		}
 
 		[StepDefinition(@"I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'")]
 		public void IConfirmKellyDataFieldIsCheckedWhenExpirationDateExists()
 		{
-			var newProductPage = new NewProduct();
-			var rowsToCheck = new List<int>();
-			if (ScenarioContext.Current.ContainsKey("Expiration Date Indexes"))
+			if (Context.Contains("AllPesticideDetails"))
 			{
-				rowsToCheck = (List<int>)Context.GetFromContext("Expiration Date Indexes");
-				foreach (var index in rowsToCheck)
+				List<StatePesticideRegistration> AllPesticideDetails = (List<StatePesticideRegistration>)Context.GetFromContext("AllPesticideDetails");
+				List<StatePesticideRegistration> DetailsWithDates = AllPesticideDetails.Where(x => x.ExpirationDate.Length > 0).ToList();
+				Report.Info("Found " + DetailsWithDates.Count + " rows with expiration dates");
+				foreach (var PesticideDetail in DetailsWithDates)
 				{
-					if (!newProductPage.KellyDataIsTickedAtRow(index))
+					if (!PesticideDetail.IsKellyData)
 					{
-						Report.Failure("The State at row index: " + index + " did not contain a check mark under the Is Kelly Data column as expected");
+						Report.Failure(PesticideDetail.State + " did not contain a check mark under the Is Kelly Data column as expected");
 						return;
 					}
 				}
-				Report.Success("All States with an Expiration Date also had a check mark under the 'Is Kelly Data' column as expceted");
+				Report.Success("All States with an Expiration Date also had a check mark under the 'Is Kelly Data' column as expected");
 				Report.Screenshot();
 			}
 			else
 			{
-				Report.Failure("There were no States to check the Kelly Data field (rows containing an Expiration Date)");
+				Report.Failure("Pesticide details have not been saved to Context");
 				Report.Screenshot();
 			}
 		}
@@ -2325,14 +2317,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Warn("Expecting a state provided in the form: AZ, IL, NY etc.");
 			}
+
+			List<StatePesticideRegistration> ListOfPesticideDetails =
+				newProductPage.GetStatePesticideRegistrationDetails();
+
+			StatePesticideRegistration thisStateDetails = ListOfPesticideDetails.FirstOrDefault(x => x.State == state);
+
+			if (thisStateDetails == null)
+			{
+				throw new Exception("Could not find details for state: " + state);
+			}
 			if (check == "is")
 			{
-				Report.IsTrue(newProductPage.KellyDataIsTickedForState(state), "The 'Is Kelly Data' field for State : " + state + " didn't contain a check when it was expected to", "The 'Is Kelly Data' field for State: " + state + " contained a check as expected");
+				Report.IsTrue(thisStateDetails.IsKellyData, "The 'Is Kelly Data' field for State : " + state + " didn't contain a check when it was expected to", "The 'Is Kelly Data' field for State: " + state + " contained a check as expected");
 				return;
 			}
 			if (check == "is not")
 			{
-				Report.IsFalse(newProductPage.KellyDataIsTickedForState(state), "The 'Is Kelly Data' field for State: " + state + " contained a check when it should not", "The 'Is Kelly Data' field for State: " + state + " did not contain a check as expected");
+				Report.IsFalse(!thisStateDetails.IsKellyData, "The 'Is Kelly Data' field for State: " + state + " contained a check when it should not", "The 'Is Kelly Data' field for State: " + state + " did not contain a check as expected");
 			}
 		}
 

@@ -23,6 +23,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new PackagingType().ClickAddRow(),
 				"Failed to click Add Row in the Bill of Materials grid",
 				"Successfully clicked Add Row in the Bill of Materials grid");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I select the option: (.*) for the (.*) field in the table")]

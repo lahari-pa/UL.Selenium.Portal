@@ -117,7 +117,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Completed");
 		}
 
-		[Given(@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
+		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335(string name, string savedAs)
 		{
 			this.CreateProductUsingTestCase75335(savedAs, name);
