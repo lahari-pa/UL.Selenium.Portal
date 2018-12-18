@@ -684,6 +684,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return th;
 		}
 
+		//Yes Button on Remove Item popup
+		[FindsBy(How = How.XPath, Using = ".//button[@class='btn btn-default'] [text()='Yes']")]
+		private IWebElement _btnYes;
+
 		public void DeleteEmptyBatteryRows()
 		{
 			IWebElement thisTable = containerElement.FindElement(By.XPath(".//table"));
@@ -706,6 +710,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						removeButton = unselectedManufacturerTypes.FirstOrDefault().FindElement(By.XPath("../..//td[" + removeIndex.ToString() + "]//a"));
 						removeButton.Click();
+						Delay.Seconds(3);
+						Report.Info("Attempting to Click Yes Button");
+						_btnYes.Click();
 						Delay.Seconds(3);
 					}
 					else

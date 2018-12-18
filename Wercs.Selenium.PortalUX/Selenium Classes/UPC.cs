@@ -19,13 +19,8 @@ using TechTalk.SpecFlow;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class UPC : BaseObject
+	class UPC : NewProduct
 	{
-		public const string BasePath = "//div[@id='dataentry']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
-
 		public bool ClickAddCaseUpcButton()
 		{
 			var el = containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
