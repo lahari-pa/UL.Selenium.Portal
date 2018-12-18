@@ -568,7 +568,10 @@
     <Compile Include="Selenium Classes\LandingPage.cs" />
     <Compile Include="Selenium Classes\SHAProductNotificationHistory.cs" />
     <Compile Include="Selenium Classes\SHAProductRecertificationHistory.cs" />
+    <Compile Include="Selenium Classes\ULSCLogin.cs" />
     <Compile Include="Selenium Classes\UPC.cs" />
+    <Compile Include="Selenium Classes\WERCSLinkDashboard.cs" />
+    <Compile Include="Steps\Steps_Shared_ULSC.cs" />
     <Compile Include="Steps\Steps_UPC.cs" />
     <Compile Include="Selenium Classes\StudioLegends.cs" />
     <Compile Include="Selenium Classes\LiveHelp.cs" />

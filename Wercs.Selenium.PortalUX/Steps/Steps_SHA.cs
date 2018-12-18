@@ -60,8 +60,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StudioTopMenu thisTopMenu = new StudioTopMenu();
 			Report.IsTrue(thisTopMenu.Wait_for_load(30), "Top menu has not loaded", "Top menu has loaded");
-			Report.IsTrue(thisTopMenu.ClickSubMenu(menuItem, submenuItem), "Failed to click: " + menuItem,
-				"Successfully clicked: " + menuItem);
+
+			if (submenuItem.Length == 0)
+			{
+				Report.IsTrue(thisTopMenu.ClickTopMenuItem(menuItem), "Failed to click: " + menuItem,
+					"Successfully clicked: " + menuItem);
+			}
+			else
+			{
+				Report.IsTrue(thisTopMenu.ClickSubMenu(menuItem, submenuItem), "Failed to click: " + menuItem,
+					"Successfully clicked: " + menuItem);
+			}
+			
 		}
 
 		[Given(@"In SHA Manager Page I click top menu item: (.*)")]

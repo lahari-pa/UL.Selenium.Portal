@@ -11,6 +11,7 @@
 @DocumentAcceptance
 @DeleteActiveProducts
 @wercsmart
+@ULSC
 
 @run_ULSC
 
@@ -42,6 +43,20 @@ Then I click the ULSC - Data Management icon in the QuickLinks Pane
 And I switch to the tab: https://wps.thewercs.com/dbSplit/PROD/Wercs.SHA.MVCWebV1/ULSC/Studio?module=1
 #need to create assert on an empty page
 And UNDER DEVELOPMENT
+
+Scenario: [23327] WERCSLink - WERCSmart - My Products Page Shows OK
+Given I call Shared Step 29665 - Login to WSW as ULSC user
+And I call Shared Step 29148 - Login to ULSC as an Administrator User
+And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart
+And I should see the WERCSLink dashboard
+And In the WERCSLink dashboard I click menu item: Services and submenu item: WERCSmart
+And In the WERCSLink dashboard I click left menu link: My Products
+And I Confirm the WerCSMart Product Information page is shown in new window/tab
+And I Close the new window/tab that opened
+And I In the WERCSLink page - Click the My Product link from the WERCSmart area of the Services page
+And I Confirm the WERCSmart  Product Information page is shown in a new window
+And I Close the new window/tab that opened
+
 
 
 

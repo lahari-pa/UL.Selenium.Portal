@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wercs.Selenium.PortalUX", "Wercs.Selenium.PortalUX.csproj", "{C8C7F758-D2AE-4186-94A5-10254BB019BC}"
 EndProject
@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{191079
 	ProjectSection(SolutionItems) = preProject
 		NuGet.config = NuGet.config
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wercs.Selenium.ULSC", "..\Wercs.Selenium.ULSC\Wercs.Selenium.ULSC.csproj", "{0CE3318A-578B-4032-976E-984D65B5BCDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{C8C7F758-D2AE-4186-94A5-10254BB019BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8C7F758-D2AE-4186-94A5-10254BB019BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8C7F758-D2AE-4186-94A5-10254BB019BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CE3318A-578B-4032-976E-984D65B5BCDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CE3318A-578B-4032-976E-984D65B5BCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CE3318A-578B-4032-976E-984D65B5BCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CE3318A-578B-4032-976E-984D65B5BCDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -28,11 +34,14 @@ Global
 		SolutionGuid = {AA5A7B35-695B-454C-94D6-287101568FBB}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs.thewercs.local/tfs/wercs
+		SccTeamFoundationServer = https://dev.azure.com/ulpsi
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Wercs.Selenium.PortalUX.csproj
 		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\Wercs.Selenium.ULSC\\Wercs.Selenium.ULSC.csproj
+		SccProjectName2 = ../Wercs.Selenium.ULSC
+		SccLocalPath2 = ..\\Wercs.Selenium.ULSC
 	EndGlobalSection
 EndGlobal
