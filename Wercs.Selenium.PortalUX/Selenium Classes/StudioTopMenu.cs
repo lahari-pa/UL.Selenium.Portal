@@ -10,7 +10,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class StudioTopMenu : BaseObject
+	public class StudioTopMenu : BaseObject
 	{
 		public const string BasePath = "//div[@id='navmenu']";
 

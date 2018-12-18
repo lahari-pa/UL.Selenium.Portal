@@ -7,7 +7,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class UlSolutionCenter : BaseObject
+	public class UlSolutionCenter : BaseObject
 	{
 		public const string BasePath = "//div[@id='solutionCenterContainer']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
@@ -97,7 +97,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 	}
-	class UlSection : UlSolutionCenter
+	public class UlSection : UlSolutionCenter
 	{
 		public string Header;
 		public string Statement;

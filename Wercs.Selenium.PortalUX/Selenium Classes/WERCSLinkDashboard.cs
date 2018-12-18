@@ -11,7 +11,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class WERCSLinkDashboard : BaseObject
+	public class WERCSLinkDashboard : BaseObject
 	{
 		public const string BasePath = "//body";
 

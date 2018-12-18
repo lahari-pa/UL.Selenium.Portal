@@ -10,7 +10,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class StudioLogin : BaseObject
+	public class StudioLogin : BaseObject
 	{
 		public const string BasePath = "//div[@id='divLogOn']";
 		[FindsBy(How = How.XPath, Using = BasePath)]

@@ -159,14 +159,15 @@ testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the follo
 #line 45
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 47
-testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
-                    "Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 49
-testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
-                    "ze Only) for UPC: saved as UPC60737, container type: Aerosol Can and size: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC60737, container type: Aerosol Can and size: " +
+                    "20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 51
-testRunner.Given("I call Shared Step 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\testd" +
-                    "oc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\" +
+                    "testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 54
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 55
@@ -177,7 +178,8 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 61
-testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment T" +
+                    "ext", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 63
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Seaso" +
                     "nings, Spices or Flavoring for Food - Salts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -253,14 +255,15 @@ testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the follo
 #line 97
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 99
-testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
-                    "Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 101
-testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
-                    "ze Only) for UPC: saved as UPC60738, container type: Aerosol Can and size: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC60738, container type: Aerosol Can and size: " +
+                    "20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 103
-testRunner.Given("I call Shared Step 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\testd" +
-                    "oc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\" +
+                    "testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 106
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 107
@@ -271,7 +274,8 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 113
-testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment T" +
+                    "ext", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 115
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Seaso" +
                     "nings, Spices or Flavoring for Food - Salts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

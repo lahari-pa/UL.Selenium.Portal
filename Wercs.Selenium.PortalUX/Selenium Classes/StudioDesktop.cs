@@ -10,7 +10,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class StudioDesktop : BaseObject
+	public class StudioDesktop : BaseObject
 	{
 		public const string BasePath = "//iframe[@id='dashboard']";
 

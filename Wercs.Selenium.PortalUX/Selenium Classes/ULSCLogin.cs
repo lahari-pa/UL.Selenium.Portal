@@ -10,7 +10,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class ULSCLogin : BaseObject
+	public class ULSCLogin : BaseObject
 	{
 		public const string BasePath = "//div[contains(@class, 'login-container')]";
 		[FindsBy(How = How.XPath, Using = BasePath)]

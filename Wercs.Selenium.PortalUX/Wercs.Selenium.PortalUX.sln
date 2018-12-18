@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{191079
 		NuGet.config = NuGet.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wercs.Selenium.ULSC", "..\Wercs.Selenium.ULSC\Wercs.Selenium.ULSC.csproj", "{0CE3318A-578B-4032-976E-984D65B5BCDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wercs.Selenium.ULSC", "Wercs.Selenium.ULSC\Wercs.Selenium.ULSC.csproj", "{0CE3318A-578B-4032-976E-984D65B5BCDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,8 +40,8 @@ Global
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Wercs.Selenium.PortalUX.csproj
 		SccLocalPath1 = .
-		SccProjectUniqueName2 = ..\\Wercs.Selenium.ULSC\\Wercs.Selenium.ULSC.csproj
-		SccProjectName2 = ../Wercs.Selenium.ULSC
-		SccLocalPath2 = ..\\Wercs.Selenium.ULSC
+		SccProjectUniqueName2 = Wercs.Selenium.ULSC\\Wercs.Selenium.ULSC.csproj
+		SccProjectName2 = Wercs.Selenium.ULSC
+		SccLocalPath2 = Wercs.Selenium.ULSC
 	EndGlobalSection
 EndGlobal

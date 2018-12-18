@@ -180,14 +180,15 @@ testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes optio
 testRunner.Given("I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification" +
                     " - Enter all valid data)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 55
-testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
-                    "Path) and select the retailer: Staples", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Staples", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 57
-testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
-                    "ze Only) for UPC: saved as UPC58736, container type: Aerosol Can and size: 33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC58736, container type: Aerosol Can and size: " +
+                    "33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 59
-testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authorin" +
-                    "g - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 61
 testRunner.Given("I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special P" +
                     "ermit - Product Label)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -219,9 +220,9 @@ testRunner.And("in the Optional Reports and Documents Available for Purchase pag
 testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     "))", ((string)(null)), table2, "Given ");
 #line 69
-testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Com" +
-                    "ments Text 58736. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
-                    "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+                    "d Comments Text 58736. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
+                    " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 71
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase58736", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -334,14 +335,15 @@ testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes optio
 testRunner.Given("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
                     "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 115
-testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy " +
-                    "Path) and select the retailer: Amazon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Amazon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 117
-testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Si" +
-                    "ze Only) for UPC: saved as UPC58738, container type: Aerosol Can and size: 33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
+                    " - Size Only) for UPC: saved as UPC58738, container type: Aerosol Can and size: " +
+                    "33", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 119
-testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authorin" +
-                    "g - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 121
 testRunner.Given("I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special P" +
                     "ermit - Product Label)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -373,9 +375,9 @@ testRunner.And("in the Optional Reports and Documents Available for Purchase pag
 testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     "))", ((string)(null)), table5, "Given ");
 #line 129
-testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Com" +
-                    "ments Text 58738. !\"£$%^&*() 1234567890 (Provide any additional comments or info" +
-                    "rmation about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
+                    "d Comments Text 58738. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
+                    " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 131
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase58738", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
