@@ -494,11 +494,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReleaseDay.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\SpecFlowFeature1.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SpecFlowFeature1.feature</DependentUpon>
-    </Compile>
     <Compile Include="Features\Subscription.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -577,7 +572,7 @@
     <Compile Include="Selenium Classes\UPC.cs" />
     <Compile Include="Selenium Classes\WERCSLinkDashboard.cs" />
     <Compile Include="Steps\Steps_Shared_ULSC.cs" />
-    <Compile Include="Steps\Steps_UPC.cs" />
+    <Compile Include="Steps\Steps__Shared_UPC.cs" />
     <Compile Include="Selenium Classes\StudioLegends.cs" />
     <Compile Include="Selenium Classes\LiveHelp.cs" />
     <Compile Include="Selenium Classes\Login.cs" />
@@ -932,10 +927,6 @@
     <None Include="Features\ReleaseDay.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ReleaseDay.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\SpecFlowFeature1.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SpecFlowFeature1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Subscription.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
