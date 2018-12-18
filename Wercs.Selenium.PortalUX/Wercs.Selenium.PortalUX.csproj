@@ -494,6 +494,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReleaseDay.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\SpecFlowFeature1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpecFlowFeature1.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Subscription.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -927,6 +932,10 @@
     <None Include="Features\ReleaseDay.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ReleaseDay.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\SpecFlowFeature1.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SpecFlowFeature1.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Subscription.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

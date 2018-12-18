@@ -44,9 +44,45 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			if (container != null)
 			{
 				rList = container.FindElements(By.XPath("//tbody//div[@class='form-group']")).Select(x => x.Text.Trim()).ToList();
-				rList.Select(x => x.Replace("\r\n", " ").Split(' ').FirstOrDefault()).ToList();
+				rList.Select(x => x.Replace("\r\n", " ").Split(' ')).ToList();
 			}
 			return rList;
+		}
+
+		public string SelectProducts_FirstProductID()
+		{
+			var productRows = containerElement.FindElements(By.XPath(".//span[@class='select2-results']"), 2).ToList();
+			if (productRows.Count == 0)
+			{
+				Report.Info("No product rows were returned!");
+				return null;
+			}
+			foreach (var row in productRows)
+			{
+				if (row.FindElement(By.XPath(".//ul[@class='select2-results__options']"), 2) != null)
+				{
+					return row.FindElement(By.XPath(".//li[@class='select2-results__option']"), 2)?.Text;
+				}
+			}
+			return null;
+		}
+
+		public bool EnterTextToSearchField(string value)
+		{
+			var searchEl = containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+			searchEl.EnterText(value);
+			return searchEl.GetAttribute("value") == value && GeneralUtilities.Wait_for_load_finish();
+		}
+
+		public bool SelectProducts_ClickProductByID(string id)
+		{
+			var productRow = containerElement.FindElement(By.XPath(".//li[@class='select2-results__option' and text()='" + id + "']"), 2);
+			if (productRow == null)
+			{
+				Report.Info("Could not find product row for product ID: " + id);
+				return false;
+			}
+			return productRow.FindElement(By.XPath(".//ul[@class='select2-results__options']"), 2).TryClick();
 		}
 	}
 }

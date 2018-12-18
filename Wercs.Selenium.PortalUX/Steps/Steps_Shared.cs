@@ -5116,7 +5116,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			var newProductSteps = new StepsNewProduct();
 			TestReport.StartStep("I set the 'Product is shipped directly..' question to: 'No'");
-			newProductSteps.SetTheSectionOptionTo("Product is shipped directly by the supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns", "No");
+			newProductSteps.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.", "No");
 			TestReport.StartStep("I set the 'Product is a Retailer's Private Label or Brand' question to: 'No'");
 			newProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			TestReport.StartStep("I set the 'Product is sold to the Retailer..' question to: 'No'");
