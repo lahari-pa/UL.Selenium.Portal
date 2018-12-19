@@ -6123,7 +6123,127 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 		}
 
+		[StepDefinition(@"I call Shared Step 55843 \(EPA expiration date - enter current year - Not June 30th\) for state: (.*)")]
+		public void SharedStep55843_EPAExpirationDate_EnterCurrentYear_NotJune30th(string state)
+		{
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select a date for the current year that is not June 30th
+			var pesticideDetailsState = new PesticideDetailsState();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			var MyStepsNewProduct = new StepsNewProduct();
+			var year = DateTime.Now.Year;
+			var dt = new DateTime(year, 8, 8);
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			// Click Continue
+			TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+		}
+		[StepDefinition(@"I call Shared Step 55844 \(EPA expiration date - enter next year - Not June 30th\) for state: (.*)")]
+		public void SharedStep55844_EPAExpirationDate_EnterNextYear_NotJune30th(string state)
+		{
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select a date for the next year that is not June 30th
+			var pesticideDetailsState = new PesticideDetailsState();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			var MyStepsNewProduct = new StepsNewProduct();
+			var year = DateTime.Now.Year + 1;
+			var dt = new DateTime(year, 8, 8);
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			// Click Continue
+			TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+		}
+		[StepDefinition(@"I call Shared Step \(EPA expiration date - enter current year plus 2 - Not June 30th\) for state: (.*)")]
+		public void SharedStep_EPAExpirationDate_EnterCurrentYearPlusTwo_NotJune30th(string state)
+		{
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select a date for the current year + 2 that is not June 30th
+			var pesticideDetailsState = new PesticideDetailsState();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			var MyStepsNewProduct = new StepsNewProduct();
+			var year = DateTime.Now.Year + 2;
+			var dt = new DateTime(year, 8, 8);
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			// Click Continue
+			TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+		}
 
+		[StepDefinition(@"I call Shared Step 55845 \(EPA expiration date - enter current year - June 30th\) for state: (.*)")]
+		public void SharedStep55845_EPAExpirationDate_EnterCurrentYear_June30th(string state)
+		{
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select June 30th for the current year
+			// NOTE:  If the current date is after June 30th for the current year select June 30th for next year
+			var pesticideDetailsState = new PesticideDetailsState();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			var MyStepsNewProduct = new StepsNewProduct();
+			var date = DateTime.Now;
+			var year = date.Month > 6 ? date.Year + 1 : date.Year;
+			var dt = new DateTime(year, 6, 30);
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			// Click Continue
+			TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+		}
+		[StepDefinition(@"I call Shared Step 55846 \(EPA expiration date - enter next year - June 30th\) for state: (.*)")]
+		public void SharedStep55846_EPAExpirationDate_EnterNextYear_June30th(string state)
+		{
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select June 30th for the next year
+			// Note:  If the current date is after June 30th and before Dec 31st select June 30th for this year +2 - for example if you are running the test on Oct 28th 2017 select June 30th for 2019
+			var pesticideDetailsState = new PesticideDetailsState();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			var MyStepsNewProduct = new StepsNewProduct();
+			var date = DateTime.Now;
+			var year = date.Month > 6 ? date.Year + 2 : date.Year + 1;
+			var dt = new DateTime(year, 6, 30);
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			// Click Continue
+			TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+		}
+
+		[StepDefinition(@"I call Shared Step \(EPA expiration date - enter current year plus 2 - June 30th\) for state: (.*)")]
+		public void SharedStep_EPAExpirationDate_EnterCurrentYearPlus_June30th(string state)
+		{
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select June 30th for the current year + 2
+			var pesticideDetailsState = new PesticideDetailsState();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			var MyStepsNewProduct = new StepsNewProduct();
+			var date = DateTime.Now;
+			var year = date.Year + 2;
+			var dt = new DateTime(year, 6, 30);
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			// Click Continue
+			TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+				"Pesticide Details - State Registration Details");
+		}
 
 	}
 }
