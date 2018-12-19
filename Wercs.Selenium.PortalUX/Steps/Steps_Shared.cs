@@ -13,6 +13,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Database_Functions;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 using WERCSmart;
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -26,7 +27,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I click the Register New Product icon in the Navigation Pane");
 			new StepsHomepage().ClickItemInNavigationPanel("Register New Product");
 			TestReport.StartStep("I should see the New Product Page");
@@ -55,11 +56,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void Step57561(string type, string name = "")
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the The Product Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("The Product");
 			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
-
 			if (name == "")
 			{
 				var forbiddenChars = @"+{}^?|{}+%'""/".ToCharArray();
@@ -78,7 +78,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 60779 \(Enter Liquid - Cooking Oil - Non-Aerosol\)")]
 		public void GivenICallSharedStepEnterLiquid_CookingOil_Non_Aerosol()
 		{
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
 			MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 			MyStepsNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid");
@@ -103,7 +103,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 60747 \(Select Primary Physical Property - Liquid - With Ingredients\)")]
 		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
 		{
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
 			//TestReport.StartStep("Primary Physical State should be showing the value: Liquid");
 			//MyStepsNewProduct.CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
@@ -115,8 +115,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
-
-			NewProduct MyNewProduct = new NewProduct();
+			var MyNewProduct = new NewProduct();
 			if (MyNewProduct.OptionExists("Flash Point (in Celsius)", "Flammable 1C"))
 			{
 				MyStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "Flammable 1C");
@@ -144,7 +143,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 60935 Additional Product Information - US - Direct Ship - Private Label Only")]
 		public void GivenICallSharedStep60935AdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
@@ -156,13 +155,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 60726 \(Additional Product Information - Country and Private Label or Brand - Yes\)")]
 		public void GivenICallSharedStep60726AdditionalProductInformation_CountryAndPrivateLabelOrBrand_Yes()
 		{
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 
 			//CLF - this option doesn't always appear. Putting this fix in for now but may need a new version of the step
-			NewProduct MyNewProduct = new NewProduct();
+			var MyNewProduct = new NewProduct();
 			if (MyNewProduct.OptionExists("Select the product's Country of Origin"))
 			{
 				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
@@ -176,8 +175,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 60756 \(Additional Product Information with Country and every option\)")]
 		public void GivenICallSharedStepAdditionalProductInformationWithCountryAndEveryOption()
 		{
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			NewProduct myNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
@@ -230,7 +229,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void SharedAdditionalProductInformation_US_DirectShip_PrivateLabelOnly()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			var MyNewProductSteps = new StepsNewProduct();
 			TestReport.StartStep("I should see the Additional Product Information Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Additional Product Information");
 			TestReport.StartStep(
@@ -252,8 +251,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void
 			GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_DirectShip_PrivateLabelQuestionsOnly()
 		{
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			NewProduct myNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var myNewProduct = new NewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Additional Product Information");
 			Delay.Seconds(1);
 			if (myNewProduct.SectionExists("Select countries the product may be sold in"))
@@ -329,7 +328,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			var stepsNewProductIngredients = new StepsNewProductIngredients();
+			var stepsNewProductIngredients = new StepsIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			TestReport.StartStep("In the Ingredients page I click Continue");
@@ -347,7 +346,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			var stepsNewProductIngredients = new StepsNewProductIngredients();
+			var stepsNewProductIngredients = new StepsIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			TechTalk.SpecFlow.Table aerosolIngredients = new TechTalk.SpecFlow.Table(new string[] {
@@ -1740,7 +1739,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
-			var stepsNewProductIngredients = new StepsNewProductIngredients();
+			var stepsNewProductIngredients = new StepsIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Ingredients");
 			TestReport.StartStep("I add the ingredient " + name + " at 100%");
@@ -2357,12 +2356,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			var newProductPesticideDetailsUS = new Steps_PesticideDetailsUS();
 			TestReport.StartStep(
 				"I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes");
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Product has an Environmental Protection Agency (EPA) Registration Number", "Yes");
 			TestReport.StartStep("I add the EPA Registration Number: 72315-6");
-			MyNewProductSteps.IAddTheEPARegistrationNumber("72315-6");
+			newProductPesticideDetailsUS.IAddTheEPARegistrationNumber("72315-6");
 			TestReport.StartStep("Clicking continue in the Pesticide Details page");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Pesticide Details");
 		}
@@ -3256,7 +3256,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			var stepsNewProductIngredients = new StepsNewProductIngredients();
+			var stepsNewProductIngredients = new StepsIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			TestReport.StartStep("I add the following ingredients:");
@@ -3436,12 +3436,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStepPesticideDate_YesRegistered_EnterEPANumberNotOnKelly_ClickContinue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			NewProduct MyNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var MyNewProduct = new NewProduct();
+			var newProductPesticideDetailsUS = new Steps_PesticideDetailsUS();
 			TestReport.StartStep("I set the 'Product has an Environmental Protection Agency (EPA) Registration Number' option to: 'Yes'");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "Yes");
 			TestReport.StartStep("I add the EPA number: TEST-1234");
-			MyStepsNewProduct.IAddTheEPARegistrationNumber("TEST-1234");
+			newProductPesticideDetailsUS.IAddTheEPARegistrationNumber("TEST-1234");
 			TestReport.StartStep("I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - U.S.");
 		}
@@ -3457,27 +3458,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 55819 \(EPA expiration date - enter current year - NOT Dec 31st\) for state: (.*)")]
 		public void GivenICallSharedStepEPAExpirationDate_EnterCurrentYear_NOTDecSt(string state)
 		{
+			var pesticideDetailsState = new PesticideDetailsState();
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			NewProduct MyNewProduct = new NewProduct();
-
+			var MyStepsNewProduct = new StepsNewProduct();
 			DateTime dtStart = DateTime.Now.AddDays(1);
 			int year = DateTime.Now.Year;
 			int month = 12;
 			int day = 29;
-
 			DateTime dtEnd = new DateTime(year, month, day);
-
-			DateTime dt = GetRandomDate(dtStart, dtEnd);
-
-			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			DateTime dt = this.GetRandomDate(dtStart, dtEnd);
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
 				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
-
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Pesticide Details - State Registration Details");
-
-
 		}
 
 		//CLF - From test plans - Confirm that an error shows "State IA: Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable."
@@ -3486,27 +3480,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStepEPAExpirationDate_EnterNextYear_NOTDecStForState(string state)
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			NewProduct MyNewProduct = new NewProduct();
-
+			var MyStepsNewProduct = new StepsNewProduct();
+			var pesticideDetailsState = new PesticideDetailsState();
 			int year = DateTime.Now.Year + 1;
 			int month = 10;
 			int day = 1;
-
 			DateTime dtStart = new DateTime(year, month, day);
-
 			year = DateTime.Now.Year;
 			month = 12;
 			day = 30;
-
 			DateTime dtEnd = new DateTime(year, month, day);
-
 			DateTime dt = GetRandomDate(dtStart, dtEnd);
 			Report.Info("Attempting to enter date: " + dt.ToString("yyyy-MM-dd"));
-			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
 				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
-
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Pesticide Details - State Registration Details");
 		}
@@ -3516,18 +3504,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			NewProduct MyNewProduct = new NewProduct();
-
+			var pesticideDetailsState = new PesticideDetailsState();
 			int year = DateTime.Now.Year + 1;
 			int month = 12;
 			int day = 31;
-
-			DateTime dt = new DateTime(year, month, day);
-
-			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			var dt = new DateTime(year, month, day);
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
 				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
-
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Pesticide Details - State Registration Details");
 		}
@@ -3536,19 +3520,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStep55822ExpirationDate31DecthisYear(string state)
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			NewProduct MyNewProduct = new NewProduct();
-
+			var MyStepsNewProduct = new StepsNewProduct();
+			var pesticideDetailsState = new PesticideDetailsState();
 			int year = DateTime.Now.Year;
 			int month = 12;
 			int day = 31;
-
-			DateTime dt = new DateTime(year, month, day);
-
-			Report.IsTrue(MyNewProduct.EditPesticideRegExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+			var dt = new DateTime(year, month, day);
+			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
 				"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
-
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Pesticide Details - State Registration Details");
 		}
@@ -3558,7 +3538,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			GivenICallSharedStep57501ProductCharacteristics_MoreThanOneState_SelectSolid_StateSubcat_MixedWater_Random_Continue_HP()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			var MyNewProductSteps = new StepsNewProduct();
 			TestReport.StartStep("I should see the Product Characteristics Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
 			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
@@ -4419,15 +4399,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
-			var ingredient = new Ingredient {
+			var newProductIngredients = new Ingredients();
+			var ingredient = new Ingredients.Ingredient {
 				CASNumber = component.Rows.First()["CASNumber"],
 				ComponentName = component.Rows.First()["ComponentName"],
 				Percent = component.Rows.First()["Percentage"],
 				PublicallyDisclosed = true,
 				PublicName = "Undisclosed Ingredient"
 			};
-
-			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+			Report.IsTrue(newProductIngredients.AddIngredient(ingredient),
 				"Failed to add ingredient: " +
 				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
 				"Successfully added ingredient: " +
@@ -4438,14 +4418,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 79431 \(Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name\) and save ingredients as: (.*)")]
 		public void IngredientsAddFlavorComponentPubliclyDisclosedYesSelectPublicName(string savedAs, Table component)
 		{
-			var ingredient = new Ingredient {
+			var newProductIngredients = new Ingredients();
+			var ingredient = new Ingredients.Ingredient {
 				CASNumber = component.Rows.First()["CASNumber"],
 				ComponentName = component.Rows.First()["ComponentName"],
 				Percent = component.Rows.First()["Percentage"],
 				PublicallyDisclosed = true,
 				PublicName = "Undisclosed Ingredient"
 			};
-			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+			Report.IsTrue(newProductIngredients.AddIngredient(ingredient),
 				"Failed to add ingredient: " +
 				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
 				"Successfully added ingredient: " +
@@ -4559,16 +4540,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			GivenICallSharedStep79490Ingredients_AddNon_GenericComponent_PublicDisclosedYesSelectNameContinueAndSaveIngredientAsIngNG(
 				string savedAs, Table component)
 		{
+			var newProductIngredients = new Ingredients();
 			TestReport.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
-			var ingredient = new Ingredient {
+			var ingredient = new Ingredients.Ingredient {
 				CASNumber = component.Rows.First()["CASNumber"],
 				ComponentName = component.Rows.First()["ComponentName"],
 				Percent = component.Rows.First()["Percentage"],
 				PublicallyDisclosed = true,
 				PublicName = "Undisclosed Ingredient"
 			};
-			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+			Report.IsTrue(newProductIngredients.AddIngredient(ingredient),
 				"Failed to add ingredient: " +
 				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
 				"Successfully added ingredient: " +
@@ -5159,14 +5141,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: (.*)")]
 		public void ThenCallSharedStep80090_Ingredients_AddNon_GenericChemicalSetToPubliclyDisclosedSelectPublicNameAndSaveIngredientAsIng(string savedAs, Table component)
 		{
-			var ingredient = new Ingredient {
+			var newProductIngredients = new Ingredients();
+			var ingredient = new Ingredients.Ingredient {
 				CASNumber = component.Rows.First()["CASNumber"],
 				ComponentName = component.Rows.First()["ComponentName"],
 				Percent = component.Rows.First()["Percentage"],
 				PublicallyDisclosed = true,
 				PublicName = component.Rows.First()["ComponentName"]
 			};
-			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+			Report.IsTrue(newProductIngredients.AddIngredient(ingredient),
 				"Failed to add ingredient: " +
 				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
 				"Successfully added ingredient: " +
@@ -5177,14 +5160,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"call Shared Step 80091 - Ingredients - Add Non-generic component - set percentage - not publicly disclosed and save ingredient as: (.*)")]
 		public void ThenCallSharedStep80091_Ingredients_AddNon_GenericChemicalSetToPubliclyDisclosedSelectPublicNameAndSaveIngredientAsIng(string savedAs, Table component)
 		{
-			var ingredient = new Ingredient {
+			var newProductIngredients = new Ingredients();
+			var ingredient = new Ingredients.Ingredient {
 				CASNumber = component.Rows.First()["CASNumber"],
 				ComponentName = component.Rows.First()["ComponentName"],
 				Percent = component.Rows.First()["Percentage"],
 				PublicallyDisclosed = false,
 				PublicName = component.Rows.First()["ComponentName"]
 			};
-			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+			Report.IsTrue(newProductIngredients.AddIngredient(ingredient),
 				"Failed to add ingredient: " +
 				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
 				"Successfully added ingredient: " +
@@ -5665,6 +5649,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		public void ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(string savedAs, Table component)
 		{
+			var newProductIngredients = new Ingredients();
 			TestReport.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
 			string CASNo = "";
@@ -5683,35 +5668,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				CASNo = component.Rows.First()["CASNumber"];
 			}
-
-			var ingredient = new Ingredient();
-
+			var ingredient = new Ingredients.Ingredient();
 			if (CASNo.Length > 0)
 			{
 				ingredient.CASNumber = CASNo;
 			}
-
 			if (component.ContainsColumn("ComponentName"))
 			{
 				ingredient.ComponentName = component.Rows.First()["ComponentName"];
 			}
-
 			if (component.ContainsColumn("Percentage"))
 			{
 				ingredient.Percent = component.Rows.First()["Percentage"];
 			}
-
 			if (component.ContainsColumn("Publicly Disclosed"))
 			{
 				ingredient.PublicallyDisclosed = component.Rows.First()["Publicly Disclosed"].ToLower() == "yes";
 			}
-
 			if (component.ContainsColumn("Public Name"))
 			{
 				ingredient.PublicName = component.Rows.First()["Public Name"];
 			}
-
-			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+			Report.IsTrue(newProductIngredients.AddIngredient(ingredient),
 				"Failed to add ingredient: " +
 				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
 				"Successfully added ingredient: " +
@@ -5766,7 +5744,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var stepsNewProduct = new StepsNewProduct();
-			var stepsNewProductIngredients = new StepsNewProductIngredients();
+			var stepsNewProductIngredients = new StepsIngredients();
 			TestReport.StartStep("I should see the Ingredients Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Ingredients");
 			stepsNewProductIngredients.InTheIngredientsPageISearchForAndSelectProductSavedAs(savedAs);
@@ -5775,14 +5753,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 80824 - Ingredients - Add FLAVOR component, not Publicly Disclosed and save as (.*)")]
 		public void ThenICallSharedStep_Ingredients_AddFLAVORComponentNotPubliclyDisclosed(string savedAs, TechTalk.SpecFlow.Table component)
 		{
+			var newProductIngredients = new Ingredients();
 			string CASNo = "";
 			if (component.Rows.First()["CASNumber"].Contains("WPS"))
 			{
 				string casSavedAs = "";
-				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))
+				if (Context.Contains(component.Rows.First()["CASNumber"]?.Split(' ')[2].Trim()))
 				{
-					ProductInformation CASProd =
-						(ProductInformation)Context.GetFromContext(component.Rows.First()["CASNumber"].Split(' ')[2]
+					var CASProd = (ProductInformation)Context.GetFromContext(component.Rows.First()["CASNumber"].Split(' ')[2]
 							.Trim());
 					CASNo = "WPS" + CASProd.Id;
 				}
@@ -5791,35 +5769,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				CASNo = component.Rows.First()["CASNumber"];
 			}
-
-			var ingredient = new Ingredient();
+			var ingredient = new Ingredients.Ingredient();
 
 			if (CASNo.Length > 0)
 			{
 				ingredient.CASNumber = CASNo;
 			}
-
 			if (component.ContainsColumn("ComponentName"))
 			{
 				ingredient.ComponentName = component.Rows.First()["ComponentName"];
 			}
-
 			if (component.ContainsColumn("Percentage"))
 			{
 				ingredient.Percent = component.Rows.First()["Percentage"];
 			}
-
 			if (component.ContainsColumn("Publicly Disclosed"))
 			{
 				ingredient.PublicallyDisclosed = component.Rows.First()["Publicly Disclosed"].ToLower() == "yes";
 			}
-
 			if (component.ContainsColumn("Public Name"))
 			{
 				ingredient.PublicName = component.Rows.First()["Public Name"];
 			}
-
-			Report.IsTrue(new NewProduct().AddIngredient(ingredient),
+			Report.IsTrue(newProductIngredients.AddIngredient(ingredient),
 				"Failed to add ingredient: " +
 				(ingredient.CASNumber == "" ? ingredient.ComponentName : ingredient.CASNumber) + "!",
 				"Successfully added ingredient: " +
@@ -5927,7 +5899,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Additional Documents -> Contact Information Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Documents -> Contact Information");
-			MyNewProduct.SetTheSectionOptionTo("Manufacturer Name","Manufacturer");
+			MyNewProduct.SetTheSectionOptionTo("Manufacturer Name", "Manufacturer");
 			MyNewProduct.SetTheSectionOptionTo("Address", "Address");
 			MyNewProduct.SetTheSectionOptionTo("Phone", "Phone");
 			MyNewProduct.SetTheSectionOptionTo("Emergency Phone", "1234 8856789");

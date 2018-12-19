@@ -697,7 +697,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
 			var newProductSteps = new StepsNewProduct();
-			var stepsNewProductIngredients = new StepsNewProductIngredients();
+			var stepsNewProductIngredients = new StepsIngredients();
 			var shaSteps = new Steps_SHA();
 			var thisGlobalSteps = new GlobalSteps();
 			var thisStepsProductGrid = new StepsProductGrid();

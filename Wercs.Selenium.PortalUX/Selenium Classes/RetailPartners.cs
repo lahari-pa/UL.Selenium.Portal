@@ -73,10 +73,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Failure("No matching retailer for: " + retailer + " was found!");
 			return false;
 		}
+
 		public string WarningMessage()
 		{
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'alert-warning')]"), 2)?.Text;
 		}
+
 		public bool ClickRetailerLogo(string retailerCode)
 		{
 			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).FirstOrDefault(x => x.GetCssValue("background-image").ToLower().Contains(retailerCode.ToLower())).TryClick() && GeneralUtilities.Wait_for_load_finish();
@@ -91,6 +93,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).Select(x => x.GetCssValue("background-image").Replace(@"""", "").Replace("url(", "").Replace(")", "")).ToList();
 		}
+
 		public bool TilesAppearBelowHeading(string heading)
 		{
 			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]")).Any();
@@ -100,6 +103,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]//span[@class='sr-only']")).Select(x => x.Text).ToList();
 		}
+
 		public bool RetailerImageDisplayed(int tile)
 		{
 			try
@@ -363,7 +367,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				newSupplier.CompanyOrBrandName = thisRow.FindElement(By.XPath(".//td[2]"), 2).GetValue();
 				newSupplier.IsActive = thisRow.FindElement(By.XPath(".//td[3]/i"), 2).GetAttribute("class")
 					.Contains("success");
-				newSupplier.IsDefault  = thisRow.FindElement(By.XPath(".//td[4]/i"), 2).GetAttribute("class")
+				newSupplier.IsDefault = thisRow.FindElement(By.XPath(".//td[4]/i"), 2).GetAttribute("class")
 					.Contains("success");
 
 				supplierList.Add(newSupplier);

@@ -40,6 +40,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click Save in the My Brands grid",
 				"Successfully clicked Save in the My Brands grid");
 		}
+
 		[StepDefinition(@"I click Cancel on the expanded row in the My Brands grid")]
 		public void ClickCancelMyBrandsGrid()
 		{
@@ -82,6 +83,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The saved brand: '" + savedBrandName + "' was not appearing in the Brands Grid. The brands displayed are: " + string.Join(", ", selMyBrands.SavedBrands()),
 				"The saved brand: " + savedBrandName + " was appearing in the Brands Grid as expected");
 		}
+
 		[StepDefinition(@"I click Edit in the My Brands grid for the last saved brand")]
 		public void ClickEditMyBrandsGrid()
 		{

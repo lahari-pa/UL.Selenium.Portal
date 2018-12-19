@@ -566,11 +566,19 @@
     <Compile Include="Selenium Classes\Homepage.cs" />
     <Compile Include="Selenium Classes\InactivityPopup.cs" />
     <Compile Include="Selenium Classes\LandingPage.cs" />
+    <Compile Include="Selenium Classes\New Product\Ingredients.cs" />
+    <Compile Include="Selenium Classes\New Product\NewProduct.cs" />
+    <Compile Include="Selenium Classes\New Product\PesticideDetailsState.cs" />
+    <Compile Include="Selenium Classes\New Product\PesticideDetailsUS.cs" />
     <Compile Include="Selenium Classes\SHAProductNotificationHistory.cs" />
     <Compile Include="Selenium Classes\SHAProductRecertificationHistory.cs" />
     <Compile Include="Selenium Classes\ULSCLogin.cs" />
     <Compile Include="Selenium Classes\UPC.cs" />
     <Compile Include="Selenium Classes\WERCSLinkDashboard.cs" />
+    <Compile Include="Steps\New Product\Steps_Ingredients.cs" />
+    <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
+    <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
+    <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
     <Compile Include="Steps\Steps_Shared_ULSC.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
     <Compile Include="Selenium Classes\StudioLegends.cs" />
@@ -580,7 +588,6 @@
     <Compile Include="Selenium Classes\MyAccount.cs" />
     <Compile Include="Selenium Classes\MyIngredientsModal.cs" />
     <Compile Include="Selenium Classes\NavigationBar.cs" />
-    <Compile Include="Selenium Classes\NewProduct.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
     <Compile Include="Selenium Classes\PackagingType.cs" />
     <Compile Include="Selenium Classes\PaymentMethods.cs" />
@@ -620,7 +627,6 @@
     <Compile Include="Steps\Steps_DocumentAcceptance.cs" />
     <Compile Include="Steps\Steps_MyIngredients.cs" />
     <Compile Include="Steps\Steps_MyMessages.cs" />
-    <Compile Include="Steps\Steps_NewProduct_Ingredients.cs" />
     <Compile Include="Steps\Steps_PackagingTypes.cs" />
     <Compile Include="Steps\Steps_PaymentMethods.cs" />
     <Compile Include="Steps\Steps_DataSummarySheet.cs" />
@@ -635,7 +641,6 @@
     <Compile Include="Steps\Steps_LandingPage.cs" />
     <Compile Include="Steps\Steps_Login.cs" />
     <Compile Include="Steps\Steps_MyAccount.cs" />
-    <Compile Include="Steps\Steps_NewProduct.cs" />
     <Compile Include="Steps\Steps_ProductGrid.cs" />
     <Compile Include="Steps\Steps_RetailPartners.cs" />
     <Compile Include="Steps\Steps_Signup.cs" />

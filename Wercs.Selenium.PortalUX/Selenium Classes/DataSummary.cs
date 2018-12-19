@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SafewareReporting;
 using SeleniumUtilities;
+using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
@@ -95,10 +96,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return els.Select(x => x.GetElementText()).ToList();
 		}
 
-		public List<Ingredient> GetIngredients()
+		public List<Ingredients.Ingredient> GetIngredients()
 		{
-			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"),2);
-			List<Ingredient> listOfIngredients = new List<Ingredient>();
+			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+			var listOfIngredients = new List<Ingredients.Ingredient>();
 			if (ingredientsTable == null)
 			{
 				Report.Error("Failed to find ingredients table");
@@ -107,7 +108,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			var ingredientsRows = ingredientsTable.FindElements(By.XPath(".//tbody/tr"));
 
-			if(ingredientsRows.Count==0)
+			if (ingredientsRows.Count == 0)
 			{
 				Report.Info("There are no ingredients in the able");
 				return listOfIngredients;
@@ -117,7 +118,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				var row = ingredientsRows[i];
 				var rowColumns = row.FindElements(By.XPath(".//td"));
-				Ingredient thisIngredient = new Ingredient();
+				Ingredients.Ingredient thisIngredient = new Ingredients.Ingredient();
 				string CASAndNaME = rowColumns[0].GetValue();
 				var pattern = @"(.*)\w(.*)";
 				var regMatch = Regex.Match(CASAndNaME, pattern);
@@ -180,7 +181,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				string numerator = regMatch.Groups[1].ToString();
 				string denominator = regMatch.Groups[2].ToString();
 
-				var calcRatio =  Convert.ToSingle(numerator) / Convert.ToSingle(denominator);
+				var calcRatio = Convert.ToSingle(numerator) / Convert.ToSingle(denominator);
 				return (decimal)calcRatio;
 			}
 			catch (Exception e)

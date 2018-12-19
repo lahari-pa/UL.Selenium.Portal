@@ -2176,225 +2176,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"statement was showing: " + statement + ", as expected!");
 		}
 
-		[StepDefinition(@"I add the EPA registration number: (.*)")]
-		public void IAddTheEPARegistrationNumber(string epaNumber)
-		{
-			// New EPA rows are always added to the top of the stack, so check if top row has any data before entering the test value
-			var newProductpage = new NewProduct();
-			if (!newProductpage.TopEPARowIsEmpty())
-			{
-				Report.Info("Adding a new EPA row because there is pre-existing data");
-				Report.IsTrue(newProductpage.AddEPARow(),
-					"New EPA Row was not added successfully",
-					"New EPA Row was added successfully");
-				Report.Info("Entering the EPA number: " + epaNumber);
-				Report.IsTrue(newProductpage.EnterEPATopRow(epaNumber),
-					"The EPA Number " + epaNumber + " was not successfully added to the top EPA table row",
-					"The EPA Number " + epaNumber + " was successfully added to the top EPA table row");
-			}
-			else
-			{
-				Report.Info("Entering the EPA number: " + epaNumber);
-				Report.IsTrue(newProductpage.EnterEPATopRow(epaNumber),
-					"The EPA Number " + epaNumber + " was not successfully added to the top EPA table row",
-					"The EPA Number " + epaNumber + " was successfully added to the top EPA table row");
-			}
-		}
-
-		[StepDefinition(@"I edit each State Pesticide Registration Number with an edited suffix")]
-		public void IEditEachStatePesticideRegNumberWithSuffix()
-		{
-			var newProductPage = new NewProduct();
-			var RowCount = newProductPage.CountPesticideRegRows();
-			var notEdited = new List<string>();
-			int counter;
-			for (int i = 0; i < RowCount; i++)
-			{
-				if (!newProductPage.AddSuffixToPesticideRegistrationNumRow(i))
-				{
-					counter = i + 1;
-					notEdited.Add(counter.ToString());
-				}
-			}
-			Report.IsTrue(notEdited.Count == 0,
-				"The State Pesticide Registration Number for the following rows was not successfully edited: " + string.Join(", ", notEdited),
-				"Every State Pesticide Registrtaion Number in the table was successfully edited");
-		}
-
-		[StepDefinition(@"I check each State Pesticide Registration Number contains the edited suffix")]
-		public void ICheckEachStatePesticideRegNumberContains()
-		{
-			var newProductPage = new NewProduct();
-			var RowCount = newProductPage.CountPesticideRegRows();
-			var notEdited = new List<string>();
-			for (int i = 0; i < RowCount; i++)
-			{
-				if (!newProductPage.CheckPesticideRegNumIsEdited(i))
-				{
-					Report.Screenshot();
-					notEdited.Add(i + 1.ToString());
-				}
-			}
-			Report.IsTrue(notEdited.Count == 0,
-				"The State Pesticide Registration Number for the following rows was not successfully edited: " + string.Join(", ", notEdited),
-				"Every State Pesticide Registrtaion Number in the table was successfully edited");
-		}
-
-		[StepDefinition(@"I click the Update Wercs Smart data with EPA data through Kelly Services link")]
-		public void IClickTheUpdateWercsSmartDataThroughKellyServicesLink()
-		{
-			var newProductPage = new NewProduct();
-			Report.IsTrue(newProductPage.ClickEPAKellyServicesLink(), "Failed to click the EPA Kelly Services link on the Pesticide State Registration Details page", "Successfully clicked the EPA Kelly Services link on the Pesticide State Registration Details page");
-		}
-
-		[StepDefinition(@"I confirm that there is data populated in the Expiration Date Column for some States")]
-		public void IConfirmDataInExpirationDateColumnPesticideStates()
-		{
-			var newProductPage = new NewProduct();
-			var AllPesticideDetails = newProductPage.GetStatePesticideRegistrationDetails();
-			Report.Screenshot();
-
-			Report.IsTrue(AllPesticideDetails.Select(x => x.ExpirationDate.Length > 0).ToList().Count() > 0,
-				"No States were found to contain data for Expiration Date on the Pesticide State Registration Details page",
-				"Some States contained data in Expiration Date column as expected");
-			// We add the indexes as a list to the scenario context to allow checking the 'Is Kelly Data Data' field in another step
-			Context.AddToContext("AllPesticideDetails", AllPesticideDetails);
-		}
-
-		[StepDefinition(@"I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'")]
-		public void IConfirmKellyDataFieldIsCheckedWhenExpirationDateExists()
-		{
-			if (Context.Contains("AllPesticideDetails"))
-			{
-				List<StatePesticideRegistration> AllPesticideDetails = (List<StatePesticideRegistration>)Context.GetFromContext("AllPesticideDetails");
-				List<StatePesticideRegistration> DetailsWithDates = AllPesticideDetails.Where(x => x.ExpirationDate.Length > 0).ToList();
-				Report.Info("Found " + DetailsWithDates.Count + " rows with expiration dates");
-				foreach (var PesticideDetail in DetailsWithDates)
-				{
-					if (!PesticideDetail.IsKellyData)
-					{
-						Report.Failure(PesticideDetail.State + " did not contain a check mark under the Is Kelly Data column as expected");
-						return;
-					}
-				}
-				Report.Success("All States with an Expiration Date also had a check mark under the 'Is Kelly Data' column as expected");
-				Report.Screenshot();
-			}
-			else
-			{
-				Report.Failure("Pesticide details have not been saved to Context");
-				Report.Screenshot();
-			}
-		}
-		[StepDefinition(@"I edit the Expiration Date to: (.*) for the State: (.*) on the Pesticide State Registration Details page")]
-		public void IEnterAnExpirationDateForPesticideStateRegistration(string expirationDate, string state)
-		{
-			var newProductPage = new NewProduct();
-			Context.AddToContext("state", state);
-			Regex dateRegex = new Regex(@"^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$");
-			if (!dateRegex.IsMatch(expirationDate))
-			{
-				Report.Failure("The format of the provided date text was incorrect. Enter a date like: 'YYYY-MM-DD'");
-				Report.Screenshot();
-			}
-			if (state.Length != 2)
-			{
-				Report.Failure("The state text provided was incorrect. Enter a state like: 'AZ', 'CO' etc.");
-				Report.Screenshot();
-			}
-			Report.IsTrue(newProductPage.EditPesticideRegExpirationDate(expirationDate, state),
-				string.Format("The Pesticide Registration Expiration Date for state '{0}' was not successfully edited to be '{1}'",
-					state, expirationDate),
-				string.Format("The Pesticide Registration Expiration Date for state '{0}' was successfully edited to be '{1}'",
-					state, expirationDate));
-		}
-
-		[StepDefinition(@"I confirm the 'Is Kelly Data' field for State: (.*) (is|is not) checked")]
-		public void IConfirmKellyDataIsOrIsNotChecked(string state, string check)
-		{
-			var newProductPage = new NewProduct();
-			if (state.Length != 2)
-			{
-				Report.Warn("Expecting a state provided in the form: AZ, IL, NY etc.");
-			}
-
-			List<StatePesticideRegistration> ListOfPesticideDetails =
-				newProductPage.GetStatePesticideRegistrationDetails();
-
-			StatePesticideRegistration thisStateDetails = ListOfPesticideDetails.FirstOrDefault(x => x.State == state);
-
-			if (thisStateDetails == null)
-			{
-				throw new Exception("Could not find details for state: " + state);
-			}
-			if (check == "is")
-			{
-				Report.IsTrue(thisStateDetails.IsKellyData, "The 'Is Kelly Data' field for State : " + state + " didn't contain a check when it was expected to", "The 'Is Kelly Data' field for State: " + state + " contained a check as expected");
-				return;
-			}
-			if (check == "is not")
-			{
-				Report.IsFalse(!thisStateDetails.IsKellyData, "The 'Is Kelly Data' field for State: " + state + " contained a check when it should not", "The 'Is Kelly Data' field for State: " + state + " did not contain a check as expected");
-			}
-		}
-
-		[StepDefinition(@"I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State")]
-		public void IConfirmTheExpirationDateMatchesTheKellyValue()
-		{
-			var newProductPage = new NewProduct();
-			if (!ScenarioContext.Current.ContainsKey("state"))
-			{
-				throw new Exception("There was no State text in the scenario context. Check the pre-requisite step for editing Expiration Date has ran successfully.");
-			}
-			var state = Context.GetFromContext("state").ToString();
-			var expirationDate = newProductPage.GetPesticideRegExpirationDate(state);
-			var kellyExpirationDate = newProductPage.GetPesticideRegKellyExpirationDate(state);
-			Report.IsTrue(expirationDate == kellyExpirationDate, "The Expiration Date does not match the value provided by Kelly", "The Expiration correctly matches the value provided by Kelly");
-		}
-
-		[StepDefinition(@"I confirm the Expiration Date field for state: (.*) is showing the value: (.*)")]
-		public void ExpirationDateForStateIsShowingValue(string state, string date)
-		{
-			var actualDate = new NewProduct().GetPesticideRegExpirationDate(state);
-			Report.IsTrue(actualDate == date,
-				string.Format("The Expiration Date field for State: '{0}' was not showing the value: '{1}' as expected. It was showing the value: '{2}'",
-					state, date, actualDate),
-				string.Format("The Expiration Date field for State: '{0}' was showing the value: '{1}' as expected",
-					state, date));
-		}
-
-		[StepDefinition(@"I confirm the Expiration Date Provided By Kelly field for state: (.*) is blank")]
-		public void IConfirmTheExpirationDateProvidedByKellyForStateIsBlank(string currentState)
-		{
-			var newProductPage = new NewProduct();
-			var state = "";
-			if (ScenarioContext.Current.ContainsKey("state"))
-			{
-				state = Context.GetFromContext("state").ToString();
-				Report.Info("Looking at state from test context: " + state);
-			}
-			else
-			{
-				state = currentState;
-				Report.Info("Looking at state from test definition: " + state);
-			}
-			Report.IsTrue(newProductPage.GetPesticideRegKellyExpirationDate(state).IsNullOrEmpty(),
-				"The Expiration Date Provided By Kelly field for state " + state + " was not blank when it was expected to be.",
-				"The Expiration Date Provided By Kelly field for state: " + state + " was blank as expected");
-		}
-
 		[StepDefinition(@"I confirm the Label Information section on the Regulatory Information 3 page contains a link for: (.*)")]
 		public void IConfirmLabelInformationOnRegulatoryInformationPageContains(string labelLink)
 		{
 			var newProductPage = new NewProduct();
 			var labelLinksShowing = newProductPage.RegulatoryInformationLabelLinks();
 			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the Regulatory Information 3 page", "The link with text: '" + labelLink + "' was found on the Regulatory Information 3 page as expected");
-		}
-
-		[StepDefinition(@"In the (Regulatory Documents to Provide|Additional Documents) Page, the document type is: (.*) for section: (.*)")]
-		public void RegulatoryDocumentsConfirmDocumentTypeInSection(string page, string type, string section)
-		{
-			Report.IsTrue(new NewProduct().GetDocumentTypeForSection(section) == type, "On page: '" + page + "' the document type for section: '" + section + "' was not: '" + type + "' when it was expected to be", " On page: '" + page + "' the document type for section: '" + section + "' was: '" + type + "' as expected");
 		}
 
 		[StepDefinition(@"I confirm 'Quantity' is visible in the UPC header")]
@@ -2827,34 +2614,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(1);
 		}
 
-		[Then(@"in page Pesticide Details - State Registration Details I should see error: (.*)")]
-		public void ThenInPagePesticideDetails_StateRegistrationDetailsIShouldSeeError(string error)
-		{
-			NewProduct thisNewProduct = new NewProduct();
-			var erros = thisNewProduct.AllErrorMessages();
-			Report.IsTrue(erros.Contains(error), "Expected error: " + error + " but got: " + string.Join(", ", erros),
-				"As expected, error is showing as: " + error);
-		}
-
-		[Then(@"I should see the appropriate response depending on today's date for state: (.*)")]
-		public void ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(string state)
-		{
-			int year = DateTime.Now.Year;
-			NewProduct thisNewProduct = new NewProduct();
-			DateTime Oct1stthisYear = new DateTime(year, 10, 1);
-			if (DateTime.Now < Oct1stthisYear)
-			{
-				ThenInPagePesticideDetails_StateRegistrationDetailsIShouldSeeError(
-					"State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
-			}
-			else
-			{
-				GivenIShouldSeeXPage("Transportation Details 1");
-				GivenInTheNewProductPageIClickSection("Pesticide Details - State Registration Details");
-				//If the current date is > Oct 1st confirm the Transportation Details 1 step is shown and Click the Pesticide Details -State Registration Details heading
-			}
-		}
-
 		[StepDefinition(@"I click the 'Use My Ingredients' button")]
 		public void ClickUseMyIngredients()
 		{
@@ -2947,25 +2706,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				NewProduct MyNewProduct = new NewProduct();
 				MyNewProduct.MoveToLabel(thisRow["Field"]);
 				thisStepShared.GivenICallSharedStep56494PesticideDetailsCanadaProvinceCodeconfirmationvalidationAndSelectionForProvince(thisRow["Field"], error);
-			}
-		}
-
-		[Then(@"I confirm that every date in the Expiration Date column has a matching date in the Expiration Date provided by Kelly column")]
-		public void ThenIConfirmThatEveryDateInTheExpirationDateColumnHasAMatchingDateInTheExpirationDateProvidedByKellyColumn()
-		{
-			List<StatePesticideRegistration>
-				AllPesticideDetails = new NewProduct().GetStatePesticideRegistrationDetails();
-
-			foreach (StatePesticideRegistration thisRow in AllPesticideDetails)
-			{
-				if (thisRow.ExpirationDate.Length > 0)
-				{
-					Report.IsTrue(thisRow.ExpirationDate == thisRow.ExpirationDateByKelly,
-						"For state: " + thisRow.State + "Expiration date: " + thisRow.ExpirationDate +
-						" does not match Kelly expiration date: " + thisRow.ExpirationDateByKelly,
-						"As expected, for state: " + thisRow.State +
-						" Expiration date and Kelly Expiration date are matching on: " + thisRow.ExpirationDate);
-				}
 			}
 		}
 
@@ -3080,30 +2820,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().AddEPARow(),
 				"Failed to click Add Row in the EPA Table",
 				"Successfully clicked Add Row in the EPA Table");
-		}
-
-		[StepDefinition(@"I check the State Pesticide Registration Number field matches the text: (.*)")]
-		public void CheckStatePesticideRegistrationNumber(string regNumText)
-		{
-			var newProductPage = new NewProduct();
-			var stateRegistrationData = newProductPage.GetStatePesticideRegistrationDetails();
-			var failReg = stateRegistrationData.FirstOrDefault(x => x.RegistrationNumber.Trim() != regNumText.Trim());
-			var failState = failReg == null ? "N/A" : failReg.State;
-			Report.IsTrue(failReg == null,
-				"The State Pesticide Registration Number column did not match the expected text: " + regNumText + ". Failed on state: " + failState,
-				"The State Pesticide Registration Number column matched the expected text: " + regNumText);
-		}
-
-		[StepDefinition(@"I confirm the State Registration EPA table does not contain any Expiration data")]
-		public void ConfirmExpirationDataBlankInStateEPATable()
-		{
-			var newProductPage = new NewProduct();
-			var epaData = newProductPage.GetStatePesticideRegistrationDetails();
-			var failReg = epaData.FirstOrDefault(x => !x.ExpirationDate.IsNullOrEmpty()) ?? epaData.FirstOrDefault(x => !x.ExpirationDateByKelly.IsNullOrEmpty());
-			var failState = failReg == null ? "N/A" : failReg.State;
-			Report.IsTrue(failReg == null,
-				"The State Registration EPA table contained Expiration data when it was not expected. Broke on state: " + failState,
-				"The State Registration EPA table did not contain any Expiration data as expected");
 		}
 
 		[StepDefinition(@"I set the Expiration Date to be (.*) days from today using the calendar selector for state: (.*)")]

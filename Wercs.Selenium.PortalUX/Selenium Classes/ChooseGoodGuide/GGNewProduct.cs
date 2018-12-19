@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
+using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 {
@@ -28,7 +29,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			return containerElement
 				.FindElement(By.XPath("//label[contains(text(), 'Add Product')]/..//label/span[contains(text(),'" + option +
-				                      "')]/../input"))
+									  "')]/../input"))
 				.TryClick();
 
 		}
@@ -83,8 +84,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			return false;
 		}
 
-		public bool WaitForNewProductRadio(int secondsToWait) {
-			
+		public bool WaitForNewProductRadio(int secondsToWait)
+		{
+
 			int counter = 0;
 			while (counter < secondsToWait)
 			{
@@ -143,7 +145,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 			return "";
 		}
-		
+
 		public bool SelectProductLineBrand(string productLine)
 		{
 			try
@@ -222,20 +224,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		}
 
 		//=========== Marks of Distinction ==============//
-			public int GetRating()
+		public int GetRating()
+		{
+			try
 			{
-				try
-				{
-					var score = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//*[@id='GGPREV_chart']//*[name()='svg']//*[name()='text']//*[name()='tspan']"));
-					return Convert.ToInt16(score.Text.Trim());
-				}
-				catch (Exception e)
-				{
-					
-				}
-
-				return -1;
+				var score = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//*[@id='GGPREV_chart']//*[name()='svg']//*[name()='text']//*[name()='tspan']"));
+				return Convert.ToInt16(score.Text.Trim());
 			}
+			catch (Exception e)
+			{
+
+			}
+
+			return -1;
+		}
 
 		public bool SetContinue(string continueYN)
 		{
@@ -253,7 +255,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			}
 			catch (Exception e)
 			{
-				
+
 			}
 
 			return false;
@@ -265,13 +267,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			var buttonToClick =
 				containerElement.FindElement(
-					By.XPath("//tr/td/label[contains(text(), '"+documentType.Trim() +"')]/../..//span[contains(@class, 'button')]"));
+					By.XPath("//tr/td/label[contains(text(), '" + documentType.Trim() + "')]/../..//span[contains(@class, 'button')]"));
 			if (buttonToClick != null)
 			{
 				if (buttonToClick.TryClick())
 				{
 					System.Threading.Thread.Sleep(5000);
-					
+
 					if (SeleniumUtilities.GeneralFunctions.EnterFilename(filePath))
 					{
 						return true;
@@ -298,7 +300,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				
+
 				if (info.UpcNumber.ToLower().Contains("saved as"))
 				{
 					var savedUPC = Context
@@ -324,7 +326,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 					SafewareReporting.Report.Info("Failed to set upc size");
 					return false;
 				}
-				
+
 				return true;
 			}
 			catch (Exception ex)
@@ -372,7 +374,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 			return false;
 		}
-		
+
 
 		public bool SetUPCSize(string size)
 		{
@@ -506,7 +508,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				default:
 					throw new Exception("You must provide a valid document type");
 			}
-			
+
 			if (buttonToClick != null)
 			{
 				buttonToClick.ScrollElementIntoView();
@@ -565,7 +567,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		// ========= Add Ingredient Functions ========= //
 
-		public bool AddIngredient(Ingredient ingredient)
+		public bool AddIngredient(Ingredients.Ingredient ingredient)
 		{
 			var placeholderEl = containerElement.FindElement(By.XPath(".//input[@id='txtCasNumber']"), 2);
 			placeholderEl.TryClick();
@@ -646,7 +648,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 						throw;
 					}
 				}
-				
+
 
 				// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
 				// If no elements match this, then we will simply take the first element in the list
@@ -687,7 +689,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				// So we have now selected the element, so we need to try and get the first 'new' entry which contains this CAS Number, and hasn't had the Percentage field filled
 				var rows = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[contains(@class,'jqgrid')]//table//tbody//tr"), 2);
 
-				var matchingrow = rows.FirstOrDefault(x => ingredient.CASNumber.Contains(x.FindElement(By.XPath(".//td[1]"), 2).Text.Trim())&& x.FindElement(By.XPath(".//td[1]"), 2).Text.Trim().Length>0);
+				var matchingrow = rows.FirstOrDefault(x => ingredient.CASNumber.Contains(x.FindElement(By.XPath(".//td[1]"), 2).Text.Trim()) && x.FindElement(By.XPath(".//td[1]"), 2).Text.Trim().Length > 0);
 				if (matchingrow == null)
 				{
 					return false;

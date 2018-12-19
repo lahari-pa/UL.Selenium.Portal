@@ -13,10 +13,11 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide;
+using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
-	[Binding, Scope(Tag="WERCSmart_ChooseGoodGuide")]
+	[Binding, Scope(Tag = "WERCSmart_ChooseGoodGuide")]
 	class Steps_ChooseGoodGuide
 	{
 		[StepDefinition(@"on the ChooseGoodGuide site the GoodGuide home page should load")]
@@ -101,13 +102,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 				default:
 					throw new Exception("Failed to provide valid button to click");
 			}
-			
+
 		}
 
 		[StepDefinition(@"in the GoodGuide site I add the following ingredients:")]
 		public void ThenInTheGoodGuideSiteIAddTheFollowingIngredients(Table ingredientInformation)
 		{
-			var Ingredients = ingredientInformation.CreateSet<Ingredient>();
+			var Ingredients = ingredientInformation.CreateSet<Ingredients.Ingredient>();
 
 			foreach (var item in Ingredients)
 			{
@@ -203,7 +204,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				filter = Context.GetFromContext(filter.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
 					.ToString().Trim();
 			}
-			string upc=table.Rows[0]["UPC"].Trim();
+			string upc = table.Rows[0]["UPC"].Trim();
 			string status = table.Rows[0]["Status"].Trim();
 
 			Report.IsTrue(new MyProducts().SetSearchCriteria(searchBy, filter, upc, status),
@@ -237,7 +238,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(!(new MyProducts().FindAndClickProduct(columnName, value)), "Product was showing.",
 					"Product not found");
 			}
-			
+
 		}
 
 		[Then(@"in the GoodGuide My Products page I delete product with (.*): (.*)")]
@@ -248,7 +249,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				throw new Exception("My Products page has not loaded");
 			}
-			
+
 			if (value.ToLower().Contains("saved as"))
 			{
 				value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
@@ -269,7 +270,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisDeleteProduct.WaitForDialogToDisappear(60), "Delete confirm dialog has not disappeared",
 				"Delete dialog has disappeared.");
 		}
-	
+
 
 
 		[StepDefinition(@"in the GoodGuide site I click the 'Add UPC' button")]
@@ -297,13 +298,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in the Physical Property page I enter product pH: (.*)")]
 		public void ThenInThePhysicalPropertyPageIEnterProductPH(string ph)
 		{
-			Report.IsTrue(new GGNewProduct().EnterPHValue(ph),"Failed to set product ph to: " + ph, "Correctly set product PH");
+			Report.IsTrue(new GGNewProduct().EnterPHValue(ph), "Failed to set product ph to: " + ph, "Correctly set product PH");
 		}
 
 		[StepDefinition(@"in the Marks of Distinction page I should see rating: (.*)")]
 		public void ThenInTheMarksOfDistinctionPageIShouldSeeRating(int rating)
 		{
-			Report.IsTrue(new GGNewProduct().GetRating()==rating, "Rating is not showing as: " + rating, "Rating is showing correctly.");
+			Report.IsTrue(new GGNewProduct().GetRating() == rating, "Rating is not showing as: " + rating, "Rating is showing correctly.");
 		}
 
 		[StepDefinition(@"in the Marks of Distinction page for Would you like to continue with the product submission process I select: (Yes|No)")]
@@ -329,7 +330,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			GGNewProduct thisGgNewProduct = new GGNewProduct();
 			switch (section)
-				{
+			{
 				case "New Product":
 					thisGgNewProduct.WaitForNewProductRadio(60);
 					Report.IsTrue(thisGgNewProduct.WaitForSection(section), section + " has failed to appear", section + " is showing as expected.");
@@ -338,17 +339,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.IsTrue(new MyProducts().Wait_for_load(60), section + " has failed to appear", section + " is showing as expected.");
 					break;
 				default:
-					Report.IsTrue(thisGgNewProduct.WaitForSection(section,120), section + " has failed to appear", section + " is showing as expected.");
+					Report.IsTrue(thisGgNewProduct.WaitForSection(section, 120), section + " has failed to appear", section + " is showing as expected.");
 					break;
-				}
+			}
 			Delay.Seconds(3);
-			
+
 		}
 
 		[Given(@"I generate a random product name and save as (.*)")]
 		public void GivenIGenerateARandomProductNameAndSaveAs(string saveAs)
 		{
-			Context.AddToContext(saveAs,Guid.NewGuid().ToString());
+			Context.AddToContext(saveAs, Guid.NewGuid().ToString());
 		}
 
 
@@ -378,13 +379,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			switch (field)
 			{
 				case ("Email"):
-				{
-					value = EmailFunctions.CreateEmail(value);
-					Context.AddToContext("AccountEmailAddress",value);
-					accountCreation.Email = value;
-					Report.IsTrue(accountCreation.Email == value, "Failed to enter the email address: " + value, "Successfully entered the email address: " + value);
-					return;
-				}
+					{
+						value = EmailFunctions.CreateEmail(value);
+						Context.AddToContext("AccountEmailAddress", value);
+						accountCreation.Email = value;
+						Report.IsTrue(accountCreation.Email == value, "Failed to enter the email address: " + value, "Successfully entered the email address: " + value);
+						return;
+					}
 			}
 		}
 
@@ -395,15 +396,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			switch (button)
 			{
 				case ("Next"):
-				{
-					Report.IsTrue(accountCreation.ClickNext(), "Failed to click " + button + "!", "Successfully clicked " + button + "!");
-					return;
-				}
+					{
+						Report.IsTrue(accountCreation.ClickNext(), "Failed to click " + button + "!", "Successfully clicked " + button + "!");
+						return;
+					}
 				default:
-				{
-					Report.IsTrue(accountCreation.ClickCancel(), "Failed to click " + button + "!", "Successfully clicked " + button + "!");
-					return;
-				}
+					{
+						Report.IsTrue(accountCreation.ClickCancel(), "Failed to click " + button + "!", "Successfully clicked " + button + "!");
+						return;
+					}
 			}
 		}
 
@@ -500,7 +501,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				passed = EmailFunctions.CheckEmailHasArrived(emailTitle, emailToFind);
 			}
-			Report.IsTrue(passed,"Email has not arrived as expected", "Email has arrived as expected");
+			Report.IsTrue(passed, "Email has not arrived as expected", "Email has arrived as expected");
 		}
 
 
