@@ -579,7 +579,6 @@
     <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
-    <Compile Include="Steps\Steps_Shared_ULSC.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
     <Compile Include="Selenium Classes\StudioLegends.cs" />
     <Compile Include="Selenium Classes\LiveHelp.cs" />
@@ -649,7 +648,6 @@
     <Compile Include="Steps\Steps_SubscriptionUpgrade.cs" />
     <Compile Include="Steps\Steps_Summary.cs" />
     <Compile Include="Steps\Steps_SupplierReports.cs" />
-    <Compile Include="Steps\Steps_ULSC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

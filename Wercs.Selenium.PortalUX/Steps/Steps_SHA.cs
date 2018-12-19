@@ -21,7 +21,7 @@ using Match = NPOI.SS.Formula.Functions.Match;
 namespace Wercs.Selenium.PortalUX.Steps
 {
 	[Binding, Scope(Tag = "SHA")]
-	class Steps_SHA
+	public class Steps_SHA
 	{
 		[Given(@"I navigate to Studio")]
 		public void GivenINavigateToStudio()
@@ -71,7 +71,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(thisTopMenu.ClickSubMenu(menuItem, submenuItem), "Failed to click: " + menuItem,
 					"Successfully clicked: " + menuItem);
 			}
-			
+
 		}
 
 		[Given(@"In SHA Manager Page I click top menu item: (.*)")]

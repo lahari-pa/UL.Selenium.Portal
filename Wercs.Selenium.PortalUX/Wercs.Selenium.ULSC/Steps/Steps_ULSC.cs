@@ -8,7 +8,7 @@ using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace Wercs.Selenium.ULSC.Steps
 {
 	[Binding, Scope(Tag = "ULSC")]
 	class StepsUlsc
@@ -17,7 +17,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the following option (.*)")]
 		public void ThenIShouldSeeTheFollowingOption(string option)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount,"Checking that the option " + option + " is showing");
+			TestReport.BeginTestModule(GlobalParameters.StepCount, "Checking that the option " + option + " is showing");
 			try
 			{
 				var selUlSolutionCenter = new UlSolutionCenter();
@@ -82,7 +82,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I navigate to Studio for ULSC")]
 		public void GivenINavigateToStudioULSC()
 		{
-			SeleniumBrowser.WebBrowser.Url = TReVor.TestVariables.GetVariableSavedAs("ULSCV27URL");
+			SeleniumBrowser.WebBrowser.Url = TReVor.TestVariables.GetVariableSavedAs("TestUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 
 		}
@@ -91,7 +91,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenILoginToStudioAsULSCUser()
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
-			var ulscUser = TReVor.TestUsers.GetUserSavedAs("ULSCV27StudioUser");
+			var ulscUser = TReVor.TestUsers.GetUserSavedAs("StudioUser");
 			thisStudioLogin.Username = ulscUser.Username;
 			thisStudioLogin.Password = ulscUser.Password;
 			thisStudioLogin.ClickSignIn();

@@ -10,7 +10,6 @@
 @LandingPage
 @DocumentAcceptance
 @DeleteActiveProducts
-@wercsmart
 @ULSC
 
 @run_ULSC
@@ -48,8 +47,6 @@ Scenario: [23327] WERCSLink - WERCSmart - My Products Page Shows OK
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 And I call Shared Step 29148 - Login to ULSC as an Administrator User
 And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart
-And I should see the WERCSLink dashboard
-And In the WERCSLink dashboard I click menu item: Services and submenu item: WERCSmart
 And In the WERCSLink dashboard I click left menu link: My Products
 And I Confirm the WerCSMart Product Information page is shown in new window/tab
 And I Close the new window/tab that opened
