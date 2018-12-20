@@ -487,10 +487,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenIShouldSeeXPage(string page)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForSection(page),
-				page + " is not showing when it was expected to",
-				page + " is showing as expected");
-			Report.Screenshot();
+			if (selNewProduct.Wait_for_load())
+			{
+				Report.IsTrue(selNewProduct.WaitForSection(page),
+					page + " is not showing when it was expected to",
+					page + " is showing as expected");
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Failure("New product page was not found");
+			}
 		}
 
 		[StepDefinition(@"I should see the Additional Information Page")]

@@ -200,37 +200,67 @@ namespace Wercs.Selenium.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I close the tab with the Product Information page")]
-		public void GivenICloseTheTabWithTheProductInformationPage()
+		[StepDefinition(@"I close the tab with the (.*) page")]
+		public void GivenICloseTheTabWithTheProductInformationPage(string page)
 		{
-			{
-				List<string> OpenBrowsers =
-					SeleniumBrowser.GetTabURLs().ToList();
+			List<string> OpenBrowsers =
+				SeleniumBrowser.GetTabURLs().ToList();
 
-				foreach (string url in OpenBrowsers)
+			foreach (string url in OpenBrowsers)
+			{
+				SeleniumBrowser.SwitchToTabWithURL(url);
+				switch (page)
 				{
-					SeleniumBrowser.SwitchToTabWithURL(url);
-					if (new PortalUX.Selenium_Classes.Homepage().Wait_for_load())
-					{
-						Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
-							"Closed tab with url: " + url);
-						return;
-					}
+					case "The Product":
+						var selNewProduct = new NewProduct();
+						if (selNewProduct.Wait_for_load())
+						{
+							if (selNewProduct.WaitForSection(page))
+							{
+								Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
+									"Closed tab with url: " + url);
+								return;
+							}
+						}
+						break;
+					case "Product Information":
+						if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='products-information']"), 2) != null)
+						{
+							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
+								"Closed tab with url: " + url);
+							return;
+						}
+						break;
+					case "New Product":
+						var selNewProductnp = new NewProduct();
+						if (selNewProductnp.Wait_for_load())
+						{
+
+							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
+								"Closed tab with url: " + url);
+							return;
+
+						}
+						break;
+					default:
+						throw new Exception("Page name you have provided is not valid");
+
 				}
 
-				//We may be on the wrong page, just find one for WERCSmart
-				Report.Error("Failed to find expected tab");
-				foreach (string url in OpenBrowsers)
+			}
+
+			//We may be on the wrong page, just find one for WERCSmart
+			Report.Error("Failed to find expected tab");
+			foreach (string url in OpenBrowsers)
+			{
+				SeleniumBrowser.SwitchToTabWithURL(url);
+				if(SeleniumBrowser.WebBrowser.Title.Contains("WERCSmart"))
 				{
-					SeleniumBrowser.SwitchToTabWithURL(url);
-					if(SeleniumBrowser.WebBrowser.Title.Contains("WERCSmart"))
-					{
-						string ulrToClose = SeleniumBrowser.GetActiveTabURL();
-						Report.Info("Attemping to close: " + ulrToClose);
-						Report.IsTrue(SeleniumBrowser.CloseTabWithURL(ulrToClose), "Failed to close tab with url: " + ulrToClose,
-							"Closed tab with url: " + ulrToClose);
-						return;
-					}
+					string ulrToClose = SeleniumBrowser.GetActiveTabURL();
+					Report.Info("Attemping to close: " + ulrToClose);
+					Report.IsTrue(SeleniumBrowser.CloseTabWithURL(ulrToClose), "Failed to close tab with url: " + ulrToClose,
+						"Closed tab with url: " + ulrToClose);
+					return;
 				}
 			}
 		}
@@ -253,13 +283,43 @@ namespace Wercs.Selenium.ULSC.Steps
 			Report.Error("Failed to switch to tab with title: " +tabTitle);
 		}
 
-		[StepDefinition(@"In the WERCSLink page - Click the My Product link from the WERCSmart area of the Services page")]
-		public void GivenInTheWERCSLinkPage_ClickTheMyProductLinkFromTheWERCSmartAreaOfTheServicesPage()
+		[StepDefinition(@"In the WERCSLink page - Click the (.*) link from the WERCSmart area of the Services page")]
+		public void GivenInTheWERCSLinkPage_ClickTheMyProductLinkFromTheWERCSmartAreaOfTheServicesPage(string link)
 		{
 			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			Report.IsTrue(thisWercsLinkDashboard.ClickMainPageLink("My Products"), "Failed to click link: My Products",
-				"Clicked My Products");
+			Report.IsTrue(thisWercsLinkDashboard.ClickMainPageLink(link), "Failed to click link: " + link,
+				"Clicked " + link);
 		}
+
+		[StepDefinition(@"I Confirm a new window opens with the WERCSmart New Product page shown")]
+		public void GivenIConfirmANewWindowOpensWithTheWERCSmartNewProductPageShown()
+		{
+			Delay.Seconds(30);
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				Report.Info("Switching tab");
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='dataentry']"), 2) != null)
+				{
+					Report.Success("New product page opened in a new tab. Successfully switched to that tab.");
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab! The available tabs were:");
+			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+
+			foreach (string url in OpenBrowsers)
+			{
+				SeleniumBrowser.SwitchToTabWithURL(url);
+				Report.Info("url: " + url);
+				Report.Screenshot();
+			}
+		}
+
 
 	}
 }

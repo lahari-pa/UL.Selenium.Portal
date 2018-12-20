@@ -21,7 +21,7 @@ using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class NewProduct : BaseObject
+	public class NewProduct : BaseObject
 	{
 		// Again a pretty poor/generic ID AND CLASHES WITH FORWARD PRODUCT REGISTRATION!!!
 		// but it's the best we have....

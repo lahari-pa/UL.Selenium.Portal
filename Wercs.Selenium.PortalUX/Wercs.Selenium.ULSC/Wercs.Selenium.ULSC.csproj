@@ -124,6 +124,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Dashboard\Services.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ULSC1.feature.cs">
       <DependentUpon>ULSC.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -136,6 +141,10 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\Dashboard\Services.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Services.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ULSC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

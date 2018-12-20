@@ -1129,7 +1129,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 	}
-	class MyAccount_MyLibrary : BaseObject
+	public class MyAccount_MyLibrary : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "myLibraryContainer")]
 		protected override IWebElement containerElement { get; set; }
@@ -1277,7 +1277,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			public string Date { set; get; }
 		}
 	}
-	class MyBrands : MyAccount_MyLibrary
+	public class MyBrands : MyAccount_MyLibrary
 	{
 		public bool Active { get; set; }
 		public bool AddNew()
