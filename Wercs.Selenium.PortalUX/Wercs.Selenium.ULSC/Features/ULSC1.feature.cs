@@ -182,14 +182,16 @@ testRunner.And("In the WERCSLink dashboard I click left menu link: My Products",
 #line 51
 testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
-testRunner.And("I Close the new window/tab that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
-testRunner.And("I In the WERCSLink page - Click the My Product link from the WERCSmart area of th" +
-                    "e Services page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I navigate to tab with title: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 54
-testRunner.And("I Confirm the WERCSmart  Product Information page is shown in a new window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In the WERCSLink page - Click the My Product link from the WERCSmart area of the " +
+                    "Services page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 55
-testRunner.And("I Close the new window/tab that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 56
+testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

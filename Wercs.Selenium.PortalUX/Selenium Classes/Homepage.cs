@@ -11,7 +11,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class Homepage : BaseObject
+	public class Homepage : BaseObject
 	{
 		public const string BasePath = "//div[@id='masterContainer']";
 		[FindsBy(How = How.XPath, Using = BasePath)]

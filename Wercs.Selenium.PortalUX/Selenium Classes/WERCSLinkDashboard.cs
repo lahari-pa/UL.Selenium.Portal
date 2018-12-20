@@ -69,7 +69,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickMenuAndSubMenuOption(string menu, string submenu = "")
 		{
-			var menuOptions = containerElement.FindElements(By.XPath(".//nav/ul/li/a"), 2);
+			if (submenu.ToLower() == "wercsmart")
+			{
+				submenu = "WERC";
+			}
+			var menuOptions = containerElement.FindElements(By.XPath(".//nav/ul/li/a/span"), 2);
 			if (menuOptions.Count == 0)
 			{
 				Report.Error("No menu options were found");
@@ -77,7 +81,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			var matchingMenuOption =
-				menuOptions.FirstOrDefault(x => x.GetAttribute("title").ToLower() == menu.ToLower());
+				menuOptions.FirstOrDefault(x => x.GetValue().ToLower() == menu.ToLower());
 
 			if (matchingMenuOption == null)
 			{
@@ -85,27 +89,58 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			if (!matchingMenuOption.TryClick())
-			{
-				Report.Error("Failed to click menu option: " + menu);
-				return false;
-			}
 
 			if (submenu.Length == 0)
 			{
 				return true;
 			}
 
+
 			var submenuOptions =
-				matchingMenuOption.FindElements(By.XPath("./following-sibling::ul[contains(@class, 'subnav')]/li/a"));
+				matchingMenuOption.FindElements(By.XPath("../../ul[contains(@class, 'subnav')]/li/a/span"),2);
 
 			var matchingSubMenuOption =
-				submenuOptions.FirstOrDefault(x => x.GetAttribute("title").ToLower() == submenu.ToLower());
+				submenuOptions.FirstOrDefault(x => x.GetValue().ToLower() == submenu.ToLower());
 
 			if (matchingSubMenuOption == null)
 			{
 				Report.Error("No matching sub menu option was found for: " + submenu);
 				return false;
+			}
+
+			var parentUL = matchingSubMenuOption.FindElement(By.XPath("../../ul"), 2);
+
+			if (parentUL.GetAttribute("aria-expanded") == "false")
+			{
+				matchingMenuOption.Click();
+				Delay.Seconds(1);
+				submenuOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//ul[contains(@class, 'subnav')]/li/a/span"), 2);
+
+				matchingSubMenuOption =
+					submenuOptions.FirstOrDefault(x => x.GetValue().ToLower() == submenu.ToLower());
+
+				if (matchingSubMenuOption == null)
+				{
+					Report.Error("No matching sub menu option was found for: " + submenu);
+					return false;
+				}
+
+				parentUL = matchingSubMenuOption.FindElement(By.XPath("../../ul"), 2);
+				if (parentUL.GetAttribute("aria-expanded") == "false")
+				{
+					menuOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//nav/ul/li/a/span"), 2);
+					if (menuOptions.Count == 0)
+					{
+						Report.Error("No menu options were found");
+						return false;
+					}
+
+					matchingMenuOption = menuOptions.FirstOrDefault(x => x.GetValue().ToLower() == menu.ToLower());
+					matchingMenuOption.Click();
+					Delay.Seconds(1);
+				}
+
+
 			}
 
 			return matchingSubMenuOption.TryClick();
@@ -128,11 +163,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickLeftLink(string linkTitle)
 		{
-			var allLinks = containerElement.FindElements(By.XPath(".//ul[@class='nav']//a"));
+			var allLinks = containerElement.FindElements(By.XPath(".//ul[@class='nav']//a/span"));
 
-			var matchingLink = allLinks.FirstOrDefault(x => x.GetAttribute("title").ToLower() == linkTitle.ToLower());
+			var matchingLink = allLinks.FirstOrDefault(x => x.GetValue().ToLower() == linkTitle.ToLower());
 
-				if (matchingLink == null)
+			if (matchingLink == null)
 			{
 				Report.Error("No matching link was found for: " + linkTitle);
 				return false;

@@ -10,7 +10,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class ProductsGrid : BaseObject
+	public class ProductsGrid : BaseObject
 	{
 		public const string BasePath = "//div[@id='products-grid']";
 
@@ -724,7 +724,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 	}
 
-	class ProductGridItem : ProductsGrid
+	public class ProductGridItem : ProductsGrid
 	{
 		public string ProductId { get; set; }
 		public string ProductName { get; set; }
