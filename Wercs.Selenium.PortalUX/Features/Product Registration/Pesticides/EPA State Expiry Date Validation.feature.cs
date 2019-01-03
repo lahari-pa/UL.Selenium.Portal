@@ -2569,12 +2569,12 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfsdesign")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("jamesnew")]
         public virtual void _56621PesticideData_EPAExpirationDateValidationSouthDakota_June30ThNoMoreThan2YearsOut()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56621] Pesticide Data - EPA Expiration date validation (South Dakota - June 30th" +
                     " no more than 2 years out)", new string[] {
-                        "tfsdesign"});
+                        "jamesnew"});
 #line 713
 this.ScenarioSetup(scenarioInfo);
 #line 714

@@ -709,7 +709,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56619
 
 # Assigned to Barrett, Beverly
-@tfsdesign
+@jamesnew
 Scenario: [56621] Pesticide Data - EPA Expiration date validation (South Dakota - June 30th no more than 2 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
