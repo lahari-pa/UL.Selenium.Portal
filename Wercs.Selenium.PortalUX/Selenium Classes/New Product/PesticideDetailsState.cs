@@ -270,6 +270,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 			return kellyExpirationDateInput.GetValue();
 		}
 
+		public string ErrorMessageForState(string state)
+		{
+			this.RefreshContainer();
+			//return this.containerElement.FindElements(By.XPath(".//p[@class='form-error']//span"), 2)?.Select(x => x.Text).ToList();
+
+			return null;
+		}
+
 		public List<StatePesticideRegistration> GetStatePesticideRegistrationDetails()
 		{
 			var allResults = new List<StatePesticideRegistration>();

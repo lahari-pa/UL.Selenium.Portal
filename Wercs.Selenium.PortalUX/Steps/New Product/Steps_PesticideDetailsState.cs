@@ -22,12 +22,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 	class Steps_PesticideDetailsState
 	{
 		[StepDefinition(@"in page Pesticide Details - State Registration Details I should see error: (.*)")]
-		public void ThenInPagePesticideDetails_StateRegistrationDetailsIShouldSeeError(string error)
+		public void IShouldSeeError(string error)
 		{
 			var thisNewProduct = new NewProduct();
 			var erros = thisNewProduct.AllErrorMessages();
 			Report.IsTrue(erros.Contains(error), "Expected error: " + error + " but got: " + string.Join(", ", erros),
 				"As expected, error is showing as: " + error);
+		}
+
+		[StepDefinition(@"in page Pesticide Details - State Registration Details I should see no errors")]
+		public void IShouldSeeNoError()
+		{
+			var thisNewProduct = new NewProduct();
+			var erros = thisNewProduct.AllErrorMessages();
+			Report.IsTrue(!erros.Any(), "Expected no errors but there were errors!",
+				"There were no errors as expected");
 		}
 
 		[StepDefinition(@"I should see the appropriate response depending on today's date for state: (.*)")]
@@ -38,8 +47,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var Oct1stthisYear = new DateTime(year, 10, 1);
 			if (DateTime.Now < Oct1stthisYear)
 			{
-				this.ThenInPagePesticideDetails_StateRegistrationDetailsIShouldSeeError(
-					"State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+				this.IShouldSeeError("State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
 			}
 			else
 			{
@@ -277,5 +285,93 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The State Registration EPA table contained Expiration data when it was not expected. Broke on state: " + failState,
 				"The State Registration EPA table did not contain any Expiration data as expected");
 		}
+
+		[StepDefinition(@"If the current date is after Sept 1st then I confirm no error is shown for the State: (.*) - if the current date is before Sept 1st then I confirm the error is displayed: (.*)")]
+		public void ConfirmNovemberErrorBasedOnCurrentDate(string state, string error)
+		{
+			var pesticideDetailsState = new PesticideDetailsState();
+			var year = DateTime.Now.Year;
+			var sept1stthisYear = new DateTime(year, 9, 1);
+			var currentDate = DateTime.Now;
+			Report.Info("Current date (DD/MM/YY) is: " + currentDate.Date + "/" + currentDate.Month + "/" + currentDate.Year);
+			if (DateTime.Now < sept1stthisYear)
+			{
+				Report.Info("Date is prior to Sept 1st. I expect to see the state error");
+				this.IShouldSeeError("State " + state + ": Valid dates are November 30 of current calendar year until September 1, at which time November 30 of either the current or the following calendar year would be acceptable.");
+			}
+			else
+			{
+				Report.Info("Date is post Sept 1st. I expect no state error");
+				this.IShouldSeeNoError();
+			}
+		}
+
+		[StepDefinition(@"I enter an EPA registration date (MM/DD) for state: (.*) of month: (.*) date: (.*) for the current year")]
+		public void EnterEpaRegistrationDateCurrentYear(string state, string month, string date)
+		{
+			var pesticideDetailsState = new PesticideDetailsState();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			var stepsNewProduct = new StepsNewProduct();
+			var year = DateTime.Now.Year;
+			if (int.TryParse(month, out var monthNum) && int.TryParse(date, out var dateNum))
+			{
+				Report.Info("From test plan: 'If the current date is after XX xxth for the current year select XX xxth for next year'");
+				var dt = new DateTime(year, monthNum, dateNum);
+				if (dt < DateTime.Now)
+				{
+					Report.Info("Using the next year because the current date has passed the specified date");
+					dt = new DateTime(year + 1, monthNum, dateNum);
+				}
+				Report.Info("Entering date of (month/date): " + dt.Month + "/ " + dt.Day + " (NOT Nov 30)");
+				Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+					"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+					"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+				// Click Continue
+				TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - State Registration Details");
+			}
+			else
+			{
+				throw new Exception("Month/ date parameter must be parsable as an integer!");
+			}
+		}
+
+		[StepDefinition(@"I enter an EPA registration date (MM/DD) for state: (.*) of month: (.*) date: (.*) for the next year")]
+		public void EnterEpaRegistrationDateNextYear(string state, string month, string date)
+		{
+			var pesticideDetailsState = new PesticideDetailsState();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+			var stepsNewProduct = new StepsNewProduct();
+			var year = DateTime.Now.Year;
+			if (int.TryParse(month, out var monthNum) && int.TryParse(date, out var dateNum))
+			{
+				Report.Info("From test plan: 'If the current date is after XX xxth for the current year select XX xxth for next year + 1'");
+				var dt = new DateTime(year, monthNum, dateNum);
+				if (dt < DateTime.Now)
+				{
+					Report.Info("Using the next year + 1 because the current date has passed the specified date");
+					dt = new DateTime(year + 2, monthNum, dateNum);
+				}
+				else
+				{
+					Report.Info("Using the next year for EPA registration");
+					dt = new DateTime(year + 1, monthNum, dateNum);
+				}
+				Report.Info("Entering date of (month/date): " + dt.Month + "/ " + dt.Day + " (NOT Nov 30)");
+				Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+					"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+					"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+				// Click Continue
+				TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - State Registration Details");
+			}
+			else
+			{
+				throw new Exception("Month/ date parameter must be parsable as an integer!");
+			}
+		}
+
 	}
 }
