@@ -43,5 +43,80 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return rList;
 		}
+
+		public bool InputUpcCaseInformation(UpcCaseInformation info)
+		{
+			try
+			{
+				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				var textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+				var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+				if (info.UpcNumber.ToLower().Contains("saved as"))
+				{
+					try
+					{
+						var savedUPC = Context
+							.GetFromContext(info.UpcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+							.ToString();
+						info.UpcNumber = savedUPC;
+					}
+					catch (Exception e)
+					{
+						Report.Info("Failed to find saved item in context: " + info.UpcNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+						throw;
+					}
+
+				}
+				upcNumberField.EnterText(info.UpcNumber);
+				var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+				containsType.Select(info.ContainerType);
+				var regex = @"(.*)\((.*)\)";
+				var sizeField = (from input in textInputs
+								 let match = Regex.Match(input.GetAttribute("placeholder"), regex)
+								 where match.Success && match.Groups[1].Value.StartsWith("Size") && match.Groups[2].Value.Contains("Ounces")
+								 select input).FirstOrDefault();
+				if (sizeField == null)
+				{
+					Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
+					return false;
+				}
+				sizeField.EnterText(info.Size);
+
+				if (info.Quantity.Length > 0)
+				{
+					var quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity of Units within the Case']"), 2);
+					quantityField.EnterText(info.Quantity);
+				}
+
+				if (info.IndividualUpcCasePack.Length > 0)
+				{
+					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'upcContained.field')]"), 2);
+					packageField.Select(info.IndividualUpcCasePack);
+				}
+
+				if (info.TransportationOption.Length > 0)
+				{
+					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);
+					packageField.Select(info.TransportationOption);
+				}
+				return true;
+			}
+			catch (Exception ex)
+			{
+				SafewareReporting.Report.Info(ex.Message);
+				return false;
+			}
+		}
+	}
+
+	public class UpcCaseInformation
+	{
+		public string UpcNumber { get; set; } = "";
+		public string ContainerType { get; set; } = "";
+		public string Size { get; set; } = "";
+		public string Quantity { get; set; } = "";
+		public string IndividualUpcCasePack { get; set; } = "";
+		public string TransportationOption { get; set; } = "";
 	}
 }

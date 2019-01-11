@@ -1382,5 +1382,78 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 			}
 		}
+
+		[StepDefinition(@"In the list of UPCs I should (see|not see) case pack indicatior for UPC: (.*)")]
+		public void ConfirmCaseUpc(string condition,string upc)
+		{
+			try
+			{
+				// Switch to window
+				var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+				Context.AddToContext("MainWindowHandle", currentHandle);
+				var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				Report.Info("Looking for SHA Manager Product UPC window");
+				bool foundWindow = false;
+				foreach (var handle in allHandles)
+				{
+					Report.Info("Checking handle: " + handle);
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+					if (SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+					{
+						Report.Success("Tab was switched successfully!");
+						Report.Screenshot();
+						foundWindow = true;
+						break;
+					}
+				}
+
+				if (!foundWindow)
+				{
+					Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+					Report.Screenshot();
+				}
+
+				// Get Displayed UPCs
+				var displayedUpcs = new StudioSHAManager().GetUPCs();
+				if (displayedUpcs == null)
+				{
+					Report.Failure("Unable to fetch UPC Information from the Product UPC window!");
+					Report.Screenshot();
+					return;
+				}
+
+				//// Confirm match
+				if (upc.ToLower().Contains("saved as"))
+				{
+					upc = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+				}
+				Report.Screenshot();
+					if (condition == "see")
+					{
+						Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber.Contains( upc + "*")),
+							$@"UPC did not appear Case Pack Indicator on the Product UPC list! UPC numbers were: {string.Join(", ", displayedUpcs)}",
+							$@"UPC appeared with Case Pack Indicator on the Product UPC list as expected");
+					}
+					if (condition == "not see")
+					{
+						Report.IsFalse(displayedUpcs.Any(x => x.UPCNumber.Contains(upc + "*")),
+							$@"UPC did  appear Case Pack Indicator on the Product UPC list! where it should not be, UPC numbers were: {string.Join(", ", displayedUpcs)}",
+							$@"UPC did not appeared with Case Pack Indicator on the Product UPC list as expected");
+					}
+			}
+			catch (NoSuchWindowException)
+			{
+				Report.Failure("Failed to switch to the SHA Manager Product UPC window!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				Report.Screenshot();
+			}
+		}
 	}
 }

@@ -17,6 +17,7 @@
 @Brands
 @MyIngredients
 @UPC
+@SHA
 @run_UPC
 
 Feature: UPC
@@ -316,3 +317,68 @@ Then I should not see the following UPC options:
 | Option                          |
 | Size (Fluid Ounces)             |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
+
+
+Scenario: [87640] UPC - Case Pack Only Present in product
+#Given I login into the WERCSmart Portal - Administrator Role
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+Given I generate a random UPC number and save as: UPC87640
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase87640
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer |
+| Amazon      |
+Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87640, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A:   steel box
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87640)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87640 and its status is: Submitted
+Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87640
+And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
+
+
+Scenario: [87643] UPC - Case Pack & regular UPC present in product
+#Given I login into the WERCSmart Portal - Administrator Role
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+Given I generate a random UPC number and save as: UPC87643
+Given I generate a random UPC number and save as: UPC876431
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase87643
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer |
+| Amazon      |
+Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC876431, container type: Paper bag and size: 2 do not click continue
+Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87643, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A:   steel box
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87643)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87643 and its status is: Submitted
+Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87643
+And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87643
+And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876431
