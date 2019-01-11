@@ -354,25 +354,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			foreach (var row in table.Rows)
 			{
 				var month = row["Month"];
-				if (month.IsNullOrEmpty())
-				{
-					throw new Exception("No table value for 'Month' was provided!");
-				}
 				var day = row["Day"];
-				if (day.IsNullOrEmpty())
-				{
-					throw new Exception("No table value for 'Day' was provided!");
-				}
 				var state = row["State"];
-				if (state.IsNullOrEmpty())
-				{
-					throw new Exception("No table value for 'State' was provided!");
-				}
 				var useNextYear = row["Increment year?"];
-				if (useNextYear.IsNullOrEmpty())
-				{
-					throw new Exception("No table value for 'Increment year?' was provided!");
-				}
 				bool iterateYear;
 				if (useNextYear.ToLower() == "yes" || useNextYear.ToLower() == "true")
 				{
@@ -465,6 +449,94 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ExpirationDate_NextYear_NotAugust31th(string state)
 		{
 			this.EnterEpaRegistrationDateNextYear("8", "1", state);
+		}
+
+		[StepDefinition(@"I select EPA expiration date - enter current year plus 2:")]
+		public void SharedStep_EPAExpirationDate_EnterCurrentYearPlus_June30th(Table table)
+		{
+			// Click in the EPA Expiration Date box for the state you are working with
+			// Select EPA day/ month for the current year + 2
+			// | State | Day | Month |
+			// | NY    | 01  | 01    |
+			foreach (var row in table.Rows)
+			{
+				var day = row["Day"];
+				var month = row["Month"];
+				var state = row["State"];
+				var pesticideDetailsState = new PesticideDetailsState();
+				TestReport.UseSubSteps = true;
+				TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
+				var MyStepsNewProduct = new StepsNewProduct();
+				var year = DateTime.Now.Year + 2;
+				DateTime dt;
+				if (int.TryParse(month, out int monthNum) && int.TryParse(day, out int dayNum))
+				{
+					 dt = new DateTime(year, monthNum, dayNum);
+				}
+				else
+				{
+					throw new Exception("Day/ month paramaters must be parsable as int!");
+				}
+				Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
+					"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
+					"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
+			}
+
+		}
+
+		// enter 'NONE' or 'N/A' if no error is excepted
+		[StepDefinition(@"If the (current|next) year is an (even|odd) number - Confirm that an error shows: (.*)")]
+		public void IfCurrentYearIsEvenOddConfirmError(string currentNext, string evenOdd, string error)
+		{
+			if (evenOdd != "even" && evenOdd != "odd")
+			{
+				throw new Exception("Step parameter must be either 'even' or 'odd'!");
+			}
+			int year;
+			switch (currentNext.ToLower())
+			{
+				case "next":
+					year = DateTime.Now.Year + 1;
+					break;
+				case "current":
+					year = DateTime.Now.Year;
+					break;
+				default:
+					throw new Exception("Step parameter must be either 'current' or 'next'!");
+			}
+			if ((evenOdd == "even") == (year % 2 == 0))
+			{
+				Report.Info("The year: " + year + " is " + (year % 2 == 0 ? "even" : "odd"));
+				if (error.ToLower() == "none" || error.ToLower() == "n/a")
+				{
+					Report.Info("I don't expect any state error");
+					this.IShouldSeeNoError();
+				}
+				else
+				{
+					Report.Info("I expect to see the state error");
+					this.IShouldSeeError(error);
+				}
+			}
+			else
+			{
+				Report.Info("The year" + year + " is: " + (evenOdd == "even" ? "odd" : "even"));
+			}
+		}
+
+		[StepDefinition(@"If the current year is an odd number I confirm that no error is displayed and the '(.*)' page has loaded")]
+		public void IfCurrentYearIsOddIConfirmNoErrorAndPageLoaded(string page)
+		{
+			var year = DateTime.Now.Year;
+			if (year % 2 == 0)
+			{
+				Report.Info("The current year " + year + " is even");
+			}
+			else
+			{
+				this.IShouldSeeNoError();
+				new StepsNewProduct().GivenIShouldSeeXPage(page);
+			}
 		}
 	}
 }

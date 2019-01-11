@@ -768,64 +768,62 @@ this.ScenarioSetup(scenarioInfo);
 #line 195
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 196
-testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 197
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 198
+#line 197
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 199
+#line 198
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 200
+#line 199
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 201
+#line 200
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 202
+#line 201
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 203
+#line 202
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 204
+#line 203
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 205
+#line 204
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 206
+#line 205
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 207
+#line 206
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: KY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 208
+#line 207
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "KY: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 209
+#line 208
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: KY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 210
+#line 209
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "KY: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 211
+#line 210
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: KY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 212
+#line 211
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: KY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 213
+#line 212
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: KY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 214
+#line 213
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 215
+#line 214
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 216
+#line 215
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56599", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -851,67 +849,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56600] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for" +
                     " current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 224
+#line 223
 this.ScenarioSetup(scenarioInfo);
-#line 225
+#line 224
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 226
+#line 225
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 227
+#line 226
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 228
+#line 227
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 229
+#line 228
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 230
+#line 229
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 231
+#line 230
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 232
+#line 231
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 233
+#line 232
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 234
+#line 233
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 235
+#line 234
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 236
+#line 235
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: LA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 237
+#line 236
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "LA: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 238
+#line 237
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: LA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 239
+#line 238
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "LA: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 240
+#line 239
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: LA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 241
+#line 240
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: LA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 242
+#line 241
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: LA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 243
+#line 242
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 244
+#line 243
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 245
+#line 244
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56600", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -937,67 +935,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56601] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for" +
                     " current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 252
+#line 251
 this.ScenarioSetup(scenarioInfo);
-#line 253
+#line 252
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 254
+#line 253
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 255
+#line 254
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 256
+#line 255
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 257
+#line 256
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 258
+#line 257
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 259
+#line 258
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 260
+#line 259
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 261
+#line 260
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 262
+#line 261
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 263
+#line 262
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 264
+#line 263
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 265
+#line 264
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MD: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 266
+#line 265
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 267
+#line 266
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MD: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 268
+#line 267
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 269
+#line 268
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: MD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 270
+#line 269
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: MD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 271
+#line 270
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 272
+#line 271
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 273
+#line 272
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56601", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1023,67 +1021,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56602] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for" +
                     " current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 280
+#line 279
 this.ScenarioSetup(scenarioInfo);
-#line 281
+#line 280
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 282
+#line 281
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 283
+#line 282
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 284
+#line 283
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 285
+#line 284
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 286
+#line 285
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 287
+#line 286
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 288
+#line 287
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 289
+#line 288
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 290
+#line 289
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 291
+#line 290
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 292
+#line 291
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: ME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 293
+#line 292
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "ME: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 294
+#line 293
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: ME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 295
+#line 294
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "ME: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 296
+#line 295
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: ME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 297
+#line 296
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: ME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 298
+#line 297
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: ME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 299
+#line 298
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 300
+#line 299
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 301
+#line 300
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56602", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1109,67 +1107,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56603] Pesticide Data - EPA Expiration date validation (Minnesota - Dec 31st for" +
                     " current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 304
+#line 303
 this.ScenarioSetup(scenarioInfo);
-#line 305
+#line 304
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 306
+#line 305
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 307
+#line 306
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 308
+#line 307
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 309
+#line 308
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 310
+#line 309
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 311
+#line 310
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 312
+#line 311
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 313
+#line 312
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 314
+#line 313
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 315
+#line 314
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 316
+#line 315
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 317
+#line 316
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MN: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 318
+#line 317
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 319
+#line 318
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MN: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 320
+#line 319
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 321
+#line 320
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: MN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 322
+#line 321
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: MN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 323
+#line 322
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 324
+#line 323
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 325
+#line 324
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56603", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1195,67 +1193,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56604] Pesticide Data - EPA Expiration date validation (Missouri -Dec 31st for c" +
                     "urrent calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 328
+#line 327
 this.ScenarioSetup(scenarioInfo);
-#line 329
+#line 328
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 330
+#line 329
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 331
+#line 330
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 332
+#line 331
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 333
+#line 332
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 334
+#line 333
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 335
+#line 334
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 336
+#line 335
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 337
+#line 336
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 338
+#line 337
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 339
+#line 338
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 340
+#line 339
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 341
+#line 340
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MO: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 342
+#line 341
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 343
+#line 342
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MO: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 344
+#line 343
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 345
+#line 344
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: MO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 346
+#line 345
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: MO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 347
+#line 346
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 348
+#line 347
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 349
+#line 348
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56604", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1281,67 +1279,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56605] Pesticide Data - EPA Expiration date validation (Mississippi - Dec 31st f" +
                     "or current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 352
+#line 351
 this.ScenarioSetup(scenarioInfo);
-#line 353
+#line 352
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 354
+#line 353
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 355
+#line 354
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 356
+#line 355
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 357
+#line 356
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 358
+#line 357
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 359
+#line 358
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 360
+#line 359
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 361
+#line 360
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 362
+#line 361
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 363
+#line 362
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 364
+#line 363
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 365
+#line 364
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MS: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 366
+#line 365
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 367
+#line 366
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MS: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 368
+#line 367
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 369
+#line 368
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: MS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 370
+#line 369
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: MS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 371
+#line 370
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 372
+#line 371
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 373
+#line 372
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56605", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1367,67 +1365,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56606] Pesticide Data - EPA Expiration date validation (Montana - Dec 31st for c" +
                     "urrent calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 376
+#line 375
 this.ScenarioSetup(scenarioInfo);
-#line 377
+#line 376
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 378
+#line 377
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 379
+#line 378
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 380
+#line 379
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 381
+#line 380
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 382
+#line 381
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 383
+#line 382
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 384
+#line 383
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 385
+#line 384
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 386
+#line 385
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 387
+#line 386
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 388
+#line 387
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 389
+#line 388
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MT: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 390
+#line 389
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 391
+#line 390
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "MT: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 392
+#line 391
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 393
+#line 392
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: MT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 394
+#line 393
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: MT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 395
+#line 394
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 396
+#line 395
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 397
+#line 396
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56606", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1455,67 +1453,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56607] Pesticide Data - EPA Expiration date validation (North Carloina - Dec 31s" +
                     "t for current calendar year until Oct 1st,  then Dec 31st for this or next year)" +
                     "", ((string[])(null)));
-#line 400
+#line 399
 this.ScenarioSetup(scenarioInfo);
-#line 401
+#line 400
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 402
+#line 401
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 403
+#line 402
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 404
+#line 403
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 405
+#line 404
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 406
+#line 405
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 407
+#line 406
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 408
+#line 407
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 409
+#line 408
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 410
+#line 409
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 411
+#line 410
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 412
+#line 411
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 413
+#line 412
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NC: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 414
+#line 413
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 415
+#line 414
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NC: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 416
+#line 415
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 417
+#line 416
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 418
+#line 417
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 419
+#line 418
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 420
+#line 419
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 421
+#line 420
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56607", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1541,67 +1539,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56608] Pesticide Data - EPA Expiration date validation (Nebraska - Dec 31st for " +
                     "current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 424
+#line 423
 this.ScenarioSetup(scenarioInfo);
-#line 425
+#line 424
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 426
+#line 425
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 427
+#line 426
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 428
+#line 427
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 429
+#line 428
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 430
+#line 429
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 431
+#line 430
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 432
+#line 431
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 433
+#line 432
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 434
+#line 433
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 435
+#line 434
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 436
+#line 435
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 437
+#line 436
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NC: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 438
+#line 437
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 439
+#line 438
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NC: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 440
+#line 439
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 441
+#line 440
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 442
+#line 441
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 443
+#line 442
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 444
+#line 443
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 445
+#line 444
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56608", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1627,67 +1625,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56609] Pesticide Data - EPA Expiration date validation (New Hampshire - Dec 31st" +
                     " for current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 448
+#line 447
 this.ScenarioSetup(scenarioInfo);
-#line 449
+#line 448
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 450
+#line 449
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 451
+#line 450
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 452
+#line 451
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 453
+#line 452
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 454
+#line 453
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 455
+#line 454
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 456
+#line 455
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 457
+#line 456
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 458
+#line 457
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 459
+#line 458
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 460
+#line 459
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 461
+#line 460
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NH: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 462
+#line 461
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 463
+#line 462
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NH: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 464
+#line 463
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 465
+#line 464
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: NH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 466
+#line 465
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: NH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 467
+#line 466
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 468
+#line 467
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 469
+#line 468
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56609", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1713,67 +1711,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56610] Pesticide Data - EPA Expiration date validation (New Jersey - Dec 31st fo" +
                     "r current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 472
+#line 471
 this.ScenarioSetup(scenarioInfo);
-#line 473
+#line 472
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 474
+#line 473
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 475
+#line 474
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 476
+#line 475
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 477
+#line 476
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 478
+#line 477
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 479
+#line 478
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 480
+#line 479
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 481
+#line 480
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 482
+#line 481
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 483
+#line 482
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 484
+#line 483
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NJ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 485
+#line 484
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NJ: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 486
+#line 485
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NJ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 487
+#line 486
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NJ: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 488
+#line 487
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NJ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 489
+#line 488
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: NJ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 490
+#line 489
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: NJ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 491
+#line 490
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 492
+#line 491
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 493
+#line 492
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56610", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1799,67 +1797,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56611] Pesticide Data - EPA Expiration date validation (New Mexico - Dec 31st fo" +
                     "r current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 496
+#line 495
 this.ScenarioSetup(scenarioInfo);
-#line 497
+#line 496
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 498
+#line 497
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 499
+#line 498
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 500
+#line 499
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 501
+#line 500
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 502
+#line 501
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 503
+#line 502
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 504
+#line 503
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 505
+#line 504
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 506
+#line 505
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 507
+#line 506
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 508
+#line 507
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 509
+#line 508
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NM: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 510
+#line 509
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 511
+#line 510
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NM: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 512
+#line 511
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 513
+#line 512
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: NM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 514
+#line 513
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: NM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 515
+#line 514
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 516
+#line 515
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 517
+#line 516
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56611", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1885,67 +1883,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56612] Pesticide Data - EPA Expiration date validation (Nevada - Dec 31st for cu" +
                     "rrent calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 520
+#line 519
 this.ScenarioSetup(scenarioInfo);
-#line 521
+#line 520
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 522
+#line 521
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 523
+#line 522
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 524
+#line 523
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 525
+#line 524
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 526
+#line 525
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 527
+#line 526
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 528
+#line 527
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 529
+#line 528
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 530
+#line 529
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 531
+#line 530
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 532
+#line 531
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 533
+#line 532
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NV: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 534
+#line 533
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 535
+#line 534
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "NV: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 536
+#line 535
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 537
+#line 536
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: NV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 538
+#line 537
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: NV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 539
+#line 538
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 540
+#line 539
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 541
+#line 540
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56612", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1971,67 +1969,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56613] Pesticide Data - EPA Expiration date validation (Oregon - Dec 31st for cu" +
                     "rrent calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 544
+#line 543
 this.ScenarioSetup(scenarioInfo);
-#line 545
+#line 544
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 546
+#line 545
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 547
+#line 546
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 548
+#line 547
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 549
+#line 548
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 550
+#line 549
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 551
+#line 550
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 552
+#line 551
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 553
+#line 552
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 554
+#line 553
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 555
+#line 554
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 556
+#line 555
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: OR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 557
+#line 556
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "OR: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 558
+#line 557
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: OR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 559
+#line 558
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "OR: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 560
+#line 559
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: OR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 561
+#line 560
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: OR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 562
+#line 561
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: OR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 563
+#line 562
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 564
+#line 563
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 565
+#line 564
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56613", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2057,67 +2055,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56614] Pesticide Data - EPA Expiration date validation (Pennsylvania - Dec 31st " +
                     "for current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 568
+#line 567
 this.ScenarioSetup(scenarioInfo);
-#line 569
+#line 568
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 570
+#line 569
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 571
+#line 570
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 572
+#line 571
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 573
+#line 572
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 574
+#line 573
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 575
+#line 574
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 576
+#line 575
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 577
+#line 576
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 578
+#line 577
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 579
+#line 578
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 580
+#line 579
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: PA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 581
+#line 580
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "PA: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 582
+#line 581
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: PA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 583
+#line 582
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "PA: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 584
+#line 583
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: PA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 585
+#line 584
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: PA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 586
+#line 585
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: PA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 587
+#line 586
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 588
+#line 587
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 589
+#line 588
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56614", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2143,67 +2141,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56615] Pesticide Data - EPA Expiration date validation (Virginia - Dec 31st for " +
                     "current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 592
+#line 591
 this.ScenarioSetup(scenarioInfo);
-#line 593
+#line 592
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 594
+#line 593
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 595
+#line 594
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 596
+#line 595
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 597
+#line 596
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 598
+#line 597
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 599
+#line 598
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 600
+#line 599
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 601
+#line 600
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 602
+#line 601
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 603
+#line 602
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 604
+#line 603
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: VA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 605
+#line 604
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "VA: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 606
+#line 605
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: VA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 607
+#line 606
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "VA: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 608
+#line 607
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: VA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 609
+#line 608
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: VA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 610
+#line 609
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: VA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 611
+#line 610
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 612
+#line 611
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 613
+#line 612
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56615", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2229,67 +2227,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56616] Pesticide Data - EPA Expiration date validation (Wisconsin - Dec 31st for" +
                     " current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 616
+#line 615
 this.ScenarioSetup(scenarioInfo);
-#line 617
+#line 616
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 618
+#line 617
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 619
+#line 618
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 620
+#line 619
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 621
+#line 620
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 622
+#line 621
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 623
+#line 622
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 624
+#line 623
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 625
+#line 624
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 626
+#line 625
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 627
+#line 626
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 628
+#line 627
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: WI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 629
+#line 628
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "WI: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 630
+#line 629
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: WI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 631
+#line 630
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "WI: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 632
+#line 631
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: WI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 633
+#line 632
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: WI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 634
+#line 633
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: WI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 635
+#line 634
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 636
+#line 635
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 637
+#line 636
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56616", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2315,67 +2313,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56617] Pesticide Data - EPA Expiration date validation (West Virginia - Dec 31st" +
                     " for current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 640
+#line 639
 this.ScenarioSetup(scenarioInfo);
-#line 641
+#line 640
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 642
+#line 641
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 643
+#line 642
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 644
+#line 643
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 645
+#line 644
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 646
+#line 645
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 647
+#line 646
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 648
+#line 647
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 649
+#line 648
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 650
+#line 649
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 651
+#line 650
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 652
+#line 651
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: WV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 653
+#line 652
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "WV: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 654
+#line 653
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: WV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 655
+#line 654
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "WV: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 656
+#line 655
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: WV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 657
+#line 656
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: WV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 658
+#line 657
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: WV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 659
+#line 658
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 660
+#line 659
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 661
+#line 660
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56617", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2401,67 +2399,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56618] Pesticide Data - EPA Expiration date validation (Wyoming - Dec 31st for c" +
                     "urrent calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 664
+#line 663
 this.ScenarioSetup(scenarioInfo);
-#line 665
+#line 664
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 666
+#line 665
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 667
+#line 666
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 668
+#line 667
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 669
+#line 668
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 670
+#line 669
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 671
+#line 670
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 672
+#line 671
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 673
+#line 672
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 674
+#line 673
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 675
+#line 674
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 676
+#line 675
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: WY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 677
+#line 676
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "WY: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 678
+#line 677
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: WY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 679
+#line 678
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "WY: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 680
+#line 679
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: WY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 681
+#line 680
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: WY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 682
+#line 681
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: WY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 683
+#line 682
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 684
+#line 683
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 685
+#line 684
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56618", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2487,67 +2485,67 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56619] Pesticide Data - EPA Expiration date validation (Washington DC - Dec 31st" +
                     " for current calendar year until Oct 1st,  then Dec 31st for this or next year)", ((string[])(null)));
-#line 688
+#line 687
 this.ScenarioSetup(scenarioInfo);
-#line 689
+#line 688
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 690
+#line 689
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 691
+#line 690
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 692
+#line 691
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 693
+#line 692
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 694
+#line 693
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 695
+#line 694
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 696
+#line 695
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 697
+#line 696
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 698
+#line 697
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 699
+#line 698
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 700
+#line 699
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: DC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 701
+#line 700
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "DC: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 702
+#line 701
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: DC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 703
+#line 702
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "DC: Valid dates are December 31 of current calendar year until October 1, at whi" +
                     "ch time December 31 of either the current or the following calendar year would b" +
                     "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 704
+#line 703
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: DC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 705
+#line 704
 testRunner.Then("I should see the appropriate response depending on today\'s date for state: DC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 706
+#line 705
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: DC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 707
+#line 706
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 708
+#line 707
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 709
+#line 708
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56619", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2573,80 +2571,80 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56621] Pesticide Data - EPA Expiration date validation (South Dakota - June 30th" +
                     " no more than 2 years out)", ((string[])(null)));
-#line 712
+#line 711
 this.ScenarioSetup(scenarioInfo);
-#line 713
+#line 712
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 714
+#line 713
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 715
+#line 714
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 716
+#line 715
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 717
+#line 716
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 718
+#line 717
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 719
+#line 718
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 720
+#line 719
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 721
+#line 720
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 722
+#line 721
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 723
+#line 722
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 724
+#line 723
 testRunner.And("I call Shared Step 55843 (EPA expiration date - enter current year - Not June 30t" +
                     "h) for state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 725
+#line 724
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "SD: Valid date is June 30 no more than two calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 726
+#line 725
 testRunner.And("I call Shared Step 55844 (EPA expiration date - enter next year - Not June 30th) " +
                     "for state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 727
+#line 726
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "SD: Valid date is June 30 no more than two calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 728
+#line 727
 testRunner.And("I call Shared Step (EPA expiration date - enter current year plus 2 - Not June 30" +
                     "th) for state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 729
+#line 728
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "SD: Valid date is June 30 no more than two calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 730
+#line 729
 testRunner.And("I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) f" +
                     "or state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 731
+#line 730
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 732
+#line 731
 testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
                     "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 733
+#line 732
 testRunner.And("I call Shared Step 55846 (EPA expiration date - enter next year - June 30th) for " +
                     "state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 734
+#line 733
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 735
+#line 734
 testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
                     "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 736
+#line 735
 testRunner.And("I call Shared Step (EPA expiration date - enter current year plus 2 - June 30th) " +
                     "for state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 737
+#line 736
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 738
+#line 737
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 739
+#line 738
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56621", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2672,56 +2670,56 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56622] Pesticide Data - EPA Expiration date validation (Rhode Island - Nov 30th " +
                     "for current year, until Sept 1st, then Nov 30th of this or next year)", ((string[])(null)));
-#line 746
+#line 745
 this.ScenarioSetup(scenarioInfo);
-#line 747
+#line 746
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 748
+#line 747
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 750
+#line 749
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 751
+#line 750
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 752
+#line 751
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 753
+#line 752
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 754
+#line 753
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 755
+#line 754
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 756
+#line 755
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 757
+#line 756
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 758
+#line 757
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 760
+#line 759
 testRunner.And("I call Shared Step 55858 (EPA expiration date - enter current year - NOT Nov 30th" +
                     ") for state: RI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 761
+#line 760
 testRunner.Then(@"in page Pesticide Details - State Registration Details I should see error: State RI: Valid dates are November 30 of current calendar year until September 1, at which time November 30 of either the current or the following calendar year would be acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 762
+#line 761
 testRunner.And("I call Shared Step 55859 (EPA expiration date - enter next year - Nov 30th) for s" +
                     "tate: RI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 764
+#line 763
 testRunner.And(@"If the current date is after (MM/DD): 09/01 then I confirm no error is shown for the State: RI - else I confirm the following error is displayed: State RI: Valid dates are November 30 of current calendar year until September 1, at which time November 30 of either the current or the following calendar year would be acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 765
+#line 764
 testRunner.And("I call Shared Step 55860 (Expiration date - enter this year - Nov 30th) for state" +
                     ": RI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 766
+#line 765
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 767
+#line 766
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 768
+#line 767
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56622", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2747,56 +2745,56 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56624] Pesticide Data - EPA Expiration date validation (Vermont - Nov 30th for c" +
                     "urrent year, until Sept 1st, then Nov 30th of this or next year)", ((string[])(null)));
-#line 775
+#line 774
 this.ScenarioSetup(scenarioInfo);
-#line 776
+#line 775
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 777
+#line 776
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 778
+#line 777
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 779
+#line 778
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 780
+#line 779
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 781
+#line 780
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 782
+#line 781
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 783
+#line 782
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 784
+#line 783
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 785
+#line 784
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 786
+#line 785
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 787
+#line 786
 testRunner.And("I call Shared Step 55858 (EPA expiration date - enter current year - NOT Nov 30th" +
                     ") for state: VT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 788
+#line 787
 testRunner.Then(@"in page Pesticide Details - State Registration Details I should see error: State VT: Valid dates are November 30 of current calendar year until September 1, at which time November 30 of either the current or the following calendar year would be acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 789
+#line 788
 testRunner.And("I call Shared Step 55859 (EPA expiration date - enter next year - Nov 30th) for s" +
                     "tate: VT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 790
+#line 789
 testRunner.And(@"If the current date is after (MM/DD): 09/01 then I confirm no error is shown for the State: VT - else I confirm the following error is displayed: State VT: Valid dates are November 30 of current calendar year until September 1, at which time November 30 of either the current or the following calendar year would be acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 791
+#line 790
 testRunner.And("I call Shared Step 55860 (Expiration date - enter this year - Nov 30th) for state" +
                     ": VT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 792
+#line 791
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 793
+#line 792
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 794
+#line 793
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56624", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2818,58 +2816,56 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("jamesnew")]
         public virtual void _56625PesticideData_EPAExpirationDateValidationSouthCarolina_Aug31StUntilJune1StThenAug31StForThisOrNextYear()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56625] Pesticide Data - EPA Expiration date validation (South Carolina - Aug 31s" +
-                    "t until June 1st then Aug 31st for this or next year)", new string[] {
-                        "jamesnew"});
-#line 802
+                    "t until June 1st then Aug 31st for this or next year)", ((string[])(null)));
+#line 800
 this.ScenarioSetup(scenarioInfo);
-#line 803
+#line 801
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 804
+#line 802
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 805
+#line 803
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 806
+#line 804
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 807
+#line 805
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 808
+#line 806
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 809
+#line 807
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 810
+#line 808
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 811
+#line 809
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 812
+#line 810
 testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 811
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 812
+testRunner.And("I select expiration date (current year - Not August 31st) for state: SC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 813
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 817
-testRunner.And("I select expiration date (current year - Not August 31st) for state: SC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 818
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 819
+#line 814
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "SC: Valid dates are August 31 of current calendar year until June 1, at which ti" +
                     "me August 31 of either the current or the following calendar year would be accep" +
                     "table.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 820
+#line 815
 testRunner.And("I select expiration date (next year - Not August 31st) for state: SC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 821
+#line 816
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 822
+#line 817
 testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
                     "SC: Valid dates are August 31 of current calendar year until June 1, at which ti" +
                     "me August 31 of either the current or the following calendar year would be accep" +
@@ -2885,19 +2881,154 @@ testRunner.Then("in page Pesticide Details - State Registration Details I should
                         "31",
                         "08",
                         "no"});
-#line 823
+#line 818
 testRunner.And("I enter the EPA registration date in the current year:", ((string)(null)), table1, "And ");
-#line 826
+#line 821
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 827
+#line 822
 testRunner.And("If the current date is after (MM/DD): 08/31 then I confirm the error is displayed" +
                     ": \'The expiration date must be a valid future date\' - else I confirm that no err" +
                     "or is shown and the \'Transportation Details 1\' page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 830
+#line 823
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 831
+#line 824
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56625", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[56627] Pesticide Data - EPA Expiration date validation (North Dakota - December " +
+            "31st no more than 2 years out but must be ODD number)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EPA State Expiry Date Validation (Suite ID: 56545)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
+        public virtual void _56627PesticideData_EPAExpirationDateValidationNorthDakota_December31StNoMoreThan2YearsOutButMustBeODDNumber()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56627] Pesticide Data - EPA Expiration date validation (North Dakota - December " +
+                    "31st no more than 2 years out but must be ODD number)", ((string[])(null)));
+#line 832
+this.ScenarioSetup(scenarioInfo);
+#line 833
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 834
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 835
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 836
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 837
+testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
+                    "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 838
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydro" +
+                    "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 839
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 840
+testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
+                    "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 841
+testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
+                    "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 842
+testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 843
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 844
+testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
+                    ") for state: ND", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 845
+testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
+                    "ND: Valid dates are December 31 no more than two (2) calendar years out, but yea" +
+                    "r must be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 846
+testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
+                    "or state: ND", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 847
+testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
+                    "ND: Valid dates are December 31 no more than two (2) calendar years out, but yea" +
+                    "r must be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table2.AddRow(new string[] {
+                        "ND",
+                        "1",
+                        "12"});
+#line 848
+testRunner.And("I select EPA expiration date - enter current year plus 2:", ((string)(null)), table2, "And ");
+#line 851
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 852
+testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
+                    "ND: Valid dates are December 31 no more than two (2) calendar years out, but yea" +
+                    "r must be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 853
+testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
+                    "or state: ND", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 854
+testRunner.And("If the current year is an even number - Confirm that an error shows: State ND: Va" +
+                    "lid dates are December 31 no more than two (2) calendar years out, but year must" +
+                    " be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 855
+testRunner.And("If the current year is an odd number - Confirm that an error shows: NONE", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 856
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 857
+testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
+                    "state: ND", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 858
+testRunner.And("If the next year is an even number - Confirm that an error shows: State ND: Valid" +
+                    " dates are December 31 no more than two (2) calendar years out, but year must be" +
+                    " ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 859
+testRunner.And("If the next year is an odd number - Confirm that an error shows: NONE", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 860
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table3.AddRow(new string[] {
+                        "ND",
+                        "31",
+                        "12"});
+#line 861
+testRunner.And("I select EPA expiration date - enter current year plus 2:", ((string)(null)), table3, "And ");
+#line 864
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 865
+testRunner.And("If the current year is an even number - Confirm that an error shows: State ND: Va" +
+                    "lid dates are December 31 no more than two (2) calendar years out, but year must" +
+                    " be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 866
+testRunner.And("If the current year is an odd number I confirm that no error is displayed and the" +
+                    " \'Transportation Details 1\' page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 867
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 868
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase56627", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

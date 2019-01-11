@@ -3479,7 +3479,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			int month = 10;
 			int day = 1;
 			DateTime dtStart = new DateTime(year, month, day);
-			year = DateTime.Now.Year;
 			month = 12;
 			day = 30;
 			DateTime dtEnd = new DateTime(year, month, day);
@@ -6232,18 +6231,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 55859 \(EPA expiration date - enter next year - Nov 30th\) for state: (.*)")]
 		public void SharedStep_55859(string state)
 		{
-			//var pesticideDetailsState = new PesticideDetailsState();
-			//TestReport.UseSubSteps = true;
-			//TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
-			//var MyStepsNewProduct = new StepsNewProduct();
-			//var date = DateTime.Now;
-			//var year = date.Month > 11 ? date.Year + 2 : date.Year + 1;
-			//var dt = new DateTime(year, 11, 30);
-			//Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
-			//	"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
-			//	"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
-			//TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
-			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - State Registration Details");
 			new Steps_PesticideDetailsState().EnterEpaRegistrationDateNextYear("11", "30", state);
 		}
 
