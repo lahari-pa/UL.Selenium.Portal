@@ -6237,12 +6237,38 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 55860 \(Expiration date - enter this year - Nov 30th\) for state: (.*)")]
 		public void SharedStep_55860_ExpirationDate_EnterThisYear_Nov30th(string state)
 		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I select an EPA date (Nov 30th of this year) for state: " + state);
 			var table = new Table("State", "Month", "Day", "Increment year?");
 			table.AddRow(state, "11", "30", "yes");
 			new Steps_PesticideDetailsState().EnterEpaRegistrationDateCurrentYear(table);
+			TestReport.StartStep("I click continue");
+			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 55886 \(EPA expiration date - enter current year plus 2 - NOT Dec 31st\) for state: (.*)")]
+		public void SharedStep_55886_EpaExpirationDate_EnterCurrentYearPlus2_NotDec31(string state)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I select an EPA date (Not Dec 31th current year + 2) for state: " + state);
+			var table = new Table("State", "Month", "Day");
+			table.AddRow(state, "12", "1");
+			new Steps_PesticideDetailsState().SharedStep_EPAExpirationDate_EnterCurrentYearPlus2(table);
+			TestReport.StartStep("I click continue");
 			new StepsNewProduct().ClickContinue();
 		}
 
 
+		[StepDefinition(@"I call Shared Step 55887 \(EPA expiration date - enter current year plus 2 - Dec 31st\) for state: (.*)")]
+		public void SharedStep_55886_EpaExpirationDate_EnterCurrentYearPlus2_Dec31(string state)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I select an EPA date (Dec 31th current year + 2) for state: " + state);
+			var table = new Table("State", "Month", "Day");
+			table.AddRow(state, "12", "31");
+			new Steps_PesticideDetailsState().SharedStep_EPAExpirationDate_EnterCurrentYearPlus2(table);
+			TestReport.StartStep("I click continue");
+			new StepsNewProduct().ClickContinue();
+		}
 	}
 }
