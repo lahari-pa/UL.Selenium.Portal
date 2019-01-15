@@ -866,3 +866,47 @@ And If the current year is an even number - Confirm that an error shows: State N
 And If the current year is an odd number I confirm that no error is displayed and the 'Transportation Details 1' page has loaded
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56627
+
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+Scenario: [56629] Pesticide Data - EPA Expiration date validation (Florida - December 31st no more than 2 years out but must be EVEN number)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+And I add the EPA registration number: TEST-1234
+And I click continue
+And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: FL
+Then in page Pesticide Details - State Registration Details I should see error: State FL: Valid dates are December 31 no more than two (2) calendar years out, but year must be EVEN number (i.e., 2018, 2020).
+And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: FL
+Then in page Pesticide Details - State Registration Details I should see error: State FL: Valid dates are December 31 no more than two (2) calendar years out, but year must be EVEN number (i.e., 2018, 2020).
+And I select EPA expiration date - enter current year plus 2:
+| State | Day | Month |
+| FL    | 1   | 12    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see error: State FL: Valid dates are December 31 no more than two (2) calendar years out, but year must be EVEN number (i.e., 2018, 2020).
+And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: FL
+And If the current year is an odd number - Confirm that an error shows: State FL: Valid dates are December 31 no more than two (2) calendar years out, but year must be EVEN number (i.e., 2018, 2020).
+And If the current year is an even number - Confirm that an error shows: NONE
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: FL
+And If the next year is an odd number - Confirm that an error shows: State FL: Valid dates are December 31 no more than two (2) calendar years out, but year must be EVEN number (i.e., 2018, 2020).
+And If the next year is an even number - Confirm that an error shows: NONE
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I select EPA expiration date - enter current year plus 2:
+| State | Day | Month |
+| FL    | 31   | 12    |
+And I click continue
+And If the current year is an odd number - Confirm that an error shows: State FL: Valid dates are December 31 no more than two (2) calendar years out, but year must be EVEN number (i.e., 2018, 2020).
+And If the current year is an even number I confirm that no error is displayed and the 'Transportation Details 1' page has loaded
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56629

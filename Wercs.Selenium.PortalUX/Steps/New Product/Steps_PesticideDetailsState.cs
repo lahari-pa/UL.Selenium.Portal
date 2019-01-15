@@ -524,18 +524,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"If the current year is an odd number I confirm that no error is displayed and the '(.*)' page has loaded")]
-		public void IfCurrentYearIsOddIConfirmNoErrorAndPageLoaded(string page)
+		[StepDefinition(@"If the current year is an (even|odd) number I confirm that no error is displayed and the '(.*)' page has loaded")]
+		public void IfCurrentYearIsOddIConfirmNoErrorAndPageLoaded(string evenOdd, string page)
 		{
-			var year = DateTime.Now.Year;
-			if (year % 2 == 0)
+			if (evenOdd != "even" && evenOdd != "odd")
 			{
-				Report.Info("The current year " + year + " is even");
+				throw new Exception("Step parameter must be either 'even' or 'odd'!");
 			}
-			else
+			var year = DateTime.Now.Year;
+			if ((evenOdd == "even") == (year % 2 == 0))
 			{
 				this.IShouldSeeNoError();
 				new StepsNewProduct().GivenIShouldSeeXPage(page);
+			}
+			else
+			{
+				Report.Info("The current year " + year + " is an " + (evenOdd == "even" ? "odd" : "even") + " number");
 			}
 		}
 	}
