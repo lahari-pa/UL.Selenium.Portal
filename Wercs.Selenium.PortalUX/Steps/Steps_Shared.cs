@@ -6253,7 +6253,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I select an EPA date (Not Dec 31th current year + 2) for state: " + state);
 			var table = new Table("State", "Month", "Day");
 			table.AddRow(state, "12", "1");
-			new Steps_PesticideDetailsState().SharedStep_EPAExpirationDate_EnterCurrentYearPlus2(table);
+			new Steps_PesticideDetailsState().SharedStep_EPAExpirationDate_EnterCurrentYearPlus("2", table);
 			TestReport.StartStep("I click continue");
 			new StepsNewProduct().ClickContinue();
 		}
@@ -6266,7 +6266,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I select an EPA date (Dec 31th current year + 2) for state: " + state);
 			var table = new Table("State", "Month", "Day");
 			table.AddRow(state, "12", "31");
-			new Steps_PesticideDetailsState().SharedStep_EPAExpirationDate_EnterCurrentYearPlus2(table);
+			new Steps_PesticideDetailsState().SharedStep_EPAExpirationDate_EnterCurrentYearPlus("2", table);
 			TestReport.StartStep("I click continue");
 			new StepsNewProduct().ClickContinue();
 		}

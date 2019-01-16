@@ -950,3 +950,168 @@ And I click continue
 Then in page Pesticide Details - State Registration Details I should see error: State AZ: Valid dates are December 31 no more than two (2) calendar years out.
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56635
+
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+Scenario: [56636] Pesticide Data - EPA Expiration date validation (Illinois - Dec 31st no more than 2 years out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+And I add the EPA registration number: TEST-1234
+And I click continue
+And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: IL
+Then in page Pesticide Details - State Registration Details I should see error: State IL: Valid dates are December 31 no more than two (2) calendar years out.
+And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: IL
+Then in page Pesticide Details - State Registration Details I should see error: State IL: Valid dates are December 31 no more than two (2) calendar years out.
+And I call Shared Step 55886 (EPA expiration date - enter current year plus 2 - NOT Dec 31st) for state: IL
+Then in page Pesticide Details - State Registration Details I should see error: State IL: Valid dates are December 31 no more than two (2) calendar years out.
+And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: IL
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: IL
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55887 (EPA expiration date - enter current year plus 2 - Dec 31st) for state: IL
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I select EPA expiration date - enter current year plus 3:
+| State | Day | Month |
+| IL    | 31  | 12    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see error: State IL: Valid dates are December 31 no more than two (2) calendar years out.
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56636
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+Scenario: [56637] Pesticide Data - EPA Expiration date validation (Hawaii - Dec 31st no more than 3 years out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+And I add the EPA registration number: TEST-1234
+And I click continue
+And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: HI
+Then in page Pesticide Details - State Registration Details I should see error: State HI: Valid dates are December 31 no more than three (3) calendar years out.
+And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: HI
+Then in page Pesticide Details - State Registration Details I should see error: State HI: Valid dates are December 31 no more than three (3) calendar years out.
+And I call Shared Step 55886 (EPA expiration date - enter current year plus 2 - NOT Dec 31st) for state: HI
+Then in page Pesticide Details - State Registration Details I should see error: State HI: Valid dates are December 31 no more than three (3) calendar years out.
+And I select EPA expiration date - enter current year plus 3:
+| State | Day | Month |
+| HI    | 1  | 10    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see error: State HI: Valid dates are December 31 no more than three (3) calendar years out.
+And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: HI
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: HI
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55887 (EPA expiration date - enter current year plus 2 - Dec 31st) for state: HI
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I select EPA expiration date - enter current year plus 3:
+| State | Day | Month |
+| HI    | 31  | 12    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I select EPA expiration date - enter current year plus 4:
+| State | Day | Month |
+| HI    | 31  | 12    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see error: State HI: Valid dates are December 31 no more than three (3) calendar years out.
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56637
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+Scenario: [56639] Pesticide Data - EPA Expiration date validation (Connecticut - Dec 31st no more than 5 years out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+And I add the EPA registration number: TEST-1234
+And I click continue
+And I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st) for state: CT
+Then in page Pesticide Details - State Registration Details I should see error: State CT: Valid dates are December 31 no more than five (5) calendar years out at any given time.
+And I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) for state: CT
+Then in page Pesticide Details - State Registration Details I should see error: State CT: Valid dates are December 31 no more than five (5) calendar years out at any given time.
+And I call Shared Step 55886 (EPA expiration date - enter current year plus 2 - NOT Dec 31st) for state: CT
+Then in page Pesticide Details - State Registration Details I should see error: State CT: Valid dates are December 31 no more than five (5) calendar years out at any given time.
+And I select EPA expiration date - enter current year plus 3:
+| State | Day | Month |
+| CT    | 1   | 10    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see error: State CT: Valid dates are December 31 no more than five (5) calendar years out at any given time.
+And I select EPA expiration date - enter current year plus 4:
+| State | Day | Month |
+| CT    | 1   | 10    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see error: State CT: Valid dates are December 31 no more than five (5) calendar years out at any given time.
+And I select EPA expiration date - enter current year plus 5:
+| State | Day | Month |
+| CT    | 1   | 10    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see error: State CT: Valid dates are December 31 no more than five (5) calendar years out at any given time.
+And I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) for state: CT
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for state: CT
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55887 (EPA expiration date - enter current year plus 2 - Dec 31st) for state: CT
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I select EPA expiration date - enter current year plus 3:
+| State | Day | Month |
+| CT    | 31  | 12    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I select EPA expiration date - enter current year plus 4:
+| State | Day | Month |
+| CT    | 31  | 12    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I select EPA expiration date - enter current year plus 5:
+| State | Day | Month |
+| CT    | 31  | 12    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see no errors
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I select EPA expiration date - enter current year plus 6:
+| State | Day | Month |
+| CT    | 31  | 12    |
+And I click continue
+Then in page Pesticide Details - State Registration Details I should see error: State CT: Valid dates are December 31 no more than five (5) calendar years out at any given time.
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56639

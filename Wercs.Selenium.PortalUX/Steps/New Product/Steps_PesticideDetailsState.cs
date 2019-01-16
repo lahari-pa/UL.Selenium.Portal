@@ -313,8 +313,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				this.IShouldSeeNoError();
 			}
 		}
-
-
+		
 		[StepDefinition(@"If the current date is after \(MM/DD\): (.*)/(.*) then I confirm the error is displayed: 'The expiration date must be a valid future date' - else I confirm that no error is shown and the '(.*)' page has loaded")]
 		public void IfCurrentDateExceedsEpaDateConfirmError(string month, string day, string page)
 		{
@@ -451,13 +450,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			this.EnterEpaRegistrationDateNextYear("8", "1", state);
 		}
 
-		[StepDefinition(@"I select EPA expiration date - enter current year plus 2:")]
-		public void SharedStep_EPAExpirationDate_EnterCurrentYearPlus2(Table table)
+		[StepDefinition(@"I select EPA expiration date - enter current year plus (.*):")]
+		public void SharedStep_EPAExpirationDate_EnterCurrentYearPlus(string addYear, Table table)
 		{
 			// Click in the EPA Expiration Date box for the state you are working with
 			// Select EPA day/ month for the current year + 2
 			// | State | Day | Month |
 			// | NY    | 01  | 01    |
+			if (!int.TryParse(addYear, out var addYearNum))
+			{
+				throw new Exception("Step parameter addYear must be parsable as an int!");
+			}
 			foreach (var row in table.Rows)
 			{
 				var day = row["Day"];
@@ -465,11 +468,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 				var state = row["State"];
 				var pesticideDetailsState = new PesticideDetailsState();
 				TestReport.UseSubSteps = true;
-				TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
-				var MyStepsNewProduct = new StepsNewProduct();
-				var year = DateTime.Now.Year + 2;
+				TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select date for the current year plus " + addYear);
+				var year = DateTime.Now.Year + addYearNum;
 				DateTime dt;
-				if (int.TryParse(month, out int monthNum) && int.TryParse(day, out int dayNum))
+				if (int.TryParse(month, out var monthNum) && int.TryParse(day, out var dayNum))
 				{
 					 dt = new DateTime(year, monthNum, dayNum);
 				}
@@ -542,38 +544,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("The current year " + year + " is an " + (evenOdd == "even" ? "odd" : "even") + " number");
 			}
 		}
-
-		[StepDefinition(@"I select EPA expiration date - enter current year plus 3:")]
-		public void SharedStep_EPAExpirationDate_EnterCurrentYearPlus3(Table table)
-		{
-			// Click in the EPA Expiration Date box for the state you are working with
-			// Select EPA day/ month for the current year + 2
-			// | State | Day | Month |
-			// | NY    | 01  | 01    |
-			foreach (var row in table.Rows)
-			{
-				var day = row["Day"];
-				var month = row["Month"];
-				var state = row["State"];
-				var pesticideDetailsState = new PesticideDetailsState();
-				TestReport.UseSubSteps = true;
-				TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
-				var MyStepsNewProduct = new StepsNewProduct();
-				var year = DateTime.Now.Year + 3;
-				DateTime dt;
-				if (int.TryParse(month, out int monthNum) && int.TryParse(day, out int dayNum))
-				{
-					dt = new DateTime(year, monthNum, dayNum);
-				}
-				else
-				{
-					throw new Exception("Day/ month paramaters must be parsable as int!");
-				}
-				Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
-					"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
-					"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
-			}
-
-		}
+		
 	}
 }
