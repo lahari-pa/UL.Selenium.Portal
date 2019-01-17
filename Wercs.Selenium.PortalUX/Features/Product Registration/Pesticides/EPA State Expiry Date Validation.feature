@@ -1115,3 +1115,135 @@ And I click continue
 Then in page Pesticide Details - State Registration Details I should see error: State CT: Valid dates are December 31 no more than five (5) calendar years out at any given time.
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56639
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+Scenario: [56640] Pesticide Data - EPA Expiration date validation (Alabama - only the year is checked - no more than 2 years out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+And I add the EPA registration number: TEST-1234
+And I click continue
+And I call Shared Step 55876 (EPA expiration date - enter next year - any date) for state: AL
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55877 (EPA expiration date - enter current year plus 2 - any date) for state: AL
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55878 (EPA expiration date - enter current year plus 3 - any date) for state: AL
+Then in page Pesticide Details - State Registration Details I should see error: State AL: Valid date is only on the year (no set Month/Day), no more than two (2) calendar years out.
+And I call Shared Step 55875 (EPA expiration date - enter current year - any date today or greater) for state: AL
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56640
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+Scenario: [56641] Pesticide Data - EPA Expiration date validation (New York - only the year is checked - no more than 2 years out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+And I add the EPA registration number: TEST-1234
+And I click continue
+And I call Shared Step 55876 (EPA expiration date - enter next year - any date) for state: NY
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55877 (EPA expiration date - enter current year plus 2 - any date) for state: NY
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55878 (EPA expiration date - enter current year plus 3 - any date) for state: NY
+Then in page Pesticide Details - State Registration Details I should see error: State NY: Valid date is only on the year (no set Month/Day), no more than two (2) calendar years out.
+And I call Shared Step 55875 (EPA expiration date - enter current year - any date today or greater) for state: NY
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56641
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+Scenario: [56642] Pesticide Data - EPA Expiration date validation (Washington - only the year is checked - no more than 2 years out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+And I add the EPA registration number: TEST-1234
+And I click continue
+And I call Shared Step 55876 (EPA expiration date - enter next year - any date) for state: WA
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55877 (EPA expiration date - enter current year plus 2 - any date) for state: WA
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55878 (EPA expiration date - enter current year plus 3 - any date) for state: WA
+Then in page Pesticide Details - State Registration Details I should see error: State WA: Valid date is only on the year (no set Month/Day), no more than two (2) calendar years out.
+And I call Shared Step 55875 (EPA expiration date - enter current year - any date today or greater) for state: WA
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56642
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+Scenario: [56644] Pesticide Data - EPA Expiration date validation (Washington - only the year is checked - no more than 2 years out)
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo with Pest Control
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+And I add the EPA registration number: TEST-1234
+And I click continue
+And I call Shared Step 55876 (EPA expiration date - enter next year - any date) for state: PR
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55877 (EPA expiration date - enter current year plus 2 - any date) for state: PR
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And in the New Product page I click section: Pesticide Details - State Registration Details
+And I call Shared Step 55878 (EPA expiration date - enter current year plus 3 - any date) for state: PR
+Then in page Pesticide Details - State Registration Details I should see error: State PR: Valid date is only on the year (no set Month/Day), no more than two (2) calendar years out.
+And I call Shared Step 55875 (EPA expiration date - enter current year - any date today or greater) for state: PR
+Then in page Pesticide Details - State Registration Details I should see no errors
+Then I should see the Transportation Details 1 Page
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56644
