@@ -570,6 +570,8 @@
     <Compile Include="Selenium Classes\New Product\NewProduct.cs" />
     <Compile Include="Selenium Classes\New Product\PesticideDetailsState.cs" />
     <Compile Include="Selenium Classes\New Product\PesticideDetailsUS.cs" />
+    <Compile Include="Selenium Classes\New Product\Retailer.cs" />
+    <Compile Include="Selenium Classes\New Product\SelectRetailers.cs" />
     <Compile Include="Selenium Classes\SHAProductNotificationHistory.cs" />
     <Compile Include="Selenium Classes\SHAProductRecertificationHistory.cs" />
     <Compile Include="Selenium Classes\ULSCLogin.cs" />
@@ -579,6 +581,8 @@
     <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
+    <Compile Include="Steps\New Product\Steps_Retailer.cs" />
+    <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\Steps__Shared_UPC.cs" />
     <Compile Include="Selenium Classes\StudioLegends.cs" />
     <Compile Include="Selenium Classes\LiveHelp.cs" />
@@ -594,7 +598,6 @@
     <Compile Include="Selenium Classes\MessageCenter.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
     <Compile Include="Selenium Classes\ReviewDocuments.cs" />
-    <Compile Include="Selenium Classes\SelectRetailer.cs" />
     <Compile Include="Selenium Classes\ServerError.cs" />
     <Compile Include="Selenium Classes\ShoppingCart.cs" />
     <Compile Include="Selenium Classes\Signup.cs" />

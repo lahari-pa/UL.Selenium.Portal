@@ -135,7 +135,7 @@ Then In the 'Select retailers' window I should only see the following retailers:
 | Walgreens                  |
 | No Retailer/No UPC Product |
 
-Given I click close in the 'Select Retailers' window
+Given I click Close in the Select Retailers popup
 
 #Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut Butters
 

@@ -39,54 +39,51 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetListOfRetailers()
 		{
-			return containerElement.FindElements(By.XPath("//label/span")).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath("//label/span")).Select(x => x.Text).ToList();
 		}
 
 		public bool ClickSelectAll()
 		{
-			return containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Select all')]")).FirstOrDefault().TryClick();
+			return this.containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Select all')]")).FirstOrDefault().TryClick();
 		}
 
 		public bool ClickDone()
 		{
-			return containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]")).FirstOrDefault().TryClick();
+			return this.containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]")).FirstOrDefault().TryClick();
 		}
 
 		public bool ClickClose()
 		{
-			return containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//i[@class='fa fa-close']")).FirstOrDefault().TryClick();
+			return this.containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//i[@class='fa fa-close']")).FirstOrDefault().TryClick();
 		}
 
 		public List<string> SelectedRetailers(bool useLogoCode = false)
 		{
-			var allSelected = containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).Where(x => x.Checked()).ToList();
+			var allSelected = this.containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).Where(x => x.Checked()).ToList();
 			if (allSelected.IsNullOrEmpty())
 			{
 				return new List<string>();
 			}
 			allSelected.LastOrDefault().ScrollElementIntoView();
-			if (useLogoCode)
-			{
-				return allSelected.Select(x => x.FindElement(By.XPath("./../../../../div[starts-with(@class,'control-group')]")).GetCssValue("background-image").Replace(@"""", "").Replace("url(", "").Replace(")", "")).ToList();
-			}
-			return allSelected.Select(x => x.FindElement(By.XPath("./following-sibling::span[contains(@data-bind,'retailer.description')]")).Text).ToList();
+			return useLogoCode ?
+				allSelected.Select(x => x.FindElement(By.XPath("./../../../../div[starts-with(@class,'control-group')]")).GetCssValue("background-image").Replace(@"""", "").Replace("url(", "").Replace(")", "")).ToList()
+				: allSelected.Select(x => x.FindElement(By.XPath("./following-sibling::span[contains(@data-bind,'retailer.description')]")).Text).ToList();
 		}
 
 		public List<string> AllRetailers()
 		{
-			var allRetailers = containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).ToList();
+			var allRetailers = this.containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).ToList();
 			if (allRetailers.IsNullOrEmpty())
 			{
 				return new List<string>();
 			}
 			allRetailers.LastOrDefault().ScrollElementIntoView();
 			return allRetailers.Select(x => x.FindElement(By.XPath("./following-sibling::span")).Text).Distinct().ToList();
-
 		}
 
 		public bool ClickRetailerOption(string option)
 		{
-			var toggleEl = containerElement.FindElement(By.XPath(".//a[@class='small-link' and contains(@data-bind,'toggleRetailerListView')]"), 2);
+			var toggleEl = this.containerElement.FindElement(By.XPath(".//a[@class='small-link' and contains(@data-bind,'toggleRetailerListView')]"), 2);
 			switch (option.ToLower())
 			{
 				case "list view":
@@ -104,7 +101,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					}
 					return toggleEl.TryClick();
 				case "select all":
-					return containerElement.FindElement(By.XPath(".//a[@class='small-link' and contains(@data-bind,'selectAll')]"), 2).TryClick();
+					return this.containerElement.FindElement(By.XPath(".//a[@class='small-link' and contains(@data-bind,'selectAll')]"), 2).TryClick();
 				default:
 					return false;
 			}
@@ -112,26 +109,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool RetailersShownInViewType(string viewType)
 		{
-			if (viewType == "list")
+			switch (viewType)
 			{
-				return containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//input[@type='checkbox']]"), 2) != null;
+				case "list":
+					return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//input[@type='checkbox']]"), 2) != null;
+				case "tile":
+					return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'control-group') and .//input[@type='checkbox']]"), 2) != null;
 			}
-			if (viewType == "tile")
-			{
-				return containerElement.FindElement(By.XPath(".//div[contains(@class,'control-group') and .//input[@type='checkbox']]"), 2) != null;
-			}
+
 			Report.Info("List type must be specified as either 'list' or 'tile'");
 			return false;
 		}
 
 		public bool SelectRetailerFromListView(string retailer)
 		{
-			return containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//span[text()='" + retailer + "']]//input"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//span[text()='" + retailer + "']]//input"), 2).TryClick();
 		}
 
 		public List<string> RetailersNotSelected()
 		{
-			return containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span")).Text).ToList();
+			return this.containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span")).Text).ToList();
 		}
 	}
 
@@ -143,7 +140,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickOk()
 		{
-			//return containerElement.FindElements(By.XPath("//div[@class='modal fade in']//button[contains(text(), 'Ok')]")).FirstOrDefault().TryClick();
 			try
 			{
 				var el = this.containerElement.FindElement(By.XPath("//div[@class='modal fade in']//button[contains(text(), 'Ok')]"), 2);
@@ -151,12 +147,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					return false;
 				}
-
-				el.TryClick();
-				Report.Screenshot();
-				GeneralUtilities.WaitForRefreshToDisappear(el);
-				GeneralUtilities.Wait_for_load_finish();
-				return true;
+				return el.TryClick() && GeneralUtilities.WaitForRefreshToDisappear(el) && GeneralUtilities.Wait_for_load_finish();
 			}
 			catch (Exception)
 			{

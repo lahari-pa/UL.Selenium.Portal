@@ -37,8 +37,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetProductId()
 		{
-			var el = containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2).Text;
-			var matches = Regex.Matches(el, @"\(\d*\)");
+			var headText = this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2)?.Text;
+			if (headText.IsNullOrEmpty())
+			{
+				throw new Exception("The product header was not displayed!");
+			}
+			var matches = Regex.Matches(headText, @"\(\d*\)");
+			if (matches.Count == 0)
+			{
+				return null;
+			}
 			var bracketedValue = matches[matches.Count - 1].Groups[0].Value;
 			return bracketedValue.Trim().Substring(1, bracketedValue.Length - 2);
 		}
@@ -2160,66 +2168,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		// ========= Add Ingredient Functions ========= //
-
-		/// <summary>
-		/// Select first vendor id from dropdown
-		/// </summary>
-		public bool SelectVendorId(string item)
-		{
-			try
-			{
-				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
-
-				var el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
-				el.Select(item);
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
-
-		/// <summary>
-		/// Select vendor id from dropdown for a specific retailer
-		/// </summary>
-		public bool SelectVendorIdForRetailer(string retailer, string item, bool selectFirst = false)
-		{
-			try
-			{
-				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
-				var el = container.FindElement(By.XPath($@".//tr[./td[text()=""{retailer}""]]//label[text()='Select Vendor']/..//select"), 2);
-				if (el == null)
-				{
-					Report.Info("Vendor was not selectable for retailer: " + retailer);
-					return false;
-				}
-				if (selectFirst)
-				{
-					var options = el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
-					if (options.Count == 0)
-					{
-						Report.Info("There were no vendor options available for retailer " + retailer);
-						return false;
-					}
-					Report.Info("Selecting the first vendor option for retailer: " + retailer);
-					var firstOption = options.First();
-					Report.Info("First vendor option is: " + firstOption);
-					el.Select(firstOption);
-					Delay.Seconds(1);
-					return el.SelectedOption() == firstOption;
-				}
-				el.Select(item);
-				Delay.Seconds(1);
-				return el.SelectedOption() == item;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
+		
 		public bool SetFullNameOfProductForRetailer(string retailer, string name)
 		{
 			var el = containerElement.FindElement(By.XPath(".//input[@placeholder='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)' and (./ancestor::td//preceding-sibling::td[contains(text(),'" + retailer + "')]) ]"), 2);
@@ -2232,63 +2181,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			el.EnterText(name);
 			return el.GetValue() == name;
 
-		}
-
-		/// <summary>
-		/// Select Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) from dropdown
-		/// </summary>
-		public bool SelectPrivateLabelName(string item)
-		{
-			try
-			{
-				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
-				var el = container.FindElement(By.XPath(".//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/..//select"), 2);
-				el.Select(item);
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
-		public bool SetPrivateLabelName(string item, string retailer)
-		{
-			try
-			{
-				var el = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']//tr[(.//td[text()='" + retailer + "'])]//input[starts-with(@placeholder,'Indicate full name of product')]"), 2);
-				if (el == null)
-				{
-					Report.Error("Could not find the input field for retailer: " + retailer);
-					return false;
-				}
-				el.EnterText(item);
-
-				return el.GetValue() == item.Trim();
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
-		/// <summary>
-		///Enter full name of product, as sold, via this retailer (e.g. Private Label Aspirin) from dropdown
-		/// </summary>
-		public bool EnterPrivateLabelName(string item)
-		{
-			try
-			{
-				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
-
-				var el = container.FindElement(By.XPath(".//label[text()='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']/..//input"), 2);
-				el.EnterText(item);
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
 		}
 
 		/*===== Safety Data Sheet Authoring ====*/
@@ -4079,37 +3971,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return containerElement.FindElement(By.XPath(".//button[starts-with(@data-bind,'click: openMyIngredients')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
-		public bool ClickAddARetailers()
-		{
-			try
-			{
-				var button = containerElement.FindElement(By.XPath(".//a[@class='btn btn-success' and text()='Add Retailers']"));
-				return button.TryClick();
-			}
-			catch (Exception ex)
-			{
-				return false;
-			}
-		}
-
-		public List<string> SelectedRetailers()
-		{
-			try
-			{
-				var selectedRetailers = new List<string>();
-				var selectedRetailersName = containerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
-				foreach (var row in selectedRetailersName)
-				{
-					selectedRetailers.Add(row.Text);
-				}
-				return selectedRetailers;
-			}
-			catch (Exception)
-			{
-				return null;
-			}
-		}
-
 		public bool EnterAdditionalRequirement(string retailerName, string valueToEnter)
 		{
 			var selectedRetailersNames = containerElement.FindElements(By.XPath(".//div[@class='grid-container']//tr[parent::tbody[@data-bind='foreach: field.field']]/td[@class='col-xs-3']"));
@@ -4271,33 +4132,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return rList;
 			//return epaTable.FindElements(By.XPath(".//th"), 2).ToList().Select(x => x.GetAttribute("value")).ToList();
 		}
-
-		public bool SelectRetailer(string retailerName)
-		{
-			var xPath = @".//input[@type='checkbox' and parent::td/following-sibling::td[text() =""" + retailerName + @"""]]";
-			var box = containerElement.FindElement(By.XPath(xPath), 2);
-			return box.TryClick() && box.Checked();
-		}
-
-		public bool DeleteSelectedRetailers()
-		{
-			var xPath = ".//a[@class='btn delete-selected']/i";
-			return containerElement.FindElement(By.XPath(xPath), 2).TryClick();
-		}
-
-		/// <summary>
-		/// New Product - The Product. Return name and ID of all options under Product Line or Brand
-		/// </summary>
-		//public List<string> AllProductLineOrBrandOptions()
-		//{
-		//	var el = containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Line')]/../following-sibling::div//select"), 2);
-		//	if (el == null)
-		//	{
-		//		Report.Failure("Could not locate the Product Line or Brand option");
-		//		return new List<string>();
-		//	}
-		//	return el.FindElements(By.XPath("./option"), 2).Select(x => x.Text).Where(x => x != "Choose...").ToList();
-		//}
 
 		/// <summary>
 		/// New Product - The Product. Return name and ID of all options under Product Line or Brand

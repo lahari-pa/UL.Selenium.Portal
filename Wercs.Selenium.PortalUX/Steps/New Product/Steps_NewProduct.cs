@@ -74,41 +74,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Info("Creating shell product with name " + name + ", saved as " + savedAs);
 				var selNewProduct = new NewProduct();
-
 				if (!selNewProduct.Wait_for_load(10))
 				{
 					throw new Exception("Page failed to load!");
 				}
-
 				Report.Info("Selecting 'Yes, create a new product'");
 				// Creates a New Product
 				selNewProduct.CreateNewProductOrCopy(true);
 				Report.Screenshot();
-
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!");
-
 				Report.Info("Inputting Name: '" + name + "'");
 				selNewProduct.ProductName = name;
 				Report.Info("Setting Product Type to be: 'Game System w/Battery'");
 				selNewProduct.ProductType = "Game System w/Battery";
 				Report.Screenshot();
-
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!");
-
 				Report.Info("Getting Product ID");
 				var fullProductName = selNewProduct.GetHeader();
 				// Product Name made out of the name + the Id - so if we remove the Name from the product we should be left with an ID!
 				var productId = fullProductName.Replace(name, "").Replace("(", "").Replace(")", "").Trim();
-
 				Report.Info("ProductID was: '" + productId + "'");
-
 				var productEntry = new ProductGridItem();
 				productEntry.ProductId = productId;
 				productEntry.ProductName = name.Trim();
 				Context.AddToContext(savedAs, productEntry);
-
 				Report.Success("Product created successfully!");
 				Report.Screenshot();
 			}
@@ -330,140 +321,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Info("Clicking Continue");
 			Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
-		}
-
-		[StepDefinition(@"I should see the Select Retailers pop up")]
-		[StepDefinition(@"the 'Select Retailers' window appears")]
-		public void GivenIShouldSeeTheSelectRetailersPopUp()
-		{
-			var selSelectRetailers = new SelectRetailers();
-			Report.IsTrue(selSelectRetailers.Wait_for_load(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
-		}
-
-		[StepDefinition(@"I confirm that (.*) is listed as a retailer on the Select Retailers pop up")]
-		public void ThenIConfirmThatXIsListedAsARetailerOnTheSelectRetailersPopUp(string retailer)
-		{
-			Report.IsTrue(new SelectRetailers().GetListOfRetailers().Contains(retailer),
-				"Retailer is not listed: " + retailer, "Retailer is listed as expected: " + retailer);
-		}
-
-		[StepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
-		public void ThenISelectTheRetailer_InTheWindow(string retailer)
-		{
-			var selectRetailers = new SelectRetailers();
-			if (!selectRetailers.Wait_for_load(1))
-			{
-				var thisNewProduct = new NewProduct();
-				thisNewProduct.ClickAddARetailers();
-				Delay.Seconds(1);
-			}
-			if (!selectRetailers.Wait_for_load(1))
-			{
-				throw new Exception("Select retailers popup is not showing as expected");
-			}
-			Report.IsTrue(selectRetailers.SelectRetailer(retailer), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
-			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
-		}
-
-		[StepDefinition(@"In the select retailers window I click cancel")]
-		public void GivenInTheSelectRetailersWindowIClickCancel()
-		{
-			var selectRetailers = new SelectRetailers();
-			selectRetailers.ClickDone();
-		}
-
-		[StepDefinition(@"In the select retailers window I click (Done|Close)")]
-		public void GivenInTheSelectRetailersWindowIClickDone(string toDo)
-		{
-			var selectRetailers = new SelectRetailers();
-			switch (toDo)
-			{
-				case "Done":
-					Report.IsTrue(selectRetailers.ClickDone(), "Failed to click 'Done' in the select retailers window", "Successfully clicked 'Done' in the select retailers window");
-					break;
-				case "Close":
-					Report.IsTrue(selectRetailers.ClickClose(), "Failed to click 'Close' in the select retailers window", "Successfully clicked 'Close' in the select retailers window");
-					break;
-			}
-		}
-
-		// Added 'should only' parameter to check an exclusive list of Retailers
-		[StepDefinition(@"In the 'Select retailers' window I (should|should only|should not) see the following retailers:")]
-		public void CheckingCorrectRetailersAreShowing(string should, Table expected)
-		{
-			var showing = new SelectRetailers().GetListOfRetailers().Where(x => x.Trim() != "").ToList();
-			var checkedRetailers = showing;
-			Report.Info("Retailers showing were: " + string.Join(", ", showing));
-			bool expectedOrNot = should != "should not";
-			foreach (var row in expected.Rows)
-			{
-				Report.IsTrue(showing.Contains(row["Retailer"]) == expectedOrNot, (expectedOrNot ? "Did not find" : "Found") + " the retailer: " + row["Retailer"], "The retailer " + row["Retailer"] + (expectedOrNot ? " was" : " was not") + " showing, as expected!", false, false);
-				if (showing.Contains(row["Retailer"]))
-				{
-					checkedRetailers.Remove(row["Retailer"]);
-				}
-			}
-			if (should == "should only")
-			{
-				Report.IsTrue(checkedRetailers.Count == 0,
-					"There were displayed Retailers not included in the expected list:: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())),
-					"As expected the only displayed Retailers were those in the list: " + string.Join(", ", expected.Rows.Select(x => x["Retailer"].ToList())));
-			}
-		}
-
-		/// <summary>
-		/// Select an option for Indicate full name of product, as sold, via this retailer (e.g.Private Label Aspirin) dropdown
-		/// </summary>
-		[StepDefinition(@"In the Retailers tab, I select Private Label name as: (.*)")]
-		public void ThenInTheRetailersTabISelectPrivateLabelNameAs(string option)
-		{
-			Report.IsTrue(new NewProduct().SelectPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
-		}
-
-		/// <summary>
-		/// Select an option for Indicate full name of product, as sold, via this retailer (e.g.Private Label Aspirin) dropdown
-		/// </summary>
-		[StepDefinition(@"In the Retailers tab, I enter Private Label name as: (.*)")]
-		public void ThenInTheRetailersTabIEnterPrivateLabelNameAs(string option)
-		{
-			Report.IsTrue(new NewProduct().EnterPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
-		}
-
-		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
-		public void ForRetailerIEnterPrivateLabelName(string retailer, string option)
-		{
-			Report.IsTrue(new NewProduct().SetPrivateLabelName(option, retailer), "Failed to set the Private label name to be: " + option + " for retailer: " + retailer, "Successfully set private label name to be: " + option + " for retailer: " + retailer);
-		}
-
-		/// <summary>
-		/// Select an option for vendor id  dropdown
-		/// </summary>
-		[StepDefinition(@"In the Retailers tab, I select Vendor id as: (.*)")]
-		public void ThenInTheRetailersTabISelectVendorIdAs(string option)
-		{
-			Report.IsTrue(new NewProduct().SelectVendorId(option), "Failed to set the vendor id to be: " + option, "Successfully set vendor id to be: " + option);
-		}
-
-		/// <summary>
-		/// Select an option for vendor id  dropdown for specific retailer.
-		/// </summary>
-		[StepDefinition(@"In the Retailers tab, for retailer: (.*) I select Vendor id as: (.*)")]
-		public void ThenInTheRetailersTabISelectVendorIdAsForRetailer(string retailer, string option)
-		{
-			Report.IsTrue(new NewProduct().SelectVendorIdForRetailer(retailer, option),
-				"Failed to set the vendor id to be: " + option + " for retailer: " + retailer,
-				"Successfully set vendor id to be: " + option + " for retailer: " + retailer);
-		}
-
-		/// <summary>
-		/// Select the first vendor id option for specific retailer
-		/// </summary>
-		[StepDefinition(@"In the Retailers tab, I select the first Vendor option for retailer: (.*)")]
-		public void ThenInTheRetailersTabISelectVendorIdAsForRetailer(string retailer)
-		{
-			Report.IsTrue(new NewProduct().SelectVendorIdForRetailer(retailer, "", true),
-				"Failed to set the first vendor option for retailer: " + retailer,
-				"Successfully set the first vendor option for retailer: " + retailer);
 		}
 
 		[StepDefinition(@"I save the product information as: (.*)")]
@@ -2197,21 +2054,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().GetUPCHeaders().Contains("Quantity"), "The text 'Quantity' did not appear in the UPC header on the Universal Product Code page", "The text 'Quantity' appeared in the UPC header on the Universal Product Code page as expected");
 		}
 
-		[StepDefinition(@"I click 'Add Retailers' in the Retailers page")]
-		public void ClickAddRetailersInRetailersPage()
-		{
-			Report.IsTrue(new NewProduct().ClickAddARetailers(), "Failed to click Add Retailers in the Retailers page", "Clicked Add Retailers in the Retailers page");
-		}
-
-		[StepDefinition(@"The selected retailers on the Retailer page should be:")]
-		public void SelectedRetailersShouldBe(Table retailers)
-		{
-			List<string> expectedRetailers = new List<string>();
-			retailers.Rows.ForEach(x => expectedRetailers.Add(x["Retailer"]));
-			var actualRetailers = new NewProduct().SelectedRetailers();
-			Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
-		}
-
 		[StepDefinition(@"The VOC intended use text is shown: (.*)")]
 		public void VOCIntendedUseTextMatches(string text)
 		{
@@ -2362,12 +2204,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			throw new Exception("New page did not load on Continue.");
 		}
 
-		[StepDefinition(@"I click close in the 'Select Retailers' window")]
-		public void ClickCloseSelectRetailersWindow()
-		{
-			Report.IsTrue(new SelectRetailers().ClickClose(), "The 'Select Retailers' Window was not closed", "The 'Select Retailers' Window was successfully closed.");
-		}
-
 		[StepDefinition(@"The message with text: (.*) is visble on the (.*) page")]
 		public void MessageVisibleOnPage(string message, string page)
 		{
@@ -2428,92 +2264,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page")]
-		public void SelectWalmartAffiliate_SelectsAll_WalMartSAMsClub()
-		{
-			var retailerInfo = new List<KeyValuePair<string, string>>
-			{
-				new KeyValuePair<string, string>("WM-BO","BONOBOS"),
-				new KeyValuePair<string, string>("WM-CO","Walmart.com"),
-				new KeyValuePair<string, string>("WM-HN","Hayneedle"),
-				new KeyValuePair<string, string>("WM-JE","Jet"),
-				new KeyValuePair<string, string>("WM-MC","MODCLOTH"),
-				new KeyValuePair<string, string>("WM-MJ","Moosejaw"),
-				new KeyValuePair<string, string>("WM-SC","Shoes.com"),
-				new KeyValuePair<string, string>("WM","Walmart")
-			};
-			foreach (var retailer in retailerInfo)
-			{
-				TestReport.UseSubSteps = false;
-				TestReport.StartStep("Selecting retailer: '" + retailer + "' selects all Wal-mart affiliates in 'Select a Retailer', then the retailer is set to: 'Wal-Mart/SAM'S CLUB'");
-				TestReport.UseSubSteps = true;
-				var selSelectRetailers = new SelectRetailers();
-				var selNewProduct = new NewProduct();
-				if (!selSelectRetailers.RetailersShownInViewType("tile"))
-				{
-					Report.Info("Clicking 'logo tile view' option because Select Retailers is shown in list view");
-					Report.IsTrue(selSelectRetailers.ClickRetailerOption("logo tile view"), "Failed to click 'logo tile view'", "Successfully clicked 'logo tile view'");
-				}
-				TestReport.StartStep(GlobalParameters.StepCount + " - I select retailer: " + retailer.Value);
-				GlobalParameters.StepCount++;
-				Report.Info("Clicking the checkbox for retailer with logo: " + retailer.Key);
-				Report.IsTrue(selSelectRetailers.SelectRetailerByLogo(retailer.Key),
-					"Failed to select retailer: " + retailer.Value,
-					"Successfully selected retailer: " + retailer.Value);
-				TestReport.StartStep(GlobalParameters.StepCount + " - I confirm all of the Walmart affiliated retailers are now selected");
-				GlobalParameters.StepCount++;
-				Report.Info("Comparing the selected retailer list with the expected retailer list");
-				var allSelected = new List<string>();
-				foreach (var selected in selSelectRetailers.SelectedRetailers(true))
-				{
-					var parts = selected.Split('/');
-					var filename = parts[parts.Length - 1].Split('?')[0];
-					allSelected.Add(Path.GetFileNameWithoutExtension(filename)?.ToLower());
-				}
-				var allExpected = retailerInfo.Select(x => x.Key.ToLower()).ToList();
-				Report.IsTrue(!allSelected.Except(allExpected).Any() && allExpected.Count == allSelected.Count,
-					"The selected retailers did not match the group of Walmart Affiliates: " + string.Join(", ", retailerInfo.Select(x => "'" + x.Value + "'").ToList()),
-					"The selected retailers matched the group of Walmart Affiliates: ");
-				TestReport.StartStep(GlobalParameters.StepCount + " - I click the Done button");
-				GlobalParameters.StepCount++;
-				Report.IsTrue(selSelectRetailers.ClickDone(),
-					"Failed to click the 'Done' button!",
-					"Successfully clicked the 'Done' button");
-				TestReport.StartStep(GlobalParameters.StepCount + " - I confirm the only retailer selected is: 'Wal-Mart/SAM'S CLUB' ");
-				GlobalParameters.StepCount++;
-				var actualRetailers = selNewProduct.SelectedRetailers();
-				var expectedRetailers = new List<string> { @"Wal-Mart/SAM'S CLUB" };
-				Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count,
-					"The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers),
-					" The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
-				Report.Info("Clicking 'Add New Retailer'");
-				selNewProduct.ClickAddARetailers();
-				Report.Info("Refreshing the selected retailers with 'select all'");
-				selSelectRetailers.ClickSelectAll();
-				selSelectRetailers.ClickSelectAll();
-			}
-			new SelectRetailers().ClickClose();
-		}
-
-		[StepDefinition(@"On the Retailer page I delete the following retailers:")]
-		public void DeleteRetailers(Table table)
-		{
-			var selNewProduct = new NewProduct();
-			var deleteRetailers = new List<string>();
-			table.Rows.ForEach(x => deleteRetailers.Add(x["Retailer"]));
-			foreach (var retailer in deleteRetailers)
-			{
-				Report.Info("Clicking the select checkbox for retailer: " + retailer);
-				Report.IsTrue(selNewProduct.SelectRetailer(retailer),
-					"Failed to select retailer: " + retailer,
-					"Successfully selected retailer: " + retailer);
-			}
-			Report.Info("Clicking the delete icon for the selected retailers");
-			Report.IsTrue(selNewProduct.DeleteSelectedRetailers(),
-				"Failed to delete the selected retailers",
-				"Successfully deleted the selected retailers");
-		}
-
 		[StepDefinition(@"I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down")]
 		public void OnlyActiveBrandAppearInProductLineDropDown()
 		{
@@ -2556,28 +2306,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			Report.IsTrue(thisNewProduct.SectionExists(question) == (shouldOrNot == "should"),
 				"Question is not showing as expected", "Question is showing or not as expected");
-		}
-
-		[StepDefinition(@"I check that Walmart and all of its affiliates are not available")]
-		public void GivenICheckThatWalmartAndAllOfItsAffiliatesAreNotAvailable()
-		{
-			var retailerList = new SelectRetailers().GetListOfRetailers();
-
-			foreach (var myRetailer in retailerList)
-			{
-				Report.Info("Retailer = " + myRetailer);
-				if (myRetailer.Contains("Walmart"))
-				{
-					throw new Exception("Unsuccessful: retailer: '" + myRetailer + "' available");
-				}
-			}
-			Report.Success("Walmart and all of its affiliates are not available");
-			Report.Screenshot();
-			SelectRetailers myDone = new SelectRetailers();
-			TestReport.StartStep("In the Retailer page I click Done");
-			myDone.ClickDone();
-			Delay.Seconds(0.5);
-			Report.Screenshot();
 		}
 
 		[Then(@"a (Danger & Warning|Warning) popup dialog should appear with the message: (.*)")]
@@ -3029,94 +2757,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsPaymentMethods.ThenIConfirmThePurchaseSummaryHeaderIsDisplayed();
 			GeneralUtilities.StudioWaitForSpinner();
 			MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
-		}
-
-		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
-		public void ClickRetailersOptionInTheSelectRetailersPopup(string option)
-		{
-			Report.IsTrue(new SelectRetailers().ClickRetailerOption(option) && GeneralUtilities.Wait_for_load_finish(), "Failed to click the retailers option: " + option, "Successfully clicked the retailers option: " + option);
-		}
-
-		[StepDefinition(@"I confirm that retailers are displayed in (list|tile) view with checkboxes next to each")]
-		public void ConfirmRetailersAreDisplayedInViewType(string viewType)
-		{
-			Report.IsTrue(new SelectRetailers().RetailersShownInViewType(viewType),
-				"Retailers were not shown in " + viewType + " view with checkboxes!",
-				"Retailers were shown in " + viewType + " view with checkboxes");
-		}
-
-		[StepDefinition(@"I select the following retailers in the Select Retailers popup list view:")]
-		public void SelectRetailersInSelectRetailersPopupListView(Table retailers)
-		{
-			var retailersToSelect = new List<string>();
-			var selSelectRetailers = new SelectRetailers();
-			retailers.Rows.ForEach(x => retailersToSelect.Add(x["Retailer"]));
-			foreach (var retailer in retailersToSelect)
-			{
-				Report.IsTrue(selSelectRetailers.SelectRetailerFromListView(retailer), "Failed to select retailer: " + retailer + " from the Select Retailers list view", "Successfully selected the retailer: " + retailer + " from the Select Retailers list view");
-			}
-		}
-
-		[StepDefinition(@"I click Done in the Select Retailers popup")]
-		public void ClickDoneInSelectRetailers()
-		{
-			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done in the Select Retailers pop up!", "Successfully clicked Done in the Select Retailers pop up");
-		}
-
-		[StepDefinition(@"the following retailers are selected in the Select Retailers window")]
-		public void SelectedRetailersInSelectRetailersWindow(Table retailers)
-		{
-			var selSelectRetailers = new SelectRetailers();
-			var expectedSelected = new List<string>();
-			retailers.Rows.ForEach(x => expectedSelected.Add(x["Retailer"]));
-			var actualSelected = selSelectRetailers.SelectedRetailers();
-			Report.IsTrue(expectedSelected.All(x => actualSelected.Contains(x)),
-				"Not all of the expected retailers were selected!",
-				"All of the expected retailers were selected");
-		}
-
-		[StepDefinition(@"all retailers are selected in the Select Retailers window")]
-		public void AllRetailersAreSelectedInSelectRetailersWindow()
-		{
-			var selSelectRetailers = new SelectRetailers();
-			var notSelected = selSelectRetailers.RetailersNotSelected();
-			if (notSelected.Count > 0)
-			{
-				Report.Failure("Some retailers were not selected: " + string.Join(", ", notSelected));
-				Report.Screenshot();
-				return;
-			}
-			Report.Success("All retailers were selected as expected");
-			Report.Screenshot();
-		}
-
-		[StepDefinition(@"I save all retailers in the Select Retailers window in alphabetical order as: (.*)")]
-		public void SaveAllRetailersInSelectRetailersWindowAlphabetical(string savedAs)
-		{
-			var selSelectRetailers = new SelectRetailers();
-			var allRetailers = selSelectRetailers.AllRetailers().OrderBy(x => x).ToList();
-			Context.AddToContext(savedAs, allRetailers);
-		}
-
-		[StepDefinition(@"the selected retailers on the Retailer page should match the retailer list saved as (.*)")]
-		public void SelectedRetailersOnRetailerPageShouldMatchSavedAs(string savedAs)
-		{
-			var retailerList = (List<string>)Context.GetFromContext(savedAs);
-			if (retailerList == null)
-			{
-				Report.Failure("No retailer list saved as: " + savedAs + " was found in context!");
-				return;
-			}
-			var actualRetailers = new NewProduct().SelectedRetailers();
-			bool match = !retailerList.Except(actualRetailers).Any() && retailerList.Count == actualRetailers.Count;
-			if (match)
-			{
-				Report.Success("The actual list of retailers matched the expected retailers.");
-				Report.Screenshot();
-				return;
-			}
-			Report.Failure("The actual list of retailers did not match the expected retailers! The differences were: " + string.Join(", ", retailerList.Except(actualRetailers)));
-			Report.Screenshot();
 		}
 
 		[StepDefinition(@"the 'Regulatory List' window opens")]

@@ -229,8 +229,8 @@ Then In the 'Select retailers' window I should see the following retailers:
 | Walgreens            |
 | Harbor Freight Tools |
 
-Given In the select retailers window I click cancel
+Given I click Done in the Select Retailers popup
+
 Given I navigate to the home page
+
 Then I delete the product: TestCase73041
-
-

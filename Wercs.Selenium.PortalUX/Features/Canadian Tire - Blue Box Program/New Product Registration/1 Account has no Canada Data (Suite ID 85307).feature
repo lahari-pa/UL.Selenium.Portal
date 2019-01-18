@@ -26,7 +26,7 @@ And I call Shared Step 62678 (Additional Product Information - US & Canada, No C
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 And In the 'Select Retailers' window I select the retailer: Canadian Tire
-And In the select retailers window I click Done
+And I click Done in the Select Retailers popup
 And I click continue
 And [Shared Step 85917 - UPC - Confirm Package type Link and field shown and required]
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85312

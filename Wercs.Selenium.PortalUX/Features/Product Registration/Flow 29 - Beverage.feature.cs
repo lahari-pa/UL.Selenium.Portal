@@ -310,7 +310,7 @@ testRunner.Then("the \'Select Retailers\' window appears", ((string)(null)), ((T
 #line 133
 testRunner.Then("In the \'Select retailers\' window I should only see the following retailers:", ((string)(null)), table2, "Then ");
 #line 138
-testRunner.Given("I click close in the \'Select Retailers\' window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click Close in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 142
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase73085", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
