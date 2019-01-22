@@ -2213,56 +2213,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				$"The message: '{message}' was visble on the '{page}' page as expected.");
 		}
 
-		// Custom 'Shared Step' so we can use the data omEPARegistration class in one go
-		[StepDefinition("I confirm data for EPA Registration: (.*) is complete")]
-		public void ConfirmDataForEPARegistrationIsComplete(string epaNumber)
-		{
-			var epaRegistrations = new NewProduct().EPARegistrationData;
-			TestReport.StartStep("I confirm that the EPA Registration No column of the table shows the EPA number previously entered");
-			Report.IsTrue(epaRegistrations.Any(x => x.EPANumber == epaNumber),
-				"The EPA Registration No. column did not contain an entry with the manually entered value: " + epaNumber,
-				"As expected the EPA Registration No. column contains an entry with the manually entered value: " + epaNumber);
-			TestReport.StartStep("I confirm that data is present in the Active Ingredient column for EPA registration: " + epaNumber);
-			var editedEPA = epaRegistrations.FirstOrDefault(x => x.EPANumber == epaNumber);
-			if (editedEPA == null)
-			{
-				Report.Failure("There were no rows in the EPA Registration table with the user added EPA Number: " + epaNumber);
-				Report.Screenshot();
-			}
-			else
-			{
-				Report.IsTrue(!editedEPA.ActiveIngredient.IsNullOrEmpty(),
-					"There was no data in the Active Ingredient field for EPA Number: " + epaNumber,
-					"As expected there was data: '" + editedEPA.ActiveIngredient + "' in the Active Ingredient field for EPA Number: " + epaNumber);
-			}
-			TestReport.StartStep("I confirm that data is present in the Percent of Active Ingredient column for EPA registration: " + epaNumber);
-			if (editedEPA == null)
-			{
-				Report.Failure("There were no rows in the EPA Registration table with the user added EPA Number: " + epaNumber);
-				Report.Screenshot();
-			}
-			else
-			{
-				Report.IsTrue(!editedEPA.PercentActiveIngredient.IsNullOrEmpty(),
-					"There was no data in the Percentage Active Ingredient field for EPA Number: " + epaNumber,
-					"As expected there was data: '" + editedEPA.PercentActiveIngredient + "' in the Percentage Active Ingredient field for EPA Number: " + epaNumber);
-			}
-			TestReport.StartStep("I confirm that the Active Ingredient and Percent of Active Ingredient columns are un-editable");
-			if (editedEPA == null)
-			{
-				Report.Failure("There were no rows in the EPA Registration table with the user added EPA Number: " + epaNumber);
-				Report.Screenshot();
-			}
-			else
-			{
-				Report.IsTrue(!editedEPA.ActiveIngredientEditable,
-					"The Active Ingredient field for EPA: " + epaNumber + " registration was editable when it was not expected to be.",
-					"The Active Ingredient field for EPA: " + epaNumber + " was un-editable as expected");
-				Report.IsTrue(!editedEPA.PercentActiveIngredientEditable,
-					"The Percent of Active Ingredient field for EPA: " + epaNumber + " registration was editable when it was not expected to be.",
-					"The Precent of Active Ingredient field for EPA: " + epaNumber + " was un-editable as expected");
-			}
-		}
 
 		[StepDefinition(@"I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down")]
 		public void OnlyActiveBrandAppearInProductLineDropDown()
@@ -2519,42 +2469,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(expectedColumns.All(x => actualColumns.Contains(x)),
 				"The expected columns were not displayed in the EPA table. Expected: " + string.Join(", ", expectedColumns) + ". Actual: " + string.Join(", ", actualColumns),
 				"The expected columns were displayed in the EPA table: " + string.Join(", ", expectedColumns));
-		}
-
-		[StepDefinition(@"I click Remove for the item on the first EPA Registration Table row")]
-		public void RemoveFirstEPARegistration()
-		{
-			Report.IsTrue(new NewProduct().RemoveEPATopRow(), "Failed to click 'Remove' on the top row of the EPA table", "Successfully clicked 'Remove' on the top row of the EPA table");
-		}
-
-		[StepDefinition(@"I confirm the EPA Registration Table is empty")]
-		public void ConfirmEPATableIsEmpty()
-		{
-			var displayedEPARegistrations = new NewProduct().EPARegistrationData;
-			Report.IsTrue(displayedEPARegistrations.Count == 0, "There were rows in the EPA Table when it was expected to be empty", "The EPA Table was empty as expected, with a row count of 0");
-		}
-
-		[StepDefinition(@"I confirm the EPA Registration Table contains a total of (.*) rows")]
-		public void ConfirmEPARegistrationRowCount(string count)
-		{
-			if (!count.All(char.IsDigit))
-			{
-				Report.Failure("The expected row count must be numeric");
-				return;
-			}
-			var expectedCount = int.Parse(count);
-			var actualCount = new NewProduct().EPARegistrationData.Count;
-			Report.IsTrue(expectedCount == actualCount,
-				"The actual EPA Registration row count did not match the expected count. Expected: " + expectedCount + ". Actual: " + actualCount,
-				"The actual EPA Registration row count was: " + actualCount + " as expected.");
-		}
-
-		[StepDefinition(@"I click Add Row in the EPA Registration Table")]
-		public void ClickAddRowEPATable()
-		{
-			Report.IsTrue(new NewProduct().AddEPARow(),
-				"Failed to click Add Row in the EPA Table",
-				"Successfully clicked Add Row in the EPA Table");
 		}
 
 		[StepDefinition(@"I set the Expiration Date to be (.*) days from today using the calendar selector for state: (.*)")]

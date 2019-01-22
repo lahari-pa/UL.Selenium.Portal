@@ -162,13 +162,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 				}
 
 				var stateRow = rows[index];
-				var kellyDataCheck = stateRow.FindElement(By.XPath(@".//td[5]/div[@class='fa fa-check' and not(contains(@style, 'display: none'))]"), 2);
+				var kellyDataCheck = stateRow.FindElement(By.XPath(@"//td/div[@class='fa fa-check' and not(contains(@style, 'display: none'))]"), 2);
 				if (kellyDataCheck == null)
 				{
 					return false;
 				}
-
-				kellyDataCheck.ScrollElementIntoView();
 				return true;
 			}
 			catch (IndexOutOfRangeException ex)
@@ -218,7 +216,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 				Report.Screenshot();
 				return false;
 			}
-
 			expirationDateInputs.First().Clear();
 			expirationDateInputs.First().SendKeys(date);
 			expirationDateInputs.First().SendKeys(Keys.Enter);

@@ -9,7 +9,7 @@ using SafewareReporting;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class SelectRetailers : BaseObject
+	class SelectRetailers : NewProduct
 	{
 		public const string BasePath = "//div[@id='select-retailers-dialog']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
