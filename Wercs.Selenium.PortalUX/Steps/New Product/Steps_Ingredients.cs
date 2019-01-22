@@ -225,10 +225,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the 'Delete' button is available in the Ingredients table")]
-		public void ConfirmTheDeleteButtonIsDisplayed()
+		[StepDefinition(@"I confirm the 'Delete' button (is|is not) available in the Ingredients table")]
+		public void ConfirmTheDeleteButtonIsDisplayed(string isIsNot)
 		{
-			Report.IsTrue(new Ingredients().DeleteIngredientsDisplayed(), "The Delete button is not displayed!", "The Delete button is displayed as expected");
+			if (isIsNot == "is")
+			{
+				Report.IsTrue(new Ingredients().DeleteIngredientsDisplayed(), "The Delete button is not displayed!", "The Delete button is displayed as expected");
+			}
+			else
+			{
+				Report.IsTrue((!new Ingredients().DeleteIngredientsDisplayed()), "The Delete button is displayed!", "The Delete button is not displayed as expected");
+			}
+			
 		}
 
 		[StepDefinition(@"I click the 'Delete' button in the Ingredients table")]

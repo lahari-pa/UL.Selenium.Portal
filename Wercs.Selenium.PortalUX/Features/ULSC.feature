@@ -20,13 +20,24 @@ Feature: ULSC
 Background:
 
 
-Scenario: [33001] Navigation links - ULSC - Data Management
-Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
+# Created by Beverly Barrett
+
+# Test case can be found at the following paths:
+# NetProjects10\PowerUnity\3. ULSC - Portal\3.1 ULSC Menu
+# NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\3. ULSC - Portal\3.1 ULSC Navigation item
+
+#UNDER CONSTRUCTION
+Scenario: [33001] Portal - Navigation links - ULSC - Data Management - User is registered in ULSC
+#In the shared step below login to Portal as a user who is linked to a ULSC Supplier who is registered in the ULSC Studio database
+And I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)
 Then the WERCSmart homepage should load
 And I should see ULSC - Data Management in the navigation bar
 Then I click the ULSC - Data Management icon in the QuickLinks Pane
-And I switch to the tab: https://wps.thewercs.com/dbSplit/PROD/Wercs.SHA.MVCWebV1/ULSC/Studio?module=1
-And UNDER DEVELOPMENT
+And I Confirm that a new tab opens
+And I Confirm that the WERCS Studio "Data Management Welcome" page/pop up is shown and that NO script errors display
+And I Confirm that the URL shown is the Studio site registered to the Supplier that this user is linked to.
+And I Click Continue (to close the welcome dialog)
+And I Close the tab/window that opened
 
 Scenario: [32996] ULSC - Data Management - User does not have access to Studio
 
@@ -44,18 +55,6 @@ And I switch to the tab: https://wps.thewercs.com/dbSplit/PROD/Wercs.SHA.MVCWebV
 #need to create assert on an empty page
 And UNDER DEVELOPMENT
 
-Scenario: [23327] WERCSLink - WERCSmart - My Products Page Shows OK
-Given I call Shared Step 29665 - Login to WSW as ULSC user
-And I call Shared Step 29148 - Login to ULSC as an Administrator User
-And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart
-And I should see the WERCSLink dashboard
-And In the WERCSLink dashboard I click menu item: Services and submenu item: WERCSmart
-And In the WERCSLink dashboard I click left menu link: My Products
-And I Confirm the WerCSMart Product Information page is shown in new window/tab
-And I Close the new window/tab that opened
-And I In the WERCSLink page - Click the My Product link from the WERCSmart area of the Services page
-And I Confirm the WERCSmart  Product Information page is shown in a new window
-And I Close the new window/tab that opened
 
 
 

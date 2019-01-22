@@ -626,7 +626,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I Select (.*) from the drop down list for Select Regulatory Specialist")]
-		public void GivenISelectAutomatedQAShaFromTheDropDownListFor(string specialist)
+		public void GivenISelectFromTheDropDownListForRegulatorySpecialist(string specialist)
 		{
 			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
 			Report.IsTrue(thisRecertificationPopup.SelectRegulatorySpecialist(specialist),
@@ -696,6 +696,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 			Report.IsTrue(passedAll, "Not all expected messages were found", "All expected messages were found");
+		}
+
+		[StepDefinition(@"in the Recertification popup I click on close")]
+		public void GivenInTheRecertificationPopupIClickOnClose()
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(!thisRecertificationPopup.CloseDialog(), "Clicking on close has not worked as expected",
+				"Clicking on close has woked as expected");
 		}
 
 		[StepDefinition(@"I Confirm the Recertification pop up is closed")]
@@ -1091,7 +1099,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			for (int i = 0; i < 30; i++)
 			{
 				List<Product> topN = myStudioShaManager.GetTopXProducts(n);
-				if (topN.Select(x => x.Status == status).ToList().Count == n)
+				if (topN.Select(x => x.Status == status).ToList().Count == topN.Count)
 				{
 					break;
 				}
@@ -1152,7 +1160,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"The Add Product to Recertification screen should be showing")]
+		[StepDefinition(@"The Add Product to Recertification screen should be showing")]
 		public void ThenTheAddProductToRecertificationScreenShouldBeShowing()
 		{
 			AddProductToRecertificationDialog thisAddProductToRecertificationDialog =
@@ -1162,7 +1170,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Add Product to Recertification screen has loaded");
 		}
 
-		[Then(@"in the Add Product to Recertification screen only the following Reasons are selected:")]
+		[StepDefinition(@"in the Add Product to Recertification screen only the following Reasons are selected:")]
 		public void ThenInTheAddProductToRecertificationScreenOnlyTheFollowingReasonsAreSelected(Table table)
 		{
 			AddProductToRecertificationDialog thisAddProductToRecertificationDialog =
@@ -1383,6 +1391,28 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"In the Add Product to Recertification Screen I select reason number: (\d+)")]
+		public void InAddProductToRecertificationScreenSelectReasonByNumber(int number)
+		{
+			AddProductToRecertificationDialog thisAddProductToRecertificationDialog =
+				new AddProductToRecertificationDialog();
+			Report.IsTrue(thisAddProductToRecertificationDialog.SelectReasonByNumber(number),
+				"Failed to select reason number: " + number.ToString(),
+				"Selected reason by number: " + number.ToString());
+
+		}
+
+		[StepDefinition(@"In the Add Product to Recertification Screen I click button: (.*)")]
+		public void InAddProductToRecertificationScreenIClickButton(string button)
+		{
+			AddProductToRecertificationDialog thisAddProductToRecertificationDialog =
+				new AddProductToRecertificationDialog();
+			Report.IsTrue(thisAddProductToRecertificationDialog.ClickButton(button),
+				"Failed to click button: " + button,
+				"Clicked button: " + button);
+
+		}
+
 		[StepDefinition(@"In the list of UPCs I should (see|not see) case pack indicatior for UPC: (.*)")]
 		public void ConfirmCaseUpc(string condition,string upc)
 		{
@@ -1455,5 +1485,47 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Screenshot();
 			}
 		}
+
+		[StepDefinition(@"The recertification popup should show")]
+		public void TheRecertificationPopupShouldShow()
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(thisRecertificationPopup.WaitForLoad(30), "Recertification popup is not showing",
+				"Recertification popup is showing");
+		}
+
+		[StepDefinition(@"In the recertification popup I set auto assign checkbox to: (true|false)")]
+		public void SetAutoAssignCheckbox(string trueOrFalse)
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(thisRecertificationPopup.SetAutoAssignRegulatorySpecialistToProduct(trueOrFalse.ToLower()=="true"), "Failed to set set auto assign to: " + trueOrFalse,
+				"Set auto assign to: " + trueOrFalse);
+		}
+
+		[StepDefinition(@"In the recertification popup I select Regulatory Specialist: (.*)")]
+		public void SetSpecialist(string specialist)
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(thisRecertificationPopup.SelectRegulatorySpecialist(specialist), "Failed to select: " + specialist,
+				"Selected: " + specialist);
+		}
+
+		[StepDefinition(@"In the recertification popup I click button: (.*)")]
+		public void ClickButton(string button)
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(thisRecertificationPopup.ClickButton("button"), "Failed to click button: " + button,
+				"Clicked button: " + button);
+		}
+
+		[StepDefinition(@"in the Recertification popup I click close button")]
+		public void GivenInTheRecertificationPopupIClickCloseButton()
+		{
+			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
+			Report.IsTrue(!thisRecertificationPopup.CloseDialog(), "Dialog has not closed as expected",
+				"Dialog has closed as expected");
+			Delay.Seconds(3);
+		}
+
 	}
 }

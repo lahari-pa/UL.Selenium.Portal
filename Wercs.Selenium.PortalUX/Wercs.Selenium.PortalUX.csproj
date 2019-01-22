@@ -574,6 +574,7 @@
     <Compile Include="Selenium Classes\New Product\SelectRetailers.cs" />
     <Compile Include="Selenium Classes\SHAProductNotificationHistory.cs" />
     <Compile Include="Selenium Classes\SHAProductRecertificationHistory.cs" />
+    <Compile Include="Selenium Classes\SHARecertification.cs" />
     <Compile Include="Selenium Classes\ULSCLogin.cs" />
     <Compile Include="Selenium Classes\UPC.cs" />
     <Compile Include="Selenium Classes\WERCSLinkDashboard.cs" />

@@ -16,6 +16,8 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using TechTalk.SpecFlow.Bindings;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
+
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
@@ -313,14 +315,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheNewProductPageIClickContinue(string page)
 		{
 			var selNewProduct = new NewProduct();
-			Report.Info("Checking the New Product page is open");
-			Report.IsTrue(selNewProduct.Wait_for_load(10), "New product page is not loaded", "New product page is loaded.");
+			if (!selNewProduct.Wait_for_load(10))
+			{
+				Report.Failure("New Product page is not loaded");
+				return;
+			}
 			if (page.ToLower() != "new product" && !selNewProduct.WaitForSection(page))
 			{
 				Report.Error($@"The page title did not match expected! Expected ""{page}""");
 			}
+
+			string pageTitle = selNewProduct.GetHeader();
 			Report.Info("Clicking Continue");
 			Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
+			Delay.Seconds(0.2);
+			if (pageTitle == "The Product")
+			{
+				try
+				{
+					ModalDialog thisModalDialog = new ModalDialog();
+					if (thisModalDialog.Exists)
+					{
+						if (thisModalDialog.GetTitle() == "Warning")
+						{
+							if (thisModalDialog.GetText().Contains("You are registering a formula (Raw material)"))
+							{
+								thisModalDialog.Click_OK();
+								Delay.Seconds(0.1);
+							}
+						}
+					}
+				}
+				catch (Exception e)
+				{
+					//Do nothing
+				}
+
+
+			}
+
 		}
 
 		[StepDefinition(@"I save the product information as: (.*)")]
@@ -1629,7 +1662,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I set the (.*) option to: (.*)")]
 		public void SetTheSectionOptionTo(string section, string option)
 		{
-			Report.IsTrue(new NewProduct().SetOptionInSection(section.Trim(), option.Trim()),
+			NewProduct thisNewProduct = new NewProduct();
+			if (!thisNewProduct.Wait_for_load(3))
+			{
+				Report.Failure("The new product page is not showing");
+			}
+			Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), option.Trim()),
 				"Failed to set the input to " + option.Trim() + " in section: " + section.Trim(),
 				"Successfully set the input to " + option.Trim() + " in section: " + section.Trim());
 			Delay.Seconds(1);
@@ -2852,7 +2890,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				$@"Retailer ""{retailer}"" is present under Destination Retailers");
 		}
 
-		[Then(@"I click (Save|Cancel) in The Product Page")]
+		[StepDefinition(@"I click (Save|Cancel) in The Product Page")]
 		public void ThenIClickSaveOrCancelInTheProductPage(string saveOrCancel)
 		{
 			NewProduct selNewProduct = new NewProduct();
@@ -2942,6 +2980,195 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisNewProduct.EnterAdditionalRequirement(retailer, additionalRequirements),
 				"Failed to enter additional requirements: " + additionalRequirements + " for retailer: " + retailer,
 				"Added additional requirements for retailer: " + retailer);
+		}
+
+		[StepDefinition(@"I confirm that you cannot add a new component to the formulation")]
+		public void ThenIConfirmThatYouCannotAddANewComponentToTheFormulation()
+		{
+			NewProduct thisNewProduct = new NewProduct();
+			TechTalk.SpecFlow.Table component = new TechTalk.SpecFlow.Table(new string[] {
+				"CASNumber",
+				"ComponentName",
+				"Percentage",
+				"Publicly Disclosed",
+				"Public Name"});
+			component.AddRow(new string[] {
+				"RR-38669-6",
+				"FLAVORS",
+				"35",
+				"Yes",
+				"Undisclosed Ingredient"});
+			var newProductIngredients = new Ingredients();
+
+			string CASNo = "";
+			if (component.Rows.First()["CASNumber"].Contains("WPS"))
+			{
+				string casSavedAs = "";
+				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))
+				{
+					ProductInformation CASProd =
+						(ProductInformation)Context.GetFromContext(component.Rows.First()["CASNumber"].Split(' ')[2]
+							.Trim());
+					CASNo = "WPS" + CASProd.Id;
+				}
+			}
+			else
+			{
+				CASNo = component.Rows.First()["CASNumber"];
+			}
+			var ingredient = new Ingredients.Ingredient();
+			if (CASNo.Length > 0)
+			{
+				ingredient.CASNumber = CASNo;
+			}
+			if (component.ContainsColumn("ComponentName"))
+			{
+				ingredient.ComponentName = component.Rows.First()["ComponentName"];
+			}
+			if (component.ContainsColumn("Percentage"))
+			{
+				ingredient.Percent = component.Rows.First()["Percentage"];
+			}
+			if (component.ContainsColumn("Publicly Disclosed"))
+			{
+				ingredient.PublicallyDisclosed = component.Rows.First()["Publicly Disclosed"].ToLower() == "yes";
+			}
+			if (component.ContainsColumn("Public Name"))
+			{
+				ingredient.PublicName = component.Rows.First()["Public Name"];
+			}
+			Report.IsTrue(!newProductIngredients.AddIngredient(ingredient),
+				"Successfully added ingredient",
+				"As expected could not add ingredient");
+		}
+
+		[StepDefinition(@"I confirm that you cannot edit the Percentage value for any component shown")]
+		public void ThenIConfirmThatYouCannotEditThePercentageValueForAnyComponentShown()
+		{
+			Report.IsTrue(!(new Ingredients().ConcentrationsAreEditable()),
+				"Concentrations should not be editable but are", "As expected, concentrations are not editable");
+		}
+
+		[StepDefinition(@"I confirm that you cannot edit the Is this a trade secret entry for any component shown")]
+		public void ThenIVonfirmThatYouCannotEditTheIsThisATradeSecretEntryForAnyComponentShown()
+		{
+			Report.IsTrue(!(new Ingredients().TradeSecretsAreEditable()),
+				"Is this a Trade secret should not be editable but is", "As expected, is this a trade secret is not editable");
+		}
+
+		[StepDefinition(@"I confirm that you can edit the Publicly Disclosed entry for any component shown")]
+		public void ThenIConfirmThatYouCanEditThePubliclyDisclosedEntryForAnyComponentShown()
+		{
+			Report.IsTrue(new Ingredients().PubliclyDisclosedAreEditable(),
+				"Publicly disclosed should be editable but is not", "As expected, publicly disclosed is editable");
+		}
+
+		[StepDefinition(@"I edit the (first|second) component to show (.*) for Publicly disclosed")]
+		public void ThenIEditTheComponentToShowYesForPubliclyDisclosed(string firstOrSecond, string yesOrNo)
+		{
+			var newProductIngredients = new Ingredients();
+
+			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
+
+			if (ListOfIngredients.Count == 0)
+			{
+				Report.Failure("No ingredients have been found to edit");
+			}
+			string firstIngredientName = ListOfIngredients[0].ComponentName;
+			if (firstOrSecond.ToLower() == "second")
+			{
+				firstIngredientName= ListOfIngredients[1].ComponentName;
+			}
+
+
+			newProductIngredients.SetIngredientPubliclyDisclosed(firstIngredientName, (yesOrNo.ToLower() == "yes"));
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm that for the first component an error is shown below the Public Name drop down which reads: (.*)")]
+		public void ThenIConfirmThatForTheFirstComponentAnErrorIsShownBelowThePublicNameDropDownWhichReads(string expectedError)
+		{
+			var newProductIngredients = new Ingredients();
+
+			if (!newProductIngredients.Exists)
+			{
+				Report.Failure("Ingredients page is not showing as expected. Navigating to it....");
+				GivenInTheNewProductPageIClickSection("Ingredients");
+			}
+			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
+
+			if (ListOfIngredients.Count == 0)
+			{
+				Report.Failure("No ingredients have been found to edit");
+			}
+
+			string firstIngredientName = ListOfIngredients[0].ComponentName;
+			string actualErrorMessage = newProductIngredients.GetPublicNameErrorMessage(firstIngredientName);
+			Report.IsTrue(actualErrorMessage == expectedError,
+				"Expected error message: " + expectedError + " but got: '" + actualErrorMessage + "'",
+				"Error is showing as expected" + expectedError);
+		}
+
+		[StepDefinition(@"I confirm that for the first component shows no error below the Public Name drop down")]
+		public void ThenIConfirmThatForTheFirstComponentShowsNoErrorBelowThePublicNameDropDown()
+		{
+			var newProductIngredients = new Ingredients();
+
+			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
+
+			if (ListOfIngredients.Count == 0)
+			{
+				Report.Failure("No ingredients have been found to edit");
+			}
+
+			string firstIngredientName = ListOfIngredients[0].ComponentName;
+			string actualErrorMessage = newProductIngredients.GetPublicNameErrorMessage(firstIngredientName);
+			Report.IsTrue(actualErrorMessage == "",
+				"Expected no error message but got: '" + actualErrorMessage + "'",
+				"As expected, no error is showing");
+		}
+
+
+		[StepDefinition(@"I edit the (first|second) component to select: (.*) from the Public Name drop down and save choice as (.*)")]
+		public void ThenIEditTheFirstComponentToSelectFromThePublicNameDropDown(string firstOrSecond, string option, string saveAs)
+		{
+			Report.Info("Beginning I edit the " + firstOrSecond + " component to select: " + option +
+			            " from the Public Name drop down and save choice as " + saveAs);
+			var newProductIngredients = new Ingredients();
+
+			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
+			Report.Info("Found " + ListOfIngredients.Count + " ingredients");
+
+			if (ListOfIngredients.Count == 0)
+			{
+				Report.Failure("No ingredients have been found to edit");
+			}
+
+			string firstIngredientName = ListOfIngredients[0].ComponentName;
+			if (firstOrSecond.ToLower() == "second")
+			{
+				firstIngredientName = ListOfIngredients[1].ComponentName;
+			}
+
+			if (option.ToLower() == "<random>")
+			{
+				List<string> availableOptions = newProductIngredients.GetIngredientPublicNameOptions(firstIngredientName);
+				List<string> filtered = availableOptions.Where(i => i != "Choose..." && i != "Undisclosed Ingredient").ToList();
+				if (filtered.Count() == 0)
+				{
+					option = "Undisclosed Ingredient";
+				}
+				else
+				{
+					Random rnd = new Random();
+					option = filtered[rnd.Next(0, filtered.Count()-1)];
+				}
+
+			}
+			Report.Info("Beginning select ingredient: " + firstIngredientName + " with option: " + option);
+			newProductIngredients.SelectIngredientPublicName(firstIngredientName, option);
+			Context.AddToContext(saveAs, option);
+			Report.Screenshot();
 		}
 
 	}

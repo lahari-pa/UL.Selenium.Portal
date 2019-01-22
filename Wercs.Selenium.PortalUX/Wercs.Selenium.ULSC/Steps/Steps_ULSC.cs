@@ -180,7 +180,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in allHandles)
 			{
-				Report.Info("Switching tab");
+				//Report.Info("Switching tab");
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='products-information']"), 2) != null)
 				{
@@ -189,14 +189,16 @@ namespace Wercs.Selenium.ULSC.Steps
 					return;
 				}
 			}
-			Report.Failure("Failed to find the correct tab! The available tabs were:");
+			Report.Failure("Failed to find the correct tab! The available tabs (with screenshots) were:");
 			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
-
+			int counter = 1;
 			foreach (string url in OpenBrowsers)
 			{
 				SeleniumBrowser.SwitchToTabWithURL(url);
-				Report.Info("url: " + url);
+				Report.Info("Tab " + counter.ToString());
+				Report.Info("Url: " + url);
 				Report.Screenshot();
+				counter++;
 			}
 		}
 
@@ -239,7 +241,15 @@ namespace Wercs.Selenium.ULSC.Steps
 							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
 								"Closed tab with url: " + url);
 							return;
-
+						}
+						break;
+					case "ULGHS.COM":
+						string targetURL = TReVor.TestVariables.GetVariableSavedAs("ULGHS.COM");
+						if (SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
+						{
+							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
+								"Closed tab with url: " + url);
+							return;
 						}
 						break;
 					default:
@@ -250,7 +260,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			}
 
 			//We may be on the wrong page, just find one for WERCSmart
-			Report.Error("Failed to find expected tab");
+			Report.Failure("Failed to find expected tab");
 			foreach (string url in OpenBrowsers)
 			{
 				SeleniumBrowser.SwitchToTabWithURL(url);
@@ -300,7 +310,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in allHandles)
 			{
-				Report.Info("Switching tab");
+				//Report.Info("Switching tab");
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='dataentry']"), 2) != null)
 				{
@@ -309,14 +319,155 @@ namespace Wercs.Selenium.ULSC.Steps
 					return;
 				}
 			}
-			Report.Failure("Failed to find the correct tab! The available tabs were:");
+			Report.Failure("Failed to find the correct tab! The available tabs (with screen shots) were:");
 			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
-
+			int counter = 1;
 			foreach (string url in OpenBrowsers)
 			{
 				SeleniumBrowser.SwitchToTabWithURL(url);
-				Report.Info("url: " + url);
+				Report.Info("Tab " + counter.ToString());
+				Report.Info("Url: " + url);
 				Report.Screenshot();
+				counter++;
+			}
+		}
+
+		[StepDefinition(@"I confirm that the WERCSLink header appears at the top left")]
+		public void GivenIConfirmThatTheWERCSLinkHeaderAppearsAtTheTopLeft()
+		{
+			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			Report.IsTrue(thisWercsLinkDashboard.TopLeftTitleExists("WERCSLink"), "Failed to find top left title WERCSLink",
+				"Found top left title: WERCSLink");
+		}
+
+		[StepDefinition(@"I confirm that the following WERCSLink menu items are showing")]
+		public void GivenIConfirmThatTheFollowingWERCSLinkMenuItemsAreShowing(Table table)
+		{
+			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			List<string> menuItems = thisWercsLinkDashboard.getLeftMenuItems();
+
+			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(menuItems.Contains(thisRow["Menu item"]), "Failed to find menu item: " + thisRow["Menu item"],
+					"Found left menu item: " + thisRow["Menu item"]);
+			}
+
+		}
+
+		[StepDefinition(@"I confirm that the WERCSLink screen shows the following sections")]
+		public void GivenIConfirmThatTheWERCSLinkScreenShowsTheFollowingSections(Table table)
+		{
+			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			List<string> sections = thisWercsLinkDashboard.getSectionTitles();
+
+			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(sections.Contains(thisRow["Section"]), "Failed to find menu item: " + thisRow["Section"],
+					"Found left menu item: " + thisRow["Section"]);
+			}
+		}
+
+		[StepDefinition(@"I confirm the WERCSmart area shows the WERCSmart logo, name and Registered trade mark")]
+		public void GivenIConfirmTheWERCSmartAreaShowsTheWERCSmartLogoNameAndRegisteredTradeMark()
+		{
+			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			List<string> images = thisWercsLinkDashboard.getSectionImages("WERCSmart®");
+			Report.IsTrue(images.Contains("wercsmart-logo"), "Logo is not showing as expected",
+				"Logo is showing as expected");
+			List<string> titles = thisWercsLinkDashboard.getSectionTitles();
+			Report.IsTrue(titles.Contains("WERCSmart®"), "Wercsmart title and registered trademark is not showing as expected",
+				"Wercsmart title and registered title is showing as expected");
+		}
+
+		[StepDefinition(@"I confirm that in the (.*) area the description text reads (.*)")]
+		public void GivenIConfirmThatInTheAreaTheDescriptionTextReads(string section, string expectedText)
+		{
+			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			string actualText = thisWercsLinkDashboard.getSectionBlurb(section);
+			Report.IsTrue(actualText == expectedText,
+				"Expected text was: " + expectedText + " actual text was: " + actualText);
+		}
+
+		[StepDefinition(@"I confirm that in the (.*) area the following links exist:")]
+		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingLinksExist(string section, Table table)
+		{
+			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			List<WERCSLinkLink> links = thisWercsLinkDashboard.getSectionLinks(section);
+
+			//| Link title | Link icon |
+			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			{
+				var matchingLink = links.FirstOrDefault(x => x.LinkTitle == thisRow["Link title"]);
+				Report.IsTrue(matchingLink!=null, "Failed to find matching link: " + thisRow["Link title"],
+					"Found matching link: " + thisRow["Link title"]);
+
+				if (matchingLink != null)
+				{
+					Report.IsTrue(matchingLink.Icon==thisRow["Link icon"], "Failed to find matching icon: " + thisRow["Link icon"],
+						"Found matching icon: " + thisRow["Link icon"]);
+
+				}
+			}
+		}
+
+		[StepDefinition(@"I confirm that in the (.*) area the following subheadings appear:")]
+		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingSubheadingsAppear(string section, Table table)
+		{
+			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			List<string> subheadings = thisWercsLinkDashboard.getSectionSubheadings(section);
+
+			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			{
+				var matchingSubheading = subheadings.FirstOrDefault(x => x == thisRow["Subheading"]);
+				Report.IsTrue(matchingSubheading != null, "Failed to find matching subheading: " + thisRow["Subheading"],
+					"Found matching subheading: " + thisRow["Subheading"]);
+			}
+		}
+
+		[StepDefinition(@"I confirm that in the (.*) area the following images appear:")]
+		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingImagesAppear(string section, Table table)
+		{
+			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			List<string> images = thisWercsLinkDashboard.getSectionImages(section);
+
+			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			{
+				var matchingImage = images.FirstOrDefault(x => x == thisRow["Image"]);
+				Report.IsTrue(matchingImage != null, "Failed to find matching image: " + thisRow["Image"],
+					"Found matching image: " + thisRow["Image"]);
+			}
+		}
+
+		[StepDefinition(@"I confirm a new window opens with the ULGHS.com page shown")]
+		public void GivenIConfirmANewWindowOpensWithTheULGHSPageShown()
+		{
+			Delay.Seconds(30);
+			string targetURL = TReVor.TestVariables.GetVariableSavedAs("ULGHS.COM");
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				//Report.Info("Switching tab");
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+
+				if(SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
+				{
+					Report.Success("Self-Service GHS SDS page opened in a new tab. Successfully switched to that tab.");
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab! The available tabs (with screen shots) were:");
+			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			int counter = 1;
+			foreach (string url in OpenBrowsers)
+			{
+				SeleniumBrowser.SwitchToTabWithURL(url);
+				Report.Info("Tab " + counter.ToString());
+				Report.Info("Url: " + url);
+				Report.Screenshot();
+				counter++;
 			}
 		}
 

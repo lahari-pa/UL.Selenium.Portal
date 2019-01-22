@@ -6075,6 +6075,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 55843 \(EPA expiration date - enter current year - Not June 30th\) for state: (.*)")]
 		public void SharedStep55843_EPAExpirationDate_EnterCurrentYear_NotJune30th(string state)
 		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 55843");
 			// Click in the EPA Expiration Date box for the state you are working with
 			// Select a date for the current year that is not June 30th
 			var table = new Table("State", "Month", "Day", "Increment year?");
@@ -6108,6 +6110,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step \(EPA expiration date - enter current year plus 2 - Not June 30th\) for state: (.*)")]
 		public void SharedStep_EPAExpirationDate_EnterCurrentYearPlusTwo_NotJune30th(string state)
 		{
+			TestReport.UseSubSteps = true;
 			// Click in the EPA Expiration Date box for the state you are working with
 			// Select a date for the current year + 2 that is not June 30th
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -6127,6 +6130,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 55845 \(EPA expiration date - enter current year - June 30th\) for state: (.*)")]
 		public void SharedStep55845_EPAExpirationDate_EnterCurrentYear_June30th(string state)
 		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 55845");
 			// Click in the EPA Expiration Date box for the state you are working with
 			// Select June 30th for the current year
 			// NOTE:  If the current date is after June 30th for the current year select June 30th for next year
@@ -6151,6 +6156,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step \(EPA expiration date - enter current year plus 2 - June 30th\) for state: (.*)")]
 		public void SharedStep_EPAExpirationDate_EnterCurrentYearPlus_June30th(string state)
 		{
+			TestReport.UseSubSteps = true;
 			// Click in the EPA Expiration Date box for the state you are working with
 			// Select June 30th for the current year + 2
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -6206,6 +6212,49 @@ namespace Wercs.Selenium.PortalUX.Steps
 			new Steps_PesticideDetailsState().SharedStep_EPAExpirationDate_EnterCurrentYearPlus("2", table);
 			TestReport.StartStep("I click continue");
 			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 80488 - SHA Manager > completed 3rd party > Add to recert 40 for product saved as: (.*)")]
+		public void ThenICallSharedStep_SHAManagerCompletedRdPartyAddToRecert(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 80488");
+			Steps_SHA MyStepsSha = new Steps_SHA();
+
+			TechTalk.SpecFlow.Table productTable = new TechTalk.SpecFlow.Table(new string[] {
+				"ProductID"});
+			productTable.AddRow(new string[] {
+				"saved as "+savedAs
+			});
+			MyStepsSha.GivenInSHAManagerISetTheFilterForStatusTo("Completed");
+			Delay.Seconds(5);
+			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
+			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
+			MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
+			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(40);
+			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
+		}
+
+		[StepDefinition(@"I call Shared Step 55460 - Recertification - ULSC registered > Re-Import data from ULSC service - No - Save for product saved as: (.*)")]
+		public void GivenICallSharedStep55460_Recertification_ULSCRegisteredRe_ImportDataFromULSCService_No_SaveForProductSavedAs(string savedAs)
+		{
+
+			var selNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			if (selNewProduct.Wait_for_load())
+			{
+				if (selNewProduct.WaitForSection("ULSC Service Data Re-Import"))
+				{
+					MyStepsNewProduct.SetTheSectionOptionTo("Would you like to Re-Import data from ULSC service?", "No, Continue editing data");
+					MyStepsNewProduct.ThenIClickSaveOrCancelInTheProductPage("Save");
+				}
+
+				Report.Screenshot();
+			}
+			else
+			{
+				Report.Failure("New product page was not found");
+			}
 		}
 
 		[StepDefinition(@"I call Shared Step 55887 \(EPA expiration date - enter current year plus 2 - Dec 31st\) for state: (.*)")]
@@ -6267,6 +6316,64 @@ namespace Wercs.Selenium.PortalUX.Steps
 			new Steps_PesticideDetailsState().SharedStep_EPAExpirationDate_EnterCurrentYearPlus("0", table);
 			TestReport.StartStep("I click continue");
 			new StepsNewProduct().ClickContinue();
+		}
+
+		[StepDefinition(@"I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as (.*)")]
+		public void GivenICallSharedStep44240_SHA_RecertificationProcessRecertificationToAssignedStatus(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as: " + savedAs);
+			var shaSteps = new Steps_SHA();
+			// Given I In SHA manager find your product in the Recertification status(you may have to wait a few minutes for the Zuora process to run and for your product to show in Recertification)
+			//-make sure you are on the Recertification status list
+			GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,"Recertification");
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter("Recertification");
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = productDetails.Id;
+			TestReport.StartStep("I select  product in the SHA grid saved as " + savedAs);
+			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
+			Delay.Seconds(3);
+			TestReport.StartStep("I click the Process Recertification button");
+			shaSteps.GivenIClickTheProcessRecertificationButton();
+			shaSteps.GivenIConfirmTheRecertificationPopUpIsShown();
+			shaSteps.GivenIUncheckTheAutoAssignRegulatorySpecialistToProductCheckBox();
+			shaSteps.GivenISelectFromTheDropDownListForRegulatorySpecialist("Automated QASha");
+			Report.Screenshot();
+			shaSteps.GivenInTheRecertificationPopupIClick("Continue");
+			shaSteps.GivenInTheRecertificationPopupIWaitForAllProcessingToBeCompleted();
+			shaSteps.GivenInTheRecertificationPopupIClickOnClose();
+			shaSteps.GivenIConfirmTheRecertificationPopUpIsClosed();
+			//	And I The recertification pop up will close
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			//	And I Your product will be shown in the Assigned status
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Assigned");
+		}
+
+		[StepDefinition(@"I call Shared Step 49742 - WPS - Check In Product saved as: (.*)")]
+		public void GivenICallSharedStep49742_WPS_CheckInProduct(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I call Shared Step 49742 - WPS - Check In Product saved as: " + savedAs);
+			var shaSteps = new Steps_SHA();
+			var studioSteps = new Steps_Studio();
+			TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+				"Item"
+			});
+			table3.AddRow(new string[] {
+				"Check in/out"
+			});
+
+			shaSteps.GivenIEditMyToolbarToAddTheFollowingOptions(table3);
+			studioSteps.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnInOutButton();
+			studioSteps.GivenInAssignProductsPopupIClickOnCheckInOrCheckOut("Check In");
+			studioSteps.GivenICloseCurrentDocument();
 		}
 
 		[StepDefinition(@"I call Shared Step 81468 \(Product Characteristics - Solid only available - without secondary physical state\)")]

@@ -227,6 +227,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public ProductGridItem FirstProductInGrid()
 		{
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			{
+				Report.Error("No rows have been found!");
+				return null;
+			}
 			var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
 			if (productRow == null || !productRow.Displayed)
 			{

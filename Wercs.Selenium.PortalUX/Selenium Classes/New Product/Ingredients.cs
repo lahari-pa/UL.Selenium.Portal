@@ -23,166 +23,224 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 	{
 		public bool AddIngredient(Ingredient ingredient)
 		{
-			var placeholderEl = containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
-			placeholderEl.TryClick();
-			IWebElement clickResult;
-			var inputEl = containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
-			// If the ingredient has a CAS number assigned, search by that string
-			if (!string.IsNullOrEmpty(ingredient.CASNumber))
+			try
 			{
-				inputEl.EnterText(ingredient.CASNumber);
-				var searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
-				int i = 0;
-				while (searching != null && i < 10)
+				var placeholderEl = containerElement.FindElement(
+					By.XPath(
+						".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"),
+					2);
+				placeholderEl.TryClick();
+				IWebElement clickResult;
+				var inputEl = containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+				// If the ingredient has a CAS number assigned, search by that string
+				if (!string.IsNullOrEmpty(ingredient.CASNumber))
 				{
-					Delay.Seconds(Delay.SpeedFactor * 1);
-					i++;
-					searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
-				}
-				// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
-				// If no elements match this, then we will simply take the first element in the list
-				var results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
-				if (!results.Any())
-				{
-					Report.Info("No results were returned on search");
-					return false;
-				}
-				while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) == null)
-				{
-					Delay.Seconds(1);
-					results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
-				}
-				if (results.Count == 0)
-				{
-					return false;
-				}
-				// Find every result row returned which match the CAS we are looking for, exluding the 'loading' row which appears at the bottom
-				var matchingCasResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='text-muted']"), 2).Text.Trim() == ingredient.CASNumber.Trim());
-				if (!matchingCasResults.Any())
-				{
-					clickResult = results.FirstOrDefault();
-					ingredient.CASNumber = clickResult.FindElement(By.XPath(".//span[2]"), 2).GetValue();
-					ingredient.ComponentName = clickResult.FindElement(By.XPath(".//span[1]"), 2).GetValue();
-					Report.Info("No CAS match was found! Clicking the first search result with CAS number: " + ingredient.CASNumber);
-				}
-				else
-				{
-					// In this case we have entries with matching CAS Numbers, so we should double check that our product name matches?
-					if (string.IsNullOrEmpty(ingredient.ComponentName))
+					inputEl.EnterText(ingredient.CASNumber);
+					var searching =
+						containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+					int i = 0;
+					while (searching != null && i < 10)
 					{
-						// No Component name was specified, so we just take the first value with a matching CAS Number!
-						clickResult = matchingCasResults.FirstOrDefault();
-						Report.Info("Clicking result in smart search with CAS number: " + clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
+						Delay.Seconds(Delay.SpeedFactor * 1);
+						i++;
+						searching = containerElement.FindElement(
+							By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+					}
+
+					// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
+					// If no elements match this, then we will simply take the first element in the list
+					var results =
+						containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					if (!results.Any())
+					{
+						Report.Info("No results were returned on search");
+						return false;
+					}
+
+					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) == null)
+					{
+						Delay.Seconds(1);
+						results = containerElement.FindElements(
+							By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					}
+
+					if (results.Count == 0)
+					{
+						return false;
+					}
+
+					// Find every result row returned which match the CAS we are looking for, exluding the 'loading' row which appears at the bottom
+					var matchingCasResults = results.Where(x =>
+						!x.Text.ToLower().Contains("loading") &&
+						x.FindElement(By.XPath(".//span[@class='text-muted']"), 2).Text.Trim() ==
+						ingredient.CASNumber.Trim());
+					if (!matchingCasResults.Any())
+					{
+						clickResult = results.FirstOrDefault();
+						ingredient.CASNumber = clickResult.FindElement(By.XPath(".//span[2]"), 2).GetValue();
+						ingredient.ComponentName = clickResult.FindElement(By.XPath(".//span[1]"), 2).GetValue();
+						Report.Info("No CAS match was found! Clicking the first search result with CAS number: " +
+						            ingredient.CASNumber);
 					}
 					else
 					{
-						// Component name was defined, so just check to see if there is a match
-						var matchingNames = matchingCasResults.FirstOrDefault(x => x.FindElement(By.XPath(".//span[@class='component-name' and text() = '" + ingredient.ComponentName + "']"), 2) != null);
-						if (matchingNames == null)
+						// In this case we have entries with matching CAS Numbers, so we should double check that our product name matches?
+						if (string.IsNullOrEmpty(ingredient.ComponentName))
 						{
-							// No match was found, so just take the first entry!
+							// No Component name was specified, so we just take the first value with a matching CAS Number!
 							clickResult = matchingCasResults.FirstOrDefault();
-							Report.Info("Clicking result in smart search with CAS number: " + clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
+							Report.Info("Clicking result in smart search with CAS number: " +
+							            clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
 						}
 						else
 						{
-							// Matching entry was found, so taking this instead!
-							clickResult = matchingNames;
-							Report.Info("Found the matched search result. Clicking result in smart search with CAS number: " + ingredient.CASNumber + " and name: " + ingredient.ComponentName);
+							// Component name was defined, so just check to see if there is a match
+							var matchingNames = matchingCasResults.FirstOrDefault(x =>
+								x.FindElement(
+									By.XPath(".//span[@class='component-name' and text() = '" +
+									         ingredient.ComponentName + "']"), 2) != null);
+							if (matchingNames == null)
+							{
+								// No match was found, so just take the first entry!
+								clickResult = matchingCasResults.FirstOrDefault();
+								Report.Info("Clicking result in smart search with CAS number: " +
+								            clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
+							}
+							else
+							{
+								// Matching entry was found, so taking this instead!
+								clickResult = matchingNames;
+								Report.Info(
+									"Found the matched search result. Clicking result in smart search with CAS number: " +
+									ingredient.CASNumber + " and name: " + ingredient.ComponentName);
+							}
 						}
 					}
 				}
-			}
-			else
-			{
-				Report.Info("No CAS Number was assigned to the ingredient, so searching for the chemical by Component Name instead");
-				inputEl.EnterText(ingredient.ComponentName);
-				var searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
-				int i = 0;
-				while (searching != null && i < 10)
-				{
-					Delay.Seconds(Delay.SpeedFactor * 1);
-					i++;
-					searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
-				}
-				// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
-				// If no elements match this, then we will simply take the first element in the list
-				var results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
-				i = 0;
-				while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) == null && i < 20)
-				{
-					if (containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2)?.Text == "No results found")
-					{
-						Report.Info("There were no results returned searching by Name!");
-						throw new Exception("Unable to add the ingredient because the search criteria did not yield any!");
-					}
-					i++;
-					Delay.Seconds(1);
-					results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
-				}
-				// Avoiding null reference exception on .GetValue() - "Loading more results" row at the bottom (no span with component-name)
-				var matchingNameResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text.Trim() == ingredient.ComponentName.Trim());
-				if (!matchingNameResults.Any())
-				{
-					// No matching name entry was found, so we take the first one just in case we are looking for a partial match!
-					clickResult = results.FirstOrDefault();
-					ingredient.CASNumber = clickResult.FindElement(By.XPath(".//span[2]"), 2).GetValue();
-					ingredient.ComponentName = clickResult.FindElement(By.XPath(".//span[1]"), 2).GetValue();
-					Report.Info("There was no match on name, so selected the first search result with name: " + ingredient.ComponentName + " and CAS number: " + ingredient.CASNumber);
-				}
 				else
 				{
-					clickResult = matchingNameResults.FirstOrDefault();
-					// We have found a match by the component name! So we should update our CAS Number field
-					ingredient.CASNumber = clickResult.FindElement(By.XPath(".//following-sibling::span[@class='text-muted']"), 2).GetValue();
-					Report.Info("Selecting the first search result which matched on chemical name: " + ingredient.ComponentName + " with CAS: " + ingredient.CASNumber);
-				}
-			}
-			// Click the element we have identified as the best match
-			if (clickResult.TryClick())
-			{
-				// So we have now selected the element, so we need to try and get the first 'new' entry which contains this CAS Number, and hasn't had the Percentage field filled
-				bool success = true;
-				var rows = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2);
-				var matchingrow = rows.FirstOrDefault(x => x.FindElement(By.XPath(".//div[@class='cas-number']/small"), 2).GetValue().Trim() == ingredient.CASNumber);
-				if (matchingrow == null)
-				{
-					return false;
-				}
-				// Find the percentage field for the matched row
-				var concInput = matchingrow.FindElement(By.XPath(".//input[contains(@class,'percent-comp')]"), 2);
-				Report.Info("Entering percentage: " + ingredient.Percent);
-				concInput.EnterText(ingredient.Percent);
-				// Find the Publicly Disclosed field for the matched row
-				var publicDisclosure = matchingrow.FindElement(By.XPath(".//td[@class='transparency']//input"), 2);
-				if (publicDisclosure != null && ingredient.PublicallyDisclosed != publicDisclosure.Checked())
-				{
+					Report.Info(
+						"No CAS Number was assigned to the ingredient, so searching for the chemical by Component Name instead");
+					inputEl.EnterText(ingredient.ComponentName);
+					var searching =
+						containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+					int i = 0;
+					while (searching != null && i < 10)
+					{
+						Delay.Seconds(Delay.SpeedFactor * 1);
+						i++;
+						searching = containerElement.FindElement(
+							By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+					}
 
-					Report.Info("Setting Publicly Disclosed to: " + ingredient.PublicallyDisclosed);
-					if (!publicDisclosure.TryCheck(ingredient.PublicallyDisclosed))
+					// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
+					// If no elements match this, then we will simply take the first element in the list
+					var results =
+						containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					i = 0;
+					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) ==
+					       null && i < 20)
 					{
-						success = false;
+						if (containerElement
+							    .FindElement(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2)?.Text ==
+						    "No results found")
+						{
+							Report.Info("There were no results returned searching by Name!");
+							throw new Exception(
+								"Unable to add the ingredient because the search criteria did not yield any!");
+						}
+
+						i++;
+						Delay.Seconds(1);
+						results = containerElement.FindElements(
+							By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					}
+
+					// Avoiding null reference exception on .GetValue() - "Loading more results" row at the bottom (no span with component-name)
+					var matchingNameResults = results.Where(x =>
+						!x.Text.ToLower().Contains("loading") &&
+						x.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text.Trim() ==
+						ingredient.ComponentName.Trim());
+					if (!matchingNameResults.Any())
+					{
+						// No matching name entry was found, so we take the first one just in case we are looking for a partial match!
+						clickResult = results.FirstOrDefault();
+						ingredient.CASNumber = clickResult.FindElement(By.XPath(".//span[2]"), 2).GetValue();
+						ingredient.ComponentName = clickResult.FindElement(By.XPath(".//span[1]"), 2).GetValue();
+						Report.Info("There was no match on name, so selected the first search result with name: " +
+						            ingredient.ComponentName + " and CAS number: " + ingredient.CASNumber);
+					}
+					else
+					{
+						clickResult = matchingNameResults.FirstOrDefault();
+						// We have found a match by the component name! So we should update our CAS Number field
+						ingredient.CASNumber = clickResult
+							.FindElement(By.XPath(".//following-sibling::span[@class='text-muted']"), 2).GetValue();
+						Report.Info("Selecting the first search result which matched on chemical name: " +
+						            ingredient.ComponentName + " with CAS: " + ingredient.CASNumber);
 					}
 				}
-				// Find the Trade Secret field for the matched row
-				var tradeSecret = matchingrow.FindElement(By.XPath(".//td[@class='trade-secret']//input"), 2);
-				if (tradeSecret != null && ingredient.TradeSecret != tradeSecret.Checked())
+
+				// Click the element we have identified as the best match
+				if (clickResult.TryClick())
 				{
-					Report.Info("Setting Trade Secret to: " + ingredient.TradeSecret);
-					if (!tradeSecret.TryCheck(ingredient.TradeSecret))
+					// So we have now selected the element, so we need to try and get the first 'new' entry which contains this CAS Number, and hasn't had the Percentage field filled
+					bool success = true;
+					var rows = containerElement.FindElements(
+						By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2);
+					var matchingrow = rows.FirstOrDefault(x =>
+						x.FindElement(By.XPath(".//div[@class='cas-number']/small"), 2).GetValue().Trim() ==
+						ingredient.CASNumber);
+					if (matchingrow == null)
 					{
-						success = false;
+						return false;
 					}
+
+					// Find the percentage field for the matched row
+					var concInput = matchingrow.FindElement(By.XPath(".//input[contains(@class,'percent-comp')]"), 2);
+					Report.Info("Entering percentage: " + ingredient.Percent);
+					concInput.EnterText(ingredient.Percent);
+					// Find the Publicly Disclosed field for the matched row
+					var publicDisclosure = matchingrow.FindElement(By.XPath(".//td[@class='transparency']//input"), 2);
+					if (publicDisclosure != null && ingredient.PublicallyDisclosed != publicDisclosure.Checked())
+					{
+
+						Report.Info("Setting Publicly Disclosed to: " + ingredient.PublicallyDisclosed);
+						if (!publicDisclosure.TryCheck(ingredient.PublicallyDisclosed))
+						{
+							success = false;
+						}
+					}
+
+					// Find the Trade Secret field for the matched row
+					var tradeSecret = matchingrow.FindElement(By.XPath(".//td[@class='trade-secret']//input"), 2);
+					if (tradeSecret != null && ingredient.TradeSecret != tradeSecret.Checked())
+					{
+						Report.Info("Setting Trade Secret to: " + ingredient.TradeSecret);
+						if (!tradeSecret.TryCheck(ingredient.TradeSecret))
+						{
+							success = false;
+						}
+					}
+
+					if (!string.IsNullOrEmpty(ingredient.PublicName))
+					{
+						var publicName = matchingrow.FindElement(By.XPath(".//td[@class='inci-name']//select"), 2);
+						publicName.Select(ingredient.PublicName);
+					}
+
+					return success;
 				}
-				if (!string.IsNullOrEmpty(ingredient.PublicName))
-				{
-					var publicName = matchingrow.FindElement(By.XPath(".//td[@class='inci-name']//select"), 2);
-					publicName.Select(ingredient.PublicName);
-				}
-				return success;
+
+				Report.Info("Failed to click the matched ingredient search result!");
+				return false;
 			}
-			Report.Info("Failed to click the matched ingredient search result!");
-			return false;
+			catch(Exception ex)
+			{
+				Report.Info("The ingredient could not be created: " + ex.Message);
+				return false;
+			}
+
 		}
 
 		public int IngredientRowCount()
@@ -309,15 +367,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 				thisIngredient.ComponentName =
 					thisRow.FindElement(By.XPath(".//td[@class='component-name']//div[@class='chemical-name']")).Text;
 				thisIngredient.CASNumber = thisRow.FindElement(By.XPath(".//div[@class = 'cas-number']/small"), 2)?.Text;
+
 				thisIngredient.Percent =
-					thisRow.FindElement(By.XPath(".//td[@class='percent-comp']//input")).GetAttribute("value");
+					thisRow.FindElement(By.XPath(".//td[@class='percent-comp']//input|.//td[@class='percent-comp']//span")).GetAttribute("value");
 				thisIngredient.PublicallyDisclosed =
 					thisRow.FindElement(By.XPath(".//td[@class='transparency']//input")).Checked();
 				thisIngredient.TradeSecret =
-					thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Checked();
+					thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input|.//td[@class='trade-secret']//span")).Checked();
 				thisIngredient.PublicName =
 					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select")).SelectedOption();
-				thisIngredient.TradeSecretEnabled = thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Enabled;
+				try
+				{
+					thisIngredient.TradeSecretEnabled = thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Enabled;
+				}
+				catch (Exception e)
+				{
+					thisIngredient.TradeSecretEnabled = false;
+				}
+
 				thisIngredient.PublicDisclosureEnabled = thisRow.FindElement(By.XPath(".//td[@class='transparency']//input")).Enabled;
 				thisIngredient.PublicNameEnabled =
 					thisRow.FindElement(By.XPath(".//td[@class='inci-name']//select")).Enabled;
@@ -777,6 +844,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		{
 			return IngredientRow(chemicalName).FindElements(By.XPath(".//select/option")).Select(x => x.Text).ToList();
 		}
+
+		public bool ConcentrationsAreEditable()
+		{
+			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[contains(@class,'percent-comp')]"), 2).FirstOrDefault()!=null;
+
+		}
+
+		public bool TradeSecretsAreEditable()
+		{
+			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//td[@class='trade-secret']//input"), 2).FirstOrDefault() != null;
+
+		}
+
+		public bool PubliclyDisclosedAreEditable()
+		{
+			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[@class='public_disclosure']"), 2).FirstOrDefault() != null;
+
+		}
+
+
 
 		public class Ingredient
 		{

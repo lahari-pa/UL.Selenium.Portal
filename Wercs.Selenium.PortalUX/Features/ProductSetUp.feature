@@ -165,7 +165,7 @@ And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
 Then I save the product information as: TestCase80768
-And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
+And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing80768NG
 | CASNumber | ComponentName | Percentage |
 | 50-00-0   | Formaldehyde  | 100        |
 Then in the Ingredients page I click Continue
@@ -216,13 +216,13 @@ And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
 Then I save the product information as: TestCase80763
-Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
+Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing80763Flav
 | CASNumber  | ComponentName | Percentage |
 | RR-38669-6 | FLAVORS        | 35         |
-And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag
+And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing80763Frag
 | CASNumber | ComponentName                                                                                                                                                  | Percentage |
 | FRAGRANCE | Fragrance - Gardenia: Skin irritant 2, Eye damage 1, Skin sensitization 1, Carcinogen 1A, reproductive toxin 2, Aquatic acute 2, Aquatic Chronic 2 / FRAGRANCE | 35         |
-And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
+And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing80763NG
 | CASNumber | ComponentName | Percentage |
 | 50-00-0   | Formaldehyde  | 30         |
 Then in the Ingredients page I click Continue

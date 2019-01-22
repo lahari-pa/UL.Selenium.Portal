@@ -10,6 +10,7 @@ using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
@@ -150,6 +151,31 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisDataSummary.WaitForSpinner();
 			thisDataSummary.ScrollToIngredients();
 			Report.Screenshot();
+		}
+
+		[Then(@"In the Data Summary window the (first|second) component should have Public Name: (.*) and Publicly Disclosed: (Yes|No)")]
+		public void ThenInTheDataSummaryWindowTheSecondComponentShouldHavePublicNameAndPubliclyDisclosed(string firstOrSecond, string publicName, string publiclyDisclosed)
+		{
+			DataSummary thisDataSummary = new DataSummary();
+			List<Ingredients.Ingredient> listOfIngredients = thisDataSummary.GetIngredients();
+			var thisIngredient = listOfIngredients[0];
+			if (firstOrSecond.ToLower() == "second")
+			{
+				thisIngredient = listOfIngredients[1];
+			}
+
+			if (publicName.ToLower().Contains("saved as"))
+			{
+				publicName = Context.GetFromContext(publicName.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim()).ToString();
+			}
+
+			Report.IsTrue(thisIngredient.PublicDisclosureEnabled == (publiclyDisclosed == "Yes"),
+				"For ingredient: " + thisIngredient.CASNumber + " expected publicly disclosed: " + publiclyDisclosed,
+				"As expected, for ingredient " + thisIngredient.ComponentName + " publicly Disclosed is showing as: " + publiclyDisclosed);
+
+			Report.IsTrue(thisIngredient.PublicName == publicName,
+				"For ingredient: " + thisIngredient.ComponentName + " expected public name: " + publicName + " but got: " + thisIngredient.PublicName,
+				"As expected, for ingredient " + thisIngredient.ComponentName + " public name is showing as: " + publicName);
 		}
 
 	}

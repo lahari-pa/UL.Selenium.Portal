@@ -604,7 +604,7 @@ testRunner.Then("I save the product information as: TestCase80768", ((string)(nu
                         "100"});
 #line 168
 testRunner.And("I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclo" +
-                    "sed = Yes, select Name Continue) and save ingredient as: Ing79428NG", ((string)(null)), table11, "And ");
+                    "sed = Yes, select Name Continue) and save ingredient as: Ing80768NG", ((string)(null)), table11, "And ");
 #line 171
 testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 172
@@ -749,7 +749,7 @@ testRunner.Then("I save the product information as: TestCase80763", ((string)(nu
                         "35"});
 #line 219
 testRunner.Given("I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed " +
-                    "= Yes, Select Public Name) and save ingredients as: Ing79428Flav", ((string)(null)), table14, "Given ");
+                    "= Yes, Select Public Name) and save ingredients as: Ing80763Flav", ((string)(null)), table14, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
@@ -762,7 +762,7 @@ testRunner.Given("I call Shared Step 79431 (Ingredients - Add FLAVOR component, 
                         "35"});
 #line 222
 testRunner.And("I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclos" +
-                    "ed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag", ((string)(null)), table15, "And ");
+                    "ed = Yes,  Select Public Name) and save ingredient as: Ing80763Frag", ((string)(null)), table15, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
@@ -774,7 +774,7 @@ testRunner.And("I call Shared Step 79436 (Ingredients - Add FRAGRANCE component,
                         "30"});
 #line 225
 testRunner.And("I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclo" +
-                    "sed = Yes, select Name Continue) and save ingredient as: Ing79428NG", ((string)(null)), table16, "And ");
+                    "sed = Yes, select Name Continue) and save ingredient as: Ing80763NG", ((string)(null)), table16, "And ");
 #line 228
 testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 229

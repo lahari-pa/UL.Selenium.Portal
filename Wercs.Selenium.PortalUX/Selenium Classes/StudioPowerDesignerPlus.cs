@@ -426,6 +426,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				case "document queue":
 					matchingLink = aLinks.FirstOrDefault(x => x.GetAttribute("id") == "cmdDocQueue");
 					break;
+				case "in out":
+					matchingLink = aLinks.FirstOrDefault(x => x.GetAttribute("id") == "cmdCheckout");
+					break;
 				default:
 					Report.Error("Please provide a suitable toolbar item name. You sent: " + item);
 					return false;
@@ -3413,6 +3416,129 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 	}
+
+	class AssignReassignProducts : BaseObject
+	{
+		public const string BasePath = "//body";
+
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+		public bool Wait_for_load(int secondsToWait = 60)
+		{
+			Delay.Seconds(2);
+			Report.Info("Wait for assign/reassign products page");
+			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			for (int i = 0; i < 30; i++)
+			{
+				urls = SeleniumBrowser.WebBrowser.WindowHandles;
+				if (urls.Count > 1)
+				{
+					break;
+				}
+
+				Delay.Seconds(1);
+			}
+
+			if (urls.Count < 2)
+			{
+				return false;
+			}
+
+			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+
+			foreach (var handle in urls)
+			{
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Untitled Page"))
+				{
+					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					Report.Success("Found window containing title: Untitled Page");
+					Report.Screenshot();
+					break;
+				}
+			}
+
+			var frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
+			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			if (base.Wait_for_load(30))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public void Close()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+		public bool WaitForSpinner(int secondsToWait = 120)
+		{
+			try
+			{
+				for (int i = 0; i < secondsToWait; i++)
+				{
+					var spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+					if (!spinner.Any(x => x.Displayed))
+					{
+						Report.Info("Waited " + i + " cycles....");
+						return true;
+					}
+					Delay.Seconds(Delay.SpeedFactor * 1);
+				}
+				Report.Info("Waited " + secondsToWait + " cycles....");
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		//Check Out, Check In
+		public bool ClickButton(string name)
+		{
+			try
+			{
+				
+				switch (name.ToLower())
+				{
+					case "check out":
+						var checkOutButton = containerElement.FindElement(By.Id("btnCheckOut"), 2);
+						if (checkOutButton == null)
+						{
+							Report.Info("Did not find check out button");
+							return false;
+						}
+						return checkOutButton.TryClick();
+						
+					case "check in":
+						var checkInButton = containerElement.FindElement(By.Id("btnCheckIn"), 2);
+						if (checkInButton == null)
+						{
+							Report.Info("Did not find check in button");
+							return false;
+						}
+						return checkInButton.TryClick();
+					
+					default:
+						Report.Error("You must supply a valid button option. You supplied: " + name);
+						return false;
+				}
+			}
+			catch (Exception e)
+			{
+				Report.Error(e.Message);
+				return false;
+			}
+
+		}
+
+	}
+
+
 
 	public class Phrase
 	{

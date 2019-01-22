@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
@@ -21,7 +22,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			Delay.Seconds(2);
-			Report.Info("Wait for dahsboard page");
+			Report.Info("Wait for dashboard page");
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
 			{
@@ -190,5 +191,222 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return matchingLink.TryClick();
 		}
+
+		public bool TopLeftTitleExists(string expectedTitle)
+		{
+			var topLeftTitle = containerElement.FindElements(By.XPath(".//h3"));
+			if (topLeftTitle.Count != 1)
+			{
+				Report.Error("Count of titles is not as expected. Found: " + topLeftTitle.Count);
+				return false;
+			}
+			return expectedTitle == topLeftTitle[0].GetValue().Trim();
+		}
+
+		public List<string> getLeftMenuItems()
+		{
+			List<string> menuItems = new List<string>();
+			var menuOptions = containerElement.FindElements(By.XPath(".//nav/ul/li/a/span"), 2);
+			if (menuOptions.Count == 0)
+			{
+				Report.Error("No menu options were found");
+			}
+			else
+			{
+				menuItems = menuOptions.Select(x => x.GetValue().Trim()).ToList();
+			}
+
+			return menuItems;
+		}
+
+		public List<string> getSectionTitles()
+		{
+			List<string> sections = new List<string>();
+			var sectionTitles = containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2);
+			if (sectionTitles.Count == 0)
+			{
+				Report.Error("No section titles were found");
+			}
+			else
+			{
+				sections = sectionTitles.Select(x => x.GetValue().Trim()).ToList();
+			}
+
+			return sections;
+		}
+
+		/*And I confirm the WERCSmart area shows the WERCSmart logo, name and Registered trade mark
+		And I confirm that in the WERCSmart area the description text below the WERCSMart logo reads Provide data for WERCSmart®review and recipientsGet resources, enter data, manage and submit requestedinformation in WERCSmart®
+		And I confirm that in the WERCSmart area the My Products link is shown below the WERCSmart description
+		And I confirm that in the WERCSmart area the My Products link shows the flask icon
+		And I confirm that in the WERCSmart area the heading "New Product Assessments" shows below the My products link
+		And I confirm that in the WERCSmart area the Register new Product link is shown below the New Products Assessments heading on the left hand side of the section
+		And I confirm that in the WERCSmart area the Register new product link shows the File icon
+		And I confirm that in the WERCSmart area the Information &amp; Insights| The WERCS logo is show below the New Product Assessment links at the bottom of the section
+		*/
+
+		public string getSectionBlurb(string section)
+		{
+			List<string> sections = new List<string>();
+			var sectionTitles = containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2);
+			if (sectionTitles.Count == 0)
+			{
+				Report.Error("No section titles were found");
+				return null;
+			}
+			else
+			{
+				var matchingSection = sectionTitles.FirstOrDefault(x => x.GetValue().Trim().ToLower()==section.ToLower());
+				if (matchingSection == null)
+				{
+					Report.Error("No matching section was found: " + section);
+					return null;
+				}
+
+				var blurbsUnderSection = matchingSection.FindElements(By.XPath("../../../following-sibling::div[contains(@class,'row')]/div[contains(@class, 'col-md-12')]/i|../../../following-sibling::div[contains(@class,'row')]/div[contains(@class, 'col-md-12')]/span|../../../following-sibling::div[contains(@class,'row')]/div[contains(@class, 'col-md-12')]/sup"), 2);
+
+				string blurb = "";
+
+				foreach (var thisBlub in blurbsUnderSection)
+				{
+					blurb = blurb + " " + thisBlub.GetValue().Trim();
+				}
+
+				return blurb.Trim();
+			}
+		}
+
+		public List<string> getSectionImages(string section)
+		{
+			List<string> images = new List<string>();
+			var sectionTitles = containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2);
+			if (sectionTitles.Count == 0)
+			{
+				Report.Error("No section titles were found");
+				return null;
+			}
+			else
+			{
+				var matchingSection = sectionTitles.FirstOrDefault(x => x.GetValue().Trim().ToLower() == section.ToLower());
+				if (matchingSection == null)
+				{
+					Report.Error("No matching section was found: " + section);
+					return null;
+				}
+
+				var imagesList = matchingSection.FindElements(By.XPath("../../../..//img"));
+
+				if (imagesList.Count == 0)
+				{
+					Report.Info("No images were found");
+				}
+				else
+				{
+					string regexPattern = @"(?<=images\/)(.*)(?=\.)";
+					Regex regex = new Regex(regexPattern);
+					foreach (var thisImage in imagesList)
+					{
+						string src = thisImage.GetAttribute("src");
+						Match match = regex.Match(src);
+						if (match.Success)
+						{
+							images.Add(match.Value);
+						}
+
+					}
+				}
+
+			}
+
+			return images;
+		}
+
+
+		public List<string> getSectionSubheadings(string section)
+		{
+			List<string> subHeadings = new List<string>();
+			var sectionTitles =
+				containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2);
+			if (sectionTitles.Count == 0)
+			{
+				Report.Error("No section titles were found");
+				return null;
+			}
+			else
+			{
+				var matchingSection =
+					sectionTitles.FirstOrDefault(x => x.GetValue().Trim().ToLower() == section.ToLower());
+				if (matchingSection == null)
+				{
+					Report.Error("No matching section was found: " + section);
+					return null;
+				}
+
+				var subHeaders = matchingSection.FindElements(By.XPath("../../../..//span[@class='pullup']"));
+
+				if (subHeaders.Count == 0)
+				{
+					Report.Info("No sub headers were found");
+				}
+				else
+				{
+					foreach (var thisSubHeader in subHeaders)
+					{
+						subHeadings.Add(thisSubHeader.GetValue());
+					}
+				}
+
+			}
+
+			return subHeadings;
+		}
+
+		public List<WERCSLinkLink> getSectionLinks(string section)
+		{
+			List<WERCSLinkLink> links = new List<WERCSLinkLink>();
+			var sectionTitles = containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2);
+			if (sectionTitles.Count == 0)
+			{
+				Report.Error("No section titles were found");
+				return null;
+			}
+			else
+			{
+				var matchingSection = sectionTitles.FirstOrDefault(x => x.GetValue().Trim().ToLower() == section.ToLower());
+				if (matchingSection == null)
+				{
+					Report.Error("No matching section was found: " + section);
+					return null;
+				}
+
+				var linksUnderSection = matchingSection.FindElements(By.XPath("../../../following-sibling::div//a"), 2);
+
+				foreach (var thisLink in linksUnderSection)
+				{
+					var linkTitle = thisLink.FindElement(By.XPath("./span"), 2);
+					var linkEm = thisLink.FindElement(By.XPath("../em"), 2);
+
+					if (linkTitle != null && linkEm !=null)
+					{
+						WERCSLinkLink newLink = new WERCSLinkLink();
+						newLink.LinkTitle = linkTitle.GetValue();
+						newLink.Icon = linkEm.GetAttribute("class").Replace("fa fa-", "").Replace("level-ov","").Trim();
+						newLink.Href = thisLink.GetAttribute("href");
+						links.Add(newLink);
+					}
+				}
+				return links;
+			}
+		}
+	}
+
+	public class WERCSLinkLink
+	{
+		public string LinkTitle { get; set; }
+		public string Href { get; set; }
+
+		public string Icon { get; set; }
+
+
 	}
 }

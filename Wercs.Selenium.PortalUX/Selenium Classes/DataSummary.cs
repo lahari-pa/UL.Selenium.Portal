@@ -98,7 +98,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<Ingredients.Ingredient> GetIngredients()
 		{
-			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"),60);
 			var listOfIngredients = new List<Ingredients.Ingredient>();
 			if (ingredientsTable == null)
 			{

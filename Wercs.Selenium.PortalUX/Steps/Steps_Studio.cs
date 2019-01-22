@@ -1015,8 +1015,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Clicked button: " + button);
 		}
 
-		
-		
+
+
 		[Given(@"I click on home to navigate back to editing specific product saved as (.*)")]
 		public void GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(string savedAs)
 		{
@@ -1134,8 +1134,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
 			Report.IsTrue(thisProductAttributePage.getRecordCount()==expectedResults, "Reults were not as expected",
 				"Results count was as expected");
-
 		}
+
+		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on check in\/out button")]
+		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnInOutButton()
+		{
+			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
+				new StudioPowerDesignerPlusDesignMode();
+			thisStudioPowerDesignerPlusDesignMode.Wait_for_load();
+			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("in out"),
+				"Failed to click in out button",
+				"Clicked in out button");
+		}
+
+		[StepDefinition(@"In Assign\/Reassign products I click on: (Check In|Check Out)")]
+		public void GivenInAssignProductsPopupIClickOnCheckInOrCheckOut(string checkInOrCheckOut)
+		{
+			AssignReassignProducts thisAssignReassignProducts = new AssignReassignProducts();
+			thisAssignReassignProducts.Wait_for_load();
+			Report.IsTrue(thisAssignReassignProducts.ClickButton(checkInOrCheckOut),
+				"Failed to click button: " + checkInOrCheckOut,
+				"Clicked button: " + checkInOrCheckOut);
+		}
+
+		//Given I Click My Toolbars
+		//AssignReassignProducts
+		//	And I Click the Check In / Out Icon
+		//	And I Click Check In
+		//And I Click the X in the top corner of the pop up to close it
 
 	}
 }

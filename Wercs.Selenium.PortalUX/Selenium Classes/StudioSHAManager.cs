@@ -332,8 +332,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectProductByID(string id)
 		{
-			Delay.Seconds(3);
-			Report.Info("Attemping to select product by id: " + id);
+			Report.Info("Beginning select product by id: " + id);
+			Delay.Seconds(5);
+			GeneralUtilities.StudioWaitForSpinner(60);
 			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
 
 			var matchingTD = SeleniumBrowser.WebBrowser
@@ -476,6 +477,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
 
 			Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
+
+			if (topX > ListOfProductRows.Count)
+			{
+				topX = ListOfProductRows.Count;
+			}
 			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList();
 
 			for (int index = 1; index < ListOfHeaders.Count; index++)
@@ -515,7 +521,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 				Product thisProduct = new Product();
-				int addIndex = 2;
+				int addIndex = 1;
 				for (int i = 0; i < ListOfHeaders.Count(); i++)
 				{
 					//Report.Info("Looking at column: " + ListOfHeaders[i]);
@@ -548,9 +554,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							break;
 						case "Status":
 							thisProduct.Status = rowValues[i].Trim();
+							Report.Info("Status is: " + thisProduct.Status);
 							try
 							{
-								var status = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']//tr[" + j + "]//td[" + (i + addIndex) + "]"), 2);
+								var status = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']//tr[" + (j+1) + "]//td[" + (i + addIndex) + "]"), 2);
+								Report.Info("Status is: " + status.GetValue());
 								if (status != null)
 								{
 									thisProduct.ColourRGB =status.GetCssValue("Color");
@@ -1560,6 +1568,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public bool CloseDialog()
+		{
+			var closeCorner = containerElement.FindElement(By.XPath("..//a[@role='button']"), 2);
+			if (closeCorner == null)
+			{
+				Report.Info("Did not find close button");
+				return false;
+			}
+			else
+			{
+				return closeCorner.TryClick();
+			}
+		}
+
 	}
 
 	class StudioSHAManagerProductSuspend : BaseObject
@@ -1888,16 +1910,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			List<string> availableReasons = GetReasons();
 			string pattern = @"^\d.0?";
 			Regex regex = new Regex(pattern);
-
+			string value = "";
 			foreach (string thisReason in availableReasons)
 			{
 				Match match = regex.Match(thisReason);
 				if (match.Success)
 				{
-					if(Convert.ToInt16(match.Value)==no)
+					try
 					{
-						return SelectReasonbyText(thisReason);
+						value = match.Value;
+						int index = value.IndexOf(".");
+						if (index > 0)
+						{
+							value = value.Substring(0, index);
+						}
+						if (Convert.ToInt16(value) == no)
+						{
+							return SelectReasonbyText(thisReason);
+						}
 					}
+					catch (Exception e)
+					{
+						Report.Info(e.Message);
+						continue;
+					}
+
 				}
 			}
 
@@ -1906,7 +1943,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectReasonbyText(string reason)
 		{
-			var reasonTD = containerElement.FindElements(By.XPath(".//table[@id='tblReasons']//tr[(.//input[@checked='checked'])]/td[3]"));
+			Report.Info("Select by text: " + reason);
+			//var reasonTD = containerElement.FindElements(By.XPath(".//table[@id='tblReasons']//tr[not(.//input[@checked='checked'])]/td[3]"));
+			var reasonTD = containerElement.FindElements(By.XPath(".//table[@id='tblReasons']//tr/td[3]"));
 			var matchingTD = reasonTD.FirstOrDefault(x => x.GetValue().Contains(reason));
 			if (matchingTD == null)
 			{
@@ -1914,7 +1953,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
-			var matchingInput = matchingTD.FindElement(By.XPath("../..//input"), 2);
+			var matchingInput = matchingTD.FindElement(By.XPath("..//input"), 2);
+			matchingInput.ScrollElementIntoView();
+			Report.Screenshot();
 			if (matchingInput == null)
 			{
 				Report.Info("No matching checkbox has been found");
@@ -1952,7 +1993,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickButton(string button)
 		{
-			var buttonList = containerElement.FindElements(By.XPath(".//button/span"));
+			Report.Info("Beginning click button: " + button);
+			var buttonList = containerElement.FindElements(By.XPath("./following-sibling::div//button/span"));
+			Report.Info("Found " + buttonList.Count + " buttons");
 			var matchingButton = buttonList.FirstOrDefault(x => x.GetValue().Trim() == button);
 			if (matchingButton == null)
 			{
