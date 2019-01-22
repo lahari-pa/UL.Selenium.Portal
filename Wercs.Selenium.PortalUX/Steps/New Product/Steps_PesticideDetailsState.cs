@@ -402,7 +402,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"I enter the EPA registration date in the next year for state: (.*):")]
-		public void EnterEpaRegistrationDateNextYear(string month, string date, string state)
+		public void EnterEpaRegistrationDateNextYear(string month, string date, string state, bool addYear = false)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
 			TestReport.UseSubSteps = true;
@@ -410,9 +410,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var year = DateTime.Now.Year;
 			if (int.TryParse(month, out var monthNum) && int.TryParse(date, out var dateNum))
 			{
-				Report.Info("From test plan: 'If the current date is after XX xxth for the current year select XX xxth for next year + 1'");
+				if (addYear)
+				{
+					Report.Info("From test plan: 'If the current date is after XX xxth for the current year select XX xxth for next year + 1'");
+				}
 				var dt = new DateTime(year, monthNum, dateNum);
-				if (dt < DateTime.Now)
+				if (addYear && dt < DateTime.Now)
 				{
 					Report.Info("Using the next year + 1 because the current date has passed the specified date");
 					dt = new DateTime(year + 2, monthNum, dateNum);

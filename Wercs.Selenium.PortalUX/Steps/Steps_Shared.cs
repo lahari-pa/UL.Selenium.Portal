@@ -6139,25 +6139,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 55846 \(EPA expiration date - enter next year - June 30th\) for state: (.*)")]
 		public void SharedStep55846_EPAExpirationDate_EnterNextYear_June30th(string state)
 		{
-			//// Click in the EPA Expiration Date box for the state you are working with
-			//// Select June 30th for the next year
-			//// Note:  If the current date is after June 30th and before Dec 31st select June 30th for this year +2 - for example if you are running the test on Oct 28th 2017 select June 30th for 2019
-			//var pesticideDetailsState = new PesticideDetailsState();
-			//TestReport.UseSubSteps = true;
-			//TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state + " and select a date for the current year that is not June 30th");
-			//var MyStepsNewProduct = new StepsNewProduct();
-			//var date = DateTime.Now;
-			//var year = date.Month > 6 ? date.Year + 2 : date.Year + 1;
-			//var dt = new DateTime(year, 6, 30);
-			//Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
-			//	"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
-			//	"Successfully entered date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state);
-			//// Click Continue
-			//TestReport.StartStep("I click continue in the Pesticide Details - State Registration page");
-			//MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
-			//	"Pesticide Details - State Registration Details");
-
-			new Steps_PesticideDetailsState().EnterEpaRegistrationDateNextYear("6", "30", state);
+			// (1) Click in the Expiration Date box for the State you are working with
+			// (2) Select June 30th for the Next year
+			// (2) Note:  If the current date is after June 30th and before Dec 31st select June 30th for this year +2
+			// (2) for example if you are running the test on Oct 28th 2017 select June 30th for 2019
+			// (3) Click Continue
+			// using addYear = true because step 2 note
+			new Steps_PesticideDetailsState().EnterEpaRegistrationDateNextYear("6", "30", state, true);
 		}
 
 		[StepDefinition(@"I call Shared Step \(EPA expiration date - enter current year plus 2 - June 30th\) for state: (.*)")]
@@ -6281,5 +6269,48 @@ namespace Wercs.Selenium.PortalUX.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 
+		[StepDefinition(@"I call Shared Step 81468 \(Product Characteristics - Solid only available - without secondary physical state\)")]
+		public void SharedStep_81468_ProductCharacteristics_SolidOnlyAvailable_WithoutSecondaryPhysicalState()
+		{
+			// By default solid should be the selected Primary Physical State - and the only state shown
+			// Select either of the buttons for the "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?" question
+			//  If Water Solubility question displays  then select a option from dropdown for "Select the best Water Solubility description" else ignore this step
+			// Click Continue
+			TestReport.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			TestReport.StartStep("I should see the Product Characteristics Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Product Characteristics");
+			TestReport.StartStep("The option available for Primary Physical State is Solid - which is selected by default");
+			stepsNewProduct.RadioButtonCountInSection("a total of", "1", "Primary Physical State");
+			if (!newProduct.SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
+			{
+				Report.Failure("The Primary Physical State was not set to Solid by default.");
+				Report.Screenshot();
+				Report.Info("Setting the Primary Physical State to: Solid");
+				stepsNewProduct.SetTheSectionOptionTo(
+					"Primary Physical State",
+					"Solid");
+			}
+			else
+			{
+				Report.Success("The Primary Physical State was showing the value of: Solid as expected");
+				Report.Screenshot();
+			}
+			TestReport.StartStep(@"Select either buttons for the ""When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5 ?"" question");
+			stepsNewProduct.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+				"No");
+			TestReport.StartStep("If Water Solubility question displays  then select a option from dropdown for 'Select the best Water Solubility description' else ignore this step");
+			if (newProduct.OptionExists("Select the best Water Solubility description"))
+			{
+				stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Decomposes");
+			}
+			else
+			{
+				Report.Info("The Water Solubility question was not displayed");
+			}
+			TestReport.StartStep("I click continue");
+			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
+		}
 	}
 }
