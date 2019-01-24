@@ -32,6 +32,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.TryClick();
 		}
 
+		public string LithiumBatteyWarning()
+		{
+			this.RefreshContainer();
+			return this.containerElement.FindElement(By.XPath("//div[contains(text(), 'Lithium battery registrations')]"), 2).Text;
+		}
+
+		public string MaximumLimitUpcWarning()
+		{
+			this.RefreshContainer();
+			return this.containerElement.FindElement(By.XPath("//p[@class='marBot-0' and contains(text(), 'maximum limit' )]"), 2).Text;
+		}
+
 		public List<string> GetUPCOptions()
 		{
 			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
@@ -42,6 +54,34 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				rList.Select(x => x.Replace("\r\n", " ").Split(' ').FirstOrDefault()).ToList();
 			}
 			return rList;
+		}
+
+		public List<string> GetUPCbuttons()
+		{
+			return containerElement.FindElements(By.XPath("//button[@class='btn btn-success']"), 2).Select(x => x.GetValue()).ToList();
+		}
+
+		public bool AddCaseUpcButton()
+		{
+			var el = containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+
+		public bool AddUpcButton()
+		{
+			var el = containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return true;
 		}
 
 		public bool InputUpcCaseInformation(UpcCaseInformation info)

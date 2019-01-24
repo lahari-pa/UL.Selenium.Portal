@@ -52,7 +52,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				foreach (var row in expected.Rows)
 				{
 					var option = row["Option"];
-					Report.Info("Checking that I see the option '" + option + "'");
+					Report.Info("Checking that I do not see the option '" + option + "'");
 					Report.IsFalse(upcOptions.Contains(option.Trim()),
 						"Options were showing which should not be. The sections not allowed are: " + string.Join("; ", option) + ". Actual sections: " + string.Join("; ", option), "Sections were not showing as expected: " + string.Join("; ", option));
 				}
@@ -70,7 +70,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I add the following into the UPC Fields")]
+		[StepDefinition(@"I add the following into the UPC case fields")]
 		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)
 		{
 			var upcInfo = table.CreateInstance<UpcCaseInformation>();
@@ -156,5 +156,150 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+
+		[StepDefinition(@"I call Shared Step 87658 \(Enter Universal Product Code \(UPC\)\) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*) do not click continue")]
+		public void UpcWithQuantityDoNotClickContinue(string upc, string containerType,
+			string size, string quantity)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			//TestReport.StartStep("I confirm 'Quantity' is visible in the UPC header");
+			//MyStepsNewProduct.ConfirmQuantityIsVisibleInUPCHeader();
+			TestReport.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			GeneralUtilities.Wait_for_load_finish();
+			TechTalk.SpecFlow.Table upcTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Field",
+				"Value"
+			});
+			upcTable.AddRow(new string[] {
+				"UPCNumber",
+				"saved as UPC" + upc
+			});
+			upcTable.AddRow(new string[] {
+				"ContainerType",
+				containerType
+			});
+			upcTable.AddRow(new string[] {
+				"Size",
+				size
+			});
+			upcTable.AddRow(new string[] {
+				"Quantity",
+				quantity
+			});
+			TestReport.StartStep("I add the following into the UPC Fields");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+		}
+
+		[StepDefinition(@"I should see lithium battery message: (.*)")]
+		public void ThenIShouldSeeBatteryMessage(string message)
+		{
+			Report.Info("Checking error message");
+			var selNewUpc = new UPC();
+			var found = selNewUpc.LithiumBatteyWarning();
+
+			Report.IsTrue(found.Trim() == message.Trim(),
+				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
+				"Warning message was showing: " + message + ", as expected!");
+		}
+
+		[StepDefinition(@"I should see maximum upc limit message: (.*)")]
+		public void MaximumUpcLimitMessage(string message)
+		{
+			Report.Info("Checking error message");
+			var selNewUpc = new UPC();
+			var found = selNewUpc.MaximumLimitUpcWarning();
+
+			Report.IsTrue(found.Trim() == message.Trim(),
+				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
+				"Warning message was showing: " + message + ", as expected!");
+		}
+
+		[StepDefinition(@"I should (see|not see) the following UPC buttons:")]
+		public void UpcButtonsDisplay(string condition, Table expected)
+		{
+			Delay.Seconds(1);
+			var selNewProduct = new UPC();
+			var upcButtons = selNewProduct.GetUPCbuttons();
+			if (condition == "see")
+			{
+				foreach (var row in expected.Rows)
+				{
+					var option = row["Option"];
+					Report.Info("Checking that I see the option '" + option + "'");
+					Report.IsTrue(upcButtons.Contains(option.Trim()),
+						"Option was not showing as expected! Expected: '" + option + "', but found: '" + string.Join("', '", upcButtons) + "'!",
+						"Option was showing: '" + option + "', as expected!");
+				}
+			}
+			if (condition == "not see")
+			{
+				foreach (var row in expected.Rows)
+				{
+					var option = row["Option"];
+					Report.Info("Checking that I do not see the option '" + option + "'");
+					Report.IsFalse(upcButtons.Contains(option.Trim()),
+						"Options were showing which should not be. The sections not allowed are: " + string.Join("; ", option) + ". Actual sections: " + string.Join("; ", option), "Sections were not showing as expected: " + string.Join("; ", option));
+				}
+			}
+			Report.Screenshot();
+		}
+
+
+		[StepDefinition(@"I switch to tab: (.*)")]
+		public void ThenISwitchToDataAcceptancePage(string option)
+		{
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//title"), 2) != null)
+				{
+					Report.Success("Tab was switched successfully!");
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab!");
+		}
+
+		[StepDefinition(@"I call Shared Step\(Enter Universal Product Code - case information\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and Quantity: (.*) and Transportation option: (.*) do not click continue")]
+		public void UPCCaseInformationDonotClickContinue(string upc, string containerType, string size, string quantity, string transportation)
+		{
+			TestReport.UseSubSteps = true;
+			StepsUPC MyStepsNewProduct = new StepsUPC();
+			StepsNewProduct MyStepsProduct = new StepsNewProduct();
+			//TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			//MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click the 'Add Case UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddCaseUpcButton();
+			GeneralUtilities.Wait_for_load_finish();
+			TestReport.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				var upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcCaseInformation {
+					ContainerType = containerType,
+					Size = size,
+					Quantity = quantity,
+					TransportationOption = transportation,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new UPC().InputUpcCaseInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				Table upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				upcTable.AddRow("Quantity", quantity);
+				upcTable.AddRow("TransportationOption", transportation);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+		}
 	}
 }

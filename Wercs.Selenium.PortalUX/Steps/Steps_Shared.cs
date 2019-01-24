@@ -702,11 +702,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			var selSelectRetailers = new SelectRetailers();
 			var selRetailer = new Retailer();
-			if (!selSelectRetailers.Wait_for_load(10))
+			if(!selSelectRetailers.DoneButton())
 			{
 				Report.Warn("The Select Retailers page was not loaded on entering the Retailer page");
 				selRetailer.ClickAddRetailers();
 			}
+			//if (!selSelectRetailers.Wait_for_load(10))
+			//{
+			//	Report.Warn("The Select Retailers page was not loaded on entering the Retailer page");
+			//	selRetailer.ClickAddRetailers();
+			//}
 
 			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: " + retailer);
 			new StepsSelectRetailers().SelectTheRetailer(retailer);

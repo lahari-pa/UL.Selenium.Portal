@@ -47,6 +47,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Select all')]")).FirstOrDefault().TryClick();
 		}
 
+		public bool DoneButton()
+		{
+			var el = containerElement.FindElement(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]"), 2);
+			if (el == null)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
 		public bool ClickDone()
 		{
 			return this.containerElement.FindElements(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]")).FirstOrDefault().TryClick();

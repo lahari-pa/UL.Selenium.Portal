@@ -382,3 +382,107 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87643
 And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87643
 And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876431
+
+
+Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Case UPC counts towards the 5 limit 
+#Given I login into the WERCSmart Portal - Administrator Role
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+Given I generate a random UPC number and save as: UPC87650
+Given I generate a random UPC number and save as: UPC876501
+Given I generate a random UPC number and save as: UPC876502
+Given I generate a random UPC number and save as: UPC876503
+Given I generate a random UPC number and save as: UPC876504
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LITHIUM ION BATTERIES
+Then I save the product information as: TestCase87650
+Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+Given I call Shared Step 65493 (Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
+Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Lithium hydroxide  | 6.7     | false               | false       |            |
+| Graphite           | 33.2    | false               | false       |            |
+| Ethylene carbonate | 60.1    | false               | false       |            |
+Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Happy path)
+Given I call Shared Step 60096 (Lithium Battery Transportation)
+Then I should see the following retailers:
+| Retailers                 |
+| No Retailer/No UPC Product|
+Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+Then I should see lithium battery message: Lithium battery registrations have a maximum of five (5) UPCs per registration. If you have additional UPCs, please create a new registration.
+Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC87650 with container type: Plastic Container size: 25 and quantity: 50 do not click continue
+Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC876501 with container type: Plastic Container size: 25 and quantity: 50 do not click continue
+Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC876502 with container type: Plastic Container size: 25 and quantity: 50 do not click continue
+Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC876503 with container type: Plastic Container size: 25 and quantity: 50 do not click continue
+Given I call Shared Step(Enter Universal Product Code - case information) for UPC: saved as UPC876504, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A:   steel box do not click continue
+Then I should see maximum upc limit message: This product registration has reached the maximum limit of active UPC entries. You may remove UPC entries that are no longer valid, if possible. Also, be sure the UPC entries are for the specific registration being made. If you need an exception to the UPC limit for this registration, please contact support and advise the total quantity of UPCs needed to accommodate this registration.
+And I should not see the following UPC buttons:
+| Option                          |
+| Add UPC             |
+| Add Case UPC             |
+Given in the Universal Product Code (UPC) page I click Continue
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I call Shared Step 69422 (Additional Documents to Provide - Upload Product Photo)
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87650)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87650 and its status is: Submitted
+Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87650
+And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC876504
+And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC87650
+And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876501
+And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876502
+And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876503
+
+
+Scenario: [87676] UPC - Case Pack can be removed from new product
+#Given I login into the WERCSmart Portal - Administrator Role
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
+Given I generate a random UPC number and save as: UPC87676
+Given I generate a random UPC number and save as: UPC876761
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase87676
+Given I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+| Retailer |
+| Amazon      |
+Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87676, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A:   steel box
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87676 and its status is: New
+Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87676
+And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87676
+And I close the window that opened
+And I switch to tab: WERCSmart Version 2.0
+Given In the New Product page I click tab: Recipient and UPC Details
+Given in the New Product page I click section: Universal Product Code (UPC)
+And I delete UPC: saved as UPC87676
+Then In the list of UPCs I should not see UPC: saved as UPC87676
+Given I call Shared Step 87658 (Enter Universal Product Code (UPC)) for UPC saved as: UPC876761 with container type: Plastic Container size: 25 and quantity:  do not click continue
+And I click the 'Add Case UPC' button
+#And I switch to tab: UL Wercs Studio
+#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
+Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87676
+Then In the SHA list of UPCs I should not see UPC: saved as UPC87676
+And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876761
+And I switch to tab: WERCSmart Version 2.0
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87676

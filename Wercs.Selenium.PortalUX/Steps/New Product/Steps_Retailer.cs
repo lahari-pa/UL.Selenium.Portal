@@ -185,5 +185,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to delete the selected retailers",
 				"Successfully deleted the selected retailers");
 		}
+
+		[StepDefinition(@"I should (see|not see) the following retailers:")]
+		public void ShouldSeeRetailers(string condition, Table expected)
+		{
+			var selRetailer = new Retailer();
+			var listRetailers = selRetailer.SelectedRetailers();
+			if (condition == "see")
+			{
+				foreach (var row in expected.Rows)
+				{
+					var option = row["Retailers"];
+					Report.Info("Checking that I see the retailer '" + option + "'");
+					Report.IsTrue(listRetailers.Contains(option.Trim()),
+						"Retailers was not showing as expected! Expected: '" + option + "', but found: '" + string.Join("', '", listRetailers) + "'!",
+						"Retailers was showing: '" + option + "', as expected!");
+				}
+			}
+			if (condition == "not see")
+			{
+				foreach (var row in expected.Rows)
+				{
+					var option = row["Retailers"];
+					Report.Info("Checking that I do not see the retailer '" + option + "'");
+					Report.IsFalse(listRetailers.Contains(option.Trim()),
+						"Retailers were showing which should not be. The sections not allowed are: " + string.Join("; ", option) + ". Actual sections: " + string.Join("; ", option), "Sections were not showing as expected: " + string.Join("; ", option));
+				}
+			}
+			Report.Screenshot();
+		}
 	}
 }

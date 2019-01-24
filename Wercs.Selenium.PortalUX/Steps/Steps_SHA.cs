@@ -26,9 +26,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I navigate to Studio")]
 		public void GivenINavigateToStudio()
 		{
+			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.open();");
+			SeleniumBrowser.WebBrowser.SwitchTo().Window(SeleniumBrowser.WebBrowser.WindowHandles.Last());
 			SeleniumBrowser.WebBrowser.Url = TReVor.TestVariables.GetVariableSavedAs("SHAUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
-
 		}
 
 		[Given(@"I navigate to Portal")]
@@ -1459,7 +1460,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					return;
 				}
 
-				//// Confirm match
+				// Confirm case indicator match
 				if (upc.ToLower().Contains("saved as"))
 				{
 					upc = Context
@@ -1490,6 +1491,46 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Failure(ex.Message);
 				Report.Screenshot();
 			}
+		}
+
+		[StepDefinition(@"In the SHA list of UPCs I should not see UPC: (.*)")]
+		public void ShaUPCList(string upc)
+		{
+			// Switch to window
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			Report.Info("Looking for SHA Manager Product UPC window");
+			bool foundWindow = false;
+			foreach (var handle in allHandles)
+			{
+				Report.Info("Checking handle: " + handle);
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				if (SeleniumBrowser.WebBrowser.FindElement(
+						By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+				{
+					Report.Success("Tab was switched successfully!");
+					Report.Screenshot();
+					foundWindow = true;
+					break;
+				}
+			}
+
+			if (!foundWindow)
+			{
+				Report.Failure("Failed to find the UPC List window ('SHA Manager Product UPC')");
+				Report.Screenshot();
+			}
+			var displayedUpcs = new StudioSHAManager().GetUPCs();
+			if (upc.ToLower().Contains("saved as"))
+			{
+				upc = Context
+					.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+					.ToString();
+			}
+
+			Report.IsTrue(!displayedUpcs.Any(x => x.UPCNumber.Contains(upc)), "UPC: " + upc + " has not been deleted.",
+				"UPC: " + upc + " has been deleted as expected.");
 		}
 
 		[StepDefinition(@"The recertification popup should show")]
