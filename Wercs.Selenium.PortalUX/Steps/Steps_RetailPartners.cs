@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using Castle.Components.DictionaryAdapter;
 using Castle.Core.Internal;
 using EnvDTE;
 using ResourcePool;
@@ -1147,6 +1149,73 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(2);
 		}
 
+
+		//x = 1 for O'Reilly, 2 for Sears, 3 for Wal-Mart
+		[StepDefinition(@"I find the Supplier ID form (.*) in the SupplierID table and save as (.*)")]
+		public void GivenIFindTheSupplierIDForSupplierInTheSupplierIDTable(string supplier, string saveAs)
+		{
+			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
+			Regex regex = new Regex(@"\d+");
+			List<string> potentialRootStrings= new List<string>();
+			foreach (Supplier thisSupplier in allSuppliers)
+			{
+				MatchCollection matches = Regex.Matches(thisSupplier.SupplierID, @"\d{5}1");
+				// Use foreach-loop.
+				foreach (Match match in matches)
+				{
+					if (match.Success)
+					{
+						potentialRootStrings.Add(thisSupplier.SupplierID.Substring(0, 5));
+					}
+				}
+			}
+
+			string foundRootString = "";
+			foreach (var thisRootString in potentialRootStrings)
+			{
+				if (allSuppliers.Select(x => x.SupplierID).ToList().Contains(thisRootString + "2") &&
+				    allSuppliers.Select(x => x.SupplierID).ToList().Contains(thisRootString + "3"))
+				{
+					foundRootString = thisRootString;
+					break;
+				}
+			}
+
+			if (!(foundRootString.Length>0))
+			{
+				throw new Exception("No root string has been found");
+			}
+
+			string requiredId = foundRootString;
+			switch (supplier)
+			{
+				case "O'Reilly":
+					requiredId = requiredId + "1";
+					break;
+				case "Sears":
+					requiredId = requiredId + "2";
+					break;
+				case "Wal-Mart":
+					requiredId = requiredId + "3";
+					break;
+				default:
+					throw new Exception("You need to specify O'Reilly, Sears or Wal-Mart");
+			}
+
+			Context.AddToContext(saveAs, requiredId);
+
+		}
+
+		[StepDefinition(@"I Confirm the Is Active column for SupplierID saved as (.*) shows a green check mark")]
+		public void GivenIConfirmTheIsActiveColumnForSupplierIDSavedAsSupplierIDShowsAGreenCheckMark(string savedAs)
+		{
+			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
+			string SupplierId = Context.GetFromContext(savedAs).ToString();
+
+			Report.IsTrue(allSuppliers.FirstOrDefault(x => x.SupplierID == SupplierId).IsActive,
+				"SupplierID: " + SupplierId + " is not showing as active",
+				"SupplierID: " + SupplierId + " is showing as active");
+		}
 
 	}
 }

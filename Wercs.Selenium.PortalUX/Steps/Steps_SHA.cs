@@ -311,7 +311,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//rerun search until status is as expected or give up
 			int counter = 0;
 
-			while (counter < 200)
+			while (counter < 10)
 			{
 				var thisStudioManager = new StudioSHAManager();
 				thisStudioManager.Wait_for_load();
@@ -530,6 +530,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(string id)
 		{
 			StudioSHAManager selStudioShaManager = new StudioSHAManager();
+
+			if (!int.TryParse(id, out int n))
+			{
+				ProductInformation thisProdInfo = (ProductInformation)Context.GetFromContext(id);
+				id = thisProdInfo.Id;
+			}
 			Report.Info("Waiting for id to change colour");
 			Report.IsTrue(selStudioShaManager.WaitForIDToBeStatus(id, 120, "N/A", "N/A", true, "rgb(254,255,160)"),
 				"ID has not turned required colour", "ID is required colour");

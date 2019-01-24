@@ -2335,6 +2335,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description",
 					"Soluble in water");
 			}
+			if (new NewProduct().GetDisplayedSections().Contains("Flash Point Testing Method Used"))
+			{
+				TestReport.StartStep("Selecting Not applicable/available for section: Flash Point Testing Method Used");
+				MyNewProductSteps.SetTheSectionOptionTo("Flash Point Testing Method Used",
+					"Not applicable/available");
+			}
 			TestReport.StartStep("Clicking continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}

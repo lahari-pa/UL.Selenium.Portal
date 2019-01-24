@@ -49,6 +49,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		{
 			Steps_SHA MyStepsSHA = new Steps_SHA();
 			MyStepsSHA.GivenIClickTopMenuItemAndSubMenuItem("UL Secure Connect", "Home");
+			Delay.Seconds(20);
 			GeneralUtilities.StudioWaitForSpinner(120);
 			StepsUlsc MyStepsULSC = new StepsUlsc();
 			MyStepsULSC.GivenTheULSCLoginPageShouldOpenInANewTab();

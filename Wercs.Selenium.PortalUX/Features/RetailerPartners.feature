@@ -312,3 +312,28 @@ Then I confirm that in the Supplier IDS list the following row exists
 And I call Shared Step 57247 - Database check - find t_vendor records for specific Retailer: Reilly and Supplier: Products Automation Account
 And I Confirm the Supplier ID you added is shown in the result for the query on the t_vendor table
 And [Shared Step 58828 - Delete Supplier ID]
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+
+# Test case can be found at the following paths:
+# NetProjects10\WERCSmart UX Reboot\WERCSmart\Retail Partners\Supplier ID
+# NetProjects10\WercsSmart Portal\WERCSmart\Retail Partners\Supplier ID
+
+Scenario: [56920] Your Supplier IDs - Actions - Deactivate
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I click the Retail Partners icon in the Navigation Pane
+And I select the retailer: O'Reilly
+And I confirm the Retailer Details Page has loaded
+#And I In the Supplier ID table find the Supplier ID 56920x where x = 1 for O'Reilly, 2 for Sears, 3 for Wal-Mart
+And I find the Supplier ID for O'Reilly in the SupplierID table and save as supplierID56920
+And I Confirm the Is Active column for SupplierID saved as supplierID56920 shows a green check mark
+And I call Shared Step 57621 - Supplier ID table > Select Deactivate - Confirm Supplier ID Is set to Inactive
+And [Shared Step 57319 - Database Check - Find t_vendor Is_active records for Specific Supplier and Retailer]
+And I Confirm the results of the query shows the Is_active column is set to 0
+And I Confirm the results of the query shows the f_user_updated column is set (not 0's)
+And I We will now re-set the Is Active column to Active so that we can re-use the supplier ID
+And [Shared Step 57565 - Supplier ID table > Select Activate - Confirm Supplier ID Is set to Active]
+And [Shared Step 57319 - Database Check - Find t_vendor Is_active records for Specific Supplier and Retailer]
+And I Confirm the results of the query show the Is Active column is set to 1
+And I Confirm the results of the query shows the F_User_updated column is set (does not show 0's)

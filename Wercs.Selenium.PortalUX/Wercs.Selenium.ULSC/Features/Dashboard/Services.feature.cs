@@ -359,6 +359,50 @@ testRunner.And("I close the tab with the ULGHS.COM page", ((string)(null)), ((Te
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[24436] WERCSLink - WERCS Studio - Data Management")]
+        public virtual void _24436WERCSLink_WERCSStudio_DataManagement()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[24436] WERCSLink - WERCS Studio - Data Management", ((string[])(null)));
+#line 151
+this.ScenarioSetup(scenarioInfo);
+#line 19
+this.FeatureBackground();
+#line 152
+testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 153
+testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 154
+testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 155
+testRunner.And("In the WERCSLink dashboard I click left menu link: WERCS Studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
+testRunner.And("I Click the Data Management link in the navigation pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 157
+testRunner.And("I Confirm New window opens with the Studio Data Management window open (Welcome p" +
+                    "age shows) and that NO script errors display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 158
+testRunner.And("I Select a Format/Subformat", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 159
+testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 160
+testRunner.And("I Close the Data Management window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 161
+testRunner.And("I Click the Data Management link on the right hand side of the Services page unde" +
+                    "r the WERCS Studio heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 162
+testRunner.And("I Confirm New window opens with the Studio Data Management window open (Welcome p" +
+                    "age shows) and that NO script errors display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 163
+testRunner.And("I Select a Format/Subformat", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 164
+testRunner.And("I Click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 165
+testRunner.And("[Shared Step 30118 - ULSC - Close Open Portal or Studio page and logout of ULSC]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

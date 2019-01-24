@@ -142,4 +142,24 @@ And In the WERCSLink page - Click the Authoring link from the WERCSmart area of 
 And I confirm a new window opens with the ULGHS.com page shown
 And I close the tab with the ULGHS.COM page
 
+# Created by Beverly Barrett
 
+# Test case can be found at the following paths:
+# NetProjects10\PowerUnity\2. WERCSLink - Dashboard\2.6 Services (new)\2.6.4 WERCS Studio
+# NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\2. ULSC - Dashboard\2.6 Services\2.6.4 WERCS Studio
+
+Scenario: [24436] WERCSLink - WERCS Studio - Data Management
+Given I call Shared Step 29665 - Login to WSW as ULSC user
+And I call Shared Step 29148 - Login to ULSC as an Administrator User
+And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart
+And In the WERCSLink dashboard I click left menu link: WERCS Studio
+And I Click the Data Management link in the navigation pane
+And I Confirm New window opens with the Studio Data Management window open (Welcome page shows) and that NO script errors display
+And I Select a Format/Subformat
+And I Click Continue
+And I Close the Data Management window
+And I Click the Data Management link on the right hand side of the Services page under the WERCS Studio heading
+And I Confirm New window opens with the Studio Data Management window open (Welcome page shows) and that NO script errors display
+And I Select a Format/Subformat
+And I Click Continue
+And [Shared Step 30118 - ULSC - Close Open Portal or Studio page and logout of ULSC]

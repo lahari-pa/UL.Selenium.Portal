@@ -616,6 +616,126 @@ testRunner.Then("I should not see an error message: This is a required field", (
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[77857] Kit recertification - change Direct Ship from Yes to No - WM only")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Kits - Flow 13")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductSetUp")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_KitsFlow13")]
+        public virtual void _77857KitRecertification_ChangeDirectShipFromYesToNo_WMOnly()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[77857] Kit recertification - change Direct Ship from Yes to No - WM only", ((string[])(null)));
+#line 214
+this.ScenarioSetup(scenarioInfo);
+#line 216
+testRunner.Given("I use Test case 77862 to create a kit and save as TestCase77857", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 217
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 218
+testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
+                    "uct data for product saved as: TestCase77857)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 220
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase77857)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 221
+testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: TestCase77857 a" +
+                    "nd its status is: Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 223
+testRunner.And("I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific prod" +
+                    "uct > Click Continue for product saved as: TestCase77857)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 225
+testRunner.And("I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP " +
+                    "(Maxed Out)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 226
+testRunner.And("I call Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 227
+testRunner.And("I Confirm the screen shows CNTXT present", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 228
+testRunner.And("I Select the CNTXT entry in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 229
+testRunner.And("I Confirm the Data area of the screen shows \"wm.com DSV submission\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 230
+testRunner.And("I IN SHA Manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 231
+testRunner.And("[Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 232
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
+                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 233
+testRunner.And("I Confirm the product is shown in Assigned status with the red font indicating an" +
+                    " active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 234
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 235
+testRunner.And("I Filter for the kit product you are working with", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 236
+testRunner.And("I Confirm the product is shown with the retailer icons shown in red indicating a " +
+                    "recertification is active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 237
+testRunner.And("I Click the Actions column ... for your product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 238
+testRunner.And("I Select Update required", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 239
+testRunner.And("I If you are using  a ULSC registered user you will see the ULSC Service Data Re-" +
+                    "Import step, select No, Continue editing data and click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 240
+testRunner.And("I The Product step is shown - click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 241
+testRunner.And("I The Additional Product Information step is shown - confirm the Yes button is sh" +
+                    "own as selected for the Direct ship question", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 242
+testRunner.And("I Select the No button for the \"Product is shipped directly by supplier to the co" +
+                    "nsumer.  Retailer sells online and does not ship, or otherwise distribute, the p" +
+                    "roduct to the consumer.  Retailer may accept product for returns.\" question", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 243
+testRunner.And("I Click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 244
+testRunner.And("I Click the Review and Submit tab heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 245
+testRunner.And("I Click the Data Acceptance step heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 246
+testRunner.And("I Click Accept", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 247
+testRunner.And("I The Purchase Summary page is shown with the success message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 248
+testRunner.And("I Click Home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 249
+testRunner.And("I In SHA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 250
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
+                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 251
+testRunner.And("I Confirm the product is shown without the product id showing the yellow highligh" +
+                    "t - this shows the product is no longer considered an e-comm/direct ship product" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 252
+testRunner.And("I Confirm that your product is shown in the Recertification status with the red f" +
+                    "ont no longer shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 253
+testRunner.And("[Shared Step 44240 - SHA - Recertification > process recertification to Assigned " +
+                    "status]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 254
+testRunner.And("[Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed" +
+                    " Out)]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 255
+testRunner.And("[Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 256
+testRunner.And("I Confirm no records are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

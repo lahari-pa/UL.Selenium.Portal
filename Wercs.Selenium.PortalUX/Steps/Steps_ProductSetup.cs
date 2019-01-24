@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Castle.Core.Internal;
 using NPOI.SS.Formula.Functions;
+using NUnit.Framework.Internal;
 using ResourcePool;
 using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using TestStack.White.Recording;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 using WERCSmart;
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -28,7 +32,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			// Log in to administrator role
-			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			sharedSteps.Shared68210_LoginToWercSmart_PremiumAccount();
 			// Generate UPC number and delete duplicates
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
@@ -1132,6 +1137,74 @@ namespace Wercs.Selenium.PortalUX.Steps
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
 
 
+
+		}
+
+		//Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
+		[Given(@"I use Test case 77862 to create a kit and save as (.*)")]
+		public void GivenIUseTestCaseToCreateAKitAndSaveAsTestCase(string saveAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			//Given I create a Walmart product and take to completed using Test Case 75335(SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
+			CreateProductUsingTestCase75335Walmart("77862_KitProduct1");
+			//Given I create a Walmart product and take to completed using Test Case 75335(SOLD set to US only with Walmart as retailer) and save as: 77862_KitProduct1
+			CreateProductUsingTestCase75335Walmart("77862_KitProduct2");
+			// Generate UPC number and delete duplicates
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC77862");
+			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC77862");
+			//Given I navigate to the landing page
+			thisGlobalSteps.NavigateToLandingPage();
+			//Given I login into the WERCSmart Portal - Administrator Role
+			sharedSteps.Shared68210_LoginToWercSmart_PremiumAccount();
+			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//And I call Shared Step 57753 (Create a New Registration via Register New Product(expanded menu))
+			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
+			//In the shared step below use any of the kit product types - these are
+			//Cosmetic Products in a kit //(RU000777)
+			//Hair Care kit //(RU000723)
+			//Hair Color Kit //(RU000724)
+			//Emergency Road kit //(RU000718)
+			//Automotive Care Products //(RU000124)
+			//Personal Care kit (RU001034)
+			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path):
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Emergency Road kit", "Kit");
+			newProductSteps.SaveProductInformation(saveAs);
+			sharedSteps.Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
+			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			// Select Walmart as the retailer and continue
+			sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
+			//And I In the shared step below add the two completed products that you are working with
+			//And I call Shared Step 31427(Create the Kit - Adding two products: product 1: 77862_KitProduct1 and product 2: 77862_KitProduct2)
+			sharedSteps.Shared31427_CreateTheKit_AddingTwoProducts("77862_KitProduct1", "77862_KitProduct2");
+			//And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+			sharedSteps.ICallSharedTransportationDetails1_NotRegulated();
+			//And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
+			sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
+			//And I call Shared Step 42759 (Portal - UPC Page - add 1 UPC)
+			sharedSteps.Shared42759_Portal_UpcPage_Add1Upc();
+			//And the comments field should appear
+			newProductSteps.ThenTheCommentsFieldShouldAppear();
+			//And I click continue
+			newProductSteps.ClickContinue();
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", saveAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(saveAs, "Submitted");
+			//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
+
+			shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(saveAs);
 
 		}
 	}
