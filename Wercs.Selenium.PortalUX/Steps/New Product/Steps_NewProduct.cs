@@ -2432,20 +2432,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the EPA Pesticide Registration table is (shown|not shown)")]
-		public void EPAPesticideTableIsShownOrNot(string shown)
-		{
-			var selNewProduct = new NewProduct();
-			if (shown == "shown")
-			{
-				Report.IsTrue(selNewProduct.EPATable() != null, "The EPA Registration Number Table was not showing", "The EPA Registration Number Table was showing as expected");
-			}
-			if (shown == "not shown")
-			{
-				Report.IsTrue(selNewProduct.EPATable() == null, "The EPA Registration Number Table was showing when it should not be.", "The EPA Registration Number Table was not showing as expected");
-			}
-		}
-
 		[StepDefinition(@"The following options (should|should not) be (displayed|displayed exclusively) for section: (.*)")]
 		public void CheckOptionsInSection(string should, string exclusive, string section, Table expected)
 		{
@@ -2489,40 +2475,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"All options in the PDM drop down contained the domain CVSHealth.com as expected");
 		}
 
-		[StepDefinition(@"I confirm the EPA Registration table contains the heading: (.*)")]
-		public void EPATableHeadingExpected(string expectedHeading)
-		{
-			var actualHeading = new NewProduct().EPATableHeading();
-			Report.IsTrue(string.Equals(actualHeading.Trim(), expectedHeading.Trim()),
-				"The table heading did not match the expected text: " + expectedHeading + ". Displayed heading: " + actualHeading,
-				"The table heading matched the expected text: " + expectedHeading);
-		}
-
-		[StepDefinition(@"I confirm the following columns are displayed in the EPA Registration table")]
-		public void ConfirmDisplayedColumnsInEPATable(Table columns)
-		{
-			var expectedColumns = new List<string>();
-			columns.Rows.ForEach(x => expectedColumns.Add(x["Column Heading"]));
-			var actualColumns = new NewProduct().EPATableColumnHeadings();
-			Report.IsTrue(expectedColumns.All(x => actualColumns.Contains(x)),
-				"The expected columns were not displayed in the EPA table. Expected: " + string.Join(", ", expectedColumns) + ". Actual: " + string.Join(", ", actualColumns),
-				"The expected columns were displayed in the EPA table: " + string.Join(", ", expectedColumns));
-		}
-
-		[StepDefinition(@"I set the Expiration Date to be (.*) days from today using the calendar selector for state: (.*)")]
-		public void SetExpirationDateForState(string days, string state)
-		{
-			if (!days.All(char.IsDigit))
-			{
-				Report.Failure("The entered number of days must be numeric");
-				return;
-			}
-			var daysParse = int.Parse(days);
-			var targetDate = DateTime.Today.Add(TimeSpan.FromDays(daysParse));
-			Report.IsTrue(new NewProduct().EPASelectExpirationDateFromCalendar(state, targetDate),
-				"Failed to set the date to " + days + " from today: " + targetDate.Day + " " + targetDate.Month + " " + targetDate.Year + " with the calendar selector for state: " + state,
-				"Successfully set the date to " + days + " from today: " + targetDate.Day + " " + targetDate.Month + " " + targetDate.Year + " with the calendar selector for state: " + state);
-		}
 		[Then(@"in the VOC Summary page I should see the following noneditable statements")]
 		public void ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(Table table)
 		{
@@ -2533,33 +2485,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.IsTrue(VOCSummaryStatements.Contains(statement), "Expected statement: " + statement,
 					"Statement: " + statement + " showing as expected");
 			}
-		}
-
-		[StepDefinition(@"I confirm that the EPA table row for state: (.*) is highlighted with the color: (none|peach|light peach|)")]
-		public void EPATableRowHighlight(string state, string colour)
-		{
-			string expectedColourCode;
-			switch (colour)
-			{
-				case "none":
-					expectedColourCode = "rowcolor-0";
-					break;
-				case "light peach":
-					expectedColourCode = "rowcolor-1";
-					break;
-				case "peach":
-					expectedColourCode = "rowcolor-2";
-					break;
-				default:
-					Report.Failure("The expected colour must be none, peach or light peach");
-					return;
-			}
-			// Matching on the 'code' (rowcolor-0, 1, 2) contained in the td class. Reporting the hex code for additional info.
-			var actualColourCode = new NewProduct().GetEPATableRowClassColour(state);
-			var actualHexCode = new NewProduct().GetEPATableRowBackgroundHex(state);
-			Report.IsTrue(expectedColourCode == actualColourCode,
-				"The row for state: " + state + " was not highlighted " + colour + " as expected. The displayed hex code is: " + actualHexCode,
-				"The row for state " + state + " was highlighted " + colour + " as expected");
 		}
 
 		[Then(@"For the Product's VOC content as sold field I should see the following error: (.*)")]

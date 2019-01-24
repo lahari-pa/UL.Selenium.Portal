@@ -189,10 +189,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data Consent Tiers.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Development Basic Tests.feature.cs">
+    <Compile Include="Features\Basic Tests.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Development Basic Tests.feature</DependentUpon>
+      <DependentUpon>Basic Tests.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\FlashpointTestingTransportation.feature.cs">
       <AutoGen>True</AutoGen>
@@ -288,11 +288,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Lithium Battery Transport Informarion.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation outlined.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EPA State Expiry Date Validation outlined.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature.cs">
       <AutoGen>True</AutoGen>
@@ -691,9 +686,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Data Consent Tiers.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Development Basic Tests.feature">
+    <None Include="Features\Basic Tests.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Development Basic Tests.feature.cs</LastGenOutput>
+      <LastGenOutput>Basic Tests.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\FlashpointTestingTransportation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -770,10 +765,6 @@
     <None Include="Features\Product Registration\Lithium Battery Transport Informarion.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Lithium Battery Transport Informarion.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation outlined.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>EPA State Expiry Date Validation outlined.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Pesticides\EPA State Expiry Date Validation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

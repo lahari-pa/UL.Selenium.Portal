@@ -501,7 +501,7 @@ Given in the New Product page I click Continue
 
 And I should see the Pesticide Details - State Registration Details Page
 
-Given I edit each State Pesticide Registration Number with an edited suffix
+Given I update each Registration Number with the appended text '-edited'
 
 Given in the New Product page I click Continue
 

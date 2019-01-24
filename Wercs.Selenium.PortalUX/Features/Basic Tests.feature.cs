@@ -18,14 +18,14 @@ namespace Wercs.Selenium.PortalUX.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class DevelopmentBasicTestsFeature
+    public partial class BasicTestsFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
         private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
-#line 1 "Development Basic Tests.feature"
+#line 1 "Basic Tests.feature"
 #line hidden
         
         public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
@@ -44,7 +44,7 @@ namespace Wercs.Selenium.PortalUX.Features
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Development Basic Tests", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Basic Tests", null, ProgrammingLanguage.CSharp, new string[] {
                         "LandingPage",
                         "Login",
                         "Homepage",
@@ -67,9 +67,9 @@ namespace Wercs.Selenium.PortalUX.Features
         public virtual void TestInitialize()
         {
             if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Development Basic Tests")))
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "Basic Tests")))
             {
-                global::Wercs.Selenium.PortalUX.Features.DevelopmentBasicTestsFeature.FeatureSetup(null);
+                global::Wercs.Selenium.PortalUX.Features.BasicTestsFeature.FeatureSetup(null);
             }
         }
         
@@ -92,7 +92,7 @@ namespace Wercs.Selenium.PortalUX.Features
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Login - check navigation menu - check products grid")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Development Basic Tests")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Basic Tests")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]

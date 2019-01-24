@@ -23,7 +23,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 	{
 		public bool ClickAddRow()
 		{
-			var table = this.EPATable();
+			var table = this.Table();
 			Report.Info("Adding a new row to the EPA Registration table on the Pesticide Details - US page");
 			var addRowBtn = table?.FindElement(By.XPath(@".//button[@data-bind='click: addRow']"), 2);
 			return addRowBtn.TryClick();
@@ -31,7 +31,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public bool EditRegistrationNumber(string epaNumber, int row)
 		{
-			var table = this.EPATable();
+			var table = this.Table();
 			var inputs = table.FindElements(By.XPath(@".//input[@class='form-control']"));
 			if (inputs.Count == 0)
 			{
@@ -60,7 +60,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 			public bool ClickRemove()
 			{
-				var epaTable = new NewProduct().EPATable();
+				var epaTable = new NewProduct().Table();
 				if (epaTable == null)
 				{
 					return false;
@@ -84,7 +84,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 			get
 			{
 				var rEpa = new List<EPARegistration>();
-				var table = this.EPATable();
+				var table = this.Table();
 				if (table == null)
 				{
 					Report.Failure("The EPA Table was not visible on the page");

@@ -1231,7 +1231,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 502
 testRunner.And("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 504
-testRunner.Given("I edit each State Pesticide Registration Number with an edited suffix", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I update each Registration Number with the appended text \'-edited\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 506
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 508

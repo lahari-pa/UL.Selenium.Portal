@@ -7,7 +7,7 @@
 @ProductGrid
 @run_DevelopmentBasicTests
 
-Feature: Development Basic Tests
+Feature: Basic Tests
 
 Scenario: Login - check navigation menu - check products grid
 

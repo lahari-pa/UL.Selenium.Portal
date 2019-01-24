@@ -145,18 +145,18 @@ testRunner.Given("I call Shared Step 63226 (Pesticide Date - Yes registered - En
 testRunner.Given("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: IA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 30
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "IA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State IA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 31
 testRunner.Given("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: IA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 32
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "IA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State IA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 33
 testRunner.Given("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: IA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -226,18 +226,18 @@ testRunner.Given("I call Shared Step 63226 (Pesticide Date - Yes registered - En
 testRunner.Given("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: GA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 51
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "GA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State GA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 52
 testRunner.Given("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: GA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 53
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "GA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State GA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 54
 testRunner.Given("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: GA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -307,18 +307,18 @@ testRunner.Given("I call Shared Step 63226 (Pesticide Date - Yes registered - En
 testRunner.Given("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: AK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 73
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "AK: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State AK:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 74
 testRunner.Given("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: AK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 75
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "AK: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State AK:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 76
 testRunner.Given("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: AK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -386,18 +386,18 @@ testRunner.Given("I call Shared Step 63226 (Pesticide Date - Yes registered - En
 testRunner.Given("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: CO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 93
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CO: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CO:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 94
 testRunner.Given("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: CO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 95
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CO: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CO:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 96
 testRunner.Given("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: CO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -464,18 +464,18 @@ testRunner.Given("I call Shared Step 63226 (Pesticide Date - Yes registered - En
 testRunner.Given("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: CA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 113
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 114
 testRunner.Given("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: CA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 115
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 116
 testRunner.Given("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: CA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -546,18 +546,18 @@ testRunner.Given("I call Shared Step 63226 (Pesticide Date - Yes registered - En
 testRunner.Given("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: AR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 135
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "AR: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State AR:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 136
 testRunner.Given("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: AR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 137
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "AR: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State AR:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 138
 testRunner.Given("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: AR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -627,18 +627,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 159
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "ID: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State ID:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 160
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 161
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "ID: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State ID:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 162
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -713,18 +713,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: IN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 183
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "IN: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State IN:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 184
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: IN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 185
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "IN: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State IN:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 186
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: IN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -799,18 +799,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: KY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 208
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "KY: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State KY:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 209
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: KY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 210
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "KY: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State KY:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 211
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: KY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -885,18 +885,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: LA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 237
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "LA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State LA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 238
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: LA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 239
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "LA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State LA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 240
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: LA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -971,18 +971,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 265
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MD: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MD:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 266
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 267
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MD: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MD:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 268
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1057,18 +1057,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: ME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 293
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "ME: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State ME:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 294
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: ME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 295
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "ME: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State ME:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 296
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: ME", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1143,18 +1143,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 317
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MN: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MN:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 318
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 319
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MN: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MN:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 320
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1229,18 +1229,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 341
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MO: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MO:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 342
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 343
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MO: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MO:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 344
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MO", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1315,18 +1315,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 365
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MS: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MS:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 366
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 367
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MS: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MS:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 368
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1401,18 +1401,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: MT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 389
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MT: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MT:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 390
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: MT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 391
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MT: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MT:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 392
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: MT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1489,18 +1489,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 413
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NC: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NC:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 414
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 415
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NC: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NC:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 416
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1575,18 +1575,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 437
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NC: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NC:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 438
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 439
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NC: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NC:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 440
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1661,18 +1661,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 461
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NH: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NH:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 462
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 463
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NH: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NH:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 464
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1747,18 +1747,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NJ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 485
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NJ: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NJ:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 486
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NJ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 487
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NJ: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NJ:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 488
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NJ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1833,18 +1833,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 509
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NM: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NM:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 510
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 511
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NM: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NM:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 512
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1919,18 +1919,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: NV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 533
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NV: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NV:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 534
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: NV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 535
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NV: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NV:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 536
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: NV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2005,18 +2005,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: OR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 557
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "OR: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State OR:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 558
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: OR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 559
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "OR: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State OR:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 560
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: OR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2091,18 +2091,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: PA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 581
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "PA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State PA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 582
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: PA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 583
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "PA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State PA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 584
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: PA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2177,18 +2177,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: VA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 605
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "VA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State VA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 606
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: VA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 607
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "VA: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State VA:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 608
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: VA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2263,18 +2263,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: WI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 629
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "WI: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State WI:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 630
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: WI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 631
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "WI: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State WI:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 632
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: WI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2349,18 +2349,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: WV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 653
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "WV: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State WV:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 654
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: WV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 655
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "WV: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State WV:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 656
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: WV", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2435,18 +2435,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: WY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 677
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "WY: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State WY:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 678
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: WY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 679
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "WY: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State WY:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 680
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: WY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2521,18 +2521,18 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: DC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 701
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "DC: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State DC:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 702
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: DC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 703
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "DC: Valid dates are December 31 of current calendar year until October 1, at whi" +
-                    "ch time December 31 of either the current or the following calendar year would b" +
-                    "e acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State DC:" +
+                    " Valid dates are December 31 of current calendar year until October 1, at which " +
+                    "time December 31 of either the current or the following calendar year would be a" +
+                    "cceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 704
 testRunner.And("I call Shared Step 55821 (EPA expiration date - enter Dec 31st of Next year) for " +
                     "state: DC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2607,20 +2607,20 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55843 (EPA expiration date - enter current year - Not June 30t" +
                     "h) for state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 725
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "SD: Valid date is June 30 no more than two calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State SD:" +
+                    " Valid date is June 30 no more than two calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 726
 testRunner.And("I call Shared Step 55844 (EPA expiration date - enter next year - Not June 30th) " +
                     "for state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 727
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "SD: Valid date is June 30 no more than two calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State SD:" +
+                    " Valid date is June 30 no more than two calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 728
 testRunner.And("I call Shared Step (EPA expiration date - enter current year plus 2 - Not June 30" +
                     "th) for state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 729
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "SD: Valid date is June 30 no more than two calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State SD:" +
+                    " Valid date is June 30 no more than two calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 730
 testRunner.And("I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) f" +
                     "or state: SD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2706,7 +2706,10 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55858 (EPA expiration date - enter current year - NOT Nov 30th" +
                     ") for state: RI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 761
-testRunner.Then(@"in page Pesticide Details - State Registration Details I should see error: State RI: Valid dates are November 30 of current calendar year until September 1, at which time November 30 of either the current or the following calendar year would be acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State RI:" +
+                    " Valid dates are November 30 of current calendar year until September 1, at whic" +
+                    "h time November 30 of either the current or the following calendar year would be" +
+                    " acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 762
 testRunner.And("I call Shared Step 55859 (EPA expiration date - enter next year - Nov 30th) for s" +
                     "tate: RI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2781,7 +2784,10 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55858 (EPA expiration date - enter current year - NOT Nov 30th" +
                     ") for state: VT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 788
-testRunner.Then(@"in page Pesticide Details - State Registration Details I should see error: State VT: Valid dates are November 30 of current calendar year until September 1, at which time November 30 of either the current or the following calendar year would be acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State VT:" +
+                    " Valid dates are November 30 of current calendar year until September 1, at whic" +
+                    "h time November 30 of either the current or the following calendar year would be" +
+                    " acceptable.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 789
 testRunner.And("I call Shared Step 55859 (EPA expiration date - enter next year - Nov 30th) for s" +
                     "tate: VT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -2857,19 +2863,19 @@ testRunner.And("I select expiration date (current year - Not August 31st) for st
 #line 814
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 815
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "SC: Valid dates are August 31 of current calendar year until June 1, at which ti" +
-                    "me August 31 of either the current or the following calendar year would be accep" +
-                    "table.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State SC:" +
+                    " Valid dates are August 31 of current calendar year until June 1, at which time " +
+                    "August 31 of either the current or the following calendar year would be acceptab" +
+                    "le.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 816
 testRunner.And("I select expiration date (next year - Not August 31st) for state: SC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 817
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 818
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "SC: Valid dates are August 31 of current calendar year until June 1, at which ti" +
-                    "me August 31 of either the current or the following calendar year would be accep" +
-                    "table.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State SC:" +
+                    " Valid dates are August 31 of current calendar year until June 1, at which time " +
+                    "August 31 of either the current or the following calendar year would be acceptab" +
+                    "le.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
@@ -2953,16 +2959,16 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: ND", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 846
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "ND: Valid dates are December 31 no more than two (2) calendar years out, but yea" +
-                    "r must be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State ND:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out, but year m" +
+                    "ust be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 847
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: ND", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 848
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "ND: Valid dates are December 31 no more than two (2) calendar years out, but yea" +
-                    "r must be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State ND:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out, but year m" +
+                    "ust be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
@@ -2977,9 +2983,9 @@ testRunner.And("I select EPA expiration date - enter current year plus 2:", ((st
 #line 852
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 853
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "ND: Valid dates are December 31 no more than two (2) calendar years out, but yea" +
-                    "r must be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State ND:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out, but year m" +
+                    "ust be ODD number (i.e., 2017, 2019).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 854
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: ND", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -3088,16 +3094,16 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: FL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 890
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "FL: Valid dates are December 31 no more than two (2) calendar years out, but yea" +
-                    "r must be EVEN number (i.e., 2018, 2020).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State FL:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out, but year m" +
+                    "ust be EVEN number (i.e., 2018, 2020).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 891
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: FL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 892
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "FL: Valid dates are December 31 no more than two (2) calendar years out, but yea" +
-                    "r must be EVEN number (i.e., 2018, 2020).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State FL:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out, but year m" +
+                    "ust be EVEN number (i.e., 2018, 2020).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
@@ -3112,9 +3118,9 @@ testRunner.And("I select EPA expiration date - enter current year plus 2:", ((st
 #line 896
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 897
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "FL: Valid dates are December 31 no more than two (2) calendar years out, but yea" +
-                    "r must be EVEN number (i.e., 2018, 2020).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State FL:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out, but year m" +
+                    "ust be EVEN number (i.e., 2018, 2020).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 898
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: FL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -3223,20 +3229,20 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: AZ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 933
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "AZ: Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State AZ:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 934
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: AZ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 935
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "AZ: Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State AZ:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 936
 testRunner.And("I call Shared Step 55886 (EPA expiration date - enter current year plus 2 - NOT D" +
                     "ec 31st) for state: AZ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 937
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "AZ: Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State AZ:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 938
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: AZ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -3275,8 +3281,8 @@ testRunner.And("I select EPA expiration date - enter current year plus 3:", ((st
 #line 950
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 951
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "AZ: Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State AZ:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 952
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 953
@@ -3341,20 +3347,20 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: IL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 974
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "IL: Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State IL:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 975
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: IL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 976
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "IL: Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State IL:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 977
 testRunner.And("I call Shared Step 55886 (EPA expiration date - enter current year plus 2 - NOT D" +
                     "ec 31st) for state: IL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 978
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "IL: Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State IL:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 979
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: IL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -3393,8 +3399,8 @@ testRunner.And("I select EPA expiration date - enter current year plus 3:", ((st
 #line 991
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 992
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "IL: Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State IL:" +
+                    " Valid dates are December 31 no more than two (2) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 993
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 994
@@ -3459,20 +3465,20 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: HI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1014
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "HI: Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State HI:" +
+                    " Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1015
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: HI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1016
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "HI: Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State HI:" +
+                    " Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1017
 testRunner.And("I call Shared Step 55886 (EPA expiration date - enter current year plus 2 - NOT D" +
                     "ec 31st) for state: HI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1018
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "HI: Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State HI:" +
+                    " Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
@@ -3487,8 +3493,8 @@ testRunner.And("I select EPA expiration date - enter current year plus 3:", ((st
 #line 1022
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1023
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "HI: Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State HI:" +
+                    " Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1024
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: HI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -3545,8 +3551,8 @@ testRunner.And("I select EPA expiration date - enter current year plus 4:", ((st
 #line 1042
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1043
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "HI: Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State HI:" +
+                    " Valid dates are December 31 no more than three (3) calendar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1044
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1045
@@ -3611,23 +3617,23 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55819 (EPA expiration date - enter current year - NOT Dec 31st" +
                     ") for state: CT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1065
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CT: Valid dates are December 31 no more than five (5) calendar years out at any " +
-                    "given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CT:" +
+                    " Valid dates are December 31 no more than five (5) calendar years out at any giv" +
+                    "en time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1066
 testRunner.And("I call Shared Step 55820 (EPA expiration date - enter next year - NOT Dec 31st) f" +
                     "or state: CT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1067
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CT: Valid dates are December 31 no more than five (5) calendar years out at any " +
-                    "given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CT:" +
+                    " Valid dates are December 31 no more than five (5) calendar years out at any giv" +
+                    "en time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1068
 testRunner.And("I call Shared Step 55886 (EPA expiration date - enter current year plus 2 - NOT D" +
                     "ec 31st) for state: CT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1069
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CT: Valid dates are December 31 no more than five (5) calendar years out at any " +
-                    "given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CT:" +
+                    " Valid dates are December 31 no more than five (5) calendar years out at any giv" +
+                    "en time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
@@ -3642,9 +3648,9 @@ testRunner.And("I select EPA expiration date - enter current year plus 3:", ((st
 #line 1073
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1074
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CT: Valid dates are December 31 no more than five (5) calendar years out at any " +
-                    "given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CT:" +
+                    " Valid dates are December 31 no more than five (5) calendar years out at any giv" +
+                    "en time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
@@ -3659,9 +3665,9 @@ testRunner.And("I select EPA expiration date - enter current year plus 4:", ((st
 #line 1078
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1079
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CT: Valid dates are December 31 no more than five (5) calendar years out at any " +
-                    "given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CT:" +
+                    " Valid dates are December 31 no more than five (5) calendar years out at any giv" +
+                    "en time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
@@ -3676,9 +3682,9 @@ testRunner.And("I select EPA expiration date - enter current year plus 5:", ((st
 #line 1083
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1084
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CT: Valid dates are December 31 no more than five (5) calendar years out at any " +
-                    "given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CT:" +
+                    " Valid dates are December 31 no more than five (5) calendar years out at any giv" +
+                    "en time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1085
 testRunner.And("I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current year) f" +
                     "or state: CT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -3771,9 +3777,9 @@ testRunner.And("I select EPA expiration date - enter current year plus 6:", ((st
 #line 1115
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1116
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "CT: Valid dates are December 31 no more than five (5) calendar years out at any " +
-                    "given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State CT:" +
+                    " Valid dates are December 31 no more than five (5) calendar years out at any giv" +
+                    "en time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1117
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1118
@@ -3858,9 +3864,9 @@ testRunner.And("in the New Product page I click section: Pesticide Details - Sta
 testRunner.And("I call Shared Step 55878 (EPA expiration date - enter current year plus 3 - any d" +
                     "ate) for state: AL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1146
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "AL: Valid date is only on the year (no set Month/Day), no more than two (2) cale" +
-                    "ndar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State AL:" +
+                    " Valid date is only on the year (no set Month/Day), no more than two (2) calenda" +
+                    "r years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1147
 testRunner.And("I call Shared Step 55875 (EPA expiration date - enter current year - any date tod" +
                     "ay or greater) for state: AL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -3952,9 +3958,9 @@ testRunner.And("in the New Product page I click section: Pesticide Details - Sta
 testRunner.And("I call Shared Step 55878 (EPA expiration date - enter current year plus 3 - any d" +
                     "ate) for state: NY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1179
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "NY: Valid date is only on the year (no set Month/Day), no more than two (2) cale" +
-                    "ndar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State NY:" +
+                    " Valid date is only on the year (no set Month/Day), no more than two (2) calenda" +
+                    "r years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1180
 testRunner.And("I call Shared Step 55875 (EPA expiration date - enter current year - any date tod" +
                     "ay or greater) for state: NY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -4046,9 +4052,9 @@ testRunner.And("in the New Product page I click section: Pesticide Details - Sta
 testRunner.And("I call Shared Step 55878 (EPA expiration date - enter current year plus 3 - any d" +
                     "ate) for state: WA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1212
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "WA: Valid date is only on the year (no set Month/Day), no more than two (2) cale" +
-                    "ndar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State WA:" +
+                    " Valid date is only on the year (no set Month/Day), no more than two (2) calenda" +
+                    "r years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1213
 testRunner.And("I call Shared Step 55875 (EPA expiration date - enter current year - any date tod" +
                     "ay or greater) for state: WA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -4140,9 +4146,9 @@ testRunner.And("in the New Product page I click section: Pesticide Details - Sta
 testRunner.And("I call Shared Step 55878 (EPA expiration date - enter current year plus 3 - any d" +
                     "ate) for state: PR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1245
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "PR: Valid date is only on the year (no set Month/Day), no more than two (2) cale" +
-                    "ndar years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State PR:" +
+                    " Valid date is only on the year (no set Month/Day), no more than two (2) calenda" +
+                    "r years out.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1246
 testRunner.And("I call Shared Step 55875 (EPA expiration date - enter current year - any date tod" +
                     "ay or greater) for state: PR", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -4214,20 +4220,20 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55843 (EPA expiration date - enter current year - Not June 30t" +
                     "h) for state: MI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1271
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MI: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MI:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1272
 testRunner.And("I call Shared Step 55844 (EPA expiration date - enter next year - Not June 30th) " +
                     "for state: MI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1273
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MI: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MI:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1274
 testRunner.And("I call Shared Step 55846 (EPA expiration date - enter next year - June 30th) for " +
                     "state: MI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1275
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "MI: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State MI:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1276
 testRunner.And("I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) f" +
                     "or state: MI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -4299,20 +4305,20 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55843 (EPA expiration date - enter current year - Not June 30t" +
                     "h) for state: OH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1300
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "OH: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State OH:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1301
 testRunner.And("I call Shared Step 55844 (EPA expiration date - enter next year - Not June 30th) " +
                     "for state: OH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1302
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "OH: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State OH:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1303
 testRunner.And("I call Shared Step 55846 (EPA expiration date - enter next year - June 30th) for " +
                     "state: OH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1304
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "OH: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State OH:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1305
 testRunner.And("I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) f" +
                     "or state: OH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -4384,20 +4390,20 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55843 (EPA expiration date - enter current year - Not June 30t" +
                     "h) for state: TN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1329
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "TN: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State TN:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1330
 testRunner.And("I call Shared Step 55844 (EPA expiration date - enter next year - Not June 30th) " +
                     "for state: TN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1331
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "TN: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State TN:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1332
 testRunner.And("I call Shared Step 55846 (EPA expiration date - enter next year - June 30th) for " +
                     "state: TN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1333
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "TN: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State TN:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1334
 testRunner.And("I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) f" +
                     "or state: TN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -4469,20 +4475,20 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.And("I call Shared Step 55843 (EPA expiration date - enter current year - Not June 30t" +
                     "h) for state: TN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1358
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "TN: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State TN:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1359
 testRunner.And("I call Shared Step 55844 (EPA expiration date - enter next year - Not June 30th) " +
                     "for state: TN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1360
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "TN: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State TN:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1361
 testRunner.And("I call Shared Step 55846 (EPA expiration date - enter next year - June 30th) for " +
                     "state: TN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1362
-testRunner.Then("in page Pesticide Details - State Registration Details I should see error: State " +
-                    "TN: Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State TN:" +
+                    " Valid date is June 30 no more than one calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1363
 testRunner.And("I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) f" +
                     "or state: TN", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -4495,6 +4501,243 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
 #line 1367
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56656", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[56645] Pesticide Data - EPA Expiration date validation (Oklahoma - March 31st, J" +
+            "une 30th, Sept 30th or December 31st no more than 1 year out)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EPA State Expiry Date Validation (Suite ID: 56545)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
+        public virtual void _56645PesticideData_EPAExpirationDateValidationOklahoma_March31StJune30ThSept30ThOrDecember31StNoMoreThan1YearOut()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56645] Pesticide Data - EPA Expiration date validation (Oklahoma - March 31st, J" +
+                    "une 30th, Sept 30th or December 31st no more than 1 year out)", ((string[])(null)));
+#line 1374
+this.ScenarioSetup(scenarioInfo);
+#line 1375
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 1376
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1377
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1378
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1379
+testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
+                    "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1380
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1381
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1382
+testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
+                    "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1383
+testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
+                    "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1384
+testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1385
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1388
+testRunner.And("I enter a registration date for the current year that is not March 31st, June 30t" +
+                    "h, Sept 30th or Dec 31st for state: OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1389
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1390
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State OK:" +
+                    " Valid dates are March 31, June 30, September 30 or December 31 no more than one" +
+                    " (1) calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1391
+testRunner.And("I enter a registration date for the next year that is not March 31st, June 30th, " +
+                    "Sept 30th or Dec 31st for state: OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1392
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1393
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State OK:" +
+                    " Valid dates are March 31, June 30, September 30 or December 31 no more than one" +
+                    " (1) calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month",
+                        "Increment year?"});
+            table18.AddRow(new string[] {
+                        "OK",
+                        "31",
+                        "3",
+                        "yes"});
+#line 1394
+testRunner.And("I enter the EPA registration date in the current year:", ((string)(null)), table18, "And ");
+#line 1397
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1398
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1399
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1400
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month",
+                        "Increment year?"});
+            table19.AddRow(new string[] {
+                        "OK",
+                        "30",
+                        "6",
+                        "yes"});
+#line 1401
+testRunner.And("I enter the EPA registration date in the current year:", ((string)(null)), table19, "And ");
+#line 1404
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1405
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1406
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1407
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month",
+                        "Increment year?"});
+            table20.AddRow(new string[] {
+                        "OK",
+                        "30",
+                        "9",
+                        "yes"});
+#line 1408
+testRunner.And("I enter the EPA registration date in the current year:", ((string)(null)), table20, "And ");
+#line 1411
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1412
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1413
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1414
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month",
+                        "Increment year?"});
+            table21.AddRow(new string[] {
+                        "OK",
+                        "31",
+                        "12",
+                        "yes"});
+#line 1415
+testRunner.And("I enter the EPA registration date in the current year:", ((string)(null)), table21, "And ");
+#line 1418
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1419
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1420
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1421
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table22.AddRow(new string[] {
+                        "OK",
+                        "31",
+                        "3"});
+#line 1422
+testRunner.And("I select EPA expiration date - enter current year plus 1:", ((string)(null)), table22, "And ");
+#line 1425
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1427
+testRunner.And(@"If the current date is after (MM/DD): 03/31 then I confirm no error is shown for the State: OK - else I confirm the following error is displayed: State OK: Valid dates are March 31, June 30, September 30 or December 31 no more than one (1) calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1428
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table23.AddRow(new string[] {
+                        "OK",
+                        "30",
+                        "6"});
+#line 1429
+testRunner.And("I select EPA expiration date - enter current year plus 1:", ((string)(null)), table23, "And ");
+#line 1432
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1434
+testRunner.And(@"If the current date is after (MM/DD): 06/30 then I confirm no error is shown for the State: OK - else I confirm the following error is displayed: State OK: Valid dates are March 31, June 30, September 30 or December 31 no more than one (1) calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1435
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table24.AddRow(new string[] {
+                        "OK",
+                        "30",
+                        "9"});
+#line 1436
+testRunner.And("I select EPA expiration date - enter current year plus 1:", ((string)(null)), table24, "And ");
+#line 1439
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1441
+testRunner.And(@"If the current date is after (MM/DD): 09/30 then I confirm no error is shown for the State: OK - else I confirm the following error is displayed: State OK: Valid dates are March 31, June 30, September 30 or December 31 no more than one (1) calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1442
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table25.AddRow(new string[] {
+                        "OK",
+                        "31",
+                        "12"});
+#line 1443
+testRunner.And("I select EPA expiration date - enter current year plus 1:", ((string)(null)), table25, "And ");
+#line 1446
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1448
+testRunner.And(@"If the current date is after (MM/DD): 12/31 then I confirm no error is shown for the State: OK - else I confirm the following error is displayed: State OK: Valid dates are March 31, June 30, September 30 or December 31 no more than one (1) calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1449
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1450
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1451
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase56645", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

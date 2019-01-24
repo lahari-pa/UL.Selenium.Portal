@@ -2168,7 +2168,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 
 		// ========= Add Ingredient Functions ========= //
-		
+
 		public bool SetFullNameOfProductForRetailer(string retailer, string name)
 		{
 			var el = containerElement.FindElement(By.XPath(".//input[@placeholder='Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)' and (./ancestor::td//preceding-sibling::td[contains(text(),'" + retailer + "')]) ]"), 2);
@@ -3795,95 +3795,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//{
 		//	return containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table/following-sibling::div/p[@class='form-error']/span"), 15)?.Text;
 		//}
-
-		public bool EPASelectExpirationDateFromCalendar(string state, DateTime date)
-		{
-			var EPATable = this.EPATable();
-			if (EPATable == null)
-			{
-				Report.Failure("The State Pesticide Registration Table could not be found");
-				Report.Screenshot();
-				return false;
-			}
-			var calendarButton = EPATable.FindElement(By.XPath(@".//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td//span[@class='input-group-addon']"), 2);
-			if (!calendarButton.TryClick())
-			{
-				var inputEl = EPATable.FindElement(By.XPath(@"..//tr[contains(@data-bind, 'css')]//div[text()='" + state + "']/ancestor::td/following-sibling::td//input"), 2);
-				if (!inputEl.TryClick())
-				{
-					Report.Failure("Could not click calender button for state: " + state);
-					Report.Screenshot();
-					return false;
-				}
-			}
-			var activeDate = EPACalednarActiveDate();
-			if (activeDate == null)
-			{
-				Report.Failure("Unable to locate the active date (Month Year) in the EPA calendar pop up for state: " + state);
-				Report.Screenshot();
-				return false;
-			}
-			var activeYear = int.Parse(activeDate[1]);
-			var activeMonth = DateTime.ParseExact(activeDate[0], "MMMM", CultureInfo.CurrentCulture).Month;
-			// Fail test if target date preceeds the default Month Year on the calendar
-			if (date.Year < activeYear || date.Year == activeYear && date.Month < activeMonth)
-			{
-				Report.Failure("Target date must be equal or later than the current active date on the calendar");
-				Report.Screenshot();
-				return false;
-			}
-			// Perform loop until target year = active year and target month = active month
-			while (date.Year > activeYear || date.Year == activeYear && date.Month > activeMonth)
-			{
-				// Click next month
-				SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//th[@class='next']"), 2).TryClick();
-				activeDate = EPACalednarActiveDate();
-				activeYear = int.Parse(activeDate[1]);
-				activeMonth = DateTime.ParseExact(activeDate[0], "MMMM", CultureInfo.CurrentCulture).Month;
-			}
-			// Select day
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//td[@class='day' and text()='" + date.Day + "']"), 2).TryClick();
-		}
-
-		public string[] EPACalednarActiveDate()
-		{
-			var calendarTable = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]"), 2);
-			var datePicker = calendarTable?.FindElement(By.XPath(".//th[@class='datepicker-switch']"), 2);
-			return datePicker?.Text.Split(' ');
-		}
-
-		public IWebElement StateEPARow(string state)
-		{
-			return this.EPATable().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
-		}
-		public string GetEPATableRowClassColour(string state)
-		{
-			var epaRow = this.EPATable().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
-			if (epaRow == null)
-			{
-				Report.Failure("Unable to locate EPA table row for state: " + state);
-				return null;
-			}
-			// Hack for screenshots - Don't scroll to row if we're looking at the top 4 states, because they are obscured by the banner
-			if (new[] { "AK", "AL", "AR", "AZ" }.All(x => x != state))
-			{
-				epaRow.ScrollElementIntoView();
-			}
-			var colourCode = epaRow.GetAttribute("class");
-			return colourCode?.Replace("rpds-", "");
-		}
-
-		public string GetEPATableRowBackgroundHex(string state)
-		{
-			var epaRow = this.EPATable().FindElement(By.XPath(".//tr[.//div[text()='" + state + "']]"), 2);
-			if (epaRow == null)
-			{
-				Report.Failure("Unable to locate EPA table row for state: " + state);
-				return null;
-			}
-			return epaRow.GetCssValue("background-color");
-		}
-
+		
 		public bool ClickUseMyIngredients()
 		{
 			return containerElement.FindElement(By.XPath(".//button[starts-with(@data-bind,'click: openMyIngredients')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
@@ -3969,35 +3881,44 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		// better identifier?
-		public IWebElement EPATable()
+		public IWebElement Table()
 		{
 			return this.containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"), 10);
 		}
 
-		public string EPATableHeading()
+		public string TableHeading()
 		{
-			var heading = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading' and ancestor::div[@class='form-group has-success']]/div"), 10);
+			var heading = this.Table().FindElement(By.XPath("/preceding-sibling::div[@class='panel-heading']"), 2);
 			if (heading == null)
 			{
-				Report.Failure("Could not find EPA table header");
+				Report.Error("Could not find EPA table header");
 				return null;
 			}
 			return heading.Text;
 		}
+		//public string EPATableHeading()
+		//{
+		//	var heading = containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading' and ancestor::div[@class='form-group has-success']]/div"), 10);
+		//	if (heading == null)
+		//	{
+		//		Report.Failure("Could not find EPA table header");
+		//		return null;
+		//	}
+		//	return heading.Text;
+		//}
 
-		public List<string> EPATableColumnHeadings()
+		public List<string> TableColumnHeadings()
 		{
-			var epaTable = this.EPATable();
-			if (epaTable == null)
+			var table = this.Table();
+			if (table == null)
 			{
+				Report.Error("Table element was not visible!");
 				return new List<string>();
 			}
 			var rList = new List<string>();
-			var columnHeaders = epaTable.FindElements(By.XPath(".//th"), 2).ToList();
+			var columnHeaders = table.FindElements(By.XPath(".//th"), 2).ToList();
 			columnHeaders.ForEach(x => rList.Add(x.Text));
 			return rList;
-			//return epaTable.FindElements(By.XPath(".//th"), 2).ToList().Select(x => x.GetAttribute("value")).ToList();
 		}
 
 		/// <summary>

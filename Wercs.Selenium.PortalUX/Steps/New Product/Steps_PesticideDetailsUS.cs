@@ -159,5 +159,39 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click Add Row in the EPA Table",
 				"Successfully clicked Add Row in the EPA Table");
 		}
+
+		[StepDefinition(@"I confirm the EPA Registration table contains the heading: (.*)")]
+		public void EPATableHeadingExpected(string expectedHeading)
+		{
+			var actualHeading = new NewProduct().TableHeading();
+			Report.IsTrue(string.Equals(actualHeading.Trim(), expectedHeading.Trim()),
+				"The table heading did not match the expected text: " + expectedHeading + ". Displayed heading: " + actualHeading,
+				"The table heading matched the expected text: " + expectedHeading);
+		}
+
+		[StepDefinition(@"I confirm the EPA Pesticide Registration table is (shown|not shown)")]
+		public void EPAPesticideTableIsShownOrNot(string shown)
+		{
+			var selNewProduct = new NewProduct();
+			if (shown == "shown")
+			{
+				Report.IsTrue(selNewProduct.Table() != null, "The EPA Registration Number Table was not showing", "The EPA Registration Number Table was showing as expected");
+			}
+			if (shown == "not shown")
+			{
+				Report.IsTrue(selNewProduct.Table() == null, "The EPA Registration Number Table was showing when it should not be.", "The EPA Registration Number Table was not showing as expected");
+			}
+		}
+
+		[StepDefinition(@"I confirm the following columns are displayed in the EPA Registration table")]
+		public void ConfirmDisplayedColumnsInEPATable(Table columns)
+		{
+			var expectedColumns = new List<string>();
+			columns.Rows.ForEach(x => expectedColumns.Add(x["Column Heading"]));
+			var actualColumns = new NewProduct().TableColumnHeadings();
+			Report.IsTrue(expectedColumns.All(x => actualColumns.Contains(x)),
+				"The expected columns were not displayed in the EPA table. Expected: " + string.Join(", ", expectedColumns) + ". Actual: " + string.Join(", ", actualColumns),
+				"The expected columns were displayed in the EPA table: " + string.Join(", ", expectedColumns));
+		}
 	}
 }
