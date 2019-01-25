@@ -726,6 +726,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		// Enter UPC string in the form: "Equals"+upcNumber where upcNumber is the exact number to input, rather than using the randomly generated step from context
+		// Enter '_CVS' or '_cvs' for upc variable to use a upc number for retailer CVS from (required for some test cases eg. CVS RCL feature)
 		[StepDefinition(@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly(string upc, string containerType, string size)
 		{
@@ -755,10 +756,49 @@ namespace Wercs.Selenium.PortalUX.Steps
 				upcTable.AddRow("Size", size);
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
-
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
+			GeneralUtilities.Wait_for_load_finish();
 		}
+
+		// UPC: CVS binding text used for using a UPC from the list of valid CVS UPCs from upcitemdb.com
+		[StepDefinition(@"I call Shared Step 57960 \(Enter Universal Product Code \(UPC\) - UPC-Container Type - Size Only\) for UPC: CVS, container type: (.*) and size: (.*)")]
+		public void GivenICallSharedEnterUniversalProductCodeUPC_CVSUPC_ContainerType_SizeOnly(string containerType, string size)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct stepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			var cvsUpc = GeneralUtilities.CvsUpcs();
+			for (int i = 0; i < cvsUpc.Count; i++)
+			{
+				Report.Info("Entering UPC information. Attempt: " + (i + 1));
+				TestReport.StartStep("I click the 'Add UPC' button");
+				stepsNewProduct.ThenIClickTheAddUpcButton();
+				TestReport.StartStep("I add the following into the UPC Fields");
+				var upc = cvsUpc[i];
+				Report.Info("UPC number: " + upc);
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+				TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+				stepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+				GeneralUtilities.Wait_for_load_finish();
+				// not returning...
+				if (new NewProduct().FormError().IsNullOrEmpty())
+				{
+					return;
+				}
+				// delete upc that failed
+				stepsNewProduct.GivenIDeleteUPC(upc);
+				Report.Info("An error was showing! on click continue! Attempting a different UPC" );
+			}
+		}
+
 
 		[StepDefinition(@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*)")]
 		public void GivenICallSharedStepEnterUniversalProductCodeUPC_Battery_ConfirmQuantity(string upc, string containerType, string size)

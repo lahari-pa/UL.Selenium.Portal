@@ -18,9 +18,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I save the UPC number 050428290231 as: UPC74208
-
-Given I delete all products with UPC Number: saved as UPC74208
+#Given I save the UPC number 050428290231 as: UPC74208
+#
+#Given I delete all products with UPC Number: saved as UPC74208
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -42,7 +42,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74208, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 10
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -126,9 +126,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I save the UPC number 050428156483 as: UPC74253
-
-Given I delete all products with UPC Number: saved as UPC74253
+#Given I save the UPC number 050428156483 as: UPC74253
+#
+#Given I delete all products with UPC Number: saved as UPC74253
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -150,7 +150,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74253, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 10
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -174,9 +174,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I save the UPC number 050428285367 as: UPC74254
-
-Given I delete all products with UPC Number: saved as UPC74254
+#Given I save the UPC number 050428285367 as: UPC74254
+#
+#Given I delete all products with UPC Number: saved as UPC74254
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -198,7 +198,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74254, container type: Plastic Container and size: 15.025
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 15.025
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -224,9 +224,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I save the UPC number 050428285367 as: UPC74255
-
-Given I delete all products with UPC Number: saved as UPC74255
+#Given I save the UPC number 050428285367 as: UPC74255
+#
+#Given I delete all products with UPC Number: saved as UPC74255
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -248,7 +248,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74255, container type: Plastic Container and size: 28.95
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 28.95
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -276,9 +276,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I save the UPC number 050428290231 as: UPC74256
-
-Given I delete all products with UPC Number: saved as UPC74256
+#Given I save the UPC number 050428290231 as: UPC74256
+#
+#Given I delete all products with UPC Number: saved as UPC74256
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -300,7 +300,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74256, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -341,9 +341,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I save the UPC number 050428290231 as: UPC74257
-
-Given I delete all products with UPC Number: saved as UPC74257
+#Given I save the UPC number 050428290231 as: UPC74257
+#
+#Given I delete all products with UPC Number: saved as UPC74257
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -365,7 +365,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74257, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -395,9 +395,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I save the UPC number 050428290231 as: UPC74259
-
-Given I delete all products with UPC Number: saved as UPC74259
+#Given I save the UPC number 050428290231 as: UPC74259
+#
+#Given I delete all products with UPC Number: saved as UPC74259
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -419,7 +419,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74259, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -453,9 +453,9 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Then The home screen should load
 
-Given I save the UPC number 050428290231 as: UPC74260
-
-Given I delete all products with UPC Number: saved as UPC74260
+#Given I save the UPC number 050428290231 as: UPC74260
+#
+#Given I delete all products with UPC Number: saved as UPC74260
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -477,7 +477,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74260, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -548,7 +548,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74188, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -617,9 +617,9 @@ Given if the save button is visible, I save changes and close the popup dialog
 
 Given I navigate to the home page
 
-Given I save the UPC number 050428290231 as: UPC74207
-
-Given I delete all products with UPC Number: saved as UPC74207
+#Given I save the UPC number 050428290231 as: UPC74207
+#
+#Given I delete all products with UPC Number: saved as UPC74207
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -641,7 +641,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74207, container type: Plastic Container and size: 2.10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10
 
 Given I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)
 
@@ -674,9 +674,9 @@ Given if the save button is visible, I save changes and close the popup dialog
 
 Given I navigate to the home page
 
-Given I save the UPC number 050428075661 as: UPC74270
-
-Given I delete all products with UPC Number: saved as UPC74270
+#Given I save the UPC number 050428075661 as: UPC74270
+#
+#Given I delete all products with UPC Number: saved as UPC74270
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -696,7 +696,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74269 (Select Retailers - Rite Aid)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74270, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 10
 
 Then I should not see the CVS RCL Page
 
@@ -721,9 +721,9 @@ Given if the save button is visible, I save changes and close the popup dialog
 
 Given I navigate to the home page
 
-Given I save the UPC number 0043396824430 as: UPC74272
-
-Given I delete all products with UPC Number: saved as UPC74272
+#Given I save the UPC number 0043396824430 as: UPC74272
+#
+#Given I delete all products with UPC Number: saved as UPC74272
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -743,7 +743,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74272, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 10
 
 Then I should not see the CVS RCL Page
 
@@ -768,9 +768,9 @@ Given if the save button is visible, I save changes and close the popup dialog
 
 Given I navigate to the home page
 
-Given I save the UPC number 050428075661 as: UPC74261
-
-Given I delete all products with UPC Number: saved as UPC74261
+#Given I save the UPC number 050428075661 as: UPC74261
+#
+#Given I delete all products with UPC Number: saved as UPC74261
 
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
@@ -790,7 +790,7 @@ Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - Non
 
 Given I call Shared Step 74201 (Select Retailers - CVS)
 
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC74261, container type: Plastic Container and size: 10
+Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 10
 
 And I confirm the page heading shows the CVS Logo with the title 'CVS Own Brand Registration' below the logo
 

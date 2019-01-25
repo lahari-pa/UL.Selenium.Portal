@@ -1368,13 +1368,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickAddUpcButton()
 		{
-			var el = containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
-			if (el == null)
-			{
-				return false;
-			}
-
-			return el.TryClick();
+			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
+			return el != null && el.TryClick();
 		}
 
 		public bool DeleteUPC(string upc)
@@ -1383,37 +1378,37 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				upc = Context.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
 			}
-			SafewareReporting.Report.Info("Attempting to delete: " + upc);
-			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-			var upcmatch = container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2)
-				.FirstOrDefault(x => x.Text.Contains(upc));
-
+			Report.Info("Attempting to delete: " + upc);
+			var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var upcmatch = container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.Text.Contains(upc))
+							?? container.FindElements(By.XPath(".//span[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.GetValue().Contains(upc))
+						   ?? container.FindElements(By.XPath(".//input[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.GetValue().Contains(upc));
 			if (upcmatch != null)
 			{
-				if (!upcmatch.FindElement(By.XPath("../..//a[contains(@data-bind, 'Delete')]")).TryClick())
+				if (!upcmatch.FindElement(By.XPath("./ancestor::tr[position()=1]//a[contains(text(), 'Delete')]"),2).TryClick())
 				{
-					SafewareReporting.Report.Info("Failed to find delete button");
+					Report.Info("Failed to find delete button");
 					return false;
 				}
-
 			}
 			else
 			{
-				SafewareReporting.Report.Info("Failed to find matching row.");
+				Report.Info("Failed to find matching row.");
 				return false;
 			}
-			SafewareReporting.Report.Info("Successfully clicked delete button.");
-			SafewareReporting.Report.Screenshot();
-			Delay.Seconds(3);
+			Report.Info("Successfully clicked delete button.");
+			Report.Screenshot();
 			ModalDialog md = new ModalDialog();
 			if (md.Wait_for_load(30))
 			{
-				SafewareReporting.Report.Screenshot();
-				md.Click_OK();
-				SafewareReporting.Report.Info("Clicked OK");
-				SafewareReporting.Report.Screenshot();
-				Delay.Seconds(2);
-				return true;
+				Report.Screenshot();
+				if (md.Click_OK())
+				{
+					Report.Info("Clicked OK");
+					Report.Screenshot();
+					return true;
+				}
+				return false;
 			}
 			return false;
 		}
@@ -3795,7 +3790,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//{
 		//	return containerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table/following-sibling::div/p[@class='form-error']/span"), 15)?.Text;
 		//}
-		
+
 		public bool ClickUseMyIngredients()
 		{
 			return containerElement.FindElement(By.XPath(".//button[starts-with(@data-bind,'click: openMyIngredients')]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
@@ -4033,7 +4028,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			try
 			{
 				var xPath = @"(//label[starts-with(text(),""" + section + @""")]))";
-
 				SeleniumBrowser.WebBrowser.FindElement(By.XPath(xPath), 2).TryClick();
 			}
 			catch (Exception e)
@@ -4048,7 +4042,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			while (counter < secondsToWait)
 			{
 				RefreshContainer();
-				var headerLogo = containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3/img"))
+				var headerLogo = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3/img"))
 					.FirstOrDefault(x => x.GetAttribute("src").ToLower().Contains(logo.ToLower()));
 				if (headerLogo != null)
 				{
@@ -4062,7 +4056,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string ActivePanelHeading()
 		{
-			return containerElement.FindElement(By.XPath(".//div[@class='panel-heading']//h3"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[@class='panel-heading']//h3"), 2).Text;
+		}
+
+		public string FormError()
+		{
+			return this.containerElement.FindElement(By.XPath(".//ul[@class='form-error']/li"), 2)?.Text;
 		}
 
 	}

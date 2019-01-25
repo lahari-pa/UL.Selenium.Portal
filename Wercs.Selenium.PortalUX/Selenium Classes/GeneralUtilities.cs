@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using HtmlAgilityPack;
 using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReporting;
@@ -139,6 +141,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'There was an error processing your request. Please try again.')]"), 2) != null;
 		}
 
-		
+		public static List<string> CvsUpcs()
+		{
+			var web = new HtmlWeb();
+			var document = web.Load(@"https://www.upcitemdb.com/info-cvs");
+			var nodes = document.DocumentNode.SelectNodes(@"//a[@name='upclist']//following-sibling::div//ul//li//div[@class='rImage']/a");
+			var upcValues = nodes.Select(x => x.InnerText).ToList();
+			return upcValues;
+		}
+
+
 	}
 }

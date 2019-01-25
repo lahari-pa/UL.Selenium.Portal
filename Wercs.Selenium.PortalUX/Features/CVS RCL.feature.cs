@@ -116,10 +116,6 @@ this.ScenarioSetup(scenarioInfo);
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 21
-testRunner.Given("I save the UPC number 050428290231 as: UPC74208", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 23
-testRunner.Given("I delete all products with UPC Number: saved as UPC74208", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 25
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -146,8 +142,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 45
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74208, container type: Plastic Container and " +
-                    "size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 47
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 49
@@ -318,10 +313,6 @@ this.ScenarioSetup(scenarioInfo);
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 127
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 129
-testRunner.Given("I save the UPC number 050428156483 as: UPC74253", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 131
-testRunner.Given("I delete all products with UPC Number: saved as UPC74253", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 133
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -348,8 +339,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 153
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74253, container type: Plastic Container and " +
-                    "size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 155
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 157
@@ -399,10 +389,6 @@ this.ScenarioSetup(scenarioInfo);
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 175
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 177
-testRunner.Given("I save the UPC number 050428285367 as: UPC74254", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 179
-testRunner.Given("I delete all products with UPC Number: saved as UPC74254", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 181
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -429,8 +415,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 201
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74254, container type: Plastic Container and " +
-                    "size: 15.025", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 15.025", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 203
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 205
@@ -485,10 +470,6 @@ this.ScenarioSetup(scenarioInfo);
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 225
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 227
-testRunner.Given("I save the UPC number 050428285367 as: UPC74255", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 229
-testRunner.Given("I delete all products with UPC Number: saved as UPC74255", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 231
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -515,8 +496,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 251
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74255, container type: Plastic Container and " +
-                    "size: 28.95", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 28.95", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 253
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 255
@@ -572,10 +552,6 @@ this.ScenarioSetup(scenarioInfo);
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 277
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 279
-testRunner.Given("I save the UPC number 050428290231 as: UPC74256", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 281
-testRunner.Given("I delete all products with UPC Number: saved as UPC74256", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 283
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -602,8 +578,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 303
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74256, container type: Plastic Container and " +
-                    "size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 305
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 307
@@ -679,10 +654,6 @@ this.ScenarioSetup(scenarioInfo);
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 342
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 344
-testRunner.Given("I save the UPC number 050428290231 as: UPC74257", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 346
-testRunner.Given("I delete all products with UPC Number: saved as UPC74257", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 348
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -709,8 +680,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 368
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74257, container type: Plastic Container and " +
-                    "size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 370
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 372
@@ -769,10 +739,6 @@ this.ScenarioSetup(scenarioInfo);
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 396
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 398
-testRunner.Given("I save the UPC number 050428290231 as: UPC74259", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 400
-testRunner.Given("I delete all products with UPC Number: saved as UPC74259", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 402
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -799,8 +765,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 422
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74259, container type: Plastic Container and " +
-                    "size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 424
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 426
@@ -864,10 +829,6 @@ this.ScenarioSetup(scenarioInfo);
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 454
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 456
-testRunner.Given("I save the UPC number 050428290231 as: UPC74260", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 458
-testRunner.Given("I delete all products with UPC Number: saved as UPC74260", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 460
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -894,8 +855,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 480
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74260, container type: Plastic Container and " +
-                    "size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 482
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 484
@@ -1009,8 +969,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 551
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74188, container type: Plastic Container and " +
-                    "size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 553
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 555
@@ -1149,10 +1108,6 @@ testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((
 testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 618
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 620
-testRunner.Given("I save the UPC number 050428290231 as: UPC74207", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 622
-testRunner.Given("I delete all products with UPC Number: saved as UPC74207", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 624
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -1179,8 +1134,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 644
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74207, container type: Plastic Container and " +
-                    "size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 2.10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 646
 testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 648
@@ -1247,10 +1201,6 @@ testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((
 testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 675
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 677
-testRunner.Given("I save the UPC number 050428075661 as: UPC74270", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 679
-testRunner.Given("I delete all products with UPC Number: saved as UPC74270", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 681
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -1277,8 +1227,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74269 (Select Retailers - Rite Aid)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 699
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74270, container type: Plastic Container and " +
-                    "size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 701
 testRunner.Then("I should not see the CVS RCL Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 703
@@ -1333,10 +1282,6 @@ testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((
 testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 722
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 724
-testRunner.Given("I save the UPC number 0043396824430 as: UPC74272", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 726
-testRunner.Given("I delete all products with UPC Number: saved as UPC74272", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 728
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -1363,8 +1308,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 746
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74272, container type: Plastic Container and " +
-                    "size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 748
 testRunner.Then("I should not see the CVS RCL Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 750
@@ -1417,10 +1361,6 @@ testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((
 testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 769
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 771
-testRunner.Given("I save the UPC number 050428075661 as: UPC74261", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 773
-testRunner.Given("I delete all products with UPC Number: saved as UPC74261", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 775
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -1447,8 +1387,7 @@ testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts
 testRunner.Given("I call Shared Step 74201 (Select Retailers - CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 793
 testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type" +
-                    " - Size Only) for UPC: saved as UPC74261, container type: Plastic Container and " +
-                    "size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - Size Only) for UPC: CVS, container type: Plastic Container and size: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 795
 testRunner.And("I confirm the page heading shows the CVS Logo with the title \'CVS Own Brand Regis" +
                     "tration\' below the logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
