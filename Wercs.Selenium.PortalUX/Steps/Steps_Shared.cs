@@ -62,7 +62,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I set the Product Name as it a appears on the Package Label option to: " + type);
 			if (name == "")
 			{
-				var forbiddenChars = @"+{}^?|{}+%'""/".ToCharArray();
+				var forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", name);
