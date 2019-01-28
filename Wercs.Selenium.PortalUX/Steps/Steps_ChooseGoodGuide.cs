@@ -516,5 +516,38 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Report.IsTrue(new ChooseGoodGuide_AccountCreation().UlToysDashboardLoads(), "ULToys dashboard failed to load!", "ULToys dashboard loaded successfully!");
 		}
+
+		[Given(@"I navigate to ChooseGoodGuide")]
+		public void GivenINavigateToChooseGoodGuide()
+		{
+			SeleniumBrowser.WebBrowser.Url = TReVor.TestVariables.GetVariableSavedAs("ChooseGGUrl");
+			SeleniumBrowser.WebBrowser.WaitForPageLoad();
+		}
+
+		[Given(@"I login to ChooseGoodGuide as Administrator")]
+		public void GivenILoginToChooseGoodGuideAsAdministrator()
+		{
+			ConflictMinerals thisChooseGGLogin = new ConflictMinerals();
+			Steps_ChooseGoodGuide myStepsGG = new Steps_ChooseGoodGuide();
+			GGNewProduct thisGgNewProduct = new GGNewProduct();
+			var shaUser = TReVor.TestUsers.GetUserSavedAs("ChooseGGUser");
+			thisChooseGGLogin.EmailAddress = shaUser.Username;
+			thisChooseGGLogin.Password = shaUser.Password;
+			thisChooseGGLogin.ClickLogin();
+			Report.Info("My products desktop is loaded");
+			MyProducts thisMyProducts = new MyProducts();
+			Report.IsTrue(thisMyProducts.Wait_for_load(60), "Failed to load My products page", " is showing My Products as expected.");
+		}
+
+		[StepDefinition(@"I call Shared Step 68883\(Login to ChooseGoodGuide\)")]
+		public void LoginToChooseGG()
+		{
+			TestReport.UseSubSteps = true;
+			Steps_ChooseGoodGuide myStepsGG = new Steps_ChooseGoodGuide();
+			TestReport.StartStep("I navigate to ChooseGoodGuide");
+			myStepsGG.GivenINavigateToChooseGoodGuide();
+			TestReport.StartStep("I log in to ChooseGoodGuide as administrator");
+			myStepsGG.GivenILoginToChooseGoodGuideAsAdministrator();
+		}
 	}
 }

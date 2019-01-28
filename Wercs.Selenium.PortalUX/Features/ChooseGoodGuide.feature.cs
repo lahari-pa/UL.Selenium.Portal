@@ -101,16 +101,14 @@ namespace Wercs.Selenium.PortalUX.Features
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 10
-testRunner.Given("I navigate to the URL: https://choosegoodguide.com/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 11
-testRunner.And("I click the \'Get Started Now\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 12
-testRunner.Then("I click the \'Create Company Account\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I navigate to ChooseGoodGuide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 13
-testRunner.And("I enter the Email: <random>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I click the \'Create Company Account\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 14
-testRunner.Given("I save the current emails in the inbox for address saved as: AccountEmailAddress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I enter the Email: <random>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 15
+testRunner.Given("I save the current emails in the inbox for address saved as: AccountEmailAddress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 16
 testRunner.And("I click the Next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -149,11 +147,11 @@ testRunner.And("I click the Next button", ((string)(null)), ((TechTalk.SpecFlow.
             table1.AddRow(new string[] {
                         "Fax",
                         "785-532-7408"});
-#line 16
+#line 17
 testRunner.Given("I create an account with the following parameters:", ((string)(null)), table1, "Given ");
-#line 29
-testRunner.And("I click the Next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
+testRunner.And("I click the Next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
 testRunner.And("The contact person page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -189,47 +187,47 @@ testRunner.And("The contact person page should appear", ((string)(null)), ((Tech
             table2.AddRow(new string[] {
                         "Secure Password",
                         "Welcome1!"});
-#line 31
+#line 32
 testRunner.Given("I setup the Company Contact Person as follows:", ((string)(null)), table2, "Given ");
-#line 43
-testRunner.And("I click the Next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 44
-testRunner.Then("I wait for the congratulations page to appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click the Next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 45
+testRunner.Then("I wait for the congratulations page to appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 46
 testRunner.And("I confirm that I have received a GoodGuide account email to account: saved as Acc" +
                     "ountEmailAddress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 47
 testRunner.And("I confirm that I have received a Signup confirmation email to account: saved as A" +
                     "ccountEmailAddress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 48
 testRunner.Then("I confirm that I have a received a Verification code email to account: saved as A" +
                     "ccountEmailAddress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 48
+#line 49
 testRunner.Given("I save the verification code sent to account: saved as AccountEmailAddress as: My" +
                     "verificationcode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 49
-testRunner.Given("I click on the login button on the congratulations page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 50
+testRunner.Given("I click on the login button on the congratulations page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 51
 testRunner.Given("on the GoodGuide login page I enter the Email address: saved as AccountEmailAddre" +
                     "ss", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
-testRunner.Given("on the GoodGuide login page I enter the Password: Welcome1!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 52
-testRunner.Then("on the GoodGuide login page I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("on the GoodGuide login page I enter the Password: Welcome1!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 53
-testRunner.Then("the GoodGuide Verification page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("on the GoodGuide login page I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 54
+testRunner.Then("the GoodGuide Verification page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 55
 testRunner.Then("on the GoodGuide Verification page I enter verification code: saved as Myverifica" +
                     "tioncode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 55
-testRunner.Then("on the GoodGuide Verification page I click Verify", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 56
-testRunner.Then("the GoodGuide terms of use page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("on the GoodGuide Verification page I click Verify", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 57
-testRunner.Then("on the GoodGuide terms of use I check the Accept checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the GoodGuide terms of use page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 58
-testRunner.Then("on the GoodGuide terms of use I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("on the GoodGuide terms of use I check the Accept checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 59
+testRunner.Then("on the GoodGuide terms of use I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 60
 testRunner.And("the GoodGuide Company Details page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -246,55 +244,42 @@ testRunner.And("the GoodGuide Company Details page should load", ((string)(null)
         public virtual void _68913RegisterNewProduct_NoMarksOfDistinction()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68913] Register New Product - No Marks of Distinction", ((string[])(null)));
-#line 61
-this.ScenarioSetup(scenarioInfo);
 #line 62
-testRunner.Given("I navigate to the URL: https://choosegoodguide.com/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 63
-testRunner.And("I click the \'Get Started Now\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
-testRunner.Given("on the GoodGuide login page I enter the Email address: c8e0c5521437.kxxyxunf@mail" +
-                    "osaur.io", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 65
-testRunner.Given("on the GoodGuide login page I enter the Password: Welcome1!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 66
-testRunner.Then("on the GoodGuide login page I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 67
-testRunner.Then("on the ChooseGoodGuide site the GoodGuide home page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 68
-testRunner.Given("on the top navigation bar I click on My Products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 69
-testRunner.Then("in the GoodGuide site the My Products page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 70
-testRunner.Given("In the My Products Menu I select: GoodGuide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 71
-testRunner.Then("in the GoodGuide site the Welcome page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
 #line 72
-testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 68883(Login to ChooseGoodGuide)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 73
-testRunner.Then("in the GoodGuide site the New Product page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the GoodGuide site the My Products page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 74
-testRunner.Given("in the GoodGuide New Product page I select: Create a New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the My Products Menu I select: GoodGuide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 75
-testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("in the GoodGuide site the Welcome page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 76
-testRunner.Then("in the GoodGuide site the Product Identification page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 77
-testRunner.Given("I generate a random product name and save as MyProductName", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("in the GoodGuide site the New Product page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 78
-testRunner.Given("in the Product Identification page I enter product name: saved as MyProductName", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the GoodGuide New Product page I select: Create a New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 79
+testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 80
+testRunner.Then("in the GoodGuide site the Product Identification page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 81
+testRunner.Given("I generate a random product name and save as MyProductName", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 82
+testRunner.Given("in the Product Identification page I enter product name: saved as MyProductName", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 83
 testRunner.Given("in the Product Identification page I select Product Line/Brand: test4 and if it d" +
                     "oes not exist I create it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 80
-testRunner.Given("in the Product Identification page I select Category: Health and Beauty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 81
-testRunner.Then(@"in the Product Identification page I should see message: Your product qualifies for a GoodGuide rating, a trusted indicator of product health. At the end of this registration, take a moment to preview and optionally add this product’s rating to the extensive GoodGuide online catalog, consumers' reliable resource for science-based product information. To learn more, visit http://www.goodguide.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 82
-testRunner.Given("in the Product Identification page I select SubCategory: After Shave for Men", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 83
-testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 84
+testRunner.Given("in the Product Identification page I select Category: Health and Beauty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 85
+testRunner.Then(@"in the Product Identification page I should see message: Your product qualifies for a GoodGuide rating, a trusted indicator of product health. At the end of this registration, take a moment to preview and optionally add this product’s rating to the extensive GoodGuide online catalog, consumers' reliable resource for science-based product information. To learn more, visit http://www.goodguide.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 86
+testRunner.Given("in the Product Identification page I select SubCategory: After Shave for Men", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 87
+testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 88
 testRunner.Then("in the GoodGuide site the Product Formulation & Public Disclosure Review page sho" +
                     "uld load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -305,47 +290,47 @@ testRunner.Then("in the GoodGuide site the Product Formulation & Public Disclosu
                         "TradeSecret",
                         "PublicName"});
             table3.AddRow(new string[] {
-                        "Water",
+                        "Methane",
                         "100",
                         "false",
                         "false",
                         ""});
-#line 85
-testRunner.Then("in the GoodGuide site I add the following ingredients:", ((string)(null)), table3, "Then ");
-#line 88
-testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 89
-testRunner.Then("in the GoodGuide site the Physical Property page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 90
-testRunner.Then("in the Physical Property page I select physical state: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 91
-testRunner.Then("in the Physical Property page I enter product pH: 2.7", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the GoodGuide site I add the following ingredients:", ((string)(null)), table3, "Then ");
 #line 92
 testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 93
-testRunner.Then("in the GoodGuide site the Marks of Distinction page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the GoodGuide site the Physical Property page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 94
-testRunner.Then("in the Marks of Distinction page I should see rating: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the Physical Property page I select physical state: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 95
-testRunner.Given("in the Marks of Distinction page for Would you like to continue with the product " +
-                    "submission process I select: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("in the Physical Property page I enter product pH: 2.7", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 96
 testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 97
-testRunner.Then("in the GoodGuide site the Company/Brand Information page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the GoodGuide site the Marks of Distinction page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 98
-testRunner.Given("in the Company/Brand Information page I upload Company logo: C:\\Dependencies\\WERC" +
-                    "Smart\\image1.jpg", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("in the Marks of Distinction page I should see rating: 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 99
-testRunner.Given("in the Company/Brand Information page I upload Brand logo: C:\\Dependencies\\WERCSm" +
-                    "art\\image2.jpg", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the Marks of Distinction page for Would you like to continue with the product " +
+                    "submission process I select: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 100
 testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 101
-testRunner.Then("in the GoodGuide site the UPC List page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the GoodGuide site the Company/Brand Information page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 102
+testRunner.Given("in the Company/Brand Information page I upload Company logo: C:\\Dependencies\\WERC" +
+                    "Smart\\image1.jpg", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 103
-testRunner.Given("I generate a random UPC number and save as: UPC68913", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the Company/Brand Information page I upload Brand logo: C:\\Dependencies\\WERCSm" +
+                    "art\\image2.jpg", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 104
+testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 105
+testRunner.Then("in the GoodGuide site the UPC List page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 107
+testRunner.Given("I generate a random UPC number and save as: UPC68913", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 108
 testRunner.Given("in the GoodGuide site I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -360,37 +345,37 @@ testRunner.Given("in the GoodGuide site I click the \'Add UPC\' button", ((strin
             table4.AddRow(new string[] {
                         "Size",
                         "20"});
-#line 105
+#line 109
 testRunner.Then("In the GoodGuide site I add the following into the UPC Fields", ((string)(null)), table4, "Then ");
-#line 110
-testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 111
-testRunner.Then("in the GoodGuide site I should be in the UPC Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 112
-testRunner.Given("in the UPC Grid I click edit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 113
-testRunner.Given("in the UPC Grid in the GoodGuide drop down I select: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 114
-testRunner.Given("in the UPC Grid in the Colour drop down I select: Blue to red", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 115
-testRunner.Given("in the UPC Grid in the Scent drop down I select: Apple", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("in the GoodGuide site I should be in the UPC Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 116
+testRunner.Given("in the UPC Grid I click edit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 117
+testRunner.Given("in the UPC Grid in the GoodGuide drop down I select: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 118
+testRunner.Given("in the UPC Grid in the Colour drop down I select: Blue to red", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 119
+testRunner.Given("in the UPC Grid in the Scent drop down I select: Apple", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 120
 testRunner.Given("in the UPC Grid in the Image upload I select: C:\\Dependencies\\WERCSmart\\image1.jp" +
                     "g", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 117
+#line 121
 testRunner.Given("in the GoodGuide New Product page I click button: Save and Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 118
+#line 122
 testRunner.Then("in the GoodGuide site the Summary page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 119
+#line 123
 testRunner.Then("in the Data Acceptance section I answer: Yes to would you like to submit product " +
                     "info", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 120
-testRunner.Then("in the Data Acceptance section I click on Accept", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 121
-testRunner.Then("in the GoodGuide site the Subscription Enrollment page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 124
-testRunner.Given("on the top navigation bar I click on My Products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("in the Data Acceptance section I click on Accept", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 125
+testRunner.Then("in the GoodGuide site the Subscription Enrollment page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 128
+testRunner.Given("on the top navigation bar I click on My Products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 129
 testRunner.Then("in the GoodGuide site the My Products page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -403,17 +388,17 @@ testRunner.Then("in the GoodGuide site the My Products page should load", ((stri
                         "saved as MyProductName",
                         "",
                         "All"});
-#line 126
-testRunner.Given("in the GoodGuide My Products page I set the search criteria as follows:", ((string)(null)), table5, "Given ");
-#line 129
-testRunner.Given("in the GoodGuide My Products page I click on Filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 130
+testRunner.Given("in the GoodGuide My Products page I set the search criteria as follows:", ((string)(null)), table5, "Given ");
+#line 133
+testRunner.Given("in the GoodGuide My Products page I click on Filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 134
 testRunner.Then("in the GoodGuide My Products page I should see product with Name: saved as MyProd" +
                     "uctName", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 131
+#line 135
 testRunner.Then("in the GoodGuide My Products page I delete product with Name: saved as MyProductN" +
                     "ame", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 132
+#line 136
 testRunner.Then("in the GoodGuide My Products page I should not see product with Name: saved as My" +
                     "ProductName", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

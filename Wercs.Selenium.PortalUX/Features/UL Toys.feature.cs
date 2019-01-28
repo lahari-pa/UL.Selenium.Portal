@@ -99,8 +99,8 @@ namespace Wercs.Selenium.PortalUX.Features
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 10
-testRunner.Given("I navigate to the URL: https://secure.supplierwercs.com/home/ssologin?sourceServi" +
-                    "ce=toys", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I navigate to the URL: https://staging.thewercs.com/SHA.MVCWeb/Home/ssologin?sour" +
+                    "ceService=Toys", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 11
 testRunner.Then("I click the \'Create Company Account\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 12

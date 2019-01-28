@@ -7,8 +7,9 @@
 Feature: ChooseGoodGuide.com Scenarios
 
 Scenario: [68878] ChooseGoodGuide.com - Create a New Company
-Given I navigate to the URL: https://choosegoodguide.com/
-And I click the 'Get Started Now' button
+Given I navigate to ChooseGoodGuide
+#Given I navigate to the URL: https://staging.thewercs.com/SHA.MVCWeb/Home/ssologin?sourceService=GoodGuide
+#And I click the 'Get Started Now' button
 Then I click the 'Create Company Account' button
 And I enter the Email: <random>
 Given I save the current emails in the inbox for address saved as: AccountEmailAddress
@@ -59,13 +60,16 @@ Then on the GoodGuide terms of use I click continue
 And the GoodGuide Company Details page should load
 
 Scenario: [68913] Register New Product - No Marks of Distinction
-Given I navigate to the URL: https://choosegoodguide.com/
-And I click the 'Get Started Now' button
-Given on the GoodGuide login page I enter the Email address: c8e0c5521437.kxxyxunf@mailosaur.io
-Given on the GoodGuide login page I enter the Password: Welcome1!
-Then on the GoodGuide login page I click on the Login button
-Then on the ChooseGoodGuide site the GoodGuide home page should load
-Given on the top navigation bar I click on My Products
+#Given I navigate to the URL: https://staging.thewercs.com/SHA.MVCWeb/Home/ssologin?sourceService=GoodGuide
+#And I click the 'Get Started Now' button
+#Given on the GoodGuide login page I enter the Email address: c8e0c5521437.kxxyxunf@mailosaur.io
+#for staging use following email 
+#Given on the GoodGuide login page I enter the Email address: 8294ba47974f.kxxyxunf@mailosaur.io
+#Given on the GoodGuide login page I enter the Password: Welcome1!
+#Then on the GoodGuide login page I click on the Login button
+#Then on the ChooseGoodGuide site the GoodGuide home page should load
+#Given on the top navigation bar I click on My Products
+Given I call Shared Step 68883(Login to ChooseGoodGuide)
 Then in the GoodGuide site the My Products page should load
 Given In the My Products Menu I select: GoodGuide
 Then in the GoodGuide site the Welcome page should load
@@ -84,7 +88,7 @@ Given in the GoodGuide New Product page I click button: Save and Next
 Then in the GoodGuide site the Product Formulation & Public Disclosure Review page should load
 Then in the GoodGuide site I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Water         | 100     | false               | false       |            |
+| Methane         | 100     | false               | false       |            |
 Given in the GoodGuide New Product page I click button: Save and Next
 Then in the GoodGuide site the Physical Property page should load
 Then in the Physical Property page I select physical state: Liquid

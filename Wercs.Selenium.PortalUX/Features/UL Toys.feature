@@ -7,7 +7,7 @@ Feature: UL Toys
 
 
 Scenario: [68368] UL Toys - Create a New Company
-Given I navigate to the URL: https://secure.supplierwercs.com/home/ssologin?sourceService=toys
+Given I navigate to the URL: https://staging.thewercs.com/SHA.MVCWeb/Home/ssologin?sourceService=Toys
 Then I click the 'Create Company Account' button
 And I enter the Email: <random>
 Given I save the current emails in the inbox for address saved as: AccountEmailAddress
