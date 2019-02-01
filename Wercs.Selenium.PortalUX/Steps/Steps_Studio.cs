@@ -94,9 +94,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickToolBarItem("attributes"),
 				"Failed to click the product attributes button",
 				"Clicked the product attributes button");
+			Delay.Seconds(5);
 			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
 			Report.IsTrue(thisProductAttributePage.Wait_for_load(60), "Product attribute page has failed to load",
 				"Product attribute page has loaded");
+
 		}
 
 		[StepDefinition(@"In Current Document Popup select checkbox: (.*)")]
@@ -1077,6 +1079,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void InProductAttributePageIClickOnFilterIcon()
 		{
 			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
+			thisProductAttributePage.Wait_for_load(30);
 			Report.IsTrue(thisProductAttributePage.ClickToolbarItem("Filter"), "Failed to click filter button",
 				"Clicked filter button");
 			ProductAttributesFilter thisProductAttributesFilter = new ProductAttributesFilter();
@@ -1163,5 +1166,57 @@ namespace Wercs.Selenium.PortalUX.Steps
 		//	And I Click Check In
 		//And I Click the X in the top corner of the pop up to close it
 
+		[StepDefinition(@"In power designer popup I set language option: (.*)")]
+		public void InPowerDesignerPopupISetLanguageOption(string language)
+		{
+			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			Report.Info("Setting power designer plus options...");
+			Report.IsTrue(thisPowerDesignerPlus.SetLanguage(language), "Failed to set language option",
+				"Set language option");
+		}
+
+		[StepDefinition(@"In power designer popup I set subformat option: (.*)")]
+		public void InPowerDesignerPopupISetSubFormatOption(string subformat)
+		{
+			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			Report.Info("Setting power designer plus options...");
+			Report.IsTrue(thisPowerDesignerPlus.EnterSubFormatFilter(subformat), "Failed to set subformat option",
+				"Set subformat option");
+		}
+
+
+		[StepDefinition(@"In power designer popup I set format: (.*) and subformat: (.*)")]
+		public void InPowerDesignerPopupISetFormatAndSubFormatOption(string format, string subformat)
+		{
+			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			Report.IsTrue(thisPowerDesignerPlus.SelectFormat(format, subformat), "Failed to set format option",
+				"Set format option");
+		}
+
+		[StepDefinition(@"In power designer popup I select product id option: (.*)")]
+		public void InPowerDesignerPopupISelectProductIDOption(string productIDOption)
+		{
+			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			Report.IsTrue(thisPowerDesignerPlus.SelectProductIDOption(productIDOption), "Failed to set action option",
+				"Set action option");
+		}
+
+		[StepDefinition(@"In power designer popup I select any Format/Subformat")]
+		public void InPowerDesignerPopupISelectAnyFormatSubFormatOption()
+		{
+			StudioPowerDesignerPlus thisPowerDesignerPlus = new StudioPowerDesignerPlus();
+			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
+				"Power designer plus has loaded");
+			Report.IsTrue(thisPowerDesignerPlus.SelectRandomFormat(), "Failed to select ranodm format",
+				"Selected random format");
+		}
 	}
 }

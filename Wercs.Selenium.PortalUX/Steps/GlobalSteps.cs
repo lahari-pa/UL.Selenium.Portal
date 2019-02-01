@@ -17,6 +17,7 @@ using OpenQA.Selenium.Interactions;
 using ResourcePool;
 using SafewareReportingPlugin;
 using TechTalk.SpecFlow.Assist;
+using TechTalk.SpecFlow.Tracing;
 using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Steps;
 
@@ -132,6 +133,15 @@ namespace WERCSmart
 
 		public void LoginToAccount(string accountSavedAs)
 		{
+			if (Context.Contains("CurrentLogin"))
+			{
+				accountSavedAs = Context.GetFromContext("CurrentLogin").ToString();
+				Report.Info("Already logged in as " + accountSavedAs + " so changing login to that");
+			}
+			else
+			{
+				Context.AddToContext("CurrentLogin", accountSavedAs);
+			}
 			var user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs);
 			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
 			{
@@ -184,6 +194,7 @@ namespace WERCSmart
 					{
 						Report.Success("Successfully logged in!");
 						GeneralUtilities.Wait_for_load_finish();
+
 						return;
 					}
 				}
@@ -993,6 +1004,44 @@ namespace WERCSmart
 		//{
 
 		//}
+
+		[StepDefinition(@"I close the current tab")]
+		public void GivenICloseTheCurrentTab()
+		{
+			SeleniumBrowser.CloseTabWithURL(SeleniumBrowser.GetActiveTabURL());
+		}
+
+		[StepDefinition(@"I close the current window")]
+		public void CloseCurrentWindow()
+		{
+			SeleniumBrowser.WebBrowser.Close();
+		}
+
+		[Given(@"I close any other windows with the same url")]
+		public void GivenICloseAnyOtherWindowsWithTheSameUrl()
+		{
+			if (SeleniumBrowser.Alert.IsAlertPresent())
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			}
+
+			//Do somethingto open new tabs
+			var allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+
+			foreach (var windowHandle in allWindows)
+			{
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(windowHandle);
+
+				if (SeleniumBrowser.GetActiveTabURL() == GlobalParameters.TestUrl)
+				{
+					break;
+				}
+
+
+			}
+
+		}
+
 
 	}
 }

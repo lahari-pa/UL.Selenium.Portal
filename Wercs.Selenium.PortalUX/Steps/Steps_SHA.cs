@@ -7,6 +7,7 @@ using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
+using NPOI.OpenXmlFormats.Spreadsheet;
 using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReporting;
@@ -538,7 +539,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				id = thisProdInfo.Id;
 			}
 			Report.Info("Waiting for id to change colour");
-			Report.IsTrue(selStudioShaManager.WaitForIDToBeStatus(id, 120, "N/A", "N/A", true, "rgb(254,255,160)"),
+			Report.IsTrue(selStudioShaManager.WaitForIDToBeStatus(id, 120, "N/A", "kit eCommProduct", false, "rgba(254, 255, 160, 1)"),
 				"ID has not turned required colour", "ID is required colour");
 		}
 
@@ -1573,6 +1574,72 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Dialog has closed as expected");
 			Delay.Seconds(3);
 		}
+
+		[StepDefinition(@"In the Product Attribute Screen I Confirm the screen shows CNTXT present")]
+		public void GivenInTheProductAttributeScreenIConfirmTheScreenShowsCNTXTPresent()
+		{
+			StudioProductAttributeScreen thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
+			Report.IsTrue(thiStudioProductAttributeScreen.ResultsAreFound(), "No results have been found",
+				"Showing as expected");
+		}
+
+		[StepDefinition(@"In the Product Attribute Screen I Select the first entry in the table with code: (.*)")]
+		public void GivenInTheProductAttributeScreenISelectFirstEntryWithCodeInTheTable(string code)
+		{
+			StudioProductAttributeScreen thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
+			Report.IsTrue(thiStudioProductAttributeScreen.SelectItemByCode(code), "Failed to select: " + code,
+				"Selected item: " + code);
+		}
+
+		[StepDefinition(@"I Confirm the Data area of the screen shows (.*)")]
+		public void GivenIConfirmTheDataAreaOfTheScreenShows(string expectedData)
+		{
+			StudioProductAttributeScreen thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
+			List<string> dataItems = thiStudioProductAttributeScreen.GetDataText();
+			Report.IsTrue(dataItems.Contains(expectedData), "Data item " + expectedData + " not showing as expected",
+				"Data item " + expectedData + " showing as expected");
+		}
+
+		[Given(@"In the SHA Manager Grid I run a search for product saved as: (.*) and its status is: (.*)")]
+		public void GivenInTheSHAManagerGridIRunASearchForProductSavedAsTestCaseAndItsStatusIs(string savedAs, string status)
+		{
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var ID = ProductDetails.Id;
+			Report.Info("Searching for id: " + ID + " and status: " + status);
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+
+			myStudioShaManager.ClickBottomMenuOption("Search");
+
+			Steps_SHA myStepsSha = new Steps_SHA();
+
+			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"ProductID",
+				ID
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+
+			Delay.Seconds(2);
+			StudioSHAManager mySHAManager = new StudioSHAManager();
+			mySHAManager.WaitForProductList(10);
+		}
+
+		[StepDefinition(@"In the Product Attribute Screen confirm that no records are found")]
+		public void GivenInTheProductAttributeScreenConfirmThatNoRecordsAreFound()
+		{
+			StudioProductAttributeScreen thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
+			Report.IsTrue(thiStudioProductAttributeScreen.ResultsAreFound(), "Results are showing",
+				"As expected results are not showing");
+		}
+
+
 
 	}
 }

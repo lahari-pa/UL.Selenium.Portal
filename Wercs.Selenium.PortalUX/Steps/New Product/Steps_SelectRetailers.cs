@@ -98,7 +98,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				throw new Exception("Select retailers popup is not showing as expected");
 			}
-			Report.IsTrue(selectRetailers.SelectRetailer(retailer), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
+
+			if(retailer.ToLower().Contains("walmart")|| retailer.ToLower().Contains("wal-mart"))
+			{
+				if (!selectRetailers.SelectRetailerContains("walmart"))
+				{
+					Report.IsTrue(selectRetailers.SelectRetailerContains("wal-mart"), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
+				}
+				else
+				{
+					Report.Success("Successfully selected retailer: " + retailer);
+				}
+			}
+			else
+			{
+				Report.IsTrue(selectRetailers.SelectRetailer(retailer), "Failed to select retailer: " + retailer + "!", "Successfully selected retailer: " + retailer);
+			}
+
 			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
 		}
 

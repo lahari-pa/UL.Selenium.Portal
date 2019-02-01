@@ -15,7 +15,7 @@ using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class StudioPowerDesignerPlus : BaseObject
+	public class StudioPowerDesignerPlus : BaseObject
 	{
 		public const string BasePath = "//div[contains(@class, 'container')]";
 
@@ -92,6 +92,28 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string SelectedSubFormat()
 		{
 			return "";
+		}
+
+		public bool SelectRandomFormat()
+		{
+			var tree = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='tree']/ul"), 2);
+
+			if (tree == null)
+			{
+				return false;
+			}
+
+			var results = tree.FindElements(By.XPath(".//li/span[(./span[contains(@class,'title')])]"), 2);
+			if (results == null)
+			{
+				return false;
+			}
+			Random rand = new Random();
+
+			int index = rand.Next(results.Count-1);
+
+			return results[index].TryClick();
+
 		}
 
 		public bool SelectFormat(string subformat, string format)
@@ -385,6 +407,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickToolBarItem(string item)
 		{
+			Report.Info("Beginning click tool bar item: " + item);
 			var aLinks = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='divBtmToolbars']//a[not(contains(@style, 'none'))]"));
 
 			if (aLinks.Count == 0)
@@ -1740,6 +1763,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
+			Report.Info("Beginning wait for product attribute page.");
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)
 			{

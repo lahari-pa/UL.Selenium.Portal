@@ -26,6 +26,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool SelectRetailerContains(string retailer)
+		{
+			var retailers = containerElement.FindElements(By.XPath("//label/span"));
+			var matchingRetailer = retailers.FirstOrDefault(x => x.Text.Trim().ToLower().Contains(retailer));
+
+			if (matchingRetailer == null)
+			{
+				Report.Info("No matching retailer was found");
+				return false;
+			}
+			var retailerInput = matchingRetailer.FindElement(By.XPath("../input"), 2);
+			if (retailerInput != null && retailerInput.TryClick())
+			{
+				return retailerInput.Selected;
+			}
+			Report.Error("Could not find retailer: " + retailer);
+			return false;
+		}
+
 		// This is required for selecting the 'Walmart affiliate' retailers, which all have the same name/span text (Wal-Mart/SAM'S CLUB)
 		public bool SelectRetailerByLogo(string retailerCode)
 		{

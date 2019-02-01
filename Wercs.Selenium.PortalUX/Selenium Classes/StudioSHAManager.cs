@@ -557,7 +557,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							Report.Info("Status is: " + thisProduct.Status);
 							try
 							{
-								var status = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']//tr[" + (j+1) + "]//td[" + (i + addIndex) + "]"), 2);
+								var status = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']//tr[@class!='jqgfirstrow'][" + (j+1) + "]//td[" + (i + addIndex) + "]"), 2);
 								Report.Info("Status is: " + status.GetValue());
 								if (status != null)
 								{
@@ -1570,16 +1570,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool CloseDialog()
 		{
-			var closeCorner = containerElement.FindElement(By.XPath("..//a[@role='button']"), 2);
-			if (closeCorner == null)
+			try
 			{
-				Report.Info("Did not find close button");
-				return false;
+				var closeCorner = containerElement.FindElement(By.XPath("..//a[@role='button']"), 2);
+				if (closeCorner == null)
+				{
+					Report.Info("Did not find close button");
+					return false;
+				}
+				else
+				{
+					return closeCorner.TryClick();
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				return closeCorner.TryClick();
+				Report.Info("Failed to close dialog by clicking on close button");
+				SeleniumBrowser.WebBrowser.Close();
+				return true;
 			}
+
 		}
 
 	}

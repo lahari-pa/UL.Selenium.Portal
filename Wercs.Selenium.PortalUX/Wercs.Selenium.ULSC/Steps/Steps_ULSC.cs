@@ -205,8 +205,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I close the tab with the (.*) page")]
 		public void GivenICloseTheTabWithTheProductInformationPage(string page)
 		{
-			List<string> OpenBrowsers =
-				SeleniumBrowser.GetTabURLs().ToList();
+			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
 
 			foreach (string url in OpenBrowsers)
 			{
@@ -246,6 +245,15 @@ namespace Wercs.Selenium.ULSC.Steps
 					case "ULGHS.COM":
 						string targetURL = TReVor.TestVariables.GetVariableSavedAs("ULGHS.COM");
 						if (SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
+						{
+							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
+								"Closed tab with url: " + url);
+							return;
+						}
+						break;
+					case "Data Management":
+						string targetURLDM = TReVor.TestVariables.GetVariableSavedAs("studio");
+						if (SeleniumBrowser.WebBrowser.Url.Contains(targetURLDM))
 						{
 							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
 								"Closed tab with url: " + url);
@@ -293,12 +301,26 @@ namespace Wercs.Selenium.ULSC.Steps
 			Report.Error("Failed to switch to tab with title: " +tabTitle);
 		}
 
-		[StepDefinition(@"In the WERCSLink page - Click the (.*) link from the WERCSmart area of the Services page")]
-		public void GivenInTheWERCSLinkPage_ClickTheMyProductLinkFromTheWERCSmartAreaOfTheServicesPage(string link)
+		[StepDefinition(@"In the WERCSLink page - Click the (.*) link from the (.*) area of the Services page")]
+		public void GivenInTheWERCSLinkPage_ClickTheMyProductLinkFromTheWERCSmartAreaOfTheServicesPage(string link, string area)
 		{
 			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			Report.IsTrue(thisWercsLinkDashboard.ClickMainPageLink(link), "Failed to click link: " + link,
-				"Clicked " + link);
+
+			switch (area)
+			{
+				case "WERCSmart":
+					Report.IsTrue(thisWercsLinkDashboard.ClickMainPageLink(link), "Failed to click link: " + link,
+						"Clicked " + link);
+					break;
+				case "WERCS Studio":
+					Report.IsTrue(thisWercsLinkDashboard.ClickMainPageLink(link), "Failed to click link: " + link,
+						"Clicked " + link);
+					break;
+				default:
+					throw new Exception("You must provide a valid page area");
+
+			}
+			
 		}
 
 		[StepDefinition(@"I Confirm a new window opens with the WERCSmart New Product page shown")]
@@ -471,6 +493,50 @@ namespace Wercs.Selenium.ULSC.Steps
 			}
 		}
 
+		[StepDefinition(@"I Confirm New window opens with the Studio Data Management window open \(Welcome page shows\) and that NO script errors display")]
+		public void GivenIConfirmNewWindowOpensWithTheStudioDataManagementWindowOpenWelcomePageShowsAndThatNOScriptErrorsDisplay()
+		{
+			Delay.Seconds(30);
+			string targetURL = TReVor.TestVariables.GetVariableSavedAs("Studio");
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				//Report.Info("Switching tab");
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 
+				if (SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
+				{
+					Report.Success("Studio Data management page opened. Successfully switched to that tab.");
+					StudioPowerDesignerPlus thisStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+
+					Report.IsTrue(thisStudioPowerDesignerPlus.Wait_for_load(120),
+						"Waiting for power designer load failed", "Welcome page loaded as expected");
+
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab! The available tabs (with screen shots) were:");
+			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			int counter = 1;
+			foreach (string url in OpenBrowsers)
+			{
+				SeleniumBrowser.SwitchToTabWithURL(url);
+				Report.Info("Tab " + counter.ToString());
+				Report.Info("Url: " + url);
+				Report.Screenshot();
+				counter++;
+			}
+		}
+
+		[StepDefinition(@"I Close the Data Management window")]
+		public void GivenICloseTheDataManagementWindow()
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+		
 	}
 }

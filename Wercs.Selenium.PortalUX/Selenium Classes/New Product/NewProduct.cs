@@ -166,10 +166,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//Valid tab names: Product Type, Product Characteristics, Recipient and UPC Details, Review and Submit
 		public bool WaitForTab(string tabName, int secondsToWait = 30)
 		{
+			Report.Info("Beginning wait for tab: " + tabName);
 			int counter = 0;
 			while (counter < secondsToWait)
 			{
-				var progWizard = containerElement.FindElement(By.XPath(".//div[@class='prog-wizard']"));
+				var progWizard = containerElement.FindElement(By.XPath(".//div[@class='prog-wizard']"),2);
 				if (progWizard != null)
 				{
 					var tab = containerElement.FindElements(By.XPath(".//div[contains(@class, 'progress')]//span[contains(@data-bind, 'description')]"), 2)
@@ -2143,6 +2144,67 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							"//div[contains(text(), 'Select Existing Registrations')]/../..//table/tbody/tr//input/../..//span"));
 
 						var matchingProduct = listOfSelected.FirstOrDefault(x => x.GetValue().Contains(product.Name));
+
+						if (matchingProduct != null)
+						{
+							Report.Info("Matching product showing in table, attempting to check checkbox");
+							var matchingCheckbox = matchingProduct.FindElement(By.XPath("../..//input"), 2);
+							return matchingCheckbox.TryClick();
+						}
+					}
+				}
+
+				return false;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
+
+		// searches by name, matches by ID
+		public bool AddItemToKitByID(ProductInformation product)
+		{
+			try
+			{
+				for (int j = 0; j < 5; j++)
+				{
+					var placeholderEl = containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]"), 2);
+					placeholderEl.TryClick();
+					IWebElement MatchedEntry = null;
+					var inputEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+					inputEl.EnterText(product.Id);
+					var searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+					int i = 0;
+					while (searching != null && i < 10)
+					{
+						Delay.Seconds(Delay.SpeedFactor * 1);
+						i++;
+						searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+					}
+					var Matches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					var MatchingByID = Matches.FirstOrDefault(x => x.GetValue().Trim().ToLower().Contains(product.Id.ToLower()));
+					if (MatchingByID == null)
+					{
+						// No matching name entry was found, so we take the first one just in case we are looking for a partial match!
+						MatchedEntry = Matches.FirstOrDefault();
+					}
+					else
+					{
+						MatchedEntry = MatchingByID;
+					}
+
+
+					if (MatchedEntry != null)
+					{
+						Report.Info("Found matching search item, attempting to click");
+						MatchedEntry.TryClick();
+						Delay.Seconds(1);
+						var listOfSelected = SeleniumBrowser.WebBrowser.FindElements(By.XPath(
+							"//div[contains(text(), 'Select Existing Registrations')]/../..//table/tbody/tr//input/../..//span"));
+
+						var matchingProduct = listOfSelected.FirstOrDefault(x => x.GetValue().Contains(product.Id));
 
 						if (matchingProduct != null)
 						{

@@ -148,18 +148,21 @@ And I close the tab with the ULGHS.COM page
 # NetProjects10\PowerUnity\2. WERCSLink - Dashboard\2.6 Services (new)\2.6.4 WERCS Studio
 # NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\2. ULSC - Dashboard\2.6 Services\2.6.4 WERCS Studio
 
+@Studio
 Scenario: [24436] WERCSLink - WERCS Studio - Data Management
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 And I call Shared Step 29148 - Login to ULSC as an Administrator User
 And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart
 And In the WERCSLink dashboard I click left menu link: WERCS Studio
-And I Click the Data Management link in the navigation pane
+And In the WERCSLink dashboard I click left menu link: Data Management
 And I Confirm New window opens with the Studio Data Management window open (Welcome page shows) and that NO script errors display
-And I Select a Format/Subformat
-And I Click Continue
-And I Close the Data Management window
-And I Click the Data Management link on the right hand side of the Services page under the WERCS Studio heading
+And In power designer popup I select any Format/Subformat
+And I click continue in the Power Designer Plus popup
+And I close the tab with the Data Management page
+Given I navigate to tab with title: Services
+And In the WERCSLink page - Click the Data Management link from the WERCSs Studio area of the Services page
 And I Confirm New window opens with the Studio Data Management window open (Welcome page shows) and that NO script errors display
-And I Select a Format/Subformat
-And I Click Continue
-And [Shared Step 30118 - ULSC - Close Open Portal or Studio page and logout of ULSC]
+And In power designer popup I select any Format/Subformat
+And I click continue in the Power Designer Plus popup
+#And [Shared Step 30118 - ULSC - Close Open Portal or Studio page and logout of ULSC]
+

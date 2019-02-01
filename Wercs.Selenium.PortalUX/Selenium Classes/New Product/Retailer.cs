@@ -162,6 +162,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 				var el = container.FindElement(By.XPath($@".//tr[./td[text()=""{retailer}""]]//label[text()='Select Vendor']/..//select"), 2);
 				if (el == null)
 				{
+					if (retailer.ToLower().Contains("walmart") || retailer.ToLower().Contains("wal-mart"))
+					{
+						retailer = "Walmart";
+						el = container.FindElement(By.XPath($@".//tr[.//*[contains(text(),'Walmart')]]//label[text()='Select Vendor']/..//select"), 2);
+						if (el == null)
+						{
+							retailer = "Wal-Mart";
+							el = container.FindElement(By.XPath($@".//tr[.//*[contains(text(),'Wal-Mart')]]//label[text()='Select Vendor']/..//select"), 2);
+						}
+					}
+				}
+
+				if (el == null)
+				{
 					Report.Info("Vendor was not selectable for retailer: " + retailer);
 					return false;
 				}

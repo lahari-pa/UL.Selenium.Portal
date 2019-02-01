@@ -37,7 +37,8 @@ And I call Shared Step 77872 (Additional Product Information - Kit flow - US onl
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 #And I In the shared step below add the two completed products that you are working with
 And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 77862_KitProduct1 and product 2: 77862_KitProduct2)
-And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 And I call Shared Step 77845 (Retailer - Select WM, Done, Select Vendor ID, Continue)
 And I call Shared Step 42759 (Portal - UPC Page - add 1 UPC)
 # And I The Product Comments step is shown - click Continue
@@ -211,46 +212,55 @@ Then I should not see an error message: This is a required field
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 
+@77857
 Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM only
-#Given I Use Test case 77862 to create a kit which has Direct Ship set to Yes and is for WM only.Test case is linked.  This leaves the kit product in Submitted status in SHA manager
+#Given I save to context name: 77862_KitProduct1 and value: 1549414
+#Given I save to context name: 77862_KitProduct2 and value: 1549415
 Given I use Test case 77862 to create a kit and save as TestCase77857
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase77857)
-#And I Use the shared step below to search for your product
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77857)
 And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77857 and its status is: Assigned
-#And I In the shared step below open the PD+ module selecting your product - make sure the MTR/CKLT subformat is selected
 And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase77857)
-#And [Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)]
 And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
 And I call Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT
-And I Confirm the screen shows CNTXT present
-And I Select the CNTXT entry in the table
-And I Confirm the Data area of the screen shows "wm.com DSV submission"
-And I IN SHA Manager
-And [Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20]
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And I Confirm the product is shown in Assigned status with the red font indicating an active
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-And I Filter for the kit product you are working with
-And I Confirm the product is shown with the retailer icons shown in red indicating a recertification is active
-And I Click the Actions column ... for your product
-And I Select Update required
-And I If you are using  a ULSC registered user you will see the ULSC Service Data Re-Import step, select No, Continue editing data and click Save
-And I The Product step is shown - click Save
-And I The Additional Product Information step is shown - confirm the Yes button is shown as selected for the Direct ship question
-And I Select the No button for the "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." question
-And I Click Save
-And I Click the Review and Submit tab heading
-And I Click the Data Acceptance step heading
-And I Click Accept
-And I The Purchase Summary page is shown with the success message
-And I Click Home
-And I In SHA
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And I Confirm the product is shown without the product id showing the yellow highlight - this shows the product is no longer considered an e-comm/direct ship product
-And I Confirm that your product is shown in the Recertification status with the red font no longer shown
-And [Shared Step 44240 - SHA - Recertification > process recertification to Assigned status]
-And [Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)]
-And [Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT]
-And I Confirm no records are shown
+And In the Product Attribute Screen I Confirm the screen shows CNTXT present
+And In the Product Attribute Screen I Select the first entry in the table with code: CNTXT
+And I Confirm the Data area of the screen shows WM.com DSV submission
+And I close the current window
+And I call Shared Step 59066 (Go to SHA Manager)
+And I call Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20 for product saved as: TestCase77857
+And In the SHA Manager Grid I run a search for product saved as: TestCase77857 and its status is: Assigned
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77857 and its status is: Assigned
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77857 and its font is red indicating a recertification
+
+#Scenario: test
+#Given I save to context name: TestCase77857 and value: 1549382
+#And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I navigate to the landing page
+And I close any other windows with the same url
+And I call Shared Step 68210 (Login to WERCSmart - Premium Account)
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I filter for the product saved as: TestCase77857
+#And I confirm that product saved: TestCase77857 is shown with the retailer icons shown in red indicating a recertification is active
+And For product saved as: TestCase77857 the status is: Needs Your Attention
+And I click Row Actions for the first product returned
+And I click on the Row Action: Update Required
+#And I If you are using  a ULSC registered user you will see the ULSC Service Data Re-Import step, select No, Continue editing data and click Save
+And I should see the The Product Page
+#And I The Additional Product Information step is shown - confirm the Yes button is shown as selected for the Direct ship question
+#And I Select the No button for the "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." question
+And I click Save in The Product Page
+And In the New Product page I click tab: Review and Submit
+And in the New Product page I click section: Data Acceptance
+And In the Data Acceptance page I click on the Accept button
+And If purchase details are showing click confirm order
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77857)
+And I Confirm the Product ID: saved as TestCase77857 is not highlited yellow indicating that this is not an e-comm/direct ship product
+#And I Confirm that your product is shown in the Recertification status with the red font no longer shown
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77857 and its status is: Recertification
+And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase77857
+And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
+And I call Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT
+And In the Product Attribute Screen confirm that no records are found

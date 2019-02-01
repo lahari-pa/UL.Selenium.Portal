@@ -899,6 +899,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page");
 			MyNewProduct.GivenIShouldSeeXPage("Additional Data (Optional)");
+			Delay.Seconds(1);
 			TestReport.StartStep(
 				"In the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: " +
 				table.Rows[0]["Personal Protection Equipment"]);
@@ -4324,8 +4325,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I enter the product id in the Product/Alias area of the filter and click Apply");
 			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
-			Delay.Seconds(3);
-			Report.Screenshot();
+
+			for(int i=0; i<5; i++)
+			{
+				Delay.Seconds(5);
+				Report.Screenshot();
+				DocumentQueuePage newDocumentQueuePage = new DocumentQueuePage();
+				Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
+					"Document queue page loaded");
+				List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
+				if (listOfDocuments.Count > 0)
+				{
+					break;
+				}
+			}
 			TestReport.StartStep("I confirm the product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF");
 			TechTalk.SpecFlow.Table tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
 				"ProductOrAlias",
@@ -5032,9 +5045,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw new Exception("Failed to find product: " + inputProduct2);
 			}
 			TestReport.StartStep($"I add {product1.Id} to the kit");
-			newProductSteps.GivenInTheCreateTheKitPageISearchForAndSelectSavedAs(product1);
+			newProductSteps.GivenInTheCreateTheKitPageISearchForAndSelectByIdSavedAs(product1);
 			TestReport.StartStep($"I add {product2.Id} to the kit");
-			newProductSteps.GivenInTheCreateTheKitPageISearchForAndSelectSavedAs(product2);
+			newProductSteps.GivenInTheCreateTheKitPageISearchForAndSelectByIdSavedAs(product2);
 			TestReport.StartStep("I click continue");
 			newProductSteps.ClickContinue();
 		}
@@ -5048,9 +5061,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I should see the Select Retailers Popup");
 			retailerSelectionSteps.GivenIShouldSeeTheSelectRetailersPopUp();
 			TestReport.StartStep("I select the retailer: Wal-Mart/SAM'S CLUB and click Done");
-			new StepsSelectRetailers().SelectTheRetailer("Wal-Mart/SAM'S CLUB");
+			new StepsSelectRetailers().SelectTheRetailer("Walmart");
 			TestReport.StartStep("I set the Vendor as: Testing");
-			new Steps_Retailer().ISelectVendorId("Testing");
+			//new Steps_Retailer().ISelectVendorId("Testing");
+			new Steps_Retailer().ISelectFirstVendorIdForRetailer("Walmart");
 			TestReport.StartStep("I click continue");
 			newProductSteps.ClickContinue();
 		}
@@ -5700,6 +5714,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 78799 - WPS PD\+ - Product Attributes - Filter for CNTXT")]
 		public void GivenICallSharedStep78799_WPSPD_ProductAttributes_FilterForCNTXT()
 		{
+			Report.Info("Beginning Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT");
 			Steps_Studio thisStepsStudio = new Steps_Studio();
 			//Click the filter icon
 			thisStepsStudio.InProductAttributePageIClickOnFilterIcon();
@@ -6397,6 +6412,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Screenshot();
 			shaSteps.GivenInTheRecertificationPopupIClick("Continue");
 			shaSteps.GivenInTheRecertificationPopupIWaitForAllProcessingToBeCompleted();
+			Report.Info("Processing is complete, clicking on close");
 			shaSteps.GivenInTheRecertificationPopupIClickOnClose();
 			shaSteps.GivenIConfirmTheRecertificationPopUpIsClosed();
 			//	And I The recertification pop up will close
@@ -6470,5 +6486,45 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
+
+		[StepDefinition(@"I call Shared Step 42759a \(Portal - UPC Page - add UPC saved as: (.*)\)")]
+		public void Shared42759a_Portal_UpcPage_AddUpcSavedAs(string savedAs)
+		{
+			var newProductSteps = new StepsNewProduct();
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click the Add UPC button");
+			newProductSteps.ThenIClickTheAddUpcButton();
+			TestReport.StartStep("I set the UPC Number, Container Type and Size");
+			var upcTable = new Table("Field", "Value");
+			upcTable.AddRow("UPCNumber", $"saved as " + savedAs);
+			upcTable.AddRow("ContainerType", "Aerosol Can");
+			upcTable.AddRow("Size", "20");
+			//upcTable.AddRow("DPCI", "087 - 16 - 0238");
+			newProductSteps.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			TestReport.StartStep("I click continue");
+			newProductSteps.ClickContinue();
+		}
+
+		[Given(@"I call Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20 for product saved as: (.*)")]
+		public void GivenICallSharedStep_SHAManagerAssignedProduct_AddRecertReasonForProductSavedAsTestCase(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 51349");
+			Steps_SHA MyStepsSha = new Steps_SHA();
+
+			TechTalk.SpecFlow.Table productTable = new TechTalk.SpecFlow.Table(new string[] {
+				"ProductID"});
+			productTable.AddRow(new string[] {
+				"saved as "+savedAs
+			});
+			MyStepsSha.GivenInSHAManagerISetTheFilterForStatusTo("Assigned");
+			Delay.Seconds(5);
+			MyStepsSha.GivenInSHAManagerISelectTheFollowingProducts(productTable);
+			MyStepsSha.GivenInSHAManagerGridIClickTheFollowingTopMenuItem("Add to Recertification");
+			MyStepsSha.ThenTheAddProductToRecertificationScreenShouldBeShowing();
+			MyStepsSha.InAddProductToRecertificationScreenSelectReasonByNumber(20);
+			MyStepsSha.InAddProductToRecertificationScreenIClickButton("Add");
+		}
+
 	}
 }

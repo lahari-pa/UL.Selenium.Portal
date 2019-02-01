@@ -410,16 +410,19 @@ Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product
 #CLF - 12/7/2018 Test is not complete because plan does not seem to be complete
 @56500
 Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 Given I save the product information as: TestCase56500
-Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
+| Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Appreciable                                  |
 Given I call Shared Step 57798 (Additional Product Information- Pesticide, Canada Only - No to everything else, Continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 Then I should see the Pesticide Details - Canada Page
 Then Field exists: Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product
+#And I Confirm the Canadian Pest Control Number question shows a data entry type control
 Then in the Pesticide Details - Canada page I click Continue
 Then For every field in the table I should see the following error: This is a required field.
 | Field                |
@@ -452,6 +455,9 @@ Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Dr
 Then in the Pesticide Details - Canada page I click Continue
 Then Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product should not be showing any error messages
 Then Field exists: Product's packaging includes a Poison Danger symbol
+#And I Confirm the "Does this product's packaging include a poison danger symbol?"question has a Yes button
+#And I Confirm the "Does this product's packaging include a poison danger symbol?"question has a No button
+#And I Confirm an error is shown below the poison danger symbol question
 Given I set the Product's packaging includes a Poison Danger symbol field to: No
 Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
 Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
@@ -479,6 +485,14 @@ Then I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 #CLF - from here the test outcomes to not seem to be as predicted.
 #I'm seeing Additional Documents -> Contact Information
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
+Then In the Data Acceptance page I select Yes, Agreed
+And In the Data Acceptance page I click on the Accept button
+And I Confirm no errors are shown
+And I Click Home
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500
 
