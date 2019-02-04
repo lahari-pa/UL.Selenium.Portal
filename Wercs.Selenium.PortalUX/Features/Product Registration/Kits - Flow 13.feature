@@ -239,6 +239,7 @@ And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77
 #And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I navigate to the landing page
 And I close any other windows with the same url
+Given I navigate to the landing page
 And I call Shared Step 68210 (Login to WERCSmart - Premium Account)
 #And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I filter for the product saved as: TestCase77857

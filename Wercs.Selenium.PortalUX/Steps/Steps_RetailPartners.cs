@@ -1151,7 +1151,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		//x = 1 for O'Reilly, 2 for Sears, 3 for Wal-Mart
-		[StepDefinition(@"I find the Supplier ID form (.*) in the SupplierID table and save as (.*)")]
+		[StepDefinition(@"I find the Supplier ID for (.*) in the SupplierID table and save as (.*)")]
 		public void GivenIFindTheSupplierIDForSupplierInTheSupplierIDTable(string supplier, string saveAs)
 		{
 			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
@@ -1206,16 +1206,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[StepDefinition(@"I Confirm the Is Active column for SupplierID saved as (.*) shows a green check mark")]
-		public void GivenIConfirmTheIsActiveColumnForSupplierIDSavedAsSupplierIDShowsAGreenCheckMark(string savedAs)
+		[StepDefinition(@"I Confirm the Is Active column for SupplierID saved as (.*) (shows|does not show) a green check mark")]
+		public void GivenIConfirmTheIsActiveColumnForSupplierIDSavedAsSupplierIDShowsAGreenCheckMark(string savedAs, string showsDoesNotShow)
 		{
 			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
 			string SupplierId = Context.GetFromContext(savedAs).ToString();
+			if (showsDoesNotShow == "shows")
+			{
+				Report.IsTrue(allSuppliers.FirstOrDefault(x => x.SupplierID == SupplierId).IsActive,
+					"SupplierID: " + SupplierId + " is not showing as active",
+					"SupplierID: " + SupplierId + " is showing as active");
+			}
+			else
+			{
+				Report.IsTrue(!allSuppliers.FirstOrDefault(x => x.SupplierID == SupplierId).IsActive,
+					"SupplierID: " + SupplierId + " is showing as active",
+					"SupplierID: " + SupplierId + " is not showing as active");
+			}
 
-			Report.IsTrue(allSuppliers.FirstOrDefault(x => x.SupplierID == SupplierId).IsActive,
-				"SupplierID: " + SupplierId + " is not showing as active",
-				"SupplierID: " + SupplierId + " is showing as active");
 		}
+
+
 
 	}
 }

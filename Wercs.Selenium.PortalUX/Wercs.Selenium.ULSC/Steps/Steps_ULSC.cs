@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReporting;
@@ -320,7 +321,7 @@ namespace Wercs.Selenium.ULSC.Steps
 					throw new Exception("You must provide a valid page area");
 
 			}
-			
+
 		}
 
 		[StepDefinition(@"I Confirm a new window opens with the WERCSmart New Product page shown")]
@@ -537,6 +538,67 @@ namespace Wercs.Selenium.ULSC.Steps
 			ScenarioContext.Current.Pending();
 		}
 
-		
+		[Given(@"I navigate to WERCSmart")]
+		public void GivenINavigateToWERCSmart()
+		{
+			var Branch = GlobalParameters.Branch;
+			string regexPattern = @"^.*(?=(\/))";
+			Regex regex = new Regex(regexPattern);
+			Match match = regex.Match(Branch);
+			if (match.Success)
+			{
+				var url = TReVor.TestVariables.GetVariableSavedAs("TestURL", "3", match.Value);
+				SeleniumBrowser.WebBrowser.Url = url;
+				SeleniumBrowser.WebBrowser.WaitForPageLoad();
+			}
+			else
+			{
+				throw new Exception("Wercsmart URL could not be found");
+			}
+		}
+
+		[Then(@"I Confirm New window opens with the error message: (.*)")]
+		public void GivenIConfirmNewWindowOpensWithErrorMessages(string errorMessage)
+		{
+			Delay.Seconds(30);
+			string currentURL = SeleniumBrowser.WebBrowser.Url;
+			string targetURL = "ULSC";
+			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			Context.AddToContext("MainWindowHandle", currentHandle);
+			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			foreach (var handle in allHandles)
+			{
+				//Report.Info("Switching tab");
+				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+
+				if (SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
+				{
+					Report.Success("Additional tab opened. Successfully switched to that tab.");
+					StudioPowerDesignerPlus thisStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
+
+					var body = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//body"),2);
+					Report.IsTrue(body.GetElementText().Trim() == errorMessage,
+						"Expected error message: " + errorMessage + " but got: " + body.GetElementText(),
+						"As expected, error message is showing: " + errorMessage);
+
+					Report.Screenshot();
+					return;
+				}
+			}
+			Report.Failure("Failed to find the correct tab! The available tabs (with screen shots) were:");
+			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
+			int counter = 1;
+			foreach (string url in OpenBrowsers)
+			{
+				SeleniumBrowser.SwitchToTabWithURL(url);
+				Report.Info("Tab " + counter.ToString());
+				Report.Info("Url: " + url);
+				Report.Screenshot();
+				counter++;
+			}
+		}
+
+
 	}
+
 }

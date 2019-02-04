@@ -143,6 +143,22 @@ namespace WERCSmart
 				Context.AddToContext("CurrentLogin", accountSavedAs);
 			}
 			var user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs);
+
+			if (user == null)
+			{
+				var Branch = GlobalParameters.Branch;
+				string regexPattern = @"^.*(?=(\/))";
+				Regex regex = new Regex(regexPattern);
+				Match match = regex.Match(Branch);
+				if (match.Success)
+				{
+					user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs,"3",match.Value);
+				}
+				else
+				{
+					throw new Exception("User: " + accountSavedAs + " could not be found");
+				}
+			}
 			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
 			{
 				GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
@@ -1020,25 +1036,32 @@ namespace WERCSmart
 		[Given(@"I close any other windows with the same url")]
 		public void GivenICloseAnyOtherWindowsWithTheSameUrl()
 		{
-			if (SeleniumBrowser.Alert.IsAlertPresent())
+			try
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
-			}
-
-			//Do somethingto open new tabs
-			var allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
-
-			foreach (var windowHandle in allWindows)
-			{
-				SeleniumBrowser.WebBrowser.SwitchTo().Window(windowHandle);
-
-				if (SeleniumBrowser.GetActiveTabURL() == GlobalParameters.TestUrl)
+				if (SeleniumBrowser.Alert.IsAlertPresent())
 				{
-					break;
+					Report.Info("Alert is present, accepting");
+					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 				}
 
 
+				var allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+
+				foreach (var windowHandle in allWindows)
+				{
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(windowHandle);
+
+					if (SeleniumBrowser.GetActiveTabURL() == GlobalParameters.TestUrl)
+					{
+						break;
+					}
+				}
 			}
+			catch (Exception e)
+			{
+				Report.Screenshot();
+			}
+
 
 		}
 

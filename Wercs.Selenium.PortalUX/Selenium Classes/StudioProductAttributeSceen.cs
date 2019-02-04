@@ -66,6 +66,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ResultsAreFound()
 		{
+			Delay.Seconds(1);
 			var codeTDsFindElements = containerElement.FindElements(By.XPath(
 				".//table[@id='AttributesGrid_tblSelectRecord']/tbody/tr[not(@id='AttributesGrid_rowHeader') and not(@id='AttributesGrid_rowTitle')]//tr[not(contains(@class, 'FixedHeader'))]/td[1]"));
 			return codeTDsFindElements.Count > 0;

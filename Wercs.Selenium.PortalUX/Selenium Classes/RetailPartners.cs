@@ -376,6 +376,62 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return supplierList;
 		}
+
+		public bool ClickActionBySupplierID(string sSupplierID, string action="Deactivate")
+		{
+			try
+			{
+				var supplierTable = containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2);
+				if (supplierTable == null)
+				{
+					Report.Info("Supplier table has not been found or is empty");
+					return false;
+				}
+
+				var supplierRows = supplierTable.FindElements(By.XPath(".//tbody/tr"));
+
+				foreach (var thisRow in supplierRows)
+				{
+					string SupplierID = thisRow.FindElement(By.XPath(".//td[1]"), 2).GetValue();
+					if (sSupplierID == SupplierID)
+					{
+						if (thisRow.FindElement(By.XPath(".//td[5]//button"), 2).TryClick())
+						{
+							Delay.Seconds(0.5);
+							var listActions = thisRow.FindElements(By.XPath(".//td[5]//a"));
+							var matchingAction = listActions.FirstOrDefault(x => x.GetValue().Contains(action));
+							if (matchingAction == null)
+							{
+								Report.Info("Could not find expected action link");
+								return false;
+							}
+
+							if (matchingAction.TryClick())
+							{
+								return true;
+							}
+							else
+							{
+								Report.Info("Failed to click action link: " + action);
+								return false;
+							}
+						}
+						else
+						{
+							Report.Info("Failed to click ... button");
+							return false;
+						}
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+				return false;
+			}
+
+			return false;
+		}
 	}
 
 	public class DataEntryNotification : BaseObject

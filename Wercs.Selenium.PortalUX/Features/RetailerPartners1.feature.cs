@@ -1011,47 +1011,28 @@ testRunner.And("[Shared Step 58828 - Delete Supplier ID]", ((string)(null)), ((T
         public virtual void _56920YourSupplierIDs_Actions_Deactivate()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56920] Your Supplier IDs - Actions - Deactivate", ((string[])(null)));
-#line 323
-this.ScenarioSetup(scenarioInfo);
-#line 324
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 325
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 326
-testRunner.And("I select the retailer: O\'Reilly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 327
-testRunner.And("I confirm the Retailer Details Page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 328
+testRunner.And("I select the retailer: O\'Reilly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 329
+testRunner.And("I confirm the Retailer Details Page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 331
 testRunner.And("I find the Supplier ID for O\'Reilly in the SupplierID table and save as supplierI" +
                     "D56920", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 330
+#line 332
 testRunner.And("I Confirm the Is Active column for SupplierID saved as supplierID56920 shows a gr" +
                     "een check mark", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 331
-testRunner.And("I call Shared Step 57621 - Supplier ID table > Select Deactivate - Confirm Suppli" +
-                    "er ID Is set to Inactive", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 332
-testRunner.And("[Shared Step 57319 - Database Check - Find t_vendor Is_active records for Specifi" +
-                    "c Supplier and Retailer]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 333
-testRunner.And("I Confirm the results of the query shows the Is_active column is set to 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 334
-testRunner.And("I Confirm the results of the query shows the f_user_updated column is set (not 0\'" +
-                    "s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 335
-testRunner.And("I We will now re-set the Is Active column to Active so that we can re-use the sup" +
-                    "plier ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 336
-testRunner.And("[Shared Step 57565 - Supplier ID table > Select Activate - Confirm Supplier ID Is" +
-                    " set to Active]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 337
-testRunner.And("[Shared Step 57319 - Database Check - Find t_vendor Is_active records for Specifi" +
-                    "c Supplier and Retailer]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 57621 - Supplier ID table > Select Deactivate - Confirm Suppli" +
+                    "er ID Is set to Inactive for supplierID saved as supplierID56920", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 338
-testRunner.And("I Confirm the results of the query show the Is Active column is set to 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 339
-testRunner.And("I Confirm the results of the query shows the F_User_updated column is set (does n" +
-                    "ot show 0\'s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 57565 - Supplier ID table > Select Activate - Confirm Supplier" +
+                    " ID Is set to Active for supplierID saved as supplierID56920", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
