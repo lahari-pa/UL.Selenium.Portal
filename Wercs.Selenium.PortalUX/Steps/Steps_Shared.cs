@@ -6889,5 +6889,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 
 		}
+
+		[StepDefinition(@"I call Shared Step 81633 - WPS PD\+ - Product Attributes - Filter for (.*)")]
+		public void ProductAttributes_FilterFor(string option)
+		{
+			Report.Info("Beginning Shared Step - WPS PD+ - Product Attributes - Filter for" + option);
+			Steps_Studio thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.InProductAttributePageIClickOnFilterIcon();
+			thisStepsStudio.InProductAttributeFilterPopupISelectFromSelectBox("...Contains...", "Code");
+			thisStepsStudio.InProductAttributeFilterPopupIEnterValueInTextBox(option, "Code");
+			thisStepsStudio.InProductAttributeFilterPopupIClickButton("apply");
+		}
+
+		[StepDefinition(@"I click alias subsection option (.*) and confirm data as:")]
+		public void ClickAliasSubsectionAndConfirmData(string aliasoption, Table expected)
+		{
+			Report.Info("Beginning Shared Step - WPS PD+ - Product Attributes - click alias subsection and confirm data");
+			ProductAttributePage thisStepsStudio = new ProductAttributePage();
+			Report.IsTrue(thisStepsStudio.ClickAliasSubsectionOption(aliasoption), "Failed to click the option: " + aliasoption + "!",
+				"successfully clicked the option" + aliasoption);
+			var data = thisStepsStudio.GetAliasSubsectionData();
+			foreach (var row in expected.Rows)
+			{
+				var option = row["Data"];
+				Report.Info("Checking that I see the option '" + option + "'");
+				Report.IsTrue(data.Contains(option.Trim()),
+					"Option was not showing as expected! Expected: '" + option + "', but found: '" + string.Join("', '", data) + "'!",
+					"Option was showing: '" + option + "', as expected!");
+			}
+		}
 	}
 }

@@ -7,6 +7,7 @@ using iTextSharp.text.pdf.parser;
 using NPOI.HSSF.Record;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
 using ResourcePool;
 using SafewareReporting;
@@ -1889,9 +1890,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			SeleniumBrowser.WebBrowser.Close();
 		}
 
+		public List<string> GetAliasSubsectionData()
+		{
+			return SeleniumBrowser.WebBrowser
+				.FindElements(By.CssSelector("#lbData > option"), 2).ToList()
+				.Select(x => x.GetValue()).ToList();
+		}
 
+		public bool ClickAliasSubsectionOption(string option)
+		{
+			var listOfSections = containerElement.FindElements(By.XPath("//div[@id='AttributesGrid_divSRData']//table//tr//td"), 2);
+			var matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == option);
+			if (matchingSection == null)
+			{
+				Report.Info("Option was not found");
+				return false;
+			}
+			return matchingSection.TryClick();
+		}
 	}
-
 
 	class ProductAttributesFilter : BaseObject
 	{

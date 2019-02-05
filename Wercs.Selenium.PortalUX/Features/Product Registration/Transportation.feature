@@ -9,6 +9,10 @@
 @wercsmart
 @RetailPartners
 @PaymentMethods
+@SHA
+@CreateProducts
+@Studio
+@ProductSetUp
 @run_Transportation
 
 Feature: Transportation
@@ -248,13 +252,12 @@ And Packing Group should be showing the value: None
 And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65944
 
-# *** IN PROGRESS ***
+
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
-#NB using tfsdesign to prevent running/reporting in regression as it is still in progress (SHA)
-@tfsdesign
 Scenario: [65947] Transportation - Copy information from DOT for all modes - confirm data is shown in WPS Studio correctly
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
 And I should see the Product Characteristics Page
@@ -289,7 +292,6 @@ And I select option: Shipping fully regulated under section: Select all modes of
 And I click continue
 And I should see the U. S. Department of Transportation (DOT) Classification Page
 And I set the UN Number field to: UN2762
-And Proper Shipping Name should be showing the value: Organochlorine pesticides, liquid, flammable, toxic
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                               |
 | Organochlorine pesticides, liquid, flammable, toxic |
@@ -304,10 +306,9 @@ And I click continue
 And I should see the International Air Transport (IATA) Classification Page
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN2762
-And Proper Shipping Name should be showing the value: Organochlorine pesticides, liquid, flammable, toxic
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                               |
-| Organochlorine pesticides, liquid, flammable, toxic |
+| Organochlorine pesticide, liquid, flammable, toxic |
 And Technical Name should be showing the value: Technical Name UN2762
 And Hazard Class (select) should be showing the value: 3
 And The following options should be displayed exclusively for section: Hazard Class (select)
@@ -321,10 +322,9 @@ And I click continue
 And I should see the International Marine (IMDG) Classification Page
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN2762
-And Proper Shipping Name should be showing the value: Organochlorine pesticides, liquid, flammable, toxic
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                               |
-| Organochlorine pesticides, liquid, flammable, toxic |
+| Organochlorine pesticide, liquid, flammable, toxic |
 And Technical Name should be showing the value: Technical Name UN2762
 And Hazard Class (select) should be showing the value: 3
 And The following options should be displayed exclusively for section: Hazard Class (select)
@@ -338,15 +338,13 @@ And I click continue
 And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
 And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 And UN Number should be showing the value: UN2762
-And Proper Shipping Name should be showing the value: Organochlorine pesticides, liquid, flammable, toxic
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                               |
-| Organochlorine pesticides, liquid, flammable, toxic |
+| Organochlorine pesticide, liquid, flammable, toxic |
 And Technical Name should be showing the value: Technical Name UN2762
-And Hazard Class (select) should be showing the value: 3, (36.1)
 And The following options should be displayed exclusively for section: Hazard Class (select)
 | Option    |
-| 3, (36.1) |
+| 3, (6.1) |
 And Packing Group (select) should be showing the value: II
 And I confirm that: II is not the only option for section: Packing Group (select)
 And I click continue
@@ -365,35 +363,134 @@ And I call Shared Step 73956 (Go to Summary and verify data) with product type: 
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase65947)
-And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase65947)
-And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase65947)
-And I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
-#And I In the shared step below search for data code DOTUN
-#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-#And I Confirm the lower portion of the table shows UN2762
-#And I Repeat steps 88 and 89 for data codes UNT, UNM and  UNI
-#And I In the shared step below search for data code HCT
-#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-#And I Confirm the lower portion of the table shows U3
-#And I Repeat steps 92 and 93 for data codes HCM, HCI, DOTHAZ
-#And I In the shared step below search for data code SNAME
-#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-#And I Confirm the lower portion of the table shows Organochlorine pesticides, liquid, flammable, toxic (this has the additional s in pesticides)
-#And I In the shared step below search for data code PGT
-#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-#And I Confirm the lower portion of the table shows II
-#And I Repeat steps 99 and 100 for data codes PGI, PGM, DOTPG
-#And I In the shared step below search for data code IMSN
-#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-#And I Confirm the lower portion of the table shows Organochlorine pesticide, liquid, flammable, toxic
-#And I Repeat steps 103 and 104 for TDSN
-#And I In the shared step below search for data code IMDGCP
-#And [Shared Step 81633 - WPS - PD+ - Product Attributes - filter for, and select specific data code]
-#And I Confirm the lower portion of the table shows 1
-#And I Repeat steps 107 and 108 for data codes IATACP and TDGCP
-#And I Click My WERCS &gt; Logout
 
-# Assigned to Beverly Barrett
-# Created by Beverly Barrett
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase65947 and its status is: Submitted
+Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase65947)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase65947)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase65947 and its status is: Assigned
+
+##Scenario: Test
+#Given I save to context name: TestCase65947 and value: 1549266 
+#Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase65947)
+Given I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase65947)
+And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for DOTUN
+And I click alias subsection option DOT UN number base classification and confirm data as:
+| Data           |
+| UN2762         |
+#And I click alias subsection option DOTUNNUM and confirm data as:
+#| Data         |
+#| 2762         |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for UNT
+And I click alias subsection option UN-No. and confirm data as:
+| Data           |
+| UN2762         |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for UNM
+And I click alias subsection option UN-No. and confirm data as:
+| Data           |
+| UN2762         |
+#And I click alias subsection option UNMNUM and confirm data as:
+#| Data         |
+#| 2762         |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for UNI
+And I click alias subsection option UN-No. and confirm data as:
+| Data           |
+| UN2762         |
+#And I click alias subsection option UNIFFC and confirm data as:
+#| Data                  |
+#| Irritant: Liquid      |
+#| Flammable Liquid: I-C |
+#And I click alias subsection option UNINUM and confirm data as:
+#| Data           |
+#| 2762         |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for HCT
+And I click alias subsection option Hazard Class and confirm data as:
+| Data           |
+| 3         |
+#And I click alias subsection option Haz Class - Target Only - Blank if ORM-D and confirm data as:
+#| Data           |
+#| 3         |
+#And I click alias subsection option TDG Hazard Class w/o end letters for rule and confirm data as:
+#| Data           |
+#| 3         |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for HCM
+And I click alias subsection option Hazard Class and confirm data as:
+| Data           |
+| 3         |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for HCI
+And I click alias subsection option Hazard Class and confirm data as:
+| Data           |
+| 3         |
+#And I click alias subsection option HAZARD CLASS IATA AIR CARGO and confirm data as:
+#| Data           |
+#| 3         |
+#And I click alias subsection option HAZARD CLASS INTERNATIONAL AIR CARGO (BASIC RETAILER) and confirm data as:
+#| Data           |
+#| 3         |
+#And I click alias subsection option HCIPR and confirm data as:
+#| Data           |
+#| 3         |
+#And I click alias subsection option HCIV and confirm data as:
+#| Data           |
+#| 3         |
+#And I click alias subsection option HAZARD CLASS IATA AIR PASSENGER and confirm data as:
+#| Data           |
+#| 3         |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for DOTHAZ
+And I click alias subsection option DOTHAZ and confirm data as:
+| Data           |
+| 3         |
+#And I click alias subsection option SPDOTHAZ and confirm data as:
+#| Data           |
+#| 3         |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for SNAME
+And I click alias subsection option SNAME and confirm data as:
+| Data           |
+| Organochlorine pesticides, liquid, flammable, toxic  |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for PGT
+And I click alias subsection option PGT and confirm data as:
+| Data           |
+| II |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for PGI
+And I click alias subsection option Packing Group and confirm data as:
+| Data           |
+| II |
+#And I click alias subsection option PGIEX and confirm data as:
+#| Data           |
+#| The UN# classification assigned to this product has a specific Packaging Group required. |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for PGM
+And I click alias subsection option Packing Group and confirm data as:
+| Data           |
+| II |
+#And I click alias subsection option PGMEX and confirm data as:
+#| Data           |
+#| The UN# classification assigned to this product has a specific Packaging Group required. |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for DOTPG
+And I click alias subsection option DOT Packing Group base classification and confirm data as:
+| Data           |
+| II |
+#And I click alias subsection option SPDOTPG and confirm data as:
+#| Data           |
+#| II |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for IMSN
+And I click alias subsection option IMSN and confirm data as:
+| Data           |
+| Organochlorine pesticide, liquid, flammable, toxic |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for TDSN
+And I click alias subsection option TDSN and confirm data as:
+| Data           |
+| Organochlorine pesticide, liquid, flammable, toxic |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for IMDGCP
+And I click alias subsection option IMDGCP and confirm data as:
+| Data           |
+| 1 |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for IATACP
+And I click alias subsection option IATACP and confirm data as:
+| Data           |
+| 1 |
+Given I call Shared Step 81633 - WPS PD+ - Product Attributes - Filter for TDGCP
+And I click alias subsection option TDGCP and confirm data as:
+| Data           |
+| 1 |
