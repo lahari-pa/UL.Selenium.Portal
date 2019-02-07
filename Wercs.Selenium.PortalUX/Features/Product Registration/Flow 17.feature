@@ -12,6 +12,7 @@
 
 Feature: Flow 17
 
+@tfsdesign
 Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -96,9 +97,15 @@ Given I call Shared Step 54799 (Lithium Battery Characteristics - any data - Hap
 
 Given I call Shared Step 60096 (Lithium Battery Transportation)
 
-Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Costco
+Then I should see the Retailer Page
 
-Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC60018 with container type: Plastic Container size: 50.0 and quantity: 1000
+And The selected retailers on the Retailer page should be:
+| Retailer                   |
+| No Retailer/No UPC Product |
+
+Given I click continue
+
+Then If the UPCs Warning popup is displayed I click OK
 
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 

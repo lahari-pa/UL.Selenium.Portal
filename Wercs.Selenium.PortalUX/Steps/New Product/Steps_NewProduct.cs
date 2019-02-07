@@ -121,7 +121,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("Clicking continue");
 				var selNewProduct = new NewProduct();
 				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked continue successfully!");
-				Report.Screenshot();
 			}
 			catch (Exception ex)
 			{

@@ -18,6 +18,7 @@ using ResourcePool;
 using SafewareReportingPlugin;
 using TechTalk.SpecFlow.Assist;
 using TechTalk.SpecFlow.Tracing;
+using TReVor;
 using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Steps;
 
@@ -960,6 +961,7 @@ namespace WERCSmart
 				ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
 				GivenILogout();
+				SeleniumBrowser.WebBrowser.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
 			}
 		}
 

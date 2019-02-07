@@ -18,6 +18,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void SaveUPCToContext(string savedAs)
 		{
 			var upc = new SummaryPage().UPCNumber();
+			Report.Info("Adding UPC number: " + upc + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, upc);
 		}
 
@@ -25,6 +26,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void SaveProductIDToContext(string savedAs)
 		{
 			var productID = new SummaryPage().ProductID();
+			Report.Info("Adding Product ID: " + productID + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, productID);
 		}
 

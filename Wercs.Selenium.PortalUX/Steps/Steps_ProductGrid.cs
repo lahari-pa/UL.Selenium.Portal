@@ -644,7 +644,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var selProductsGrid = new ProductsGrid();
 			Report.Info("Entering text: " + pageNum + " into the user grid page navigation input");
-			selProductsGrid.NumToGridNavigationInput(pageNum);
+			Report.IsTrue(selProductsGrid.NumToGridNavigationInput(pageNum), "Failed to enter page number: " + pageNum + " into navigation input");
 			Report.Info("Pressing the enter key");
 			selProductsGrid.KeyToGridNavigationInput("enter");
 		}

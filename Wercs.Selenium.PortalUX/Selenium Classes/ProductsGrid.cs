@@ -504,28 +504,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 		}
 
-		public void NumToGridNavigationInput(string pageNumber)
+		public bool NumToGridNavigationInput(string pageNumber)
 		{
 			try
 			{
 				var inputEl = GridNavigationInput();
 				if (inputEl == null)
 				{
-					Report.Failure("The navigation input box could not be found");
-					return;
+					Report.Info("The Num input was not displayed. Clicking the '...' navigation element");
+					this.GridNavigation("...");
+					inputEl = GridNavigationInput();
+					if (inputEl == null)
+					{
+						return false;
+					}
+					Report.Info("Entering page number: " + pageNumber);
+					inputEl.EnterText(pageNumber);
+					return true;
 				}
-
 				inputEl.EnterText(pageNumber);
-			}
-			catch (StaleElementReferenceException)
-			{
-				this.RefreshContainer();
-				GridNavigation("...");
-				GridNavigationInput().EnterText(pageNumber);
+				return true;
 			}
 			catch (Exception ex)
 			{
 				Report.Info("Exception: " + ex.Message);
+				return false;
 			}
 
 		}

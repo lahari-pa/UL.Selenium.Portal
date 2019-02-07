@@ -12,6 +12,7 @@
 
 Feature: Flow 18
 
+@tfsdesign
 Scenario: [60116] Anti-Static Product - Aerosol - RU000656
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

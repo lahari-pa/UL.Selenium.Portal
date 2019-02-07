@@ -214,5 +214,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Screenshot();
 		}
+
+		[StepDefinition(@"If the UPCs Warning popup is displayed I click OK")]
+		public void IfISeeUpcWarningPopupClickOk()
+		{
+			var noRetailerWarning = new NoRetailerWarningPopup();
+			if (noRetailerWarning.Wait_for_load(10))
+			{
+				Report.IsTrue(noRetailerWarning.ClickOk(), "Failed to click OK in the UPC Warning popup!", "Successfully clicked OK in the UPC Warning popup");
+			}
+		}
 	}
 }

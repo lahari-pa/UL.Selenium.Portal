@@ -12,6 +12,7 @@
 
 Feature: Flow 22
 
+@tfsdesign
 Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -67,7 +68,6 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Weld-Through Primer - Aerosol
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60544
-
 
 @tfs_design
 Scenario: [60545] Photograph Coating - Aerosol - RU001067
