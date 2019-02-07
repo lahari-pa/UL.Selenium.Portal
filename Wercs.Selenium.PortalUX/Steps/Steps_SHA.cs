@@ -451,7 +451,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(Table table)
 		{
 			ProductRecertificationHistory thisProductRecertificationHistory = new ProductRecertificationHistory();
-
+			thisProductRecertificationHistory.Wait_for_load(30);
+			Report.Screenshot();
 			List<Product> ListOfRecertificationProducts = thisProductRecertificationHistory.GetProducts();
 
 			bool allPassed = true;
@@ -502,6 +503,42 @@ namespace Wercs.Selenium.PortalUX.Steps
 						            thisRow["Recertification Reason"] + " but got: " +
 						            thisProduct.RecertificationReason);
 						allPassed = false;
+					}
+
+					if (table.ContainsColumn("Date"))
+					{
+						if (thisRow["Date"].Contains("Within a day of today"))
+						{
+							DateTime now = DateTime.Now;
+							DateTime yesterday = now.AddDays(-1);
+							DateTime tommorrow = now.AddDays(+1);
+							if (thisProduct.RecertificationDate > yesterday && thisProduct.RecertificationDate <= tommorrow)
+							{
+								Report.Info("Recertification date: " + thisRow["Date"]);
+							}
+							else
+							{
+								Report.Info("Recertification date did not match. Expected date between " + yesterday.ToString() + " and " + tommorrow.ToString() + " but got: " +
+								            thisProduct.RecertificationDate.ToString());
+								allPassed = false;
+							}
+						}
+						else
+						{
+							DateTime expected = Convert.ToDateTime(thisRow["Date"]);
+
+							if (thisProduct.RecertificationDate == expected)
+							{
+								Report.Info("Recertification date: " + thisRow["Date"]);
+							}
+							else
+							{
+								Report.Info("Recertification date did not match. Expected: " +
+								            thisRow["Date"] + " but got: " +
+								            thisProduct.RecertificationDate.ToString());
+								allPassed = false;
+							}
+						}
 					}
 				}
 			}
@@ -662,7 +699,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheRecertificationPopupIWaitForAllProcessingToBeCompleted()
 		{
 			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
-			Report.IsTrue(!thisRecertificationPopup.WaitForProcessing(240), "Processing has not completed as expected",
+			Report.IsTrue(thisRecertificationPopup.WaitForProcessing(120), "Processing has not completed as expected",
 				"Processing has completed as expected");
 		}
 

@@ -5413,6 +5413,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			@"I call Shared Step 51351 \(SHA > Select Product > View Recertification History\) for product saved as: (.*)")]
 		public void GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(string savedAs)
 		{
+			TestReport.UseSubSteps = true;
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
@@ -5423,6 +5424,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click 'Recertification History'");
 			thisStepsSha.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(
 				"Recertification History");
+			Delay.Seconds(1);
 		}
 
 		[StepDefinition(@"I call Shared Step 60778 \(Primary Physical Property - Packaged in gas cylinder\)")]
@@ -6718,11 +6720,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(3);
 			TestReport.StartStep("I click the Process Recertification button");
 			shaSteps.GivenIClickTheProcessRecertificationButton();
+			TestReport.StartStep("I confirm Process Recertification popup shows");
 			shaSteps.GivenIConfirmTheRecertificationPopUpIsShown();
+			TestReport.StartStep("I uncheck auto assign regulatory specialist");
 			shaSteps.GivenIUncheckTheAutoAssignRegulatorySpecialistToProductCheckBox();
+			TestReport.StartStep("I select specialist");
 			shaSteps.GivenISelectFromTheDropDownListForRegulatorySpecialist("Automated QASha");
 			Report.Screenshot();
+			TestReport.StartStep("I click continue");
 			shaSteps.GivenInTheRecertificationPopupIClick("Continue");
+			TestReport.StartStep("I wait for processing to be completed");
 			shaSteps.GivenInTheRecertificationPopupIWaitForAllProcessingToBeCompleted();
 			Report.Info("Processing is complete, clicking on close");
 			shaSteps.GivenInTheRecertificationPopupIClickOnClose();
@@ -6825,7 +6832,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			newProductSteps.ClickContinue();
 		}
 
-		[Given(
+		[StepDefinition(
 			@"I call Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20 for product saved as: (.*)")]
 		public void GivenICallSharedStep_SHAManagerAssignedProduct_AddRecertReasonForProductSavedAsTestCase(
 			string savedAs)
@@ -6918,5 +6925,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Option was showing: '" + option + "', as expected!");
 			}
 		}
+
+		[Given(@"I call Shared Step 51352 - Products page - Filter for your product - Update Required link for product saved as: (.*)")]
+		public void GivenICallSharedStep_ProductsPage_FilterForYourProduct_UpdateRequiredLink(string savedAs)
+		{
+			StepsProductGrid thisStepsProductGrid = new StepsProductGrid();
+			thisStepsProductGrid.GivenISearchForTheProductSavedAs(savedAs);
+			thisStepsProductGrid.WhenIClickRowActionsForTheFirstProductReturned();
+			thisStepsProductGrid.ClickRowAction("Update Required");
+		}
+
 	}
 }

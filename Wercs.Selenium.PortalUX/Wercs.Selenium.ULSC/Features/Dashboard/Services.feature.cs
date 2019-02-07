@@ -376,7 +376,7 @@ testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((strin
 #line 154
 testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 155
-testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart59322", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 156
 testRunner.And("In the WERCSLink dashboard I click left menu link: WERCS Studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 157

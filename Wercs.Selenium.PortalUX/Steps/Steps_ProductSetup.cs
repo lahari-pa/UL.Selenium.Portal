@@ -122,7 +122,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Completed");
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
+		[StepDefinition(
+			@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335(string name, string savedAs)
 		{
 			this.CreateProductUsingTestCase75335(savedAs, name);
@@ -194,7 +195,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
 				"Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification("red", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(
+				"red", savedAs);
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 
 			TechTalk.SpecFlow.Table recertification = new TechTalk.SpecFlow.Table(new string[] {
@@ -249,6 +251,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			shaSteps.GivenICloseTheProductRecertificationHistoryPopUp();
 
 		}
+
 		/*
 		[Given(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
 		public void GivenITakeProductWithNameFromCompletedToRecertification84108(string name, string savedAs)
@@ -285,7 +288,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
-			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
 			// Generate UPC number and delete duplicates
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
@@ -430,14 +434,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
-			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
 			// Generate UPC number and delete duplicates
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC84108");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC84108");
 			//And I call Shared Step 57753 (Create a New Registration via Register New Product(expanded menu))
 			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
 			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Alkaline battery
-			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Alkaline battery", name);
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Alkaline battery",
+				name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
 			//And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
@@ -451,11 +457,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 			sharedSteps.ICallSharedRetailer_SelectNoRetailer_ClickDone();
 			//Given I set the  field to: I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and would like to upload it
-			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English", "I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and would like to upload it");
+			newProductSteps.SetTheSectionOptionTo("OSHA-compliant Safety Data Sheet, English",
+				"I do not have an OSHA-compliant SDS for this battery but do have a Technical Data Sheet (TDS) or Battery Data Sheet (BDS) and would like to upload it");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Technical Data Sheet(TDS) or Battery Data Sheet(BDS) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("Technical Data Sheet (TDS) or Battery Data Sheet (BDS)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			sharedSteps.ICallSharedBrowseForFileSelectClickOpen(
+				"Technical Data Sheet (TDS) or Battery Data Sheet (BDS)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
 			//And I check the checkbox with description: I confirm that I have provided the most up-to-date, TDS/BDS in this product registration
-			newProductSteps.ICheckTheCheckboxWithDescription("check", "I confirm that I have provided the most up-to-date, TDS/BDS in this product registration");
+			newProductSteps.ICheckTheCheckboxWithDescription("check",
+				"I confirm that I have provided the most up-to-date, TDS/BDS in this product registration");
 			//Given in the Regulatory Documents to Provide page I click Continue
 			newProductSteps.ClickContinue();
 			//Given in the Additional Documents to Provide page I click Continue
@@ -473,19 +482,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Submitted");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Assigned");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Assigned");
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
 			//And I call Shared Step 79500(WPS Studio - PD + -set all data and publish using rule and doc queue -CKLT and SBCS only) for product saved as: TestCase84108
-			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
+			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(
+				savedAs);
 			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
 			// 59066(Go to SHA Manager)
@@ -494,13 +506,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Completed");
 
 		}
 
 
 		[StepDefinition(@"I create a product and take to completed using Test Case 84109 and save as: (.*)")]
-		public void TakeProductFromCompletedToRecertification84109(string savedAs, string name = "Answering machine, No battery included")
+		public void TakeProductFromCompletedToRecertification84109(string savedAs,
+			string name = "Answering machine, No battery included")
 		{
 			TestReport.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
@@ -517,7 +531,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
 			//And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Answering machine, No battery included
-			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Answering machine, No battery included", name);
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(
+				"Answering machine, No battery included", name);
 			// Save product to context
 			newProductSteps.SaveProductInformation(savedAs);
 			//And I call Shared Step 69687(Additional Product Information - US, No(PL))
@@ -548,13 +563,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Submitted");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Assigned");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Assigned");
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
 
@@ -564,7 +581,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: X)
 			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
 			//And I call Shared Step 79500(WPS Studio - PD + -set all data and publish using rule and doc queue -CKLT and SBCS only) for product saved as: TestCase84108
-			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
+			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(
+				savedAs);
 			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
 			// 59066(Go to SHA Manager)
@@ -573,7 +591,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Completed");
 
 		}
 
@@ -610,9 +629,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Completed
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Completed");
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its font is red indicating a recertification
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification("red", savedAs);
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(
+				"red", savedAs);
 			//And I call Shared Step 51351(SHA > Select Product > View Recertification History) for product saved as: TestCase84511
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 			//And In the Product Recertification History popup I should see the following entry
@@ -621,11 +642,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TechTalk.SpecFlow.Table recertification = new TechTalk.SpecFlow.Table(new string[] {
 				"Product ID",
 				"Active",
-				"Recertification Reason"});
+				"Recertification Reason"
+			});
 			recertification.AddRow(new string[] {
 				"saved as " + savedAs,
 				"true",
-				"Recertification of Product by WERCSmart Customer"});
+				"Recertification of Product by WERCSmart Customer"
+			});
 			shaSteps.GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(recertification);
 			//And I Close the Product Recertification History pop up
 			shaSteps.GivenICloseTheProductRecertificationHistoryPopUp();
@@ -676,7 +699,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Recertification
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Recertification");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Recertification");
 			//# And I Confirm your product is shown in the Recertification status without the red recertification font color
 			//And I call Shared Step 51351(SHA > Select Product > View Recertification History) for product saved as: TestCase84511
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
@@ -686,18 +710,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TechTalk.SpecFlow.Table recertification2 = new TechTalk.SpecFlow.Table(new string[] {
 				"Product ID",
 				"Active",
-				"Recertification Reason"});
+				"Recertification Reason"
+			});
 			recertification2.AddRow(new string[] {
 				"saved as " + savedAs,
 				"false",
-				"Recertification of Product by WERCSmart Customer"});
+				"Recertification of Product by WERCSmart Customer"
+			});
 			shaSteps.GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(recertification2);
 			//And I Close the Product Recertification History pop up
 			shaSteps.GivenICloseTheProductRecertificationHistoryPopUp();
 		}
 
 		[Given(@"I create a product with name: (.*) and take to completed using Test Case 80821 and save as: (.*)")]
-		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCaseAndSaveAsTestCase(string productName, string savedAs)
+		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCaseAndSaveAsTestCase(string productName,
+			string savedAs)
 		{
 			TestReport.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
@@ -728,20 +755,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ComponentName",
 				"Percentage",
 				"Publicly Disclosed",
-				"Public Name"});
+				"Public Name"
+			});
 			table34.AddRow(new string[] {
 				"100-41-4",
 				"Ethylbenzene",
 				"25",
 				"Yes",
-				"Undisclosed Ingredient"});
-			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
-				"Ing" + savedAs + "1", table34);
+				"Undisclosed Ingredient"
+			});
+			sharedSteps
+				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
+					"Ing" + savedAs + "1", table34);
 
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
 			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "1");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success
-			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
+			stepsNewProductIngredients
+				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("success");
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808212
 			//| CASNumber  | ComponentName | Percentage | Publicly Disclosed | Public Name            |
 			//| 37334-84-2 | Cellolyn 21   | 15         | No                 | Undisclosed Ingredient |
@@ -750,51 +781,63 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ComponentName",
 				"Percentage",
 				"Publicly Disclosed",
-				"Public Name"});
+				"Public Name"
+			});
 			table35.AddRow(new string[] {
 				"37334-84-2",
 				"Cellolyn 21",
 				"15",
 				"No",
-				"Undisclosed Ingredient"});
-			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
-				"Ing" + savedAs + "2", table35);
+				"Undisclosed Ingredient"
+			});
+			sharedSteps
+				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
+					"Ing" + savedAs + "2", table35);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 2
 			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "2");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients
+				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing808213
 			//| CASNumber  | ComponentName    | Percentage |
 			//| RR-38384-6 | FRAGRANCE-HERBAL | 10         |
 			TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
 				"CASNumber",
 				"ComponentName",
-				"Percentage"});
+				"Percentage"
+			});
 			table36.AddRow(new string[] {
 				"RR-38384-6",
 				"FRAGRANCE-HERBAL",
-				"10"});
-			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing" + savedAs + "5", table36);
+				"10"
+			});
+			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(
+				"Ing" + savedAs + "5", table36);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 3
 			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "3");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients
+				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing808214
 			//| CASNumber  | ComponentName    | Percentage |
 			//| RR-38213-8 | FRAGRANCE-BANANA | 10         |
 			TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
 				"CASNumber",
 				"ComponentName",
-				"Percentage"});
+				"Percentage"
+			});
 			table37.AddRow(new string[] {
 				"RR-38213-8",
 				"FRAGRANCE-BANANA",
-				"10"});
-			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing" + savedAs + "6", table37);
+				"10"
+			});
+			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(
+				"Ing" + savedAs + "6", table37);
 			//Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 4
 			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "4");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
-			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
+			stepsNewProductIngredients
+				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808215
 			//| CASNumber | ComponentName    | Percentage | Publicly Disclosed | Public Name            |
 			//| FLAVOR    | 611 Grape Flavor | 10         | No                 | Undisclosed Ingredient |
@@ -803,19 +846,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ComponentName",
 				"Percentage",
 				"Publicly Disclosed",
-				"Public Name"});
+				"Public Name"
+			});
 			table38.AddRow(new string[] {
 				"FLAVOR",
 				"611 Grape Flavor",
 				"10",
 				"No",
-				"Undisclosed Ingredient"});
-			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
-				"Ing" + savedAs + "7", table38);
+				"Undisclosed Ingredient"
+			});
+			sharedSteps
+				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
+					"Ing" + savedAs + "7", table38);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 5
 			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("1", "5");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
-			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
+			stepsNewProductIngredients
+				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("danger");
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808216
 			//| CASNumber | ComponentName                 | Percentage | Publicly Disclosed | Public Name            |
 			//| NA519     | Black Cherry - Natural Flavor | 10         | Yes                | Undisclosed Ingredient |
@@ -824,36 +871,44 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ComponentName",
 				"Percentage",
 				"Publicly Disclosed",
-				"Public Name"});
+				"Public Name"
+			});
 			table39.AddRow(new string[] {
 				"NA519",
 				"Black Cherry - Natural Flavor",
 				"10",
 				"Yes",
-				"Undisclosed Ingredient"});
-			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
-				"Ing" + savedAs + "8", table39);
+				"Undisclosed Ingredient"
+			});
+			sharedSteps
+				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
+					"Ing" + savedAs + "8", table39);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 6
 			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "6");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients
+				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing808217
 			//| CASNumber | ComponentName                                                                                                       | Percentage |
 			//| FRAGRANCE | Fragrance - Birch Branch: Skin Irrit. 2, Eye Irrit. 2A, Skin Sens. 1, Repro Tox 2, Acute Aquatic 2, Chronic Acute 2 | 10         |
 			TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
 				"CASNumber",
 				"ComponentName",
-				"Percentage"});
+				"Percentage"
+			});
 			table40.AddRow(new string[] {
 				"FRAGRANCE",
 				"Fragrance - Birch Branch: Skin Irrit. 2, Eye Irrit. 2A, Skin Sens. 1, Repro Tox 2" +
 				", Acute Aquatic 2, Chronic Acute 2",
-				"10"});
-			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing" + savedAs + "9", table40);
+				"10"
+			});
+			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(
+				"Ing" + savedAs + "9", table40);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 2 and denominator: 7
 			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("2", "7");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients
+				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//And I call Shared Step 80822 - Ingredients - Add non-generic - specific component - set publicly disclosed and add public name and save ingredient as: Ing808218
 			//| CASNumber | ComponentName | Percentage | Publicly Disclosed | Public Name            |
 			//| 7732-18-5 | Water         | 10         | Yes                | Undisclosed Ingredient |
@@ -862,19 +917,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ComponentName",
 				"Percentage",
 				"Publicly Disclosed",
-				"Public Name"});
+				"Public Name"
+			});
 			table41.AddRow(new string[] {
 				"7732-18-5",
 				"Water",
 				"10",
 				"Yes",
-				"Undisclosed Ingredient"});
-			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
-				"Ing" + savedAs + "10", table41);
+				"Undisclosed Ingredient"
+			});
+			sharedSteps
+				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
+					"Ing" + savedAs + "10", table41);
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 3 and denominator: 8
 			stepsNewProductIngredients.IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing("3", "8");
 			//And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a warning
-			stepsNewProductIngredients.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
+			stepsNewProductIngredients
+				.IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed("warning");
 			//Then in the Ingredients page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			//And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
@@ -886,9 +945,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//And I should see the Additional Documents to Provide Page
 			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("IFRA Certificate (Perfumery Products)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("IFRA Certificate (Perfumery Products)",
+				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate(Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("GRAS Certificate (Flavor Products)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("GRAS Certificate (Flavor Products)",
+				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			//Then in the Additional documents page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
@@ -931,9 +992,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//| Text |
 			//| Y    |
 			TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
-				"Text"});
+				"Text"
+			});
 			table42.AddRow(new string[] {
-				"Y"});
+				"Y"
+			});
 			studioSteps.ThenInThePhraseSelectorScreenISelectPhrases(table42);
 			//And In the phrase selector screen I click button: Save
 			studioSteps.ThenInThePhraseSelectorScreenIClickButton("Save");
@@ -944,17 +1007,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
 				"Component CAS",
 				"Component ID",
-				"Chemical Name"});
+				"Chemical Name"
+			});
 			table43.AddRow(new string[] {
 				"saved as " + savedAs,
 				"MIXTURE",
-				"AAA WERCS Test Raw Material"});
+				"AAA WERCS Test Raw Material"
+			});
 			sharedSteps.GivenICallSharedStep79501WPSStudio_PD_CreateComponentForRdPartyProduct(table43);
 			//Given I click on home to navigate back to editing specific product saved as TestCase80821
 			studioSteps.GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(savedAs);
 
 			//And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80821
-			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
+			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(
+				savedAs);
 
 			// 59066(Go to SHA Manager)
 			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
@@ -963,14 +1029,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Completed
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Completed");
 
 
 
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) while logged in as (.*) and take to completed using Test Case 79428 and save as: (.*)")]
-		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCase79428AndSaveAsTestCase(string productName, string loggedInAs, string savedAs)
+		[StepDefinition(
+			@"I create a product with name: (.*) while logged in as (.*) and take to completed using Test Case 79428 and save as: (.*)")]
+		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCase79428AndSaveAsTestCase(
+			string productName, string loggedInAs, string savedAs)
 		{
 			TestReport.UseSubSteps = true;
 			var sharedSteps = new Steps_Shared();
@@ -1012,15 +1081,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ComponentName",
 				"Percentage",
 				"Publicly Disclosed",
-				"Public Name"});
+				"Public Name"
+			});
 			table34.AddRow(new string[] {
 				"RR-38669-6",
 				"FLAVORS",
 				"35",
 				"Yes",
-				"Undisclosed Ingredient"});
-			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
-				"Ing" + savedAs + "1", table34);
+				"Undisclosed Ingredient"
+			});
+			sharedSteps
+				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
+					"Ing" + savedAs + "1", table34);
 			//And I call Shared Step 79436(Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing79428Frag
 			//| CASNumber | ComponentName | Percentage |
 			//| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35 |
@@ -1028,12 +1100,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
 				"CASNumber",
 				"ComponentName",
-				"Percentage"});
+				"Percentage"
+			});
 			table40.AddRow(new string[] {
 				"FRAGRANCE",
 				"Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2",
-				"35"});
-			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName("Ing" + savedAs + "2", table40);
+				"35"
+			});
+			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(
+				"Ing" + savedAs + "2", table40);
 			//And I call Shared Step 79490(Ingredients - Add non - generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
 			//	| CASNumber | ComponentName | Percentage |
 			//	| 50 - 00 - 0 | Formaldehyde | 30 |
@@ -1042,15 +1117,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"ComponentName",
 				"Percentage",
 				"Publicly Disclosed",
-				"Public Name"});
+				"Public Name"
+			});
 			table55.AddRow(new string[] {
 				"50-00-0",
 				"Formaldehyde",
 				"30",
 				"Yes",
-				"Undisclosed Ingredient"});
-			sharedSteps.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
-				"Ing" + savedAs + "3", table55);
+				"Undisclosed Ingredient"
+			});
+			sharedSteps
+				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
+					"Ing" + savedAs + "3", table55);
 
 			//Then in the Ingredients page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
@@ -1063,9 +1141,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//And I should see the Additional Documents to Provide Page
 			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("IFRA Certificate (Perfumery Products)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("IFRA Certificate (Perfumery Products)",
+				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate(Flavor Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
-			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("GRAS Certificate (Flavor Products)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			sharedSteps.ICallSharedBrowseForFileSelectClickOpen("GRAS Certificate (Flavor Products)",
+				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			//Then in the Additional documents page I click Continue
 			newProductSteps.GivenInTheNewProductPageIClickContinue("Additional documents");
 			//Then in the Product aliases page I click Continue
@@ -1111,9 +1191,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//| Text |
 			//| Y    |
 			TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
-				"Text"});
+				"Text"
+			});
 			table42.AddRow(new string[] {
-				"Y"});
+				"Y"
+			});
 			studioSteps.ThenInThePhraseSelectorScreenISelectPhrases(table42);
 			//And In the phrase selector screen I click button: Save
 			studioSteps.ThenInThePhraseSelectorScreenIClickButton("Save");
@@ -1122,7 +1204,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			studioSteps.GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(savedAs);
 
 			//And I call Shared Step 79500 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and SBCS only) for product saved as: TestCase80821
-			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(savedAs);
+			sharedSteps.GivenICallSharedStep79500WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndSBCSOnly(
+				savedAs);
 
 			// 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
@@ -1134,7 +1217,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Completed
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs, "Completed");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Completed");
 
 
 
@@ -1163,6 +1247,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				thisGlobalSteps.GivenICloseTheCurrentTab();
 				thisGlobalSteps.NavigateToLandingPage();
 			}
+
 			if (!Context.Contains("77862_KitProduct2"))
 			{
 				CreateProductUsingTestCase75335Walmart("77862_KitProduct2");
@@ -1180,46 +1265,140 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			//And I call Shared Step 57753(Create a New Registration via Register New Product(expanded menu))
 			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
-//And I In the shared step below use any of the kit product types -these are* Cosmetic Products in a kit(RU000777)*Hair Care kit(RU000723)*Hair Color Kit(RU000724)*Emergency Road kit(RU000718)*Automotive Care Products(RU000124)*Personal Care kit(RU001034)
-//And I call Shared Step 57500(The Product - Enter name, select product type - Continue - Happy Path): (.*)
-sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Emergency Road kit", "Kit" + System.DateTime.Now.ToShortDateString());
-//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
-newProductSteps.SaveProductInformation(saveAs);
-sharedSteps.Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
-//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
-//And I In the shared step below add the two completed products that you are working with
-//And I call Shared Step 31427(Create the Kit - Adding two products: product 1: (.*) and product 2: (.*))
-sharedSteps.Shared31427_CreateTheKit_AddingTwoProducts("77862_KitProduct1", "77862_KitProduct2");
-//And I call Shared Step 57506(Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-sharedSteps.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
-//And I call Shared Step 62536(Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
-//And I call Shared Step 77845(Retailer - Select WM, Done, Select Vendor ID, Continue)
-sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
-//And I call Shared Step 42759(Portal - UPC Page - add 1 UPC)
-sharedSteps.Shared42759a_Portal_UpcPage_AddUpcSavedAs("UPC77862");
-//And I click continue
-newProductSteps.ClickContinue();
-//And the comments field should appear
-newProductSteps.ThenTheCommentsFieldShouldAppear();
-//And I click continue
-newProductSteps.ClickContinue();
-// 57885 (Data Acceptance - Click Accept - Happy Path)
-sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
-// If purchase details are showing click confirm order
-newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
-//And I Click Home
-// 65080 (Login to Studio and Open SHA manager)
-sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
-// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
-sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", saveAs);
-// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(saveAs, "Submitted");
-//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
+			//And I In the shared step below use any of the kit product types -these are* Cosmetic Products in a kit(RU000777)*Hair Care kit(RU000723)*Hair Color Kit(RU000724)*Emergency Road kit(RU000718)*Automotive Care Products(RU000124)*Personal Care kit(RU001034)
+			//And I call Shared Step 57500(The Product - Enter name, select product type - Continue - Happy Path): (.*)
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(
+				"Emergency Road kit", "Kit" + System.DateTime.Now.ToShortDateString());
+			//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
+			newProductSteps.SaveProductInformation(saveAs);
+			sharedSteps.Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
+			//And I call Shared Step 57503(Regulatory Information 1 - TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			//And I In the shared step below add the two completed products that you are working with
+			//And I call Shared Step 31427(Create the Kit - Adding two products: product 1: (.*) and product 2: (.*))
+			sharedSteps.Shared31427_CreateTheKit_AddingTwoProducts("77862_KitProduct1", "77862_KitProduct2");
+			//And I call Shared Step 57506(Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+			sharedSteps
+				.GivenICallSharedTransportationDetails_RegulatedForTransportNo_ExemptionRandom_Continue_HappyPath();
+			//And I call Shared Step 62536(Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+			sharedSteps.SharedTransportationDetails2_DoNotShipInternationally_Continue();
+			//And I call Shared Step 77845(Retailer - Select WM, Done, Select Vendor ID, Continue)
+			sharedSteps.Shared77845_Retailer_SelectWM_Done_SelectVendorID_Continue();
+			//And I call Shared Step 42759(Portal - UPC Page - add 1 UPC)
+			sharedSteps.Shared42759a_Portal_UpcPage_AddUpcSavedAs("UPC77862");
+			//And I click continue
+			newProductSteps.ClickContinue();
+			//And the comments field should appear
+			newProductSteps.ThenTheCommentsFieldShouldAppear();
+			//And I click continue
+			newProductSteps.ClickContinue();
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			//And I Click Home
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", saveAs);
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(saveAs,
+				"Submitted");
+			//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 
-shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(saveAs);
+			shaSteps.ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(saveAs);
 
-}
-}
+		}
+
+
+		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75651 and save as: (.*)")]
+		public void GivenICreateProductUsingTestCase75651(string name, string savedAs)
+		{
+			this.CreateProductUsingTestCase75651(savedAs, name);
+		}
+
+		public void CreateProductUsingTestCase75651(string savedAs, string name)
+		{
+			TestReport.UseSubSteps = true;
+			var sharedSteps = new Steps_Shared();
+			var productsGridSteps = new StepsProductGrid();
+			var newProductSteps = new StepsNewProduct();
+			var newProduct = new NewProduct();
+			var shaSteps = new Steps_SHA();
+			var thisGlobalSteps = new GlobalSteps();
+			thisGlobalSteps.NavigateToLandingPage();
+			// Log in to administrator role
+			thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			// Generate UPC number and delete duplicates
+			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75651");
+			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75651");
+			// 57408 (Create a New Registration via Register New Product icon)
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			// 57500 (The Product- Enter name, select product type - Continue - Happy Path)
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", name);
+			// Save product to context
+			newProductSteps.SaveProductInformation(savedAs);
+			// 26897 (Product Characteristics - Solid only available - continue)
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+			// 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+			sharedSteps.ICallSharedIngredients_AddAnyChemical("Sodium hydroxide");
+			// 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
+			//And I call Shared Step 75146(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue)
+			TechTalk.SpecFlow.Table retailerTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Retailer"});
+			retailerTable.AddRow(new string[] {
+				"CVS"});
+			sharedSteps
+				.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(
+					retailerTable);
+
+			// 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75651","Metal Container","40");
+			// 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
+			// Click continue
+			newProductSteps.ClickContinue();
+			// Click continue
+			newProductSteps.ClickContinue();
+			// 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+			var sdsTable = new Table("Personal Protection Equipment", "Autoignition Temperature",
+				"Minimum Ignition Energy", "Viscosity", "Appearance", "Odor", "Odor Threshold",
+				"Partition Coefficient");
+			sdsTable.AddRow("Mask", "300", "1", "20", "Black", "Odorless", "No data available", "10");
+			sharedSteps
+				.GivenICallSharedSafetyDataSheetAuthoring_AditionalDataStep_AddAnyRandomDataForAllFields_HappyPath(
+					sdsTable);
+			// 57883 (Comments - Happy Path) and enter the comment: Test Comment 75335
+			sharedSteps.GivenICallSharedCommentsHappyPath("Test Comment 75335");
+			// 57885 (Data Acceptance - Click Accept - Happy Path)
+			sharedSteps.GivenICallSharedDataAcceptance_ClickAccept_HappyPath();
+			// If purchase details are showing click confirm order
+			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
+			// 65080 (Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			Report.Info(
+				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Submitted");
+			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
+			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			Report.Info(
+				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned");
+			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+				"Assigned");
+
+
+		}
+
+	}
+
 }

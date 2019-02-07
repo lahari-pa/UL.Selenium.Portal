@@ -1512,30 +1512,45 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool WaitForProcessing(int secondsToWait)
 		{
+			Report.Info("Wait for processing...");
 			string progress = "0";
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var progressBar =
-					SeleniumBrowser.WebBrowser.FindElement(
-						By.XPath("//div[@id='dialog-recertification']//div[@id='progBarRecertification']"), 2);
-
-				if (progressBar != null)
+				try
 				{
-					progress = progressBar.GetProperty("aria-valuenow");
+					var progressBar =
+						SeleniumBrowser.WebBrowser.FindElement(
+							By.XPath("//div[@id='dialog-recertification']//div[@id='progBarRecertification']"), 2);
 
-					if (progress == "100")
+					if (progressBar != null)
 					{
+						progress = progressBar.GetProperty("aria-valuenow");
+						Report.Info("Progress: " + progress);
+
+						if (progress == "100")
+						{
+							return true;
+						}
+						else
+						{
+							Report.Info("Progress is: " + progress);
+						}
+					}
+					
+				}
+				catch (Exception e)
+				{
+					Report.Info("Exception");
+				}
+				var processMessage = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//span[@id='msgRecertification']//span"), 2);
+				if (processMessage != null)
+				{
+					if (processMessage.GetValue().Contains("Processed Recertification"))
+					{
+						Report.Info(processMessage.GetValue());
+						Report.Screenshot();
 						return true;
 					}
-					else
-					{
-						Report.Info("Progress is: " + progress);
-					}
-				}
-				else
-				{
-					Report.Info("Progress bar was not found");
-					return false;
 				}
 
 				Delay.Seconds(1);

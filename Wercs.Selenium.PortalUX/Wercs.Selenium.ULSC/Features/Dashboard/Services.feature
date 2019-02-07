@@ -152,7 +152,7 @@ And I close the tab with the ULGHS.COM page
 Scenario: [24436] WERCSLink - WERCS Studio - Data Management
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 And I call Shared Step 29148 - Login to ULSC as an Administrator User
-And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart
+And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart59322
 And In the WERCSLink dashboard I click left menu link: WERCS Studio
 And In the WERCSLink dashboard I click left menu link: Data Management
 And I Confirm New window opens with the Studio Data Management window open (Welcome page shows) and that NO script errors display

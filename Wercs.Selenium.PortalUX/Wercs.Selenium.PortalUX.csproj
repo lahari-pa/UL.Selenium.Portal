@@ -46,7 +46,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.4.1.95\lib\net45\CredentialManagement.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.5.0.110\lib\net45\CredentialManagement.dll</HintPath>
     </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -106,13 +106,13 @@
       <HintPath>packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ResourcePool, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.4.1.95\lib\net45\ResourcePool.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.5.0.110\lib\net45\ResourcePool.dll</HintPath>
     </Reference>
     <Reference Include="SafewareReportingPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.4.1.95\lib\net45\SafewareReportingPlugin.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.5.0.110\lib\net45\SafewareReportingPlugin.dll</HintPath>
     </Reference>
     <Reference Include="SafewareSeleniumUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.4.1.95\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.5.0.110\lib\net45\SafewareSeleniumUtilities.dll</HintPath>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -136,7 +136,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Safeware.SeleniumUtilities.4.1.95\lib\net45\TReVor.dll</HintPath>
+      <HintPath>packages\Safeware.SeleniumUtilities.5.0.110\lib\net45\TReVor.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver">
       <HintPath>packages\Selenium.WebDriver.3.5.2\lib\net40\WebDriver.dll</HintPath>
@@ -998,7 +998,7 @@ taskkill /f /im IEDriverServer.exe /fi "memusage gt 40" 2&gt;NUL
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\SpecFlow.2.3.2\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SpecFlow.2.3.2\build\SpecFlow.targets'))" />
-    <Error Condition="!Exists('packages\Safeware.SeleniumUtilities.4.1.95\Build\Safeware.SeleniumUtilities.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Safeware.SeleniumUtilities.4.1.95\Build\Safeware.SeleniumUtilities.targets'))" />
+    <Error Condition="!Exists('packages\Safeware.SeleniumUtilities.5.0.110\Build\Safeware.SeleniumUtilities.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Safeware.SeleniumUtilities.5.0.110\Build\Safeware.SeleniumUtilities.targets'))" />
   </Target>
-  <Import Project="packages\Safeware.SeleniumUtilities.4.1.95\Build\Safeware.SeleniumUtilities.targets" Condition="Exists('packages\Safeware.SeleniumUtilities.4.1.95\Build\Safeware.SeleniumUtilities.targets')" />
+  <Import Project="packages\Safeware.SeleniumUtilities.5.0.110\Build\Safeware.SeleniumUtilities.targets" Condition="Exists('packages\Safeware.SeleniumUtilities.5.0.110\Build\Safeware.SeleniumUtilities.targets')" />
 </Project>

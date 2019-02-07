@@ -359,6 +359,7 @@ namespace WERCSmart
 			{
 				Report.Info("Navigating to the landing page");
 				SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
+				Report.Screenshot();
 				Report.Success("Successfully navigated to the landing page!");
 			}
 			catch (Exception ex)
@@ -1041,9 +1042,11 @@ namespace WERCSmart
 				if (SeleniumBrowser.Alert.IsAlertPresent())
 				{
 					Report.Info("Alert is present, accepting");
+					Report.Screenshot();
 					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 				}
 
+				Report.Info("Current URL is: " + SeleniumBrowser.GetActiveTabURL());
 
 				var allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
 
@@ -1053,6 +1056,7 @@ namespace WERCSmart
 
 					if (SeleniumBrowser.GetActiveTabURL() == GlobalParameters.TestUrl)
 					{
+						SeleniumBrowser.WebBrowser.Close();
 						break;
 					}
 				}
