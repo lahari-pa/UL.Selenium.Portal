@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -203,22 +204,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return expectedTitle == topLeftTitle[0].GetValue().Trim();
 		}
 
-		public List<string> getLeftMenuItems()
-		{
-			List<string> menuItems = new List<string>();
-			var menuOptions = containerElement.FindElements(By.XPath(".//nav/ul/li/a/span"), 2);
-			if (menuOptions.Count == 0)
-			{
-				Report.Error("No menu options were found");
-			}
-			else
-			{
-				menuItems = menuOptions.Select(x => x.GetValue().Trim()).ToList();
-			}
-
-			return menuItems;
-		}
-
 		public List<string> getSectionTitles()
 		{
 			List<string> sections = new List<string>();
@@ -398,15 +383,124 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return links;
 			}
 		}
+
+		public List<string> DashboardWidgetTitles()
+		{
+			return this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'grid-stack-item-content')]//div[@class='panel-title']"), 2).Select(x => x.Text).ToList();
+		}
+
+		public bool WercsLinkNavigationButtonDisplayed()
+		{
+			var els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav navbar-nav']//a"), 2).ToList();
+			return  els.Any(x => x != null && x.Displayed);
+		}
+
+		public bool ClickWercsLinkNavigationButton()
+		{
+			var els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav navbar-nav']//a"), 2).ToList();
+			return els.First(x => x != null && x.Displayed).TryClick();
+		}
+
+		public List<SideBarNavLink> GetSideBarNavLinks()
+		{
+			var rList = new List<SideBarNavLink>();
+			var sidebarItem = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li/a"), 2).ToList();
+			foreach (var item in sidebarItem)
+			{
+				var thisLink = new SideBarNavLink();
+				var titleEl = item.FindElement(By.XPath("./span"), 2);
+				thisLink.Title = titleEl?.Text;
+				thisLink.TitleDisplayed = titleEl?.Displayed ?? false;
+				//thisLink.TitleDisplayed = false;
+				//if (titleEl != null)
+				//{
+				//	thisLink.TitleDisplayed = titleEl.Displayed;
+				//}
+				thisLink.SubLinkTitles = item.FindElements(By.XPath("./following-sibling::ul/li/a/span"), 2).Select(x => x.Text).ToList();
+				rList.Add(thisLink);
+			}
+			return rList;
+		}
+
+		public string UserButtonText()
+		{
+			return this.containerElement.FindElement(By.XPath(".//li[@class='btn-group']/a"), 2)?.Text;
+		}
+
+		public bool ClickUserButton()
+		{
+			return this.containerElement.FindElement(By.XPath(".//li[starts-with(@class,'btn-group')]/a"), 2).TryClick();
+		}
+
+		public bool ResetDashboardIconDisplayed()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//a[@id='dashboard-widgets']"), 2);
+			return  el != null && el.Displayed;
+		}
+
+		public bool ClickResetDashboardIcon()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[@id='dashboard-widgets']"), 2).TryClick();
+		}
+
+		public bool ResetDashboardDropdownItemDisplayed()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//a[@id='dashboard-reset']"), 2);
+			return  el != null && el.Displayed;
+		}
+
+		public bool SignOutDropDownItemDisplayed()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//a[@id='logoutDialog']"), 2);
+			return el != null && el.Displayed;
+		}
+
+		public bool ClickSignOut()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[@id='logoutDialog']"), 2).TryClick();
+		}
+
+		public bool ULLogoDisplayed()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']"), 2);
+			return el != null && el.Displayed;
+		}
+
+		public bool ClickULLogo()
+		{
+			return this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']"), 2).TryClick();
+		}
 	}
 
 	public class WERCSLinkLink
 	{
 		public string LinkTitle { get; set; }
+
 		public string Href { get; set; }
 
 		public string Icon { get; set; }
 
+	}
+
+	public class SideBarNavLink : WERCSLinkDashboard
+	{
+
+		public string Title { get; set; }
+
+		public bool TitleDisplayed { get; set; }
+
+		public List<string> SubLinkTitles { get; set; }
+
+		public bool ClickLink()
+		{
+			return this.containerElement.FindElement(By.XPath(".//ul[@class='nav']//li/a[./span[text()='" + this.Title + "']]"),2).TryClick();
+		}
+
+		public bool ClickSubLink(string title)
+		{
+			return this.containerElement.FindElement(By.XPath(".//ul[@class='nav']//li/a[./span[text()='" + title + "']]"), 2).TryClick();
+
+		}
 
 	}
 }

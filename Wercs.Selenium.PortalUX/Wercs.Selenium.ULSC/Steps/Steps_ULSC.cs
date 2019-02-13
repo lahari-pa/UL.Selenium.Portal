@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Castle.Core.Internal;
 using OpenQA.Selenium;
 using ResourcePool;
 using SafewareReporting;
@@ -10,6 +11,7 @@ using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Tracing;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using WERCSmart;
 
 namespace Wercs.Selenium.ULSC.Steps
 {
@@ -366,15 +368,12 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm that the following WERCSLink menu items are showing")]
 		public void GivenIConfirmThatTheFollowingWERCSLinkMenuItemsAreShowing(Table table)
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			List<string> menuItems = thisWercsLinkDashboard.getLeftMenuItems();
-
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			var menuItems = new WERCSLinkDashboard().GetSideBarNavLinks().Select(x=>x.Title).ToList();
+			foreach (var thisRow in table.Rows)
 			{
 				Report.IsTrue(menuItems.Contains(thisRow["Menu item"]), "Failed to find menu item: " + thisRow["Menu item"],
 					"Found left menu item: " + thisRow["Menu item"]);
 			}
-
 		}
 
 		[StepDefinition(@"I confirm that the WERCSLink screen shows the following sections")]
@@ -598,7 +597,166 @@ namespace Wercs.Selenium.ULSC.Steps
 			}
 		}
 
+		[StepDefinition(@"I confirm the left hand navigation is displayed under WercsLink")]
+		public void ConfirmLeftHandNavigationDisplayed()
+		{
+			Report.IsTrue(new WERCSLinkDashboard().GetSideBarNavLinks().Any(x => !string.IsNullOrEmpty(x.Title)),
+				"The left hand navigation did not load with any items!",
+				"The left hand navigation loaded with items as expected");
+		}
 
+		[StepDefinition(@"I confirm the following widget panels are displayed on the Dashboard:")]
+		public void ConfirmWidgetPanelsDisplayedOnTheDashboard(Table table)
+		{
+			var expectedWidgets = new List<string>();
+			table.Rows.ForEach(x=> expectedWidgets.Add(x["Widget"]));
+			var actualWidgets = new WERCSLinkDashboard().DashboardWidgetTitles();
+			var success = true;
+			foreach (var widget in expectedWidgets)
+			{
+				if (actualWidgets.Contains(widget))
+				{
+					continue;
+				}
+				success = false;
+				Report.Failure("Widget: " + widget + " was not displayed!");
+				Report.Screenshot();
+			}
+			if (success)
+			{
+				Report.Success("All expected widgets were displayed: " + string.Join(", ", expectedWidgets));
+				Report.Screenshot();
+			}
+			//Report.IsTrue(expectedWidgets.All(x => actualWidgets.Contains(x)),
+			//	"Expected to see the following widgets: " + string.Join(", ", expectedWidgets + " But found: " + string.Join(", ", actualWidgets)),
+			//	"The following widgets were displayed as expected: " + string.Join(", ", expectedWidgets));
+		}
+
+		[StepDefinition(@"I Confirm the Layout shows a header, left hand navigation, Message center and KPI areas")]
+		public void ConfirmDashboardLayout_Header_LeftHandNavigation_MessageCenter_KPIAreas()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I confirm the WERCSLink header is displayed");
+			this.GivenIConfirmThatTheWERCSLinkHeaderAppearsAtTheTopLeft();
+			TestReport.StartStep("I confirm the left hand navigation is displayed under WercsLink");
+			this.ConfirmLeftHandNavigationDisplayed();
+			TestReport.StartStep("I confirm the Message widget panel is displayed on the Dashboard:");
+			var table = new Table ("Widget");
+			table.AddRow("Message Center");
+			this.ConfirmWidgetPanelsDisplayedOnTheDashboard(table);
+			TestReport.StartStep("I confirm the KPI widget panels are displayed on the Dashboard");
+			var kpiTitles = new List<string> { "Products By Retailer and Status", "RUs by Category", "Products by Recertification Reason", "Products by RU", "RUs by Category by Retailer", "Subscription Status" };
+			table = new Table("Widget");
+			foreach (var title in kpiTitles)
+			{
+				table.AddRow(title);
+			}
+			this.ConfirmWidgetPanelsDisplayedOnTheDashboard(table);
+		}
+
+		[StepDefinition(@"I confirm the WERCSLink sidebar menu icon is displayed")]
+		public void IConfirmTheWercsLinkSidebarMenuIconIsDisplayed()
+		{
+			Report.IsTrue(new WERCSLinkDashboard().WercsLinkNavigationButtonDisplayed(), "The WERCSLink sidebar menu icon was not displayed!", "The WERCSLink sidebar menu icon was displayed as expected");
+		}
+
+		[StepDefinition(@"I click the WERCSLink sidebar menu icon")]
+		public void IClickTheWercsLinkSidebarMenuIcon()
+		{
+			Report.IsTrue(new WERCSLinkDashboard().ClickWercsLinkNavigationButton(), "Failed to click the WERCSLink sidebard navigation button", "Successfully clicked the WERCSLink sidebard navigation button");
+		}
+
+		[StepDefinition(@"I confirm the left hand navigation list is (collapsed|expanded)")]
+		public void ConfirmLeftNavigationCollapsesWithTitlesNotDisplayed(string navState)
+		{
+			var sideBarItems = new WERCSLinkDashboard().GetSideBarNavLinks();
+			switch (navState)
+			{
+				case "collapsed":
+					Report.IsTrue(sideBarItems.All(x => !x.TitleDisplayed), "The side bar navigation list was not collapsed - titles were displayed!", "The side bar navigation list was collapsed as expected");
+					break;
+				case "expanded":
+					Report.IsTrue(sideBarItems.All(x => x.TitleDisplayed), "The side bar navigation list was not expanded - titles were not displayed!", "The side bar navigation list was expanded as expected");
+					break;
+				default:
+					Report.Error("Step variable must be either 'collapsed' or 'expanded'!");
+					break;
+			}
+		}
+
+		[StepDefinition(@"I confirm the user button in the header displays the logged in username")]
+		public void ConfirmUserButtonDisplaysLoggedInUserName()
+		{
+			var user = TReVor.TestUsers.GetUserSavedAs("WercsUser");
+			if (user == null)
+			{
+				Report.Failure("No ULCS WercsUser found for current branch in TReVor");
+				return;
+			}
+			var username = user.Username;
+			var displayedUser = new WERCSLinkDashboard().UserButtonText();
+			Report.IsTrue(displayedUser == username, "Expected username in the header to be: " + user + " but was: " + displayedUser + "!", "Username: " + username + " was displayed in the header as expected");
+		}
+
+		[StepDefinition(@"I click the user button in the header")]
+		public void ClickHeaderUserButton()
+		{
+			Report.IsTrue(new WERCSLinkDashboard().ClickUserButton(), "Failed to click the user button in the header!", "Successfully clicked the user button in the header");
+		}
+
+		[StepDefinition(@"I confirm the Reset Dashboard icon is displayed next to the user button in the header")]
+		public void ConfirmResetDashboardIconDisplayed()
+		{
+			Report.IsTrue(new WERCSLinkDashboard().ResetDashboardIconDisplayed(), "The Reset Dashboard icon was not displayed in the header!", "The Reset Dashboard icon was displyed in the header as expected");
+		}
+
+		[StepDefinition(@"I click the Reset Dashboard icon next to the user button in the header")]
+		public void ClickResetDashboardIcon()
+		{
+			Report.IsTrue(new WERCSLinkDashboard().ClickResetDashboardIcon(), "Failed to click the Reset Dashboard icon in the header!", "Successfully clicked the Reset Dashboard icon in the header");
+		}
+
+		[StepDefinition(@"I confirm the Reset Dashboard dropdown item is displayed underneath the header icon")]
+		public void ConfirmResetDashboardDropDownItemDisplayed()
+		{
+			Report.IsTrue(new WERCSLinkDashboard().ResetDashboardDropdownItemDisplayed(), "The Reset Dashboard dropdown item was not displayed under the header icon!", "The Reset Dashboard dropdown item was displyed under the header icon as expected");
+		}
+
+		[StepDefinition(@"I confirm a new tab opens with url: (.*)")]
+		public void ConfirmNewTabOpenWithUrl(string url)
+		{
+			new GlobalSteps().SwitchToTheTab(url);
+		}
+
+		[StepDefinition(@"I confirm the Sign Out dropdown item is (displayed|not displayed)")]
+		public void ConfirmSignOutDropdownDisplayed(string visibility)
+		{
+			if (visibility == "displayed")
+			{
+				Report.IsTrue(new WERCSLinkDashboard().SignOutDropDownItemDisplayed(), "The Sign Out dropdown item was not displayed when it was expected to be!", "The Sign Out dropdown item was displayed as expected");
+			}
+			else if (visibility == "not displayed")
+			{
+				Report.IsTrue(!new WERCSLinkDashboard().SignOutDropDownItemDisplayed(), "The Sign Out dropdown item was displayed when it was not expected to be!", "The Sign Out dropdown item was not displayed as expected");
+			}
+			else
+			{
+				Report.Error("Step parameter must be either 'displayed' or 'not displayed'!");
+			}
+		}
+
+		[StepDefinition(@"I confirm the UL Logo is displayed next to the user button in the header")]
+		public void ConfirmTheUlLogoIsDisplayedHeader()
+		{
+			Report.IsTrue(new WERCSLinkDashboard().ULLogoDisplayed(), "The UL Logo was not displayed in the header!", "The UL logo was displayed in the header as expected");
+		}
+
+		[StepDefinition(@"I click the UL Logo next to the user button in the header")]
+		public void ClickTheUlLogoHeader()
+		{
+			Report.IsTrue(new WERCSLinkDashboard().ClickULLogo(), "Failed to click the UL Logo in the header!", "Successfully clicked the UL logo in the header");
+			Delay.Seconds(10);
+		}
 	}
 
 }
