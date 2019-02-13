@@ -6,14 +6,15 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
 using Org.BouncyCastle.Crypto.Engines;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 
@@ -25,10 +26,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var placeholderEl = containerElement.FindElement(
-					By.XPath(
-						".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"),
-					2);
+				var placeholderEl = containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
 				placeholderEl.TryClick();
 				IWebElement clickResult;
 				var inputEl = containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
@@ -80,7 +78,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 						ingredient.CASNumber = clickResult.FindElement(By.XPath(".//span[2]"), 2).GetValue();
 						ingredient.ComponentName = clickResult.FindElement(By.XPath(".//span[1]"), 2).GetValue();
 						Report.Info("No CAS match was found! Clicking the first search result with CAS number: " +
-						            ingredient.CASNumber);
+									ingredient.CASNumber);
 					}
 					else
 					{
@@ -90,7 +88,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 							// No Component name was specified, so we just take the first value with a matching CAS Number!
 							clickResult = matchingCasResults.FirstOrDefault();
 							Report.Info("Clicking result in smart search with CAS number: " +
-							            clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
+										clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
 						}
 						else
 						{
@@ -98,13 +96,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 							var matchingNames = matchingCasResults.FirstOrDefault(x =>
 								x.FindElement(
 									By.XPath(".//span[@class='component-name' and text() = '" +
-									         ingredient.ComponentName + "']"), 2) != null);
+											 ingredient.ComponentName + "']"), 2) != null);
 							if (matchingNames == null)
 							{
 								// No match was found, so just take the first entry!
 								clickResult = matchingCasResults.FirstOrDefault();
 								Report.Info("Clicking result in smart search with CAS number: " +
-								            clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
+											clickResult.FindElement(By.XPath(".//span[@class='text-muted']")).Text);
 							}
 							else
 							{
@@ -139,11 +137,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 						containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					i = 0;
 					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) ==
-					       null && i < 20)
+						   null && i < 20)
 					{
 						if (containerElement
-							    .FindElement(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2)?.Text ==
-						    "No results found")
+								.FindElement(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2)?.Text ==
+							"No results found")
 						{
 							Report.Info("There were no results returned searching by Name!");
 							throw new Exception(
@@ -168,7 +166,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 						ingredient.CASNumber = clickResult.FindElement(By.XPath(".//span[2]"), 2).GetValue();
 						ingredient.ComponentName = clickResult.FindElement(By.XPath(".//span[1]"), 2).GetValue();
 						Report.Info("There was no match on name, so selected the first search result with name: " +
-						            ingredient.ComponentName + " and CAS number: " + ingredient.CASNumber);
+									ingredient.ComponentName + " and CAS number: " + ingredient.CASNumber);
 					}
 					else
 					{
@@ -177,7 +175,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 						ingredient.CASNumber = clickResult
 							.FindElement(By.XPath(".//following-sibling::span[@class='text-muted']"), 2).GetValue();
 						Report.Info("Selecting the first search result which matched on chemical name: " +
-						            ingredient.ComponentName + " with CAS: " + ingredient.CASNumber);
+									ingredient.ComponentName + " with CAS: " + ingredient.CASNumber);
 					}
 				}
 
@@ -235,7 +233,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 				Report.Info("Failed to click the matched ingredient search result!");
 				return false;
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Report.Info("The ingredient could not be created: " + ex.Message);
 				return false;
@@ -847,7 +845,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public bool ConcentrationsAreEditable()
 		{
-			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[contains(@class,'percent-comp')]"), 2).FirstOrDefault()!=null;
+			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[contains(@class,'percent-comp')]"), 2).FirstOrDefault() != null;
 
 		}
 

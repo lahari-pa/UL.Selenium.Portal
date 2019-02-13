@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ResourcePool;
-using SafewareReporting;
 
 namespace Wercs.Selenium.PortalUX.Database_Functions
 {
@@ -23,7 +16,7 @@ namespace Wercs.Selenium.PortalUX.Database_Functions
 				string connectionString = DbUtils.GetConnectionString();
 				using (conn = new SqlConnection(connectionString))
 				{
-					using (var cmd = new SqlCommand("select f_GUID from T_CLIENT where F_NAME like '%" + retailerName  + "%'", conn))
+					using (var cmd = new SqlCommand("select f_GUID from T_CLIENT where F_NAME like '%" + retailerName + "%'", conn))
 					{
 						conn.Open();
 						using (SqlDataReader reader = cmd.ExecuteReader())

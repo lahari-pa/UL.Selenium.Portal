@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
@@ -20,17 +24,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		public bool ClickSaveAndNext()
 		{
 			Delay.Seconds(1);
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[(./b[contains(text(), 'Save and Next')])]"))
-				.TryClick();
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[(./b[contains(text(), 'Save and Next')])]")).TryClick();
 
 		}
 		//Create or Copy
 		public bool SelectAddProductOption(string option)
 		{
-			return containerElement
-				.FindElement(By.XPath("//label[contains(text(), 'Add Product')]/..//label/span[contains(text(),'" + option +
-									  "')]/../input"))
-				.TryClick();
+			return containerElement.FindElement(By.XPath("//label[contains(text(), 'Add Product')]/..//label/span[contains(text(),'" + option + "')]/../input")).TryClick();
 
 		}
 
@@ -48,7 +48,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				counter++;
 			}
-			SafewareReporting.Report.Info("Waited until: " + counter.ToString());
+			Report.Info("Waited until: " + counter.ToString());
 			return false;
 		}
 
@@ -160,7 +160,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				}
 				else
 				{
-					SafewareReporting.Report.Info("Option does not exist in select box");
+					Report.Info("Option does not exist in select box");
 				}
 			}
 			catch (Exception e)
@@ -274,7 +274,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				{
 					System.Threading.Thread.Sleep(5000);
 
-					if (SeleniumUtilities.GeneralFunctions.EnterFilename(filePath))
+					if (GeneralFunctions.EnterFilename(filePath))
 					{
 						return true;
 					}
@@ -311,19 +311,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 				if (!SetUPCValue(info.UpcNumber))
 				{
-					SafewareReporting.Report.Info("Failed to set upc number");
+					Report.Info("Failed to set upc number");
 					return false;
 				}
 
 				if (!SetUPCType(info.ContainerType))
 				{
-					SafewareReporting.Report.Info("Failed to set container type");
+					Report.Info("Failed to set container type");
 					return false;
 				}
 
 				if (!SetUPCSize(info.Size))
 				{
-					SafewareReporting.Report.Info("Failed to set upc size");
+					Report.Info("Failed to set upc size");
 					return false;
 				}
 
@@ -331,7 +331,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			}
 			catch (Exception ex)
 			{
-				SafewareReporting.Report.Info(ex.Message);
+				Report.Info(ex.Message);
 				return false;
 			}
 		}
@@ -516,7 +516,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				{
 					System.Threading.Thread.Sleep(5000);
 
-					if (SeleniumUtilities.GeneralFunctions.EnterFilename(filePath))
+					if (GeneralFunctions.EnterFilename(filePath))
 					{
 						return true;
 					}
@@ -652,10 +652,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 				// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
 				// If no elements match this, then we will simply take the first element in the list
-				SafewareReporting.Report.Info("Looking for perfect match.");
+				Report.Info("Looking for perfect match.");
 				var Matches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//li[contains(@class,'ui-menu-item')]"), 2);
 
-				SafewareReporting.Report.Info("Matches: " + Matches.Count.ToString());
+				Report.Info("Matches: " + Matches.Count.ToString());
 
 				while (Matches.FirstOrDefault().FindElement(By.XPath(".//a"), 2) == null)
 				{
@@ -664,7 +664,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				}
 
 				var MatchingNameValue = Matches.FirstOrDefault(x => x.GetValue().Trim() == ingredient.ComponentName.Trim());
-				SafewareReporting.Report.Info("Got matching name value: " + MatchingNameValue);
+				Report.Info("Got matching name value: " + MatchingNameValue);
 				if (MatchingNameValue == null)
 				{
 					// No matching name entry was found, so we take the first one just in case we are looking for a partial match!

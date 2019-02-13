@@ -6,9 +6,10 @@ using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
 using Castle.Core.Internal;
 using EnvDTE;
-using ResourcePool;
-using SafewareReporting;
-using SafewareSeleniumUtilities;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Classes;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -1136,7 +1137,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			string expectedSupplierID = table.Rows[0]["Supplier ID"];
 			string expectedCompany = table.Rows[0]["Company or Brand Name"];
-			Supplier matchingSupplier = allSuppliers.FirstOrDefault(x=>x.SupplierID== expectedSupplierID && x.CompanyOrBrandName==expectedCompany);
+			Supplier matchingSupplier = allSuppliers.FirstOrDefault(x => x.SupplierID == expectedSupplierID && x.CompanyOrBrandName == expectedCompany);
 
 			Report.IsTrue(matchingSupplier != null, "No matching row was found in the list",
 				"Matching row as found as expected");
@@ -1156,7 +1157,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			List<Supplier> allSuppliers = new RetailParntersDetails().GetAllSuppliers();
 			Regex regex = new Regex(@"\d+");
-			List<string> potentialRootStrings= new List<string>();
+			List<string> potentialRootStrings = new List<string>();
 			foreach (Supplier thisSupplier in allSuppliers)
 			{
 				MatchCollection matches = Regex.Matches(thisSupplier.SupplierID, @"\d{5}1");
@@ -1174,14 +1175,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			foreach (var thisRootString in potentialRootStrings)
 			{
 				if (allSuppliers.Select(x => x.SupplierID).ToList().Contains(thisRootString + "2") &&
-				    allSuppliers.Select(x => x.SupplierID).ToList().Contains(thisRootString + "3"))
+					allSuppliers.Select(x => x.SupplierID).ToList().Contains(thisRootString + "3"))
 				{
 					foundRootString = thisRootString;
 					break;
 				}
 			}
 
-			if (!(foundRootString.Length>0))
+			if (!(foundRootString.Length > 0))
 			{
 				throw new Exception("No root string has been found");
 			}

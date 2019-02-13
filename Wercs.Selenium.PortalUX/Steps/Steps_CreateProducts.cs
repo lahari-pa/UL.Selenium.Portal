@@ -5,10 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NPOI.OpenXmlFormats.Vml.Office;
+using NTTQA_Reporting_Module.Reporting.Core;
 using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -101,7 +100,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsShared.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", saveAs);
 			Report.Info(
 				"Given In the SHA manager grid I see the WPS ID I have saved as product: " + saveAs + " and its status is: Completed");
-			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(saveAs,"Completed");
+			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(saveAs, "Completed");
 
 
 		}

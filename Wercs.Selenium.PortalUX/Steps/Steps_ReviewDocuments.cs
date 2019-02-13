@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using iTextSharp.text;
-using ResourcePool;
-using System.IO;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -55,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				OpenBrowsers = SeleniumBrowser.GetTabURLs();
 
 				if (OpenBrowsers.Select(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()) && x.Contains("documentId"))
-					    .Count() > 0)
+						.Count() > 0)
 				{
 					break;
 				}
@@ -66,7 +66,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			Report.IsTrue(OpenBrowsers.Select(x => x.ToLower().Contains(GlobalParameters.TestUrl.ToLower()) && x.Contains("documentId")).Count() > 0,
 				"No document is found", "Document has been found as expected: " + OpenBrowsers.FirstOrDefault(x => x.Contains(GlobalParameters.TestUrl) && x.Contains("documentId")));
-			
+
 		}
 
 		[Given(@"I close the document")]

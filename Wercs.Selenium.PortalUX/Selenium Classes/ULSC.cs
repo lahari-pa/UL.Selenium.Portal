@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NTTQA_Automation_Classes.Base_Classes;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {

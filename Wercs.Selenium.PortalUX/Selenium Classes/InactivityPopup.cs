@@ -1,7 +1,9 @@
 ﻿using System;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Reflection;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 
@@ -23,9 +25,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click the WERCSmart login button");
 			try
 			{
-				var blah = ResourcePool.UserPool.WERCSmart.WERCSmartUsers;
 				Report.Info("Beginning to click the Login button");
-				var test = ResourcePool.UserPool.WERCSmart.WERCSmartUsers;
 				var selHomepage = new LandingPage();
 				if (!selHomepage.Wait_for_load(1))
 				{

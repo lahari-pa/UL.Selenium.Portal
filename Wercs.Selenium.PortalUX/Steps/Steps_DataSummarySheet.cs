@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Web.Administration;
-using ResourcePool;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -14,7 +13,7 @@ using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
-	[Binding, Scope(Tag="DataSummarySheet")]
+	[Binding, Scope(Tag = "DataSummarySheet")]
 	class StepsDataSummarySheet
 	{
 		[StepDefinition(@"I should see the following batteries present:")]
@@ -51,12 +50,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I confirm that I see the following option for private label question: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingOptionForPrivateLabelQuestion(string message)
 		{
-				var dataSummarySheet = new DataSummary();
-				var found = dataSummarySheet.GetPrivateLabelStatement();
+			var dataSummarySheet = new DataSummary();
+			var found = dataSummarySheet.GetPrivateLabelStatement();
 
-				Report.IsTrue(found.Trim() == message.Trim(),
-					"private label option was not as expected! Expected: " + message + ", but found: " + found + "!",
-					"private label option was showing: " + message + ", as expected!");
+			Report.IsTrue(found.Trim() == message.Trim(),
+				"private label option was not as expected! Expected: " + message + ", but found: " + found + "!",
+				"private label option was showing: " + message + ", as expected!");
 		}
 
 		[StepDefinition(@"I confirm that I see the following option for Product has been granted an Alternative Control Plan question: (.*)")]
@@ -91,7 +90,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"option was not as expected! Expected: " + option + " in section: " + section,
 					"option was showing: " + option + " in section: " + section);
 
-		//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
+			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
 		}
 
 		[StepDefinition(@"The data summary window should be showing")]
@@ -139,7 +138,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Failure("Actual ratio was not as expected. It is: " + actualRatio);
 			}
-			Report.IsTrue(regMatch.Groups[1].ToString()==numerator, "Numerator was expected to be: " + numerator + " but is: " + regMatch.Groups[1].ToString(), "As expected, numerator is: " + numerator);
+			Report.IsTrue(regMatch.Groups[1].ToString() == numerator, "Numerator was expected to be: " + numerator + " but is: " + regMatch.Groups[1].ToString(), "As expected, numerator is: " + numerator);
 			Report.IsTrue(regMatch.Groups[2].ToString() == denominator, "Denominator was expected to be: " + denominator + " but is: " + regMatch.Groups[1].ToString(), "As expected, denominator is: " + denominator);
 
 		}

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using iTextSharp.text.pdf.parser;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 
 
@@ -89,10 +91,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetDataText()
 		{
-			List<string> returnList= new List<string>();
-			var dataAreaSelect = containerElement.FindElement(By.XPath(".//select[@id='lbData']"),2);
+			List<string> returnList = new List<string>();
+			var dataAreaSelect = containerElement.FindElement(By.XPath(".//select[@id='lbData']"), 2);
 
-			if(dataAreaSelect==null)
+			if (dataAreaSelect == null)
 			{
 				Report.Info("Could not find data area values");
 			}

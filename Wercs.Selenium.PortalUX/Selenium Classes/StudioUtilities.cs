@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
-
 
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -29,7 +29,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					var currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 					Context.AddToContext("BaseWindow", currentWindow);
 				}
-				
+
 			}
 
 			if (popupTitle == "BaseWindow")

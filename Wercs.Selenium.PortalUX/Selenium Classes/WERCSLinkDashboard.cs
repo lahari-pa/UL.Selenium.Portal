@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SafewareReporting;
-using SeleniumUtilities;
 
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -99,7 +100,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 
 			var submenuOptions =
-				matchingMenuOption.FindElements(By.XPath("../../ul[contains(@class, 'subnav')]/li/a/span"),2);
+				matchingMenuOption.FindElements(By.XPath("../../ul[contains(@class, 'subnav')]/li/a/span"), 2);
 
 			var matchingSubMenuOption =
 				submenuOptions.FirstOrDefault(x => x.GetValue().ToLower() == submenu.ToLower());
@@ -241,7 +242,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			else
 			{
-				var matchingSection = sectionTitles.FirstOrDefault(x => x.GetValue().Trim().ToLower()==section.ToLower());
+				var matchingSection = sectionTitles.FirstOrDefault(x => x.GetValue().Trim().ToLower() == section.ToLower());
 				if (matchingSection == null)
 				{
 					Report.Error("No matching section was found: " + section);
@@ -371,11 +372,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					var linkTitle = thisLink.FindElement(By.XPath("./span"), 2);
 					var linkEm = thisLink.FindElement(By.XPath("../em"), 2);
 
-					if (linkTitle != null && linkEm !=null)
+					if (linkTitle != null && linkEm != null)
 					{
 						WERCSLinkLink newLink = new WERCSLinkLink();
 						newLink.LinkTitle = linkTitle.GetValue();
-						newLink.Icon = linkEm.GetAttribute("class").Replace("fa fa-", "").Replace("level-ov","").Trim();
+						newLink.Icon = linkEm.GetAttribute("class").Replace("fa fa-", "").Replace("level-ov", "").Trim();
 						newLink.Href = thisLink.GetAttribute("href");
 						links.Add(newLink);
 					}

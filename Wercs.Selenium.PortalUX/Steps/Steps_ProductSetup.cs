@@ -6,9 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
 using NPOI.SS.Formula.Functions;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
 using NUnit.Framework.Internal;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -1161,7 +1162,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// If purchase details are showing click confirm order
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 
-//************************** Switching to SHA Manager ********************
+			//************************** Switching to SHA Manager ********************
 
 			// 65080 (Login to Studio and Open SHA manager)
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
@@ -1356,7 +1357,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					retailerTable);
 
 			// 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC75335, container type: Metal Container and size: 40
-			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75651","Metal Container","40");
+			sharedSteps.GivenICallSharedEnterUniversalProductCodeUPC_UPC_ContainerType_SizeOnly("75651", "Metal Container", "40");
 			// 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 			sharedSteps.GivenICallSharedRegulatoryDocumentsToProvide_USOnly_RequestAuthoring_HappyPath();
 			// Click continue

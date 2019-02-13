@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Reflection;
-using ResourcePool;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Cache;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
+using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 
 namespace Wercs.Selenium.PortalUX.Steps
@@ -191,7 +195,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " I login as user: " + username);
 			try
 			{
-
 				var user = (WERCSmartUser)Context.GetFromContext(username);
 				GivenIPopulateTheInputFieldWith("email", user.Email);
 				Delay.Seconds(5);
@@ -253,7 +256,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 											" was not found in context.");
 					}
 
-					var savedUser = (ResourcePool.WERCSmartUser)savedAsValue;
+					var savedUser = (WERCSmartUser)savedAsValue;
 					switch (inputField)
 					{
 						case ("email"):
@@ -317,7 +320,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var selLogin = new Login();
-				var user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs);
+				var user = TestUsers.GetUserSavedAs(accountSavedAs);
 				if (user == null)
 				{
 					throw new Exception("The user saved as: " + accountSavedAs + " could not be located in TReVor!");

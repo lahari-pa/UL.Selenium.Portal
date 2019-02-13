@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
-using SafewareReporting;
-
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
 	class SelectRetailers : NewProduct
@@ -162,7 +162,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 	}
 
-	class NoRetailerWarningPopup : BaseDialog
+	class NoRetailerWarningPopup : BaseObject
 	{
 		public const string BasePath = "//div[@class='modal fade in']";
 		[FindsBy(How = How.XPath, Using = BasePath)]

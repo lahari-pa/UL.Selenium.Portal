@@ -4,11 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using iTextSharp.text;
-using ResourcePool;
-using System.IO;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -236,7 +233,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.IsTrue((!new Ingredients().DeleteIngredientsDisplayed()), "The Delete button is displayed!", "The Delete button is not displayed as expected");
 			}
-			
+
 		}
 
 		[StepDefinition(@"I click the 'Delete' button in the Ingredients table")]

@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
-using iTextSharp.text;
-using ResourcePool;
-using System.IO;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using SafewareReporting;
+using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -26,8 +21,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var thisNewProduct = new NewProduct();
 			var erros = thisNewProduct.AllErrorMessages();
-			Report.IsTrue(erros.Contains(error), "Expected error: " + error + " but got: " + string.Join(", ", erros),
-				"As expected, error is showing as: " + error);
+			Report.IsTrue(erros.Contains(error), "Expected error: " + error + " but got: " + string.Join(", ", erros), "As expected, error is showing as: " + error);
 		}
 
 		[StepDefinition(@"in page Pesticide Details - State Registration Details I should see no errors")]
@@ -210,7 +204,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var stateRegistrationData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
 			foreach (var state in states)
 			{
-				Report.IsTrue(stateRegistrationData.First(x => x.State == state).IsKellyData, "The state: " + state  + " did not contain a tick under 'Is Kelly Data' as expected!", "State: " + state + " contained a tick under 'Is Kelly Data' as expected");
+				Report.IsTrue(stateRegistrationData.First(x => x.State == state).IsKellyData, "The state: " + state + " did not contain a tick under 'Is Kelly Data' as expected!", "State: " + state + " contained a tick under 'Is Kelly Data' as expected");
 			}
 			//var pesticideDetailsState = new PesticideDetailsState();
 			//var rowsToCheck = new List<int>();
@@ -493,7 +487,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ExpirationDate_CurrentYear_NotAugust31th(string state)
 		{
 			var table = new Table("State", "Month", "Day", "Increment year?");
-			table.AddRow(state,"8", "1", "no");
+			table.AddRow(state, "8", "1", "no");
 			this.EnterEpaRegistrationDateCurrentYear(table);
 		}
 
@@ -526,7 +520,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				DateTime dt;
 				if (int.TryParse(month, out var monthNum) && int.TryParse(day, out var dayNum))
 				{
-					 dt = new DateTime(year, monthNum, dayNum);
+					dt = new DateTime(year, monthNum, dayNum);
 				}
 				else
 				{

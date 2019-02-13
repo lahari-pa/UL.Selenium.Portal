@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SeleniumUtilities;
 
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -78,33 +79,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			set { this.containerElement.FindElement(By.XPath("//input[@name='loginEmail']"), 2).EnterText(value); }
 		}
 
-        public string PasswordField
-        {
-            get { return this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).Text; }
-	        set
-	        {
+		public string PasswordField {
+			get { return this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).Text; }
+			set
+			{
 				IWebElement pw = this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2);
-		        pw.EnterText(value);
-		        pw.SendKeys(Keys.Tab);
+				pw.EnterText(value);
+				pw.SendKeys(Keys.Tab);
 
-	        }
-        }
-
-        public void Click_Login()
-        {
-	        IWebElement loginButton =
-		        this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 2);
-
-	        if (loginButton != null)
-	        {
-		        loginButton.ClickWithScroll();
 			}
-	        else
-	        {
-		        throw new Exception("Login button was not found");
-	        }
-	        
-        }
+		}
+
+		public void Click_Login()
+		{
+			IWebElement loginButton =
+				this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 2);
+
+			if (loginButton != null)
+			{
+				loginButton.ClickWithScroll();
+			}
+			else
+			{
+				throw new Exception("Login button was not found");
+			}
+
+		}
 
 		public void Click_Forgotten_Password()
 		{

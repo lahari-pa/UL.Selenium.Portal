@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ResourcePool;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Cache;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TestStack.White.UIItems.WindowItems;
@@ -878,7 +880,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I log into PayPal with user saved as: (.*) and click Continue")]
 		public void GivenILogInWithEmailAndPassword(string savedAs)
 		{
-			var user = TReVor.TestUsers.GetUserSavedAs(savedAs);
+			var user = TestUsers.GetUserSavedAs(savedAs);
 			GivenILogInWithEmailAndPassword(user.Username, user.Password);
 		}
 

@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using Castle.Core.Internal;
-using NPOI.SS.Formula.Functions;
-using ResourcePool;
-using System.Text.RegularExpressions;
-using SafewareReporting;
-using SeleniumUtilities;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module.Reporting.Core;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
 using Wercs.Selenium.PortalUX.Database_Functions;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using Wercs.Selenium.PortalUX.Steps;

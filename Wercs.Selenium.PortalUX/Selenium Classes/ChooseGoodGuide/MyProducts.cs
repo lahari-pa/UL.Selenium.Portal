@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 {
@@ -87,12 +90,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 				//get the index of the header of the item we want to match
 				int i = ListOfHeaders.Select((value, index) => new {
-						        value,
-						        index = index + 1
-					        })
-					        .Where(pair => pair.value == findBy)
-					        .Select(pair => pair.index)
-					        .FirstOrDefault() - 1;
+					value,
+					index = index + 1
+				})
+							.Where(pair => pair.value == findBy)
+							.Select(pair => pair.index)
+							.FirstOrDefault() - 1;
 
 				if (i > -1)
 				{
@@ -104,7 +107,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			}
 			catch (Exception e)
 			{
-				SafewareReporting.Report.Info(e.Message);
+				Report.Info(e.Message);
 			}
 
 			return false;
@@ -118,7 +121,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				Delay.Seconds(2);
 				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='editdata']")).TryClick())
 				{
-					SafewareReporting.Report.Info("Clicked edit button");
+					Report.Info("Clicked edit button");
 					Delay.Seconds(1);
 
 					return Wait_for_load(60);
@@ -132,7 +135,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			if (FindAndClickProduct(findBy, findValue))
 			{
-				SafewareReporting.Report.Screenshot();
+				Report.Screenshot();
 				Delay.Seconds(2);
 				return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[@title='Delete Product']")).TryClick();
 			}

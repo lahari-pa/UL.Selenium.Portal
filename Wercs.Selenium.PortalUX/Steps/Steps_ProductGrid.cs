@@ -4,8 +4,10 @@ using System.Linq;
 using Castle.Core.Internal;
 using iTextSharp.text.pdf;
 using NPOI.HSSF.Record;
-using ResourcePool;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 
@@ -543,7 +545,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
-			string uPCNo = GlobalFunctions.GenerateUPCNumber();
+			string uPCNo = GeneralFunctions.GenerateUPCNumber();
 			Context.AddToContext(savedAs, uPCNo);
 			Report.Info("Generated UPC No: " + uPCNo);
 		}

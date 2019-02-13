@@ -2,10 +2,11 @@
 using System.Linq;
 using Mailosaur;
 using NPOI.SS.Formula.Functions;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Classes;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 
 using TechTalk.SpecFlow;
@@ -308,7 +309,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Click the WERCSmart login button");
 			try
 			{
-				var blah = ResourcePool.UserPool.WERCSmart.WERCSmartUsers;
 				Report.Info("Beginning to click the Login button");
 				var selForgotPasswordpage = new ForgottenPassword();
 				if (!selForgotPasswordpage.Wait_for_load(1))

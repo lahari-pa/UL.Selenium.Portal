@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Mailosaur;
+using NTTQA_Automation_Classes.Base_Classes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SafewareReporting;
-using SeleniumUtilities;
-
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SeleniumUtilities;
-
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
@@ -45,9 +45,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					ProductStatus thisProductStatus = new ProductStatus();
 					thisProductStatus.StatusName = codeSpan.GetValue();
 					thisProductStatus.StatusDescription = row.GetValue();
-					
+
 					thisProductStatus.CSSColour = codeSpan.GetCssValue("color");
-					
+
 					if (thisProductStatus.CSSColour == "rgba(255, 0, 255, 1)")
 					{
 						thisProductStatus.ColourName = "Magenta";

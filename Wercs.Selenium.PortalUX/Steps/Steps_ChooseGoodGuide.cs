@@ -6,8 +6,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using EnvDTE;
 using Mailosaur;
-using ResourcePool;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Cache;
+using NTTQA_TReVor_Module.Classes;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -520,7 +523,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I navigate to ChooseGoodGuide")]
 		public void GivenINavigateToChooseGoodGuide()
 		{
-			SeleniumBrowser.WebBrowser.Url = TReVor.TestVariables.GetVariableSavedAs("ChooseGGUrl");
+			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("ChooseGGUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
@@ -530,7 +533,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			ConflictMinerals thisChooseGGLogin = new ConflictMinerals();
 			Steps_ChooseGoodGuide myStepsGG = new Steps_ChooseGoodGuide();
 			GGNewProduct thisGgNewProduct = new GGNewProduct();
-			var shaUser = TReVor.TestUsers.GetUserSavedAs("ChooseGGUser");
+			var shaUser = TestUsers.GetUserSavedAs("ChooseGGUser");
 			thisChooseGGLogin.EmailAddress = shaUser.Username;
 			thisChooseGGLogin.Password = shaUser.Password;
 			thisChooseGGLogin.ClickLogin();

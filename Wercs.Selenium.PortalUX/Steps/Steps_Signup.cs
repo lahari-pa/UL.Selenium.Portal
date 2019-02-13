@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Mailosaur;
-using ResourcePool;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Cache;
+using NTTQA_TReVor_Module.Classes;
 using SeleniumUtilities;
 
 using TechTalk.SpecFlow;
@@ -94,69 +97,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw;
 			}
 		}
-
-
-		[StepDefinition(@"I create a user from the ResourcePool: (.*)")]
-		public void GivenICreateAUserFromTheResourcePool(string identifier)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I create a user from the ResourcePool: " + identifier);
-			try
-			{
-				var account = ResourcePool.UserPool.WERCSmart.WERCSmartUsers.Find(x => x.Identifier == identifier);
-				account.Email = EmailFunctions.CreateEmail(account.Email);
-				Context.AddToContext(identifier, account);
-				GivenISaveTheCurrentEmailsInTheInboxFor(identifier);
-
-				StepsLogin myStepsLogin = new StepsLogin();
-				myStepsLogin.GivenIClickOnTheNewToWercsmartLink();
-
-				StepsSignup myStepsSignup = new StepsSignup();
-				myStepsSignup.ThenTheSignupPageShouldAppear();
-
-				myStepsSignup.GivenIEnterSignupEmailUser(identifier);
-				myStepsSignup.GivenIConfirmSignupEmailUser(identifier);
-
-				myStepsSignup.GivenIClickOnSubmit();
-				Delay.Seconds(1);
-				ThenTheSignupThankYouPageShouldAppear();
-				Delay.Seconds(60);
-				ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", identifier, "<SiteNotification>","Link to create WERCSmart Account");
-
-				ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-				WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-
-				WhenIEnterTheFollowingInformationIntoTheNewUserForm(identifier);
-
-				WhenInTheNewUserFormIClickOnContinue();
-
-				ThenIShouldBeOnThePageOfTheForm("Security questions");
-
-				EnterTheFollowingIntoSecurityQuestions(identifier);
-				EnterPinForUser(identifier);
-
-				WhenInTheNewUserFormIClickOnContinue();
-
-				StepsLandingPage myStepsLandingPage = new StepsLandingPage();
-				myStepsLandingPage.ClickTheLoginButton();
-				myStepsLogin.GivenILoginAsUser(identifier);
-				GivenIfTermsOfUsePageAppearsIAccept();
-
-				StepsHomepage myStepsHomepage = new StepsHomepage();
-				myStepsHomepage.ThenTheWercSmartHomepageShouldLoad();
-
-				GlobalSteps myGlobalSteps = new GlobalSteps();
-				myGlobalSteps.GivenILogout();
-
-				Report.Success("Account details saved!");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-
 
 		[StepDefinition(@"I define the user: (.*) with the following parameters:")]
 		[StepDefinition(@"\[WERCSmart] I define the user: (.*) with the following parameters:")]
@@ -540,11 +480,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				if (emailFrom.ToLower() == "<sitenotification>")
 				{
-					emailFrom = TReVor.TestVariables.GetVariableSavedAs("NotificationEmail");
+					emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
 				}
 
 				Report.Info("Expecting email from: " + emailFrom);
-				
+
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				if (user == null)
 				{
@@ -571,7 +511,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						int i = 0;
 						while (i < 5)
 						{
-							Report.Info("Attempt: " + (i+1));
+							Report.Info("Attempt: " + (i + 1));
 							if (EmailFunctions.WaitForInboxDifferences(user.Email))
 							{
 								CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");

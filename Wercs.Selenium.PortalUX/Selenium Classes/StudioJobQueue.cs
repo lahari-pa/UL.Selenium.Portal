@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SafewareReporting;
-using SeleniumUtilities;
 
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -50,7 +51,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<Job> GetFirstXJobs(int firstX)
 		{
 			Report.Info("Get first " + firstX.ToString() + " jobs.");
-			var tableRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='jobListGrid-grid']//tr[not(@class='jqgfirstrow')]"),10);
+			var tableRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='jobListGrid-grid']//tr[not(@class='jqgfirstrow')]"), 10);
 			Report.Info("Found " + tableRows.Count.ToString() + " rows");
 			List<Job> listOfJobs = new List<Job>();
 			for (int i = 0; i < Math.Min(tableRows.Count, firstX); i++)

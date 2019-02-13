@@ -4,11 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using iTextSharp.text;
-using ResourcePool;
-using System.IO;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -99,7 +96,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				throw new Exception("Select retailers popup is not showing as expected");
 			}
 
-			if(retailer.ToLower().Contains("walmart")|| retailer.ToLower().Contains("wal-mart"))
+			if (retailer.ToLower().Contains("walmart") || retailer.ToLower().Contains("wal-mart"))
 			{
 				if (!selectRetailers.SelectRetailerContains("walmart"))
 				{

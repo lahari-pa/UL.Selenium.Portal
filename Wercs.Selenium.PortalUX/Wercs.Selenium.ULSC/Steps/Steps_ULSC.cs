@@ -4,14 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Cache;
 using OpenQA.Selenium;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Tracing;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using WERCSmart;
+
 
 namespace Wercs.Selenium.ULSC.Steps
 {
@@ -87,7 +90,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[Given(@"I navigate to Studio for ULSC")]
 		public void GivenINavigateToStudioULSC()
 		{
-			SeleniumBrowser.WebBrowser.Url = TReVor.TestVariables.GetVariableSavedAs("TestUrl");
+			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("TestUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 
 		}
@@ -96,7 +99,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		public void GivenILoginToStudioAsULSCUser()
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
-			var ulscUser = TReVor.TestUsers.GetUserSavedAs("StudioUser");
+			var ulscUser = TestUsers.GetUserSavedAs("StudioUser");
 			thisStudioLogin.Username = ulscUser.Username;
 			thisStudioLogin.Password = ulscUser.Password;
 			thisStudioLogin.ClickSignIn();
@@ -134,7 +137,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		public void GivenInTheULSCLoginPageIEnterUsernameAndPasswordForTheFollowingAccountTest(string accountSavedAs)
 		{
 			ULSCLogin thisULSCLogin = new ULSCLogin();
-			var user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs);
+			var user = TestUsers.GetUserSavedAs(accountSavedAs);
 			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
 			{
 				thisULSCLogin.Username = user.Username;
@@ -246,7 +249,7 @@ namespace Wercs.Selenium.ULSC.Steps
 						}
 						break;
 					case "ULGHS.COM":
-						string targetURL = TReVor.TestVariables.GetVariableSavedAs("ULGHS.COM");
+						string targetURL = TestVariables.GetVariableSavedAs("ULGHS.COM");
 						if (SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
 						{
 							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
@@ -255,7 +258,7 @@ namespace Wercs.Selenium.ULSC.Steps
 						}
 						break;
 					case "Data Management":
-						string targetURLDM = TReVor.TestVariables.GetVariableSavedAs("studio");
+						string targetURLDM = TestVariables.GetVariableSavedAs("studio");
 						if (SeleniumBrowser.WebBrowser.Url.Contains(targetURLDM))
 						{
 							Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
@@ -275,7 +278,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			foreach (string url in OpenBrowsers)
 			{
 				SeleniumBrowser.SwitchToTabWithURL(url);
-				if(SeleniumBrowser.WebBrowser.Title.Contains("WERCSmart"))
+				if (SeleniumBrowser.WebBrowser.Title.Contains("WERCSmart"))
 				{
 					string ulrToClose = SeleniumBrowser.GetActiveTabURL();
 					Report.Info("Attemping to close: " + ulrToClose);
@@ -301,7 +304,7 @@ namespace Wercs.Selenium.ULSC.Steps
 				}
 			}
 
-			Report.Error("Failed to switch to tab with title: " +tabTitle);
+			Report.Error("Failed to switch to tab with title: " + tabTitle);
 		}
 
 		[StepDefinition(@"In the WERCSLink page - Click the (.*) link from the (.*) area of the Services page")]
@@ -368,7 +371,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm that the following WERCSLink menu items are showing")]
 		public void GivenIConfirmThatTheFollowingWERCSLinkMenuItemsAreShowing(Table table)
 		{
-			var menuItems = new WERCSLinkDashboard().GetSideBarNavLinks().Select(x=>x.Title).ToList();
+			var menuItems = new WERCSLinkDashboard().GetSideBarNavLinks().Select(x => x.Title).ToList();
 			foreach (var thisRow in table.Rows)
 			{
 				Report.IsTrue(menuItems.Contains(thisRow["Menu item"]), "Failed to find menu item: " + thisRow["Menu item"],
@@ -420,12 +423,12 @@ namespace Wercs.Selenium.ULSC.Steps
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
 				var matchingLink = links.FirstOrDefault(x => x.LinkTitle == thisRow["Link title"]);
-				Report.IsTrue(matchingLink!=null, "Failed to find matching link: " + thisRow["Link title"],
+				Report.IsTrue(matchingLink != null, "Failed to find matching link: " + thisRow["Link title"],
 					"Found matching link: " + thisRow["Link title"]);
 
 				if (matchingLink != null)
 				{
-					Report.IsTrue(matchingLink.Icon==thisRow["Link icon"], "Failed to find matching icon: " + thisRow["Link icon"],
+					Report.IsTrue(matchingLink.Icon == thisRow["Link icon"], "Failed to find matching icon: " + thisRow["Link icon"],
 						"Found matching icon: " + thisRow["Link icon"]);
 
 				}
@@ -464,7 +467,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		public void GivenIConfirmANewWindowOpensWithTheULGHSPageShown()
 		{
 			Delay.Seconds(30);
-			string targetURL = TReVor.TestVariables.GetVariableSavedAs("ULGHS.COM");
+			string targetURL = TestVariables.GetVariableSavedAs("ULGHS.COM");
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -473,7 +476,7 @@ namespace Wercs.Selenium.ULSC.Steps
 				//Report.Info("Switching tab");
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 
-				if(SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
+				if (SeleniumBrowser.WebBrowser.Url.Contains(targetURL))
 				{
 					Report.Success("Self-Service GHS SDS page opened in a new tab. Successfully switched to that tab.");
 					Report.Screenshot();
@@ -497,7 +500,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		public void GivenIConfirmNewWindowOpensWithTheStudioDataManagementWindowOpenWelcomePageShowsAndThatNOScriptErrorsDisplay()
 		{
 			Delay.Seconds(30);
-			string targetURL = TReVor.TestVariables.GetVariableSavedAs("Studio");
+			string targetURL = TestVariables.GetVariableSavedAs("Studio");
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
@@ -546,7 +549,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			Match match = regex.Match(Branch);
 			if (match.Success)
 			{
-				var url = TReVor.TestVariables.GetVariableSavedAs("TestURL", "3", match.Value);
+				var url = TestVariables.GetVariableSavedAs("TestURL", "3", match.Value);
 				SeleniumBrowser.WebBrowser.Url = url;
 				SeleniumBrowser.WebBrowser.WaitForPageLoad();
 			}
@@ -575,7 +578,7 @@ namespace Wercs.Selenium.ULSC.Steps
 					Report.Success("Additional tab opened. Successfully switched to that tab.");
 					StudioPowerDesignerPlus thisStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
 
-					var body = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//body"),2);
+					var body = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//body"), 2);
 					Report.IsTrue(body.GetElementText().Trim() == errorMessage,
 						"Expected error message: " + errorMessage + " but got: " + body.GetElementText(),
 						"As expected, error message is showing: " + errorMessage);
@@ -609,7 +612,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		public void ConfirmWidgetPanelsDisplayedOnTheDashboard(Table table)
 		{
 			var expectedWidgets = new List<string>();
-			table.Rows.ForEach(x=> expectedWidgets.Add(x["Widget"]));
+			table.Rows.ForEach(x => expectedWidgets.Add(x["Widget"]));
 			var actualWidgets = new WERCSLinkDashboard().DashboardWidgetTitles();
 			var success = true;
 			foreach (var widget in expectedWidgets)
@@ -641,7 +644,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			TestReport.StartStep("I confirm the left hand navigation is displayed under WercsLink");
 			this.ConfirmLeftHandNavigationDisplayed();
 			TestReport.StartStep("I confirm the Message widget panel is displayed on the Dashboard:");
-			var table = new Table ("Widget");
+			var table = new Table("Widget");
 			table.AddRow("Message Center");
 			this.ConfirmWidgetPanelsDisplayedOnTheDashboard(table);
 			TestReport.StartStep("I confirm the KPI widget panels are displayed on the Dashboard");
@@ -687,7 +690,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm the user button in the header displays the logged in username")]
 		public void ConfirmUserButtonDisplaysLoggedInUserName()
 		{
-			var user = TReVor.TestUsers.GetUserSavedAs("WercsUser");
+			var user = TestUsers.GetUserSavedAs("WercsUser");
 			if (user == null)
 			{
 				Report.Failure("No ULCS WercsUser found for current branch in TReVor");

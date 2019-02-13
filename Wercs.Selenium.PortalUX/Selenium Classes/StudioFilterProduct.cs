@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using iTextSharp.text.pdf.parser;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
-
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
@@ -19,7 +20,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public bool Wait_for_load(int secondsToWait=60)
+		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			var urls = SeleniumBrowser.WebBrowser.WindowHandles;
 			for (int i = 0; i < 30; i++)

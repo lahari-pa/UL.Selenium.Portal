@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ResourcePool;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 
@@ -350,7 +351,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (savedAs.ToLower().Contains("list"))
 			{
 				var ids = (List<string>)Context.GetFromContext(savedAs);
-				if (ids == null) 
+				if (ids == null)
 				{
 					Report.Failure("Could not find product IDs in context saved as: " + savedAs);
 					return;
@@ -388,7 +389,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"I was able to " + (isChecked_ ? "deselect" : "select") + " product with ID: " + id + " when it should be disabled!",
 					"I was not able to " + (isChecked_ ? "deselect" : "select") + " product with ID: " + id + " as expected");
 			}
-			
+
 		}
 
 		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab and the checkbox is disabled while the page is working")]

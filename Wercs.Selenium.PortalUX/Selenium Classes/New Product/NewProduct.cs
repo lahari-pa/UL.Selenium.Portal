@@ -6,14 +6,17 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
 using Org.BouncyCastle.Crypto.Engines;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
@@ -170,7 +173,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			int counter = 0;
 			while (counter < secondsToWait)
 			{
-				var progWizard = containerElement.FindElement(By.XPath(".//div[@class='prog-wizard']"),2);
+				var progWizard = containerElement.FindElement(By.XPath(".//div[@class='prog-wizard']"), 2);
 				if (progWizard != null)
 				{
 					var tab = containerElement.FindElements(By.XPath(".//div[contains(@class, 'progress')]//span[contains(@data-bind, 'description')]"), 2)
@@ -422,7 +425,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						if (item.Selected)
 						{
 							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
-							SafewareReporting.Report.Info(selectedText + " is selected.");
+							Report.Info(selectedText + " is selected.");
 							return selectedText;
 						}
 					}
@@ -477,7 +480,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						if (item.Selected)
 						{
 							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
-							SafewareReporting.Report.Info(selectedText + " is selected.");
+							Report.Info(selectedText + " is selected.");
 							return selectedText;
 						}
 					}
@@ -532,7 +535,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						if (item.Selected)
 						{
 							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
-							SafewareReporting.Report.Info(selectedText + " is selected.");
+							Report.Info(selectedText + " is selected.");
 							return selectedText;
 						}
 					}
@@ -587,7 +590,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						if (item.Selected)
 						{
 							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
-							SafewareReporting.Report.Info(selectedText + " is selected.");
+							Report.Info(selectedText + " is selected.");
 							return selectedText;
 						}
 					}
@@ -642,7 +645,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						if (item.Selected)
 						{
 							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
-							SafewareReporting.Report.Info(selectedText + " is selected.");
+							Report.Info(selectedText + " is selected.");
 							return selectedText;
 						}
 					}
@@ -725,7 +728,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				else
 				{
-					SafewareReporting.Report.Info("Failed to find any row.");
+					Report.Info("Failed to find any row.");
 					emptyBatteryRowsExist = false;
 				}
 			}
@@ -870,7 +873,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -910,7 +913,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -950,7 +953,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -992,7 +995,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -1056,7 +1059,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -1098,7 +1101,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -1140,7 +1143,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -1212,7 +1215,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						if (presenceB != null)
 						{
 							presence = presenceB.FindElement(By.XPath("../span")).Text;
-							SafewareReporting.Report.Info("Adding metal: " + metalName + ": " + presence);
+							Report.Info("Adding metal: " + metalName + ": " + presence);
 							listOfMetals.Add(new MetalPresence(metalName, presence));
 						}
 						else
@@ -1223,7 +1226,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					}
 					catch (Exception e)
 					{
-						SafewareReporting.Report.Info(e.Message);
+						Report.Info(e.Message);
 					}
 
 				}
@@ -1232,7 +1235,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			set
 			{
-				SafewareReporting.Report.Info(value.Count.ToString() + " metals to set.");
+				Report.Info(value.Count.ToString() + " metals to set.");
 				var header = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
 
 				foreach (MetalPresence thisMetal in value)
@@ -1245,12 +1248,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						try
 						{
 							var metalInput = inputLabel.FindElement(By.XPath("../input"));
-							SafewareReporting.Report.Info("Attempting to set metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
+							Report.Info("Attempting to set metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
 							metalInput.TryClick();
 						}
 						catch (Exception e)
 						{
-							SafewareReporting.Report.Error("Failed to click metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
+							Report.Error("Failed to click metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
 							throw;
 						}
 					}
@@ -1280,7 +1283,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				catch (Exception e)
 				{
-					//	SafewareReporting.Report.Error(e.Message);
+					//	Report.Error(e.Message);
 				}
 
 			}
@@ -1297,7 +1300,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -1386,7 +1389,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						   ?? container.FindElements(By.XPath(".//input[contains(@data-bind,'upc')]"), 2).FirstOrDefault(x => x.GetValue().Contains(upc));
 			if (upcmatch != null)
 			{
-				if (!upcmatch.FindElement(By.XPath("./ancestor::tr[position()=1]//a[contains(text(), 'Delete')]"),2).TryClick())
+				if (!upcmatch.FindElement(By.XPath("./ancestor::tr[position()=1]//a[contains(text(), 'Delete')]"), 2).TryClick())
 				{
 					Report.Info("Failed to find delete button");
 					return false;
@@ -1520,7 +1523,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			catch (Exception ex)
 			{
-				SafewareReporting.Report.Info(ex.Message);
+				Report.Info(ex.Message);
 				return false;
 			}
 		}
@@ -2256,7 +2259,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						if (item.Selected)
 						{
 							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
-							SafewareReporting.Report.Info(selectedText + " is selected.");
+							Report.Info(selectedText + " is selected.");
 							return selectedText;
 						}
 					}
@@ -2700,7 +2703,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -2887,7 +2890,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (selectOption != null)
 				{
 					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					SafewareReporting.Report.Info("Selected option is: " + selectedOption);
+					Report.Info("Selected option is: " + selectedOption);
 					if (selectedOption.ToLower() == "yes")
 					{
 						return true;
@@ -4204,7 +4207,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<Mailosaur.Link> Links { get; set; }
 	}
 
-	class RegulatoryList : BaseDialog
+	class RegulatoryList : BaseObject
 	{
 		public const string BasePath = "//div[@class='modal fade in']";
 		[FindsBy(How = How.XPath, Using = BasePath)]

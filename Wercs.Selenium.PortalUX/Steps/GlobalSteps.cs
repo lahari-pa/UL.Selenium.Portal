@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Reflection;
 using System.Threading;
-using SafewareReporting;
 using TechTalk.SpecFlow;
 using NUnit.Framework;
 using SeleniumUtilities;
@@ -12,13 +10,15 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Cache;
+using NTTQA_TReVor_Module.Classes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using ResourcePool;
-using SafewareReportingPlugin;
 using TechTalk.SpecFlow.Assist;
-using TechTalk.SpecFlow.Tracing;
-using TReVor;
 using Wercs.Selenium.PortalUX.Classes;
 using Wercs.Selenium.PortalUX.Steps;
 
@@ -32,7 +32,7 @@ namespace WERCSmart
 		[BeforeFeature(Order = 1)]
 		public static void SetTestURL()
 		{
-			GlobalParameters.TestUrl = TReVor.TestVariables.GetVariableSavedAs("TestURL");
+			GlobalParameters.TestUrl = TestVariables.GetVariableSavedAs("TestURL");
 		}
 
 		[BeforeStep(Order = 1)]
@@ -45,7 +45,7 @@ namespace WERCSmart
 				if (!string.IsNullOrEmpty(tst))
 				{
 					GlobalParameters.FullyQualifiedTestName = tst;
-					if (!TReVor.Classes.Database_Functions.UpdateFullyQualifiedName(GlobalParameters.FullyQualifiedTestName))
+					if (!NTTQA_TReVor_Module.Database.Scenarios.UpdateFullyQualifiedName(GlobalParameters.FullyQualifiedTestName))
 					{
 						GlobalParameters.FullyQualifiedTestName = "";
 					}
@@ -143,7 +143,7 @@ namespace WERCSmart
 			{
 				Context.AddToContext("CurrentLogin", accountSavedAs);
 			}
-			var user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs);
+			var user = TestUsers.GetUserSavedAs(accountSavedAs);
 
 			if (user == null)
 			{
@@ -153,7 +153,7 @@ namespace WERCSmart
 				Match match = regex.Match(Branch);
 				if (match.Success)
 				{
-					user = TReVor.TestUsers.GetUserSavedAs(accountSavedAs,"3",match.Value);
+					user = TestUsers.GetUserSavedAs(accountSavedAs, "3", match.Value);
 				}
 				else
 				{
@@ -536,7 +536,7 @@ namespace WERCSmart
 			{
 				if (emailFrom.ToLower() == "<sitenotification>")
 				{
-					emailFrom = TReVor.TestVariables.GetVariableSavedAs("NotificationEmail");
+					emailFrom = TestVariables.GetVariableSavedAs("NotificationEmail");
 				}
 
 				var email = string.Empty;
@@ -862,7 +862,7 @@ namespace WERCSmart
 		[StepDefinition("I save the TReVor test user: (.*) to context as 'TReVorTestUser'")]
 		public void ISaveTheWercSmartUserStoredInTrevorAs(string savedAs)
 		{
-			var user = TReVor.TestUsers.GetUserSavedAs(savedAs);
+			var user = TestUsers.GetUserSavedAs(savedAs);
 			if (user == null)
 			{
 				Report.Failure("Failed to find a user stored in TReVor: " + savedAs);
@@ -892,8 +892,8 @@ namespace WERCSmart
 				Report.Info("Logging out");
 				GivenILogout();
 				Report.Info("Checking I can log in with the new credentials");
-				TReVor.TestUsers.CacheRefreshed = false;
-				TReVor.TestUsers.UpdateCache();
+				TestUsers.CacheRefreshed = false;
+				TestUsers.UpdateCache();
 				ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
 				GivenILogout();
@@ -904,12 +904,12 @@ namespace WERCSmart
 		public void IUpdateThePasswordForAllTrevorTestUsersWithinCurrentBranch()
 		{
 			TestReport.UseSubSteps = true;
-			var allUsers = TReVor.TestUsers.GetAllUsers();
+			var allUsers = TestUsers.GetAllUsers();
 			var usersSavedAs = allUsers.Select(x => x.SavedAs).ToList();
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (var savedAs in usersSavedAs)
 			{
-				var user = TReVor.TestUsers.GetUserSavedAs(savedAs);
+				var user = TestUsers.GetUserSavedAs(savedAs);
 				if (!user.Username.Contains("@"))
 				{
 					Report.Info($"The email did not contain an '@' so continuing to the next user.");
@@ -956,8 +956,8 @@ namespace WERCSmart
 					new GlobalSteps().NavigateToLandingPage();
 				}
 				Report.Info("Checking I can log in with the new credentials");
-				TReVor.TestUsers.CacheRefreshed = false;
-				TReVor.TestUsers.UpdateCache();
+				TestUsers.CacheRefreshed = false;
+				TestUsers.UpdateCache();
 				ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
 				GivenILogout();

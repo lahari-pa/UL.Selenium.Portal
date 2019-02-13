@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Mailosaur;
-using ResourcePool;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Classes;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TestStack.White.UIItems.WindowItems;
@@ -18,7 +19,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 	class Steps_ConflictMinerals
 	{
 
-		
+
 		[StepDefinition(@"in the Conflict Minerals page I put in email account for user saved as: (.*)")]
 		public void GivenInTheConflictMineralsPageIPutInEmailAccountForUserSavedAs(string savedAsUser)
 		{
@@ -34,7 +35,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Console.WriteLine(e);
 				throw;
 			}
-			
+
 		}
 
 		[Then(@"the Conflict Minerals page should load")]
@@ -93,7 +94,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				expectedEmail = Context.GetFromContext(expectedEmail.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
 					.ToString().Trim();
 			}
-			Report.IsTrue(thisConflictMinerals.ContactEmail==expectedEmail,
+			Report.IsTrue(thisConflictMinerals.ContactEmail == expectedEmail,
 				"Company contact email is not showing as expected. Should be: " + expectedEmail + " but is: " + thisConflictMinerals.ContactEmail, "Contact email is showing as expected: " + expectedEmail);
 		}
 
@@ -119,7 +120,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheConflictMineralsPageICreateEnterCompanyContactPersonAsFollows(Table table)
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			
+
 			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
 			{
 				switch (thisRow["Field"])
@@ -214,7 +215,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in the (.*) terms of use I click continue")]
 		public void ThenInTheConflictMineralsTermsOfUseIClickContinue(string dummyTitle)
 		{
-			Report.IsTrue(new ConflictMinerals().ClickContinue(),"Failed to click continue","Successfully clicked continue!");
+			Report.IsTrue(new ConflictMinerals().ClickContinue(), "Failed to click continue", "Successfully clicked continue!");
 		}
 
 
@@ -243,10 +244,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"in the (.*) login page I click on the Login button")]
 		public void GivenInTheConflictMineralsLoginPageIClickOnTheLoginButton(string dummyTitle)
 		{
-			Report.IsTrue(new ConflictMinerals().ClickLogin(),"Failed to click the log in button!","Successfully clicked the log in button!");
+			Report.IsTrue(new ConflictMinerals().ClickLogin(), "Failed to click the log in button!", "Successfully clicked the log in button!");
 		}
 
-		
+
 
 
 
@@ -309,7 +310,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenInTheConflictMineralsVerificationPageIClickVerify(string dummyTitle)
 		{
 			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
-			Report.IsTrue(thisConflictMinerals.ClickVerify(),"Failed to click the verify button","Successfully clicked the verify button!");
+			Report.IsTrue(thisConflictMinerals.ClickVerify(), "Failed to click the verify button", "Successfully clicked the verify button!");
 		}
 
 
@@ -394,7 +395,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 						break;
 					default:
 						throw new Exception("Field value as not one of the expected ones");
-					
+
 				}
 			}
 		}

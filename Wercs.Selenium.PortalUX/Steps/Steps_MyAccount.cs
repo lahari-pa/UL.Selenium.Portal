@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
-using ResourcePool;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Cache;
+using NTTQA_TReVor_Module.Classes;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TestStack.White.UIItems.WindowItems;
@@ -597,7 +601,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Success("The user: " + user + " was found in the My Account user grid");
 			Report.Screenshot();
-			var adminEmail = TReVor.TestVariables.GetVariableSavedAs("AdministratorEmailAddress");
+			var adminEmail = TestVariables.GetVariableSavedAs("AdministratorEmailAddress");
 
 			Report.IsTrue(userMatch.Email == adminEmail,
 				string.Format("The user: '{0}' was not associated with the email address: '{1}'",
@@ -809,7 +813,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 				if (emailAddress.StartsWith("<") && emailAddress.EndsWith(">"))
 				{
-					emailAddress = TReVor.TestUsers.GetUserSavedAs(emailAddress.TrimStart('<').TrimEnd('>')).Username;
+					emailAddress = TestUsers.GetUserSavedAs(emailAddress.TrimStart('<').TrimEnd('>')).Username;
 				}
 
 				Report.Info("Email Address = '" + emailAddress + "'");
@@ -852,7 +856,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void IUpdateThePasswordForTrevorTestUser(string savedAs)
 		{
 			// Get user credentials from TReVor based on saved as ID
-			var user = TReVor.TestUsers.GetUserSavedAs(savedAs);
+			var user = TestUsers.GetUserSavedAs(savedAs);
 			if (user == null)
 			{
 				Report.Failure("Unable to find TReVor test user saved as: " + savedAs);
@@ -926,7 +930,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				if (selModal.Wait_for_close())
 				{
 					Report.Info("Updating the password in TReVor Test Users");
-					TReVor.TestUsers.UpdatePassword(savedAs, newPassword);
+					TestUsers.UpdatePassword(savedAs, newPassword);
 					return;
 				}
 				throw new Exception("Modal dialog did not close!");

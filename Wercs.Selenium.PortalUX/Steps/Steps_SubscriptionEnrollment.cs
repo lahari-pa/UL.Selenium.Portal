@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Castle.Components.DictionaryAdapter;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium.Support.UI;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TestStack.White.UIItems.WindowItems;
@@ -167,7 +169,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Agency Service Agreement pop is showing as expected: " + actualText);
 
 			Report.Info("Actual message length is: " + actualText.Length.ToString() +
-			            " expected message length is: " + text.Trim().Length);
+						" expected message length is: " + text.Trim().Length);
 			if (actualText.Trim() != text.Trim())
 			{
 				StringBuilder builder = new StringBuilder();

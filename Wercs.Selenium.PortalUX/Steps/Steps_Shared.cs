@@ -5,9 +5,6 @@ using System.Linq;
 using System.Text;
 using Castle.Core.Internal;
 using NPOI.SS.Formula.Functions;
-using ResourcePool;
-using System.Text.RegularExpressions;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -15,6 +12,12 @@ using Wercs.Selenium.PortalUX.Database_Functions;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 using WERCSmart;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_Reporting_Module;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_TReVor_Module.Cache;
 
 namespace Wercs.Selenium.PortalUX.Steps
 {
@@ -69,7 +72,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", name);
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
-			                     " in the Type of Product select field");
+								 " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -881,7 +884,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I click the browse button for label: Product Label in section: " + section +
-			                     @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
+								 @" and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf");
 			MyStepsNewProduct.UploadPDFFileSectionAndType("Product Label", section,
 				@"C:\Dependencies\WERCSmart\testdoc.pdf");
 			TestReport.StartStep(@"in the New Product page I click Continue");
@@ -943,7 +946,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				.GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(
 					table.Rows[0]["Personal Protection Equipment"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " +
-			                     table.Rows[0]["Autoignition Temperature"]);
+								 table.Rows[0]["Autoignition Temperature"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(
 				table.Rows[0]["Autoignition Temperature"]);
 			TestReport.StartStep(
@@ -952,17 +955,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(
 				table.Rows[0]["Minimum Ignition Energy"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-			                     table.Rows[0]["Viscosity"]);
+								 table.Rows[0]["Viscosity"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(table.Rows[0]["Viscosity"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
-			                     table.Rows[0]["Appearance"]);
+								 table.Rows[0]["Appearance"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(
 				table.Rows[0]["Appearance"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " +
-			                     table.Rows[0]["Odor"]);
+								 table.Rows[0]["Odor"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(table.Rows[0]["Odor"]);
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " +
-			                     table.Rows[0]["Odor Threshold"]);
+								 table.Rows[0]["Odor Threshold"]);
 			MyNewProduct.GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(
 				table.Rows[0]["Odor Threshold"]);
 			Delay.Seconds(1);
@@ -1296,7 +1299,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (waterSolubility != null && waterSolubility != "N/A")
 			{
 				TestReport.StartStep("I set the Select the best Water Solubility description option to: " +
-				                     waterSolubility);
+									 waterSolubility);
 				MyNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", waterSolubility);
 			}
 			else
@@ -1697,7 +1700,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				table.Rows[0]["Personal Protection Equipment"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Autoignition I enter: " +
-			                     table.Rows[0]["Autoignition Temperature"]);
+								 table.Rows[0]["Autoignition Temperature"]);
 			MyNewProduct.SetTheSectionOptionTo("Autoignition Temperature", table.Rows[0]["Autoignition Temperature"]);
 
 			TestReport.StartStep(
@@ -1706,19 +1709,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.SetTheSectionOptionTo("Minimum Ignition Energy", table.Rows[0]["Minimum Ignition Energy"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Viscosity I enter: " +
-			                     table.Rows[0]["Viscosity"]);
+								 table.Rows[0]["Viscosity"]);
 			MyNewProduct.SetTheSectionOptionTo("Viscosity", table.Rows[0]["Viscosity"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Appearance I select: " +
-			                     table.Rows[0]["Appearance"]);
+								 table.Rows[0]["Appearance"]);
 			MyNewProduct.SetTheSectionOptionTo("Appearance", table.Rows[0]["Appearance"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor I select: " +
-			                     table.Rows[0]["Odor"]);
+								 table.Rows[0]["Odor"]);
 			MyNewProduct.SetTheSectionOptionTo("Odor", table.Rows[0]["Odor"]);
 
 			TestReport.StartStep("In the Review and Submit tab of the New Product Page for Odor Threshold I select: " +
-			                     table.Rows[0]["Odor Threshold"]);
+								 table.Rows[0]["Odor Threshold"]);
 			MyNewProduct.SetTheSectionOptionTo("Odor Threshold", table.Rows[0]["Odor Threshold"]);
 			// if Product's Dispensing Method is required enter any option
 
@@ -3864,8 +3867,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenIShouldSeeXPage("Volatile Organic Compound Summary");
-			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {"Statement"});
-			table1.AddRow(new string[] {"VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy")});
+			TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] { "Statement" });
+			table1.AddRow(new string[] { "VOC Analysis Date (Today's Date) " + DateTime.Today.ToString("MM/dd/yyyy") });
 			MyStepsNewProduct.ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table1);
 		}
 
@@ -4013,7 +4016,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			foreach (TechTalk.SpecFlow.TableRow thisRetailer in Retailers.Rows)
 			{
 				TestReport.StartStep("In the Select Retailers popup I select the retailer: " +
-				                     thisRetailer["Retailer"]);
+									 thisRetailer["Retailer"]);
 				new StepsSelectRetailers().SelectTheRetailer(thisRetailer["Retailer"]);
 			}
 
@@ -4138,14 +4141,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (MatchingJob != null)
 			{
 				Report.Success("Matching job has been found with username=SHAMANAGER, date=" +
-				               DateTime.Today.Date.ToString() +
-				               ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+							   DateTime.Today.Date.ToString() +
+							   ", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 			else
 			{
 				Report.Info("No matching job has been found with username=SHAMANAGER, date=" +
-				            DateTime.Today.Date.ToString() +
-				            ", class=Wercs.Core.BLLPortal.ImportProcessRules");
+							DateTime.Today.Date.ToString() +
+							", class=Wercs.Core.BLLPortal.ImportProcessRules");
 			}
 
 			TestReport.StartStep("I wait for this job to complete processing");
@@ -4644,7 +4647,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			List<Job> ListOfJobs = thisStudioJobQueue.GetFirstXJobs(20);
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
-			var shaUser = TReVor.TestUsers.GetUserSavedAs("SHAUser");
+			var shaUser = TestUsers.GetUserSavedAs("SHAUser");
 			Job matchingJob = ListOfJobs.FirstOrDefault(x =>
 				x.RecordID == id && x.Method == "PublishMultiple" && x.UserName == shaUser.Username);
 			if (matchingJob == null)
@@ -5501,7 +5504,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 
 				TestReport.StartStep("In the Select Retailers popup I select the retailer: " +
-				                     thisRetailer["Retailer"]);
+									 thisRetailer["Retailer"]);
 				new StepsSelectRetailers().SelectTheRetailer(thisRetailer["Retailer"]);
 			}
 
@@ -6091,7 +6094,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			if (supplier == "Products Automation Account")
 			{
-				var user = TReVor.TestUsers.GetUserSavedAs("ProductAccount");
+				var user = TestUsers.GetUserSavedAs("ProductAccount");
 				supplier = user.Username;
 			}
 
@@ -6473,7 +6476,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var pesticideDetailsState = new PesticideDetailsState();
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state +
-			                     " and select a date for the current year that is not June 30th");
+								 " and select a date for the current year that is not June 30th");
 			var MyStepsNewProduct = new StepsNewProduct();
 			var year = DateTime.Now.Year + 2;
 			var dt = new DateTime(year, 8, 8);
@@ -6523,7 +6526,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var pesticideDetailsState = new PesticideDetailsState();
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I click the EPA Expiration Date box for the state: " + state +
-			                     " and select a date for the current year that is not June 30th");
+								 " and select a date for the current year that is not June 30th");
 			var MyStepsNewProduct = new StepsNewProduct();
 			var date = DateTime.Now;
 			var year = date.Year + 2;

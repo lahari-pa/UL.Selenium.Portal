@@ -4,11 +4,14 @@ using System.Data.Common;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 
 
@@ -441,7 +444,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public int GetProductCount()
 		{
-			var pageCount = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='listPager_right']/div"),2);
+			var pageCount = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='listPager_right']/div"), 2);
 			if (pageCount == null)
 			{
 				Report.Info("No page count has been found");
@@ -453,7 +456,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Match match = regex.Match(pageCount.GetValue());
 			if (match.Success)
 			{
-				return Convert.ToInt16(match.Value.Replace("of ",""));
+				return Convert.ToInt16(match.Value.Replace("of ", ""));
 			}
 			else
 			{
@@ -497,18 +500,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			List<Product> ListOfProducts = new List<Product>();
 			//get all columns
 			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
-			for (int j =0; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
+			for (int j = 0; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
 			{
 				List<string> rowValues = new List<string>();
 				//Report.Info("Looking at row: " + j.ToString());
 				bool gotRow = false;
 				int counter = 0;
-				while(!gotRow && counter <10)
+				while (!gotRow && counter < 10)
 				{
 					try
 					{
 						ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
-						rowValues = ListOfProductRows[j].FindElements(By.XPath(".//td"),2).Select(x => x.GetValue()).ToList();
+						rowValues = ListOfProductRows[j].FindElements(By.XPath(".//td"), 2).Select(x => x.GetValue()).ToList();
 						gotRow = true;
 					}
 					catch (Exception e)
@@ -557,11 +560,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							Report.Info("Status is: " + thisProduct.Status);
 							try
 							{
-								var status = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']//tr[@class!='jqgfirstrow'][" + (j+1) + "]//td[" + (i + addIndex) + "]"), 2);
+								var status = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']//tr[@class!='jqgfirstrow'][" + (j + 1) + "]//td[" + (i + addIndex) + "]"), 2);
 								Report.Info("Status is: " + status.GetValue());
 								if (status != null)
 								{
-									thisProduct.ColourRGB =status.GetCssValue("Color");
+									thisProduct.ColourRGB = status.GetCssValue("Color");
 								}
 
 							}
@@ -666,7 +669,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var rightBorderColour = matchingTD.GetCssValue("border-right-color");
 
 				if (bottomBorderColour == "rgba(205, 10, 10, 1)" && leftBorderColour == "rgba(205, 10, 10, 1)" &&
-				    rightBorderColour == "rgba(205, 10, 10, 1)")
+					rightBorderColour == "rgba(205, 10, 10, 1)")
 				{
 					return true;
 				}
@@ -1536,7 +1539,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							Report.Info("Progress is: " + progress);
 						}
 					}
-					
+
 				}
 				catch (Exception e)
 				{
@@ -1658,7 +1661,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var enterField = containerElement.FindElement(By.XPath(".//textarea[@id='txtHoldMessage']"));
 			string originalMessage = this.GetSupplierMessage();
-			enterField.SendKeys(" " +message);
+			enterField.SendKeys(" " + message);
 			return (enterField.GetValue() == originalMessage + " " + message);
 		}
 
@@ -1696,7 +1699,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			bool allSucceeded = true;
 			//uncheck all checkboxes
-			var checkboxes = containerElement.FindElements(By.XPath(".//div[@id='holdcheckboxes']//input[@type='checkbox']"),2);
+			var checkboxes = containerElement.FindElements(By.XPath(".//div[@id='holdcheckboxes']//input[@type='checkbox']"), 2);
 
 			foreach (var thisCheckbox in checkboxes)
 			{
@@ -1707,7 +1710,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			foreach (string client in clientList)
 			{
-				IWebElement checkbox=null;
+				IWebElement checkbox = null;
 				IWebElement matchingLabel = optionLabels.FirstOrDefault(x => x.GetValue().Contains(client));
 				if (matchingLabel != null)
 				{
@@ -2024,7 +2027,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var matchingButton = buttonList.FirstOrDefault(x => x.GetValue().Trim() == button);
 			if (matchingButton == null)
 			{
-				matchingButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button/span[text()='" +  button + "']"), 2);
+				matchingButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button/span[text()='" + button + "']"), 2);
 				if (matchingButton == null)
 				{
 					Report.Info("no matching button was found");

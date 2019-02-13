@@ -8,8 +8,10 @@ using MailboxAPI = Mailosaur.MailboxApi;
 using MailosaurBasicEmail = Mailosaur.Email;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SafewareReporting;
-using SeleniumUtilities;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 
 namespace MySDS.SeleniumClasses
 {
@@ -593,7 +595,7 @@ namespace MySDS.SeleniumClasses
 		public bool EnterEmailAddress(string emailAddress)
 		{
 			Report.Info("Entering Email Address: " + emailAddress);
-			ExtensionMethods.EnterText(this._emailaddressInput, emailAddress);
+			_emailaddressInput.EnterText(emailAddress);
 			return true;
 		}
 
@@ -604,7 +606,7 @@ namespace MySDS.SeleniumClasses
 		public bool EnterPassword(string password)
 		{
 			Report.Info("Entering Password: " + password);
-			ExtensionMethods.EnterText(this._passwordInput, password);
+			_passwordInput.EnterText(password);
 			return true;
 		}
 
@@ -688,7 +690,7 @@ namespace MySDS.SeleniumClasses
 				return false;
 			}
 
-			var myAccount = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//ul/li/a[text()='" + accountName + " ']"), 10).FirstOrDefault();
+			var myAccount = containerElement.FindElements(By.XPath(".//ul/li/a[text()='" + accountName + " ']"), 10).FirstOrDefault();
 
 			if (myAccount == null)
 			{
@@ -698,10 +700,10 @@ namespace MySDS.SeleniumClasses
 			}
 			Report.Success(accountName + " Account Found - Attempting to Click");
 
-			ExtensionMethods.ClickWithScroll(myAccount);
+			myAccount.ClickWithScroll();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 
-			var myLogOut = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//ul/li/a[text()='Log out']"), 10).FirstOrDefault();
+			var myLogOut = containerElement.FindElements(By.XPath(".//ul/li/a[text()='Log out']"), 10).FirstOrDefault();
 
 			if (myLogOut == null)
 			{
@@ -711,7 +713,7 @@ namespace MySDS.SeleniumClasses
 			}
 			Report.Success("Log Out Link Found - Attempting to Click");
 
-			ExtensionMethods.ClickWithScroll(myLogOut);
+			myLogOut.ClickWithScroll();
 			Delay.Seconds(2.5 * Delay.SpeedFactor);
 
 			var myLogin = new MailosaurLogIn();
@@ -773,7 +775,7 @@ namespace MySDS.SeleniumClasses
 				return false;
 			}
 
-			var myMailbox = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/a[text()='" + mailboxName + "']"), 10).FirstOrDefault();
+			var myMailbox = containerElement.FindElements(By.XPath(".//div/a[text()='" + mailboxName + "']"), 10).FirstOrDefault();
 
 			if (myMailbox == null)
 			{
@@ -783,7 +785,7 @@ namespace MySDS.SeleniumClasses
 			}
 			Report.Success(mailboxName + " Mailbox Found - Attempting to Click");
 
-			ExtensionMethods.ClickWithScroll(myMailbox);
+			myMailbox.ClickWithScroll();
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 
 			var myInbox = new MailosaurInbox();
@@ -816,7 +818,7 @@ namespace MySDS.SeleniumClasses
 			{
 				IWebElement tableInbox = this.containerElement.FindElement(By.XPath(".//div[@class='email-list']"));
 
-				IWebElement rowEmail = ExtensionMethods.FindElements(tableInbox, By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains(prefix));
+				IWebElement rowEmail = tableInbox.FindElements(By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => p.GetValue().Contains(prefix));
 
 				if (rowEmail != null)
 				{
@@ -844,7 +846,7 @@ namespace MySDS.SeleniumClasses
 
 				IWebElement tableInbox = this.containerElement.FindElement(By.XPath(".//div[@class='email-list']"));
 
-				IWebElement rowEmail = ExtensionMethods.FindElements(tableInbox, By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains(prefix));
+				IWebElement rowEmail = tableInbox.FindElements(By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => p.GetValue().Contains(prefix));
 
 				if (rowEmail != null)
 				{
@@ -918,7 +920,7 @@ namespace MySDS.SeleniumClasses
 
 			Report.Info("Checking That Email with Prefix: " + order + " Does Not Exist");
 
-			IWebElement rowEmail = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains(order));
+			IWebElement rowEmail = containerElement.FindElements(By.XPath(".//div[@class='subject']"), 10).FirstOrDefault(p => p.GetValue().Contains(order));
 
 			Delay.Seconds(1.5 * Delay.SpeedFactor);
 			if (rowEmail == null)
@@ -995,7 +997,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Delete_Exists");
 
-			IWebElement fLink = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//button[@class='btn btn-link js-delete']/i"), 10).FirstOrDefault();
+			IWebElement fLink = containerElement.FindElements(By.XPath(".//button[@class='btn btn-link js-delete']/i"), 10).FirstOrDefault();
 
 			if (fLink == null)
 			{
@@ -1062,7 +1064,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Email_Forgot_Password_Link");
 
-			IWebElement fLink = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a[contains(@href, 'ResetPassword.aspx')]"), 10).FirstOrDefault();
+			IWebElement fLink = containerElement.FindElements(By.XPath(".//div/div[@class='email-content clearfix']/a[contains(@href, 'ResetPassword.aspx')]"), 10).FirstOrDefault();
 
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1074,7 +1076,7 @@ namespace MySDS.SeleniumClasses
 					return false;
 				}
 				Delay.Seconds(2 * Delay.SpeedFactor);
-				IWebElement myForgot = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//td/a[contains(@href, 'ResetPassword.aspx')]"), 10).FirstOrDefault();
+				IWebElement myForgot = containerElement.FindElements(By.XPath(".//td/a[contains(@href, 'ResetPassword.aspx')]"), 10).FirstOrDefault();
 				if (myForgot == null)
 				{
 					Report.Error("Failed to find Reset Password Link");
@@ -1223,8 +1225,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Client_Create_Link_Exists");
 
-			IWebElement fLink =
-				ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains("Simply click this link to create"));
+			IWebElement fLink = containerElement.FindElements(By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => p.GetValue().Contains("Simply click this link to create"));
 
 			Delay.Seconds(2 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1243,8 +1244,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Client_Create_Link");
 
-			IWebElement fLink =
-				ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains("link"));
+			IWebElement fLink = containerElement.FindElements(By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => p.GetValue().Contains("link"));
 
 			Delay.Seconds(1 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1266,8 +1266,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Client_Login_Link");
 
-			IWebElement fLink =
-				ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => ExtensionMethods.GetValue(p).Contains("Here"));
+			IWebElement fLink = containerElement.FindElements(By.XPath(".//div/div[@class='email-content clearfix']/a"), 10).FirstOrDefault(p => p.GetValue().Contains("Here"));
 
 			Delay.Seconds(5 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1289,7 +1288,7 @@ namespace MySDS.SeleniumClasses
 		{
 			Report.Info("Beginning Email_Reset_Password_Link");
 
-			IWebElement fLink = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//div/div[@class='email-content clearfix']/a[contains(@href, 'RecipientPasswordReset')]"), 10).FirstOrDefault();
+			IWebElement fLink = containerElement.FindElements(By.XPath(".//div/div[@class='email-content clearfix']/a[contains(@href, 'RecipientPasswordReset')]"), 10).FirstOrDefault();
 
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			if (fLink == null)
@@ -1302,7 +1301,7 @@ namespace MySDS.SeleniumClasses
 				}
 				Delay.Seconds(2 * Delay.SpeedFactor);
 				Report.Info("On Links Page");
-				IWebElement myReset = ExtensionMethods.FindElements(this.containerElement, By.XPath(".//td/a[contains(@href, 'RecipientPasswordReset')]"), 10).FirstOrDefault();
+				IWebElement myReset = containerElement.FindElements(By.XPath(".//td/a[contains(@href, 'RecipientPasswordReset')]"), 10).FirstOrDefault();
 
 				if (myReset == null)
 				{
@@ -1389,7 +1388,7 @@ namespace MySDS.SeleniumClasses
 
 		public void Save_As()
 		{
-			ExtensionMethods.SaveAs(this.Plugin);
+			Plugin.SaveAs();
 		}
 
 		public bool Click_Save_As()
@@ -1416,7 +1415,7 @@ namespace MySDS.SeleniumClasses
 
 		public void Save_As()
 		{
-			ExtensionMethods.SaveAs(this.Plugin);
+			Plugin.SaveAs();
 		}
 
 		public bool Click_Save_As()

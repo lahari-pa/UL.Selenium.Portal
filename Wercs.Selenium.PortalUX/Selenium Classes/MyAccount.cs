@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using BoDi;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Classes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using Org.BouncyCastle.Asn1.Mozilla;
-using SafewareReporting;
 using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Classes;
 
@@ -85,7 +88,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			catch (Exception e)
 			{
-				SafewareReporting.Report.Error(e.Message);
+				Report.Error(e.Message);
 				return false;
 			}
 
@@ -103,7 +106,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (!listOfUsers.Contains(username))
 			{
-				SafewareReporting.Report.Error("Username: " + username + " does not show in the list. The full list is: " +
+				Report.Error("Username: " + username + " does not show in the list. The full list is: " +
 											  string.Join(",", listOfUsers));
 				return false;
 			}
@@ -125,7 +128,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			else
 			{
-				SafewareReporting.Report.Error("Actions elipsis is not found");
+				Report.Error("Actions elipsis is not found");
 				return false;
 			}
 
@@ -144,7 +147,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			else
 			{
-				SafewareReporting.Report.Error("Actions link is not found");
+				Report.Error("Actions link is not found");
 				return false;
 			}
 
@@ -1261,8 +1264,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return null;
 			}
 			Random r = new Random();
-			int rInt = r.Next(1, rows.Count+1); //for ints
-			var thisID = rows[rInt-1].FindElement(By.XPath("./td/div/small"), 2).Text;
+			int rInt = r.Next(1, rows.Count + 1); //for ints
+			var thisID = rows[rInt - 1].FindElement(By.XPath("./td/div/small"), 2).Text;
 			var thisName = rows[rInt - 1].FindElement(By.XPath("./td/div[@data-bind='text:Name']"), 2).Text;
 
 			PackagingTypeItem thisItem = new PackagingTypeItem();

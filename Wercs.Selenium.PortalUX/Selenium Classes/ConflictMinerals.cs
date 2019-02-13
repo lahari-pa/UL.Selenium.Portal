@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SafewareReporting;
-using SeleniumUtilities;
-using TechTalk.SpecFlow.Assist;
-
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
@@ -54,13 +53,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			catch (Exception e)
 			{
-				
+
 			}
 			return false;
-		
-	}
 
-	public string NewEmail {
+		}
+
+		public string NewEmail {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).Text.Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).EnterText(value); }
 		}
@@ -107,7 +106,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string ContactEmail {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtContactEmail']"), 2).GetValue().Trim(); }
-			
+
 		}
 
 		public string ContactPhoneNumber {
@@ -138,7 +137,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			set
 			{
-				var countrySelect = this.containerElement.FindElement(By.XPath(".//select[@id='Countries']"), 2); 
+				var countrySelect = this.containerElement.FindElement(By.XPath(".//select[@id='Countries']"), 2);
 				countrySelect.Select(value);
 			}
 		}
@@ -165,7 +164,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var chkAccepted = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//*[@id='Accepted']"), 2);
 				chkAccepted.Check(value);
 			}
-		} 
+		}
 
 		public bool ClickLogin()
 		{
@@ -214,7 +213,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-		
+
 
 		public bool ClickSignIn()
 		{
@@ -292,7 +291,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var Contents = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='legends']")).FirstOrDefault(x=>x.Text.Contains("Congratulations! You have successfully"));
+				var Contents = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='legends']")).FirstOrDefault(x => x.Text.Contains("Congratulations! You have successfully"));
 
 				if (Contents != null)
 				{
@@ -319,7 +318,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				catch (Exception e)
 				{
 				}
-				
+
 				Delay.Seconds(1);
 			}
 
@@ -342,7 +341,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				catch (Exception e)
 				{
 				}
-				
+
 				Delay.Seconds(1);
 			}
 
@@ -362,10 +361,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e){
-					
+				catch (Exception e)
+				{
+
 				}
-				
+
 				Delay.Seconds(1);
 			}
 
@@ -423,7 +423,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool UlToysDashboardLoads()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h2[text()='My Company Details']"),30)!=null;
+			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h2[text()='My Company Details']"), 30) != null;
 		}
 	}
 }

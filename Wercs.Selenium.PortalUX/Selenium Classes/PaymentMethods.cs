@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SafewareReporting;
 using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	class PaymentMethods : BaseDialog
+	class PaymentMethods : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "paymentMethodsContainer")]
 		protected override IWebElement containerElement { get; set; }
@@ -798,7 +801,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	}
 
-	class PaymentMethods_Edit_Address : BaseDialog
+	class PaymentMethods_Edit_Address : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "editAddressDetails")]
 		protected override IWebElement containerElement { get; set; }
@@ -1344,7 +1347,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 	}
 
-	class PaymentMethods_Subscription_Billing : BaseDialog
+	class PaymentMethods_Subscription_Billing : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "shoppingCart")]
 		protected override IWebElement containerElement { get; set; }
@@ -1582,7 +1585,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	}
 
-	class PaymentMethods_Thank_You : BaseDialog
+	class PaymentMethods_Thank_You : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "shoppingCart")]
 		protected override IWebElement containerElement { get; set; }
@@ -1637,7 +1640,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 	}
 
-	class PaymentMethods_PayPal : BaseDialog
+	class PaymentMethods_PayPal : BaseObject
 	{
 		public const string BasePath = "//div[@class='main']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
@@ -1694,7 +1697,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 	}
 
-	class PaymentMethods_PayPal_MemberReview : BaseDialog
+	class PaymentMethods_PayPal_MemberReview : BaseObject
 	{
 		public const string BasePath = "memberReview";
 		[FindsBy(How = How.Id, Using = BasePath)]

@@ -8,9 +8,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using NPOI.OpenXmlFormats.Spreadsheet;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA_TReVor_Module.Cache;
 using OpenQA.Selenium;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using Wercs.Selenium.PortalUX.Classes;
@@ -29,7 +33,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.open();");
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(SeleniumBrowser.WebBrowser.WindowHandles.Last());
-			SeleniumBrowser.WebBrowser.Url = TReVor.TestVariables.GetVariableSavedAs("SHAUrl");
+			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("SHAUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
 		}
 
@@ -44,7 +48,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenILoginToStudioAsAdministrator()
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
-			var shaUser = TReVor.TestUsers.GetUserSavedAs("SHAUser");
+			var shaUser = TestUsers.GetUserSavedAs("SHAUser");
 			thisStudioLogin.Username = shaUser.Username;
 			thisStudioLogin.Password = shaUser.Password;
 			thisStudioLogin.ClickSignIn();
@@ -489,7 +493,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					else
 					{
 						Report.Info("Active did not match. Expected: " + thisRow["Active"] + " but got: " +
-						            thisProduct.Active);
+									thisProduct.Active);
 						allPassed = false;
 					}
 
@@ -500,8 +504,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 					else
 					{
 						Report.Info("Recertification reason did not match. Expected: " +
-						            thisRow["Recertification Reason"] + " but got: " +
-						            thisProduct.RecertificationReason);
+									thisRow["Recertification Reason"] + " but got: " +
+									thisProduct.RecertificationReason);
 						allPassed = false;
 					}
 
@@ -519,7 +523,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 							else
 							{
 								Report.Info("Recertification date did not match. Expected date between " + yesterday.ToString() + " and " + tommorrow.ToString() + " but got: " +
-								            thisProduct.RecertificationDate.ToString());
+											thisProduct.RecertificationDate.ToString());
 								allPassed = false;
 							}
 						}
@@ -534,8 +538,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 							else
 							{
 								Report.Info("Recertification date did not match. Expected: " +
-								            thisRow["Date"] + " but got: " +
-								            thisProduct.RecertificationDate.ToString());
+											thisRow["Date"] + " but got: " +
+											thisProduct.RecertificationDate.ToString());
 								allPassed = false;
 							}
 						}
@@ -776,7 +780,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
 					if (SeleniumBrowser.WebBrowser.FindElement(
-						    By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+							By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
@@ -899,7 +903,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			actualMessage = regex.Replace(actualMessage, " ");
 
 			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
-			            " expected message length is: " + shouldSee.Trim().Length);
+						" expected message length is: " + shouldSee.Trim().Length);
 			if (actualMessage.Trim() != shouldSee.Trim())
 			{
 				StringBuilder builder = new StringBuilder();
@@ -952,7 +956,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			actualMessage = regex.Replace(actualMessage, " ");
 
 			Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
-			            " expected message length is: " + shouldSee.Trim().Length);
+						" expected message length is: " + shouldSee.Trim().Length);
 			if (actualMessage.Trim() != shouldSee.Trim())
 			{
 				StringBuilder builder = new StringBuilder();
@@ -1097,7 +1101,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				actualMessage = regex.Replace(actualMessage, " ");
 
 				Report.Info("Actual message length is: " + actualMessage.Length.ToString() +
-				            " expected message length is: " + shouldSee.Trim().Length);
+							" expected message length is: " + shouldSee.Trim().Length);
 				if (actualMessage.Trim() != shouldSee.Trim())
 				{
 					StringBuilder builder = new StringBuilder();
@@ -1459,7 +1463,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(@"In the list of UPCs I should (see|not see) case pack indicatior for UPC: (.*)")]
-		public void ConfirmCaseUpc(string condition,string upc)
+		public void ConfirmCaseUpc(string condition, string upc)
 		{
 			try
 			{
@@ -1506,18 +1510,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 						.ToString();
 				}
 				Report.Screenshot();
-					if (condition == "see")
-					{
-						Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber.Contains( upc + "*")),
-							$@"UPC did not appear Case Pack Indicator on the Product UPC list! UPC numbers were: {string.Join(", ", displayedUpcs)}",
-							$@"UPC appeared with Case Pack Indicator on the Product UPC list as expected");
-					}
-					if (condition == "not see")
-					{
-						Report.IsFalse(displayedUpcs.Any(x => x.UPCNumber.Contains(upc + "*")),
-							$@"UPC did  appear Case Pack Indicator on the Product UPC list! where it should not be, UPC numbers were: {string.Join(", ", displayedUpcs)}",
-							$@"UPC did not appeared with Case Pack Indicator on the Product UPC list as expected");
-					}
+				if (condition == "see")
+				{
+					Report.IsTrue(displayedUpcs.Any(x => x.UPCNumber.Contains(upc + "*")),
+						$@"UPC did not appear Case Pack Indicator on the Product UPC list! UPC numbers were: {string.Join(", ", displayedUpcs)}",
+						$@"UPC appeared with Case Pack Indicator on the Product UPC list as expected");
+				}
+				if (condition == "not see")
+				{
+					Report.IsFalse(displayedUpcs.Any(x => x.UPCNumber.Contains(upc + "*")),
+						$@"UPC did  appear Case Pack Indicator on the Product UPC list! where it should not be, UPC numbers were: {string.Join(", ", displayedUpcs)}",
+						$@"UPC did not appeared with Case Pack Indicator on the Product UPC list as expected");
+				}
 			}
 			catch (NoSuchWindowException)
 			{
@@ -1583,7 +1587,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void SetAutoAssignCheckbox(string trueOrFalse)
 		{
 			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
-			Report.IsTrue(thisRecertificationPopup.SetAutoAssignRegulatorySpecialistToProduct(trueOrFalse.ToLower()=="true"), "Failed to set set auto assign to: " + trueOrFalse,
+			Report.IsTrue(thisRecertificationPopup.SetAutoAssignRegulatorySpecialistToProduct(trueOrFalse.ToLower() == "true"), "Failed to set set auto assign to: " + trueOrFalse,
 				"Set auto assign to: " + trueOrFalse);
 		}
 

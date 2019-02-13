@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using iTextSharp.text;
-using ResourcePool;
 using System.IO;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -83,7 +84,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new UPC().InputUpcCaseInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
 		}
 
- 
+
 		[StepDefinition(@"I call Shared Step 87641\(Enter Universal Product Code - case information\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and Quantity: (.*) and Transportation option: (.*)")]
 		public void UPCCaseInformation(string upc, string containerType, string size, string quantity, string transportation)
 		{

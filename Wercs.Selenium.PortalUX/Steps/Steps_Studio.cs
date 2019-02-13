@@ -5,10 +5,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NPOI.OpenXmlFormats.Vml.Office;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
 using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -1135,7 +1137,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void InProductAttributePageIShouldSeeXResults(int expectedResults)
 		{
 			ProductAttributePage thisProductAttributePage = new ProductAttributePage();
-			Report.IsTrue(thisProductAttributePage.getRecordCount()==expectedResults, "Reults were not as expected",
+			Report.IsTrue(thisProductAttributePage.getRecordCount() == expectedResults, "Reults were not as expected",
 				"Results count was as expected");
 		}
 

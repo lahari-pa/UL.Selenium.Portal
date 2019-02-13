@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using iTextSharp.text;
-using ResourcePool;
-using System.IO;
-using NUnit.Framework;
-using SafewareReporting;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -480,7 +478,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.IsTrue(thisNewProduct.SelectAcceptRadio(), "Failed to set accept radio", "Set accept radio to: " + trueOrFalse);
 			}
-			
+
 		}
 
 		[StepDefinition(@"In the Formulation 3rd Party screen I set Granted to (true|false)")]

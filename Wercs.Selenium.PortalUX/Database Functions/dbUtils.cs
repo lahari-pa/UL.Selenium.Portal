@@ -1,10 +1,6 @@
-﻿using ResourcePool;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NTTQA_Reporting_Module;
 
 namespace Wercs.Selenium.PortalUX.Database_Functions
 {

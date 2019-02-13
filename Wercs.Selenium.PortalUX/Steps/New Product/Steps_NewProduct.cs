@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using iTextSharp.text;
-using ResourcePool;
 using System.IO;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -3009,7 +3012,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			string firstIngredientName = ListOfIngredients[0].ComponentName;
 			if (firstOrSecond.ToLower() == "second")
 			{
-				firstIngredientName= ListOfIngredients[1].ComponentName;
+				firstIngredientName = ListOfIngredients[1].ComponentName;
 			}
 
 
@@ -3065,7 +3068,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void ThenIEditTheFirstComponentToSelectFromThePublicNameDropDown(string firstOrSecond, string option, string saveAs)
 		{
 			Report.Info("Beginning I edit the " + firstOrSecond + " component to select: " + option +
-			            " from the Public Name drop down and save choice as " + saveAs);
+						" from the Public Name drop down and save choice as " + saveAs);
 			var newProductIngredients = new Ingredients();
 
 			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
@@ -3093,7 +3096,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				else
 				{
 					Random rnd = new Random();
-					option = filtered[rnd.Next(0, filtered.Count()-1)];
+					option = filtered[rnd.Next(0, filtered.Count() - 1)];
 				}
 
 			}

@@ -5,13 +5,14 @@ using System.Linq;
 using iTextSharp.text;
 using iTextSharp.text.pdf.parser;
 using NPOI.HSSF.Record;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SafewareReporting;
-using SeleniumUtilities;
 
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -111,7 +112,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Random rand = new Random();
 
-			int index = rand.Next(results.Count-1);
+			int index = rand.Next(results.Count - 1);
 
 			return results[index].TryClick();
 
@@ -271,12 +272,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				return false;
 			}
-			
+
 		}
 
 		public void QuickSearch(string id)
 		{
-			var input = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='ucSelectProdselectProdTB']"),2);
+			var input = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='ucSelectProdselectProdTB']"), 2);
 			input.EnterText(id);
 			input.SendKeys(Keys.Return);
 			Delay.Seconds(5);
@@ -762,7 +763,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool DoubleClickCategoryToEdit(string category)
 		{
-			var listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '"+category+"')]//span"),30);
+			var listOfCategories = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@title, '" + category + "')]//span"), 30);
 			var matchingCategories = listOfCategories.Where(x => x.GetValue() == category).ToList();
 			var matchingCategory = listOfCategories.FirstOrDefault(x => x.GetValue() == category);
 			if (matchingCategory == null)
@@ -1443,58 +1444,58 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickButton(string name)
 		{
 
-				for (int i = 0; i < 60; i++)
+			for (int i = 0; i < 60; i++)
+			{
+				try
 				{
-					try
+					var buttonList = containerElement.FindElements(By.XPath(".//table[@id='Table2']//a"));
+
+					IWebElement matchingButton;
+
+					switch (name.ToLower())
 					{
-						var buttonList = containerElement.FindElements(By.XPath(".//table[@id='Table2']//a"));
+						case "preview":
+							matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkPreview");
+							break;
+						case "apply":
+							matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkApply");
+							break;
+						case "preview in word":
+							matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkPreviewInWord");
+							break;
+						case "close":
+							matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkClose");
+							break;
+						default:
+							Report.Error("You must provide a valid button name. You supplied: " + name);
+							return false;
+					}
 
-						IWebElement matchingButton;
-
-						switch (name.ToLower())
+					if (matchingButton != null)
+					{
+						if (matchingButton.TryClick())
 						{
-							case "preview":
-								matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkPreview");
-								break;
-							case "apply":
-								matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkApply");
-								break;
-							case "preview in word":
-								matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkPreviewInWord");
-								break;
-							case "close":
-								matchingButton = buttonList.FirstOrDefault(x => x.GetAttribute("id") == "lnkClose");
-								break;
-							default:
-								Report.Error("You must provide a valid button name. You supplied: " + name);
-								return false;
-						}
-
-						if (matchingButton != null)
-						{
-							if (matchingButton.TryClick())
-							{
-								Delay.Seconds(2);
-								return true;
-							}
-							else
-							{
-								Report.Info("Failed to click button although it was found");
-							}
-
+							Delay.Seconds(2);
+							return true;
 						}
 						else
 						{
-							Report.Info("No matching buttons found");
+							Report.Info("Failed to click button although it was found");
 						}
 
 					}
-					catch (Exception e)
+					else
 					{
-						Report.Info("List of buttons not found");
+						Report.Info("No matching buttons found");
 					}
-					Delay.Seconds(1);
+
 				}
+				catch (Exception e)
+				{
+					Report.Info("List of buttons not found");
+				}
+				Delay.Seconds(1);
+			}
 
 
 			return false;
@@ -1825,14 +1826,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickToolbarItem(string toolbarItem)
 		{
-			IWebElement linkToClick=null;
+			IWebElement linkToClick = null;
 			switch (toolbarItem.ToLower())
 			{
 				case "filter":
-					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_lnkFilter']"),2);
+					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_lnkFilter']"), 2);
 					break;
 				case "new":
-					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdNew']"),2);
+					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdNew']"), 2);
 					break;
 				case "edit":
 				case "editselected":
@@ -3543,7 +3544,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				
+
 				switch (name.ToLower())
 				{
 					case "check out":
@@ -3554,7 +3555,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							return false;
 						}
 						return checkOutButton.TryClick();
-						
+
 					case "check in":
 						var checkInButton = containerElement.FindElement(By.Id("btnCheckIn"), 2);
 						if (checkInButton == null)
@@ -3563,7 +3564,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							return false;
 						}
 						return checkInButton.TryClick();
-					
+
 					default:
 						Report.Error("You must supply a valid button option. You supplied: " + name);
 						return false;

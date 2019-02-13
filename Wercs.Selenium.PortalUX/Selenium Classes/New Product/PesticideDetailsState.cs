@@ -6,16 +6,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
-using Org.BouncyCastle.Crypto.Engines;
-using ResourcePool;
-using SafewareReporting;
-using SeleniumUtilities;
-using TechTalk.SpecFlow;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 {
@@ -94,7 +92,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 			this.RefreshContainer();
 			return clicked;
 		}
-		
+
 		public bool EditExpirationDate(string value, string state)
 		{
 			var row = this.StateRegistrationRow(state);
@@ -169,7 +167,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 			return kellyExpirationDateInput.GetValue();
 		}
-		
+
 		public bool CalenderDatePickerDisplayed(string state)
 		{
 			var calendar = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//div[@class='datepicker-days']"), 2);
@@ -269,7 +267,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		{
 			var calendarTable = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]"), 2);
 			var datePicker = calendarTable?.FindElement(By.XPath(".//th[@class='datepicker-switch']"), 2);
-			var dates = datePicker?.Text.Split(' ').Select(x=>x.Trim()).ToList();
+			var dates = datePicker?.Text.Split(' ').Select(x => x.Trim()).ToList();
 			month = "";
 			year = "";
 			if (dates != null && dates.Count == 2)

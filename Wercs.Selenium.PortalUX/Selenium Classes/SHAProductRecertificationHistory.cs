@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
-using SafewareReporting;
-using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
@@ -155,7 +156,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				thisProduct.ID = thisRow.FindElement(By.XPath(".//td[" + indexOfID + "]"), 2).GetValue();
 				thisProduct.Name = thisRow.FindElement(By.XPath(".//td[" + indexOfProductName + "]"), 2).GetValue();
 				thisProduct.Active = thisRow.FindElement(By.XPath(".//td[" + indexOfActive + "]"), 2).GetValue() ==
-				                     "true";
+									 "true";
 				string rD = thisRow.FindElement(By.XPath(".//td[" + indexOfDate + "]"), 2).GetValue();
 				if (rD.Trim().Length > 0)
 				{

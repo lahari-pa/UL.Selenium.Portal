@@ -4,13 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using iTextSharp.text;
-using ResourcePool;
-using System.IO;
-using System.Runtime.InteropServices;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using SafewareReporting;
-using SeleniumUtilities;
+using NTTQA_Reporting_Module.Reporting.Core;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using TechTalk.SpecFlow.Bindings;
@@ -30,8 +24,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (!epaRegistrations.First().EPANumber.IsNullOrEmpty())
 			{
 				Report.Info("Adding a new EPA row because there is pre-existing data");
-				var thisEpaRegistration = new PesticideDetailsUS.EPARegistration { EPANumber = epaNumber, Row = epaRegistrations.Count + 1};
-				new PesticideDetailsUS().EPARegistrationData = new List<PesticideDetailsUS.EPARegistration> {thisEpaRegistration};
+				var thisEpaRegistration = new PesticideDetailsUS.EPARegistration { EPANumber = epaNumber, Row = epaRegistrations.Count + 1 };
+				new PesticideDetailsUS().EPARegistrationData = new List<PesticideDetailsUS.EPARegistration> { thisEpaRegistration };
 				Report.IsTrue(new PesticideDetailsUS().EPARegistrationData.First().EPANumber == epaNumber, "Failed to add new EPA row with number: " + epaNumber, "Successfully added EPA row with registration number: " + epaNumber);
 			}
 			//if (!new PesticideDetailsUS().TopEPARowIsEmpty())

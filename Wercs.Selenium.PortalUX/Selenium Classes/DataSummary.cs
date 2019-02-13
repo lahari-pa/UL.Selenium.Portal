@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SafewareReporting;
-using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
@@ -98,7 +100,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<Ingredients.Ingredient> GetIngredients()
 		{
-			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"),60);
+			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 60);
 			var listOfIngredients = new List<Ingredients.Ingredient>();
 			if (ingredientsTable == null)
 			{

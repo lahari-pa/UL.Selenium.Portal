@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using SafewareReporting;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using Wercs.Selenium.PortalUX.Classes;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
-	public class SubscriptionEnrollment : BaseDialog
+	public class SubscriptionEnrollment : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "enrollment")]
 		protected override IWebElement containerElement { get; set; }
@@ -898,7 +901,7 @@ public class Info_Link
 }
 
 
-class SubscriptionEnrollmentDlg : BaseDialog
+class SubscriptionEnrollmentDlg : BaseObject
 {
 	[FindsBy(How = How.Id, Using = "subscriptionSummary")]
 	protected override IWebElement containerElement { get; set; }
@@ -1122,7 +1125,7 @@ class SubscriptionEnrollmentDlg : BaseDialog
 }
 
 
-class AgencyServiceAgreementDlg : BaseDialog
+class AgencyServiceAgreementDlg : BaseObject
 {
 	[FindsBy(How = How.Id, Using = "showAgencyServiceAgreement")]
 	protected override IWebElement containerElement { get; set; }
@@ -1165,7 +1168,7 @@ class AgencyServiceAgreementDlg : BaseDialog
 	}
 }
 
-class SubscriptionPopup : BaseDialog
+class SubscriptionPopup : BaseObject
 {
 	[FindsBy(How = How.XPath, Using = "//div[starts-with(@class,'popover') and @role='tooltip']")]
 	protected override IWebElement containerElement { get; set; }

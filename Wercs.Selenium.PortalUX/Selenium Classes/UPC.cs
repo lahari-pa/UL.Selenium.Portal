@@ -6,16 +6,17 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
 using Org.BouncyCastle.Crypto.Engines;
-using ResourcePool;
-using SafewareReporting;
 using SeleniumUtilities;
-using TechTalk.SpecFlow;
+
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes
 {
@@ -144,7 +145,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			catch (Exception ex)
 			{
-				SafewareReporting.Report.Info(ex.Message);
+				Report.Info(ex.Message);
 				return false;
 			}
 		}

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using ResourcePool;
 using SeleniumUtilities;
 
 
@@ -36,7 +38,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			get
 			{
 				return this.containerElement.FindElement(By.XPath(".//select[@id='ddlGUILanguage']"), 2)
-					.SelectedOption();}
+					.SelectedOption();
+			}
 			set
 			{
 				IWebElement lang = this.containerElement.FindElement(By.XPath(".//select[@id='ddlGUILanguage']"), 2);

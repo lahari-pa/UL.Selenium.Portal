@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
 
 namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 {
-	class ChooseGoodGuide_AccountCreation: ConflictMinerals
+	class ChooseGoodGuide_AccountCreation : ConflictMinerals
 	{
 		// Cannot have a more precise container element than this
 		public const string BasePath = "//div[@class='container-fluid']";
@@ -22,8 +22,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			return containerElement.FindElement(By.XPath(".//a[text()='Create Company Account']"), 2).TryClick();
 		}
 
-		public string Email
-		{
+		public string Email {
 			get { return containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).GetValue(); }
 			set { containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).EnterText(value); }
 		}
@@ -38,37 +37,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			return containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"), 2).TryClick();
 		}
 
-		public string WhatCityWereYouBornIn
-		{
+		public string WhatCityWereYouBornIn {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).Text.Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).EnterText(value); }
 		}
 
-		public string WhatWasTheModelOfYourFirstCar
-		{
+		public string WhatWasTheModelOfYourFirstCar {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).Text.Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).EnterText(value); }
 		}
 
-		public string WhatIsYourFavouriteSport
-		{
+		public string WhatIsYourFavouriteSport {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).Text.Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).EnterText(value); }
 		}
-		public string WhatIsYourFavouriteFoodOrDrink
-		{
+		public string WhatIsYourFavouriteFoodOrDrink {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).Text.Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).EnterText(value); }
 		}
 
-		public string WhatIsYourFavouriteVacationDestination
-		{
+		public string WhatIsYourFavouriteVacationDestination {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).Text.Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).EnterText(value); }
 		}
 
-		public string EnterSecurePassword
-		{
+		public string EnterSecurePassword {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).Text.Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).EnterText(value); }
 		}
