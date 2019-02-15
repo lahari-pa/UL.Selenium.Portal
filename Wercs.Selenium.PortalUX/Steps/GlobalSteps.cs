@@ -170,11 +170,16 @@ namespace WERCSmart
 		public void GivenILogInWithEmailXAndPasswordY(string username, string password)
 		{
 			var selLandingPage = new LandingPage();
-			if (selLandingPage.Wait_for_load(5))
+			if (!selLandingPage.Wait_for_load(5))
 			{
-				Report.Info("Clicking 'Log In' on the Landing Page");
-				selLandingPage.Click_Login();
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 2) != null)
+				{
+					throw new Exception("HTTP Server error 503 was thrown!");
+				}
+				throw new Exception("Landing page did not load!");
 			}
+			Report.Info("Clicking 'Log In' on the Landing Page");
+			selLandingPage.Click_Login();
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;

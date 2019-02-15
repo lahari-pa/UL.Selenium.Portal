@@ -4741,6 +4741,310 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[56646] Pesticide Data - EPA Expiration date validation (Texas - March 31st, June" +
+            " 30th, Sept 30th or December 31st no more than 2 year out)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EPA State Expiry Date Validation (Suite ID: 56545)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_EPAState")]
+        public virtual void _56646PesticideData_EPAExpirationDateValidationTexas_March31StJune30ThSept30ThOrDecember31StNoMoreThan2YearOut()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56646] Pesticide Data - EPA Expiration date validation (Texas - March 31st, June" +
+                    " 30th, Sept 30th or December 31st no more than 2 year out)", ((string[])(null)));
+#line 1458
+this.ScenarioSetup(scenarioInfo);
+#line 1459
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 1460
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1461
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1462
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1463
+testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
+                    "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1464
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1465
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1466
+testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
+                    "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1467
+testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
+                    "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1468
+testRunner.And("I add the EPA registration number: TEST-1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1469
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1470
+testRunner.And("I enter a registration date for the current year that is not March 31st, June 30t" +
+                    "h, Sept 30th or Dec 31st for state: TX", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1471
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1472
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State TX:" +
+                    " Valid dates are March 31, June 30, September 30 or December 31 no more than two" +
+                    " (2) calendar years out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1473
+testRunner.And("I enter a registration date for the next year that is not March 31st, June 30th, " +
+                    "Sept 30th or Dec 31st for state: TX", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1474
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1475
+testRunner.Then("in page Pesticide Details - State Registration page I should see error: State TX:" +
+                    " Valid dates are March 31, June 30, September 30 or December 31 no more than two" +
+                    " (2) calendar years out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month",
+                        "Increment year?"});
+            table26.AddRow(new string[] {
+                        "TX",
+                        "31",
+                        "3",
+                        "yes"});
+#line 1476
+testRunner.And("I enter the EPA registration date in the current year:", ((string)(null)), table26, "And ");
+#line 1479
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1480
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1481
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1482
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month",
+                        "Increment year?"});
+            table27.AddRow(new string[] {
+                        "TX",
+                        "30",
+                        "6",
+                        "yes"});
+#line 1483
+testRunner.And("I enter the EPA registration date in the current year:", ((string)(null)), table27, "And ");
+#line 1486
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1487
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1488
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1489
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month",
+                        "Increment year?"});
+            table28.AddRow(new string[] {
+                        "TX",
+                        "30",
+                        "9",
+                        "yes"});
+#line 1490
+testRunner.And("I enter the EPA registration date in the current year:", ((string)(null)), table28, "And ");
+#line 1493
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1494
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1495
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1496
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month",
+                        "Increment year?"});
+            table29.AddRow(new string[] {
+                        "TX",
+                        "31",
+                        "12",
+                        "yes"});
+#line 1497
+testRunner.And("I enter the EPA registration date in the current year:", ((string)(null)), table29, "And ");
+#line 1500
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1501
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1502
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1503
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table30.AddRow(new string[] {
+                        "TX",
+                        "31",
+                        "3"});
+#line 1504
+testRunner.And("I select EPA expiration date - enter current year plus 1:", ((string)(null)), table30, "And ");
+#line 1507
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1508
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1509
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table31.AddRow(new string[] {
+                        "TX",
+                        "30",
+                        "6"});
+#line 1510
+testRunner.And("I select EPA expiration date - enter current year plus 1:", ((string)(null)), table31, "And ");
+#line 1513
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1514
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1515
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table32.AddRow(new string[] {
+                        "TX",
+                        "30",
+                        "9"});
+#line 1516
+testRunner.And("I select EPA expiration date - enter current year plus 1:", ((string)(null)), table32, "And ");
+#line 1519
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1520
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1521
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table33.AddRow(new string[] {
+                        "TX",
+                        "31",
+                        "12"});
+#line 1522
+testRunner.And("I select EPA expiration date - enter current year plus 1:", ((string)(null)), table33, "And ");
+#line 1525
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1526
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1527
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1528
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table34.AddRow(new string[] {
+                        "TX",
+                        "31",
+                        "3"});
+#line 1529
+testRunner.And("I select EPA expiration date - enter current year plus 2:", ((string)(null)), table34, "And ");
+#line 1532
+testRunner.And(@"If the current date is after (MM/DD): 03/31 then I confirm no error is shown for the State: TX - else I confirm the following error is displayed: State TX: Valid dates are March 31, June 30, September 30 or December 31 no more than two (2) calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1533
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table35.AddRow(new string[] {
+                        "TX",
+                        "30",
+                        "6"});
+#line 1534
+testRunner.And("I select EPA expiration date - enter current year plus 2:", ((string)(null)), table35, "And ");
+#line 1537
+testRunner.And(@"If the current date is after (MM/DD): 06/30 then I confirm no error is shown for the State: OK - else I confirm the following error is displayed: State OK: Valid dates are March 31, June 30, September 30 or December 31 no more than one (1) calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1538
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table36.AddRow(new string[] {
+                        "TX",
+                        "30",
+                        "9"});
+#line 1539
+testRunner.And("I select EPA expiration date - enter current year plus 2:", ((string)(null)), table36, "And ");
+#line 1542
+testRunner.And(@"If the current date is after (MM/DD): 09/30 then I confirm no error is shown for the State: TX - else I confirm the following error is displayed: State TX: Valid dates are March 31, June 30, September 30 or December 31 no more than two (2) calendar year out at any given time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1543
+testRunner.And("in the New Product page I click section: Pesticide Details - State Registration D" +
+                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
+                        "State",
+                        "Day",
+                        "Month"});
+            table37.AddRow(new string[] {
+                        "TX",
+                        "31",
+                        "12"});
+#line 1544
+testRunner.And("I select EPA expiration date - enter current year plus 1:", ((string)(null)), table37, "And ");
+#line 1547
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1548
+testRunner.Then("in page Pesticide Details - State Registration Details I should see no errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1549
+testRunner.Then("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1550
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1551
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase56646", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
