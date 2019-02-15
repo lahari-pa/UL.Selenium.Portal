@@ -169,17 +169,17 @@ this.ScenarioSetup(scenarioInfo);
                         "SupplierType",
                         "Manufacturer"});
             table1.AddRow(new string[] {
-                        "CityQuestion",
-                        "CityQuestion"});
+                        "PhoneQuestion",
+                        "PhoneQuestion"});
             table1.AddRow(new string[] {
-                        "CityHint",
-                        "CityHint"});
+                        "PhoneHint",
+                        "PhoneHint"});
             table1.AddRow(new string[] {
-                        "CarQuestion",
-                        "CarQuestion"});
+                        "MentorQuestion",
+                        "MentorQuestion"});
             table1.AddRow(new string[] {
-                        "CarHint",
-                        "CarHint"});
+                        "MentorHint",
+                        "MentorHint"});
             table1.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
@@ -187,17 +187,17 @@ this.ScenarioSetup(scenarioInfo);
                         "FriendHint",
                         "FriendHint"});
             table1.AddRow(new string[] {
-                        "JobQuestion",
-                        "JobQuestion"});
+                        "AnimalQuestion",
+                        "AnimalQuestion"});
             table1.AddRow(new string[] {
-                        "JobHint",
-                        "JobHint"});
+                        "AnimalHint",
+                        "AnimalHint"});
             table1.AddRow(new string[] {
-                        "MascotQuestion",
-                        "MascotQuestion"});
+                        "CollegeQuestion",
+                        "CollegeQuestion"});
             table1.AddRow(new string[] {
-                        "MascotHint",
-                        "MascotHint"});
+                        "CollegeHint",
+                        "CollegeHint"});
             table1.AddRow(new string[] {
                         "Pin",
                         "1234"});

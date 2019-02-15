@@ -151,7 +151,7 @@ testRunner.Then("I should see user name: AllRetailers, ProductsCompany in the he
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[63514] Create a New User on the User Grid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[63514] Add and Deactivate a New User from the User Grid")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MyAccount")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
@@ -162,15 +162,15 @@ testRunner.Then("I should see user name: AllRetailers, ProductsCompany in the he
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PaymentMethods")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_MyAccount")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
-        public virtual void _63514CreateANewUserOnTheUserGrid()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfsdesign")]
+        public virtual void _63514AddAndDeactivateANewUserFromTheUserGrid()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63514] Create a New User on the User Grid", new string[] {
-                        "tfs_design"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63514] Add and Deactivate a New User from the User Grid", new string[] {
+                        "tfsdesign"});
 #line 34
 this.ScenarioSetup(scenarioInfo);
 #line 35
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 37

@@ -786,17 +786,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("Beginning entering Security Questions!");
 				var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 				var userForm = new NewUser();
-
-				userForm.EnterQuestionAnswer("1", user.CityQuestion);
-				userForm.EnterQuestionHint("1", user.CityHint);
-				userForm.EnterQuestionAnswer("2", user.CarQuestion);
-				userForm.EnterQuestionHint("2", user.CarHint);
+				userForm.EnterQuestionAnswer("1", user.PhoneQuestion);
+				userForm.EnterQuestionHint("1", user.PhoneHint);
+				userForm.EnterQuestionAnswer("2", user.MentorQuestion);
+				userForm.EnterQuestionHint("2", user.MentorHint);
 				userForm.EnterQuestionAnswer("3", user.FriendQuestion);
 				userForm.EnterQuestionHint("3", user.FriendHint);
-				userForm.EnterQuestionAnswer("4", user.JobQuestion);
-				userForm.EnterQuestionHint("4", user.JobHint);
-				userForm.EnterQuestionAnswer("5", user.MascotQuestion);
-				userForm.EnterQuestionHint("5", user.MascotHint);
+				userForm.EnterQuestionAnswer("4", user.AnimalQuestion);
+				userForm.EnterQuestionHint("4", user.AnimalHint);
+				userForm.EnterQuestionAnswer("5", user.CollegeQuestion);
+				userForm.EnterQuestionHint("5", user.CollegeHint);
 
 				Report.Info("Security Questions inputted succesfully for user: " + savedAs);
 				Report.Screenshot();

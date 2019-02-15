@@ -157,8 +157,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Cancel_click()
 		{
 			Report.Info("Attempting to Click Cancel Button");
-			_btnCancel.Click();
-			return true;
+			return _btnCancel.TryClick();
 		}
 
 		//Continue Button
@@ -168,64 +167,61 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Continue_click()
 		{
 			Report.Info("Attempting to Click Continue Button");
-			_btnContinue.Click();
-			return true;
+			return _btnContinue.TryClick();
 		}
 
 		public bool Forgot_Password_Questions(string savedAs)
 		{
 			Report.Info("Beginning Forgot_Password_Questions");
-
 			if (!Exists)
 			{
 				Report.Info("Not on Questions Page");
 				Report.Screenshot();
 				return false;
 			}
-
 			var user = (WERCSmartUser)Context.GetFromContext(savedAs);
-
+			GeneralUtilities.Wait_for_load_finish();
+			Delay.Seconds(5);
 			IWebElement questionOne = containerElement.FindElement(By.XPath(".//label[@for='secQuestion1']"));
 			IWebElement questionTwo = containerElement.FindElement(By.XPath(".//label[@for='secQuestion2']"));
-
 			switch (questionOne.Text)
 			{
-				case "In what city were you born?":
-					if (!Enter_Answer_One(user.CityQuestion))
+				case "What was your phone number when you were 15 years old?":
+					if (!this.Enter_Answer_One(user.PhoneQuestion))
 					{
-						Report.Info("Failed to Enter Answer One: " + user.CityQuestion);
+						Report.Info("Failed to Enter Answer One: " + user.PhoneQuestion);
 						Report.Screenshot();
 						return false;
 					}
 					break;
-				case "What was the model of your first car?":
-					if (!Enter_Answer_One(user.CarQuestion))
+				case "What is the first name of your mentor when you were younger":
+					if (!this.Enter_Answer_One(user.MentorQuestion))
 					{
-						Report.Info("Failed to Enter Answer One: " + user.CarQuestion);
+						Report.Info("Failed to Enter Answer One: " + user.MentorQuestion);
 						Report.Screenshot();
 						return false;
 					}
 					break;
-				case "What is the first name of your childhood best friend?":
-					if (!Enter_Answer_One(user.FriendQuestion))
+				case "What was your childhood friend's nickname?":
+					if (!this.Enter_Answer_One(user.FriendQuestion))
 					{
 						Report.Info("Failed to Enter Answer One: " + user.FriendQuestion);
 						Report.Screenshot();
 						return false;
 					}
 					break;
-				case "In what city was your first job?":
-					if (!Enter_Answer_One(user.JobQuestion))
+				case "What was your first stuffed animal?":
+					if (!this.Enter_Answer_One(user.AnimalQuestion))
 					{
-						Report.Info("Failed to Enter Answer One: " + user.JobQuestion);
+						Report.Info("Failed to Enter Answer One: " + user.AnimalQuestion);
 						Report.Screenshot();
 						return false;
 					}
 					break;
-				case "What is your high school mascot?":
-					if (!Enter_Answer_One(user.MascotQuestion))
+				case "What college did you want to attend, but didn't?":
+					if (!this.Enter_Answer_One(user.CollegeQuestion))
 					{
-						Report.Info("Failed to Enter Answer One: " + user.MascotQuestion);
+						Report.Info("Failed to Enter Answer One: " + user.CollegeQuestion);
 						Report.Screenshot();
 						return false;
 					}
@@ -237,42 +233,42 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Answer One Entered");
 			switch (questionTwo.Text)
 			{
-				case "In what city were you born?":
-					if (!Enter_Answer_Two(user.CityQuestion))
+				case "What was your phone number when you were 15 years old?":
+					if (!this.Enter_Answer_Two(user.PhoneQuestion))
 					{
-						Report.Info("Failed to Enter Answer Two: " + user.CityQuestion);
+						Report.Info("Failed to Enter Answer One: " + user.PhoneQuestion);
 						Report.Screenshot();
 						return false;
 					}
 					break;
-				case "What was the model of your first car?":
-					if (!Enter_Answer_Two(user.CarQuestion))
+				case "What is the first name of your mentor when you were younger":
+					if (!this.Enter_Answer_Two(user.MentorQuestion))
 					{
-						Report.Info("Failed to Enter Answer Two: " + user.CarQuestion);
+						Report.Info("Failed to Enter Answer One: " + user.MentorQuestion);
 						Report.Screenshot();
 						return false;
 					}
 					break;
-				case "What is the first name of your childhood best friend?":
-					if (!Enter_Answer_Two(user.FriendQuestion))
+				case "What was your childhood friend's nickname?":
+					if (!this.Enter_Answer_Two(user.FriendQuestion))
 					{
-						Report.Info("Failed to Enter Answer Two: " + user.FriendQuestion);
+						Report.Info("Failed to Enter Answer One: " + user.FriendQuestion);
 						Report.Screenshot();
 						return false;
 					}
 					break;
-				case "In what city was your first job?":
-					if (!Enter_Answer_Two(user.JobQuestion))
+				case "What was your first stuffed animal?":
+					if (!this.Enter_Answer_Two(user.AnimalQuestion))
 					{
-						Report.Info("Failed to Enter Answer Two: " + user.JobQuestion);
+						Report.Info("Failed to Enter Answer One: " + user.AnimalQuestion);
 						Report.Screenshot();
 						return false;
 					}
 					break;
-				case "What is your high school mascot?":
-					if (!Enter_Answer_Two(user.MascotQuestion))
+				case "What college did you want to attend, but didn't?":
+					if (!this.Enter_Answer_Two(user.CollegeQuestion))
 					{
-						Report.Info("Failed to Enter Answer Two: " + user.MascotQuestion);
+						Report.Info("Failed to Enter Answer One: " + user.CollegeQuestion);
 						Report.Screenshot();
 						return false;
 					}
@@ -281,7 +277,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Error("Unable to Find Correct Question");
 					return false;
 			}
-			Report.Info("Answer One Entered");
+			Report.Info("Answer Two Entered");
 			Delay.Seconds(1 * Delay.SpeedFactor);
 			Report.Info("Answers Entered");
 			Report.Screenshot();
@@ -353,9 +349,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Login_click()
 		{
 			Report.Info("Attempting to Click Login Button");
-			_btnLogin.Click();
-			Delay.Seconds(Delay.SpeedFactor * 1);
-			return true;
+			return _btnLogin.TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 

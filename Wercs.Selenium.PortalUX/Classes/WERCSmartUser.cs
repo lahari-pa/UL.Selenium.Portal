@@ -28,16 +28,29 @@ namespace Wercs.Selenium.PortalUX.Classes
 		public string SupplierType { get; set; }
 
 		// SECURITY QUESTIONS
-		public string CityQuestion { get; set; }
-		public string CityHint { get; set; }
-		public string CarQuestion { get; set; }
-		public string CarHint { get; set; }
+		public string PhoneQuestion { get; set; }
+		public string PhoneHint { get; set; }
+		public string MentorQuestion { get; set; }
+		public string MentorHint { get; set; }
 		public string FriendQuestion { get; set; }
 		public string FriendHint { get; set; }
-		public string JobQuestion { get; set; }
-		public string JobHint { get; set; }
-		public string MascotQuestion { get; set; }
-		public string MascotHint { get; set; }
+		public string AnimalQuestion { get; set; }
+		public string AnimalHint { get; set; }
+		public string CollegeQuestion { get; set; }
+		public string CollegeHint { get; set; }
 		public string Pin { get; set; }
+
+		// old security Qs
+		//public string CityQuestion { get; set; }
+		//public string CityHint { get; set; }
+		//public string CarQuestion { get; set; }
+		//public string CarHint { get; set; }
+		//public string FriendQuestion { get; set; }
+		//public string FriendHint { get; set; }
+		//public string JobQuestion { get; set; }
+		//public string JobHint { get; set; }
+		//public string MascotQuestion { get; set; }
+		//public string MascotHint { get; set; }
+		//public string Pin { get; set; }
 	}
 }

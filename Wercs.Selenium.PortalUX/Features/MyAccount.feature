@@ -30,9 +30,9 @@ Given In the UserDetails page I set Name to be: saved as ThisUser
 Given In the UserDetails page I click Save
 Then I should see user name: AllRetailers, ProductsCompany in the header next to the user icon
 
-@tfs_design
-Scenario: [63514] Create a New User on the User Grid
-Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+@tfsdesign
+Scenario: [63514] Add and Deactivate a New User from the User Grid
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I click on My Account
 Then I create a new email address

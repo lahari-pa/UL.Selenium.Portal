@@ -217,7 +217,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " I login as user: " + username + " with password: " + password);
 			try
 			{
-
+				Delay.Seconds(3);
 				var user = (WERCSmartUser)Context.GetFromContext(username);
 				GivenIPopulateTheInputFieldWith("email", user.Email);
 				Delay.Seconds(5);

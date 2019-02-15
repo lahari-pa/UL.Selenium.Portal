@@ -34,16 +34,16 @@ Given I define the user: 63297 with the following parameters:
 | CompanyPhone         | 123-456-7889   |
 | EmergencyPhoneNumber | 123-456-7789   |
 | SupplierType         | Manufacturer   |
-| CityQuestion         | CityQuestion   |
-| CityHint             | CityHint       |
-| CarQuestion          | CarQuestion    |
-| CarHint              | CarHint        |
+| PhoneQuestion         | PhoneQuestion   |
+| PhoneHint             | PhoneHint       |
+| MentorQuestion          | MentorQuestion    |
+| MentorHint              | MentorHint        |
 | FriendQuestion       | FriendQuestion |
 | FriendHint           | FriendHint     |
-| JobQuestion          | JobQuestion    |
-| JobHint              | JobHint        |
-| MascotQuestion       | MascotQuestion |
-| MascotHint           | MascotHint     |
+| AnimalQuestion          | AnimalQuestion    |
+| AnimalHint              | AnimalHint        |
+| CollegeQuestion       | CollegeQuestion |
+| CollegeHint           | CollegeHint     |
 | Pin                  | 1234           |
 
 Given I save the current emails in the inbox for user saved as: 63297

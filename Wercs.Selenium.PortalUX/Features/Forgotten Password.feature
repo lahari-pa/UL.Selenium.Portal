@@ -78,16 +78,16 @@ Given If not already created, I create a user: ForgotPW_SecQs with the following
 | CompanyPhone         | 123-456-7889   |
 | EmergencyPhoneNumber | 123-456-7789   |
 | SupplierType         | Manufacturer   |
-| CityQuestion         | CityQuestion   |
-| CityHint             | CityHint       |
-| CarQuestion          | CarQuestion    |
-| CarHint              | CarHint        |
+| PhoneQuestion         | PhoneQuestion   |
+| PhoneHint             | PhoneHint       |
+| MentorQuestion          | MentorQuestion    |
+| MentorHint              | MentorHint        |
 | FriendQuestion       | FriendQuestion |
 | FriendHint           | FriendHint     |
-| JobQuestion          | JobQuestion    |
-| JobHint              | JobHint        |
-| MascotQuestion       | MascotQuestion |
-| MascotHint           | MascotHint     |
+| AnimalQuestion          | AnimalQuestion    |
+| AnimalHint              | AnimalHint        |
+| CollegeQuestion       | CollegeQuestion |
+| CollegeHint           | CollegeHint     |
 | Pin                  | 1234           |
 Then I click the User Icon
 And I click on Sign Out
