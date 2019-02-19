@@ -348,12 +348,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Current date (DD/MM/YY) is: " + currentDate.Date + "/" + currentDate.Month + "/" + currentDate.Year);
 			if (DateTime.Now < comparisonDate)
 			{
-				Report.Info("Date is prior to Sept 1st. I expect to see the state error");
-				this.IShouldSeeError("State " + state + ": Valid dates are November 30 of current calendar year until September 1, at which time November 30 of either the current or the following calendar year would be acceptable.");
+				Report.Info("Date is prior to " + month  + "/" + day + " so I expect to see the state error");
+				this.IShouldSeeError(error);
 			}
 			else
 			{
-				Report.Info("Date is post Sept 1st. I expect no state error");
+				Report.Info("Date is after " + month + "/" + day + " so I expect no state error");
 				this.IShouldSeeNoError();
 			}
 		}

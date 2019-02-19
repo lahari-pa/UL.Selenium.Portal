@@ -1529,17 +1529,20 @@ And in the New Product page I click section: Pesticide Details - State Registrat
 And I select EPA expiration date - enter current year plus 2:
 | State | Day | Month |
 | TX    | 31  | 3     |
+And I click continue
 And If the current date is after (MM/DD): 03/31 then I confirm no error is shown for the State: TX - else I confirm the following error is displayed: State TX: Valid dates are March 31, June 30, September 30 or December 31 no more than two (2) calendar year out at any given time.
 And in the New Product page I click section: Pesticide Details - State Registration Details
 And I select EPA expiration date - enter current year plus 2:
 | State | Day | Month |
 | TX    | 30  | 6     |
+And I click continue
 And If the current date is after (MM/DD): 06/30 then I confirm no error is shown for the State: OK - else I confirm the following error is displayed: State OK: Valid dates are March 31, June 30, September 30 or December 31 no more than one (1) calendar year out at any given time.
 And in the New Product page I click section: Pesticide Details - State Registration Details
 And I select EPA expiration date - enter current year plus 2:
 | State | Day | Month |
 | TX    | 30  | 9     |
-And If the current date is after (MM/DD): 09/30 then I confirm no error is shown for the State: TX - else I confirm the following error is displayed: State TX: Valid dates are March 31, June 30, September 30 or December 31 no more than two (2) calendar year out at any given time.
+And I click continue
+And If the current date is after (MM/DD): 06/30 then I confirm no error is shown for the State: TX - else I confirm the following error is displayed: State TX: Valid dates are March 31, June 30, September 30 or December 31 no more than two (2) calendar year out at any given time.
 And in the New Product page I click section: Pesticide Details - State Registration Details
 And I select EPA expiration date - enter current year plus 1:
 | State | Day | Month |
