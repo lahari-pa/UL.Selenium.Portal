@@ -55,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
                         "DataSummarySheet",
                         "wercsmart",
                         "RetailPartners",
-                        "run_Flow4"});
+                        "run_Flow6"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -106,7 +106,7 @@ namespace Wercs.Selenium.PortalUX.Features.ProductRegistration
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow6")]
         public virtual void _78731Insecticide_CrawlingBug_AerosolRU001005_6A()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[78731] Insecticide - Crawling Bug - Aerosol (RU001005) - 6A", ((string[])(null)));
@@ -241,7 +241,7 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow6")]
         public virtual void _57711Antifungal_AerosolRU000050_6A()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57711] Antifungal - Aerosol (RU000050) - 6A", ((string[])(null)));

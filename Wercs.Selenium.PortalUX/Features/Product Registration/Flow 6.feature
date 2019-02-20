@@ -8,7 +8,7 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
-@run_Flow4
+@run_Flow6
 
 Feature: Flow 6
 
