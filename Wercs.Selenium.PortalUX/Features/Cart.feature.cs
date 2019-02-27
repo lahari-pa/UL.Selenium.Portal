@@ -89,14 +89,6 @@ namespace Wercs.Selenium.PortalUX.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 11
-#line 13
-testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-        }
-        
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[66635] Left hand navigation - Shopping Cart navigation - Products")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Cart")]
@@ -114,8 +106,6 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
                         "mytag"});
 #line 16
 this.ScenarioSetup(scenarioInfo);
-#line 11
-this.FeatureBackground();
 #line 17
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
@@ -143,8 +133,6 @@ testRunner.Given("I click the Shopping Cart icon in the Navigation Pane", ((stri
                         "tfs_design"});
 #line 22
 this.ScenarioSetup(scenarioInfo);
-#line 11
-this.FeatureBackground();
 #line 23
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 24
@@ -209,8 +197,6 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74837] Shopping Cart navigation with subscription without products", ((string[])(null)));
 #line 43
 this.ScenarioSetup(scenarioInfo);
-#line 11
-this.FeatureBackground();
 #line 45
 testRunner.Given("I log in with the subscription without products account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 47
@@ -244,8 +230,6 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74919] Shopping cart navigation with products in cart without subscription", ((string[])(null)));
 #line 60
 this.ScenarioSetup(scenarioInfo);
-#line 11
-this.FeatureBackground();
 #line 62
 testRunner.Given("I log in with the without subscription without products account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 64

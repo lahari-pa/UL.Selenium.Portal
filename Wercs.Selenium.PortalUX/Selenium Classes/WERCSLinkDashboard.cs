@@ -33,17 +33,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				{
 					break;
 				}
-
 				Delay.Seconds(1);
 			}
-
 			if (urls.Count < 2)
 			{
 				return false;
 			}
-
 			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-
 			foreach (var handle in urls)
 			{
 				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Dashboard"))
@@ -55,13 +51,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					break;
 				}
 			}
-
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 			if (base.Wait_for_load(30))
 			{
 				return true;
 			}
-
 			return false;
 		}
 
@@ -307,7 +301,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return images;
 		}
 
-
 		public List<string> getSectionSubheadings(string section)
 		{
 			List<string> subHeadings = new List<string>();
@@ -405,23 +398,54 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<SideBarNavLink> GetSideBarNavLinks()
 		{
 			var rList = new List<SideBarNavLink>();
-			var sidebarItem = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li/a"), 2).ToList();
-			foreach (var item in sidebarItem)
+			var sidebarItems = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li/a"), 2).ToList();
+			foreach (var item in sidebarItems)
 			{
-				var thisLink = new SideBarNavLink();
-				var titleEl = item.FindElement(By.XPath("./span"), 2);
-				thisLink.Title = titleEl?.Text;
-				thisLink.TitleDisplayed = titleEl?.Displayed ?? false;
-				//thisLink.TitleDisplayed = false;
-				//if (titleEl != null)
-				//{
-				//	thisLink.TitleDisplayed = titleEl.Displayed;
-				//}
-				thisLink.SubLinkTitles = item.FindElements(By.XPath("./following-sibling::ul/li/a/span"), 2).Select(x => x.Text).ToList();
+				var thisLink = this.GetSideBarNavLink(item);
 				rList.Add(thisLink);
 			}
 			return rList;
 		}
+
+		public SideBarNavLink GetSideBarNavLink(string title)
+		{
+			var rLink = new SideBarNavLink();
+			var els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li/a"), 2);
+			foreach (var el in els)
+			{
+				if (el.Text == title)
+				{
+					rLink = this.GetSideBarNavLink(el);
+				}
+			}
+			return rLink;
+		}
+
+		public SideBarNavLink GetSideBarNavLink(IWebElement el)
+		{
+			var thisLink = new SideBarNavLink();
+			var titleEl = el.FindElement(By.XPath("./span"), 2);
+			thisLink.Title = titleEl?.Text;
+			thisLink.TitleDisplayed = titleEl?.Displayed ?? false;
+			var primaryUl = el.FindElement(By.XPath("./following-sibling::ul[@id='multilevel'"), 2);
+			thisLink.Expanded = primaryUl.GetAttribute("aria-expanded") == "true";
+			var rsubLinks = new List<SideBarNavLink.SubLink>();
+			var subEls = el.FindElements(By.XPath("./following-sibling::ul[@id='multilevel' and @aria-expanded='true']/li/a"), 2);
+			for (var i = 0; i < subEls.Count; i++)
+			{
+				// Add sub sub link titles
+				var subSubEls = this.containerElement.FindElements(By.XPath(".//ul[@id='level" + (i + 1).ToString() + "']/li/a"), 2);
+				var rSubSubLinks = subSubEls.Select(subSubEl => new SideBarNavLink.SubLink.SubSubLink {
+						Title = subSubEl.Text
+					})
+					.ToList();
+				rsubLinks.Add(new SideBarNavLink.SubLink { Index = i + 1, Title = subEls[i].Text, SubSubLinks = rSubSubLinks });
+			}
+			// Add complete sub links to this link
+			thisLink.SubLinks = rsubLinks;
+			return thisLink;
+		}
+
 
 		public string UserButtonText()
 		{
@@ -471,6 +495,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']"), 2).TryClick();
 		}
+
+		public bool AnyServicesGrid()
+		{
+			var els = this.containerElement.FindElements(By.XPath("//div[starts-with(@class,'well well-sm brand')]"), 2);
+			return els != null && els.Any();
+		}
+
+		public bool StatusCheckPageDisplayed(string title)
+		{
+			var el = this.containerElement.FindElement(By.XPath("//div[@id='status-check-page']//h2[contains(text(),'" + title + "')]"), 2);
+			return el != null && el.Displayed;
+		}
 	}
 
 	public class WERCSLinkLink
@@ -490,18 +526,61 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool TitleDisplayed { get; set; }
 
-		public List<string> SubLinkTitles { get; set; }
+		public bool Expanded { get; set; }
 
-		public bool ClickLink()
+		public List<SubLink> SubLinks { get; set; }
+
+		public bool Click()
 		{
-			return this.containerElement.FindElement(By.XPath(".//ul[@class='nav']//li/a[./span[text()='" + this.Title + "']]"),2).TryClick();
+			var els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']//li/a"), 2);
+			foreach (var el in els)
+			{
+				if (el.Text == this.Title)
+				{
+					return el.TryClick();
+				}
+			}
+			return false;
 		}
 
-		public bool ClickSubLink(string title)
+		public class SubLink : SideBarNavLink
 		{
-			return this.containerElement.FindElement(By.XPath(".//ul[@class='nav']//li/a[./span[text()='" + title + "']]"), 2).TryClick();
+			public int Index { get; set; }
+
+			public new bool Click()
+			{
+				var els = this.containerElement.FindElements(By.XPath(".//ul[@id='multilevel' and @aria-expanded='true']/li/a"), 2);
+				foreach (var el in els)
+				{
+					if (el.Text == this.Title)
+					{
+						return el.TryClick();
+					}
+				}
+				return false;
+			}
+
+			public List<SubSubLink> SubSubLinks {get;set;}
+
+			public class SubSubLink : SubLink
+			{
+				public new bool Click()
+				{
+					var els = this.containerElement.FindElements(By.XPath(".//ul[@id='level" + this.Index + "']/li/a"), 2);
+					foreach (var el in els)
+					{
+						if (el.Text == this.Title)
+						{
+							return el.TryClick();
+						}
+					}
+					return false;
+				}
+			}
 
 		}
 
 	}
+
+
 }

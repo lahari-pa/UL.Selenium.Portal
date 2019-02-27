@@ -12,7 +12,7 @@ Feature: Security Roles
 
 Scenario: [52978] Log Into Account
 
-Given I go to the WERCSmart Log in
+#Given I go to the WERCSmart Log in
 
 Given I login as the administrator
 

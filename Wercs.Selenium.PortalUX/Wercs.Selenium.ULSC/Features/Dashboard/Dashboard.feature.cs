@@ -241,58 +241,93 @@ testRunner.And("I should see the WERCSLink dashboard", ((string)(null)), ((TechT
 #line 57
 testRunner.And("I confirm that the following WERCSLink menu items are showing", ((string)(null)), table1, "And ");
 #line 64
-testRunner.And("I Click the Additional Services link in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the side bar navigation link: Additional Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 65
-testRunner.And("I Confirm the Additional Services page is shown (this is still under development " +
-                    "so we may need to add more steps for this page in the future)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink Additional Services page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 66
-testRunner.And("I Click the Key Performance Indicators list in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the side bar navigation link: Key Performance Indicators", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 67
-testRunner.And("I Confirm the Key Performance Indicator page is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink Key Performance Indicators page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 68
-testRunner.And("I Click the Recent Activities link in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the side bar navigation link: Recent Activities", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 69
-testRunner.And("I Confirm the Recent Activities page is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink Recent Activities page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 70
-testRunner.And("I Click the Product Lookup link in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the side bar navigation link: Product Lookup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 71
-testRunner.And("I Confirm the Product Lookup page is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink Product Lookup page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 72
-testRunner.And("I Click the Services link in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the side bar navigation link: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
-testRunner.And("I Confirm the Services page is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink Services page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
-testRunner.And("I Click the Services link again", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the side bar navigation link: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sub link"});
+            table2.AddRow(new string[] {
+                        "WERCSmart"});
+            table2.AddRow(new string[] {
+                        "Self-Service Authoring"});
+            table2.AddRow(new string[] {
+                        "Branded Materials"});
+            table2.AddRow(new string[] {
+                        "WERCS Studio"});
 #line 75
-testRunner.And("I Confirm you see links below the Services link for the following:WERCSmartSelf-S" +
-                    "ervicing AuthoringBranded MaterialsWERCS Studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
-testRunner.And("I Click the WERCSmart link below the Services link in the left hand navigation pa" +
-                    "ne", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 77
-testRunner.And("I Confirm you see links below the WERCSmart link for the following items:My Produ" +
-                    "cts Register ProductSelf-Service AuthoringBranded MaterialsWERCS Studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
-testRunner.And("I Click the Self-Service Authoring link in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
-testRunner.And("I Confirm you see links below the Self-Service Authoring link for the following i" +
-                    "tems:Authoring", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
-testRunner.And("I Click the Branded Materials link in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the following sub links are displayed below the WERCSLink menu item: Se" +
+                    "rvices:", ((string)(null)), table2, "And ");
 #line 81
-testRunner.And("I Confirm you see links below the Branded Materials link for the following items:" +
-                    "Branded Materials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click the link: WERCSmart below the WERCSLink menu item: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Link"});
+            table3.AddRow(new string[] {
+                        "My Products"});
+            table3.AddRow(new string[] {
+                        "Register new product"});
 #line 82
-testRunner.And("I Click the WERCS Studio link in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
-testRunner.And("I Confirm you see links below the WERCS Studio link for the following items:Data " +
-                    "ManagementReportsStudio HomeMappings", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
-testRunner.And("I Scroll to the top of the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 85
-testRunner.And("I Click the Dashboard link on the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the following links are displayed below menu item: Services and sub ite" +
+                    "m WERCSmart", ((string)(null)), table3, "And ");
 #line 86
-testRunner.And("I Confirm the Dashboard page is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click the link: Self-Service Authoring below the WERCSLink menu item: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Link"});
+            table4.AddRow(new string[] {
+                        "Authoring"});
+#line 87
+testRunner.And("I confirm the following links are displayed below menu item: Services and sub ite" +
+                    "m Self-Service Authoring", ((string)(null)), table4, "And ");
+#line 90
+testRunner.Given("I click the link: Branded Materials below the WERCSLink menu item: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Link"});
+            table5.AddRow(new string[] {
+                        "Branded Materials"});
+#line 91
+testRunner.And("I confirm the following links are displayed below menu item: Services and sub ite" +
+                    "m Branded Materials", ((string)(null)), table5, "And ");
+#line 94
+testRunner.Given("I click the link: WERCS Studio below the WERCSLink menu item: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Link"});
+            table6.AddRow(new string[] {
+                        "Data Management"});
+            table6.AddRow(new string[] {
+                        "Reports"});
+            table6.AddRow(new string[] {
+                        "Studio Home"});
+            table6.AddRow(new string[] {
+                        "Mappings"});
+#line 95
+testRunner.And("I confirm the following links are displayed below menu item: Services and sub ite" +
+                    "m WERCS Studio", ((string)(null)), table6, "And ");
+#line 101
+testRunner.And("I click the side bar navigation link: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
+testRunner.And("I should see the WERCSLink dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

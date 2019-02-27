@@ -91,14 +91,6 @@ namespace Wercs.Selenium.PortalUX.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 13
-#line 14
-testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-        }
-        
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[68420] List of Supplier Reports")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Supplier Reports")]
@@ -116,8 +108,6 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68420] List of Supplier Reports", ((string[])(null)));
 #line 16
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 17
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
@@ -168,8 +158,6 @@ testRunner.Given("under the supplier Reports menu I should see the following opt
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68421] Active UPCs for Products Report", ((string[])(null)));
 #line 32
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 33
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 34
@@ -222,8 +210,6 @@ testRunner.Then("I confirm that the excel file saved as: 68421 contains the foll
                         "tfs_design"});
 #line 50
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 51
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 52
@@ -278,8 +264,6 @@ testRunner.Then("I confirm that the excel file saved as: 68422 contains the foll
                         "tfs_design"});
 #line 69
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 70
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 71
@@ -338,8 +322,6 @@ testRunner.Then("I confirm that the excel file saved as: 68423 contains the foll
                         "tfs_design"});
 #line 89
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 90
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 91
@@ -404,8 +386,6 @@ testRunner.Then("I confirm that the excel file saved as: 73082 in column: Contai
                         "tfs_design"});
 #line 111
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 112
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 113
@@ -460,8 +440,6 @@ testRunner.Then("I confirm that the excel file saved as: 73225 contains the foll
                         "tfs_design"});
 #line 129
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 130
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 131
@@ -519,8 +497,6 @@ testRunner.Then("I confirm that the excel file saved as: 73228 contains the foll
                         "tfs_design"});
 #line 148
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 150
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 152
@@ -584,8 +560,6 @@ testRunner.And("I delete the excel file saved as excel73226", ((string)(null)), 
                         "tfs_design"});
 #line 183
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 184
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 185
@@ -635,8 +609,6 @@ testRunner.Then("I confirm that the excel file saved as: 73229 contains the foll
                         "tfs_design"});
 #line 199
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 200
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 201
@@ -691,8 +663,6 @@ testRunner.Then("I confirm that the excel file saved as: 73227 contains the foll
                         "tfs_design"});
 #line 217
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 218
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 219
@@ -751,8 +721,6 @@ testRunner.Then("I confirm that the excel file saved as: 73230 contains the foll
                         "tfs_design"});
 #line 238
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 239
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 240
@@ -814,8 +782,6 @@ testRunner.Then("I confirm that the excel file saved as: 75391 contains the foll
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[76551] California Proposition 65 - Registrations Prior to August 30, 2018", ((string[])(null)));
 #line 258
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 260
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 262
@@ -879,8 +845,6 @@ testRunner.And("I delete the Supplier Report file saved as excel76551", ((string
                         "tfs_design"});
 #line 288
 this.ScenarioSetup(scenarioInfo);
-#line 13
-this.FeatureBackground();
 #line 290
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 292

@@ -11,9 +11,6 @@
 
 Feature: Flash Point, testing method and Transportation (Suite ID: 74116)
 
-Background:
-Given I go to the WERCSmart Log in
-
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 Scenario: [74337] Flash Point < 60°C - Testing method shows closed cup only, Transportation shows Yes and No due to an exemption, Hazard class 3 must be used

@@ -61,26 +61,43 @@ And I confirm that the following WERCSLink menu items are showing
 | Recent Activities          |
 | Product Lookup             |
 | Services                   |
-And I Click the Additional Services link in the left hand navigation list
-And I Confirm the Additional Services page is shown (this is still under development so we may need to add more steps for this page in the future)
-And I Click the Key Performance Indicators list in the left hand navigation list
-And I Confirm the Key Performance Indicator page is shown
-And I Click the Recent Activities link in the left hand navigation list
-And I Confirm the Recent Activities page is shown
-And I Click the Product Lookup link in the left hand navigation list
-And I Confirm the Product Lookup page is shown
-And I Click the Services link in the left hand navigation list
-And I Confirm the Services page is shown
-And I Click the Services link again
-And I Confirm you see links below the Services link for the following:WERCSmartSelf-Servicing AuthoringBranded MaterialsWERCS Studio
-And I Click the WERCSmart link below the Services link in the left hand navigation pane
-And I Confirm you see links below the WERCSmart link for the following items:My Products Register ProductSelf-Service AuthoringBranded MaterialsWERCS Studio
-And I Click the Self-Service Authoring link in the left hand navigation list
-And I Confirm you see links below the Self-Service Authoring link for the following items:Authoring
-And I Click the Branded Materials link in the left hand navigation list
-And I Confirm you see links below the Branded Materials link for the following items:Branded Materials
-And I Click the WERCS Studio link in the left hand navigation list
-And I Confirm you see links below the WERCS Studio link for the following items:Data ManagementReportsStudio HomeMappings
-And I Scroll to the top of the left hand navigation list
-And I Click the Dashboard link on the left hand navigation list
-And I Confirm the Dashboard page is shown
+And I click the side bar navigation link: Additional Services
+And I confirm the WERCSLink Additional Services page loads
+And I click the side bar navigation link: Key Performance Indicators
+And I confirm the WERCSLink Key Performance Indicators page loads
+And I click the side bar navigation link: Recent Activities
+And I confirm the WERCSLink Recent Activities page loads
+And I click the side bar navigation link: Product Lookup
+And I confirm the WERCSLink Product Lookup page loads
+And I click the side bar navigation link: Services
+And I confirm the WERCSLink Services page loads
+And I click the side bar navigation link: Services
+And I confirm the following sub links are displayed below the WERCSLink menu item: Services:
+| Sub link |
+| WERCSmart              |
+| Self-Service Authoring |
+| Branded Materials      |
+| WERCS Studio           |
+Given I click the link: WERCSmart below the WERCSLink menu item: Services
+And I confirm the following links are displayed below menu item: Services and sub item WERCSmart
+| Link             |
+| My Products      |
+| Register new product |
+Given I click the link: Self-Service Authoring below the WERCSLink menu item: Services
+And I confirm the following links are displayed below menu item: Services and sub item Self-Service Authoring
+| Link      |
+| Authoring |
+Given I click the link: Branded Materials below the WERCSLink menu item: Services
+And I confirm the following links are displayed below menu item: Services and sub item Branded Materials
+| Link              |
+| Branded Materials |
+Given I click the link: WERCS Studio below the WERCSLink menu item: Services
+And I confirm the following links are displayed below menu item: Services and sub item WERCS Studio
+| Link            |
+| Data Management |
+| Reports         |
+| Studio Home     |
+| Mappings        |
+And I click the side bar navigation link: Dashboard
+And I should see the WERCSLink dashboard
+

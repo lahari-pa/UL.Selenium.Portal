@@ -108,8 +108,6 @@ namespace Wercs.Selenium.PortalUX.Features
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52978] Log Into Account", ((string[])(null)));
 #line 13
 this.ScenarioSetup(scenarioInfo);
-#line 15
-testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 17
 testRunner.Given("I login as the administrator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19

@@ -10,8 +10,8 @@
 
 Feature: Supplier Reports
 
-Background:
-Given I go to the WERCSmart Log in
+#Background:
+#Given I go to the WERCSmart Log in
 
 Scenario: [68420] List of Supplier Reports
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

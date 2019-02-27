@@ -167,6 +167,41 @@ namespace Wercs.Selenium.ULSC.Steps
 			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
 			Report.IsTrue(thisWercsLinkDashboard.ClickMenuAndSubMenuOption(menu, submenu), "Failed to click menu item: " + menu + " and submenu item: " + submenu,
 				"Clicked menu item: " + menu + " and submenu item: " + submenu);
+
+			// trying this...
+
+			//var thisLink = new WERCSLinkDashboard().GetSideBarNavLink(menu);
+			//if (thisLink == null)
+			//{
+			//	Report.Failure("There was no menu item with title: " + menu);
+			//	Report.Screenshot();
+			//	return;
+			//}
+
+			//if (thisLink.Expanded)
+			//{
+			//	var subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
+			//	if (subMatch == null)
+			//	{
+			//		Report.Failure("No sub link was found with title: " + submenu);
+			//		Report.Screenshot();
+			//		return;
+			//	}
+			//	subMatch.Click();
+			//}
+			//else if(thisLink.Click())
+			//{
+			//	thisLink = new WERCSLinkDashboard().GetSideBarNavLink(menu);
+			//	var subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
+			//	if (subMatch == null)
+			//	{
+			//		Report.Failure("No sub link was found with title: " + submenu);
+			//		Report.Screenshot();
+			//		return;
+			//	}
+			//	subMatch.Click();
+			//}
+			//Report.Failure("Failed to click menu item: " + menu);
 		}
 
 		[StepDefinition(@"In the WERCSLink dashboard I click left menu link: (.*)")]
@@ -368,6 +403,7 @@ namespace Wercs.Selenium.ULSC.Steps
 				"Found top left title: WERCSLink");
 		}
 
+		// using new class
 		[StepDefinition(@"I confirm that the following WERCSLink menu items are showing")]
 		public void GivenIConfirmThatTheFollowingWERCSLinkMenuItemsAreShowing(Table table)
 		{
@@ -377,6 +413,52 @@ namespace Wercs.Selenium.ULSC.Steps
 				Report.IsTrue(menuItems.Contains(thisRow["Menu item"]), "Failed to find menu item: " + thisRow["Menu item"],
 					"Found left menu item: " + thisRow["Menu item"]);
 			}
+		}
+
+		[StepDefinition(@"I confirm the following sub links are displayed below the WERCSLink menu item: (.*):")]
+		public void ConfirmWercsLinkMenuItemDisplaysSubItems(string menuItem, Table table)
+		{
+			var sidebar = new WERCSLinkDashboard().GetSideBarNavLinks();
+			var thisMenuItem = sidebar.First(x => x.Title == menuItem);
+			if (thisMenuItem == null)
+			{
+				Report.Failure($"The menu item: {menuItem} was not displayed!" );
+				Report.Screenshot();
+				return;
+			}
+			foreach (var row in table.Rows)
+			{
+				if (thisMenuItem.SubLinks.All(x => x.Title != row["Sub link"]))
+				{
+					Report.Failure("The sub link: " + row["Sub link"] + " was not displayed below menu item: " + menuItem + "!");
+					Report.Screenshot();
+					return;
+				}
+				Report.Info("Sub link: " + row["Sub link"] + " was displayed");
+			}
+			Report.Success("The correct sub item links were displayed below the menu item: " + menuItem);
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I click the link: (.*) below the WERCSLink menu item: (.*)")]
+		public void ClickSubLinkItem(string subLink, string menuItem)
+		{
+			var sidebar = new WERCSLinkDashboard().GetSideBarNavLinks();
+			var thisMenuItem = sidebar.First(x => x.Title == menuItem);
+			if (thisMenuItem == null)
+			{
+				Report.Failure($"The menu item: {menuItem} was not displayed!");
+				Report.Screenshot();
+				return;
+			}
+			var thisSubLink = thisMenuItem.SubLinks.First(x => x.Title == subLink);
+			if (thisSubLink == null)
+			{
+				Report.Failure("The sub link with title: " + subLink + " was not displayed under the primary link: " + menuItem);
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(thisSubLink.Click(), $"Failed to click sub link: {subLink}!", $"Successfully clicked sub link: {subLink}");
 		}
 
 		[StepDefinition(@"I confirm that the WERCSLink screen shows the following sections")]
@@ -759,6 +841,88 @@ namespace Wercs.Selenium.ULSC.Steps
 		{
 			Report.IsTrue(new WERCSLinkDashboard().ClickULLogo(), "Failed to click the UL Logo in the header!", "Successfully clicked the UL logo in the header");
 			Delay.Seconds(10);
+		}
+
+		[StepDefinition(@"I click the side bar navigation link: (.*)")]
+		public void ClickSideBarLink(string title)
+		{
+			var menuItems = new WERCSLinkDashboard().GetSideBarNavLinks();
+			var match = menuItems.First(x => x.Title == title);
+			if (match == null)
+			{
+				throw new Exception("There was no side bar displayed with title: " + title);
+			}
+			Report.IsTrue(match.Click(), "Failed to click the side bar link: " + title , "Successfully cliked the side bar link: " + title);
+		}
+
+		[StepDefinition(@"I confirm the WERCSLink (Services|Additional Services) page loads")]
+		public void ConfirmAdditionalServicesPageLoads(string page)
+		{
+			var anyServices = new WERCSLinkDashboard().AnyServicesGrid();
+			var i = 0;
+			while (!anyServices && i < 60)
+			{
+				anyServices = new WERCSLinkDashboard().AnyServicesGrid();
+				Delay.Seconds(1);
+				i++;
+			}
+			Report.IsTrue(anyServices, $"No {page} were loaded!", $"{page} were loaded");
+		}
+
+		[StepDefinition(@"I confirm the WERCSLink Recent Activities page loads")]
+		public void ConfirmRecentActivitiesPageLoads()
+		{
+			var loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Recent Activities");
+			var i = 0;
+			while (!loaded && i < 60)
+			{
+				loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Recent Activities");
+				Delay.Seconds(1);
+				i++;
+			}
+			Report.IsTrue(loaded, "The Recent Activities page was not loaded!", "The Recent Activies Page was loaded as expected");
+		}
+
+		[StepDefinition(@"I confirm the WERCSLink Product Lookup page loads")]
+		public void ConfirmProductLookupPageLoads()
+		{
+			var loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Product Lookup");
+			var i = 0;
+			while (!loaded && i < 60)
+			{
+				loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Product Lookup");
+				Delay.Seconds(1);
+				i++;
+			}
+			Report.IsTrue(loaded, "The Product Lookup page was not loaded!", "The Product Lookup Page was loaded as expected");
+		}
+
+		// There is no title or disctinct ids to work with, so just confirm that any widgets are loaded (eg. RUs)
+		[StepDefinition(@"I confirm the WERCSLink Key Performance Indicators page loads")]
+		public void ConfirmKeyPerformanceIndicatorsPageLoads()
+		{
+			var widgets = new WERCSLinkDashboard().DashboardWidgetTitles();
+			Report.IsTrue(widgets.Any(), "The Key Performance Indicators page did not load with widgets!", "The Key Performance Indictors page loaded with widgets");
+		}
+
+		[StepDefinition(@"I confirm the following links are displayed below menu item: (.*) and sub item (.*)")]
+		public void ConfirmFollowingSubSubLinksDisplayedBelowWercSmartSubLink(string menuItem, string subLink, Table table)
+		{
+			var sidebar = new WERCSLinkDashboard().GetSideBarNavLinks();
+			var link = sidebar.First(x => x.Title == menuItem);
+			var subSubLinks = link.SubLinks.First(x => x.Title == subLink).SubSubLinks;
+			foreach (var row in table.Rows)
+			{
+				if (subSubLinks.All(x => x.Title != row["Link"]))
+				{
+					Report.Failure("Link: " + row["Link"] + " was not displayed below the sub link: " + subLink+ "!");
+					Report.Screenshot();
+					return;
+				}
+				Report.Info("The link " + row["Link"] + " was displayed a level below link: " + subLink);
+			}
+			Report.Success("The correct links were displayed below the sub link: " + subLink);
+			Report.Screenshot();
 		}
 	}
 
