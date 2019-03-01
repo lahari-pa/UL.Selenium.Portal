@@ -119,7 +119,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.SectExatcDataNotKnown("Boiling Point (in Celsius)");
 			MyStepsNewProduct.SetTheSectionOptionTo("Boiling Point (in Celsius)", "Not tested/Unknown");
 			MyStepsNewProduct.SectExatcDataNotKnown("Flash Point (in Celsius)");
-			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
+			MyStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not Tested/Unknown");
 			var MyNewProduct = new NewProduct();
 			if (MyNewProduct.OptionExists("Flash Point (in Celsius)", "Flammable 1C"))
 			{
