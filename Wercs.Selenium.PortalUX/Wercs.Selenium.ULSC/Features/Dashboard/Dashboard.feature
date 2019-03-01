@@ -101,3 +101,46 @@ And I confirm the following links are displayed below menu item: Services and su
 And I click the side bar navigation link: Dashboard
 And I should see the WERCSLink dashboard
 
+# Created by Barrett, Beverly
+
+# Test case can be found at the following paths:
+# NetProjects10\PowerUnity\2. WERCSLink - Dashboard
+# NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\2. ULSC - Dashboard
+
+Scenario: [52993] Message Center - layout
+Given I call Shared Step 29665 - Login to WSW as ULSC user
+Given I call Shared Step 29148 - Login to ULSC as an Administrator User
+And I confirm the following widget panels are displayed on the Dashboard:
+| Widget         |
+| Message Center |
+
+And I Confirm the three dots icon is shown in the top right of the message center area
+And I Click the three dots icon
+And I Confirm the Remove menu item is shown
+And I Click the three dots icon again
+And I Confirm the Remove menu item is no longer shown
+And I Confirm the "Enter WPS ID or Product Name" field is shown below the Message Center heading
+And I If you are working with a brand new account you will not see anything below the "Enter WPS ID or Product name" field within the Message center area.
+And I If you are working with an older account, confirm you see entries below the "Enter WPS ID or Product Name" field
+And I Click the three dots icon at the top left of the Message Center area
+And I Click the "Remove" menu option
+And I Confirm the Message Center area of the screen is now blank
+And I Click the Dashboard entry in the left hand navigation list
+And I Click Reset Dashboard
+And I Confirm the Dashboard page refreshes and the Message center area is shown again
+
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\PowerUnity\2. WERCSLink - Dashboard
+# NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\2. ULSC - Dashboard
+Scenario: [52995] KPIs - Defaults
+Given I call Shared Step 29665 - Login to WSW as ULSC user
+Given I call Shared Step 29148 - Login to ULSC as an Administrator User
+And I Confirm the KPI area shows 6 preferred KPIs
+And I Confirm the KPIs shown are :Products by Retailer and StatusRUs by CategoryProducts by Recertification ReasonProducts by RURUs by Category by RetailerSubscription Status
+And I Confirm the Products by Retailer and Status shows as a pie chart
+And I Confirm the RUs by Category shows as a pie chart
+And I Confirm the Products by Recertification Reason shows as a bar graph
+And I Confirm the Products by RU shows as a bar graph
+And I Confirm the RUs by Category by Retailer shows as a pie chart
+And I Confirm the Subscription status shows "Coming soon..."

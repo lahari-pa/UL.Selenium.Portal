@@ -945,17 +945,17 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
                         "SupplierType",
                         "Manufacturer"});
             table28.AddRow(new string[] {
-                        "CityQuestion",
-                        "CityQuestion"});
+                        "PhoneQuestion",
+                        "PhoneQuestion"});
             table28.AddRow(new string[] {
-                        "CityHint",
-                        "CityHint"});
+                        "PhoneHint",
+                        "PhoneHint"});
             table28.AddRow(new string[] {
-                        "CarQuestion",
-                        "CarQuestion"});
+                        "MentorQuestion",
+                        "MentorQuestion"});
             table28.AddRow(new string[] {
-                        "CarHint",
-                        "CarHint"});
+                        "MentorHint",
+                        "MentorHint"});
             table28.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
@@ -963,17 +963,17 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
                         "FriendHint",
                         "FriendHint"});
             table28.AddRow(new string[] {
-                        "JobQuestion",
-                        "JobQuestion"});
+                        "AnimalQuestion",
+                        "AnimalQuestion"});
             table28.AddRow(new string[] {
-                        "JobHint",
-                        "JobHint"});
+                        "AnimalHint",
+                        "AnimalHint"});
             table28.AddRow(new string[] {
-                        "MascotQuestion",
-                        "MascotQuestion"});
+                        "CollegeQuestion",
+                        "CollegeQuestion"});
             table28.AddRow(new string[] {
-                        "MascotHint",
-                        "MascotHint"});
+                        "CollegeHint",
+                        "CollegeHint"});
             table28.AddRow(new string[] {
                         "Pin",
                         "1234"});
@@ -1354,17 +1354,17 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
                         "SupplierType",
                         "Manufacturer"});
             table41.AddRow(new string[] {
-                        "CityQuestion",
-                        "CityQuestion"});
+                        "PhoneQuestion",
+                        "PhoneQuestion"});
             table41.AddRow(new string[] {
-                        "CityHint",
-                        "CityHint"});
+                        "PhoneHint",
+                        "PhoneHint"});
             table41.AddRow(new string[] {
-                        "CarQuestion",
-                        "CarQuestion"});
+                        "MentorQuestion",
+                        "MentorQuestion"});
             table41.AddRow(new string[] {
-                        "CarHint",
-                        "CarHint"});
+                        "MentorHint",
+                        "MentorHint"});
             table41.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
@@ -1372,17 +1372,17 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
                         "FriendHint",
                         "FriendHint"});
             table41.AddRow(new string[] {
-                        "JobQuestion",
-                        "JobQuestion"});
+                        "AnimalQuestion",
+                        "AnimalQuestion"});
             table41.AddRow(new string[] {
-                        "JobHint",
-                        "JobHint"});
+                        "AnimalHint",
+                        "AnimalHint"});
             table41.AddRow(new string[] {
-                        "MascotQuestion",
-                        "MascotQuestion"});
+                        "CollegeQuestion",
+                        "CollegeQuestion"});
             table41.AddRow(new string[] {
-                        "MascotHint",
-                        "MascotHint"});
+                        "CollegeHint",
+                        "CollegeHint"});
             table41.AddRow(new string[] {
                         "Pin",
                         "1234"});

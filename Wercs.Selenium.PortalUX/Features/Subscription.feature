@@ -331,16 +331,16 @@ Given If not already created, I create a user: New_Sub with the following parame
 | CompanyPhone         | 123-456-7889   |
 | EmergencyPhoneNumber | 123-456-7789   |
 | SupplierType         | Manufacturer   |
-| CityQuestion         | CityQuestion   |
-| CityHint             | CityHint       |
-| CarQuestion          | CarQuestion    |
-| CarHint              | CarHint        |
+| PhoneQuestion         | PhoneQuestion   |
+| PhoneHint             | PhoneHint       |
+| MentorQuestion          | MentorQuestion    |
+| MentorHint              | MentorHint        |
 | FriendQuestion       | FriendQuestion |
 | FriendHint           | FriendHint     |
-| JobQuestion          | JobQuestion    |
-| JobHint              | JobHint        |
-| MascotQuestion       | MascotQuestion |
-| MascotHint           | MascotHint     |
+| AnimalQuestion          | AnimalQuestion    |
+| AnimalHint              | AnimalHint        |
+| CollegeQuestion       | CollegeQuestion |
+| CollegeHint           | CollegeHint     |
 | Pin                  | 1234           |
 Given I click on My Account
 Then I click on NEW SUBSCRIPTION
@@ -478,16 +478,16 @@ Given If not already created, I create a user: New_VC with the following paramet
 | CompanyPhone         | 123-456-7889   |
 | EmergencyPhoneNumber | 123-456-7789   |
 | SupplierType         | Manufacturer   |
-| CityQuestion         | CityQuestion   |
-| CityHint             | CityHint       |
-| CarQuestion          | CarQuestion    |
-| CarHint              | CarHint        |
+| PhoneQuestion         | PhoneQuestion   |
+| PhoneHint             | PhoneHint       |
+| MentorQuestion          | MentorQuestion    |
+| MentorHint              | MentorHint        |
 | FriendQuestion       | FriendQuestion |
 | FriendHint           | FriendHint     |
-| JobQuestion          | JobQuestion    |
-| JobHint              | JobHint        |
-| MascotQuestion       | MascotQuestion |
-| MascotHint           | MascotHint     |
+| AnimalQuestion          | AnimalQuestion    |
+| AnimalHint              | AnimalHint        |
+| CollegeQuestion       | CollegeQuestion |
+| CollegeHint           | CollegeHint     |
 | Pin                  | 1234           |
 #Login to WERCSmart Portal - Visaul Automation Accou
 #Given I populate the email input field with: User_9a6761333718.kxxyxunf@mailosaur.io

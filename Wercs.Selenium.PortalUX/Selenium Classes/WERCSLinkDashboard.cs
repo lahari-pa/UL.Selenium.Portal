@@ -199,6 +199,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return expectedTitle == topLeftTitle[0].GetValue().Trim();
 		}
 
+		// section = widget under 'Services' menu item
 		public List<string> getSectionTitles()
 		{
 			List<string> sections = new List<string>();
@@ -340,43 +341,43 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return subHeadings;
 		}
 
-		public List<WERCSLinkLink> getSectionLinks(string section)
-		{
-			List<WERCSLinkLink> links = new List<WERCSLinkLink>();
-			var sectionTitles = containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2);
-			if (sectionTitles.Count == 0)
-			{
-				Report.Error("No section titles were found");
-				return null;
-			}
-			else
-			{
-				var matchingSection = sectionTitles.FirstOrDefault(x => x.GetValue().Trim().ToLower() == section.ToLower());
-				if (matchingSection == null)
-				{
-					Report.Error("No matching section was found: " + section);
-					return null;
-				}
+		//public List<WERCSLinkLink> getSectionLinks(string section)
+		//{
+		//	List<WERCSLinkLink> links = new List<WERCSLinkLink>();
+		//	var sectionTitles = containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2);
+		//	if (sectionTitles.Count == 0)
+		//	{
+		//		Report.Error("No section titles were found");
+		//		return null;
+		//	}
+		//	else
+		//	{
+		//		var matchingSection = sectionTitles.FirstOrDefault(x => x.GetValue().Trim().ToLower() == section.ToLower());
+		//		if (matchingSection == null)
+		//		{
+		//			Report.Error("No matching section was found: " + section);
+		//			return null;
+		//		}
 
-				var linksUnderSection = matchingSection.FindElements(By.XPath("../../../following-sibling::div//a"), 2);
+		//		var linksUnderSection = matchingSection.FindElements(By.XPath("../../../following-sibling::div//a"), 2);
 
-				foreach (var thisLink in linksUnderSection)
-				{
-					var linkTitle = thisLink.FindElement(By.XPath("./span"), 2);
-					var linkEm = thisLink.FindElement(By.XPath("../em"), 2);
+		//		foreach (var thisLink in linksUnderSection)
+		//		{
+		//			var linkTitle = thisLink.FindElement(By.XPath("./span"), 2);
+		//			var linkEm = thisLink.FindElement(By.XPath("../em"), 2);
 
-					if (linkTitle != null && linkEm != null)
-					{
-						WERCSLinkLink newLink = new WERCSLinkLink();
-						newLink.LinkTitle = linkTitle.GetValue();
-						newLink.Icon = linkEm.GetAttribute("class").Replace("fa fa-", "").Replace("level-ov", "").Trim();
-						newLink.Href = thisLink.GetAttribute("href");
-						links.Add(newLink);
-					}
-				}
-				return links;
-			}
-		}
+		//			if (linkTitle != null && linkEm != null)
+		//			{
+		//				WERCSLinkLink newLink = new WERCSLinkLink();
+		//				newLink.LinkTitle = linkTitle.GetValue();
+		//				newLink.Icon = linkEm.GetAttribute("class").Replace("fa fa-", "").Replace("level-ov", "").Trim();
+		//				newLink.Href = thisLink.GetAttribute("href");
+		//				links.Add(newLink);
+		//			}
+		//		}
+		//		return links;
+		//	}
+		//}
 
 		public List<string> DashboardWidgetTitles()
 		{
@@ -395,10 +396,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return els.First(x => x != null && x.Displayed).TryClick();
 		}
 
-		public List<SideBarNavLink> GetSideBarNavLinks()
+		public List<NavLink> GetSideBarNavLinks()
 		{
-			var rList = new List<SideBarNavLink>();
-			var sidebarItems = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li/a"), 2).ToList();
+			var rList = new List<NavLink>();
+			var sidebarItems = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li"), 2).ToList();
 			foreach (var item in sidebarItems)
 			{
 				var thisLink = this.GetSideBarNavLink(item);
@@ -407,45 +408,76 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return rList;
 		}
 
-		public SideBarNavLink GetSideBarNavLink(string title)
+		public NavLink GetSideBarNavLink(string title)
 		{
-			var rLink = new SideBarNavLink();
-			var els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li/a"), 2);
+			var els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']/li"), 2);
 			foreach (var el in els)
 			{
-				if (el.Text == title)
+				if (el.FindElement(By.XPath("./a"))?.Text == title)
 				{
-					rLink = this.GetSideBarNavLink(el);
+					return this.GetSideBarNavLink(el);
 				}
 			}
-			return rLink;
+			return null;
 		}
 
-		public SideBarNavLink GetSideBarNavLink(IWebElement el)
+		// el is the list element (li) within the navigation element (nav)
+		public NavLink GetSideBarNavLink(IWebElement el)
 		{
-			var thisLink = new SideBarNavLink();
-			var titleEl = el.FindElement(By.XPath("./span"), 2);
-			thisLink.Title = titleEl?.Text;
-			thisLink.TitleDisplayed = titleEl?.Displayed ?? false;
-			var primaryUl = el.FindElement(By.XPath("./following-sibling::ul[@id='multilevel'"), 2);
-			thisLink.Expanded = primaryUl.GetAttribute("aria-expanded") == "true";
-			var rsubLinks = new List<SideBarNavLink.SubLink>();
-			var subEls = el.FindElements(By.XPath("./following-sibling::ul[@id='multilevel' and @aria-expanded='true']/li/a"), 2);
-			for (var i = 0; i < subEls.Count; i++)
+			var thisLink = new NavLink {
+				Title = el.FindElement(By.XPath("./a"), 2)?.GetAttribute("title"),
+				TitleDisplayed = el.FindElement(By.XPath("./a/span"), 2)?.Displayed ?? false,
+				Expanded = false,
+				Href = el.FindElement(By.XPath("./a"), 2)?.GetAttribute("href"),
+				Icon = el.FindElement(By.XPath("./a/em"),2).GetAttribute("class").Replace("fa fa-", "")
+			};
+			var multilevelUl = el.FindElement(By.XPath("./a/following-sibling::ul[starts-with(@id,'multilevel')]"), 2);
+			var rsubLinks = new List<NavSubLink>();
+			// Only add sub links if the multilevel ul exists
+			if (multilevelUl != null)
 			{
-				// Add sub sub link titles
-				var subSubEls = this.containerElement.FindElements(By.XPath(".//ul[@id='level" + (i + 1).ToString() + "']/li/a"), 2);
-				var rSubSubLinks = subSubEls.Select(subSubEl => new SideBarNavLink.SubLink.SubSubLink {
-						Title = subSubEl.Text
-					})
-					.ToList();
-				rsubLinks.Add(new SideBarNavLink.SubLink { Index = i + 1, Title = subEls[i].Text, SubSubLinks = rSubSubLinks });
+				thisLink.Expanded = multilevelUl.GetAttribute("aria-expanded") == "true";
+				// Only add sub links if multilevel ul is expanded
+				if (thisLink.Expanded)
+				{
+					var subEls = multilevelUl.FindElements(By.XPath("./li/a"), 2);
+					for (var i = 0; i < subEls.Count; i++)
+					{
+						if (!subEls[i].Displayed)
+						{
+							continue;
+						}
+						var levelxUl = el.FindElement(By.XPath("//ul[@id='level" + (i + 1).ToString() + "']"), 2);
+						var rSubSubLinks = new List<NavSubSubLink>();
+						// Only add sub sub links if the levelx ul exists and is expanded
+						if (levelxUl != null && levelxUl.GetAttribute("aria-expanded") == "true")
+						{
+							// Add sub sub links to the list belonging to this sub link
+							var subSubEls = levelxUl.FindElements(By.XPath("./li/a"), 2);
+							rSubSubLinks = subSubEls.Select(ss => new NavSubSubLink {
+									Title = ss.Text,
+									ParentLevel = i + 1,
+									Href = ss.GetAttribute("href"),
+									Icon = ss.FindElement(By.XPath("./em"), 2)?.GetAttribute("class").Replace("fa fa-", "")
+							})
+								.ToList();
+						}
+						// Add sub link to the list belonging to this link
+						rsubLinks.Add(new NavSubLink {
+							Index = i + 1,
+							Title = subEls[i].Text,
+							Expanded = levelxUl != null && levelxUl.GetAttribute("aria-expanded") == "true",
+							SubSubLinks = rSubSubLinks,
+							Href = subEls[i].GetAttribute("href"),
+							Icon = subEls[i].FindElement(By.XPath("./em"), 2)?.GetAttribute("class").Replace("fa fa-", "")
+						});
+					}
+					// Add all sub links to this link
+				}
 			}
-			// Add complete sub links to this link
 			thisLink.SubLinks = rsubLinks;
 			return thisLink;
 		}
-
 
 		public string UserButtonText()
 		{
@@ -507,35 +539,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var el = this.containerElement.FindElement(By.XPath("//div[@id='status-check-page']//h2[contains(text(),'" + title + "')]"), 2);
 			return el != null && el.Displayed;
 		}
-	}
 
-	public class WERCSLinkLink
-	{
-		public string LinkTitle { get; set; }
-
-		public string Href { get; set; }
-
-		public string Icon { get; set; }
-
-	}
-
-	public class SideBarNavLink : WERCSLinkDashboard
-	{
-
-		public string Title { get; set; }
-
-		public bool TitleDisplayed { get; set; }
-
-		public bool Expanded { get; set; }
-
-		public List<SubLink> SubLinks { get; set; }
-
-		public bool Click()
+		public bool ClickNavItem(NavLink link)
 		{
 			var els = this.containerElement.FindElements(By.XPath(".//ul[@class='nav']//li/a"), 2);
 			foreach (var el in els)
 			{
-				if (el.Text == this.Title)
+				if (el.Text == link.Title)
 				{
 					return el.TryClick();
 				}
@@ -543,43 +553,96 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
-		public class SubLink : SideBarNavLink
+		public bool ClickNavItem(NavSubLink link)
 		{
-			public int Index { get; set; }
-
-			public new bool Click()
+			var els = this.containerElement.FindElements(By.XPath(".//ul[starts-with(@id,'multilevel')]/li/a"), 2);
+			foreach (var el in els)
 			{
-				var els = this.containerElement.FindElements(By.XPath(".//ul[@id='multilevel' and @aria-expanded='true']/li/a"), 2);
-				foreach (var el in els)
+				if (el.Text == link.Title)
 				{
-					if (el.Text == this.Title)
-					{
-						return el.TryClick();
-					}
-				}
-				return false;
-			}
-
-			public List<SubSubLink> SubSubLinks {get;set;}
-
-			public class SubSubLink : SubLink
-			{
-				public new bool Click()
-				{
-					var els = this.containerElement.FindElements(By.XPath(".//ul[@id='level" + this.Index + "']/li/a"), 2);
-					foreach (var el in els)
-					{
-						if (el.Text == this.Title)
-						{
-							return el.TryClick();
-						}
-					}
-					return false;
+					return el.TryClick();
 				}
 			}
-
+			return false;
 		}
 
+		public bool ClickNavItem(NavSubSubLink link)
+		{
+			var els = this.containerElement.FindElements(By.XPath(".//ul[@id='level" + link.ParentLevel + "']/li/a"), 2);
+			foreach (var el in els)
+			{
+				if (el.Text == link.Title)
+				{
+					return el.TryClick();
+				}
+			}
+			return false;
+		}
+
+		public bool ClickWidgetDropDownMenuToggle(string widgetTite)
+		{
+			var xPath = ".//div[@class='panel-title' and text()='" + widgetTite + "']/../..//button[@class='btn btn-default dropdown-toggle']";
+			return this.containerElement.FindElement(By.XPath(xPath), 2).TryClick();
+		}
+
+		public bool WidgetDropDownMenuToggleDisplayed(string widgetTite)
+		{
+			var xPath = ".//div[@class='panel-title' and text()='" + widgetTite + "']/../..//button[@class='btn btn-default dropdown-toggle']";
+			return this.containerElement.FindElement(By.XPath(xPath), 2) != null;
+		}
+
+	}
+
+	// combine with NavLink
+	//public class WERCSLinkLink
+	//{
+	//	public string LinkTitle { get; set; }
+
+	//	public string Href { get; set; }
+
+	//	public string Icon { get; set; }
+
+	//}
+
+	public class NavLink : WERCSLinkDashboard
+	{
+		public string Title { get; set; }
+
+		public bool TitleDisplayed { get; set; }
+
+		public bool Expanded { get; set; }
+
+		public string Href { get; set; }
+
+		public string Icon { get; set; }
+
+		public List<NavSubLink> SubLinks { get; set; }
+	}
+
+	public class NavSubLink : NavLink
+	{
+		public int Index { get; set; }
+
+		public new string Title { get; set; }
+
+		public new bool Expanded { get; set; }
+
+		public List<NavSubSubLink> SubSubLinks { get; set; }
+	}
+
+	public class NavSubSubLink : NavLink
+	{
+		public new string Title { get; set; }
+
+		public int ParentLevel { get; set; }
+
+	}
+
+	public class DashboardWidget
+	{
+		public string Title { get; set; }
+
+		// graph
 	}
 
 

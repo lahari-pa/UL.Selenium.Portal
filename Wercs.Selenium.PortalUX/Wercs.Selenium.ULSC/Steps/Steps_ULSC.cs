@@ -418,8 +418,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm the following sub links are displayed below the WERCSLink menu item: (.*):")]
 		public void ConfirmWercsLinkMenuItemDisplaysSubItems(string menuItem, Table table)
 		{
-			var sidebar = new WERCSLinkDashboard().GetSideBarNavLinks();
-			var thisMenuItem = sidebar.First(x => x.Title == menuItem);
+			var thisMenuItem = new WERCSLinkDashboard().GetSideBarNavLink(menuItem);
 			if (thisMenuItem == null)
 			{
 				Report.Failure($"The menu item: {menuItem} was not displayed!" );
@@ -443,8 +442,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I click the link: (.*) below the WERCSLink menu item: (.*)")]
 		public void ClickSubLinkItem(string subLink, string menuItem)
 		{
-			var sidebar = new WERCSLinkDashboard().GetSideBarNavLinks();
-			var thisMenuItem = sidebar.First(x => x.Title == menuItem);
+			var thisMenuItem = new WERCSLinkDashboard().GetSideBarNavLink(menuItem);
 			if (thisMenuItem == null)
 			{
 				Report.Failure($"The menu item: {menuItem} was not displayed!");
@@ -458,7 +456,7 @@ namespace Wercs.Selenium.ULSC.Steps
 				Report.Screenshot();
 				return;
 			}
-			Report.IsTrue(thisSubLink.Click(), $"Failed to click sub link: {subLink}!", $"Successfully clicked sub link: {subLink}");
+			Report.IsTrue(new WERCSLinkDashboard().ClickNavItem(thisSubLink), $"Failed to click sub link: {subLink}!", $"Successfully clicked sub link: {subLink}");
 		}
 
 		[StepDefinition(@"I confirm that the WERCSLink screen shows the following sections")]
@@ -495,26 +493,72 @@ namespace Wercs.Selenium.ULSC.Steps
 				"Expected text was: " + expectedText + " actual text was: " + actualText);
 		}
 
-		[StepDefinition(@"I confirm that in the (.*) area the following links exist:")]
-		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingLinksExist(string section, Table table)
+		[StepDefinition(@"I confirm that the following links exist under menu item: (.*):")]
+		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingLinksExist(string menuItem, Table table)
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			List<WERCSLinkLink> links = thisWercsLinkDashboard.getSectionLinks(section);
-
-			//| Link title | Link icon |
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			//WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			//List<WERCSLinkLink> links = thisWercsLinkDashboard.getSectionLinks(section);
+			var navLinks = new WERCSLinkDashboard().GetSideBarNavLinks();
+			var navLink = new NavLink();
+			if (navLinks.Any(x => x.Title == menuItem))
 			{
-				var matchingLink = links.FirstOrDefault(x => x.LinkTitle == thisRow["Link title"]);
-				Report.IsTrue(matchingLink != null, "Failed to find matching link: " + thisRow["Link title"],
-					"Found matching link: " + thisRow["Link title"]);
-
-				if (matchingLink != null)
+				navLink = navLinks.First(x => x.Title == menuItem);
+				// then sub links should contain all links
+				foreach (var row in table.Rows)
 				{
-					Report.IsTrue(matchingLink.Icon == thisRow["Link icon"], "Failed to find matching icon: " + thisRow["Link icon"],
-						"Found matching icon: " + thisRow["Link icon"]);
-
+					var expectedTitle = row["Link title"];
+					var expcetedIcon = row["Link icon"];
+					if (Report.IsTrue(navLinks.First(x => x.Title == menuItem).SubLinks.Any(x => x.Title == expectedTitle), "No link with title: " + expectedTitle + " was displayed below menu item " + menuItem, "Link with title: " + expectedTitle + " was displayed under menu item: " + menuItem + " as expected"))
+					{
+						Report.IsTrue(navLinks.First(x => x.Title == menuItem).SubLinks.Any(x => x.Icon == expcetedIcon), "No link with icon: " + expcetedIcon + " was displayed below menu item " + menuItem, "Link with icon: " + expectedTitle + " was displayed under menu item: " + menuItem + " as expected");
+					}
 				}
 			}
+			else if (navLinks.Any(x => x.SubLinks.Any(y => y.Title == menuItem)))
+			{
+				// then sub sub links should contain all links
+				navLink = navLinks.First(x => x.SubLinks.Any(y => y.Title==menuItem)).SubLinks.First(x => x.Title==menuItem);
+				foreach (var row in table.Rows)
+				{
+					var expectedTitle = row["Link title"];
+					var expcetedIcon = row["Link icon"];
+					var ssLinks = navLinks.First(x => x.SubLinks.Any(y => y.Title == menuItem)).SubLinks.First(x => x.Title == menuItem).SubSubLinks;
+					if (Report.IsTrue(ssLinks.Any(x => x.Title == expectedTitle),
+						"No link with title: " + expectedTitle + " was displayed below menu item " + menuItem,
+						"Link with title: " + expectedTitle + " was displayed under menu item: " + menuItem + " as expected"))
+					{
+						Report.IsTrue(ssLinks.Any(x => x.Icon == expcetedIcon),
+							"No link with icon: " + expcetedIcon + " was displayed below menu item " + menuItem,
+							"Link with icon: " + expectedTitle + " was displayed under menu item: " + menuItem + " as expected");
+					}
+				}
+			}
+			else
+			{
+				Report.Failure("No section with title: " +menuItem + " was found!");
+				Report.Screenshot();
+			}
+			//| Link title | Link icon |
+
+			//| Link title | Link icon |
+			//foreach (var row in table.Rows)
+			//{
+			//	var expectedTitle = row["Link title"];
+			//	var expcetedIcon = row["Link icon"];
+			//	var subSubLink
+			//	if(nav)
+
+			//	var matchingLink = links.FirstOrDefault(x => x.LinkTitle == thisRow["Link title"]);
+			//	Report.IsTrue(matchingLink != null, "Failed to find matching link: " + thisRow["Link title"],
+			//		"Found matching link: " + thisRow["Link title"]);
+
+			//	if (matchingLink != null)
+			//	{
+			//		Report.IsTrue(matchingLink.Icon == thisRow["Link icon"], "Failed to find matching icon: " + thisRow["Link icon"],
+			//			"Found matching icon: " + thisRow["Link icon"]);
+
+			//	}
+			//}
 		}
 
 		[StepDefinition(@"I confirm that in the (.*) area the following subheadings appear:")]
@@ -846,13 +890,12 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I click the side bar navigation link: (.*)")]
 		public void ClickSideBarLink(string title)
 		{
-			var menuItems = new WERCSLinkDashboard().GetSideBarNavLinks();
-			var match = menuItems.First(x => x.Title == title);
-			if (match == null)
+			var menuItem = new WERCSLinkDashboard().GetSideBarNavLink(title);
+			if (menuItem == null)
 			{
 				throw new Exception("There was no side bar displayed with title: " + title);
 			}
-			Report.IsTrue(match.Click(), "Failed to click the side bar link: " + title , "Successfully cliked the side bar link: " + title);
+			Report.IsTrue(new WERCSLinkDashboard().ClickNavItem(menuItem), "Failed to click the side bar link: " + title , "Successfully cliked the side bar link: " + title);
 		}
 
 		[StepDefinition(@"I confirm the WERCSLink (Services|Additional Services) page loads")]
@@ -908,9 +951,20 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm the following links are displayed below menu item: (.*) and sub item (.*)")]
 		public void ConfirmFollowingSubSubLinksDisplayedBelowWercSmartSubLink(string menuItem, string subLink, Table table)
 		{
-			var sidebar = new WERCSLinkDashboard().GetSideBarNavLinks();
-			var link = sidebar.First(x => x.Title == menuItem);
-			var subSubLinks = link.SubLinks.First(x => x.Title == subLink).SubSubLinks;
+			var link = new WERCSLinkDashboard().GetSideBarNavLink(menuItem);
+			if (link == null)
+			{
+				Report.Failure("Menu item: " + menuItem + " was not displayed in the nav side bar!");
+				Report.Screenshot();
+				return;
+			}
+			var subSubLinks = link.SubLinks.First(x => x.Title == subLink)?.SubSubLinks;
+			if (subSubLinks == null)
+			{
+				Report.Failure("No sub link matching title: '" + subLink + "' with sub sub link was found!");
+				Report.Screenshot();
+				return;
+			}
 			foreach (var row in table.Rows)
 			{
 				if (subSubLinks.All(x => x.Title != row["Link"]))
@@ -923,6 +977,18 @@ namespace Wercs.Selenium.ULSC.Steps
 			}
 			Report.Success("The correct links were displayed below the sub link: " + subLink);
 			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I click the link: (.*) below menu item: (.*) and sub item (.*)")]
+		public void ClickLinkBelowWercSmartSubLink(string subSub, string menu, string sub)
+		{
+
+		}
+
+		[StepDefinition(@"I confirm the three vertical dots drop down button is displayed for widget: (.*)")]
+		public void ConfirmVerticalDotDropDownButtonIsDisplayed(string widget)
+		{
+
 		}
 	}
 

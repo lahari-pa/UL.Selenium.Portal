@@ -24,6 +24,9 @@ Given I call Shared Step 29665 - Login to WSW as ULSC user
 And I call Shared Step 29148 - Login to ULSC as an Administrator User
 And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart
 And In the WERCSLink dashboard I click left menu link: My Products
+
+And I click the side bar navigation link: My Products
+
 And I Confirm the WerCSMart Product Information page is shown in new window/tab
 And I close the tab with the Product Information page
 Given I navigate to tab with title: Services
@@ -41,7 +44,8 @@ Scenario: [23328] WERCSLink - WERCSmart -  Request New Assessment
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 And I call Shared Step 29148 - Login to ULSC as an Administrator User
 And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart
-And In the WERCSLink dashboard I click left menu link: Register New Product
+#And In the WERCSLink dashboard I click left menu link: Register New Product
+And I click the side bar navigation link: Register New Product
 And I Confirm a new window opens with the WERCSmart New Product page shown
 And I set the Select the type of product to create field to: Create a New Registration
 And in the New Product page I click Continue
@@ -70,6 +74,7 @@ And I confirm that the following WERCSLink menu items are showing
 | Recent Activities          |
 | Product Lookup             |
 | Services                   |
+# Services main paige
 And I confirm that the WERCSLink screen shows the following sections
 | Section                |
 | WERCSmart®             |
@@ -78,7 +83,7 @@ And I confirm that the WERCSLink screen shows the following sections
 | Branded Materials      |
 And I confirm the WERCSmart area shows the WERCSmart logo, name and Registered trade mark
 And I confirm that in the WERCSmart® area the description text reads Provide data for WERCS mart ® review and recipients Get resources, enter data, manage and submit requested information in WERCS mart ®
-And I confirm that in the WERCSmart® area the following links exist:
+And I confirm that the following links exist under menu item: WERCSmart:
 | Link title           | Link icon |
 | My Products          | flask     |
 | Register new product | file      |
@@ -92,7 +97,7 @@ And I confirm that in the WERCSmart® area the following images appear:
 #And I Confirm the middle section of the Services screen is split into two sections - top will be the Self-Service Authoring section and the bottom will be the Branded Materials section
 #And I confirm the Self-Service Authoring icon and heading is shown at the top of the top middle section
 And I confirm that in the Self-Service Authoring area the description text reads Your direct connection with professional services Order your regional GHS Safety Data Sheets via an online submssion tool
-And I confirm that in the Self-Service Authoring area the following links exist:
+And I confirm that the following links exist under menu item: Self-Service Authoring:
 | Link title | Link icon     |
 | Authoring  | pencil-square |
 And I confirm that in the Self-Service Authoring area the following images appear:
@@ -101,7 +106,7 @@ And I confirm that in the Self-Service Authoring area the following images appea
 | IandI               |
 #And I Confirm the lower portion of the middle section of the screen shows the Branded Materials logo and heading
 And I confirm that in the Branded Materials area the description text reads Make your unique branded materials available in WERCSmart® Allow your unique component attributes to be accessible to the public or assign them as permission-only
-And I confirm that in the Branded Materials area the following links exist:
+And I confirm that the following links exist under menu item: Branded Materials:
 | Link title        | Link icon |
 | Branded Materials | tag       |
 And I confirm that in the Branded Materials area the following images appear:
@@ -110,8 +115,7 @@ And I confirm that in the Branded Materials area the following images appear:
 | IandI        |
 #And I confirm the Right hand section of the screen shows the WERCS Studio logo and name
 And I confirm that in the WERCS Studio area the description text reads Product data and documents in your private database Manage, report and distribute product information from your private Studio database.
-
-And I confirm that in the WERCS Studio area the following links exist:
+And I confirm that the following links exist under menu item: WERCS Studio:
 | Link title      | Link icon |
 | Data Management | calendar  |
 | Reports         | print     |
@@ -152,7 +156,7 @@ And I close the tab with the ULGHS.COM page
 Scenario: [24436] WERCSLink - WERCS Studio - Data Management
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 And I call Shared Step 29148 - Login to ULSC as an Administrator User
-And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart59322
+And I call Shared Step 53079 - WERCSLink go to Services - WERCSmart
 And In the WERCSLink dashboard I click left menu link: WERCS Studio
 And In the WERCSLink dashboard I click left menu link: Data Management
 And I Confirm New window opens with the Studio Data Management window open (Welcome page shows) and that NO script errors display
