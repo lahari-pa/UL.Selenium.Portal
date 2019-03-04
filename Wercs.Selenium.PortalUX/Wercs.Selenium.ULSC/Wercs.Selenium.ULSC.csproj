@@ -145,6 +145,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Services.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product creation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product creation.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ULSC1.feature.cs">
       <DependentUpon>ULSC.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -167,6 +172,10 @@
     <None Include="Features\Dashboard\Services.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Services.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product creation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Product creation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ULSC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

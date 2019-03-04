@@ -31,7 +31,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I navigate to Studio")]
 		public void GivenINavigateToStudio()
 		{
-			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.open();");
+			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			if (handles.Count == 0)
+			{
+				((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.open();");
+			}
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(SeleniumBrowser.WebBrowser.WindowHandles.Last());
 			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("SHAUrl");
 			SeleniumBrowser.WebBrowser.WaitForPageLoad();
@@ -306,8 +310,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		[StepDefinition(
 			@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
-		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(
-			string productSavedAs, string status)
+		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(string productSavedAs,
+			string status)
 		{
 
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
@@ -317,14 +321,115 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//rerun search until status is as expected or give up
 			int counter = 0;
 
+			bool found = false;
+
+			while (counter < 10 && !found)
+			{
+				var thisStudioManager = new StudioSHAManager();
+				thisStudioManager.Wait_for_load();
+				thisStudioManager.ClickBottomMenuOption("Search");
+
+				Steps_SHA myStepsSha = new Steps_SHA();
+
+				TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+					"SearchTerm",
+					"SearchValue"
+				});
+				table.AddRow(new string[] {
+					"ProductID",
+					ID
+				});
+				table.AddRow(new string[] {
+					"Status",
+					"All"
+				});
+				myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+
+				Delay.Seconds(2);
+				StudioSHAManager mySHAManager = new StudioSHAManager();
+				mySHAManager.WaitForProductList(10);
+
+				var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+				if (topProductnew != null)
+				{
+					if (topProductnew.ID == ID)
+					{
+						if (status.ToLower() == "accepted or completed")
+						{
+							if (topProductnew.Status.ToLower() == "accepted" | topProductnew.Status.ToLower() == "accepted")
+							{
+								found = true;
+							}
+						}
+						else
+						{
+							if (status.ToLower() == "submitted or ghs submitted")
+							{
+								if (topProductnew.Status.ToLower() == "submitted" | topProductnew.Status.ToLower() == "ghs submitted")
+								{
+									found = true;
+								}
+							}
+							if (topProductnew.Status.ToLower() == status.ToLower())
+							{
+								found = true;
+							}
+						}
+					}
+				}
+				counter++;
+			}
+
+			Report.IsTrue(found, "Expected: id=" + ID + " and status " + status, "Statuses match");
+			/*
+			string setStatus = status;
+			if (status.ToLower() == "accepted or completed")
+			{
+				setStatus = "Accepted";
+			}
+			if (status.ToLower() == "submitted or ghs submitted")
+			{
+				setStatus = "Submitted";
+			}
+
 			while (counter < 10)
 			{
+				if (status.ToLower() == "accepted or completed")
+				{
+					if (setStatus == "Accepted")
+					{
+						setStatus = "Completed";
+					}
+					else
+					{
+						setStatus = "Accepted";
+					}
+				}
+
+				if (status.ToLower() == "submitted or ghs submitted")
+				{
+					if (setStatus == "Submitted")
+					{
+						setStatus = "GHS Submitted";
+					}
+					else
+					{
+						setStatus = "Submitted";
+					}
+				}
+
+
 				var thisStudioManager = new StudioSHAManager();
 				thisStudioManager.Wait_for_load();
 				Product topProduct = thisStudioManager.GetTopXProducts(1).FirstOrDefault();
 
-				if (topProduct == null || !(topProduct.Status == status && topProduct.ID == ID))
+				if (topProduct == null || !(topProduct.Status == setStatus && topProduct.ID == ID))
 				{
+					string filterStatus = setStatus;
+					if (filterStatus == "GHS Submitted")
+					{
+						filterStatus = "Submitted";
+					}
 					StudioSHAManager myStudioShaManager = new StudioSHAManager();
 
 					myStudioShaManager.ClickBottomMenuOption("Search");
@@ -341,7 +446,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					});
 					table.AddRow(new string[] {
 						"Status",
-						status
+						filterStatus
 					});
 					myStepsSha.GivenInSHAManagerPageIRunSearch(table);
 
@@ -355,20 +460,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 					break;
 				}
 
-			}
+				var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
+				if (topProductnew != null)
+				{
+					if (status.ToLower() == "accepted or completed")
+					{
+						if (topProductnew.Status.ToLower() == "accepted" | topProductnew.Status.ToLower() == "accepted")
+						{
+							Report.IsTrue(topProductnew.ID == ID,
+								"Expected: id=" + ID + " and status " + status + " but got: " + topProductnew.ID + " and " +
+								topProductnew.Status, "Statuses match");
+								break;
+						}
+					}
+					else
+					{
+						Report.IsTrue(topProductnew.ID == ID && topProductnew.Status == setStatus,
+							"Expected: id=" + ID + " and status " + status + " but got: " + topProductnew.ID + " and " +
+							topProductnew.Status, "Statuses match");
+					}
 
-			var topProductnew = new StudioSHAManager().GetTopXProducts(1).FirstOrDefault();
-			if (topProductnew != null)
-			{
-				Report.IsTrue(topProductnew.ID == ID && topProductnew.Status == status,
-					"Expected: id=" + ID + " and status " + status + " but got: " + topProductnew.ID + " and " +
-					topProductnew.Status, "Statuses match");
-			}
-			else
-			{
-				Report.Failure("No products found");
-			}
+				}
+				else
+				{
+					Report.Info("No products found");
+				}
 
+			}
+			*/
 		}
 
 		[StepDefinition(
@@ -458,6 +577,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisProductRecertificationHistory.Wait_for_load(30);
 			Report.Screenshot();
 			List<Product> ListOfRecertificationProducts = thisProductRecertificationHistory.GetProducts();
+			Report.Info("Found " + ListOfRecertificationProducts.Count.ToString() + " recertification products");
 
 			bool allPassed = true;
 
@@ -751,7 +871,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheRecertificationPopupIClickOnClose()
 		{
 			RecertificationPopup thisRecertificationPopup = new RecertificationPopup();
-			Report.IsTrue(!thisRecertificationPopup.CloseDialog(), "Clicking on close has not worked as expected",
+			Report.IsTrue(thisRecertificationPopup.CloseDialog(), "Clicking on close has not worked as expected",
 				"Clicking on close has woked as expected");
 		}
 

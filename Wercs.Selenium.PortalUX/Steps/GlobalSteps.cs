@@ -87,6 +87,12 @@ namespace WERCSmart
 		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account)")]
 		public void LoginToWERCSmart(string type)
 		{
+			//if alredy logged in, logout
+			if (new TopMenuBar().LoggedIn())
+			{
+				new TopMenuBar().ClickSignOut();
+				Delay.Seconds(3);
+			}
 			switch (type)
 			{
 				case ("data consent Account"):
@@ -145,6 +151,15 @@ namespace WERCSmart
 			}
 			var user = TestUsers.GetUserSavedAs(accountSavedAs);
 
+			if (new TopMenuBar().LoggedIn())
+			{
+				Report.Info("Logged in, logging out");
+				Report.Screenshot();
+				new TopMenuBar().ClickSignOut();
+				Delay.Seconds(3);
+				Report.Screenshot();
+			}
+
 			if (user == null)
 			{
 				var Branch = GlobalParameters.Branch;
@@ -169,6 +184,7 @@ namespace WERCSmart
 		[StepDefinition(@"I log in with email: (.*) and password: (.*)")]
 		public void GivenILogInWithEmailXAndPasswordY(string username, string password)
 		{
+			Report.Info("Beginning I login with email and password");
 			var selLandingPage = new LandingPage();
 			if (!selLandingPage.Wait_for_load(5))
 			{
@@ -365,8 +381,80 @@ namespace WERCSmart
 			{
 				Report.Info("Navigating to the landing page");
 				SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
-				Report.Screenshot();
-				Report.Success("Successfully navigated to the landing page!");
+				Delay.Seconds(1);
+				var allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+				if (SeleniumBrowser.Alert.IsAlertPresent())
+				{
+					Report.Info("Alert is present, accepting");
+					Report.Screenshot();
+					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+					Delay.Seconds(1);
+					allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+					SeleniumBrowser.WebBrowser.SwitchTo().Window(allWindows[0]);
+					Delay.Seconds(1);
+
+					if (allWindows.Count == 1)
+					{
+						Report.Success("Successfully navigated to the landing page!");
+						Report.Screenshot();
+						return;
+
+					}
+				}
+
+				try
+				{
+					allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+					Report.Info("Current tabs/windows open:");
+					foreach (var windowHandle in allWindows)
+					{
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(windowHandle);
+						Report.Info("url: " + SeleniumBrowser.GetActiveTabURL());
+					}
+
+					foreach (var windowHandle in allWindows)
+					{
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(windowHandle);
+
+						if (SeleniumBrowser.GetActiveTabURL().Contains(GlobalParameters.TestUrl))
+						{
+							Report.Info("Current url: " + SeleniumBrowser.GetActiveTabURL());
+							SeleniumBrowser.Navigate(GlobalParameters.TestUrl);
+							Report.Success("Successfully navigated to the landing page!");
+							Report.Screenshot();
+							return;
+						}
+					}
+				}
+				catch (Exception e)
+				{
+					Report.Info(e.Message);
+				}
+
+				allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+				if (allWindows.Count > 1)
+				{
+					for (int i = 1; i < allWindows.Count + 1; i++)
+					{
+						SeleniumBrowser.WebBrowser.SwitchTo().Window(allWindows[i]);
+						SeleniumBrowser.WebBrowser.Close();
+					}
+				}
+				allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
+				if (allWindows.Count > 1)
+				{
+					Report.Error("Failed to navigate to landing page");
+					Report.Screenshot();
+					return;
+				}
+				else
+				{
+					Report.Success("Successfully navigated to the landing page!");
+					Report.Screenshot();
+					return;
+
+				}
+
 			}
 			catch (Exception ex)
 			{
@@ -1041,40 +1129,7 @@ namespace WERCSmart
 			SeleniumBrowser.WebBrowser.Close();
 		}
 
-		[Given(@"I close any other windows with the same url")]
-		public void GivenICloseAnyOtherWindowsWithTheSameUrl()
-		{
-			try
-			{
-				if (SeleniumBrowser.Alert.IsAlertPresent())
-				{
-					Report.Info("Alert is present, accepting");
-					Report.Screenshot();
-					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
-				}
 
-				Report.Info("Current URL is: " + SeleniumBrowser.GetActiveTabURL());
-
-				var allWindows = SeleniumBrowser.WebBrowser.WindowHandles;
-
-				foreach (var windowHandle in allWindows)
-				{
-					SeleniumBrowser.WebBrowser.SwitchTo().Window(windowHandle);
-
-					if (SeleniumBrowser.GetActiveTabURL() == GlobalParameters.TestUrl)
-					{
-						SeleniumBrowser.WebBrowser.Close();
-						break;
-					}
-				}
-			}
-			catch (Exception e)
-			{
-				Report.Screenshot();
-			}
-
-
-		}
 
 
 	}

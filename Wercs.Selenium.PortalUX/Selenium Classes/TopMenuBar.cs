@@ -126,5 +126,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElement(By.XPath(".//a[(.//i[@id='live-help'])]"), 2).TryClick();
 		}
+
+		public bool LoggedIn()
+		{
+			try
+			{
+				var ddt = this.containerElement.FindElement(By.XPath("//a[contains(@class,'dropdown-toggle oDrop')]"), 2);
+				if (ddt == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
 	}
 }

@@ -82,14 +82,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
@@ -104,7 +104,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Accepted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Accepted");
 			// 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", savedAs);
@@ -119,7 +119,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 		}
 
@@ -194,10 +194,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			newProductSteps.ThenIClickSaveOrCancelInTheProductPage("Save");
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(
-				"red", savedAs);
+				savedAs,"red");
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 
 			TechTalk.SpecFlow.Table recertification = new TechTalk.SpecFlow.Table(new string[] {
@@ -234,7 +234,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsProductGrid.GivenForProductSavedAsTestCaseTheStatusIs(savedAs, "Assessment in Progress");
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Recertification");
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 
@@ -276,6 +276,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenITakeProductFromCompletedToRecertification84109(string savedAs)
 		{
 			this.TakeProductFromCompletedToRecertification84109(savedAs, "Alkaline battery");
+		}
+
+		[Given(@"I call test stuff for saved as: (.*)")]
+		public void GivenICallTestStuff(string savedAs)
+		{
+			Test(savedAs);
+		}
+
+
+		public void Test(string savedAs)
+		{
+			var thisGlobalSteps = new GlobalSteps();
+			var sharedSteps = new Steps_Shared();
+			thisGlobalSteps.NavigateToLandingPage();
+			// Log in to administrator role
+			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 		}
 
 		public void CreateProductUsingTestCase75335(string savedAs, string name)
@@ -334,13 +354,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// If purchase details are showing click confirm order
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			// 65080 (Login to Studio and Open SHA manager)
+	//********************
+	//SHA Manager
+	//********************
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
@@ -349,7 +372,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
@@ -366,10 +389,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Accepted");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Accepted");
 			Report.Info("49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase75335)");
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", savedAs);
+			Report.Info("(SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)");
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info("51664 (SHA - Accepted); Product - set Retailers to Completed for saved as: TestCase75335)");
 			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
 				"Retailer"
@@ -382,7 +407,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info(
 				"In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var ID = ProductDetails.Id;
@@ -483,14 +508,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
@@ -507,7 +532,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 
 		}
@@ -564,14 +589,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: X )
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
 			// 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
@@ -592,7 +617,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 
 		}
@@ -630,7 +655,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Completed
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its font is red indicating a recertification
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(
@@ -700,7 +725,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Given I call Shared Step 49841(SHA - Search for exact WPS ID in All Status for saved as: TestCase84511)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase84511 and its status is: Recertification
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Recertification");
 			//# And I Confirm your product is shown in the Recertification status without the red recertification font color
 			//And I call Shared Step 51351(SHA > Select Product > View Recertification History) for product saved as: TestCase84511
@@ -970,14 +995,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
 			//Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase80821)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			//Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
 			//And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80821)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
@@ -1030,7 +1055,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Completed
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 
 
@@ -1169,14 +1194,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
 			//Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase80821)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
 			//Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase80821)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
 			//And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase80821)
 			sharedSteps.GivenICallSharedWPSStudio_JobQueue_WaitForImportProcessRulesJobToComplete(savedAs);
@@ -1218,7 +1243,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: X and its status is: Completed");
 			//Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase80821 and its status is: Completed
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 
 
@@ -1269,7 +1294,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//And I In the shared step below use any of the kit product types -these are* Cosmetic Products in a kit(RU000777)*Hair Care kit(RU000723)*Hair Color Kit(RU000724)*Emergency Road kit(RU000718)*Automotive Care Products(RU000124)*Personal Care kit(RU001034)
 			//And I call Shared Step 57500(The Product - Enter name, select product type - Continue - Happy Path): (.*)
 			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(
-				"Emergency Road kit", "Kit" + System.DateTime.Now.ToShortDateString());
+				"Emergency Road kit", "Kit" + System.DateTime.Now.DayOfWeek + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second);
 			//And I call Shared Step 77872(Additional Product Information - Kit flow - US only, Direct Ship(yes), Continue)
 			newProductSteps.SaveProductInformation(saveAs);
 			sharedSteps.Shared77872_AdditionalProductInformation_KitFlow_UsOnly_DirectShip_Yes_Continue();
@@ -1303,7 +1328,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", saveAs);
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(saveAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs,
 				"Submitted");
 			//And I Confirm the Product ID: TestCase77862 is highlited yellow indicating that this is an e-comm/direct ship product
 
@@ -1385,7 +1410,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Submitted
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Submitted");
 			// 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase75335)
 			sharedSteps.GivenICallSharedSHAManager_Submitted_SelectProductProcessProductData(savedAs);
@@ -1394,11 +1419,157 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info(
 				"the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned");
 			// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Assigned
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
 
 
 		}
+
+		[Given(@"I Use Test case 84518 to process the product from Assigned back to Completed status saved as (.*)")]
+		public void GivenIUseTestCaseToProcessTheProductFromAssignedBackToCompletedStatusSavedAsTestCase(string savedAs)
+		{
+			ProcessAssignedFormulatedProductBackToCompletedUsingTestCase84518(savedAs);
+		}
+
+
+
+		public void ProcessAssignedFormulatedProductBackToCompletedUsingTestCase84518(string savedAs)
+		{
+			Steps_Shared sharedSteps = new Steps_Shared();
+
+			//If you are running this test case you already have a formulated product which is in Assigned status having come from Recertification.
+			//And I call Shared Step 65080(Login to Studio and Open SHA manager)
+			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
+			//And I call Shared Step 68969(WPS Studio - Open PD +, edit existing with specific product > Click Continue for product saved as: (.*))
+			sharedSteps.GivenICallSharedWPSStudio_OpenPDEditExistingWithSpecificProductClickContinue(savedAs);
+			//And[Shared Step 75932 - WPS Studio - Toolbars - My Toolbar - Check IN / Out - Check in -close pop up]
+			//This seems to do the same job...
+			sharedSteps.GivenICallSharedStep49742_WPS_CheckInProduct(savedAs);
+			//For recertification of a formulated product which has authoring requested,
+			//we have to add NGHS to the document queue manually - CKLT and SBCS will be automatically
+			//added to the document queue
+			sharedSteps.ICallSharedStep84505();
+			//Step 84505 - WPS PD + -Current Document - Add NGHS RTF and PDF to Document queue]
+			//And I Click the Document Queue icon(icon looks like a page with three dots below it)
+			//TestReport.StartStep("I click the Document queue icon in the tool bar");
+			Steps_Studio thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
+			TestReport.StartStep("I click the filter icon");
+			thisStepsStudio.InDocumentQueuePopupIClickOnFilterIcon();
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = productDetails.Id;
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInSelectBox("Matches", @"Product\Alias");
+			TestReport.StartStep("I enter the product id in the Product/Alias area of the filter and click Apply");
+			thisStepsStudio.InDocumentQueueFilterPageIEnterValueInEntryBox(id, @"Product\Alias");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnApply();
+
+			for (int i = 0; i < 5; i++)
+			{
+				Delay.Seconds(5);
+				Report.Screenshot();
+				DocumentQueuePage newDocumentQueuePage = new DocumentQueuePage();
+				Report.IsTrue(newDocumentQueuePage.Wait_for_load(30), "Document queue page failed to load",
+					"Document queue page loaded");
+				List<Document> listOfDocuments = newDocumentQueuePage.GetAllDocuments();
+				if (listOfDocuments.Count > 0)
+				{
+					break;
+				}
+			}
+
+			TestReport.StartStep(
+				"I confirm the product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF");
+			TechTalk.SpecFlow.Table tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
+				"ProductOrAlias",
+				"Subformat",
+				"Language",
+				"DocType"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"SBCS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"NGHS",
+				"EN",
+				"PDF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"NGHS",
+				"EN",
+				"RTF"
+			});
+			tblCheckDocument.AddRow(new string[] {
+				"saved as " + savedAs,
+				"CKLT",
+				"EN",
+				"PDF"
+			});
+			thisStepsStudio.GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(tblCheckDocument);
+			Delay.Seconds(3);
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenDocumentQueuePopup();
+			Delay.Seconds(3);
+			Report.Screenshot();
+			// And I Confirm you see entries for NGHS(RTF and PDF), CKLT and SBCS(both PDF only)
+			// And I Select the two entries for NGHS
+			// And I Click Process Documents
+			// And I 2 queued document(s) were sent for publishing message is shown - Click OK to close
+			// And I Select the entries for CKLT and SBCS
+			// And I Click process Documents
+			// And I 2 queued document(s) were sent for publishing message is shown - Click OK to close
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnSelectAllCheckbox();
+			Report.Screenshot();
+			TestReport.StartStep("I click Process Documents");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnProcessDocuments();
+			Delay.Seconds(2);
+			Report.Screenshot();
+			GeneralUtilities.StudioWaitForSpinner(60);
+			TestReport.StartStep(
+				"I confirm a pop up shows with message indicating 4 queued documents were sent for publishing");
+			thisStepsStudio.IShouldSeeAnAlertAsFollows("queued document(s) were sent for publishing.");
+			TestReport.StartStep("I click OK ");
+			thisStepsStudio.ICloseAlert();
+			TestReport.StartStep("I close the Document queue window");
+			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
+
+			// And I call Shared Step 55663(WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: (.*))
+			sharedSteps.GivenICallShared55663WPSStudio_GoToJobQueue_WaitForPublishMultipleToComplete(savedAs);
+			// 59066(Go to SHA Manager)
+			sharedSteps.GivenICallSharedStep59066GoToSHAManager();
+			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			//And I Depending in the retailers you selected your product will be shown in the Accepted or Completed status.If any retailer is shown in Accepted use the shared step below to set to Completed
+			Steps_SHA shaSteps = new Steps_SHA();
+			TestReport.StartStep("Depending in the retailers you selected your product will be shown in the Accepted or Completed status");
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Accepted or Completed");
+
+			var currentStatus = new StudioSHAManager().GetproductStatus(id).StatusName;
+
+			if (currentStatus == "Accepted")
+			{
+				// 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75335)
+				TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+					"Retailer"
+				});
+				table4.AddRow(new string[] {
+					"Wal-Mart/SAM'S CLUB (WM)"
+				});
+				sharedSteps.GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs(savedAs, table4);
+				// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
+				sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+				// In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
+				shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
+					"Completed");
+			}
+
+
+
+		}
+
 
 	}
 

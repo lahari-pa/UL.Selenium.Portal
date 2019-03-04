@@ -55,8 +55,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickEditButton(), "Failed to click edit button",
 				"Clicked edit button");
+			Delay.Seconds(3);
 			PDEditPage thisPdEditPage = new PDEditPage();
-			Report.IsTrue(thisPdEditPage.Wait_for_load(60), "Edit page has failed to load", "Edit page has loaded");
+			Report.Info("Wait for PD Edit page to load");
+			Report.IsTrue(thisPdEditPage.Wait_for_load(120), "Edit page has failed to load", "Edit page has loaded");
 		}
 
 		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on apply rules button")]
@@ -359,7 +361,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Report.Info("Beginning: In Apply Rules Page I click on the button: " + button);
 			ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
-			thisApplyRulesPage.Wait_for_load(60);
+			try
+			{
+				thisApplyRulesPage.Wait_for_load(60);
+			}
+			catch (Exception ex)
+			{
+				if (SeleniumBrowser.Alert.WaitForAlert(3))
+				{
+					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				}
+			}
+
 			Delay.Seconds(1);
 			Report.IsTrue(thisApplyRulesPage.ClickButton(button), "Failed to click " + button, "Clicked " + button);
 			if (button.ToLower() == "apply")

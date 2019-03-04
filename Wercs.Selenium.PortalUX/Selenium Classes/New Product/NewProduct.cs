@@ -1490,8 +1490,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				}
 				upcNumberField.EnterText(info.UpcNumber);
-				var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-				containsType.Select(info.ContainerType);
+
+				if (info.ContainerType.ToLower() != "none")
+				{
+					var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+					containsType.Select(info.ContainerType);
+				}
+
 				var regex = @"(.*)\((.*)\)";
 				var sizeField = (from input in textInputs
 								 let match = Regex.Match(input.GetAttribute("placeholder"), regex)

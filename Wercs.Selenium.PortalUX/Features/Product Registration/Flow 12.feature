@@ -167,7 +167,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
 
 @ProductSetUp
-@Scenario42196
+@42196
 Scenario: [42196] 3rd party > Recertification - with check for editing of Public disclosure setting and other Ingredients page validation
 #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)
@@ -240,7 +240,6 @@ And I call Shared Step 59066 (Go to SHA Manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase42196)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase42196 and its status is: Completed
 And I navigate to the landing page
-And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I search for the product saved as: TestCase42196
 Given For product saved as: TestCase42196 the status is: Completed
 #And I Confirm the product is shown in Completed status for NR so that it can be used again the next time the test case is run

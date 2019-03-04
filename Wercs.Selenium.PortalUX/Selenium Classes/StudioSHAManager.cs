@@ -335,65 +335,72 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectProductByID(string id)
 		{
-			Report.Info("Beginning select product by id: " + id);
-			Delay.Seconds(5);
-			GeneralUtilities.StudioWaitForSpinner(60);
-			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
-
-			var matchingTD = SeleniumBrowser.WebBrowser
-				.FindElements(By.XPath("//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
-				.FirstOrDefault(x => x.GetValue().Trim() == id);
-
-			if (matchingTD != null)
+			try
 			{
-				Report.Info("Found matching cell");
-				matchingTD = SeleniumBrowser.WebBrowser
+				Report.Info("Beginning select product by id: " + id);
+				Delay.Seconds(5);
+				GeneralUtilities.StudioWaitForSpinner(60);
+				int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+
+				var matchingTD = SeleniumBrowser.WebBrowser
 					.FindElements(By.XPath("//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
 					.FirstOrDefault(x => x.GetValue().Trim() == id);
-				var checkbox = matchingTD.FindElement(By.XPath("../td/input"));
-				Report.Info("Found checkbox");
-				if (checkbox != null)
-				{
-					if (checkbox.Checked())
-					{
-						Report.Info("Checkbox is already checked");
-						return true;
-					}
 
-					checkbox.TryClick();
-					if (checkbox.Checked())
+				if (matchingTD != null)
+				{
+					Report.Info("Found matching cell");
+					matchingTD = SeleniumBrowser.WebBrowser
+						.FindElements(By.XPath("//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+						.FirstOrDefault(x => x.GetValue().Trim() == id);
+					var checkbox = matchingTD.FindElement(By.XPath("../td/input"));
+					Report.Info("Found checkbox");
+					if (checkbox != null)
 					{
-						Report.Screenshot();
-						return true;
+						if (checkbox.Checked())
+						{
+							Report.Info("Checkbox is already checked");
+							return true;
+						}
+
+						checkbox.TryClick();
+						if (checkbox.Checked())
+						{
+							Report.Screenshot();
+							return true;
+						}
+						else
+						{
+							Report.Info("Attempted to check checkbox but failed.");
+							return false;
+						}
 					}
 					else
 					{
-						Report.Info("Attempted to check checkbox but failed.");
-						return false;
+						Report.Info("Checkbox has not been found");
+						matchingTD = SeleniumBrowser.WebBrowser
+							.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
+							.FirstOrDefault(x => x.GetValue().Trim() == id);
+						checkbox = matchingTD.FindElement(By.XPath("../td/input"));
+						if (checkbox != null)
+						{
+							checkbox.Check(true);
+							Report.Screenshot();
+							return true;
+						}
+						else
+						{
+							Report.Error("Checkbox has not been found");
+						}
 					}
 				}
 				else
 				{
-					Report.Info("Checkbox has not been found");
-					matchingTD = SeleniumBrowser.WebBrowser
-						.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
-						.FirstOrDefault(x => x.GetValue().Trim() == id);
-					checkbox = matchingTD.FindElement(By.XPath("../td/input"));
-					if (checkbox != null)
-					{
-						checkbox.Check(true);
-						Report.Screenshot();
-						return true;
-					}
-					else
-					{
-						Report.Error("Checkbox has not been found");
-					}
+					Report.Info("Failed to find matching table cell for id: " + id);
 				}
 			}
-			else
+			catch (Exception e)
 			{
-				Report.Info("Failed to find matching table cell for id: " + id);
+				Report.Info(e.Message);
 			}
 
 			return false;
@@ -1262,7 +1269,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectRetailer(string retailerName)
 		{
-			var retailerSpan = containerElement.FindElement(By.XPath(".//input[@id='clients']/..")).GetInnerHTML();
+			Report.Info("Beginning select retailer: " + retailerName);
+			var retailerSpan = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='clients']/..")).GetInnerHTML();
 			List<string> splitOnBr = Regex.Split(retailerSpan, @"\<br\>").ToList();
 			var matchingInputString = splitOnBr.FirstOrDefault(x => x.Contains(retailerName));
 
@@ -1484,6 +1492,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 
+			if (!matchingButton.Displayed)
+			{
+				Report.Info("Button found but not visible");
+				return false;
+			}
 			return true;
 		}
 

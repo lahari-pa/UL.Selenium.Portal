@@ -95,16 +95,16 @@ Given I define the user: 63297 with the following parameters:
 | CompanyPhone         | 123-456-7889   |
 | EmergencyPhoneNumber | 123-456-7789   |
 | SupplierType         | Manufacturer   |
-| PhoneQuestion         | PhoneQuestion   |
-| PhoneHint             | PhoneHint       |
-| MentorQuestion          | MentorQuestion    |
-| MentorHint              | MentorHint        |
+| CityQuestion         | CityQuestion   |
+| CityHint             | CityHint       |
+| CarQuestion          | CarQuestion    |
+| CarHint              | CarHint        |
 | FriendQuestion       | FriendQuestion |
 | FriendHint           | FriendHint     |
-| AnimalQuestion          | AnimalQuestion    |
-| AnimalHint              | AnimalHint        |
-| CollegeQuestion       | CollegeQuestion |
-| CollegeHint           | CollegeHint     |
+| JobQuestion          | JobQuestion    |
+| JobHint              | JobHint        |
+| MascotQuestion       | MascotQuestion |
+| MascotHint           | MascotHint     |
 | Pin                  | 1234           |
 
 Given I save the current emails in the inbox for user saved as: 63297
@@ -1176,6 +1176,7 @@ And The pie chart should be showing on the retailer details page
 And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
 
 @ProductSetUp
+@58753
 Scenario: [58753] Hair Color Kit - RU000724
 Given I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct1
 Given I navigate to the landing page
@@ -1301,8 +1302,6 @@ And In the Product Recertification History popup I should see the following entr
 | saved as TestCase51296 | true   | 20. Completed Product-Full Update (N/C) |
 And I Close the Product Recertification History pop up
 Given I navigate to the landing page
-And I close any other windows with the same url
-Given I navigate to the landing page
 And I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 #And I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
 And I call Shared Step 51352 - Products page - Filter for your product - Update Required link for product saved as: TestCase51296
@@ -1335,7 +1334,7 @@ And I call Shared Step 51351 (SHA > Select Product > View Recertification Histor
 #And I Confirm the Product Recertification History pop up shows
 And In the Product Recertification History popup I should see the following entry
 | Product ID             | Active | Recertification Reason                  | Date                  |
-| saved as TestCase84511 | false  | 20. Completed Product-Full Update (N/C) | Within a day of today |
+| saved as TestCase51296 | false  | 20. Completed Product-Full Update (N/C) | Within a day of today |
 #And I Confirm the entry you noted in step 37 not shows False in the Active column and contains a date/time under the date column
 
 
@@ -1367,7 +1366,25 @@ And in the Recertification popup I wait for all processing to be completed
 And in the Recertification popup I should see the following products as successfully assigned
 | ProductID              |
 | saved as TestCase42273 |
-And In the Recertification popup I click Continue
+And In the Recertification popup I click Cancel
 And I Confirm the Recertification pop up is closed
 And In the SHA Manager Grid I run a search for product saved as: TestCase42273 and its status is: Assigned
 #Automation can stop here.
+
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\Release Day Tests
+
+@78417
+Scenario: [78417] Recert by WERCSMart user
+Given I create a product with name: 78417 and take to completed using Test Case 75335 and save as: TestCase42273
+Given I take a product from completed to recertification using Test Case 75410 saved: TestCase78417
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78417)
+And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase78417
+And I Use Test case 84518 to process the product from Assigned back to Completed status saved as TestCase78417
+
+
+

@@ -51,5 +51,17 @@ namespace Wercs.Selenium.ULSC.Steps
 			MyStepsULSC.GivenITheULSCLoginPageIClickLogin();
 		}
 
+		[Given(@"I call Shared Step 54595 - WERCSLink Dashboard > Services > My Products")]
+		public void GivenICallSharedStep54595WERCSLinkDashboardServicesMyProducts()
+		{
+			TestReport.UseSubSteps = true;
+			StepsUlsc myStepsULSC = new StepsUlsc();
+			myStepsULSC.GivenIShouldSeeTheWERCSLinkDashboard();
+			myStepsULSC.GivenInTheWERCSLinkDashboardIClickMenuItemAndSubmenuItem("Services", "WERCSmart");
+			myStepsULSC.GivenInTheWERCSLinkPage_ClickTheMyProductLinkFromTheWERCSmartAreaOfTheServicesPage("My Products",
+				"WERCSmart");
+		}
+
+
 	}
 }

@@ -526,13 +526,13 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_Flow12")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductSetUp")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Scenario42196")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("42196")]
         public virtual void _421963RdPartyRecertification_WithCheckForEditingOfPublicDisclosureSettingAndOtherIngredientsPageValidation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[42196] 3rd party > Recertification - with check for editing of Public disclosure" +
                     " setting and other Ingredients page validation", new string[] {
                         "ProductSetUp",
-                        "Scenario42196"});
+                        "42196"});
 #line 221
 this.ScenarioSetup(scenarioInfo);
 #line 223
@@ -680,10 +680,8 @@ testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as produ
 #line 292
 testRunner.And("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 293
-testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 294
 testRunner.And("I search for the product saved as: TestCase42196", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 295
+#line 294
 testRunner.Given("For product saved as: TestCase42196 the status is: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();

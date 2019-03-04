@@ -57,6 +57,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Step57561(type, "");
 		}
 
+		//Seems to be identical to 57500
+		[StepDefinition(
+			@"I call Shared Step 57561a \(The Product - Enter Product Name: (.*) and select Type of Product\): (.*)")]
+		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string name, string type)
+		{
+			Step57561(type, name);
+		}
+
 		public void Step57561(string type, string name = "")
 		{
 			TestReport.UseSubSteps = true;
@@ -1165,12 +1173,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			TestReport.StartStep("Upload exemption letter");
 			MyNewProduct.UploadPDFFileSectionAndType("Exemption Letter",
 				"Transportation Exemption Letter or Special Permit", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep("Upload special permit letter");
 			MyNewProduct.UploadPDFFileSectionAndType("Special Permit",
 				"Transportation Exemption Letter or Special Permit", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			TestReport.StartStep("Upload product label");
 			MyNewProduct.UploadPDFFileSectionAndType("Please upload a PDF of the product label (full label).",
 				"Provide Full Product Label (required)", @"C:\Dependencies\WERCSmart\testdoc.pdf");
+			Report.Screenshot();
 			TestReport.StartStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
@@ -4059,9 +4071,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStudioShaManager.SelectFromStatusFilter("All");
 			GeneralUtilities.StudioWaitForSpinner();
 			myStudioShaManager.WaitForProductList(60);
+			Report.Info("Getting saved product: " + savedAs);
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
-
+			Report.Info("Looking for id: " + id.ToString());
 			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
 				"SearchTerm",
 				"SearchValue"
@@ -5668,8 +5681,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
 			TestReport.StartStep("I click Apply");
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
-			Delay.Seconds(3);
-			//	And I The Completed Successfully pop up is shown, click okNote: in Staging the completed successful pop up does not show till you try to close the Apply rules pop up
+			Delay.Seconds(5);
+			//	And I The Completed Successfully pop up is shown, click okNote: in Staging the completed
+			// successful pop up does not show till you try to close the Apply rules pop up
 			//	And I Close the Apply Rules pop up
 			TestReport.StartStep("I close the Apply Rules pop up");
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
@@ -5842,7 +5856,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var shaManager = new StudioSHAManager();
 			var processUI = new ProcessUIDialog();
 			TestReport.StartStep("I confirm the product saved as is shown in the UPC Update status");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"UPC Update");
 			TestReport.StartStep("I select  product in the SHA grid saved as " + savedAs);
 			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
@@ -5891,7 +5905,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(processUI.ClickClose(), "Failed to close the Process Products popup",
 				"Successfully closed the Process Products popup");
 			TestReport.StartStep("I confirm the product saved as is shown in the Accepted status");
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Accepted");
 
 		}
@@ -6328,17 +6342,37 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the rule name filter box I enter the studio user name");
 			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
+			Delay.Seconds(2);
 			TestReport.StartStep("I select the rule  by clicking on it");
 			thisStepsStudio.InSelectRulesPageIClickOnFirstRecord();
 			//And I Check that the Product group radio button is selected
 			TestReport.StartStep("I click Apply");
 			thisStepsStudio.InApplyRulesPageIClickOnButton("Apply");
-			thisStepsStudio.GivenICloseCurrentDocument();
+			Delay.Seconds(2);
+			//thisStepsStudio.GivenICloseCurrentDocument();
 
 			Delay.Seconds(3);
+			bool closedApplyRules = false;
 			TestReport.StartStep("I close the Apply Rules pop up");
-			thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
-			Delay.Seconds(3);
+			for (int i = 0; i < 3; i++)
+			{
+				ApplyRulesPage thisApplyRulesPage = new ApplyRulesPage();
+				if (thisApplyRulesPage.Wait_for_load(1))
+				{
+					thisStepsStudio.InApplyRulesPageIClickOnButton("Close");
+					Delay.Seconds(3);
+				}
+				else
+				{
+					closedApplyRules = true;
+					break;
+				}
+			}
+
+			if (!closedApplyRules)
+			{
+				throw new Exception("Failed to close apply rules popup");
+			}
 			TestReport.StartStep("I click the Document queue icon in the tool bar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton();
 			TestReport.StartStep("I click the filter icon");
@@ -6709,7 +6743,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// Given I In SHA manager find your product in the Recertification status(you may have to wait a few minutes for the Zuora process to run and for your product to show in Recertification)
 			//-make sure you are on the Recertification status list
 			GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Recertification");
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			myStudioShaManager.WaitForProductList(60);
@@ -6742,7 +6776,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			GeneralUtilities.StudioWaitForSpinner();
 			myStudioShaManager.WaitForProductList(60);
 			//	And I Your product will be shown in the Assigned status
-			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIsAssigned(savedAs,
+			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Assigned");
 		}
 
@@ -6937,6 +6971,55 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsProductGrid.WhenIClickRowActionsForTheFirstProductReturned();
 			thisStepsProductGrid.ClickRowAction("Update Required");
 		}
+
+
+		[StepDefinition(@"I call Shared Step 84505 - WPS PD+ - Current Document - Add NGHS RTF and PDF to Document queue")]
+		public void ICallSharedStep84505()
+		{
+			TestReport.StartStep("I open the Current Document pop up using the tool bar icons");
+			Steps_Studio thisStepsStudio = new Steps_Studio();
+			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
+
+			//And I Change the Subformat drop down to NGHS
+			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("queue");
+			//And I Click the Publish this document for standard viewing icon(looks like a page with text)
+			//And I Click OK
+			//And I Click the Publish this document in PDF format icon(icon looks like the Adobe sign on a document)
+			//And I Click OK
+			thisStepsStudio.GivenICloseCurrentDocument();
+		}
+
+		[Given(@"I call Shared Step 86293 - UPC - Package type shown but not required - Enter UPC, Container and size, Continue for UPC: (.*)")]
+		public void GivenICallSharedStep_UPC_PackageTypeShownButNotRequired_EnterUPCContainerAndSizeContinue(string UPC)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			TestReport.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			TestReport.StartStep("I add the following into the UPC Fields");
+
+			if (UPC.ToLower().Contains("saved as"))
+			{
+				UPC = Context.GetFromContext(UPC.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString();
+			}
+			//And I DO NOT select a Package Type from the drop down listPackage type should not be required for this UPC entry
+
+			Table upcTable = new Table("Field", "Value");
+			upcTable.AddRow("UPCNumber", "saved as UPC" + UPC);
+			upcTable.AddRow("ContainerType", "None");
+			upcTable.AddRow("Size", "40");
+			MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			//And I Click Continueor Save(button shown depends on the flow you are in)
+			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code(UPC)");
+			GeneralUtilities.Wait_for_load_finish();
+
+
+		}
+
 
 	}
 }
