@@ -35,24 +35,6 @@ namespace WERCSmart
 			GlobalParameters.TestUrl = TestVariables.GetVariableSavedAs("TestURL");
 		}
 
-		[BeforeStep(Order = 1)]
-		public static void GetFullyQualifiedTestName()
-		{
-			if (GlobalParameters.CollectTestRunData && string.IsNullOrEmpty(GlobalParameters.FullyQualifiedTestName))
-			{
-				var testContext = ScenarioContext.Current.ScenarioContainer.Resolve<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>();
-				var tst = testContext.FullyQualifiedTestClassName + "." + testContext.TestName;
-				if (!string.IsNullOrEmpty(tst))
-				{
-					GlobalParameters.FullyQualifiedTestName = tst;
-					if (!NTTQA_TReVor_Module.Database.Scenarios.UpdateFullyQualifiedName(GlobalParameters.FullyQualifiedTestName))
-					{
-						GlobalParameters.FullyQualifiedTestName = "";
-					}
-				}
-			}
-		}
-
 		[StepDefinition(@"I login as the administrator")]
 		[StepDefinition(@"I login as the administrator")]
 		[When(@"I login as the administrator")]
@@ -985,8 +967,7 @@ namespace WERCSmart
 				Report.Info("Logging out");
 				GivenILogout();
 				Report.Info("Checking I can log in with the new credentials");
-				TestUsers.CacheRefreshed = false;
-				TestUsers.UpdateCache();
+				TestUsers.RefreshTestUserCache();
 				ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
 				GivenILogout();
@@ -1049,8 +1030,7 @@ namespace WERCSmart
 					new GlobalSteps().NavigateToLandingPage();
 				}
 				Report.Info("Checking I can log in with the new credentials");
-				TestUsers.CacheRefreshed = false;
-				TestUsers.UpdateCache();
+				TestUsers.RefreshTestUserCache();
 				ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
 				GivenILogout();
