@@ -725,7 +725,9 @@ Given I generate a random UPC number and save as: UPC64530
 
 Given I navigate to the landing page
 
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 
 And I search for the product saved as: ProductSetup64530
 

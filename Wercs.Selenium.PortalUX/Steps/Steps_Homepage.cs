@@ -589,12 +589,49 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		//[Then(@"Confirm that freshdesk opens in another tab")]
+		//public void ThenConfirmThatFreshdeskOpensInAnotherTab()
+		//{
+		//	TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that freshdesk opens in another tab");
+		//	Delay.Seconds(5);
+		//	try
+		//	{
+		//		string freshdeskUrl = @"https://wercsmarttest.freshdesk.com/support/solutions";
+		//		List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
+		//		Report.IsTrue(listOfTabs.Contains(freshdeskUrl),
+		//			"Fresh desk url: " + freshdeskUrl + " was not found. Tabs open: " + string.Join(",", listOfTabs),
+		//			" As expected, tab is open with url: " + freshdeskUrl);
+		//		Report.Screenshot();
+		//		Report.Info("Closing Freshdesk");
+		//		SeleniumBrowser.CloseTabWithURL(freshdeskUrl);
+		//		Delay.Seconds(3);
+
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		Report.Failure(ex.Message);
+		//		throw;
+		//	}
+		//}
+
 		[Then(@"Confirm that freshdesk opens in another tab")]
-		public void ThenConfirmThatFreshdeskOpensInAnotherTab()
+		public void ConfirmThatFreshdeskOpensInAnotherTab()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Confirm that freshdesk opens in another tab");
 			Delay.Seconds(5);
-			try
+			if (GlobalParameters.SiteType == "Development")
+			{
+				string freshdeskUrl = @"https://wercsmarttest.freshdesk.com/support/solutions";
+				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
+				Report.IsTrue(listOfTabs.Contains(freshdeskUrl),
+					"Fresh desk url: " + freshdeskUrl + " was not found. Tabs open: " + string.Join(",", listOfTabs),
+					" As expected, tab is open with url: " + freshdeskUrl);
+				Report.Screenshot();
+				Report.Info("Closing Freshdesk");
+				SeleniumBrowser.CloseTabWithURL(freshdeskUrl);
+				Delay.Seconds(3);
+			}
+			if (GlobalParameters.SiteType == "Staging")
 			{
 				string freshdeskUrl = @"https://wercsmart.freshdesk.com/en/support/solutions";
 				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
@@ -605,12 +642,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("Closing Freshdesk");
 				SeleniumBrowser.CloseTabWithURL(freshdeskUrl);
 				Delay.Seconds(3);
-
 			}
-			catch (Exception ex)
+			if (GlobalParameters.SiteType == "Production")
 			{
-				Report.Failure(ex.Message);
-				throw;
+				string freshdeskUrl = @"https://wercsmart.freshdesk.com/en/support/solutions";
+				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
+				Report.IsTrue(listOfTabs.Contains(freshdeskUrl),
+					"Fresh desk url: " + freshdeskUrl + " was not found. Tabs open: " + string.Join(",", listOfTabs),
+					" As expected, tab is open with url: " + freshdeskUrl);
+				Report.Screenshot();
+				Report.Info("Closing Freshdesk");
+				SeleniumBrowser.CloseTabWithURL(freshdeskUrl);
+				Delay.Seconds(3);
+			}
+			if (GlobalParameters.SiteType == "Local Production")
+			{
+				string freshdeskUrl = @"https://wercsmarttest.freshdesk.com/support/solutions";
+				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
+				Report.IsTrue(listOfTabs.Contains(freshdeskUrl),
+					"Fresh desk url: " + freshdeskUrl + " was not found. Tabs open: " + string.Join(",", listOfTabs),
+					" As expected, tab is open with url: " + freshdeskUrl);
+				Report.Screenshot();
+				Report.Info("Closing Freshdesk");
+				SeleniumBrowser.CloseTabWithURL(freshdeskUrl);
+				Delay.Seconds(3);
 			}
 		}
 

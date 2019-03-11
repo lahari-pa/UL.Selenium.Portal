@@ -4724,6 +4724,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			selGlobalSteps.DeleteProductWithUPCNumberIfOneHasBeenGenerated();
 		}
 
+		[StepDefinition(@"I call Shared Step \(Login to WERCSmart - Premium Account\)")]
+		public void GivenICallSharedStepLoginToWERCSmart_PremiumAccount()
+		{
+			GlobalSteps MyGlobalSteps = new GlobalSteps();
+			MyGlobalSteps.LoginToAccount("PremiumSubscriptionAccount");
+		}
+
 		[StepDefinition(
 			@"I call Shared Step 74834 \(Login to WERCSmart - with subscription without products account\)")]
 		public void Shared74834_LoginToWercSmart_WithSubscriptionWithoutProductsAccount()
