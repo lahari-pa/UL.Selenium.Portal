@@ -229,20 +229,20 @@ testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((strin
 testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 47
 testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
-testRunner.And("In the WERCSLink dashboard I click left menu link: My Products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 49
-testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the link: My Products below menu item: Services and sub item WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 50
-testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
-testRunner.Given("I navigate to tab with title: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
+testRunner.Given("I navigate to tab with title: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 53
 testRunner.And("In the WERCSLink page - Click the My Product link from the WERCSmart area of the " +
                     "Services page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
-testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 54
+testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 55
 testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

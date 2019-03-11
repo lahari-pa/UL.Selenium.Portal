@@ -13,6 +13,7 @@ using OpenQA.Selenium;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
+using Wercs.Selenium.ULSC.Selenium_Classes;
 using WERCSmart;
 
 
@@ -164,53 +165,74 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"In the WERCSLink dashboard I click menu item: (.*) and submenu item: (.*)")]
 		public void GivenInTheWERCSLinkDashboardIClickMenuItemAndSubmenuItem(string menu, string submenu)
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			Report.IsTrue(thisWercsLinkDashboard.ClickMenuAndSubMenuOption(menu, submenu), "Failed to click menu item: " + menu + " and submenu item: " + submenu,
-				"Clicked menu item: " + menu + " and submenu item: " + submenu);
+			//WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+			//Report.IsTrue(thisWercsLinkDashboard.ClickMenuAndSubMenuOption(menu, submenu), "Failed to click menu item: " + menu + " and submenu item: " + submenu,
+			//	"Clicked menu item: " + menu + " and submenu item: " + submenu);
 
 			// trying this...
-
-			//var thisLink = new WERCSLinkDashboard().GetSideBarNavLink(menu);
-			//if (thisLink == null)
-			//{
-			//	Report.Failure("There was no menu item with title: " + menu);
-			//	Report.Screenshot();
-			//	return;
-			//}
-
-			//if (thisLink.Expanded)
-			//{
-			//	var subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
-			//	if (subMatch == null)
-			//	{
-			//		Report.Failure("No sub link was found with title: " + submenu);
-			//		Report.Screenshot();
-			//		return;
-			//	}
-			//	subMatch.Click();
-			//}
-			//else if(thisLink.Click())
-			//{
-			//	thisLink = new WERCSLinkDashboard().GetSideBarNavLink(menu);
-			//	var subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
-			//	if (subMatch == null)
-			//	{
-			//		Report.Failure("No sub link was found with title: " + submenu);
-			//		Report.Screenshot();
-			//		return;
-			//	}
-			//	subMatch.Click();
-			//}
-			//Report.Failure("Failed to click menu item: " + menu);
+			// first check if we are on 'Services page already and click' you have to click the menu item twice to get the sub items expanded
+			var thisLink = new SideBarNavigation().GetNavLink(menu);
+			if (thisLink == null)
+			{
+				Report.Failure("There was no menu item with title: " + menu);
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("Clicking menu item: " + menu);
+			if (!new SideBarNavigation().ClickNavItem(thisLink))
+			{
+				Report.Failure("Failed to click menu item: " + menu + "!");
+				Report.Screenshot();
+				return;
+			}
+			Delay.Seconds(2);
+			thisLink = new SideBarNavigation().GetNavLink(menu);
+			if (thisLink.SubLinks.Any())
+			{
+				Report.Info("Menu item: " + menu + " is already expanded. Clicking sub menu item: " + submenu);
+				var subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
+				if (subMatch == null)
+				{
+					Report.Failure("No sub link was found with title: " + submenu);
+					Report.Screenshot();
+					return;
+				}
+				Report.IsTrue(new SideBarNavigation().ClickNavItem(subMatch), "Failed to click sub menu item: " + subMatch + "!", "Successfully clicked sub menu item: " + submenu);
+			}
+			else if (new SideBarNavigation().ClickNavItem(thisLink))
+			{
+				Report.Info($"Clicked menu item: '{menu}'. Finding proceeding sub menu items");
+				// get link item again for loaded sub links
+				Delay.Seconds(2);
+				thisLink = new SideBarNavigation().GetNavLink(menu);
+				if (thisLink.SubLinks.Any())
+				{
+					Report.Info("Clicking sub menu item: " + submenu);
+					var subMatch = thisLink.SubLinks.First(x => x.Title == submenu);
+					if (subMatch == null)
+					{
+						Report.Failure("No sub link was found with title: " + submenu);
+						Report.Screenshot();
+						return;
+					}
+					Report.IsTrue(new SideBarNavigation().ClickNavItem(subMatch), "Failed to click sub menu item: " + subMatch + "!", "Successfully clicked sub menu item: " + submenu);
+					return;
+				}
+				Report.Failure("No sub links were found after clicking menu item: " + menu);
+				Report.Screenshot();
+				return;
+			}
+			Report.Failure("Failed to click menu item: " + menu);
+			Report.Screenshot();
 		}
 
-		[StepDefinition(@"In the WERCSLink dashboard I click left menu link: (.*)")]
-		public void GivenInTheWERCSLinkDashboardIClickLeftMenuLink(string menu)
-		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			Report.IsTrue(thisWercsLinkDashboard.ClickLeftLink(menu), "Failed to click left menu link " + menu,
-				"Clicked menu item: " + menu);
-		}
+		//[StepDefinition(@"In the WERCSLink dashboard I click left menu link: (.*)")]
+		//public void GivenInTheWERCSLinkDashboardIClickLeftMenuLink(string menu)
+		//{
+		//	WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
+		//	Report.IsTrue(thisWercsLinkDashboard.ClickLeftLink(menu), "Failed to click left menu link " + menu,
+		//		"Clicked menu item: " + menu);
+		//}
 
 		[StepDefinition(@"I Confirm the WerCSMart Product Information page is shown in new window/tab")]
 		public void GivenIConfirmTheWerCSMartProductInformationPageIsShownInNewWindowTab()
@@ -230,7 +252,7 @@ namespace Wercs.Selenium.ULSC.Steps
 					return;
 				}
 			}
-			Report.Failure("Failed to find the correct tab! The available tabs (with screenshots) were:");
+			Report.Failure("Failed to find the correct tab! The available tabs (with screenshots) were:", false);
 			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
 			int counter = 1;
 			foreach (string url in OpenBrowsers)
@@ -398,8 +420,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm that the WERCSLink header appears at the top left")]
 		public void GivenIConfirmThatTheWERCSLinkHeaderAppearsAtTheTopLeft()
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			Report.IsTrue(thisWercsLinkDashboard.TopLeftTitleExists("WERCSLink"), "Failed to find top left title WERCSLink",
+			Report.IsTrue(new TopBarNavigation().TopLeftTitleExists("WERCSLink"), "Failed to find top left title WERCSLink",
 				"Found top left title: WERCSLink");
 		}
 
@@ -407,7 +428,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm that the following WERCSLink menu items are showing")]
 		public void GivenIConfirmThatTheFollowingWERCSLinkMenuItemsAreShowing(Table table)
 		{
-			var menuItems = new WERCSLinkDashboard().GetSideBarNavLinks().Select(x => x.Title).ToList();
+			var menuItems = new SideBarNavigation().GetNavLinks().Select(x => x.Title).ToList();
 			foreach (var thisRow in table.Rows)
 			{
 				Report.IsTrue(menuItems.Contains(thisRow["Menu item"]), "Failed to find menu item: " + thisRow["Menu item"],
@@ -418,7 +439,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm the following sub links are displayed below the WERCSLink menu item: (.*):")]
 		public void ConfirmWercsLinkMenuItemDisplaysSubItems(string menuItem, Table table)
 		{
-			var thisMenuItem = new WERCSLinkDashboard().GetSideBarNavLink(menuItem);
+			var thisMenuItem = new SideBarNavigation().GetNavLink(menuItem);
 			if (thisMenuItem == null)
 			{
 				Report.Failure($"The menu item: {menuItem} was not displayed!" );
@@ -442,7 +463,7 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I click the link: (.*) below the WERCSLink menu item: (.*)")]
 		public void ClickSubLinkItem(string subLink, string menuItem)
 		{
-			var thisMenuItem = new WERCSLinkDashboard().GetSideBarNavLink(menuItem);
+			var thisMenuItem = new SideBarNavigation().GetNavLink(menuItem);
 			if (thisMenuItem == null)
 			{
 				Report.Failure($"The menu item: {menuItem} was not displayed!");
@@ -456,118 +477,64 @@ namespace Wercs.Selenium.ULSC.Steps
 				Report.Screenshot();
 				return;
 			}
-			Report.IsTrue(new WERCSLinkDashboard().ClickNavItem(thisSubLink), $"Failed to click sub link: {subLink}!", $"Successfully clicked sub link: {subLink}");
+			Report.IsTrue(new SideBarNavigation().ClickNavItem(thisSubLink), $"Failed to click sub link: {subLink}!", $"Successfully clicked sub link: {subLink}");
 		}
 
-		[StepDefinition(@"I confirm that the WERCSLink screen shows the following sections")]
-		public void GivenIConfirmThatTheWERCSLinkScreenShowsTheFollowingSections(Table table)
+		[StepDefinition(@"I confirm that the Services page displays the following sections:")]
+		public void ConfirmServicesPageDisplaysSections(Table table)
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			List<string> sections = thisWercsLinkDashboard.getSectionTitles();
-
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			var sections = new Services().SectionHeadings();
+			foreach (var thisRow in table.Rows)
 			{
-				Report.IsTrue(sections.Contains(thisRow["Section"]), "Failed to find menu item: " + thisRow["Section"],
-					"Found left menu item: " + thisRow["Section"]);
+				Report.IsTrue(sections.Contains(thisRow["Section"]), "Failed to find Services section: " + thisRow["Section"],
+					"Found Services section: " + thisRow["Section"]);
 			}
 		}
 
-		[StepDefinition(@"I confirm the WERCSmart area shows the WERCSmart logo, name and Registered trade mark")]
-		public void GivenIConfirmTheWERCSmartAreaShowsTheWERCSmartLogoNameAndRegisteredTradeMark()
+		[StepDefinition(@"I confirm that the Services page contains a section with the WERCSmart logo, name and Registered trade mark")]
+		public void ConfirmServicesPageContainsASectionWithWercSmartLogoNameAndRegisteredTrademark()
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			List<string> images = thisWercsLinkDashboard.getSectionImages("WERCSmart®");
-			Report.IsTrue(images.Contains("wercsmart-logo"), "Logo is not showing as expected",
-				"Logo is showing as expected");
-			List<string> titles = thisWercsLinkDashboard.getSectionTitles();
-			Report.IsTrue(titles.Contains("WERCSmart®"), "Wercsmart title and registered trademark is not showing as expected",
-				"Wercsmart title and registered title is showing as expected");
-		}
-
-		[StepDefinition(@"I confirm that in the (.*) area the description text reads (.*)")]
-		public void GivenIConfirmThatInTheAreaTheDescriptionTextReads(string section, string expectedText)
-		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			string actualText = thisWercsLinkDashboard.getSectionBlurb(section);
-			Report.IsTrue(actualText == expectedText,
-				"Expected text was: " + expectedText + " actual text was: " + actualText);
-		}
-
-		[StepDefinition(@"I confirm that the following links exist under menu item: (.*):")]
-		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingLinksExist(string menuItem, Table table)
-		{
-			//WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			//List<WERCSLinkLink> links = thisWercsLinkDashboard.getSectionLinks(section);
-			var navLinks = new WERCSLinkDashboard().GetSideBarNavLinks();
-			var navLink = new NavLink();
-			if (navLinks.Any(x => x.Title == menuItem))
+			var images = new Services().SectionImages("WERCSmart®");
+			if (images != null)
 			{
-				navLink = navLinks.First(x => x.Title == menuItem);
-				// then sub links should contain all links
-				foreach (var row in table.Rows)
+				Report.IsTrue(images.Contains("wercsmart-logo"), "The WercSmart Logo was not displayed for section with heading: WercSmart name and registered trademark!",
+					"The WercSmart logo was displayed in the section with heading: WercSmart name and registered trademark as expected");
+				return;
+			}
+			Report.Failure("The Services section: WERCSmart was not found!");
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm that the Services section: (.*) contains the description text: (.*)")]
+		public void ConfirmThatInServicesSectionContainsDescriptionText(string heading, string expectedText)
+		{
+			var actualText = new Services().SectionDescription(heading);
+			var normalisedActual = Regex.Replace(actualText, @"\s+", "");
+			var normalisedExpected = Regex.Replace(expectedText, @"\s+", "");
+			Report.IsTrue(normalisedActual == normalisedExpected,
+				$"Expected text ({expectedText}) did not match actual text ({actualText}) for section: {heading}!", "Expected description text matched actual text for section: " + heading);
+		}
+
+		[StepDefinition(@"I confirm that the following links are displayed in the Services section: (.*):")]
+		public void ConfirmLinksAreDisplayedInServicesSection(string section, Table table)
+		{
+			var links = new Services().SectionLinks(section);
+			foreach (var row in table.Rows)
+			{
+				var expectedTitle = row["Link title"];
+				var expectedIcon = row["Link icon"];
+				if (Report.IsTrue(links.Any(x=>x.Title==expectedTitle), "No link with title: " + expectedTitle + " was displayed in Services section: " + section, "Link with title: " + expectedTitle + " was displayed in Services section: " + section + " as expected"))
 				{
-					var expectedTitle = row["Link title"];
-					var expcetedIcon = row["Link icon"];
-					if (Report.IsTrue(navLinks.First(x => x.Title == menuItem).SubLinks.Any(x => x.Title == expectedTitle), "No link with title: " + expectedTitle + " was displayed below menu item " + menuItem, "Link with title: " + expectedTitle + " was displayed under menu item: " + menuItem + " as expected"))
-					{
-						Report.IsTrue(navLinks.First(x => x.Title == menuItem).SubLinks.Any(x => x.Icon == expcetedIcon), "No link with icon: " + expcetedIcon + " was displayed below menu item " + menuItem, "Link with icon: " + expectedTitle + " was displayed under menu item: " + menuItem + " as expected");
-					}
+					Report.IsTrue(links.Any(x => x.Icon == expectedIcon), "No link with icon: " + expectedIcon + " was displayed in Services section: " + section, "Link with icon: " +expectedIcon + " was displayed in Services section: " + section + " as expected");
 				}
 			}
-			else if (navLinks.Any(x => x.SubLinks.Any(y => y.Title == menuItem)))
-			{
-				// then sub sub links should contain all links
-				navLink = navLinks.First(x => x.SubLinks.Any(y => y.Title==menuItem)).SubLinks.First(x => x.Title==menuItem);
-				foreach (var row in table.Rows)
-				{
-					var expectedTitle = row["Link title"];
-					var expcetedIcon = row["Link icon"];
-					var ssLinks = navLinks.First(x => x.SubLinks.Any(y => y.Title == menuItem)).SubLinks.First(x => x.Title == menuItem).SubSubLinks;
-					if (Report.IsTrue(ssLinks.Any(x => x.Title == expectedTitle),
-						"No link with title: " + expectedTitle + " was displayed below menu item " + menuItem,
-						"Link with title: " + expectedTitle + " was displayed under menu item: " + menuItem + " as expected"))
-					{
-						Report.IsTrue(ssLinks.Any(x => x.Icon == expcetedIcon),
-							"No link with icon: " + expcetedIcon + " was displayed below menu item " + menuItem,
-							"Link with icon: " + expectedTitle + " was displayed under menu item: " + menuItem + " as expected");
-					}
-				}
-			}
-			else
-			{
-				Report.Failure("No section with title: " +menuItem + " was found!");
-				Report.Screenshot();
-			}
-			//| Link title | Link icon |
-
-			//| Link title | Link icon |
-			//foreach (var row in table.Rows)
-			//{
-			//	var expectedTitle = row["Link title"];
-			//	var expcetedIcon = row["Link icon"];
-			//	var subSubLink
-			//	if(nav)
-
-			//	var matchingLink = links.FirstOrDefault(x => x.LinkTitle == thisRow["Link title"]);
-			//	Report.IsTrue(matchingLink != null, "Failed to find matching link: " + thisRow["Link title"],
-			//		"Found matching link: " + thisRow["Link title"]);
-
-			//	if (matchingLink != null)
-			//	{
-			//		Report.IsTrue(matchingLink.Icon == thisRow["Link icon"], "Failed to find matching icon: " + thisRow["Link icon"],
-			//			"Found matching icon: " + thisRow["Link icon"]);
-
-			//	}
-			//}
 		}
 
-		[StepDefinition(@"I confirm that in the (.*) area the following subheadings appear:")]
+		[StepDefinition(@"I confirm that the following subheadings are displayed in the Services section: (.*)")]
 		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingSubheadingsAppear(string section, Table table)
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			List<string> subheadings = thisWercsLinkDashboard.getSectionSubheadings(section);
-
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			var subheadings = new Services().SectionSubHeadings(section);
+			foreach (var thisRow in table.Rows)
 			{
 				var matchingSubheading = subheadings.FirstOrDefault(x => x == thisRow["Subheading"]);
 				Report.IsTrue(matchingSubheading != null, "Failed to find matching subheading: " + thisRow["Subheading"],
@@ -575,13 +542,12 @@ namespace Wercs.Selenium.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that in the (.*) area the following images appear:")]
+		[StepDefinition(@"I confirm the following images are displayed in the Services section: (.*)")]
 		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingImagesAppear(string section, Table table)
 		{
-			WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
-			List<string> images = thisWercsLinkDashboard.getSectionImages(section);
+			var images = new Services().SectionImages(section);
 
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (var thisRow in table.Rows)
 			{
 				var matchingImage = images.FirstOrDefault(x => x == thisRow["Image"]);
 				Report.IsTrue(matchingImage != null, "Failed to find matching image: " + thisRow["Image"],
@@ -729,36 +695,37 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm the left hand navigation is displayed under WercsLink")]
 		public void ConfirmLeftHandNavigationDisplayed()
 		{
-			Report.IsTrue(new WERCSLinkDashboard().GetSideBarNavLinks().Any(x => !string.IsNullOrEmpty(x.Title)),
+			Report.IsTrue(new SideBarNavigation().GetNavLinks().Any(x => !string.IsNullOrEmpty(x.Title)),
 				"The left hand navigation did not load with any items!",
 				"The left hand navigation loaded with items as expected");
 		}
 
-		[StepDefinition(@"I confirm the following widget panels are displayed on the Dashboard:")]
-		public void ConfirmWidgetPanelsDisplayedOnTheDashboard(Table table)
+		[StepDefinition(@"I confirm the following widget panels are (displayed|not displayed) on the Dashboard page:")]
+		public void ConfirmWidgetPanelsDisplayedOnTheDashboard(string displayed, Table table)
 		{
 			var expectedWidgets = new List<string>();
 			table.Rows.ForEach(x => expectedWidgets.Add(x["Widget"]));
-			var actualWidgets = new WERCSLinkDashboard().DashboardWidgetTitles();
-			var success = true;
-			foreach (var widget in expectedWidgets)
+			Report.Info("Expected widgets are: " + string.Join(", ", expectedWidgets));
+			var actualWidgets = new Dashboard().WidgetTitles();
+			Report.Info("Actual widgets are: " + string.Join(", ", actualWidgets));
+			switch (displayed)
 			{
-				if (actualWidgets.Contains(widget))
-				{
-					continue;
-				}
-				success = false;
-				Report.Failure("Widget: " + widget + " was not displayed!");
-				Report.Screenshot();
+				case "displayed":
+					Report.IsTrue(expectedWidgets.All(x => actualWidgets.Contains(x)),
+						"Expected to see the following widgets: " + string.Join(", ", expectedWidgets + " But found: " + string.Join(", ", actualWidgets)),
+						"The following widgets were displayed as expected: " + string.Join(", ", expectedWidgets));
+					break;
+				case "not displayed":
+					Report.IsTrue(expectedWidgets.All(x => !actualWidgets.Contains(x)),
+						"Widgets were displayed which were not expected! ",
+						"None of the listed widgets were displayed as expected");
+					break;
+				default:
+					Report.Error("Step parameter must be set to either 'displayed' or 'not displayed'!");
+					return;
 			}
-			if (success)
-			{
-				Report.Success("All expected widgets were displayed: " + string.Join(", ", expectedWidgets));
-				Report.Screenshot();
-			}
-			//Report.IsTrue(expectedWidgets.All(x => actualWidgets.Contains(x)),
-			//	"Expected to see the following widgets: " + string.Join(", ", expectedWidgets + " But found: " + string.Join(", ", actualWidgets)),
-			//	"The following widgets were displayed as expected: " + string.Join(", ", expectedWidgets));
+
+
 		}
 
 		[StepDefinition(@"I Confirm the Layout shows a header, left hand navigation, Message center and KPI areas")]
@@ -772,7 +739,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			TestReport.StartStep("I confirm the Message widget panel is displayed on the Dashboard:");
 			var table = new Table("Widget");
 			table.AddRow("Message Center");
-			this.ConfirmWidgetPanelsDisplayedOnTheDashboard(table);
+			this.ConfirmWidgetPanelsDisplayedOnTheDashboard("displayed", table);
 			TestReport.StartStep("I confirm the KPI widget panels are displayed on the Dashboard");
 			var kpiTitles = new List<string> { "Products By Retailer and Status", "RUs by Category", "Products by Recertification Reason", "Products by RU", "RUs by Category by Retailer", "Subscription Status" };
 			table = new Table("Widget");
@@ -780,25 +747,25 @@ namespace Wercs.Selenium.ULSC.Steps
 			{
 				table.AddRow(title);
 			}
-			this.ConfirmWidgetPanelsDisplayedOnTheDashboard(table);
+			this.ConfirmWidgetPanelsDisplayedOnTheDashboard("displayed", table);
 		}
 
 		[StepDefinition(@"I confirm the WERCSLink sidebar menu icon is displayed")]
 		public void IConfirmTheWercsLinkSidebarMenuIconIsDisplayed()
 		{
-			Report.IsTrue(new WERCSLinkDashboard().WercsLinkNavigationButtonDisplayed(), "The WERCSLink sidebar menu icon was not displayed!", "The WERCSLink sidebar menu icon was displayed as expected");
+			Report.IsTrue(new TopBarNavigation().WercsLinkNavigationButtonDisplayed(), "The WERCSLink sidebar menu icon was not displayed!", "The WERCSLink sidebar menu icon was displayed as expected");
 		}
 
 		[StepDefinition(@"I click the WERCSLink sidebar menu icon")]
 		public void IClickTheWercsLinkSidebarMenuIcon()
 		{
-			Report.IsTrue(new WERCSLinkDashboard().ClickWercsLinkNavigationButton(), "Failed to click the WERCSLink sidebard navigation button", "Successfully clicked the WERCSLink sidebard navigation button");
+			Report.IsTrue(new TopBarNavigation().ClickWercsLinkNavigationButton(), "Failed to click the WERCSLink sidebard navigation button", "Successfully clicked the WERCSLink sidebard navigation button");
 		}
 
 		[StepDefinition(@"I confirm the left hand navigation list is (collapsed|expanded)")]
 		public void ConfirmLeftNavigationCollapsesWithTitlesNotDisplayed(string navState)
 		{
-			var sideBarItems = new WERCSLinkDashboard().GetSideBarNavLinks();
+			var sideBarItems = new SideBarNavigation().GetNavLinks();
 			switch (navState)
 			{
 				case "collapsed":
@@ -823,32 +790,32 @@ namespace Wercs.Selenium.ULSC.Steps
 				return;
 			}
 			var username = user.Username;
-			var displayedUser = new WERCSLinkDashboard().UserButtonText();
+			var displayedUser = new TopBarNavigation().UserButtonText();
 			Report.IsTrue(displayedUser == username, "Expected username in the header to be: " + user + " but was: " + displayedUser + "!", "Username: " + username + " was displayed in the header as expected");
 		}
 
 		[StepDefinition(@"I click the user button in the header")]
 		public void ClickHeaderUserButton()
 		{
-			Report.IsTrue(new WERCSLinkDashboard().ClickUserButton(), "Failed to click the user button in the header!", "Successfully clicked the user button in the header");
+			Report.IsTrue(new TopBarNavigation().ClickUserButton(), "Failed to click the user button in the header!", "Successfully clicked the user button in the header");
 		}
 
 		[StepDefinition(@"I confirm the Reset Dashboard icon is displayed next to the user button in the header")]
 		public void ConfirmResetDashboardIconDisplayed()
 		{
-			Report.IsTrue(new WERCSLinkDashboard().ResetDashboardIconDisplayed(), "The Reset Dashboard icon was not displayed in the header!", "The Reset Dashboard icon was displyed in the header as expected");
+			Report.IsTrue(new TopBarNavigation().ResetDashboardIconDisplayed(), "The Reset Dashboard icon was not displayed in the header!", "The Reset Dashboard icon was displyed in the header as expected");
 		}
 
 		[StepDefinition(@"I click the Reset Dashboard icon next to the user button in the header")]
 		public void ClickResetDashboardIcon()
 		{
-			Report.IsTrue(new WERCSLinkDashboard().ClickResetDashboardIcon(), "Failed to click the Reset Dashboard icon in the header!", "Successfully clicked the Reset Dashboard icon in the header");
+			Report.IsTrue(new TopBarNavigation().ClickResetDashboardIcon(), "Failed to click the Reset Dashboard icon in the header!", "Successfully clicked the Reset Dashboard icon in the header");
 		}
 
 		[StepDefinition(@"I confirm the Reset Dashboard dropdown item is displayed underneath the header icon")]
 		public void ConfirmResetDashboardDropDownItemDisplayed()
 		{
-			Report.IsTrue(new WERCSLinkDashboard().ResetDashboardDropdownItemDisplayed(), "The Reset Dashboard dropdown item was not displayed under the header icon!", "The Reset Dashboard dropdown item was displyed under the header icon as expected");
+			Report.IsTrue(new TopBarNavigation().ResetDashboardDropdownItemDisplayed(), "The Reset Dashboard dropdown item was not displayed under the header icon!", "The Reset Dashboard dropdown item was displyed under the header icon as expected");
 		}
 
 		[StepDefinition(@"I confirm a new tab opens with url: (.*)")]
@@ -862,11 +829,11 @@ namespace Wercs.Selenium.ULSC.Steps
 		{
 			if (visibility == "displayed")
 			{
-				Report.IsTrue(new WERCSLinkDashboard().SignOutDropDownItemDisplayed(), "The Sign Out dropdown item was not displayed when it was expected to be!", "The Sign Out dropdown item was displayed as expected");
+				Report.IsTrue(new TopBarNavigation().SignOutDropDownItemDisplayed(), "The Sign Out dropdown item was not displayed when it was expected to be!", "The Sign Out dropdown item was displayed as expected");
 			}
 			else if (visibility == "not displayed")
 			{
-				Report.IsTrue(!new WERCSLinkDashboard().SignOutDropDownItemDisplayed(), "The Sign Out dropdown item was displayed when it was not expected to be!", "The Sign Out dropdown item was not displayed as expected");
+				Report.IsTrue(!new TopBarNavigation().SignOutDropDownItemDisplayed(), "The Sign Out dropdown item was displayed when it was not expected to be!", "The Sign Out dropdown item was not displayed as expected");
 			}
 			else
 			{
@@ -877,29 +844,29 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm the UL Logo is displayed next to the user button in the header")]
 		public void ConfirmTheUlLogoIsDisplayedHeader()
 		{
-			Report.IsTrue(new WERCSLinkDashboard().ULLogoDisplayed(), "The UL Logo was not displayed in the header!", "The UL logo was displayed in the header as expected");
+			Report.IsTrue(new TopBarNavigation().ULLogoDisplayed(), "The UL Logo was not displayed in the header!", "The UL logo was displayed in the header as expected");
 		}
 
 		[StepDefinition(@"I click the UL Logo next to the user button in the header")]
 		public void ClickTheUlLogoHeader()
 		{
-			Report.IsTrue(new WERCSLinkDashboard().ClickULLogo(), "Failed to click the UL Logo in the header!", "Successfully clicked the UL logo in the header");
+			Report.IsTrue(new TopBarNavigation().ClickULLogo(), "Failed to click the UL Logo in the header!", "Successfully clicked the UL logo in the header");
 			Delay.Seconds(10);
 		}
 
 		[StepDefinition(@"I click the side bar navigation link: (.*)")]
 		public void ClickSideBarLink(string title)
 		{
-			var menuItem = new WERCSLinkDashboard().GetSideBarNavLink(title);
+			var menuItem = new SideBarNavigation().GetNavLink(title);
 			if (menuItem == null)
 			{
 				throw new Exception("There was no side bar displayed with title: " + title);
 			}
-			Report.IsTrue(new WERCSLinkDashboard().ClickNavItem(menuItem), "Failed to click the side bar link: " + title , "Successfully cliked the side bar link: " + title);
+			Report.IsTrue(new SideBarNavigation().ClickNavItem(menuItem), "Failed to click the side bar link: " + title , "Successfully cliked the side bar link: " + title);
 		}
 
-		[StepDefinition(@"I confirm the WERCSLink (Services|Additional Services) page loads")]
-		public void ConfirmAdditionalServicesPageLoads(string page)
+		[StepDefinition(@"I confirm the WERCSLink Additional Services page loads")]
+		public void ConfirmAdditionalServicesPageLoads()
 		{
 			var anyServices = new WERCSLinkDashboard().AnyServicesGrid();
 			var i = 0;
@@ -909,7 +876,7 @@ namespace Wercs.Selenium.ULSC.Steps
 				Delay.Seconds(1);
 				i++;
 			}
-			Report.IsTrue(anyServices, $"No {page} were loaded!", $"{page} were loaded");
+			Report.IsTrue(anyServices, $"Additional  Services pas was not loaded!", $"Additional Services page was loaded");
 		}
 
 		[StepDefinition(@"I confirm the WERCSLink Recent Activities page loads")]
@@ -944,14 +911,14 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I confirm the WERCSLink Key Performance Indicators page loads")]
 		public void ConfirmKeyPerformanceIndicatorsPageLoads()
 		{
-			var widgets = new WERCSLinkDashboard().DashboardWidgetTitles();
+			var widgets = new Dashboard().WidgetTitles();
 			Report.IsTrue(widgets.Any(), "The Key Performance Indicators page did not load with widgets!", "The Key Performance Indictors page loaded with widgets");
 		}
 
 		[StepDefinition(@"I confirm the following links are displayed below menu item: (.*) and sub item (.*)")]
 		public void ConfirmFollowingSubSubLinksDisplayedBelowWercSmartSubLink(string menuItem, string subLink, Table table)
 		{
-			var link = new WERCSLinkDashboard().GetSideBarNavLink(menuItem);
+			var link = new SideBarNavigation().GetNavLink(menuItem);
 			if (link == null)
 			{
 				Report.Failure("Menu item: " + menuItem + " was not displayed in the nav side bar!");
@@ -982,13 +949,90 @@ namespace Wercs.Selenium.ULSC.Steps
 		[StepDefinition(@"I click the link: (.*) below menu item: (.*) and sub item (.*)")]
 		public void ClickLinkBelowWercSmartSubLink(string subSub, string menu, string sub)
 		{
-
+			var thisMenuItem = new SideBarNavigation().GetNavLink(menu);
+			if (thisMenuItem == null)
+			{
+				Report.Failure($"The menu item: {menu} was not displayed!");
+				Report.Screenshot();
+				return;
+			}
+			var thisSubLink = thisMenuItem.SubLinks.First(x => x.Title == sub);
+			if (thisSubLink == null)
+			{
+				Report.Failure("The link with title: " + sub + " was not displayed under the menu item: " + menu);
+				Report.Screenshot();
+				return;
+			}
+			var thisSubSubLink = thisSubLink.SubSubLinks.First(x => x.Title == subSub);
+			if (thisSubSubLink == null)
+			{
+				Report.Failure("The link with title: " + subSub + " was not displayed under the sub menu item: " + sub);
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(new SideBarNavigation().ClickNavItem(thisSubSubLink), "Failed to click the link with title: " + subSub, "Successfully clicked link with title: "+ subSub);
 		}
 
-		[StepDefinition(@"I confirm the three vertical dots drop down button is displayed for widget: (.*)")]
+		[StepDefinition(@"I confirm that the drop down button with three dots is displayed for dashboard widget: (.*)")]
 		public void ConfirmVerticalDotDropDownButtonIsDisplayed(string widget)
 		{
+			Report.IsTrue(new Dashboard().WidgetDropDownMenuToggleDisplayed(widget), "", "");
+		}
 
+		[StepDefinition(@"I click the drop down button with three dots for dashboard widget: (.*)")]
+		public void ClickVerticalDotDropDownButton(string widget)
+		{
+			Report.IsTrue(new Dashboard().ClickWidgetDropDownMenuToggle(widget), "", "");
+		}
+
+		[StepDefinition(@"I confirm that the 'Remove' drop down item is (displayed|not displayed) for widget: (.*)")]
+		public void ConfirmRemoveDropDownItemIsDisplayed(string displayed, string widgetTitle)
+		{
+			switch (displayed)
+			{
+				case "displayed":
+					Report.IsTrue(new Dashboard().RemoveDropDownItemDisplayed(widgetTitle), "The 'Remove' drop down item was not displayed for widget: " + widgetTitle + "!", "The 'Remove' drop down item was displayed as expected");
+					break;
+				case "not displayed":
+					Report.IsTrue(!new Dashboard().RemoveDropDownItemDisplayed(widgetTitle), "The 'Remove' drop down item was displayed for widget: " + widgetTitle + " when it was not expected to be!", "The 'Remove' drop down item was not displayed as expected");
+					break;
+				default:
+					Report.Error("The step parameter must be set to either 'displayed' or 'not displayed'!");
+					return;
+			}
+		}
+
+		[StepDefinition(@"I click the 'Remove' drop down item for widget: (.*)")]
+		public void ClickRemoveDropDownItem(string widgetTitle)
+		{
+			Report.IsTrue(new Dashboard().ClickRemoveDropDownItem(widgetTitle), "Failed to click 'Remove' drop down item!", "Successfully clicked 'Remove' drop down item");
+		}
+
+		[StepDefinition(@"I confirm the WERCSLink: (.*) page has loaded")]
+		public void ConfirmWercsLinkPageHasLoaded(string page)
+		{
+			switch (page)
+			{
+				case "Dashboard":
+					Report.IsTrue(new Dashboard().Wait_For_Load(), "The Dashboard page did not load!", "The Dashboard page loaded");
+					break;
+				case "Key Performance Indicators":
+					Report.IsTrue(new KeyPerformanceIndicators().Wait_For_Load(), "The KPI page did not load!", "The KPI page loaded");
+					break;
+				case "Services":
+					Report.IsTrue(new Services().Wait_For_Load(), "The Services page did not load!", "The Services page loaded");
+					break;
+				default:
+					Report.Info("Step parameter did not match any valid page! Pages are: Dashboard, Key Performance Indicators, Services");
+					return;
+			}
+		}
+
+		[StepDefinition(@"I Confirm the 'Enter WPS ID or Product Name' filter input is displayed in the Message Center widget")]
+		public void ConfirmFilterInputIsDisplayedInTheMessageCenterWidget()
+		{
+			var messageCenter = new Dashboard().GetMessageCenter();
+			Report.IsTrue(messageCenter.FilterPlaceholder == "Enter WPS ID or Product Name", "The 'Enter WPS ID or Product Name' input was not displayed!", "The 'Enter WPS ID or Product Name' input was displayed as expected");
 		}
 	}
 

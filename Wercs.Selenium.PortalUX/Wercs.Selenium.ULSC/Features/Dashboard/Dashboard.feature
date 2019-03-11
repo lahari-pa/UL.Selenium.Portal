@@ -70,7 +70,7 @@ And I confirm the WERCSLink Recent Activities page loads
 And I click the side bar navigation link: Product Lookup
 And I confirm the WERCSLink Product Lookup page loads
 And I click the side bar navigation link: Services
-And I confirm the WERCSLink Services page loads
+And I confirm the WERCSLink: Services page has loaded
 And I click the side bar navigation link: Services
 And I confirm the following sub links are displayed below the WERCSLink menu item: Services:
 | Sub link |
@@ -110,24 +110,30 @@ And I should see the WERCSLink dashboard
 Scenario: [52993] Message Center - layout
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 Given I call Shared Step 29148 - Login to ULSC as an Administrator User
-And I confirm the following widget panels are displayed on the Dashboard:
+And I confirm the WERCSLink: Dashboard page has loaded
+And I confirm the following widget panels are displayed on the Dashboard page:
 | Widget         |
 | Message Center |
-
-And I Confirm the three dots icon is shown in the top right of the message center area
-And I Click the three dots icon
-And I Confirm the Remove menu item is shown
-And I Click the three dots icon again
-And I Confirm the Remove menu item is no longer shown
-And I Confirm the "Enter WPS ID or Product Name" field is shown below the Message Center heading
-And I If you are working with a brand new account you will not see anything below the "Enter WPS ID or Product name" field within the Message center area.
-And I If you are working with an older account, confirm you see entries below the "Enter WPS ID or Product Name" field
-And I Click the three dots icon at the top left of the Message Center area
-And I Click the "Remove" menu option
-And I Confirm the Message Center area of the screen is now blank
-And I Click the Dashboard entry in the left hand navigation list
-And I Click Reset Dashboard
-And I Confirm the Dashboard page refreshes and the Message center area is shown again
+And I confirm that the drop down button with three dots is displayed for dashboard widget: Message Center
+And I click the drop down button with three dots for dashboard widget: Message Center
+And I confirm that the 'Remove' drop down item is displayed for widget: Message Center
+And I click the drop down button with three dots for dashboard widget: Message Center
+And I confirm that the 'Remove' drop down item is not displayed for widget: Message Center
+#And I Confirm the "Enter WPS ID or Product Name" filter input is diplayed in the Message Center widget
+And I Confirm the 'Enter WPS ID or Product Name' filter input is displayed in the Message Center widget
+#And I If you are working with a brand new account you will not see anything below the "Enter WPS ID or Product name" field within the Message center area.
+#And I If you are working with an older account, confirm you see entries below the "Enter WPS ID or Product Name" field
+And I click the drop down button with three dots for dashboard widget: Message Center
+And I click the 'Remove' drop down item for widget: Message Center
+And I confirm the following widget panels are not displayed on the Dashboard page:
+| Widget         |
+| Message Center |
+And I click the side bar navigation link: Dashboard
+And I click the link: Reset Dashboard below the WERCSLink menu item: Dashboard
+And I confirm the WERCSLink: Dashboard page has loaded
+And I confirm the following widget panels are displayed on the Dashboard page:
+| Widget         |
+| Message Center |
 
 # Created by Barrett, Beverly
 # Test case can be found at the following paths:

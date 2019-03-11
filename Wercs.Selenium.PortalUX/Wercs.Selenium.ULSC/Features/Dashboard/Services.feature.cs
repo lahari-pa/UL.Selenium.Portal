@@ -139,21 +139,19 @@ testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator Use
 #line 25
 testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 26
-testRunner.And("In the WERCSLink dashboard I click left menu link: My Products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
-testRunner.And("I click the side bar navigation link: My Products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
+testRunner.And("I click the link: My Products below menu item: Services and sub item WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
 testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+#line 28
 testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 29
 testRunner.Given("I navigate to tab with title: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 33
+#line 30
 testRunner.And("In the WERCSLink page - Click the My Products link from the WERCSmart area of the" +
                     " Services page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
+#line 31
 testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 35
+#line 32
 testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -181,38 +179,39 @@ testRunner.And("I close the tab with the Product Information page", ((string)(nu
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[23328] WERCSLink - WERCSmart -  Request New Assessment", null, new string[] {
                         "NewProduct"});
-#line 43
+#line 39
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 19
 this.FeatureBackground();
-#line 44
+#line 40
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 45
+#line 41
 testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 42
 testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
-testRunner.And("I click the side bar navigation link: Register New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 43
+testRunner.And("I click the link: Register New Product below menu item: Services and sub item WER" +
+                    "CSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 44
 testRunner.And("I Confirm a new window opens with the WERCSmart New Product page shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
+#line 45
 testRunner.And("I set the Select the type of product to create field to: Create a New Registratio" +
                     "n", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
+#line 46
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
+#line 47
 testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 48
 testRunner.And("I close the tab with the The Product page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
+#line 49
 testRunner.Given("I navigate to tab with title: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 55
+#line 50
 testRunner.And("In the WERCSLink page - Click the Register New Product link from the WERCSmart ar" +
                     "ea of the Services page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 51
 testRunner.And("I Confirm a new window opens with the WERCSmart New Product page shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
+#line 52
 testRunner.And("I close the tab with the New Product page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -238,18 +237,18 @@ testRunner.And("I close the tab with the New Product page", ((string)(null)), ((
         public virtual void _53102Services_ScreenLayoutChecks()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[53102] Services - Screen layout checks", null, ((string[])(null)));
-#line 65
+#line 60
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 19
 this.FeatureBackground();
-#line 66
+#line 61
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 67
+#line 62
 testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 63
 testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
+#line 64
 testRunner.And("I confirm that the WERCSLink header appears at the top left", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -264,7 +263,7 @@ testRunner.And("I confirm that the WERCSLink header appears at the top left", ((
                         "Product Lookup"});
             table1.AddRow(new string[] {
                         "Services"});
-#line 70
+#line 65
 testRunner.And("I confirm that the following WERCSLink menu items are showing", ((string)(null)), table1, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -277,15 +276,15 @@ testRunner.And("I confirm that the following WERCSLink menu items are showing", 
                         "WERCS Studio"});
             table2.AddRow(new string[] {
                         "Branded Materials"});
+#line 72
+testRunner.And("I confirm that the Services page displays the following sections:", ((string)(null)), table2, "And ");
 #line 78
-testRunner.And("I confirm that the WERCSLink screen shows the following sections", ((string)(null)), table2, "And ");
-#line 84
-testRunner.And("I confirm the WERCSmart area shows the WERCSmart logo, name and Registered trade " +
-                    "mark", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 85
-testRunner.And("I confirm that in the WERCSmart® area the description text reads Provide data for" +
-                    " WERCS mart ® review and recipients Get resources, enter data, manage and submit" +
-                    " requested information in WERCS mart ®", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that the Services page contains a section with the WERCSmart logo, name" +
+                    " and Registered trade mark", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 79
+testRunner.And("I confirm that the Services section: WERCSmart® contains the description text: Pr" +
+                    "ovide data for WERCSmart® review and recipients Get resources, enter data, manag" +
+                    "e and submit requested information in WERCSmart®", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Link title",
@@ -296,15 +295,17 @@ testRunner.And("I confirm that in the WERCSmart® area the description text read
             table3.AddRow(new string[] {
                         "Register new product",
                         "file"});
-#line 86
-testRunner.And("I confirm that the following links exist under menu item: WERCSmart:", ((string)(null)), table3, "And ");
+#line 80
+testRunner.And("I confirm that the following links are displayed in the Services section: WERCSma" +
+                    "rt®:", ((string)(null)), table3, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Subheading"});
             table4.AddRow(new string[] {
                         "New Product Assessments"});
-#line 90
-testRunner.And("I confirm that in the WERCSmart® area the following subheadings appear:", ((string)(null)), table4, "And ");
+#line 84
+testRunner.And("I confirm that the following subheadings are displayed in the Services section: W" +
+                    "ERCSmart®", ((string)(null)), table4, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Image"});
@@ -312,12 +313,12 @@ testRunner.And("I confirm that in the WERCSmart® area the following subheadings
                         "wercsmart-logo"});
             table5.AddRow(new string[] {
                         "IandI"});
-#line 93
-testRunner.And("I confirm that in the WERCSmart® area the following images appear:", ((string)(null)), table5, "And ");
-#line 99
-testRunner.And("I confirm that in the Self-Service Authoring area the description text reads Your" +
-                    " direct connection with professional services Order your regional GHS Safety Dat" +
-                    "a Sheets via an online submssion tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 87
+testRunner.And("I confirm the following images are displayed in the Services section: WERCSmart®", ((string)(null)), table5, "And ");
+#line 91
+testRunner.And("I confirm that the Services section: Self-Service Authoring contains the descript" +
+                    "ion text: Your direct connection with professional services Order your regional " +
+                    "GHS Safety Data Sheets via an online submssion tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Link title",
@@ -325,9 +326,9 @@ testRunner.And("I confirm that in the Self-Service Authoring area the descriptio
             table6.AddRow(new string[] {
                         "Authoring",
                         "pencil-square"});
-#line 100
-testRunner.And("I confirm that the following links exist under menu item: Self-Service Authoring:" +
-                    "", ((string)(null)), table6, "And ");
+#line 92
+testRunner.And("I confirm that the following links are displayed in the Services section: Self-Se" +
+                    "rvice Authoring:", ((string)(null)), table6, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Image"});
@@ -335,12 +336,14 @@ testRunner.And("I confirm that the following links exist under menu item: Self-S
                         "self-authoring-logo"});
             table7.AddRow(new string[] {
                         "IandI"});
-#line 103
-testRunner.And("I confirm that in the Self-Service Authoring area the following images appear:", ((string)(null)), table7, "And ");
-#line 108
-testRunner.And("I confirm that in the Branded Materials area the description text reads Make your" +
-                    " unique branded materials available in WERCSmart® Allow your unique component at" +
-                    "tributes to be accessible to the public or assign them as permission-only", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 95
+testRunner.And("I confirm the following images are displayed in the Services section: Self-Servic" +
+                    "e Authoring", ((string)(null)), table7, "And ");
+#line 99
+testRunner.And("I confirm that the Services section: Branded Materials contains the description t" +
+                    "ext: Make your unique branded materials available in WERCSmart® Allow your uniqu" +
+                    "e component attributes to be accessible to the public or assign them as permissi" +
+                    "on-only", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Link title",
@@ -348,8 +351,9 @@ testRunner.And("I confirm that in the Branded Materials area the description tex
             table8.AddRow(new string[] {
                         "Branded Materials",
                         "tag"});
-#line 109
-testRunner.And("I confirm that the following links exist under menu item: Branded Materials:", ((string)(null)), table8, "And ");
+#line 100
+testRunner.And("I confirm that the following links are displayed in the Services section: Branded" +
+                    " Materials:", ((string)(null)), table8, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Image"});
@@ -357,12 +361,13 @@ testRunner.And("I confirm that the following links exist under menu item: Brande
                         "branded-logo"});
             table9.AddRow(new string[] {
                         "IandI"});
-#line 112
-testRunner.And("I confirm that in the Branded Materials area the following images appear:", ((string)(null)), table9, "And ");
-#line 117
-testRunner.And("I confirm that in the WERCS Studio area the description text reads Product data a" +
-                    "nd documents in your private database Manage, report and distribute product info" +
-                    "rmation from your private Studio database.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 103
+testRunner.And("I confirm the following images are displayed in the Services section: Branded Mat" +
+                    "erials", ((string)(null)), table9, "And ");
+#line 107
+testRunner.And("I confirm that the Services section: WERCS Studio contains the description text: " +
+                    "Product data and documents in your private database Manage, report and distribut" +
+                    "e product information from your private Studio database.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Link title",
@@ -379,8 +384,9 @@ testRunner.And("I confirm that in the WERCS Studio area the description text rea
             table10.AddRow(new string[] {
                         "Mappings",
                         "map"});
-#line 118
-testRunner.And("I confirm that the following links exist under menu item: WERCS Studio:", ((string)(null)), table10, "And ");
+#line 108
+testRunner.And("I confirm that the following links are displayed in the Services section: WERCS S" +
+                    "tudio:", ((string)(null)), table10, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Image"});
@@ -388,8 +394,9 @@ testRunner.And("I confirm that the following links exist under menu item: WERCS 
                         "studio"});
             table11.AddRow(new string[] {
                         "IandI"});
-#line 124
-testRunner.And("I confirm that in the WERCS Studio area the following images appear:", ((string)(null)), table11, "And ");
+#line 114
+testRunner.And("I confirm the following images are displayed in the Services section: WERCS Studi" +
+                    "o", ((string)(null)), table11, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -414,23 +421,23 @@ testRunner.And("I confirm that in the WERCS Studio area the following images app
         public virtual void _23331WERCSLink_Self_ServiceAuthoring_Authoring()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[23331] WERCSLink - Self-Service Authoring  - Authoring", null, ((string[])(null)));
-#line 135
+#line 123
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 19
 this.FeatureBackground();
-#line 136
+#line 124
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 137
+#line 125
 testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 138
+#line 126
 testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 145
+#line 133
 testRunner.And("In the WERCSLink page - Click the Authoring link from the WERCSmart area of the S" +
                     "ervices page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 146
+#line 134
 testRunner.And("I confirm a new window opens with the ULGHS.com page shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 147
+#line 135
 testRunner.And("I close the tab with the ULGHS.COM page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -458,41 +465,41 @@ testRunner.And("I close the tab with the ULGHS.COM page", ((string)(null)), ((Te
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[24436] WERCSLink - WERCS Studio - Data Management", null, new string[] {
                         "Studio"});
-#line 156
+#line 142
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 19
 this.FeatureBackground();
-#line 157
+#line 143
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 158
+#line 144
 testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 159
+#line 145
 testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 160
-testRunner.And("In the WERCSLink dashboard I click left menu link: WERCS Studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 161
-testRunner.And("In the WERCSLink dashboard I click left menu link: Data Management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 162
+#line 148
+testRunner.And("I click the side bar navigation link: WERCS Studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 149
+testRunner.And("I click the link: Data Management below the WERCSLink menu item: WERCS Studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 150
 testRunner.And("I Confirm New window opens with the Studio Data Management window open (Welcome p" +
                     "age shows) and that NO script errors display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 163
+#line 151
 testRunner.And("In power designer popup I select any Format/Subformat", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 164
+#line 152
 testRunner.And("I click continue in the Power Designer Plus popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 165
+#line 153
 testRunner.And("I close the tab with the Data Management page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 166
+#line 154
 testRunner.Given("I navigate to tab with title: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 167
+#line 155
 testRunner.And("In the WERCSLink page - Click the Data Management link from the WERCSs Studio are" +
                     "a of the Services page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 168
+#line 156
 testRunner.And("I Confirm New window opens with the Studio Data Management window open (Welcome p" +
                     "age shows) and that NO script errors display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 169
+#line 157
 testRunner.And("In power designer popup I select any Format/Subformat", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 170
+#line 158
 testRunner.And("I click continue in the Power Designer Plus popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

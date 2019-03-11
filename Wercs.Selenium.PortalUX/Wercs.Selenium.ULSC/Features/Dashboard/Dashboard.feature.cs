@@ -267,7 +267,7 @@ testRunner.And("I confirm the WERCSLink Product Lookup page loads", ((string)(nu
 #line 72
 testRunner.And("I click the side bar navigation link: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
-testRunner.And("I confirm the WERCSLink Services page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink: Services page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
 testRunner.And("I click the side bar navigation link: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -367,46 +367,58 @@ this.ScenarioInitialize(scenarioInfo);
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 112
 testRunner.Given("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 113
+testRunner.And("I confirm the WERCSLink: Dashboard page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Widget"});
             table7.AddRow(new string[] {
                         "Message Center"});
-#line 113
-testRunner.And("I confirm the following widget panels are displayed on the Dashboard:", ((string)(null)), table7, "And ");
+#line 114
+testRunner.And("I confirm the following widget panels are displayed on the Dashboard page:", ((string)(null)), table7, "And ");
 #line 117
-testRunner.And("I Confirm the three dots icon is shown in the top right of the message center are" +
-                    "a", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that the drop down button with three dots is displayed for dashboard wi" +
+                    "dget: Message Center", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 118
-testRunner.And("I Click the three dots icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 119
-testRunner.And("I Confirm the Remove menu item is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 120
-testRunner.And("I Click the three dots icon again", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 121
-testRunner.And("I Confirm the Remove menu item is no longer shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 122
-testRunner.And("I Confirm the \"Enter WPS ID or Product Name\" field is shown below the Message Cen" +
-                    "ter heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 123
-testRunner.And("I If you are working with a brand new account you will not see anything below the" +
-                    " \"Enter WPS ID or Product name\" field within the Message center area.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 124
-testRunner.And("I If you are working with an older account, confirm you see entries below the \"En" +
-                    "ter WPS ID or Product Name\" field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 125
-testRunner.And("I Click the three dots icon at the top left of the Message Center area", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 126
-testRunner.And("I Click the \"Remove\" menu option", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 127
-testRunner.And("I Confirm the Message Center area of the screen is now blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 128
-testRunner.And("I Click the Dashboard entry in the left hand navigation list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 129
-testRunner.And("I Click Reset Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 130
-testRunner.And("I Confirm the Dashboard page refreshes and the Message center area is shown again" +
+testRunner.And("I click the drop down button with three dots for dashboard widget: Message Center" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 119
+testRunner.And("I confirm that the \'Remove\' drop down item is displayed for widget: Message Cente" +
+                    "r", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 120
+testRunner.And("I click the drop down button with three dots for dashboard widget: Message Center" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 121
+testRunner.And("I confirm that the \'Remove\' drop down item is not displayed for widget: Message C" +
+                    "enter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 123
+testRunner.And("I Confirm the \'Enter WPS ID or Product Name\' filter input is displayed in the Mes" +
+                    "sage Center widget", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 126
+testRunner.And("I click the drop down button with three dots for dashboard widget: Message Center" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 127
+testRunner.And("I click the \'Remove\' drop down item for widget: Message Center", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Widget"});
+            table8.AddRow(new string[] {
+                        "Message Center"});
+#line 128
+testRunner.And("I confirm the following widget panels are not displayed on the Dashboard page:", ((string)(null)), table8, "And ");
+#line 131
+testRunner.And("I click the side bar navigation link: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 132
+testRunner.And("I click the link: Reset Dashboard below the WERCSLink menu item: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 133
+testRunner.And("I confirm the WERCSLink: Dashboard page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Widget"});
+            table9.AddRow(new string[] {
+                        "Message Center"});
+#line 134
+testRunner.And("I confirm the following widget panels are displayed on the Dashboard page:", ((string)(null)), table9, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -431,30 +443,30 @@ testRunner.And("I Confirm the Dashboard page refreshes and the Message center ar
         public virtual void _52995KPIs_Defaults()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52995] KPIs - Defaults", null, ((string[])(null)));
-#line 136
+#line 142
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 137
+#line 143
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 138
+#line 144
 testRunner.Given("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 139
+#line 145
 testRunner.And("I Confirm the KPI area shows 6 preferred KPIs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 140
+#line 146
 testRunner.And("I Confirm the KPIs shown are :Products by Retailer and StatusRUs by CategoryProdu" +
                     "cts by Recertification ReasonProducts by RURUs by Category by RetailerSubscripti" +
                     "on Status", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 141
+#line 147
 testRunner.And("I Confirm the Products by Retailer and Status shows as a pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 142
+#line 148
 testRunner.And("I Confirm the RUs by Category shows as a pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 143
+#line 149
 testRunner.And("I Confirm the Products by Recertification Reason shows as a bar graph", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 144
+#line 150
 testRunner.And("I Confirm the Products by RU shows as a bar graph", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 145
+#line 151
 testRunner.And("I Confirm the RUs by Category by Retailer shows as a pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 146
+#line 152
 testRunner.And("I Confirm the Subscription status shows \"Coming soon...\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

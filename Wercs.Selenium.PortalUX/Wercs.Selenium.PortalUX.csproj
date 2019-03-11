@@ -47,8 +47,7 @@
       <HintPath>packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="CredentialManagement, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\NTTQA.Selenium.TReVor.Modules.5.0.266\lib\net452\CredentialManagement.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\NTTQA.Selenium.TReVor.Modules.5.0.269\lib\net452\CredentialManagement.dll</HintPath>
     </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>packages\EnvDTE.8.0.1\lib\net10\EnvDTE.dll</HintPath>
@@ -101,16 +100,13 @@
       <HintPath>packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\NTTQA.Selenium.TReVor.Modules.5.0.266\lib\net452\NTTQA.Selenium.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\NTTQA.Selenium.TReVor.Modules.5.0.269\lib\net452\NTTQA.Selenium.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium.Reporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\NTTQA.Selenium.TReVor.Modules.5.0.266\lib\net452\NTTQA.Selenium.Reporting.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\NTTQA.Selenium.TReVor.Modules.5.0.269\lib\net452\NTTQA.Selenium.Reporting.dll</HintPath>
     </Reference>
     <Reference Include="NTTQA.Selenium.TReVor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\NTTQA.Selenium.TReVor.Modules.5.0.266\lib\net452\NTTQA.Selenium.TReVor.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\NTTQA.Selenium.TReVor.Modules.5.0.269\lib\net452\NTTQA.Selenium.TReVor.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
@@ -511,11 +507,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UL Toys.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\ULSC1.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ULSC.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\UPC.feature.cs">
       <AutoGen>True</AutoGen>
@@ -940,10 +931,6 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UL Toys.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\ULSC.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ULSC1.feature.cs</LastGenOutput>
-    </None>
     <None Include="Features\UPC.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UPC.feature.cs</LastGenOutput>
@@ -986,8 +973,8 @@ taskkill /f /im IEDriverServer.exe /fi "memusage gt 40" 2&gt;NUL
     <Error Condition="!Exists('packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
     <Error Condition="!Exists('packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props'))" />
     <Error Condition="!Exists('packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets'))" />
-    <Error Condition="!Exists('packages\NTTQA.Selenium.TReVor.Modules.5.0.266\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NTTQA.Selenium.TReVor.Modules.5.0.266\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
+    <Error Condition="!Exists('packages\NTTQA.Selenium.TReVor.Modules.5.0.269\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NTTQA.Selenium.TReVor.Modules.5.0.269\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
   </Target>
   <Import Project="packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
-  <Import Project="packages\NTTQA.Selenium.TReVor.Modules.5.0.266\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('packages\NTTQA.Selenium.TReVor.Modules.5.0.266\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
+  <Import Project="packages\NTTQA.Selenium.TReVor.Modules.5.0.269\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('packages\NTTQA.Selenium.TReVor.Modules.5.0.269\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
 </Project>
