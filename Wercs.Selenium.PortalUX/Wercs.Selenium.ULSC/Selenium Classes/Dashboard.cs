@@ -51,15 +51,6 @@ namespace Wercs.Selenium.ULSC.Selenium_Classes
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
 			return this.containerElement != null;
 		}
-		//public List<DashboardWidget> GetWidgets()
-		//{
-
-		//}
-
-		//public DashboardWidget GetWidget(string title)
-		//{
-
-		//}
 
 		public List<string> WidgetTitles()
 		{
@@ -116,6 +107,79 @@ namespace Wercs.Selenium.ULSC.Selenium_Classes
 			rMessageCenter.FilterValue = container.FindElement(By.XPath(".//input[@id='filterCurrent']"), 2)?.GetValue();
 			return rMessageCenter;
 		}
+
+		public SubscriptionStatus GetSubscriptionStatus()
+		{
+			var rSubscriptionStatus = new SubscriptionStatus();
+			// get element with title 'Subscription Status'
+			var container = this.WidgetContainer("Subscription Status");
+			if (container == null)
+			{
+				return null;
+			}
+			rSubscriptionStatus.Title = "Subscription Status";
+			rSubscriptionStatus.CenterHeading = container.FindElement(By.XPath(".//h2"), 2)?.Text;
+			return rSubscriptionStatus;
+		}
+
+		public WidgetGraph GetGraph(DashboardWidget widget)
+		{
+			var rGraph = new WidgetGraph();
+			var container = this.WidgetContainer(widget.Title);
+			if (container == null)
+			{
+				return null;
+			}
+			var gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
+			if (gEls.Count == 0)
+			{
+				return null;
+			}
+			if (gEls.Any(x => x.GetAttribute("class").ToString() == "highcharts-axis"))
+			{
+				rGraph.Type = GraphType.Bar;
+			}
+			else if(gEls.Any(x => x.GetAttribute("class").ToString().Contains("highcharts-tracker")))
+			{
+				rGraph.Type = GraphType.Pie;
+			}
+			else
+			{
+				return null;
+			}
+			// Get data
+			return rGraph;
+		}
+
+		public WidgetGraph GetGraph(string widgetName)
+		{
+			var rGraph = new WidgetGraph();
+			var container = this.WidgetContainer(widgetName);
+			if (container == null)
+			{
+				return null;
+			}
+			var gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
+			if (gEls.Count == 0)
+			{
+				return null;
+			}
+			if (gEls.Any(x => x.GetAttribute("class").ToString() == "highcharts-axis"))
+			{
+				rGraph.Type = GraphType.Bar;
+			}
+			else if (gEls.Any(x => x.GetAttribute("class").ToString().Contains("highcharts-tracker")))
+			{
+				rGraph.Type = GraphType.Pie;
+			}
+			else
+			{
+				return null;
+			}
+			// Get data
+			return rGraph;
+		}
+
 		public class DashboardWidget
 		{
 			public string Title { get; set; }
@@ -131,6 +195,11 @@ namespace Wercs.Selenium.ULSC.Selenium_Classes
 			public string FilterValue { get; set; }
 		}
 
+		public class SubscriptionStatus : DashboardWidget
+		{
+			public string CenterHeading { get; set; }
+		}
+
 		public class Message
 		{
 			public string Title { get; set; }
@@ -139,7 +208,8 @@ namespace Wercs.Selenium.ULSC.Selenium_Classes
 
 
 		}
-		public enum GraphType { PieOneTier, PieTwoTier, Bar }
+
+		public enum GraphType { Pie, Bar }
 
 		public class WidgetGraph
 		{
@@ -151,8 +221,18 @@ namespace Wercs.Selenium.ULSC.Selenium_Classes
 
 		public class GraphData
 		{
+			// Series
 
 		}
 
+		public class BarData : GraphData
+		{
+
+		}
+
+		public class PieData : GraphData
+		{
+
+		}
 	}
 }

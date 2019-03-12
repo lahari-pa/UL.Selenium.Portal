@@ -119,7 +119,6 @@ And I click the drop down button with three dots for dashboard widget: Message C
 And I confirm that the 'Remove' drop down item is displayed for widget: Message Center
 And I click the drop down button with three dots for dashboard widget: Message Center
 And I confirm that the 'Remove' drop down item is not displayed for widget: Message Center
-#And I Confirm the "Enter WPS ID or Product Name" filter input is diplayed in the Message Center widget
 And I Confirm the 'Enter WPS ID or Product Name' filter input is displayed in the Message Center widget
 #And I If you are working with a brand new account you will not see anything below the "Enter WPS ID or Product name" field within the Message center area.
 #And I If you are working with an older account, confirm you see entries below the "Enter WPS ID or Product Name" field
@@ -142,11 +141,19 @@ And I confirm the following widget panels are displayed on the Dashboard page:
 Scenario: [52995] KPIs - Defaults
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 Given I call Shared Step 29148 - Login to ULSC as an Administrator User
-And I Confirm the KPI area shows 6 preferred KPIs
-And I Confirm the KPIs shown are :Products by Retailer and StatusRUs by CategoryProducts by Recertification ReasonProducts by RURUs by Category by RetailerSubscription Status
-And I Confirm the Products by Retailer and Status shows as a pie chart
-And I Confirm the RUs by Category shows as a pie chart
-And I Confirm the Products by Recertification Reason shows as a bar graph
-And I Confirm the Products by RU shows as a bar graph
-And I Confirm the RUs by Category by Retailer shows as a pie chart
-And I Confirm the Subscription status shows "Coming soon..."
+And I click the side bar navigation link: Key Performance Indicators
+And I confirm the WERCSLink: Key Performance Indicators page has loaded
+And I confirm the following widget panels are displayed on the Key Performance Indicators page:
+| Widget                             |
+| Products by Retailer and Status    |
+| RUs by Category                    |
+| Products by Recertification Reason |
+| Products by RU                     |
+| RUs by Category by Retailer        |
+| Subscription Status                |
+And I confirm that the: Products by Retailer and Status dashboard widget contains a pie chart
+And I confirm that the: RUs by Category dashboard widget contains a pie chart
+And I confirm that the: Products by Recertification Reason dashboard widget contains a bar chart
+And I confirm that the: Products by RU dashboard widget contains a bar chart
+And I confirm that the: RUs by Category by Retailer dashboard widget contains a pie chart
+And I confirm that the Subscription Status widget displays centered heading with text: Coming Soon...

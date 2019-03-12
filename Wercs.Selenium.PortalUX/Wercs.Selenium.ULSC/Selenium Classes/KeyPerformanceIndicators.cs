@@ -43,6 +43,39 @@ namespace Wercs.Selenium.ULSC.Selenium_Classes
 			return match?.FindElement(By.XPath("./ancestor::div[starts-with(@class,'grid-stack-item-content')][1]"), 2);
 		}
 
+		//public class DashboardWidget
+		//{
+		//	public string Title { get; set; }
+		//}
 
+		//public class SubscriptionStatus : DashboardWidget
+		//{
+		//	public string CenterHeading { get; set; }
+		//}
+
+		//public enum GraphType { Pie, Bar }
+
+		//public class WidgetGraph
+		//{
+		//	public Dashboard.GraphType Type { get; set; }
+
+		//	public Dashboard.GraphData Data { get; set; }
+
+		//}
+
+		//public class GraphData
+		//{
+
+		//}
+
+		//public class BarData : Dashboard.GraphData
+		//{
+
+		//}
+
+		//public class PieData : Dashboard.GraphData
+		//{
+
+		//}
 	}
 }

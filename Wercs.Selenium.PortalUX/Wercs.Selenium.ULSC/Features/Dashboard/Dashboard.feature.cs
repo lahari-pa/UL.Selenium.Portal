@@ -391,33 +391,33 @@ testRunner.And("I click the drop down button with three dots for dashboard widge
 #line 121
 testRunner.And("I confirm that the \'Remove\' drop down item is not displayed for widget: Message C" +
                     "enter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 123
+#line 122
 testRunner.And("I Confirm the \'Enter WPS ID or Product Name\' filter input is displayed in the Mes" +
                     "sage Center widget", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 126
+#line 125
 testRunner.And("I click the drop down button with three dots for dashboard widget: Message Center" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 127
+#line 126
 testRunner.And("I click the \'Remove\' drop down item for widget: Message Center", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Widget"});
             table8.AddRow(new string[] {
                         "Message Center"});
-#line 128
+#line 127
 testRunner.And("I confirm the following widget panels are not displayed on the Dashboard page:", ((string)(null)), table8, "And ");
-#line 131
+#line 130
 testRunner.And("I click the side bar navigation link: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 132
+#line 131
 testRunner.And("I click the link: Reset Dashboard below the WERCSLink menu item: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 133
+#line 132
 testRunner.And("I confirm the WERCSLink: Dashboard page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Widget"});
             table9.AddRow(new string[] {
                         "Message Center"});
-#line 134
+#line 133
 testRunner.And("I confirm the following widget panels are displayed on the Dashboard page:", ((string)(null)), table9, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -443,31 +443,51 @@ testRunner.And("I confirm the following widget panels are displayed on the Dashb
         public virtual void _52995KPIs_Defaults()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52995] KPIs - Defaults", null, ((string[])(null)));
-#line 142
+#line 141
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 143
+#line 142
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 144
+#line 143
 testRunner.Given("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 144
+testRunner.And("I click the side bar navigation link: Key Performance Indicators", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 145
-testRunner.And("I Confirm the KPI area shows 6 preferred KPIs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink: Key Performance Indicators page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Widget"});
+            table10.AddRow(new string[] {
+                        "Products by Retailer and Status"});
+            table10.AddRow(new string[] {
+                        "RUs by Category"});
+            table10.AddRow(new string[] {
+                        "Products by Recertification Reason"});
+            table10.AddRow(new string[] {
+                        "Products by RU"});
+            table10.AddRow(new string[] {
+                        "RUs by Category by Retailer"});
+            table10.AddRow(new string[] {
+                        "Subscription Status"});
 #line 146
-testRunner.And("I Confirm the KPIs shown are :Products by Retailer and StatusRUs by CategoryProdu" +
-                    "cts by Recertification ReasonProducts by RURUs by Category by RetailerSubscripti" +
-                    "on Status", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 147
-testRunner.And("I Confirm the Products by Retailer and Status shows as a pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 148
-testRunner.And("I Confirm the RUs by Category shows as a pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 149
-testRunner.And("I Confirm the Products by Recertification Reason shows as a bar graph", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 150
-testRunner.And("I Confirm the Products by RU shows as a bar graph", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 151
-testRunner.And("I Confirm the RUs by Category by Retailer shows as a pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 152
-testRunner.And("I Confirm the Subscription status shows \"Coming soon...\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the following widget panels are displayed on the Key Performance Indica" +
+                    "tors page:", ((string)(null)), table10, "And ");
+#line 154
+testRunner.And("I confirm that the: Products by Retailer and Status dashboard widget contains a p" +
+                    "ie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 155
+testRunner.And("I confirm that the: RUs by Category dashboard widget contains a pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
+testRunner.And("I confirm that the: Products by Recertification Reason dashboard widget contains " +
+                    "a bar chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 157
+testRunner.And("I confirm that the: Products by RU dashboard widget contains a bar chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 158
+testRunner.And("I confirm that the: RUs by Category by Retailer dashboard widget contains a pie c" +
+                    "hart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 159
+testRunner.And("I confirm that the Subscription Status widget displays centered heading with text" +
+                    ": Coming Soon...", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -700,6 +700,7 @@ namespace Wercs.Selenium.ULSC.Steps
 				"The left hand navigation loaded with items as expected");
 		}
 
+		[StepDefinition(@"I confirm the following widget panels are (displayed|not displayed) on the Key Performance Indicators page:")]
 		[StepDefinition(@"I confirm the following widget panels are (displayed|not displayed) on the Dashboard page:")]
 		public void ConfirmWidgetPanelsDisplayedOnTheDashboard(string displayed, Table table)
 		{
@@ -712,7 +713,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			{
 				case "displayed":
 					Report.IsTrue(expectedWidgets.All(x => actualWidgets.Contains(x)),
-						"Expected to see the following widgets: " + string.Join(", ", expectedWidgets + " But found: " + string.Join(", ", actualWidgets)),
+						"Expected to see the following widgets: " + string.Join(", ", expectedWidgets) + " But found: " + string.Join(", ", actualWidgets),
 						"The following widgets were displayed as expected: " + string.Join(", ", expectedWidgets));
 					break;
 				case "not displayed":
@@ -1033,6 +1034,50 @@ namespace Wercs.Selenium.ULSC.Steps
 		{
 			var messageCenter = new Dashboard().GetMessageCenter();
 			Report.IsTrue(messageCenter.FilterPlaceholder == "Enter WPS ID or Product Name", "The 'Enter WPS ID or Product Name' input was not displayed!", "The 'Enter WPS ID or Product Name' input was displayed as expected");
+		}
+
+		[StepDefinition(@"I confirm that the: (.*) dashboard widget contains a (pie|bar) chart")]
+		public void ConfirmDashboardWidgetContainsChart(string widget, string chartType)
+		{
+			if (new Dashboard().WidgetContainer(widget) == null)
+			{
+				Report.Failure("Widget: " + widget + " was not found on the dashboard!");
+				Report.Screenshot();
+				return;
+			}
+			var graph = new Dashboard().GetGraph(widget);
+			if (graph == null)
+			{
+				Report.Failure("No graph was displayed for widget: " + widget);
+				Report.Screenshot();
+				return;
+			}
+			switch (chartType)
+			{
+				case "pie":
+					Report.IsTrue(graph.Type == Dashboard.GraphType.Pie, "The graph type was not pie!", "The graph type was pie as expected");
+					break;
+				case "bar":
+					Report.IsTrue(graph.Type == Dashboard.GraphType.Bar, "The graph type was not bar!", "The graph type was bar as expected");
+					break;
+				default:
+					Report.Error("Step parameter must be set to either 'bar' or 'pie'!");
+					return;
+			}
+
+		}
+
+		[StepDefinition(@"I confirm that the Subscription Status widget displays centered heading with text: (.*)")]
+		public void ConfirmSubscriptionStatusWidgetDisplaysCenteredHeading(string headingText)
+		{
+			var subscriptionStatus = new Dashboard().GetSubscriptionStatus();
+			if (subscriptionStatus == null)
+			{
+				Report.Failure("No Subscription Status widget was found!");
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(subscriptionStatus.CenterHeading == headingText, "Heading text did not match expected: " + headingText + "!", "Heading text matched expected");
 		}
 	}
 

@@ -526,6 +526,8 @@ Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Con
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Boric acid         | 34      | false               | false        |            |
 And I select the first Public Name dropdown option for ingredient: Boric acid
+Then for ingredient: Boric acid the Trade Secret field is disabled
+And for ingredient: Boric acid I select Public Name: Choose...
 And I click the Trade Secret checkbox for ingredient: Boric acid
 Then for ingredient: Boric acid the Public Name field is disabled
 Then for ingredient: Boric acid the Publicly Disclosed field is disabled
