@@ -1235,6 +1235,500 @@ namespace Wercs.Selenium.PortalUX.Steps
 				$"The displayed options for filter: {filter}' matched the expected options.");
 		}
 
+		[StepDefinition(@"I confirm retailers list based on environment")]
+		public void SeeFollowingOptionsMoreFilters()
+		{
+			if (GlobalParameters.SiteType == "Development")
+			{
+				TestReport.UseSubSteps = true;
+				StepsProductGrid MyNewProduct = new StepsProductGrid();
+				TestReport.StartStep("I should only see the following retailers");
+				TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Option"
+			});
+				produtTable.AddRow(new string[] {
+				"99 Cents"
+			});
+				produtTable.AddRow(new string[] {
+				"Ahold"
+			});
+				produtTable.AddRow(new string[] {
+				"Albertsons (includes Albertsons, LLC and New Albertson's Inc.)"
+			});
+				produtTable.AddRow(new string[] {
+				"Albertsons Companies"
+			});
+				produtTable.AddRow(new string[] {
+				"Amazon"
+			});
+				produtTable.AddRow(new string[] {
+				"Autozone"
+			});
+				produtTable.AddRow(new string[] {
+				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
+			});
+				produtTable.AddRow(new string[] {
+				"Big Lots"
+			});
+				produtTable.AddRow(new string[] {
+				"Canadian Tire"
+			});
+				produtTable.AddRow(new string[] {
+				"Costco"
+			});
+				produtTable.AddRow(new string[] {
+				"CVS"
+			});
+				produtTable.AddRow(new string[] {
+				"Delhaize America (All Retail Banners)"
+			});
+				produtTable.AddRow(new string[] {
+				"Dick's Sporting Goods"
+			});
+				produtTable.AddRow(new string[] {
+				"Dollar General"
+			});
+				produtTable.AddRow(new string[] {
+				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
+			});
+				produtTable.AddRow(new string[] {
+				"Essendant"
+			});
+				produtTable.AddRow(new string[] {
+				"Family Dollar"
+			});
+				produtTable.AddRow(new string[] {
+				"Genuine Parts"
+			});
+				produtTable.AddRow(new string[] {
+				"Harbor Freight Tools"
+			});
+				produtTable.AddRow(new string[] {
+				"HD Supply"
+			});
+				produtTable.AddRow(new string[] {
+				"HEB "
+			});
+				produtTable.AddRow(new string[] {
+				"HyVee"
+			});
+				produtTable.AddRow(new string[] {
+				"Kohl's"
+			});
+				produtTable.AddRow(new string[] {
+				"Kroger"
+			});
+				produtTable.AddRow(new string[] {
+				"Lowe's"
+			});
+				produtTable.AddRow(new string[] {
+				"McLane"
+			});
+				produtTable.AddRow(new string[] {
+				"Meijer"
+			});
+				produtTable.AddRow(new string[] {
+				"New Egg"
+			});
+				produtTable.AddRow(new string[] {
+				"No Retailer/No UPC Product"
+			});
+				produtTable.AddRow(new string[] {
+				"Northgate Market"
+			});
+				produtTable.AddRow(new string[] {
+				"Office Depot"
+			});
+				produtTable.AddRow(new string[] {
+				"Optoro "
+			});
+				produtTable.AddRow(new string[] {
+				"O'Reilly"
+			});
+				produtTable.AddRow(new string[] {
+				"Petco"
+			});
+				produtTable.AddRow(new string[] {
+				"Price Chopper "
+			});
+				produtTable.AddRow(new string[] {
+				"Publix "
+			});
+				produtTable.AddRow(new string[] {
+				"PurView/CVS"
+			});
+				produtTable.AddRow(new string[] {
+				"Rite Aid"
+			});
+				produtTable.AddRow(new string[] {
+				"Save Mart Supermarkets"
+			});
+				produtTable.AddRow(new string[] {
+				"Schnuck's"
+			});
+				produtTable.AddRow(new string[] {
+				"Sears/K-Mart"
+			});
+				produtTable.AddRow(new string[] {
+				"Smart & Final"
+			});
+				produtTable.AddRow(new string[] {
+				"Staples"
+			});
+				produtTable.AddRow(new string[] {
+				"SuperValu"
+			});
+				produtTable.AddRow(new string[] {
+				"Target"
+			});
+				produtTable.AddRow(new string[] {
+				"The Home Depot"
+			});
+				produtTable.AddRow(new string[] {
+				"TopCo"
+			});
+				produtTable.AddRow(new string[] {
+				"Tractor Supply"
+			});
+				produtTable.AddRow(new string[] {
+				"Ultra/Standard"
+			});
+				produtTable.AddRow(new string[] {
+				"Unified"
+			});
+				produtTable.AddRow(new string[] {
+				"Wakefern"
+			});
+				produtTable.AddRow(new string[] {
+				"Walgreens"
+			});
+				produtTable.AddRow(new string[] {
+				"Wal-Mart/SAM'S CLUB"
+			});
+				produtTable.AddRow(new string[] {
+				"Weis"
+			});
+				produtTable.AddRow(new string[] {
+				"WinCo Foods"
+			});
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
+			}
+			if (GlobalParameters.SiteType == "Staging")
+			{
+				TestReport.UseSubSteps = true;
+				StepsProductGrid MyNewProduct = new StepsProductGrid();
+				TestReport.StartStep("I should only see the following retailers");
+				TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Option"
+			});
+				produtTable.AddRow(new string[] {
+				"Ahold"
+			});
+				produtTable.AddRow(new string[] {
+				"Albertsons Companies"
+			});
+				produtTable.AddRow(new string[] {
+				"Amazon"
+			});
+				produtTable.AddRow(new string[] {
+				"Autozone"
+			});
+				produtTable.AddRow(new string[] {
+				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
+			});
+				produtTable.AddRow(new string[] {
+				"Canadian Tire"
+			});
+				produtTable.AddRow(new string[] {
+				"Costco"
+			});
+				produtTable.AddRow(new string[] {
+				"CVS"
+			});
+				produtTable.AddRow(new string[] {
+				"Delhaize America (All Retail Banners)"
+			});
+				produtTable.AddRow(new string[] {
+				"Dick's Sporting Goods"
+			});
+				produtTable.AddRow(new string[] {
+				"Dollar General"
+			});
+				produtTable.AddRow(new string[] {
+				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
+			});
+				produtTable.AddRow(new string[] {
+				"Essendant"
+			});
+				produtTable.AddRow(new string[] {
+				"Family Dollar"
+			});
+				produtTable.AddRow(new string[] {
+				"Genuine Parts"
+			});
+				produtTable.AddRow(new string[] {
+				"Harbor Freight Tools"
+			});
+				produtTable.AddRow(new string[] {
+				"HD Supply"
+			});
+				produtTable.AddRow(new string[] {
+				"HyVee"
+			});
+				produtTable.AddRow(new string[] {
+				"Kohl's"
+			});
+				produtTable.AddRow(new string[] {
+				"Kroger"
+			});
+				produtTable.AddRow(new string[] {
+				"Lowe's"
+			});
+				produtTable.AddRow(new string[] {
+				"McLane"
+			});
+				produtTable.AddRow(new string[] {
+				"Meijer"
+			});
+				produtTable.AddRow(new string[] {
+				"New Egg"
+			});
+				produtTable.AddRow(new string[] {
+				"No Retailer/No UPC Product"
+			});
+				produtTable.AddRow(new string[] {
+				"Northgate Market"
+			});
+				produtTable.AddRow(new string[] {
+				"Office Depot"
+			});
+				produtTable.AddRow(new string[] {
+				"Optoro "
+			});
+				produtTable.AddRow(new string[] {
+				"O'Reilly"
+			});
+				produtTable.AddRow(new string[] {
+				"Petco"
+			});
+				produtTable.AddRow(new string[] {
+				"Price Chopper "
+			});
+				produtTable.AddRow(new string[] {
+				"Publix "
+			});
+				produtTable.AddRow(new string[] {
+				"Rite Aid"
+			});
+				produtTable.AddRow(new string[] {
+				"Save Mart Supermarkets"
+			});
+				produtTable.AddRow(new string[] {
+				"Schnuck's"
+			});
+				produtTable.AddRow(new string[] {
+				"Sears/K-Mart"
+			});
+				produtTable.AddRow(new string[] {
+				"Smart & Final"
+			});
+				produtTable.AddRow(new string[] {
+				"Staples"
+			});
+				produtTable.AddRow(new string[] {
+				"SuperValu"
+			});
+				produtTable.AddRow(new string[] {
+				"Target"
+			});
+				produtTable.AddRow(new string[] {
+				"The Home Depot"
+			});
+				produtTable.AddRow(new string[] {
+				"TopCo"
+			});
+				produtTable.AddRow(new string[] {
+				"Tractor Supply"
+			});
+				produtTable.AddRow(new string[] {
+				"Ultra/Standard"
+			});
+				produtTable.AddRow(new string[] {
+				"Unified"
+			});
+				produtTable.AddRow(new string[] {
+				"Wakefern"
+			});
+				produtTable.AddRow(new string[] {
+				"Walgreens"
+			});
+				produtTable.AddRow(new string[] {
+				"Wal-Mart/SAM'S CLUB"
+			});
+				produtTable.AddRow(new string[] {
+				"WinCo Foods"
+			});
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
+			}
+			if (GlobalParameters.SiteType == "Local Production")
+			{
+				TestReport.UseSubSteps = true;
+				StepsProductGrid MyNewProduct = new StepsProductGrid();
+				TestReport.StartStep("I should only see the following retailers");
+				TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+				"Option"
+			});
+				produtTable.AddRow(new string[] {
+				"Ahold"
+			});
+				produtTable.AddRow(new string[] {
+				"Albertsons Companies"
+			});
+				produtTable.AddRow(new string[] {
+				"Amazon"
+			});
+				produtTable.AddRow(new string[] {
+				"Autozone"
+			});
+				produtTable.AddRow(new string[] {
+				"Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)"
+			});
+				produtTable.AddRow(new string[] {
+				"Canadian Tire"
+			});
+				produtTable.AddRow(new string[] {
+				"Costco"
+			});
+				produtTable.AddRow(new string[] {
+				"CVS"
+			});
+				produtTable.AddRow(new string[] {
+				"Delhaize America (All Retail Banners)"
+			});
+				produtTable.AddRow(new string[] {
+				"Dick's Sporting Goods"
+			});
+				produtTable.AddRow(new string[] {
+				"Dollar General"
+			});
+				produtTable.AddRow(new string[] {
+				"Dollar Tree Stores, Inc. / Greenbrier International, Inc"
+			});
+				produtTable.AddRow(new string[] {
+				"Essendant"
+			});
+				produtTable.AddRow(new string[] {
+				"Family Dollar"
+			});
+				produtTable.AddRow(new string[] {
+				"Genuine Parts"
+			});
+				produtTable.AddRow(new string[] {
+				"Harbor Freight Tools"
+			});
+				produtTable.AddRow(new string[] {
+				"HD Supply"
+			});
+				produtTable.AddRow(new string[] {
+				"HyVee"
+			});
+				produtTable.AddRow(new string[] {
+				"Kohl's"
+			});
+				produtTable.AddRow(new string[] {
+				"Kroger"
+			});
+				produtTable.AddRow(new string[] {
+				"Lowe's"
+			});
+				produtTable.AddRow(new string[] {
+				"McLane"
+			});
+				produtTable.AddRow(new string[] {
+				"Meijer"
+			});
+				produtTable.AddRow(new string[] {
+				"New Egg"
+			});
+				produtTable.AddRow(new string[] {
+				"No Retailer/No UPC Product"
+			});
+				produtTable.AddRow(new string[] {
+				"Northgate Market"
+			});
+				produtTable.AddRow(new string[] {
+				"Office Depot"
+			});
+				produtTable.AddRow(new string[] {
+				"Optoro "
+			});
+				produtTable.AddRow(new string[] {
+				"O'Reilly"
+			});
+				produtTable.AddRow(new string[] {
+				"Petco"
+			});
+				produtTable.AddRow(new string[] {
+				"Price Chopper "
+			});
+				produtTable.AddRow(new string[] {
+				"Publix "
+			});
+				produtTable.AddRow(new string[] {
+				"Rite Aid"
+			});
+				produtTable.AddRow(new string[] {
+				"Save Mart Supermarkets"
+			});
+				produtTable.AddRow(new string[] {
+				"Schnuck's"
+			});
+				produtTable.AddRow(new string[] {
+				"Sears/K-Mart"
+			});
+				produtTable.AddRow(new string[] {
+				"Smart & Final"
+			});
+				produtTable.AddRow(new string[] {
+				"Staples"
+			});
+				produtTable.AddRow(new string[] {
+				"SuperValu"
+			});
+				produtTable.AddRow(new string[] {
+				"Target"
+			});
+				produtTable.AddRow(new string[] {
+				"The Home Depot"
+			});
+				produtTable.AddRow(new string[] {
+				"TopCo"
+			});
+				produtTable.AddRow(new string[] {
+				"Tractor Supply"
+			});
+				produtTable.AddRow(new string[] {
+				"Ultra/Standard"
+			});
+				produtTable.AddRow(new string[] {
+				"Unified"
+			});
+				produtTable.AddRow(new string[] {
+				"Wakefern"
+			});
+				produtTable.AddRow(new string[] {
+				"Walgreens"
+			});
+				produtTable.AddRow(new string[] {
+				"Wal-Mart/SAM'S CLUB"
+			});
+				produtTable.AddRow(new string[] {
+				"WinCo Foods"
+			});
+				MyNewProduct.ShouldSeeTheFollowingOptionsMoreFilters("Retailer", produtTable);
+			}
+		}
+
 		[StepDefinition(@"I confirm the filter with label: ""(.*)"" is displayed and default option: ""(.*)""")]
 		public void ConfirmFilterDisplayedWithLabelAndDefaultOption(string label, string option)
 		{

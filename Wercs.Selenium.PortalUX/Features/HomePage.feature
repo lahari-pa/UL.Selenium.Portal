@@ -230,7 +230,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
 Then I click More below the Alerts Panel
 And I should see the header: Message Center on the Message Center window
-Then Confirm that 'NO Script Errors' display
+
 
 Scenario: [64854] Navigation Settings
 # Sign in and expand the menu, checking the correct items are showing
@@ -564,68 +564,69 @@ Scenario: [68413] More Filters - Retailer
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I click More Filters in the products grid
 And I confirm the filter with label: "Retailer" is displayed and default option: "All Retailers"
-And I should see the following options for the Retailer filter
-| Option                 |
-| Ahold                  |
-| Albertsons Companies   |
-| Amazon                 |
-| Autozone               |
-| Bed Bath and Beyond    |
-| Canadian Tire          |
-| Costco                 |
-| CVS                    |
-| Delhaize               |
-| Dick's Sporting Goods  |
-| Dollar General         |
-| Dollar Tree            |
-| Essendant              |
-| Family Dollar          |
-| Genuine Parts          |
-| Harbor Freight Tools   |
-| HD Supply              |
-| HyVee                  |
-| Kohl's                 |
-| Kroger                 |
-| Lowes                  |
-| McLane                 |
-| Meijer                 |
-| Michaels               |
-| New Egg                |
-| Northgate Market       |
-| Office Depot           |
-| O'Reilly Auto Parts    |
-| Petco                  |
-| Price Chopper          |
-| Publix                 |
-| Rite Aid               |
-| Save Mart Supermarkets |
-| Schnucks               |
-| Sears K Mart           |
-| Smart & Final          |
-| Staples                |
-| SuperValue             |
-| Target                 |
-| The Home Depot         |
-| Topco                  |
-| Tractor Value Supply   |
-| Ultra Standard         |
-| Unified                |
-| Wakefren               |
-| Walgreens              |
-| BONBONS                |
-| Walmart.com            |
-| Hayneedle              |
-| Jet                    |
-| MODCLOTH               |
-| Moosejaw               |
-| Shoes.com              |
-| Walmart                |
-| Winco Foods            |
+And I confirm retailers list based on environment
+#And I should see the following options for the Retailer filter
+#| Option                 |
+#| Ahold                  |
+#| Albertsons Companies   |
+#| Amazon                 |
+#| Autozone               |
+#| Bed Bath and Beyond    |
+#| Canadian Tire          |
+#| Costco                 |
+#| CVS                    |
+#| Delhaize               |
+#| Dick's Sporting Goods  |
+#| Dollar General         |
+#| Dollar Tree            |
+#| Essendant              |
+#| Family Dollar          |
+#| Genuine Parts          |
+#| Harbor Freight Tools   |
+#| HD Supply              |
+#| HyVee                  |
+#| Kohl's                 |
+#| Kroger                 |
+#| Lowes                  |
+#| McLane                 |
+#| Meijer                 |
+#| Michaels               |
+#| New Egg                |
+#| Northgate Market       |
+#| Office Depot           |
+#| O'Reilly Auto Parts    |
+#| Petco                  |
+#| Price Chopper          |
+#| Publix                 |
+#| Rite Aid               |
+#| Save Mart Supermarkets |
+#| Schnucks               |
+#| Sears K Mart           |
+#| Smart & Final          |
+#| Staples                |
+#| SuperValue             |
+#| Target                 |
+#| The Home Depot         |
+#| Topco                  |
+#| Tractor Value Supply   |
+#| Ultra Standard         |
+#| Unified                |
+#| Wakefren               |
+#| Walgreens              |
+#| BONBONS                |
+#| Walmart.com            |
+#| Hayneedle              |
+#| Jet                    |
+#| MODCLOTH               |
+#| Moosejaw               |
+#| Shoes.com              |
+#| Walmart                |
+#| Winco Foods            |
 And I select the Wal-Mart/SAM'S CLUB option in the Retailer More Filters drop down
 And I confirm all products in the grid contain either the the text "WM" or "All" under the 'Retailers' column
-And I click the first instance of Actions - Edit UPC in the products grid
-Then I should see the Universal Product Code (UPC) Page
-And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
+#And I click the first instance of Actions - Edit UPC in the products grid
+#Then I should see the Universal Product Code (UPC) Page
+#And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
 
 # HomePage/ Actions/ Edit UPCs
 

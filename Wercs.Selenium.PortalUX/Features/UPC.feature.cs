@@ -1651,7 +1651,7 @@ testRunner.Given("I call Shared Step 75146 (Retailer - Select one or more retail
 #line 556
 testRunner.Given("I call Shared Step 87641(Enter Universal Product Code - case information) for UPC" +
                     ": saved as UPC87686, container type: Paper bag and size: 2 and Quantity: 4 and T" +
-                    "ransportation option: 4A:   steel box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "ransportation option: 4A:  steel box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 557
 testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
