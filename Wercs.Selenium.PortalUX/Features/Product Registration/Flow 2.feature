@@ -510,18 +510,15 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 # Created by Aaron Caton
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 2
-
 @71274
 Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-# And I Enter "Pest (Flea, Tick, etc.) repellent for Use onAnimals - liquid" in Type of Product smart search field
 And I call Shared Step 57561a (The Product - Enter Product Name: Pest repellant for Use on Animals - liquid and select Type of Product): repellant for Use on Animals - liquid
 And I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-#And I In the shared step below, select any one of the three radio buttons
 And I call Shared Step 56799 (Confirm Additional Product Information shows Pesticide question and its radio buttons)
 #CLF 26 Feb 2019. This appears to  be the wrong step so changed it to: 57865
-#And I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+# JS 13/03 - TFS test case changed to use shared 57865
 Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -529,22 +526,27 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | Hydrogen         | 30.2    | false               | false       |            |
 | Propylene Glycol | 19.8    | false               | false       |            |
 | Butane           | 25.06   | false               | false       |            |
-
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-#CLF 26 Feb 2019. Added in step below as it appeared to be missing
-Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+# JS 13/03 Change shared step used to match tfs test case change
+And I call Shared Step 29183 (Pesticide Details - U.S. - No EPA number)
 And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 #CLF the below step also seemed to be missing
+# JS 13/03 Additonal Documents To Provide steps were added to tfs test case
 Then I should see the Additional Documents to Provide Page
+# TFS test case change - added shared step
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Full Product Label and file: C:\Dependencies\WERCSmart\testdoc.pdf
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment
+And I should see the Data Acceptance Page
+Then In the Data Acceptance page I select Yes, Agreed
+And I should not see any error messages
+Given I navigate to the home page
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71274

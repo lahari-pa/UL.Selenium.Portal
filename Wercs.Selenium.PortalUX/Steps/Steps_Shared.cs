@@ -7027,6 +7027,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[StepDefinition(@"I call Shared Step 29183 \(Pesticide Details - U.S. - No EPA number\)")]
+		public void GivenICallSharedStepPesticideDetails_US_NoEpaNumber()
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			TestReport.StartStep("I should see the Pesticide Details - U.S. Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Pesticide Details - U.S.");
+			TestReport.StartStep("I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has an Environmental Protection Agency (EPA) Registration Number", "No");
+			TestReport.StartStep("I select the first option in section: Select the applicable exemption");
+			MyStepsNewProduct.SelectFirstOptionInSection("Select the applicable exemption");
+			TestReport.StartStep("In the Pesticide Details - U.S. page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - U.S.");
+		}
+
 
 	}
 }
