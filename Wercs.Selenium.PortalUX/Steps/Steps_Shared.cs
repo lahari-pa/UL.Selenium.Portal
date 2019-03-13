@@ -2843,11 +2843,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Flash Point (in Celsius)",
 				"80"));
-			myStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "80");
+			myStepsNewProduct.SetTheSectionOptionTo("Flash Point (in Celsius)", "50");
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Flash Point Testing Method Used",
-				"Not applicable/available"));
-			myStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Not applicable/available");
+				"50"));
+			myStepsNewProduct.SetTheSectionOptionTo("Flash Point Testing Method Used", "Closed cup method");
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Secondary Physical State",
 				"Liquid"));
