@@ -992,18 +992,18 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56500] Pesticide Data- Canada - validation of questions (updated)", null, new string[] {
                         "56500"});
-#line 412
+#line 413
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 413
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 414
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 415
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 415
+#line 416
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 416
+#line 417
 testRunner.Given("I save the product information as: TestCase56500", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1024,24 +1024,24 @@ testRunner.Given("I save the product information as: TestCase56500", ((string)(n
                         "66",
                         "Closed cup method",
                         "Appreciable"});
-#line 417
+#line 418
 testRunner.And("I call Shared Step 74760 (Product Characteristics - Select Liquid as primary phys" +
                     "ical state and enter all required data)", ((string)(null)), table4, "And ");
-#line 420
+#line 421
 testRunner.Given("I call Shared Step 57798 (Additional Product Information- Pesticide, Canada Only " +
                     "- No to everything else, Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 421
+#line 422
 testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 422
+#line 423
 testRunner.Given("I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue -" +
                     " Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 423
-testRunner.Then("I should see the Pesticide Details - Canada Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 424
+testRunner.Then("I should see the Pesticide Details - Canada Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 425
 testRunner.Then("Field exists: Provide Canada\'s 5-Digit Pest Control Number (PCN) or 8-Digit Drug " +
                     "Identification Number (DIN) for this product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 426
+#line 428
 testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1057,8 +1057,6 @@ testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((str
             table5.AddRow(new string[] {
                         "Labrador"});
             table5.AddRow(new string[] {
-                        "Manitoba"});
-            table5.AddRow(new string[] {
                         "New Brunswick"});
             table5.AddRow(new string[] {
                         "New Foundland"});
@@ -1071,107 +1069,128 @@ testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((str
             table5.AddRow(new string[] {
                         "Quebec"});
             table5.AddRow(new string[] {
-                        "Saskatchewan"});
-            table5.AddRow(new string[] {
-                        "Northwest Territory"});
-            table5.AddRow(new string[] {
                         "Yukon Territory"});
-#line 427
+#line 430
 testRunner.Then("For every field in the table I should see the following error: This is a required" +
                     " field.", ((string)(null)), table5, "Then ");
-#line 445
-testRunner.Given("I set the Provide Canada\'s 5-Digit Pest Control Number (PCN) or 8-Digit Drug Iden" +
-                    "tification Number (DIN) for this product field to: 279255", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 446
-testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 447
-testRunner.Then("Provide Canada should be showing the error messages: Enter a valid number (5 or 8" +
-                    " digits).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 448
 testRunner.Given("I set the Provide Canada\'s 5-Digit Pest Control Number (PCN) or 8-Digit Drug Iden" +
-                    "tification Number (DIN) for this product field to: abc256", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "tification Number (DIN) for this product field to: 279255", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 449
 testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 450
 testRunner.Then("Provide Canada should be showing the error messages: Enter a valid number (5 or 8" +
                     " digits).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 451
-testRunner.Given("I set the Provide Canada\'s 5-Digit Pest Control Number (PCN) or 8-Digit Drug Iden" +
-                    "tification Number (DIN) for this product field to: 2792", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 452
-testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I set the Provide Canada\'s 5-Digit Pest Control Number (PCN) or 8-Digit Drug Iden" +
+                    "tification Number (DIN) for this product field to: abc256", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 453
+testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 454
 testRunner.Then("Provide Canada should be showing the error messages: Enter a valid number (5 or 8" +
                     " digits).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 454
+#line 456
+testRunner.Given("I set the Provide Canada\'s 5-Digit Pest Control Number (PCN) or 8-Digit Drug Iden" +
+                    "tification Number (DIN) for this product field to: 2792", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 457
+testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 458
+testRunner.Then("Provide Canada should be showing the error messages: Enter a valid number (5 or 8" +
+                    " digits).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 460
+testRunner.Given("I set the Provide Canada\'s 5-Digit Pest Control Number (PCN) or 8-Digit Drug Iden" +
+                    "tification Number (DIN) for this product field to: 2792101055", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 461
+testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 462
+testRunner.Then("Provide Canada should be showing the error messages: Enter a valid number (5 or 8" +
+                    " digits).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 464
 testRunner.Given("I set the Provide Canada\'s 5-Digit Pest Control Number (PCN) or 8-Digit Drug Iden" +
                     "tification Number (DIN) for this product field to: 27925", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 455
+#line 465
 testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 456
+#line 466
 testRunner.Then("Provide Canada\'s 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification" +
                     " Number (DIN) for this product should not be showing any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 457
+#line 467
 testRunner.Then("Field exists: Product\'s packaging includes a Poison Danger symbol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 461
-testRunner.Given("I set the Product\'s packaging includes a Poison Danger symbol field to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 462
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Option"});
+            table6.AddRow(new string[] {
+                        "Yes"});
+            table6.AddRow(new string[] {
+                        "No"});
+#line 468
+testRunner.And("The following options should be displayed for section: Product\'s packaging includ" +
+                    "es a Poison Danger symbol", ((string)(null)), table6, "And ");
+#line 472
+testRunner.And("Section: Product\'s packaging includes a Poison Danger symbol should be showing an" +
+                    " error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 474
+testRunner.Given("I set the radio option in section: Product\'s packaging includes a Poison Danger s" +
+                    "ymbol to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 475
 testRunner.Then("Product\'s packaging includes a Poison Danger symbol should not be showing any err" +
                     "or messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Alberta"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "British Columbia"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Labrador"});
-            table6.AddRow(new string[] {
-                        "Manitoba"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "New Brunswick"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "New Foundland"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Nova Scotia"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Ontario"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Prince Edward Island"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Quebec"});
-            table6.AddRow(new string[] {
-                        "Saskatchewan"});
-            table6.AddRow(new string[] {
-                        "Northwest Territory"});
-            table6.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Yukon Territory"});
-#line 463
+#line 476
 testRunner.Then("For every field in the table I call Shared Step 56494 expecting error: This is a " +
-                    "required field.", ((string)(null)), table6, "Then ");
-#line 478
+                    "required field.", ((string)(null)), table7, "Then ");
+#line 492
+testRunner.And("Manitoba should be showing the value: N/A", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 494
+testRunner.And("Saskatchewan should be showing the value: None", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 496
+testRunner.And("Northwest Territory should be showing the value: N/A", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 497
 testRunner.Then("in the Pesticide Details - Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 479
+#line 498
 testRunner.Given("I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Ha" +
                     "ppy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 480
+#line 499
 testRunner.Given("I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC prod" +
                     "uct > Done > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 481
+#line 500
 testRunner.Given("I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm" +
                     " questions - Request author, add label and todays date - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 482
+#line 501
 testRunner.Then("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 483
+#line 502
 testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 484
+#line 503
 testRunner.Then("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 485
+#line 504
 testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 508
+testRunner.And("I call Shared Step 64097 - Additional Documents -> Contact Information - Add any " +
+                    "Name, address, phone and emergency phone - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1180,7 +1199,7 @@ testRunner.Then("in the Optional Reports and Documents Available for Purchase pa
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table7.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -1189,24 +1208,20 @@ testRunner.Then("in the Optional Reports and Documents Available for Purchase pa
                         "Odorless",
                         "No data available",
                         "10"});
-#line 488
+#line 509
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table7, "And ");
-#line 491
+                    "g:", ((string)(null)), table8, "And ");
+#line 512
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 0000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 492
+#line 513
 testRunner.Then("In the Data Acceptance page I select Yes, Agreed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 493
-testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 494
-testRunner.And("I Confirm no errors are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 495
-testRunner.And("I Click Home", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 496
+#line 514
+testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 515
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 497
+#line 516
 testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56500", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1233,63 +1248,63 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56541] Pesticide Data - United States - EPA Registered - Data returned from call" +
                     " to Kelly API (done)", null, ((string[])(null)));
-#line 499
+#line 518
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 500
+#line 519
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 501
+#line 520
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 502
+#line 521
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Pet Shampoo with pest control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 503
+#line 522
 testRunner.Given("I save the product information as: TestCase56541", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 504
+#line 523
 testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 505
+#line 524
 testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 506
+#line 525
 testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 507
+#line 526
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 508
+#line 527
 testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 509
+#line 528
 testRunner.And("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 510
+#line 529
 testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 511
+#line 530
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 512
+#line 531
 testRunner.Given("I add the EPA registration number: 72315-6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 513
+#line 532
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 514
+#line 533
 testRunner.And("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 515
+#line 534
 testRunner.Given("I confirm that there is data populated in the Expiration Date Column for some Sta" +
                     "tes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 516
+#line 535
 testRunner.Then("I confirm that every date in the Expiration Date column has a matching date in th" +
                     "e Expiration Date provided by Kelly column", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 517
+#line 536
 testRunner.And("I confirm the \'Is Kelly Data\' field is marked with a check for every State contai" +
                     "ning data in \'Expiration Date\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 518
+#line 537
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 519
+#line 538
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 520
+#line 539
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 521
+#line 540
 testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56541", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1316,86 +1331,86 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[62778] Pesticide Details - U.S. - Validation of Product has an Environment Prote" +
                     "ction Agency (EPA) Registration Number", null, ((string[])(null)));
-#line 523
+#line 542
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 525
+#line 544
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 527
+#line 546
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 529
+#line 548
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 531
+#line 550
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 533
+#line 552
 testRunner.Then("I save the product information as: TestCase62778", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 535
+#line 554
 testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 537
+#line 556
 testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 539
+#line 558
 testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 541
+#line 560
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 543
+#line 562
 testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 545
+#line 564
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Section"});
-            table8.AddRow(new string[] {
-                        "Product has an Environmental Protection Agency (EPA) Registration Number"});
-#line 547
-testRunner.And("I see the following sections", ((string)(null)), table8, "And ");
-#line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Option"});
+                        "Section"});
             table9.AddRow(new string[] {
-                        "Yes"});
-            table9.AddRow(new string[] {
-                        "No"});
-#line 551
-testRunner.And("The following options should be displayed for section: Product has an Environment" +
-                    "al Protection Agency (EPA) Registration Number", ((string)(null)), table9, "And ");
-#line 556
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 558
-testRunner.Then("Product has an Environmental Protection Agency (EPA) Registration Number should b" +
-                    "e showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 560
-testRunner.Given("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
-                    "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 562
-testRunner.Then("Product has an Environmental Protection Agency (EPA) Registration Number should n" +
-                    "ot be showing the error messages: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 564
-testRunner.And("I confirm the EPA Pesticide Registration table is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                        "Product has an Environmental Protection Agency (EPA) Registration Number"});
 #line 566
-testRunner.Given("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
-                    "r option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 568
-testRunner.Then("I confirm the EPA Pesticide Registration table is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I see the following sections", ((string)(null)), table9, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Section"});
+                        "Option"});
             table10.AddRow(new string[] {
-                        "Select the applicable exemption"});
+                        "Yes"});
+            table10.AddRow(new string[] {
+                        "No"});
 #line 570
-testRunner.And("I see the following sections", ((string)(null)), table10, "And ");
-#line 574
+testRunner.And("The following options should be displayed for section: Product has an Environment" +
+                    "al Protection Agency (EPA) Registration Number", ((string)(null)), table10, "And ");
+#line 575
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 577
+testRunner.Then("Product has an Environmental Protection Agency (EPA) Registration Number should b" +
+                    "e showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 579
+testRunner.Given("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
+                    "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 581
 testRunner.Then("Product has an Environmental Protection Agency (EPA) Registration Number should n" +
                     "ot be showing the error messages: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 576
+#line 583
+testRunner.And("I confirm the EPA Pesticide Registration table is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 585
+testRunner.Given("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
+                    "r option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 587
+testRunner.Then("I confirm the EPA Pesticide Registration table is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Section"});
+            table11.AddRow(new string[] {
+                        "Select the applicable exemption"});
+#line 589
+testRunner.And("I see the following sections", ((string)(null)), table11, "And ");
+#line 593
+testRunner.Then("Product has an Environmental Protection Agency (EPA) Registration Number should n" +
+                    "ot be showing the error messages: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 595
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 578
+#line 597
 testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase62778", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1420,94 +1435,94 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
         public virtual void _62780PesticideDetails_U_S__ValidationOfEPARegistrationNumberTable()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[62780] Pesticide Details - U.S. - Validation of EPA Registration Number table", null, ((string[])(null)));
-#line 580
+#line 599
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 582
+#line 601
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 584
+#line 603
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 586
+#line 605
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 588
+#line 607
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 590
+#line 609
 testRunner.Then("I save the product information as: TestCase62780", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 592
+#line 611
 testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 594
+#line 613
 testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 596
+#line 615
 testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 598
+#line 617
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 600
+#line 619
 testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 602
+#line 621
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table11.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Product has an Environmental Protection Agency (EPA) Registration Number"});
-#line 604
-testRunner.And("I see the following sections", ((string)(null)), table11, "And ");
-#line 608
+#line 623
+testRunner.And("I see the following sections", ((string)(null)), table12, "And ");
+#line 627
 testRunner.Given("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 610
+#line 629
 testRunner.And("I confirm the EPA Pesticide Registration table is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 612
+#line 631
 testRunner.Then("I confirm the EPA Registration table contains the heading: Provide the EPA Regist" +
                     "ration Number", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column Heading"});
-            table12.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "EPA Pesticide Registration No."});
-            table12.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Federal EPA Active Ingredient."});
-            table12.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Percent of Active Ingredient."});
-            table12.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Remove"});
-#line 614
-testRunner.And("I confirm the following columns are displayed in the EPA Registration table", ((string)(null)), table12, "And ");
-#line 621
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 623
-testRunner.Then("I should see an error message: Federal Registration Number is required", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 625
-testRunner.Given("I click Remove for the item on the first EPA Registration Table row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 627
-testRunner.And("I confirm the EPA Registration Table contains a total of 0 rows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 629
-testRunner.Then("I should see an error message: Required answer missing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 631
-testRunner.Given("I click Add Row in the EPA Registration Table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 633
-testRunner.Then("I should see an error message: Federal Registration Number is required", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 635
-testRunner.And("I confirm the EPA Registration Table contains a total of 1 rows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 637
-testRunner.Given("I add the EPA registration number: 123456789", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 639
+testRunner.And("I confirm the following columns are displayed in the EPA Registration table", ((string)(null)), table13, "And ");
+#line 640
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 641
+#line 642
+testRunner.Then("I should see an error message: Federal Registration Number is required", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 644
+testRunner.Given("I click Remove for the item on the first EPA Registration Table row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 646
+testRunner.And("I confirm the EPA Registration Table contains a total of 0 rows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 648
+testRunner.Then("I should see an error message: Required answer missing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 650
+testRunner.Given("I click Add Row in the EPA Registration Table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 652
+testRunner.Then("I should see an error message: Federal Registration Number is required", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 654
+testRunner.And("I confirm the EPA Registration Table contains a total of 1 rows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 656
+testRunner.Given("I add the EPA registration number: 123456789", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 658
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 660
 testRunner.Then("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 643
+#line 662
 testRunner.And("I check the State Pesticide Registration Number field matches the text: 123456789" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 645
+#line 664
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 647
+#line 666
 testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase62780", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1534,68 +1549,68 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56577] Pesticide Data - EPA data - Is Kelly Data is updated when user edits date" +
                     " from Kelly", null, ((string[])(null)));
-#line 649
+#line 668
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 651
+#line 670
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 653
+#line 672
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 655
+#line 674
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 657
+#line 676
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 659
+#line 678
 testRunner.Then("I save the product information as: TestCase56577", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 661
+#line 680
 testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 663
+#line 682
 testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 665
+#line 684
 testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 667
+#line 686
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 669
+#line 688
 testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 671
+#line 690
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 673
+#line 692
 testRunner.Given("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 675
+#line 694
 testRunner.Given("I add the EPA registration number: 56228-10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 677
+#line 696
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 679
+#line 698
 testRunner.Then("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 681
+#line 700
 testRunner.And("I confirm that there is data populated in the Expiration Date Column for some Sta" +
                     "tes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 683
+#line 702
 testRunner.And("I confirm the \'Is Kelly Data\' field is marked with a check for every State contai" +
                     "ning data in \'Expiration Date\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 685
+#line 704
 testRunner.Then("I edit the Expiration Date to: 2019-12-31 for the State: AZ on the Pesticide Stat" +
                     "e Registration Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 687
+#line 706
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 689
+#line 708
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 691
+#line 710
 testRunner.Then("in the New Product page I click section: Pesticide Details - State Registration D" +
                     "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 693
+#line 712
 testRunner.Then("I confirm the \'Is Kelly Data\' field for State: AZ is not checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 695
+#line 714
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 697
+#line 716
 testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase56577", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1622,90 +1637,90 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[62799] Pesticide Details - State Registration - Manual entry of dates and colori" +
                     "ng", null, ((string[])(null)));
-#line 699
+#line 718
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 701
+#line 720
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 703
+#line 722
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 705
+#line 724
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 707
+#line 726
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 709
+#line 728
 testRunner.Then("I save the product information as: TestCase62799", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 711
+#line 730
 testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 713
+#line 732
 testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 715
+#line 734
 testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 717
+#line 736
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 719
+#line 738
 testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 721
+#line 740
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 723
+#line 742
 testRunner.Given("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 725
+#line 744
 testRunner.Given("I add the EPA registration number: testregistrationnumber", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 727
+#line 746
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 729
+#line 748
 testRunner.Then("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 731
+#line 750
 testRunner.And("I confirm the State Registration EPA table does not contain any Expiration data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 733
+#line 752
 testRunner.Given("I set the Expiration Date to be 29 days from today using the calendar selector fo" +
                     "r state: AL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 735
+#line 754
 testRunner.Then("I confirm that the EPA table row for state: AL is highlighted with the color: pea" +
                     "ch", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 737
+#line 756
 testRunner.And("I confirm the Expiration Date Provided By Kelly field for state: AL is blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 739
+#line 758
 testRunner.And("I confirm the \'Is Kelly Data\' field for State: AL is not checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 741
+#line 760
 testRunner.Given("I set the Expiration Date to be 60 days from today using the calendar selector fo" +
                     "r state: NY", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 743
+#line 762
 testRunner.Then("I confirm that the EPA table row for state: NY is highlighted with the color: lig" +
                     "ht peach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 745
+#line 764
 testRunner.Given("I set the Expiration Date to be 100 days from today using the calendar selector f" +
                     "or state: WA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 747
+#line 766
 testRunner.Then("I confirm that the EPA table row for state: WA is highlighted with the color: non" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 749
+#line 768
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 751
+#line 770
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 753
+#line 772
 testRunner.Then("in the New Product page I click section: Pesticide Details - State Registration D" +
                     "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 755
+#line 774
 testRunner.Then("I confirm that the EPA table row for state: AL is highlighted with the color: pea" +
                     "ch", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 757
+#line 776
 testRunner.Then("I confirm that the EPA table row for state: NY is highlighted with the color: lig" +
                     "ht peach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 759
+#line 778
 testRunner.Then("I confirm that the EPA table row for state: WA is highlighted with the color: non" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 761
+#line 780
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 763
+#line 782
 testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase62799", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1730,103 +1745,103 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
         public virtual void _56502PesticideData_UnitedStates_EPAExempt()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56502] Pesticide Data - United States - EPA Exempt", null, ((string[])(null)));
-#line 770
+#line 789
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 771
+#line 790
 testRunner.Given("I generate a random UPC number and save as: UPC56502", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 772
+#line 791
 testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 773
+#line 792
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 774
+#line 793
 testRunner.And("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Pet Shampoo with pest control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 775
+#line 794
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 776
+#line 795
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 777
+#line 796
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 778
+#line 797
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 779
+#line 798
 testRunner.And("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
                     "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 780
+#line 799
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 781
+#line 800
 testRunner.Given("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
                     "r option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Section"});
-            table13.AddRow(new string[] {
-                        "Select the applicable exemption"});
-#line 782
-testRunner.Given("I see the following sections", ((string)(null)), table13, "Given ");
-#line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Section"});
+            table14.AddRow(new string[] {
+                        "Select the applicable exemption"});
+#line 801
+testRunner.Given("I see the following sections", ((string)(null)), table14, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table14.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Product is FIFRA 25(b) Exempt"});
-            table14.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Food Based Pesticides - Exempt from EPA Registration"});
-            table14.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Device based products - Exempt from EPA Registration"});
-            table14.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Pheromone Traps – Exempt from EPA Registration"});
-#line 785
+#line 804
 testRunner.And("The following radio buttons should be displayed for section: Select the applicabl" +
-                    "e exemption", ((string)(null)), table14, "And ");
-#line 791
+                    "e exemption", ((string)(null)), table15, "And ");
+#line 810
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 792
+#line 811
 testRunner.Then("Select the applicable exemption should be showing the error messages: This is a r" +
                     "equired field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 793
+#line 812
 testRunner.And("I set the Select the applicable exemption option to: Food Based Pesticides - Exem" +
                     "pt from EPA Registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 794
+#line 813
 testRunner.Then("Select the applicable exemption should not be showing the error messages: This is" +
                     " a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 795
+#line 814
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 796
+#line 815
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 797
+#line 816
 testRunner.And("I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Ha" +
                     "ppy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 798
+#line 817
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 799
+#line 818
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 800
+#line 819
 testRunner.Then("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 801
+#line 820
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 802
+#line 821
 testRunner.Then("Provide Full Product Label (required) should be showing the error messages: Docum" +
                     "ent is required: Please upload a PDF of the product label (full label).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 803
+#line 822
 testRunner.Given("I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for" +
                     " document type: Please upload a PDF of the product label (full label). and file:" +
                     " C:\\Dependencies\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 804
+#line 823
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 805
+#line 824
 testRunner.Then("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 806
+#line 825
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1835,7 +1850,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table15.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -1844,36 +1859,36 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "10"});
-#line 807
+#line 826
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table15, "And ");
-#line 810
+                    "g:", ((string)(null)), table16, "And ");
+#line 829
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 0000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 811
+#line 830
 testRunner.And("I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet S" +
                     "hampoo with pest control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 812
+#line 831
 testRunner.Then("In the Data Acceptance page I select Yes, Agreed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 813
+#line 832
 testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 814
+#line 833
 testRunner.Given("If purchase details are showing click confirm order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 816
+#line 835
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 817
+#line 836
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 819
+#line 838
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase56502)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 820
+#line 839
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase56502 a" +
                     "nd its status is: Submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 821
+#line 840
 testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
                     "uct data for product saved as: TestCase56502)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 822
+#line 841
 testRunner.And("I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific prod" +
                     "uct > Click Continue for product saved as: TestCase56502)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

@@ -3128,8 +3128,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 74760 \(Product Characteristics - Select Liquid as primary physical state and enter all required data\)")]
+		[StepDefinition(@"I call Shared Step 74760 \(Product Characteristics - Select Liquid as primary physical state and enter all required data\)")]
 		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectLiquidAndEnterOtherOptions(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -3756,18 +3755,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.ErrorMessagesShouldNotBeShowingForItem(province);
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 69388 \(Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 69388 \(Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path\)")]
 		public void GivenICallSharedStepRetailer_CanadaOnly_SelectNoRetailerNoUPCProductDoneContinue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			NoRetailerWarningPopup WarningPopup = new NoRetailerWarningPopup();
 			TestReport.StartStep("In the 'Select Retailers' window I select the retailer: No Retailer/No UPC Product");
 			new StepsSelectRetailers().SelectTheRetailer("No Retailer/No UPC Product");
 			TestReport.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			TestReport.StartStep("In the Retailer page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
+			new StepsNewProduct().ClickContinue();
+			TestReport.StartStep("In the UPCs Warning popup I click Ok");
+			WarningPopup.ClickOk();
 		}
 
 		[StepDefinition(

@@ -408,6 +408,7 @@ Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase66345
 
 #CLF - 12/7/2018 Test is not complete because plan does not seem to be complete
+# JS - 13/03 TFS test case was edited/ compelted
 @56500
 Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -423,7 +424,9 @@ Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Con
 Then I should see the Pesticide Details - Canada Page
 Then Field exists: Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product
 #And I Confirm the Canadian Pest Control Number question shows a data entry type control
+# 'field exists' only passes on a data entry element
 Then in the Pesticide Details - Canada page I click Continue
+# JS TFS test case changed to remove Manitoba, Saskatchewan and Northwest Territory from expected fields with error
 Then For every field in the table I should see the following error: This is a required field.
 | Field                |
 | Provide Canada       |
@@ -431,50 +434,66 @@ Then For every field in the table I should see the following error: This is a re
 | Alberta              |
 | British Columbia     |
 | Labrador             |
-| Manitoba             |
+#| Manitoba            |
 | New Brunswick        |
 | New Foundland        |
 | Nova Scotia          |
 | Ontario              |
 | Prince Edward Island |
 | Quebec               |
-| Saskatchewan         |
-| Northwest Territory  |
+#| Saskatchewan        |
+#| Northwest Territory |
 | Yukon Territory      |
-
+# Type in a Canadian Pest Control Products (PCP) Registration Number with more than 5 digits and less than 8 digits
 Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 279255
 Then in the Pesticide Details - Canada page I click Continue
 Then Provide Canada should be showing the error messages: Enter a valid number (5 or 8 digits).
+# Enter data in the Canada Pest Control Number field that contains alpha characters
 Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: abc256
 Then in the Pesticide Details - Canada page I click Continue
 Then Provide Canada should be showing the error messages: Enter a valid number (5 or 8 digits).
+# Enter less than 5 digits in the Canada Pest Control Number field
 Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 2792
 Then in the Pesticide Details - Canada page I click Continue
 Then Provide Canada should be showing the error messages: Enter a valid number (5 or 8 digits).
+# Enter more than 8 digits in the Canada Pest Control Number field
+Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 2792101055
+Then in the Pesticide Details - Canada page I click Continue
+Then Provide Canada should be showing the error messages: Enter a valid number (5 or 8 digits).
+# Enter in a valid PCP Registration (5 or 8 digits)
 Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 27925
 Then in the Pesticide Details - Canada page I click Continue
 Then Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product should not be showing any error messages
 Then Field exists: Product's packaging includes a Poison Danger symbol
-#And I Confirm the "Does this product's packaging include a poison danger symbol?"question has a Yes button
-#And I Confirm the "Does this product's packaging include a poison danger symbol?"question has a No button
-#And I Confirm an error is shown below the poison danger symbol question
-Given I set the Product's packaging includes a Poison Danger symbol field to: No
+And The following options should be displayed for section: Product's packaging includes a Poison Danger symbol
+| Option |
+| Yes    |
+| No     |
+And Section: Product's packaging includes a Poison Danger symbol should be showing an error message
+#Given I set the Product's packaging includes a Poison Danger symbol field to: No
+Given I set the radio option in section: Product's packaging includes a Poison Danger symbol to: No
 Then Product's packaging includes a Poison Danger symbol should not be showing any error messages
 Then For every field in the table I call Shared Step 56494 expecting error: This is a required field.
 | Field                |
 | Alberta              |
 | British Columbia     |
 | Labrador             |
-| Manitoba             |
+#| Manitoba             |
 | New Brunswick        |
 | New Foundland        |
 | Nova Scotia          |
 | Ontario              |
 | Prince Edward Island |
 | Quebec               |
-| Saskatchewan         |
-| Northwest Territory  |
+#| Saskatchewan         |
+#| Northwest Territory  |
 | Yukon Territory      |
+# Confirm the Manitoba question shows N/A as already selected
+And Manitoba should be showing the value: N/A
+#Confirm "None" is shown as already selected for the Saskatchewan question
+And Saskatchewan should be showing the value: None
+#Confirm N/A is shown as already selected for the Northwest Territory question
+And Northwest Territory should be showing the value: N/A
 Then in the Pesticide Details - Canada page I click Continue
 Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 Given I call Shared Step 69388 (Retailer - Canada Only - Select No Retailer/No UPC product > Done > Continue - Happy Path)
@@ -485,14 +504,14 @@ Then I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 #CLF - from here the test outcomes to not seem to be as predicted.
 #I'm seeing Additional Documents -> Contact Information
+# JS shared step 64097 added to the TFS test case
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment 0000
 Then In the Data Acceptance page I select Yes, Agreed
-And In the Data Acceptance page I click on the Accept button
-And I Confirm no errors are shown
-And I Click Home
+And I should not see any error messages
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56500
 

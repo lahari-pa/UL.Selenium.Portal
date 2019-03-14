@@ -1660,6 +1660,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().ClickSummaruButtonInDataAcceptance(), "Failed to click the Summary button!", "Successfully clicked the Summary button!");
 		}
 
+		[StepDefinition(@"I set the radio option in section: (.*) to: (.*)")]
+		public void SetRadioOptionInSectionTo(string section, string option)
+		{
+			Report.IsTrue(new NewProduct().SelectRadio(section, option), "Failed to select radio option: " + option + " in section: " + section, "Successfully set radio option: " + option);
+		}
+
 		[StepDefinition(@"I set the (.*) field to: (.*)")]
 		[StepDefinition(@"I set the (.*) option to: (.*)")]
 		public void SetTheSectionOptionTo(string section, string option)
@@ -2418,6 +2424,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var errorMessages = new NewProduct().GetErrorsForSection(section);
 			Report.IsTrue(errorMessages.Count == 0, "No error message should be showing for section: " + section + " but found: " + string.Join(", ", errorMessages),
 				"As expected, no error messages were showing for section: " + section);
+		}
+
+		[StepDefinition(@"Section: (.*) should be showing an error message")]
+		public void ErrorMessagesShouldBeShowingForItem(string section)
+		{
+			Delay.Seconds(1);
+			var errorMessages = new NewProduct().GetErrorsForSection(section);
+			Report.IsTrue(errorMessages.Any(), "No error message was displayed for section: " + section + " when there was expected to be!",
+				"As expected, an error message were displayed for section: " + section);
 		}
 
 		[Then(@"For every field in the table I should see the following error: (.*)")]

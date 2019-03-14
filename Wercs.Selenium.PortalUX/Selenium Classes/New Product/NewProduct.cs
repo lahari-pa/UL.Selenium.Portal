@@ -3689,6 +3689,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return el.FindElement(By.XPath("./input"), 10).TryClick();
 		}
 
+		public bool SelectRadio(string section, string value)
+		{
+			var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
+			var el = this.containerElement.FindElement(By.XPath(xPath), 2);
+			if (el != null)
+			{
+				return el.TryClick();
+			}
+			Report.Error("Could not find the correct input in section: " + section);
+			return false;
+		}
+
 		// NB only works fr select/option
 		public bool SetOptionInSectionByValue(string section, string value, string text)
 		{
@@ -3791,7 +3803,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Delay.Seconds(1);
 			Report.Info("Beginning get all options for section.");
 			var optionsText = new List<string>();
-			var matchingElements = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[contains(@class,'form-group') and .//label[contains(text(),'" + section + "')]]//*[name()='input' or name()='select']"), 2);
+			var matchingElements = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@".//div[contains(@class,'form-group') and .//label[contains(text(),""" + section + @""")]]//*[name()='input' or name()='select']"), 2);
 			if (matchingElements.Count == 1 && matchingElements.FirstOrDefault().TagName.ToLower() == "select")
 			{
 				optionsText = matchingElements.FirstOrDefault().FindElements(By.XPath(@"./option")).Select(x => x.Text).Where(x => x != "Choose...").ToList();
