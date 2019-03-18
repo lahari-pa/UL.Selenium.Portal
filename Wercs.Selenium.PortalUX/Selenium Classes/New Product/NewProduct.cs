@@ -705,6 +705,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var listOfRows = containerElement.FindElements(By.XPath(".//tbody//tr"));
 			int batteryTypeIndex = th.FirstOrDefault(x => x.Value == "Battery Type").Key;
 			int removeIndex = th.FirstOrDefault(x => x.Value == "Remove").Key;
+			ModalDialog modeldialog = new ModalDialog();
 
 			bool emptyBatteryRowsExist = true;
 			IWebElement removeButton = null;
@@ -719,6 +720,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						removeButton = unselectedManufacturerTypes.FirstOrDefault().FindElement(By.XPath("../..//td[" + removeIndex.ToString() + "]//a"));
 						removeButton.Click();
+						modeldialog.ClickButton("YES");
 						Delay.Seconds(3);
 					}
 					else
