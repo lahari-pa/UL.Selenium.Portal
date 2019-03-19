@@ -358,7 +358,7 @@ testRunner.And("I enter the information into the new user form for user saved as
 #line 122
 testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 123
-testRunner.Then("I should be on the Security Questions page of the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should be on the 1234s page of the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 124
 testRunner.And("I enter the following into the Security Questions window for user saved as: 63297" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

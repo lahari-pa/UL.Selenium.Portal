@@ -27,6 +27,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			@"I create a Walmart product and take to completed using Test Case 75335 \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
 		public void CreateProductUsingTestCase75335Walmart(string savedAs)
 		{
+
+			Report.Info("Create Walmark product using Test Case 75335");
 			var sharedSteps = new Steps_Shared();
 			var productsGridSteps = new StepsProductGrid();
 			var newProductSteps = new StepsNewProduct();
@@ -1097,11 +1099,21 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps.GivenICallSharedCreateANewRegistrationViaRegisterNewProductExpandedMenu();
 			//And I call Shared Step 57561(The Product - Enter Product Name and select Type of Product): Raw Material
 			sharedSteps.GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct("Raw Material");
-			//Then I save the product information as: TestCase80821
+
+			Report.Info("Checking for warning dialog");
+			if (new DataEntryNotification().Wait_for_close(10))
+			{
+				Report.Info("Warning open");
+				Report.Screenshot();
+				if (!new DataEntryNotification().ClickOK())
+				{
+					Report.Error("Could not close warning");
+				}
+			}
 			newProductSteps.SaveProductInformation(savedAs);
-			//Given I call Shared Step 79431(Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
-			//	| CASNumber | ComponentName | Percentage |
-			//	| RR - 38669 - 6 | FLAVORS | 35 |
+			//And I Use the shared step below to add a FLAVOR component to your formulation - for example use a FLAVORS Ingredient with the CAS Number of RR - 38669 - 6
+			//And I call Shared Step 79431(Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: (.*)
+
 			TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
 				"CASNumber",
 				"ComponentName",
@@ -1119,22 +1131,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 			sharedSteps
 				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 					"Ing" + savedAs + "1", table34);
-			//And I call Shared Step 79436(Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: Ing79428Frag
-			//| CASNumber | ComponentName | Percentage |
-			//| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35 |
 
-			TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
+			//And I Use the shared step below to add a FRAGRANCE component to your formulation - for example use Fragrance - Gardenia: Skin irritant 2, Eye damage 1, Skin sensitization 1, Carcinogen 1A, reproductive toxin 2, Aquatic acute 2, Aquatic Chronic 2 / FRAGRANCE
+			//And I call Shared Step 79436(Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes, Select Public Name) and save ingredient as: (.*)
+
+			TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
 				"CASNumber",
 				"ComponentName",
 				"Percentage"
 			});
-			table40.AddRow(new string[] {
-				"FRAGRANCE",
-				"Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2",
+			table36.AddRow(new string[] {
+				"RR-38384-6",
+				"FRAGRANCE-HERBAL",
 				"35"
 			});
 			sharedSteps.CallSharedIngredients_AddFragranceComponent_PubliclyDisclosedYes_SelectPublicName(
-				"Ing" + savedAs + "2", table40);
+				"Ing" + savedAs + "5", table36);
+
+
 			//And I call Shared Step 79490(Ingredients - Add non - generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
 			//	| CASNumber | ComponentName | Percentage |
 			//	| 50 - 00 - 0 | Formaldehyde | 30 |
@@ -1156,14 +1170,15 @@ namespace Wercs.Selenium.PortalUX.Steps
 				.ThenICallSharedStep_Ingredients_AddNon_Generic_SpecificComponent_SetPubliclyDisclosedAndAddPublicName(
 					"Ing" + savedAs + "3", table55);
 
-			//Then in the Ingredients page I click Continue
-			newProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+
+		  //Then in the Ingredients page I click Continue
+		  newProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			//And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
 			sharedSteps.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
 			//And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			//And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-			sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
+		//	sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
 			//And I should see the Additional Documents to Provide Page
 			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
@@ -1266,18 +1281,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Walmart as the retailer for these products.
 			//Use the test case 75335 to create these products - test case is linked to this one.Note: these input
 			//products do not have to be direct ship vendor products
-
 			if (!Context.Contains("77862_KitProduct1"))
 			{
+				TestReport.StartStep("Beginning create kit 1");
 				CreateProductUsingTestCase75335Walmart("77862_KitProduct1");
-				thisGlobalSteps.GivenICloseTheCurrentTab();
 				thisGlobalSteps.NavigateToLandingPage();
 			}
 
 			if (!Context.Contains("77862_KitProduct2"))
 			{
+				TestReport.StartStep("Beginning create kit 2");
 				CreateProductUsingTestCase75335Walmart("77862_KitProduct2");
-				thisGlobalSteps.GivenICloseTheCurrentTab();
 				thisGlobalSteps.NavigateToLandingPage();
 			}
 

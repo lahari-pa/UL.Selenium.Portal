@@ -167,8 +167,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				publicName = Context.GetFromContext(publicName.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim()).ToString();
 			}
-
-			Report.IsTrue(thisIngredient.PublicDisclosureEnabled == (publiclyDisclosed == "Yes"),
+			Report.Info("Looking for " + firstOrSecond + " component with public name: " + publicName + " and publicly disclosed: " + publiclyDisclosed);
+			Report.Info(listOfIngredients.Count.ToString() + " ingredients found:");
+			for (int i = 0; i < listOfIngredients.Count; i++)
+			{
+				Report.Info((i+1).ToString() + ": " + listOfIngredients[i].getDetails());
+			}
+			Report.IsTrue(thisIngredient.PublicallyDisclosed == (publiclyDisclosed == "Yes"),
 				"For ingredient: " + thisIngredient.CASNumber + " expected publicly disclosed: " + publiclyDisclosed,
 				"As expected, for ingredient " + thisIngredient.ComponentName + " publicly Disclosed is showing as: " + publiclyDisclosed);
 

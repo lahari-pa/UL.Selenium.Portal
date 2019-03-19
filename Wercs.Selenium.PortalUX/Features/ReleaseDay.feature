@@ -120,7 +120,7 @@ Then the email should contain a link to set up the WERCSmart account
 When I click on the link I should see the WERCSmart new account page
 And I enter the information into the new user form for user saved as: 63297
 And In the new user form I click on continue
-Then I should be on the Security Questions page of the form
+Then I should be on the 1234s page of the form
 And I enter the following into the Security Questions window for user saved as: 63297
 And I enter the pin for user saved as: 63297
 When In the new user form I click on continue

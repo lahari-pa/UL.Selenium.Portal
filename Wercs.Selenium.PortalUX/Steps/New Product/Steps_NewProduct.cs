@@ -1570,15 +1570,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[StepDefinition(@"The following radio buttons should be displayed for section: (.*)")]
-		public void CheckRadioButtonsInSectionAndOrder(string section, Table expected)
+		[StepDefinition(@"The following radio buttons (should|should not) be displayed for section: (.*)")]
+		public void CheckRadioButtonsInSectionAndOrder(string shouldOrNot, string section, Table expected)
 		{
 			var expectedRadioButtons = new List<string>();
 			expected.Rows.ForEach(x => expectedRadioButtons.Add(x["Button"]));
 			var radioButtonsShowing = new NewProduct().RadioButtonsInSection(section);
-			Report.IsTrue(expectedRadioButtons.All(x => radioButtonsShowing.Contains(x)),
-				"The actual radio buttons for section: " + section + " were no as expected. Actual radios: " + string.Join(", ", radioButtonsShowing) + ". Expected: " + string.Join(", ", expectedRadioButtons),
-				"The actual radio buttons for section: " + section + " were as expected: " + string.Join(", ", radioButtonsShowing));
+
+			if (shouldOrNot == "should")
+			{
+				Report.IsTrue(expectedRadioButtons.All(x => radioButtonsShowing.Contains(x)),
+					"The actual radio buttons for section: " + section + " were not as expected. Actual radios: " + string.Join(", ", radioButtonsShowing) + ". Expected: " + string.Join(", ", expectedRadioButtons),
+					"The actual radio buttons for section: " + section + " were as expected: " + string.Join(", ", radioButtonsShowing));
+			}
+			else
+			{
+				Report.IsTrue(!expectedRadioButtons.Any(x => radioButtonsShowing.Contains(x)),
+					"The actual radio buttons for section: " + section + " were not as expected. Actual radios: " + string.Join(", ", radioButtonsShowing) + ". Should not be showing: " + string.Join(", ", expectedRadioButtons),
+					"The actual radio buttons for section: " + section + " were as expected: " + string.Join(", ", radioButtonsShowing));
+			}
+
 		}
 
 		[StepDefinition(@"I click the 'Add UPC' button")]
@@ -1644,6 +1655,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
 			Report.IsTrue(new NewProduct().ClickAcceptButton(), "Failed to click accept button", "Clicked accept button", true);
+			Delay.Seconds(1);
 		}
 
 		[StepDefinition(@"In the Data Acceptance page I see the Accept button")]
@@ -2278,9 +2290,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"In the Create the kit page I search for and select: (.*)")]
 		public void GivenInTheCreateTheKitPageISearchForAndSelect(string productToAdd)
 		{
-			Report.IsTrue(new NewProduct().AddItemToKit(productToAdd),
-				"Failed to add product: " + productToAdd + " to kit.",
-				"Successfully added product: " + productToAdd + " to kit.");
+			if (productToAdd.ToLower().Contains("saved as"))
+			{
+				var productToAddPI = (ProductInformation)Context
+					.GetFromContext(productToAdd.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+
+				Report.IsTrue(new NewProduct().AddItemToKitByID(productToAddPI),
+					"Failed to add product: " + productToAddPI.Id + " to kit.",
+					"Successfully added product: " + productToAddPI.Id + " to kit.");
+			}
+			else
+			{
+				Report.IsTrue(new NewProduct().AddItemToKit(productToAdd),
+					"Failed to add product: " + productToAdd + " to kit.",
+					"Successfully added product: " + productToAdd + " to kit.");
+			}
+
 		}
 
 		[StepDefinition(@"In the Create the kit page I search for and select product saved as: (.*)")]
@@ -3118,6 +3143,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Beginning select ingredient: " + firstIngredientName + " with option: " + option);
 			newProductIngredients.SelectIngredientPublicName(firstIngredientName, option);
 			Context.AddToContext(saveAs, option);
+			Report.Info("Added to context name: " + saveAs + " value: " + option);
 			Report.Screenshot();
 		}
 

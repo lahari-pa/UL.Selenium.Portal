@@ -8,6 +8,7 @@ using SeleniumUtilities;
 using Wercs.Selenium.PortalUX.Selenium_Classes;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Classes;
@@ -34,6 +35,8 @@ namespace WERCSmart
 		{
 			GlobalParameters.TestUrl = TestVariables.GetVariableSavedAs("TestURL");
 		}
+
+
 
 		[StepDefinition(@"I login as the administrator")]
 		[StepDefinition(@"I login as the administrator")]
@@ -122,14 +125,14 @@ namespace WERCSmart
 
 		public void LoginToAccount(string accountSavedAs)
 		{
-			if (Context.Contains("CurrentLogin"))
+			if (SeleniumUtilities.Context.Contains("CurrentLogin"))
 			{
-				accountSavedAs = Context.GetFromContext("CurrentLogin").ToString();
+				accountSavedAs = SeleniumUtilities.Context.GetFromContext("CurrentLogin").ToString();
 				Report.Info("Already logged in as " + accountSavedAs + " so changing login to that");
 			}
 			else
 			{
-				Context.AddToContext("CurrentLogin", accountSavedAs);
+				SeleniumUtilities.Context.AddToContext("CurrentLogin", accountSavedAs);
 			}
 			var user = TestUsers.GetUserSavedAs(accountSavedAs);
 
@@ -257,7 +260,7 @@ namespace WERCSmart
 			string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
 			string myEmail = EmailFunctions.CreateEmail(myDate);
-			Context.AddToContext(saveAs, myEmail);
+			SeleniumUtilities.Context.AddToContext(saveAs, myEmail);
 			Report.Info("Saved email: " + myEmail);
 		}
 
@@ -280,7 +283,7 @@ namespace WERCSmart
 					var account = parameters.CreateInstance<WERCSmartUser>();
 					account.Email = EmailFunctions.CreateEmail(account.Email);
 					account.Identifier = savedAs;
-					Context.AddToContext(savedAs, account, true);
+					SeleniumUtilities.Context.AddToContext(savedAs, account, true);
 					Report.Success("Account details saved!");
 
 					var mySignUp = new StepsSignup();
@@ -538,7 +541,7 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I save the current emails in this inbox so I can locate the new one when it arrives");
 			try
 			{
-				var emailAddress = Context.GetFromContext(savedas).ToString();
+				var emailAddress = SeleniumUtilities.Context.GetFromContext(savedas).ToString();
 				Report.Info("Storing inbox for address: " + emailAddress);
 				EmailFunctions.StoreCurrentInbox(emailAddress);
 				Report.Success("Inbox stored successfully!");
@@ -562,7 +565,7 @@ namespace WERCSmart
 			try
 			{
 				var email = EmailFunctions.CreateEmail(createdEmail);
-				Context.AddToContext(savedAs, email);
+				SeleniumUtilities.Context.AddToContext(savedAs, email);
 				Report.Info("Email address created: " + email);
 			}
 			catch (Exception ex)
@@ -617,12 +620,12 @@ namespace WERCSmart
 				var email = string.Empty;
 				if (savedAs == "ForgotPW_SecQs")
 				{
-					var user = (WERCSmartUser)Context.GetFromContext(savedAs);
+					var user = (WERCSmartUser)SeleniumUtilities.Context.GetFromContext(savedAs);
 					email = user.Email;
 				}
 				else
 				{
-					email = Context.GetFromContext(savedAs).ToString();
+					email = SeleniumUtilities.Context.GetFromContext(savedAs).ToString();
 				}
 
 				if (EmailFunctions.WaitForInboxDifferences(email))
@@ -652,7 +655,7 @@ namespace WERCSmart
 						}
 					}
 
-					Context.AddToContext("Matching", matchingEmail);
+					SeleniumUtilities.Context.AddToContext("Matching", matchingEmail);
 				}
 				else
 				{
@@ -684,7 +687,7 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)SeleniumUtilities.Context.GetFromContext("Matching");
 				var emailBody = EmailFunctions.getEmailBody(email);
 				Report.Info("Body of the Email was: " + emailBody);
 				Report.IsTrue(emailBody == bodyText, "Body text did not match correctly!", "Body text matched correctly!");
@@ -706,7 +709,7 @@ namespace WERCSmart
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)SeleniumUtilities.Context.GetFromContext("Matching");
 				var emailBody = EmailFunctions.getEmailBody(email);
 				Report.Info("Body of the Email was: " + emailBody);
 				Report.IsTrue(emailBody.Contains(bodyText), "Body text did not match correctly!", "Body text matched correctly!");
@@ -748,7 +751,7 @@ namespace WERCSmart
 			{
 				Report.Info("Switch to Tab: " + url);
 				var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-				Context.AddToContext("MainWindowHandle", currentHandle);
+				SeleniumUtilities.Context.AddToContext("MainWindowHandle", currentHandle);
 				var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 				foreach (var handle in allHandles)
 				{
@@ -775,13 +778,13 @@ namespace WERCSmart
 		public void SaveTheCurrentWindowAs(string savedAs)
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			Context.AddToContext(savedAs, currentHandle);
+			SeleniumUtilities.Context.AddToContext(savedAs, currentHandle);
 		}
 
 		[StepDefinition(@"I close the window saved as: (.*)")]
 		public void SwitchBackToMainWindow(string savedAs)
 		{
-			var handleToClose = Context.GetFromContext(savedAs)?.ToString();
+			var handleToClose = SeleniumUtilities.Context.GetFromContext(savedAs)?.ToString();
 			if (handleToClose == null)
 			{
 				Report.Failure("Unable to find window saved as: " + savedAs + " in context to close!");
@@ -806,12 +809,13 @@ namespace WERCSmart
 		public void SwitchToDataSumaryTab()
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			Context.AddToContext("MainWindowHandle", currentHandle);
+			SeleniumUtilities.Context.AddToContext("MainWindowHandle", currentHandle);
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in allHandles)
 			{
 				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[text()='Summary']"), 2) != null)
+				Delay.Seconds(5);
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[text()='Summary']"), 20) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					Report.Screenshot();
@@ -826,7 +830,7 @@ namespace WERCSmart
 		public void ThenISwitchToDataAcceptancePage()
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			Context.AddToContext("MainWindowHandle", currentHandle);
+			SeleniumUtilities.Context.AddToContext("MainWindowHandle", currentHandle);
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in allHandles)
 			{
@@ -844,7 +848,7 @@ namespace WERCSmart
 		public void CloseDataSummaryTab()
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			var mainHandle = Context.GetFromContext("MainWindowHandle").ToString();
+			var mainHandle = SeleniumUtilities.Context.GetFromContext("MainWindowHandle").ToString();
 			SeleniumBrowser.WebBrowser.Close();
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
 		}
@@ -891,7 +895,7 @@ namespace WERCSmart
 		public void SwitchToTermsOfUseTab()
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			Context.AddToContext("MainWindowHandle", currentHandle);
+			SeleniumUtilities.Context.AddToContext("MainWindowHandle", currentHandle);
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in allHandles)
 			{
@@ -928,9 +932,9 @@ namespace WERCSmart
 		public void DeleteProductWithUPCNumberIfOneHasBeenGenerated()
 		{
 			var testCaseId = GlobalParameters.TestCaseId;
-			if (testCaseId != null && Context.GetFromContext($"UPC{testCaseId}") != null)
+			if (testCaseId != null && SeleniumUtilities.Context.GetFromContext($"UPC{testCaseId}") != null)
 			{
-				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", Context.GetFromContext($"UPC{testCaseId}").ToString());
+				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", SeleniumUtilities.Context.GetFromContext($"UPC{testCaseId}").ToString());
 			}
 		}
 
@@ -943,7 +947,7 @@ namespace WERCSmart
 				Report.Failure("Failed to find a user stored in TReVor: " + savedAs);
 				return;
 			}
-			Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
+			SeleniumUtilities.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
 		}
 
 		[StepDefinition(@"I update the password for the following TReVor test users:")]
@@ -1044,7 +1048,7 @@ namespace WERCSmart
 			ProductInformation newProductInformation = new ProductInformation();
 			newProductInformation.Id = value;
 			newProductInformation.Name = value;
-			Context.AddToContext(name, newProductInformation);
+			SeleniumUtilities.Context.AddToContext(name, newProductInformation);
 		}
 
 		[Given(@"I check alert text contains (.*) and dismiss")]
@@ -1069,7 +1073,7 @@ namespace WERCSmart
 		[Given(@"I save to context name: (.*) and string value: (.*)")]
 		public void GivenISaveToContextNameAndStringValue(string name, string value)
 		{
-			Context.AddToContext(name, value);
+			SeleniumUtilities.Context.AddToContext(name, value);
 		}
 
 		[StepDefinition(@"I move the mouse pointer by an offset of (.*) in x and (.*) in y")]

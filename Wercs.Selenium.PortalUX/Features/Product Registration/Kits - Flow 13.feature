@@ -10,6 +10,7 @@
 @RetailPartners
 @PaymentMethods
 @SHA
+@SummaryPage
 @ProductSetUp
 @run_KitsFlow13
 
@@ -110,7 +111,7 @@ And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 #And I The Purchase summary step is shown with the success message
 
-# NEEDS WORK - call create product to completed steps (one is regulated for transport, one is not regulated for transport)
+#Call create product to completed steps (one is regulated for transport, one is not regulated for transport)
 Scenario: [63521] Kit Product - One or more inputs is regulated for transport - Transportation step does NOT shows Not regulated option
 Given I login into the WERCSmart Portal - Administrator Role
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -183,6 +184,11 @@ Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (O
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Bleach
 
+#The previous steps just create the kit items
+#Scenario: Test
+#Given I login into the WERCSmart Portal - Administrator Role
+#Given I save to context name: Kit1 and value: 1502868
+#Given I save to context name: Kit2 and value: 1502793
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Care kit
 Then I save the product information as: TestCase63521
@@ -190,21 +196,45 @@ Given I call Shared Step 63460 (Additional Product Information - SOLD = US, No(P
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Create the Kit Page
 Given In the Create the kit page I search for and select: saved as Kit1
-Given In the Create the kit page I search for and select: 1
+Given In the Create the kit page I search for and select: saved as Kit2
 Then in the Create the Kit page I click Continue
 And I should see the Transportation Details 1 Page
-Then in the Transport Details 1 page I should see the Product is Regulated for Transport question
+Then in the Transportation Details 1 page I should see the Product is Regulated for Transport question
 Then The following radio buttons should be displayed for section: Product is Regulated for Transport
-| Button                  |
-| Yes                     |
-| No, due to an exemption |
+| Button                               |
+| Yes                                  |
+| No, due to an exemption or exception |
 #Then in the Transport Details 1 page I should not see the Not regulated option
+Then The following radio buttons should not be displayed for section: Product is Regulated for Transport
+| Button        |
+| Not Regulated |
 # Below is equvilent because Not Regulated is not displayed if the last step passes and the count is = 2
 And I should see a total of 2 radio buttons for the section: Product is Regulated for Transport
 Then in the Transportation Details 1 page I click Continue
-Then I should see an error message: This is a required field
-Given I set the Product is Regulated for Transport field to: No, due to an exemption
-Then I should not see an error message: This is a required field
+Then I should see an error message: This is a required field.
+Given I set the Product is Regulated for Transport field to: No, due to an exemption or exception
+Then I should not see an error message: This is a required field.
+Given I set the Please select DOT Exceptions if applicable? field to: 173.159 (a) – Exemption for non-spillable lead-acid batteries
+Then in the Transportation Details 1 page I click Continue
+And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+And I should see the Additional Documents to Provide Page
+Then in the Additional Documents to Provide page I click Continue
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I should see the Data Acceptance Page
+And I click the Summary button in the Data Acceptance window
+And I switch to the Data Summary page
+And In the Data Summary page I confirm that the following items are included in the kit:
+| Kit items     |
+| saved as Kit1 |
+| saved as Kit2 |
+And In the Data Summary page I confirm the following questions and answers
+| Question                           | Answer        | True or False |
+| Product is Regulated for Transport | Not Regulated | False         |
+And In the Data Summary page I confirm that I do not see any errors
+And I close the Data Summary tab
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase63521
 
 # Assigned to Barrett, Beverly
 # Created by Barrett, Beverly
@@ -218,6 +248,7 @@ Scenario: [77857] Kit recertification - change Direct Ship from Yes to No - WM o
 #Given I save to context name: 77862_KitProduct2 and value: 1549415
 Given I use Test case 77862 to create a kit and save as TestCase77857
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77857)
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase77857)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77857)
 And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77857 and its status is: Assigned
@@ -272,9 +303,12 @@ And In the Product Attribute Screen confirm that no records are found
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Kits - Flow 13\Kit - Direct Ship Vendor question
 @77858
 Scenario: [77858] Kit recertification - Direct Ship - change from No to Yes - WM only
+#Given I save to context name: 77862_KitProduct1 and value: 1552743
+#Given I save to context name: 77862_KitProduct2 and value: 1552746
 #Given I Use Test case 77862 to create a kit which has Direct Ship set to Yes and is for WM only.Test case is linked.  This leaves the kit product in Submitted status in SHA manager
 Given I use Test case 77862 to create a kit and save as TestCase77858
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77858)
 And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase77858)
 #And I Use the shared step below to search for your product
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77858)
@@ -308,11 +342,11 @@ And in the New Product page I click section: Data Acceptance
 And In the Data Acceptance page I click on the Accept button
 And If purchase details are showing click confirm order
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77857)
-And I Confirm the Product ID: saved as TestCase77857 is not highlited yellow indicating that this is not an e-comm/direct ship product
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase77858)
+And I Confirm the Product ID: saved as TestCase77858 is not highlited yellow indicating that this is not an e-comm/direct ship product
 #And I Confirm that your product is shown in the Recertification status with the red font no longer shown
-And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77857 and its status is: Recertification
-And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase77857
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase77858 and its status is: Recertification
+And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase77858
 And I call Shared Step 20375 - Go to Product Attributes via Authoring Tab in PDP/PAP (Maxed Out)
 And I call Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT
 And In the Product Attribute Screen confirm that no records are found

@@ -234,18 +234,92 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Error("No rows have been found!");
 				return null;
 			}
+
+			Delay.Seconds(5);
 			var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
 			if (productRow == null || !productRow.Displayed)
 			{
 				return null;
 			}
 
+			var ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
+			var ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim();
+			var DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
+			List<string> Retailers = new List<string>();
+			List<string> RetailersAbrv = new List<string>();
+			var RetailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
+
+			foreach (var RetailerLi in RetailersLi)
+			{
+				if (RetailerLi.GetAttribute("title").Length > 0)
+				{
+					Retailers.Add(RetailerLi.GetAttribute("title").Trim());
+				}
+				else
+				{
+					Retailers.Add(RetailerLi.GetAttribute("data-original-title").Trim());
+				}
+
+				RetailersAbrv.Add(RetailerLi.Text.Trim());
+			}
+
+
+
 			var productElement = new ProductGridItem() {
-				ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
-				ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
-				DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim()
+				ProductId = ProductId,
+				ProductName = ProductName,
+				DateCreated = DateCreated,
+				Retailers = Retailers,
+				RetailerAbrv = RetailersAbrv
 			};
 			return productElement;
+		}
+
+		public bool SelectShowArchivedRetailers()
+		{
+			var inputShowArchivedRetailers =
+				containerElement.FindElement(By.XPath(".//input[@id='show-archived-retailers']"),3);
+			if (inputShowArchivedRetailers == null)
+			{
+				Report.Info("Could not find show archived retailers input box to click");
+				return false;
+			}
+
+			return inputShowArchivedRetailers.TryCheck();
+		}
+
+		public ProductGridItem FirstProductInGridWithRetailers()
+		{
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			{
+				Report.Error("No rows have been found!");
+				return null;
+			}
+
+			var productRows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
+			foreach (var row in productRows)
+			{
+				if (row.FindElement(By.XPath(".//ul[@class='list-inline retailers']/li[@class='abr']"), 2) != null)
+				{
+					var productRow = row;
+					if (productRow == null || !productRow.Displayed)
+					{
+						return null;
+					}
+					var productElement = new ProductGridItem() {
+						ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
+						ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
+						DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
+						Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
+					};
+					return productElement;
+
+				}
+			}
+
+			return null;
+
+
 		}
 
 		public ProductGridItem ProductInRow(int row)
@@ -740,6 +814,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string ProductName { get; set; }
 		public string DateCreated { get; set; }
 		public List<string> Retailers { get; set; }
+		public List<string> RetailerAbrv { get; set; }
 
 		public bool ClickActions()
 		{

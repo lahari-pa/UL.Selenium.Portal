@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -112,6 +113,47 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 				.FirstOrDefault(x => x.Text == "YES").TryClick();
+		}
+
+		public List<string> GetRetailers()
+		{
+			var retailers = containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+
+			List<string> retailerList = new List<string>();
+			foreach (var retailer in retailers)
+			{
+				retailerList.Add(retailer.GetValue());
+			}
+
+			return retailerList;
+		}
+
+		public bool SelectRetailer(string retailer)
+		{
+			var retailers = containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+
+			var matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
+
+			if (matchingRetailer == null)
+			{
+				Report.Info("Could not find matching retailer. Retailers found were: " + String.Join(",", this.GetRetailers()));
+				return false;
+			}
+			else
+			{
+				var retailerCheckbox = matchingRetailer.FindElement(By.XPath("..//input"), 2);
+				if (retailerCheckbox == null)
+				{
+					Report.Info(("Found retailer but could not find checkbox"));
+					Report.Screenshot();
+					return false;
+				}
+				else
+				{
+					return retailerCheckbox.TryCheck();
+				}
+
+			}
 		}
 	}
 }

@@ -707,6 +707,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
+				Delay.Seconds(1);
 				var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkProcess']"));
 				return button.TryClick();
 			}

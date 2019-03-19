@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Castle.Core.Internal;
 using iTextSharp.text.pdf;
@@ -393,20 +394,42 @@ namespace Wercs.Selenium.PortalUX.Steps
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
 
-				ModalDialog thisModalDialog = new ModalDialog();
-				if (thisModalDialog.Wait_for_load(5))
+				if (action == "Update Registration")
 				{
-					if (thisModalDialog.GetTitle() == "Update Registration")
+					ModalDialog thisModalDialog = new ModalDialog();
+					if (thisModalDialog.Wait_for_load(5))
 					{
-						Report.Info("Confirm Update Registration dialog is showing.");
-						thisModalDialog.ClickButton("YES");
-						Delay.Seconds(5);
-					}
-					else
-					{
-						throw new Exception("Unexpected modal dialog is showing");
+						if (thisModalDialog.GetTitle() == "Update Registration")
+						{
+							Report.Info("Confirm Update Registration dialog is showing.");
+							thisModalDialog.ClickButton("YES");
+							Delay.Seconds(5);
+						}
+						else
+						{
+							throw new Exception("Unexpected modal dialog is showing");
+						}
 					}
 				}
+
+				if (action == "Archive Retailers")
+				{
+					ModalDialog thisModalDialog = new ModalDialog();
+					if (thisModalDialog.Wait_for_load(5))
+					{
+						if (thisModalDialog.GetTitle() == "Archive Retailers")
+						{
+							Report.Info("Confirm Update Registration dialog is showing.");
+							thisModalDialog.ClickButton("YES");
+							Delay.Seconds(5);
+						}
+						else
+						{
+							throw new Exception("Unexpected modal dialog is showing");
+						}
+					}
+				}
+
 			}
 			catch (Exception ex)
 			{
@@ -910,6 +933,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			Report.Info("Filtering on product id: " + productID);
 			selProdGrid.ProductIdField = productID;
+			selProdGrid.ClickProductIdNameSearchButton();
 			Report.Info("clicking Actions for first row in the grid");
 			Report.IsTrue(selProdGrid.ClickActionsForFirstResultInGrid(), "Failed to click first Action Button!", "Successfully clicked the first Action Button!");
 		}
@@ -1897,6 +1921,115 @@ namespace Wercs.Selenium.PortalUX.Steps
 			new ProductsGrid().ClickContainer();
 			Report.Screenshot();
 		}
+
+		[StepDefinition(@"I should see the Archive Retailers Popup")]
+		public void GivenIShouldSeeTheArchiveRetailersPopup()
+		{
+			ModalDialog thisModalDialog = new ModalDialog();
+			if (thisModalDialog.Wait_for_load(5))
+			{
+				Report.IsTrue(thisModalDialog.GetTitle() == "Archive Retailers", "Dialog is not showing as expected",
+					"Dialog is showing as expected");
+			}
+			else
+			{
+				Report.Failure("Archive Retailers dialog is not showing");
+			}
+		}
+
+		[StepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer")]
+		public void GivenIInTheArchiveRetailersPopupSelectTheTheCheckboxNextToTheRetailerSYouWantToArchive()
+		{
+			ModalDialog thisModalDialog = new ModalDialog();
+			List<string> retailers = thisModalDialog.GetRetailers();
+			string retailerToArchive = retailers[0];
+			Report.IsTrue(thisModalDialog.SelectRetailer(retailerToArchive), "Failed to select: " + retailerToArchive,
+				"Selected: " + retailerToArchive);
+
+			Context.AddToContext("retailer", retailerToArchive);
+		}
+
+		[StepDefinition(@"In the Archive Retailers popup click on: (.*)")]
+		public void GivenInTheArchiveRetailersPopupClickOn(string buttonToClick)
+		{
+			ModalDialog thisModalDialog = new ModalDialog();
+			Report.IsTrue(thisModalDialog.ClickButton(buttonToClick), "Failed to click: " + buttonToClick,
+				"Clicked: " + buttonToClick);
+			Delay.Seconds(3);
+		}
+
+		[StepDefinition(@"I Select the check box next to Show Archived Retailers")]
+		public void GivenISelectTheCheckBoxNextToShowArchivedRetailers()
+		{
+			ProductsGrid thisProductsGrid = new ProductsGrid();
+			Report.IsTrue(thisProductsGrid.SelectShowArchivedRetailers(),
+				"Failed to click show archived retailers checkbox", "Clicked show archived retailers checkbox");
+
+		}
+
+		[StepDefinition(@"I save the ProductID and Name of the first Product in the grid with a retailer as: (.*)")]
+		public void SaveFirstProductInGridWithARetailer(string savedAs)
+		{
+			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Saving Product ID and Name of First Product as " + savedAs);
+			try
+			{
+				Report.Info("Saving Product ID and Name of First Product as " + savedAs);
+				var selProdGrid = new ProductsGrid();
+				var productElement = selProdGrid.FirstProductInGridWithRetailers();
+				Context.AddToContext(savedAs, productElement);
+				Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
+				Report.Info("Filtering on product id: " + productElement.ProductId);
+				selProdGrid.ProductIdField = productElement.ProductId;
+				selProdGrid.ClickProductIdNameSearchButton();
+				Delay.Seconds(3);
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition (@"I Confirm that two asterisks are visible in the retailer\(s\) that are archived icons that display")]
+		public void GivenIConfirmThatTwoAsterisksAreVisibleInTheRetailerSThatAreArchivedIconsThatDisplay()
+		{
+			if (Context.Contains("retailer"))
+			{
+				string archivedRetailer = Context.GetFromContext("retailer").ToString();
+				var selProdGrid = new ProductsGrid();
+				var productElement = selProdGrid.FirstProductInGrid();
+				List<string> retailers = productElement.Retailers;
+				var abbreviatedRetailer = "";
+				if (retailers.Contains(archivedRetailer))
+				{
+					for (int i = 0; i < retailers.Count; i++)
+					{
+						if (retailers[i] == archivedRetailer)
+						{
+							abbreviatedRetailer = productElement.RetailerAbrv[i];
+						}
+					}
+				}
+
+				if (abbreviatedRetailer.Length > 0)
+				{
+					Report.IsTrue(abbreviatedRetailer.Contains("**"), "Retailer is not showing as expected",
+						"Retailer is showing as expected");
+				}
+				else
+				{
+					Report.Error("Retailer is not showing as expected");
+				}
+
+			}
+			else
+			{
+				Report.Error("No retailer is saved into context");
+			}
+
+		}
+
 
 	}
 }

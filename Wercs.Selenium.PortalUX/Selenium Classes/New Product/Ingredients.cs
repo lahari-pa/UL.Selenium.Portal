@@ -865,16 +865,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public class Ingredient
 		{
-			public string ComponentName { get; set; }
-			public string CASNumber { get; set; }
-			public string Percent { get; set; }
-			public bool PublicallyDisclosed { get; set; }
-			public bool TradeSecret { get; set; }
-			public string PublicName { get; set; }
-			public bool TradeSecretEnabled { get; set; }
-			public bool PublicDisclosureEnabled { get; set; }
-			public bool PublicNameEnabled { get; set; }
-			public bool Selected { get; set; }
+			public string ComponentName { get; set; } = "";
+			public string CASNumber { get; set; } = "";
+			public string Percent { get; set; } = "";
+			public bool PublicallyDisclosed { get; set; } = false;
+			public bool TradeSecret { get; set; } = false;
+			public string PublicName { get; set; } = "";
+			public bool TradeSecretEnabled { get; set; } = false;
+			public bool PublicDisclosureEnabled { get; set; } = false;
+			public bool PublicNameEnabled { get; set; } = false;
+			public bool Selected { get; set; } = false;
+
+			public string getDetails()
+			{
+				return "Component Name " + ComponentName + " CAS Number: " + CASNumber + " Percent: " + Percent +
+					" Publicly disclosed: " + PublicallyDisclosed.ToString() + " Trade secret: " +
+					TradeSecret.ToString() + " Public name: " + PublicName + " Trade secret enabled: " +
+					TradeSecretEnabled + " Public disclosure enabled: " + PublicDisclosureEnabled +
+					" Public name enabled: " + PublicNameEnabled + " Selected: " + Selected.ToString();
+			}
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Castle.Core.Internal;
+using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
@@ -48,5 +49,53 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"The Summary page completed loading");
 
 		}
+
+		[StepDefinition(@"In the Data Summary page I confirm that the following items are included in the kit:")]
+		public void ThenInTheDataSummaryPageIConfirmThatTheFollowingItemsAreIncludedInTheKit(Table table)
+		{
+			var selSummaryPage = new SummaryPage();
+			List<string> kitContents = selSummaryPage.GetKitContents();
+			foreach (var row in table.Rows)
+			{
+				var kit = row["Kit items"];
+				if (kit.ToLower().Contains("saved as"))
+				{
+					var piKit = (ProductInformation)Context.GetFromContext(kit
+						.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim());
+					kit = piKit.Id;
+				}
+
+				Report.IsTrue(kitContents.FirstOrDefault(x=>x.Contains(kit))!=null, "Expecting kit list to show: " + kit,
+					kit + " is showing as expected");
+			}
+		}
+
+		//| Question | Answer | True or False |
+		[StepDefinition(@"In the Data Summary page I confirm the following questions and answers")]
+		public void ThenInTheDataSummaryPageIConfirmTheFollowingQuestionsAndAnswers(Table table)
+		{
+			var selSummaryPage = new SummaryPage();
+			foreach (var row in table.Rows)
+			{
+				string answer = selSummaryPage.GetAnswerToQuestion(row["Question"]);
+				if (row["True or False"]=="True")
+				{
+					Report.IsTrue(answer == row["Answer"], "Expected answer: " + row["Answer"] + " but got: " + answer);
+				}
+				else
+				{
+					Report.IsTrue(answer != row["Answer"], "Expected answer: " + row["Answer"] + " but got: " + answer);
+				}
+			}
+		}
+
+		[StepDefinition(@"In the Data Summary page I confirm that I do not see any errors")]
+		public void ThenInTheDataSummaryPageIConfirmThatIDoNotSeeAnyErrors()
+		{
+			//Under construction
+		}
+
+
+
 	}
 }

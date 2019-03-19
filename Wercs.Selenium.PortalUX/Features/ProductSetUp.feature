@@ -754,7 +754,6 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
 
 @TFSdesign
-#Coralie - 7 Dec 2018 Blocked because Staging not working and Dev broken
 @86187
 Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product  - submit thru to Completed status
 #Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
@@ -798,8 +797,8 @@ And I call Shared Step 78877 - WPS Studio - PD+ - set all data and publish using
 And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase86187)
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)
-Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Accepted
-Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: TestCase86187)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86187 and its status is: Accepted or Completed
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86187)
 Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase86187) for
 | Retailer |
 | CVS      |
@@ -856,3 +855,41 @@ And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for sa
 And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78864 and its status is: Completed
 #And I If the product is shown in Accepted status for any retailer use the shared step below to set all to Completed
 #And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: (.*))
+
+
+@85286
+Scenario: [85286] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
+#Given I call Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
+Given I login into the WERCSmart Portal - Canada has all data account
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#And I In the shared step below use Crayon as your product type
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Crayon
+Then I save the product information as: TestCase85286
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+And I call Shared Step 86163 - Retailer - Canada Only & PL, Select No Retailer, Add PL, Continue
+And I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given If purchase details are showing click confirm order
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85286)
+#And I Confirm your product is shown in the Submitted status.Note this may take a few minutes for the Zuora process to process your product, if it is not shown in Submitted wait a minute or two and re-search for your product
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase85286)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85286)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85286 and its status is: Assigned
+And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase85286)
+And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase85286)
+And I call Shared Step 78888 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT, HGHS (EN and CF) and SBCS for product saved as TestCase85286
+And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase85286)
+Given I call Shared Step 59066 (Go to SHA Manager)
+Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85286)
+Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85286 and its status is: Completed

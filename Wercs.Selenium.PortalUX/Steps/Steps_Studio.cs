@@ -379,7 +379,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Info("As button was apply, waiting for spinner and alert");
 				Delay.Seconds(10);
-				if (!thisApplyRulesPage.WaitForSpinner(30))
+				if (!thisApplyRulesPage.WaitForSpinner(60))
 				{
 					if (SeleniumBrowser.Alert.WaitForAlert(3))
 					{

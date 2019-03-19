@@ -299,9 +299,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisProductSearch.ClickButton("Find"), "Failed to click find", "Clicked find", false, false);
 			Delay.Seconds(10);
 			Report.Info("Waiting for spinner");
-			GeneralUtilities.StudioWaitForSpinner();
-			thisProductSearch.Wait_for_load(60);
-			GeneralUtilities.StudioWaitForSpinner();
+			GeneralUtilities.StudioWaitForSpinner(10);
+			thisProductSearch.Wait_for_load(10);
+			GeneralUtilities.StudioWaitForSpinner(10);
 			Report.Info("Finished waiting for spinner");
 			Delay.Seconds(10);
 			Report.Screenshot();
@@ -356,16 +356,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 					{
 						if (status.ToLower() == "accepted or completed")
 						{
-							if (topProductnew.Status.ToLower() == "accepted" | topProductnew.Status.ToLower() == "accepted")
+							if (topProductnew.Status.ToLower() == "accepted" | topProductnew.Status.ToLower() == "completed")
 							{
 								found = true;
 							}
 						}
 						else
 						{
-							if (status.ToLower() == "submitted or ghs submitted")
+							if (status.ToLower() == "submitted")
 							{
-								if (topProductnew.Status.ToLower() == "submitted" | topProductnew.Status.ToLower() == "ghs submitted")
+								if (topProductnew.Status.ToLower() == "submitted")
 								{
 									found = true;
 								}

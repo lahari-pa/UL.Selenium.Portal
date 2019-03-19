@@ -759,7 +759,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 				else
 				{
-					Report.Info("Confirm order button does not exist");
+					Report.Error( "Confirm order button does not exist");
 					Report.Screenshot();
 				}
 

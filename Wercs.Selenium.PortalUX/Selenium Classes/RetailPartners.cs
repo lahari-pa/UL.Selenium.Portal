@@ -448,6 +448,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
+		public bool ClickOK()
+		{
+			return this.containerElement.FindElement(By.XPath(".//button[text()='Ok']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
 
 	}
 

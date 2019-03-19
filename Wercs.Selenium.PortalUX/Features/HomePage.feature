@@ -968,3 +968,18 @@ And I click the products grid container
 Then I confirm the Retailers popup is not displayed
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
+
+
+Scenario: [71230] Archived Retailers - My Products View
+Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Then The home screen should load
+Given I filter the products by: Accepted by Retailers
+And I save the ProductID and Name of the first Product in the grid with a retailer as: TestCase71230
+And I click Row Actions for the first product returned
+And I click on the Row Action: Archive Retailers
+And I should see the Archive Retailers Popup
+And In the Archive Retailers popup, I select the the checkbox next to the the first retailer
+And In the Archive Retailers popup click on: ARCHIVE
+And I search for the product saved as: TestCase71230
+And I Select the check box next to Show Archived Retailers
+And I Confirm that two asterisks are visible in the retailer(s) that are archived icons that display

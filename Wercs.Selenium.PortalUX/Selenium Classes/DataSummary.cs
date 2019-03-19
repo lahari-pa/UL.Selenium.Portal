@@ -100,6 +100,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<Ingredients.Ingredient> GetIngredients()
 		{
+			Report.Info("Getting ingredients");
 			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 60);
 			var listOfIngredients = new List<Ingredients.Ingredient>();
 			if (ingredientsTable == null)
@@ -115,6 +116,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Info("There are no ingredients in the able");
 				return listOfIngredients;
 			}
+			else
+			{
+				Report.Info("Found " + ingredientsRows.Count.ToString() + " ingredients");
+			}
 
 			for (int i = 0; i < ingredientsRows.Count - 1; i++)
 			{
@@ -122,14 +127,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				var rowColumns = row.FindElements(By.XPath(".//td"));
 				Ingredients.Ingredient thisIngredient = new Ingredients.Ingredient();
 				string CASAndNaME = rowColumns[0].GetValue();
-				var pattern = @"(.*)\w(.*)";
+				var pattern = @"([A-Za-z\d\-\,^\r]+)";
 				var regMatch = Regex.Match(CASAndNaME, pattern);
-				if (!regMatch.Success || regMatch.Groups.Count != 3)
+				if (!regMatch.Success)
 				{
 					throw new Exception("pattern not found");
 				}
-				thisIngredient.CASNumber = regMatch.Groups[1].ToString();
-				thisIngredient.ComponentName = regMatch.Groups[2].ToString();
+				var pattern2 = @"[\\r\\n\s]+(.*)";
+				var regMatch2 = Regex.Match(CASAndNaME, pattern2);
+				if (!regMatch2.Success )
+				{
+					throw new Exception("pattern not found");
+				}
+				thisIngredient.CASNumber = regMatch.Value.Trim();
+				thisIngredient.ComponentName = regMatch2.Value.Trim();
 				thisIngredient.Percent = rowColumns[1].GetValue();
 				thisIngredient.PublicallyDisclosed = rowColumns[2].GetValue() == "Yes";
 				thisIngredient.TradeSecret = rowColumns[3].GetValue() == "Yes";
