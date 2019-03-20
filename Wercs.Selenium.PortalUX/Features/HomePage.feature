@@ -877,9 +877,10 @@ And In the SHA manager grid I see the WPS ID I have saved as product: ProductSet
 
 And I call Shared Step 51351 (SHA > Select Product > View Recertification History) for product saved as: ProductSetup64532
 
+#20/03/2019 CLF Changed recertification from 2.0 Specific UPC Update to 2.0 UPC Update
 Given In the Product Recertification History popup I should see the following entry
-| Product ID                 | Recertification Reason  | Active |
-| saved as ProductSetup64532 | 2.0 Specific UPC Update | true   |
+| Product ID                 | Recertification Reason | Active |
+| saved as ProductSetup64532 | 2.0 UPC Update         | true   |
 
 Given I Close the Product Recertification History pop up
 

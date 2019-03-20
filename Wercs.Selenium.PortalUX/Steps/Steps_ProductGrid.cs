@@ -356,22 +356,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("Found products in grid, clicking first action button...");
 				Report.IsTrue(selProdGrid.ClickActionsForFirstResultInGrid(), "Failed to click first Action Button!", "Successfully clicked the first Action Button!");
 				Report.Screenshot();
-
-				ModalDialog thisModalDialog = new ModalDialog();
-				if (thisModalDialog.Wait_for_load(5))
-				{
-					if (thisModalDialog.GetTitle() == "Update Registration")
-					{
-						Report.Info("Confirm Update Registration dialog is showing.");
-						thisModalDialog.ClickButton("YES");
-						Delay.Seconds(5);
-					}
-					else
-					{
-						throw new Exception("Unexpected modal dialog is showing");
-					}
-				}
-
+				
 			}
 			catch (Exception ex)
 			{
@@ -393,43 +378,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Successfully clicked Row Action: '" + action + "'!");
 				GeneralUtilities.Wait_for_load_finish();
 				Report.Screenshot();
-
-				if (action == "Update Registration")
-				{
-					ModalDialog thisModalDialog = new ModalDialog();
-					if (thisModalDialog.Wait_for_load(5))
-					{
-						if (thisModalDialog.GetTitle() == "Update Registration")
-						{
-							Report.Info("Confirm Update Registration dialog is showing.");
-							thisModalDialog.ClickButton("YES");
-							Delay.Seconds(5);
-						}
-						else
-						{
-							throw new Exception("Unexpected modal dialog is showing");
-						}
-					}
-				}
-
-				if (action == "Archive Retailers")
-				{
-					ModalDialog thisModalDialog = new ModalDialog();
-					if (thisModalDialog.Wait_for_load(5))
-					{
-						if (thisModalDialog.GetTitle() == "Archive Retailers")
-						{
-							Report.Info("Confirm Update Registration dialog is showing.");
-							thisModalDialog.ClickButton("YES");
-							Delay.Seconds(5);
-						}
-						else
-						{
-							throw new Exception("Unexpected modal dialog is showing");
-						}
-					}
-				}
-
 			}
 			catch (Exception ex)
 			{
