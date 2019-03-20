@@ -322,6 +322,42 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public List<ProductGridItem> GetAllItemsInGrid()
+		{
+			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
+			{
+				Report.Error("No rows have been found!");
+				return null;
+			}
+
+			List<ProductGridItem> ListProductGridItems = new List<ProductGridItem>();
+			var productRows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
+			foreach (var row in productRows)
+			{
+				if (row.FindElement(By.XPath(".//ul[@class='list-inline retailers']/li[contains(@class,'abr')]"), 2) != null)
+				{
+					var productRow = row;
+					if (productRow == null || !productRow.Displayed)
+					{
+						return null;
+					}
+					var productElement = new ProductGridItem() {
+						ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
+						ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
+						DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
+						Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
+					};
+					ListProductGridItems.Add(productElement);
+
+				}
+			}
+
+			return ListProductGridItems;
+			
+
+		}
+
+
 		public ProductGridItem ProductInRow(int row)
 		{
 			var productRow = this.containerElement.FindElement(By.XPath($".//tbody/tr[{row}]"), 2);

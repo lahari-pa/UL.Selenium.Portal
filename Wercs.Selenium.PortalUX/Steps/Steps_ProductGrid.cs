@@ -1991,6 +1991,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[Given(@"I check for all items in the grid that the retailers are alphabetically listed")]
+		public void GivenISaveTheProductIDAndNameOfTheFirstProductInTheGridWithMoreThanOneRetailerAs()
+		{
+
+			try
+			{
+				var selProdGrid = new ProductsGrid();
+				List<ProductGridItem> allItems= selProdGrid.GetAllItemsInGrid();
+				foreach (ProductGridItem thisItem in allItems)
+				{
+					Report.IsTrue(thisItem.Retailers.OrderBy(x => x).SequenceEqual(thisItem.Retailers),
+						"Item: " + thisItem.ProductId + " does not have retailers alphabetically listed",
+						"Item: " + thisItem.ProductId + " has retailers alphabetically listed");
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+
 		[StepDefinition (@"I Confirm that two asterisks are visible in the retailer\(s\) that are archived icons that display")]
 		public void GivenIConfirmThatTwoAsterisksAreVisibleInTheRetailerSThatAreArchivedIconsThatDisplay()
 		{
