@@ -7386,5 +7386,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
+		[StepDefinition(@"I call Shared Step 94674 \(Additional Product Information - RU Wine\)")]
+		public void CallSharedStep9674_AdditionalProductInformation_RuWine()
+		{
+			// if Selected Option is not United States by default then report error and select it
+			if (!new NewProduct().SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
+			{
+				Report.Error("Expected 'United States' to be selected by default!");
+				Report.Info("Setting section: 'Select countries the product may be sold in' to: 'United States'");
+				Report.IsTrue(new NewProduct().SetOptionInSection("Select countries the product may be sold in", "United States"), "Failed to set section: 'Select countries the product may be sold in' to: 'United States'", "Successfully set section: 'Select countries the product may be sold in' to: 'United States'");
+			}
+			// click Yes for Product is a Retailers Private Label or Brand
+			Report.IsTrue(new NewProduct().SetOptionInSection("Product is a Retailers Private Label or Brand", "Yes"), "Failed to set section: 'Product is a Retailers Private Label or Brand' to: 'Yes'", "Successfully set section: 'Product is a Retailers Private Label or Brand' to: 'Yes'");
+			// click continue
+			new NewProduct().ClickContinue();
+		}
 	}
 }

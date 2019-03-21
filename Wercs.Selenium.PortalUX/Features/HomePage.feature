@@ -145,6 +145,7 @@ Then I click the User Icon
 And I click on Sign Out
 And the landing page should load
 
+
 #pass - staging 4.10
 Scenario: [56212] My Products grid Actions - Edit Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -156,15 +157,28 @@ Then I click on the Row Action: Edit
 Then the Product Type page should be loaded
 And the product saved as: FirstProduct should be visible in editor
 
-@tfs_design
-Scenario: [56214] My Products grid Actions - Submit Navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then the WERCSmart homepage should load
-When I filter the products by: Not Yet Submitted
-Given I save the ProductID and Name of the first Product in the grid as: FirstProduct
+Scenario: [56214] My Products grid Actions - Submit navigation
+Given I generate a random UPC number and save as: UPC56214
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+And I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
+And I call Shared Step 94674 (Additional Product Information - RU Wine)
+And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+And I call Shared Step 49818 (Beverage Regulatory Details)
+And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+And I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol)
+And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+And I click continue
+And I click continue
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+And I navigate to the home page
+And I filter the products by: Not Yet Submitted
 When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Submit
-And UNDER DEVELOPMENT
+And I should see the Data Acceptance Page
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56214
 
 Scenario: [56216] My Products grid Actions - Delete Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -711,10 +725,12 @@ And I click Row Actions for the first product returned
 
 And I should see the following Actions options
 | Option             |
+| Discontinue        |
 | View               |
 | View UPCs          |
 | Process UPC Update |
 | Remove UPC Update  |
+| Monitor Progress    |
 
 # Assigned to Barrett, Beverly
 # Created by Barrett, Beverly
@@ -844,10 +860,12 @@ And I click Row Actions for the first product returned
 
 And I should see the following Actions options
 | Option             |
+| Discontinue        |
 | View               |
 | View UPCs          |
 | Process UPC Update |
 | Remove UPC Update  |
+| Monitor Progress   |
 
 Scenario: [64532] Remove UPC Update - Remove
 

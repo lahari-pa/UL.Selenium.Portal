@@ -262,12 +262,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				RetailersAbrv.Add(RetailerLi.Text.Trim());
 			}
-
-
-
+			var labelBrandTag = productRow.FindElement(By.XPath(".//div/p/span"),2);
 			var productElement = new ProductGridItem() {
 				ProductId = ProductId,
-				ProductName = ProductName,
+				ProductName = labelBrandTag != null ?
+					productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
+					productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
 				DateCreated = DateCreated,
 				Retailers = Retailers,
 				RetailerAbrv = RetailersAbrv
@@ -366,9 +366,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					{
 						return null;
 					}
+					var labelBrandTag = productRow.FindElement(By.XPath(".//div/p/span"), 2);
 					var productElement = new ProductGridItem() {
 						ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
-						ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
+						ProductName = labelBrandTag != null ?
+							productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
+							productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
 						DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
 						Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
 					};
@@ -376,7 +379,6 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				}
 			}
-
 			return ListProductGridItems;
 
 
