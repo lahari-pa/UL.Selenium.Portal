@@ -1800,7 +1800,77 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"As expected results are not showing");
 		}
 
+		[StepDefinition(@"I Confirm you see the Document List pop up")]
+		public void GivenIConfirmYouSeeTheDocumentListPopUp()
+		{
+			Report.IsTrue(new SHADocumentList().Wait_for_load(30), "Documnet List pop up is not showing",
+				"Document list popup is showing");
+		}
 
+
+		[StepDefinition(@"In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx\.pdf - where xxxxxxx is the product id of product saved as: (.*)")]
+		public void GivenIConfirmTheFilenameColumnShowsAnEntryForXxxxxxx_Pdf_WhereXxxxxxxIsTheProductIdOfProductSavedAsTestCase(string savedAs)
+		{
+			List<string> Documents = new SHADocumentList().GetPDFNames();
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var ID = ProductDetails.Id;
+			string expectedFilename = ID + @".pdf";
+			Report.Info("Searching for " + expectedFilename);
+			Report.IsTrue(Documents.FirstOrDefault(x=>x.Contains(expectedFilename))!=null,
+				"Filename: " + expectedFilename + " is not showing as expected. Filenames showing are: " +
+				String.Join(",", Documents), "Filename: " + expectedFilename + " is showing as expected");
+		}
+
+		[StepDefinition(@"In the Document List popup I Double click on the filename for product saved as: (.*)")]
+		public void GivenInTheDocumentListPopupIDoubleClickOnTheFilenameForProductSavedAsTestCase(string savedAs)
+		{
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var ID = ProductDetails.Id;
+			string expectedFilename = ID + @".pdf";
+			Report.IsTrue(new SHADocumentList().DoubleClickPDF(expectedFilename),
+				"Failed to double click filename: " + expectedFilename, "Clicked filename: " + expectedFilename);
+		}
+
+		[StepDefinition(@"I Click (.*) on the Document List window pop up")]
+		public void ThenIClickButtonOnTheDocumentListWindowPopUp(string button)
+		{
+			Report.IsTrue(new SHADocumentList().ClickButton(button),
+				"Failed to double click button: " + button, "Clicked button: " + button);
+		}
+
+		[StepDefinition(@"I should see a new tabbed document with the pdf containing product code saved as: (.*) and NGHS / English twice")]
+		public void ThenIShouldSeeANewTabbedDocumentWithThePdfContainingProductCodeSavedAsTestCase(string savedAs)
+		{
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var ID = ProductDetails.Id;
+			SHADocumentList thisSHADocument = new SHADocumentList();
+			Delay.Seconds(3);
+			string docURL = thisSHADocument.DocumentWindowOpen();
+			if (docURL != null)
+			{
+				string pdfText = thisSHADocument.DocumentText(docURL);
+				Report.IsTrue(pdfText.Contains(ID), "PDF does not contain: " + ID, "PDF contains " + ID);
+				Report.IsTrue(CountStringOccurrences(pdfText, "NGHS / English") == 2, "PDF does not contain: NGHS / English twice", "PDF contains NGHS / English twice");
+			}
+			else
+			{
+				Report.Error("Tabbed document has not been found as expected");
+			}
+		}
+
+
+		public static int CountStringOccurrences(string text, string pattern)
+		{
+			// Loop through all instances of the string 'text'.
+			int count = 0;
+			int i = 0;
+			while ((i = text.IndexOf(pattern, i)) != -1)
+			{
+				i += pattern.Length;
+				count++;
+			}
+			return count;
+		}
 
 	}
 }

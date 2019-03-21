@@ -356,7 +356,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("Found products in grid, clicking first action button...");
 				Report.IsTrue(selProdGrid.ClickActionsForFirstResultInGrid(), "Failed to click first Action Button!", "Successfully clicked the first Action Button!");
 				Report.Screenshot();
-				
+
 			}
 			catch (Exception ex)
 			{
@@ -1906,12 +1906,22 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(3);
 		}
 
-		[StepDefinition(@"I Select the check box next to Show Archived Retailers")]
-		public void GivenISelectTheCheckBoxNextToShowArchivedRetailers()
+		[StepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]
+		public void GivenISelectTheCheckBoxNextToShowArchivedRetailers(string selectOrDeselect)
 		{
 			ProductsGrid thisProductsGrid = new ProductsGrid();
-			Report.IsTrue(thisProductsGrid.SelectShowArchivedRetailers(),
-				"Failed to click show archived retailers checkbox", "Clicked show archived retailers checkbox");
+
+			if (selectOrDeselect.ToLower() == "select")
+			{
+				Report.IsTrue(thisProductsGrid.SelectShowArchivedRetailers(),
+					"Failed to click show archived retailers checkbox", "Clicked show archived retailers checkbox");
+			}
+			else
+			{
+				Report.IsTrue(thisProductsGrid.DeselectShowArchivedRetailers(),
+					"Failed to deselect show archived retailers checkbox", "Deselected show archived retailers checkbox");
+			}
+
 
 		}
 
@@ -2001,6 +2011,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[StepDefinition(@"I should see the View UPCs page")]
+		public void WhenIShouldSeeTheViewUPCsPage()
+		{
+			ScenarioContext.Current.Pending();
+		}
 
 	}
 }

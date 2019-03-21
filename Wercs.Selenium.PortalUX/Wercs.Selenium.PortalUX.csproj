@@ -152,6 +152,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountHasStewardship.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Home page\Actions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Actions.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Home page\BulkActions.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -550,6 +555,7 @@
     <Compile Include="Selenium Classes\New Product\PesticideDetailsUS.cs" />
     <Compile Include="Selenium Classes\New Product\Retailer.cs" />
     <Compile Include="Selenium Classes\New Product\SelectRetailers.cs" />
+    <Compile Include="Selenium Classes\SHADocumentList.cs" />
     <Compile Include="Selenium Classes\SHAProductNotificationHistory.cs" />
     <Compile Include="Selenium Classes\SHAProductRecertificationHistory.cs" />
     <Compile Include="Selenium Classes\SHARecertification.cs" />
@@ -645,6 +651,10 @@
     <None Include="Features\Canadian Tire - Blue Box Program\Forwarding\AccountHasStewardship.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AccountHasStewardship.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Home page\Actions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Actions.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Home page\BulkActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -2569,6 +2569,8 @@ testRunner.And("I Select the check box next to Show Archived Retailers", ((strin
 #line 986
 testRunner.And("I Confirm that two asterisks are visible in the retailer(s) that are archived ico" +
                     "ns that display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 987
+testRunner.And("I Deselect the check box next to Show Archived Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -2599,16 +2601,16 @@ testRunner.And("I Confirm that two asterisks are visible in the retailer(s) that
         public virtual void _73791MyProductsGrid_RetailersColumnAlphabeticalOrder()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73791] My Products grid - Retailers Column Alphabetical Order", null, ((string[])(null)));
-#line 988
+#line 989
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 989
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 990
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 991
-testRunner.Given("I filter the products by: Accepted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 992
+testRunner.Given("I filter the products by: Accepted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 993
 testRunner.And("I check for all items in the grid that the retailers are alphabetically listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

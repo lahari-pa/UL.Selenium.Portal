@@ -7361,6 +7361,30 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Pesticide Details - U.S.");
 		}
 
+		[StepDefinition(@"I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: (.*)")]
+		public void ThenICallSharedStep49743SHAManager_SelectProduct_Actions_DocumentManagement(string savedAs)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Select product");
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			if (!myStudioShaManager.Wait_for_load(30))
+			{
+				Report.Error("Studio SHA Manager is not showing");
+			}
+
+			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			var id = productDetails.Id;
+
+			bool selectedID = false;
+
+			Report.IsTrue(myStudioShaManager.SelectProductByID(id), "Failed to select product with id: " + id, "Selected product with id: " + id);
+
+			TestReport.StartStep("Click document management");
+			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Document Management"),
+				"Failed to click document management", "Clicked document management");
+
+		}
+
 
 	}
 }

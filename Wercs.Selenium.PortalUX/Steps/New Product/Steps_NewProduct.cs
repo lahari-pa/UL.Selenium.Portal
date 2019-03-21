@@ -2676,7 +2676,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Message: '" + alert + "' is displayed as expected");
 		}
 
-		[Given(@"If purchase details are showing click confirm order")]
+		[StepDefinition(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
 		{
 			// if subscription upgrade - Proceed ?

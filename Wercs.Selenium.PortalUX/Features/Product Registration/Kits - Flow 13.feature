@@ -354,3 +354,44 @@ And In the Product Attribute Screen I Confirm the screen shows CNTXT present
 And In the Product Attribute Screen I Select the first entry in the table with code: CNTXT
 And I Confirm the Data area of the screen shows WM.com DSV submission
 
+@73949
+Scenario: [73949] Kit - Document merge - US only
+Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
+Given I navigate to the landing page
+Given I create a Walmart product and take to completed using Test Case 75335 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
+Given I navigate to the landing page
+Given I generate a random UPC number and save as: UPC73949
+And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
+Then I save the product information as: TestCase73949
+And I call Shared Step 60648 (Additional Product Information - US, No (Direct Ship), No (PL), No (GNFR))
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 73949_KitProduct1 and product 2: 73949_KitProduct2)
+And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+And I should see the Additional Documents to Provide Page
+And I click continue
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And If purchase details are showing click confirm order
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Submitted
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase73949)
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Assigned
+And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase73949
+And I Confirm you see the Document List pop up
+And In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx.pdf - where xxxxxxx is the product id of product saved as: TestCase73949
+And In the Document List popup I Double click on the filename for product saved as: TestCase73949
+# And confirm you see NGHS documents in EN for both the input productsNote:
+# each document in the PDF will show NGHS / English and the Product Code(s) will show the product ID for the input product
+
+#CLF 21/03/2019 Commenting out below because I cannot get the pdf document
+#Then I should see a new tabbed document with the pdf containing product code saved as: TestCase73949 and NGHS / English twice
+And I close the window that opened
+And I Click Cancel on the Document List window pop up

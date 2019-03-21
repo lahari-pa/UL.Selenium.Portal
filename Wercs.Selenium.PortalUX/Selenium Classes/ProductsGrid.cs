@@ -288,6 +288,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return inputShowArchivedRetailers.TryCheck();
 		}
 
+		public bool DeselectShowArchivedRetailers()
+		{
+			var inputShowArchivedRetailers =
+				containerElement.FindElement(By.XPath(".//input[@id='show-archived-retailers']"), 3);
+			if (inputShowArchivedRetailers == null)
+			{
+				Report.Info("Could not find show archived retailers input box to click");
+				return false;
+			}
+
+			return inputShowArchivedRetailers.TryCheck(false);
+		}
+
 		public ProductGridItem FirstProductInGridWithRetailers()
 		{
 			if (this.containerElement.FindElements(By.XPath(".//tbody/tr")).Count == 0)
@@ -304,16 +317,28 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					var productRow = row;
 					if (productRow == null || !productRow.Displayed)
 					{
-						return null;
+						continue;
 					}
-					var productElement = new ProductGridItem() {
-						ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
-						ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
-						DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
-						Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
-					};
-					return productElement;
 
+					var actionsButton = row.FindElement(By.XPath(".//button[contains(@class,'ellipsis')]"));
+					if (actionsButton != null)
+					{
+						if (actionsButton.TryClick())
+						{
+							if (ActionsAvailableInDropDown().Contains("Archive Retailers"))
+							{
+								var productElement = new ProductGridItem() {
+									ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim(),
+									ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
+									DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
+									Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
+								};
+								return productElement;
+							}
+						}
+					}
+
+					continue;
 				}
 			}
 
@@ -353,7 +378,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 			return ListProductGridItems;
-			
+
 
 		}
 

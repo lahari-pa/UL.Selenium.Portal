@@ -984,6 +984,7 @@ And In the Archive Retailers popup click on: ARCHIVE
 And I search for the product saved as: TestCase71230
 And I Select the check box next to Show Archived Retailers
 And I Confirm that two asterisks are visible in the retailer(s) that are archived icons that display
+And I Deselect the check box next to Show Archived Retailers
 
 Scenario: [73791] My Products grid - Retailers Column Alphabetical Order
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
