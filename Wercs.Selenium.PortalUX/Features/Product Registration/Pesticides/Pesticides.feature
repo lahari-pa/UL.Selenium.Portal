@@ -645,9 +645,13 @@ Given I click Remove for the item on the first EPA Registration Table row
 
 And I confirm the EPA Registration Table contains a total of 0 rows
 
+And I click continue
+
 Then I should see an error message: Required answer missing
 
 Given I click Add Row in the EPA Registration Table
+
+And I click continue
 
 Then I should see an error message: Federal Registration Number is required
 

@@ -2879,16 +2879,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 		[StepDefinition(
-			@"I call Shared Step 71618 \(U. S. Department of Transportation \(DOT\) Classification - For Alcohol\)")]
-		public void SharedUSDepartmentOfTransportationDOTClassification_ForAlcohol()
+			@"I call Shared Step 71618 \(U. S. Department of Transportation \(DOT\) Classification - For Alcohol \(Packaging III\)\)")]
+		public void SharedUSDepartmentOfTransportationDOTClassification_ForAlcoholPackagingiii()
 		{
 			TestReport.UseSubSteps = true;
 			StepsNewProduct myStepsNewProduct = new StepsNewProduct();
 			NewProduct myNewProduct = new NewProduct();
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"UN Number",
-				"UN2789"));
-			myStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN2789");
+				"UN3065"));
+			myStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN3065");
+			TestReport.StartStep("By default the 'Proper Shipping Name' Field will be populated with 'Alcoholic beverages'");
+			myStepsNewProduct.CheckingFieldInputIsCorrect("Proper Shipping Name", "Alcoholic beverages");
 			TestReport.StartStep("I select the first valid option for section: 'Proper Shipping Name'");
 			myStepsNewProduct.SelectFirstOptionInSection("Proper Shipping Name");
 			var shippingName = myNewProduct.GetAllOptionsForSection("Proper Shipping Name")[0];
@@ -2896,23 +2898,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Technical Name (if applicable)",
 				"Technical " + shippingName));
 			myStepsNewProduct.SetTheSectionOptionTo("Technical Name (if applicable)", "Technical " + shippingName);
-			TestReport.StartStep("I select the first valid option for section: 'Hazard Class (select)'");
-			myStepsNewProduct.SelectFirstOptionInSection("Hazard Class (select)");
-			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
-				"Packing Group (select)",
-				"III"));
-			myStepsNewProduct.SetTheSectionOptionTo("Packing Group (select)", "II");
-			if (myNewProduct.SelectedOptionsForSection("Packing Group (select)").Contains("Choose..."))
-			{
-				Report.Info(
-					"Option 'III' was not available in section: 'Packing Group (select)' so selecting the first valid option");
-				myStepsNewProduct.SelectFirstOptionInSection("Packing Group (select)");
-			}
-
-			TestReport.StartStep(
-				"In the U. S. Department of Transportation (DOT) Classification page I click Continue");
-			myStepsNewProduct.GivenInTheNewProductPageIClickContinue(
-				"U. S. Department of Transportation (DOT) Classification");
+			TestReport.StartStep("By default, '3' should be selected for 'Hazard Class (select)'");
+			myStepsNewProduct.CheckingFieldInputIsCorrect("Hazard Class (select)", "3");
+			TestReport.StartStep("I set the Packing Group section to 'III'");
+			myStepsNewProduct.SetTheSectionOptionTo("Packing Group (select)", "III");
+			TestReport.StartStep("The following question should be displayed: 'Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packaging Group selected is not consistent with this data.  Verify the data and transportation packaging group.  If the problem persists, please contact Support.'");
+			var table = new Table("Section");
+			table.AddRow("Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data. Verify the data and transportation packing group. If problem persists, please contact Support.");
+			myStepsNewProduct.CheckDisplayedSections("see", table);
+			TestReport.StartStep("Setting 'Packing Group' error question to: 'The UN# classification assigned to this product has a specific Packaging Group required.'");
+			myStepsNewProduct.SetTheSectionOptionTo("Product has a boiling point of", "The UN# classification assigned to this product has a specific Packaging Group required.");
+			TestReport.StartStep("In the U. S. Department of Transportation (DOT) Classification page I click Continue");
+			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("U. S. Department of Transportation (DOT) Classification");
 		}
 
 		[StepDefinition(@"I call Shared Step 73956 \(Go to Summary and verify data\) with product type: (.*)")]
@@ -7389,16 +7386,17 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I call Shared Step 94674 \(Additional Product Information - RU Wine\)")]
 		public void CallSharedStep9674_AdditionalProductInformation_RuWine()
 		{
-			// if Selected Option is not United States by default then report error and select it
-			if (!new NewProduct().SelectedOptionsForSection("Primary Physical State").Contains("Solid"))
+			TestReport.StartStep("If the selected option is not United States by default then report error and select it");
+			if (!new NewProduct().SelectedOptionsForSection("Select countries the product may be sold in").Contains("United States"))
 			{
-				Report.Error("Expected 'United States' to be selected by default!");
+				Report.Error("Expected 'United States' to be selected by default for question: 'Select countries the product may be sold in'!");
 				Report.Info("Setting section: 'Select countries the product may be sold in' to: 'United States'");
 				Report.IsTrue(new NewProduct().SetOptionInSection("Select countries the product may be sold in", "United States"), "Failed to set section: 'Select countries the product may be sold in' to: 'United States'", "Successfully set section: 'Select countries the product may be sold in' to: 'United States'");
 			}
-			// click Yes for Product is a Retailers Private Label or Brand
-			Report.IsTrue(new NewProduct().SetOptionInSection("Product is a Retailers Private Label or Brand", "Yes"), "Failed to set section: 'Product is a Retailers Private Label or Brand' to: 'Yes'", "Successfully set section: 'Product is a Retailers Private Label or Brand' to: 'Yes'");
-			// click continue
+			TestReport.StartStep("click Yes or No for Product is a Retailers Private Label or Brand");
+			Report.Info("Selecting option 'No'");
+			Report.IsTrue(new NewProduct().SetOptionInSection("Product is a Retailer's Private Label or Brand", "No"), "Failed to set section: 'Product is a Retailers Private Label or Brand' to: 'Yes'", "Successfully set section: 'Product is a Retailers Private Label or Brand' to: 'Yes'");
+			TestReport.StartStep("I click continue");
 			new NewProduct().ClickContinue();
 		}
 	}

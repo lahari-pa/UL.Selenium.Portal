@@ -158,7 +158,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void EPATableHeadingExpected(string expectedHeading)
 		{
 			var actualHeading = new NewProduct().TableHeading();
-			Report.IsTrue(string.Equals(actualHeading.Trim(), expectedHeading.Trim()),
+			Report.IsTrue(actualHeading!=null && string.Equals(actualHeading.Trim(), expectedHeading.Trim()),
 				"The table heading did not match the expected text: " + expectedHeading + ". Displayed heading: " + actualHeading,
 				"The table heading matched the expected text: " + expectedHeading);
 		}

@@ -538,3 +538,55 @@ Given I enter the text: Formald into the My Ingredients search field
 Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
 
 And I navigate to the home page
+
+@tfs_design
+Scenario: [70516] Add and Remove Packaging Type
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I click on My Account
+Given In the My Account page I navigate to the My Library page
+Then I confirm the current active tab on the My Library page is: My Packaging Types
+Given I click 'Add New' in the My Packaging Types section of My Library
+Then I should see the Packaging Type Page
+Given I set the Package Type Name field to: Super Packaging Type (TM)
+Given I click continue
+Then I should see the Bill of Materials Page
+And I confirm that the following table headings are displayed:
+| Heading                     |
+| My Packing Materials        |
+| My Packaging Weight (grams) |
+| Remove                      |
+And I confirm that the 'Add Row' button is displayed
+And I save the Packaging Type details as: ThisPackaging
+Given I click Add Row in the Bill Of Materials grid
+
+#Verify that under 'My Packaging Materials' - a 'Choose' drop-down becomes available
+#Verify that under 'My Packaging Weight' - an enter text field becomes available
+#Verify that under the 'Remove Column' - you see the 'X' Icon
+
+# select first option for My Packaging Materials
+Given I select the option: Clear Glass for the My Packaging Materials field in the table
+Given I select the option: 99 for the My Packaging Weight (grams) field in the table
+Given I click continue
+# Verify that it transitions to the 'CONEG' Screen
+# Confirm the following question displays:  "Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA)
+# Confirm the question above displays a "YES" and "NO" Buttons
+# Confirm the following question displays: "Do you have a CONEG Certificate for this package?"
+# Confirm the question above displays a "YES" and "NO" Buttons
+# Click 'YES' to the 'Do you have a CONEG Certificate for this package?'
+# Verify  text "UPLOAD the CONEG Certificate"
+# Verify text in  field under CONEG Certificate  says "Drop .pdf file here or click "Browse" max file size: 4 MB"
+# Navigate to a PDF File
+# Select the File you want to use
+# Verify the 'VIEW' and 'REMOVE' Buttons become active
+# Click the 'VIEW BUTTON'
+# Confirm the file opens for viewing in a new window
+# Close the window
+# Click 'CONTINUE'
+
+Given In the Data Acceptance page I click on the Accept button
+Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
+Given I delete Packaging Type saved as: ThisPackaging
+Then I confirm the name and ID for Packaging Type saved as: ThisPackaging appear in the Delete Product pop up
+Given I click Delete in the Delete Product pop up
+And I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid

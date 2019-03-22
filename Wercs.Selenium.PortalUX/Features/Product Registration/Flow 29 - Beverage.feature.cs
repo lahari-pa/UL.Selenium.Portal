@@ -149,7 +149,7 @@ testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes optio
                     "ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 42
 testRunner.Given("I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification" +
-                    " - For Alcohol)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - For Alcohol (Packaging III))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 44
 testRunner.Given("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -305,7 +305,7 @@ testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes optio
                     "ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 129
 testRunner.Given("I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification" +
-                    " - For Alcohol)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " - For Alcohol (Packaging III))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 131
 testRunner.Then("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

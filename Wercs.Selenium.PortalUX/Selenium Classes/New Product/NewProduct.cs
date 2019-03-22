@@ -3967,7 +3967,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string TableHeading()
 		{
-			var heading = this.Table().FindElement(By.XPath("/preceding-sibling::div[@class='panel-heading']"), 2);
+			var heading = this.Table().FindElement(By.XPath("./preceding-sibling::div[@class='panel-heading']"), 2);
 			if (heading == null)
 			{
 				Report.Error("Could not find EPA table header");

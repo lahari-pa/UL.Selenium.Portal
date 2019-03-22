@@ -20,7 +20,29 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new PackagingType().ClickAddRow(),
 				"Failed to click Add Row in the Bill of Materials grid",
 				"Successfully clicked Add Row in the Bill of Materials grid");
-			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I confirm that the 'Add Row' button is displayed")]
+		public void ConfirmTheAddRowButtonIsDisplayed()
+		{
+			Report.IsTrue(new PackagingType().AddRowDisplayed(), "The Add Row button was not displayed!", "The Add Row Button is displayed as expected");
+		}
+
+		[StepDefinition(@"I confirm that the following table headings are displayed:")]
+		public void ConfirmTheFollowingTableHeadingsAreDisplayed(Table table)
+		{
+			foreach (var row in table.Rows)
+			{
+				var heading = row["Heading"];
+				if (heading == null)
+				{
+					Report.Failure("The table step parameter must contain the column: 'Heading'");
+					return;
+				}
+				var actualHeadings = new PackagingType().TableHeadings();
+				Report.IsTrue(actualHeadings.Contains(heading), "The table heading: "+ heading + " was not displayed!", "The table heading: " + heading + " was displayed as expected");
+
+			}
 		}
 
 		[StepDefinition(@"I select the option: (.*) for the (.*) field in the table")]

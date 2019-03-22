@@ -148,7 +148,6 @@ Then I should not see the following UPC options:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
 
 
-
 Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Ounces)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -235,7 +234,6 @@ Then I should not see the following UPC options:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
 
-
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -270,7 +268,6 @@ Then I should not see the following UPC options:
 | Option                          |
 | Size (Fluid Ounces)                             |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
-
 
 
 Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
@@ -384,7 +381,7 @@ And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC8
 And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876431
 
 
-Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Case UPC counts towards the 5 limit 
+Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Case UPC counts towards the 5 limit
 #Given I login into the WERCSmart Portal - Administrator Role
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 Given I generate a random UPC number and save as: UPC87650

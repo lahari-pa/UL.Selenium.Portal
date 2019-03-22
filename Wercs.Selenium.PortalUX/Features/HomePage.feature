@@ -162,23 +162,24 @@ Given I generate a random UPC number and save as: UPC56214
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
+Then I save the product information as: TestCase56214
 And I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
 And I call Shared Step 94674 (Additional Product Information - RU Wine)
 And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 And I call Shared Step 49818 (Beverage Regulatory Details)
 And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-And I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol)
+And I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 And I click continue
 And I click continue
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
 And I navigate to the home page
 And I filter the products by: Not Yet Submitted
+And I search for the product saved as: TestCase56214
 When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Submit
 And I should see the Data Acceptance Page
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56214
 
 Scenario: [56216] My Products grid Actions - Delete Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -711,7 +712,7 @@ And I call Shared Step 51351 (SHA > Select Product > View Recertification Histor
 
 Given In the Product Recertification History popup I should see the following entry
 | Product ID                 | Recertification Reason  | Active |
-| saved as ProductSetup64529 | 2.0 Specific UPC Update | true   |
+| saved as ProductSetup64529 | 2.0 UPC Update | true   |
 
 Given I Close the Product Recertification History pop up
 
@@ -834,7 +835,7 @@ And I call Shared Step 51351 (SHA > Select Product > View Recertification Histor
 
 Given In the Product Recertification History popup I should see the following entry
 | Product ID                 | Recertification Reason  | Active |
-| saved as ProductSetup64531 | 2.0 Specific UPC Update | true   |
+| saved as ProductSetup64531 | 2.0 UPC Update | true   |
 
 Given I Close the Product Recertification History pop up
 

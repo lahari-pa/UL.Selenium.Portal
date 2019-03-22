@@ -22,11 +22,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public const string BasePath = "//div[@id='dataentry']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
+
+		public IWebElement AddRow()
+		{
+			return this.containerElement.FindElement(By.XPath(".//button[@data-bind='click: addRow']"), 2);
+		}
 		public bool RefreshContainer()
 		{
 			containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
 			return containerElement != null;
 		}
+
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
 			int counter = 0;
@@ -44,20 +50,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			return false;
 		}
+
 		public bool ClickAddRow()
 		{
-			return containerElement.FindElement(By.XPath(".//button[@data-bind='click: addRow']"), 2).TryClick();
+			return this.AddRow().TryClick();
+		}
+
+		public bool AddRowDisplayed()
+		{
+			var el = this.AddRow();
+			return el != null && el.Displayed;
+		}
+
+		public List<string> TableHeadings()
+		{
+			return this.containerElement.FindElements(By.XPath(".//thead//th"), 2).Select(x => x.Text).ToList();
 		}
 
 		public bool SelectOptionForField(string option, string field)
 		{
-			var columnNumber = containerElement.FindElements(By.XPath(".//thead//th")).ToList().FindIndex(x => x.Text == field) + 1;
-			if (columnNumber < 1)
+			var columnIndex = containerElement.FindElements(By.XPath(".//thead//th")).ToList().FindIndex(x => x.Text == field) + 1;
+			if (columnIndex < 1)
 			{
 				Report.Failure("Couldn't find column: " + field);
 				return false;
 			}
-			var xPath = ".//tbody//td[" + columnNumber + "]/child::*";
+			var xPath = ".//tbody//td[" + columnIndex + "]/child::*";
 			var el = containerElement.FindElement(By.XPath(xPath), 2);
 			if (el.TagName == "select")
 			{
@@ -73,6 +91,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Failure("Could not find element of select type or input type in the table.");
 			return false;
 		}
+
 		public bool SavePackagingDetails(string savedAs)
 		{
 			var header = containerElement.FindElement(By.XPath(".//h2"), 2);
@@ -88,5 +107,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Context.AddToContext("PackagingTypeName_" + savedAs, name);
 			return true;
 		}
+
+
 	}
 }

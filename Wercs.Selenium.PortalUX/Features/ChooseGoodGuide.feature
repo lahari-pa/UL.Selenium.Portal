@@ -63,7 +63,7 @@ Scenario: [68913] Register New Product - No Marks of Distinction
 #Given I navigate to the URL: https://staging.thewercs.com/SHA.MVCWeb/Home/ssologin?sourceService=GoodGuide
 #And I click the 'Get Started Now' button
 #Given on the GoodGuide login page I enter the Email address: c8e0c5521437.kxxyxunf@mailosaur.io
-#for staging use following email 
+#for staging use following email
 #Given on the GoodGuide login page I enter the Email address: 8294ba47974f.kxxyxunf@mailosaur.io
 #Given on the GoodGuide login page I enter the Password: Welcome1!
 #Then on the GoodGuide login page I click on the Login button
