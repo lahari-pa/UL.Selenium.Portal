@@ -86,9 +86,47 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return lGetKitContents;
 		}
 
+		public List<SummaryDocument> GetAdditionalDocuments()
+		{
+			List<SummaryDocument> listOfDocuments = new List<SummaryDocument>();
+			var allTableQuestions = containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h2"));
+			if (allTableQuestions.Count == 0)
+			{
+				return listOfDocuments;
+			}
+
+			var matchingQuestion = allTableQuestions.FirstOrDefault(x => x.GetValue().Contains("Additional documents you've requested"));
+
+			if (matchingQuestion != null)
+			{
+
+				var matchingAnswers = matchingQuestion.FindElements(By.XPath("../table//tbody/tr"));
+				foreach (var answer in matchingAnswers)
+				{
+					var DocumentName = answer.FindElement(By.XPath(".//td[1]/div"), 2);
+					var DocumentLang = answer.FindElement(By.XPath(".//td[2]/div"), 2);
+
+					if (DocumentName != null && DocumentLang != null)
+					{
+						SummaryDocument thisSummaryDocument = new SummaryDocument() {DocumentName=DocumentName.GetValue(), DocumentLanguage = DocumentLang.GetValue()};
+						listOfDocuments.Add(thisSummaryDocument);
+					}
+
+				}
+			}
+
+			return listOfDocuments;
+		}
+
 		public IWebElement LoadingSpinner()
 		{
 			return containerElement.FindElement(By.XPath(@".//span[contains(@data-bind,""dataEntry.pname() === 'undefined (undefined)"") and contains(text(),'Loading')]"), 2);
 		}
+	}
+
+	class SummaryDocument
+	{
+		public string DocumentName { get; set; }
+		public string DocumentLanguage { get; set; }
 	}
 }

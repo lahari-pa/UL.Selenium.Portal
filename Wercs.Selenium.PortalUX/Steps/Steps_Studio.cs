@@ -229,7 +229,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Clicked save button");
 				Delay.Seconds(1);
 				thisGraphicEditor.Wait_for_close();
-				Delay.Seconds(1);
+				Delay.Seconds(5);
 			}
 		}
 

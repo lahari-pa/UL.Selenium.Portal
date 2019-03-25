@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Mailosaur;
+using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module.Reporting.Core;
 using NTTQA_TReVor_Module.Classes;
@@ -138,6 +139,24 @@ namespace Wercs.Selenium.PortalUX.Steps
 						thisConflictMinerals.ContactPassword = thisRow["Value"].Trim();
 						thisConflictMinerals.ContactReEnterPassword = thisRow["Value"].Trim();
 						break;
+					case "City":
+						thisConflictMinerals.ContactCity = thisRow["Value"].Trim();
+						break;
+					case "Model":
+						thisConflictMinerals.ContactModel = thisRow["Value"].Trim();
+						break;
+					case "Sport":
+						thisConflictMinerals.ContactSport = thisRow["Value"].Trim();
+						break;
+					case "Food":
+						thisConflictMinerals.ContactFood = thisRow["Value"].Trim();
+						break;
+					case "Vacation":
+						thisConflictMinerals.ContactVacation = thisRow["Value"].Trim();
+						break;
+					case "IdentityPassword":
+						thisConflictMinerals.ContactIdentityPassword = thisRow["Value"].Trim();
+						break;
 					default:
 						throw new Exception("Field value as not one of the expected ones");
 
@@ -208,6 +227,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisConflictMinerals.GetCompanyNameSignedIn().Trim() == companyName,
 				"Company name is not showing in header as expected.", "Company name is showing in header as expected.");
 		}
+
+		[StepDefinition(@"in the Conflict Minerals I confirm I see my email address in the header: (.*)")]
+		public void ThenInTheConflictMineralsIConfirmISeeMyEmailAddressInTheHeader(string emailAddress)
+		{
+			if (emailAddress.ToLower().Contains("saved as"))
+			{
+				emailAddress = Context.GetFromContext(emailAddress.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString().Trim();
+			}
+			ConflictMinerals thisConflictMinerals = new ConflictMinerals();
+			Report.IsTrue(thisConflictMinerals.GetEmailSignedIn().Trim() == emailAddress,
+				"Email address is not showing in header as expected.", "Email address is showing in header as expected.");
+
+
+
+		}
+
 
 
 
@@ -286,8 +322,16 @@ namespace Wercs.Selenium.PortalUX.Steps
 					.ToString().Trim();
 			}
 
-			Report.IsTrue(EmailFunctions.CheckEmailHasArrived("New Verification Code", emailToFind),
-				"Email has not arrived as expected", "Email has arrived as expected");
+			for (int i = 0; i < 30; i++)
+			{
+				if (EmailFunctions.CheckEmailHasArrived("New Verification Code", emailToFind))
+				{
+					Report.Success("Verification code has been found");
+					return;
+				}
+				Delay.Seconds(1);
+			}
+			Report.Failure( "Email has not arrived as expected");
 		}
 
 		[StepDefinition(@"In the (.*) Verification page I enter verification code: (.*)")]

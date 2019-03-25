@@ -129,6 +129,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtRePassword']"), 2).EnterText(value); }
 		}
 
+		public string ContactCity {
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).Text.Trim(); }
+			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).EnterText(value); }
+		}
+
+		public string ContactModel {
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).Text.Trim(); }
+			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).EnterText(value); }
+		}
+		public string ContactSport {
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).Text.Trim(); }
+			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).EnterText(value); }
+		}
+		public string ContactFood {
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).Text.Trim(); }
+			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).EnterText(value); }
+		}
+		public string ContactVacation {
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).Text.Trim(); }
+			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).EnterText(value); }
+		}
+		
+		public string ContactIdentityPassword {
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).Text.Trim(); }
+			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).EnterText(value); }
+		}
+
 		public string Country {
 			get
 			{
@@ -406,10 +433,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetCompanyNameSignedIn()
 		{
-			var username = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[contains(@class, 'username')]"));
+			var username = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[contains(@class, 'username')]"),2);
 			if (username != null)
 			{
 				return username.Text;
+			}
+
+			return "";
+
+		}
+
+		public string GetEmailSignedIn()
+		{
+			var username = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//i[@class='fa fa-user']"),2);
+			if (username != null)
+			{
+				return username.GetValue();
 			}
 
 			return "";

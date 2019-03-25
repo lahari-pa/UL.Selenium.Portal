@@ -95,6 +95,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			//Under construction
 		}
 
+		//| Document  | Language |
+		[StepDefinition(@"In the Summary document I confirm that the following Additional documents are showing")]
+		public void GivenInTheSummaryDocumentIConfirmThatTheFollowingAdditionalDocumentsAreShowing(Table table)
+		{
+			ScenarioContext.Current.Pending();
+		}
 
 
 	}

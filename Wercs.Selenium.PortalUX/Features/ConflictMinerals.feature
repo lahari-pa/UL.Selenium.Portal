@@ -11,16 +11,18 @@
 @ConflictMinerals
 @run_conflictminerals
 
-Feature: Conflict Minerals
+Feature: Conflict Mineral
+#The feature appears to be obsolete
 
 Background:
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 #Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 #Then The home screen should load
 
+
 Scenario: [68211] Conflict Minerals - Create a new company
 Given I create a new email address and save as: Myemail
-Given I navigate to the URL: https://secure.supplierwercs.com/conflictminerals/Home/Ssologin?sourceService=cm
+Given I navigate to the URL: https://secure.supplierwercs.com/Home/ssologin?sourceService=cm
 Then the Conflict Minerals page should load
 Given in the Conflict Minerals page I click on Create Company Account
 Then in the Conflict Minerals page the New Email form should have loaded
@@ -49,6 +51,12 @@ Given in the Conflict Minerals page I create enter Company Contact Person as fol
 | Phone Number      | 785-532-6413           |
 | Additional Emails | richardSmith@smith.com |
 | Password          | Welcome1!              |
+| City              | London                 |
+| Model             | Fiat Uno               |
+| Sport             | Basketball             |
+| Food              | Profiteroles           |
+| Vacation          | New Zealand            |
+| IdentityPassword  | Welcome1!              |
 Given in the Conflict Minerals page I click on Next
 Then I should see a congratulations page
 Then I confirm that I have received a Signup confirmation email to account: saved as Myemail
@@ -68,7 +76,7 @@ Then the Conflict Minerals terms of use page should load
 Then in the Conflict Minerals terms of use I check the Accept checkbox
 Then in the Conflict Minerals terms of use I click continue
 Then in the Conflict Minerals I should see the dashboard
-Then in the Conflict Minerals I should see company name in the header: This test company
+Then in the Conflict Minerals I confirm I see my email address in the header: saved as Myemail
 
 
 

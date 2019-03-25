@@ -920,6 +920,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			NewProduct selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.DeleteUPC(upc), "Failed to delete UPC:" + upc, "Successfully deleted: " + upc);
+			Delay.Seconds(5);
 		}
 
 		[StepDefinition(@"In the list of UPCs I should not see UPC: (.*)")]
@@ -3146,6 +3147,26 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Added to context name: " + saveAs + " value: " + option);
 			Report.Screenshot();
 		}
+
+		//Item Description
+		[StepDefinition(@"in the Purchase Summary Screen I should see the following:")]
+		public void GivenInThePurchaseSummaryScreenIShouldSeeTheFollowing(Table table)
+		{
+			Delay.Seconds(1);
+			GeneralUtilities.Wait_for_load_finish();
+
+			var mySub = new PaymentMethods_Subscription_Billing();
+			mySub.Wait_for_load();
+			List<string> items = mySub.GetRowsBelowProduct();
+			Report.IsTrue(items.Count() == table.Rows.Count, "Items count should be " + table.Rows.Count, "Items count is " + table.Rows.Count);
+			foreach (TableRow thisRow in table.Rows)
+			{
+				Report.IsTrue(items.Contains(thisRow["Item Description"]),
+					thisRow["Item Description"] + " is not showing as expected",
+					thisRow["Item Description"] + " is showing as expected");
+			}
+		}
+
 
 	}
 }

@@ -7107,7 +7107,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyNewProduct.SetTheSectionOptionTo("WHMIS-compliant Safety Data Sheet, English and French-Canadian",
 				"Request to author");
 			MyNewProduct.UploadPDFFile("Label in both French and English", @"C:\Dependencies\WERCSmart\testdoc.pdf");
-			MyNewProduct.SetTheSectionOptionTo("WHMIS Document Date", DateTime.Now.ToString("yyyy-MM-dd"));
+			//Commented out as per Beverley 20 March 2019
+			//MyNewProduct.SetTheSectionOptionTo("WHMIS Document Date", DateTime.Now.ToString("yyyy-MM-dd"));
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Documents to Provide");
 		}
 
@@ -7382,6 +7383,43 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
+		[StepDefinition(@"I call Shared Step 78879 - Additional Product Information - Canada Only - Child \(NO\), GHS \(NO\), DSV \(NO\), PLP \(NO\), GNFR \(NO\), Continue")]
+		public void ThenICallSharedStep78879AdditionalProductInformation_CanadaOnly_ChildNOGHSNODSVNOPLPNOGNFRNOContinue()
+		{
+			NewProduct MyNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
+
+		[StepDefinition(@"I call Shared Step 62681 - Additional Product Information - Canada, No\(OSHA\), No\(DSV\), No\(PLP\), No\(GNFR\), Continue - Happy Path")]
+		public void ThenICallSharedStep62681AdditionalProductInformation_CanadaNoOSHANoDSVNoPLPNoGNFRContinue_HappyPath()
+		{
+			NewProduct MyNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			if (countrySold.Contains("United States"))
+			{
+				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+			}
+			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)", "No");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+		}
 
 		[StepDefinition(@"I call Shared Step 94674 \(Additional Product Information - RU Wine\)")]
 		public void CallSharedStep9674_AdditionalProductInformation_RuWine()

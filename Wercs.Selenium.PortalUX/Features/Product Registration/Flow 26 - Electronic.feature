@@ -40,8 +40,8 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 #Given I call Shared 48367 Product Includes Battery > any type
 
 Given I call Shared Step 48367 (Product Includes Battery > any type)
-| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
-| Alkaline     | L1028F       | 6                               | 6                                  |
+| Battery Type | Manufacturer                      | Number of batteries per package | How many batteries required to run |
+| Alkaline     | Panasonic Alkaline battery LR6 AA | 6                               | 6                                  |
 
 Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 

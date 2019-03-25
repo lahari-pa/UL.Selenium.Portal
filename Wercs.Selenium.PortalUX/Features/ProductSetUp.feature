@@ -893,3 +893,63 @@ And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Mu
 Given I call Shared Step 59066 (Go to SHA Manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85286)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85286 and its status is: Completed
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\Product set up and process to specific statuses
+# NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
+
+@78865
+Scenario: [78865] Create a new product SOLD = Canada only , PL = No, NR product - submit thru to Completed status (HGHS only)
+Given I login into the WERCSmart Portal - Canada has all data account
+Given I generate a random UPC number and save as: UPC78865
+Given I delete all products with UPC Number: saved as UPC78865
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+Then I save the product information as: TestCase78865
+And I call Shared Step 26897 (Product Characteristics - Solid only available - continue)
+And I call Shared Step 78879 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+And I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
+Given in the Additional Documents to Provide page I click Continue
+Given in the Optional Reports and Documents Available for Purchase page I click Continue
+And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Some test comment
+#And I should see the Data Acceptance Page
+#And I click the Summary button in the Data Acceptance window
+#And I switch to the Data Summary page
+#And In the Summary document I confirm that the following Additional documents are showing
+#| Document       | Language        |
+#| Canada GHS SDS | English (U.S)   |
+#| Canada GHS SDS | French-Canadian |
+#And I close the Data Summary tab
+And I should see the Data Acceptance Page
+And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+And in the Purchase Summary Screen I should see the following:
+| Item Description                                            |
+| Chemical assessment                                         |
+| Additional document Canada GHS SDS ENGLISH (USA)            |
+| Additional document language Canada GHS SDS FRENCH (CANADA) |
+
+Given If purchase details are showing click confirm order
+
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78865)
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78865 and its status is: Submitted
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase78865)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78865)
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78865 and its status is: Assigned
+And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase78865)
+And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase78865)
+And I call Shared Step 78888 - WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT, HGHS (EN and CF) and SBCS for product saved as TestCase78865
+And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase78865)
+Given I call Shared Step 59066 (Go to SHA Manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78865)
+And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78865 and its status is: Completed

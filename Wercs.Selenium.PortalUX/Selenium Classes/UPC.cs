@@ -139,7 +139,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				if (info.TransportationOption.Length > 0)
 				{
 					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);
-					packageField.Select(info.TransportationOption);
+					if (info.TransportationOption.ToLower().Contains("random"))
+					{
+						List<string> packageOptions = packageField.FindElements(By.XPath(".//option")).Select(x=>x.GetValue()).ToList();
+						Random r = new Random();
+						int rInt = r.Next(0, packageOptions.Count-1);
+						packageField.Select(packageOptions[rInt]);
+					}
+					else
+					{
+						
+						packageField.Select(info.TransportationOption);
+					}
+					
 				}
 				return true;
 			}

@@ -148,7 +148,7 @@ testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not P
                         "How many batteries required to run"});
             table1.AddRow(new string[] {
                         "Alkaline",
-                        "L1028F",
+                        "Panasonic Alkaline battery LR6 AA",
                         "6",
                         "6"});
 #line 42

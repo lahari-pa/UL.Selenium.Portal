@@ -18,7 +18,7 @@ namespace Wercs.Selenium.PortalUX.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class ConflictMineralsFeature
+    public partial class ConflictMineralFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -44,7 +44,7 @@ namespace Wercs.Selenium.PortalUX.Features
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Conflict Minerals", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Conflict Mineral", null, ProgrammingLanguage.CSharp, new string[] {
                         "LandingPage",
                         "Login",
                         "Homepage",
@@ -71,9 +71,9 @@ namespace Wercs.Selenium.PortalUX.Features
         public virtual void TestInitialize()
         {
             if (((testRunner.FeatureContext != null) 
-                        && (testRunner.FeatureContext.FeatureInfo.Title != "Conflict Minerals")))
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "Conflict Mineral")))
             {
-                global::Wercs.Selenium.PortalUX.Features.ConflictMineralsFeature.FeatureSetup(null);
+                global::Wercs.Selenium.PortalUX.Features.ConflictMineralFeature.FeatureSetup(null);
             }
         }
         
@@ -101,13 +101,13 @@ namespace Wercs.Selenium.PortalUX.Features
         
         public virtual void FeatureBackground()
         {
-#line 16
+#line 17
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[68211] Conflict Minerals - Create a new company")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Conflict Minerals")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Conflict Mineral")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
@@ -123,27 +123,27 @@ namespace Wercs.Selenium.PortalUX.Features
         public virtual void _68211ConflictMinerals_CreateANewCompany()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68211] Conflict Minerals - Create a new company", null, ((string[])(null)));
-#line 21
+#line 23
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 16
+#line 17
 this.FeatureBackground();
-#line 22
-testRunner.Given("I create a new email address and save as: Myemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 23
-testRunner.Given("I navigate to the URL: https://secure.supplierwercs.com/conflictminerals/Home/Sso" +
-                    "login?sourceService=cm", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 24
-testRunner.Then("the Conflict Minerals page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I create a new email address and save as: Myemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 25
-testRunner.Given("in the Conflict Minerals page I click on Create Company Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I navigate to the URL: https://secure.supplierwercs.com/Home/ssologin?sourceServi" +
+                    "ce=cm", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 26
-testRunner.Then("in the Conflict Minerals page the New Email form should have loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the Conflict Minerals page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 27
-testRunner.Given("in the Conflict Minerals page I put in email account: saved as Myemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the Conflict Minerals page I click on Create Company Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 28
-testRunner.Given("in the Conflict Minerals page I click on Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("in the Conflict Minerals page the New Email form should have loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 29
+testRunner.Given("in the Conflict Minerals page I put in email account: saved as Myemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 30
+testRunner.Given("in the Conflict Minerals page I click on Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 31
 testRunner.Then("in the Conflict Minerals page the Create Company Account form should have loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -182,13 +182,13 @@ testRunner.Then("in the Conflict Minerals page the Create Company Account form s
             table1.AddRow(new string[] {
                         "Fax",
                         "785-532-7408"});
-#line 30
+#line 32
 testRunner.Given("in the Conflict Minerals page I create enter Company Details as follows:", ((string)(null)), table1, "Given ");
-#line 43
-testRunner.Given("in the Conflict Minerals page I click on Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 44
-testRunner.Then("in the Conflict Minerals page the Company Contact Person form should have loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 45
+testRunner.Given("in the Conflict Minerals page I click on Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 46
+testRunner.Then("in the Conflict Minerals page the Company Contact Person form should have loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 47
 testRunner.Then("in the Conflict Minerals page the Company Contact Person form email value is: sav" +
                     "ed as Myemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -207,54 +207,72 @@ testRunner.Then("in the Conflict Minerals page the Company Contact Person form e
             table2.AddRow(new string[] {
                         "Password",
                         "Welcome1!"});
-#line 46
+            table2.AddRow(new string[] {
+                        "City",
+                        "London"});
+            table2.AddRow(new string[] {
+                        "Model",
+                        "Fiat Uno"});
+            table2.AddRow(new string[] {
+                        "Sport",
+                        "Basketball"});
+            table2.AddRow(new string[] {
+                        "Food",
+                        "Profiteroles"});
+            table2.AddRow(new string[] {
+                        "Vacation",
+                        "New Zealand"});
+            table2.AddRow(new string[] {
+                        "IdentityPassword",
+                        "Welcome1!"});
+#line 48
 testRunner.Given("in the Conflict Minerals page I create enter Company Contact Person as follows:", ((string)(null)), table2, "Given ");
-#line 52
+#line 60
 testRunner.Given("in the Conflict Minerals page I click on Next", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
+#line 61
 testRunner.Then("I should see a congratulations page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 54
+#line 62
 testRunner.Then("I confirm that I have received a Signup confirmation email to account: saved as M" +
                     "yemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 55
+#line 63
 testRunner.Then("I confirm that I have received a CARP account email to account: saved as Myemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 56
+#line 64
 testRunner.Then("I confirm that I have a received a Verification code email to account: saved as M" +
                     "yemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 57
+#line 65
 testRunner.Given("I save the verification code sent to account: saved as Myemail as: Myverification" +
                     "code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 58
+#line 66
 testRunner.Given("I click on the login button on the congratulations page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 59
+#line 67
 testRunner.Then("the Conflict Minerals page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 60
+#line 68
 testRunner.Given("in the Conflict Minerals login page I enter Email address: saved as Myemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 69
 testRunner.Given("in the Conflict Minerals login page I enter Password: Welcome1!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 62
+#line 70
 testRunner.Given("in the Conflict Minerals login page I click on the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 63
+#line 71
 testRunner.Then("if an error message shows I retry entering password: Welcome1! and clicking on lo" +
                     "gin", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 64
+#line 72
 testRunner.Then("the Conflict Minerals Verification page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 65
+#line 73
 testRunner.Then("In the Conflict Minerals Verification page I enter verification code: saved as My" +
                     "verificationcode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 66
+#line 74
 testRunner.Then("In the Conflict Minerals Verification page I click Verify", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 67
+#line 75
 testRunner.Then("the Conflict Minerals terms of use page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 68
+#line 76
 testRunner.Then("in the Conflict Minerals terms of use I check the Accept checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 69
+#line 77
 testRunner.Then("in the Conflict Minerals terms of use I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 70
+#line 78
 testRunner.Then("in the Conflict Minerals I should see the dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 71
-testRunner.Then("in the Conflict Minerals I should see company name in the header: This test compa" +
-                    "ny", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 79
+testRunner.Then("in the Conflict Minerals I confirm I see my email address in the header: saved as" +
+                    " Myemail", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

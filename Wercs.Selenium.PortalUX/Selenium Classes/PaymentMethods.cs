@@ -1582,7 +1582,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		public List<string> GetRowsBelowProduct()
+		{
+			var headerRows = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath("//h3[contains(text(),'Product Billing')]/..//table/tbody/tr/td/b"));
 
+			if (headerRows.Count > 1)
+			{
+				Report.Error("There is more than one product, we haven't handled that yet...");
+			}
+			else
+			{
+				var subRows = SeleniumBrowser.WebBrowser.FindElements(
+					By.XPath("//h3[contains(text(),'Product Billing')]/..//table/tbody/tr/td[2]"));
+				return subRows.Select(x => x.GetValue()).ToList();
+
+			}
+			return new List<string>();
+		}
 	}
 
 	class PaymentMethods_Thank_You : BaseObject
