@@ -192,6 +192,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			thisStepsProductGrid.GivenForProductSavedAsTestCaseTheStatusIs(savedAs, "Completed");
 			thisStepsProductGrid.WhenIClickRowActionsForTheFirstProductReturned();
 			thisStepsProductGrid.ClickRowAction("Update Data");
+			thisStepsProductGrid.IShouldSeeTheUpdateRegistrationPopup();
+			thisStepsProductGrid.InUpdateRegistrationPopupIClickButton("Yes");
 			newProductSteps.GivenIShouldSeeXPage("The Product");
 			newProductSteps.ThenIClickSaveOrCancelInTheProductPage("Save");
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();

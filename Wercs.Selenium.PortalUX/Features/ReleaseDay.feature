@@ -1258,7 +1258,7 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: test
+Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: random
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC63684, container type: Plastic Container and size: 3.6
 
@@ -1350,6 +1350,7 @@ Scenario: [42273] Recertification > Process recertification > Process 1 product
 #Given I If you do not have the test product in your account mentioned in the Description then use these two test cases
 #to create a product and get it to the correct status:1. Use test case 75335 to create a new product and process it thru to
 #Completed Status2. Use Test case 75410 to get the same product from Completed to Recertification
+#Given I save to context name: TestCase42273 and value: 1555525
 Given I create a product with name: 42273 and take to completed using Test Case 75335 and save as: TestCase42273
 Given I take a product from completed to recertification using Test Case 75410 saved: TestCase42273
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)

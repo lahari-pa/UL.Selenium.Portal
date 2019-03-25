@@ -2017,5 +2017,25 @@ namespace Wercs.Selenium.PortalUX.Steps
 			ScenarioContext.Current.Pending();
 		}
 
+		[StepDefinition(@"I should see the Update Registration popup")]
+		public void IShouldSeeTheUpdateRegistrationPopup()
+		{
+			ModalDialog thisModalDialog = new ModalDialog();
+			Report.IsTrue(thisModalDialog.Wait_for_load(30), "Modal dialog has not opened as expected",
+				"Modal dialog is showing");
+			Report.IsTrue(thisModalDialog.GetTitle() == "Update Registration",
+				"Update registration is not showing as expected", "Update registration dialog is showing as expected");
+		}
+
+		[StepDefinition(@"In the Update Registration popup I click on button (Cancel|View|Yes)")]
+		public void InUpdateRegistrationPopupIClickButton(string button)
+		{
+			ModalDialog thisModalDialog = new ModalDialog();
+			Report.IsTrue(thisModalDialog.Wait_for_load(30), "Modal dialog has not opened as expected",
+				"Modal dialog is showing");
+			Report.IsTrue(thisModalDialog.ClickButton(button.ToUpper()),
+				"Failed to click button: " + button.ToUpper(), "Clicked " + button.ToUpper());
+			Delay.Seconds(1);
+		}
 	}
 }

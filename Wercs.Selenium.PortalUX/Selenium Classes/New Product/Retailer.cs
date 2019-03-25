@@ -149,6 +149,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 			}
 		}
 
+		public bool SelectRandomVendorId()
+		{
+			try
+			{
+				var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+				var el = container.FindElement(By.XPath(".//label[text()='Select Vendor']/..//select"), 2);
+				if (el == null)
+				{
+					Report.Error("Could not find the Vendor ID select input element");
+					return false;
+				}
+
+				List<string> vendorOptions = el.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+				Random r = new Random();
+				int rInt = r.Next(0, vendorOptions.Count-1); 
+				el.Select(vendorOptions[rInt]);
+				Delay.Seconds(1);
+				return el.SelectedOption() == vendorOptions[rInt];
+			}
+			catch (Exception ex)
+			{
+				Report.Error(ex.Message);
+				return false;
+			}
+		}
+
 		/// <summary>
 		/// Select vendor id from dropdown for a specific retailer. Overloads for string specific retailer, bool select the first available option
 		/// </summary>
