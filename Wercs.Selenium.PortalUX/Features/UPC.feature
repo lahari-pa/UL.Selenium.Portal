@@ -518,6 +518,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase87685
 And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC87685
 And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC876851
+And I close the window saved as: SHAManagerProductUPC
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase87685)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87685)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Assigned

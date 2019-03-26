@@ -4377,20 +4377,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 75347 \(WPS Studio - PD\+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS\) for product saved as: (.*)")]
-		public void GivenICallSharedWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSAndSBCS(
-			string savedAs)
+		[StepDefinition(@"I call Shared Step 75347 \(WPS Studio - PD\+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS\) for product saved as: (.*)")]
+		public void GivenICallSharedWPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTNGHSAndSBCS(string savedAs)
 		{
 			TestReport.StartStep("Beginning shared step 75347");
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep(
-				"I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic");
+				"I set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQAHDPF data codes to show the Green check mark graphic");
 			Report.Info("In power tools workspace I set edit to true");
 			StudioPowerDesignerPlusDesignMode thisStudioPowerDesignerPlusDesignMode =
 				new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 				"Power designer has opened");
+			// 'If you can't click on them select Options and make sure Edit mode is selected.'
 			thisStudioPowerDesignerPlusDesignMode.ClickOptions();
 			Delay.Seconds(1);
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.WaitForDocumentOptionsPopup(30),
@@ -4399,6 +4398,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.SetOption("edit", true), "Failed to set edit",
 				"Successfully set edit to true");
 			thisStudioPowerDesignerPlusDesignMode.ClickCloseDocumentOptionsPopup();
+			// Set the DPQAPF, DCQAPF, VOCQA, RSQAPF and RSQHADPF data codes to show the Green check mark graphic (filename is DPQA_PASS[1].png)
+			// Do this by double clicking on the graphic and selecting the green check mark graphic from the available list and click save
 			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
 				"datacode",
 				"value"
@@ -4420,7 +4421,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"pass"
 			});
 			table2.AddRow(new string[] {
-				"RSQHADPF",
+				"RSQAHDPF",
 				"pass"
 			});
 			Steps_Studio thisStepsStudio = new Steps_Studio();

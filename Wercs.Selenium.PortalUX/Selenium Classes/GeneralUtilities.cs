@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -146,6 +147,38 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var nodes = document.DocumentNode.SelectNodes(@"//a[@name='upclist']//following-sibling::div//ul//li//div[@class='rImage']/a");
 			var upcValues = nodes.Select(x => x.InnerText).ToList();
 			return upcValues;
+		}
+
+		public static bool TrySelect(IWebElement el, string optionValue, bool ignoreWhitespace = false)
+		{
+			try
+			{
+				if (el.TagName != "select")
+				{
+					return false;
+				}
+				if (!ignoreWhitespace)
+				{
+					el.Select(optionValue);
+					return el.SelectedOption() == optionValue;
+				}
+				var options = el.FindElements(By.XPath("./option"), 1);
+				foreach (var thisOptionEl in options)
+				{
+					var thisOptionValue = thisOptionEl.GetValue();
+					if (thisOptionValue.Replace(" ", string.Empty) != optionValue.Replace(" ", string.Empty))
+					{
+						continue;
+					}
+					el.Select(thisOptionValue);
+					return el.SelectedOption() == thisOptionValue;
+				}
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
 		}
 
 

@@ -148,10 +148,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					}
 					else
 					{
-						
 						packageField.Select(info.TransportationOption);
+						GeneralUtilities.TrySelect(packageField, info.TransportationOption, true);
 					}
-					
 				}
 				return true;
 			}

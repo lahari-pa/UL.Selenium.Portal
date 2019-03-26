@@ -498,6 +498,7 @@ namespace WERCSmart
 				{
 					throw new Exception("No Main Window Handle found in context!");
 				}
+				// if current window = main window then return
 				Report.Info("Attempting to close the current window");
 				SeleniumBrowser.WebBrowser.Close();
 				Report.Info("Current window closed, switching to the MainWindowHandle");

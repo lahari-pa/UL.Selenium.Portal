@@ -1597,11 +1597,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 				{
 					Report.Info("Checking handle: " + handle);
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-					if (SeleniumBrowser.WebBrowser.FindElement(
-							By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
+					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h3[contains(text(),'SHA Manager Product UPC')]"), 2) != null)
 					{
 						Report.Success("Tab was switched successfully!");
 						Report.Screenshot();
+						currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+						Context.AddToContext("SHAManagerProductUPC", currentHandle);
 						foundWindow = true;
 						break;
 					}
