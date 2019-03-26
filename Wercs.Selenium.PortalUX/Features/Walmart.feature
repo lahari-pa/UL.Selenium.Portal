@@ -249,7 +249,6 @@ Given If I see the retail partners page I set all data consent tiers to true for
 
 Then The home screen should load
 
-
 Given I generate a random UPC number and save as: UPC63684
 
 Given I delete all products with UPC Number: saved as UPC63684
@@ -277,7 +276,7 @@ Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 
-Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: test
+Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: random
 
 Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC63684, container type: Plastic Container and size: 3.6
 
@@ -295,11 +294,11 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet shampoo
 
-# Navigate to home page
+Given I navigate to the home page
 
-# Filter for the Product you have created
+Given I search for the product saved as: TestCase63684
 
-# Confirm that next to the 'Product Name' - you see a "PL"  that you see a PL icon next to your product ID
+Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
 

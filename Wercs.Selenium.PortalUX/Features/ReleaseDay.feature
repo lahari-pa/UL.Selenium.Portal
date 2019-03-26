@@ -861,6 +861,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
 
+
 Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -1226,13 +1227,15 @@ And I confirm that the Packaging Type saved as: ThisPackaging does not appear in
 
 
 Scenario: [63684] Walmart Private label product
+
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+
 Then The home screen should load
 
-# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
 Given I generate a random UPC number and save as: UPC63684
+
 Given I delete all products with UPC Number: saved as UPC63684
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -1276,14 +1279,13 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet shampoo
 
+Given I navigate to the home page
+
+Given I search for the product saved as: TestCase63684
+
+Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
+
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684
-
-# Assigned to Barrett, Beverly
-# Created by Barrett, Beverly
-
-# Test case can be found at the following paths:
-# NetProjects10\WercsSmart Portal\SHA Manager\Add to Recertification
-# NetProjects10\WercsSmart Portal\Release Day Tests
 
 @SHA
 @51296

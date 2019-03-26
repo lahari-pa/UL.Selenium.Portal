@@ -3121,16 +3121,18 @@ namespace Wercs.Selenium.PortalUX.Steps
 			stepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			var newProduct = new NewProduct();
 			stepsRetailer.SelectPrivateLabelName(name);
-
+			Delay.Seconds(2);
 			if (option == "random")
 			{
-				new Retailer().SelectRandomVendorId();
+				TestReport.StartStep("Selecting a random vendor ID");
+				Report.IsTrue(new Retailer().SelectRandomVendorId(), "Failed to set Vendor ID!", "Successfully set vendor ID");
+				Report.Screenshot();
 			}
 			else
 			{
+				TestReport.StartStep("Selecting vendor ID: " + option);
 				new Steps_Retailer().ISelectVendorId(option);
 			}
-
 			TestReport.StartStep("In the Retailer page I click Continue");
 			stepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
 		}

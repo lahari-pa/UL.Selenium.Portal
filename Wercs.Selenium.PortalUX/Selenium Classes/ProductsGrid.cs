@@ -270,7 +270,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
 				DateCreated = DateCreated,
 				Retailers = Retailers,
-				RetailerAbrv = RetailersAbrv
+				RetailerAbrv = RetailersAbrv,
+				NameLabel = labelBrandTag?.Text
 			};
 			return productElement;
 		}
@@ -373,15 +374,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
 							productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
 						DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim(),
-						Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList()
+						Retailers = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed).Select(x => x.Text).ToList(),
+						NameLabel = labelBrandTag?.Text
 					};
 					ListProductGridItems.Add(productElement);
 
 				}
 			}
 			return ListProductGridItems;
-
-
 		}
 
 
@@ -878,6 +878,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string DateCreated { get; set; }
 		public List<string> Retailers { get; set; }
 		public List<string> RetailerAbrv { get; set; }
+
+		public string NameLabel { get; set; }
 
 		public bool ClickActions()
 		{

@@ -2037,5 +2037,20 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"Failed to click button: " + button.ToUpper(), "Clicked " + button.ToUpper());
 			Delay.Seconds(1);
 		}
+
+		[StepDefinition(@"I confirm that the label: '(.*)' is displayed next to the Product Name for the top result in the grid")]
+		public void ConfirmThatTheProductNameLabelIsDisplayed(string label)
+		{
+			Report.Info("Getting first product in the grid");
+			var product = new ProductsGrid().FirstProductInGrid();
+			if (product == null)
+			{
+				Report.Failure("No products were found in the grid!");
+				Report.Screenshot();
+				return;
+			}
+			Report.Info("Checking the top product Name label");
+			Report.IsTrue(product.NameLabel == label, $"The '{label}' label was not displayed next to the product name for the top result!", $"The '{label}' label was displayed next to the product name for the top result");
+		}
 	}
 }
