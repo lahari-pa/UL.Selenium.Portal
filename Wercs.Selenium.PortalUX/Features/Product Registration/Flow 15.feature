@@ -13,7 +13,7 @@
 Feature: Flow 15
 
 
-Scenario: [58760] Lights, LED - RU000948
+Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -25,7 +25,7 @@ Given I delete all products with UPC Number: saved as UPC58760
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lights, LED
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)
 
 Then I save the product information as: TestCase58760
 
