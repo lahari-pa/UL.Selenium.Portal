@@ -1411,7 +1411,7 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 394
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I log in with the account saved in TReVor as: PremiumSubscriptionAccount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 396
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 398
@@ -1437,17 +1437,6 @@ testRunner.Given("I search for UPC number saved as: Summary - UPC - 71188", ((st
 #line 416
 testRunner.Then("I should only see one product in the grid, with Product ID matching that saved as" +
                     ": Summary - Product ID - 71188", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 418
-testRunner.Given("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 420
-testRunner.And("I click on the Row Action: View", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 422
-testRunner.Then("A Summary page should open in a new browser tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 424
-testRunner.And("in the Summary page the UPC number should match that saved as: Summary - UPC - 71" +
-                    "188", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 426
-testRunner.Given("I close the browser tab with the Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1478,12 +1467,12 @@ testRunner.Given("I close the browser tab with the Summary page", ((string)(null
         public virtual void _65617CorrectOrderOfStatuses()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65617] Correct Order of Statuses", null, ((string[])(null)));
-#line 428
+#line 419
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 429
+#line 420
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 430
+#line 421
 testRunner.And("I should see a Pie Chart and Legend under Product Information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1498,7 +1487,7 @@ testRunner.And("I should see a Pie Chart and Legend under Product Information", 
                         "Accepted by Retailers"});
             table8.AddRow(new string[] {
                         "Needs Your Attention"});
-#line 431
+#line 422
 testRunner.And("I should see the following states in the following order in the Legend:", ((string)(null)), table8, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1517,7 +1506,7 @@ testRunner.And("I should see the following states in the following order in the 
                         "Needs Your Attention"});
             table9.AddRow(new string[] {
                         "Canceled"});
-#line 438
+#line 429
 testRunner.And("I should see the following filters in the following order under My products:", ((string)(null)), table9, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1549,17 +1538,17 @@ testRunner.And("I should see the following filters in the following order under 
         public virtual void _59732Announcements_Add()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59732] Announcements - Add", null, ((string[])(null)));
-#line 448
+#line 439
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 449
+#line 440
 testRunner.Given("I navigate to Studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 450
+#line 441
 testRunner.Given("I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Sha" +
                     "red Step))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 451
+#line 442
 testRunner.Given("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 452
+#line 443
 testRunner.Given("I call Shared Step 59728 (Go to Manage Global Messages)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1574,15 +1563,15 @@ testRunner.Given("I call Shared Step 59728 (Go to Manage Global Messages)", ((st
                         "GlobalMessage",
                         "true",
                         "Warning"});
-#line 453
+#line 444
 testRunner.Given("In the the Manage Global Messages dialog I add and save the following messages:", ((string)(null)), table10, "Given ");
-#line 456
+#line 447
 testRunner.Given("I close the Manage Global Messages dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 457
+#line 448
 testRunner.Given("I navigate to Portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 458
+#line 449
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 459
+#line 450
 testRunner.Then("In the announcements area I should see my saved messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -1614,24 +1603,24 @@ testRunner.Then("In the announcements area I should see my saved messages", ((st
         public virtual void _58579LiveHelp_ChatFeature()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[58579] Live Help - Chat Feature", null, ((string[])(null)));
-#line 461
+#line 452
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 462
+#line 453
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 463
+#line 454
 testRunner.Given("I click on the Live Help button on the upper right", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 464
+#line 455
 testRunner.Then("I should see the Live Help dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 465
+#line 456
 testRunner.Then("In the Live Help dialog I should see the following text: Please provide the follo" +
                     "wing to begin a live chat or call: Support: +1-518-720-6220 or +1-877-642-6753  " +
                     "Agency: +1-855-313-1230", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 466
+#line 457
 testRunner.Given("In the Live Help dialog I enter name: John Smith", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 467
+#line 458
 testRunner.Given("In the Live Help dialog I enter email: johnsmithtest@test.co.uk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 468
+#line 459
 testRunner.Given("In the Live Help dialog I click on the x to close", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -1663,18 +1652,18 @@ testRunner.Given("In the Live Help dialog I click on the x to close", ((string)(
         public virtual void _56829MoreFilters()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56829] More Filters", null, ((string[])(null)));
-#line 470
+#line 461
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 474
+#line 465
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 476
+#line 467
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 478
+#line 469
 testRunner.And("I should see an option for More Filters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 480
+#line 471
 testRunner.Given("I click More Filters in the products grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 482
+#line 473
 testRunner.Given("I confirm the product exists with Product ID: 1501253 and Name: More Filters Test" +
                     " Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1693,7 +1682,7 @@ testRunner.Given("I confirm the product exists with Product ID: 1501253 and Name
             table11.AddRow(new string[] {
                         "Additional Programs",
                         "Kit Registrations"});
-#line 484
+#line 475
 testRunner.Given("I enter combinations of More Filters and should see the product ID: 1501253 only " +
                     "for the correct combinations", ((string)(null)), table11, "Given ");
 #line hidden
@@ -1712,20 +1701,20 @@ testRunner.Given("I enter combinations of More Filters and should see the produc
             table12.AddRow(new string[] {
                         "Additional Programs",
                         "Kit Registrations"});
-#line 491
+#line 482
 testRunner.Given("I enter combinations of Status and More Filters and should see the product ID: 15" +
                     "01253 only for the correct combinations", ((string)(null)), table12, "Given ");
-#line 498
+#line 489
 testRunner.Given("I click More Filters in the products grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 500
+#line 491
 testRunner.Then("the \'More Filters\' options are not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 502
+#line 493
 testRunner.Given("I click More Filters in the products grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 504
+#line 495
 testRunner.Then("the \'More Filters\' options are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 506
+#line 497
 testRunner.Given("I click More Filters in the products grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 508
+#line 499
 testRunner.Then("the \'More Filters\' options are not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -1757,18 +1746,18 @@ testRunner.Then("the \'More Filters\' options are not displayed", ((string)(null
         public virtual void _66335MainMenu_Expanded()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[66335] Main Menu - expanded", null, ((string[])(null)));
-#line 512
+#line 503
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 514
+#line 505
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 516
+#line 507
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 518
+#line 509
 testRunner.And("I should see the navigation menu icon in the navigation bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 520
+#line 511
 testRunner.Given("I expand the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 522
+#line 513
 testRunner.Then("the Navigation Menu should be expanded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1789,9 +1778,9 @@ testRunner.Then("the Navigation Menu should be expanded", ((string)(null)), ((Te
                         "Shopping Cart"});
             table13.AddRow(new string[] {
                         "Support"});
-#line 524
+#line 515
 testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table13, "And ");
-#line 535
+#line 526
 testRunner.Given("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1812,9 +1801,9 @@ testRunner.Given("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.
                         "Shopping Cart"});
             table14.AddRow(new string[] {
                         "Support"});
-#line 537
+#line 528
 testRunner.Then("the following icons should be found in the navigation bar", ((string)(null)), table14, "Then ");
-#line 548
+#line 539
 testRunner.And("the navigation labels should be hidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1846,20 +1835,20 @@ testRunner.And("the navigation labels should be hidden", ((string)(null)), ((Tec
         public virtual void _66336MainMenu_Collapsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[66336] Main Menu - collapsed", null, ((string[])(null)));
-#line 550
+#line 541
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 552
+#line 543
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 554
+#line 545
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 556
+#line 547
 testRunner.Given("I expand the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 558
+#line 549
 testRunner.Then("the Navigation Menu should be expanded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 560
+#line 551
 testRunner.Given("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 562
+#line 553
 testRunner.Then("the Navigation Menu should be collapsed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1889,7 +1878,7 @@ testRunner.Then("the Navigation Menu should be collapsed", ((string)(null)), ((T
             table15.AddRow(new string[] {
                         "Life-Saver",
                         "Support"});
-#line 564
+#line 555
 testRunner.Given("the hover over text is as expected for the following navigation icons", ((string)(null)), table15, "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -1921,21 +1910,21 @@ testRunner.Given("the hover over text is as expected for the following navigatio
         public virtual void _68413MoreFilters_Retailer()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68413] More Filters - Retailer", null, ((string[])(null)));
-#line 578
+#line 569
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 579
+#line 570
 testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 580
+#line 571
 testRunner.Given("I click More Filters in the products grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 581
+#line 572
 testRunner.And("I confirm the filter with label: \"Retailer\" is displayed and default option: \"All" +
                     " Retailers\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 582
+#line 573
 testRunner.And("I confirm retailers list based on environment", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 640
+#line 631
 testRunner.And("I select the Wal-Mart/SAM\'S CLUB option in the Retailer More Filters drop down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 641
+#line 632
 testRunner.And("I confirm all products in the grid contain either the the text \"WM\" or \"All\" unde" +
                     "r the \'Retailers\' column", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1968,36 +1957,36 @@ testRunner.And("I confirm all products in the grid contain either the the text \
         public virtual void _64528EditUPCs_ClickLinkCheckStatusInSHA()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64528] Edit UPCs - Click Link check status in SHA", null, ((string[])(null)));
-#line 648
+#line 639
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 650
+#line 641
 testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: Produ" +
                     "ctSetup64528", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 652
+#line 643
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 654
+#line 645
 testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 656
+#line 647
 testRunner.And("I search for the product saved as: ProductSetup64528", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 658
+#line 649
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 660
+#line 651
 testRunner.Then("I click on the Row Action: Edit UPCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 662
+#line 653
 testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 664
+#line 655
 testRunner.And("I confirm that retailer \"CV\" is present under the \'Destination Retailers\' column " +
                     "in the UPC table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 666
+#line 657
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 668
+#line 659
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: ProductSetup64528)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 670
+#line 661
 testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup645" +
                     "28 and its font is red indicating a recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 672
+#line 663
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: ProductSetup64528", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2007,15 +1996,15 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "Active"});
             table16.AddRow(new string[] {
                         "saved as ProductSetup64528",
-                        "2.0 Specific UPC Update",
+                        "2.0 UPC Update",
                         "true"});
-#line 674
+#line 665
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table16, "Given ");
-#line 678
+#line 669
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 680
+#line 671
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 682
+#line 673
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2049,36 +2038,36 @@ testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automati
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remov" +
                     "e UPC Update", null, ((string[])(null)));
-#line 687
+#line 678
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 689
+#line 680
 testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: Produ" +
                     "ctSetup64529", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 691
+#line 682
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 693
+#line 684
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 695
+#line 686
 testRunner.And("I search for the product saved as: ProductSetup64529", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 697
+#line 688
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 699
+#line 690
 testRunner.Then("I click on the Row Action: Edit UPCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 701
+#line 692
 testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 703
+#line 694
 testRunner.And("I confirm that retailer \"CV\" is present under the \'Destination Retailers\' column " +
                     "in the UPC table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 705
+#line 696
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 707
+#line 698
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: ProductSetup64529)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 709
+#line 700
 testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup645" +
                     "29 and its font is red indicating a recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 711
+#line 702
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: ProductSetup64529", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2090,17 +2079,17 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "saved as ProductSetup64529",
                         "2.0 UPC Update",
                         "true"});
-#line 713
+#line 704
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table17, "Given ");
-#line 717
+#line 708
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 719
+#line 710
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 721
+#line 712
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 723
+#line 714
 testRunner.And("I search for the product saved as: ProductSetup64529", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 725
+#line 716
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2117,7 +2106,7 @@ testRunner.And("I click Row Actions for the first product returned", ((string)(n
                         "Remove UPC Update"});
             table18.AddRow(new string[] {
                         "Monitor Progress"});
-#line 727
+#line 718
 testRunner.And("I should see the following Actions options", ((string)(null)), table18, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2149,66 +2138,66 @@ testRunner.And("I should see the following Actions options", ((string)(null)), t
         public virtual void _64530ProcessUPCUpdate()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64530] Process UPC Update", null, ((string[])(null)));
-#line 738
+#line 729
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 740
+#line 731
 testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: Produ" +
                     "ctSetup64530", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 742
+#line 733
 testRunner.Given("I generate a random UPC number and save as: UPC64530", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 744
+#line 735
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 748
+#line 739
 testRunner.Given("I log in with the account saved in TReVor as: PremiumSubscriptionAccount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 750
+#line 741
 testRunner.And("I search for the product saved as: ProductSetup64530", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 752
+#line 743
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 754
+#line 745
 testRunner.Then("I click on the Row Action: Edit UPCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 756
+#line 747
 testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 758
+#line 749
 testRunner.And("I confirm that retailer \"CV\" is present under the \'Destination Retailers\' column " +
                     "in the UPC table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 760
+#line 751
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 762
+#line 753
 testRunner.And("I search for the product saved as: ProductSetup64530", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 764
+#line 755
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 766
+#line 757
 testRunner.Then("I click on the Row Action: Process UPC Update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 768
+#line 759
 testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 770
+#line 761
 testRunner.And("I call Shared Step 75307 (Edit UPC - Add UPC and all data - Click Save) for UPC N" +
                     "umber saved as: \"UPC64530\", container type: \"Plastic Container\", size: \"10\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 772
+#line 763
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 774
+#line 765
 testRunner.Then("In the Data Acceptance page I select Yes, Agreed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 776
+#line 767
 testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 778
+#line 769
 testRunner.And("the Purchase Summary should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 780
+#line 771
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 782
+#line 773
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 784
+#line 775
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: ProductSetup64530)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 786
+#line 777
 testRunner.And("I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: " +
                     "ProductSetup64530", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 788
+#line 779
 testRunner.And("I confirm UPC number saved as: \"UPC64530\" is displayed in the SHA Manager Product" +
                     " UPC list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 790
+#line 781
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 792
+#line 783
 testRunner.And("I call Shared Step 55637 (SHA - Process UPC Update for Specific product) saved as" +
                     ": ProductSetup64530", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2216,7 +2205,7 @@ testRunner.And("I call Shared Step 55637 (SHA - Process UPC Update for Specific 
                         "Retailer"});
             table19.AddRow(new string[] {
                         "CVS"});
-#line 794
+#line 785
 testRunner.And("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
                     " saved as: ProductSetup64530) for", ((string)(null)), table19, "And ");
 #line hidden
@@ -2249,38 +2238,38 @@ testRunner.And("I call Shared Step 51664 (SHA - Accepted Product - set Retailers
         public virtual void _64531RemoveUPCUpdate_Cancel()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64531] Remove UPC Update - Cancel", null, ((string[])(null)));
-#line 808
+#line 799
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 810
+#line 801
 testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: Produ" +
                     "ctSetup64531", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 812
+#line 803
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 814
+#line 805
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 816
+#line 807
 testRunner.And("I search for the product saved as: ProductSetup64531", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 818
+#line 809
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 820
+#line 811
 testRunner.Then("I click on the Row Action: Edit UPCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 822
+#line 813
 testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 824
+#line 815
 testRunner.And("I confirm that retailer \"CV\" is present under the \'Destination Retailers\' column " +
                     "in the UPC table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 826
+#line 817
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 828
+#line 819
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 830
+#line 821
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: ProductSetup64531)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 832
+#line 823
 testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup645" +
                     "31 and its font is red indicating a recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 834
+#line 825
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: ProductSetup64531", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2292,31 +2281,31 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "saved as ProductSetup64531",
                         "2.0 UPC Update",
                         "true"});
-#line 836
+#line 827
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table20, "Given ");
-#line 840
+#line 831
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 842
+#line 833
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 844
+#line 835
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 846
+#line 837
 testRunner.And("I search for the product saved as: ProductSetup64531", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 848
+#line 839
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 850
+#line 841
 testRunner.Then("I click on the Row Action: Remove UPC Update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 852
+#line 843
 testRunner.And("I confirm the Remove UPC Update popup displays the warning: Are you sure you want" +
                     " to restore the following Product ?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 854
+#line 845
 testRunner.And("I confirm the Remove UPC Update popup displays the name and ID for product saved " +
                     "as: ProductSetup64531", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 856
+#line 847
 testRunner.Given("in the modal dialog I click cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 858
+#line 849
 testRunner.And("I confirm the Remove UPC Update popup has closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 860
+#line 851
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2333,7 +2322,7 @@ testRunner.And("I click Row Actions for the first product returned", ((string)(n
                         "Remove UPC Update"});
             table21.AddRow(new string[] {
                         "Monitor Progress"});
-#line 862
+#line 853
 testRunner.And("I should see the following Actions options", ((string)(null)), table21, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2365,38 +2354,38 @@ testRunner.And("I should see the following Actions options", ((string)(null)), t
         public virtual void _64532RemoveUPCUpdate_Remove()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64532] Remove UPC Update - Remove", null, ((string[])(null)));
-#line 871
+#line 862
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 873
+#line 864
 testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: Produ" +
                     "ctSetup64532", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 875
+#line 866
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 877
+#line 868
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 879
+#line 870
 testRunner.And("I search for the product saved as: ProductSetup64532", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 881
+#line 872
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 883
+#line 874
 testRunner.Then("I click on the Row Action: Edit UPCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 885
+#line 876
 testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 887
+#line 878
 testRunner.And("I confirm that retailer \"CV\" is present under the \'Destination Retailers\' column " +
                     "in the UPC table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 889
+#line 880
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 891
+#line 882
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 893
+#line 884
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: ProductSetup64532)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 895
+#line 886
 testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup645" +
                     "32 and its font is red indicating a recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 897
+#line 888
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: ProductSetup64532", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -2408,23 +2397,23 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "saved as ProductSetup64532",
                         "2.0 UPC Update",
                         "true"});
-#line 900
+#line 891
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table22, "Given ");
-#line 904
+#line 895
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 906
+#line 897
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 908
+#line 899
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 910
+#line 901
 testRunner.And("I search for the product saved as: ProductSetup64532", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 912
+#line 903
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 914
+#line 905
 testRunner.Then("I click on the Row Action: Remove UPC Update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 916
+#line 907
 testRunner.And("in the modal dialog I click the \"REMOVE\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 918
+#line 909
 testRunner.And("I confirm the Remove UPC Update popup has closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2433,23 +2422,23 @@ testRunner.And("I confirm the Remove UPC Update popup has closed", ((string)(nul
                         "Process UPC Update"});
             table23.AddRow(new string[] {
                         "Remove UPC Update"});
-#line 920
+#line 911
 testRunner.And("I should not see the following Actions options", ((string)(null)), table23, "And ");
-#line 925
+#line 916
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 927
+#line 918
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: ProductSetup64532)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 929
+#line 920
 testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup645" +
                     "32 and its font is not red indicating a recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 931
+#line 922
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: ProductSetup64532", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 933
+#line 924
 testRunner.And("I confirm there is no product entry listed with Recertification Reason: 2.0 Speci" +
                     "fic UPC Update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 935
+#line 926
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -2481,25 +2470,25 @@ testRunner.Given("I Close the Product Recertification History pop up", ((string)
         public virtual void _85275SelectAll_PopupCloses()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85275] Select All - Popup closes", null, ((string[])(null)));
-#line 941
+#line 932
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 942
+#line 933
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 944
+#line 935
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 946
+#line 937
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 948
+#line 939
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 950
+#line 941
 testRunner.Then("I save the product information as: TestCase85275", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 952
+#line 943
 testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 954
+#line 945
 testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -2515,41 +2504,41 @@ testRunner.Given("I call Shared Step 59680 (Additional Product Information - US 
                         "false",
                         "false",
                         ""});
-#line 956
+#line 947
 testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table24, "Given ");
-#line 960
+#line 951
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 962
+#line 953
 testRunner.Then("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 964
+#line 955
 testRunner.Given("I click the Select all retailers option in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 966
+#line 957
 testRunner.Then("all retailers are selected in the Select Retailers window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 968
+#line 959
 testRunner.Given("I click Done in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 970
+#line 961
 testRunner.Given("In the Retailers tab, I select the first Vendor option for retailer: O\'Reilly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 972
+#line 963
 testRunner.Given("In the Retailers tab, I select the first Vendor option for retailer: Sears/K-Mart" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 974
+#line 965
 testRunner.Given("In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM" +
                     "\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 976
+#line 967
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 978
+#line 969
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 980
+#line 971
 testRunner.And("I search for the product saved as: TestCase85275", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 982
+#line 973
 testRunner.And("I click \'All\' under Retailers for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 984
+#line 975
 testRunner.Then("I confirm the Retailers popup is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 986
+#line 977
 testRunner.And("I click the products grid container", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 988
+#line 979
 testRunner.Then("I confirm the Retailers popup is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 990
+#line 981
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase85275", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -2582,37 +2571,37 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         public virtual void _71230ArchivedRetailers_MyProductsView()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[71230] Archived Retailers - My Products View", null, ((string[])(null)));
-#line 993
+#line 984
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 994
+#line 985
 testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 995
+#line 986
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 996
+#line 987
 testRunner.Given("I filter the products by: Accepted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 997
+#line 988
 testRunner.And("I save the ProductID and Name of the first Product in the grid with a retailer as" +
                     ": TestCase71230", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 998
+#line 989
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 999
+#line 990
 testRunner.And("I click on the Row Action: Archive Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1000
+#line 991
 testRunner.And("I should see the Archive Retailers Popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1001
+#line 992
 testRunner.And("In the Archive Retailers popup, I select the the checkbox next to the the first r" +
                     "etailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1002
+#line 993
 testRunner.And("In the Archive Retailers popup click on: ARCHIVE", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1003
+#line 994
 testRunner.And("I search for the product saved as: TestCase71230", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1004
+#line 995
 testRunner.And("I Select the check box next to Show Archived Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1005
+#line 996
 testRunner.And("I Confirm that two asterisks are visible in the retailer(s) that are archived ico" +
                     "ns that display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1006
+#line 997
 testRunner.And("I Deselect the check box next to Show Archived Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2644,16 +2633,16 @@ testRunner.And("I Deselect the check box next to Show Archived Retailers", ((str
         public virtual void _73791MyProductsGrid_RetailersColumnAlphabeticalOrder()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73791] My Products grid - Retailers Column Alphabetical Order", null, ((string[])(null)));
-#line 1008
+#line 999
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 1009
+#line 1000
 testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1010
+#line 1001
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 1011
+#line 1002
 testRunner.Given("I filter the products by: Accepted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1012
+#line 1003
 testRunner.And("I check for all items in the grid that the retailers are alphabetically listed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

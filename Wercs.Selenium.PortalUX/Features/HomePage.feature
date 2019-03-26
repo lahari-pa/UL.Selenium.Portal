@@ -391,7 +391,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 # JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
 
 Then The home screen should load
 
@@ -415,15 +415,6 @@ Given I search for UPC number saved as: Summary - UPC - 71188
 
 Then I should only see one product in the grid, with Product ID matching that saved as: Summary - Product ID - 71188
 
-Given I click Row Actions for the first product returned
-
-And I click on the Row Action: View
-
-Then A Summary page should open in a new browser tab
-
-And in the Summary page the UPC number should match that saved as: Summary - UPC - 71188
-
-Given I close the browser tab with the Summary page
 
 Scenario: [65617] Correct Order of Statuses
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -673,7 +664,7 @@ And I call Shared Step 51351 (SHA > Select Product > View Recertification Histor
 
 Given In the Product Recertification History popup I should see the following entry
 | Product ID                 | Recertification Reason  | Active |
-| saved as ProductSetup64528 | 2.0 Specific UPC Update | true   |
+| saved as ProductSetup64528 | 2.0 UPC Update | true   |
 
 Given I Close the Product Recertification History pop up
 
