@@ -163,7 +163,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 				List<string> vendorOptions = el.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
 				Random r = new Random();
-				int rInt = r.Next(0, vendorOptions.Count-1); 
+				int rInt = r.Next(0, vendorOptions.Count-1);
+				Report.Info("Attempting to select vendor: " + vendorOptions[rInt]);
 				el.Select(vendorOptions[rInt]);
 				Delay.Seconds(1);
 				return el.SelectedOption() == vendorOptions[rInt];

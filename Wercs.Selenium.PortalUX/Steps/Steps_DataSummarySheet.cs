@@ -80,14 +80,32 @@ namespace Wercs.Selenium.PortalUX.Steps
 				"option was showing: " + message + ", as expected!");
 		}
 
+		[StepDefinition(@"Product Name should be showing value: (.*)")]
+		public void ProductNameShouldBeShowingFollowing(string option)
+		{
+			var dataSummarySheet = new DataSummary();
+
+
+			var found = dataSummarySheet.sGetProductName();
+
+			Report.IsTrue(found.Contains(option),
+				"Expected: " + option + " but got: " + found,
+				"Got value: " + option + " as expected.");
+
+			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
+		}
+
+
 		[StepDefinition(@"(.*) should be showing the following option: (.*)")]
 		public void ShouldBeShowingFollowing(string section, string option)
 		{
 			var dataSummarySheet = new DataSummary();
+
+			
 			var found = dataSummarySheet.GetInfoForSectionOption(section, option);
 
 			Report.IsTrue(found.Contains(option),
-					"option was not as expected! Expected: " + option + " in section: " + section + " but got: " + found,
+					"option was not as expected! Expected: " + option + " in section: " + section + " but got: " + string.Join(",",found),
 					"option was showing: " + option + " in section: " + section);
 
 			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);

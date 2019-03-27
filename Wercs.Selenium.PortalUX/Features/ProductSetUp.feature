@@ -953,3 +953,35 @@ And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Mu
 Given I call Shared Step 59066 (Go to SHA Manager)
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78865)
 And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78865 and its status is: Completed
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Registration\4. Account Canada address(Yes), Package type (Yes), Stewardship (FULL)
+
+Scenario: [85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
+#Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
+Given I login into the WERCSmart Portal - Canada has all data account
+And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#And I In the shared step below use Bubble solution as your product type
+And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+And I call Shared Step 85730 - Additional Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
+And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+And In the 'Select Retailers' window I select the retailer: Canadian Tire
+And I click Done in the Select Retailers popup
+And For retailer: Canadian Tire I add additional requirements: Additional requirements: Canadian Tire
+And I click continue
+And I should see the Universal Product Code (UPC) Page
+#And In the UPC page I should see Add new Packaging Type link
+Given I generate a random UPC number and save as: UPC85752
+And I click the 'Add UPC' button
+And I enter UPC Number: saved as UPC85752
+And I Select a container type from the drop down list
+And I Add a value for Size (Ounces)
+And I Confirm the Package Type drop down list shows a Packaging type available for selection - Do not select one
+And I click continue
+And I Confirm "This is a required field" error message is shown below the Package Type field
+And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85752

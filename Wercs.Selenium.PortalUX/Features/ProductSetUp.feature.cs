@@ -2876,6 +2876,87 @@ testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = Y" +
+            "ES, Packaging type IS required")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Product set up and process to specific statuses (Suite ID: 75359)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("CreateProducts")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Studio")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductSetUp")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ProductSetUp")]
+        public virtual void _85752AccountHasAllCanadaData_ALLStewardshipSOLDCanadaOnlyPLYESPackagingTypeISRequired()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = Y" +
+                    "ES, Packaging type IS required", null, ((string[])(null)));
+#line 963
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 965
+testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 966
+testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 968
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 969
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 970
+testRunner.And("I call Shared Step 85730 - Additional Product Information - Canada Only - Child (" +
+                    "NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 971
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydro" +
+                    "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 972
+testRunner.And("I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue -" +
+                    " Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 973
+testRunner.And("In the \'Select Retailers\' window I select the retailer: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 974
+testRunner.And("I click Done in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 975
+testRunner.And("For retailer: Canadian Tire I add additional requirements: Additional requirement" +
+                    "s: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 976
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 977
+testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 979
+testRunner.Given("I generate a random UPC number and save as: UPC85752", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 980
+testRunner.And("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 981
+testRunner.And("I enter UPC Number: saved as UPC85752", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 982
+testRunner.And("I Select a container type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 983
+testRunner.And("I Add a value for Size (Ounces)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 984
+testRunner.And("I Confirm the Package Type drop down list shows a Packaging type available for se" +
+                    "lection - Do not select one", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 985
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 986
+testRunner.And("I Confirm \"This is a required field\" error message is shown below the Package Typ" +
+                    "e field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 987
+testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85752", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

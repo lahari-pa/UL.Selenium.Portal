@@ -1467,6 +1467,111 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
+		
+		public List<InputError> GetAllErrors()
+		{
+			string regexPattern = @"""(?:optionsCaption:\s*[\'\""])(.*)(?:[\'\""])""";
+
+			var errorInputs = containerElement.FindElements(By.XPath(
+				"//p[@class='form-error' and not(contains(@style, 'none'))]/../input|//p[@class='form-error' and not(contains(@style, 'none'))]/../select"));
+
+			List<InputError > errorsList = new List<InputError>();
+			foreach (var errorInput in errorInputs)
+			{
+				string errorString = errorInput
+					.FindElement(By.XPath("./..//p[@class='form-error' and not(contains(@style, 'none'))]"), 2)
+					.GetValue();
+				var match = Regex.Match(errorInput.GetAttribute("data-bind"), regexPattern);
+
+				string inputTitle = "";
+
+				if (match.Success)
+				{
+					inputTitle = match.Groups[1].Value;
+				}
+
+				errorsList.Add(new InputError(){errorMessage = errorString, input=errorInput, inputName=inputTitle});
+
+			}
+
+			return errorsList;
+		}
+		
+		public List<string> GetAllOptionsForUPCPackageType()
+		{
+			if (!this.UPCPackageTypeFieldExists())
+			{
+				Report.Info("Package type field does not exist");
+				Report.Screenshot();
+				return null;
+			}
+			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var packageTypeField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+			return packageTypeField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+		}
+
+		public bool InputUPCNumber(string UPCnumber)
+		{
+			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+			if (UPCnumber.ToLower().Contains("saved as"))
+			{
+				try
+				{
+					var savedUPC = Context
+						.GetFromContext(UPCnumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					UPCnumber = savedUPC;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + UPCnumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+
+			}
+			upcNumberField.EnterText(UPCnumber);
+			return upcNumberField.GetValue() == UPCnumber;
+		}
+
+		public bool InputUPCSize(string size)
+		{
+			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
+			var regex = @"(.*)\((.*)\)";
+			var sizeField = (from input in textInputs
+				let match = Regex.Match(input.GetAttribute("placeholder"), regex)
+				where match.Success && match.Groups[1].Value.StartsWith("Size") && match.Groups[2].Value.Contains("Ounces")
+				select input).FirstOrDefault();
+			if (sizeField == null)
+			{
+				Report.Info(@"Failed to find 'Size' input in the format ""Size (.. Ounces)""");
+				return false;
+			}
+			sizeField.EnterText(size);
+			return sizeField.GetValue() == size;
+		}
+
+		public bool SelectContainerType(string containerType)
+		{
+			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+			var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+			containsType.Select(containerType);
+			return containsType.GetValue() == containerType;
+		}
+
+		public List<string> GetContainerOptions()
+		{
+			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+			var containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
+			return containsType.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
+		}
+
 		public bool InputUpcInformation(UpcInformation info)
 		{
 			try
@@ -4261,5 +4366,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 	}
 
+	public class InputError
+	{
+		public string inputName { get; set; }
+		public IWebElement input { get; set; }
+		public string errorMessage { get; set; }
+	}
 
 }

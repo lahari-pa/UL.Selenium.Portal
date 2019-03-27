@@ -121,7 +121,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 				Report.Error("Failed to located State Registration table row for state: " + state);
 				return false;
 			}
-			var input = row.FindElement(By.XPath("/td/input"), 2);
+			var input = row.FindElement(By.XPath("./td/input"), 2);
 			input.Clear();
 			input.EnterText(value);
 			return input.GetValue() == value;
@@ -310,6 +310,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		public List<StatePesticideRegistration> GetStatePesticideRegistrationDetails()
 		{
 			var rStatePest = new List<StatePesticideRegistration>();
+			Delay.Seconds(3);
 			var epaTable = this.Table();
 			if (epaTable == null)
 			{
@@ -338,7 +339,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 				var state = thisRow.FindElement(By.XPath($".//td[position() = {headings.IndexOf(expectedHeadings[1]) + 1}]//div")).Text;
 				var expirationDate = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[2]) + 1}]//input")).GetValue();
 				var registrationNumberEl = thisRow.FindElement(By.XPath($".//td[position()={headings.IndexOf(expectedHeadings[0]) + 1}]//input"));
-				var registrationNumber = registrationNumberEl.Text;
+				var registrationNumber = registrationNumberEl.GetValue();
 				if (registrationNumber.Length == 0)
 				{
 					registrationNumber = registrationNumberEl.GetAttribute("placeholder");
@@ -375,6 +376,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 			public bool EditRegistrationNumber(string value)
 			{
+				Report.Info("Beginning edit registration number: " + value);
 				return new PesticideDetailsState().EditRegistrationNumber(value, this.State);
 			}
 

@@ -735,25 +735,6 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
-		[Then(@"I should be on the New Account page of the form")]
-		public void ThenIShouldBeOnTheNewAccountPageOfTheForm()
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Check that new account page has loaded");
-			try
-			{
-				Report.Info("Checking that the New Account page has loaded");
-				NewUser thisNewUser = new NewUser();
-				Report.IsTrue(thisNewUser.WaitForPageTitle("New Account", 60),
-					"New Account page has not loaded as expected.",
-					"New Account page loaded as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
 
 
 		[StepDefinition(@"If terms of use page appears I accept")]

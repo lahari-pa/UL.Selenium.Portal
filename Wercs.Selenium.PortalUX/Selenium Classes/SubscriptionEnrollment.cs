@@ -241,6 +241,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Click_link(string planName, string item, string linkText, string linkURL)
 		{
+			Report.Info("Beginning click link. Plan name: " + planName + " item: " + item + " linktext: " + linkText + " url: " + linkURL);
 			List<Plan> allPlans = new List<Plan>();
 			if (ScenarioContext.Current.ContainsKey("Plans"))
 			{
@@ -313,12 +314,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						}
 						else
 						{
-							throw new Exception("No info link was found");
+							Report.Info( "No info link was found");
 						}
 					}
 					catch (Exception e)
 					{
-						throw new Exception("No info link was found: " + e.Message);
+						throw new Exception("Error: " + e.Message);
 					}
 				}
 				else

@@ -77,35 +77,45 @@ And I should see the Subheading Product Information expanded in the main window
 And I should see the Subheading Alerts expanded in the main window
 And I should see the Subheading Announcements expanded in the main window
 
-
+@63297
 Scenario: [63297] Add subscription to a new supplier through data entry
 Given I define the user: 63297 with the following parameters:
-| Field                | Value          |
-| Email                | User_<random>  |
-| Country              | UNITED STATES  |
-| FirstName            | Richard        |
-| LastName             | Smith          |
-| Password             | Pa4*ytuufnn    |
-| Address1             | Address 1      |
-| Address2             | Address 2      |
-| City                 | City Name      |
-| State                | Florida        |
-| Zip                  | 999            |
-| CompanyName          | Company 1      |
-| CompanyPhone         | 123-456-7889   |
-| EmergencyPhoneNumber | 123-456-7789   |
-| SupplierType         | Manufacturer   |
-| CityQuestion         | CityQuestion   |
-| CityHint             | CityHint       |
-| CarQuestion          | CarQuestion    |
-| CarHint              | CarHint        |
-| FriendQuestion       | FriendQuestion |
-| FriendHint           | FriendHint     |
-| JobQuestion          | JobQuestion    |
-| JobHint              | JobHint        |
-| MascotQuestion       | MascotQuestion |
-| MascotHint           | MascotHint     |
-| Pin                  | 1234           |
+| Field                | Value           |
+| Email                | User_<random>   |
+| Country              | UNITED STATES   |
+| FirstName            | Richard         |
+| LastName             | Smith           |
+| Password             | Pa4*ytuufnn     |
+| Address1             | Address 1       |
+| Address2             | Address 2       |
+| City                 | City Name       |
+| State                | Florida         |
+| Zip                  | 999             |
+| CompanyName          | Company 1       |
+| CompanyPhone         | 123-456-7889    |
+| EmergencyPhoneNumber | 123-456-7789    |
+| SupplierType         | Manufacturer    |
+| CityQuestion         | CityQuestion    |
+| CityHint             | CityHint        |
+| CarQuestion          | CarQuestion     |
+| CarHint              | CarHint         |
+| FriendQuestion       | FriendQuestion  |
+| FriendHint           | FriendHint      |
+| JobQuestion          | JobQuestion     |
+| JobHint              | JobHint         |
+| MascotQuestion       | MascotQuestion  |
+| MascotHint           | MascotHint      |
+| PhoneQuestion        | PhoneQuestion   |
+| PhoneHint            | PhoneHint       |
+| MentorQuestion       | MentorQuestion  |
+| MentorHint           | MentorHint      |
+| FriendQuestion       | FriendQuestion  |
+| FriendHint           | FriendHint      |
+| AnimalQuestion       | AnimalQuestion  |
+| AnimalHint           | AnimalHint      |
+| CollegeQuestion      | CollegeQuestion |
+| CollegeHint          | CollegeHint     |
+| Pin                  | 1234            |
 
 Given I save the current emails in the inbox for user saved as: 63297
 #Given I click on the New to WERCSmart Link
@@ -120,7 +130,7 @@ Then the email should contain a link to set up the WERCSmart account
 When I click on the link I should see the WERCSmart new account page
 And I enter the information into the new user form for user saved as: 63297
 And In the new user form I click on continue
-Then I should be on the 1234s page of the form
+Then I should be on the Security Questions page of the form
 And I enter the following into the Security Questions window for user saved as: 63297
 And I enter the pin for user saved as: 63297
 When In the new user form I click on continue
@@ -468,6 +478,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
 
 
+@71051
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -581,7 +592,7 @@ Given I set the Amount of VOC content as weight percentage of the total formula,
 Given in the New Product page I click Continue
 Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
 Then I confirm that I see the following VOC-OTC-CARB statement4: Based on your selection, you have verified your product contains VOC with intended uses as follows. The CARB VOC compliance limit(s) for the intended use you identified is/are:
-Given I call Shared Step 57819 (VOC Results - Confirm VOC Limits table shows correct values (CARB only) - Happy Path): Personal Fragrance Product (more than 20% fragrance)
+Given I call Shared Step 57819 (VOC Results - Confirm VOC Limits table shows correct values (CARB only) - Happy Path): Personal Fragrance Product (more than 20% fragrance) - Liquid
 And I confirm that I see the following VOC content as weight percentage for each state statement: VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.
 Then I confirm that I see the following CARB value: 20
 Then I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
@@ -603,7 +614,7 @@ Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (O
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Goggles                       | 200                      | 25                      | 12.2      | Black      | Odorless | No data available | 5                     |
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
 
 
@@ -692,9 +703,9 @@ Given in the New Product page I click Continue
 And I should see the Volatile Organic Compound Summary Page
 And I confirm that I see todays VOC Analysis Date
 And I should see the following Voc Limits with units  present:
-| Use                       | VOC Compliance Limit | Units      | Regulation           |
-| Charcoal Lighter Material | 0.02                 | lb / start | OTC Model rule limit |
-| Charcoal Lighter Material | 0.02                 | lb / start | CARB limit           |
+| Use                       | VOC Compliance Limit | Units    | Regulation           |
+| Charcoal Lighter Material | 0.02                 | lb/start | OTC Model rule limit |
+| Charcoal Lighter Material | 0.02                 | lb/start | CARB limit           |
 And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
 And I confirm statement: limits specified by CARB shows the text: Exceeds the limits specified by CARB
 And I confirm statement: limits specified by OTC shows the text: Exceeds the limits specified by OTC Model Rule
@@ -1183,6 +1194,8 @@ Given I create a product and take to completed using Test Case 75335 and save as
 Given I navigate to the landing page
 Given I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct2
 Given I navigate to the landing page
+
+#Scenario: debug 58753
 Given I generate a random UPC number and save as: UPC58753
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1210,7 +1223,7 @@ Given In the My Account page I navigate to the My Library page
 Then I confirm the current active tab on the My Library page is: My Packaging Types
 Given I click 'Add New' in the My Packaging Types section of My Library
 Then I should see the Packaging Type Page
-Given I set the Package Type Name field to: Super Packaging Type (TM)
+Given I set the Package Type Name field to: Super Packaging Type 1 (TM)
 Given I click continue
 Then I should see the Bill of Materials Page
 And I save the Packaging Type details as: ThisPackaging
@@ -1218,8 +1231,42 @@ Given I click Add Row in the Bill Of Materials grid
 Given I select the option: Clear Glass for the My Packaging Materials field in the table
 Given I select the option: 99 for the My Packaging Weight (grams) field in the table
 Given I click continue
+Then I should see the CONEG Page
+Given I set the Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA) field to: No
+Given I set the Do you have a CONEG Certificate for this package? field to: Yes
+
+#CLF - 26/3/2019 had to spell CONEG Certficate wrongly because otherwise it will not work.
+And I click the browse button for label: CONEG Certficate and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+#And I Verify the 'VIEW' and 'REMOVE' Buttons become active
+#And I Click the 'VIEW BUTTON'
+#And I Confirm the file opens for viewing in a new window
+#And I Close the window
+Given I click continue
+Then I should see the Data Acceptance Page
+#And I Confirm the following statement displays under 'Data Acceptance' - "In case of any problem with this product we will communicate to the following email address. Please update this email address if you want us to use a different email"
+#And I Confirm the email registered (user) is populated in the field under the Statement
+#And I Confirm the 'SUMMARY BUTTON' is available
+#And I Confirm the 'SUMMARY' Page opens in a NEW TAB
+Given I click the Summary button in the Data Acceptance window
+Given I switch to the Data Summary page
+Then Product Name should be showing value: Super Packaging Type 1 (TM)
+Given I close the Data Summary tab
+Then I should see the Data Acceptance Page
+
+#And I Verify the 'Summary Page' matched with the data/text entered for the '' you created
+#And I Click on the top-right 'PRINT BUTTON'
+#And I Verify the 'Summary Print Preview' contains the information you entered for the Packaging Type
+#And I Close the 'Print Preview Tab'
+#And I Click the 'ACCEPT BUTTON'
 Given In the Data Acceptance page I click on the Accept button
+#And I Verify your 'ID number and Packaging Type Name' appears under "ID / Packaging Type Name"
 Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
+#And I Verify the date appears under "Date Created"
+#And I Under the 'Actions Column' - Click on the [...]
+#And I Select the 'DELETE' Option
+#And I Verify popup Delete Product with message " Are you sure you want to remove this item?" and the name  and ID of your new packaging type
+#And I Click the 'DELETE Button'
 Given I delete Packaging Type saved as: ThisPackaging
 Then I confirm the name and ID for Packaging Type saved as: ThisPackaging appear in the Delete Product pop up
 Given I click Delete in the Delete Product pop up

@@ -1937,6 +1937,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[StepDefinition(@"I should see the following Voc Limits with units  present:")]
 		public void VocLimitsWithUnits(Table information)
 		{
+			Delay.Seconds(3);
 			var expected = information.CreateSet<VocLimitsWithUnits>();
 			var voclimits = new NewProduct();
 			var displayed = voclimits.GetDisplayedVocLimitsWithUnits();
@@ -3167,6 +3168,27 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 		}
 
+		[StepDefinition(@"I Confirm (.*) error message is shown below the (.*) field")]
+		public void GivenIConfirmErrorMessageIsShownBelowField(string errorMessage, string field)
+		{
+			Delay.Seconds(1);
+			var errorsList = new NewProduct().GetAllErrors();
+		}
+
+		[StepDefinition(@"I enter UPC Number: (.*)")]
+		public void GivenIEnterUPCNumberSavedAsUPC(string upcNumber)
+		{
+			Report.IsTrue(new NewProduct().InputUPCNumber(upcNumber), "Failed to enter upc number", "Entered upc number");
+		}
+
+		[Given(@"I Select a container type from the drop down list")]
+		public void GivenISelectAContainerTypeFromTheDropDownList()
+		{
+			List<string> containerTypes = new NewProduct().GetContainerOptions();
+			Random random = new Random();
+			int randomNumber = random.Next(0, containerTypes.Count-1);
+			//Report.IsTrue(new NewProduct().SelectContainerType(containerTypes[randomNumber]), "Failed to select: " + )
+		}
 
 	}
 }

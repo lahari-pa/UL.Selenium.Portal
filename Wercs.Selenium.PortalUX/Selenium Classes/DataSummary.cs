@@ -92,10 +92,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetInfoForSectionOption(string section, string option)
 		{
+
+			
 			WaitForSpinner();
 			var els = containerElement.FindElements(By.XPath(".//h3[@class='summary-question' and contains(text(),'" + section + "')]/../p[contains(text(),'" + option + "')]"), 2);
 
 			return els.Select(x => x.GetElementText()).ToList();
+		}
+
+		public string sGetProductName()
+		{
+			var productName = containerElement.FindElement(
+				By.XPath("//h2/small[contains(text(), 'Product Name')]/../span[not(contains(@style, 'none'))]"), 2);
+			if (productName == null)
+			{
+				Report.Info("Could not find product name");
+				return "";
+			}
+
+			return productName.GetValue();
 		}
 
 		public List<Ingredients.Ingredient> GetIngredients()
@@ -237,6 +252,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 
 		}
+
+		
 
 	}
 }
