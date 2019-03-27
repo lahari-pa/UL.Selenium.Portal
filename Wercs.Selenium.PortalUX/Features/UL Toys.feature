@@ -5,7 +5,7 @@
 
 Feature: UL Toys
 
-
+@tfs_design
 Scenario: [68368] UL Toys - Create a New Company
 Given I navigate to the URL: https://staging.thewercs.com/SHA.MVCWeb/Home/ssologin?sourceService=Toys
 Then I click the 'Create Company Account' button

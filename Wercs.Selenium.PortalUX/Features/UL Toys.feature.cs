@@ -98,9 +98,11 @@ namespace Wercs.Selenium.PortalUX.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_ULToys")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ConflictMinerals")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WERCSmart_ChooseGoodGuide")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfs_design")]
         public virtual void _68368ULToys_CreateANewCompany()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68368] UL Toys - Create a New Company", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[68368] UL Toys - Create a New Company", null, new string[] {
+                        "tfs_design"});
 #line 9
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

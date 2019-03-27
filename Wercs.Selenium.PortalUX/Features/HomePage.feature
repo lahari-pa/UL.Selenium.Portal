@@ -1001,3 +1001,59 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 Then The home screen should load
 Given I filter the products by: Accepted by Retailers
 And I check for all items in the grid that the retailers are alphabetically listed
+
+Scenario: [55796] Navigate to Home Page
+Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
+Then the WERCSmart homepage should load
+
+# Check correct items are showing in header bar
+Then I should see the UL/WERCSmart Logo in the header bar
+And I should see the User Icon in the header bar
+
+# Check correct items are showing in the User dropdown menu
+Then I click the User Icon
+And I should see My Account in the user dropdown
+And I should see Sign Out in the user dropdown
+
+# Checking that the navigation bar is showing
+Then I should see the Navigation Menu Icon in the navigation bar
+
+# Expands the navigation bar and checks that the correct icons and labels are showing
+Then I expand the Navigation Menu
+And the following icons and labels should be found in the navigation bar
+| Item                 |
+| Home                 |
+| Register New Product |
+| My Messages          |
+| Retail Partners      |
+| Supplier Reports     |
+| UL Solution Center   |
+| Shopping Cart        |
+| Support              |
+
+# Collapses the navigation bar and checks that only the icons are displayed on the screen (not the labels!)
+Then I collapse the Navigation Menu
+And the following icons should be found in the navigation bar
+| Item                 |
+| Home                 |
+| Register New Product |
+| My Messages          |
+| Retail Partners      |
+| Supplier Reports     |
+| UL Solution Center   |
+| Shopping Cart        |
+| Support              |
+
+# Checks that the top menu can be collapsed successfully
+Then I click on the triangle next to Product Information to collapse the section
+And I scroll to the top of the page
+And I should see the Subheading Product Information in the main window
+And I should see the Subheading Alerts in the main window
+And I should see the Subheading Announcements in the main window
+And I should see the Subheading My Products in the products grid
+
+# Checks that the correct items are showing when the section is expanded
+Then I click on the triangle next to Product Information to expand the section
+And I should see the Subheading Product Information expanded in the main window
+And I should see the Subheading Alerts expanded in the main window
+And I should see the Subheading Announcements expanded in the main window

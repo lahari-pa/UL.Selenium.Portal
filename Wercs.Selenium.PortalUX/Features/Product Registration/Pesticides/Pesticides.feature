@@ -847,3 +847,142 @@ And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific
 #And I Go to the State Pesticide Section of MTR/CKLT SECT0127
 #And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
 #Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56502
+
+
+Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
+
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+
+Then The home screen should load
+
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+
+Then I save the product information as: TestCase71051
+
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+
+And I should see the Pesticide Details - U.S. Page
+
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+
+Given in the New Product page I click Continue
+
+Given I add the EPA registration number: 72315-6
+
+Given in the New Product page I click Continue
+
+And I should see the Pesticide Details - State Registration Details Page
+
+Given I update each Registration Number with the appended text '-edited'
+
+Given in the New Product page I click Continue
+
+And I should see the Transportation Details 1 Page
+
+Then in the New Product page I click section: Pesticide Details - State Registration Details
+
+And I should see the Pesticide Details - State Registration Details Page
+
+Then I check each State Pesticide Registration Number contains the edited suffix
+
+Given I click the Update Wercs Smart data with EPA data through Kelly Services link
+
+Then I check each State Pesticide Registration Number contains the edited suffix
+
+Given I navigate to the home page
+
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase71051
+
+
+Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly when the Update WERCSmart data link is used
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+Then I save the product information as: TestCase62848
+Given I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+And I should see the Pesticide Details - U.S. Page
+And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
+Given in the New Product page I click Continue
+Given I add the EPA registration number: 56228-10
+Given in the New Product page I click Continue
+And I should see the Pesticide Details - State Registration Details Page
+Given I confirm that there is data populated in the Expiration Date Column for some States
+And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
+Then I edit the Expiration Date to: 2019-12-31 for the State: AZ on the Pesticide State Registration Details page
+Given in the New Product page I click Continue
+Then in the New Product page I click section: Pesticide Details - U.S.
+And I should see the Pesticide Details - U.S. Page
+Given in the New Product page I click Continue
+And I should see the Pesticide Details - State Registration Details Page
+Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
+Given I click the Update Wercs Smart data with EPA data through Kelly Services link
+Then I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State
+Then I confirm the 'Is Kelly Data' field for State: AZ is checked
+Given I navigate to the home page
+Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
+
+
+Scenario: [56476] VOC checks for Personal Fragrance product
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Then The home screen should load
+Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): more than 20% fragrance
+Then I save the product information as: TestCase56476
+Given I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
+Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Acetone
+Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+Then I see the following sections
+| Section                                                                                                             |
+| Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB |
+Then I do not see the following sections
+| Section                                                                                                                                                              |
+| Amount of VOC content (as a weight percentage (%) of the total formulation) contained in this product, excluding exempt compounds, as defined by the OTC Model Rule. |
+Given in the New Product page I click Continue
+Then Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should be showing the error messages: This is a required field.
+Given I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 20
+Given in the New Product page I click Continue
+Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
+Then I confirm that I see the following VOC-OTC-CARB statement4: Based on your selection, you have verified your product contains VOC with intended uses as follows. The CARB VOC compliance limit(s) for the intended use you identified is/are:
+Given I call Shared Step 57819 (VOC Results - Confirm VOC Limits table shows correct values (CARB only) - Happy Path): Personal Fragrance Product (more than 20% fragrance)
+And I confirm that I see the following VOC content as weight percentage for each state statement: VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.
+Then I confirm that I see the following CARB value: 20
+Then I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted CARB value: 20
+Given in the New Product page I click Continue
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Then I should see the Additional Documents to Provide Page
+Then I see the following sections
+| Section                                           |
+| Volatile Organic Compounds                        |
+Given in the New Product page I click Continue
+Then I should see an error message: Document is required: Product Label
+Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
+Then I should see the Optional Reports and Documents Available for Purchase Page
+Given in the New Product page I click Continue
+Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+| Goggles                       | 200                      | 25                      | 12.2      | Black      | Odorless | No data available | 5                     |
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance)
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
