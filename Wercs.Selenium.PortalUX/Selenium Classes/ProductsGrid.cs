@@ -234,43 +234,44 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Error("No rows have been found!");
 				return null;
 			}
-
 			Delay.Seconds(5);
 			var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
 			if (productRow == null || !productRow.Displayed)
 			{
 				return null;
 			}
+			var productId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
+			var dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
+			var retailers = new List<string>();
+			var retailersAbrv = new List<string>();
+			var retailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
 
-			var ProductId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
-			var ProductName = productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim();
-			var DateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
-			List<string> Retailers = new List<string>();
-			List<string> RetailersAbrv = new List<string>();
-			var RetailersLi = productRow.FindElements(By.XPath(".//li")).Where(x => x.Displayed);
-
-			foreach (var RetailerLi in RetailersLi)
+			foreach (var retailerLi in retailersLi)
 			{
-				if (RetailerLi.GetAttribute("title").Length > 0)
+				var retailerLiButton = retailerLi.FindElement(By.XPath("./button"), 2);
+				if (!retailerLi.GetAttribute("title").IsNullOrEmpty())
 				{
-					Retailers.Add(RetailerLi.GetAttribute("title").Trim());
+					retailers.Add(retailerLi.GetAttribute("title")?.Trim());
+				}
+				else if (retailerLiButton!=null && !retailerLiButton.GetAttribute("title").IsNullOrEmpty())
+				{
+					retailers.Add(retailerLiButton.GetAttribute("title")?.Trim());
 				}
 				else
 				{
-					Retailers.Add(RetailerLi.GetAttribute("data-original-title").Trim());
+					retailers.Add(retailerLi.GetAttribute("data-original-title")?.Trim());
 				}
-
-				RetailersAbrv.Add(RetailerLi.Text.Trim());
+				retailersAbrv.Add(retailerLi.Text.Trim());
 			}
 			var labelBrandTag = productRow.FindElement(By.XPath(".//div/p/span"),2);
 			var productElement = new ProductGridItem() {
-				ProductId = ProductId,
+				ProductId = productId,
 				ProductName = labelBrandTag != null ?
 					productRow.FindElement(By.XPath(".//div/p"), 2).Text.TrimEnd(labelBrandTag.Text.ToCharArray()).Trim() :
 					productRow.FindElement(By.XPath(".//div/p"), 2).Text.Trim(),
-				DateCreated = DateCreated,
-				Retailers = Retailers,
-				RetailerAbrv = RetailersAbrv,
+				DateCreated = dateCreated,
+				Retailers = retailers,
+				RetailerAbrv = retailersAbrv,
 				NameLabel = labelBrandTag?.Text
 			};
 			return productElement;
@@ -516,6 +517,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					if (delDialog.ClickDelete())
 					{
 						Report.Info("Clicked 'delete'");
+						Delay.Seconds(5);
 						GeneralUtilities.Wait_for_load_finish();
 						Delay.Seconds(1);
 						Report.Info("Checking the products grid is empty");

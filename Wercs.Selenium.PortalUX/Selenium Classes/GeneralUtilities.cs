@@ -55,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public static bool Wait_for_load_finish()
 		{
-			Delay.Seconds(Delay.SpeedFactor * 1);
+			Delay.Seconds(2);
 			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2) == null)
 			{
 				return true;

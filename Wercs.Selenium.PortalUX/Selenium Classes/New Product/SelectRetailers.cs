@@ -156,9 +156,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'list-view') and .//span[text()='" + retailer + "']]//input"), 2).TryClick();
 		}
 
-		public List<string> RetailersNotSelected()
+		public List<string> UnselectedRetailers()
 		{
-			return this.containerElement.FindElements(By.XPath(".//input[@type = 'checkbox']"), 2).Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span")).Text).ToList();
+			var checkboxes = this.containerElement.FindElements(By.XPath(".//label[@class='checkbox']/input"), 2);
+			return checkboxes.All(x => x.Checked()) ? new List<string>() :
+				checkboxes.Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span"),2)?.Text).ToList();
 		}
 	}
 

@@ -69,7 +69,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void AllRetailersAreSelectedInSelectRetailersWindow()
 		{
 			var selSelectRetailers = new SelectRetailers();
-			var notSelected = selSelectRetailers.RetailersNotSelected();
+			var notSelected = selSelectRetailers.UnselectedRetailers();
 			Report.IsTrue(!notSelected.Any(), "Some retailers were not selected: " + string.Join(", ", notSelected),
 				"All retailers were selected as expected");
 		}
