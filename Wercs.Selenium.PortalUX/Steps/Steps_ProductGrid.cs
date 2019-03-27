@@ -287,6 +287,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Report.Info("Products " + shouldOrNot + " be returned in the search grid");
 				var selProdGrid = new ProductsGrid();
+				Delay.Seconds(1);
 				bool productsExpected = shouldOrNot == "should";
 
 				Report.IsTrue((selProdGrid.ProductsCount() != 0) == productsExpected,
@@ -1443,6 +1444,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			});
 				produtTable.AddRow(new string[] {
 				"HD Supply"
+			});
+				produtTable.AddRow(new string[] {
+				"HEB "
 			});
 				produtTable.AddRow(new string[] {
 				"HyVee"

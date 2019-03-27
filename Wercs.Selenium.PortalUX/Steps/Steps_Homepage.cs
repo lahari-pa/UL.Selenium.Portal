@@ -633,7 +633,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 			if (GlobalParameters.SiteType == "Staging")
 			{
-				string freshdeskUrl = @"https://wercsmart.freshdesk.com/en/support/solutions";
+				string freshdeskUrl = @"https://wercsmarttest.freshdesk.com/support/solutions";
 				List<string> listOfTabs = SeleniumBrowser.GetTabURLs();
 				Report.IsTrue(listOfTabs.Contains(freshdeskUrl),
 					"Fresh desk url: " + freshdeskUrl + " was not found. Tabs open: " + string.Join(",", listOfTabs),
