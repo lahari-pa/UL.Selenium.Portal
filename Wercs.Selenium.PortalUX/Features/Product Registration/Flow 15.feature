@@ -14,45 +14,27 @@ Feature: Flow 15
 
 
 Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
-
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
 Then The home screen should load
-
 Given I generate a random UPC number and save as: UPC58760
-
 Given I delete all products with UPC Number: saved as UPC58760
-
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)
-
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Emitting Diodes
 Then I save the product information as: TestCase58760
-
-Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
-
+And I call Shared Step 69687 (Additional Product Information - US, No(PL))
+#Given I call Shared Step 59922 (Additional Product Information - Private Label or Brand only)
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-
 # Missing step in test case - TCLP page
-Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
-
+#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
-
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58760, container type: Plastic Container and size: 22
-
 Given in the Additional Documents to Provide page I click Continue
-
 Given in the Other Product Document Uploads page I click Continue
-
 # Given in the Additional Documents Request page I click Continue
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lights, LED
-
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Light Bulbs - Light Emitting Diodes (LED)
 Given I navigate to the home page
-
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58760
 
 Scenario: [58759] Servers, Small-Scale - RU001183

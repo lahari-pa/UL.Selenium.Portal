@@ -83,6 +83,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
 								 " in the Type of Product select field");
 			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
+			Delay.Seconds(1);
+			Report.Screenshot();
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			var prodDetails = new NewProduct().GetCurrentProductInformation();

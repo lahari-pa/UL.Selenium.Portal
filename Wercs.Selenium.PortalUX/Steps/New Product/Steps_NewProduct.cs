@@ -3173,6 +3173,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			Delay.Seconds(1);
 			var errorsList = new NewProduct().GetAllErrors();
+			Report.IsTrue(errorsList.FirstOrDefault(x => x.inputName == field) != null,
+				"An error is not showing on field: " + field, "An error is showing on field: " + field);
+
+			Report.Info("Error message is showing as: " + errorsList.FirstOrDefault(x => x.inputName == field).errorMessage);
+
+			Report.IsTrue(errorsList.FirstOrDefault(x => x.inputName == field && x.errorMessage.Trim()==errorMessage.Trim()) != null,
+				"An error message is not showing as expected: " + errorMessage, "An error is showing as expected: " + errorMessage);
 		}
 
 		[StepDefinition(@"I enter UPC Number: (.*)")]
@@ -3181,13 +3188,34 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(new NewProduct().InputUPCNumber(upcNumber), "Failed to enter upc number", "Entered upc number");
 		}
 
-		[Given(@"I Select a container type from the drop down list")]
+		[StepDefinition(@"I Select a container type from the drop down list")]
 		public void GivenISelectAContainerTypeFromTheDropDownList()
 		{
 			List<string> containerTypes = new NewProduct().GetContainerOptions();
 			Random random = new Random();
 			int randomNumber = random.Next(0, containerTypes.Count-1);
-			//Report.IsTrue(new NewProduct().SelectContainerType(containerTypes[randomNumber]), "Failed to select: " + )
+			Report.IsTrue(new NewProduct().SelectContainerType(containerTypes[randomNumber]),
+				"Failed to select: " + containerTypes[randomNumber], "Selected: " + containerTypes[randomNumber]);
+		}
+
+		[StepDefinition(@"I enter Size Value: (.*)")]
+		public void GivenIEnterSizeValue(string size)
+		{
+			Report.IsTrue(new NewProduct().InputUPCSize(size), "Failed to enter size: " + size, "Entered size: " + size);
+		}
+
+		[StepDefinition(@"I Confirm the Package Type drop down list shows a Packaging type available for selection - Do not select one")]
+		public void GivenIConfirmThePackageTypeDropDownListShowsAPackagingTypeAvailableForSelection_DoNotSelectOne()
+		{
+			Report.IsTrue(new NewProduct().GetAllOptionsForUPCPackageType().Count > 0, "There are no packaging types",
+				"Packaging types are showing");
+		}
+
+		[StepDefinition(@"In the UPC page I should see Add new Packaging Type link")]
+		public void GivenInTheUPCPageIShouldSeeAddNewPackagingTypeLink()
+		{
+			Report.IsTrue(new NewProduct().AddNewPackingTypeLinkExists(), "Add new packaging type link does not exist as expected",
+				"Add new packaging type link exists as expected");
 		}
 
 	}

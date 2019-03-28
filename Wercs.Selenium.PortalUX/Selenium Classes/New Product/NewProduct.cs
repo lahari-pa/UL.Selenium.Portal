@@ -1467,10 +1467,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-		
+		public bool AddNewPackingTypeLinkExists()
+		{
+			var link = containerElement.FindElement(By.XPath("//a[contains(text(), 'Add new Packaging Type')]"), 2);
+			return (link != null);
+		}
+
+
 		public List<InputError> GetAllErrors()
 		{
-			string regexPattern = @"""(?:optionsCaption:\s*[\'\""])(.*)(?:[\'\""])""";
+			string regexPattern = @"(?:optionsCaption:\s*[\'\""])(.*)[\'\""]";
 
 			var errorInputs = containerElement.FindElements(By.XPath(
 				"//p[@class='form-error' and not(contains(@style, 'none'))]/../input|//p[@class='form-error' and not(contains(@style, 'none'))]/../select"));
@@ -1481,14 +1487,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				string errorString = errorInput
 					.FindElement(By.XPath("./..//p[@class='form-error' and not(contains(@style, 'none'))]"), 2)
 					.GetValue();
-				var match = Regex.Match(errorInput.GetAttribute("data-bind"), regexPattern);
+				string dataBind = errorInput.GetAttribute("data-bind");
+				var match = Regex.Match(dataBind, regexPattern);
 
 				string inputTitle = "";
 
-				if (match.Success)
-				{
+
 					inputTitle = match.Groups[1].Value;
-				}
 
 				errorsList.Add(new InputError(){errorMessage = errorString, input=errorInput, inputName=inputTitle});
 
@@ -1496,7 +1501,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			return errorsList;
 		}
-		
+
 		public List<string> GetAllOptionsForUPCPackageType()
 		{
 			if (!this.UPCPackageTypeFieldExists())

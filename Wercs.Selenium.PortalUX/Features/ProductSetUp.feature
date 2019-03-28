@@ -922,14 +922,6 @@ And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Opt
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Some test comment
-#And I should see the Data Acceptance Page
-#And I click the Summary button in the Data Acceptance window
-#And I switch to the Data Summary page
-#And In the Summary document I confirm that the following Additional documents are showing
-#| Document       | Language        |
-#| Canada GHS SDS | English (U.S)   |
-#| Canada GHS SDS | French-Canadian |
-#And I close the Data Summary tab
 And I should see the Data Acceptance Page
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 And in the Purchase Summary Screen I should see the following:
@@ -960,6 +952,7 @@ And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Registration\4. Account Canada address(Yes), Package type (Yes), Stewardship (FULL)
 
+@85752
 Scenario: [85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 #Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 Given I login into the WERCSmart Portal - Canada has all data account
@@ -971,17 +964,16 @@ And I call Shared Step 85730 - Additional Product Information - Canada Only - Ch
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
 And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 And In the 'Select Retailers' window I select the retailer: Canadian Tire
-And I click Done in the Select Retailers popup
 And For retailer: Canadian Tire I add additional requirements: Additional requirements: Canadian Tire
 And I click continue
 And I should see the Universal Product Code (UPC) Page
-#And In the UPC page I should see Add new Packaging Type link
+And In the UPC page I should see Add new Packaging Type link
 Given I generate a random UPC number and save as: UPC85752
 And I click the 'Add UPC' button
 And I enter UPC Number: saved as UPC85752
 And I Select a container type from the drop down list
-And I Add a value for Size (Ounces)
+And I enter Size Value: 12
 And I Confirm the Package Type drop down list shows a Packaging type available for selection - Do not select one
 And I click continue
-And I Confirm "This is a required field" error message is shown below the Package Type field
+And I Confirm This is a required field. error message is shown below the Package Type field
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85752
