@@ -56,6 +56,7 @@ namespace Wercs.Selenium.PortalUX.Features.CanadianTire_BlueBoxProgram.NewProduc
                         "wercsmart",
                         "RetailPartners",
                         "SHA",
+                        "UPC",
                         "run_1AccountHasNoCanadaData"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -114,18 +115,19 @@ namespace Wercs.Selenium.PortalUX.Features.CanadianTire_BlueBoxProgram.NewProduc
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("UPC")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_1AccountHasNoCanadaData")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tfsdesign")]
         public virtual void _85312NoCanadaData_SOLDUSAndCanadaPLNoPackagingTypeIsRequired()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85312] No Canada data - SOLD = US and Canada, PL = No, Packaging Type is require" +
-                    "d", null, new string[] {
-                        "tfsdesign"});
+                    "d", null, ((string[])(null)));
 #line 18
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 20
 testRunner.Given("I log in with the account saved in TReVor as: NoCanadaData", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 21
+testRunner.Given("I generate a random UPC number and save as: UPC85312", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 22
 testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -133,28 +135,338 @@ testRunner.And("I call Shared Step 57408 (Create a New Registration via Register
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 24
+testRunner.Then("I save the product information as: TestCase85312", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 25
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
+#line 26
 testRunner.And("I call Shared Step 62678 (Additional Product Information - US & Canada, No Child," +
                     " No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
-testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
 testRunner.And("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PRO" +
                     "P 65 - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
-testRunner.And("In the \'Select Retailers\' window I select the retailer: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
-testRunner.And("I click Done in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step  (Select Retailers Canadian Tire and enter additional requirem" +
+                    "ents field - Indicate full name of product, as sold via this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and req" +
+                    "uired ) for UPC: saved as UPC85312, container type: Plastic Container and size: " +
+                    "12 click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
-testRunner.And("[Shared Step 85917 - UPC - Confirm Package type Link and field shown and required" +
-                    "]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase85312", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85312", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85726] No Canada data - SOLD = US and Canada, PL = Yes, Packaging Type is requir" +
+            "ed")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "1 Account has no Canada Data (Suite ID 85307)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("UPC")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_1AccountHasNoCanadaData")]
+        public virtual void _85726NoCanadaData_SOLDUSAndCanadaPLYesPackagingTypeIsRequired()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85726] No Canada data - SOLD = US and Canada, PL = Yes, Packaging Type is requir" +
+                    "ed", null, ((string[])(null)));
+#line 34
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 36
+testRunner.Given("I log in with the account saved in TReVor as: NoCanadaData", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
+testRunner.Given("I generate a random UPC number and save as: UPC85726", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 38
+testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 39
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 40
+testRunner.Then("I save the product information as: TestCase85726", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 41
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
+testRunner.And("I call Shared Step 85284 - Additional Product Information - US & Canada, Child (N" +
+                    "o), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 43
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 44
+testRunner.And("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PRO" +
+                    "P 65 - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 45
+testRunner.And("I call Shared Step  (Select Retailers Canadian Tire and enter additional requirem" +
+                    "ents field - Indicate full name of product, as sold via this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 46
+testRunner.And("I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and req" +
+                    "uired ) for UPC: saved as UPC85726, container type: Plastic Container and size: " +
+                    "12 click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Option"});
+#line 49
+testRunner.Then("I should see the following UPC options:", ((string)(null)), table1, "Then ");
+#line 57
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85726", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85727] No Canada data - SOLD = Canada only, PL = No, Packaging Type is required")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "1 Account has no Canada Data (Suite ID 85307)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("UPC")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_1AccountHasNoCanadaData")]
+        public virtual void _85727NoCanadaData_SOLDCanadaOnlyPLNoPackagingTypeIsRequired()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85727] No Canada data - SOLD = Canada only, PL = No, Packaging Type is required", null, ((string[])(null)));
+#line 60
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 62
+testRunner.Given("I log in with the account saved in TReVor as: NoCanadaData", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 63
+testRunner.Given("I generate a random UPC number and save as: UPC85727", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 64
+testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 65
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 66
+testRunner.Then("I save the product information as: TestCase85727", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 67
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+testRunner.And("I call Shared Step 78879 - Additional Product Information - Canada Only - Child (" +
+                    "NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 69
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 70
+testRunner.And("I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue -" +
+                    " Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 71
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 72
+testRunner.And("I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and req" +
+                    "uired ) for UPC: saved as UPC85727, container type: Plastic Container and size: " +
+                    "12 click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 83
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85727", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85728] No Canada data - SOLD = Canada only, PL = YES, Packaging Type is required" +
+            "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "1 Account has no Canada Data (Suite ID 85307)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("UPC")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_1AccountHasNoCanadaData")]
+        public virtual void _85728NoCanadaData_SOLDCanadaOnlyPLYESPackagingTypeIsRequired()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85728] No Canada data - SOLD = Canada only, PL = YES, Packaging Type is required" +
+                    "", null, ((string[])(null)));
+#line 86
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 88
+testRunner.Given("I log in with the account saved in TReVor as: NoCanadaData", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 89
+testRunner.Given("I generate a random UPC number and save as: UPC85728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 90
+testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 91
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 92
+testRunner.Then("I save the product information as: TestCase85728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 93
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 94
+testRunner.And("I call Shared Step 85730 - Additional Product Information - Canada Only - Child (" +
+                    "NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 95
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 96
+testRunner.And("I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue -" +
+                    " Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 97
+testRunner.And("I call Shared Step  (Select Retailers Canadian Tire and enter additional requirem" +
+                    "ents field - Indicate full name of product, as sold via this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 98
+testRunner.And("I call Shared Step 87647 (UPC - Confirm Package type Link and field shown and req" +
+                    "uired ) for UPC: saved as UPC85728, container type: Plastic Container and size: " +
+                    "12 click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 99
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85728", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85733] No Canada data - SOLD = US Only, PL = No, Packaging Type is NOT required")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "1 Account has no Canada Data (Suite ID 85307)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("UPC")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_1AccountHasNoCanadaData")]
+        public virtual void _85733NoCanadaData_SOLDUSOnlyPLNoPackagingTypeIsNOTRequired()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85733] No Canada data - SOLD = US Only, PL = No, Packaging Type is NOT required", null, ((string[])(null)));
+#line 102
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 104
+testRunner.Given("I log in with the account saved in TReVor as: NoCanadaData", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 105
+testRunner.Given("I generate a random UPC number and save as: UPC85733", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 106
+testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 107
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 108
+testRunner.Then("I save the product information as: TestCase85733", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 109
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 110
+testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
+                    "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 111
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 112
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 113
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 114
+testRunner.And("I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown" +
+                    " - Add UPC data - Continue) for UPC: saved as UPC85733, container type: Plastic " +
+                    "Container and size: 12 click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 115
+testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 116
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85733", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("[85734] No Canada data - SOLD = US Only, PL = YES, Packaging Type is NOT required" +
+            "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "1 Account has no Canada Data (Suite ID 85307)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("LandingPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Login")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Homepage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Signup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ProductGrid")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DataSummarySheet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("wercsmart")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("RetailPartners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SHA")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("UPC")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("run_1AccountHasNoCanadaData")]
+        public virtual void _85734NoCanadaData_SOLDUSOnlyPLYESPackagingTypeIsNOTRequired()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85734] No Canada data - SOLD = US Only, PL = YES, Packaging Type is NOT required" +
+                    "", null, ((string[])(null)));
+#line 119
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 121
+testRunner.Given("I log in with the account saved in TReVor as: NoCanadaData", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 122
+testRunner.Given("I generate a random UPC number and save as: UPC85734", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 123
+testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 124
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 125
+testRunner.Then("I save the product information as: TestCase85734", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 126
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 127
+testRunner.Given("I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA" +
+                    "), No(DSV), Yes(PLP), No(GNFR))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 128
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 129
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 130
+testRunner.And("I call Shared Step  (Select Retailers Costco and enter additional requirements fi" +
+                    "eld - Indicate full name of product, as sold via this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 131
+testRunner.And("I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown" +
+                    " - Add UPC data - Continue) for UPC: saved as UPC85734, container type: Plastic " +
+                    "Container and size: 12 click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 132
+testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 133
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85734", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }

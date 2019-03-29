@@ -160,6 +160,35 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 		}
+
+
+		public List<string> UpcPageLinks()
+		{
+			var linksText = new List<string>();
+			linksText = containerElement.FindElements(By.XPath(".//div[@class='alert alert-info']//a")).Select(x => x.Text).ToList();
+			return linksText;
+		}
+
+		public List<string> GetUPCErrorsForSection(string section)
+		{
+			var xPath = @"(.//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//label[@class='sr-only'][contains(text(),""" + section + @""")])] | " +
+						@".//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//select[@class='form-control']//option[contains(text(),""" + section + @""")])])";
+			var el = containerElement.FindElements(By.XPath(xPath), 10);
+			return el.Count == 0 ? new List<string>() : el.Select(x => x.Text).ToList();
+		}
+
+
+		public bool SelectRadio(string section, string value)
+		{
+			var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
+			var el = this.containerElement.FindElement(By.XPath(xPath), 2);
+			if (el != null)
+			{
+				return el.TryClick();
+			}
+			Report.Error("Could not find the correct input in section: " + section);
+			return false;
+		}
 	}
 
 	public class UpcCaseInformation

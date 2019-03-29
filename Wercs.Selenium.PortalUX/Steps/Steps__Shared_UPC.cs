@@ -302,5 +302,134 @@ namespace Wercs.Selenium.PortalUX.Steps
 				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
 			}
 		}
+
+		[StepDefinition(@"I confirm that UPC page contains link for: (.*)")]
+		public void IConfirmUPCContains(string labelLink)
+		{
+			var uPCpage = new UPC();
+			var labelLinksShowing = uPCpage.UpcPageLinks();
+			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the upc page", "The link with text: '" + labelLink + "' was found on the upc page as expected");
+		}
+
+		[StepDefinition(@"(.*) (should|should not) be showing the error messages on upc screen: (.*)")]
+		public void ErrorMessagesAreShowingOnUpc(string section, string should, string pipeDelimitedErrorMessages)
+		{
+			Delay.Seconds(1);
+			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			var errorMessages = new UPC().GetUPCErrorsForSection(section);
+			Report.Info("Error messages showing are: " + string.Join(", ", errorMessages));
+			if (should == "should")
+			{
+				foreach (var item in errorMessagesExpected)
+				{
+					Report.IsTrue(errorMessages.Any(e => e.Contains(item)),
+						"Failed to find the error message: " + item + " under section: " + section + "!",
+						"Successfully found the error message: " + item + " for section: " + section, false, false);
+				}
+			}
+			if (should == "should not")
+			{
+				foreach (var item in errorMessagesExpected)
+				{
+					Report.IsFalse(errorMessages.Contains(item.Trim()),
+						"The error message: " + item + " was displayed under section" + section + " when it should not be.",
+						"The error message: " + item + " was not displayed under section: " + section + " as expected", false, false);
+				}
+			}
+			Report.Screenshot();
+		}
+
+
+		[StepDefinition(@"I call Shared Step 87647 \(UPC - Confirm Package type Link and field shown and required \) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
+		public void EnterUPCInfoConfirmPackagingTypeLinkAndError(string upc, string containerType, string size)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			StepsUPC MyStepsUpc = new StepsUPC();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			UPC uPCpage = new UPC();
+			TestReport.StartStep("I confirm Add new Packaging Type link");
+			var labelLinksShowing = uPCpage.UpcPageLinks();
+			Report.IsTrue(labelLinksShowing.Contains("Add new Packaging Type"), "The link with text: Add new Packaging Type was not found on the upc page", "The link with text: Add new Packaging Type was found on the upc page as expected");
+			TestReport.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			TestReport.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				var upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				Table upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+			Delay.Seconds(1);
+			TestReport.StartStep("Confirm error message!");
+			string pipeDelimitedErrorMessages = "This is a required field.";
+			var errorMessagesExpected = pipeDelimitedErrorMessages.Split('|');
+			var errorMessages = new UPC().GetUPCErrorsForSection("Package Type");
+			foreach (var item in errorMessagesExpected)
+			{
+				Report.IsTrue(errorMessages.Any(e => e.Equals(item)),
+					"Failed to find the error message",
+					"Successfully found the error message");
+			}
+		}
+
+
+		[StepDefinition(@"I call Shared Step 85909 \(UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) click continue")]
+		public void EnterUPCInfoConfirmPackagingTypeLinkdoesNotExists(string upc, string containerType, string size)
+		{
+			TestReport.UseSubSteps = true;
+			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			StepsUPC MyStepsUpc = new StepsUPC();
+			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
+			MyStepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
+			UPC uPCpage = new UPC();
+			TestReport.StartStep("I confirm Add new Packaging Type link does not display");
+			var labelLinksShowing = uPCpage.UpcPageLinks();
+			Report.IsFalse(labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was found on the upc page, it should not have been", "Add new Packaging Type was not found on the upc page as expected");
+			TestReport.StartStep("I click the 'Add UPC' button");
+			MyStepsNewProduct.ThenIClickTheAddUpcButton();
+			TestReport.StartStep("I should not see Package Type option");
+			var upcOptions = uPCpage.GetUPCOptions();
+			Report.IsFalse(upcOptions.Contains("Package Type"),
+				"option was displayed which should not have been", "option did not displayed as expected");
+			TestReport.StartStep("I add the following into the UPC Fields");
+			if (upc.Contains("Equals"))
+			{
+				var upc_ = upc.Replace("Equals", "");
+				var upcInfo = new UpcInformation {
+					ContainerType = containerType,
+					Size = size,
+					UpcNumber = upc_
+				};
+				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+					"Successfully inputted UPC information!");
+			}
+			else
+			{
+				Table upcTable = new Table("Field", "Value");
+				upcTable.AddRow("UPCNumber", "saved as UPC" + upc);
+				upcTable.AddRow("ContainerType", containerType);
+				upcTable.AddRow("Size", size);
+				MyStepsNewProduct.ThenIAddTheFollowingIntoTheUpcFields(upcTable);
+			}
+			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+		}
 	}
 }

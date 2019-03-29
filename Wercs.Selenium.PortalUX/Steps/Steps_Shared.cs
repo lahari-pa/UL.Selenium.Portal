@@ -7451,5 +7451,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click continue");
 			new NewProduct().ClickContinue();
 		}
+
+		[StepDefinition(@"I call Shared Step  \(Select Retailers (.*) and enter additional requirements field - Indicate full name of product, as sold via this retailer\)")]
+		public void SelectRetailers(string retailer)
+		{
+			TestReport.UseSubSteps = true;
+			var stepsNewProduct = new StepsNewProduct();
+			var stepsRetailer = new Retailer();
+			TestReport.StartStep("In the Select Retailers popup I select the retailer: CVS");
+			new StepsSelectRetailers().SelectTheRetailer(retailer);
+			TestReport.StartStep("I enter private label as 'This Private Label'");
+			stepsRetailer.EnterPrivateLabelName("This Private Label");
+			TestReport.StartStep("I click continue");
+			stepsNewProduct.ClickContinue();
+		}
 	}
 }
