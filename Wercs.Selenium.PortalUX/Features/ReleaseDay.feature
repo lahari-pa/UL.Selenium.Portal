@@ -561,7 +561,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
 
-
+@56477
 Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 # Checking that the test will run correctly by handling extra screens
@@ -1380,5 +1380,50 @@ And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for sa
 And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase78417
 And I Use Test case 84518 to process the product from Assigned back to Completed status saved as TestCase78417
 
-
-
+Scenario: [75321] Forward Product - Completed Status (NO Recert)
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#And I For this test case you will need to know your Supplier Name as it appears in SHA manager - you can see this using the shared step below
+And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: greg@accupackmidwest.comUL and saved id as: myID
+And I Now we will search for a product to test with - in the shared step below use the Completed Status to search on
+And [Shared Step 74655 - SHA - Search by Supplier ID for specific product status]
+And I Make a note of 1 of the products shown for your supplier with a "Completed Status" which has retailers present - which does not show in the red recertification present fontNote:DO NOT select a product which is shown in "orange font" as this will be a Branded Material and WILL NOT HAVE the edit UPC link shown on it.If you do not have a product which shows - use test case 75335 to create a product and process it to completed
+And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I Click the "Accepted by Retailers" Filter
+And I Confirm the Products shown display the 'Green Color Status' - which is the "Accepted by Retailers"
+And I Enter the "Product ID" you noted earlier into the filter area and press the "ENTER KEY"
+And [Shared Step 75130 - Bulk Actions - Select Forward Product Registration]
+And I With the 'Selected Products Tab' selected by default
+And I In the "Search by WPS ID or Product Name" start typing the WPS ID or Product Name of the Product you made a note of earlier
+And I Confirm the Product is shown for selection
+And I Select the product by clicking on it
+And I Click 'CONTINUE'
+And I Select a "NEW" Retailer which you know is not already associated to the product (should not be present on the note you made earlier)
+And I Click 'CONTINUE'
+And [Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue]
+And I The 'Product Results Tab' is selected
+And I Confirm that the UPC Number displays the recently selected "Retailer"(Step 17)
+And I Confirm that NO Errors display for the Product
+And I Click 'CONTINUE'
+And I The 'Review and Submit' step is shown
+And I Select the "All of the above statements are true" Radio Button
+And I Click 'CONTINUE'
+And I Confirm the Purchase Summary page is shown with the success message shown" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  "
+And I Click on the 'HOME BUTTON'
+And I In SHA Manager
+And I In the shared step below search for your product using the WPS ID you noted earlier
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm the Product shows a "Completed Status" for the Original Retailer(see Clients column)
+And I Confirm the Productshows a "Submitted Status" for the recently selected Retailer (see clients column)
+And [Shared Step 75309 - SHA > Select Product > UPC List]
+And I With the SHA Manager Product UPC window open - Click on the 'maximize' icon to expand the view of the window
+And I Confirm the recently added Retailer(s)is (are) shown against the UPC you selected
+And I Close the SHA Manager Product UPC window
+And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: (.*))
+And I In the shared step below search for the Product you are working with
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
+And I Confirm the Product shows the ORIGINAL RETAILER(s) with a "Completed Status" (see the Clients column)
+And I Confirm the Product shows theNEW RETAILER(s) with an "Accepted Status" (see the Clients column)Note: if you selected a retailer that does not have a feed associated to it you will see the product in Completed status for this retailer)
+And I In the Shared Step below - Select the Product with the "Accepted Status"
+And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: (.*))
+And I Confirm the Product now shows a "Completed" Status in Completed forALL associated Retailers

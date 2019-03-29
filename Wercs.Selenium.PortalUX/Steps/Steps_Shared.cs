@@ -7465,5 +7465,19 @@ namespace Wercs.Selenium.PortalUX.Steps
 			TestReport.StartStep("I click continue");
 			stepsNewProduct.ClickContinue();
 		}
+
+		[StepDefinition(@"I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: (.*) and saved id as: (.*)")]
+		public void GivenICallSharedStep74654SHAManager_Suppliers_SearchByEmailAddress(string email)
+		{
+			//	Given I Click the "Suppliers" link on the top right of the screen
+			//	And I In the top "Input Field" - enter the email address of the user you are going to be using in WERCSmart for this test into the search area of the pop up
+			//		And I Select the "Email" Radio Button
+			//	And I Click on the 'SEARCH Button'
+			//	And I Select the"Entry"
+			//	And I Make a note of the Supplier ID - this will need to be exact in order for the searches within SHA manager to return the correct results(also case sensitive)
+			//	And I Close the Supplier Manager pop up
+			//
+		}
+
 	}
 }

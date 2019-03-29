@@ -832,6 +832,33 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			return false;
 		}
 
+		public bool ClickSuppliersButton()
+		{
+			try
+			{
+				if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+				{
+					SeleniumBrowser.ExitIFrame();
+					if (!SeleniumBrowser.SwitchToIFrame("Widget1FRAME"))
+					{
+						Report.Info("Could not switch to iframe");
+						return false;
+					}
+				}
+
+				var SupplierLink =
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='ddtopmenubar']//li[@id='supplierbar']/a"));
+
+				return SupplierLink.TryClick();
+			}
+			catch (Exception e)
+			{
+				Report.Info(e.Message);
+				return false;
+			}
+
+		}
+
 		public bool ClickActionsMenuOption(string option)
 		{
 			try
