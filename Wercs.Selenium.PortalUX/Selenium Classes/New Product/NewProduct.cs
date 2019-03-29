@@ -1493,7 +1493,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				string inputTitle = "";
 
 
-					inputTitle = match.Groups[1].Value;
+				inputTitle = match.Groups[1].Value;
 
 				errorsList.Add(new InputError(){errorMessage = errorString, input=errorInput, inputName=inputTitle});
 
