@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using NTTQA_Automation_Classes.Classes;
+﻿using NTTQA_Automation_Classes.Classes;
 using NTTQA_Reporting_Module.Reporting.Core;
 using TechTalk.SpecFlow;
-using Wercs.Selenium.PortalUX.Database_Functions;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Steps;
-using WERCSmart;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Steps;
 
-namespace Wercs.Selenium.ULSC.Steps
+namespace UL.Selenium.Portal.ULSC.Steps
 {
 	[Binding]
 	public class Steps_Shared_ULSC

@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using NPOI.OpenXmlFormats.Spreadsheet;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Automation_Classes.Universal_Functions;
@@ -17,13 +12,11 @@ using NTTQA_TReVor_Module.Cache;
 using OpenQA.Selenium;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using WERCSmart;
-using Match = NPOI.SS.Formula.Functions.Match;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "SHA")]
 	public class Steps_SHA
@@ -1817,7 +1810,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var ID = ProductDetails.Id;
 			string expectedFilename = ID + @".pdf";
 			Report.Info("Searching for " + expectedFilename);
-			Report.IsTrue(Documents.FirstOrDefault(x=>x.Contains(expectedFilename))!=null,
+			Report.IsTrue(Documents.FirstOrDefault(x => x.Contains(expectedFilename)) != null,
 				"Filename: " + expectedFilename + " is not showing as expected. Filenames showing are: " +
 				String.Join(",", Documents), "Filename: " + expectedFilename + " is showing as expected");
 		}

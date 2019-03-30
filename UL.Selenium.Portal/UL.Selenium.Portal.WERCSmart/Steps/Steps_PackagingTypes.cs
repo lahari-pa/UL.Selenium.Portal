@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using NTTQA_Reporting_Module.Reporting.Core;
+﻿using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "PackagingTypes")]
 	class Steps_PackagingTypes
@@ -40,7 +35,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					return;
 				}
 				var actualHeadings = new PackagingType().TableHeadings();
-				Report.IsTrue(actualHeadings.Contains(heading), "The table heading: "+ heading + " was not displayed!", "The table heading: " + heading + " was displayed as expected");
+				Report.IsTrue(actualHeadings.Contains(heading), "The table heading: " + heading + " was not displayed!", "The table heading: " + heading + " was displayed as expected");
 
 			}
 		}
@@ -193,10 +188,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 			newProductSteps.SetTheSectionOptionTo("Package Type Name", table.Rows[0]["Name"]);
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("Bill of Materials");
-			SavePackagingTypeDetails(saveAs);
-			ClickAddRowBillOfMaterials();
-			SelectOptionForFieldInTable(table.Rows[0]["Materials"], "My Packaging Materials");
-			SelectOptionForFieldInTable(table.Rows[0]["Weight"], "My Packaging Weight (grams)");
+			this.SavePackagingTypeDetails(saveAs);
+			this.ClickAddRowBillOfMaterials();
+			this.SelectOptionForFieldInTable(table.Rows[0]["Materials"], "My Packaging Materials");
+			this.SelectOptionForFieldInTable(table.Rows[0]["Weight"], "My Packaging Weight (grams)");
 			newProductSteps.ClickContinue();
 			newProductSteps.GivenIShouldSeeXPage("CONEG");
 			newProductSteps.SetTheSectionOptionTo("Does your container or any", table.Rows[0]["Contact with food or drink"]);

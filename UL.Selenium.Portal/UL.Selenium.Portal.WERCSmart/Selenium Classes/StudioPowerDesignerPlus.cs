@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using iTextSharp.text;
-using iTextSharp.text.pdf.parser;
-using NPOI.HSSF.Record;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class StudioPowerDesignerPlus : BaseObject
 	{
@@ -154,26 +149,26 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterSourceProduct(string sourceProduct)
 		{
-			var enterField = containerElement.FindElement(By.XPath(".//input[@id='sourceproductSelectselectProdTB']"));
+			var enterField = this.containerElement.FindElement(By.XPath(".//input[@id='sourceproductSelectselectProdTB']"));
 			enterField.EnterText(sourceProduct);
 			return (enterField.GetValue() == sourceProduct);
 		}
 
 		public bool ClickOpenFilterDialog()
 		{
-			var enterField = containerElement.FindElement(By.XPath(".//input[@id='sourceproductSelectselProd']"));
+			var enterField = this.containerElement.FindElement(By.XPath(".//input[@id='sourceproductSelectselProd']"));
 			return enterField.TryClick();
 		}
 
 		public bool ClickRefreshButton()
 		{
-			var enterField = containerElement.FindElement(By.XPath(".//button[contains(@class, 'refresh')]"));
+			var enterField = this.containerElement.FindElement(By.XPath(".//button[contains(@class, 'refresh')]"));
 			return enterField.TryClick();
 		}
 
 		public string GetSourceProductName()
 		{
-			var label = containerElement.FindElement(By.XPath(".//label[@id='sourceproductSelectlblProductName']"), 5);
+			var label = this.containerElement.FindElement(By.XPath(".//label[@id='sourceproductSelectlblProductName']"), 5);
 			if (label != null)
 			{
 				return label.GetValue().Trim();
@@ -185,7 +180,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickContinueButton()
 		{
-			var enterField = containerElement.FindElement(By.XPath(".//input[@id='continueBtn']"));
+			var enterField = this.containerElement.FindElement(By.XPath(".//input[@id='continueBtn']"));
 			return enterField.TryClick();
 		}
 
@@ -519,7 +514,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetCurrentStatusOfDataCode(string code)
 		{
-			var dataCodes = containerElement.FindElements(By.XPath(".//div[@id='divCanvasContent']//span[(./img)]"));
+			var dataCodes = this.containerElement.FindElements(By.XPath(".//div[@id='divCanvasContent']//span[(./img)]"));
 			IWebElement button;
 			switch (code)
 			{
@@ -590,7 +585,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool DoubleClickDataCode(string code)
 		{
-			var dataCodes = containerElement.FindElements(By.XPath(".//div[@id='divCanvasContent']//td[(./span/img)]"));
+			var dataCodes = this.containerElement.FindElements(By.XPath(".//div[@id='divCanvasContent']//td[(./span/img)]"));
 			IWebElement button;
 			switch (code)
 			{
@@ -662,7 +657,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var Popup = containerElement.FindElement(By.XPath(".//div[@id='doc-options-panel']"), 1);
+				var Popup = this.containerElement.FindElement(By.XPath(".//div[@id='doc-options-panel']"), 1);
 				if (Popup != null)
 				{
 					return true;
@@ -679,7 +674,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SetOption(string option, bool check)
 		{
 			Delay.Seconds(1);
-			var optionsList = containerElement.FindElements(By.XPath(".//input[@type='checkbox']"));
+			var optionsList = this.containerElement.FindElements(By.XPath(".//input[@type='checkbox']"));
 
 			switch (option)
 			{
@@ -725,7 +720,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickCloseDocumentOptionsPopup()
 		{
-			var close = containerElement.FindElement(
+			var close = this.containerElement.FindElement(
 				By.XPath(".//label[text()='Options']/following-sibling::img[@title='Close' and @alt='Close']"), 1);
 			if (close != null)
 			{
@@ -737,7 +732,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickLeftMenuSection(string section, string leftRightDouble = "left")
 		{
-			var listOfSections = containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
+			var listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
 			var matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
 			if (matchingSection == null)
 			{
@@ -835,7 +830,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				try
 				{
-					var Graphics = containerElement.FindElements(By.XPath("//div[@id='subsectionGrphEditor']//table//img"));
+					var Graphics = this.containerElement.FindElements(By.XPath("//div[@id='subsectionGrphEditor']//table//img"));
 
 					var matchingGraphic =
 						Graphics.FirstOrDefault(x => x.GetAttribute("title").ToLower().Contains(graphicName.ToLower()));
@@ -861,7 +856,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickButton(string buttonName)
 		{
-			var Buttons = containerElement.FindElements(By.XPath("//div[@id='koPopup']//input"));
+			var Buttons = this.containerElement.FindElements(By.XPath("//div[@id='koPopup']//input"));
 			IWebElement MatchingButton;
 			switch (buttonName.ToLower())
 			{
@@ -1094,7 +1089,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				var labels = containerElement.FindElements(By.XPath(".//label[(./input[@type='checkbox'])]"));
+				var labels = this.containerElement.FindElements(By.XPath(".//label[(./input[@type='checkbox'])]"));
 				var matchingLabel = labels.FirstOrDefault(x => x.GetValue().Trim() == name);
 				if (matchingLabel != null)
 				{
@@ -1123,7 +1118,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				try
 				{
-					if (containerElement.FindElement(By.XPath(".//input[@id='btnSave']"), 10).TryClick())
+					if (this.containerElement.FindElement(By.XPath(".//input[@id='btnSave']"), 10).TryClick())
 					{
 						return true;
 					}
@@ -1152,7 +1147,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				return containerElement.FindElement(By.XPath(".//input[@id='btnCancel']")).TryClick();
+				return this.containerElement.FindElement(By.XPath(".//input[@id='btnCancel']")).TryClick();
 			}
 			catch (Exception e)
 			{
@@ -1270,7 +1265,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				var radios = containerElement.FindElements(By.XPath(".//table[@id='tblApply']//input[@type='radio']"));
+				var radios = this.containerElement.FindElements(By.XPath(".//table[@id='tblApply']//input[@type='radio']"));
 				IWebElement matchingRadio;
 				switch (name.ToLower())
 				{
@@ -1303,7 +1298,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				var radios = containerElement.FindElements(By.XPath(".//table[@id='tblTo']//input[@type='radio']"));
+				var radios = this.containerElement.FindElements(By.XPath(".//table[@id='tblTo']//input[@type='radio']"));
 				IWebElement matchingRadio;
 				switch (name.ToLower())
 				{
@@ -1330,7 +1325,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterInputSingleRule(string sInput)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='ucSelProductGroup_cmdSelect']"), 2);
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='ucSelProductGroup_cmdSelect']"), 2);
 			if (input != null)
 			{
 				input.EnterText(sInput);
@@ -1346,7 +1341,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//update revision, email rule report, apply to ghs regions, skip report generation
 		public bool SetCheckBox(string name, bool setChecked)
 		{
-			var checkboxes = containerElement.FindElements(By.XPath(".//table[@id='tblUpdateRevision']//input"));
+			var checkboxes = this.containerElement.FindElements(By.XPath(".//table[@id='tblUpdateRevision']//input"));
 			IWebElement matchingElement;
 			switch (name.ToLower())
 			{
@@ -1383,7 +1378,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterInputProductGroup(string sInput)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='ucSelProductGroup_txtProdGroup']"), 2);
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='ucSelProductGroup_txtProdGroup']"), 2);
 			if (input != null)
 			{
 				input.EnterText(sInput);
@@ -1398,7 +1393,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSingleRuleEllipsis()
 		{
-			var srEllipsis = containerElement.FindElement(By.XPath(".//input[@id='ucSelRule_cmdSelect']"), 2);
+			var srEllipsis = this.containerElement.FindElement(By.XPath(".//input[@id='ucSelRule_cmdSelect']"), 2);
 			if (srEllipsis != null)
 			{
 				return srEllipsis.TryClick();
@@ -1413,7 +1408,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickRuleGroupEllipsis()
 		{
-			var rgEllipsis = containerElement.FindElement(By.XPath(".//input[@id='ucSelRuleGroup_cmdSelect']"), 2);
+			var rgEllipsis = this.containerElement.FindElement(By.XPath(".//input[@id='ucSelRuleGroup_cmdSelect']"), 2);
 			if (rgEllipsis != null)
 			{
 				return rgEllipsis.TryClick();
@@ -1428,7 +1423,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickRuleGroupCommandSwitch()
 		{
-			var rgCommandSwitch = containerElement.FindElement(By.XPath(".//input[@id='ucSelRuleGroup_cmdSwitch']"), 2);
+			var rgCommandSwitch = this.containerElement.FindElement(By.XPath(".//input[@id='ucSelRuleGroup_cmdSwitch']"), 2);
 			if (rgCommandSwitch != null)
 			{
 				return rgCommandSwitch.TryClick();
@@ -1448,7 +1443,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				try
 				{
-					var buttonList = containerElement.FindElements(By.XPath(".//table[@id='Table2']//a"));
+					var buttonList = this.containerElement.FindElements(By.XPath(".//table[@id='Table2']//a"));
 
 					IWebElement matchingButton;
 
@@ -1548,7 +1543,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 			if (base.Wait_for_load(30))
 			{
-				if (WaitForClickFilterButton(30))
+				if (this.WaitForClickFilterButton(30))
 				{
 					return true;
 				}
@@ -1567,7 +1562,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var button = containerElement.FindElement(By.XPath(".//a[@id='Selectrecord1_lnkFilter']"), 2);
+				var button = this.containerElement.FindElement(By.XPath(".//a[@id='Selectrecord1_lnkFilter']"), 2);
 				if (button != null)
 				{
 					return true;
@@ -1581,7 +1576,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickFilterButton()
 		{
-			var button = containerElement.FindElement(By.XPath(".//a[@id='Selectrecord1_lnkFilter']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//a[@id='Selectrecord1_lnkFilter']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -1597,7 +1592,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SelectTopRule()
 		{
 			var rowList =
-				containerElement.FindElements(
+				this.containerElement.FindElements(
 					By.XPath(".//table[@id='Selectrecord1_grdSR']//tr[contains(@id, 'record')]"));
 			if (rowList.Count > 0)
 			{
@@ -1624,7 +1619,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectFromSelectBox(string selectBox, string value)
 		{
-			var listOfSelects = containerElement.FindElements(By.XPath(".//select"));
+			var listOfSelects = this.containerElement.FindElements(By.XPath(".//select"));
 			IWebElement matchingSelect;
 			switch (selectBox.ToLower())
 			{
@@ -1670,7 +1665,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterInTextBox(string textBox, string value)
 		{
-			var listOfSelects = containerElement.FindElements(By.XPath(".//input"));
+			var listOfSelects = this.containerElement.FindElements(By.XPath(".//input"));
 			IWebElement matchingInput;
 			switch (textBox.ToLower())
 			{
@@ -1700,7 +1695,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterRuleNameFilter(string sInput)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_grdFilters_ctl04_txtFilter']"), 2);
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_grdFilters_ctl04_txtFilter']"), 2);
 			if (input != null)
 			{
 				input.EnterText(sInput);
@@ -1715,7 +1710,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickApply()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -1730,7 +1725,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickCancel()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_btnCancel']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_btnCancel']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -1744,7 +1739,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickClear()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdClear']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdClear']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -1801,7 +1796,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 			if (base.Wait_for_load(30))
 			{
-				return WaitForFilterButtonLoad();
+				return this.WaitForFilterButtonLoad();
 			}
 
 			return false;
@@ -1811,7 +1806,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			for (int i = 0; i < 30; i++)
 			{
-				var linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_lnkFilter']"), 2);
+				var linkToClick = this.containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_lnkFilter']"), 2);
 
 				if (linkToClick.Displayed)
 				{
@@ -1830,18 +1825,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			switch (toolbarItem.ToLower())
 			{
 				case "filter":
-					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_lnkFilter']"), 2);
+					linkToClick = this.containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_lnkFilter']"), 2);
 					break;
 				case "new":
-					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdNew']"), 2);
+					linkToClick = this.containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdNew']"), 2);
 					break;
 				case "edit":
 				case "editselected":
-					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdEdit']"), 2);
+					linkToClick = this.containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdEdit']"), 2);
 					break;
 				case "delete":
 				case "deleteSelected":
-					linkToClick = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdDelete']"), 2);
+					linkToClick = this.containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_cmdDelete']"), 2);
 					break;
 				default:
 					Report.Info("You have not provided a valid toolbar item to click.");
@@ -1858,7 +1853,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public int getRecordCount()
 		{
-			var spanCount = containerElement.FindElement(By.XPath(".//span[@id='AttributesGrid_litRecordCount']"), 2);
+			var spanCount = this.containerElement.FindElement(By.XPath(".//span[@id='AttributesGrid_litRecordCount']"), 2);
 			if (spanCount == null)
 			{
 				Report.Info("Record count was not found");
@@ -1900,7 +1895,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickAliasSubsectionOption(string option)
 		{
-			var listOfSections = containerElement.FindElements(By.XPath("//div[@id='AttributesGrid_divSRData']//table//tr//td"), 2);
+			var listOfSections = this.containerElement.FindElements(By.XPath("//div[@id='AttributesGrid_divSRData']//table//tr//td"), 2);
 			var matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == option);
 			if (matchingSection == null)
 			{
@@ -1926,7 +1921,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SelectFromSelectBox(string selectBox, string value)
 		{
 			Report.Info("Select from select box: " + selectBox + " value: " + value);
-			var listOfSelects = containerElement.FindElements(By.XPath(".//select"));
+			var listOfSelects = this.containerElement.FindElements(By.XPath(".//select"));
 			IWebElement matchingSelect;
 			switch (selectBox.ToLower())
 			{
@@ -1968,7 +1963,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterInTextBox(string textBox, string value)
 		{
-			var listOfInputs = containerElement.FindElements(By.XPath(".//input"));
+			var listOfInputs = this.containerElement.FindElements(By.XPath(".//input"));
 			IWebElement matchingInput;
 			switch (textBox.ToLower())
 			{
@@ -1997,7 +1992,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickApply()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='AttributesGrid_cmdApply']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='AttributesGrid_cmdApply']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2012,7 +2007,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickCancel()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='AttributesGrid_btnCancel']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='AttributesGrid_btnCancel']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2026,7 +2021,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickClear()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='AttributesGrid_cmdClear']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='AttributesGrid_cmdClear']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2098,7 +2093,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickFilterButton()
 		{
-			var button = containerElement.FindElement(By.XPath(".//a[@id='DocumentQueue_lnkFilter']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//a[@id='DocumentQueue_lnkFilter']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2127,7 +2122,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				SeleniumBrowser.WebBrowser.FindElements(
 					By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@id, 'DocumentQueue')]"));
 
-			List<string> documentQueueHeaders = GetDocumentQueueTableHeaders();
+			List<string> documentQueueHeaders = this.GetDocumentQueueTableHeaders();
 
 			List<string> propertiesInDocument = new Document().GetType().GetProperties().Select(x => x.Name).ToList();
 
@@ -2194,7 +2189,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			try
 			{
 				var headerRow =
-					containerElement.FindElement(
+					this.containerElement.FindElement(
 						By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@class, 'ColHeader')]"));
 				return headerRow.FindElements(By.XPath(".//td//a")).Select(x => x.GetValue()).ToList();
 			}
@@ -2210,7 +2205,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SelectTopItem()
 		{
 			var rowList =
-				containerElement.FindElements(
+				this.containerElement.FindElements(
 					By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@id, 'DocumentQueue')]"));
 			if (rowList.Count > 0)
 			{
@@ -2222,7 +2217,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool CheckSelectAllCheckbox()
 		{
-			var checkbox = containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
+			var checkbox = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
 			if (checkbox != null)
 			{
 				checkbox.Check(true);
@@ -2239,7 +2234,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickDeleteSelected()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='btnDelete']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='btnDelete']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2253,7 +2248,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickCloneSelectedRow()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='btnClone']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='btnClone']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2268,7 +2263,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickProcessDocuments()
 		{
 			Report.Info("Beginning click process documents");
-			var button = containerElement.FindElement(By.XPath(".//input[@id='btnProcessToPublish']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='btnProcessToPublish']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2323,7 +2318,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SelectFromSelectBox(string selectBox, string value)
 		{
 			Report.Info("Select from select box: " + selectBox + " value: " + value);
-			var listOfSelects = containerElement.FindElements(By.XPath(".//select"));
+			var listOfSelects = this.containerElement.FindElements(By.XPath(".//select"));
 			IWebElement matchingSelect;
 			switch (selectBox.ToLower())
 			{
@@ -2413,7 +2408,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterInTextBox(string textBox, string value)
 		{
-			var listOfSelects = containerElement.FindElements(By.XPath(".//input"));
+			var listOfSelects = this.containerElement.FindElements(By.XPath(".//input"));
 			IWebElement matchingInput;
 			switch (textBox.ToLower())
 			{
@@ -2503,7 +2498,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							this.Wait_for_load();
 							try
 							{
-								var dateInput = containerElement.FindElement(
+								var dateInput = this.containerElement.FindElement(
 									By.XPath(".//input[@id='DocumentQueue_grdFilters_ctl17_ucDateRange_txtDateRange']"));
 								string dateFromTo = dateInput.GetValue();
 								string dateFrom = dateFromTo.Split(new string[] { " - " }, StringSplitOptions.None)[0];
@@ -2533,7 +2528,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickDatePicker()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdFilters_ctl17_ucDateRange_cmdSelect']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_grdFilters_ctl17_ucDateRange_cmdSelect']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2549,7 +2544,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickApply()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_cmdApply']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_cmdApply']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2564,7 +2559,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickCancel()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_btnCancel']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_btnCancel']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2578,7 +2573,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickClear()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_cmdClear']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='DocumentQueue_cmdClear']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2650,7 +2645,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool StartDateClickCurrent()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='btnStartToday']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='btnStartToday']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2665,7 +2660,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EndDateClickCurrent()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@id='btnEndToday']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@id='btnEndToday']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2680,7 +2675,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickOK()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@type='submit' and @value='Ok']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@type='submit' and @value='Ok']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2695,7 +2690,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickClear()
 		{
-			var button = containerElement.FindElement(By.XPath(".//input[@type='submit' and @value='Clear']"), 2);
+			var button = this.containerElement.FindElement(By.XPath(".//input[@type='submit' and @value='Clear']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2724,7 +2719,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				//get current selected from date
 				var montYear =
-					containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[2]"), 2);
+					this.containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[2]"), 2);
 
 				if (montYear == null)
 				{
@@ -2735,18 +2730,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				int selectedYear = Convert.ToInt16(sMonthYear.Split(' ')[1].Trim());
 				string curMonth = sMonthYear.Split(' ')[0].Trim();
 				int selectedMonth = DateTime.ParseExact(curMonth, "MMMM", CultureInfo.InvariantCulture).Month;
-				var nextYearButton = containerElement.FindElement(By.XPath(".//a[@id='lnkForwardOneYearStartDate']"), 1);
-				var previousYearButton = containerElement.FindElement(By.XPath(".//a[@id='lnkBackOneYearStartDate']"), 1);
-				var nextMonthButton = containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[3]/a"), 2);
-				var previousMonthButton = containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[1]/a"), 2);
+				var nextYearButton = this.containerElement.FindElement(By.XPath(".//a[@id='lnkForwardOneYearStartDate']"), 1);
+				var previousYearButton = this.containerElement.FindElement(By.XPath(".//a[@id='lnkBackOneYearStartDate']"), 1);
+				var nextMonthButton = this.containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[3]/a"), 2);
+				var previousMonthButton = this.containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[1]/a"), 2);
 				while (selectedYear != year)
 				{
 					this.Wait_for_load();
-					montYear = containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[2]"), 2);
+					montYear = this.containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[2]"), 2);
 					sMonthYear = montYear.GetValue();
 					selectedYear = Convert.ToInt16(sMonthYear.Split(' ')[1].Trim());
-					nextYearButton = containerElement.FindElement(By.XPath(".//a[@id='lnkForwardOneYearStartDate']"), 1);
-					previousYearButton = containerElement.FindElement(By.XPath(".//a[@id='lnkBackOneYearStartDate']"), 1);
+					nextYearButton = this.containerElement.FindElement(By.XPath(".//a[@id='lnkForwardOneYearStartDate']"), 1);
+					previousYearButton = this.containerElement.FindElement(By.XPath(".//a[@id='lnkBackOneYearStartDate']"), 1);
 					if (selectedYear < year)
 					{
 						nextYearButton.TryClick();
@@ -2760,12 +2755,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				while (selectedMonth != month)
 				{
 					this.Wait_for_load();
-					montYear = containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[2]"), 2);
+					montYear = this.containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[2]"), 2);
 					sMonthYear = montYear.GetValue();
 					curMonth = sMonthYear.Split(' ')[0].Trim();
 					selectedMonth = DateTime.ParseExact(curMonth, "MMMM", CultureInfo.InvariantCulture).Month;
-					nextMonthButton = containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[3]/a"), 2);
-					previousMonthButton = containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[1]/a"), 2);
+					nextMonthButton = this.containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[3]/a"), 2);
+					previousMonthButton = this.containerElement.FindElement(By.XPath("//table[@id='calStartDate']//tr[1]//table//tr[1]/td[1]/a"), 2);
 
 					if (selectedMonth < month)
 					{
@@ -2778,7 +2773,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				}
 
-				var days = containerElement.FindElements(
+				var days = this.containerElement.FindElements(
 					By.XPath(".//table[@id='calStartDate']//td[@class='Day' or @class='Weekend' or @class='Selected']"));
 
 				IWebElement matchingDay = days.FirstOrDefault(x => Convert.ToInt16(x.GetValue().Trim()) == day);
@@ -2812,7 +2807,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 				//get current selected from date
 				var montYear =
-					containerElement.FindElement(By.XPath("//table[@id='calEndDate']//tr[1]//table//tr[1]/td[2]"), 2);
+					this.containerElement.FindElement(By.XPath("//table[@id='calEndDate']//tr[1]//table//tr[1]/td[2]"), 2);
 
 				if (montYear == null)
 				{
@@ -2823,10 +2818,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				int selectedYear = Convert.ToInt16(sMonthYear.Split(' ')[1].Trim());
 				string curMonth = sMonthYear.Split(' ')[0].Trim();
 				int selectedMonth = DateTime.ParseExact(curMonth, "MMMM", CultureInfo.InvariantCulture).Month;
-				var nextYearButton = containerElement.FindElement(By.XPath(".//a[@id='lnkForwardOneYearEndDate']"), 1);
-				var previousYearButton = containerElement.FindElement(By.XPath(".//a[@id='lnkBackOneYearEndDate']"), 1);
-				var nextMonthButton = containerElement.FindElement(By.XPath("//table[@id='calEndDate']//tr[1]//table//tr[1]/td[3]/a"), 2);
-				var previousMonthButton = containerElement.FindElement(By.XPath("//table[@id='calEndDate']//tr[1]//table//tr[1]/td[1]/a"), 2);
+				var nextYearButton = this.containerElement.FindElement(By.XPath(".//a[@id='lnkForwardOneYearEndDate']"), 1);
+				var previousYearButton = this.containerElement.FindElement(By.XPath(".//a[@id='lnkBackOneYearEndDate']"), 1);
+				var nextMonthButton = this.containerElement.FindElement(By.XPath("//table[@id='calEndDate']//tr[1]//table//tr[1]/td[3]/a"), 2);
+				var previousMonthButton = this.containerElement.FindElement(By.XPath("//table[@id='calEndDate']//tr[1]//table//tr[1]/td[1]/a"), 2);
 				while (selectedYear != year)
 				{
 					if (selectedYear < year)
@@ -2852,7 +2847,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					selectedMonth = DateTime.ParseExact(curMonth, "MMMM", CultureInfo.InvariantCulture).Month;
 				}
 
-				var days = containerElement.FindElements(
+				var days = this.containerElement.FindElements(
 					By.XPath(".//table[@id='calEndDate']//td[@class='Day' or @class='Weekend' or @class='Selected']"));
 
 				IWebElement matchingDay = days.FirstOrDefault(x => Convert.ToInt16(x.GetValue().Trim()) == day);
@@ -2928,7 +2923,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickButton(string button)
 		{
-			var varButtons = containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
+			var varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
 			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
 			if (matchingButton == null)
 			{
@@ -2942,7 +2937,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//Apply rules, EU Wizard, GHS Wizard, Regulation matrix
 		public bool ClickAuthoringButton(string button)
 		{
-			var varButtons = containerElement.FindElements(By.XPath(".//span[@id='authoring-buttons']/a"), 2);
+			var varButtons = this.containerElement.FindElements(By.XPath(".//span[@id='authoring-buttons']/a"), 2);
 			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
 			if (matchingButton == null)
 			{
@@ -2956,7 +2951,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickIDSelect()
 		{
-			var matchingButton = containerElement.FindElement(By.XPath(".//input[@id='productSelectorselProd']"), 2);
+			var matchingButton = this.containerElement.FindElement(By.XPath(".//input[@id='productSelectorselProd']"), 2);
 			if (matchingButton == null)
 			{
 				Report.Info("Failed to find button to open id select");
@@ -2968,7 +2963,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSubFormatSelect()
 		{
-			var matchingButton = containerElement.FindElement(By.XPath(".//input[@id='formatSubformatSelectorselFormat']"), 2);
+			var matchingButton = this.containerElement.FindElement(By.XPath(".//input[@id='formatSubformatSelectorselFormat']"), 2);
 			if (matchingButton == null)
 			{
 				Report.Info("Failed to find button to open subformat select");
@@ -2980,7 +2975,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterID(string id)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='productSelectorselectProdTB']"));
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='productSelectorselectProdTB']"));
 			if (input == null)
 			{
 				Report.Info("Failed to find id input");
@@ -3058,7 +3053,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//Save, Submit
 		public bool ClickButton(string button)
 		{
-			var varButtons = containerElement.FindElements(By.XPath(".//input[@type='submit']"), 2);
+			var varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='submit']"), 2);
 
 			if (varButtons == null)
 			{
@@ -3089,7 +3084,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var input = containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"), 1);
+				var input = this.containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"), 1);
 				if (input != null)
 				{
 					return true;
@@ -3102,7 +3097,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterCAS(string cas)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"), 2);
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='txtCASID']"), 2);
 			if (input == null)
 			{
 				Report.Info("Failed to find CAS input");
@@ -3115,7 +3110,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterComponentID(string componentID)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='txtCompID']"));
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='txtCompID']"));
 			if (input == null)
 			{
 				Report.Info("Failed to find componentID input");
@@ -3128,7 +3123,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterChemicalName(string chemicalName)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='txtChemName']"));
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='txtChemName']"));
 			if (input == null)
 			{
 				Report.Info("Failed to find chemical name input");
@@ -3141,7 +3136,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterTradeSecretName(string tradeSelectName)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='txtTradeSecName']"));
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='txtTradeSecName']"));
 			if (input == null)
 			{
 				Report.Info("Failed to find trade secret name input");
@@ -3154,7 +3149,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool AddToFormulationNowCheckboxChecked(bool check)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='chkAddToFormula']"));
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='chkAddToFormula']"));
 			if (input.Checked() == check)
 			{
 				Report.Info("Add to Formulation Checkbox is already set correctly.");
@@ -3169,7 +3164,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool LoadRegulationDataNowCheckboxChecked(bool check)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='chkLoadRegulation']"));
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='chkLoadRegulation']"));
 			if (input.Checked() == check)
 			{
 				Report.Info("Load Regulation Data Now Checkbox is already set correctly.");
@@ -3217,7 +3212,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//Save, Clear, Cancel, Previous, Next
 		public bool ClickButton(string button)
 		{
-			var varButtons = containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
+			var varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
 			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
 			if (matchingButton == null)
 			{
@@ -3240,7 +3235,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SelectItem(string columnHeader, string value)
 		{
 			Report.Info("Selecting phrase: " + value + " in column: " + columnHeader);
-			List<string> rawHeaders = GetHeaders();
+			List<string> rawHeaders = this.GetHeaders();
 			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfHeader = 0;
 			for (int i = 0; i < headers.Count; i++)
@@ -3252,7 +3247,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 			}
 
-			var listOfColumnItems = containerElement
+			var listOfColumnItems = this.containerElement
 				.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 			var sValues = listOfColumnItems.Select(x => x.GetValue().Trim()).ToList();
@@ -3269,7 +3264,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				for (int i = 0; i < 5; i++)
 				{
 					Report.Info("Trying to select with double click");
-					listOfColumnItems = containerElement
+					listOfColumnItems = this.containerElement
 						.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 					matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
@@ -3277,7 +3272,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Delay.Seconds(1);
 					matchingItem.DoubleClick();
 					Delay.Seconds(2);
-					var listOfSelectedColumnItems = containerElement
+					var listOfSelectedColumnItems = this.containerElement
 						.FindElements(By.XPath(".//table[@id='tblPicked']//tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 					var matchingSelectedItem = listOfSelectedColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
@@ -3290,7 +3285,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				for (int i = 0; i < 5; i++)
 				{
-					listOfColumnItems = containerElement
+					listOfColumnItems = this.containerElement
 						.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 					matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
@@ -3299,7 +3294,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					matchingItem.Click();
 					matchingItem.Click();
 					Delay.Seconds(2);
-					var listOfSelectedColumnItems = containerElement
+					var listOfSelectedColumnItems = this.containerElement
 						.FindElements(By.XPath(".//table[@id='tblPicked']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 					var matchingSelectedItem = listOfSelectedColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
@@ -3318,7 +3313,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<Phrase> GetSelectedPhrases()
 		{
 			Report.Info("Beginning get selected phrases");
-			List<string> rawHeaders = GetHeaders();
+			List<string> rawHeaders = this.GetHeaders();
 			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			Report.Info("Got " + headers.Count + " headers");
 			int indexOfCode = 0;
@@ -3348,7 +3343,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					indexOfNotes = i + 1;
 				}
 			}
-			var selectedRows = containerElement.FindElements(By.XPath(".//table[@id='tblPicked']//tr"), 2);
+			var selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='tblPicked']//tr"), 2);
 			List<Phrase> listOfPhrases = new List<Phrase>();
 			if (selectedRows == null)
 			{
@@ -3372,7 +3367,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<Phrase> GetAvailablePhrases()
 		{
 			List<string> headers = this.GetHeaders();
-			var selectedRows = containerElement.FindElements(By.XPath(".//tbody[@id='sortable-list2']//tr"));
+			var selectedRows = this.containerElement.FindElements(By.XPath(".//tbody[@id='sortable-list2']//tr"));
 			int indexOfCode = this.GetHeaders().IndexOf("Code");
 			int indexOfText = this.GetHeaders().IndexOf("Text");
 			int indexOfType = this.GetHeaders().IndexOf("Type");
@@ -3393,7 +3388,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool filterSelectPhrases(string filter)
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='AttrEditPager_txtPhraseFilter']"), 2);
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='AttrEditPager_txtPhraseFilter']"), 2);
 
 			if (input == null)
 			{
@@ -3432,7 +3427,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//Save, Clear, Cancel, Previous, Next
 		public bool ClickButton(string button)
 		{
-			var varButtons = containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
+			var varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
 			var matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
 			if (matchingButton == null)
 			{
@@ -3446,7 +3441,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string GetSelectedValue()
 		{
 			Report.Info("Beginning get selected value");
-			var oldValue = containerElement.FindElement(By.XPath(".//textarea[@id='oldValue']"), 2);
+			var oldValue = this.containerElement.FindElement(By.XPath(".//textarea[@id='oldValue']"), 2);
 			if (oldValue == null)
 			{
 				Report.Info("Value item was not found.");
@@ -3548,7 +3543,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				switch (name.ToLower())
 				{
 					case "check out":
-						var checkOutButton = containerElement.FindElement(By.Id("btnCheckOut"), 2);
+						var checkOutButton = this.containerElement.FindElement(By.Id("btnCheckOut"), 2);
 						if (checkOutButton == null)
 						{
 							Report.Info("Did not find check out button");
@@ -3557,7 +3552,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						return checkOutButton.TryClick();
 
 					case "check in":
-						var checkInButton = containerElement.FindElement(By.Id("btnCheckIn"), 2);
+						var checkInButton = this.containerElement.FindElement(By.Id("btnCheckIn"), 2);
 						if (checkInButton == null)
 						{
 							Report.Info("Did not find check in button");

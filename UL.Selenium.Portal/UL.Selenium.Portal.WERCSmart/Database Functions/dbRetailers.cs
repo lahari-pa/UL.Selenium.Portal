@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Wercs.Selenium.PortalUX.Database_Functions
+namespace UL.Selenium.Portal.WERCSmart.Database_Functions
 {
 	static class dbRetailers
 	{

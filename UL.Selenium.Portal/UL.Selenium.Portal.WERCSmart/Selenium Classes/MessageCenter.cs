@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -7,7 +6,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class MessageCenter : BaseObject
 	{
@@ -26,11 +25,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickPrimaryButton(string button)
 		{
-			return containerElement.FindElement(By.XPath(".//button[@class='btn btn-primary' and text()='" + button + "']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[@class='btn btn-primary' and text()='" + button + "']"), 2).TryClick();
 		}
 		public bool ClickShowArchived()
 		{
-			var input = containerElement.FindElement(By.XPath(".//input[@id='chkArchivedMsgCtr']"), 2);
+			var input = this.containerElement.FindElement(By.XPath(".//input[@id='chkArchivedMsgCtr']"), 2);
 			if (input == null)
 			{
 				return false;
@@ -42,7 +41,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			if (position.ToLower() == "current")
 			{
-				var activePageControl = containerElement.FindElement(By.XPath(".//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
+				var activePageControl = this.containerElement.FindElement(By.XPath(".//ul[starts-with(@class,'pagination')]/li[@class='active']/span"), 2);
 				if (activePageControl == null)
 				{
 					Report.Failure("The page control could not be found on the My Packaging Types grid");
@@ -52,7 +51,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (position.ToLower() == "last")
 			{
-				var lastControl = containerElement.FindElements(By.XPath(".//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
+				var lastControl = this.containerElement.FindElements(By.XPath(".//ul[starts-with(@class,'pagination')]/li/a[@class='page-link']"), 2);
 				if (lastControl.Count == 0)
 				{
 					Report.Info("Last page is: 1");
@@ -64,20 +63,20 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 		public bool ClickPage(string page)
 		{
-			if (GetPage("current") == int.Parse(page))
+			if (this.GetPage("current") == int.Parse(page))
 			{
 				return false;
 			}
 			Report.Info("Clicking page: " + page);
-			return containerElement.FindElement(By.XPath(".//a[@class='page-link' and text()= '" + page + "']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[@class='page-link' and text()= '" + page + "']"), 2).TryClick();
 		}
 		public int MessageCount()
 		{
-			return containerElement.FindElements(By.XPath(".//tbody[not(starts-with(@data-bind,'foreach:'))]/tr"), 2).Count;
+			return this.containerElement.FindElements(By.XPath(".//tbody[not(starts-with(@data-bind,'foreach:'))]/tr"), 2).Count;
 		}
 		public bool NextDisabled()
 		{
-			return containerElement.FindElement(By.XPath(".//span[@class='current next' and parent::li[@class='disabled']]"), 2) != null;
+			return this.containerElement.FindElement(By.XPath(".//span[@class='current next' and parent::li[@class='disabled']]"), 2) != null;
 		}
 		public bool Navigation(string navOption)
 		{
@@ -85,9 +84,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			switch (navOption.ToLower())
 			{
 				case "next":
-					return containerElement.FindElement(By.XPath(".//a[@class='page-link next']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+					return this.containerElement.FindElement(By.XPath(".//a[@class='page-link next']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 				case "previous":
-					return containerElement.FindElement(By.XPath(".//a[@class='page-link prev']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+					return this.containerElement.FindElement(By.XPath(".//a[@class='page-link prev']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
 			}
 			Report.Failure("Unable to apply navigation option: " + navOption);
 			return false;
@@ -95,40 +94,40 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<Message> MessageItems()
 		{
 			var rList = new List<Message>();
-			ClickPage("1");
-			int pageNumber = GetPage("current");
+			this.ClickPage("1");
+			int pageNumber = this.GetPage("current");
 			var ingredientNumber = 1;
 			if (pageNumber == -1)
 			{
 				Report.Failure("Could not get current page number from the grid");
 				return rList;
 			}
-			int lastPageNumber = GetPage("last");
+			int lastPageNumber = this.GetPage("last");
 			while (pageNumber <= lastPageNumber && pageNumber != -1)
 			{
-				var rowCount = MessageCount();
+				var rowCount = this.MessageCount();
 				for (int i = 1; i <= rowCount; i++)
 				{
-					rList.Add(GetMessage(i));
+					rList.Add(this.GetMessage(i));
 					ingredientNumber++;
 				}
-				if (NextDisabled())
+				if (this.NextDisabled())
 				{
 					Report.Info("Found a total of: " + rList.Count + " ingredients");
-					ClickPage("1");
+					this.ClickPage("1");
 					return rList;
 				}
-				Navigation("next");
-				pageNumber = GetPage("current");
+				this.Navigation("next");
+				pageNumber = this.GetPage("current");
 			}
 			Report.Info("Found a total of: " + rList.Count + " ingredients");
 			Report.Screenshot();
-			ClickPage("1");
+			this.ClickPage("1");
 			return rList;
 		}
 		public Message GetMessage(int row)
 		{
-			var tableRow = containerElement.FindElement(By.XPath(".//tbody/tr[" + row + "]"), 2);
+			var tableRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[" + row + "]"), 2);
 			if (tableRow == null)
 			{
 				return new Message();

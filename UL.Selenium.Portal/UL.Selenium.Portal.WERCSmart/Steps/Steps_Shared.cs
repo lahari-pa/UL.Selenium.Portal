@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Text;
 using Castle.Core.Internal;
-using NPOI.SS.Formula.Functions;
-using SeleniumUtilities;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Database_Functions;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
-using WERCSmart;
-using NTTQA_Reporting_Module.Reporting.Core;
-using NTTQA_Reporting_Module;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Automation_Classes.Universal_Functions;
+using NTTQA_Reporting_Module;
+using NTTQA_Reporting_Module.Reporting.Core;
 using NTTQA_TReVor_Module.Cache;
-using Org.BouncyCastle.Asn1.Cmp;
+using SeleniumUtilities;
+using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Database_Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding]
 	public class Steps_Shared : TechTalk.SpecFlow.Steps
@@ -55,7 +50,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			@"I call Shared Step 57561 \(The Product - Enter Product Name and select Type of Product\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string type)
 		{
-			Step57561(type, "");
+			this.Step57561(type, "");
 		}
 
 		//Seems to be identical to 57500
@@ -63,7 +58,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			@"I call Shared Step 57561a \(The Product - Enter Product Name: (.*) and select Type of Product\): (.*)")]
 		public void GivenICallSharedStepTheProduct_EnterProductNameAndSelectTypeOfProduct(string name, string type)
 		{
-			Step57561(type, name);
+			this.Step57561(type, name);
 		}
 
 		public void Step57561(string type, string name = "")
@@ -3296,7 +3291,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			buttons.AddRow("Product is not considered a pesticide product");
 			TestReport.StartStep(
 				"I confirm the radios showing in order are: Prevents, Destroys Repels Pests..', 'Regulates Plant Growth, Defoliates..', 'Product is not considered a pesticide product'");
-			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should","Which one best describes your product", buttons);
+			MyNewProduct.CheckRadioButtonsInSectionAndOrder("should", "Which one best describes your product", buttons);
 		}
 
 		[StepDefinition(
@@ -3318,13 +3313,13 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option)
 		{
 			string name = "";
-			Step57561(option, name);
+			this.Step57561(option, name);
 		}
 
 		public void GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath(string option,
 			string name)
 		{
-			Step57561(option, name);
+			this.Step57561(option, name);
 		}
 
 		[StepDefinition(
@@ -3658,7 +3653,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			month = 12;
 			day = 30;
 			DateTime dtEnd = new DateTime(year, month, day);
-			DateTime dt = GetRandomDate(dtStart, dtEnd);
+			DateTime dt = this.GetRandomDate(dtStart, dtEnd);
 			Report.Info("Attempting to enter date: " + dt.ToString("yyyy-MM-dd"));
 			Report.IsTrue(pesticideDetailsState.EditExpirationDate(dt.ToString("yyyy-MM-dd"), state),
 				"Failed to enter date: " + dt.ToString("yyyy-MM-dd") + " for state: " + state,
@@ -4066,7 +4061,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			myStepsSha.GivenINavigateToStudio();
 			TestReport.StartStep("I log in to studio as administrator");
 			myStepsSha.GivenILoginToStudioAsAdministrator();
-			GivenICallSharedStep59066GoToSHAManager();
+			this.GivenICallSharedStep59066GoToSHAManager();
 
 		}
 
@@ -4182,7 +4177,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			}
 
 			TestReport.StartStep("I wait for this job to complete processing");
-			GivenICallSharedStep59066GoToSHAManager();
+			this.GivenICallSharedStep59066GoToSHAManager();
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();
 			StudioSHAManagerProductSearch myProductSearch = new StudioSHAManagerProductSearch();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -6788,7 +6783,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			var shaSteps = new Steps_SHA();
 			// Given I In SHA manager find your product in the Recertification status(you may have to wait a few minutes for the Zuora process to run and for your product to show in Recertification)
 			//-make sure you are on the Recertification status list
-			GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
+			this.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Recertification");
 			StudioSHAManager myStudioShaManager = new StudioSHAManager();

@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Mailosaur;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
-
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using WERCSmart;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "Solutions")]
 	class StepsSolution

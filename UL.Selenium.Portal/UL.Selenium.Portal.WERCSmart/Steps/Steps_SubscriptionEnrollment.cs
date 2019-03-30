@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Castle.Components.DictionaryAdapter;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
-using OpenQA.Selenium.Support.UI;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TestStack.White.UIItems.WindowItems;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "SubEnrollment")]
 	class StepsSubscriptionEnrollment
@@ -457,7 +453,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				var mySub = new SubscriptionEnrollment();
 
-				ThenIClickOnX("Cancel");
+				this.ThenIClickOnX("Cancel");
 
 				Report.IsTrue(mySub.Proceed_click(), "Failed to Click Proceed Button", "Proceed Button Clicked");
 			}

@@ -7,10 +7,10 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using NTTQA_TReVor_Module.Cache;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "Login"), Scope(Tag = "WERCSmart_Login")]
 	class StepsLogin
@@ -196,12 +196,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var user = (WERCSmartUser)Context.GetFromContext(username);
-				GivenIPopulateTheInputFieldWith("email", user.Email);
+				this.GivenIPopulateTheInputFieldWith("email", user.Email);
 				Delay.Seconds(5);
-				GivenIPopulateTheInputFieldWith("password", user.Password);
+				this.GivenIPopulateTheInputFieldWith("password", user.Password);
 				Delay.Seconds(5);
 				Report.Screenshot();
-				WhenISelectTheLoginButton();
+				this.WhenISelectTheLoginButton();
 				Delay.Seconds(5);
 			}
 			catch (Exception ex)
@@ -219,12 +219,12 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				Delay.Seconds(3);
 				var user = (WERCSmartUser)Context.GetFromContext(username);
-				GivenIPopulateTheInputFieldWith("email", user.Email);
+				this.GivenIPopulateTheInputFieldWith("email", user.Email);
 				Delay.Seconds(5);
-				GivenIPopulateTheInputFieldWith("password", password);
+				this.GivenIPopulateTheInputFieldWith("password", password);
 				Delay.Seconds(5);
 				Report.Screenshot();
-				WhenISelectTheLoginButton();
+				this.WhenISelectTheLoginButton();
 				Delay.Seconds(5);
 			}
 			catch (Exception ex)

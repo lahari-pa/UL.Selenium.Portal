@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Linq;
 using Mailosaur;
-using NPOI.SS.Formula.Functions;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
 using NTTQA_TReVor_Module.Classes;
 using NUnit.Framework;
 using SeleniumUtilities;
-
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "ForgottenPassword")]
 	class StepsForgottenPassword

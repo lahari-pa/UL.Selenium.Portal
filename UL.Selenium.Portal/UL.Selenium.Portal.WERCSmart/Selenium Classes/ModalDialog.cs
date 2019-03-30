@@ -7,7 +7,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class ModalDialog : BaseObject
 	{
@@ -79,17 +79,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public void EnterLoginPassword(string password)
 		{
-			containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2).EnterText(password);
+			this.containerElement.FindElement(By.XPath(".//input[@name='loginPassword']"), 2).EnterText(password);
 		}
 
 		public void EnterNewPassword(string password)
 		{
-			containerElement.FindElement(By.XPath(".//input[@id='newPassword']"), 2).EnterText(password);
+			this.containerElement.FindElement(By.XPath(".//input[@id='newPassword']"), 2).EnterText(password);
 		}
 
 		public void EnterVerifyPassword(string password)
 		{
-			containerElement.FindElement(By.XPath(".//input[@id='verifyPassword']"), 2).EnterText(password);
+			this.containerElement.FindElement(By.XPath(".//input[@id='verifyPassword']"), 2).EnterText(password);
 		}
 
 		public bool ClickContinue()
@@ -117,7 +117,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetRetailers()
 		{
-			var retailers = containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+			var retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
 
 			List<string> retailerList = new List<string>();
 			foreach (var retailer in retailers)
@@ -130,7 +130,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			var retailers = containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
+			var retailers = this.containerElement.FindElements(By.XPath("//table/tbody/tr/td[2]"));
 
 			var matchingRetailer = retailers.FirstOrDefault(x => x.GetValue() == retailer);
 

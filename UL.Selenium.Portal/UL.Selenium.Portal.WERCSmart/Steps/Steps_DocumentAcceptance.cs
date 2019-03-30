@@ -1,13 +1,11 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "DocumentAcceptance")]
 	class Steps_DocumentAcceptance

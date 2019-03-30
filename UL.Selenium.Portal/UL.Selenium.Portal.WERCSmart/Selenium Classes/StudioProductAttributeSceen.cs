@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using iTextSharp.text.pdf.parser;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class StudioProductAttributeScreen : BaseObject
 	{
@@ -62,21 +58,21 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickFilterButton()
 		{
-			var button = containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_imgFilter']"));
+			var button = this.containerElement.FindElement(By.XPath(".//a[@id='AttributesGrid_imgFilter']"));
 			return button.TryClick();
 		}
 
 		public bool ResultsAreFound()
 		{
 			Delay.Seconds(1);
-			var codeTDsFindElements = containerElement.FindElements(By.XPath(
+			var codeTDsFindElements = this.containerElement.FindElements(By.XPath(
 				".//table[@id='AttributesGrid_tblSelectRecord']/tbody/tr[not(@id='AttributesGrid_rowHeader') and not(@id='AttributesGrid_rowTitle')]//tr[not(contains(@class, 'FixedHeader'))]/td[1]"));
 			return codeTDsFindElements.Count > 0;
 		}
 
 		public bool SelectItemByCode(string Code)
 		{
-			var codeTDsFindElements = containerElement.FindElements(By.XPath(
+			var codeTDsFindElements = this.containerElement.FindElements(By.XPath(
 				".//table[@id='AttributesGrid_tblSelectRecord']/tbody/tr[not(@id='AttributesGrid_rowHeader') and not(@id='AttributesGrid_rowTitle')]//tr[not(contains(@class, 'FixedHeader'))]/td[1]"));
 
 			var matchingTD = codeTDsFindElements.FirstOrDefault(x => x.GetValue() == Code);
@@ -92,7 +88,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> GetDataText()
 		{
 			List<string> returnList = new List<string>();
-			var dataAreaSelect = containerElement.FindElement(By.XPath(".//select[@id='lbData']"), 2);
+			var dataAreaSelect = this.containerElement.FindElement(By.XPath(".//select[@id='lbData']"), 2);
 
 			if (dataAreaSelect == null)
 			{

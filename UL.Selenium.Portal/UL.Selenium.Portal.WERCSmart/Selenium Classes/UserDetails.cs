@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -8,8 +6,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class UserDetails : BaseObject
 	{
@@ -72,14 +69,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				//var test = containerElement.FindElement(By.XPath(".//label[contains(text(),'User Role')]"));
 				//var test2 = test.FindElement(By.XPath("following-sibling::select"));
 				//this.RefreshPageObject();
-				containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 				var el = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind, 'userRole')]"));
 				return el.GetValue();
 			}
 			set
 			{
 				//var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'User Role')]/following-sibling::select"), 2);
-				containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 				var el = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind, 'userRole')]"), 2);
 				el.Select(value);
 			}
@@ -112,11 +109,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string ConfirmEmailAddress {
 			get
 			{
-				return containerElement.FindElement(By.Id("txtConfirm"), 2).GetValue();
+				return this.containerElement.FindElement(By.Id("txtConfirm"), 2).GetValue();
 			}
 			set
 			{
-				containerElement.FindElement(By.Id("txtConfirm"), 2).EnterText(value);
+				this.containerElement.FindElement(By.Id("txtConfirm"), 2).EnterText(value);
 				Report.Success("Entered confirm email address: " + value);
 			}
 		}
@@ -125,7 +122,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			get
 			{
 				//var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Country')]/following-sibling::select"), 2);
-				containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 				var el = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"));
 				return el.GetValue();
 			}
@@ -139,7 +136,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string CountryCode {
 			get
 			{
-				containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 				return this._sCountryCode.GetValue();
 			}
 
@@ -185,18 +182,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Beginning Add_New_User: " + username);
 
 			Report.Info("Entering User Information");
-			Name = username;
-			Title = title;
-			UserRole = role;
-			PhoneNumber = phoneNo;
-			EmailAddress = emailAddress;
-			ConfirmEmailAddress = confirm;
-			Country = country.ToUpper();
+			this.Name = username;
+			this.Title = title;
+			this.UserRole = role;
+			this.PhoneNumber = phoneNo;
+			this.EmailAddress = emailAddress;
+			this.ConfirmEmailAddress = confirm;
+			this.Country = country.ToUpper();
 
 			Report.Info("User Details Entered");
 			Report.Screenshot();
 
-			if (!ClickButton("Create"))
+			if (!this.ClickButton("Create"))
 			{
 				Report.Info("Failed to Click Create Button");
 				Report.Screenshot();
@@ -229,14 +226,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Close_click()
 		{
 			Report.Info("Attempting to Click Close Button");
-			return _btnClose.TryClick();
+			return this._btnClose.TryClick();
 		}
 
 		public bool Add_User_Thank_You()
 		{
 			Report.Info("Beginning Add_User_Thank_You");
 			//containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-			IWebElement myText = containerElement.FindElements(By.XPath(".//div/p[@class='marBot-20']"), 10).FirstOrDefault();
+			IWebElement myText = this.containerElement.FindElements(By.XPath(".//div/p[@class='marBot-20']"), 10).FirstOrDefault();
 
 			if (myText == null)
 			{
@@ -251,7 +248,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Success("Thank You Text Correct - User Has Been Created");
 				Report.Screenshot();
 
-				if (!Close_click())
+				if (!this.Close_click())
 				{
 					Report.Info("Failed to Click Close Button");
 					Report.Screenshot();
@@ -270,7 +267,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Updated_User_Thank_You_Close()
 		{
 			Report.Info("Beginning Add_User_Thank_You");
-			IWebElement myText = containerElement.FindElements(By.XPath(".//div/p[@class='marBot-20']"), 10).FirstOrDefault();
+			IWebElement myText = this.containerElement.FindElements(By.XPath(".//div/p[@class='marBot-20']"), 10).FirstOrDefault();
 			if (myText == null)
 			{
 				Report.Info("Failed to Find Thenk You Text");
@@ -278,7 +275,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Report.IsTrue(myText.Text == "The user account has been updated.", "Thank You Text Incorrect: " + myText.Text, "Thank You Text Correct: The user acount has been updated.");
-			return Close_click();
+			return this.Close_click();
 		}
 	}
 }

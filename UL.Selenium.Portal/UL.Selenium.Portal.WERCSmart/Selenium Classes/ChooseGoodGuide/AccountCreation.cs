@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NTTQA_Automation_Classes.Extension_Methods;
+﻿using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
 	class ChooseGoodGuide_AccountCreation : ConflictMinerals
 	{
@@ -19,22 +14,22 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickCreateCompanyAccount()
 		{
-			return containerElement.FindElement(By.XPath(".//a[text()='Create Company Account']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[text()='Create Company Account']"), 2).TryClick();
 		}
 
 		public string Email {
-			get { return containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).GetValue(); }
-			set { containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).EnterText(value); }
+			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).GetValue(); }
+			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).EnterText(value); }
 		}
 
 		public bool ClickNext()
 		{
-			return containerElement.FindElement(By.XPath(".//input[@id='cmdNext']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//input[@id='cmdNext']"), 2).TryClick();
 		}
 
 		public bool ClickCancel()
 		{
-			return containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"), 2).TryClick();
 		}
 
 		public string WhatCityWereYouBornIn {

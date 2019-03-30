@@ -6,7 +6,7 @@ using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class ConflictMinerals : BaseObject
 	{
@@ -150,7 +150,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).Text.Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).EnterText(value); }
 		}
-		
+
 		public string ContactIdentityPassword {
 			get { return this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).Text.Trim(); }
 			set { this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).EnterText(value); }
@@ -195,7 +195,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickLogin()
 		{
-			var loginButton = containerElement.FindElement(By.XPath(".//input[@id='cmdLogIn']"));
+			var loginButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdLogIn']"));
 			if (loginButton != null)
 			{
 				return loginButton.TryClick();
@@ -229,7 +229,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickCreateCompanyAccount()
 		{
-			var listOfAs = containerElement.FindElements(By.XPath(".//a"));
+			var listOfAs = this.containerElement.FindElements(By.XPath(".//a"));
 
 			var createCompanyLink = listOfAs.FirstOrDefault(x => x.Text.Contains("Create Company Account"));
 			if (createCompanyLink != null)
@@ -244,7 +244,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSignIn()
 		{
-			var signInLink = containerElement.FindElement(By.XPath(".//a[@id='loginLink']"));
+			var signInLink = this.containerElement.FindElement(By.XPath(".//a[@id='loginLink']"));
 
 			if (signInLink != null)
 			{
@@ -255,7 +255,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickNext()
 		{
-			var nextButton = containerElement.FindElement(By.XPath(".//input[@id='cmdNext']"));
+			var nextButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdNext']"));
 
 			if (nextButton != null)
 			{
@@ -266,7 +266,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickBack()
 		{
-			var backButton = containerElement.FindElement(By.XPath(".//input[@id='cmdBack']"));
+			var backButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdBack']"));
 
 			if (backButton != null)
 			{
@@ -277,7 +277,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickCancel()
 		{
-			var cancelButton = containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"));
+			var cancelButton = this.containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"));
 
 			if (cancelButton != null)
 			{
@@ -433,7 +433,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetCompanyNameSignedIn()
 		{
-			var username = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[contains(@class, 'username')]"),2);
+			var username = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[contains(@class, 'username')]"), 2);
 			if (username != null)
 			{
 				return username.Text;
@@ -445,7 +445,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetEmailSignedIn()
 		{
-			var username = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//i[@class='fa fa-user']"),2);
+			var username = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//i[@class='fa fa-user']"), 2);
 			if (username != null)
 			{
 				return username.GetValue();

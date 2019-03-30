@@ -1,30 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Components.DictionaryAdapter;
-using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.Extensions;
-using OpenQA.Selenium.Support.PageObjects;
-using Org.BouncyCastle.Crypto.Engines;
 using SeleniumUtilities;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class UPC : NewProduct
 	{
 		public bool ClickAddCaseUpcButton()
 		{
-			var el = containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -47,7 +38,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetUPCOptions()
 		{
-			var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 			var rList = new List<string>();
 			if (container != null)
 			{
@@ -59,12 +50,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetUPCbuttons()
 		{
-			return containerElement.FindElements(By.XPath("//button[@class='btn btn-success']"), 2).Select(x => x.GetValue()).ToList();
+			return this.containerElement.FindElements(By.XPath("//button[@class='btn btn-success']"), 2).Select(x => x.GetValue()).ToList();
 		}
 
 		public bool AddCaseUpcButton()
 		{
-			var el = containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewPackRow')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -76,7 +67,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool AddUpcButton()
 		{
-			var el = containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -89,7 +80,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				var textInputs = container.FindElements(By.XPath("//input[@type = 'text']"), 2);
 				var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
 
@@ -141,9 +132,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					var packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'transport.field')]"), 2);
 					if (info.TransportationOption.ToLower().Contains("random"))
 					{
-						List<string> packageOptions = packageField.FindElements(By.XPath(".//option")).Select(x=>x.GetValue()).ToList();
+						List<string> packageOptions = packageField.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
 						Random r = new Random();
-						int rInt = r.Next(0, packageOptions.Count-1);
+						int rInt = r.Next(0, packageOptions.Count - 1);
 						packageField.Select(packageOptions[rInt]);
 					}
 					else
@@ -165,7 +156,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> UpcPageLinks()
 		{
 			var linksText = new List<string>();
-			linksText = containerElement.FindElements(By.XPath(".//div[@class='alert alert-info']//a")).Select(x => x.Text).ToList();
+			linksText = this.containerElement.FindElements(By.XPath(".//div[@class='alert alert-info']//a")).Select(x => x.Text).ToList();
 			return linksText;
 		}
 
@@ -173,7 +164,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var xPath = @"(.//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//label[@class='sr-only'][contains(text(),""" + section + @""")])] | " +
 						@".//p[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group has-error')]//select[@class='form-control']//option[contains(text(),""" + section + @""")])])";
-			var el = containerElement.FindElements(By.XPath(xPath), 10);
+			var el = this.containerElement.FindElements(By.XPath(xPath), 10);
 			return el.Count == 0 ? new List<string>() : el.Select(x => x.Text).ToList();
 		}
 

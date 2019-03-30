@@ -9,10 +9,9 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
-using Wercs.Selenium.PortalUX.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class ForgottenPassword : BaseObject
 	{
@@ -135,7 +134,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Enter_Answer_One(string answerText)
 		{
 			Report.Info("Entering Answer One: " + answerText);
-			_txtQuestionOne.EnterText(answerText);
+			this._txtQuestionOne.EnterText(answerText);
 			return true;
 		}
 
@@ -146,7 +145,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Enter_Answer_Two(string answerText)
 		{
 			Report.Info("Entering Answer One: " + answerText);
-			_txtQuestionTwo.EnterText(answerText);
+			this._txtQuestionTwo.EnterText(answerText);
 			return true;
 		}
 
@@ -157,7 +156,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Cancel_click()
 		{
 			Report.Info("Attempting to Click Cancel Button");
-			return _btnCancel.TryClick();
+			return this._btnCancel.TryClick();
 		}
 
 		//Continue Button
@@ -167,13 +166,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Continue_click()
 		{
 			Report.Info("Attempting to Click Continue Button");
-			return _btnContinue.TryClick();
+			return this._btnContinue.TryClick();
 		}
 
 		public bool Forgot_Password_Questions(string savedAs)
 		{
 			Report.Info("Beginning Forgot_Password_Questions");
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Questions Page");
 				Report.Screenshot();
@@ -182,8 +181,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			var user = (WERCSmartUser)Context.GetFromContext(savedAs);
 			GeneralUtilities.Wait_for_load_finish();
 			Delay.Seconds(5);
-			IWebElement questionOne = containerElement.FindElement(By.XPath(".//label[@for='secQuestion1']"));
-			IWebElement questionTwo = containerElement.FindElement(By.XPath(".//label[@for='secQuestion2']"));
+			IWebElement questionOne = this.containerElement.FindElement(By.XPath(".//label[@for='secQuestion1']"));
+			IWebElement questionTwo = this.containerElement.FindElement(By.XPath(".//label[@for='secQuestion2']"));
 			switch (questionOne.Text)
 			{
 				case "What was your phone number when you were 15 years old?":
@@ -281,7 +280,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Delay.Seconds(1 * Delay.SpeedFactor);
 			Report.Info("Answers Entered");
 			Report.Screenshot();
-			if (!Continue_click())
+			if (!this.Continue_click())
 			{
 				Report.Info("Failed to Click Continue");
 				Report.Screenshot();
@@ -299,7 +298,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Enter_New_Password(string newPw)
 		{
 			Report.Info("Entering New Password: " + newPw);
-			_txtNewPw.EnterText(newPw);
+			this._txtNewPw.EnterText(newPw);
 			return true;
 		}
 
@@ -310,7 +309,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Enter_Verify_Password(string verifyPw)
 		{
 			Report.Info("Entering Verify Password: " + verifyPw);
-			_txtVerifyPw.EnterText(verifyPw);
+			this._txtVerifyPw.EnterText(verifyPw);
 			return true;
 		}
 
@@ -318,13 +317,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning New_Password_Form: " + newPassword + " / " + verifyPw);
 
-			if (!Enter_New_Password(newPassword))
+			if (!this.Enter_New_Password(newPassword))
 			{
 				Report.Info("Failed to Enter New Password: " + newPassword);
 				Report.Screenshot();
 				return false;
 			}
-			if (!Enter_Verify_Password(verifyPw))
+			if (!this.Enter_Verify_Password(verifyPw))
 			{
 				Report.Info("Failed to Enter Verify Password: " + verifyPw);
 				Report.Screenshot();
@@ -332,7 +331,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Report.Info("Passwords Entered");
 			Report.Screenshot();
-			if (!Continue_click())
+			if (!this.Continue_click())
 			{
 				Report.Info("Failed to Click Continue Button");
 				Report.Screenshot();
@@ -349,7 +348,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Login_click()
 		{
 			Report.Info("Attempting to Click Login Button");
-			return _btnLogin.TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this._btnLogin.TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 

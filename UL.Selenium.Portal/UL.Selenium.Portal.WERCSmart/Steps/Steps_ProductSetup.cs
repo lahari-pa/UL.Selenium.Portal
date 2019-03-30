@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.Core.Internal;
-using NPOI.SS.Formula.Functions;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
-using NUnit.Framework.Internal;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using TestStack.White.Recording;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
-using WERCSmart;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "ProductSetUp")]
 	class Steps_ProductSetup : TechTalk.SpecFlow.Steps
@@ -201,7 +193,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,
 				"Completed");
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(
-				savedAs,"red");
+				savedAs, "red");
 			sharedSteps.GivenICallSharedStep51351SHASelectProductViewRecertificationHistoryForProductSavedAs(savedAs);
 
 			TechTalk.SpecFlow.Table recertification = new TechTalk.SpecFlow.Table(new string[] {
@@ -285,7 +277,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I call test stuff for saved as: (.*)")]
 		public void GivenICallTestStuff(string savedAs)
 		{
-			Test(savedAs);
+			this.Test(savedAs);
 		}
 
 
@@ -358,9 +350,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			// If purchase details are showing click confirm order
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			// 65080 (Login to Studio and Open SHA manager)
-	//********************
-	//SHA Manager
-	//********************
+			//********************
+			//SHA Manager
+			//********************
 			sharedSteps.GivenICallShared65080LoginToStudioAndOpenSHAManager();
 			// 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75335)
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", savedAs);
@@ -1173,14 +1165,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 					"Ing" + savedAs + "3", table55);
 
 
-		  //Then in the Ingredients page I click Continue
-		  newProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
+			//Then in the Ingredients page I click Continue
+			newProductSteps.GivenInTheNewProductPageIClickContinue("Ingredients");
 			//And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
 			sharedSteps.GivenICallSharedStepFormulationRdParty_AcceptFormulation_GrantTier_Continue();
 			//And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 			sharedSteps.GivenICallSharedEnterRegulatoryInformation_NotProp();
 			//And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-		//	sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
+			//	sharedSteps.SharedRegulatoryInformation2_Microbeads_No();
 			//And I should see the Additional Documents to Provide Page
 			newProductSteps.GivenIShouldSeeXPage("Additional Documents to Provide");
 			//And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate(Perfumery Products) and file: C:\Dependencies\WERCSmart\testdoc.pdf
@@ -1286,14 +1278,14 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (!Context.Contains("77862_KitProduct1"))
 			{
 				TestReport.StartStep("Beginning create kit 1");
-				CreateProductUsingTestCase75335Walmart("77862_KitProduct1");
+				this.CreateProductUsingTestCase75335Walmart("77862_KitProduct1");
 				thisGlobalSteps.NavigateToLandingPage();
 			}
 
 			if (!Context.Contains("77862_KitProduct2"))
 			{
 				TestReport.StartStep("Beginning create kit 2");
-				CreateProductUsingTestCase75335Walmart("77862_KitProduct2");
+				this.CreateProductUsingTestCase75335Walmart("77862_KitProduct2");
 				thisGlobalSteps.NavigateToLandingPage();
 			}
 
@@ -1444,7 +1436,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		[Given(@"I Use Test case 84518 to process the product from Assigned back to Completed status saved as (.*)")]
 		public void GivenIUseTestCaseToProcessTheProductFromAssignedBackToCompletedStatusSavedAsTestCase(string savedAs)
 		{
-			ProcessAssignedFormulatedProductBackToCompletedUsingTestCase84518(savedAs);
+			this.ProcessAssignedFormulatedProductBackToCompletedUsingTestCase84518(savedAs);
 		}
 
 

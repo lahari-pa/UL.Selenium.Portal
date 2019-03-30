@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
@@ -12,12 +11,12 @@ using NTTQA_TReVor_Module.Cache;
 using OpenQA.Selenium;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.ULSC.Selenium_Classes;
-using WERCSmart;
+using UL.Selenium.Portal.ULSC.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps;
 
-
-namespace Wercs.Selenium.ULSC.Steps
+namespace UL.Selenium.Portal.ULSC.Steps
 {
 	[Binding, Scope(Tag = "ULSC")]
 	class StepsUlsc
@@ -442,7 +441,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			var thisMenuItem = new SideBarNavigation().GetNavLink(menuItem);
 			if (thisMenuItem == null)
 			{
-				Report.Failure($"The menu item: {menuItem} was not displayed!" );
+				Report.Failure($"The menu item: {menuItem} was not displayed!");
 				Report.Screenshot();
 				return;
 			}
@@ -523,9 +522,9 @@ namespace Wercs.Selenium.ULSC.Steps
 			{
 				var expectedTitle = row["Link title"];
 				var expectedIcon = row["Link icon"];
-				if (Report.IsTrue(links.Any(x=>x.Title==expectedTitle), "No link with title: " + expectedTitle + " was displayed in Services section: " + section, "Link with title: " + expectedTitle + " was displayed in Services section: " + section + " as expected"))
+				if (Report.IsTrue(links.Any(x => x.Title == expectedTitle), "No link with title: " + expectedTitle + " was displayed in Services section: " + section, "Link with title: " + expectedTitle + " was displayed in Services section: " + section + " as expected"))
 				{
-					Report.IsTrue(links.Any(x => x.Icon == expectedIcon), "No link with icon: " + expectedIcon + " was displayed in Services section: " + section, "Link with icon: " +expectedIcon + " was displayed in Services section: " + section + " as expected");
+					Report.IsTrue(links.Any(x => x.Icon == expectedIcon), "No link with icon: " + expectedIcon + " was displayed in Services section: " + section, "Link with icon: " + expectedIcon + " was displayed in Services section: " + section + " as expected");
 				}
 			}
 		}
@@ -863,7 +862,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			{
 				throw new Exception("There was no side bar displayed with title: " + title);
 			}
-			Report.IsTrue(new SideBarNavigation().ClickNavItem(menuItem), "Failed to click the side bar link: " + title , "Successfully cliked the side bar link: " + title);
+			Report.IsTrue(new SideBarNavigation().ClickNavItem(menuItem), "Failed to click the side bar link: " + title, "Successfully cliked the side bar link: " + title);
 		}
 
 		[StepDefinition(@"I confirm the WERCSLink Additional Services page loads")]
@@ -937,7 +936,7 @@ namespace Wercs.Selenium.ULSC.Steps
 			{
 				if (subSubLinks.All(x => x.Title != row["Link"]))
 				{
-					Report.Failure("Link: " + row["Link"] + " was not displayed below the sub link: " + subLink+ "!");
+					Report.Failure("Link: " + row["Link"] + " was not displayed below the sub link: " + subLink + "!");
 					Report.Screenshot();
 					return;
 				}
@@ -971,7 +970,7 @@ namespace Wercs.Selenium.ULSC.Steps
 				Report.Screenshot();
 				return;
 			}
-			Report.IsTrue(new SideBarNavigation().ClickNavItem(thisSubSubLink), "Failed to click the link with title: " + subSub, "Successfully clicked link with title: "+ subSub);
+			Report.IsTrue(new SideBarNavigation().ClickNavItem(thisSubSubLink), "Failed to click the link with title: " + subSub, "Successfully clicked link with title: " + subSub);
 		}
 
 		[StepDefinition(@"I confirm that the drop down button with three dots is displayed for dashboard widget: (.*)")]

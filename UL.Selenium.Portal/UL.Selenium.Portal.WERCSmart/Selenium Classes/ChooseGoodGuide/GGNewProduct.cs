@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -10,9 +8,9 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
 	class GGNewProduct : BaseObject
 	{
@@ -30,7 +28,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		//Create or Copy
 		public bool SelectAddProductOption(string option)
 		{
-			return containerElement.FindElement(By.XPath("//label[contains(text(), 'Add Product')]/..//label/span[contains(text(),'" + option + "')]/../input")).TryClick();
+			return this.containerElement.FindElement(By.XPath("//label[contains(text(), 'Add Product')]/..//label/span[contains(text(),'" + option + "')]/../input")).TryClick();
 
 		}
 
@@ -58,7 +56,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				var input = containerElement.FindElement(
+				var input = this.containerElement.FindElement(
 					By.XPath("//div[@class='form-group']//label[contains(text(),'Product Name')]/../..//input"));
 				input.EnterText(productName);
 				return true;
@@ -90,7 +88,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			int counter = 0;
 			while (counter < secondsToWait)
 			{
-				var radioLabel = containerElement.FindElements(By.XPath(".//span[contains(text(), 'Create a New Product')]"));
+				var radioLabel = this.containerElement.FindElements(By.XPath(".//span[contains(text(), 'Create a New Product')]"));
 				if (radioLabel != null)
 				{
 					return true;
@@ -107,7 +105,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[@class='form-group child']//select")).Select(category);
+				this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[@class='form-group child']//select")).Select(category);
 				return true;
 			}
 			catch (Exception e)
@@ -122,7 +120,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select")).Select(subcategory);
+				this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select")).Select(subcategory);
 				return true;
 			}
 			catch (Exception e)
@@ -175,12 +173,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[contains(text(), 'Add new product')]")).TryClick())
 			{
-				if (WaitForSection("Product Line/Brand"))
+				if (this.WaitForSection("Product Line/Brand"))
 				{
 					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Product Line/Brand')]/following-sibling::input")).EnterText(productLine);
 					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Product Line/Brand')]/following-sibling::button")).TryClick();
 					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Product Line/Brand')]/following-sibling::a")).TryClick();
-					if (WaitForSection("Product Identification"))
+					if (this.WaitForSection("Product Identification"))
 					{
 						return true;
 					}
@@ -266,7 +264,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		public bool UploadFile(string documentType, string filePath)
 		{
 			var buttonToClick =
-				containerElement.FindElement(
+				this.containerElement.FindElement(
 					By.XPath("//tr/td/label[contains(text(), '" + documentType.Trim() + "')]/../..//span[contains(@class, 'button')]"));
 			if (buttonToClick != null)
 			{
@@ -309,19 +307,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 					info.UpcNumber = savedUPC;
 				}
 
-				if (!SetUPCValue(info.UpcNumber))
+				if (!this.SetUPCValue(info.UpcNumber))
 				{
 					Report.Info("Failed to set upc number");
 					return false;
 				}
 
-				if (!SetUPCType(info.ContainerType))
+				if (!this.SetUPCType(info.ContainerType))
 				{
 					Report.Info("Failed to set container type");
 					return false;
 				}
 
-				if (!SetUPCSize(info.Size))
+				if (!this.SetUPCSize(info.Size))
 				{
 					Report.Info("Failed to set upc size");
 					return false;
@@ -493,17 +491,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		//Image, Front, Back
 		public bool UPCUpload(string documentType, string filePath)
 		{
-			var buttonToClick = containerElement.FindElement(By.XPath("//td[7]//span[text()='Add']/../../span"));
+			var buttonToClick = this.containerElement.FindElement(By.XPath("//td[7]//span[text()='Add']/../../span"));
 			switch (documentType)
 			{
 				case "Image":
-					buttonToClick = containerElement.FindElement(By.XPath("//td[7]//span[text()='Add']/../../span"));
+					buttonToClick = this.containerElement.FindElement(By.XPath("//td[7]//span[text()='Add']/../../span"));
 					break;
 				case "Front":
-					buttonToClick = containerElement.FindElement(By.XPath("//td[8]//span[text()='Add']/../../span"));
+					buttonToClick = this.containerElement.FindElement(By.XPath("//td[8]//span[text()='Add']/../../span"));
 					break;
 				case "Back":
-					buttonToClick = containerElement.FindElement(By.XPath("//td[9]//span[text()='Add']/../../span"));
+					buttonToClick = this.containerElement.FindElement(By.XPath("//td[9]//span[text()='Add']/../../span"));
 					break;
 				default:
 					throw new Exception("You must provide a valid document type");
@@ -569,10 +567,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool AddIngredient(Ingredients.Ingredient ingredient)
 		{
-			var placeholderEl = containerElement.FindElement(By.XPath(".//input[@id='txtCasNumber']"), 2);
+			var placeholderEl = this.containerElement.FindElement(By.XPath(".//input[@id='txtCasNumber']"), 2);
 			placeholderEl.TryClick();
 			IWebElement MatchedEntry = null;
-			var inputEl = containerElement.FindElement(By.XPath(".//input[@id='txtCasNumber']"), 2);
+			var inputEl = this.containerElement.FindElement(By.XPath(".//input[@id='txtCasNumber']"), 2);
 			if (ingredient.CASNumber != "" && ingredient.CASNumber != null)
 			{
 				inputEl.EnterText(ingredient.CASNumber);
@@ -660,7 +658,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 				while (Matches.FirstOrDefault().FindElement(By.XPath(".//a"), 2) == null)
 				{
 					Delay.Seconds(Delay.SpeedFactor * 1);
-					Matches = containerElement.FindElements(By.XPath(".//li[contains(@class,'ui-menu-item')]"), 2);
+					Matches = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'ui-menu-item')]"), 2);
 				}
 
 				var MatchingNameValue = Matches.FirstOrDefault(x => x.GetValue().Trim() == ingredient.ComponentName.Trim());

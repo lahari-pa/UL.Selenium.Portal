@@ -7,8 +7,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class ForwardProductRegistration : BaseObject
 	{
@@ -57,19 +56,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool EnterTextToSearchField(string value)
 		{
-			var searchEl = containerElement.FindElement(By.XPath(".//input[@type='text' and contains(@placeholder,'Start typing Product name or WPSID')]"), 2);
+			var searchEl = this.containerElement.FindElement(By.XPath(".//input[@type='text' and contains(@placeholder,'Start typing Product name or WPSID')]"), 2);
 			searchEl.EnterText(value);
 			return searchEl.GetAttribute("value") == value && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public bool ClickContinue()
 		{
-			return containerElement.FindElement(By.XPath(".//a[@data-bind='click: next']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[@data-bind='click: next']"), 2).TryClick();
 		}
 
 		public bool SelectProducts_ClickTheFirstProductCheckbox()
 		{
-			var productRows = containerElement.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
+			var productRows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2).ToList();
 			if (productRows.Count == 0)
 			{
 				Report.Info("No product rows were returned!");
@@ -87,7 +86,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectProducts_ClickProductByID(string id)
 		{
-			var productRow = containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
+			var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
 			if (productRow == null)
 			{
 				Report.Info("Could not find product row for product ID: " + id);
@@ -97,7 +96,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 		public bool SelectProducts_ClickProductByID_(string id)
 		{
-			var productRow = containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
+			var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
 			if (productRow == null)
 			{
 				Report.Info("Could not find product row for product ID: " + id);
@@ -115,7 +114,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string SelectProducts_FirstProductID()
 		{
-			var productRows = containerElement.FindElements(By.XPath(".//table[contains(@data-bind,'searchResults')]/tbody/tr"), 2).ToList();
+			var productRows = this.containerElement.FindElements(By.XPath(".//table[contains(@data-bind,'searchResults')]/tbody/tr"), 2).ToList();
 			if (productRows.Count == 0)
 			{
 				Report.Info("No product rows were returned!");
@@ -133,7 +132,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectProducts_ProductIsChecked(string id)
 		{
-			var productRow = containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
+			var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
 			if (productRow == null)
 			{
 				Report.Info("Could not find product row for product ID: " + id);
@@ -143,12 +142,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 		public bool SelectProducts_ProductCheckboxDisabled(bool disabledCheck)
 		{
-			var inputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox']"));
+			var inputs = this.containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox']"));
 			if (!inputs.Any())
 			{
 				return false;
 			}
-			var disabledInputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
+			var disabledInputs = this.containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
 			int timer = 0;
 			bool disabled = !disabledCheck;
 			while (timer < 100 && disabled != disabledCheck)
@@ -158,25 +157,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					disabled = disabledCheck;
 				}
 				Delay.Seconds(0.1);
-				disabledInputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
+				disabledInputs = this.containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
 				timer++;
 			}
 			return disabled;
 		}
 		public bool SelectProducts_ProductCheckboxIsDisabled()
 		{
-			var inputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox']"));
+			var inputs = this.containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox']"));
 			if (!inputs.Any())
 			{
 				return false;
 			}
-			var disabledInputs = containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
+			var disabledInputs = this.containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
 			return disabledInputs.Any();
 		}
 
 		public bool SelectRetailer(string retailer)
 		{
-			var retailers = containerElement.FindElements(By.XPath(@".//div[@class='col-sm-3 retailer-select' and .//span[contains(text(),""" + retailer + @""")]]"), 2).ToList();
+			var retailers = this.containerElement.FindElements(By.XPath(@".//div[@class='col-sm-3 retailer-select' and .//span[contains(text(),""" + retailer + @""")]]"), 2).ToList();
 			if (retailers.Count == 0)
 			{
 				Report.Info("No retailer tiles were found!");
@@ -187,7 +186,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool AllWalMartAffiliatesSelected()
 		{
-			var retailers = containerElement.FindElements(By.XPath(@".//div[@class='col-sm-3 retailer-select' and .//span[contains(text(),""Wal-Mart/SAM'S CLUB"")]]"), 2).ToList();
+			var retailers = this.containerElement.FindElements(By.XPath(@".//div[@class='col-sm-3 retailer-select' and .//span[contains(text(),""Wal-Mart/SAM'S CLUB"")]]"), 2).ToList();
 			if (retailers.Count == 0)
 			{
 				Report.Info("There were no Walmart affiliate retailers displayed");
@@ -199,7 +198,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string ActiveTab()
 		{
-			return containerElement.FindElement(By.XPath(".//div[@class='prog-step active']"), 2)?.Text;
+			return this.containerElement.FindElement(By.XPath(".//div[@class='prog-step active']"), 2)?.Text;
 		}
 
 		public bool FirstProductSelectVendor(string option)
@@ -220,7 +219,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectFirstUPC()
 		{
-			var upcs = GetUPCs();
+			var upcs = this.GetUPCs();
 			if (upcs.Count == 0)
 			{
 				Report.Failure("No UPC rows were found in the grid");
@@ -245,7 +244,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<SelectUPCs> GetUPCs()
 		{
 			var rUPCs = new List<SelectUPCs>();
-			var upcRows = containerElement.FindElements(By.XPath(".//div[./h3[text()='Select UPCs']]//tbody/tr"), 2);
+			var upcRows = this.containerElement.FindElements(By.XPath(".//div[./h3[text()='Select UPCs']]//tbody/tr"), 2);
 			foreach (var row in upcRows)
 			{
 				rUPCs.Add(new SelectUPCs {
@@ -263,7 +262,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<SelectProducts> GetProducts()
 		{
 			var rProducts = new List<SelectProducts>();
-			var productRows = containerElement.FindElements(By.XPath(".//table[.//th[contains(text(),'Product Name')]]/tbody/tr"), 2);
+			var productRows = this.containerElement.FindElements(By.XPath(".//table[.//th[contains(text(),'Product Name')]]/tbody/tr"), 2);
 			foreach (var row in productRows)
 			{
 				rProducts.Add(new SelectProducts {
@@ -278,7 +277,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<ProductResults> GetProductResults()
 		{
 			var rProductResults = new List<ProductResults>();
-			var productTables = containerElement.FindElements(By.XPath(".//div[@class='panel-body']//table"), 2);
+			var productTables = this.containerElement.FindElements(By.XPath(".//div[@class='panel-body']//table"), 2);
 			foreach (var product in productTables)
 			{
 				var upcRows = product.FindElements(By.XPath("./tbody/tr"), 2).ToList();
@@ -297,17 +296,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickAddUPC()
 		{
-			return containerElement.FindElement(By.XPath(".//button[@id='add-new-row-btn' and contains(@data-bind,'addNewRow')]"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[@id='add-new-row-btn' and contains(@data-bind,'addNewRow')]"), 2).TryClick();
 		}
 
 		public bool ClickAddToNoRetailer()
 		{
-			return containerElement.FindElement(By.XPath(".//button[@id='add-new-row-btn' and contains(@data-bind,'addToNoRetailer')]"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[@id='add-new-row-btn' and contains(@data-bind,'addToNoRetailer')]"), 2).TryClick();
 		}
 
 		public bool SelectUPCNoUPC()
 		{
-			return containerElement.FindElement(By.XPath(".//td[./following-sibling::td[./strong[text()='No UPC']]]/input"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//td[./following-sibling::td[./strong[text()='No UPC']]]/input"), 2).TryClick();
 		}
 
 		public bool ReviewAndSubmit_AreStatementsTrue(string value)
@@ -317,7 +316,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				Report.Info("Are statements true option must be 'true' or 'false'");
 				return false;
 			}
-			return containerElement.FindElement(By.XPath(".//input[@name='areStatementsTrue' and @value='" + value + "']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//input[@name='areStatementsTrue' and @value='" + value + "']"), 2).TryClick();
 		}
 
 		public class SelectProducts : ForwardProductRegistration
@@ -328,7 +327,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			public string SelectVendor {
 				get
 				{
-					var row = containerElement.FindElement(By.XPath(".//tr[@id='" + InternalID + "']"), 2);
+					var row = this.containerElement.FindElement(By.XPath(".//tr[@id='" + this.InternalID + "']"), 2);
 					var select = row.FindElement(By.XPath(".//select[contains(@data-bind,'vendors')]"), 2);
 					if (select == null)
 					{
@@ -339,7 +338,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				set
 				{
-					var row = containerElement.FindElement(By.XPath(".//tr[@id='" + InternalID + "']"), 2);
+					var row = this.containerElement.FindElement(By.XPath(".//tr[@id='" + this.InternalID + "']"), 2);
 					var select = row.FindElement(By.XPath(".//select[contains(@data-bind,'vendors')]"), 2);
 					if (select == null)
 					{
@@ -356,7 +355,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			public bool ClickProduct()
 			{
-				var row = containerElement.FindElement(By.XPath(".//tr[@id='" + InternalID + "']"), 2);
+				var row = this.containerElement.FindElement(By.XPath(".//tr[@id='" + this.InternalID + "']"), 2);
 				return row.TryClick() && row.GetAttribute("class") == "active";
 			}
 		}
@@ -368,7 +367,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			public string Size { get; set; }
 			public bool SelectUPC()
 			{
-				return containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + UPCInfo.UPCNumber + "']]/td/input")).TryClick();
+				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/input")).TryClick();
 			}
 		}
 
@@ -388,11 +387,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				if (action.ToLower() == "edit")
 				{
-					return containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + UPCNumber + "']]/td/a[contains(@data-bind,'edit')]")).TryClick();
+					return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCNumber + "']]/td/a[contains(@data-bind,'edit')]")).TryClick();
 				}
 				if (action.ToLower() == "remove")
 				{
-					return containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + UPCNumber + "']]/td/a[contains(@data-bind,'remove') or contains(@data-bind,'delete')]")).TryClick();
+					return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCNumber + "']]/td/a[contains(@data-bind,'remove') or contains(@data-bind,'delete')]")).TryClick();
 				}
 				return false;
 			}

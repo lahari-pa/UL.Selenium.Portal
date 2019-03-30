@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class NavigationBar : BaseObject
 	{
@@ -121,7 +119,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Click_ExpandedMenuLink(string destination)
 		{
-			var allLinks = containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-link')]//a[not(contains(@class,'spacer'))]"), 2);
+			var allLinks = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'sidemenu-link')]//a[not(contains(@class,'spacer'))]"), 2);
 			if (allLinks.Count == 0)
 			{
 				Report.Info("No links were found in the expanded navigation menu");

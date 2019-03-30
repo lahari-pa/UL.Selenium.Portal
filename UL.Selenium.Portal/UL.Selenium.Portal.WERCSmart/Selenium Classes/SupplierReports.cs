@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Mailosaur;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class SupplierReports : BaseObject
 	{
@@ -20,48 +17,48 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectReport(string report)
 		{
-			return containerElement.FindElements(By.XPath(".//div[@id='reportList']//tr/td//span"))
+			return this.containerElement.FindElements(By.XPath(".//div[@id='reportList']//tr/td//span"))
 				.FirstOrDefault(x => x.Text == report).FindElement(By.XPath("./../../a")).TryClick();
 		}
 
 		public string GetCurrentTitle()
 		{
-			return containerElement.FindElement(By.XPath(".//form[@id='panel']//h3"))?.Text;
+			return this.containerElement.FindElement(By.XPath(".//form[@id='panel']//h3"))?.Text;
 		}
 
 		public string GetCurrentSubText()
 		{
-			return containerElement.FindElement(By.XPath(".//form[@id='panel']//p"))?.Text;
+			return this.containerElement.FindElement(By.XPath(".//form[@id='panel']//p"))?.Text;
 		}
 
 		public bool ClickDownload()
 		{
-			return containerElement.FindElement(By.XPath("//form[@id='panel']//button")).TryClick();
+			return this.containerElement.FindElement(By.XPath("//form[@id='panel']//button")).TryClick();
 		}
 
 		public List<string> GetReportList()
 		{
-			return containerElement.FindElements(By.XPath("//div[@id='reportList']//tr/td//span")).Select(x => x.Text.Trim())
+			return this.containerElement.FindElements(By.XPath("//div[@id='reportList']//tr/td//span")).Select(x => x.Text.Trim())
 				.ToList();
 		}
 
 		//eg 1459158
 		public bool SelectKitThatContainsSpecificProduct(string searchTerm)
 		{
-			containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]")).TryClick();
+			this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]")).TryClick();
 			Delay.Seconds(1);
 			var Searches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//input"));
 			var Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"));
 			Search.EnterText(searchTerm);
 			Delay.Seconds(1);
 			var searching =
-				containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+				this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 			int i = 0;
 			while (searching != null && i < 10)
 			{
 				Delay.Seconds(Delay.SpeedFactor * 1);
 				i++;
-				searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"),
+				searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"),
 					2);
 			}
 
@@ -97,7 +94,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			var selectionBox = containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"));
+			var selectionBox = this.containerElement.FindElement(By.XPath(".//select[@id='retailerProgram']"));
 			selectionBox.Select(retailer);
 			return selectionBox.SelectedOption() == retailer;
 		}

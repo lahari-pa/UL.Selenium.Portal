@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -8,9 +6,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class LiveHelp : BaseObject
 	{
@@ -66,13 +62,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetFormText()
 		{
-			return containerElement.FindElement(By.XPath(".//div[@id='lc_prechat_form']/p")).GetValue().Trim();
+			return this.containerElement.FindElement(By.XPath(".//div[@id='lc_prechat_form']/p")).GetValue().Trim();
 
 		}
 
 		public bool ClickCloseX()
 		{
-			return containerElement.FindElement(By.XPath(".//span[@id='lc-close']")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//span[@id='lc-close']")).TryClick();
 		}
 
 

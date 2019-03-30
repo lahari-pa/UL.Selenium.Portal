@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -11,7 +8,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.ULSC.Selenium_Classes
+namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 {
 	class Services : BaseObject
 	{
@@ -206,7 +203,7 @@ namespace Wercs.Selenium.ULSC.Selenium_Classes
 
 		public WercsLinkService GetSection(string title)
 		{
-			var match = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2)?.FirstOrDefault(x=>x.Text==title);
+			var match = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'vert-offset-top-3')]/span"), 2)?.FirstOrDefault(x => x.Text == title);
 			var sectionEl = match?.FindElement(By.XPath("./ancestor::div[starts-with(@id,'well')][1]"), 2);
 			return sectionEl == null ? null : this.GetSection(sectionEl);
 		}

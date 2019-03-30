@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Castle.Components.DictionaryAdapter;
-using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -12,8 +8,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class RetailPartners : BaseObject
 	{
@@ -34,7 +29,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<string> ListOfRetailersWithAdditionalADataConsentRequests()
 		{
 			List<string> AdditionalDataConsentRequests = new List<string>();
-			var MyDataAndRecipients = containerElement.FindElements(By.XPath(".//h2"), 2).FirstOrDefault(x => x.Text.Contains("My Data & Recipients"));
+			var MyDataAndRecipients = this.containerElement.FindElements(By.XPath(".//h2"), 2).FirstOrDefault(x => x.Text.Contains("My Data & Recipients"));
 			if (MyDataAndRecipients != null)
 			{
 				AdditionalDataConsentRequests = MyDataAndRecipients.FindElements(By.XPath("../ div[2]//a//span")).Select(x => x.Text).ToList();
@@ -84,34 +79,34 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickRetailerLogo(string retailerCode)
 		{
-			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).FirstOrDefault(x => x.GetCssValue("background-image").ToLower().Contains(retailerCode.ToLower())).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).FirstOrDefault(x => x.GetCssValue("background-image").ToLower().Contains(retailerCode.ToLower())).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public bool NoRetailerTilesAreEmpty()
 		{
-			return !containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//div[starts-with(@class,'col') and not(.//a)]"), 2).Any();
+			return !this.containerElement.FindElements(By.XPath(".//div[@class='all-retailers']//div[starts-with(@class,'col') and not(.//a)]"), 2).Any();
 		}
 
 		public List<string> GetAllAvailableRetailers()
 		{
-			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).Select(x => x.GetCssValue("background-image").Replace(@"""", "").Replace("url(", "").Replace(")", "")).ToList();
+			return this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col')]//a"), 2).Select(x => x.GetCssValue("background-image").Replace(@"""", "").Replace("url(", "").Replace(")", "")).ToList();
 		}
 
 		public bool TilesAppearBelowHeading(string heading)
 		{
-			return containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]")).Any();
+			return this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]")).Any();
 		}
 
 		public List<string> AllRetailerTilesBelowHeading(string heading)
 		{
-			return containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]//span[@class='sr-only']")).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]//span[@class='sr-only']")).Select(x => x.Text).ToList();
 		}
 
 		public bool RetailerImageDisplayed(int tile)
 		{
 			try
 			{
-				var el = containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]/a"), 2).ToList()[tile - 1];
+				var el = this.containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]/a"), 2).ToList()[tile - 1];
 				var backgorundImage = el.GetCssValue("background-image");
 				el.ScrollElementIntoView();
 				return backgorundImage != "none";
@@ -125,7 +120,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool RetailerTextDisplayed(int tile)
 		{
-			var el = containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]//span[@class='sr-only']"), 2).ToList()[tile - 1];
+			var el = this.containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]//span[@class='sr-only']"), 2).ToList()[tile - 1];
 			if (el == null)
 			{
 				Report.Failure("Failed to find text element for tile: " + tile);
@@ -137,7 +132,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> AllRetailerNames()
 		{
-			return containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]//span[@class='sr-only']")).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath(@".//div[starts-with(@class,'col-sm-3')]//span[@class='sr-only']")).Select(x => x.Text).ToList();
 		}
 	}
 
@@ -155,12 +150,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetSectionText(string section)
 		{
-			return containerElement.FindElement(By.XPath(".//div[contains(@class,'panel') and (./preceding-sibling::h3[text()='" + section + "'])]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class,'panel') and (./preceding-sibling::h3[text()='" + section + "'])]"), 2).Text;
 		}
 
 		public bool SupplierIDTableShowing()
 		{
-			return containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2) != null;
+			return this.containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2) != null;
 		}
 
 		public string GetChartLegend()
@@ -170,17 +165,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool PieChartShowing()
 		{
-			return containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//*[name()='svg']"), 2) != null;
+			return this.containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//*[name()='svg']"), 2) != null;
 		}
 
 		public string GetPieChartFooterText()
 		{
-			return containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//div[@class='chart-legend']/p"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//div[@class='chart-legend']/p"), 2).Text;
 		}
 
 		public string ChartRetailerFill()
 		{
-			var chart = containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//*[name()='svg']"), 2);
+			var chart = this.containerElement.FindElement(By.XPath(".//h3[contains(normalize-space(),'& You')]//following-sibling::div//*[name()='svg']"), 2);
 			if (chart == null)
 			{
 				return null;
@@ -195,7 +190,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string ChartCentrePercentage()
 		{
-			var el = containerElement.FindElement(By.XPath(".//div[@id='total-products']"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//div[@id='total-products']"), 2);
 			if (el == null)
 			{
 				return null;
@@ -205,7 +200,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetAndYouText()
 		{
-			return containerElement.FindElement(By.XPath(".//div[@class='chart-legend']/../../..//h3"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//div[@class='chart-legend']/../../..//h3"), 2).Text;
 		}
 
 		public string GetTierInformation()
@@ -298,7 +293,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSaveChanges()
 		{
-			return containerElement.FindElement(By.XPath(".//p/a[contains(@class,'btn') and not(contains(style,'display: none'))]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.containerElement.FindElement(By.XPath(".//p/a[contains(@class,'btn') and not(contains(style,'display: none'))]"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public string WarningMessage()
@@ -308,7 +303,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> WarningMessages()
 		{
-			var messages = containerElement.FindElements(By.XPath(".//div[contains(@class,'alert-warning') and contains(@data-bind,'additionalInfo')]/p"), 2);
+			var messages = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'alert-warning') and contains(@data-bind,'additionalInfo')]/p"), 2);
 			if (messages.Count == 0)
 			{
 				return new List<string>();
@@ -318,17 +313,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetSelectedRetailer()
 		{
-			return containerElement.FindElement(By.XPath("//h2[@id='retailerLabel']"), 2).GetElementText();
+			return this.containerElement.FindElement(By.XPath("//h2[@id='retailerLabel']"), 2).GetElementText();
 		}
 
 		public List<string> GetButtons(string section)
 		{
-			return containerElement.FindElements(By.XPath(".//div[contains(@class,'panel') and (./preceding-sibling::h3[text()='" + section + "'])]//ul[contains(@class,'list')]//a"), 2).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'panel') and (./preceding-sibling::h3[text()='" + section + "'])]//ul[contains(@class,'list')]//a"), 2).Select(x => x.Text).ToList();
 		}
 
 		public List<string> GetSupplierIDTableHeaders()
 		{
-			return containerElement
+			return this.containerElement
 				.FindElements(
 					By.XPath(
 						".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table/thead/tr/th"),
@@ -337,13 +332,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickAddSupplierId()
 		{
-			return containerElement.FindElement(By.XPath(".//a[@class='add-supplier-id']")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[@class='add-supplier-id']")).TryClick();
 		}
 
 		public List<string> WalmartRegistrationsRetailers()
 		{
 			var xPath = ".//p[contains(text(),'Walmart registrations')]/following-sibling::ul/li";
-			return containerElement.FindElements(By.XPath(xPath), 2).Select(x => x.Text.Trim()).ToList();
+			return this.containerElement.FindElements(By.XPath(xPath), 2).Select(x => x.Text.Trim()).ToList();
 		}
 
 		public IWebElement DataConsentTiersTable()
@@ -354,7 +349,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<Supplier> GetAllSuppliers()
 		{
 			List<Supplier> supplierList = new List<Supplier>();
-			var supplierTable = containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2);
+			var supplierTable = this.containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2);
 			if (supplierTable == null)
 			{
 				Report.Info("Supplier table has not been found or is empty");
@@ -384,7 +379,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				var supplierTable = containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2);
+				var supplierTable = this.containerElement.FindElement(By.XPath(".//h3[text()='Your Supplier IDs']//following-sibling::div[contains(@class,'supplier')]//table"), 2);
 				if (supplierTable == null)
 				{
 					Report.Info("Supplier table has not been found or is empty");
@@ -551,7 +546,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickClose()
 		{
-			return containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).TryClick();
 		}
 
 	}

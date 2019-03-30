@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class ProductNotificationHistory : BaseObject
 	{
@@ -40,7 +37,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//Close, Export
 		public bool ClickButton(string button)
 		{
-			var varButtons = containerElement.FindElements(By.XPath("..//button/span"), 2);
+			var varButtons = this.containerElement.FindElements(By.XPath("..//button/span"), 2);
 			var matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
 			if (matchingButton == null)
 			{
@@ -63,7 +60,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SelectItem(string columnHeader, string value)
 		{
 			Report.Info("Selecting item: " + value + " in column: " + columnHeader);
-			List<string> rawHeaders = GetHeaders();
+			List<string> rawHeaders = this.GetHeaders();
 			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfHeader = 0;
 			for (int i = 0; i < headers.Count; i++)
@@ -75,7 +72,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 			}
 
-			var listOfColumnItems = containerElement
+			var listOfColumnItems = this.containerElement
 				.FindElements(By.XPath(".//table[@id='listProdRecertHistory']//tr/td[" + indexOfHeader + "]"), 2)
 				.ToList();
 
@@ -90,7 +87,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			else
 			{
 				Report.Info("Trying to select");
-				listOfColumnItems = containerElement
+				listOfColumnItems = this.containerElement
 					.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 				matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
@@ -106,7 +103,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<Notification> GetNotifications()
 		{
-			List<string> rawHeaders = GetHeaders();
+			List<string> rawHeaders = this.GetHeaders();
 			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfSupplierName = 0;
 			int indexOfType = 0;
@@ -152,7 +149,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 			}
 
-			var selectedRows = containerElement.FindElements(By.XPath(".//table[@id='tblViewNotificationHistory']//tr"), 2);
+			var selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='tblViewNotificationHistory']//tr"), 2);
 			List<Notification> listOfNotifications = new List<Notification>();
 			if (selectedRows == null)
 			{
@@ -184,7 +181,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickTopItem()
 		{
-			var selectedRows = containerElement.FindElements(By.XPath(".//table[@id='tblViewNotificationHistory']//tr"), 2);
+			var selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='tblViewNotificationHistory']//tr"), 2);
 			if (selectedRows.Count == 0)
 			{
 				Report.Info("No items have been found to click");
@@ -234,7 +231,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				var notificationDetailDiv = containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']"), 2);
+				var notificationDetailDiv = this.containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']"), 2);
 				if (notificationDetailDiv != null)
 				{
 					return true;
@@ -246,12 +243,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		}
 		public Notification GetNotificationDetails()
 		{
-			if (!WaitForNotificationDetails(60))
+			if (!this.WaitForNotificationDetails(60))
 			{
 				Report.Error("Notification details screen is not showing");
 				return null;
 			}
-			var notificationDetailsTableRows = containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']//table//tr"), 2);
+			var notificationDetailsTableRows = this.containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']//table//tr"), 2);
 
 			Notification thisNotification = new Notification();
 			thisNotification.ProductID = notificationDetailsTableRows
@@ -280,7 +277,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickButtonInNotificationDetails(string button)
 		{
-			var varButtons = containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']/../..//button/span"), 2);
+			var varButtons = this.containerElement.FindElements(By.XPath(".//div[@id='divViewProductMessageDetails']/../..//button/span"), 2);
 			var matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
 			if (matchingButton == null)
 			{

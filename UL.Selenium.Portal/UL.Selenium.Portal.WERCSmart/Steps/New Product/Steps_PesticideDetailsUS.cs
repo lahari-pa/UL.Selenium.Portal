@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Castle.Core.Internal;
-using iTextSharp.text;
 using NTTQA_Reporting_Module.Reporting.Core;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using TechTalk.SpecFlow.Bindings;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_PesticideDetailsUS
@@ -158,7 +153,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void EPATableHeadingExpected(string expectedHeading)
 		{
 			var actualHeading = new NewProduct().TableHeading();
-			Report.IsTrue(actualHeading!=null && string.Equals(actualHeading.Trim(), expectedHeading.Trim()),
+			Report.IsTrue(actualHeading != null && string.Equals(actualHeading.Trim(), expectedHeading.Trim()),
 				"The table heading did not match the expected text: " + expectedHeading + ". Displayed heading: " + actualHeading,
 				"The table heading matched the expected text: " + expectedHeading);
 		}

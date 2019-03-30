@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NTTQA_Automation_Classes.Base_Classes;
+﻿using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
 	class ChooseGoodGuide_Homepage : BaseObject
 	{
@@ -20,7 +15,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickGetStarted()
 		{
-			return containerElement.FindElement(By.XPath(".//a[text()='Get Started NOW']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[text()='Get Started NOW']"), 2).TryClick();
 		}
 	}
 }

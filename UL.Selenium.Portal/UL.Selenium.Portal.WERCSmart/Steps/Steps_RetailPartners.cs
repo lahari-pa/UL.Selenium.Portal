@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Components.DictionaryAdapter;
 using Castle.Core.Internal;
-using EnvDTE;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
 using NTTQA_TReVor_Module.Classes;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "RetailPartners")]
 	class StepsRetailPartners
@@ -55,8 +52,8 @@ namespace Wercs.Selenium.PortalUX.Steps
 						thisRetailParntersDetails.SetDataConsentTier(DCT, true);
 					}
 
-					GivenClickTheSaveChangesButton();
-					ClickCloseOnSavePopupDialog();
+					this.GivenClickTheSaveChangesButton();
+					this.ClickCloseOnSavePopupDialog();
 
 					thisRetailParntersDetails.ClickBackButton();
 

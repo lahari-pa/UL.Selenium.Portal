@@ -1,28 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
-using iTextSharp.text;
-using System.IO;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-using OpenQA.Selenium;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using TechTalk.SpecFlow.Bindings;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
 	[Binding, Scope(Tag = "NewProduct")]
 	class StepsNewProduct
@@ -912,7 +904,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.IsTrue(selNewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
 			GeneralUtilities.Wait_for_load_finish();
 			TestReport.StartStep("I should see page has loaded: " + section);
-			GivenIShouldSeeXPage(section);
+			this.GivenIShouldSeeXPage(section);
 		}
 
 		[StepDefinition(@"I delete UPC: (.*)")]
@@ -2198,10 +2190,10 @@ namespace Wercs.Selenium.PortalUX.Steps
 					}
 					else
 					{
-						SelectFirstOptionInSection(section);
+						this.SelectFirstOptionInSection(section);
 					}
 					Report.Info("Clicking continue");
-					ClickContinue();
+					this.ClickContinue();
 					if (myNewProduct.WaitForSection(newPage))
 					{
 						Report.Info("The new page has loaded");
@@ -2468,7 +2460,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Delay.Seconds(3);
 			foreach (TableRow thisRow in table.Rows)
 			{
-				ErrorMessagesAreShowingForItem(thisRow["Field"], "should", expectedError);
+				this.ErrorMessagesAreShowingForItem(thisRow["Field"], "should", expectedError);
 			}
 		}
 
@@ -3070,7 +3062,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			if (!newProductIngredients.Exists)
 			{
 				Report.Failure("Ingredients page is not showing as expected. Navigating to it....");
-				GivenInTheNewProductPageIClickSection("Ingredients");
+				this.GivenInTheNewProductPageIClickSection("Ingredients");
 			}
 			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
 
@@ -3178,7 +3170,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 
 			Report.Info("Error message is showing as: " + errorsList.FirstOrDefault(x => x.inputName == field).errorMessage);
 
-			Report.IsTrue(errorsList.FirstOrDefault(x => x.inputName == field && x.errorMessage.Trim()==errorMessage.Trim()) != null,
+			Report.IsTrue(errorsList.FirstOrDefault(x => x.inputName == field && x.errorMessage.Trim() == errorMessage.Trim()) != null,
 				"An error message is not showing as expected: " + errorMessage, "An error is showing as expected: " + errorMessage);
 		}
 
@@ -3193,7 +3185,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			List<string> containerTypes = new NewProduct().GetContainerOptions();
 			Random random = new Random();
-			int randomNumber = random.Next(0, containerTypes.Count-1);
+			int randomNumber = random.Next(0, containerTypes.Count - 1);
 			Report.IsTrue(new NewProduct().SelectContainerType(containerTypes[randomNumber]),
 				"Failed to select: " + containerTypes[randomNumber], "Selected: " + containerTypes[randomNumber]);
 		}

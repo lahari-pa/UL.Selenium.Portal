@@ -13,9 +13,8 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using Wercs.Selenium.PortalUX.Classes;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class SubscriptionEnrollment : BaseObject
 	{
@@ -31,13 +30,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Select_Articles(string articles)
 		{
 			Report.Info("Selecting Number of Articles: " + articles);
-			_selectArticles.Select(articles);
+			this._selectArticles.Select(articles);
 			return true;
 		}
 
 		public bool SetSection(string section, string option)
 		{
-			var el = containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
 			if (el == null)
 			{
 				Report.Error("Could not find the section: " + section);
@@ -51,7 +50,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string GetSectionSelectedOption(string section)
 		{
-			var el = containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//h3[normalize-space(text())='Select the range of your products, articles and enhanced articles']//following-sibling::div[1]//select[(./preceding-sibling::label[normalize-space(text())='" + section + "'])]"), 2);
 			if (el == null)
 			{
 				Report.Error("Could not find the section: " + section);
@@ -64,18 +63,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string Get_Selected_Articles()
 		{
-			return _selectArticles.SelectedOption();
+			return this._selectArticles.SelectedOption();
 		}
 
 		public string Get_Articles_info_header()
 		{
-			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"))
 				.GetAttribute("data-original-title").ToString();
 		}
 
 		public string Get_Articles_info_body()
 		{
-			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Articles ']/a"))
 				.GetAttribute("data-content").ToString();
 		}
 
@@ -83,7 +82,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				return _selectArticles.Displayed;
+				return this._selectArticles.Displayed;
 			}
 			catch (Exception e)
 			{
@@ -93,18 +92,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool RefreshContainerElement()
 		{
-			containerElement = SeleniumBrowser.WebBrowser.FindElement(By.Id("enrollment"), 2);
-			return containerElement != null;
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.Id("enrollment"), 2);
+			return this.containerElement != null;
 		}
 
 		public List<string> ReturnSelectDropDownItems(string label)
 		{
-			return new SelectElement(containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//following-sibling::select"), 2)).Options.Select(x => x.Text.Trim()).ToList();
+			return new SelectElement(this.containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//following-sibling::select"), 2)).Options.Select(x => x.Text.Trim()).ToList();
 		}
 
 		public bool HoverOverInformationElement(string label)
 		{
-			var el = containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//i[contains(@class,'info-circle')]"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//i[contains(@class,'info-circle')]"), 2);
 			var actions = new Actions(SeleniumBrowser.WebBrowser);
 			actions.MoveToElement(el).Build().Perform();
 			Delay.Seconds(Delay.SpeedFactor * 3);
@@ -113,31 +112,31 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string Get_Page_Header()
 		{
-			return containerElement.FindElement(By.XPath("//div[contains(@class, 'header-with-back')]/h2")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath("//div[contains(@class, 'header-with-back')]/h2")).Text.Trim();
 		}
 
 		public List<string> Get_Page_SubHeaders()
 		{
-			RefreshContainerElement();
-			return containerElement.FindElements(By.XPath("//h3/span/../../h3")).Select(x => x.Text).ToList();
+			this.RefreshContainerElement();
+			return this.containerElement.FindElements(By.XPath("//h3/span/../../h3")).Select(x => x.Text).ToList();
 		}
 
 		public string Get_Extra_Text_SubHeader(string subHeader)
 		{
-			return Extract_Before_Return(containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
-												   "')]/following-sibling::div/p")).Text);
+			return this.Extract_Before_Return(this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
+																			   "')]/following-sibling::div/p")).Text);
 		}
 
 		public string Get_Extra_Text_Link(string subHeader)
 		{
-			return containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
-												  "')]/following-sibling::div/p/a")).Text;
+			return this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
+														 "')]/following-sibling::div/p/a")).Text;
 			Delay.Seconds(1);
 		}
 
 		public void Click_Extra_Text_Link(string subHeader, string link)
 		{
-			containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
+			this.containerElement.FindElement(By.XPath("//h3/span/../../h3[contains(text(), '" + subHeader +
 												  "')]/following-sibling::div/p/a[contains(text(),'" + link + "')]")).TryClick();
 			Delay.Seconds(1);
 		}
@@ -149,7 +148,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Select_Enhanced_Articles(string enArticles)
 		{
 			Report.Info("Selecting Number of Enhanced Articles: " + enArticles);
-			_selectEnArticles.Select(enArticles);
+			this._selectEnArticles.Select(enArticles);
 			return true;
 		}
 
@@ -157,7 +156,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				return _selectEnArticles.Displayed;
+				return this._selectEnArticles.Displayed;
 			}
 			catch (Exception e)
 			{
@@ -167,18 +166,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string Get_Selected_Enhanced_Articles()
 		{
-			return _selectEnArticles.SelectedOption();
+			return this._selectEnArticles.SelectedOption();
 		}
 
 		public string Get_Enhanced_Articles_info_header()
 		{
-			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"))
 				.GetAttribute("data-original-title").ToString();
 		}
 
 		public string Get_Enhanced_Articles_info_body()
 		{
-			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Enhanced Articles ']/a"))
 				.GetAttribute("data-content").ToString();
 		}
 
@@ -189,7 +188,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Select_Formulated_Products(string formProds)
 		{
 			Report.Info("Selecting Number of Formulated Products: " + formProds);
-			_selectFormProds.Select(formProds);
+			this._selectFormProds.Select(formProds);
 			return true;
 		}
 
@@ -197,7 +196,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				return _selectFormProds.Displayed;
+				return this._selectFormProds.Displayed;
 			}
 			catch (Exception e)
 			{
@@ -207,17 +206,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public string Get_Selected_Formulated_Products()
 		{
-			return _selectFormProds.SelectedOption();
+			return this._selectFormProds.SelectedOption();
 		}
 		public string Get_Formulated_Products_info_header()
 		{
-			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"))
 				.GetAttribute("data-original-title").ToString();
 		}
 
 		public string Get_Formulated_Products_info_body()
 		{
-			return containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"))
+			return this.containerElement.FindElement(By.XPath("//div[@class='col-sm-4']/label[text()='Formulated Products ']/a"))
 				.GetAttribute("data-content").ToString();
 		}
 
@@ -225,7 +224,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			List<string> featurePlans = new List<string>();
 			Regex regex = new Regex(@".*\r\n");
-			var listOfPlans = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).Select(x => x.Text).ToList();
+			var listOfPlans = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).Select(x => x.Text).ToList();
 			foreach (string thisPlan in listOfPlans)
 			{
 				Match match = regex.Match(thisPlan);
@@ -249,7 +248,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			else
 			{
-				allPlans = Get_All_Plans();
+				allPlans = this.Get_All_Plans();
 				Context.AddToContext("Plans", allPlans);
 			}
 			Plan thisPlan = allPlans.FirstOrDefault(x => x.Plan_Name == planName);
@@ -257,8 +256,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				if (thisPlan.Info_points.Select(x => x.Info_Header).Contains(item))
 				{
-					var PlanLabel = containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
-						.FirstOrDefault(x => (Extract_Before_Return(x.Text) == thisPlan.Plan_Name));
+					var PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
+						.FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == thisPlan.Plan_Name));
 					try
 					{
 						var listOfLis = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"));
@@ -275,7 +274,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 							Delay.Seconds(1);
 							Report.Info("Clicked info link");
 							Report.Screenshot();
-							var expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
+							var expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
 							if (expandableDiv.GetAttribute("aria-expanded") == "true")
 							{
 								Report.Info("Got extra info. Trying to find url link.");
@@ -314,7 +313,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						}
 						else
 						{
-							Report.Info( "No info link was found");
+							Report.Info("No info link was found");
 						}
 					}
 					catch (Exception e)
@@ -339,30 +338,30 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			return SeleniumBrowser.WebBrowser
 				.FindElements(By.XPath(".//div[contains(@class, 'subscription')]/div[contains(@class, 'heading')]/label"))
-				.Select(x => Extract_Before_Return(x.Text)).ToList();
+				.Select(x => this.Extract_Before_Return(x.Text)).ToList();
 
 		}
 
 		public string GetFooterSubsCalculatorText()
 		{
-			return containerElement.FindElement(By.XPath(".//div[contains(@class, 'panel-footer')]/h3")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class, 'panel-footer')]/h3")).Text.Trim();
 		}
 
 		public string GetEstimatedAnualCost()
 		{
-			return containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost: ']/strong")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost: ']/strong")).Text.Trim();
 
 		}
 
 		public string GetEstimatedAnualCostPerProduct()
 		{
-			return containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost per Product: ']/strong")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath(".//div[contains(@class, 'calculator-total')]/p[text()= 'Estimated Annual Cost per Product: ']/strong")).Text.Trim();
 
 		}
 
 		public string GetAlertMessage()
 		{
-			return containerElement.FindElement(By.XPath(".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 2)?.Text;
+			return this.containerElement.FindElement(By.XPath(".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 2)?.Text;
 		}
 
 
@@ -370,9 +369,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<Plan> Get_All_Plans()
 		{
-			List<string> featurePlans = Get_Feature_Plans();
+			List<string> featurePlans = this.Get_Feature_Plans();
 			List<Plan> listOfPlans = new List<Plan>();
-			var listSubscriptions = containerElement.FindElements(By.XPath(".//div[contains(@class, 'subscription')]")).ToList();
+			var listSubscriptions = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'subscription')]")).ToList();
 
 			foreach (var subscription in listSubscriptions)
 			{
@@ -498,7 +497,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			else
 			{
-				allPlans = Get_All_Plans();
+				allPlans = this.Get_All_Plans();
 				Context.AddToContext("Plans", allPlans);
 			}
 			Plan thisPlan = allPlans.FirstOrDefault(x => x.Plan_Name == planName);
@@ -506,8 +505,8 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			{
 				if (thisPlan.Info_points.Select(x => x.Info_Header).Contains(item))
 				{
-					var PlanLabel = containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
-						.FirstOrDefault(x => (Extract_Before_Return(x.Text) == thisPlan.Plan_Name));
+					var PlanLabel = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'heading')]/label"))
+						.FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == thisPlan.Plan_Name));
 					try
 					{
 						var listOfLis = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li"));
@@ -521,7 +520,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 								throw new Exception("Failed to click info link.");
 							}
 							Delay.Seconds(1);
-							var expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
+							var expandableDiv = PlanLabel.FindElements(By.XPath("./../following-sibling::div//li")).FirstOrDefault(x => (this.Extract_Before_Return(x.Text) == item)).FindElement(By.XPath(".//div"));
 							if (expandableDiv.GetAttribute("aria-expanded") == "true")
 							{
 								string expandableDivText = expandableDiv.Text.Trim();
@@ -565,14 +564,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Select_Range");
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Subscription Enrollment Page");
 				Report.Screenshot();
 				return false;
 			}
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
-			if (!Select_Articles(articles))
+			if (!this.Select_Articles(articles))
 			{
 				Report.Info("Failed to Select Correct Number of Articles: " + articles);
 				Report.Screenshot();
@@ -580,7 +579,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			Report.Info("Number of Articles Selected");
-			if (!Select_Enhanced_Articles(enArticles))
+			if (!this.Select_Enhanced_Articles(enArticles))
 			{
 				Report.Info("Failed to Select Correct Number of Enhanced Articles: " + enArticles);
 				Report.Screenshot();
@@ -588,7 +587,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Delay.Seconds(0.5 * Delay.SpeedFactor);
 			Report.Info("Number of Enhanced Articles Selected");
-			if (!Select_Formulated_Products(formProds))
+			if (!this.Select_Formulated_Products(formProds))
 			{
 				Report.Info("Failed to Select Correct Number of Formulated Products: " + formProds);
 				Report.Screenshot();
@@ -607,7 +606,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Get_Feature_Plan: " + feature_plan);
 
-			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).ToList();
+			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/div/div/label")).ToList();
 
 			foreach (var feature in allProducts)
 			{
@@ -645,14 +644,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Select_Feature_Plan: " + featurePlan);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Subscription Enrollment Page");
 				Report.Screenshot();
 				return false;
 			}
 
-			IWebElement myFeature = Get_Feature_Plan(featurePlan);
+			IWebElement myFeature = this.Get_Feature_Plan(featurePlan);
 
 			if (myFeature == null)
 			{
@@ -676,7 +675,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Gold_click()
 		{
 			Report.Info("Attempting to Select Gold Support Services Plan");
-			_selectGold.Click();
+			this._selectGold.Click();
 			return true;
 		}
 
@@ -686,7 +685,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Silver_click()
 		{
 			Report.Info("Attempting to Select Silver Support Services Plan");
-			_selectSilver.Click();
+			this._selectSilver.Click();
 			return true;
 		}
 
@@ -696,7 +695,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Bronze_click()
 		{
 			Report.Info("Attempting to Select Bronze Support Services Plan");
-			_selectBronze.Click();
+			this._selectBronze.Click();
 			return true;
 		}
 
@@ -705,10 +704,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			switch (section.ToLower())
 			{
 				case ("select the feature plan"):
-					var input_1 = containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div[@class='row']//input"), 2).FirstOrDefault(x => x.Checked());
+					var input_1 = this.containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div[@class='row']//input"), 2).FirstOrDefault(x => x.Checked());
 					return input_1.FindElement(By.XPath("./parent::label"), 2).GetElementText();
 				case ("select the support services plan"):
-					var input_2 = containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div//input"), 2).FirstOrDefault(x => x.Checked());
+					var input_2 = this.containerElement.FindElements(By.XPath(".//h3[normalize-space(text())='" + section + "']//following-sibling::div//input"), 2).FirstOrDefault(x => x.Checked());
 					return input_2.FindElement(By.XPath("./parent::label"), 2).GetElementText();
 			}
 			return "";
@@ -718,7 +717,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Get_General_Support_Plan");
 
-			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-4']/div/div/label")).ToList();
+			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-4']/div/div/label")).ToList();
 
 			foreach (var feature in allProducts)
 			{
@@ -740,7 +739,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool General_Support_click()
 		{
-			IWebElement _selectGenSupport = Get_General_Support_Plan();
+			IWebElement _selectGenSupport = this.Get_General_Support_Plan();
 			if (_selectGenSupport == null)
 			{
 				return false;
@@ -754,7 +753,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Select_Support_Services_Plan: " + servicesPlan);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Subscription Enrollment Page");
 				Report.Screenshot();
@@ -764,7 +763,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			switch (servicesPlan)
 			{
 				case "Gold":
-					if (!Gold_click())
+					if (!this.Gold_click())
 					{
 						Report.Info("Failed to Select Gold Support Services Plan");
 						Report.Screenshot();
@@ -774,7 +773,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Success("Gold Support Services Plan Selected");
 					break;
 				case "Silver":
-					if (!Silver_click())
+					if (!this.Silver_click())
 					{
 						Report.Info("Failed to Select Silver Support Services Plan");
 						Report.Screenshot();
@@ -784,7 +783,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Success("Silver Support Services Plan Selected");
 					break;
 				case "Bronze":
-					if (!Bronze_click())
+					if (!this.Bronze_click())
 					{
 						Report.Info("Failed to Select Bronze Support Services Plan");
 						Report.Screenshot();
@@ -794,7 +793,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					Report.Success("Bronze Support Services Plan Selected");
 					break;
 				case "General Support":
-					if (!General_Support_click())
+					if (!this.General_Support_click())
 					{
 						Report.Info("Failed to Select General Support Services Plan");
 						Report.Screenshot();
@@ -818,12 +817,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Proceed_click()
 		{
 			Report.Info("Attempting to Click Proceed Button");
-			return _btnProceed.TryClick();
+			return this._btnProceed.TryClick();
 		}
 
 		public bool Proceed_button_enabled()
 		{
-			return _btnProceed.Enabled;
+			return this._btnProceed.Enabled;
 		}
 
 		public bool Select_Enrollment_Options(string articles, string enArticles, string formProds, string featurePlan,
@@ -831,25 +830,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Select_Enrollment_Options");
 			Delay.Seconds(5 * Delay.SpeedFactor);
-			if (!Select_Range(articles, enArticles, formProds))
+			if (!this.Select_Range(articles, enArticles, formProds))
 			{
 				Report.Info("Failed to Select Range Options");
 				return false;
 			}
 
-			if (!Select_Feature_Plan(featurePlan))
+			if (!this.Select_Feature_Plan(featurePlan))
 			{
 				Report.Info("Failed to Select Feature Plan");
 				return false;
 			}
 
-			if (!Select_Support_Services_Plan(servicesPlan))
+			if (!this.Select_Support_Services_Plan(servicesPlan))
 			{
 				Report.Info("Failed to Select Support Services Plan");
 				return false;
 			}
 
-			if (!Proceed_click())
+			if (!this.Proceed_click())
 			{
 				Report.Info("Failed to Click Proceed Button");
 				Report.Screenshot();
@@ -887,325 +886,325 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public string Info_Detail { get; set; }
 		public List<Info_Link> Info_Links { get; set; }
 	}
-}
 
-public class Info_Link
-{
-	public string Link_Text { get; set; }
-	public string Link_URL { get; set; }
-
-	public Info_Link(string text, string url)
+	public class Info_Link
 	{
-		Link_Text = text;
-		Link_URL = url;
-	}
-}
+		public string Link_Text { get; set; }
+		public string Link_URL { get; set; }
 
-
-class SubscriptionEnrollmentDlg : BaseObject
-{
-	[FindsBy(How = How.Id, Using = "subscriptionSummary")]
-	protected override IWebElement containerElement { get; set; }
-
-	public bool Header_Correct(string headerText)
-	{
-		Report.Info("Beginning Header_Correct");
-
-		IWebElement myHeader = containerElement
-			.FindElements(By.XPath(".//div[@class='modal-header']/h2[text()='" + headerText + "']"), 10).FirstOrDefault();
-
-		if (myHeader == null)
+		public Info_Link(string text, string url)
 		{
-			Report.Info("Failed to Find Header Text");
-			Report.Screenshot();
-			return false;
+			this.Link_Text = text;
+			this.Link_URL = url;
 		}
-		if (!myHeader.Displayed)
-		{
-			Report.Info("Incorrect Dialog Open");
-			Report.Screenshot();
-			return false;
-		}
-		Report.Success("Correct Dialog Opened: " + headerText);
-		return true;
 	}
 
-	//Articles
-	[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Articles']/../")]
-	private IWebElement _rowArticles;
 
-	//Enhanced Articles
-	[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Enhanced Articles']/../")]
-	private IWebElement _rowEnArticles;
-
-	//Formulated Products
-	[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Formulated Products ']/../")]
-	private IWebElement _rowFormProds;
-
-	public bool Feature_Plan_Check(string plan)
+	class SubscriptionEnrollmentDlg : BaseObject
 	{
-		Report.Info("Beginning Feature_Plan_Check: " + plan);
+		[FindsBy(How = How.Id, Using = "subscriptionSummary")]
+		protected override IWebElement containerElement { get; set; }
 
-		IWebElement myFeat = containerElement.FindElements(By.XPath(".//div[@class='panel-heading']/span[1]"), 10)
-			.FirstOrDefault();
-
-		if (myFeat == null)
+		public bool Header_Correct(string headerText)
 		{
-			Report.Info("Failed to Find Feature Plan");
-			return false;
+			Report.Info("Beginning Header_Correct");
+
+			IWebElement myHeader = this.containerElement
+				.FindElements(By.XPath(".//div[@class='modal-header']/h2[text()='" + headerText + "']"), 10).FirstOrDefault();
+
+			if (myHeader == null)
+			{
+				Report.Info("Failed to Find Header Text");
+				Report.Screenshot();
+				return false;
+			}
+			if (!myHeader.Displayed)
+			{
+				Report.Info("Incorrect Dialog Open");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Correct Dialog Opened: " + headerText);
+			return true;
 		}
 
-		if (myFeat.Text != plan)
-		{
-			Report.Info("Feature Plan is Incorrect: " + myFeat.Text);
-			return false;
-		}
-		Report.Success("Feature Plan is Correct");
-		Report.Screenshot();
-		return true;
+		//Articles
+		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Articles']/../")]
+		private IWebElement _rowArticles;
 
+		//Enhanced Articles
+		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Enhanced Articles']/../")]
+		private IWebElement _rowEnArticles;
+
+		//Formulated Products
+		[FindsBy(How = How.XPath, Using = ".//tbody/tr/td[text()='Formulated Products ']/../")]
+		private IWebElement _rowFormProds;
+
+		public bool Feature_Plan_Check(string plan)
+		{
+			Report.Info("Beginning Feature_Plan_Check: " + plan);
+
+			IWebElement myFeat = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']/span[1]"), 10)
+				.FirstOrDefault();
+
+			if (myFeat == null)
+			{
+				Report.Info("Failed to Find Feature Plan");
+				return false;
+			}
+
+			if (myFeat.Text != plan)
+			{
+				Report.Info("Feature Plan is Incorrect: " + myFeat.Text);
+				return false;
+			}
+			Report.Success("Feature Plan is Correct");
+			Report.Screenshot();
+			return true;
+
+		}
+
+		public string Get_Option(string option)
+		{
+			Report.Info("Beginning Get_Option: " + option);
+
+			IWebElement myOption = null;
+
+			myOption = this.containerElement.FindElements(By.XPath(".//tbody/tr/td[text()='" + option + "']/../td[2]"), 10).FirstOrDefault();
+			if (myOption == null)
+			{
+				Report.Info("Failed to Find Chosen " + option + " Option");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Success("Option Found: " + myOption.Text);
+			return myOption.Text;
+		}
+
+		public string Get_Service_Plan()
+		{
+			Report.Info("Beginning Get_Service_Plan");
+
+			IWebElement myOption = null;
+
+			myOption = this.containerElement.FindElements(By.XPath(".//tbody[2]/tr/td[1]"), 10).FirstOrDefault();
+			if (myOption == null)
+			{
+				Report.Info("Failed to Find Chosen Support Services Plan");
+				Report.Screenshot();
+				return "";
+			}
+
+			if (myOption.Text.Trim() != "Support Services Plan")
+			{
+				Report.Info("Failed to Find Chosen Support Services Plan");
+				Report.Screenshot();
+				return "";
+			}
+			IWebElement myOptionText = null;
+			myOptionText = myOption.FindElements(By.XPath("../td[2]"), 10).FirstOrDefault();
+			if (myOptionText == null)
+			{
+				Report.Info("Failed to Find Chosen Support Services Plan Text");
+				Report.Screenshot();
+				return "";
+			}
+			Report.Success("Option Found: " + myOptionText.Text);
+			return myOptionText.Text;
+		}
+
+		public bool Check_Options(string feature_plan, string articles, string enArticles, string formProds, string supportPlan)
+		{
+			Report.Info("Beginning Check_Options");
+
+			if (!this.Exists)
+			{
+				Report.Info("Failed to Open Subscription Enrollment Dialog");
+				Report.Screenshot();
+				return false;
+			}
+
+			if (!this.Feature_Plan_Check(feature_plan))
+			{
+				Report.Info("Incorrect Feature Plan");
+				Report.Screenshot();
+				return false;
+			}
+
+			string myArt = this.Get_Option("Articles");
+
+			if (myArt != articles)
+			{
+				Report.Info("Incorrect Articles Option");
+				Report.Info("Expected: " + articles);
+				Report.Info("Got: " + myArt);
+				Report.Screenshot();
+				return false;
+			}
+			string myEnArt = this.Get_Option("Enhanced Articles");
+
+			if (myEnArt != enArticles)
+			{
+				Report.Info("Incorrect Enhanced Articles Option");
+				Report.Info("Expected: " + enArticles);
+				Report.Info("Got: " + myEnArt);
+				Report.Screenshot();
+				return false;
+			}
+			string myForm = this.Get_Option("Formulated");
+
+			if (myForm != formProds)
+			{
+				Report.Info("Incorrect Formulated Products Option");
+				Report.Info("Expected: " + formProds);
+				Report.Info("Got: " + myForm);
+				Report.Screenshot();
+				return false;
+			}
+			string mySupp = this.Get_Service_Plan();
+
+			if (mySupp != supportPlan)
+			{
+				Report.Info("Incorrect Support Services Plan");
+				Report.Info("Expected: " + supportPlan);
+				Report.Info("Got: " + mySupp);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Chosen Options Correct");
+			Report.Screenshot();
+			return true;
+		}
+
+		//Checkout Button
+		[FindsBy(How = How.XPath, Using = ".//div[@class='modal-footer']/button[text()='Checkout']")]
+		private IWebElement _btnCheckout;
+
+		public bool Checkout_click()
+		{
+			Report.Info("Attempting to Click Checkout Button");
+			this._btnCheckout.Click();
+			return true;
+		}
+
+		//Cancel Button
+		[FindsBy(How = How.XPath, Using = ".//div[@class='modal-footer']/button[text()='Cancel']")]
+		private IWebElement _btnCancel;
+
+		public bool Cancel_click()
+		{
+			Report.Info("Attempting to Click Cancel Button");
+			this._btnCancel.Click();
+			return true;
+		}
+
+		public bool Subscription_Text(string subText)
+		{
+			Report.Info("Beginning Subscription_Text");
+
+			IWebElement myText = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-11']"), 10).FirstOrDefault();
+
+			if (myText == null)
+			{
+				Report.Info("Subscription Text Not Found");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Subscription Text = " + myText.Text.Trim());
+			if (myText.Text.Trim() != subText)
+			{
+				Report.Info("Subscription Text Incorrect");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Success("Subscription Text Correct");
+			Report.Screenshot();
+			return true;
+		}
 	}
 
-	public string Get_Option(string option)
+
+	class AgencyServiceAgreementDlg : BaseObject
 	{
-		Report.Info("Beginning Get_Option: " + option);
+		[FindsBy(How = How.Id, Using = "showAgencyServiceAgreement")]
+		protected override IWebElement containerElement { get; set; }
 
-		IWebElement myOption = null;
+		[FindsBy(How = How.CssSelector, Using = "#showAgencyServiceAgreement > div > div > div.modal-body")]
+		IWebElement Agencypopuptext { get; set; }
 
-		myOption = containerElement.FindElements(By.XPath(".//tbody/tr/td[text()='" + option + "']/../td[2]"), 10).FirstOrDefault();
-		if (myOption == null)
+		[FindsBy(How = How.CssSelector, Using = "#showAgencyServiceAgreement > div > div > div.modal-footer > button")]
+		IWebElement PopupCloseButton { get; set; }
+
+		public string GetBodyText()
 		{
-			Report.Info("Failed to Find Chosen " + option + " Option");
-			Report.Screenshot();
-			return "";
+			return this.containerElement.FindElement(By.XPath("//div[@class='modal-body']")).Text.Trim();
 		}
-		Report.Success("Option Found: " + myOption.Text);
-		return myOption.Text;
+
+		public string AgencyPopupText()
+		{
+			var el = this.Agencypopuptext;
+
+			if (el == null)
+			{
+				Report.Error("Could not find body in popup dialog");
+				return "";
+			}
+			return el.Text;
+		}
+
+		public void ClickCloseButton()
+		{
+			//containerElement.FindElement(By.XPath("#showAgencyServiceAgreement > div > div > div.modal-footer > button")).TryClick();
+
+			var el = this.PopupCloseButton;
+
+			if (el == null)
+			{
+				return;
+			}
+
+			el.Click();
+		}
 	}
 
-	public string Get_Service_Plan()
+	class SubscriptionPopup : BaseObject
 	{
-		Report.Info("Beginning Get_Service_Plan");
+		[FindsBy(How = How.XPath, Using = "//div[starts-with(@class,'popover') and @role='tooltip']")]
+		protected override IWebElement containerElement { get; set; }
 
-		IWebElement myOption = null;
-
-		myOption = containerElement.FindElements(By.XPath(".//tbody[2]/tr/td[1]"), 10).FirstOrDefault();
-		if (myOption == null)
+		public string GetHeaderText()
 		{
-			Report.Info("Failed to Find Chosen Support Services Plan");
-			Report.Screenshot();
-			return "";
+			if (this.containerElement == null)
+			{
+				Report.Error("Popup dialo could not be located!");
+				return "";
+			}
+			var el = this.containerElement.FindElement(By.XPath(".//h3"), 2);
+
+			if (el == null)
+			{
+				Report.Error("Could not find header in popup dialog");
+				return "";
+			}
+			return el.Text;
 		}
 
-		if (myOption.Text.Trim() != "Support Services Plan")
+		public string GetBodyText()
 		{
-			Report.Info("Failed to Find Chosen Support Services Plan");
-			Report.Screenshot();
-			return "";
+			if (this.containerElement == null)
+			{
+				Report.Error("Popup dialo could not be located!");
+				return "";
+			}
+			var el = this.containerElement.FindElement(By.XPath(".//div[@class='popover-content']"), 2);
+
+			if (el == null)
+			{
+				Report.Error("Could not find body in popup dialog");
+				return "";
+			}
+			return el.Text;
 		}
-		IWebElement myOptionText = null;
-		myOptionText = myOption.FindElements(By.XPath("../td[2]"), 10).FirstOrDefault();
-		if (myOptionText == null)
-		{
-			Report.Info("Failed to Find Chosen Support Services Plan Text");
-			Report.Screenshot();
-			return "";
-		}
-		Report.Success("Option Found: " + myOptionText.Text);
-		return myOptionText.Text;
+
 	}
-
-	public bool Check_Options(string feature_plan, string articles, string enArticles, string formProds, string supportPlan)
-	{
-		Report.Info("Beginning Check_Options");
-
-		if (!Exists)
-		{
-			Report.Info("Failed to Open Subscription Enrollment Dialog");
-			Report.Screenshot();
-			return false;
-		}
-
-		if (!Feature_Plan_Check(feature_plan))
-		{
-			Report.Info("Incorrect Feature Plan");
-			Report.Screenshot();
-			return false;
-		}
-
-		string myArt = Get_Option("Articles");
-
-		if (myArt != articles)
-		{
-			Report.Info("Incorrect Articles Option");
-			Report.Info("Expected: " + articles);
-			Report.Info("Got: " + myArt);
-			Report.Screenshot();
-			return false;
-		}
-		string myEnArt = Get_Option("Enhanced Articles");
-
-		if (myEnArt != enArticles)
-		{
-			Report.Info("Incorrect Enhanced Articles Option");
-			Report.Info("Expected: " + enArticles);
-			Report.Info("Got: " + myEnArt);
-			Report.Screenshot();
-			return false;
-		}
-		string myForm = Get_Option("Formulated");
-
-		if (myForm != formProds)
-		{
-			Report.Info("Incorrect Formulated Products Option");
-			Report.Info("Expected: " + formProds);
-			Report.Info("Got: " + myForm);
-			Report.Screenshot();
-			return false;
-		}
-		string mySupp = Get_Service_Plan();
-
-		if (mySupp != supportPlan)
-		{
-			Report.Info("Incorrect Support Services Plan");
-			Report.Info("Expected: " + supportPlan);
-			Report.Info("Got: " + mySupp);
-			Report.Screenshot();
-			return false;
-		}
-		Report.Success("Chosen Options Correct");
-		Report.Screenshot();
-		return true;
-	}
-
-	//Checkout Button
-	[FindsBy(How = How.XPath, Using = ".//div[@class='modal-footer']/button[text()='Checkout']")]
-	private IWebElement _btnCheckout;
-
-	public bool Checkout_click()
-	{
-		Report.Info("Attempting to Click Checkout Button");
-		_btnCheckout.Click();
-		return true;
-	}
-
-	//Cancel Button
-	[FindsBy(How = How.XPath, Using = ".//div[@class='modal-footer']/button[text()='Cancel']")]
-	private IWebElement _btnCancel;
-
-	public bool Cancel_click()
-	{
-		Report.Info("Attempting to Click Cancel Button");
-		_btnCancel.Click();
-		return true;
-	}
-
-	public bool Subscription_Text(string subText)
-	{
-		Report.Info("Beginning Subscription_Text");
-
-		IWebElement myText = containerElement.FindElements(By.XPath(".//div[@class='col-sm-11']"), 10).FirstOrDefault();
-
-		if (myText == null)
-		{
-			Report.Info("Subscription Text Not Found");
-			Report.Screenshot();
-			return false;
-		}
-		Report.Info("Subscription Text = " + myText.Text.Trim());
-		if (myText.Text.Trim() != subText)
-		{
-			Report.Info("Subscription Text Incorrect");
-			Report.Screenshot();
-			return false;
-		}
-		Report.Success("Subscription Text Correct");
-		Report.Screenshot();
-		return true;
-	}
-}
-
-
-class AgencyServiceAgreementDlg : BaseObject
-{
-	[FindsBy(How = How.Id, Using = "showAgencyServiceAgreement")]
-	protected override IWebElement containerElement { get; set; }
-
-	[FindsBy(How = How.CssSelector, Using = "#showAgencyServiceAgreement > div > div > div.modal-body")]
-	IWebElement Agencypopuptext { get; set; }
-
-	[FindsBy(How = How.CssSelector, Using = "#showAgencyServiceAgreement > div > div > div.modal-footer > button")]
-	IWebElement PopupCloseButton { get; set; }
-
-	public string GetBodyText()
-	{
-		return containerElement.FindElement(By.XPath("//div[@class='modal-body']")).Text.Trim();
-	}
-
-	public string AgencyPopupText()
-	{
-		var el = Agencypopuptext;
-
-		if (el == null)
-		{
-			Report.Error("Could not find body in popup dialog");
-			return "";
-		}
-		return el.Text;
-	}
-
-	public void ClickCloseButton()
-	{
-		//containerElement.FindElement(By.XPath("#showAgencyServiceAgreement > div > div > div.modal-footer > button")).TryClick();
-
-		var el = PopupCloseButton;
-
-		if (el == null)
-		{
-			return;
-		}
-
-		el.Click();
-	}
-}
-
-class SubscriptionPopup : BaseObject
-{
-	[FindsBy(How = How.XPath, Using = "//div[starts-with(@class,'popover') and @role='tooltip']")]
-	protected override IWebElement containerElement { get; set; }
-
-	public string GetHeaderText()
-	{
-		if (containerElement == null)
-		{
-			Report.Error("Popup dialo could not be located!");
-			return "";
-		}
-		var el = containerElement.FindElement(By.XPath(".//h3"), 2);
-
-		if (el == null)
-		{
-			Report.Error("Could not find header in popup dialog");
-			return "";
-		}
-		return el.Text;
-	}
-
-	public string GetBodyText()
-	{
-		if (containerElement == null)
-		{
-			Report.Error("Popup dialo could not be located!");
-			return "";
-		}
-		var el = containerElement.FindElement(By.XPath(".//div[@class='popover-content']"), 2);
-
-		if (el == null)
-		{
-			Report.Error("Could not find body in popup dialog");
-			return "";
-		}
-		return el.Text;
-	}
-
 }

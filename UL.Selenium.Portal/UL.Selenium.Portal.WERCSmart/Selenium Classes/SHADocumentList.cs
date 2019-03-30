@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Core.Internal;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using NTTQA_Automation_Classes.Base_Classes;
@@ -11,11 +8,10 @@ using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class SHADocumentList : BaseObject
 	{
@@ -43,14 +39,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> GetPDFNames()
 		{
-			var ListOfFilenameTDs = containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
+			var ListOfFilenameTDs = this.containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
 
 			return ListOfFilenameTDs.Select(x => x.GetValue()).ToList();
 		}
 
 		public bool DoubleClickPDF(string pdfName)
 		{
-			var ListOfFilenameTDs = containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
+			var ListOfFilenameTDs = this.containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
 			var matchingTD = ListOfFilenameTDs.FirstOrDefault(x => x.GetValue().Contains(pdfName));
 			if (matchingTD != null)
 			{
@@ -63,7 +59,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool ClickButton(string buttonName)
 		{
 			var listOfButtons =
-				containerElement.FindElements(By.XPath(".//button|.//input[@type='submit' or @type='button']"));
+				this.containerElement.FindElements(By.XPath(".//button|.//input[@type='submit' or @type='button']"));
 
 			var matchingButton = listOfButtons.FirstOrDefault(x => x.GetValue() == buttonName);
 

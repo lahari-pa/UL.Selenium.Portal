@@ -3,8 +3,7 @@ using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class AccountNotifications : BaseObject
 	{

@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
 	class TopMenu : BaseObject
 	{
@@ -19,7 +15,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		protected override IWebElement containerElement { get; set; }
 		public bool ClickDropDownNextToSelectBox(string selectBoxText)
 		{
-			return containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']/following-sibling::button")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']/following-sibling::button")).TryClick();
 		}
 
 		public bool ClickSelectBox(string selectBoxText)
@@ -28,7 +24,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 			{
 				try
 				{
-					var select = containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"));
+					var select = this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"));
 					if (select != null)
 					{
 						return select.TryClick();
@@ -47,10 +43,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			try
 			{
-				if (ClickDropDownNextToSelectBox(selectBoxText))
+				if (this.ClickDropDownNextToSelectBox(selectBoxText))
 				{
 					Delay.Seconds(1);
-					var dropDownMenu = containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']")).FirstOrDefault(x => x.Displayed);
+					var dropDownMenu = this.containerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']")).FirstOrDefault(x => x.Displayed);
 					return dropDownMenu.FindElement(By.XPath(".//li/a/span[text()='" + itemToSelect + "']")).TryClick();
 
 				}

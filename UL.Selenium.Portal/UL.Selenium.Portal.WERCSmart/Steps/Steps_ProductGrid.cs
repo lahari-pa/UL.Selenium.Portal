@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using Castle.Core.Internal;
-using iTextSharp.text.pdf;
-using NPOI.HSSF.Record;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using WERCSmart;
-
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "ProductGrid")]
 	class StepsProductGrid
@@ -1960,7 +1956,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			try
 			{
 				var selProdGrid = new ProductsGrid();
-				List<ProductGridItem> allItems= selProdGrid.GetAllItemsInGrid();
+				List<ProductGridItem> allItems = selProdGrid.GetAllItemsInGrid();
 				foreach (ProductGridItem thisItem in allItems)
 				{
 					Report.IsTrue(thisItem.Retailers.OrderBy(x => x).SequenceEqual(thisItem.Retailers),
@@ -1976,7 +1972,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		}
 
 
-		[StepDefinition (@"I Confirm that two asterisks are visible in the retailer\(s\) that are archived icons that display")]
+		[StepDefinition(@"I Confirm that two asterisks are visible in the retailer\(s\) that are archived icons that display")]
 		public void GivenIConfirmThatTwoAsterisksAreVisibleInTheRetailerSThatAreArchivedIconsThatDisplay()
 		{
 			if (Context.Contains("retailer"))

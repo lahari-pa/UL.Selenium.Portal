@@ -1,19 +1,12 @@
-﻿using System;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using iTextSharp.text;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "ReviewDocuments")]
 	class Steps_ReviewDocuments

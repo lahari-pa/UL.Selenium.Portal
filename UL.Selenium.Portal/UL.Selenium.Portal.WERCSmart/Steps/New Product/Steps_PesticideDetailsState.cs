@@ -6,12 +6,9 @@ using Castle.Core.Internal;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using TechTalk.SpecFlow.Bindings;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_PesticideDetailsState
@@ -348,7 +345,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info("Current date (DD/MM/YY) is: " + currentDate.Date + "/" + currentDate.Month + "/" + currentDate.Year);
 			if (DateTime.Now < comparisonDate)
 			{
-				Report.Info("Date is prior to " + month  + "/" + day + " so I expect to see the state error");
+				Report.Info("Date is prior to " + month + "/" + day + " so I expect to see the state error");
 				this.IShouldSeeError(error);
 			}
 			else

@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using iTextSharp.text;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "MyIngredients")]
 	class Steps_MyIngredients
@@ -43,9 +39,9 @@ namespace Wercs.Selenium.PortalUX.Steps
 			{
 				TestReport.StartStep("I add the ingredient: " + row["Chemical Name"] + " to My Library");
 				Report.Info("I enter the text: " + row["Chemical Name"] + " into the My Ingredients search field");
-				EnterTextInSearch(row["Chemical Name"]);
+				this.EnterTextInSearch(row["Chemical Name"]);
 				Report.Info("I select '" + row["Chemical Name"] + "' from the smart search results");
-				SelectSearchResult(row["Chemical Name"], row["CAS"]);
+				this.SelectSearchResult(row["Chemical Name"], row["CAS"]);
 				var allIngredientsUpdate = selMyIngredients.IngredientsLibrary();
 				ingredientsContext.Add(allIngredientsUpdate.First(r => allIngredients.All(p => r.Index != p.Index)));
 				allIngredients = allIngredientsUpdate;

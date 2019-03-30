@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NTTQA_Automation_Classes.Base_Classes;
+﻿using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class YouTube : BaseObject
 	{
@@ -22,7 +17,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool VideoDisplayed()
 		{
-			var videoEl = containerElement.FindElement(By.XPath(".//div[@id='player']//video"), 2);
+			var videoEl = this.containerElement.FindElement(By.XPath(".//div[@id='player']//video"), 2);
 			return videoEl != null && videoEl.Displayed;
 		}
 	}

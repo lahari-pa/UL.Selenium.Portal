@@ -6,7 +6,7 @@ using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class LandingPage : BaseObject
 	{
@@ -56,12 +56,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		protected override IWebElement containerElement { get; set; }
 		public bool ClickGetStartedNow()
 		{
-			return containerElement.FindElement(By.XPath(".//a[text()='Get started now']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[text()='Get started now']"), 2).TryClick();
 		}
 
 		public bool ClickTermsOfUse()
 		{
-			return containerElement.FindElement(By.XPath(".//a[contains(text(),'Terms')]"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[contains(text(),'Terms')]"), 2).TryClick();
 		}
 	}
 

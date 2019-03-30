@@ -8,9 +8,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class Homepage : BaseObject
 	{
@@ -124,7 +122,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public int PieChartProductsTotal()
 		{
-			var el = containerElement.FindElement(By.XPath(".//div[@id='total-products']"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//div[@id='total-products']"), 2);
 			if (el == null)
 			{
 				return -1;
@@ -134,7 +132,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<string> PieChartLegendItems()
 		{
-			return containerElement.FindElements(By.XPath(".//ul[@class='status-list']//li/span"), 2).Select(x => x.GetElementText().Trim()).ToList();
+			return this.containerElement.FindElements(By.XPath(".//ul[@class='status-list']//li/span"), 2).Select(x => x.GetElementText().Trim()).ToList();
 		}
 
 		public bool EntryShowingInPieChartLegend(string text, string colour)

@@ -1,6 +1,4 @@
 ﻿using System;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Mailosaur;
@@ -10,11 +8,10 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using NTTQA_TReVor_Module.Classes;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TestStack.White.UIItems.WindowItems;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "ConflictMinerals")]
 	class Steps_ConflictMinerals
@@ -331,7 +328,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 				Delay.Seconds(1);
 			}
-			Report.Failure( "Email has not arrived as expected");
+			Report.Failure("Email has not arrived as expected");
 		}
 
 		[StepDefinition(@"In the (.*) Verification page I enter verification code: (.*)")]

@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Components.DictionaryAdapter;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
-using Wercs.Selenium.PortalUX.Classes;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class SubscriptionUpgrade : SubscriptionEnrollment
 	{
@@ -28,13 +23,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			switch (range)
 			{
 				case "Articles":
-					myRange = _selectArticles;
+					myRange = this._selectArticles;
 					break;
 				case "Enhanced Articles":
-					myRange = _selectEnArticles;
+					myRange = this._selectEnArticles;
 					break;
 				case "Formulated Products":
-					myRange = _selectFormProds;
+					myRange = this._selectFormProds;
 					break;
 				default:
 					throw new Exception("Failed to Find Correct Range Name");
@@ -65,14 +60,14 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Feature_Plan_Selected: " + featurePlan);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Subscription Upgrade Page");
 				Report.Screenshot();
 				return false;
 			}
 
-			IWebElement myFeature = Get_Feature_Plan(featurePlan);
+			IWebElement myFeature = this.Get_Feature_Plan(featurePlan);
 
 			IWebElement myCheck = myFeature.FindElement(By.XPath(".//input"), 2);
 
@@ -98,13 +93,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Downgrade_Feature_Plan_Check");
 
-			IWebElement myStandard = Get_Feature_Plan("Standard");
+			IWebElement myStandard = this.Get_Feature_Plan("Standard");
 			IWebElement standardCheck = myStandard.FindElement(By.XPath(".//input"), 2);
 
-			IWebElement myLimitPlus = Get_Feature_Plan("Limited Plus");
+			IWebElement myLimitPlus = this.Get_Feature_Plan("Limited Plus");
 			IWebElement limitplusCheck = myLimitPlus.FindElement(By.XPath(".//input"), 2);
 
-			IWebElement myLimited = Get_Feature_Plan("Limited");
+			IWebElement myLimited = this.Get_Feature_Plan("Limited");
 			IWebElement limitedCheck = myLimited.FindElement(By.XPath(".//input"), 2);
 
 			switch (currentPlan)
@@ -168,7 +163,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Support_Plan_Selected: " + supportPlan);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Subscription Upgrade Page");
 				Report.Screenshot();
@@ -180,16 +175,16 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			switch (supportPlan)
 			{
 				case "Gold":
-					mySupport = _selectGold;
+					mySupport = this._selectGold;
 					break;
 				case "Silver":
-					mySupport = _selectSilver;
+					mySupport = this._selectSilver;
 					break;
 				case "Bronze":
-					mySupport = _selectBronze;
+					mySupport = this._selectBronze;
 					break;
 				case "General Support":
-					mySupport = Get_General_Support_Plan();
+					mySupport = this.Get_General_Support_Plan();
 					break;
 				default:
 					throw new Exception("Failed to Find Correct Support Plan");
@@ -219,17 +214,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Downgrade_Support_Plan_Check");
 
-			IWebElement mySilver = _selectSilver;
+			IWebElement mySilver = this._selectSilver;
 			IWebElement silverCheck = mySilver.FindElement(By.XPath(".//input"), 2);
 
 			IWebElement mySupp = null;
 
-			mySupp = containerElement.FindElement(By.XPath(".//div[@class='panel-heading bronze']/label"), 2);
+			mySupp = this.containerElement.FindElement(By.XPath(".//div[@class='panel-heading bronze']/label"), 2);
 
 			if (mySupp == null)
 			{
 				Report.Info("Bronze Support Plan Not Found - Checking for General Support");
-				mySupp = Get_General_Support_Plan();
+				mySupp = this.Get_General_Support_Plan();
 
 				if (mySupp == null)
 				{
@@ -283,12 +278,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (costText == "Estimated Annual Cost")
 			{
-				myCurrentCost = containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[1]/div/p/strong"), 2);
+				myCurrentCost = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[1]/div/p/strong"), 2);
 				ScenarioContext.Current.Add("CurrentEstCost", myCurrentCost.Text);
 			}
 			if (costText == "Estimated Annual Cost per Product")
 			{
-				myCurrentCost = containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[2]/div/p/strong"), 2);
+				myCurrentCost = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[2]/div/p/strong"), 2);
 				ScenarioContext.Current.Add("CurrentPerCost", myCurrentCost.Text);
 			}
 
@@ -302,7 +297,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (rangeType == "Articles")
 			{
-				if (!Select_Articles(rangeValue))
+				if (!this.Select_Articles(rangeValue))
 				{
 					Report.Info("Failed to Select " + rangeValue + " for " + rangeType);
 					Report.Screenshot();
@@ -311,7 +306,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (rangeType == "Enhanced Articles")
 			{
-				if (!Select_Enhanced_Articles(rangeValue))
+				if (!this.Select_Enhanced_Articles(rangeValue))
 				{
 					Report.Info("Failed to Select " + rangeValue + " for " + rangeType);
 					Report.Screenshot();
@@ -320,7 +315,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (rangeType == "Formulated Products")
 			{
-				if (!Select_Formulated_Products(rangeValue))
+				if (!this.Select_Formulated_Products(rangeValue))
 				{
 					Report.Info("Failed to Select " + rangeValue + " for " + rangeType);
 					Report.Screenshot();
@@ -335,7 +330,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (costText == "Estimated Annual Cost")
 			{
-				myNewCost = containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[1]/div/p/strong"), 2);
+				myNewCost = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[1]/div/p/strong"), 2);
 				if (myNewCost == null)
 				{
 					Report.Info("Failed to Find Cost Text for: " + costText);
@@ -356,7 +351,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (costText == "Estimated Annual Cost per Product")
 			{
-				myNewCost = containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[2]/div/p/strong"), 2);
+				myNewCost = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-9']/div[2]/div/p/strong"), 2);
 				if (myNewCost == null)
 				{
 					Report.Info("Failed to Find Cost Text for: " + costText);

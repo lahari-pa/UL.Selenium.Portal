@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using iTextSharp.text;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Castle.Core.Internal;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using TechTalk.SpecFlow.Bindings;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_Retailer

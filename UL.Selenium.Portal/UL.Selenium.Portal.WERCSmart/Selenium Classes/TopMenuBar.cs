@@ -8,7 +8,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class TopMenuBar : BaseObject
 	{
@@ -43,12 +43,12 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickSignOut()
 		{
-			return SelectAccountOption("Sign Out");
+			return this.SelectAccountOption("Sign Out");
 		}
 
 		public bool ClickMyAccount()
 		{
-			return SelectAccountOption("My Account");
+			return this.SelectAccountOption("My Account");
 		}
 
 		//Valid options: "My Account", "Sign Out"
@@ -57,9 +57,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			try
 			{
 				//show account options
-				if (!AccountOptionsVisible())
+				if (!this.AccountOptionsVisible())
 				{
-					ClickOnUserTopRight();
+					this.ClickOnUserTopRight();
 				}
 				//if (!AccountOptionsVisible())
 				//{
@@ -95,7 +95,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickWercsSmartLogo()
 		{
-			return containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.containerElement.FindElement(By.XPath(".//a[@class='navbar-brand']/h1"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public bool NotificationIconShowing()

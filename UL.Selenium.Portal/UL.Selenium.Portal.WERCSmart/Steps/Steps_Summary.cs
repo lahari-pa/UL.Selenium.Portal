@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "SummaryPage")]
 	class Steps_Summary
@@ -65,7 +64,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					kit = piKit.Id;
 				}
 
-				Report.IsTrue(kitContents.FirstOrDefault(x=>x.Contains(kit))!=null, "Expecting kit list to show: " + kit,
+				Report.IsTrue(kitContents.FirstOrDefault(x => x.Contains(kit)) != null, "Expecting kit list to show: " + kit,
 					kit + " is showing as expected");
 			}
 		}
@@ -78,7 +77,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			foreach (var row in table.Rows)
 			{
 				string answer = selSummaryPage.GetAnswerToQuestion(row["Question"]);
-				if (row["True or False"]=="True")
+				if (row["True or False"] == "True")
 				{
 					Report.IsTrue(answer == row["Answer"], "Expected answer: " + row["Answer"] + " but got: " + answer);
 				}

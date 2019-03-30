@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
 using NTTQA_TReVor_Module.Cache;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TestStack.White.UIItems.WindowItems;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "PaymentMethods")]
 	class Steps_PaymentMethods
@@ -759,7 +757,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				}
 				else
 				{
-					Report.Error( "Confirm order button does not exist");
+					Report.Error("Confirm order button does not exist");
 					Report.Screenshot();
 				}
 
@@ -881,7 +879,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 		public void GivenILogInWithEmailAndPassword(string savedAs)
 		{
 			var user = TestUsers.GetUserSavedAs(savedAs);
-			GivenILogInWithEmailAndPassword(user.Username, user.Password);
+			this.GivenILogInWithEmailAndPassword(user.Username, user.Password);
 		}
 
 		[StepDefinition(@"I log into PayPal with email: (.*) and password: (.*) and click Continue")]

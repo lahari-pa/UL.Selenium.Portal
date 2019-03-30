@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Components.DictionaryAdapter;
 using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.Extensions;
-using OpenQA.Selenium.Support.PageObjects;
-using Org.BouncyCastle.Crypto.Engines;
-using SeleniumUtilities;
-using TechTalk.SpecFlow;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	internal class Ingredients : NewProduct
 	{
@@ -26,29 +16,29 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var placeholderEl = containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
+				var placeholderEl = this.containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 2);
 				placeholderEl.TryClick();
 				IWebElement clickResult;
-				var inputEl = containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+				var inputEl = this.containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
 				// If the ingredient has a CAS number assigned, search by that string
 				if (!string.IsNullOrEmpty(ingredient.CASNumber))
 				{
 					inputEl.EnterText(ingredient.CASNumber);
 					var searching =
-						containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+						this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
 					while (searching != null && i < 10)
 					{
 						Delay.Seconds(Delay.SpeedFactor * 1);
 						i++;
-						searching = containerElement.FindElement(
+						searching = this.containerElement.FindElement(
 							By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					}
 
 					// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
 					// If no elements match this, then we will simply take the first element in the list
 					var results =
-						containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+						this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					if (!results.Any())
 					{
 						Report.Info("No results were returned on search");
@@ -58,7 +48,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) == null)
 					{
 						Delay.Seconds(1);
-						results = containerElement.FindElements(
+						results = this.containerElement.FindElements(
 							By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					}
 
@@ -121,25 +111,25 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 						"No CAS Number was assigned to the ingredient, so searching for the chemical by Component Name instead");
 					inputEl.EnterText(ingredient.ComponentName);
 					var searching =
-						containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+						this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					int i = 0;
 					while (searching != null && i < 10)
 					{
 						Delay.Seconds(Delay.SpeedFactor * 1);
 						i++;
-						searching = containerElement.FindElement(
+						searching = this.containerElement.FindElement(
 							By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 					}
 
 					// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
 					// If no elements match this, then we will simply take the first element in the list
 					var results =
-						containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+						this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					i = 0;
 					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) ==
 						   null && i < 20)
 					{
-						if (containerElement
+						if (this.containerElement
 								.FindElement(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2)?.Text ==
 							"No results found")
 						{
@@ -150,7 +140,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 						i++;
 						Delay.Seconds(1);
-						results = containerElement.FindElements(
+						results = this.containerElement.FindElements(
 							By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					}
 
@@ -184,7 +174,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 				{
 					// So we have now selected the element, so we need to try and get the first 'new' entry which contains this CAS Number, and hasn't had the Percentage field filled
 					bool success = true;
-					var rows = containerElement.FindElements(
+					var rows = this.containerElement.FindElements(
 						By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2);
 					var matchingrow = rows.FirstOrDefault(x =>
 						x.FindElement(By.XPath(".//div[@class='cas-number']/small"), 2).GetValue().Trim() ==
@@ -243,7 +233,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public int IngredientRowCount()
 		{
-			var rows = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//td[@class='component-name']]"), 2);
+			var rows = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//td[@class='component-name']]"), 2);
 			return rows.Count;
 		}
 
@@ -286,7 +276,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public bool SetIngredientPubliclyDisclosed(string chemicalName, bool checked_)
 		{
-			var publiclyDisclosedInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
+			var publiclyDisclosedInput = this.IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='public_disclosure']"));
 			if (publiclyDisclosedInput == null || !publiclyDisclosedInput.Displayed)
 			{
 				Report.Failure("The Publicly Disclosed checkbox was not displayed");
@@ -303,7 +293,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public bool SetIngredientTradeSecret(string chemicalName, bool checkedTrueFalse)
 		{
-			var tradeSecretInput = IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
+			var tradeSecretInput = this.IngredientRow(chemicalName).FindElement(By.XPath(".//input[@class='trade_secret']"));
 			if (tradeSecretInput == null)
 			{
 				Report.Failure("Could not find the Trade Secret checkbox");
@@ -338,9 +328,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var totalExpected = IngredientRowCount().ToString();
+				var totalExpected = this.IngredientRowCount().ToString();
 				var pubDisExpected = total;
-				var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
+				var pubDisSummary = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span")).Text;
 				var summaryActual = pubDisSummary.Split(new[] { " / " }, StringSplitOptions.None);
 				Report.Info("Public Disclosure Total was showing as: " + summaryActual[0] + " out of a total " + summaryActual[1] + " ingredients");
 				if (summaryActual[0] == pubDisExpected && summaryActual[1] == totalExpected)
@@ -358,7 +348,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		public List<Ingredient> GetIngredients()
 		{
 			List<Ingredient> Ingredients = new List<Ingredient>();
-			var rows = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//td[@class='component-name']]"), 2);
+			var rows = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//td[@class='component-name']]"), 2);
 			foreach (var thisRow in rows)
 			{
 				Ingredient thisIngredient = new Ingredient();
@@ -394,7 +384,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public bool ClickSelectIngredient(string name)
 		{
-			var row = containerElement.FindElement(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[@class='chemical-name' and contains(text(), '" + name + "')]]"), 2);
+			var row = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr[.//div[@class='chemical-name' and contains(text(), '" + name + "')]]"), 2);
 			if (row == null)
 			{
 				return false;
@@ -410,18 +400,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 			ingredient_ = new Ingredient();
 			IWebElement resultMatch;
 			//var inputEl = containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
-			var searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+			var searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 			int i = 0;
 			while (searching != null && i < 10)
 			{
 				Delay.Seconds(1);
 				i++;
-				searching = containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
+				searching = this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__message')]"), 2);
 			}
 			if (!string.IsNullOrEmpty(ingredient.CASNumber))
 			{
 				// So, we have now searched for our CAS ingredient, so we now need to select the first 'li' tage which contains our CAS Value exactly
-				var results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+				var results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 				if (!results.Any())
 				{
 					Report.Info("No results were returned on search");
@@ -433,7 +423,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 				{
 					resultFound = results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) != null;
 					Delay.Seconds(1);
-					results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					j++;
 				}
 				if (!resultFound)
@@ -455,18 +445,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 			if (!string.IsNullOrEmpty(ingredient.ComponentName))
 			{
 				Report.Info("No CAS Number was assigned to the ingredient, so searching for the chemical by Component Name instead");
-				var results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+				var results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 				i = 0;
 				while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) == null && i < 20)
 				{
-					if (containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2)?.Text == "No results found")
+					if (this.containerElement.FindElement(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2)?.Text == "No results found")
 					{
 						Report.Info("There were no results returned searching by Name!");
 						return false;
 					}
 					i++;
 					Delay.Seconds(1);
-					results = containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+					results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 				}
 				// Avoiding null reference exception on .GetValue() - "Loading more results" row at the bottom (no span with component-name)
 				var matchingNameResults = results.Where(x => !x.Text.ToLower().Contains("loading") && x.FindElement(By.XPath(".//span[@class='component-name']"), 2).Text.Trim() == ingredient.ComponentName.Trim());
@@ -489,7 +479,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		public bool EnterTextSearchComponent(string value)
 		{
 			Report.Info("Entering text to the search box input");
-			var inputEl = containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
+			var inputEl = this.containerElement.FindElement(By.XPath(".//input[@class='select2-search__field']"), 2);
 			if (inputEl == null)
 			{
 				Report.Info("Could not find the search input element!");
@@ -664,7 +654,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		public string TransparencyScoreNumerator()
 		{
 			Report.Info("Beginning get Transparency score numerator");
-			var pubDisSummaryspan = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2);
+			var pubDisSummaryspan = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2);
 			if (pubDisSummaryspan == null)
 			{
 				pubDisSummaryspan = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2);
@@ -690,7 +680,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 			try
 			{
 				Report.Info("Beginning get Transparency score denominator");
-				var pubDisSummary = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2).Text;
+				var pubDisSummary = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2).Text;
 				if (pubDisSummary == null)
 				{
 					pubDisSummary = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2).Text;
@@ -713,13 +703,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public string TransparencyScoreStatus()
 		{
-			var transparencyScoreEl = containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2);
+			var transparencyScoreEl = this.containerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2);
 			return transparencyScoreEl?.GetAttribute("class").Replace("label label-", "");
 		}
 
 		public bool ClickRegulated(string ingredientName)
 		{
-			var row = IngredientRow(ingredientName);
+			var row = this.IngredientRow(ingredientName);
 			return row.FindElement(By.XPath(".//a[contains(@data-bind,'openRegulation')]"), 2).TryClick();
 		}
 
@@ -728,32 +718,32 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 			switch (orderBy.ToLower())
 			{
 				case "chemical name":
-					return containerElement
+					return this.containerElement
 						.FindElement(By.XPath(
 							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'ChemicalName')]"))
 						.TryClick();
 				case "cas number":
-					return containerElement
+					return this.containerElement
 						.FindElement(By.XPath(
 							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'CasNumber')]"))
 						.TryClick();
 				case "percent":
-					return containerElement
+					return this.containerElement
 						.FindElement(By.XPath(
 							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'Percent')]"))
 						.TryClick();
 				case "publicly disclosed":
-					return containerElement
+					return this.containerElement
 						.FindElement(By.XPath(
 							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'PubliclyDisclosed')]"))
 						.TryClick();
 				case "trade secret":
-					return containerElement
+					return this.containerElement
 						.FindElement(By.XPath(
 							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'TradeSecret')]"))
 						.TryClick();
 				case "public name":
-					return containerElement
+					return this.containerElement
 						.FindElement(By.XPath(
 							"//div[contains(@class, 'formulation-grid')]//span[contains(@data-bind, 'PublicName')]"))
 						.TryClick();
@@ -767,7 +757,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		{
 			try
 			{
-				return IngredientRow(ingredient)
+				return this.IngredientRow(ingredient)
 					.FindElement(By.XPath(".//td[@class='inci-name']//p[@class='form-error']/span")).Text;
 			}
 			catch (Exception e)
@@ -778,13 +768,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public List<string> GetIngredientTableColumnHeaders()
 		{
-			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//thead//th"), 2).Select(x => x.Text).ToList();
+			return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//thead//th"), 2).Select(x => x.Text).ToList();
 		}
 
 		//checkbox, textbox, select
 		public bool ConfirmTableInputMatchByColumnTitle(string columnTitle, string expectedInput)
 		{
-			var firstRow = containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2).FirstOrDefault();
+			var firstRow = this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//tr"), 2).FirstOrDefault();
 			var cell = firstRow.FindElements(By.XPath(".//td")).FirstOrDefault();
 			switch (columnTitle)
 			{
@@ -840,24 +830,24 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 		public List<string> GetIngredientPublicNameOptions(string chemicalName)
 		{
-			return IngredientRow(chemicalName).FindElements(By.XPath(".//select/option")).Select(x => x.Text).ToList();
+			return this.IngredientRow(chemicalName).FindElements(By.XPath(".//select/option")).Select(x => x.Text).ToList();
 		}
 
 		public bool ConcentrationsAreEditable()
 		{
-			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[contains(@class,'percent-comp')]"), 2).FirstOrDefault() != null;
+			return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[contains(@class,'percent-comp')]"), 2).FirstOrDefault() != null;
 
 		}
 
 		public bool TradeSecretsAreEditable()
 		{
-			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//td[@class='trade-secret']//input"), 2).FirstOrDefault() != null;
+			return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//td[@class='trade-secret']//input"), 2).FirstOrDefault() != null;
 
 		}
 
 		public bool PubliclyDisclosedAreEditable()
 		{
-			return containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[@class='public_disclosure']"), 2).FirstOrDefault() != null;
+			return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[@class='public_disclosure']"), 2).FirstOrDefault() != null;
 
 		}
 
@@ -878,11 +868,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 			public string getDetails()
 			{
-				return "Component Name " + ComponentName + " CAS Number: " + CASNumber + " Percent: " + Percent +
-					" Publicly disclosed: " + PublicallyDisclosed.ToString() + " Trade secret: " +
-					TradeSecret.ToString() + " Public name: " + PublicName + " Trade secret enabled: " +
-					TradeSecretEnabled + " Public disclosure enabled: " + PublicDisclosureEnabled +
-					" Public name enabled: " + PublicNameEnabled + " Selected: " + Selected.ToString();
+				return "Component Name " + this.ComponentName + " CAS Number: " + this.CASNumber + " Percent: " + this.Percent +
+					" Publicly disclosed: " + this.PublicallyDisclosed.ToString() + " Trade secret: " +
+					this.TradeSecret.ToString() + " Public name: " + this.PublicName + " Trade secret enabled: " +
+					this.TradeSecretEnabled + " Public disclosure enabled: " + this.PublicDisclosureEnabled +
+					" Public name enabled: " + this.PublicNameEnabled + " Selected: " + this.Selected.ToString();
 			}
 		}
 	}

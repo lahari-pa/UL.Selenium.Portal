@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class PaymentMethods : BaseObject
 	{
@@ -21,7 +19,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Header_Correct");
 
-			IWebElement myHeader = containerElement
+			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div[@class='header-with-back']/h2[text()='Payment Methods']"), 10).FirstOrDefault();
 
 			if (myHeader == null)
@@ -44,7 +42,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Sub_Heading_Correct");
 
-			IWebElement myHeader = containerElement
+			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div[@class='main-wrapper has-title payment-methods']/h2[text()='Select your payment method']"), 10).FirstOrDefault();
 
 			if (myHeader == null)
@@ -66,15 +64,15 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool RefindContainerElement()
 		{
-			containerElement = SeleniumBrowser.WebBrowser.FindElement(By.Id("paymentMethodsContainer"), 2);
-			return containerElement != null;
+			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.Id("paymentMethodsContainer"), 2);
+			return this.containerElement != null;
 		}
 
 		public bool Select_Payment_Method(string payment_method)
 		{
 			Report.Info("Beginning Select_Payment_Method: " + payment_method);
-			RefindContainerElement();
-			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div"), 2).ToList();
+			this.RefindContainerElement();
+			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div"), 2).ToList();
 
 			foreach (var method in allProducts)
 			{
@@ -99,7 +97,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Delay.Seconds(2 * Delay.SpeedFactor);
 
-			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div")).ToList();
+			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div")).ToList();
 
 			foreach (var method in allProducts)
 			{
@@ -122,7 +120,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Credit_Card_Default");
 
-			List<IWebElement> allProducts = containerElement.FindElements(By.XPath(".//h4[@class='card-title']")).ToList();
+			List<IWebElement> allProducts = this.containerElement.FindElements(By.XPath(".//h4[@class='card-title']")).ToList();
 
 			IWebElement myCard = null;
 
@@ -164,7 +162,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Payment Methods Page");
 				Report.Screenshot();
@@ -253,7 +251,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Payment Methods Page");
 				Report.Screenshot();
@@ -331,7 +329,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Payment Methods Page");
 				Report.Screenshot();
@@ -399,7 +397,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Payment Methods Page");
 				Report.Screenshot();
@@ -487,7 +485,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Payment Methods Page");
 				Report.Screenshot();
@@ -582,10 +580,10 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Report.Info("Expected Warning = " + warning);
 
-			if (_transfer_warning.Text != warning)
+			if (this._transfer_warning.Text != warning)
 			{
 				Report.Info("Warning Message Text Incorrect");
-				Report.Info(_transfer_warning.Text);
+				Report.Info(this._transfer_warning.Text);
 				Report.Screenshot();
 				return false;
 			}
@@ -597,7 +595,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//==================PayPal text
 		public string Paypal_text()
 		{
-			return containerElement.FindElement(By.XPath("//div[@class='alert alert-info']")).Text.Trim();
+			return this.containerElement.FindElement(By.XPath("//div[@class='alert alert-info']")).Text.Trim();
 		}
 
 		//Continue Button
@@ -607,7 +605,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Continue_click()
 		{
 			Report.Info("Attempting to Click Continue Button");
-			_btnContinue.Click();
+			this._btnContinue.Click();
 			return true;
 		}
 
@@ -618,7 +616,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (enabled == "enabled")
 			{
-				if (!_btnContinue.Enabled)
+				if (!this._btnContinue.Enabled)
 				{
 					Report.Info("Continue Button is Disabled");
 					Report.Screenshot();
@@ -631,7 +629,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			if (enabled == "disabled")
 			{
-				if (_btnContinue.Enabled)
+				if (this._btnContinue.Enabled)
 				{
 					Report.Info("Continue Button is Enabled");
 					Report.Screenshot();
@@ -653,7 +651,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Get_Contact_Info");
 
-			IWebElement myContact = _tbl_addresses.FindElements(By.XPath("div[1]/div"), 10).FirstOrDefault();
+			IWebElement myContact = this._tbl_addresses.FindElements(By.XPath("div[1]/div"), 10).FirstOrDefault();
 
 			if (myContact == null)
 			{
@@ -669,7 +667,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Confirm_Contact_Info");
 
-			string myInfo = Get_Contact_Info();
+			string myInfo = this.Get_Contact_Info();
 
 			if (!myInfo.Contains(company_name))
 			{
@@ -709,7 +707,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Get_Billing_Address");
 
-			IWebElement myBill = containerElement.FindElements(By.XPath(".//div/h3[text()='Billing Address']"), 10).FirstOrDefault();
+			IWebElement myBill = this.containerElement.FindElements(By.XPath(".//div/h3[text()='Billing Address']"), 10).FirstOrDefault();
 
 			IWebElement myAddress = myBill.FindElements(By.XPath("../div"), 10).FirstOrDefault();
 
@@ -727,7 +725,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Confirm_Billing_Address");
 
-			string myInfo = Get_Billing_Address();
+			string myInfo = this.Get_Billing_Address();
 
 			if (!myInfo.Contains(address_one))
 			{
@@ -792,7 +790,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Change_click()
 		{
 			Report.Info("Attempting to Click Change Button");
-			_btnChange.Click();
+			this._btnChange.Click();
 			return true;
 		}
 
@@ -810,7 +808,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Sub_Headings_Correct");
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Failed to Open Edit Address Form");
 				Report.Screenshot();
@@ -818,7 +816,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Report.Info("Edit Address Form Open");
 
-			IWebElement myH1 = containerElement.FindElements(By.XPath(".//div/h4[text()='" + sub_1 + "']"), 10).FirstOrDefault();
+			IWebElement myH1 = this.containerElement.FindElements(By.XPath(".//div/h4[text()='" + sub_1 + "']"), 10).FirstOrDefault();
 
 			if (myH1 == null)
 			{
@@ -828,7 +826,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			Report.Success("Header with Text: " + sub_1 + " Found");
 
-			IWebElement myH2 = containerElement.FindElements(By.XPath(".//div/h4[text()='" + sub_2 + "']"), 10).FirstOrDefault();
+			IWebElement myH2 = this.containerElement.FindElements(By.XPath(".//div/h4[text()='" + sub_2 + "']"), 10).FirstOrDefault();
 
 			if (myH2 == null)
 			{
@@ -853,7 +851,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Edit_Primary_Account_Contact");
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Edit Address Form");
 				Report.Screenshot();
@@ -862,7 +860,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Edit Address Form Open");
 			if (firstName != "")
 			{
-				IWebElement myFirst = _section_pac.FindElements(By.XPath(".//input[@name='firstName']"), 10).FirstOrDefault();
+				IWebElement myFirst = this._section_pac.FindElements(By.XPath(".//input[@name='firstName']"), 10).FirstOrDefault();
 				if (myFirst == null)
 				{
 					Report.Info("Failed to Find First Name Text Box");
@@ -874,7 +872,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (lastName != "")
 			{
-				IWebElement myLast = _section_pac.FindElements(By.XPath(".//input[@name='lastName']"), 10).FirstOrDefault();
+				IWebElement myLast = this._section_pac.FindElements(By.XPath(".//input[@name='lastName']"), 10).FirstOrDefault();
 				if (myLast == null)
 				{
 					Report.Info("Failed to Find Last Name Text Box");
@@ -886,7 +884,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (email != "")
 			{
-				IWebElement myEmail = _section_pac.FindElements(By.XPath(".//input[@name='email']"), 10).FirstOrDefault();
+				IWebElement myEmail = this._section_pac.FindElements(By.XPath(".//input[@name='email']"), 10).FirstOrDefault();
 				if (myEmail == null)
 				{
 					Report.Info("Failed to Find Email Address Text Box");
@@ -915,7 +913,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Edit Address Form");
 				Report.Screenshot();
@@ -930,7 +928,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				switch (field)
 				{
 					case "First Name":
-						myFieldHeader = _section_pac.FindElements(By.XPath(".//label[text()='First Name']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_pac.FindElements(By.XPath(".//label[text()='First Name']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -941,7 +939,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Last Name":
-						myFieldHeader = _section_pac.FindElements(By.XPath(".//label[text()='Last Name']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_pac.FindElements(By.XPath(".//label[text()='Last Name']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -952,7 +950,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Email Address":
-						myFieldHeader = _section_pac.FindElements(By.XPath(".//label[text()='Email Address']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_pac.FindElements(By.XPath(".//label[text()='Email Address']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -963,7 +961,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Address 1":
-						myFieldHeader = _section_bill.FindElements(By.XPath(".//label[text()='Address Line 1']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Address Line 1']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -974,7 +972,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Address 2":
-						myFieldHeader = _section_bill.FindElements(By.XPath(".//label[text()='Address Line 2']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Address Line 2']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -985,7 +983,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "City":
-						myFieldHeader = _section_bill.FindElements(By.XPath(".//label[text()='City']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='City']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -996,7 +994,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "State":
-						myFieldHeader = _section_bill.FindElements(By.XPath(".//label[text()='State']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='State']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1007,7 +1005,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Zip Code":
-						myFieldHeader = _section_bill.FindElements(By.XPath(".//label[text()='Zip']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Zip']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1018,7 +1016,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Country":
-						myFieldHeader = _section_bill.FindElements(By.XPath(".//label[text()='Country']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Country']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1029,7 +1027,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Phone Number":
-						myFieldHeader = _section_bill.FindElements(By.XPath(".//label[text()='Phone']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Phone']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1040,7 +1038,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Shipping/Billing Checkbox":
-						myFieldHeader = containerElement.FindElements(By.XPath(".//div[@class='checkbox']/label"), 10).FirstOrDefault();
+						myFieldHeader = this.containerElement.FindElements(By.XPath(".//div[@class='checkbox']/label"), 10).FirstOrDefault();
 						if (myFieldHeader.Text.Trim() != "Shipping Address is the same as billing address")
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1075,7 +1073,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				return false;
 			}
 			Delay.Seconds(2 * Delay.SpeedFactor);
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Edit Address Form");
 				Report.Screenshot();
@@ -1084,7 +1082,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Edit Address Form Open");
 			if (address1 != "")
 			{
-				IWebElement myAdd1 = _section_bill.FindElements(By.XPath(".//input[@name='address1']"), 10).FirstOrDefault();
+				IWebElement myAdd1 = this._section_bill.FindElements(By.XPath(".//input[@name='address1']"), 10).FirstOrDefault();
 				if (myAdd1 == null)
 				{
 					Report.Info("Failed to Find Address Line 1 Text Box");
@@ -1096,7 +1094,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (address2 != "")
 			{
-				IWebElement myAdd2 = _section_bill.FindElements(By.XPath(".//input[@name='address2']"), 10).FirstOrDefault();
+				IWebElement myAdd2 = this._section_bill.FindElements(By.XPath(".//input[@name='address2']"), 10).FirstOrDefault();
 				if (myAdd2 == null)
 				{
 					Report.Info("Failed to Find Address Line 2 Text Box");
@@ -1108,7 +1106,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (city != "")
 			{
-				IWebElement myCity = _section_bill.FindElements(By.XPath(".//input[@name='city']"), 10).FirstOrDefault();
+				IWebElement myCity = this._section_bill.FindElements(By.XPath(".//input[@name='city']"), 10).FirstOrDefault();
 				if (myCity == null)
 				{
 					Report.Info("Failed to Find City Text Box");
@@ -1120,7 +1118,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (state != "")
 			{
-				IWebElement myState = _section_bill.FindElements(By.XPath(".//input[@name='state']"), 10).FirstOrDefault();
+				IWebElement myState = this._section_bill.FindElements(By.XPath(".//input[@name='state']"), 10).FirstOrDefault();
 				if (myState == null)
 				{
 					Report.Info("Failed to Find State Text Box");
@@ -1132,7 +1130,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (state != "")
 			{
-				IWebElement myState = _section_bill.FindElements(By.XPath(".//input[@name='state']"), 10).FirstOrDefault();
+				IWebElement myState = this._section_bill.FindElements(By.XPath(".//input[@name='state']"), 10).FirstOrDefault();
 				if (myState == null)
 				{
 					Report.Info("Failed to Find State Text Box");
@@ -1144,7 +1142,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (zip != "")
 			{
-				IWebElement myZip = _section_bill.FindElements(By.XPath(".//input[@name='zip']"), 10).FirstOrDefault();
+				IWebElement myZip = this._section_bill.FindElements(By.XPath(".//input[@name='zip']"), 10).FirstOrDefault();
 				if (myZip == null)
 				{
 					Report.Info("Failed to Find Zip Text Box");
@@ -1156,7 +1154,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (country != "")
 			{
-				IWebElement myCountry = _section_bill.FindElements(By.XPath(".//input[@name='country']"), 10).FirstOrDefault();
+				IWebElement myCountry = this._section_bill.FindElements(By.XPath(".//input[@name='country']"), 10).FirstOrDefault();
 				if (myCountry == null)
 				{
 					Report.Info("Failed to Find Zip Text Box");
@@ -1168,7 +1166,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (phone != "")
 			{
-				IWebElement myPhone = _section_bill.FindElements(By.XPath(".//input[@name='phone']"), 10).FirstOrDefault();
+				IWebElement myPhone = this._section_bill.FindElements(By.XPath(".//input[@name='phone']"), 10).FirstOrDefault();
 				if (myPhone == null)
 				{
 					Report.Info("Failed to Find Phone Text Box");
@@ -1191,7 +1189,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Shipp_Same_As_Bill_Check(bool bEnable)
 		{
 			Report.Info("Shipping Address is the same as Billing Address - " + bEnable);
-			_chk_same.Check(bEnable);
+			this._chk_same.Check(bEnable);
 			return true;
 		}
 
@@ -1202,7 +1200,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Cancel_click()
 		{
 			Report.Info("Attempting to Click Cancel Button");
-			_btnCancel.Click();
+			this._btnCancel.Click();
 			return true;
 		}
 
@@ -1213,7 +1211,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Save_click()
 		{
 			Report.Info("Attempting to Click Save Button");
-			_btnSave.Click();
+			this._btnSave.Click();
 			return true;
 		}
 
@@ -1230,7 +1228,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			Delay.Seconds(3 * Delay.SpeedFactor);
 
-			if (!Exists)
+			if (!this.Exists)
 			{
 				Report.Info("Not on Edit Address Form");
 				Report.Screenshot();
@@ -1245,7 +1243,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				switch (field)
 				{
 					case "Address 1":
-						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Address Line 1']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Address Line 1']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1256,7 +1254,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Address 2":
-						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Address Line 2']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Address Line 2']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1267,7 +1265,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "City":
-						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='City']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='City']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1278,7 +1276,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "State":
-						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='State']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='State']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1289,7 +1287,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Zip Code":
-						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Zip']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Zip']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1300,7 +1298,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Country":
-						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Country']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Country']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1311,7 +1309,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Phone Number":
-						myFieldHeader = _section_ship.FindElements(By.XPath(".//label[text()='Phone']"), 10).FirstOrDefault();
+						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Phone']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1335,7 +1333,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Shipping_Address_Hidden");
 
-			if (_section_ship.Displayed)
+			if (this._section_ship.Displayed)
 			{
 				Report.Info("Shipping Address Not Hidden");
 				Report.Screenshot();
@@ -1356,7 +1354,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Purchase_Header_Correct");
 
-			IWebElement myHeader = containerElement
+			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div[@class='header-with-back']//h2[contains(text(),'Purchase Summary')]"), 10).FirstOrDefault();
 
 			if (myHeader == null)
@@ -1379,7 +1377,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Subscription_Billing_Header_Correct");
 
-			IWebElement myHeader = containerElement
+			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div/h3[text()='Subscription Billing']"), 10).FirstOrDefault();
 
 			if (myHeader == null)
@@ -1400,7 +1398,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Product_Billing_Header_Displayed()
 		{
-			IWebElement myHeader = containerElement
+			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div/h3[text()='Product Billing']"), 10).FirstOrDefault();
 			return myHeader != null && myHeader.Displayed;
 		}
@@ -1409,7 +1407,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Yearly_Option_Selected");
 
-			IWebElement myOption = containerElement.FindElement(By.XPath(".//input[@name='billingFrequency']"), 2);
+			IWebElement myOption = this.containerElement.FindElement(By.XPath(".//input[@name='billingFrequency']"), 2);
 
 			if (myOption == null)
 			{
@@ -1437,9 +1435,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			Report.Info("Column 2 = " + column_2);
 			Report.Info("Column 3 = " + column_3);
 
-			IWebElement myColumn1 = containerElement.FindElement(By.XPath(".//table/thead/tr/th[1]"), 2);
-			IWebElement myColumn2 = containerElement.FindElement(By.XPath(".//table/thead/tr/th[2]"), 2);
-			IWebElement myColumn3 = containerElement.FindElement(By.XPath(".//table/thead/tr/th[3]"), 2);
+			IWebElement myColumn1 = this.containerElement.FindElement(By.XPath(".//table/thead/tr/th[1]"), 2);
+			IWebElement myColumn2 = this.containerElement.FindElement(By.XPath(".//table/thead/tr/th[2]"), 2);
+			IWebElement myColumn3 = this.containerElement.FindElement(By.XPath(".//table/thead/tr/th[3]"), 2);
 
 			if (myColumn1 == null)
 			{
@@ -1491,7 +1489,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Table_Footer_Statement");
 
-			IWebElement myStatement = containerElement.FindElement(By.XPath(".//tfoot/tr/td[text()='" + statement + "']"), 2);
+			IWebElement myStatement = this.containerElement.FindElement(By.XPath(".//tfoot/tr/td[text()='" + statement + "']"), 2);
 
 			if (myStatement == null)
 			{
@@ -1507,7 +1505,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Prices_And_Payment_Section");
 
-			IWebElement myHeading = containerElement.FindElement(By.XPath(".//div[@class='alert alert-warning']/h4[text()='Prices and Payment']"), 2);
+			IWebElement myHeading = this.containerElement.FindElement(By.XPath(".//div[@class='alert alert-warning']/h4[text()='Prices and Payment']"), 2);
 
 			if (myHeading == null)
 			{
@@ -1540,7 +1538,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning Confirmation_Text_Correct");
 
-			IWebElement myText = containerElement.FindElement(By.XPath(".//div[@class='col-sm-8']/span/b"), 2);
+			IWebElement myText = this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-8']/span/b"), 2);
 
 			if (myText == null)
 			{
@@ -1566,7 +1564,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Confirm_Order_click()
 		{
 			Report.Info("Attempting to Click Confirm Order Button");
-			return _btn_confirm.TryClick();
+			return this._btn_confirm.TryClick();
 		}
 
 		public bool ConfirmOrderButtonExists()
@@ -1611,7 +1609,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			Report.Info("Beginning ThankYou_Header_Correct");
 
-			IWebElement myHeader = containerElement
+			IWebElement myHeader = this.containerElement
 				.FindElements(By.XPath(".//div[@class='header-with-back']/h2[text()=' Thank You']"), 10).FirstOrDefault();
 
 			if (myHeader == null)
@@ -1650,7 +1648,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool Home_click()
 		{
 			Report.Info("Attempting to Click Home Button");
-			var el = containerElement.FindElement(By.XPath(".//a[text()='Home']"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//a[text()='Home']"), 2);
 			return el.TryClick();
 		}
 
@@ -1726,7 +1724,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool WaitForSpinner()
 		{
-			var spinner = _spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
+			var spinner = this._spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
 			if (spinner == null)
 			{
 				return true;
@@ -1734,7 +1732,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			while (spinner != null && spinner.Displayed)
 			{
-				spinner = _spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
+				spinner = this._spinnerFinder.FindElement(By.XPath("//div[@class='spinWrap']"), 2);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 			}
 
@@ -1743,7 +1741,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public void Click_AgreeAndContinue()
 		{
-			WaitForSpinner();
+			this.WaitForSpinner();
 			IWebElement continueButton =
 				this.containerElement.FindElement(By.Id("confirmButtonTop"), 2);
 

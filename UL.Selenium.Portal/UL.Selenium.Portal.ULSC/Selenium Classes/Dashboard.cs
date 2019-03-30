@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TextTemplating;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.ULSC.Selenium_Classes
+namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 {
 	class Dashboard : BaseObject
 	{
@@ -139,7 +133,7 @@ namespace Wercs.Selenium.ULSC.Selenium_Classes
 			{
 				rGraph.Type = GraphType.Bar;
 			}
-			else if(gEls.Any(x => x.GetAttribute("class").ToString().Contains("highcharts-tracker")))
+			else if (gEls.Any(x => x.GetAttribute("class").ToString().Contains("highcharts-tracker")))
 			{
 				rGraph.Type = GraphType.Pie;
 			}

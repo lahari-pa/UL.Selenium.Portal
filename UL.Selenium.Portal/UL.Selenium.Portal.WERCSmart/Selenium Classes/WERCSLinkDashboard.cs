@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text.RegularExpressions;
+﻿using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class WERCSLinkDashboard : BaseObject
 	{
@@ -175,7 +169,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickMainPageLink(string linkTitle)
 		{
-			var allLinks = containerElement.FindElements(By.XPath(".//a[not(ancestor::ul)]"));
+			var allLinks = this.containerElement.FindElements(By.XPath(".//a[not(ancestor::ul)]"));
 
 			var matchingLink = allLinks.FirstOrDefault(x => x.GetAttribute("title").ToLower() == linkTitle.ToLower());
 

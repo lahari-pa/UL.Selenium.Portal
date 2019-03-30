@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "DataSummarySheet")]
 	class StepsDataSummarySheet
@@ -101,11 +99,11 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			var dataSummarySheet = new DataSummary();
 
-			
+
 			var found = dataSummarySheet.GetInfoForSectionOption(section, option);
 
 			Report.IsTrue(found.Contains(option),
-					"option was not as expected! Expected: " + option + " in section: " + section + " but got: " + string.Join(",",found),
+					"option was not as expected! Expected: " + option + " in section: " + section + " but got: " + string.Join(",", found),
 					"option was showing: " + option + " in section: " + section);
 
 			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
@@ -189,7 +187,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			Report.Info(listOfIngredients.Count.ToString() + " ingredients found:");
 			for (int i = 0; i < listOfIngredients.Count; i++)
 			{
-				Report.Info((i+1).ToString() + ": " + listOfIngredients[i].getDetails());
+				Report.Info((i + 1).ToString() + ": " + listOfIngredients[i].getDetails());
 			}
 			Report.IsTrue(thisIngredient.PublicallyDisclosed == (publiclyDisclosed == "Yes"),
 				"For ingredient: " + thisIngredient.CASNumber + " expected publicly disclosed: " + publiclyDisclosed,

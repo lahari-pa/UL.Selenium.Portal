@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using EnvDTE;
 using Mailosaur;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Universal_Functions;
@@ -14,11 +9,11 @@ using NTTQA_TReVor_Module.Classes;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "WERCSmart_ChooseGoodGuide")]
 	class Steps_ChooseGoodGuide

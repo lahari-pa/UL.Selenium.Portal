@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlAgilityPack;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 
-namespace Wercs.Selenium.ULSC.Selenium_Classes
+namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 {
 	public static class GeneralUtilities
 	{

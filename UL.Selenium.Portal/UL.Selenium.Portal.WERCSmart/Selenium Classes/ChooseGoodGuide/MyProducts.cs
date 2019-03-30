@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -10,7 +7,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
 	class MyProducts : BaseObject
 	{
@@ -67,7 +64,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 		{
 			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdFilterProducts']")).TryClick())
 			{
-				WaitForLoadingToGo();
+				this.WaitForLoadingToGo();
 				return true;
 			}
 
@@ -76,7 +73,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickClearFilter()
 		{
-			return containerElement.FindElement(By.XPath(".//button[@id='cmdClear']")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[@id='cmdClear']")).TryClick();
 		}
 
 		public bool FindAndClickProduct(string findBy, string findValue)
@@ -116,7 +113,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickEditProduct(string findBy, string findValue)
 		{
-			if (FindAndClickProduct(findBy, findValue))
+			if (this.FindAndClickProduct(findBy, findValue))
 			{
 				Delay.Seconds(2);
 				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='editdata']")).TryClick())
@@ -124,7 +121,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 					Report.Info("Clicked edit button");
 					Delay.Seconds(1);
 
-					return Wait_for_load(60);
+					return this.Wait_for_load(60);
 				}
 			}
 
@@ -133,7 +130,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickDeleteProduct(string findBy, string findValue)
 		{
-			if (FindAndClickProduct(findBy, findValue))
+			if (this.FindAndClickProduct(findBy, findValue))
 			{
 				Report.Screenshot();
 				Delay.Seconds(2);
@@ -179,19 +176,19 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickDelete()
 		{
-			return containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Delete')])]")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Delete')])]")).TryClick();
 		}
 
 		public bool ClickCancel()
 		{
-			return containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Cancel')])]")).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Cancel')])]")).TryClick();
 		}
 
 		public bool WaitForDialogToDisappear(int secondsToWait)
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				if (!Wait_for_load(1))
+				if (!this.Wait_for_load(1))
 				{
 					return true;
 				}

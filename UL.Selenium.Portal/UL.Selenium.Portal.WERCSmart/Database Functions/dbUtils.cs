@@ -2,7 +2,7 @@
 using System.Configuration;
 using NTTQA_Reporting_Module;
 
-namespace Wercs.Selenium.PortalUX.Database_Functions
+namespace UL.Selenium.Portal.WERCSmart.Database_Functions
 {
 	public static class DbUtils
 	{

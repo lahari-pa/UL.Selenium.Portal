@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class UlSolutionCenter : BaseObject
 	{
@@ -80,7 +79,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			get
 			{
 				var rList = new List<UlSection>();
-				var sections = containerElement.FindElements(By.XPath(".//div[@class='col-md-6']"), 2);
+				var sections = this.containerElement.FindElements(By.XPath(".//div[@class='col-md-6']"), 2);
 				foreach (var section in sections)
 				{
 					var header = section.FindElement(By.XPath(".//h3"), 2)?.Text;
@@ -106,7 +105,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool LearnMoreDisplayed;
 		public bool ClickLearnMore()
 		{
-			return containerElement.FindElement(By.XPath(@".//div[@class='col-md-6' and .//h3[text()=""" + this.Header + @"""]]//a[@role='button' and text()='Learn More']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(@".//div[@class='col-md-6' and .//h3[text()=""" + this.Header + @"""]]//a[@role='button' and text()='Learn More']"), 2).TryClick();
 		}
 	}
 }

@@ -7,7 +7,8 @@ using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	class SelectRetailers : NewProduct
 	{
@@ -17,7 +18,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectRetailer(string retailer)
 		{
-			var retailerInput = containerElement.FindElements(By.XPath("//label/span")).FirstOrDefault(x => x.Text.Trim() == retailer).FindElement(By.XPath("../input"), 2);
+			var retailerInput = this.containerElement.FindElements(By.XPath("//label/span")).FirstOrDefault(x => x.Text.Trim() == retailer).FindElement(By.XPath("../input"), 2);
 			if (retailerInput != null && retailerInput.TryClick())
 			{
 				return retailerInput.Selected;
@@ -28,7 +29,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectRetailerContains(string retailer)
 		{
-			var retailers = containerElement.FindElements(By.XPath("//label/span"));
+			var retailers = this.containerElement.FindElements(By.XPath("//label/span"));
 			var matchingRetailer = retailers.FirstOrDefault(x => x.Text.Trim().ToLower().Contains(retailer));
 
 			if (matchingRetailer == null)
@@ -48,7 +49,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		// This is required for selecting the 'Walmart affiliate' retailers, which all have the same name/span text (Wal-Mart/SAM'S CLUB)
 		public bool SelectRetailerByLogo(string retailerCode)
 		{
-			var el = containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col-sm-3')]/div[starts-with(@class,'control')]"), 2).FirstOrDefault(x => x.GetCssValue("background-image").ToLower().Contains(retailerCode.ToLower()));
+			var el = this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'col-sm-3')]/div[starts-with(@class,'control')]"), 2).FirstOrDefault(x => x.GetCssValue("background-image").ToLower().Contains(retailerCode.ToLower()));
 			if (el == null)
 			{
 				return false;
@@ -68,7 +69,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool DoneButton()
 		{
-			var el = containerElement.FindElement(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]"), 2);
+			var el = this.containerElement.FindElement(By.XPath("//div[@id='select-retailers-dialog']//a[contains(text(), 'Done')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -160,7 +161,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var checkboxes = this.containerElement.FindElements(By.XPath(".//label[@class='checkbox']/input"), 2);
 			return checkboxes.All(x => x.Checked()) ? new List<string>() :
-				checkboxes.Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span"),2)?.Text).ToList();
+				checkboxes.Where(x => !x.Checked()).Select(x => x.FindElement(By.XPath("./following-sibling::span"), 2)?.Text).ToList();
 		}
 	}
 

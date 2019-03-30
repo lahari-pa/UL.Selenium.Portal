@@ -9,14 +9,12 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using NTTQA_TReVor_Module.Cache;
 using NTTQA_TReVor_Module.Classes;
 using SeleniumUtilities;
-
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using WERCSmart;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "Signup"), Scope(Tag = "WERCSmart_Signup")]
 	public class StepsSignup
@@ -496,7 +494,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Delay.Seconds(60);
 				if (EmailFunctions.WaitForInboxDifferences(user.Email))
 				{
-					CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+					this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 				}
 				else
 				{
@@ -514,7 +512,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 							Report.Info("Attempt: " + (i + 1));
 							if (EmailFunctions.WaitForInboxDifferences(user.Email))
 							{
-								CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
+								this.CheckForEmailDifferences(user, emailFrom, title, shouldOrNot == "should");
 								return;
 							}
 
@@ -833,23 +831,23 @@ namespace Wercs.Selenium.PortalUX.Steps
 		{
 			TestReport.UseSubSteps = true;
 			var stepsLogin = new StepsLogin();
-			DefineUser(savedAs, parameters);
-			GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
+			this.DefineUser(savedAs, parameters);
+			this.GivenISaveTheCurrentEmailsInTheInboxFor(savedAs);
 			stepsLogin.GivenIClickOnTheNewToWercsmartLink();
-			ThenTheSignupPageShouldAppear();
-			GivenIEnterSignupEmailUser(savedAs);
-			GivenIConfirmSignupEmailUser(savedAs);
-			GivenIClickOnSubmit();
-			ThenTheSignupThankYouPageShouldAppear();
-			ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<sitenotification>", "Link to create WERCSmart Account");
-			ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
-			WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
-			WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
-			WhenInTheNewUserFormIClickOnContinue();
-			ThenIShouldBeOnThePageOfTheForm("Security questions");
-			EnterTheFollowingIntoSecurityQuestions(savedAs);
-			EnterPinForUser(savedAs);
-			WhenInTheNewUserFormIClickOnContinue();
+			this.ThenTheSignupPageShouldAppear();
+			this.GivenIEnterSignupEmailUser(savedAs);
+			this.GivenIConfirmSignupEmailUser(savedAs);
+			this.GivenIClickOnSubmit();
+			this.ThenTheSignupThankYouPageShouldAppear();
+			this.ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle("should", savedAs, "<sitenotification>", "Link to create WERCSmart Account");
+			this.ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount();
+			this.WhenIClickOnTheLinkIShouldSeeTheWercSmartNewAccountPage();
+			this.WhenIEnterTheFollowingInformationIntoTheNewUserForm(savedAs);
+			this.WhenInTheNewUserFormIClickOnContinue();
+			this.ThenIShouldBeOnThePageOfTheForm("Security questions");
+			this.EnterTheFollowingIntoSecurityQuestions(savedAs);
+			this.EnterPinForUser(savedAs);
+			this.WhenInTheNewUserFormIClickOnContinue();
 			TestReport.UseSubSteps = false;
 		}
 

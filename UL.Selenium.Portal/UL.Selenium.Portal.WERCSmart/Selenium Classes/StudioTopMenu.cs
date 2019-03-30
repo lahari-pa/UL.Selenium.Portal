@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class StudioTopMenu : BaseObject
 	{
@@ -33,7 +29,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
-			var ListOfOptions = containerElement.FindElements(By.XPath(".//li//a"));
+			var ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
 			return ListOfOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == item.Trim().ToLower()).TryClick();
 
 		}
@@ -43,7 +39,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			var navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
-			var ListOfOptions = containerElement.FindElements(By.XPath(".//li//a"));
+			var ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
 			var topMenuItem = ListOfOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == menuItem.Trim().ToLower());
 			if (topMenuItem.TryClick())
 			{

@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using NPOI.OpenXmlFormats.Vml.Office;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
-using NUnit.Framework.Constraints;
-using OpenQA.Selenium;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "Studio")]
 	class Steps_Studio

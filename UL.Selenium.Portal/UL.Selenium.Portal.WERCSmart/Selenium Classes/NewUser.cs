@@ -7,9 +7,7 @@ using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class NewUser : BaseObject
 	{
@@ -452,7 +450,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			set
 			{
-				Select_Country(value);
+				this.Select_Country(value);
 				Report.Success("Entered country: " + value);
 			}
 		}
@@ -690,7 +688,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				if (CurrentPageTitle() == waitingForTitle)
+				if (this.CurrentPageTitle() == waitingForTitle)
 				{ return true; }
 				i++;
 				Delay.Seconds(1);

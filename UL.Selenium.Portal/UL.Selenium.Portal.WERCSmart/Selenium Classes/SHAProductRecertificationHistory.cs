@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class ProductRecertificationHistory : BaseObject
 	{
@@ -40,7 +37,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//Close, Export
 		public bool ClickButton(string button)
 		{
-			var varButtons = containerElement.FindElements(By.XPath("..//button/span"), 2);
+			var varButtons = this.containerElement.FindElements(By.XPath("..//button/span"), 2);
 			var matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
 			if (matchingButton == null)
 			{
@@ -63,7 +60,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public bool SelectItem(string columnHeader, string value)
 		{
 			Report.Info("Selecting item: " + value + " in column: " + columnHeader);
-			List<string> rawHeaders = GetHeaders();
+			List<string> rawHeaders = this.GetHeaders();
 			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfHeader = 0;
 			for (int i = 0; i < headers.Count; i++)
@@ -75,7 +72,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 			}
 
-			var listOfColumnItems = containerElement
+			var listOfColumnItems = this.containerElement
 				.FindElements(By.XPath(".//table[@id='listProdRecertHistory']//tr/td[" + indexOfHeader + "]"), 2)
 				.ToList();
 
@@ -90,7 +87,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			else
 			{
 				Report.Info("Trying to select");
-				listOfColumnItems = containerElement
+				listOfColumnItems = this.containerElement
 					.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 				matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
@@ -106,7 +103,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<Product> GetProducts()
 		{
-			List<string> rawHeaders = GetHeaders();
+			List<string> rawHeaders = this.GetHeaders();
 			List<string> headers = rawHeaders.Select(x => x.Replace("\r\n", string.Empty).Trim()).ToList();
 			int indexOfID = 0;
 			int indexOfProductName = 0;
@@ -142,7 +139,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 			}
 
-			var selectedRows = containerElement.FindElements(By.XPath(".//table[@id='listProdRecertHistory']//tr"), 2);
+			var selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='listProdRecertHistory']//tr"), 2);
 			List<Product> listOfProducts = new List<Product>();
 			if (selectedRows == null)
 			{

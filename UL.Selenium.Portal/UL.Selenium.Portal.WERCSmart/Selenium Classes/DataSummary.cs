@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using Wercs.Selenium.PortalUX.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class DataSummary : BaseObject
 	{
@@ -23,7 +21,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool WaitForSpinner()
 		{
-			var spinner = containerElement.FindElement(By.XPath(".//i[contains(@class,'fa-spinner')]"), 2);
+			var spinner = this.containerElement.FindElement(By.XPath(".//i[contains(@class,'fa-spinner')]"), 2);
 			if (spinner == null)
 			{
 				return true;
@@ -31,7 +29,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			while (spinner != null && spinner.Displayed)
 			{
-				spinner = containerElement.FindElement(By.XPath(".//i[contains(@class,'fa-spinner')]"), 2);
+				spinner = this.containerElement.FindElement(By.XPath(".//i[contains(@class,'fa-spinner')]"), 2);
 				Delay.Seconds(Delay.SpeedFactor * 1);
 			}
 
@@ -40,9 +38,9 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public List<Battery> GetDisplayedBatteries()
 		{
-			WaitForSpinner();
+			this.WaitForSpinner();
 			var retList = new List<Battery>();
-			var tableElement = containerElement.FindElement(By.XPath(".//h2[@class='summary-question' and contains(text(),'battery')]//following-sibling::table"), 2);
+			var tableElement = this.containerElement.FindElement(By.XPath(".//h2[@class='summary-question' and contains(text(),'battery')]//following-sibling::table"), 2);
 			if (tableElement == null)
 			{
 				return null;
@@ -68,7 +66,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		/// <returns></returns>
 		public string GetPrivateLabelStatement()
 		{
-			WaitForSpinner();
+			this.WaitForSpinner();
 			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'Private Label')]/../p[1]"), 2).Text;
 		}
 
@@ -77,7 +75,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		/// </summary>
 		public string GetAlternativeControlPlanQuestion()
 		{
-			WaitForSpinner();
+			this.WaitForSpinner();
 			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'Alternative Control Plan')]/../p[1]"), 2).Text;
 		}
 
@@ -86,23 +84,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		/// </summary>
 		public string GetGramsOfVocPerUseAsDefinedCaliforniaConsumerProductsQuestion()
 		{
-			WaitForSpinner();
+			this.WaitForSpinner();
 			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'California Consumer Products Regulation')]/../p[1]"), 2).Text;
 		}
 
 		public List<string> GetInfoForSectionOption(string section, string option)
 		{
 
-			
-			WaitForSpinner();
-			var els = containerElement.FindElements(By.XPath(".//h3[@class='summary-question' and contains(text(),'" + section + "')]/../p[contains(text(),'" + option + "')]"), 2);
+
+			this.WaitForSpinner();
+			var els = this.containerElement.FindElements(By.XPath(".//h3[@class='summary-question' and contains(text(),'" + section + "')]/../p[contains(text(),'" + option + "')]"), 2);
 
 			return els.Select(x => x.GetElementText()).ToList();
 		}
 
 		public string sGetProductName()
 		{
-			var productName = containerElement.FindElement(
+			var productName = this.containerElement.FindElement(
 				By.XPath("//h2/small[contains(text(), 'Product Name')]/../span[not(contains(@style, 'none'))]"), 2);
 			if (productName == null)
 			{
@@ -116,7 +114,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<Ingredients.Ingredient> GetIngredients()
 		{
 			Report.Info("Getting ingredients");
-			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 60);
+			var ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 60);
 			var listOfIngredients = new List<Ingredients.Ingredient>();
 			if (ingredientsTable == null)
 			{
@@ -150,7 +148,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				}
 				var pattern2 = @"[\\r\\n\s]+(.*)";
 				var regMatch2 = Regex.Match(CASAndNaME, pattern2);
-				if (!regMatch2.Success )
+				if (!regMatch2.Success)
 				{
 					throw new Exception("pattern not found");
 				}
@@ -167,7 +165,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public void ScrollToIngredients()
 		{
-			var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+			var ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
 			if (ingredientsTable == null)
 			{
 				Report.Error("Failed to find ingredients table");
@@ -180,7 +178,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+				var ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
 
 				if (ingredientsTable == null)
 				{
@@ -224,7 +222,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			try
 			{
-				var ingredientsTable = containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+				var ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
 
 				if (ingredientsTable == null)
 				{
@@ -253,7 +251,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		}
 
-		
+
 
 	}
 }

@@ -3,7 +3,7 @@ using System.Linq;
 using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class AddNewSupplier : ModalDialog
 	{

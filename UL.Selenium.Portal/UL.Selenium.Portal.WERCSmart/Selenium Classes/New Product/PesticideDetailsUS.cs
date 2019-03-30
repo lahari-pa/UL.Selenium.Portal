@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Components.DictionaryAdapter;
-using Castle.Core.Internal;
+﻿using System.Collections.Generic;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	public class PesticideDetailsUS : NewProduct
 	{
@@ -60,11 +53,11 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 					return false;
 				}
 				var removeEls = epaTable.FindElements(By.XPath("//a[@class = 'close']"), 2);
-				if (removeEls.Count < Row)
+				if (removeEls.Count < this.Row)
 				{
 					return false;
 				}
-				return removeEls[Row - 1].TryClick();
+				return removeEls[this.Row - 1].TryClick();
 			}
 
 			public bool EditRegistration(string newEpaNumber)

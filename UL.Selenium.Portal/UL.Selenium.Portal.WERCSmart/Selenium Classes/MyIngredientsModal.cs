@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
-using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class MyIngredientsModal : BaseObject
 	{
@@ -17,23 +16,23 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool Click_OK()
 		{
-			return containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 				.FirstOrDefault(x => x.Text == "OK").TryClick();
 		}
 
 		public bool Click_Next()
 		{
-			return containerElement.FindElement(By.XPath(".//a[@class='page-link next' and text()='Next']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//a[@class='page-link next' and text()='Next']"), 2).TryClick();
 		}
 
 		public string IngredientToRemove()
 		{
-			return containerElement.FindElement(By.XPath(".//span[contains(@data-bind,'component.name')]"), 2).Text;
+			return this.containerElement.FindElement(By.XPath(".//span[contains(@data-bind,'component.name')]"), 2).Text;
 		}
 
 		public bool ClickButton(string option)
 		{
-			return containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
+			return this.containerElement.FindElements(By.XPath("//div[@class='modal-footer']/button"), 2)
 				.FirstOrDefault(x => x.Text.Trim().ToLower() == option.ToLower()).TryClick();
 		}
 
@@ -41,7 +40,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			var rIngredients = new List<MyIngredients.IngredientItem>();
 			int count = 1;
-			var rows = containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
+			var rows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
 			foreach (var row in rows)
 			{
 				rIngredients.Add(new MyIngredients.IngredientItem() {
@@ -56,7 +55,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			while (this.Click_Next())
 			{
-				rows = containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
+				rows = this.containerElement.FindElements(By.XPath(".//tbody/tr"), 2);
 				foreach (var row in rows)
 				{
 					rIngredients.Add(new MyIngredients.IngredientItem() {

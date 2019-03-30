@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Core.Internal;
+﻿using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class SHARecertification : BaseObject
 	{
@@ -40,7 +35,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		//Continue Cancel
 		public bool ClickButton(string button)
 		{
-			var varButtons = containerElement.FindElements(By.XPath(".//button/span"), 2);
+			var varButtons = this.containerElement.FindElements(By.XPath(".//button/span"), 2);
 			var matchingButton = varButtons.FirstOrDefault(x => x.GetValue().ToLower().Trim() == button.ToLower());
 			if (matchingButton == null)
 			{
@@ -53,7 +48,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SelectRegulatorySpecialist(string name)
 		{
-			var regulatorySpecialist = containerElement.FindElement(By.XPath(".//select[@id='regUsers']"), 2);
+			var regulatorySpecialist = this.containerElement.FindElement(By.XPath(".//select[@id='regUsers']"), 2);
 			if (regulatorySpecialist == null)
 			{
 				Report.Info("Could not find regulatory specialist select");
@@ -66,7 +61,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool SetAutoAssign(bool set)
 		{
-			var autoAssign = containerElement.FindElement(By.XPath(".//input[@id='chkAutoAssignUserRecert']"), 2);
+			var autoAssign = this.containerElement.FindElement(By.XPath(".//input[@id='chkAutoAssignUserRecert']"), 2);
 			if (autoAssign == null)
 			{
 				Report.Info("Could not find auto assign checkbox");

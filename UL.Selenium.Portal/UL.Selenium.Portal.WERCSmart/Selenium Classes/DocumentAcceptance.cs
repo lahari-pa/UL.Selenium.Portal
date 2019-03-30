@@ -11,8 +11,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using SeleniumUtilities;
 
-
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class DocumentAcceptance : BaseObject
 	{
@@ -35,13 +34,13 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			switch (navOption)
 			{
 				case "next":
-					navEl = containerElement.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
+					navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
 					break;
 				case "previous":
-					navEl = containerElement.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
+					navEl = this.containerElement.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
 					break;
 				case "...":
-					navEl = containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+					navEl = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
 					break;
 				default:
 					Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
@@ -60,7 +59,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		{
 			if (position.ToLower() == "current")
 			{
-				var activePageControl = containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']/li[@class='active']/span"), 2);
+				var activePageControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']/li[@class='active']/span"), 2);
 				if (activePageControl == null)
 				{
 					Report.Failure("The page control could not be found on the My Packaging Types grid");
@@ -70,7 +69,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 			}
 			if (position.ToLower() == "last")
 			{
-				var lastControl = containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[@class='page-link']"), 2);
+				var lastControl = this.containerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/a[@class='page-link']"), 2);
 				if (lastControl.Count == 0)
 				{
 					Report.Info("Last page is: 1");
@@ -83,17 +82,17 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 		public bool ClickPage(string page)
 		{
-			if (GetPage("current") == int.Parse(page))
+			if (this.GetPage("current") == int.Parse(page))
 			{
 				return false;
 			}
 			Report.Info("Clicking page: " + page);
-			return containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link' and text()= '" + page + "']"), 2).TryClick();
+			return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link' and text()= '" + page + "']"), 2).TryClick();
 		}
 
 		public bool NextDisabled()
 		{
-			var pagingControl = containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
+			var pagingControl = this.containerElement.FindElement(By.XPath(".//ul[@id='pagingControl']"), 2);
 			if (pagingControl == null)
 			{
 				Report.Failure("Unable to find the paging control on grid navigation");
@@ -105,18 +104,18 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<MyProductsItem> GetProducts()
 		{
 			var rList = new List<MyProductsItem>();
-			ClickPage("1");
-			int pageNumber = GetPage("current");
+			this.ClickPage("1");
+			int pageNumber = this.GetPage("current");
 			var ingredientNumber = 1;
 			if (pageNumber == -1)
 			{
 				Report.Failure("Could not get current page number from the grid");
 				return rList;
 			}
-			int lastPageNumber = GetPage("last");
+			int lastPageNumber = this.GetPage("last");
 			while (pageNumber <= lastPageNumber && pageNumber != -1)
 			{
-				var rows = containerElement.FindElements(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr"), 2);
+				var rows = this.containerElement.FindElements(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr"), 2);
 				foreach (var row in rows)
 				{
 					var productsItem = new MyProductsItem {
@@ -125,27 +124,27 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 					};
 					rList.Add(productsItem);
 				}
-				if (NextDisabled())
+				if (this.NextDisabled())
 				{
 					Report.Info("Found a total of: " + rList.Count + " ingredients");
-					ClickPage("1");
+					this.ClickPage("1");
 					return rList;
 				}
-				ProductGridNavigation("next");
-				pageNumber = GetPage("current");
+				this.ProductGridNavigation("next");
+				pageNumber = this.GetPage("current");
 			}
 			return rList;
 		}
 		public List<string> DocumentsGridHeadings()
 		{
 			var rList = new List<string>();
-			var headings = containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//thead//th"), 2);
+			var headings = this.containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//thead//th"), 2);
 			return headings.Select(x => x.Text).ToList();
 		}
 		public List<DocumentsItem> GetDocuments()
 		{
 			var rList = new List<DocumentsItem>();
-			var rows = containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//tbody/tr"), 2);
+			var rows = this.containerElement.FindElements(By.XPath(".//div[./h3[contains(text(),'Documents')]]//tbody/tr"), 2);
 			int i = 1;
 			foreach (var row in rows)
 			{
@@ -195,7 +194,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 
 			public bool Click()
 			{
-				return containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + WPSID + "']]"), 2).TryClick();
+				return this.containerElement.FindElement(By.XPath(".//div[./h3[text()='My Products']]//tbody/tr[./td[contains(@data-bind, 'ProductID') and text()='" + this.WPSID + "']]"), 2).TryClick();
 			}
 		}
 		public class DocumentsItem : DocumentAcceptance
@@ -210,7 +209,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 				switch (action.ToLower())
 				{
 					case "view":
-						return containerElement.FindElement(By.XPath(".//div[./h3[contains(text(),'Documents')]]//tbody/tr[" + Row + "]//a[text()='View']"), 2).TryClick();
+						return this.containerElement.FindElement(By.XPath(".//div[./h3[contains(text(),'Documents')]]//tbody/tr[" + this.Row + "]//a[text()='View']"), 2).TryClick();
 				}
 				return false;
 			}

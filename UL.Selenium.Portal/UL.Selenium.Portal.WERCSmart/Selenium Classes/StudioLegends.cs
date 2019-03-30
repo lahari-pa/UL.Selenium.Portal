@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class StudioLegends : BaseObject
 	{
@@ -32,7 +29,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes
 		public List<ProductStatus> GetProductStatuses()
 		{
 			List<ProductStatus> listOfProductStatuses = new List<ProductStatus>();
-			var listOfProductStatusRows = containerElement.FindElements(By.XPath(".//table//tr[1]/td/ul/li"));
+			var listOfProductStatusRows = this.containerElement.FindElements(By.XPath(".//table//tr[1]/td/ul/li"));
 			if (listOfProductStatusRows.Count > 0)
 			{
 				foreach (var row in listOfProductStatusRows)

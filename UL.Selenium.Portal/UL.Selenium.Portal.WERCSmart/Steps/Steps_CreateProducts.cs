@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using NPOI.OpenXmlFormats.Vml.Office;
-using NTTQA_Reporting_Module.Reporting.Core;
-using NUnit.Framework.Constraints;
-using OpenQA.Selenium;
-using SeleniumUtilities;
+﻿using NTTQA_Reporting_Module.Reporting.Core;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "CreateProducts")]
 	class Steps_CreateProduct
@@ -100,7 +89,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 			MyStepsShared.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("All", saveAs);
 			Report.Info(
 				"Given In the SHA manager grid I see the WPS ID I have saved as product: " + saveAs + " and its status is: Completed");
-			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs,"Completed");
+			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Completed");
 
 
 		}

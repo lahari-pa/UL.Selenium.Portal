@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Threading;
-using TechTalk.SpecFlow;
-using NUnit.Framework;
-using SeleniumUtilities;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -17,15 +12,18 @@ using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
 using NTTQA_TReVor_Module.Cache;
 using NTTQA_TReVor_Module.Classes;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Steps;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 [assembly: Apartment(ApartmentState.STA)]
 
-namespace WERCSmart
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding]
 	public class GlobalSteps
@@ -44,7 +42,7 @@ namespace WERCSmart
 		[Then(@"I login as the administrator")]
 		public void GivenILoginAsTheAdministrator()
 		{
-			LoginToAccount("ProductAccount");
+			this.LoginToAccount("ProductAccount");
 		}
 
 		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account)")]
@@ -53,16 +51,16 @@ namespace WERCSmart
 			switch (type)
 			{
 				case ("WERCs Visual Account"):
-					LoginToAccount("VisualAccount");
+					this.LoginToAccount("VisualAccount");
 					break;
 				case ("WERCs Premium Subscription Account"):
-					LoginToAccount("PremiumSubscriptionAccount");
+					this.LoginToAccount("PremiumSubscriptionAccount");
 					break;
 				case ("WERCs Product Account"):
-					LoginToAccount("ProductAccount");
+					this.LoginToAccount("ProductAccount");
 					break;
 				case ("WERCs ULSC Account"):
-					LoginToAccount("ULSCAccount");
+					this.LoginToAccount("ULSCAccount");
 					break;
 			}
 		}
@@ -81,16 +79,16 @@ namespace WERCSmart
 			switch (type)
 			{
 				case ("data consent Account"):
-					LoginToAccount("DataConsentAccount");
+					this.LoginToAccount("DataConsentAccount");
 					break;
 				case ("Division Account"):
-					LoginToAccount("DivisionAccount");
+					this.LoginToAccount("DivisionAccount");
 					break;
 				case ("Administrator Role"):
-					LoginToAccount("ProductAccount");
+					this.LoginToAccount("ProductAccount");
 					break;
 				case ("Canada has all data account"):
-					LoginToAccount("CanadaHasAllData");
+					this.LoginToAccount("CanadaHasAllData");
 					break;
 			}
 		}
@@ -101,10 +99,10 @@ namespace WERCSmart
 			switch (type)
 			{
 				case ("subscription"):
-					LoginToAccount("SubCart");
+					this.LoginToAccount("SubCart");
 					break;
 				case ("without subscription"):
-					LoginToAccount("ProductsInCart");
+					this.LoginToAccount("ProductsInCart");
 					break;
 			}
 		}
@@ -112,7 +110,7 @@ namespace WERCSmart
 		[StepDefinition(@"I log in with the account saved in TReVor as: (.*)")]
 		public void ILogInWithTheAccountSavedInTrevorAs(string accountSavedAs)
 		{
-			LoginToAccount(accountSavedAs);
+			this.LoginToAccount(accountSavedAs);
 		}
 
 		[Then(@"The home screen should load")]
@@ -162,7 +160,7 @@ namespace WERCSmart
 			}
 			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
 			{
-				GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
+				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 			}
 		}
 
@@ -961,7 +959,7 @@ namespace WERCSmart
 			foreach (var savedAs in usersSavedAs)
 			{
 				TestReport.StartStep($"I update the password for user: {savedAs}");
-				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				var selMyAccount = new StepsMyAccount();
 				Report.Info("Navigating to My Account from the homepage");
 				selMyAccount.GivenINavigateToTheMyAccountPage();
@@ -970,12 +968,12 @@ namespace WERCSmart
 				Report.Info("Updating the password for test user " + savedAs);
 				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
 				Report.Info("Logging out");
-				GivenILogout();
+				this.GivenILogout();
 				Report.Info("Checking I can log in with the new credentials");
 				TestUsers.RefreshTestUserCache();
-				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
-				GivenILogout();
+				this.GivenILogout();
 			}
 		}
 
@@ -1000,13 +998,13 @@ namespace WERCSmart
 					continue;
 				}
 				TestReport.StartStep($"I update the password for user: {savedAs}");
-				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				var alert = new RetailPartners().WarningMessage();
 				if (alert != null && alert.Contains("The recipients listed below have additional Data Consent requests"))
 				{
 					Report.Info("Account needs to be reviewed - data consent requests. Continuing to the next account");
 					Report.Info("Logging out");
-					GivenILogout();
+					this.GivenILogout();
 					continue;
 				}
 				if (!new Homepage().Wait_for_load())
@@ -1015,7 +1013,7 @@ namespace WERCSmart
 					if (new TopMenuBar().Wait_for_load())
 					{
 						Report.Info("Logging out");
-						GivenILogout();
+						this.GivenILogout();
 					}
 					continue;
 				}
@@ -1027,7 +1025,7 @@ namespace WERCSmart
 				Report.Info("Updating the password for test user " + savedAs);
 				selMyAccount.IUpdateThePasswordForTrevorTestUser(savedAs);
 				Report.Info("Logging out");
-				GivenILogout();
+				this.GivenILogout();
 				if (!new LandingPage().Wait_for_load())
 				{
 					Report.Info("Directed to an unexpected WercSmart landing page!");
@@ -1036,9 +1034,9 @@ namespace WERCSmart
 				}
 				Report.Info("Checking I can log in with the new credentials");
 				TestUsers.RefreshTestUserCache();
-				ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
 				Report.Info("Logging out");
-				GivenILogout();
+				this.GivenILogout();
 				SeleniumBrowser.WebBrowser.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
 			}
 		}

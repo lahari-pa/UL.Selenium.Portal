@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Components.DictionaryAdapter;
-using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.Extensions;
-using OpenQA.Selenium.Support.PageObjects;
 
-namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	class Retailer : NewProduct
 	{
@@ -163,7 +154,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 
 				List<string> vendorOptions = el.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
 				Random r = new Random();
-				int rInt = r.Next(0, vendorOptions.Count-1);
+				int rInt = r.Next(0, vendorOptions.Count - 1);
 				Report.Info("Attempting to select vendor: " + vendorOptions[rInt]);
 				el.Select(vendorOptions[rInt]);
 				Delay.Seconds(1);
@@ -183,7 +174,7 @@ namespace Wercs.Selenium.PortalUX.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var container = containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
+				var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-striped table-hover table-fixed marTop-20']"), 2);
 				var el = container.FindElement(By.XPath($@".//tr[./td[text()=""{retailer}""]]//label[text()='Select Vendor']/..//select"), 2);
 				if (el == null)
 				{

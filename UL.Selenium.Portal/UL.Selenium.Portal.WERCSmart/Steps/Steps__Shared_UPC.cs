@@ -1,26 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using iTextSharp.text;
-using System.IO;
+﻿using System.Linq;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using TechTalk.SpecFlow.Bindings;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-using static Wercs.Selenium.PortalUX.Selenium_Classes.UPC;
-using static Wercs.Selenium.PortalUX.Steps.Steps_Shared;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "UPC")]
 	class StepsUPC

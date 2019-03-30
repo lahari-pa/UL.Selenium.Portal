@@ -6,10 +6,9 @@ using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "ForwardProductRegistration")]
 	class StepsForwardProductRegistration
@@ -313,7 +312,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				foreach (var id_ in ids)
 				{
 					Report.Info("Attempting to select product with id: " + id_);
-					EnterTextInSearchByIDOrProductNameField(id_);
+					this.EnterTextInSearchByIDOrProductNameField(id_);
 					if (selForwardProductReg.SelectProducts_ClickProductByID(id_))
 					{
 						Report.Success("Successfully selected product with ID: " + id_);
@@ -336,7 +335,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					Report.Failure("Could not find product ID in context saved as: " + savedAs);
 					return;
 				}
-				EnterTextInSearchByIDOrProductNameField(id);
+				this.EnterTextInSearchByIDOrProductNameField(id);
 				Report.Screenshot();
 				Report.IsTrue(selForwardProductReg.SelectProducts_ClickProductByID(id),
 					"Failed to select the product with ID: " + id + "!",
@@ -412,7 +411,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 					if (selForwardProductReg.SelectProducts_ClickProductByID_(id_))
 					{
 						TestReport.StartStep("I confirm the checkbox is disabled while the page is working");
-						ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
+						this.ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
 						break;
 					}
 				}
@@ -428,7 +427,7 @@ namespace Wercs.Selenium.PortalUX.Steps
 				Report.Info("Clicking product checkbox with ID: " + id);
 				selForwardProductReg.SelectProducts_ClickProductByID_(id);
 				TestReport.StartStep("I confirm the checkbox is disabled while the page is working");
-				ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
+				this.ConfirmProductCheckboxIsDisabledWhilePageIsWorking();
 			}
 
 		}

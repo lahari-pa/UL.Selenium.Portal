@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+﻿using NTTQA_Reporting_Module.Reporting.Core;
 using TechTalk.SpecFlow;
-using TestStack.White.UIItems.WindowItems;
-using Wercs.Selenium.PortalUX.Classes;
-using Wercs.Selenium.PortalUX.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "SubUpgrade")]
 	class Steps_SubscriptionUpgrade

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Reflection;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
-using SeleniumUtilities;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
-using Wercs.Selenium.PortalUX.Selenium_Classes;
-
-namespace Wercs.Selenium.PortalUX.Steps
+namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "LandingPage"), Scope(Tag = "WERCSmart_LandingPage")]
 	public class StepsLandingPage
