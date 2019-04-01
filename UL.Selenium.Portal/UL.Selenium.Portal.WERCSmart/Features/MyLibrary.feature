@@ -1,4 +1,4 @@
-﻿@Homepage
+@Homepage
 @Login
 @Signup
 @MyAccount
@@ -15,6 +15,7 @@
 
 Feature: MyLibrary
 
+@TReVorId:16654
 Scenario: [64884] My Library
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -33,6 +34,7 @@ Then I should see the following tabs in the My Library page
 | My Ingredients                     |
 | Contact Information per SDS(s)     |
 
+@TReVorId:16662
 Scenario: [70535] Add Brand
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -98,6 +100,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 
 And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
+@TReVorId:16665
 Scenario: [70537] Edit Brand - Update Name
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -131,6 +134,7 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
 
+@TReVorId:16658
 Scenario: [70533] Edit Packaging Type
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -461,6 +465,7 @@ Then I confirm that all changes in edited ingredients: My Library Ingredients Ed
 
 And I remove all ingredients in the list saved as: My Library New Ingredients
 
+@TReVorId:16692
 Scenario: [73328] Pagination functionality
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

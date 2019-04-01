@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -49,6 +49,7 @@ Given I select any Walmart Affiliate automatically selects all from that group, 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73917
 
+@TReVorId:16660
 Scenario: [73920] Walmart Affiliates when Viewing My Retail Partners
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -74,6 +75,7 @@ Given I click each Wal-mart affiliate retailer and should be taken to the Wal-ma
 And I navigate to the home page
 
 
+@TReVorId:16778
 Scenario: [74133] Walmart Product Type Electronics
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -190,6 +192,7 @@ Given I select any Walmart Affiliate automatically selects all from that group, 
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase73919
 
+@TReVorId:18956
 Scenario: [73918] Walmart Affiliates when Forwarding to a New Retailer
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -241,6 +244,7 @@ And I confirm that: WM is displayed in the Destination Retailers column under Pr
 Given I click the Home navigation icon and accept the alert popup
 
 
+@TReVorId:16656
 Scenario: [63684] Walmart Private label product
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

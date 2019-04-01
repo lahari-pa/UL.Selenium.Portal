@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -13,6 +13,7 @@
 Feature:  EPA State Expiry Date Validation (Suite ID: 56545)
 
 
+@TReVorId:16719
 Scenario: [56593] Pesticide Data - EPA Expiration date validation (Iowa - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -36,6 +37,7 @@ Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current 
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56593
 
+@TReVorId:16718
 Scenario: [56592] Pesticide Data - EPA Expiration date validation (Georgia - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -57,6 +59,7 @@ Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current 
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56592
 
+@TReVorId:16714
 Scenario: [56582] Pesticide Data - EPA Expiration date validation (Alaska - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -79,6 +82,7 @@ Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current 
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56582
 
+@TReVorId:16717
 Scenario: [56591] Pesticide Data - EPA Expiration date validation (Colorado Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -99,6 +103,7 @@ Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current 
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56591
 
+@TReVorId:16716
 Scenario: [56590] Pesticide Data - EPA Expiration date validation (California - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -119,6 +124,7 @@ Given I call Shared Step 55822 (EPA expiration date - enter Dec 31st of Current 
 Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56590
 
+@TReVorId:16715
 Scenario: [56583] Pesticide Data - EPA Expiration date validation (Arkansas > Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -142,6 +148,7 @@ Then I should see the Transportation Details 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56583
 
 # Assigned to Barrett, Beverly
+@TReVorId:21341
 Scenario: [56594] Pesticide Data - EPA Expiration date validation (Idaho - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -167,6 +174,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56594
 
 # Assigned to Barrett, Beverly
+@TReVorId:21342
 Scenario: [56596] Pesticide Data - EPA Expiration date validation (Indiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -192,6 +200,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 
 # Assigned to Barrett, Beverly
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21344
 Scenario: [56599] Pesticide Data - EPA Expiration date validation (Kentucky - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -221,6 +230,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21346
 Scenario: [56600] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -249,6 +259,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21347
 Scenario: [56601] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -277,6 +288,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21348
 Scenario: [56602] Pesticide Data - EPA Expiration date validation (Louisiana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -301,6 +313,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56602
 
 # Assigned to Barrett, Beverly
+@TReVorId:21350
 Scenario: [56603] Pesticide Data - EPA Expiration date validation (Minnesota - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -325,6 +338,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56603
 
 # Assigned to Barrett, Beverly
+@TReVorId:21357
 Scenario: [56604] Pesticide Data - EPA Expiration date validation (Missouri -Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -349,6 +363,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56604
 
 # Assigned to Barrett, Beverly
+@TReVorId:21358
 Scenario: [56605] Pesticide Data - EPA Expiration date validation (Mississippi - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -373,6 +388,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56605
 
 # Assigned to Barrett, Beverly
+@TReVorId:21359
 Scenario: [56606] Pesticide Data - EPA Expiration date validation (Montana - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -397,6 +413,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56606
 
 # Assigned to Barrett, Beverly
+@TReVorId:21360
 Scenario: [56607] Pesticide Data - EPA Expiration date validation (North Carloina - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -421,6 +438,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56607
 
 # Assigned to Barrett, Beverly
+@TReVorId:21361
 Scenario: [56608] Pesticide Data - EPA Expiration date validation (Nebraska - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -445,6 +463,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56608
 
 # Assigned to Barrett, Beverly
+@TReVorId:21362
 Scenario: [56609] Pesticide Data - EPA Expiration date validation (New Hampshire - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -469,6 +488,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56609
 
 # Assigned to Barrett, Beverly
+@TReVorId:21363
 Scenario: [56610] Pesticide Data - EPA Expiration date validation (New Jersey - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -493,6 +513,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56610
 
 # Assigned to Barrett, Beverly
+@TReVorId:21433
 Scenario: [56611] Pesticide Data - EPA Expiration date validation (New Mexico - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -517,6 +538,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56611
 
 # Assigned to Barrett, Beverly
+@TReVorId:21434
 Scenario: [56612] Pesticide Data - EPA Expiration date validation (Nevada - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -541,6 +563,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56612
 
 # Assigned to Barrett, Beverly
+@TReVorId:21435
 Scenario: [56613] Pesticide Data - EPA Expiration date validation (Oregon - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -565,6 +588,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56613
 
 # Assigned to Barrett, Beverly
+@TReVorId:21436
 Scenario: [56614] Pesticide Data - EPA Expiration date validation (Pennsylvania - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -589,6 +613,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56614
 
 # Assigned to Barrett, Beverly
+@TReVorId:21437
 Scenario: [56615] Pesticide Data - EPA Expiration date validation (Virginia - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -613,6 +638,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56615
 
 # Assigned to Barrett, Beverly
+@TReVorId:21438
 Scenario: [56616] Pesticide Data - EPA Expiration date validation (Wisconsin - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -637,6 +663,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56616
 
 # Assigned to Barrett, Beverly
+@TReVorId:21439
 Scenario: [56617] Pesticide Data - EPA Expiration date validation (West Virginia - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -661,6 +688,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56617
 
 # Assigned to Barrett, Beverly
+@TReVorId:21440
 Scenario: [56618] Pesticide Data - EPA Expiration date validation (Wyoming - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -685,6 +713,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56618
 
 # Assigned to Barrett, Beverly
+@TReVorId:21441
 Scenario: [56619] Pesticide Data - EPA Expiration date validation (Washington DC - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -709,6 +738,7 @@ And I navigate to the home page
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56619
 
 # Assigned to Barrett, Beverly
+@TReVorId:21442
 Scenario: [56621] Pesticide Data - EPA Expiration date validation (South Dakota - June 30th no more than 2 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -743,6 +773,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21448
 Scenario: [56622] Pesticide Data - EPA Expiration date validation (Rhode Island - Nov 30th for current year, until Sept 1st, then Nov 30th of this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -772,6 +803,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21455
 Scenario: [56624] Pesticide Data - EPA Expiration date validation (Vermont - Nov 30th for current year, until Sept 1st, then Nov 30th of this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -798,6 +830,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21456
 Scenario: [56625] Pesticide Data - EPA Expiration date validation (South Carolina - Aug 31st until June 1st then Aug 31st for this or next year)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -830,6 +863,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21500
 Scenario: [56627] Pesticide Data - EPA Expiration date validation (North Dakota - December 31st no more than 2 years out but must be ODD number)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -874,6 +908,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21501
 Scenario: [56629] Pesticide Data - EPA Expiration date validation (Florida - December 31st no more than 2 years out but must be EVEN number)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -917,6 +952,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21502
 Scenario: [56635] Pesticide Data - EPA Expiration date validation (Arizona - Dec 31st no more than 2 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -958,6 +994,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21503
 Scenario: [56636] Pesticide Data - EPA Expiration date validation (Illinois - Dec 31st no more than 2 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -998,6 +1035,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21504
 Scenario: [56637] Pesticide Data - EPA Expiration date validation (Hawaii - Dec 31st no more than 3 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1049,6 +1087,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21505
 Scenario: [56639] Pesticide Data - EPA Expiration date validation (Connecticut - Dec 31st no more than 5 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1122,6 +1161,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21506
 Scenario: [56640] Pesticide Data - EPA Expiration date validation (Alabama - only the year is checked - no more than 2 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1155,6 +1195,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21507
 Scenario: [56641] Pesticide Data - EPA Expiration date validation (New York - only the year is checked - no more than 2 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1188,6 +1229,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21508
 Scenario: [56642] Pesticide Data - EPA Expiration date validation (Washington - only the year is checked - no more than 2 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1221,6 +1263,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21509
 Scenario: [56644] Pesticide Data - EPA Expiration date validation (Washington - only the year is checked - no more than 2 years out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1255,6 +1298,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21791
 Scenario: [56653] Pesticide Data - EPA Expiration date validation (Michigan - June 30th no more than 1 year out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1284,6 +1328,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21792
 Scenario: [56654] Pesticide Data - EPA Expiration date validation (Ohio - June 30th no more than 1 year out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1313,6 +1358,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21793
 Scenario: [56655] Pesticide Data - EPA Expiration date validation (Tennessee - June 30th no more than 1 year out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1342,6 +1388,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21794
 Scenario: [56656] Pesticide Data - EPA Expiration date validation (Tennessee - June 30th no more than 1 year out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1371,6 +1418,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21843
 Scenario: [56645] Pesticide Data - EPA Expiration date validation (Oklahoma - March 31st, June 30th, Sept 30th or December 31st no more than 1 year out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -1455,6 +1503,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides\EPA State Expiry Date Validation
+@TReVorId:21910
 Scenario: [56646] Pesticide Data - EPA Expiration date validation (Texas - March 31st, June 30th, Sept 30th or December 31st no more than 2 year out)
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

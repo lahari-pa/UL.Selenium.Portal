@@ -95,23 +95,25 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31352] Additional Product Information - navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20281")]
         public virtual void _31352AdditionalProductInformation_Navigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31352] Additional Product Information - navigation", null, ((string[])(null)));
-#line 16
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31352] Additional Product Information - navigation", null, new string[] {
+                        "TReVorId:20281"});
+#line 17
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 17
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 20
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 20
+#line 21
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Deodorant - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
+#line 22
 testRunner.Then("I save the product information as: TestCase31352", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -132,22 +134,22 @@ testRunner.Then("I save the product information as: TestCase31352", ((string)(nu
                         "66",
                         "Closed cup method",
                         "Appreciable"});
-#line 22
+#line 23
 testRunner.Given("I call Shared Step 74760 (Product Characteristics - Select Liquid as primary phys" +
                     "ical state and enter all required data)", ((string)(null)), table1, "Given ");
-#line 25
-testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 26
-testRunner.And("I should see following statement: Select countries the product may be sold in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
+testRunner.And("I should see following statement: Select countries the product may be sold in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
 testRunner.And("I should see following statement: Product has been classified using OSHA (US) Glo" +
                     "bally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Stand" +
                     "ards (Canada)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
+#line 29
 testRunner.And("I should see following statement: Product is shipped directly by supplier to the " +
                     "consumer. Retailer sells online and does not ship, or otherwise distribute, the " +
                     "product to the consumer. Retailer may accept product for returns.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
+#line 30
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31352", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -156,23 +158,25 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31359] Additional Product Information - validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20282")]
         public virtual void _31359AdditionalProductInformation_Validation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31359] Additional Product Information - validation", null, ((string[])(null)));
-#line 32
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31359] Additional Product Information - validation", null, new string[] {
+                        "TReVorId:20282"});
+#line 34
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 33
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 34
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 35
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 36
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 37
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 38
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Deodorant - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 37
+#line 39
 testRunner.Then("I save the product information as: TestCase31359", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -193,18 +197,18 @@ testRunner.Then("I save the product information as: TestCase31359", ((string)(nu
                         "66",
                         "Closed cup method",
                         "Appreciable"});
-#line 38
+#line 40
 testRunner.Given("I call Shared Step 74760 (Product Characteristics - Select Liquid as primary phys" +
                     "ical state and enter all required data)", ((string)(null)), table2, "Given ");
-#line 41
+#line 43
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 42
+#line 44
 testRunner.And("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) u" +
                     "nder 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) should be showing th" +
                     "e error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 45
 testRunner.And(@"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
+#line 46
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31359", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -213,43 +217,45 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[85242] Additional Product Information with marketed child question- navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20283")]
         public virtual void _85242AdditionalProductInformationWithMarketedChildQuestion_Navigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85242] Additional Product Information with marketed child question- navigation", null, ((string[])(null)));
-#line 47
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85242] Additional Product Information with marketed child question- navigation", null, new string[] {
+                        "TReVorId:20283"});
+#line 50
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 48
+#line 51
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 49
+#line 52
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 50
+#line 53
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
+#line 54
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
+#line 55
 testRunner.Then("I save the product information as: TestCase85242", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 53
+#line 56
 testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 54
+#line 57
 testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 58
 testRunner.And("I should see following statement: Select countries the product may be sold in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 59
 testRunner.And("I should see following statement: Product is marketed for use by, or on, a child " +
                     "(US is 12 and under; Canada is 14 and under)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
+#line 60
 testRunner.And("I should see following statement: Product has been classified using OSHA (US) Glo" +
                     "bally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Stand" +
                     "ards (Canada)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
+#line 61
 testRunner.And("I should see following statement: Product is shipped directly by supplier to the " +
                     "consumer. Retailer sells online and does not ship, or otherwise distribute, the " +
                     "product to the consumer. Retailer may accept product for returns.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 59
+#line 62
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase85242", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -258,39 +264,41 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[85244] Additional Product Information with marketed child question- validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20284")]
         public virtual void _85244AdditionalProductInformationWithMarketedChildQuestion_Validation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85244] Additional Product Information with marketed child question- validation", null, ((string[])(null)));
-#line 62
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85244] Additional Product Information with marketed child question- validation", null, new string[] {
+                        "TReVorId:20284"});
+#line 66
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 63
+#line 67
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
+#line 68
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 65
+#line 69
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 66
+#line 70
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 67
+#line 71
 testRunner.Then("I save the product information as: TestCase85244", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 68
+#line 72
 testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 69
+#line 73
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 70
+#line 74
 testRunner.And("Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 " +
                     "and under) should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
+#line 75
 testRunner.And("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) u" +
                     "nder 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) should be showing th" +
                     "e error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 72
+#line 76
 testRunner.And(@"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 73
+#line 77
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase85244", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -299,30 +307,32 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[85367] Which one best describes your product question- navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21302")]
         public virtual void _85367WhichOneBestDescribesYourProductQuestion_Navigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85367] Which one best describes your product question- navigation", null, ((string[])(null)));
-#line 76
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85367] Which one best describes your product question- navigation", null, new string[] {
+                        "TReVorId:21302"});
+#line 81
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 77
+#line 82
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 78
+#line 83
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 79
+#line 84
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 80
+#line 85
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 81
+#line 86
 testRunner.Then("I save the product information as: TestCase85367", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 82
+#line 87
 testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
                     "Solid - State&Subcat - Mixed&Water -random - Continue - HP)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 83
+#line 88
 testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 89
 testRunner.And("I should see following statement: Which one best describes your product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -335,19 +345,19 @@ testRunner.And("I should see following statement: Which one best describes your 
                             "ehydrates plants for control of growth"});
             table3.AddRow(new string[] {
                         "Product is not considered a pesticide product"});
-#line 85
-testRunner.And("I should see the following radio buttons:", ((string)(null)), table3, "And ");
 #line 90
+testRunner.And("I should see the following radio buttons:", ((string)(null)), table3, "And ");
+#line 95
 testRunner.And("I should see following statement: Select countries the product may be sold in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
+#line 96
 testRunner.And("I should see following statement: Product has been classified using OSHA (US) Glo" +
                     "bally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Stand" +
                     "ards (Canada)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
+#line 97
 testRunner.And("I should see following statement: Product is shipped directly by supplier to the " +
                     "consumer. Retailer sells online and does not ship, or otherwise distribute, the " +
                     "product to the consumer. Retailer may accept product for returns.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 93
+#line 98
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase85367", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -356,39 +366,41 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[85368] Which one best describes your product question- validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21303")]
         public virtual void _85368WhichOneBestDescribesYourProductQuestion_Validation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85368] Which one best describes your product question- validation", null, ((string[])(null)));
-#line 96
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85368] Which one best describes your product question- validation", null, new string[] {
+                        "TReVorId:21303"});
+#line 102
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 97
+#line 103
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 98
+#line 104
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 99
+#line 105
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 100
+#line 106
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 101
+#line 107
 testRunner.Then("I save the product information as: TestCase85368", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 102
+#line 108
 testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than one state - select " +
                     "Solid - State&Subcat - Mixed&Water -random - Continue - HP)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 103
+#line 109
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 104
+#line 110
 testRunner.And("Which one best describes your product should be showing the error messages: This " +
                     "is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 105
+#line 111
 testRunner.And("Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) u" +
                     "nder 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) should be showing th" +
                     "e error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 106
+#line 112
 testRunner.And(@"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 107
+#line 113
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase85368", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -397,23 +409,25 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[85488] Private Label and Goods Not for Resale question - navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21304")]
         public virtual void _85488PrivateLabelAndGoodsNotForResaleQuestion_Navigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85488] Private Label and Goods Not for Resale question - navigation", null, ((string[])(null)));
-#line 110
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85488] Private Label and Goods Not for Resale question - navigation", null, new string[] {
+                        "TReVorId:21304"});
+#line 117
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 111
+#line 118
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 112
+#line 119
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 113
+#line 120
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 114
+#line 121
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Deodorant - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 115
+#line 122
 testRunner.Then("I save the product information as: TestCase85488", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -434,19 +448,19 @@ testRunner.Then("I save the product information as: TestCase85488", ((string)(nu
                         "66",
                         "Closed cup method",
                         "Appreciable"});
-#line 116
+#line 123
 testRunner.Given("I call Shared Step 74760 (Product Characteristics - Select Liquid as primary phys" +
                     "ical state and enter all required data)", ((string)(null)), table4, "Given ");
-#line 119
+#line 126
 testRunner.And("I set the Product has been classified using OSHA (US) option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 120
+#line 127
 testRunner.And("I set the Product is shipped directly by supplier to the consumer option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 121
+#line 128
 testRunner.And("I should see following statement: Product is a Retailer\'s Private Label or Brand", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 122
+#line 129
 testRunner.And("I should see following statement: Product is sold to the Retailer solely for the " +
                     "Retailer\'s use and is not sold to the Consumer (Goods Not for Resale)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 123
+#line 130
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase85488", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -455,23 +469,25 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[85489] Private Label and Goods Not for Resale question - validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21305")]
         public virtual void _85489PrivateLabelAndGoodsNotForResaleQuestion_Validation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85489] Private Label and Goods Not for Resale question - validation", null, ((string[])(null)));
-#line 127
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85489] Private Label and Goods Not for Resale question - validation", null, new string[] {
+                        "TReVorId:21305"});
+#line 135
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 128
+#line 136
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 129
+#line 137
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 130
+#line 138
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 131
+#line 139
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Deodorant - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 132
+#line 140
 testRunner.Then("I save the product information as: TestCase85489", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -492,23 +508,23 @@ testRunner.Then("I save the product information as: TestCase85489", ((string)(nu
                         "66",
                         "Closed cup method",
                         "Appreciable"});
-#line 133
+#line 141
 testRunner.Given("I call Shared Step 74760 (Product Characteristics - Select Liquid as primary phys" +
                     "ical state and enter all required data)", ((string)(null)), table5, "Given ");
-#line 136
+#line 144
 testRunner.And("I set the Product has been classified using OSHA (US) option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 137
+#line 145
 testRunner.And("I set the Product is shipped directly by supplier to the consumer option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 138
+#line 146
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 139
+#line 147
 testRunner.And("Product is a Retailer\'s Private Label or Brand should be showing the error messag" +
                     "es: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 140
+#line 148
 testRunner.And("Product is sold to the Retailer solely for the Retailer\'s use and is not sold to " +
                     "the Consumer (Goods Not for Resale) should be showing the error messages: This i" +
                     "s a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 141
+#line 149
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase85489", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden

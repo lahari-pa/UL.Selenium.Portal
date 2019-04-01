@@ -1,4 +1,4 @@
-﻿@wercsmart
+@wercsmart
 @Login
 @UlSolutionCenter
 @Homepage
@@ -19,6 +19,7 @@
 
 Feature: UL Solution Center
 
+@TReVorId:19010
 Scenario: [59654] UL Solution Center shows when expanded menu item is clicked
 
 Given I login as the administrator
@@ -33,6 +34,7 @@ Given I click the UL Solution Center link in the expanded navigation side menu
 
 Then I confirm that the UL Solution Center page is loaded
 
+@TReVorId:19011
 Scenario: [59655] UL Solution Center shows correct entries
 
 Given I login as the administrator
@@ -52,6 +54,7 @@ Then I confirm the following sections are displayed in the UL Solution Center pa
 | UL Secure Connect (ULSC) |
 | ULGHS                    |
 
+@TReVorId:19012
 Scenario: [81288] UL Solution Center shows correct entries - ECOLOGO section
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -76,6 +79,7 @@ And I close the window that opened
 
 Then I confirm that the UL Solution Center page is loaded
 
+@TReVorId:19013
 Scenario: [59657] UL Solution Center shows correct entries - Prospector section
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -99,6 +103,7 @@ And I close the window that opened
 
 Then I confirm that the UL Solution Center page is loaded
 
+@TReVorId:19014
 Scenario: [59658] UL Solution Center shows correct entries - GOODGUIDE for CONSUMERS section
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -121,6 +126,7 @@ And I close the window that opened
 
 Then I confirm that the UL Solution Center page is loaded
 
+@TReVorId:19015
 Scenario: [59659] UL Solution Center shows correct entries - GOODGUIDE FOR SUPPLIERS section
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -145,6 +151,7 @@ Then I check that the current URL contains: https://choosegoodguide.com/
 
 #Then I confirm that the UL Solution Center page is loaded
 
+@TReVorId:19016
 Scenario: [59660] UL Solution Center shows correct entries - UL Secure Connect section
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -167,6 +174,7 @@ And I close the window that opened
 
 Then I confirm that the UL Solution Center page is loaded
 
+@TReVorId:19017
 Scenario: [59661] UL Solution Center shows correct entries - ULGHS section
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

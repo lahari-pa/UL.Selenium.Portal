@@ -105,138 +105,140 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[53069] Signup - Account Creation - Happy Path")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7943")]
         public virtual void _53069Signup_AccountCreation_HappyPath()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[53069] Signup - Account Creation - Happy Path", null, ((string[])(null)));
-#line 20
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[53069] Signup - Account Creation - Happy Path", null, new string[] {
+                        "TReVorId:7943"});
+#line 21
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 17
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table592 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "Email",
                         "User_<random>"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "Country",
                         "UNITED STATES"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "FirstName",
                         "Richard"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "LastName",
                         "Smith"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "Password",
                         "Pa4*ytuufnn"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "Address1",
                         "Address 1"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "Address2",
                         "Address 2"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "City",
                         "City Name"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "State",
                         "Florida"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "Zip",
                         "999"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "CompanyName",
                         "Wercs QA Automated test"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "CompanyPhone",
                         "123-456-7889"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "EmergencyPhoneNumber",
                         "123-456-7789"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "SupplierType",
                         "Manufacturer"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "PhoneQuestion",
                         "PhoneQuestion"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "PhoneHint",
                         "PhoneHint"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "MentorQuestion",
                         "MentorQuestion"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "MentorHint",
                         "MentorHint"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "FriendHint",
                         "FriendHint"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "AnimalQuestion",
                         "AnimalQuestion"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "AnimalHint",
                         "AnimalHint"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "CollegeQuestion",
                         "CollegeQuestion"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "CollegeHint",
                         "CollegeHint"});
-            table1.AddRow(new string[] {
+            table592.AddRow(new string[] {
                         "Pin",
                         "1234"});
-#line 21
-testRunner.Given("I define the user: SignupUser with the following parameters:", ((string)(null)), table1, "Given ");
-#line 48
-testRunner.Given("I save the current emails in the inbox for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 22
+testRunner.Given("I define the user: SignupUser with the following parameters:", ((string)(null)), table592, "Given ");
 #line 49
-testRunner.Given("I click on the New to WERCSmart Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I save the current emails in the inbox for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 50
-testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click on the New to WERCSmart Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 51
-testRunner.Given("I enter signup email for user: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 52
-testRunner.And("I confirm signup email for user: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I enter signup email for user: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 53
-testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm signup email for user: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 54
-testRunner.Then("the signup thank you page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 55
+testRunner.Then("the signup thank you page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 56
 testRunner.Then("there should be a new email for user: SignupUser from: <SiteNotification> with th" +
                     "e title: Link to create WERCSmart Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 56
-testRunner.Then("the email should contain a link to set up the WERCSmart account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 57
-testRunner.When("I click on the link I should see the WERCSmart new account page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("the email should contain a link to set up the WERCSmart account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 58
-testRunner.And("I enter the information into the new user form for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.When("I click on the link I should see the WERCSmart new account page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 59
-testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I enter the information into the new user form for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 60
-testRunner.Then("I should be on the Security Questions page of the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
+testRunner.Then("I should be on the Security Questions page of the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 62
 testRunner.And("I enter the following into the Security Questions window for user saved as: Signu" +
                     "pUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
-testRunner.And("I enter the pin for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
-testRunner.When("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And("I enter the pin for user saved as: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 64
-testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.When("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 65
-testRunner.Given("I login as user: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 66
-testRunner.Given("If terms of use page appears I accept", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I login as user: SignupUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 67
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("If terms of use page appears I accept", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 68
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 69
 testRunner.Then("I should see username for user saved as: SignupUser in the right corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -244,74 +246,78 @@ testRunner.Then("I should see username for user saved as: SignupUser in the righ
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[52998] Signup - Emails Do Not Match")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7941")]
         public virtual void _52998Signup_EmailsDoNotMatch()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52998] Signup - Emails Do Not Match", null, ((string[])(null)));
-#line 71
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52998] Signup - Emails Do Not Match", null, new string[] {
+                        "TReVorId:7941"});
+#line 73
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 17
 this.FeatureBackground();
-#line 72
-testRunner.Given("I click on the New to WERCSmart Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 73
-testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 74
-testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Error text"});
-            table2.AddRow(new string[] {
-                        "This is a required field."});
+testRunner.Given("I click on the New to WERCSmart Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 75
-testRunner.Then("Under the Enter Email text box the following errors should appear", ((string)(null)), table2, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Error text"});
-            table3.AddRow(new string[] {
-                        "This is a required field."});
-#line 78
-testRunner.Then("Under the Confirm Email text box the following errors should appear", ((string)(null)), table3, "Then ");
-#line 81
-testRunner.Given("I enter signup email: AnyOldUser@fake.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 82
-testRunner.And("I confirm signup email: Different@fake.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 76
 testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table593 = new TechTalk.SpecFlow.Table(new string[] {
                         "Error text"});
-            table4.AddRow(new string[] {
-                        "Email and confirm email fields do not match"});
+            table593.AddRow(new string[] {
+                        "This is a required field."});
+#line 77
+testRunner.Then("Under the Enter Email text box the following errors should appear", ((string)(null)), table593, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table594 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Error text"});
+            table594.AddRow(new string[] {
+                        "This is a required field."});
+#line 80
+testRunner.Then("Under the Confirm Email text box the following errors should appear", ((string)(null)), table594, "Then ");
+#line 83
+testRunner.Given("I enter signup email: AnyOldUser@fake.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 84
-testRunner.Then("Under the Enter Email text box the following errors should appear", ((string)(null)), table4, "Then ");
+testRunner.And("I confirm signup email: Different@fake.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 85
+testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table595 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Error text"});
+            table595.AddRow(new string[] {
+                        "Email and confirm email fields do not match"});
+#line 86
+testRunner.Then("Under the Enter Email text box the following errors should appear", ((string)(null)), table595, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[53000] Signup - Copy and Paste Email Address")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7942")]
         public virtual void _53000Signup_CopyAndPasteEmailAddress()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[53000] Signup - Copy and Paste Email Address", null, ((string[])(null)));
-#line 89
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[53000] Signup - Copy and Paste Email Address", null, new string[] {
+                        "TReVorId:7942"});
+#line 92
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 17
 this.FeatureBackground();
-#line 90
-testRunner.Given("I click on the New to WERCSmart Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 91
-testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 92
-testRunner.Given("I enter signup email: AnyOldUser@fake.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 93
-testRunner.Given("I copy the current value of the signup email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on the New to WERCSmart Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 94
-testRunner.When("I paste into confirm email: AnyOldUser@fake.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 95
-testRunner.Then("I should see popup error: You cannot paste text into this textbox!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I enter signup email: AnyOldUser@fake.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 96
+testRunner.Given("I copy the current value of the signup email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 97
+testRunner.When("I paste into confirm email: AnyOldUser@fake.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 98
+testRunner.Then("I should see popup error: You cannot paste text into this textbox!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 99
 testRunner.Given("In the popup error I click on Cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -319,193 +325,195 @@ testRunner.Given("In the popup error I click on Cancel", ((string)(null)), ((Tec
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[57737] New Account - Required fields")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7944")]
         public virtual void _57737NewAccount_RequiredFields()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57737] New Account - Required fields", null, ((string[])(null)));
-#line 98
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57737] New Account - Required fields", null, new string[] {
+                        "TReVorId:7944"});
+#line 102
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 17
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table596 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "Email",
                         "User_<random>"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "Country",
                         "UNITED STATES"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "FirstName",
                         "Richard"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "LastName",
                         "Smith"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "Password",
                         "Pa4*ytuufnn"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "Address1",
                         "Address 1"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "Address2",
                         "Address 2"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "City",
                         "City Name"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "State",
                         "Florida"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "Zip",
                         "999"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "CompanyName",
                         "Company 1"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "CompanyPhone",
                         "123-456-4789"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "EmergencyPhoneNumber",
                         "123-456-4789"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "SupplierType",
                         "Manufacturer"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "PhoneQuestion",
                         "PhoneQuestion"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "PhoneHint",
                         "PhoneHint"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "MentorQuestion",
                         "MentorQuestion"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "MentorHint",
                         "MentorHint"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "FriendHint",
                         "FriendHint"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "AnimalQuestion",
                         "AnimalQuestion"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "AnimalHint",
                         "AnimalHint"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "CollegeQuestion",
                         "CollegeQuestion"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "CollegeHint",
                         "CollegeHint"});
-            table5.AddRow(new string[] {
+            table596.AddRow(new string[] {
                         "Pin",
                         "abcd"});
-#line 99
-testRunner.Given("I define the user: SignupUser2 with the following parameters:", ((string)(null)), table5, "Given ");
-#line 127
-testRunner.Given("I save the current emails in the inbox for user saved as: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 128
-testRunner.Given("I click on the New to WERCSmart Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 129
-testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 130
-testRunner.Given("I enter signup email for user: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 103
+testRunner.Given("I define the user: SignupUser2 with the following parameters:", ((string)(null)), table596, "Given ");
 #line 131
-testRunner.And("I confirm signup email for user: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I save the current emails in the inbox for user saved as: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 132
-testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click on the New to WERCSmart Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 133
-testRunner.Then("the signup thank you page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 134
+testRunner.Given("I enter signup email for user: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 135
+testRunner.And("I confirm signup email for user: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 136
+testRunner.And("I click on submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 137
+testRunner.Then("the signup thank you page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 138
 testRunner.Then("there should be a new email for user: SignupUser2 from: <SiteNotification> with t" +
                     "he title: Link to create WERCSmart Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 135
-testRunner.Then("the email should contain a link to set up the WERCSmart account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 136
-testRunner.When("I click on the link I should see the WERCSmart new account page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 137
-testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 138
-testRunner.Then("I should be on the Account Information page of the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 139
-testRunner.Then("In the Country entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the email should contain a link to set up the WERCSmart account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 140
-testRunner.Then("In the First Name entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("I click on the link I should see the WERCSmart new account page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 141
-testRunner.Then("In the Last Name entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 142
-testRunner.Then("In the Password entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should be on the Account Information page of the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 143
+testRunner.Then("In the Country entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 144
+testRunner.Then("In the First Name entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 145
+testRunner.Then("In the Last Name entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 146
+testRunner.Then("In the Password entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 147
 testRunner.Then("In the Confirm Password entry error I see error message: This is a required field" +
                     ".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 144
-testRunner.Then("In the Address 1 entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 145
-testRunner.Then("In the City entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 146
-testRunner.Then("In the State entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 147
-testRunner.Then("In the Zip entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 148
-testRunner.Then("In the Company entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In the Address 1 entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 149
-testRunner.Then("In the Company Phone entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In the City entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 150
-testRunner.Then("In the Country Code entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In the State entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 151
+testRunner.Then("In the Zip entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 152
+testRunner.Then("In the Company entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 153
+testRunner.Then("In the Company Phone entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 154
+testRunner.Then("In the Country Code entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 155
 testRunner.Then("In the Emergency Phone Number entry error I see error message: This is a required" +
                     " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 152
-testRunner.Then("In the Supplier Type entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 153
-testRunner.And("I enter the information into the new user form for user saved as: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 154
-testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 155
-testRunner.Then("I should be on the Security Questions page of the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 156
-testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("In the Supplier Type entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 157
-testRunner.Then("In the CityQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I enter the information into the new user form for user saved as: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 158
-testRunner.Then("In the CarQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 159
-testRunner.Then("In the FriendQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should be on the Security Questions page of the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 160
-testRunner.Then("In the JobQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 161
-testRunner.Then("In the MascotQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In the CityQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 162
-testRunner.Then("In the PINQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("In the CarQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 163
+testRunner.Then("In the FriendQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 164
+testRunner.Then("In the JobQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 165
+testRunner.Then("In the MascotQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 166
+testRunner.Then("In the PINQuestion entry error I see error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 167
 testRunner.And("I enter the following into the Security Questions window for user saved as: Signu" +
                     "pUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 164
-testRunner.And("I enter the pin for user saved as: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 165
-testRunner.When("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 168
+testRunner.And("I enter the pin for user saved as: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 169
+testRunner.When("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 172
 testRunner.Then("In the PINQuestion entry error I see error message: PIN must be a 4 digit number." +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 169
-testRunner.And("I enter the pin: 1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 170
-testRunner.When("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 171
-testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 172
-testRunner.Given("I login as user: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 173
-testRunner.Given("If terms of use page appears I accept", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I enter the pin: 1234", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 174
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("In the new user form I click on continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 175
+testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 176
+testRunner.Given("I login as user: SignupUser2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 177
+testRunner.Given("If terms of use page appears I accept", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 178
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 179
 testRunner.Then("I should see username for user saved as: SignupUser2 in the right corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

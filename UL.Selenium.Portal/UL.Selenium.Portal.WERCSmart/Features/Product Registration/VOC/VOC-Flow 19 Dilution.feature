@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -12,6 +12,7 @@
 
 Feature: VOC - Flow 19 Dilution - validation of limits (Suite ID: 64747)
 
+@TReVorId:16794
 Scenario: [62730] VOC - Flow 19 - Dilution ration - Sold = 50, Used = 45 limit checking
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -38,6 +39,7 @@ Then in the VOC Summary page I should see the following noneditable statements
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62730
 
 
+@TReVorId:16793
 Scenario: [62728] VOC - Flow 19 - Dilution - Sold = 50, Used = 15 limit checking
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -63,6 +65,7 @@ Then in the VOC Summary page I should see the following noneditable statements
 | Exceeds the limits specified by the Ozone Transport Commission                      |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62728
 
+@TReVorId:16792
 Scenario: [62724] VOC - Flow 19 - Dilution - Sold = 50 Used = 2 - limit checking
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -88,6 +91,7 @@ Then in the VOC Summary page I should see the following noneditable statements
 | Does not exceed the limits specified by the Ozone Transport Commission              |
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62724
 
+@TReVorId:16791
 Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load

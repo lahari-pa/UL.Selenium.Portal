@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -12,6 +12,7 @@
 
 Feature: Flow 6
 
+@TReVorId:21894
 Scenario: [78731] Insecticide - Crawling Bug - Aerosol (RU001005) - 6A
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -71,6 +72,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
 
 
+@TReVorId:21898
 Scenario: [57711] Antifungal - Aerosol (RU000050) - 6A
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

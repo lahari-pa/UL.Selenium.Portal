@@ -86,18 +86,20 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[66635] Left hand navigation - Shopping Cart navigation - Products")]
         [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:16744")]
         public virtual void _66635LeftHandNavigation_ShoppingCartNavigation_Products()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[66635] Left hand navigation - Shopping Cart navigation - Products", null, new string[] {
-                        "mytag"});
-#line 16
+                        "mytag",
+                        "TReVorId:16744"});
+#line 17
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 17
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 20
 testRunner.Given("I click the Shopping Cart icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -110,52 +112,52 @@ testRunner.Given("I click the Shopping Cart icon in the Navigation Pane", ((stri
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63323] Remove single product from cart", null, new string[] {
                         "tfs_design"});
-#line 22
+#line 23
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 23
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 24
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 25
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 26
 testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
+#line 27
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 27
-testRunner.Then("I save the product information as: TestCase63323", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 28
+testRunner.Then("I save the product information as: TestCase63323", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 29
 testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
+#line 31
 testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table1.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Propane",
                         "100",
                         "false",
                         "false",
                         ""});
-#line 31
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table1, "Given ");
-#line 34
+#line 32
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table6, "Given ");
+#line 35
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 35
+#line 36
 testRunner.Given("I call Shared Step 63219 (Retailer Association - Select No Retailer - Click conti" +
                     "nue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 37
 testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 41
+#line 42
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase63323", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -164,25 +166,27 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74837] Shopping Cart navigation with subscription without products")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:18951")]
         public virtual void _74837ShoppingCartNavigationWithSubscriptionWithoutProducts()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74837] Shopping Cart navigation with subscription without products", null, ((string[])(null)));
-#line 43
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74837] Shopping Cart navigation with subscription without products", null, new string[] {
+                        "TReVorId:18951"});
+#line 45
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 45
-testRunner.Given("I log in with the subscription without products account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 47
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I log in with the subscription without products account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 49
-testRunner.Given("I click the Shopping Cart icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 51
-testRunner.Then("I should see the empty shopping cart pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click the Shopping Cart icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 53
-testRunner.And("the Empty Cart pop up message reads: There are no items in the shopping cart.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see the empty shopping cart pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 55
-testRunner.Given("I close the Empty Cart pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("the Empty Cart pop up message reads: There are no items in the shopping cart.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 57
+testRunner.Given("I close the Empty Cart pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 59
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -190,21 +194,23 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74919] Shopping cart navigation with products in cart without subscription")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:18953")]
         public virtual void _74919ShoppingCartNavigationWithProductsInCartWithoutSubscription()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74919] Shopping cart navigation with products in cart without subscription", null, ((string[])(null)));
-#line 60
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74919] Shopping cart navigation with products in cart without subscription", null, new string[] {
+                        "TReVorId:18953"});
+#line 63
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 62
+#line 65
 testRunner.Given("I log in with the without subscription without products account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
+#line 67
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 66
+#line 69
 testRunner.Given("I click the Shopping Cart icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 68
+#line 71
 testRunner.Then("the Subscription Enrollment page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 70
+#line 73
 testRunner.And(@"I see the alert message with text: Subscription enrollment is required to submit your registration for assessment. Please enroll at this time. Once you purchase your subscription, the registration data will transfer for assessment. under Subscription Enrollment", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

@@ -96,264 +96,266 @@ namespace UL.Selenium.Portal.WERCSmart.Features.ProductRegistration.Ingredients
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[80854] Ingredients - Transparency Ratio - Formulated product with 3rd party prod" +
             "uct included in formulation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21355")]
         public virtual void _80854Ingredients_TransparencyRatio_FormulatedProductWith3RdPartyProductIncludedInFormulation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[80854] Ingredients - Transparency Ratio - Formulated product with 3rd party prod" +
-                    "uct included in formulation", null, ((string[])(null)));
-#line 16
+                    "uct included in formulation", null, new string[] {
+                        "TReVorId:21355"});
+#line 17
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 21
+#line 22
 testRunner.Given("I save to context name: TestCase80854Component and value: 1525632", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 23
+#line 24
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
+#line 26
 testRunner.And("I call Shared Step 80780 - My Products - Filter for product - View - Note transpa" +
                     "rency ratio - close summary for product saved as: TestCase80854Component", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
+#line 27
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
+#line 29
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
-testRunner.Then("I save the product information as: TestCase80854", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 30
+testRunner.Then("I save the product information as: TestCase80854", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 31
 testRunner.And("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+#line 32
 testRunner.And("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
+#line 34
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 0 and denominator: 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
+#line 35
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a danger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table319 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "Percentage",
                         "Publicly Disclosed",
                         "Public Name"});
-            table1.AddRow(new string[] {
+            table319.AddRow(new string[] {
                         "WPS SavedAs TestCase80854Component",
                         "15",
                         "Yes",
                         "Undisclosed Ingredient"});
-#line 35
+#line 36
 testRunner.And("I call Shared Step 80822 - Ingredients - Add non-generic - specific component - s" +
-                    "et publicly disclosed and add public name and save ingredient as: Ing808212", ((string)(null)), table1, "And ");
-#line 39
+                    "et publicly disclosed and add public name and save ingredient as: Ing808212", ((string)(null)), table319, "And ");
+#line 40
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 0.375 and denominator: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
+#line 41
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table320 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage",
                         "Publicly Disclosed",
                         "Public Name"});
-            table2.AddRow(new string[] {
+            table320.AddRow(new string[] {
                         "84696-51-5",
                         "Extract, spearmint",
                         "4",
                         "Yes",
                         "Extract, spearmint"});
-#line 43
+#line 44
 testRunner.And("call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly " +
-                    "Disclosed, select public name and save ingredient as: TestCase80854Component2", ((string)(null)), table2, "And ");
-#line 46
+                    "Disclosed, select public name and save ingredient as: TestCase80854Component2", ((string)(null)), table320, "And ");
+#line 47
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 1.375 and denominator: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 48
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a info", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table321 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage",
                         "Publicly Disclosed",
                         "Public Name"});
-            table3.AddRow(new string[] {
+            table321.AddRow(new string[] {
                         "FLAVOR",
                         "072 Springmint",
                         "4",
                         "No",
                         "Undisclosed Ingredient"});
-#line 49
+#line 50
 testRunner.And("I call Shared Step 80824 - Ingredients - Add FLAVOR component, not Publicly Discl" +
-                    "osed and save as TestCase80854Component3", ((string)(null)), table3, "And ");
-#line 52
+                    "osed and save as TestCase80854Component3", ((string)(null)), table321, "And ");
+#line 53
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 1.375 and denominator: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 54
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table322 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage",
                         "Publicly Disclosed",
                         "Public Name"});
-            table4.AddRow(new string[] {
+            table322.AddRow(new string[] {
                         "7732-18-5",
                         "Water",
                         "4",
                         "Yes",
                         "Water"});
-#line 54
+#line 55
 testRunner.And("call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly " +
-                    "Disclosed, select public name and save ingredient as: TestCase80854Component4", ((string)(null)), table4, "And ");
-#line 57
+                    "Disclosed, select public name and save ingredient as: TestCase80854Component4", ((string)(null)), table322, "And ");
+#line 58
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 2.375 and denominator: 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
+#line 59
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a info", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table323 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage",
                         "Publicly Disclosed",
                         "Public Name"});
-            table5.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "144-55-8",
                         "Sodium Bicarbonate",
                         "4",
                         "No",
                         "Baking Soda"});
-#line 60
+#line 61
 testRunner.And("I call Shared Step 80824 - Ingredients - Add FLAVOR component, not Publicly Discl" +
-                    "osed and save as TestCase80854Component5", ((string)(null)), table5, "And ");
-#line 63
+                    "osed and save as TestCase80854Component5", ((string)(null)), table323, "And ");
+#line 64
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 2.375 and denominator: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
+#line 65
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table324 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage",
                         "Publicly Disclosed",
                         "Public Name"});
-            table6.AddRow(new string[] {
+            table324.AddRow(new string[] {
                         "NA751",
                         "Menthol flavoring",
                         "4",
                         "Yes",
                         "Menthol flavoring"});
-#line 65
+#line 66
 testRunner.And("call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly " +
-                    "Disclosed, select public name and save ingredient as: TestCase80854Component6", ((string)(null)), table6, "And ");
-#line 68
+                    "Disclosed, select public name and save ingredient as: TestCase80854Component6", ((string)(null)), table324, "And ");
+#line 69
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 3.375 and denominator: 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
+#line 70
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a info", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table325 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage",
                         "Publicly Disclosed",
                         "Public Name"});
-            table7.AddRow(new string[] {
+            table325.AddRow(new string[] {
                         "RR-38254-7",
                         "FRAGRANCE - CUCUMBER",
                         "4",
                         "Yes",
                         "FRAGRANCE - CUCUMBER"});
-#line 72
+#line 73
 testRunner.And("call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly " +
-                    "Disclosed, select public name and save ingredient as: TestCase80854Component7", ((string)(null)), table7, "And ");
-#line 75
+                    "Disclosed, select public name and save ingredient as: TestCase80854Component7", ((string)(null)), table325, "And ");
+#line 76
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 3.375 and denominator: 7", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
+#line 77
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table326 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage",
                         "Publicly Disclosed",
                         "Public Name"});
-            table8.AddRow(new string[] {
+            table326.AddRow(new string[] {
                         "111-42-2",
                         "Diethanolamine",
                         "4",
                         "No",
                         "Diethanolamine"});
-#line 79
+#line 80
 testRunner.And("I call Shared Step 80824 - Ingredients - Add FLAVOR component, not Publicly Discl" +
-                    "osed and save as TestCase80854Component8", ((string)(null)), table8, "And ");
-#line 82
+                    "osed and save as TestCase80854Component8", ((string)(null)), table326, "And ");
+#line 83
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 3.375 and denominator: 8", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 84
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table327 = new TechTalk.SpecFlow.Table(new string[] {
                         "CASNumber",
                         "ComponentName",
                         "Percentage",
                         "Publicly Disclosed",
                         "Public Name"});
-            table9.AddRow(new string[] {
+            table327.AddRow(new string[] {
                         "26675-46-7",
                         "Isoflurane",
                         "57",
                         "Yes",
                         "Isoflurane"});
-#line 86
+#line 87
 testRunner.And("call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly " +
-                    "Disclosed, select public name and save ingredient as: TestCase80854Component9", ((string)(null)), table9, "And ");
-#line 89
+                    "Disclosed, select public name and save ingredient as: TestCase80854Component9", ((string)(null)), table327, "And ");
+#line 90
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency Score has n" +
                     "umerator: 4.375 and denominator: 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 90
+#line 91
 testRunner.And("In the Ingredients page I confirm the Publicly Disclosed Transparency score is fl" +
                     "agged as a warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
-testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 93
+testRunner.Then("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 94
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 94
+#line 95
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
+#line 96
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 96
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 97
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 98
 testRunner.And("I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for" +
                     " document type: IFRA Certificate (Perfumery Products) and file: C:\\Dependencies\\" +
                     "WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 98
+#line 99
 testRunner.And("I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for" +
                     " document type: GRAS Certificate (Flavor Products) and file: C:\\Dependencies\\WER" +
                     "CSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 99
-testRunner.Then("in the Additional documents page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 100
+testRunner.Then("in the Additional documents page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 101
 testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table328 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -362,7 +364,7 @@ testRunner.Then("in the Optional Reports and Documents Available for Purchase pa
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table10.AddRow(new string[] {
+            table328.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -371,23 +373,23 @@ testRunner.Then("in the Optional Reports and Documents Available for Purchase pa
                         "Odorless",
                         "No data available",
                         "10"});
-#line 101
+#line 102
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table10, "Given ");
-#line 104
-testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "g:", ((string)(null)), table328, "Given ");
 #line 105
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 106
-testRunner.And("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 107
-testRunner.And("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 108
-testRunner.And("I take a screenshot of the ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 109
-testRunner.And("Confirm that transparency ratio is 4.375 / 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I take a screenshot of the ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 110
+testRunner.And("Confirm that transparency ratio is 4.375 / 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 111
 testRunner.And("I close the Data Summary tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

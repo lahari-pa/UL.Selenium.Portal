@@ -1,4 +1,4 @@
-﻿@Login
+@Login
 @Homepage
 @Signup
 @wercsmart
@@ -13,6 +13,7 @@ Feature: VOC
 
 
 @test74626
+@TReVorId:16761
 Scenario: [74626] VOC - Show state collection when state table has a value
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -64,6 +65,7 @@ And I should see the following Voc percent for each state:
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74626
 
+@TReVorId:16746
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -158,6 +160,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
 
+@TReVorId:16752
 Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 # Checking that the test will run correctly by handling extra screens
@@ -294,6 +297,7 @@ And I should see the Data Acceptance Page
 Given I navigate to the home page
 Then I delete the product: TestCase56477
 
+@TReVorId:16754
 Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB and OTC
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -411,6 +415,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
 
+@TReVorId:16757
 Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -543,6 +548,7 @@ And I should see the Data Acceptance Page
 Given I navigate to the home page
 Then I delete the product: TestCase56483
 
+@TReVorId:16759
 Scenario: [56484] VOC - Aero checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
