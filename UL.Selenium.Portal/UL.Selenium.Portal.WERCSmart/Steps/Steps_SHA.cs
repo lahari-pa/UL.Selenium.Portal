@@ -1927,5 +1927,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked close button");
 		}
 
+		[Given(@"I save a product id which is not red or orange and has retailers as (.*)")]
+		public void GivenISaveAProductIdWhichIsNotRedOrOrangeAndHasRetailersAsTestCase(string saveAs)
+		{
+			ScenarioContext.Current.Pending();
+		}
+
+
 	}
 }

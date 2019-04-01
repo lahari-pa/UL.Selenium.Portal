@@ -1387,7 +1387,11 @@ Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: greg@accupackmidwest.comUL and saved id as: myID
 #And I Now we will search for a product to test with - in the shared step below use the Completed Status to search on
 And I call Shared Step 74655 SHA - Search by Supplier ID saved as myID for specific product status: Completed
-And I Make a note of 1 of the products shown for your supplier with a "Completed Status" which has retailers present - which does not show in the red recertification present fontNote:DO NOT select a product which is shown in "orange font" as this will be a Branded Material and WILL NOT HAVE the edit UPC link shown on it.If you do not have a product which shows - use test case 75335 to create a product and process it to completed
+#I Make a note of 1 of the products shown for your supplier with a "Completed Status" which has retailers present -
+#which does not show in the red recertification present fontNote:
+#DO NOT select a product which is shown in "orange font" as this will be a Branded Material
+#and WILL NOT HAVE the edit UPC link shown on it.If you do not have a product which shows - use test case 75335 to create a product and process it to completed
+And I save a product id which is not red or orange and has retailers as TestCase75321
 And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I Click the "Accepted by Retailers" Filter
 And I Confirm the Products shown display the 'Green Color Status' - which is the "Accepted by Retailers"

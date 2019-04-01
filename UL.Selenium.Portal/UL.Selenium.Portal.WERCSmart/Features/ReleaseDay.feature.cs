@@ -2914,102 +2914,103 @@ testRunner.And("I call Shared Step 74654 - SHA manager - Suppliers - Search by e
 #line 1389
 testRunner.And("I call Shared Step 74655 SHA - Search by Supplier ID saved as myID for specific p" +
                     "roduct status: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1390
-testRunner.And(@"I Make a note of 1 of the products shown for your supplier with a ""Completed Status"" which has retailers present - which does not show in the red recertification present fontNote:DO NOT select a product which is shown in ""orange font"" as this will be a Branded Material and WILL NOT HAVE the edit UPC link shown on it.If you do not have a product which shows - use test case 75335 to create a product and process it to completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1391
+#line 1394
+testRunner.And("I save a product id which is not red or orange and has retailers as TestCase75321" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1395
 testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1392
+#line 1396
 testRunner.And("I Click the \"Accepted by Retailers\" Filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1393
+#line 1397
 testRunner.And("I Confirm the Products shown display the \'Green Color Status\' - which is the \"Acc" +
                     "epted by Retailers\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1394
+#line 1398
 testRunner.And("I Enter the \"Product ID\" you noted earlier into the filter area and press the \"EN" +
                     "TER KEY\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1395
+#line 1399
 testRunner.And("[Shared Step 75130 - Bulk Actions - Select Forward Product Registration]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1396
+#line 1400
 testRunner.And("I With the \'Selected Products Tab\' selected by default", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1397
+#line 1401
 testRunner.And("I In the \"Search by WPS ID or Product Name\" start typing the WPS ID or Product Na" +
                     "me of the Product you made a note of earlier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1398
+#line 1402
 testRunner.And("I Confirm the Product is shown for selection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1399
+#line 1403
 testRunner.And("I Select the product by clicking on it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1400
+#line 1404
 testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1401
+#line 1405
 testRunner.And("I Select a \"NEW\" Retailer which you know is not already associated to the product" +
                     " (should not be present on the note you made earlier)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1402
+#line 1406
 testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1403
+#line 1407
 testRunner.And("[Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing d" +
                     "ata and select 1 UPC - Continue]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1404
-testRunner.And("I The \'Product Results Tab\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1405
-testRunner.And("I Confirm that the UPC Number displays the recently selected \"Retailer\"(Step 17)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1406
-testRunner.And("I Confirm that NO Errors display for the Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1407
-testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1408
-testRunner.And("I The \'Review and Submit\' step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I The \'Product Results Tab\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1409
-testRunner.And("I Select the \"All of the above statements are true\" Radio Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm that the UPC Number displays the recently selected \"Retailer\"(Step 17)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1410
-testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm that NO Errors display for the Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1411
-testRunner.And(@"I Confirm the Purchase Summary page is shown with the success message shown"" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  """, ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1412
-testRunner.And("I Click on the \'HOME BUTTON\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I The \'Review and Submit\' step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1413
-testRunner.And("I In SHA Manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Select the \"All of the above statements are true\" Radio Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1414
+testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1415
+testRunner.And(@"I Confirm the Purchase Summary page is shown with the success message shown"" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  """, ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1416
+testRunner.And("I Click on the \'HOME BUTTON\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1417
+testRunner.And("I In SHA Manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1418
 testRunner.And("I In the shared step below search for your product using the WPS ID you noted ear" +
                     "lier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1415
+#line 1419
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
                     "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1416
+#line 1420
 testRunner.And("I Confirm the Product shows a \"Completed Status\" for the Original Retailer(see Cl" +
                     "ients column)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1417
+#line 1421
 testRunner.And("I Confirm the Productshows a \"Submitted Status\" for the recently selected Retaile" +
                     "r (see clients column)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1418
+#line 1422
 testRunner.And("[Shared Step 75309 - SHA > Select Product > UPC List]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1419
+#line 1423
 testRunner.And("I With the SHA Manager Product UPC window open - Click on the \'maximize\' icon to " +
                     "expand the view of the window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1420
+#line 1424
 testRunner.And("I Confirm the recently added Retailer(s)is (are) shown against the UPC you select" +
                     "ed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1421
+#line 1425
 testRunner.And("I Close the SHA Manager Product UPC window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1422
+#line 1426
 testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
                     "uct data for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1423
+#line 1427
 testRunner.And("I In the shared step below search for the Product you are working with", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1424
+#line 1428
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
                     "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1425
+#line 1429
 testRunner.And("I Confirm the Product shows the ORIGINAL RETAILER(s) with a \"Completed Status\" (s" +
                     "ee the Clients column)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1426
+#line 1430
 testRunner.And("I Confirm the Product shows theNEW RETAILER(s) with an \"Accepted Status\" (see the" +
                     " Clients column)Note: if you selected a retailer that does not have a feed assoc" +
                     "iated to it you will see the product in Completed status for this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1427
+#line 1431
 testRunner.And("I In the Shared Step below - Select the Product with the \"Accepted Status\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1428
+#line 1432
 testRunner.And("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
                     " saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1429
+#line 1433
 testRunner.And("I Confirm the Product now shows a \"Completed\" Status in Completed for ALL associa" +
                     "ted Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

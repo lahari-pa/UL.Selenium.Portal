@@ -7476,7 +7476,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsSha.InSupplierManagerPopupIEnterSearchTerm(email);
 
 			TestReport.StartStep("I Select the 'Email' Radio Button");
-			thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-mail");
+			thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-Mail");
 
 			TestReport.StartStep("I click on the search button");
 			thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
@@ -7489,8 +7489,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 74655 SHA - Search by Supplier ID saved as (.) for specific product status: (.*)")]
-		public void GivenICallSharedStep74655SHAManagerSearchBySupplierIDAndStatus(string savedAs, string status)
+
+		[StepDefinition(@"I call Shared Step 74655 SHA - Search by Supplier ID saved as (.*) for specific product status: (.*)")]
+		public void GivenICallSharedStepSHA74655SearchBySupplierIDSavedAsMyIDForSpecificProductStatusCompleted(string savedAs, string status)
 		{
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("Beginning shared step: 74655");

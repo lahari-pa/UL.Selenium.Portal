@@ -43,16 +43,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectSupplierSearchTypeRadio(string radio)
 		{
-			var searchRadios = this.containerElement.FindElements(By.XPath(".//input[@type='radio']"));
-			var matchingRadio =
-				searchRadios.FirstOrDefault(x => x.GetValue().Trim().ToLower().Replace("-", "").Contains(radio));
+			var matchingRadio = this.containerElement.FindElement(By.XPath(".//input[@type='radio'][following-sibling::text()[position()=1][contains(., '" + radio + "')]]"),2);
 			if (matchingRadio == null)
 			{
 				Report.Info("No matching radio has been found");
 				return false;
 			}
 
-			return matchingRadio.TryClick();
+			return matchingRadio.TryCheck();
 		}
 
 		public List<string> GetSupplierIDs()
