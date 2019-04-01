@@ -18,7 +18,6 @@ Given I ensure the Data Consent Tier Sliders are set as follows:
 | 2.1  | Off   |
 | 2.2  | Off   |
 | 4.2  | Off   |
-
 Then I should not be able to edit Tier 1
 And I should be able to edit Tier 2.1
 And I should be able to edit Tier 2.2
