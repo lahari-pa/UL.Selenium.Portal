@@ -2911,11 +2911,9 @@ testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager
 #line 1387
 testRunner.And("I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: gre" +
                     "g@accupackmidwest.comUL and saved id as: myID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 1388
-testRunner.And("I Now we will search for a product to test with - in the shared step below use th" +
-                    "e Completed Status to search on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1389
-testRunner.And("[Shared Step 74655 - SHA - Search by Supplier ID for specific product status]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 74655 SHA - Search by Supplier ID saved as myID for specific p" +
+                    "roduct status: Completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1390
 testRunner.And(@"I Make a note of 1 of the products shown for your supplier with a ""Completed Status"" which has retailers present - which does not show in the red recertification present fontNote:DO NOT select a product which is shown in ""orange font"" as this will be a Branded Material and WILL NOT HAVE the edit UPC link shown on it.If you do not have a product which shows - use test case 75335 to create a product and process it to completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1391
