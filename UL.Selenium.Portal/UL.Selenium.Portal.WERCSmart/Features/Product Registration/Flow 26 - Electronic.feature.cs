@@ -95,61 +95,63 @@ namespace UL.Selenium.Portal.WERCSmart.Features.ProductRegistration
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[60671] Computer (Combination of Monitor + Desktop) - RU001177")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:11617")]
         public virtual void _60671ComputerCombinationOfMonitorDesktop_RU001177()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60671] Computer (Combination of Monitor + Desktop) - RU001177", null, ((string[])(null)));
-#line 17
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60671] Computer (Combination of Monitor + Desktop) - RU001177", null, new string[] {
+                        "TReVorId:11617"});
+#line 18
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 19
+#line 20
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
+#line 22
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 22
+#line 23
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 28
+#line 29
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
+#line 31
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Computer (Combination of Monitor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 32
+#line 33
 testRunner.Then("I save the product information as: TestCase60671", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 34
+#line 35
 testRunner.Given("I call Shared Step 60935 Additional Product Information - US - Direct Ship - Priv" +
                     "ate Label Only", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 37
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table203 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run"});
-            table1.AddRow(new string[] {
+            table203.AddRow(new string[] {
                         "Alkaline",
                         "Panasonic Alkaline battery LR6 AA",
                         "6",
                         "6"});
-#line 42
-testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table1, "Given ");
-#line 46
+#line 43
+testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table203, "Given ");
+#line 47
 testRunner.Given("I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - sele" +
                     "ct No to all - Click Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 48
+#line 49
 testRunner.Given("I call Shared Step 58189 Answer Electronic Equipment questions - With Cathode Ray" +
                     " - No to all", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 50
+#line 51
 testRunner.Given("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
+#line 53
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment T" +
                     "ext", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 54
+#line 55
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Compu" +
                     "ter (Combination of Monitor + Desktop)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 56
+#line 57
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase60671", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden

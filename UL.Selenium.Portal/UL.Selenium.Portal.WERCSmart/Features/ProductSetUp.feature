@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -15,6 +15,7 @@
 
 Feature:  Product set up and process to specific statuses (Suite ID: 75359)
 @Test1
+@TReVorId:18985
 Scenario: [75335] Create a new simple product (Chalk) and submit thru to Completed status (NGHS only)
 Given I login into the WERCSmart Portal - Administrator Role
 Given I generate a random UPC number and save as: UPC75335
@@ -63,6 +64,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75335 and its status is: Completed
 
 @Test2
+@TReVorId:20215
 Scenario: [75142] Create a new simple product (Chalk) and submit thru to SHA - Status = Submitted
 Given I login into the WERCSmart Portal - Administrator Role
 Given I generate a random UPC number and save as: UPC75142
@@ -95,6 +97,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 #Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
 
 @Test3
+@TReVorId:20216
 Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include generic component)- thru to Completed (includes adding WPSxxxxxx component)
 Given I generate a random UPC number and save as: UPC79428
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -160,6 +163,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 @Test4
 @75651
+@TReVorId:21866
 Scenario: [75651] Create a new simple product (Chalk) and submit thru to SHA  - Process to Assigned
 Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 #Given I login into the WERCSmart Portal - Administrator Role
@@ -193,6 +197,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75651 and its status is: Assigned
 
 @Test5
+@TReVorId:20229
 Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic component) - thru to Completed (includes adding WPSxxxxxx component)
 Given I generate a random UPC number and save as: UPC80768
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -244,6 +249,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 #Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80768
 
 @Test6
+@TReVorId:20230
 Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include generic component) - thru to Completed (includes adding WPSxxxxxx component)
 Given I generate a random UPC number and save as: UPC80763
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -304,6 +310,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 #Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80763
 
 @Test7
+@TReVorId:20244
 Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - process to completed
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -358,6 +365,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 #Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase80089
 
 @Test8
+@TReVorId:20257
 Scenario: [84109] Create Electronic - process to Completed (Answering machine, no battery included)
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -397,6 +405,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 #Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84109
 
 @Test9
+@TReVorId:20258
 Scenario: [84511] Electronic Product from Completed status to Recertification
 #If you are using this test case you already have a product you are working with and it is in a Completed status for 1 or more retailers.
 Given I create an electronic product and save it as: TestCase84511
@@ -458,6 +467,7 @@ And I Close the Product Recertification History pop up
 
 @Test10
 @75410
+@TReVorId:20280
 Scenario: [75410] Product from Completed status to Recertification
 Given I create a product and take to completed using Test Case 75335 and save as: TestCase75410
 
@@ -517,6 +527,7 @@ And I Close the Product Recertification History pop up
 #Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase75410
 
 @Test11
+@TReVorId:20299
 Scenario: [84507] Recertification > Process recertification > Process multiple products
 Given I create a product with name: 8450712 and take to completed using Test Case 84108 and save as: TestCase845072
 Given I take a product from completed to recertification using Test Case 75410 saved: TestCase845072
@@ -561,6 +572,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 
 @Test12
+@TReVorId:21307
 Scenario: [85965] Create a new simple product (Chalk) with SOLD = US Only, PL = Yes and submit thru to Completed status (NGHS only)
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I generate a random UPC number and save as: UPC85965
@@ -609,6 +621,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase85965 and its status is: Completed
 
 @Test13
+@TReVorId:21325
 Scenario: [77859] Create a kit  - Direct ship = Yes Retailer not Walmart thru to Submitted status 1
 #For this test case you will need two input products in completed status which have SOLD set to US only
 #and make sure to add any retailer except Walmart as the retailer for these products.
@@ -657,6 +670,7 @@ And I call Shared Step 78799 - WPS PD+ - Product Attributes - Filter for CNTXT
 And In Product Attributes Popup Page I should see 0 results
 
 @Test14
+@TReVorId:21326
 Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing
 Given I generate a random UPC number and save as: UPC80821
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -755,6 +769,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 
 @TFSdesign
 @86187
+@TReVorId:21464
 Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product  - submit thru to Completed status
 #Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 Given I login into the WERCSmart Portal - Canada has all data account
@@ -812,6 +827,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 # NetProjects10\WercsSmart Portal\WERCSmart\Product set up and process to specific statuses
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
 @78864
+@TReVorId:21868
 Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Chalk) and submit thru to Completed status
 #Given I call Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)
 Given I login into the WERCSmart Portal - Canada has all data account
@@ -858,6 +874,7 @@ And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78
 
 
 @85286
+@TReVorId:22063
 Scenario: [85286] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
 #Given I call Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 Given I login into the WERCSmart Portal - Canada has all data account
@@ -902,6 +919,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Submission\Submit and process to Completed\Account has Full Stewardship Data
 
 @78865
+@TReVorId:22070
 Scenario: [78865] Create a new product SOLD = Canada only , PL = No, NR product - submit thru to Completed status (HGHS only)
 Given I login into the WERCSmart Portal - Canada has all data account
 Given I generate a random UPC number and save as: UPC78865
@@ -953,6 +971,7 @@ And In the SHA manager grid I see the WPS ID I have saved as product: TestCase78
 # NetProjects10\WercsSmart Portal\WERCSmart\Canadian Tire - Blue Box Program\New Product Registration\4. Account Canada address(Yes), Package type (Yes), Stewardship (FULL)
 
 @85752
+@TReVorId:22074
 Scenario: [85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = YES, Packaging type IS required
 #Given [Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 Given I login into the WERCSmart Portal - Canada has all data account

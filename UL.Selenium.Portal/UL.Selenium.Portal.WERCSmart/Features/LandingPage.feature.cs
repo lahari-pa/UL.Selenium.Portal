@@ -81,34 +81,36 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[50769] Navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:6874")]
         public virtual void _50769Navigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50769] Navigation", null, ((string[])(null)));
-#line 11
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50769] Navigation", null, new string[] {
+                        "TReVorId:6874"});
+#line 12
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table118 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table1.AddRow(new string[] {
+            table118.AddRow(new string[] {
                         "Manufacturers"});
-            table1.AddRow(new string[] {
+            table118.AddRow(new string[] {
                         "Retailers"});
-            table1.AddRow(new string[] {
+            table118.AddRow(new string[] {
                         "Subscription"});
-#line 12
-testRunner.Then("I should see the following menu options in the header:", ((string)(null)), table1, "Then ");
-#line 17
-testRunner.Given("I select the Manufacturers link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 13
+testRunner.Then("I should see the following menu options in the header:", ((string)(null)), table118, "Then ");
 #line 18
-testRunner.Then("I confirm I am taken to the Manufacturers page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I select the Manufacturers link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
-testRunner.Given("I select the Retailers link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I confirm I am taken to the Manufacturers page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20
-testRunner.Then("I confirm I am taken to the Retailers page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I select the Retailers link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 21
-testRunner.Given("I select the Subscription link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I confirm I am taken to the Retailers page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 22
+testRunner.Given("I select the Subscription link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 23
 testRunner.Then("I confirm I am taken to the Subscription page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -117,20 +119,22 @@ testRunner.Then("I confirm I am taken to the Subscription page", ((string)(null)
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[50770] Sign Up Link")]
         [NUnit.Framework.CategoryAttribute("singlerun")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21932")]
         public virtual void _50770SignUpLink()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50770] Sign Up Link", null, new string[] {
-                        "singlerun"});
-#line 25
+                        "singlerun",
+                        "TReVorId:21932"});
+#line 27
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 26
-testRunner.Given("I select the Sign Up link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 27
-testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 28
-testRunner.And("I click the back button in the browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I select the Sign Up link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29
+testRunner.Then("the signup page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 30
+testRunner.And("I click the back button in the browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
 testRunner.And("the landing page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -138,27 +142,29 @@ testRunner.And("the landing page should load", ((string)(null)), ((TechTalk.Spec
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[59830] TimeOut Feature")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7799")]
         public virtual void _59830TimeOutFeature()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59830] TimeOut Feature", null, ((string[])(null)));
-#line 31
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59830] TimeOut Feature", null, new string[] {
+                        "TReVorId:7799"});
+#line 34
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 32
+#line 35
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 33
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 34
-testRunner.Given("I stay on the homepage with no activity until the inactivity popup appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
-testRunner.Then("Click Yes on the inactivity popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 38
-testRunner.And("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 37
 testRunner.Given("I stay on the homepage with no activity until the inactivity popup appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 39
+testRunner.Then("Click Yes on the inactivity popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 41
+testRunner.And("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
+testRunner.Given("I stay on the homepage with no activity until the inactivity popup appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 44
 testRunner.Then("Click No on the inactivity popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 43
+#line 46
 testRunner.And("the landing page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -167,16 +173,18 @@ testRunner.And("the landing page should load", ((string)(null)), ((TechTalk.Spec
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[50772] Get Started Now Button")]
         [NUnit.Framework.CategoryAttribute("tfsdesign")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:18980")]
         public virtual void _50772GetStartedNowButton()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50772] Get Started Now Button", null, new string[] {
-                        "tfsdesign"});
-#line 47
+                        "tfsdesign",
+                        "TReVorId:18980"});
+#line 51
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 49
+#line 53
 testRunner.Given("I click the Get Started Now link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
+#line 55
 testRunner.Then("the login page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -185,16 +193,18 @@ testRunner.Then("the login page should appear", ((string)(null)), ((TechTalk.Spe
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[50775] Terms of Use")]
         [NUnit.Framework.CategoryAttribute("tfsdesign")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:18981")]
         public virtual void _50775TermsOfUse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50775] Terms of Use", null, new string[] {
-                        "tfsdesign"});
-#line 55
+                        "tfsdesign",
+                        "TReVorId:18981"});
+#line 60
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 57
+#line 62
 testRunner.Given("I click the Terms of Use link in the Landing Page footer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 59
+#line 64
 testRunner.Then("I confirm the WERCSmart Terms of Use page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

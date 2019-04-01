@@ -107,52 +107,54 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[72582] Active Export Report")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:18977")]
         public virtual void _72582ActiveExportReport()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[72582] Active Export Report", null, ((string[])(null)));
-#line 22
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[72582] Active Export Report", null, new string[] {
+                        "TReVorId:18977"});
+#line 23
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 24
+#line 25
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
+#line 27
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 28
+#line 29
 testRunner.Given("I click the My Messages icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
+#line 31
 testRunner.Given("I save the messages in Message Center as messages72582", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 32
+#line 33
 testRunner.Given("I click the Export button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 34
+#line 35
 testRunner.Given("I confirm an excel file is downloaded then close the Report Download popup. I sav" +
                     "e the file as excel72582", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table126 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table1.AddRow(new string[] {
+            table126.AddRow(new string[] {
                         "WPSID"});
-            table1.AddRow(new string[] {
+            table126.AddRow(new string[] {
                         "Product Name"});
-            table1.AddRow(new string[] {
+            table126.AddRow(new string[] {
                         "Type of Alert"});
-            table1.AddRow(new string[] {
+            table126.AddRow(new string[] {
                         "Alert Date"});
-            table1.AddRow(new string[] {
+            table126.AddRow(new string[] {
                         "Subject"});
-            table1.AddRow(new string[] {
+            table126.AddRow(new string[] {
                         "Details"});
-            table1.AddRow(new string[] {
+            table126.AddRow(new string[] {
                         "Status"});
-#line 36
+#line 37
 testRunner.Then("I confirm that the exported excel file saved as: excel72582 contains the followin" +
-                    "g columns:", ((string)(null)), table1, "Then ");
-#line 46
+                    "g columns:", ((string)(null)), table126, "Then ");
+#line 47
 testRunner.Then("I confirm that the text: Active is displayed exclusively under the Status column " +
                     "for file saved as excel72582", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 48
+#line 49
 testRunner.And("I confirm the number of rows in the file saved as excel72582 matches the number o" +
                     "f messages in My Messages saved as messages72582", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
+#line 51
 testRunner.And("I delete the excel file saved as excel72582", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -165,51 +167,51 @@ testRunner.And("I delete the excel file saved as excel72582", ((string)(null)), 
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[72586] Archive Export Report", null, new string[] {
                         "tfs_design"});
-#line 54
+#line 55
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 56
+#line 57
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 58
+#line 59
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 60
+#line 61
 testRunner.Given("I click the My Messages icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 62
+#line 63
 testRunner.Given("I save the messages in Message Center as messages72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
+#line 65
 testRunner.Given("I click the \'Show Archived\' checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 68
+#line 69
 testRunner.Then("I confirm that additional messages were displayed since they were saved as messag" +
                     "es72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 70
+#line 71
 testRunner.Given("I click the Export button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 72
+#line 73
 testRunner.Given("I confirm an excel file is downloaded then close the Report Download popup. I sav" +
                     "e the file as excel72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table127 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table2.AddRow(new string[] {
+            table127.AddRow(new string[] {
                         "WPSID"});
-            table2.AddRow(new string[] {
+            table127.AddRow(new string[] {
                         "Product Name"});
-            table2.AddRow(new string[] {
+            table127.AddRow(new string[] {
                         "Type of Alert"});
-            table2.AddRow(new string[] {
+            table127.AddRow(new string[] {
                         "Alert Date"});
-            table2.AddRow(new string[] {
+            table127.AddRow(new string[] {
                         "Subject"});
-            table2.AddRow(new string[] {
+            table127.AddRow(new string[] {
                         "Details"});
-            table2.AddRow(new string[] {
+            table127.AddRow(new string[] {
                         "Status"});
-#line 74
+#line 75
 testRunner.Then("I confirm that the exported excel file saved as: excel72586 contains the followin" +
-                    "g columns:", ((string)(null)), table2, "Then ");
-#line 84
+                    "g columns:", ((string)(null)), table127, "Then ");
+#line 85
 testRunner.Then("I confirm that the text: Archived is displayed under the Status column for file s" +
                     "aved as excel72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 86
+#line 87
 testRunner.And("I delete the excel file saved as excel72586", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

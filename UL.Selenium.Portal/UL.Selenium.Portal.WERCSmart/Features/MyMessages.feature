@@ -1,4 +1,4 @@
-﻿@wercsmart
+@wercsmart
 @Login
 @UlSolutionCenter
 @Homepage
@@ -19,6 +19,7 @@
 
 Feature: MyMessages
 
+@TReVorId:18977
 Scenario: [72582] Active Export Report
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

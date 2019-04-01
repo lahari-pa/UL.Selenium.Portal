@@ -1,4 +1,4 @@
-﻿@SubEnrollment
+@SubEnrollment
 @LandingPage
 @PaymentMethods
 @Login
@@ -17,6 +17,7 @@ Feature: Sign Up
 Background:
 Given I go to the WERCSmart Log in
 
+@TReVorId:7943
 Scenario: [53069] Signup - Account Creation - Happy Path
 Given I define the user: SignupUser with the following parameters:
 | Field                | Value          |
@@ -68,6 +69,7 @@ Then the WERCSmart homepage should load
 Then I should see username for user saved as: SignupUser in the right corner
 
 #pass - staging 4.10
+@TReVorId:7941
 Scenario: [52998] Signup - Emails Do Not Match
 Given I click on the New to WERCSmart Link
 Then the signup page should appear
@@ -86,6 +88,7 @@ Then Under the Enter Email text box the following errors should appear
 | Email and confirm email fields do not match |
 
 #pass - staging 4.10
+@TReVorId:7942
 Scenario: [53000] Signup - Copy and Paste Email Address
 Given I click on the New to WERCSmart Link
 Then the signup page should appear
@@ -95,6 +98,7 @@ When I paste into confirm email: AnyOldUser@fake.com
 Then I should see popup error: You cannot paste text into this textbox!
 Given In the popup error I click on Cancel
 
+@TReVorId:7944
 Scenario: [57737] New Account - Required fields
 Given I define the user: SignupUser2 with the following parameters:
 | Field                | Value          |

@@ -85,44 +85,46 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[57206] Retailer specific - CVS")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7870")]
         public virtual void _57206RetailerSpecific_CVS()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57206] Retailer specific - CVS", null, ((string[])(null)));
-#line 15
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57206] Retailer specific - CVS", null, new string[] {
+                        "TReVorId:7870"});
+#line 16
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 16
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 17
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 19
-testRunner.When("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20
-testRunner.Then("I confirm that there is a section labeled: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 21
+testRunner.Then("I confirm that there is a section labeled: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 22
 testRunner.And("I confirm that under the pie chart I see the label: % of your product portfolio i" +
                     "s associated with CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
+#line 23
 testRunner.And("I confirm that: CVS requires suppliers of all store branded products to grant Tie" +
                     "r 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 23
-testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
-testRunner.Then("I check that the current URL contains: https://login.ulscm.com/RPUI/cvsportal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 25
+testRunner.Then("I check that the current URL contains: https://login.ulscm.com/RPUI/cvsportal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 26
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
+#line 30
 testRunner.When("I click the Products in Scope button and confirm that an excel file is produced c" +
                     "alled CV_Report_DataUsageTier_<Date>.xlsx and save as CVSExcelFile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 30
-testRunner.And("I confirm the excel file saved as CVSExcelFile can be opened and contains data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
-testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I confirm the excel file saved as CVSExcelFile can be opened and contains data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 32
-testRunner.And("I click the back arrow next to CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click on close in the Report Download dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 33
+testRunner.And("I click the back arrow next to CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 34
 testRunner.Then("I should see the Retail Partners page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -130,35 +132,37 @@ testRunner.Then("I should see the Retail Partners page", ((string)(null)), ((Tec
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[57211] Retailer specific - Costco")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7871")]
         public virtual void _57211RetailerSpecific_Costco()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57211] Retailer specific - Costco", null, ((string[])(null)));
-#line 35
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57211] Retailer specific - Costco", null, new string[] {
+                        "TReVorId:7871"});
+#line 37
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 36
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 37
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 38
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 39
-testRunner.When("I select the retailer: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 40
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 41
+testRunner.When("I select the retailer: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 42
 testRunner.And("I confirm that: Costco requests suppliers of Cleaning, Health & Beauty, Automotiv" +
                     "e Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent. is sh" +
                     "owing under the Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
+#line 43
 testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 42
+#line 44
 testRunner.Then("I check that the current URL contains: https://www.costco.com/sustainability-envi" +
                     "ronment.html", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 43
+#line 45
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 49
 testRunner.Then("I click the Products in Scope button and confirm that an excel file is produced c" +
                     "alled CO_Report_DataUsageTier_<Date>.xlsx and save as CostcoExcelFile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 48
+#line 50
 testRunner.And("I confirm the excel file saved as CostcoExcelFile can be opened and contains data" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -167,30 +171,32 @@ testRunner.And("I confirm the excel file saved as CostcoExcelFile can be opened 
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[57214] Retailer specific - Dollar Tree")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7872")]
         public virtual void _57214RetailerSpecific_DollarTree()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57214] Retailer specific - Dollar Tree", null, ((string[])(null)));
-#line 51
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57214] Retailer specific - Dollar Tree", null, new string[] {
+                        "TReVorId:7872"});
+#line 54
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 52
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 54
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 55
-testRunner.When("I select the retailer: Dollar Tree", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 56
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 57
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 58
+testRunner.When("I select the retailer: Dollar Tree", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 59
 testRunner.And("I confirm that: Dollar Tree requires suppliers of formulated products to grant Ti" +
                     "er 2.1 and Tier 2.2 permissions. is showing under the Data Consent Tiers heading" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
+#line 60
 testRunner.And("I should not see the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
+#line 61
 testRunner.When("I click the Products in Scope button and confirm that an excel file is produced c" +
                     "alled DT_Report_DataUsageTier_<Date>.xlsx and save as DollarTreeExcelFile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 59
+#line 62
 testRunner.And("I confirm the excel file saved as DollarTreeExcelFile can be opened and contains " +
                     "data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -199,29 +205,31 @@ testRunner.And("I confirm the excel file saved as DollarTreeExcelFile can be ope
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[57218] Retailer specific - Family Dollar")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:13887")]
         public virtual void _57218RetailerSpecific_FamilyDollar()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57218] Retailer specific - Family Dollar", null, ((string[])(null)));
-#line 61
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57218] Retailer specific - Family Dollar", null, new string[] {
+                        "TReVorId:13887"});
+#line 65
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 62
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 63
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 64
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 65
-testRunner.When("I select the retailer: Family Dollar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 66
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 67
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 68
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 69
+testRunner.When("I select the retailer: Family Dollar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 70
 testRunner.And("I confirm that: Family Dollar requires suppliers of formulated products to grant " +
                     "Tier 2.1 and Tier 2.2. is showing under the Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
+#line 71
 testRunner.And("I should not see the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 72
 testRunner.When("I click the Products in Scope button and confirm that an excel file is produced c" +
                     "alled FD_Report_DataUsageTiers_<Date>.xlsx and save as FamilyDollarExcelFile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 69
+#line 73
 testRunner.And("I confirm the excel file saved as FamilyDollarExcelFile can be opened and contain" +
                     "s data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -230,35 +238,37 @@ testRunner.And("I confirm the excel file saved as FamilyDollarExcelFile can be o
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[57221] Retailer specific - Target")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7873")]
         public virtual void _57221RetailerSpecific_Target()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57221] Retailer specific - Target", null, ((string[])(null)));
-#line 71
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57221] Retailer specific - Target", null, new string[] {
+                        "TReVorId:7873"});
+#line 76
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 72
+#line 77
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 73
+#line 78
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 74
+#line 79
 testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 75
+#line 80
 testRunner.When("I select the retailer: Target", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 76
+#line 81
 testRunner.And("I confirm that: Target requests suppliers of Cleaning and Health & Beauty product" +
                     "s to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under th" +
                     "e Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
+#line 83
 testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 79
+#line 84
 testRunner.Then("I check that the current URL contains: https://corporate.target.com/corporate-res" +
                     "ponsibility/planet/sustainable-products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 80
+#line 85
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
+#line 87
 testRunner.When("I click the Products in Scope button and confirm that an excel file is produced c" +
                     "alled TG_Report_DataUsageTier_<Date>.xlsx and save as TargetExcelFile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 83
+#line 88
 testRunner.And("I confirm the excel file saved as TargetExcelFile can be opened and contains data" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -267,35 +277,37 @@ testRunner.And("I confirm the excel file saved as TargetExcelFile can be opened 
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[57223] Retailer specific - Walgreens")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7874")]
         public virtual void _57223RetailerSpecific_Walgreens()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57223] Retailer specific - Walgreens", null, ((string[])(null)));
-#line 85
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57223] Retailer specific - Walgreens", null, new string[] {
+                        "TReVorId:7874"});
+#line 91
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 86
+#line 92
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 87
+#line 93
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 88
+#line 94
 testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 89
+#line 95
 testRunner.When("I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 90
+#line 96
 testRunner.And("I confirm that: Walgreens requests suppliers of Cleaning and Health & Beauty prod" +
                     "ucts to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent T" +
                     "iers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
+#line 98
 testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 93
+#line 99
 testRunner.Then("I check that the current URL contains: https://www.walgreens.com/topic/sr/sr_prod" +
                     "uct_integrity_home.jsp", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 94
+#line 100
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 96
+#line 102
 testRunner.When("I click the Products in Scope button and confirm that an excel file is produced c" +
                     "alled WG_Report_DataUsageTier_<Date>.xlsx and save as WalgreensExcelFile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 97
+#line 103
 testRunner.And("I confirm the excel file saved as WalgreensExcelFile can be opened and contains d" +
                     "ata", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -304,33 +316,35 @@ testRunner.And("I confirm the excel file saved as WalgreensExcelFile can be open
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[57225] Retailer specific - Walmart")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7875")]
         public virtual void _57225RetailerSpecific_Walmart()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57225] Retailer specific - Walmart", null, ((string[])(null)));
-#line 99
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57225] Retailer specific - Walmart", null, new string[] {
+                        "TReVorId:7875"});
+#line 106
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 100
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 101
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 102
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 103
-testRunner.When("I select the retailer: Wal-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 104
-testRunner.And(@"I confirm that: Walmart requires suppliers of formulated products in the following categories to grant Tier 2.1 and Tier 2.2 permissions: Cleaning, Health and Beauty, OTC - Over the Counter, Nutritional Supplements, Battery and Battery-containing Products and Lawn and Garden is showing under the Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 106
-testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 107
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 108
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 109
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 110
+testRunner.When("I select the retailer: Wal-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 111
+testRunner.And(@"I confirm that: Walmart requires suppliers of formulated products in the following categories to grant Tier 2.1 and Tier 2.2 permissions: Cleaning, Health and Beauty, OTC - Over the Counter, Nutritional Supplements, Battery and Battery-containing Products and Lawn and Garden is showing under the Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 113
+testRunner.When("I click the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 114
 testRunner.Then("I check that the current URL contains: https://www.walmartsustainabilityhub.com/s" +
                     "ustainable-chemistry", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 108
+#line 115
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 110
+#line 117
 testRunner.When("I click the Products in Scope button and confirm that an excel file is produced c" +
                     "alled WM_Report_DataUsageTier_<Date>.xlsx and save as WalmartExcelFile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 111
+#line 118
 testRunner.And("I confirm the excel file saved as WalmartExcelFile can be opened and contains dat" +
                     "a", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -339,28 +353,30 @@ testRunner.And("I confirm the excel file saved as WalmartExcelFile can be opened
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[57229] Retailer specific - Canadian Tire")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:7876")]
         public virtual void _57229RetailerSpecific_CanadianTire()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57229] Retailer specific - Canadian Tire", null, ((string[])(null)));
-#line 113
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[57229] Retailer specific - Canadian Tire", null, new string[] {
+                        "TReVorId:7876"});
+#line 121
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 115
+#line 123
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 116
+#line 124
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 117
+#line 125
 testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 118
+#line 126
 testRunner.When("I select the retailer: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 119
+#line 127
 testRunner.And("I confirm that: Canadian Tire requires suppliers of formulated products to grant " +
                     "Tier 2.1 and Tier 2.2 permissions. is showing under the Data Consent Tiers headi" +
                     "ng", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 121
+#line 129
 testRunner.When("I click the Products in Scope button and confirm that an excel file is produced c" +
                     "alled CT_Report_DataUsageTier_<Date>.xlsx and save as CanadianTireExcelFile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 122
+#line 130
 testRunner.And("I confirm the excel file saved as CanadianTireExcelFile can be opened and contain" +
                     "s data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -369,21 +385,23 @@ testRunner.And("I confirm the excel file saved as CanadianTireExcelFile can be o
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[69112] Retailer specific - Topco")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:11277")]
         public virtual void _69112RetailerSpecific_Topco()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69112] Retailer specific - Topco", null, ((string[])(null)));
-#line 124
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69112] Retailer specific - Topco", null, new string[] {
+                        "TReVorId:11277"});
+#line 133
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 126
+#line 135
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 127
+#line 136
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 128
+#line 137
 testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 129
+#line 138
 testRunner.When("I select the retailer: TopCo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 130
+#line 139
 testRunner.And("I confirm that: This recipient does not require additional data consent tiers at " +
                     "this time. is showing under the Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -392,51 +410,53 @@ testRunner.And("I confirm that: This recipient does not require additional data 
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74540] Target - Data Tier Warning when not all are selected")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:18955")]
         public virtual void _74540Target_DataTierWarningWhenNotAllAreSelected()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74540] Target - Data Tier Warning when not all are selected", null, ((string[])(null)));
-#line 132
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74540] Target - Data Tier Warning when not all are selected", null, new string[] {
+                        "TReVorId:18955"});
+#line 142
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 134
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 136
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 138
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 140
-testRunner.When("I select the retailer: Target", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 142
-testRunner.Then("the Data Consent Tier: Tier 2.1 should be set to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 144
-testRunner.Given("I toggle the data consent tier: Tier 2.1 to: off", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 146
-testRunner.Given("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 148
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 150
+testRunner.When("I select the retailer: Target", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 152
+testRunner.Then("the Data Consent Tier: Tier 2.1 should be set to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 154
+testRunner.Given("I toggle the data consent tier: Tier 2.1 to: off", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 156
+testRunner.Given("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 158
 testRunner.Given("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table711 = new TechTalk.SpecFlow.Table(new string[] {
                         "Message"});
-            table1.AddRow(new string[] {
+            table711.AddRow(new string[] {
                         "NOTE: Your selection does not meet this retailer\'s request. Target requests suppl" +
                             "iers of Cleaning and Health & Beauty products to grant Tier 2.1, Tier 2.2, Tier " +
                             "3, and Tier 4.1 consent. Target will be notified of your Data Tier selections"});
-            table1.AddRow(new string[] {
+            table711.AddRow(new string[] {
                         @"Revising the Data Use Tier consents you have provided to a retailer will suspend your participation in that retailer’s programs. Product data and reports generated while you consent was in effect will remain available to the retailer, but no further product data or reports will be generated."});
-#line 150
+#line 160
 testRunner.Then("the warning message in the Retail Partners details page should contain the follow" +
-                    "ing:", ((string)(null)), table1, "Then ");
-#line 155
+                    "ing:", ((string)(null)), table711, "Then ");
+#line 165
 testRunner.Given("I toggle the data consent tier: Tier 2.1 to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 157
+#line 167
 testRunner.Given("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 159
+#line 169
 testRunner.Given("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 161
+#line 171
 testRunner.And("I confirm that: Target requests suppliers of Cleaning and Health & Beauty product" +
                     "s to grant Tier 2.1, Tier 2.2, Tier 3, and Tier 4.1 consent. is showing under th" +
                     "e Data Consent Tiers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 163
+#line 173
 testRunner.And("I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -13,6 +13,7 @@
 
 Feature: Regulatory Information 1
 
+@TReVorId:20297
 Scenario: [85492] Regulatory Information 1 - navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -31,6 +32,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@TReVorId:21310
 Scenario: [85693] Regulatory Information 1 - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -49,6 +51,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@TReVorId:21311
 Scenario: [85695] California Proposition 65 - select Yes - navigation 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load

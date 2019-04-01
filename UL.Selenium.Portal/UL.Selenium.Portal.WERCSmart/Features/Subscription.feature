@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -17,6 +17,7 @@
 
 Feature: Subscription
 
+@TReVorId:19117
 Scenario: [63297] Add subscription to a new supplier through data entry
 Given I define the user: 63297 with the following parameters:
 | Field                | Value          |
@@ -313,6 +314,7 @@ Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: 63297
 
 
+@TReVorId:19118
 Scenario: [59245] Add subscription to a new supplier from My account
 Given I go to the WERCSmart Log in
 Given If not already created, I create a user: New_Sub with the following parameters:
@@ -459,6 +461,7 @@ Then In the My Account page I navigate to the Order History page
 Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: New_Sub
 
+@TReVorId:19119
 Scenario: [67822] New subscription to a new supplier from My account - Visual Checks
 #This test requires a new master account in  wercsmart without any subscription
 Given I go to the WERCSmart Log in
@@ -600,6 +603,7 @@ Then I should see Estimated Annual Cost per Product of: $0.00
 Then I should see Proceed button disabled
 
 
+@TReVorId:19120
 Scenario: [79577] PayPal flow through My Account
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load

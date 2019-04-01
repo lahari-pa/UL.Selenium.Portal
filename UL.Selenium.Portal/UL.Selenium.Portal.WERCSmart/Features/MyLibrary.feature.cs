@@ -99,77 +99,81 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[64884] My Library")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:16654")]
         public virtual void _64884MyLibrary()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64884] My Library", null, ((string[])(null)));
-#line 18
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64884] My Library", null, new string[] {
+                        "TReVorId:16654"});
+#line 19
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 20
+#line 21
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 22
+#line 23
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 24
+#line 25
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
+#line 27
 testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table121 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tab"});
-            table1.AddRow(new string[] {
+            table121.AddRow(new string[] {
                         "My Packaging Types"});
-            table1.AddRow(new string[] {
+            table121.AddRow(new string[] {
                         "My Brands"});
-            table1.AddRow(new string[] {
+            table121.AddRow(new string[] {
                         "My Distributors"});
-            table1.AddRow(new string[] {
+            table121.AddRow(new string[] {
                         "My Ingredients"});
-            table1.AddRow(new string[] {
+            table121.AddRow(new string[] {
                         "Contact Information per SDS(s)"});
-#line 28
-testRunner.Then("I should see the following tabs in the My Library page", ((string)(null)), table1, "Then ");
+#line 29
+testRunner.Then("I should see the following tabs in the My Library page", ((string)(null)), table121, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[70535] Add Brand")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:16662")]
         public virtual void _70535AddBrand()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70535] Add Brand", null, ((string[])(null)));
-#line 36
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70535] Add Brand", null, new string[] {
+                        "TReVorId:16662"});
+#line 38
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 38
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 40
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 42
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 44
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 46
-testRunner.Given("I navigate to the My Brands tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 48
-testRunner.Given("I click \'Add New\' in the My Brands section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I navigate to the My Brands tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 50
-testRunner.Given("I enter the Brand Name: NewBrand(TM) in the input field on the expanded row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click \'Add New\' in the My Brands section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 52
+testRunner.Given("I enter the Brand Name: NewBrand(TM) in the input field on the expanded row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
 testRunner.Then("I confirm the \'Active\' input is checked on the expanded row in the My Brands grid" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 54
-testRunner.Given("I click Save on the expanded row in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 56
-testRunner.Then("I confirm the last saved brand appears in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click Save on the expanded row in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 58
+testRunner.Then("I confirm the last saved brand appears in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 60
 testRunner.Then("I confirm that the text \'Yes\' is displayed under the \'Active\' column for the last" +
                     " saved brand", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 60
-testRunner.And("I save the active brands list to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
+testRunner.And("I save the active brands list to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
+#line 66
 testRunner.And("I confirm that only \'Active\' brands saved in My Library - My Brands appear in the" +
                     " \'Product Line or Brand\' drop down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -183,43 +187,43 @@ testRunner.And("I confirm that only \'Active\' brands saved in My Library - My B
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70536] Edit Brand - Deactivate", null, new string[] {
                         "tfs_design"});
-#line 67
+#line 69
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 69
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 71
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 73
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 75
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 77
-testRunner.Given("I navigate to the My Brands tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 79
-testRunner.Given("I click \'Add New\' in the My Brands section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I navigate to the My Brands tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 81
-testRunner.Given("I enter the Brand Name: NewBrand(TM) in the input field on the expanded row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click \'Add New\' in the My Brands section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 83
+testRunner.Given("I enter the Brand Name: NewBrand(TM) in the input field on the expanded row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 85
 testRunner.Then("I confirm the \'Active\' input is checked on the expanded row in the My Brands grid" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 85
-testRunner.Given("I click Save on the expanded row in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 87
-testRunner.Given("I click Edit in the My Brands grid for the last saved brand", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 89
-testRunner.Given("I deselect the \'Active\' checkbox on the expanded row in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 91
 testRunner.Given("I click Save on the expanded row in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 89
+testRunner.Given("I click Edit in the My Brands grid for the last saved brand", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 91
+testRunner.Given("I deselect the \'Active\' checkbox on the expanded row in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 93
+testRunner.Given("I click Save on the expanded row in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 95
 testRunner.Then("I confirm that the text \'No\' is displayed under the \'Active\' column for the last " +
                     "saved brand", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 95
-testRunner.And("I save the active brands list to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 97
+testRunner.And("I save the active brands list to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 99
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 99
+#line 101
 testRunner.And("I confirm that only \'Active\' brands saved in My Library - My Brands appear in the" +
                     " \'Product Line or Brand\' drop down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -228,44 +232,46 @@ testRunner.And("I confirm that only \'Active\' brands saved in My Library - My B
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[70537] Edit Brand - Update Name")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:16665")]
         public virtual void _70537EditBrand_UpdateName()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70537] Edit Brand - Update Name", null, ((string[])(null)));
-#line 101
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70537] Edit Brand - Update Name", null, new string[] {
+                        "TReVorId:16665"});
+#line 104
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 103
+#line 106
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 105
+#line 108
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 107
+#line 110
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 109
+#line 112
 testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 111
+#line 114
 testRunner.Given("I navigate to the My Brands tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 113
+#line 116
 testRunner.Given("I click \'Add New\' in the My Brands section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 115
+#line 118
 testRunner.Given("I enter the Brand Name: NewTestBrand(TM) in the input field on the expanded row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 117
+#line 120
 testRunner.Then("I confirm the \'Active\' input is checked on the expanded row in the My Brands grid" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 119
+#line 122
 testRunner.Given("I click Save on the expanded row in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 121
+#line 124
 testRunner.Given("I click Edit in the My Brands grid for the last saved brand", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 123
+#line 126
 testRunner.Given("I enter the Brand Name: NewTestBrandEdited(TM) in the input field on the expanded" +
                     " row", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 125
+#line 128
 testRunner.Given("I click Save on the expanded row in the My Brands grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 127
+#line 130
 testRunner.And("I save the active brands list to context", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 129
+#line 132
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 131
+#line 134
 testRunner.And("I confirm that only \'Active\' brands saved in My Library - My Brands appear in the" +
                     " \'Product Line or Brand\' drop down", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -274,72 +280,74 @@ testRunner.And("I confirm that only \'Active\' brands saved in My Library - My B
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[70533] Edit Packaging Type")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:16658")]
         public virtual void _70533EditPackagingType()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70533] Edit Packaging Type", null, ((string[])(null)));
-#line 134
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70533] Edit Packaging Type", null, new string[] {
+                        "TReVorId:16658"});
+#line 138
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 136
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 138
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 140
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 142
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 144
-testRunner.Then("I confirm the current active tab on the My Library page is: My Packaging Types", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 146
-testRunner.Given("I click \'Add New\' in the My Packaging Types section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 148
-testRunner.Then("I should see the Packaging Type Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm the current active tab on the My Library page is: My Packaging Types", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 150
-testRunner.Given("I set the Package Type Name field to: Super Packaging Type (TM)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click \'Add New\' in the My Packaging Types section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 152
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I should see the Packaging Type Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 154
-testRunner.Then("I should see the Bill of Materials Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I set the Package Type Name field to: Super Packaging Type (TM)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 156
-testRunner.And("I save the Packaging Type details as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 158
-testRunner.Given("I click Add Row in the Bill Of Materials grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I should see the Bill of Materials Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 160
+testRunner.And("I save the Packaging Type details as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 162
+testRunner.Given("I click Add Row in the Bill Of Materials grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 164
 testRunner.Given("I select the option: Clear Glass for the My Packaging Materials field in the tabl" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 162
+#line 166
 testRunner.Given("I select the option: 250.0 for the My Packaging Weight (grams) field in the table" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 164
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 166
-testRunner.Given("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 168
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 170
+testRunner.Given("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 172
 testRunner.Then("I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packa" +
                     "ging Types grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 170
-testRunner.Given("I edit Packaging Type saved as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 172
-testRunner.Given("I set the Package Type Name field to: Super Packaging Type Edited (TM)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 174
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I edit Packaging Type saved as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 176
-testRunner.And("I save the Packaging Type details as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I set the Package Type Name field to: Super Packaging Type Edited (TM)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 178
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 180
-testRunner.Given("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I save the Packaging Type details as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 182
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 184
+testRunner.Given("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 186
 testRunner.Then("I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packa" +
                     "ging Types grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 184
+#line 188
 testRunner.Given("I delete Packaging Type saved as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 186
+#line 190
 testRunner.Then("I confirm the name and ID for Packaging Type saved as: ThisPackaging appear in th" +
                     "e Delete Product pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 188
+#line 192
 testRunner.Given("I click Delete in the Delete Product pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 190
+#line 194
 testRunner.Then("I confirm that the Packaging Type saved as: ThisPackaging does not appear in the " +
                     "My Packaging Types grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -353,63 +361,63 @@ testRunner.Then("I confirm that the Packaging Type saved as: ThisPackaging does 
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70539] Add an Ingredient (Basic) and remove", null, new string[] {
                         "tfs_design"});
-#line 194
+#line 198
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 196
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 198
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 200
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 202
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 204
-testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 206
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 208
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 210
 testRunner.And("I save the current list of ingredients in My Library to context as: My Library In" +
                     "gredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 208
-testRunner.Given("I enter the text: wat into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 210
-testRunner.And("I select the smart search result with name: Water and CAS: 7732-18-5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 212
-testRunner.And("I save the ingredient I added in My Library to context as: water70539", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I enter the text: wat into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 214
-testRunner.Given("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I select the smart search result with name: Water and CAS: 7732-18-5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 216
-testRunner.Given("I click the WERCSmart logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I save the ingredient I added in My Library to context as: water70539", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 218
+testRunner.Given("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 220
+testRunner.Given("I click the WERCSmart logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 222
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 221
-testRunner.Given("I edit the product with ID: 1470688", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 223
-testRunner.Given("In the New Product page I click tab: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 225
-testRunner.And("in the New Product page I click section: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I edit the product with ID: 1470688", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 227
-testRunner.Given("I click the \'Use My Ingredients\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the New Product page I click tab: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 229
-testRunner.Then("I see the My Ingredients pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("in the New Product page I click section: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 231
+testRunner.Given("I click the \'Use My Ingredients\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 233
+testRunner.Then("I see the My Ingredients pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 235
 testRunner.And("I confirm My Ingredient saved as: water70539 appears in the Use My Ingredients po" +
                     "pup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 233
-testRunner.And("I click OK in the My Ingredients dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 235
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 237
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I click OK in the My Ingredients dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 239
-testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 241
-testRunner.Given("I remove My Ingredient in My Library saved as: water70539", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 243
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 245
+testRunner.Given("I remove My Ingredient in My Library saved as: water70539", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 247
 testRunner.Then("I confirm the component name in the delete product popup matches the ingredient s" +
                     "aved as: water70539", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 245
+#line 249
 testRunner.Given("I click: YES in the \'Remove Component from My Ingredients\' pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 247
+#line 251
 testRunner.Then("I confirm My Ingredient saved as: water70539 in My Library has been removed from " +
                     "the grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -423,65 +431,65 @@ testRunner.Then("I confirm My Ingredient saved as: water70539 in My Library has 
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70556] Add an Ingredient (Trade secret) and remove", null, new string[] {
                         "tfs_design"});
-#line 251
+#line 255
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 253
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 255
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 257
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 259
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 261
-testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 263
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 265
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 267
 testRunner.And("I save the current list of ingredients in My Library to context as: My Library In" +
                     "gredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 265
-testRunner.Given("I enter the text: wat into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 267
-testRunner.And("I select the smart search result with name: Water and CAS: 7732-18-5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 269
-testRunner.And("I save the ingredient I added in My Library to context as: water70556", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I enter the text: wat into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 271
-testRunner.Given("I click the Trade Secret checkbox for My Ingredient saved as: water70556", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I select the smart search result with name: Water and CAS: 7732-18-5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 273
-testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I save the ingredient I added in My Library to context as: water70556", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 275
-testRunner.Given("I click the WERCSmart logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click the Trade Secret checkbox for My Ingredient saved as: water70556", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 277
+testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 279
+testRunner.Given("I click the WERCSmart logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 281
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 280
-testRunner.Given("I edit the product with ID: 1470688", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 282
-testRunner.Given("In the New Product page I click tab: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 284
-testRunner.And("in the New Product page I click section: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I edit the product with ID: 1470688", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 286
-testRunner.Given("I click the \'Use My Ingredients\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the New Product page I click tab: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 288
-testRunner.Then("I see the My Ingredients pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("in the New Product page I click section: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 290
+testRunner.Given("I click the \'Use My Ingredients\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 292
+testRunner.Then("I see the My Ingredients pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 294
 testRunner.And("I confirm My Ingredient saved as: water70556 appears in the Use My Ingredients po" +
                     "pup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 292
-testRunner.And("I click OK in the My Ingredients dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 294
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 296
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I click OK in the My Ingredients dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 298
-testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 300
-testRunner.Given("I remove My Ingredient in My Library saved as: water70556", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 302
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 304
+testRunner.Given("I remove My Ingredient in My Library saved as: water70556", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 306
 testRunner.Then("I confirm the component name in the delete product popup matches the ingredient s" +
                     "aved as: water70556", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 304
+#line 308
 testRunner.Given("I click: YES in the \'Remove Component from My Ingredients\' pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 306
+#line 310
 testRunner.Then("I confirm My Ingredient saved as: water70556 in My Library has been removed from " +
                     "the grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -495,69 +503,69 @@ testRunner.Then("I confirm My Ingredient saved as: water70556 in My Library has 
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70567] Add an Ingredient (Publicly Disclosed) and remove", null, new string[] {
                         "tfs_design"});
-#line 310
+#line 314
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 312
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 314
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 316
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 318
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 320
-testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 322
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 324
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 326
 testRunner.And("I save the current list of ingredients in My Library to context as: My Library In" +
                     "gredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 329
-testRunner.Given("I enter the text: Formald into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 331
-testRunner.And("I select the smart search result with name: Formaldehyde and CAS: 50-00-0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 333
-testRunner.And("I save the ingredient I added in My Library to context as: formaldehyde70567", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I enter the text: Formald into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 335
+testRunner.And("I select the smart search result with name: Formaldehyde and CAS: 50-00-0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 337
+testRunner.And("I save the ingredient I added in My Library to context as: formaldehyde70567", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 339
 testRunner.Given("I click the Publicly Disclosed checkbox for My Ingredient saved as: formaldehyde7" +
                     "0567", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 337
+#line 341
 testRunner.Given("I set the Public Name to be: Formaldehyde solution for My Ingredient saved as: fo" +
                     "rmaldehyde70567", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 339
-testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 341
-testRunner.Given("I click the WERCSmart logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 343
+testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 345
+testRunner.Given("I click the WERCSmart logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 347
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 346
-testRunner.Given("I edit the product with ID: 1470688", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 348
-testRunner.Given("In the New Product page I click tab: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 350
-testRunner.And("in the New Product page I click section: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I edit the product with ID: 1470688", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 352
-testRunner.Given("I click the \'Use My Ingredients\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the New Product page I click tab: Product Characteristics", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 354
-testRunner.Then("I see the My Ingredients pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("in the New Product page I click section: Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 356
+testRunner.Given("I click the \'Use My Ingredients\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 358
+testRunner.Then("I see the My Ingredients pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 360
 testRunner.And("I confirm My Ingredient saved as: formaldehyde70567 appears in the Use My Ingredi" +
                     "ents popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 358
-testRunner.And("I click OK in the My Ingredients dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 360
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 362
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I click OK in the My Ingredients dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 364
-testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 366
-testRunner.Given("I remove My Ingredient in My Library saved as: formaldehyde70567", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 368
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 370
+testRunner.Given("I remove My Ingredient in My Library saved as: formaldehyde70567", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 372
 testRunner.Then("I confirm the component name in the delete product popup matches the ingredient s" +
                     "aved as: formaldehyde70567", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 370
+#line 374
 testRunner.Given("I click: YES in the \'Remove Component from My Ingredients\' pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 372
+#line 376
 testRunner.Then("I confirm My Ingredient saved as: formaldehyde70567 in My Library has been remove" +
                     "d from the grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -571,205 +579,205 @@ testRunner.Then("I confirm My Ingredient saved as: formaldehyde70567 in My Libra
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73329] Edit Ingredient", null, new string[] {
                         "tfs_design"});
-#line 376
+#line 380
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 378
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 380
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 382
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 384
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 386
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 388
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 390
 testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table122 = new TechTalk.SpecFlow.Table(new string[] {
                         "Chemical Name",
                         "CAS"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Sulfuric acid",
                         "7664-93-9"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Cobalt sulfate",
                         "10124-43-3"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Graphene",
                         "1034343-98-0"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Pyrrole-2-carboxylic acid",
                         "634-97-9"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Formaldehyde",
                         "50-00-0"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Polycarbonate",
                         "25037-45-0"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Nitric acid",
                         "7697-37-2"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Cumene",
                         "98-82-8"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Argon",
                         "7440-37-1"});
-            table2.AddRow(new string[] {
+            table122.AddRow(new string[] {
                         "Mica",
                         "12001-26-2"});
-#line 388
+#line 392
 testRunner.Given("I add the following ingredients and save them to context as: My Library New Ingre" +
-                    "dients", ((string)(null)), table2, "Given ");
+                    "dients", ((string)(null)), table122, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table123 = new TechTalk.SpecFlow.Table(new string[] {
                         "Index",
                         "Click Publicly Disclosed",
                         "Click Trade Secret",
                         "Public Name Change"});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "1",
                         "Y",
                         "N",
                         "+"});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "2",
                         "N",
                         "Y",
                         "="});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "3",
                         "N",
                         "N",
                         "-"});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "4",
                         "N",
                         "Y",
                         "+"});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "5",
                         "Y",
                         "N",
                         "+"});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "6",
                         "Y",
                         "N",
                         "+"});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "7",
                         "N",
                         "Y",
                         "="});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "8",
                         "N",
                         "N",
                         "-"});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "9",
                         "N",
                         "Y",
                         "+"});
-            table3.AddRow(new string[] {
+            table123.AddRow(new string[] {
                         "10",
                         "Y",
                         "N",
                         "+"});
-#line 406
+#line 410
 testRunner.Given("I edit the ingredients: My Library New Ingredients and save the edited ingredient" +
-                    "s to context as: My Library Ingredients Edited", ((string)(null)), table3, "Given ");
-#line 419
-testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 421
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "s to context as: My Library Ingredients Edited", ((string)(null)), table123, "Given ");
 #line 423
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 425
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 427
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 429
-testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 431
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 433
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 435
 testRunner.And("I confirm that all changes in edited ingredients: My Library Ingredients Edited w" +
                     "ere saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table124 = new TechTalk.SpecFlow.Table(new string[] {
                         "Index",
                         "Click Publicly Disclosed",
                         "Click Trade Secret",
                         "Public Name Change"});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "1",
                         "Y",
                         "N",
                         "+"});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "2",
                         "N",
                         "Y",
                         "-"});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "3",
                         "Y",
                         "N",
                         "-"});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "4",
                         "N",
                         "N",
                         "+"});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "5",
                         "N",
                         "N",
                         "="});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "6",
                         "Y",
                         "N",
                         "+"});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "7",
                         "N",
                         "Y",
                         "+"});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "8",
                         "Y",
                         "N",
                         "-"});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "9",
                         "N",
                         "Y",
                         "+"});
-            table4.AddRow(new string[] {
+            table124.AddRow(new string[] {
                         "10",
                         "Y",
                         "N",
                         "="});
-#line 435
+#line 439
 testRunner.Given("I edit the ingredients: My Library New Ingredients and save the edited ingredient" +
-                    "s to context as: My Library Ingredients Edited 2", ((string)(null)), table4, "Given ");
-#line 448
-testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 450
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "s to context as: My Library Ingredients Edited 2", ((string)(null)), table124, "Given ");
 #line 452
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 454
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 456
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 458
-testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 460
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 462
+testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 464
 testRunner.Then("I confirm that all changes in edited ingredients: My Library Ingredients Edited 2" +
                     " were saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 462
+#line 466
 testRunner.And("I remove all ingredients in the list saved as: My Library New Ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -777,70 +785,72 @@ testRunner.And("I remove all ingredients in the list saved as: My Library New In
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[73328] Pagination functionality")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:16692")]
         public virtual void _73328PaginationFunctionality()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73328] Pagination functionality", null, ((string[])(null)));
-#line 464
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73328] Pagination functionality", null, new string[] {
+                        "TReVorId:16692"});
+#line 469
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 466
+#line 471
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 468
+#line 473
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 470
+#line 475
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 472
+#line 477
 testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 474
+#line 479
 testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 476
+#line 481
 testRunner.And("I save the current list of ingredients in My Library to context as: My Library In" +
                     "gredients Pagination", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 478
+#line 483
 testRunner.Then("I confirm the navigation button is enabled in the My Ingredients grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 480
+#line 485
 testRunner.Given("I click the Next button in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 482
+#line 487
 testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 484
+#line 489
 testRunner.And("I confirm the ingredients for page 2 saved as: My Library Ingredients Pagination " +
                     "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 486
+#line 491
 testRunner.Given("I click the Next button in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 488
+#line 493
 testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 490
+#line 495
 testRunner.And("I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination " +
                     "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 492
+#line 497
 testRunner.Given("I click the Previous button in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 494
+#line 499
 testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 496
+#line 501
 testRunner.And("I confirm the ingredients for page 2 saved as: My Library Ingredients Pagination " +
                     "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 498
+#line 503
 testRunner.Given("I click the Previous button in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 500
+#line 505
 testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 502
+#line 507
 testRunner.And("I confirm the ingredients for page 1 saved as: My Library Ingredients Pagination " +
                     "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 504
+#line 509
 testRunner.Given("I click page number: 2 in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 506
+#line 511
 testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 508
+#line 513
 testRunner.And("I confirm the ingredients for page 2 saved as: My Library Ingredients Pagination " +
                     "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 510
+#line 515
 testRunner.Given("I click page number: 3 in the My Ingredients grid navigation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 512
+#line 517
 testRunner.Then("I confirm the current active page number in the My Ingredients grid is: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 514
+#line 519
 testRunner.And("I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination " +
                     "are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 516
+#line 521
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -853,30 +863,30 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73326] Searching an Ingredient", null, new string[] {
                         "tfs_design"});
-#line 520
+#line 525
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 522
+#line 527
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 524
+#line 529
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 526
+#line 531
 testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 528
+#line 533
 testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 530
+#line 535
 testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 532
+#line 537
 testRunner.Given("I enter the text: 50-0 into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 534
+#line 539
 testRunner.Then("I confirm that the smart search results contain a chemical with CAS: 50-00-0 and " +
                     "Name: Formaldehyde", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 536
+#line 541
 testRunner.Given("I enter the text: Formald into the My Ingredients search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 538
+#line 543
 testRunner.Then("I confirm that the smart search results contain a chemical with CAS: 50-00-0 and " +
                     "Name: Formaldehyde", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 540
+#line 545
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -889,66 +899,66 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70516] Add and Remove Packaging Type", null, new string[] {
                         "tfs_design"});
-#line 543
+#line 548
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 544
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 545
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 546
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 547
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 548
-testRunner.Then("I confirm the current active tab on the My Library page is: My Packaging Types", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 549
-testRunner.Given("I click \'Add New\' in the My Packaging Types section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 550
-testRunner.Then("I should see the Packaging Type Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 551
-testRunner.Given("I set the Package Type Name field to: Super Packaging Type (TM)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 552
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 553
+testRunner.Then("I confirm the current active tab on the My Library page is: My Packaging Types", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 554
+testRunner.Given("I click \'Add New\' in the My Packaging Types section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 555
+testRunner.Then("I should see the Packaging Type Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 556
+testRunner.Given("I set the Package Type Name field to: Super Packaging Type (TM)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 557
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 558
 testRunner.Then("I should see the Bill of Materials Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table125 = new TechTalk.SpecFlow.Table(new string[] {
                         "Heading"});
-            table5.AddRow(new string[] {
+            table125.AddRow(new string[] {
                         "My Packing Materials"});
-            table5.AddRow(new string[] {
+            table125.AddRow(new string[] {
                         "My Packaging Weight (grams)"});
-            table5.AddRow(new string[] {
+            table125.AddRow(new string[] {
                         "Remove"});
-#line 554
-testRunner.And("I confirm that the following table headings are displayed:", ((string)(null)), table5, "And ");
 #line 559
+testRunner.And("I confirm that the following table headings are displayed:", ((string)(null)), table125, "And ");
+#line 564
 testRunner.And("I confirm that the \'Add Row\' button is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 560
+#line 565
 testRunner.And("I save the Packaging Type details as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 561
+#line 566
 testRunner.Given("I click Add Row in the Bill Of Materials grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 568
+#line 573
 testRunner.Given("I select the option: Clear Glass for the My Packaging Materials field in the tabl" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 569
+#line 574
 testRunner.Given("I select the option: 99 for the My Packaging Weight (grams) field in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 570
+#line 575
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 587
+#line 592
 testRunner.Given("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 588
+#line 593
 testRunner.Then("I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packa" +
                     "ging Types grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 589
+#line 594
 testRunner.Given("I delete Packaging Type saved as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 590
+#line 595
 testRunner.Then("I confirm the name and ID for Packaging Type saved as: ThisPackaging appear in th" +
                     "e Delete Product pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 591
+#line 596
 testRunner.Given("I click Delete in the Delete Product pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 592
+#line 597
 testRunner.And("I confirm that the Packaging Type saved as: ThisPackaging does not appear in the " +
                     "My Packaging Types grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

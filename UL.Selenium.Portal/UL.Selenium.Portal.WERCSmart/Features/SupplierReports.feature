@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @ForgottenPassword
@@ -13,6 +13,7 @@ Feature: Supplier Reports
 #Background:
 #Given I go to the WERCSmart Log in
 
+@TReVorId:16834
 Scenario: [68420] List of Supplier Reports
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -29,6 +30,7 @@ Given under the supplier Reports menu I should see the following options
 | UPC Report for All Products with Retailer        |
 | UPC Report for Specific Product with Retailer    |
 
+@TReVorId:16835
 Scenario: [68421] Active UPCs for Products Report
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I click the Supplier Reports icon in the QuickLinks Pane
@@ -255,6 +257,7 @@ Then I confirm that the excel file saved as: 75391 contains the following column
 | Current Submission Level                            |
 | Current Data Tier Consent for the Selected Retailer |
 
+@TReVorId:16846
 Scenario: [76551] California Proposition 65 - Registrations Prior to August 30, 2018
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

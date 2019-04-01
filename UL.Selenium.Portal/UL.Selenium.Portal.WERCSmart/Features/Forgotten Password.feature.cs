@@ -93,33 +93,35 @@ testRunner.Given("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.Sp
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[52962] Forgot Password - Registered Email")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:10148")]
         public virtual void _52962ForgotPassword_RegisteredEmail()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52962] Forgot Password - Registered Email", null, ((string[])(null)));
-#line 16
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52962] Forgot Password - Registered Email", null, new string[] {
+                        "TReVorId:10148"});
+#line 17
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 13
 this.FeatureBackground();
-#line 17
-testRunner.Given("I create an email automatedcompany1 and save it as automatedcompany1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
-testRunner.Given("I save the current emails in the inbox for address saved as: automatedcompany1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I create an email automatedcompany1 and save it as automatedcompany1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
-testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I save the current emails in the inbox for address saved as: automatedcompany1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 20
-testRunner.Given("I enter a email address: savedas automatedcompany1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 21
-testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I enter a email address: savedas automatedcompany1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 22
+testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
 testRunner.Then("the message should contain Please check your email to get instructions on how to " +
                     "reset your password.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 23
-testRunner.Then("I click the login button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 24
+testRunner.Then("I click the login button in the Forgotten Password window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 25
 testRunner.Then("there should be a new email for email Address saved as: automatedcompany1 from: <" +
                     "SiteNotification> with the title: WERCSmart Password Reset", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 25
+#line 26
 testRunner.And(@"the body of the email should show: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you! UL WERCSmart Customer Support Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -127,32 +129,34 @@ testRunner.And(@"the body of the email should show: Dear WERCSmart User, We rece
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[52969] Forgot Password - Unregistered Email")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:10149")]
         public virtual void _52969ForgotPassword_UnregisteredEmail()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52969] Forgot Password - Unregistered Email", null, ((string[])(null)));
-#line 27
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52969] Forgot Password - Unregistered Email", null, new string[] {
+                        "TReVorId:10149"});
+#line 29
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 13
 this.FeatureBackground();
-#line 28
+#line 30
 testRunner.Given("I create an email myunregisteredaccount and save it as myunregisteredaccount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
+#line 31
 testRunner.Given("I save the current emails in the inbox for address saved as: myunregisteredaccoun" +
                     "t", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
-testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
-testRunner.Given("I enter an email address: savedas myunregisteredaccount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 32
-testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 33
+testRunner.Given("I enter an email address: savedas myunregisteredaccount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 34
+testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 35
 testRunner.Then("the message should contain Please check your email to get instructions on how to " +
                     "reset your password.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 34
+#line 36
 testRunner.Then("there should be a new email for email Address saved as: myunregisteredaccount fro" +
                     "m: <SiteNotification> with the title: WERCSmart Account Information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 35
+#line 37
 testRunner.And(@"the body of the email should show: Dear Future WERCSmart User: Recently you attempted to access WERCSmart and indicated you forgot your password. Our records do not show your email to be registered as a User of WERCSmart at this time. We recommend you create an account. Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -160,26 +164,28 @@ testRunner.And(@"the body of the email should show: Dear Future WERCSmart User: 
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[53035] Forgot Password - Badly Formatted Email")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:10150")]
         public virtual void _53035ForgotPassword_BadlyFormattedEmail()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[53035] Forgot Password - Badly Formatted Email", null, ((string[])(null)));
-#line 38
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[53035] Forgot Password - Badly Formatted Email", null, new string[] {
+                        "TReVorId:10150"});
+#line 41
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 13
 this.FeatureBackground();
-#line 39
-testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 40
-testRunner.Given("I enter a email address: abc123.tt@j", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 41
-testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 42
+testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 43
+testRunner.Given("I enter a email address: abc123.tt@j", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 44
+testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 45
 testRunner.Then("In the Forgotten Password window I should see the following error messages: Email" +
                     " is not valid.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 43
+#line 46
 testRunner.And("I click the cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
+#line 47
 testRunner.Then("I should see for the forgotten password: Forgot your Password?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -187,32 +193,34 @@ testRunner.Then("I should see for the forgotten password: Forgot your Password?"
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[53048] Forgot Password - Reset Password")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:10151")]
         public virtual void _53048ForgotPassword_ResetPassword()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[53048] Forgot Password - Reset Password", null, ((string[])(null)));
-#line 46
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[53048] Forgot Password - Reset Password", null, new string[] {
+                        "TReVorId:10151"});
+#line 50
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 13
 this.FeatureBackground();
-#line 47
+#line 51
 testRunner.Given("I create an email AllRetailersProductsCompany and save it as AllRetailersProducts" +
                     "Company", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 48
+#line 52
 testRunner.Given("I save the current emails in the inbox for address saved as: AllRetailersProducts" +
                     "Company", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 49
-testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
-testRunner.Given("I enter a email address: savedas AllRetailersProductsCompany", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
-testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
+testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 55
+testRunner.Given("I enter a email address: savedas AllRetailersProductsCompany", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 56
+testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 57
 testRunner.Then("there should be a new email for email Address saved as: AllRetailersProductsCompa" +
                     "ny from: <SiteNotification> with the title: WERCSmart Password Reset", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 54
+#line 58
 testRunner.And(@"the body of the email should show: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you! UL WERCSmart Customer Support Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 59
 testRunner.When("I click the link in the email I get directed to security questions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
@@ -220,19 +228,21 @@ testRunner.When("I click the link in the email I get directed to security questi
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[50835] Forgot Password - Email Validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:10147")]
         public virtual void _50835ForgotPassword_EmailValidation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50835] Forgot Password - Email Validation", null, ((string[])(null)));
-#line 58
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50835] Forgot Password - Email Validation", null, new string[] {
+                        "TReVorId:10147"});
+#line 63
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 13
 this.FeatureBackground();
-#line 59
+#line 64
 testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 60
+#line 65
 testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 61
+#line 66
 testRunner.Then("In the Forgotten Password window I should see the following error messages: This " +
                     "is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -241,131 +251,133 @@ testRunner.Then("In the Forgotten Password window I should see the following err
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[64860] Forgot Password (security questions answered)")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:11278")]
         public virtual void _64860ForgotPasswordSecurityQuestionsAnswered()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64860] Forgot Password (security questions answered)", null, ((string[])(null)));
-#line 64
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[64860] Forgot Password (security questions answered)", null, new string[] {
+                        "TReVorId:11278"});
+#line 70
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 13
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table59 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "Email",
                         "User_<random>"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "Country",
                         "UNITED STATES"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "FirstName",
                         "Richard"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "LastName",
                         "Smith"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "Password",
                         "Pa4*ytuufnn"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "Address1",
                         "Address 1"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "Address2",
                         "Address 2"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "City",
                         "City Name"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "State",
                         "Florida"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "Zip",
                         "999"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "CompanyName",
                         "Company 1"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "CompanyPhone",
                         "123-456-7889"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "EmergencyPhoneNumber",
                         "123-456-7789"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "SupplierType",
                         "Manufacturer"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "PhoneQuestion",
                         "PhoneQuestion"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "PhoneHint",
                         "PhoneHint"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "MentorQuestion",
                         "MentorQuestion"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "MentorHint",
                         "MentorHint"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "FriendHint",
                         "FriendHint"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "AnimalQuestion",
                         "AnimalQuestion"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "AnimalHint",
                         "AnimalHint"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "CollegeQuestion",
                         "CollegeQuestion"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "CollegeHint",
                         "CollegeHint"});
-            table1.AddRow(new string[] {
+            table59.AddRow(new string[] {
                         "Pin",
                         "1234"});
-#line 65
+#line 71
 testRunner.Given("If not already created, I create a user: ForgotPW_SecQs with the following parame" +
-                    "ters:", ((string)(null)), table1, "Given ");
-#line 92
-testRunner.Then("I click the User Icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 93
-testRunner.And("I click on Sign Out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 94
-testRunner.And("the landing page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
-testRunner.Then("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 96
-testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 97
-testRunner.Given("I enter the email address for the Account saved as: ForgotPW_SecQs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "ters:", ((string)(null)), table59, "Given ");
 #line 98
-testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I click the User Icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 99
+testRunner.And("I click on Sign Out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 100
+testRunner.And("the landing page should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 101
+testRunner.Then("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 102
+testRunner.Given("I click on the Forgot Your Password Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 103
+testRunner.Given("I enter the email address for the Account saved as: ForgotPW_SecQs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 104
+testRunner.And("I click the continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 105
 testRunner.Then("the message should contain Please check your email to get instructions on how to " +
                     "reset your password.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 100
+#line 106
 testRunner.Then("there should be a new email for email Address saved as: ForgotPW_SecQs from: <Sit" +
                     "eNotification> with the title: WERCSmart Password Reset", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 101
-testRunner.And(@"the body of the email should contain: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you! UL WERCSmart Customer Support Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 102
-testRunner.And("the email should contain a link to reset a WERCSmart Account Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 103
-testRunner.When("I click the link in the email I get directed to security questions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 104
-testRunner.Then("I answer the security questions for Account: ForgotPW_SecQs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 105
-testRunner.Then("I enter a new password: 123Password! and verify: 123Password!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 106
-testRunner.Then("I click the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 107
-testRunner.Then("I log in as user: ForgotPW_SecQs with password: 123Password!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And(@"the body of the email should contain: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you! UL WERCSmart Customer Support Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 108
+testRunner.And("the email should contain a link to reset a WERCSmart Account Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 109
+testRunner.When("I click the link in the email I get directed to security questions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 110
+testRunner.Then("I answer the security questions for Account: ForgotPW_SecQs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 111
+testRunner.Then("I enter a new password: 123Password! and verify: 123Password!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 112
+testRunner.Then("I click the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 113
+testRunner.Then("I log in as user: ForgotPW_SecQs with password: 123Password!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 114
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

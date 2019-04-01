@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -12,6 +12,7 @@
 
 Feature: Lithium Battery Transport Informarion
 
+@TReVorId:18966
 Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Battery Transportation step - question wording and validation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -110,6 +111,7 @@ Then The home screen should load
 
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65512
 
+@TReVorId:18967
 Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Battery Transportation step - question wording and validation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

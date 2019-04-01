@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -13,6 +13,7 @@
 
 Feature: Flow 4-A
 
+@TReVorId:20285
 Scenario: [74825] Flow 4-A - Air Freshener-Dual Purpose/Disinfectant-Aerosol - RU001539
 Given I generate a random UPC number and save as: UPC74825
 And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

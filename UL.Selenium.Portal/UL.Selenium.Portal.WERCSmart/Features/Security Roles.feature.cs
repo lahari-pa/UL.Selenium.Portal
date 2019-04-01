@@ -89,26 +89,28 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[52978] Log Into Account")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:16655")]
         public virtual void _52978LogIntoAccount()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52978] Log Into Account", null, ((string[])(null)));
-#line 13
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52978] Log Into Account", null, new string[] {
+                        "TReVorId:16655"});
+#line 14
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 17
+#line 18
 testRunner.Given("I login as the administrator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 19
+#line 20
 testRunner.Then("I should see username: AllRetailers, ProductsCompany in the right corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 21
+#line 22
 testRunner.Given("I navigate to the MyAccount page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 23
+#line 24
 testRunner.Given("I save all the users in the User Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 25
+#line 26
 testRunner.Then("In Your Company User Accounts the user AllRetailers, ProductsCompany is associate" +
                     "d with the administrator email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 27
+#line 28
 testRunner.Given("I click the User Icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
+#line 30
 testRunner.And("I click on Sign Out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

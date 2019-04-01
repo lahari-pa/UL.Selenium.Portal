@@ -1,4 +1,4 @@
-﻿@wercsmart
+@wercsmart
 @run_Homepage
 
 @Login
@@ -24,6 +24,7 @@
 Feature: Home Page
 
 #pass - staging 4.10
+@TReVorId:10160
 Scenario: [55817] Product Information Panel - No Alerts/No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -49,6 +50,7 @@ And I should see the following states in the Legend:
 Given I see notifications in the Announcement Panel
 
 #pass
+@TReVorId:10154
 Scenario: [55938] My Products grid
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -74,6 +76,7 @@ And the Product Grid should have the following headers:
 | Actions           |
 
 #pass - staging 4.10
+@TReVorId:6653
 Scenario: [56020] Bulk Actions
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -88,6 +91,7 @@ And I click on the close button on Bulk Actions
 Then I should see the Subheading My Products in the products grid
 
 #pass - staging 4.10
+@TReVorId:6658
 Scenario: [56149] Click Register Product button from home page - Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -98,6 +102,7 @@ And I should see the radio button: Create a New Registration
 And I should see the radio button: Copy from an Existing Registration
 
 #pass - staging 4.10
+@TReVorId:10157
 Scenario: [56158] Retail Partners navigation No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -107,6 +112,7 @@ And I should see the following subheading All Retailers
 And I should not see the following subheading Most Recent Retailers
 
 #pass - staging 4.10
+@TReVorId:6661
 Scenario: [56161] UL Solution Center navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -122,6 +128,7 @@ Then I confirm the following sections are displayed in the UL Solution Center pa
 | ULGHS                    |
 
 #pass - staging 4.10
+@TReVorId:10163
 Scenario: [56163] Left hand navigation - Shopping Cart - No Products
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -131,6 +138,7 @@ And I click on the close button on Cart is Empty
 Then I should see the Subheading Announcements in the main window
 
 #pass - staging 4.10 (might need to look at freshdesk link
+@TReVorId:6666
 Scenario: [56188] Support navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -138,6 +146,7 @@ Then I click the Support icon in the Navigation Pane
 Then Confirm that freshdesk opens in another tab
 
 #pass - staging 4.10
+@TReVorId:6667
 Scenario: [56206] Sign Out
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -147,6 +156,7 @@ And the landing page should load
 
 
 #pass - staging 4.10
+@TReVorId:10166
 Scenario: [56212] My Products grid Actions - Edit Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -157,6 +167,7 @@ Then I click on the Row Action: Edit
 Then the Product Type page should be loaded
 And the product saved as: FirstProduct should be visible in editor
 
+@TReVorId:22069
 Scenario: [56214] My Products grid Actions - Submit navigation
 Given I generate a random UPC number and save as: UPC56214
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -181,6 +192,7 @@ Then I click on the Row Action: Submit
 And I should see the Data Acceptance Page
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
+@TReVorId:10172
 Scenario: [56216] My Products grid Actions - Delete Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -201,6 +213,7 @@ Then I should not see products in the Product Grid
 # Removing this step as multiple tests are creating products simultaneously - can't guarantee the count =-1 since deleting the product and refreshing
 #Then the number of items in the pie chart should be one less than the figure I saved
 
+@TReVorId:10175
 Scenario: [56218] My Products grid Actions - View Navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
@@ -240,6 +253,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then clicking on the top Alert should direct me to the My Messages page
 And UNDER DEVELOPMENT
 
+@TReVorId:6682
 Scenario: [56281] Product Information - Alerts - click More
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -247,6 +261,7 @@ Then I click More below the Alerts Panel
 And I should see the header: Message Center on the Message Center window
 
 
+@TReVorId:11379
 Scenario: [64854] Navigation Settings
 # Sign in and expand the menu, checking the correct items are showing
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -278,6 +293,7 @@ And the Navigation Menu should be collapsed
 Given I click on My Account
 And the Navigation Menu should be collapsed
 
+@TReVorId:11383
 Scenario: [64872] Pie Panel Settings
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -315,6 +331,7 @@ And the Alerts dialog should be visible
 And I should see the Subheading Announcements in the main window
 And the Announcements dialog should be visible
 
+@TReVorId:16680
 Scenario: [67299] Terms of Use - footer
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -327,6 +344,7 @@ Given I confirm the WERCSmart Terms of Use page opened in a new tab and navigate
 
 And I close the window that opened
 
+@TReVorId:16679
 Scenario: [65886] My Products - Pagination
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -359,6 +377,7 @@ Given I click ... in the products grid
 
 Given I enter the down arrow into the products grid page navigation input then the correct page is shown
 
+@TReVorId:16681
 Scenario: [68388] More Filters - Brand
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -389,6 +408,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 #CLF 16/7/2018 This scenario cannot be completed because there are no products returned by the Accepted By Retailers Filter
 #in the development environment.
 # JS 13/8/18 Finished test now we have more products completed via SHA - it will work in staging at least
+@TReVorId:16776
 Scenario: [71188] Primary Filter on My Products View - UPC Filter
 
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
@@ -416,6 +436,7 @@ Given I search for UPC number saved as: Summary - UPC - 71188
 Then I should only see one product in the grid, with Product ID matching that saved as: Summary - Product ID - 71188
 
 
+@TReVorId:16775
 Scenario: [65617] Correct Order of Statuses
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 And I should see a Pie Chart and Legend under Product Information
@@ -436,6 +457,7 @@ And I should see the following filters in the following order under My products:
 | Needs Your Attention   |
 | Canceled               |
 
+@TReVorId:16773
 Scenario: [59732] Announcements - Add
 Given I navigate to Studio
 Given I call Shared Step 53542 (Login with Administrator Role Continue 2 (2nd login Shared Step))
@@ -449,6 +471,7 @@ Given I navigate to Portal
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then In the announcements area I should see my saved messages
 
+@TReVorId:16772
 Scenario: [58579] Live Help - Chat Feature
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Given I click on the Live Help button on the upper right
@@ -458,6 +481,7 @@ Given In the Live Help dialog I enter name: John Smith
 Given In the Live Help dialog I enter email: johnsmithtest@test.co.uk
 Given In the Live Help dialog I click on the x to close
 
+@TReVorId:17229
 Scenario: [56829] More Filters
 
 # Consider creating the test product from scratch every time? nb kit 13 58753
@@ -500,6 +524,7 @@ Then the 'More Filters' options are not displayed
 
 
 # Couldn't find the test case in TFS folders, placing it in home page
+@TReVorId:18976
 Scenario: [66335] Main Menu - expanded
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -538,6 +563,7 @@ Then the following icons should be found in the navigation bar
 
 And the navigation labels should be hidden
 
+@TReVorId:18978
 Scenario: [66336] Main Menu - collapsed
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -566,6 +592,7 @@ Given the hover over text is as expected for the following navigation icons
 # Assigned to Amanda Coutant
 # Created by Amanda Coutant
 
+@TReVorId:20286
 Scenario: [68413] More Filters - Retailer
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I click More Filters in the products grid
@@ -636,6 +663,7 @@ And I confirm all products in the grid contain either the the text "WM" or "All"
 
 # HomePage/ Actions/ Edit UPCs
 
+@TReVorId:20300
 Scenario: [64528] Edit UPCs - Click Link check status in SHA
 
 Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64528
@@ -675,6 +703,7 @@ And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 # Assigned to Barrett, Beverly
 # Created by Barrett, Beverly
 
+@TReVorId:20301
 Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remove UPC Update
 
 Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64529
@@ -726,6 +755,7 @@ And I should see the following Actions options
 
 # Assigned to Barrett, Beverly
 # Created by Barrett, Beverly
+@TReVorId:21301
 Scenario: [64530] Process UPC Update
 
 Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64530
@@ -796,6 +826,7 @@ And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Complete
 #
 #And I call Shared Step 55637 (SHA - Process UPC Update for Specific product) saved as: debug64530
 
+@TReVorId:21309
 Scenario: [64531] Remove UPC Update - Cancel
 
 Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64531
@@ -859,6 +890,7 @@ And I should see the following Actions options
 | Remove UPC Update  |
 | Monitor Progress   |
 
+@TReVorId:21324
 Scenario: [64532] Remove UPC Update - Remove
 
 Given I create a product and take to completed using Test Case 75335 and save as: ProductSetup64532
@@ -929,6 +961,7 @@ Given I Close the Product Recertification History pop up
 # Created by Amanda Coutant
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page
+@TReVorId:21364
 Scenario: [85275] Select All - Popup closes
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -981,6 +1014,7 @@ Then I confirm the Retailers popup is not displayed
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85275
 
 
+@TReVorId:22065
 Scenario: [71230] Archived Retailers - My Products View
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then The home screen should load
@@ -996,12 +1030,14 @@ And I Select the check box next to Show Archived Retailers
 And I Confirm that two asterisks are visible in the retailer(s) that are archived icons that display
 And I Deselect the check box next to Show Archived Retailers
 
+@TReVorId:22071
 Scenario: [73791] My Products grid - Retailers Column Alphabetical Order
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then The home screen should load
 Given I filter the products by: Accepted by Retailers
 And I check for all items in the grid that the retailers are alphabetically listed
 
+@TReVorId:6652
 Scenario: [55796] Navigate to Home Page
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load

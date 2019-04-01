@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -26,6 +26,7 @@ And I confirm that if the Retailer logo is not shown, then the Retailer name is 
 # And Use the Stored Procedure GET_MOST_RECENT_RETAILERS to confirm that the retailers shown under Most Recent Retailers is correct NOTE: Parameters for the GET_MOST_RECENT_RETAILERS are @SUPPLIERGUID  - different for each supplier  @TOPPRODUCTS - use the number 8 @SOURCESERVICE - use the word PORTAL    Supplier GUID should be enclosed in single quotes   The word PORTAL for the SOURCESERVICE does not need single quotes
 # And Use this query to see the list of currently active retailers in Portal select * from t_client where f_active = 1 and ISNULL(f_config.value('(/Client/@Active)[1]','varchar(20)'),'true') = 'true'  order by f_name CONFIRM this list matches the list of retailers you see in the Retail Partners page
 
+@TReVorId:11651
 Scenario: [56895] Retailer Partners - Main Page layout (New supplier)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 
@@ -94,6 +95,7 @@ And I check that the following retailers are showing:
 | Winco Foods            | WC    |
 | NewEgg                 | NE    |
 
+@TReVorId:13888
 Scenario: [56903] Retailer Detail Page - Retailer does not require Supplier ID or Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -108,6 +110,7 @@ And Section: Your Supplier IDs should be showing text: This retailer does not su
 And I confirm that there is a section labeled: Data Consent Tiers
 And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time.
 
+@TReVorId:13889
 Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but does not require Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -129,6 +132,7 @@ And I confirm that there is a section labeled: Data Consent Tiers
 And Section: Data Consent Tiers should be showing text: This recipient does not require additional data consent tiers at this time.
 Given I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) for retailer: Sears/K-Mart
 
+@TReVorId:13893
 Scenario: [56981] Retailer & You - layout
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -141,6 +145,7 @@ Given I confirm that the color of the pie chart for the Retailer selected is Gre
 And The pie chart footer text should contain: % of your product portfolio is associated with Walgreens
 
 #BLOCKED because requires database access
+@TReVorId:13894
 Scenario: [56982] Retailer & You - validation of information shown
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -156,6 +161,7 @@ Given I confirm the percentage in the pie chart legend statement matches the per
 Given I click the back arrow on the Retail Partners Details page
 Then I should see the Retail Partners page
 
+@TReVorId:13890
 Scenario: [56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID - Cancel
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -177,6 +183,7 @@ Then I confirm the Add New Supplier ID pop up closes
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 
+@TReVorId:20214
 Scenario: [56927] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - wording check
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -190,6 +197,7 @@ And I confirm the text displayed in the Data Tier Details popup matches for each
 And I close the Data Tier Details popup
 And I navigate to the home page
 
+@TReVorId:20253
 Scenario: [56929] What are the Data Usage Tiers? - Tier 2: Chemical Program Support - wording check
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -212,6 +220,7 @@ And I confirm the text displayed in the Data Tier Details popup matches for each
 And I close the Data Tier Details popup
 And I navigate to the home page
 
+@TReVorId:20255
 Scenario: [56931] What are the Data Usage Tiers? - Tier 3: Supplemental Reports - wording check
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -229,6 +238,7 @@ And I close the Data Tier Details popup
 And I navigate to the home page
 
 # NB logged ticket for spelling error, waiting for correction
+@TReVorId:20256
 Scenario: [56933] What are the Data Usage Tiers? - Tier 4: Public Disclosure Options - wording check
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -245,6 +255,7 @@ And I confirm the text displayed in the Data Tier Details popup matches for each
 And I close the Data Tier Details popup
 And I navigate to the home page
 
+@TReVorId:20259
 Scenario: [56925] My Data & Recipients - General layout checks
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -260,6 +271,7 @@ And the Data Consent Tier: Tier 1 should be set to: on
 And I should not be able to edit Tier Tier 1
 And I navigate to the home page
 
+@TReVorId:20260
 Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/headings
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -282,6 +294,7 @@ And I navigate to the home page
 
 # ******* Blocked because cannot run database queries on staging, also the query appears to be wrong or the database string is.
 @TFS_design
+@TReVorId:22080
 Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New Supplier ID - Save  - DB validation is only for local
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I click the Retail Partners icon in the Navigation Pane
@@ -322,6 +335,7 @@ And [Shared Step 58828 - Delete Supplier ID]
 
 
 #DB queries are not automated because they will not work in staging
+@TReVorId:21834
 Scenario: [56920] Your Supplier IDs - Actions - Deactivate
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -341,6 +355,7 @@ And I call Shared Step 57565 - Supplier ID table > Select Activate - Confirm Sup
 #And I Confirm the results of the query shows the F_User_updated column is set (does not show 0's)
 
 
+@TReVorId:22079
 Scenario: [56909] Retailer Detail Page - Retailer does not require Supplier ID but does require Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -361,6 +376,7 @@ And I confirm that there is a section labeled: Costco & You
 And The pie chart should be showing on the retailer details page
 And The pie chart footer text should contain: % of your product portfolio is associated with Costco
 
+@TReVorId:11657
 Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load

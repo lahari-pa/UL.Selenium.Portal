@@ -92,102 +92,104 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74337] Flash Point < 60°C - Testing method shows closed cup only, Transportation" +
             " shows Yes and No due to an exemption, Hazard class 3 must be used")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21328")]
         public virtual void _74337FlashPoint60C_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74337] Flash Point < 60°C - Testing method shows closed cup only, Transportation" +
-                    " shows Yes and No due to an exemption, Hazard class 3 must be used", null, ((string[])(null)));
-#line 16
+                    " shows Yes and No due to an exemption, Hazard class 3 must be used", null, new string[] {
+                        "TReVorId:21328"});
+#line 17
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 17
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 19
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
+#line 20
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
+#line 21
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
-testRunner.And("I set the Boiling Point (in Celsius) field to: 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
+testRunner.And("I set the Boiling Point (in Celsius) field to: 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
 testRunner.And("I set the Flash Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table1.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "Closed cup method"});
-#line 23
+#line 24
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table1, "And ");
-#line 26
-testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "sting Method Used", ((string)(null)), table17, "And ");
 #line 27
-testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
-testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 32
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 33
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table2.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "Yes"});
-            table2.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-#line 33
+#line 34
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table2, "And ");
-#line 37
-testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "ulated for Transport", ((string)(null)), table18, "And ");
 #line 38
+testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 39
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
+#line 40
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 41
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 42
-testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 43
+testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 44
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (50C - less " +
                     "than or equal to 60C) must only be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
+#line 45
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 46
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
+#line 49
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 50
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -196,7 +198,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table3.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -205,24 +207,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 54
+#line 55
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table3, "And ");
-#line 57
+                    "g:", ((string)(null)), table19, "And ");
+#line 58
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 59
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 60
-testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 61
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 62
-testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74337", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -232,102 +234,104 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74349] Flash Point = 60°C - Testing method shows closed cup only, Transportation" +
             " shows Yes and No due to an exemption, Hazard class 3 must be used")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21329")]
         public virtual void _74349FlashPoint60C_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74349] Flash Point = 60°C - Testing method shows closed cup only, Transportation" +
-                    " shows Yes and No due to an exemption, Hazard class 3 must be used", null, ((string[])(null)));
-#line 67
+                    " shows Yes and No due to an exemption, Hazard class 3 must be used", null, new string[] {
+                        "TReVorId:21329"});
+#line 69
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 68
+#line 70
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 69
+#line 71
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
+#line 72
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
+#line 73
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 72
+#line 74
 testRunner.And("I set the Boiling Point (in Celsius) field to: 38", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 73
+#line 75
 testRunner.And("I set the Flash Point (in Celsius) field to: 60", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table4.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "Closed cup method"});
-#line 74
+#line 76
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table4, "And ");
-#line 77
-testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
-testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "sting Method Used", ((string)(null)), table20, "And ");
 #line 79
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 80
+testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 81
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 82
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
+#line 83
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Ethanol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
+#line 84
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 85
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table5.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "Yes"});
-            table5.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-#line 84
+#line 86
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table5, "And ");
-#line 88
+                    "ulated for Transport", ((string)(null)), table21, "And ");
+#line 90
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 89
+#line 91
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 90
+#line 92
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
+#line 93
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
+#line 94
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 93
+#line 95
 testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 94
+#line 96
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (60C - less " +
                     "than or equal to 60C) must only be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
+#line 97
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 96
+#line 98
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 99
+#line 101
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 100
+#line 102
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 101
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 102
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 103
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 104
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 105
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -336,7 +340,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table6.AddRow(new string[] {
+            table22.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -345,24 +349,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 105
+#line 107
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table6, "And ");
-#line 108
+                    "g:", ((string)(null)), table22, "And ");
+#line 110
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 109
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 110
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 111
-testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 112
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 113
-testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 114
+testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 115
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 116
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74349", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -372,88 +376,90 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74357] Flash Point < 60°C - Testing method shows closed cup only, Transportation" +
             " select No due to an exemption")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21330")]
         public virtual void _74357FlashPoint60C_TestingMethodShowsClosedCupOnlyTransportationSelectNoDueToAnExemption()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74357] Flash Point < 60°C - Testing method shows closed cup only, Transportation" +
-                    " select No due to an exemption", null, ((string[])(null)));
-#line 121
+                    " select No due to an exemption", null, new string[] {
+                        "TReVorId:21330"});
+#line 124
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 122
+#line 125
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 123
+#line 126
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 124
+#line 127
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 125
+#line 128
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 126
+#line 129
 testRunner.And("I set the Boiling Point (in Celsius) field to: 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 127
+#line 130
 testRunner.And("I set the Flash Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table7.AddRow(new string[] {
+            table23.AddRow(new string[] {
                         "Closed cup method"});
-#line 128
-testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table7, "And ");
 #line 131
-testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 132
-testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 133
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
+                    "sting Method Used", ((string)(null)), table23, "And ");
 #line 134
+testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 135
+testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 136
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 137
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 135
+#line 138
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 136
+#line 139
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 137
+#line 140
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table8.AddRow(new string[] {
+            table24.AddRow(new string[] {
                         "Yes"});
-            table8.AddRow(new string[] {
+            table24.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-#line 138
+#line 141
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table8, "And ");
-#line 142
+                    "ulated for Transport", ((string)(null)), table24, "And ");
+#line 145
 testRunner.And("I set the Product is Regulated for Transport field to: No, due to an exemption or" +
                     " exception", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 143
+#line 146
 testRunner.And("I set the Please select DOT Exceptions if applicable? field to: 173.120(a)(2)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 144
+#line 147
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 145
+#line 148
 testRunner.And("I call Shared Step 62536 (Transportation Details 2 > I do not ship internationall" +
                     "y > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 148
+#line 151
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 149
+#line 152
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 150
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 151
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 152
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 153
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 154
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 155
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -462,7 +468,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table9.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "Gloves",
                         "800",
                         "25",
@@ -471,24 +477,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 154
+#line 157
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table9, "And ");
-#line 157
+                    "g:", ((string)(null)), table25, "And ");
+#line 160
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 158
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 159
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 160
-testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 161
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 162
-testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 163
+testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 164
+testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 165
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 166
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74357", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -498,105 +504,107 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74346] Flash Point > 60°C - Testing method shows all, Transportation shows all, " +
             "Hazard class 3 must NOT be used")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21331")]
         public virtual void _74346FlashPoint60C_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74346] Flash Point > 60°C - Testing method shows all, Transportation shows all, " +
-                    "Hazard class 3 must NOT be used", null, ((string[])(null)));
-#line 167
+                    "Hazard class 3 must NOT be used", null, new string[] {
+                        "TReVorId:21331"});
+#line 171
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 168
+#line 172
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 169
+#line 173
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 170
+#line 174
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 171
+#line 175
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 172
+#line 176
 testRunner.Given("I set the Boiling Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 173
+#line 177
 testRunner.Given("I set the Flash Point (in Celsius) field to: 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table10.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Closed cup method"});
-            table10.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Open cup method"});
-            table10.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Not applicable/available"});
-#line 174
+#line 178
 testRunner.And("The following options should be displayed for section: Flash Point Testing Method" +
-                    " Used", ((string)(null)), table10, "And ");
-#line 179
+                    " Used", ((string)(null)), table26, "And ");
+#line 183
 testRunner.And("I set the Flash Point Testing Method Used field to: Open cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 180
+#line 184
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 181
+#line 185
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 182
+#line 186
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 183
+#line 187
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 184
+#line 188
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table11.AddRow(new string[] {
+            table27.AddRow(new string[] {
                         "Yes"});
-            table11.AddRow(new string[] {
+            table27.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-#line 185
-testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table11, "And ");
 #line 189
+testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
+                    "ulated for Transport", ((string)(null)), table27, "And ");
+#line 193
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 190
+#line 194
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 191
+#line 195
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 192
+#line 196
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 193
+#line 197
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 194
+#line 198
 testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 195
+#line 199
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (80C - great" +
                     "er than 60C) must not be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 196
+#line 200
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 197
+#line 201
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 200
+#line 204
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 201
+#line 205
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 202
+#line 206
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 203
+#line 207
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 204
+#line 208
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 205
+#line 209
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -605,7 +613,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table12.AddRow(new string[] {
+            table28.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -614,24 +622,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 206
+#line 210
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table12, "And ");
-#line 209
+                    "g:", ((string)(null)), table28, "And ");
+#line 213
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74346", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 210
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 211
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 212
-testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 213
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 214
-testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 215
+testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 216
+testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 217
+testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 218
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 219
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74346", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -641,105 +649,107 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74364] Flash Point > 60°C - Testing method shows all, Transportation shows all, " +
             "Hazard class 3 must NOT be used")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21332")]
         public virtual void _74364FlashPoint60C_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74364] Flash Point > 60°C - Testing method shows all, Transportation shows all, " +
-                    "Hazard class 3 must NOT be used", null, ((string[])(null)));
-#line 222
+                    "Hazard class 3 must NOT be used", null, new string[] {
+                        "TReVorId:21332"});
+#line 227
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 223
+#line 228
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 224
+#line 229
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 225
+#line 230
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 226
+#line 231
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 227
+#line 232
 testRunner.Given("I set the Boiling Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 228
+#line 233
 testRunner.Given("I set the Flash Point (in Celsius) field to: 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table13.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "Closed cup method"});
-            table13.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "Open cup method"});
-            table13.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "Not applicable/available"});
-#line 229
-testRunner.And("The following options should be displayed for section: Flash Point Testing Method" +
-                    " Used", ((string)(null)), table13, "And ");
 #line 234
+testRunner.And("The following options should be displayed for section: Flash Point Testing Method" +
+                    " Used", ((string)(null)), table29, "And ");
+#line 239
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 235
+#line 240
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 236
+#line 241
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 237
+#line 242
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 238
+#line 243
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 239
+#line 244
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table14.AddRow(new string[] {
+            table30.AddRow(new string[] {
                         "Yes"});
-            table14.AddRow(new string[] {
+            table30.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-#line 240
-testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table14, "And ");
-#line 244
-testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 245
+testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
+                    "ulated for Transport", ((string)(null)), table30, "And ");
+#line 249
+testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 250
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 246
+#line 251
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 247
+#line 252
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 248
+#line 253
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 249
+#line 254
 testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 250
+#line 255
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (80C - great" +
                     "er than 60C) must not be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 251
+#line 256
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 252
+#line 257
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 255
+#line 260
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 256
+#line 261
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 257
+#line 262
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 258
+#line 263
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 259
+#line 264
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 260
+#line 265
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -748,7 +758,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table15.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -757,24 +767,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 261
+#line 266
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table15, "And ");
-#line 264
+                    "g:", ((string)(null)), table31, "And ");
+#line 269
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74346", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 265
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 266
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 267
-testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 268
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 269
-testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 270
+testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 271
+testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 272
+testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 273
+testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 274
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 275
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74364", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -784,106 +794,108 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74365] Flash Point > 60°C - Testing method shows all, Transportation shows all, " +
             "Hazard class 3 must NOT be used")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21333")]
         public virtual void _74365FlashPoint60C_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74365] Flash Point > 60°C - Testing method shows all, Transportation shows all, " +
-                    "Hazard class 3 must NOT be used", null, ((string[])(null)));
-#line 274
+                    "Hazard class 3 must NOT be used", null, new string[] {
+                        "TReVorId:21333"});
+#line 280
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 275
+#line 281
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 276
+#line 282
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 277
+#line 283
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 278
+#line 284
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 279
+#line 285
 testRunner.Given("I set the Boiling Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 280
+#line 286
 testRunner.Given("I set the Flash Point (in Celsius) field to: 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table16.AddRow(new string[] {
+            table32.AddRow(new string[] {
                         "Closed cup method"});
-            table16.AddRow(new string[] {
+            table32.AddRow(new string[] {
                         "Open cup method"});
-            table16.AddRow(new string[] {
+            table32.AddRow(new string[] {
                         "Not applicable/available"});
-#line 281
-testRunner.And("The following options should be displayed for section: Flash Point Testing Method" +
-                    " Used", ((string)(null)), table16, "And ");
-#line 286
-testRunner.And("I set the Flash Point Testing Method Used field to: Not applicable/available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 287
+testRunner.And("The following options should be displayed for section: Flash Point Testing Method" +
+                    " Used", ((string)(null)), table32, "And ");
+#line 292
+testRunner.And("I set the Flash Point Testing Method Used field to: Not applicable/available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 293
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 288
+#line 294
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 289
+#line 295
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 290
+#line 296
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 291
+#line 297
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table17.AddRow(new string[] {
+            table33.AddRow(new string[] {
                         "Yes"});
-            table17.AddRow(new string[] {
+            table33.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-            table17.AddRow(new string[] {
+            table33.AddRow(new string[] {
                         "Not Regulated"});
-#line 292
-testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table17, "And ");
-#line 297
-testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 298
+testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
+                    "ulated for Transport", ((string)(null)), table33, "And ");
+#line 303
+testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 304
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 299
+#line 305
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 300
+#line 306
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 301
+#line 307
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 302
+#line 308
 testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 303
+#line 309
 testRunner.And("UN Number should be showing the error messages: Flash Point is required with Haza" +
                     "rd Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 304
+#line 310
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 305
+#line 311
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 308
+#line 314
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 309
+#line 315
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 310
+#line 316
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 311
+#line 317
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 312
+#line 318
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 313
+#line 319
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -892,7 +904,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table18.AddRow(new string[] {
+            table34.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -901,24 +913,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 314
+#line 320
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table18, "And ");
-#line 317
+                    "g:", ((string)(null)), table34, "And ");
+#line 323
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74346", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 318
+#line 324
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 319
+#line 325
 testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 320
+#line 326
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 321
+#line 327
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 322
+#line 328
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 323
+#line 329
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74365", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -928,91 +940,93 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74366] Flash Point = 60°C - Testing method shows closed cup only, Transportation" +
             " select No due to an exemption")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21334")]
         public virtual void _74366FlashPoint60C_TestingMethodShowsClosedCupOnlyTransportationSelectNoDueToAnExemption()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74366] Flash Point = 60°C - Testing method shows closed cup only, Transportation" +
-                    " select No due to an exemption", null, ((string[])(null)));
-#line 330
+                    " select No due to an exemption", null, new string[] {
+                        "TReVorId:21334"});
+#line 337
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 331
+#line 338
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 332
+#line 339
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 333
+#line 340
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 334
+#line 341
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 335
+#line 342
 testRunner.Given("I set the Boiling Point (in Celsius) field to: 45", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 336
+#line 343
 testRunner.Given("I set the Flash Point (in Celsius) field to: 60", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table19.AddRow(new string[] {
+            table35.AddRow(new string[] {
                         "Closed cup method"});
-#line 337
+#line 344
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table19, "And ");
-#line 340
+                    "sting Method Used", ((string)(null)), table35, "And ");
+#line 347
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 341
+#line 348
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 342
+#line 349
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 343
+#line 350
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 344
+#line 351
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 345
+#line 352
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 346
+#line 353
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table20.AddRow(new string[] {
+            table36.AddRow(new string[] {
                         "Yes"});
-            table20.AddRow(new string[] {
+            table36.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-#line 347
+#line 354
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table20, "And ");
-#line 351
+                    "ulated for Transport", ((string)(null)), table36, "And ");
+#line 358
 testRunner.And("I set the Product is Regulated for Transport field to: No, due to an exemption or" +
                     " exception", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 352
+#line 359
 testRunner.And("I set the Please select DOT Exceptions if applicable? field to: 173.120(a)(2)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 353
+#line 360
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 354
+#line 361
 testRunner.And("I call Shared Step 62536 (Transportation Details 2 > I do not ship internationall" +
                     "y > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 355
+#line 362
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 358
+#line 365
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 359
+#line 366
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 360
+#line 367
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 361
+#line 368
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 362
+#line 369
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 363
+#line 370
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1021,7 +1035,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table21.AddRow(new string[] {
+            table37.AddRow(new string[] {
                         "Gloves",
                         "800",
                         "25",
@@ -1030,24 +1044,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 364
+#line 371
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table21, "And ");
-#line 367
+                    "g:", ((string)(null)), table37, "And ");
+#line 374
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74366", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 368
+#line 375
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 369
+#line 376
 testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 370
+#line 377
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 371
+#line 378
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 372
+#line 379
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 373
+#line 380
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74366", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1057,105 +1071,107 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74368] Flash Point Range < 23 - Testing method shows closed cup only, Transporta" +
             "tion shows Yes and No due to an exemption, Hazard class 3 must be used")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21335")]
         public virtual void _74368FlashPointRange23_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74368] Flash Point Range < 23 - Testing method shows closed cup only, Transporta" +
-                    "tion shows Yes and No due to an exemption, Hazard class 3 must be used", null, ((string[])(null)));
-#line 380
+                    "tion shows Yes and No due to an exemption, Hazard class 3 must be used", null, new string[] {
+                        "TReVorId:21335"});
+#line 388
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 381
+#line 389
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 382
+#line 390
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 383
+#line 391
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 384
+#line 392
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 385
+#line 393
 testRunner.And("I set the Boiling Point (in Celsius) field to: 45", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 386
+#line 394
 testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 387
+#line 395
 testRunner.And("I set the Flash Point (in Celsius) field to: <23C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table22.AddRow(new string[] {
+            table38.AddRow(new string[] {
                         "Closed cup method"});
-#line 388
+#line 396
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table22, "And ");
-#line 391
+                    "sting Method Used", ((string)(null)), table38, "And ");
+#line 399
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 392
+#line 400
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 393
+#line 401
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 394
+#line 402
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 395
+#line 403
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
                     "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 396
+#line 404
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 397
+#line 405
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table23.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Yes"});
-            table23.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-#line 398
+#line 406
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table23, "And ");
-#line 402
+                    "ulated for Transport", ((string)(null)), table39, "And ");
+#line 410
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 403
+#line 411
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 404
+#line 412
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 405
+#line 413
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 406
+#line 414
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 407
+#line 415
 testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 408
+#line 416
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (22C - less " +
                     "than or equal to 60C) must only be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 409
+#line 417
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 410
+#line 418
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 413
+#line 421
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 414
+#line 422
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 415
+#line 423
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 416
+#line 424
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 417
+#line 425
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 418
+#line 426
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1164,7 +1180,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table24.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "Gloves",
                         "800",
                         "25",
@@ -1173,24 +1189,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 419
+#line 427
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table24, "And ");
-#line 422
+                    "g:", ((string)(null)), table40, "And ");
+#line 430
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74368", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 423
+#line 431
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 424
+#line 432
 testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 425
+#line 433
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 426
+#line 434
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 427
+#line 435
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 428
+#line 436
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74368", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1200,105 +1216,107 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74372] Flash Point Range >=23 and <38 - Testing method shows closed cup only, Tr" +
             "ansportation shows Yes and No due to an exemption, Hazard class 3 must be used")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21336")]
         public virtual void _74372FlashPointRange23And38_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74372] Flash Point Range >=23 and <38 - Testing method shows closed cup only, Tr" +
-                    "ansportation shows Yes and No due to an exemption, Hazard class 3 must be used", null, ((string[])(null)));
-#line 432
+                    "ansportation shows Yes and No due to an exemption, Hazard class 3 must be used", null, new string[] {
+                        "TReVorId:21336"});
+#line 441
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 433
+#line 442
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 434
+#line 443
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 435
+#line 444
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 436
+#line 445
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 437
+#line 446
 testRunner.And("I set the Boiling Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 438
+#line 447
 testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 439
+#line 448
 testRunner.And("I set the Flash Point (in Celsius) field to: >=23C and <38C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table25.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "Closed cup method"});
-#line 440
+#line 449
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table25, "And ");
-#line 443
+                    "sting Method Used", ((string)(null)), table41, "And ");
+#line 452
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 444
+#line 453
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 445
+#line 454
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 446
+#line 455
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 447
+#line 456
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 448
+#line 457
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 449
+#line 458
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table26.AddRow(new string[] {
+            table42.AddRow(new string[] {
                         "Yes"});
-            table26.AddRow(new string[] {
+            table42.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-#line 450
+#line 459
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table26, "And ");
-#line 454
+                    "ulated for Transport", ((string)(null)), table42, "And ");
+#line 463
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 455
+#line 464
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 456
+#line 465
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 457
+#line 466
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 458
+#line 467
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 459
+#line 468
 testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 460
+#line 469
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (23C - less " +
                     "than or equal to 60C) must only be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 461
+#line 470
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 462
+#line 471
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 465
+#line 474
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 466
+#line 475
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 467
+#line 476
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 468
+#line 477
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 469
+#line 478
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 470
+#line 479
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1307,7 +1325,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table27.AddRow(new string[] {
+            table43.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1316,24 +1334,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 471
+#line 480
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table27, "And ");
-#line 474
+                    "g:", ((string)(null)), table43, "And ");
+#line 483
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74372", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 475
+#line 484
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 476
+#line 485
 testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 477
+#line 486
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 478
+#line 487
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 479
+#line 488
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 480
+#line 489
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74372", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1344,106 +1362,108 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.DescriptionAttribute("[74374] Flash Point Range >=38 and <=60  - Testing method shows closed cup only, " +
             "Transportation shows Yes and No due to an exemption, Hazard class 3 must be used" +
             "")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21337")]
         public virtual void _74374FlashPointRange38And60_TestingMethodShowsClosedCupOnlyTransportationShowsYesAndNoDueToAnExemptionHazardClass3MustBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74374] Flash Point Range >=38 and <=60  - Testing method shows closed cup only, " +
                     "Transportation shows Yes and No due to an exemption, Hazard class 3 must be used" +
-                    "", null, ((string[])(null)));
-#line 484
+                    "", null, new string[] {
+                        "TReVorId:21337"});
+#line 494
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 485
+#line 495
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 486
+#line 496
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 487
+#line 497
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 488
+#line 498
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 489
+#line 499
 testRunner.And("I set the Boiling Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 490
+#line 500
 testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 491
+#line 501
 testRunner.And("I set the Flash Point (in Celsius) field to: >=38C and <=60C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table28.AddRow(new string[] {
+            table44.AddRow(new string[] {
                         "Closed cup method"});
-#line 492
+#line 502
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table28, "And ");
-#line 495
+                    "sting Method Used", ((string)(null)), table44, "And ");
+#line 505
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 496
+#line 506
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 497
+#line 507
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 498
+#line 508
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 499
+#line 509
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 500
+#line 510
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 501
+#line 511
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table29.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "Yes"});
-            table29.AddRow(new string[] {
+            table45.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-#line 502
+#line 512
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table29, "And ");
-#line 506
+                    "ulated for Transport", ((string)(null)), table45, "And ");
+#line 516
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 507
+#line 517
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 508
+#line 518
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 509
+#line 519
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 510
+#line 520
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 511
+#line 521
 testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 512
+#line 522
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (39C - less " +
                     "than or equal to 60C) must only be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 513
+#line 523
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 514
+#line 524
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 517
+#line 527
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 518
+#line 528
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 519
+#line 529
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 520
+#line 530
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 521
+#line 531
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 522
+#line 532
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1452,7 +1472,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table30.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1461,24 +1481,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 523
+#line 533
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table30, "And ");
-#line 526
+                    "g:", ((string)(null)), table46, "And ");
+#line 536
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74374", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 527
+#line 537
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 528
+#line 538
 testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 529
+#line 539
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 530
+#line 540
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 531
+#line 541
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 532
+#line 542
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74374", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1488,111 +1508,113 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74376] Flash Point Range > 60 and < 93 - Testing method shows all, Transportatio" +
             "n shows all, Hazard class 3 must NOT be used")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21338")]
         public virtual void _74376FlashPointRange60And93_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74376] Flash Point Range > 60 and < 93 - Testing method shows all, Transportatio" +
-                    "n shows all, Hazard class 3 must NOT be used", null, ((string[])(null)));
-#line 536
+                    "n shows all, Hazard class 3 must NOT be used", null, new string[] {
+                        "TReVorId:21338"});
+#line 547
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 537
+#line 548
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 538
+#line 549
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 539
+#line 550
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 540
+#line 551
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 541
+#line 552
 testRunner.And("I set the Boiling Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 542
+#line 553
 testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 543
+#line 554
 testRunner.And("I set the Flash Point (in Celsius) field to: >60C and <93C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table31.AddRow(new string[] {
+            table47.AddRow(new string[] {
                         "Closed cup method"});
-            table31.AddRow(new string[] {
+            table47.AddRow(new string[] {
                         "Open cup method"});
-            table31.AddRow(new string[] {
+            table47.AddRow(new string[] {
                         "Not applicable/available"});
-#line 544
+#line 555
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table31, "And ");
-#line 549
+                    "sting Method Used", ((string)(null)), table47, "And ");
+#line 560
 testRunner.And("I set the Flash Point Testing Method Used field to: Open cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 550
+#line 561
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 551
+#line 562
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 552
+#line 563
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 553
+#line 564
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 554
+#line 565
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 555
+#line 566
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table32.AddRow(new string[] {
+            table48.AddRow(new string[] {
                         "Yes"});
-            table32.AddRow(new string[] {
+            table48.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-            table32.AddRow(new string[] {
+            table48.AddRow(new string[] {
                         "Not Regulated"});
-#line 556
+#line 567
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table32, "And ");
-#line 561
+                    "ulated for Transport", ((string)(null)), table48, "And ");
+#line 572
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 562
+#line 573
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 563
+#line 574
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 564
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 565
-testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
-                    " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 566
-testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 567
-testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
-                    "th the selected Hazard Class and Flash Point value.|The Flash Point (61C - great" +
-                    "er than 60C) must not be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 568
-testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
-                    "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 569
-testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 572
-testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
-                    "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 573
-testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
-                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 574
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 575
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 576
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
+                    " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 577
+testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 578
+testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
+                    "th the selected Hazard Class and Flash Point value.|The Flash Point (61C - great" +
+                    "er than 60C) must not be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 579
+testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
+                    "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 580
+testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 583
+testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
+                    "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 584
+testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 585
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 586
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 587
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 588
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1601,7 +1623,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table33.AddRow(new string[] {
+            table49.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1610,24 +1632,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 578
+#line 589
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table33, "And ");
-#line 581
+                    "g:", ((string)(null)), table49, "And ");
+#line 592
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74376", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 582
+#line 593
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 583
+#line 594
 testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 584
+#line 595
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 585
+#line 596
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 586
+#line 597
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 587
+#line 598
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74376", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1637,111 +1659,113 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74379] Flash Point Range >=93 and <=815 - Testing method shows all, Transportati" +
             "on shows all, Hazard class 3 must NOT be used")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21339")]
         public virtual void _74379FlashPointRange93And815_TestingMethodShowsAllTransportationShowsAllHazardClass3MustNOTBeUsed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74379] Flash Point Range >=93 and <=815 - Testing method shows all, Transportati" +
-                    "on shows all, Hazard class 3 must NOT be used", null, ((string[])(null)));
-#line 591
+                    "on shows all, Hazard class 3 must NOT be used", null, new string[] {
+                        "TReVorId:21339"});
+#line 603
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 592
+#line 604
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 593
+#line 605
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 594
+#line 606
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 595
+#line 607
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 596
+#line 608
 testRunner.And("I set the Boiling Point (in Celsius) field to: 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 597
+#line 609
 testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 598
+#line 610
 testRunner.And("I set the Flash Point (in Celsius) field to: >=93C and <=815C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table34.AddRow(new string[] {
+            table50.AddRow(new string[] {
                         "Closed cup method"});
-            table34.AddRow(new string[] {
+            table50.AddRow(new string[] {
                         "Open cup method"});
-            table34.AddRow(new string[] {
+            table50.AddRow(new string[] {
                         "Not applicable/available"});
-#line 599
+#line 611
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table34, "And ");
-#line 604
+                    "sting Method Used", ((string)(null)), table50, "And ");
+#line 616
 testRunner.And("I set the Flash Point Testing Method Used field to: Open cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 605
+#line 617
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 606
+#line 618
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 607
+#line 619
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 608
+#line 620
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 609
+#line 621
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 610
+#line 622
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table35.AddRow(new string[] {
+            table51.AddRow(new string[] {
                         "Yes"});
-            table35.AddRow(new string[] {
+            table51.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-            table35.AddRow(new string[] {
+            table51.AddRow(new string[] {
                         "Not Regulated"});
-#line 611
+#line 623
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table35, "And ");
-#line 616
+                    "ulated for Transport", ((string)(null)), table51, "And ");
+#line 628
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 617
+#line 629
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 618
+#line 630
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 619
+#line 631
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 620
+#line 632
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 621
+#line 633
 testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 622
+#line 634
 testRunner.And("UN Number should be showing the error messages: The UN-Number (DOT) is invalid wi" +
                     "th the selected Hazard Class and Flash Point value.|The Flash Point (93C - great" +
                     "er than 60C) must not be used with Hazard Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 623
+#line 635
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 624
+#line 636
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 627
+#line 639
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 628
+#line 640
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 629
+#line 641
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 630
+#line 642
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 631
+#line 643
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 632
+#line 644
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1750,7 +1774,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table36.AddRow(new string[] {
+            table52.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1759,24 +1783,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 633
+#line 645
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table36, "And ");
-#line 636
+                    "g:", ((string)(null)), table52, "And ");
+#line 648
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74379", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 637
+#line 649
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 638
+#line 650
 testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 639
+#line 651
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 640
+#line 652
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 641
+#line 653
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 642
+#line 654
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74379", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1787,107 +1811,109 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.DescriptionAttribute("[74380] Flash Point Range Not Tested - Testing method shows Not Applicable/availa" +
             "ble, Transportation shows all, UN page shows - FP is required with Hazard Class " +
             "3")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21340")]
         public virtual void _74380FlashPointRangeNotTested_TestingMethodShowsNotApplicableAvailableTransportationShowsAllUNPageShows_FPIsRequiredWithHazardClass3()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74380] Flash Point Range Not Tested - Testing method shows Not Applicable/availa" +
                     "ble, Transportation shows all, UN page shows - FP is required with Hazard Class " +
-                    "3", null, ((string[])(null)));
-#line 646
+                    "3", null, new string[] {
+                        "TReVorId:21340"});
+#line 659
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 647
+#line 660
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 648
+#line 661
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 649
+#line 662
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 650
+#line 663
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 651
+#line 664
 testRunner.And("I set the Boiling Point (in Celsius) field to: 75", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 652
+#line 665
 testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 653
+#line 666
 testRunner.And("I set the Flash Point (in Celsius) field to: Not Tested/Unknown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table37.AddRow(new string[] {
+            table53.AddRow(new string[] {
                         "Not applicable/available"});
-#line 654
+#line 667
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table37, "And ");
-#line 657
-testRunner.And("I set the Flash Point Testing Method Used field to: Not applicable/available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 658
-testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 659
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 660
-testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
-                    "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 661
-testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
-                    "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 662
-testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
-                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 663
-testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Option"});
-            table38.AddRow(new string[] {
-                        "Yes"});
-            table38.AddRow(new string[] {
-                        "No, due to an exemption or exception"});
-            table38.AddRow(new string[] {
-                        "Not Regulated"});
-#line 664
-testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table38, "And ");
-#line 669
-testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "sting Method Used", ((string)(null)), table53, "And ");
 #line 670
-testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
-                    "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Flash Point Testing Method Used field to: Not applicable/available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 671
-testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
-                    "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 672
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 673
-testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
-                    " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
+                    "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 674
-testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
+                    "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 675
-testRunner.And("UN Number should be showing the error messages: Flash Point is required with Haza" +
-                    "rd Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 676
-testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
-                    "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table54 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Option"});
+            table54.AddRow(new string[] {
+                        "Yes"});
+            table54.AddRow(new string[] {
+                        "No, due to an exemption or exception"});
+            table54.AddRow(new string[] {
+                        "Not Regulated"});
 #line 677
-testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 680
-testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
-                    "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 681
-testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
-                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
+                    "ulated for Transport", ((string)(null)), table54, "And ");
 #line 682
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 683
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
+                    "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 684
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
+                    "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 685
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 686
+testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
+                    " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 687
+testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 688
+testRunner.And("UN Number should be showing the error messages: Flash Point is required with Haza" +
+                    "rd Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 689
+testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
+                    "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 690
+testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 693
+testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
+                    "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 694
+testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
+                    "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 695
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 696
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 697
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 698
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table55 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1896,7 +1922,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table39.AddRow(new string[] {
+            table55.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1905,24 +1931,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 686
+#line 699
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table39, "And ");
-#line 689
+                    "g:", ((string)(null)), table55, "And ");
+#line 702
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74380", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 690
+#line 703
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 691
+#line 704
 testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 692
+#line 705
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 693
+#line 706
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 694
+#line 707
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 695
+#line 708
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74380", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1933,107 +1959,109 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
         [NUnit.Framework.DescriptionAttribute("[74382] Flash Point Range None, No Flash Point- Testing method shows Not Applicab" +
             "le/available, Transportation shows all, UN page shows - FP is required with Haza" +
             "rd Class 3")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21343")]
         public virtual void _74382FlashPointRangeNoneNoFlashPoint_TestingMethodShowsNotApplicableAvailableTransportationShowsAllUNPageShows_FPIsRequiredWithHazardClass3()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74382] Flash Point Range None, No Flash Point- Testing method shows Not Applicab" +
                     "le/available, Transportation shows all, UN page shows - FP is required with Haza" +
-                    "rd Class 3", null, ((string[])(null)));
-#line 699
+                    "rd Class 3", null, new string[] {
+                        "TReVorId:21343"});
+#line 713
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 700
+#line 714
 testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 701
+#line 715
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 702
+#line 716
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bleach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 703
+#line 717
 testRunner.And("I call Shared Step 74339 (Product Characteristics - Select Liquid and enter only " +
                     "Secondary state, Specific gravity, pH)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 704
+#line 718
 testRunner.And("I set the Boiling Point (in Celsius) field to: 75", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 705
+#line 719
 testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 706
+#line 720
 testRunner.And("I set the Flash Point (in Celsius) field to: None, No Flash Point", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table56 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table40.AddRow(new string[] {
+            table56.AddRow(new string[] {
                         "Not applicable/available"});
-#line 707
+#line 721
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table40, "And ");
-#line 710
+                    "sting Method Used", ((string)(null)), table56, "And ");
+#line 724
 testRunner.And("I set the Flash Point Testing Method Used field to: Not applicable/available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 711
+#line 725
 testRunner.And("I set the Select the best Water Solubility description field to: Insoluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 712
+#line 726
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 713
+#line 727
 testRunner.And("I call Shared Step 74340 (Additional Product Information - Pesticide= Not conside" +
                     "red, SOLD=US, everything else = No - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 714
+#line 728
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Hydrogen per" +
                     "oxide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 715
+#line 729
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 716
+#line 730
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table57 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table41.AddRow(new string[] {
+            table57.AddRow(new string[] {
                         "Yes"});
-            table41.AddRow(new string[] {
+            table57.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-            table41.AddRow(new string[] {
+            table57.AddRow(new string[] {
                         "Not Regulated"});
-#line 717
+#line 731
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table41, "And ");
-#line 722
+                    "ulated for Transport", ((string)(null)), table57, "And ");
+#line 736
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 723
+#line 737
 testRunner.And("I set the Select all modes of transport that you\'ve classified the product for fi" +
                     "eld to: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 724
+#line 738
 testRunner.And("I select option: Shipping fully regulated under section: Select all modes of tran" +
                     "sport that you\'ve classified the product for and subsection: DOT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 725
+#line 739
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 726
+#line 740
 testRunner.And("I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select" +
                     " radio button - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 727
+#line 741
 testRunner.And("section: UN Number is highlighed in red indicating an error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 728
+#line 742
 testRunner.And("UN Number should be showing the error messages: Flash Point is required with Haza" +
                     "rd Class 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 729
+#line 743
 testRunner.And("I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, co" +
                     "nfirm Packing group - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 730
+#line 744
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 733
+#line 747
 testRunner.And("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 734
+#line 748
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 735
+#line 749
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 736
+#line 750
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 737
+#line 751
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 738
+#line 752
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table58 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -2042,7 +2070,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table42.AddRow(new string[] {
+            table58.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -2051,24 +2079,24 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odorless",
                         "No data available",
                         "1"});
-#line 739
+#line 753
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table42, "And ");
-#line 742
+                    "g:", ((string)(null)), table58, "And ");
+#line 756
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74382", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 743
+#line 757
 testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 744
+#line 758
 testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 745
+#line 759
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 746
+#line 760
 testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 747
+#line 761
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 748
+#line 762
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase74382", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

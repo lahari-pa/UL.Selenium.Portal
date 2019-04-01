@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -13,6 +13,7 @@
 Feature: Flow 15
 
 
+@TReVorId:11592
 Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -37,6 +38,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58760
 
+@TReVorId:11586
 Scenario: [58759] Servers, Small-Scale - RU001183
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
