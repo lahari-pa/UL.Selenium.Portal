@@ -3012,8 +3012,8 @@ testRunner.And("I In the Shared Step below - Select the Product with the \"Accep
 testRunner.And("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
                     " saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1429
-testRunner.And("I Confirm the Product now shows a \"Completed\" Status in Completed forALL associat" +
-                    "ed Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Confirm the Product now shows a \"Completed\" Status in Completed for ALL associa" +
+                    "ted Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

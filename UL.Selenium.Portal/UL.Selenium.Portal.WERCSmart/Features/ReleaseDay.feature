@@ -1426,4 +1426,4 @@ And I Confirm the Product shows the ORIGINAL RETAILER(s) with a "Completed Statu
 And I Confirm the Product shows theNEW RETAILER(s) with an "Accepted Status" (see the Clients column)Note: if you selected a retailer that does not have a feed associated to it you will see the product in Completed status for this retailer)
 And I In the Shared Step below - Select the Product with the "Accepted Status"
 And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: (.*))
-And I Confirm the Product now shows a "Completed" Status in Completed forALL associated Retailers
+And I Confirm the Product now shows a "Completed" Status in Completed for ALL associated Retailers
