@@ -7,6 +7,7 @@
 Feature: Landing Page
 
 #does not work in staging as of 09-17-2018
+
 Scenario: [50769] Navigation
 Then I should see the following menu options in the header:
 | Option        |
