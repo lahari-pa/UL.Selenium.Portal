@@ -10,7 +10,6 @@ Feature: Landing Page
 #does not work in staging as of 09-17-2018
 @tfs_design
 Scenario: [50769] Navigation
-#Given I navigate to the URL: https://staging.thewercs.com/Wercs.SHA.MVCWebV1/
 Then I should see the following menu options in the header:
 | Option        |
 | Manufacturers |
