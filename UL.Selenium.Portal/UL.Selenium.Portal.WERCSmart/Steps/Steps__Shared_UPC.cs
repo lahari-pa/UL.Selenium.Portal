@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
@@ -420,6 +422,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			TestReport.StartStep("In the Universal Product Code (UPC) page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Universal Product Code (UPC)");
+		}
+
+		[StepDefinition(@"I Select a package type from the drop down list")]
+		public void GivenISelectAPackagerTypeFromTheDropDownList()
+		{
+			List<string> upcOptions = new NewProduct().GetPackageOptions();
+			Random random = new Random();
+			int randomNumber = random.Next(1, upcOptions.Count - 1);
+			Report.IsTrue(new NewProduct().SelectPackageType(upcOptions[randomNumber]),
+				"Failed to select: " + upcOptions[randomNumber], "Selected: " + upcOptions[randomNumber]);
 		}
 	}
 }
