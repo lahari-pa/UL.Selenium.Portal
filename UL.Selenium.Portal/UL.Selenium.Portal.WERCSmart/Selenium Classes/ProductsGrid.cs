@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
@@ -833,6 +834,45 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return "";
 			}
 
+		}
+
+		public bool AllRetailersAreShowingStatus(string expectedStatus)
+		{
+			var listOfRetailers = this.containerElement.FindElements(By.XPath(".//table[contains(@class, 'products-table')]//tr//ul[@class='list-inline retailers']/li"));
+
+			foreach (var thisItem in listOfRetailers)
+			{
+				string borderColour = thisItem.GetCssValue("border-color");
+				string foundStatus = "";
+				switch (borderColour)
+				{
+					case "rgb(30, 143, 31)":
+						foundStatus = "Accepted by Retailers";
+						break;
+					case "rgb(239, 157, 14)":
+						foundStatus = "Assessment in Progress";
+						break;
+					case "rgb(75, 82, 87)":
+						foundStatus = "Not Yet Submitted";
+						break;
+					case "rgb(0, 152, 255)":
+						foundStatus = "Sending to Retailers";
+						break;
+					case "rgb(207, 58, 83)":
+						foundStatus = "Needs Your Attention";
+						break;
+					default:
+						foundStatus = "";
+						break;
+				}
+
+				if (foundStatus != expectedStatus)
+				{
+					return false;
+				}
+			}
+
+			return true;
 		}
 
 		public bool ClickRetailerFirstRow(string retailer)

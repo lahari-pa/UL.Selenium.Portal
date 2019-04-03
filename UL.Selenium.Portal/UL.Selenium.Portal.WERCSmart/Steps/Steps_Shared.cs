@@ -7461,7 +7461,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.ClickContinue();
 		}
 
-		[StepDefinition(@"I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: (.*) and saved id as: (.*)")]
+		[StepDefinition(@"I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: (.*) and saved name as: (.*)")]
 		public void GivenICallSharedStep74654SHAManager_Suppliers_SearchByEmailAddress(string email, string savedAs)
 		{
 			TestReport.UseSubSteps = true;
@@ -7481,8 +7481,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click on the search button");
 			thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
 
-			TestReport.StartStep("I Make a note of the Supplier ID");
-			thisStepsSha.InSupplierManagerPopupISaveFirstSupplierIDAs(savedAs);
+			TestReport.StartStep("I Make a note of the Supplier Name");
+			thisStepsSha.InSupplierManagerPopupISaveFirstSupplierNameAs(savedAs);
 
 			TestReport.StartStep("I click on the close button");
 			thisStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
@@ -7538,6 +7538,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found","Product list is showing");
 
 		}
+
+		[StepDefinition(@"I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration")]
+		public void GivenICallSharedStep75130BulkActions_SelectForwardProductRegistration()
+		{
+			StepsProductGrid thisStepsProductGrid = new StepsProductGrid();
+
+			thisStepsProductGrid.GivenIClickBulkActionsInTheProductsGrid();
+			thisStepsProductGrid.GivenIClickForwardProductRegistrationInTheBulkActionsWindow(
+				"Forward Product Registration");
+		}
+
 
 	}
 }

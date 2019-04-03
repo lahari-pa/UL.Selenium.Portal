@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -327,6 +327,7 @@ Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: 63297
 
 
+@TReVorId:20207
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -511,6 +512,7 @@ Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
 
 
+@TReVorId:20219
 Scenario: [56476] VOC checks for Personal Fragrance product
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -562,6 +564,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
 
 @56477
+@TReVorId:20220
 Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 # Checking that the test will run correctly by handling extra screens
@@ -1280,6 +1283,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @SHA
 @51296
+@TReVorId:21863
 Scenario: [51296] Product in Assigned status - add to recertification
 Given I create a product with name: TestCase51296 and take to completed using Test Case 75651 and save as: TestCase51296
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -1339,6 +1343,7 @@ And In the Product Recertification History popup I should see the following entr
 
 @SHA
 @42273
+@TReVorId:21864
 Scenario: [42273] Recertification > Process recertification > Process 1 product
 #Given I If you do not have the test product in your account mentioned in the Description then use these two test cases
 #to create a product and get it to the correct status:1. Use test case 75335 to create a new product and process it thru to
@@ -1380,29 +1385,23 @@ And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for sa
 And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase78417
 And I Use Test case 84518 to process the product from Assigned back to Completed status saved as TestCase78417
 
+@SHA
+@ForwardProductRegistration
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-#And I For this test case you will need to know your Supplier Name as it appears in SHA manager - you can see this using the shared step below
-And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: greg@accupackmidwest.comUL and saved id as: myID
-#And I Now we will search for a product to test with - in the shared step below use the Completed Status to search on
-And I call Shared Step 74655 SHA - Search by Supplier ID saved as myID for specific product status: Completed
-#I Make a note of 1 of the products shown for your supplier with a "Completed Status" which has retailers present -
-#which does not show in the red recertification present fontNote:
-#DO NOT select a product which is shown in "orange font" as this will be a Branded Material
-#and WILL NOT HAVE the edit UPC link shown on it.If you do not have a product which shows - use test case 75335 to create a product and process it to completed
-And I save a product id which is not red or orange and has retailers as TestCase75321
+Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
+Given I navigate to the landing page
 And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-And I Click the "Accepted by Retailers" Filter
-And I Confirm the Products shown display the 'Green Color Status' - which is the "Accepted by Retailers"
-And I Enter the "Product ID" you noted earlier into the filter area and press the "ENTER KEY"
-And [Shared Step 75130 - Bulk Actions - Select Forward Product Registration]
-And I With the 'Selected Products Tab' selected by default
-And I In the "Search by WPS ID or Product Name" start typing the WPS ID or Product Name of the Product you made a note of earlier
-And I Confirm the Product is shown for selection
-And I Select the product by clicking on it
-And I Click 'CONTINUE'
-And I Select a "NEW" Retailer which you know is not already associated to the product (should not be present on the note you made earlier)
+And I filter the products by: Accepted by Retailers
+And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+And I filter for the product saved as: TestCase75321
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+Then I should see the header: Forward Product Registration on the Forward Product Registration window
+And I enter the text: saved as TestCase75321 in the 'Search by WPS ID or Product Name' field
+And In the Foward Product Registration Screen I should see product: saved as TestCase75321
+And In the Foward Product Registration Screen I Select the product: saved as TestCase75321
+And I click continue on the Forward Product Registration page
+#And I Select a "NEW" Retailer which you know is not already associated to the product (should not be present on the note you made earlier)
+And In the Forward Product Registration Screen I select a retailer under Other Retailers and save as TestCase75321Retailer
 And I Click 'CONTINUE'
 And [Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue]
 And I The 'Product Results Tab' is selected

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module.Reporting.Core;
 using OpenQA.Selenium;
@@ -37,7 +38,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			return searchButton.TryClick();
+			if (searchButton.TryClick())
+			{
+				Delay.Seconds(5);
+				return true;
+			}
+
+			return false;
 
 		}
 
@@ -71,9 +78,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public List<string> GetSupplierNames()
+		{
+			List<string> suppliers = new List<string>();
+			var searchTable = this.containerElement.FindElement(By.XPath(".//table[@id='listSupplierInfo']"), 5);
+			if (searchTable == null)
+			{
+				Report.Info("No supplier table has been found");
+				return suppliers;
+			}
+
+			var rows = searchTable.FindElements(By.XPath(".//tr[not(contains(@class, 'firstrow'))]"));
+
+			suppliers = rows.Select(x => x.GetAttribute("id")).ToList();
+
+			return suppliers;
+
+		}
+
 		public bool ClickClose()
 		{
-			var closeButton = this.containerElement.FindElement(By.XPath(".//span[contains(@class, 'close')]"), 2);
+			var closeButton = this.containerElement.FindElement(By.XPath("..//span[contains(@class, 'close')]"), 2);
 			if (closeButton == null)
 			{
 				Report.Info("Could not find close button");

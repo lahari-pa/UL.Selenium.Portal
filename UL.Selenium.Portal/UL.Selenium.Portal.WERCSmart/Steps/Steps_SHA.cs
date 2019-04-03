@@ -1906,17 +1906,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked search button");
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier ID as: (.*)")]
-		public void InSupplierManagerPopupISaveFirstSupplierIDAs(string saveAs)
+		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
+		public void InSupplierManagerPopupISaveFirstSupplierNameAs(string saveAs)
 		{
 			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
-			string id = thisStudioSupplierManager.GetSupplierIDs().FirstOrDefault();
-			if (id != null)
+			string name = thisStudioSupplierManager.GetSupplierNames().FirstOrDefault();
+			if (name != null)
 			{
-				Context.AddToContext(saveAs, id);
+				Context.AddToContext(saveAs, name);
 			}
-			Report.IsTrue(id!=null, "No id was found",
-				"Id: " + id + " was saved as: " + saveAs);
+			Report.IsTrue(name != null, "No name was found",
+				"Name: " + name + " was saved as: " + saveAs);
 		}
 
 		[StepDefinition(@"In the Supplier Manager Popup I click on the close button")]
@@ -1927,10 +1927,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked close button");
 		}
 
-		[Given(@"I save a product id which is not red or orange and has retailers as (.*)")]
+		[StepDefinition(@"I save a product id which blue and has retailers as (.*)")]
 		public void GivenISaveAProductIdWhichIsNotRedOrOrangeAndHasRetailersAsTestCase(string saveAs)
 		{
-			ScenarioContext.Current.Pending();
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			string id = thisStudioSHAManager.ReturnIDOfProductWhichIsBlueAndHasClients();
+
+			if (id != null)
+			{
+				Context.AddToContext(saveAs, id);
+			}
+			Report.IsTrue(id != null, "No suitable id was found", "ID: " + id + " was found and saved as: " + saveAs);
+
 		}
 
 
