@@ -702,6 +702,7 @@ Given I navigate to the home page
 Then I delete the product: TestCase56477
 
 
+@TReVorId:20221
 Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB and OTC
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -820,6 +821,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
 
 
+@TReVorId:20222
 Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -953,6 +955,7 @@ Given I navigate to the home page
 Then I delete the product: TestCase56483
 
 
+@TReVorId:20223
 Scenario: [56484] VOC - Aero checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
