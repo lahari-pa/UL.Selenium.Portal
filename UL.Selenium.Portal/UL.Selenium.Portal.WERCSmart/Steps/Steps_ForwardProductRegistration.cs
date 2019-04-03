@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Universal_Functions;
 using NTTQA_Reporting_Module;
 using NTTQA_Reporting_Module.Reporting.Core;
 using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -114,6 +116,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I enter the text: (.*) in the 'Search by WPS ID or Product Name' field")]
 		public void EnterTextInSearchByIDOrProductNameField(string value)
 		{
+			if (value.ToLower().Contains("saved as"))
+			{
+				var PI = (ProductInformation)Context.GetFromContext(value.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
+				if (PI == null)
+				{
+					throw new Exception("Failed to find product: " + value);
+				}
+
+				value = PI.Id;
+			}
 			var selForwardProdReg = new ForwardProductRegistration();
 			Report.IsTrue(selForwardProdReg.EnterTextToSearchField(value),
 				"Failed to enter text: " + value + " to the search field",
@@ -466,5 +478,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to set the 'Are Statements True' radio to: " + option,
 				"Successfully set the 'Are Statements True' radio to: " + option);
 		}
+
+		[StepDefinition(@"In the Foward Product Registration Screen I should see product: (.*)")]
+		public void ThenInTheFowardProductRegistrationScreenIShouldSeeProduct(string id)
+		{
+			if (id.ToLower().Contains("saved as"))
+			{
+				var PI = (ProductInformation)Context.GetFromContext(id.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
+				if (PI == null)
+				{
+					throw new Exception("Failed to find product: " + id);
+				}
+
+				id = PI.Id;
+			}
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
+				"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
+		}
+
+		[StepDefinition(@"In the Foward Product Registration Screen I Select the product: (.*)")]
+		public void ThenInTheFowardProductRegistrationScreenISelectTheProduct(string id)
+		{
+			if (id.ToLower().Contains("saved as"))
+			{
+				var PI = (ProductInformation)Context.GetFromContext(id.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim());
+				if (PI == null)
+				{
+					throw new Exception("Failed to find product: " + id);
+				}
+
+				id = PI.Id;
+			}
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(selForwardProdReg.SelectProducts_ClickProductByID(id),
+				"ID: " + id + " has not be selected as expected", "ID: " + id + " has been selected as expected");
+		}
+
+		[StepDefinition(@"In the Forward Product Registration Screen I select a retailer under Other Retailers and save as (.*)")]
+		public void ThenInTheForwardProductRegistrationScreenISelectARetailerUnderOtherRetailersAndSaveAs(string saveAs)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			var listOfRetailers = selForwardProdReg.GetListOfOtherRetailers();
+			Random rnd = new Random();
+			int index = rnd.Next(0, listOfRetailers.Count-1);
+
+			Report.IsTrue(selForwardProdReg.SelectRetailer(listOfRetailers[index]),
+				"Failed to select retailer: " + listOfRetailers[index], "Selected retailer: " + listOfRetailers[index]);
+
+			Context.AddToContext(saveAs, listOfRetailers[index]);
+
+		}
+
 	}
 }

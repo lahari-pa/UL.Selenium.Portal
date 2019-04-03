@@ -37,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.NewP
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "1 Account has no Canada Data (Suite ID 85307).feature"
+#line 1 "1 Account has no Canada Data.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]

@@ -94,13 +94,11 @@ namespace UL.Selenium.Portal.WERCSmart.Features.ProductRegistration
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU001" +
-            "246")]
+        [NUnit.Framework.DescriptionAttribute("[60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU001246")]
         [NUnit.Framework.CategoryAttribute("TReVorId:11626")]
-        public virtual void Scenario60737SeasoningsSpicesOrFlavoringForFood_SaltsSolid_RU001246()
+        public virtual void _60737SeasoningsSpicesOrFlavoringForFood_SaltsSolid_RU001246()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU001" +
-                    "246", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU001246", null, new string[] {
                         "TReVorId:11626"});
 #line 18
 this.ScenarioInitialize(scenarioInfo);
@@ -131,20 +129,20 @@ testRunner.Given("I call Shared Step 60741 (Select Primary Physical Property - S
 testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
                     "ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table207 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table207.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 40
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table207, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table1, "Given ");
 #line 46
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 48
@@ -180,13 +178,11 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU00" +
-            "1246")]
+        [NUnit.Framework.DescriptionAttribute("[60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU001246")]
         [NUnit.Framework.CategoryAttribute("TReVorId:11641")]
-        public virtual void Scenario60738SeasoningsSpicesOrFlavoringForFood_SaltsLiquid_RU001246()
+        public virtual void _60738SeasoningsSpicesOrFlavoringForFood_SaltsLiquid_RU001246()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU00" +
-                    "1246", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU001246", null, new string[] {
                         "TReVorId:11641"});
 #line 71
 this.ScenarioInitialize(scenarioInfo);
@@ -217,20 +213,20 @@ testRunner.Given("I call Shared Step 60747 (Select Primary Physical Property - L
 testRunner.Given("I call Shared Step 60756 (Additional Product Information with Country and every o" +
                     "ption)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table208 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table208.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 93
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table208, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table2, "Given ");
 #line 99
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 101
