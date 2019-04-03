@@ -22,6 +22,7 @@
 Feature: Release Day
 
 @63297
+@TReVorId:20204
 Scenario: [63297] Add subscription to a new supplier through data entry
 Given I define the user: 63297 with the following parameters:
 | Field                | Value           |
@@ -424,6 +425,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @71051
+@TReVorId:20209
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -479,6 +481,7 @@ Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase71051
 
 
+@TReVorId:20218
 Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly when the Update WERCSmart data link is used
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -702,6 +705,7 @@ Given I navigate to the home page
 Then I delete the product: TestCase56477
 
 
+@TReVorId:20221
 Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB and OTC
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -820,6 +824,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
 
 
+@TReVorId:20222
 Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -953,6 +958,7 @@ Given I navigate to the home page
 Then I delete the product: TestCase56483
 
 
+@TReVorId:20223
 Scenario: [56484] VOC - Aero checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -1114,6 +1120,7 @@ And The pie chart should be showing on the retailer details page
 And The pie chart footer text should contain: % of your product portfolio is associated with Costco
 
 
+@TReVorId:20224
 Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -1136,6 +1143,7 @@ And The pie chart footer text should contain: % of your product portfolio is ass
 
 @ProductSetUp
 @58753
+@TReVorId:20296
 Scenario: [58753] Hair Color Kit - RU000724
 Given I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct1
 Given I navigate to the landing page
@@ -1162,6 +1170,7 @@ And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 #And I The Purchase summary step is shown with the success message
 
 
+@TReVorId:20225
 Scenario: [70516] Add and Remove Packaging Type
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -1220,6 +1229,7 @@ Given I click Delete in the Delete Product pop up
 And I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
 
 
+@TReVorId:20226
 Scenario: [63684] Walmart Private label product
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -1377,6 +1387,7 @@ And In the SHA Manager Grid I run a search for product saved as: TestCase42273 a
 # NetProjects10\WercsSmart Portal\Release Day Tests
 
 @78417
+@TReVorId:21865
 Scenario: [78417] Recert by WERCSMart user
 Given I create a product with name: 78417 and take to completed using Test Case 75335 and save as: TestCase42273
 Given I take a product from completed to recertification using Test Case 75410 saved: TestCase78417
@@ -1387,9 +1398,10 @@ And I Use Test case 84518 to process the product from Assigned back to Completed
 
 @SHA
 @ForwardProductRegistration
+@TReVorId:22087
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
-Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
-Given I navigate to the landing page
+#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
+#Given I navigate to the landing page
 And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I filter the products by: Accepted by Retailers
 And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
@@ -1400,25 +1412,27 @@ And I enter the text: saved as TestCase75321 in the 'Search by WPS ID or Product
 And In the Foward Product Registration Screen I should see product: saved as TestCase75321
 And In the Foward Product Registration Screen I Select the product: saved as TestCase75321
 And I click continue on the Forward Product Registration page
-#And I Select a "NEW" Retailer which you know is not already associated to the product (should not be present on the note you made earlier)
+#And I Select a "NEW" Retailer which you know is not already associated to the product saved into context as 'retailer'
 And In the Forward Product Registration Screen I select a retailer under Other Retailers and save as TestCase75321Retailer
-And I Click 'CONTINUE'
-And [Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue]
-And I The 'Product Results Tab' is selected
-And I Confirm that the UPC Number displays the recently selected "Retailer"(Step 17)
-And I Confirm that NO Errors display for the Product
-And I Click 'CONTINUE'
-And I The 'Review and Submit' step is shown
-And I Select the "All of the above statements are true" Radio Button
-And I Click 'CONTINUE'
-And I Confirm the Purchase Summary page is shown with the success message shown" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  "
-And I Click on the 'HOME BUTTON'
-And I In SHA Manager
-And I In the shared step below search for your product using the WPS ID you noted earlier
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved as: (.*))
-And I Confirm the Product shows a "Completed Status" for the Original Retailer(see Clients column)
+And I click continue on the Forward Product Registration page
+And I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue and save UPC as TestCase75321UPC
+Then I should see the header: Product Results on the Forward Product Registration window
+Then I confirm that for UPC Number saved as TestCase75321UPC the retailer is displayed as saved as TestCase75321Retailer
+And I confirm that NO Errors display for the Product
+And I click continue on the Forward Product Registration page
+Then I should see the header: Review & Submit on the Forward Product Registration window
+Then I select the true radio for the 'Are Statements True' question under the Review and Submit tab
+And I click continue on the Forward Product Registration page
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Purchase Summary screen I confirm the folling statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+
+Scenario: Test75321
+Given I save to context name: TestCase75321 and value: 1555642
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75321)
+And I Confirm the Product shows a "Completed Status" for the Original Retailer (see Clients column)
 And I Confirm the Productshows a "Submitted Status" for the recently selected Retailer (see clients column)
-And [Shared Step 75309 - SHA > Select Product > UPC List]
+And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: TestCase75321
 And I With the SHA Manager Product UPC window open - Click on the 'maximize' icon to expand the view of the window
 And I Confirm the recently added Retailer(s)is (are) shown against the UPC you selected
 And I Close the SHA Manager Product UPC window

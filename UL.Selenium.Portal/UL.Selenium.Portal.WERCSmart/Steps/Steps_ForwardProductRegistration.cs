@@ -520,15 +520,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			var listOfRetailers = selForwardProdReg.GetListOfOtherRetailers();
+
+			string alreadySelectedRetailer = "CVS";
+
+			if (Context.Contains("retailer"))
+			{
+				alreadySelectedRetailer = Context.GetFromContext("retailer").ToString();
+			}
+
+
+			var itemToRemove = listOfRetailers.SingleOrDefault(r => r == alreadySelectedRetailer);
+			if (itemToRemove != null)
+			{
+				listOfRetailers.Remove(itemToRemove);
+			}
+
 			Random rnd = new Random();
 			int index = rnd.Next(0, listOfRetailers.Count-1);
 
-			Report.IsTrue(selForwardProdReg.SelectRetailer(listOfRetailers[index]),
+			Report.IsTrue(selForwardProdReg.SelectOtherRetailer(listOfRetailers[index]),
 				"Failed to select retailer: " + listOfRetailers[index], "Selected retailer: " + listOfRetailers[index]);
 
 			Context.AddToContext(saveAs, listOfRetailers[index]);
 
 		}
+
+		[Then(@"I confirm that for UPC Number (.*) the retailer is displayed as (.*)")]
+		public void ThenIConfirmThatForUPCNumberSavedAsTestCaseUPCTheRetailerIsDisplayedAsSavedAsTestCaseRetailer(string UPCNumber, string Retailer)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			if (UPCNumber.ToLower().Contains("saved as"))
+			{
+				UPCNumber = Context
+					.GetFromContext(UPCNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase)
+						.Trim()).ToString();
+			}
+
+			if (Retailer.ToLower().Contains("saved as"))
+			{
+				Retailer = Context
+					.GetFromContext(Retailer.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase)
+						.Trim()).ToString();
+			}
+
+			var listProductResults = selForwardProdReg.GetProductResults();
+
+			var matchingListItem = listProductResults.FirstOrDefault(x =>
+				x.UPCs.FirstOrDefault(y => y.UPCNumber == UPCNumber).DestinationRetailers.Contains(Retailer));
+
+			Report.IsTrue(matchingListItem != null,
+				"Failed to find matching item for UPCNumber: " + UPCNumber + " and retailer: " + Retailer,
+				"Found matching item for UPCNumber: " + UPCNumber + " and retailer: " + Retailer);
+		}
+
+		[StepDefinition(@"I confirm that NO Errors display for the Product")]
+		public void ThenIConfirmThatNOErrorsDisplayForTheProduct()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
+		}
+
 
 	}
 }
