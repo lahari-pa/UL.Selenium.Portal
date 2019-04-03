@@ -7461,18 +7461,94 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.ClickContinue();
 		}
 
-		[StepDefinition(@"I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: (.*) and saved id as: (.*)")]
-		public void GivenICallSharedStep74654SHAManager_Suppliers_SearchByEmailAddress(string email)
+		[StepDefinition(@"I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: (.*) and saved name as: (.*)")]
+		public void GivenICallSharedStep74654SHAManager_Suppliers_SearchByEmailAddress(string email, string savedAs)
 		{
-			//	Given I Click the "Suppliers" link on the top right of the screen
-			//	And I In the top "Input Field" - enter the email address of the user you are going to be using in WERCSmart for this test into the search area of the pop up
-			//		And I Select the "Email" Radio Button
-			//	And I Click on the 'SEARCH Button'
-			//	And I Select the"Entry"
-			//	And I Make a note of the Supplier ID - this will need to be exact in order for the searches within SHA manager to return the correct results(also case sensitive)
-			//	And I Close the Supplier Manager pop up
-			//
+			TestReport.UseSubSteps = true;
+			Steps_SHA thisStepsSha = new Steps_SHA();
+			TestReport.StartStep("Given I Click the Suppliers link on the top right of the screen");
+			thisStepsSha.IClickOnSuppliersLink();
+
+			TestReport.StartStep("Given I Click the Suppliers pop up should open");
+			thisStepsSha.TheSupplierManagerPopupAppears();
+
+			TestReport.StartStep("Given enter the email address of the user you are going to be using in WERCSmart");
+			thisStepsSha.InSupplierManagerPopupIEnterSearchTerm(email);
+
+			TestReport.StartStep("I Select the 'Email' Radio Button");
+			thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-Mail");
+
+			TestReport.StartStep("I click on the search button");
+			thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+
+			TestReport.StartStep("I Make a note of the Supplier Name");
+			thisStepsSha.InSupplierManagerPopupISaveFirstSupplierNameAs(savedAs);
+
+			TestReport.StartStep("I click on the close button");
+			thisStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+
 		}
+
+
+		[StepDefinition(@"I call Shared Step 74655 SHA - Search by Supplier ID saved as (.*) for specific product status: (.*)")]
+		public void GivenICallSharedStepSHA74655SearchBySupplierIDSavedAsMyIDForSpecificProductStatusCompleted(string savedAs, string status)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 74655");
+			Steps_SHA thisStepsSha = new Steps_SHA();
+			TestReport.StartStep("I set the status filter to All");
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			Report.Info("Getting saved product: " + savedAs);
+
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+			TestReport.StartStep("I click Srch in the bottom menu list");
+
+			myStudioShaManager.ClickBottomMenuOption("Search");
+
+
+			var supplierID = Context.GetFromContext(savedAs).ToString();
+			Report.Info("Looking for supplier id: " + supplierID.ToString());
+			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"Supplier",
+				supplierID
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+
+
+			TestReport.StartStep("I click Srch in the bottom menu list");
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			Steps_SHA myStepsSha = new Steps_SHA();
+			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+			Delay.Seconds(1);
+			Report.Info("Waiting for product list");
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found","Product list is showing");
+
+		}
+
+		[StepDefinition(@"I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration")]
+		public void GivenICallSharedStep75130BulkActions_SelectForwardProductRegistration()
+		{
+			StepsProductGrid thisStepsProductGrid = new StepsProductGrid();
+
+			thisStepsProductGrid.GivenIClickBulkActionsInTheProductsGrid();
+			thisStepsProductGrid.GivenIClickForwardProductRegistrationInTheBulkActionsWindow(
+				"Forward Product Registration");
+		}
+
 
 	}
 }

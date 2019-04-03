@@ -15,7 +15,7 @@ Feature: [64739] Flow 31 - Seasonings
 
 
 @TReVorId:11626
-Scenario: Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU001246
+Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU001246
 	# ====== Logging in as the correct user ====== #
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -68,7 +68,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @TReVorId:11641
-Scenario: Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU001246
+Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU001246
 	# ====== Logging in as the correct user ====== #
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 

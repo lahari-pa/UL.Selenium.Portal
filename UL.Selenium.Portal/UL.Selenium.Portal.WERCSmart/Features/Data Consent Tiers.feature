@@ -13,13 +13,11 @@ Then I click the Retail Partners icon in the Navigation Pane
 Scenario: [56942] Data Consent Tiers - Walmart
 Given I select the retailer: Wal-Mart
 Then I confirm that there is a section labeled: Data Consent Tiers
-
 Given I ensure the Data Consent Tier Sliders are set as follows:
 | Tier | State |
 | 2.1  | Off   |
 | 2.2  | Off   |
 | 4.2  | Off   |
-
 Then I should not be able to edit Tier 1
 And I should be able to edit Tier 2.1
 And I should be able to edit Tier 2.2
