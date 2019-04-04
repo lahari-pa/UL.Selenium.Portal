@@ -80,7 +80,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			try
 			{
-				int idIndex = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+				int idIndex = SeleniumBrowser.WebBrowser
+					.FindElements(By.XPath(
+						"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+					.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
 
 				StudioSHAManager mySHAManager = new StudioSHAManager();
 				mySHAManager.Wait_for_load();
@@ -149,7 +152,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//idStatus - tPartyForm, hold, elect, brandedcomp, docrequest, batt, kit, rulerunning, rulequeue, ruleerror, feederror,
-		public bool WaitForIDToBeStatus(string id, int secondsToWait, string tableStatus, string idStatus, bool expectingBold = false, string tableBackground = "none")
+		public bool WaitForIDToBeStatus(string id, int secondsToWait, string tableStatus, string idStatus,
+			bool expectingBold = false, string tableBackground = "none")
 		{
 			Report.Info("Beginning wait for id to be status");
 			var myProductSearch = new StudioSHAManagerProductSearch();
@@ -195,8 +199,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var thisProductStatus = this.GetproductStatus(id);
 				if (thisProductStatus != null)
 				{
-					if ((idStatus == thisProductStatus.StatusName || idStatus.ToLower() == "n/a") && thisProductStatus.Bold == expectingBold &&
-						(tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor))
+					if ((idStatus == thisProductStatus.StatusName || idStatus.ToLower() == "n/a") &&
+					    thisProductStatus.Bold == expectingBold &&
+					    (tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor))
 					{
 						return true;
 					}
@@ -208,7 +213,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					else
 					{
-						matchReport += " status did not match. Expecting: " + idStatus + " but got: " + thisProductStatus.StatusName;
+						matchReport += " status did not match. Expecting: " + idStatus + " but got: " +
+						               thisProductStatus.StatusName;
 					}
 
 					if (thisProductStatus.Bold == expectingBold)
@@ -217,7 +223,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					else
 					{
-						matchReport += " bolding did not match. Expecting: " + expectingBold.ToString() + " but got: " + thisProductStatus.Bold.ToString();
+						matchReport += " bolding did not match. Expecting: " + expectingBold.ToString() + " but got: " +
+						               thisProductStatus.Bold.ToString();
 					}
 
 					if (tableBackground == "none" || tableBackground == thisProductStatus.CSSBackgroundColor)
@@ -261,7 +268,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool WaitForIDToTurnBlue(string id, int secondsToWait)
 		{
 			//get index of id column
-			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			int index = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
 			for (int i = 0; i < secondsToWait; i++)
 			{
 				StudioSHAManager mySHAManager = new StudioSHAManager();
@@ -336,7 +346,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Beginning select product by id: " + id);
 				Delay.Seconds(5);
 				GeneralUtilities.StudioWaitForSpinner(60);
-				int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+				int index = SeleniumBrowser.WebBrowser
+					.FindElements(By.XPath(
+						"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+					.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
 
 				var matchingTD = SeleniumBrowser.WebBrowser
 					.FindElements(By.XPath("//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
@@ -406,7 +419,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Delay.Seconds(3);
 			Report.Info("Attemping to rightclick product by id: " + id);
-			int index = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			int index = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
 
 			var matchingTD = SeleniumBrowser.WebBrowser
 				.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
@@ -430,7 +446,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']//tr"), 3).ToList();
+				var ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']//tr"), 3)
+					.ToList();
 				if (ListOfProductRows == null || ListOfProductRows.Count == 1)
 				{
 					//count of 1 row means only headers so table is empty
@@ -480,7 +497,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return new List<Product>();
 			}
 
-			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
+			ListOfProductRows = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
 
 			Report.Info("Got product rows: " + ListOfProductRows.Count.ToString());
 
@@ -488,7 +506,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				topX = ListOfProductRows.Count;
 			}
-			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]")).Select(x => x.GetValue().Trim()).ToList();
+
+			List<string> ListOfHeaders = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList();
 
 			for (int index = 1; index < ListOfHeaders.Count; index++)
 			{
@@ -502,7 +524,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Got list of headers");
 			List<Product> ListOfProducts = new List<Product>();
 			//get all columns
-			ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
+			ListOfProductRows = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
 			for (int j = 0; j < Math.Min(ListOfProductRows.Count, topX + 1); j++)
 			{
 				List<string> rowValues = new List<string>();
@@ -513,14 +536,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					try
 					{
-						ListOfProductRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
-						rowValues = ListOfProductRows[j].FindElements(By.XPath(".//td"), 2).Select(x => x.GetValue()).ToList();
+						ListOfProductRows = SeleniumBrowser.WebBrowser
+							.FindElements(By.XPath("//table[@id='list']/tbody//tr[@class!='jqgfirstrow']"), 3).ToList();
+						rowValues = ListOfProductRows[j].FindElements(By.XPath(".//td"), 2).Select(x => x.GetValue())
+							.ToList();
 						gotRow = true;
 					}
 					catch (Exception e)
 					{
 						Report.Info("Try " + counter + "Failed to get row values for row " + j);
 					}
+
 					Delay.Seconds(1);
 					counter++;
 				}
@@ -563,7 +589,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Report.Info("Status is: " + thisProduct.Status);
 							try
 							{
-								var status = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='list']//tr[@class!='jqgfirstrow'][" + (j + 1) + "]//td[" + (i + addIndex) + "]"), 2);
+								var status = SeleniumBrowser.WebBrowser.FindElement(
+									By.XPath("//table[@id='list']//tr[@class!='jqgfirstrow'][" + (j + 1) + "]//td[" +
+									         (i + addIndex) + "]"), 2);
 								Report.Info("Status is: " + status.GetValue());
 								if (status != null)
 								{
@@ -672,7 +700,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var rightBorderColour = matchingTD.GetCssValue("border-right-color");
 
 				if (bottomBorderColour == "rgba(205, 10, 10, 1)" && leftBorderColour == "rgba(205, 10, 10, 1)" &&
-					rightBorderColour == "rgba(205, 10, 10, 1)")
+				    rightBorderColour == "rgba(205, 10, 10, 1)")
 				{
 					return true;
 				}
@@ -843,7 +871,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				var SupplierLink =
-					SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='ddtopmenubar']//li[@id='supplierbar']/a"));
+					SeleniumBrowser.WebBrowser.FindElement(
+						By.XPath(".//div[@id='ddtopmenubar']//li[@id='supplierbar']/a"));
 
 				return SupplierLink.TryClick();
 			}
@@ -871,8 +900,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				var ListOfTopMenuOptions =
 					SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//ul[@id='ddsubmenu1']/li/a"));
-				IWebElement menuOption = ListOfTopMenuOptions.FirstOrDefault(x => x.GetValue(true).ToLower() == option.ToLower());
-				Report.Info("Found options: " + string.Join(",", ListOfTopMenuOptions.Select(x => x.GetValue(true)).ToList()));
+				IWebElement menuOption =
+					ListOfTopMenuOptions.FirstOrDefault(x => x.GetValue(true).ToLower() == option.ToLower());
+				Report.Info("Found options: " +
+				            string.Join(",", ListOfTopMenuOptions.Select(x => x.GetValue(true)).ToList()));
 				if (menuOption != null)
 				{
 					return menuOption.TryClick(Click_Functionality.ClickType.JavaScript);
@@ -923,12 +954,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				option = "Srch";
 			}
 
-			var listOfOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[contains(@class,'navtable')]//td[not(contains(@class, 'disabled')) and not(contains(@style, 'none'))]/div"));
+			var listOfOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath(
+				"//table[contains(@class,'navtable')]//td[not(contains(@class, 'disabled')) and not(contains(@style, 'none'))]/div"));
 			var matchingOption = listOfOptions.FirstOrDefault(x => x.GetValue().ToLower().Contains(option.ToLower()));
 
 			if (matchingOption == null)
 			{
-				Report.Info("No matching menu option found: " + option + ". Available options: " + string.Join(",", listOfOptions));
+				Report.Info("No matching menu option found: " + option + ". Available options: " +
+				            string.Join(",", listOfOptions));
 				return false;
 			}
 
@@ -948,9 +981,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			var headers = headerRow.FindElements(By.XPath("./td"), 2);
-			var upcPosition = headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'UPC Number')]"))) + 1;
-			var pkgTypePosition = headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Type')]"))) + 1;
-			var pkgSizePosition = headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Size')]"))) + 1;
+			var upcPosition = headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'UPC Number')]"))) +
+			                  1;
+			var pkgTypePosition =
+				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Type')]"))) + 1;
+			var pkgSizePosition =
+				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Size')]"))) + 1;
 			// IndexOf() returns -1 if el not found in the row. position()= 0 will fail to get the correct td
 			if (upcPosition == 0 || pkgTypePosition == 0 || pkgSizePosition == 0)
 			{
@@ -988,6 +1024,46 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public string ReturnIDOfProductWhichIsBlueAndHasClients()
+		{
+			int indexOfID = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
+			int indexOfClients = SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath(
+					".//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
+				.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Clients");
+
+			var idTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfID + 1).ToString() + "]"));
+
+			var clientsTDs = SeleniumBrowser.WebBrowser.FindElements(
+				By.XPath(".//table[@id='list']//tr[not(@class='jqgfirstrow')]//td[" + (indexOfClients + 1).ToString() + "]"));
+
+			for (int i = 0; i < idTDs.Count; i++)
+			{
+				var thisIDTD = idTDs[i];
+				var thisClientsTD = clientsTDs[i];
+				string colour = thisIDTD.FindElement(By.XPath(".//span")).GetCssValue("color").ToString();
+				if (colour == "rgba(0, 0, 255, 1)" && thisClientsTD.GetValue().Length > 0)
+				{
+					var bottomBorderColour = thisIDTD.GetCssValue("border-bottom-color");
+					var leftBorderColour = thisIDTD.GetCssValue("border-left-color");
+					var rightBorderColour = thisIDTD.GetCssValue("border-right-color");
+
+					if (!(bottomBorderColour == "rgba(205, 10, 10, 1)" && leftBorderColour == "rgba(205, 10, 10, 1)" &&
+					      rightBorderColour == "rgba(205, 10, 10, 1)"))
+					{
+						return thisIDTD.GetValue().Trim();
+					}
+						
+				}
+			}
+
+			return null;
+
+		}
 	}
 
 	class StudioSHAManagerProductSearch : BaseObject
@@ -1941,7 +2017,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> GetReasons()
 		{
 			List<string> reasons = new List<string>();
-			var reasonTD = this.containerElement.FindElements(By.XPath(".//table[@id='tblReasons']//tr[(.//input)]/td[3]"));
+			var reasonTD =
+				this.containerElement.FindElements(By.XPath(".//table[@id='tblReasons']//tr[(.//input)]/td[3]"));
 			if (reasonTD.Count == 0)
 			{
 				Report.Error("No reasons have been found");
@@ -1957,7 +2034,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> GetSelectedReasons()
 		{
 			List<string> reasons = new List<string>();
-			var reasonTD = this.containerElement.FindElements(By.XPath(".//table[@id='tblReasons']//tr[(.//input[@checked='checked'])]/td[3]"));
+			var reasonTD =
+				this.containerElement.FindElements(
+					By.XPath(".//table[@id='tblReasons']//tr[(.//input[@checked='checked'])]/td[3]"));
 			if (reasonTD.Count == 0)
 			{
 				Report.Info("No selected reasons have been found");
@@ -1989,6 +2068,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						{
 							value = value.Substring(0, index);
 						}
+
 						if (Convert.ToInt16(value) == no)
 						{
 							return this.SelectReasonbyText(thisReason);
@@ -2064,17 +2144,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var matchingButton = buttonList.FirstOrDefault(x => x.GetValue().Trim() == button);
 			if (matchingButton == null)
 			{
-				matchingButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button/span[text()='" + button + "']"), 2);
+				matchingButton =
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button/span[text()='" + button + "']"), 2);
 				if (matchingButton == null)
 				{
 					Report.Info("no matching button was found");
 					return false;
 				}
+
 				return matchingButton.TryClick();
 			}
+
 			return matchingButton.TryClick();
 		}
-
 
 	}
 }

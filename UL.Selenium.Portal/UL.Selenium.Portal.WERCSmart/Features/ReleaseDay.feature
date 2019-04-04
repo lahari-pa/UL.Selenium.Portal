@@ -1368,25 +1368,22 @@ And I call Shared Step 44240 - SHA - Recertification > process recertification t
 And I Use Test case 84518 to process the product from Assigned back to Completed status saved as TestCase78417
 
 @TReVorId:22087
+@ForwardProductRegistration
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
-#And I For this test case you will need to know your Supplier Name as it appears in SHA manager - you can see this using the shared step below
-And I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: greg@accupackmidwest.comUL and saved id as: myID
-And I Now we will search for a product to test with - in the shared step below use the Completed Status to search on
-And [Shared Step 74655 - SHA - Search by Supplier ID for specific product status]
-And I Make a note of 1 of the products shown for your supplier with a "Completed Status" which has retailers present - which does not show in the red recertification present fontNote:DO NOT select a product which is shown in "orange font" as this will be a Branded Material and WILL NOT HAVE the edit UPC link shown on it.If you do not have a product which shows - use test case 75335 to create a product and process it to completed
+Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
+Given I navigate to the landing page
 And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-And I Click the "Accepted by Retailers" Filter
-And I Confirm the Products shown display the 'Green Color Status' - which is the "Accepted by Retailers"
-And I Enter the "Product ID" you noted earlier into the filter area and press the "ENTER KEY"
-And [Shared Step 75130 - Bulk Actions - Select Forward Product Registration]
-And I With the 'Selected Products Tab' selected by default
-And I In the "Search by WPS ID or Product Name" start typing the WPS ID or Product Name of the Product you made a note of earlier
-And I Confirm the Product is shown for selection
-And I Select the product by clicking on it
-And I Click 'CONTINUE'
-And I Select a "NEW" Retailer which you know is not already associated to the product (should not be present on the note you made earlier)
+And I filter the products by: Accepted by Retailers
+And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers
+And I filter for the product saved as: TestCase75321
+And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+Then I should see the header: Forward Product Registration on the Forward Product Registration window
+And I enter the text: saved as TestCase75321 in the 'Search by WPS ID or Product Name' field
+And In the Foward Product Registration Screen I should see product: saved as TestCase75321
+And In the Foward Product Registration Screen I Select the product: saved as TestCase75321
+And I click continue on the Forward Product Registration page
+#And I Select a "NEW" Retailer which you know is not already associated to the product (should not be present on the note you made earlier)
+And In the Forward Product Registration Screen I select a retailer under Other Retailers and save as TestCase75321Retailer
 And I Click 'CONTINUE'
 And [Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing data and select 1 UPC - Continue]
 And I The 'Product Results Tab' is selected

@@ -3219,7 +3219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			List<string> containerTypes = new NewProduct().GetContainerOptions();
 			Random random = new Random();
-			int randomNumber = random.Next(0, containerTypes.Count - 1);
+			int randomNumber = random.Next(1, containerTypes.Count - 1);
 			Report.IsTrue(new NewProduct().SelectContainerType(containerTypes[randomNumber]),
 				"Failed to select: " + containerTypes[randomNumber], "Selected: " + containerTypes[randomNumber]);
 		}
@@ -3244,5 +3244,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Add new packaging type link exists as expected");
 		}
 
+		[StepDefinition(@"The alert message is not displayed with text: (.*)")]
+		public void AlertMessageNotDisplayed(string alert)
+		{
+			List<string> actualAlerts = new NewProduct().DisplayedAlerts();
+			//if (actualAlerts == null)
+			//{
+			//	Report.Failure("Could not locate any alert messages on the page");
+			//	return;
+			//}
+			Report.IsFalse(actualAlerts.Contains(alert),
+				"Message is displayed where it should not have been. Displayed message: " + actualAlerts + "!",
+				"Message did not display as expected ");
+		}
 	}
 }

@@ -1866,5 +1866,81 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return count;
 		}
 
+		[StepDefinition(@"I click on the Suppliers link on the top right of the screen")]
+		public void IClickOnSuppliersLink()
+		{
+			StudioSHAManager thisShaManager = new StudioSHAManager();
+			Report.IsTrue(thisShaManager.ClickSuppliersButton(), "Failed to click suppliers button",
+				"Clicked suppliers button");
+		}
+
+		[StepDefinition(@"The Supplier Manager popup appears")]
+		public void TheSupplierManagerPopupAppears()
+		{
+			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.Wait_for_load(30), "StudioSupplierManager has not opened",
+				"StudioSupplierManager has opened");
+		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
+		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
+		{
+			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.EnterSearchTerm(searchTerm), "Failed to enter search term: " + searchTerm,
+				"Entered search term: " + searchTerm);
+		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I select radio button: (.*)")]
+		public void InSupplierManagerPopupISelectRadioButton(string button)
+		{
+			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.SelectSupplierSearchTypeRadio(button), "Failed to select radio button: " + button,
+				"Selected radio button: " + button);
+		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I click on the search button")]
+		public void InSupplierManagerPopupIClickOnTheSearchButton()
+		{
+			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.ClickSearchButton(), "Failed to click search button",
+				"Clicked search button");
+		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
+		public void InSupplierManagerPopupISaveFirstSupplierNameAs(string saveAs)
+		{
+			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			string name = thisStudioSupplierManager.GetSupplierNames().FirstOrDefault();
+			if (name != null)
+			{
+				Context.AddToContext(saveAs, name);
+			}
+			Report.IsTrue(name != null, "No name was found",
+				"Name: " + name + " was saved as: " + saveAs);
+		}
+
+		[StepDefinition(@"In the Supplier Manager Popup I click on the close button")]
+		public void InSupplierManagerPopupIClickOnTheCloseButton()
+		{
+			StudioSupplierManager thisStudioSupplierManager = new StudioSupplierManager();
+			Report.IsTrue(thisStudioSupplierManager.ClickClose(), "Failed to click close button",
+				"Clicked close button");
+		}
+
+		[StepDefinition(@"I save a product id which blue and has retailers as (.*)")]
+		public void GivenISaveAProductIdWhichIsNotRedOrOrangeAndHasRetailersAsTestCase(string saveAs)
+		{
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			string id = thisStudioSHAManager.ReturnIDOfProductWhichIsBlueAndHasClients();
+
+			if (id != null)
+			{
+				Context.AddToContext(saveAs, id);
+			}
+			Report.IsTrue(id != null, "No suitable id was found", "ID: " + id + " was found and saved as: " + saveAs);
+
+		}
+
+
 	}
 }
