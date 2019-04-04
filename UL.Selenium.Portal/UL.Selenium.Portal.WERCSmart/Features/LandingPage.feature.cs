@@ -90,16 +90,16 @@ namespace UL.Selenium.Portal.WERCSmart.Features
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-            TechTalk.SpecFlow.Table table118 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table118.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Manufacturers"});
-            table118.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Retailers"});
-            table118.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Subscription"});
 #line 13
-testRunner.Then("I should see the following menu options in the header:", ((string)(null)), table118, "Then ");
+testRunner.Then("I should see the following menu options in the header:", ((string)(null)), table1, "Then ");
 #line 18
 testRunner.Given("I select the Manufacturers link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19

@@ -397,7 +397,7 @@ testRunner.Then("I should see the Optional Reports and Documents Available for P
 testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table329 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -406,7 +406,7 @@ testRunner.Then("in the Optional Reports and Documents Available for Purchase pa
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table329.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -418,7 +418,7 @@ testRunner.Then("in the Optional Reports and Documents Available for Purchase pa
 #line 150
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table329, "Given ");
+                    "g:", ((string)(null)), table1, "Given ");
 #line 153
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 57863. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
@@ -494,7 +494,7 @@ testRunner.Then("I should see the Optional Reports and Documents Available for P
 testRunner.Then("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table330 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -503,7 +503,7 @@ testRunner.Then("in the Optional Reports and Documents Available for Purchase pa
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table330.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Mask",
                         "300",
                         "1.005",
@@ -515,7 +515,7 @@ testRunner.Then("in the Optional Reports and Documents Available for Purchase pa
 #line 185
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table330, "Given ");
+                    "g:", ((string)(null)), table2, "Given ");
 #line 188
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 57863. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
@@ -551,23 +551,23 @@ testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)
 testRunner.Then("in the Transportation Details 1 page I should see the Product is Regulated for Tr" +
                     "ansport question", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table331 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table331.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Yes"});
-            table331.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 207
 testRunner.Then("The following radio buttons should be displayed for section: Product is Regulated" +
-                    " for Transport", ((string)(null)), table331, "Then ");
+                    " for Transport", ((string)(null)), table3, "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table332 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table332.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Not Regulated"});
 #line 212
 testRunner.Then("The following radio buttons should not be displayed for section: Product is Regul" +
-                    "ated for Transport", ((string)(null)), table332, "Then ");
+                    "ated for Transport", ((string)(null)), table4, "Then ");
 #line 216
 testRunner.And("I should see a total of 2 radio buttons for the section: Product is Regulated for" +
                     " Transport", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -604,26 +604,26 @@ testRunner.And("I click the Summary button in the Data Acceptance window", ((str
 #line 230
 testRunner.And("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table333 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Kit items"});
-            table333.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "saved as Kit1"});
-            table333.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "saved as Kit2"});
 #line 231
 testRunner.And("In the Data Summary page I confirm that the following items are included in the k" +
-                    "it:", ((string)(null)), table333, "And ");
+                    "it:", ((string)(null)), table5, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table334 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Question",
                         "Answer",
                         "True or False"});
-            table334.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Product is Regulated for Transport",
                         "Not Regulated",
                         "False"});
 #line 235
-testRunner.And("In the Data Summary page I confirm the following questions and answers", ((string)(null)), table334, "And ");
+testRunner.And("In the Data Summary page I confirm the following questions and answers", ((string)(null)), table6, "And ");
 #line 238
 testRunner.And("In the Data Summary page I confirm that I do not see any errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 239
