@@ -120,12 +120,12 @@ testRunner.And("I should see the Product Characteristics Page", ((string)(null))
 #line 24
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table517 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table517.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Solid"});
 #line 25
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table517, "And ");
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table1, "And ");
 #line 28
 testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
@@ -210,12 +210,12 @@ testRunner.And("I should see the Product Characteristics Page", ((string)(null))
 #line 56
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table518 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table518.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Liquid"});
 #line 57
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table518, "And ");
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table2, "And ");
 #line 60
 testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
@@ -314,12 +314,12 @@ testRunner.And("I should see the Product Characteristics Page", ((string)(null))
 #line 96
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table519 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table519.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Aerosol"});
 #line 97
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table519, "And ");
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table3, "And ");
 #line 100
 testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 101
@@ -328,19 +328,19 @@ testRunner.And("I should see following statement: pH", ((string)(null)), ((TechT
 testRunner.And("I should see following statement: When the product has a flammable propellant, or" +
                     " contains ingredients with a flash point below 60⁰C then", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table520 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table520.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "This product is classified as a D001 Hazardous Waste under RCRA (as per Section 1" +
                             "3 or 15 of the SDS)."});
-            table520.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "This product is classified as a D003 Hazardous Waste under RCRA."});
-            table520.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "This product is not classified as D001 or D003 Hazardous Waste under RCRA"});
 #line 103
 testRunner.And("The following radio buttons should be displayed for section: When the product has" +
                     " a flammable propellant, or contains ingredients with a flash point below 60⁰C t" +
-                    "hen", ((string)(null)), table520, "And ");
+                    "hen", ((string)(null)), table4, "And ");
 #line 108
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31786", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -417,12 +417,12 @@ testRunner.And("I should see the Product Characteristics Page", ((string)(null))
 #line 134
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table521 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table521.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Gas"});
 #line 135
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table521, "And ");
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table5, "And ");
 #line 138
 testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 139
@@ -500,18 +500,18 @@ testRunner.And("I should see the Product Characteristics Page", ((string)(null))
 #line 165
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table522 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table522.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Aerosol"});
-            table522.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Gas"});
-            table522.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Liquid"});
-            table522.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Solid"});
 #line 166
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table522, "And ");
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table6, "And ");
 #line 172
 testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 173
