@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -11,6 +11,7 @@
 @run_Flow9
 Feature: Flow 9
 
+@TReVorId:11512
 Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -68,6 +69,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58072
 
 @newproductstepstest
+@TReVorId:11522
 Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -105,6 +107,7 @@ Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 
+@TReVorId:11515
 Scenario: [58078] Energy or Nutritional Bars - RU000618
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -209,6 +212,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I navigate to the home page
 Then I delete the product: TestCase58079
 
+@TReVorId:11513
 Scenario: [58073] Footwear - Gel Insert - RU000854
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -260,6 +264,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
 
+@TReVorId:11523
 Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking SDS step shows only product label and Additional documents to provide shows SDS as optional)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -318,6 +323,7 @@ Then I should see the Optional Reports and Documents Available for Purchase Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325
 
+@TReVorId:11519
 Scenario: [58091] Latex Gloves - RU000151
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -464,6 +470,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
+@TReVorId:11521
 Scenario: [58097] Ingredient Search in Registration
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -593,6 +600,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 
 @upctest
+@TReVorId:22066
 Scenario: [58604] Condom - RU000937
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

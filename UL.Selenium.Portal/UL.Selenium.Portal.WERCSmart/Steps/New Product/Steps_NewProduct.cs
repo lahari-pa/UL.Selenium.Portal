@@ -2152,6 +2152,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(statements.Contains(value), "The statement with text: " + value + " was not showing on the VOC Summary page", "The statement with text: " + value + " was showing on the VOC summary page as expected.");
 		}
 
+		[StepDefinition(@"I confirm that statement with text: '(.*)' is not displayed")]
+
+		public void StatementIsNotDisplayed(string statement)
+		{
+			var allStatements = new NewProduct().AllAdditionalStatements();
+			Report.IsTrue(!allStatements.Contains(statement), "Statement: " + statement + " was displayed when it was not expected!", "Statement: " + statement + " was not displayed as expected");
+		}
 		public void SelectTCLPElementOptionsToNo(List<string> elements)
 		{
 			var newProduct = new NewProduct();
@@ -2503,10 +2510,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			else if (exclusive == "displayed exclusively")
 			{
-				differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
-				Report.IsTrue(differences.Count == 0,
-					$"The actual options for section: {section} did not match the expected options. The differences were: {string.Join(", ", differences.Select(x => "'" + x + "'").ToList())}",
-					$"The actual options for section: {section} matched the expected options: {string.Join(", ", expectedOptions)}");
+				Report.Info("Expected options to be displayed are:");
+				foreach (var option in expectedOptions)
+				{
+					Report.Info(option);
+				}
+				var allMatch = true;
+				foreach (var displayedOption in displayedOptionsLower)
+				{
+					var match = false;
+					foreach (var expectedOption in expectedOptionsLower)
+					{
+						if (expectedOption != displayedOption)
+						{
+							continue;
+						}
+						match = true;
+						break;
+					}
+					if (match)
+					{
+						continue;
+					}
+					allMatch = false;
+					Report.Failure("Option: " + displayedOption + " was displayed when it was not expected!");
+					Report.Screenshot();
+				}
+				if (allMatch)
+				{
+					Report.Success("The displayed options matched the expected options exactly for section: " + section);
+					Report.Screenshot();
+				}
 			}
 		}
 

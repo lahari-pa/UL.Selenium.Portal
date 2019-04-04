@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -11,6 +11,7 @@
 @run_Flow24_Deodorant
 
 Feature: Flow 24 - Deodorant
+@TReVorId:11424
 Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

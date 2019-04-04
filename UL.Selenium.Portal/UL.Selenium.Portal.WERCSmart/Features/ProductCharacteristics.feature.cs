@@ -95,43 +95,45 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31834] Product Characteristics - Solid only navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20231")]
         public virtual void _31834ProductCharacteristics_SolidOnlyNavigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31834] Product Characteristics - Solid only navigation", null, ((string[])(null)));
-#line 16
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31834] Product Characteristics - Solid only navigation", null, new string[] {
+                        "TReVorId:20231"});
+#line 17
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 17
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 20
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 20
+#line 21
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
-testRunner.Then("I save the product information as: TestCase31834", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 22
-testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I save the product information as: TestCase31834", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 23
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 24
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table517 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table1.AddRow(new string[] {
+            table517.AddRow(new string[] {
                         "Solid"});
-#line 24
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table1, "And ");
-#line 27
-testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table517, "And ");
 #line 28
+testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 29
 testRunner.And("I should see following statement: When mixed with an equal amount of water, will " +
                     "this produce a solution with a pH <= 2 or a pH >= 12.5?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
-testRunner.And("I should see following statement: Select the best Water Solubility description", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
+testRunner.And("I should see following statement: Select the best Water Solubility description", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31834", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -140,39 +142,41 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31837] Product Characteristics - Solid only validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20232")]
         public virtual void _31837ProductCharacteristics_SolidOnlyValidation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31837] Product Characteristics - Solid only validation", null, ((string[])(null)));
-#line 32
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31837] Product Characteristics - Solid only validation", null, new string[] {
+                        "TReVorId:20232"});
+#line 34
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 33
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 34
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 35
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 36
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 37
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 38
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Chalk", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 37
-testRunner.Then("I save the product information as: TestCase31837", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 38
-testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
-testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("I save the product information as: TestCase31837", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 40
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 42
 testRunner.And("Secondary Physical State should be showing the error messages: This is a required" +
                     " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
+#line 43
 testRunner.And("When mixed with an equal amount of water, will this produce a solution with a pH " +
                     "<= 2 or a pH >= 12.5? should be showing the error messages: This is a required f" +
                     "ield.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 42
+#line 44
 testRunner.And("Select the best Water Solubility description should be showing the error messages" +
                     ": This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 45
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31837", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -181,48 +185,50 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31827] Product Characteristics - Liquid only navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20233")]
         public virtual void _31827ProductCharacteristics_LiquidOnlyNavigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31827] Product Characteristics - Liquid only navigation", null, ((string[])(null)));
-#line 46
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31827] Product Characteristics - Liquid only navigation", null, new string[] {
+                        "TReVorId:20233"});
+#line 49
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 47
+#line 50
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 48
+#line 51
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 49
+#line 52
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 50
+#line 53
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Conditioner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
+#line 54
 testRunner.Then("I save the product information as: TestCase31827", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 52
+#line 55
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 56
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table518 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table2.AddRow(new string[] {
+            table518.AddRow(new string[] {
                         "Liquid"});
-#line 54
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table2, "And ");
 #line 57
-testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
-testRunner.And("I should see following statement: Specific Gravity", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 59
-testRunner.And("I should see following statement: pH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table518, "And ");
 #line 60
-testRunner.And("I should see following statement: Boiling Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
-testRunner.And("I should see following statement: Flash Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see following statement: Specific Gravity", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
-testRunner.And("I should see following statement: Flash Point Testing Method Used", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see following statement: pH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
+testRunner.And("I should see following statement: Boiling Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
+testRunner.And("I should see following statement: Flash Point (in Celsius)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 65
+testRunner.And("I should see following statement: Flash Point Testing Method Used", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 66
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31827", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -231,48 +237,50 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31833] Product Characteristics - Liquid only validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20234")]
         public virtual void _31833ProductCharacteristics_LiquidOnlyValidation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31833] Product Characteristics - Liquid only validation", null, ((string[])(null)));
-#line 66
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31833] Product Characteristics - Liquid only validation", null, new string[] {
+                        "TReVorId:20234"});
+#line 70
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 67
+#line 71
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 68
+#line 72
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 69
+#line 73
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 70
+#line 74
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Conditioner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 71
+#line 75
 testRunner.Then("I save the product information as: TestCase31833", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 72
+#line 76
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 73
+#line 77
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 74
+#line 78
 testRunner.And("Secondary Physical State should be showing the error messages: This is a required" +
                     " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
+#line 79
 testRunner.And("Specific Gravity should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
+#line 80
 testRunner.And("pH should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 77
+#line 81
 testRunner.And("Boiling Point (in Celsius) should be showing the error messages: This is a requir" +
                     "ed field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
+#line 82
 testRunner.And("Flash Point (in Celsius) should be showing the error messages: This is a required" +
                     " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
+#line 83
 testRunner.And("Flash Point Testing Method Used should be showing the error messages: This is a r" +
                     "equired field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
+#line 84
 testRunner.And("Select the best Water Solubility description should be showing the error messages" +
                     ": This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
+#line 85
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31833", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -281,57 +289,59 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31786] Product Characteristics - Aerosol only navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20235")]
         public virtual void _31786ProductCharacteristics_AerosolOnlyNavigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31786] Product Characteristics - Aerosol only navigation", null, ((string[])(null)));
-#line 84
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31786] Product Characteristics - Aerosol only navigation", null, new string[] {
+                        "TReVorId:20235"});
+#line 89
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 85
+#line 90
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 86
+#line 91
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 87
+#line 92
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 88
+#line 93
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Algicide - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 89
+#line 94
 testRunner.Then("I save the product information as: TestCase31786", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 90
+#line 95
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
+#line 96
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table519 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table3.AddRow(new string[] {
+            table519.AddRow(new string[] {
                         "Aerosol"});
-#line 92
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table3, "And ");
-#line 95
-testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 96
-testRunner.And("I should see following statement: pH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 97
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table519, "And ");
+#line 100
+testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 101
+testRunner.And("I should see following statement: pH", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
 testRunner.And("I should see following statement: When the product has a flammable propellant, or" +
                     " contains ingredients with a flash point below 60⁰C then", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table520 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table4.AddRow(new string[] {
+            table520.AddRow(new string[] {
                         "This product is classified as a D001 Hazardous Waste under RCRA (as per Section 1" +
                             "3 or 15 of the SDS)."});
-            table4.AddRow(new string[] {
+            table520.AddRow(new string[] {
                         "This product is classified as a D003 Hazardous Waste under RCRA."});
-            table4.AddRow(new string[] {
+            table520.AddRow(new string[] {
                         "This product is not classified as D001 or D003 Hazardous Waste under RCRA"});
-#line 98
+#line 103
 testRunner.And("The following radio buttons should be displayed for section: When the product has" +
                     " a flammable propellant, or contains ingredients with a flash point below 60⁰C t" +
-                    "hen", ((string)(null)), table4, "And ");
-#line 103
+                    "hen", ((string)(null)), table520, "And ");
+#line 108
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31786", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -340,38 +350,40 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31789] Product Characteristics - Aerosol only validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20236")]
         public virtual void _31789ProductCharacteristics_AerosolOnlyValidation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31789] Product Characteristics - Aerosol only validation", null, ((string[])(null)));
-#line 106
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31789] Product Characteristics - Aerosol only validation", null, new string[] {
+                        "TReVorId:20236"});
+#line 112
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 107
+#line 113
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 108
+#line 114
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 109
+#line 115
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 110
+#line 116
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Algicide - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 111
+#line 117
 testRunner.Then("I save the product information as: TestCase31789", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 112
+#line 118
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 113
+#line 119
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 114
+#line 120
 testRunner.And("Secondary Physical State should be showing the error messages: This is a required" +
                     " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 115
+#line 121
 testRunner.And("pH should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 116
+#line 122
 testRunner.And("When the product has a flammable propellant, or contains ingredients with a flash" +
                     " point below 60⁰C then should be showing the error messages: This is a required " +
                     "field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 117
+#line 123
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31789", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -380,40 +392,42 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31804] Product Characteristics - Gas only navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20288")]
         public virtual void _31804ProductCharacteristics_GasOnlyNavigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31804] Product Characteristics - Gas only navigation", null, ((string[])(null)));
-#line 120
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31804] Product Characteristics - Gas only navigation", null, new string[] {
+                        "TReVorId:20288"});
+#line 127
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 121
+#line 128
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 122
+#line 129
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 123
+#line 130
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 124
+#line 131
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Compressed gas", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 125
+#line 132
 testRunner.Then("I save the product information as: TestCase31804", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 126
+#line 133
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 127
+#line 134
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table521 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table5.AddRow(new string[] {
+            table521.AddRow(new string[] {
                         "Gas"});
-#line 128
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table5, "And ");
-#line 131
+#line 135
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table521, "And ");
+#line 138
 testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 132
+#line 139
 testRunner.And("I should see following statement: Select the best Water Solubility description", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 133
+#line 140
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31804", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -422,35 +436,37 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[31826] Product Characteristics - Gas only validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20289")]
         public virtual void _31826ProductCharacteristics_GasOnlyValidation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31826] Product Characteristics - Gas only validation", null, ((string[])(null)));
-#line 136
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[31826] Product Characteristics - Gas only validation", null, new string[] {
+                        "TReVorId:20289"});
+#line 144
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 137
+#line 145
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 138
+#line 146
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 139
+#line 147
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 140
+#line 148
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Compressed gas", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 141
+#line 149
 testRunner.Then("I save the product information as: TestCase31826", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 142
+#line 150
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 143
+#line 151
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 144
+#line 152
 testRunner.And("Secondary Physical State should be showing the error messages: This is a required" +
                     " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 145
+#line 153
 testRunner.And("Select the best Water Solubility description should be showing the error messages" +
                     ": This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 146
+#line 154
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase31826", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -459,46 +475,48 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[85157] Product Characteristics - All navigation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20290")]
         public virtual void _85157ProductCharacteristics_AllNavigation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85157] Product Characteristics - All navigation", null, ((string[])(null)));
-#line 149
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85157] Product Characteristics - All navigation", null, new string[] {
+                        "TReVorId:20290"});
+#line 158
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 150
+#line 159
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 151
+#line 160
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 152
+#line 161
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 153
+#line 162
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Bonding agent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 154
+#line 163
 testRunner.Then("I save the product information as: TestCase85157", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 155
+#line 164
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 156
+#line 165
 testRunner.And("I should see following statement: Primary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table522 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table6.AddRow(new string[] {
+            table522.AddRow(new string[] {
                         "Aerosol"});
-            table6.AddRow(new string[] {
+            table522.AddRow(new string[] {
                         "Gas"});
-            table6.AddRow(new string[] {
+            table522.AddRow(new string[] {
                         "Liquid"});
-            table6.AddRow(new string[] {
+            table522.AddRow(new string[] {
                         "Solid"});
-#line 157
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table6, "And ");
-#line 163
+#line 166
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table522, "And ");
+#line 172
 testRunner.And("I should see following statement: Secondary Physical State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 164
+#line 173
 testRunner.And("I should see following statement: Select the best Water Solubility description", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 165
+#line 174
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase85157", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -507,38 +525,40 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[85158] Product Characteristics - All validation")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20291")]
         public virtual void _85158ProductCharacteristics_AllValidation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85158] Product Characteristics - All validation", null, ((string[])(null)));
-#line 168
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85158] Product Characteristics - All validation", null, new string[] {
+                        "TReVorId:20291"});
+#line 178
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 169
+#line 179
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 170
+#line 180
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 171
+#line 181
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 172
+#line 182
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Bonding agent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 173
+#line 183
 testRunner.Then("I save the product information as: TestCase85158", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 174
+#line 184
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 175
+#line 185
 testRunner.When("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 176
+#line 186
 testRunner.And("Primary Physical State should be showing the error messages: This is a required f" +
                     "ield.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 177
+#line 187
 testRunner.And("Secondary Physical State should be showing the error messages: This is a required" +
                     " field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 178
+#line 188
 testRunner.And("Select the best Water Solubility description should be showing the error messages" +
                     ": This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 179
+#line 189
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase85158", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden

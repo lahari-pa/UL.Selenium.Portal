@@ -1,4 +1,4 @@
-﻿@Homepage
+@Homepage
 @Login
 @Signup
 @MyAccount
@@ -31,6 +31,7 @@ Given In the UserDetails page I click Save
 Then I should see user name: AllRetailers, ProductsCompany in the header next to the user icon
 
 @tfsdesign
+@TReVorId:22076
 Scenario: [63514] Add and Deactivate a New User from the User Grid
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -41,6 +42,7 @@ Then I add a new user with the following information
 | User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |
 Then I confirm the new user is Active
 
+@TReVorId:22078
 Scenario: [64874] Division Area - no divisions set up
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 And I navigate to My Account
@@ -49,6 +51,7 @@ And I should not see the Division Accounts grid
 And In the My Account page I navigate to the Company Information page
 Then In the Company Information screen I should see 0 Division Accounts
 
+@TReVorId:13901
 Scenario: [65887] Pagination
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -92,6 +95,7 @@ Given I click ... in the My Account user grid
 
 Given I enter the down arrow into the user grid page navigation box then the correct page is shown
 
+@TReVorId:16677
 Scenario: [68417] Company Information
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -108,6 +112,7 @@ Then In the Company Information page I confirm the Company Information is correc
 # Created by Larkin, Steve
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\My Account\Subscription Information
+@TReVorId:21429
 Scenario: [87304] Video link How to Subscribe
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I click on My Account

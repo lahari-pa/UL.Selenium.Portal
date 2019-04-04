@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -12,6 +12,7 @@
 
 Feature: Flow 16
 
+@TReVorId:11525
 Scenario: [59273] Alkaline Battery - RU000344
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -61,6 +62,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
 
+@TReVorId:11527
 Scenario: [59274] Battery Containing Mercury - RU000729
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -110,6 +112,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59274
 
 
+@TReVorId:11532
 Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -158,6 +161,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
 
 
+@TReVorId:11534
 Scenario: [59277] Magnesium Battery - RU000728
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -206,6 +210,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59277
 
 
+@TReVorId:11536
 Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -256,6 +261,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@TReVorId:11538
 Scenario: [59279] Nickel-Cadmium Battery - RU000346
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -305,6 +311,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59279
 
 
+@TReVorId:11539
 Scenario: [59280] Silver Battery - RU000698
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -354,6 +361,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59280
 
 
+@TReVorId:11540
 Scenario: [59281] Water-Charged Cell - RU001543
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -405,6 +413,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 
+@TReVorId:11541
 Scenario: [59282] Zinc Air - RU001205
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -454,6 +463,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
 
 
+@TReVorId:11529
 Scenario: [59275] Carbon Zinc Battery - RU000727
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -22,6 +22,7 @@
 Feature: Release Day
 
 @63297
+@TReVorId:20204
 Scenario: [63297] Add subscription to a new supplier through data entry
 Given I define the user: 63297 with the following parameters:
 | Field                | Value           |
@@ -327,6 +328,7 @@ Then In the Order History screen I select Subscription
 Then In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: 63297
 
 
+@TReVorId:20207
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -423,6 +425,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @71051
+@TReVorId:20209
 Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT refresh from Kelly when the Update WERCSmart data link is used
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -478,6 +481,7 @@ Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase71051
 
 
+@TReVorId:20218
 Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly when the Update WERCSmart data link is used
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -511,6 +515,7 @@ Given I navigate to the home page
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62848
 
 
+@TReVorId:20219
 Scenario: [56476] VOC checks for Personal Fragrance product
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -562,6 +567,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
 
 @56477
+@TReVorId:20220
 Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 # Checking that the test will run correctly by handling extra screens
@@ -699,6 +705,7 @@ Given I navigate to the home page
 Then I delete the product: TestCase56477
 
 
+@TReVorId:20221
 Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB and OTC
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -817,6 +824,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
 
 
+@TReVorId:20222
 Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -950,6 +958,7 @@ Given I navigate to the home page
 Then I delete the product: TestCase56483
 
 
+@TReVorId:20223
 Scenario: [56484] VOC - Aero checks
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -1111,6 +1120,7 @@ And The pie chart should be showing on the retailer details page
 And The pie chart footer text should contain: % of your product portfolio is associated with Costco
 
 
+@TReVorId:20224
 Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tiers
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -1131,34 +1141,7 @@ And I confirm that there is a section labeled: Wal-Mart/SAM'S CLUB & You
 And The pie chart should be showing on the retailer details page
 And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
 
-@ProductSetUp
-@58753
-Scenario: [58753] Hair Color Kit - RU000724
-Given I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct1
-Given I navigate to the landing page
-Given I create a product and take to completed using Test Case 75335 and save as: 58753_KitProduct2
-Given I navigate to the landing page
-
-#Scenario: debug 58753
-Given I generate a random UPC number and save as: UPC58753
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
-And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
-And I call Shared Step 60648 (Additional Product Information - US, No (Direct Ship), No (PL), No (GNFR))
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 58753_KitProduct1 and product 2: 58753_KitProduct2)
-And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
-And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58753, container type: Plastic Container and size: 100
-And I should see the Additional Documents to Provide Page
-And I click continue
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment Kit 58753
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-#And I The Purchase summary step is shown with the success message
-
-
+@TReVorId:20225
 Scenario: [70516] Add and Remove Packaging Type
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -1217,6 +1200,7 @@ Given I click Delete in the Delete Product pop up
 And I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
 
 
+@TReVorId:20226
 Scenario: [63684] Walmart Private label product
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -1280,6 +1264,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 @SHA
 @51296
+@TReVorId:21863
 Scenario: [51296] Product in Assigned status - add to recertification
 Given I create a product with name: TestCase51296 and take to completed using Test Case 75651 and save as: TestCase51296
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -1339,6 +1324,7 @@ And In the Product Recertification History popup I should see the following entr
 
 @SHA
 @42273
+@TReVorId:21864
 Scenario: [42273] Recertification > Process recertification > Process 1 product
 #Given I If you do not have the test product in your account mentioned in the Description then use these two test cases
 #to create a product and get it to the correct status:1. Use test case 75335 to create a new product and process it thru to
@@ -1372,6 +1358,7 @@ And In the SHA Manager Grid I run a search for product saved as: TestCase42273 a
 # NetProjects10\WercsSmart Portal\Release Day Tests
 
 @78417
+@TReVorId:21865
 Scenario: [78417] Recert by WERCSMart user
 Given I create a product with name: 78417 and take to completed using Test Case 75335 and save as: TestCase42273
 Given I take a product from completed to recertification using Test Case 75410 saved: TestCase78417
@@ -1380,6 +1367,7 @@ And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for sa
 And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase78417
 And I Use Test case 84518 to process the product from Assigned back to Completed status saved as TestCase78417
 
+@TReVorId:22087
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -1427,3 +1415,54 @@ And I Confirm the Product shows theNEW RETAILER(s) with an "Accepted Status" (se
 And I In the Shared Step below - Select the Product with the "Accepted Status"
 And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: (.*))
 And I Confirm the Product now shows a "Completed" Status in Completed for ALL associated Retailers
+
+# Assigned to Barrett, Beverly
+# Created by Barrett, Beverly
+
+# Test case can be found at the following paths:
+# NetProjects10\WercsSmart Portal\Release Day Tests
+
+Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC Results Step Shows Alternative Control Plan
+Given I generate a random UPC number and save as: UPC73503
+And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
+Then I save the product information as: TestCase73503
+And I call Shared Step 57532 (Product Characteristics - Aerosol & Gas available - Select Gas - Continue - Happy Path)
+And I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+| Sodium chloride | 100   | false               | false       |            |
+And I call Shared Step 48360 - Regulatory - Test TSCA and PROP65 - Continue
+And I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+And I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations option to: Yes
+And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 50
+And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule option to: 40
+And I set the Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? option to: Yes
+And I click continue
+And I should see the Volatile Organic Compound Summary Page
+Given I scroll to the bottom of the page
+And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
+And I confirm that statement with text: 'Does not exceed the limits specified by the California Consumer Products Regulation' is not displayed
+And I confirm that statement with text: 'Exceeds the limit specified by the California Consumer Products Regulation' is not displayed
+And The VOC Summary page contains the statement with the text: Alternative Control Plan
+And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
+And in the New Product page I click section: Volatile Organic Compounds (VOC)
+And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 30
+And I click continue
+Given I scroll to the bottom of the page
+And I confirm that statement with text: 'Alternative Control Plan' is not displayed
+And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
+And in the New Product page I click section: Volatile Organic Compounds (VOC)
+And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations option to: No
+And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 55
+And I click continue
+Given I scroll to the bottom of the page
+And I confirm that statement with text: 'Alternative Control Plan' is not displayed
+And The VOC Summary page contains the statement with the text: Exceeds the limits specified in the California Consumer Products Regulation
+And I navigate to the home page
+And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase73503
+

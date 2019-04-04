@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -13,6 +13,7 @@
 Feature: Ingredients
 (Suite ID: 64740)
 
+@TReVorId:16675
 Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -71,6 +72,7 @@ Then In the ingredients table the ingredients should be in the following order
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
 
+@TReVorId:16676
 Scenario: [71987] Sorting Percent on Ingredient page
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -113,6 +115,7 @@ Then In the ingredients table the ingredients should be in the following order
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
 
+@TReVorId:16667
 Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Disclosed check box- Trade secret is active
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -143,6 +146,7 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 
+@TReVorId:16672
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -180,6 +184,7 @@ And I should see the Regulatory Information 1 Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
 
 #CLF - this is basically the same as 65470
+@TReVorId:16664
 Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclosed & Public Name are not active
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -208,6 +213,7 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
 
+@TReVorId:16661
 Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Name is required, trade secret is not required
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -241,6 +247,7 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
 
+@TReVorId:16659
 Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not required fields
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -272,6 +279,7 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 
+@TReVorId:16653
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -301,6 +309,7 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
 
+@TReVorId:16674
 Scenario: [71291] Product Ingredients contains a third party component that requires updating for public disclosure
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -339,6 +348,7 @@ And I should see the Regulatory Information 1 Page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
 
+@TReVorId:18931
 Scenario: [74142] Pop up that Informs the regulations the components are associated
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -371,6 +381,7 @@ Given I navigate to the home page
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
 
+@TReVorId:18933
 Scenario: [69796] Aerosol Warning Message on Ingredient page
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -421,6 +432,7 @@ Then I should see an error message: Formulation must total or exceed 100%.
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
 
+@TReVorId:18935
 Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Denominator, not included in Numerator
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -461,6 +473,7 @@ Given I navigate to the home page
 
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
 
+@TReVorId:18937
 Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denominator, not included in Numerator
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -539,6 +552,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
 @jamesnew
+@TReVorId:21412
 Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulation
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -594,6 +608,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
 
+@TReVorId:21465
 Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

@@ -1,4 +1,4 @@
-﻿@RetailPartners
+@RetailPartners
 @Homepage
 @LandingPage
 @Login
@@ -12,6 +12,7 @@ Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 #Then I click the Retail Partners icon in the Navigation Pane
 
+@TReVorId:7870
 Scenario: [57206] Retailer specific - CVS
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -32,6 +33,7 @@ Given I click on close in the Report Download dialog
 And I click the back arrow next to CVS
 Then I should see the Retail Partners page
 
+@TReVorId:7871
 Scenario: [57211] Retailer specific - Costco
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -48,6 +50,7 @@ Then I click the Products in Scope button and confirm that an excel file is prod
 And I confirm the excel file saved as CostcoExcelFile can be opened and contains data
 
 
+@TReVorId:7872
 Scenario: [57214] Retailer specific - Dollar Tree
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -58,6 +61,7 @@ And I should not see the More Information hyperlink
 When I click the Products in Scope button and confirm that an excel file is produced called DT_Report_DataUsageTier_<Date>.xlsx and save as DollarTreeExcelFile
 And I confirm the excel file saved as DollarTreeExcelFile can be opened and contains data
 
+@TReVorId:13887
 Scenario: [57218] Retailer specific - Family Dollar
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -68,6 +72,7 @@ And I should not see the More Information hyperlink
 When I click the Products in Scope button and confirm that an excel file is produced called FD_Report_DataUsageTiers_<Date>.xlsx and save as FamilyDollarExcelFile
 And I confirm the excel file saved as FamilyDollarExcelFile can be opened and contains data
 
+@TReVorId:7873
 Scenario: [57221] Retailer specific - Target
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -82,6 +87,7 @@ And I close the window that opened
 When I click the Products in Scope button and confirm that an excel file is produced called TG_Report_DataUsageTier_<Date>.xlsx and save as TargetExcelFile
 And I confirm the excel file saved as TargetExcelFile can be opened and contains data
 
+@TReVorId:7874
 Scenario: [57223] Retailer specific - Walgreens
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -96,6 +102,7 @@ And I close the window that opened
 When I click the Products in Scope button and confirm that an excel file is produced called WG_Report_DataUsageTier_<Date>.xlsx and save as WalgreensExcelFile
 And I confirm the excel file saved as WalgreensExcelFile can be opened and contains data
 
+@TReVorId:7875
 Scenario: [57225] Retailer specific - Walmart
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -110,6 +117,7 @@ And I close the window that opened
 When I click the Products in Scope button and confirm that an excel file is produced called WM_Report_DataUsageTier_<Date>.xlsx and save as WalmartExcelFile
 And I confirm the excel file saved as WalmartExcelFile can be opened and contains data
 
+@TReVorId:7876
 Scenario: [57229] Retailer specific - Canadian Tire
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -121,6 +129,7 @@ And I confirm that: Canadian Tire requires suppliers of formulated products to g
 When I click the Products in Scope button and confirm that an excel file is produced called CT_Report_DataUsageTier_<Date>.xlsx and save as CanadianTireExcelFile
 And I confirm the excel file saved as CanadianTireExcelFile can be opened and contains data
 
+@TReVorId:11277
 Scenario: [69112] Retailer specific - Topco
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -129,6 +138,7 @@ Then I click the Retail Partners icon in the Navigation Pane
 When I select the retailer: TopCo
 And I confirm that: This recipient does not require additional data consent tiers at this time. is showing under the Data Consent Tiers
 
+@TReVorId:18955
 Scenario: [74540] Target - Data Tier Warning when not all are selected
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

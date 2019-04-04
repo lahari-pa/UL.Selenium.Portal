@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Signup
 @wercsmart
 @Homepage
@@ -8,6 +8,7 @@ Feature: Landing Page
 
 #does not work in staging as of 09-17-2018
 
+@TReVorId:6874
 Scenario: [50769] Navigation
 Then I should see the following menu options in the header:
 | Option        |
@@ -22,12 +23,14 @@ Given I select the Subscription link
 Then I confirm I am taken to the Subscription page
 
 @singlerun
+@TReVorId:21932
 Scenario: [50770] Sign Up Link
 Given I select the Sign Up link
 Then the signup page should appear
 And I click the back button in the browser
 And the landing page should load
 
+@TReVorId:7799
 Scenario: [59830] TimeOut Feature
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 Then the WERCSmart homepage should load
@@ -44,6 +47,7 @@ And the landing page should load
 #verify the wait time is 15 min for each click on popup (yes/no)
 
 @tfsdesign
+@TReVorId:18980
 Scenario: [50772] Get Started Now Button
 
 Given I click the Get Started Now link
@@ -52,6 +56,7 @@ Then the login page should appear
 
 #does not work in staging as of 09-17-2018
 @tfsdesign
+@TReVorId:18981
 Scenario: [50775] Terms of Use
 
 Given I click the Terms of Use link in the Landing Page footer

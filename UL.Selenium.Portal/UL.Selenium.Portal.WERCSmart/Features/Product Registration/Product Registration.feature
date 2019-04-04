@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -18,6 +18,7 @@ Feature: Product Registration
 #Then The home screen should load
 
 
+@TReVorId:22077
 Scenario: Create a new product
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -180,6 +181,7 @@ Given in the New Product page I click Continue
 Given I navigate to the home page
 Then I delete the product: TestCase63724
 
+@TReVorId:11276
 Scenario: [65441] Delete a UPC from the UPC Grid
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -254,6 +256,7 @@ Then I delete the product: TestCase65441
 
 
 
+@TReVorId:11378
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response
 Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -308,6 +311,7 @@ Then I should see an error message: This is a required field.
 Given I navigate to the home page
 Then I delete the product: TestCase65392
 
+@TReVorId:11377
 Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -489,6 +493,7 @@ Then I delete the product: TestCase67661
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Product Documents
 
 @59322
+@TReVorId:21842
 Scenario: [59322] Upload document - VOC exemption letter & VOC product label
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)

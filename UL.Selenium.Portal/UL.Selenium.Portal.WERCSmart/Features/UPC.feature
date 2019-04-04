@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -22,6 +22,7 @@
 
 Feature: UPC
 
+@TReVorId:21457
 Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight Ounces)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -60,6 +61,7 @@ Then I should not see the following UPC options:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
 
 
+@TReVorId:21458
 Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid Ounces)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -98,6 +100,7 @@ Then I should not see the following UPC options:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87587
 
 
+@TReVorId:21459
 Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid Ounces)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -148,6 +151,7 @@ Then I should not see the following UPC options:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
 
 
+@TReVorId:21460
 Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Ounces)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -192,6 +196,7 @@ Then I should not see the following UPC options:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87593
 
 
+@TReVorId:21461
 Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as Weight (Ounces)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -234,6 +239,7 @@ Then I should not see the following UPC options:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87596
 
 
+@TReVorId:21462
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -270,6 +276,7 @@ Then I should not see the following UPC options:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
 
 
+@TReVorId:21463
 Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 
 Given I save to context name: TestCase1 and value: 1525111
@@ -316,6 +323,7 @@ Then I should not see the following UPC options:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87595
 
 
+@TReVorId:21795
 Scenario: [87640] UPC - Case Pack Only Present in product
 #Given I login into the WERCSmart Portal - Administrator Role
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
@@ -347,6 +355,7 @@ Given I call Shared Step 75309 (SHA > Select Product > UPC List) for product sav
 And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 
 
+@TReVorId:21796
 Scenario: [87643] UPC - Case Pack & regular UPC present in product
 #Given I login into the WERCSmart Portal - Administrator Role
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
@@ -381,6 +390,7 @@ And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC8
 And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876431
 
 
+@TReVorId:21840
 Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Case UPC counts towards the 5 limit
 #Given I login into the WERCSmart Portal - Administrator Role
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
@@ -438,6 +448,7 @@ And In the list of UPCs I should not see case pack indicatior for UPC: saved as 
 And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876503
 
 
+@TReVorId:21841
 Scenario: [87676] UPC - Case Pack can be removed from new product
 #Given I login into the WERCSmart Portal - Administrator Role
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
@@ -485,6 +496,7 @@ And I switch to tab: WERCSmart Version 2.0
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87676
 
 
+@TReVorId:21886
 Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to Complete
 #Given I login into the WERCSmart Portal - Administrator Role
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount
@@ -537,6 +549,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for 
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87685 and its status is: Completed
 
 
+@TReVorId:21887
 Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 #Given I login into the WERCSmart Portal - Administrator Role
 Given I log in with the account saved in TReVor as: PremiumSubscriptionAccount

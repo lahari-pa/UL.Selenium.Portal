@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -13,6 +13,7 @@
 Feature: Flow 14
 
 
+@TReVorId:11614
 Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001240
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -71,6 +72,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Us
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58736
 
 
+@TReVorId:11634
 Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU001240
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -1,4 +1,4 @@
-﻿@wercsmart
+@wercsmart
 @Login
 @UlSolutionCenter
 @Homepage
@@ -19,6 +19,7 @@
 
 Feature: BulkActions
 
+@TReVorId:18968
 Scenario: [56223] Bulk Actions - Forward Product Registration navigation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -34,6 +35,7 @@ Then I should see the header: Forward Product Registration on the Forward Produc
 And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
 
 #This test cases uses the ULSC account
+@TReVorId:18970
 Scenario: [56224] Bulk Actions - Sync Products to WERCSLink navigation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account
@@ -50,6 +52,7 @@ Then I click on the cancel button on the ULSC Sync popup
 
 And I should see the Subheading Alerts in the main window
 
+@TReVorId:18972
 Scenario: [56225] Bulk Actions - Accept Documents navigation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -62,6 +65,7 @@ And I click Accept Documents in the Bulk Actions window
 
 And I should see the header: Document Acceptance on the Document Acceptance window
 
+@TReVorId:18973
 Scenario: [56227] Bulk Actions  Delete Products navigation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
@@ -74,6 +78,7 @@ And I click Delete Products in the Bulk Actions window
 
 And I should see the header: Delete Active Products on the Delete Active Product window
 
+@TReVorId:18399
 Scenario: [74634] Forward Product Registration - Only can select product once
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -118,6 +123,7 @@ And I confirm I am unable to select the product with ID saved as: ProductInProgr
 
 Given I click the Home navigation icon and accept the alert popup
 
+@TReVorId:18974
 Scenario: [76314] Forward Product - NR should Not Require UPC
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

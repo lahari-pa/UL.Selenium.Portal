@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -13,6 +13,7 @@
 
 Feature: Regulatory Information 3
 
+@TReVorId:21899
 Scenario: [88022] Regulatory Information 3 - navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -41,6 +42,7 @@ And I should see the following checkbox:
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88022
 
 
+@TReVorId:21900
 Scenario: [88644] Regulatory Information 3 - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
