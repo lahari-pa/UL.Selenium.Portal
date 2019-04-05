@@ -25,8 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var selLogin = new Login();
-				selLogin.Click_Forgotten_Password();
-
+				Report.IsTrue(selLogin.Click_Forgotten_Password(), "Failed to click 'Forgot Your Password?'", "Successfully clicked 'Forgot Your Password?'");
 			}
 			catch (Exception ex)
 			{
