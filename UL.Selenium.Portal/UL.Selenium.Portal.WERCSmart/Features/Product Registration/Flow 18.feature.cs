@@ -165,7 +165,7 @@ testRunner.Given("I call Shared Step 60567 (Upload Product Label only) for secti
 testRunner.And("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table164 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -175,7 +175,7 @@ testRunner.And("in the Optional Reports and Documents Available for Purchase pag
                         "Odor Threshold",
                         "Partition Coefficient",
                         "Product\'s Dispensing Method"});
-            table164.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Mask",
                         "150",
                         "44",
@@ -187,7 +187,7 @@ testRunner.And("in the Optional Reports and Documents Available for Purchase pag
                         "Aerosol"});
 #line 65
 testRunner.Given("I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional" +
-                    "))", ((string)(null)), table164, "Given ");
+                    "))", ((string)(null)), table1, "Given ");
 #line 69
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 60116. !\"£$%^&*() 1234567890 (Provide any additional comments or" +

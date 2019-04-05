@@ -14,7 +14,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "ProductGrid")]
-	class StepsProductGrid
+	public class StepsProductGrid
 	{
 		[StepDefinition(@"I should see an option for (More Filters|Product ID/Name|Bulk Actions)")]
 		public void GivenIShouldSeeAnOptionFor(string field)
@@ -156,6 +156,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						//do nothing
 					}
 
+				}
+
+				if (id == "")
+				{
+					try
+					{
+						id = Context.GetFromContext(savedAs).ToString();
+					}
+					catch (Exception e)
+					{
+
+					}
 				}
 
 				Report.Info("Searching for product with ID: '" + id + "'");
@@ -2052,5 +2064,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Checking the top product Name label");
 			Report.IsTrue(product.NameLabel == label, $"The '{label}' label was not displayed next to the product name for the top result!", $"The '{label}' label was displayed next to the product name for the top result");
 		}
+
+		[StepDefinition(@"I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers")]
+		public void GivenIConfirmTheProductsShownAreGreen()
+		{
+			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
+		}
+
+
 	}
 }

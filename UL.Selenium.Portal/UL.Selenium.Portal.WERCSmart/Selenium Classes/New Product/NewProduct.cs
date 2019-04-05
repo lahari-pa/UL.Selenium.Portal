@@ -3119,7 +3119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"));
+				var errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"),2);
 				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
 			}
 			catch (Exception e)

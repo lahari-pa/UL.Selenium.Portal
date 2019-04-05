@@ -689,7 +689,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var email = (Mailosaur.Email)SeleniumUtilities.Context.GetFromContext("Matching");
 				var emailBody = EmailFunctions.getEmailBody(email);
 				Report.Info("Body of the Email was: " + emailBody);
-				Report.IsTrue(emailBody == bodyText, "Body text did not match correctly!", "Body text matched correctly!");
+				// html codes are coming through from mailosaur eg. for '+' character
+				var bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
+				Report.Info("Body of the Email was: " + emailBody);
+				var actualTrimmed = bodyDecode.Replace(" ", "");
+				var expectedTrimmed = bodyText.Replace(" ", "");
+				Report.IsTrue(actualTrimmed == expectedTrimmed, "Body text did not match correctly!", "Body text matched correctly!");
 			}
 			catch (Exception ex)
 			{
@@ -710,8 +715,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var email = (Mailosaur.Email)SeleniumUtilities.Context.GetFromContext("Matching");
 				var emailBody = EmailFunctions.getEmailBody(email);
+				// html codes are coming through from mailosaur eg. for '+' character
+				var bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
 				Report.Info("Body of the Email was: " + emailBody);
-				Report.IsTrue(emailBody.Contains(bodyText), "Body text did not match correctly!", "Body text matched correctly!");
+				var actualTrimmed = bodyDecode.Replace(" ", "");
+				var expectedTrimmed = bodyText.Replace(" ", "");
+				Report.IsTrue(actualTrimmed.Contains(expectedTrimmed), "Body text did not match correctly!", "Body text matched correctly!");
 			}
 			catch (Exception ex)
 			{

@@ -144,129 +144,129 @@ testRunner.Given("I set the Who is the Product Development Manager (PDM) for thi
 testRunner.Then("the question: What is the CVS merchandising category for this product? is display" +
                     "ed at position: 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Acne/HSC"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Adult Care"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Allergy Remedies"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "APPAREL"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Baby Care"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Baked Goods – Frozen Food"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "BATTERIES"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Beverages"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Bulb & Wire"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Candles"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Candy"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Cold Remedies"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Cosmetics"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Dairy"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Deodorants"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Diet/Nutrition"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Digestive Health"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "External Pain"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Eye Care"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Facial Care"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Feminine Care"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "FIRST AID"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Foot Care"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Fragrances"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Grocery"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Hair Care"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Hair Notions"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Hand & Body"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Home Diagnostics"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Home Health Care"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Hosiery"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Household"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Household Paper"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Housewares"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "LAUNDRY"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Nicotine Replacement"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Oral Hygiene"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Pain Relievers"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Personal Cleansing"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Personal Intimacy"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "PET SUPPLIES"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Photo Processing 1 Hour"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Picture Frames & ALB"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Pro Salon"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Reading Glasses"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Seasonal"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Seasonal Fall & Winter"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Seasonal Toys"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Shaving Needs"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Small Electronics"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Snacks"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Stationery"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Suncare"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Top of Checkout"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Toys"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Trial Travel"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Vitamins"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Wine & Spirits"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Other"});
 #line 56
 testRunner.And("The following options should be displayed exclusively for section: What is the CV" +
-                    "S merchandising category for this product?", ((string)(null)), table7, "And ");
+                    "S merchandising category for this product?", ((string)(null)), table1, "And ");
 #line 118
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 120
@@ -558,23 +558,23 @@ testRunner.Given("I set the Is this product intended to be rinsed off after use?
 testRunner.Then("the question: Refer to your Product Label. Select the options that appear on the " +
                     "label. is displayed at position: 8", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Drug Facts Panel"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Supplement Facts Panel"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Nutrition Facts Panel"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Active Ingredient Panel"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "An Active Ingredient is listed on the Panel"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "None of the Above"});
 #line 328
 testRunner.And("The following options should be displayed for section: Refer to your Product Labe" +
-                    "l. Select the options that appear on the label.", ((string)(null)), table8, "And ");
+                    "l. Select the options that appear on the label.", ((string)(null)), table2, "And ");
 #line 337
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 341
@@ -841,17 +841,17 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
 #line 525
 testRunner.Given("I call Shared Step 57205 (Go to Retail Partners - Select CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tier",
                         "State"});
-            table9.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "2.1",
                         "On"});
-            table9.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "2.2",
                         "On"});
 #line 527
-testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table9, "Then ");
+testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table3, "Then ");
 #line 532
 testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 534
@@ -893,85 +893,85 @@ testRunner.Given("I call Shared Step 74202 (CVS Pharmacy - Yes, I wish to Contin
 testRunner.Then("the question: What is the CVS Store Brand associated to this product? is displaye" +
                     "d at position: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Beauty 360 (CVS Pharmacy)"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Blade"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Caliber"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Cottondale"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "CVS Batteries"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "CVS Health (CVS Pharmacy)"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "DVX"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Essence Of Beauty"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "GE Abound"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "GE Lighting - PL"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Gold Emblem"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Gran Legacy"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Hawaiian Traditions"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "House to Home"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Island Accents"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "JT Boots"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Just The Basics"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Live Better"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Lux Flavors"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Merry Brite"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Non-Brand with CVS Distribution Statement"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Nuance Salma Hayek"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Pa\'Ina"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Pet Central"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Poparazzi"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Radiance Base"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Radiance Platinum"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Red And Pink"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Rosebrook"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Santa\'s Treats"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Skin + Pharmacy"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Spooky Village"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Style Essentials"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Total Home"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Vida Mia"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "ZX"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Other"});
 #line 566
 testRunner.And("The following options should be displayed for section: What is the CVS Store Bran" +
-                    "d associated to this product?", ((string)(null)), table10, "And ");
+                    "d associated to this product?", ((string)(null)), table4, "And ");
 #line 606
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 608
@@ -1001,17 +1001,17 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
 #line 619
 testRunner.Given("I call Shared Step 57205 (Go to Retail Partners - Select CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tier",
                         "State"});
-            table11.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "2.1",
                         "On"});
-            table11.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "2.2",
                         "On"});
 #line 621
-testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table11, "Then ");
+testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table5, "Then ");
 #line 626
 testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 628
@@ -1085,17 +1085,17 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
 #line 677
 testRunner.Given("I call Shared Step 57205 (Go to Retail Partners - Select CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tier",
                         "State"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "2.1",
                         "On"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "2.2",
                         "On"});
 #line 679
-testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table12, "Then ");
+testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table6, "Then ");
 #line 684
 testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 686
@@ -1157,17 +1157,17 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
 #line 725
 testRunner.Given("I call Shared Step 57205 (Go to Retail Partners - Select CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tier",
                         "State"});
-            table13.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "2.1",
                         "On"});
-            table13.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "2.2",
                         "On"});
 #line 727
-testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table13, "Then ");
+testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table7, "Then ");
 #line 732
 testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 734
@@ -1227,17 +1227,17 @@ testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.Spec
 #line 773
 testRunner.Given("I call Shared Step 57205 (Go to Retail Partners - Select CVS)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tier",
                         "State"});
-            table14.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "2.1",
                         "On"});
-            table14.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "2.2",
                         "On"});
 #line 775
-testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table14, "Then ");
+testRunner.Then("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table8, "Then ");
 #line 780
 testRunner.Given("if the save button is visible, I save changes and close the popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 782
@@ -1273,21 +1273,21 @@ testRunner.Given("I call Shared Step 57960 (Enter Universal Product Code (UPC) -
 testRunner.And("I confirm the page heading shows the CVS Logo with the title \'CVS Own Brand Regis" +
                     "tration\' below the logo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Paragraph"});
-            table15.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         @"CVS Pharmacy has taken a major step forward in advancing its efforts to remove chemicals of concern to our customers. This action is a significant milestone in CVS Pharmacy's journey to provide products that are safe, compliant, sustainable and help people on their path to better health. As a supplier registering a CVS Pharmacy Store Brand Product, you are required to complete additional screening and questions to support CVS's restricted chemical commitment."});
-            table15.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         @"Your product will be screened by WERCs against CVS Pharmacy's Restricted Chemical Policy (RCP) as outlined in the CVS Store Brand Quality Assurance Agreement. CVS will be notified when an item is non-compliant with CVS Pharmacy's RCP. The notification will include the item that is out of compliance and only disclose the non-compliant ingredients marked as publicly available. The output of the screening has been designed to protect the supplier's proprietary information. The Supplier is responsible for working directly with their CVS Product Development Manager to resolve the non-compliance."});
 #line 810
-testRunner.And("The displayed message text is comprised of the following paragraphs", ((string)(null)), table15, "And ");
+testRunner.And("The displayed message text is comprised of the following paragraphs", ((string)(null)), table9, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table16.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Continue?"});
 #line 815
-testRunner.And("I see the following sections", ((string)(null)), table16, "And ");
+testRunner.And("I see the following sections", ((string)(null)), table10, "And ");
 #line 819
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 821

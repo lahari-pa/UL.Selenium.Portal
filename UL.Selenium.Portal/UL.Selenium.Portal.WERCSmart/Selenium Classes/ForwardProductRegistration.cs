@@ -84,6 +84,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public List<string> SelectProducts_GetListOfIDs()
+		{
+			var products = containerElement.FindElements(By.XPath(".//tbody/tr/td//label[contains(@data-bind, 'wpsid')]"));
+			return products.Select(x => x.GetValue()).ToList();
+		}
+
 		public bool SelectProducts_ClickProductByID(string id)
 		{
 			var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[.//label[text()='" + id + "']]"), 2);
@@ -171,6 +177,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			var disabledInputs = this.containerElement.FindElements(By.XPath(".//tbody/tr//input[@type='checkbox' and @disabled]"));
 			return disabledInputs.Any();
+		}
+
+		public List<string> GetListOfOtherRetailers()
+		{
+			var retailers = this.containerElement.FindElements(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//span"));
+			if (!retailers.Any())
+			{
+				return new List<string>();
+			}
+			else
+			{
+				return retailers.Select(x => x.GetValue()).ToList();
+			}
 		}
 
 		public bool SelectRetailer(string retailer)

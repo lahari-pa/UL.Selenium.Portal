@@ -150,22 +150,22 @@ testRunner.Given("I click the UL Solution Center icon in the QuickLinks Pane", (
 #line 46
 testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table666 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sections"});
-            table666.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "ECOLOGO"});
-            table666.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Prospector"});
-            table666.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "GoodGuide for Consumers"});
-            table666.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "GoodGuide for Suppliers"});
-            table666.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "UL Secure Connect (ULSC)"});
-            table666.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "ULGHS"});
 #line 48
-testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table666, "Then ");
+testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table1, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
