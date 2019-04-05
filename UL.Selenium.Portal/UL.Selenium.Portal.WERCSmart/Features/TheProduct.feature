@@ -290,27 +290,24 @@ Then I save the product information as: TestCase84639
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84639
 
 @TReVorId:20272
-Scenario: [84640] Product Name - can contain special characters - ; character testing
+Scenario: [84640] Product Name - can not contain special characters - ; character testing
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 And I set the Product Name as it a appears on the Package Label field to: ;The Product Name
 And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
 And I click continue
-And I confirm the product name: ";The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The Prod;uct Name
 And I click continue
-And I confirm the product name: "The Prod;uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The Product Name;
 And I click continue
-And I confirm the product name: "The Product Name;" is displayed in the header
-And in the New Product page I click section: The Product
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The ; Product ; Name ;
 And I click continue
-And I confirm the product name: "The ; Product ; Name ;" is displayed in the header
-Then I save the product information as: TestCase84640
-And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84640
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+
+
 
 @TReVorId:20273
 Scenario: [84641] Product Name - can contain special characters - < character testing
@@ -319,21 +316,17 @@ And I call Shared Step 57753 (Create a New Registration via Register New Product
 And I set the Product Name as it a appears on the Package Label field to: <The Product Name
 And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
 And I click continue
-And I confirm the product name: "<The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The Prod<uct Name
 And I click continue
-And I confirm the product name: "The Prod<uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The Product Name<
 And I click continue
-And I confirm the product name: "The Product Name<" is displayed in the header
-And in the New Product page I click section: The Product
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The < Product < Name <
 And I click continue
-And I confirm the product name: "The < Product < Name <" is displayed in the header
-Then I save the product information as: TestCase84641
-And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84641
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+
 
 @TReVorId:20274
 Scenario: [84642] Product Name - can contain special characters - > character testing
@@ -342,21 +335,17 @@ And I call Shared Step 57753 (Create a New Registration via Register New Product
 And I set the Product Name as it a appears on the Package Label field to: >The Product Name
 And In the Product Type tab of the New Product Page, I enter: Bubble solution in the Type of Product select field
 And I click continue
-And I confirm the product name: ">The Product Name" is displayed in the header
-And in the New Product page I click section: The Product
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The Prod>uct Name
 And I click continue
-And I confirm the product name: "The Prod>uct Name" is displayed in the header
-And in the New Product page I click section: The Product
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The Product Name>
 And I click continue
-And I confirm the product name: "The Product Name>" is displayed in the header
-And in the New Product page I click section: The Product
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
 And I set the Product Name as it a appears on the Package Label field to: The > Product > Name >
 And I click continue
-And I confirm the product name: "The > Product > Name >" is displayed in the header
-Then I save the product information as: TestCase84642
-And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84642
+Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
+
 
 @TReVorId:20275
 Scenario: [84643] Product Name - can contain special characters - , character testing
