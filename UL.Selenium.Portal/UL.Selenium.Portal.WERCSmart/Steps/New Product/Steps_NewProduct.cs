@@ -3255,11 +3255,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Packaging types are showing");
 		}
 
-		[StepDefinition(@"In the UPC page I should see Add new Packaging Type link")]
-		public void GivenInTheUPCPageIShouldSeeAddNewPackagingTypeLink()
+		[StepDefinition(@"In the UPC page I (should|should not) see Add new Packaging Type link")]
+		public void GivenInTheUPCPageIShouldSeeAddNewPackagingTypeLink(string shouldOrNot)
 		{
-			Report.IsTrue(new NewProduct().AddNewPackingTypeLinkExists(), "Add new packaging type link does not exist as expected",
-				"Add new packaging type link exists as expected");
+			if(shouldOrNot == "should")
+			{
+				Report.IsTrue(new NewProduct().AddNewPackingTypeLinkExists(), "Add new packaging type link does not exist as expected",
+					"Add new packaging type link exists as expected");
+			}
+			else
+			{
+				Report.IsTrue(!new NewProduct().AddNewPackingTypeLinkExists(), "Add new packaging type link does not exist as expected",
+					"Add new packaging type link exists as expected");
+			}
 		}
 	}
 }
