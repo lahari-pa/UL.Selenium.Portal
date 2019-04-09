@@ -3258,15 +3258,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the UPC page I (should|should not) see Add new Packaging Type link")]
 		public void GivenInTheUPCPageIShouldSeeAddNewPackagingTypeLink(string shouldOrNot)
 		{
-			if(shouldOrNot == "should")
+			var labelLinksShowing = new UPC().UpcPageLinks();
+			if (shouldOrNot == "should")
 			{
-				Report.IsTrue(new NewProduct().AddNewPackingTypeLinkExists(), "Add new packaging type link does not exist as expected",
-					"Add new packaging type link exists as expected");
+				Report.IsTrue(labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was not found", "Add new Packaging Type was found on the upc page as expected");
+			}
+			else if(shouldOrNot == "should not")
+			{
+				Report.IsTrue(!labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was found on the upc page, it should not have been", "Add new Packaging Type was not found on the upc page as expected");
 			}
 			else
 			{
-				Report.IsTrue(!new NewProduct().AddNewPackingTypeLinkExists(), "Add new packaging type link does not exist as expected",
-					"Add new packaging type link exists as expected");
+				Report.Failure("input values must be either 'should' or 'should not'");
 			}
 		}
 	}
