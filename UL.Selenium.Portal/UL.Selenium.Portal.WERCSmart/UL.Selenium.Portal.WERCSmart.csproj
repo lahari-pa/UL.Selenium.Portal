@@ -175,6 +175,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship%28FULL%29.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package types%28Yes%29 Stewardship%28Partial%29.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Account Canada Address%28Yes%29 Package types%28Yes%29 Stewardship%28Partial%29.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Cart.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -679,6 +684,10 @@
     <None Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship%28FULL%29.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship%28FULL%29.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package types%28Yes%29 Stewardship%28Partial%29.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Account Canada Address%28Yes%29 Package types%28Yes%29 Stewardship%28Partial%29.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Cart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
