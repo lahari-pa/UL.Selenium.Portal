@@ -1,4 +1,4 @@
-﻿@wercsmart
+@wercsmart
 @run_Actions
 
 @Login
@@ -29,6 +29,7 @@ Feature: Actions
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Home Page\Actions\View UPCs
 
+@TReVorId:22123
 Scenario: [73424] View UPCs - Product with UPCs
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Then the WERCSmart homepage should load

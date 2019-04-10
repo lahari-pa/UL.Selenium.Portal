@@ -545,6 +545,7 @@ Then I confirm that the smart search results contain a chemical with CAS: 50-00-
 And I navigate to the home page
 
 @tfs_design
+@TReVorId:20225
 Scenario: [70516] Add and Remove Packaging Type
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
