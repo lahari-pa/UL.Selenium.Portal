@@ -977,11 +977,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rem ##### TReVor Post Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.0.331\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.0.332\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>rem ##### TReVor Pre Build Events #####
-"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.0.331\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
+"$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.0.332\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
 </PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
