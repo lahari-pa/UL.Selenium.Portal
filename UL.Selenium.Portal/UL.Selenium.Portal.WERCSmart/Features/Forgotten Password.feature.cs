@@ -122,7 +122,7 @@ testRunner.Then("I click the login button in the Forgotten Password window", ((s
 testRunner.Then("there should be a new email for email Address saved as: automatedcompany1 from: <" +
                     "SiteNotification> with the title: WERCSmart Password Reset", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 26
-testRunner.And(@"the body of the email should show: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you! UL WERCSmart Customer Support Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(@"the body of the email should contain: Dear WERCSmart User, We received a request to reset the password associated with your account. Please click on the link to reset your password. If you did not request to have your password reset, please contact Customer Support at +1 (877) 642-6753 immediately. If you would like to change your password in the future, please log in to your account and select Reset Password under Actions in the My Account section. Thank you! UL WERCSmart Customer Support Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -157,7 +157,7 @@ testRunner.Then("the message should contain Please check your email to get instr
 testRunner.Then("there should be a new email for email Address saved as: myunregisteredaccount fro" +
                     "m: <SiteNotification> with the title: WERCSmart Account Information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 37
-testRunner.And(@"the body of the email should show: Dear Future WERCSmart User: Recently you attempted to access WERCSmart and indicated you forgot your password. Our records do not show your email to be registered as a User of WERCSmart at this time. We recommend you create an account. Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(@"the body of the email should contain: Dear Future WERCSmart User: Recently you attempted to access WERCSmart and indicated you forgot your password. Our records do not show your email to be registered as a User of WERCSmart at this time. We recommend you create an account. Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -262,87 +262,87 @@ this.ScenarioInitialize(scenarioInfo);
 #line 13
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table59 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Email",
                         "User_<random>"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Country",
                         "UNITED STATES"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "FirstName",
                         "Richard"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "LastName",
                         "Smith"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Password",
                         "Pa4*ytuufnn"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Address1",
                         "Address 1"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Address2",
                         "Address 2"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "City",
                         "City Name"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "State",
                         "Florida"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Zip",
                         "999"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "CompanyName",
                         "Company 1"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "CompanyPhone",
                         "123-456-7889"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "EmergencyPhoneNumber",
                         "123-456-7789"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "SupplierType",
                         "Manufacturer"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "PhoneQuestion",
                         "PhoneQuestion"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "PhoneHint",
                         "PhoneHint"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "MentorQuestion",
                         "MentorQuestion"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "MentorHint",
                         "MentorHint"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "FriendQuestion",
                         "FriendQuestion"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "FriendHint",
                         "FriendHint"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "AnimalQuestion",
                         "AnimalQuestion"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "AnimalHint",
                         "AnimalHint"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "CollegeQuestion",
                         "CollegeQuestion"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "CollegeHint",
                         "CollegeHint"});
-            table59.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Pin",
                         "1234"});
 #line 71
 testRunner.Given("If not already created, I create a user: ForgotPW_SecQs with the following parame" +
-                    "ters:", ((string)(null)), table59, "Given ");
+                    "ters:", ((string)(null)), table1, "Given ");
 #line 98
 testRunner.Then("I click the User Icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 99

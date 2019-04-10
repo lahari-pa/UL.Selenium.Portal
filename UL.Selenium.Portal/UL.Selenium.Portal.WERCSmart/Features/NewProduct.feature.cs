@@ -115,14 +115,14 @@ testRunner.Then("I click the Register New Product icon in the Navigation Pane", 
 #line 22
 testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table128 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Button"});
-            table128.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Create a New Registration"});
-            table128.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Copy from an Existing Registration"});
 #line 23
-testRunner.And("I should see the following radio buttons:", ((string)(null)), table128, "And ");
+testRunner.And("I should see the following radio buttons:", ((string)(null)), table1, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

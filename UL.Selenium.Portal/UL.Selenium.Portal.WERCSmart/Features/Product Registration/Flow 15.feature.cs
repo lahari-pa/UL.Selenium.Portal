@@ -183,18 +183,18 @@ testRunner.Given("I call Shared Step 60935 (Additional Product Information - US 
 #line 52
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table138 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run"});
-            table138.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Alkaline",
                         "AG Alkaline button cell batteries by L\'image Home Products Inc.",
                         "4",
                         "2"});
 #line 53
-testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table138, "Given ");
+testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table1, "Given ");
 #line 56
 testRunner.Given("I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No" +
                     " to ALL With Copper)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

@@ -2152,6 +2152,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(statements.Contains(value), "The statement with text: " + value + " was not showing on the VOC Summary page", "The statement with text: " + value + " was showing on the VOC summary page as expected.");
 		}
 
+		[StepDefinition(@"I confirm that statement with text: '(.*)' is not displayed")]
+
+		public void StatementIsNotDisplayed(string statement)
+		{
+			var allStatements = new NewProduct().AllAdditionalStatements();
+			Report.IsTrue(!allStatements.Contains(statement), "Statement: " + statement + " was displayed when it was not expected!", "Statement: " + statement + " was not displayed as expected");
+		}
 		public void SelectTCLPElementOptionsToNo(List<string> elements)
 		{
 			var newProduct = new NewProduct();
@@ -2503,10 +2510,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			else if (exclusive == "displayed exclusively")
 			{
-				differences = expectedOptionsLower.Except(displayedOptionsLower).ToList();
-				Report.IsTrue(differences.Count == 0,
-					$"The actual options for section: {section} did not match the expected options. The differences were: {string.Join(", ", differences.Select(x => "'" + x + "'").ToList())}",
-					$"The actual options for section: {section} matched the expected options: {string.Join(", ", expectedOptions)}");
+				Report.Info("Expected options to be displayed are:");
+				foreach (var option in expectedOptions)
+				{
+					Report.Info(option);
+				}
+				var allMatch = true;
+				foreach (var displayedOption in displayedOptionsLower)
+				{
+					var match = false;
+					foreach (var expectedOption in expectedOptionsLower)
+					{
+						if (expectedOption != displayedOption)
+						{
+							continue;
+						}
+						match = true;
+						break;
+					}
+					if (match)
+					{
+						continue;
+					}
+					allMatch = false;
+					Report.Failure("Option: " + displayedOption + " was displayed when it was not expected!");
+					Report.Screenshot();
+				}
+				if (allMatch)
+				{
+					Report.Success("The displayed options matched the expected options exactly for section: " + section);
+					Report.Screenshot();
+				}
 			}
 		}
 
@@ -2656,17 +2690,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				count++;
 			}
 		}
-		[Then(@"The alert message is displayed with text: (.*)")]
-		public void AlertMessageDisplayed(string alert)
+		[Then(@"The alert message (is|is not) displayed with text: (.*)")]
+		public void AlertMessageDisplayed(string displayed, string alert)
 		{
-			List<string> actualAlerts = new NewProduct().DisplayedAlerts();
+			var expectDisplayed = false;
+			switch (displayed)
+			{
+				case "is":
+					expectDisplayed = true;
+					break;
+				case "is not":
+					break;
+				default:
+					Report.Failure("Step parameter must be either 'is' or 'is not'");
+					return;
+			}
+			var actualAlerts = new NewProduct().DisplayedAlerts();
 			if (actualAlerts == null)
 			{
-				Report.Failure("Could not locate any alert messages on the page");
+				Report.Failure("Error fetching alert messages!");
 				return;
 			}
-			Report.IsTrue(actualAlerts.Contains(alert),
-				"Message is not displayed as expected. Expected: " + alert + " but got: " + string.Join(",", actualAlerts),
+			Report.IsTrue(actualAlerts.Contains(alert) == expectDisplayed,
+				$"Alert message {(expectDisplayed ? "is not" : "is")} displayed when . Expected: " + alert + " but got: " + string.Join(",", actualAlerts),
 				"Message: '" + alert + "' is displayed as expected");
 		}
 
@@ -3183,9 +3229,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I Select a container type from the drop down list")]
 		public void GivenISelectAContainerTypeFromTheDropDownList()
 		{
-			List<string> containerTypes = new NewProduct().GetContainerOptions();
-			Random random = new Random();
-			int randomNumber = random.Next(0, containerTypes.Count - 1);
+			var containerTypes = new NewProduct().GetContainerOptions();
+			// the container type count must be greater than 1 or random number will throw argument out of range exception (cannot have a range between 1 and 0)
+			if (containerTypes.Count <= 1)
+			{
+				Report.Failure("Expected > 1 options to appear under the container select");
+				return;
+			}
+			var random = new Random();
+			var randomNumber = random.Next(1, containerTypes.Count - 1);
 			Report.IsTrue(new NewProduct().SelectContainerType(containerTypes[randomNumber]),
 				"Failed to select: " + containerTypes[randomNumber], "Selected: " + containerTypes[randomNumber]);
 		}
@@ -3203,12 +3255,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Packaging types are showing");
 		}
 
-		[StepDefinition(@"In the UPC page I should see Add new Packaging Type link")]
-		public void GivenInTheUPCPageIShouldSeeAddNewPackagingTypeLink()
+		[StepDefinition(@"In the UPC page I (should|should not) see Add new Packaging Type link")]
+		public void GivenInTheUPCPageIShouldSeeAddNewPackagingTypeLink(string shouldOrNot)
 		{
-			Report.IsTrue(new NewProduct().AddNewPackingTypeLinkExists(), "Add new packaging type link does not exist as expected",
-				"Add new packaging type link exists as expected");
+			var labelLinksShowing = new UPC().UpcPageLinks();
+			if (shouldOrNot == "should")
+			{
+				Report.IsTrue(labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was not found", "Add new Packaging Type was found on the upc page as expected");
+			}
+			else if(shouldOrNot == "should not")
+			{
+				Report.IsTrue(!labelLinksShowing.Contains("Add new Packaging Type"), "Add new Packaging Type link was found on the upc page, it should not have been", "Add new Packaging Type was not found on the upc page as expected");
+			}
+			else
+			{
+				Report.Failure("input values must be either 'should' or 'should not'");
+			}
 		}
-
 	}
 }

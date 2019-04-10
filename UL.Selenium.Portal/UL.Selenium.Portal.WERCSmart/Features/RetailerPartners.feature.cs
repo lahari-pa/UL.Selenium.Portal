@@ -142,167 +142,167 @@ testRunner.And("I should see the following subheading All Retailers", ((string)(
 #line 37
 testRunner.Then("I confirm that none of the available Retailer Tiles are blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table584 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer",
                         "Code"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Ahold",
                         "AH"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Albertsons Companies",
                         "SW"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Amazon",
                         "AM"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Autozone",
                         "AZ"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Bed Bath and Beyond",
                         "BB"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Canadian Tire",
                         "CT"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Costco",
                         "CO"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "CVS",
                         "CV"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Delhaize",
                         "DA"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Dick\'s Sporting Goods",
                         "DI"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Dollar General",
                         "DG"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Dollar Tree",
                         "DT"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Essendant",
                         "US"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Family Dollar",
                         "FD"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Genuine Parts",
                         "GP"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Harbor Freight Tools",
                         "HF"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "HD Supply",
                         "HS"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "HyVee",
                         "HV"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Kroger",
                         "KG"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Lowes",
                         "LW"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "McLane",
                         "ML"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Meijer",
                         "MJ"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Northgate Market",
                         "NM"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Office Depot",
                         "OD"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "O\'Reilly Auto Parts",
                         "OR"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Petco",
                         "PC"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Price Chopper",
                         "PR"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Rite Aid",
                         "RA"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Save Mart Supermarkets",
                         "SM"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Schnucks",
                         "SC"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Sears K Mart",
                         "SE"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Smart & Final",
                         "SF"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Staples",
                         "SP"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "SuperValue",
                         "SV"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Target",
                         "TG"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "The Home Depot",
                         "HD"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Topco",
                         "TP"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Tractor Value Supply",
                         "TS"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Ultra Standard",
                         "ST"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Unified",
                         "UF"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Wakefren",
                         "WF"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Walgreens",
                         "WG"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "BONBONS",
                         "WM-BO"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Walmart.com",
                         "WM-CO"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Hayneedle",
                         "WM-HN"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Jet",
                         "WM-JE"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "MODCLOTH",
                         "WM-MC"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Moosejaw",
                         "WM-MJ"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Shoes.com",
                         "WM-SC"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Walmart",
                         "WM"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Winco Foods",
                         "WC"});
-            table584.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "NewEgg",
                         "NE"});
 #line 43
-testRunner.And("I check that the following retailers are showing:", ((string)(null)), table584, "And ");
+testRunner.And("I check that the following retailers are showing:", ((string)(null)), table1, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -372,20 +372,20 @@ testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((Tec
 #line 121
 testRunner.Then("I should see the retailer heading: Sears/K-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table585 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column name"});
-            table585.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Supplier ID"});
-            table585.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Company or Brand Name"});
-            table585.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Is Active"});
-            table585.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Is Default"});
-            table585.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Actions"});
 #line 122
-testRunner.Then("I check that in the Supplier ID table the following columns are showing:", ((string)(null)), table585, "Then ");
+testRunner.Then("I check that in the Supplier ID table the following columns are showing:", ((string)(null)), table2, "Then ");
 #line 130
 testRunner.Given("I call Shared Step 56968 (Confirm - Data Consent Tiers not required )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 131
@@ -535,18 +535,18 @@ testRunner.And("I click the \"What are the Data Usage Tiers?\" information butto
 #line 192
 testRunner.And("I click the \"Tier 1: Regulatory Compliance\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table586 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section",
                         "Text"});
-            table586.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "A",
                         @"Definition. ""Regulatory Support"" is any evaluation of Supplier's data that is required to assist any WERCSmart Recipient in complying with any statute or regulation applicable in the United States or other countries (including international laws and regulations), governing the sale, handling, transportation, storage or disposal of products containing chemicals. These evaluations are included in the “WERCSmart Results” which are provided to WERCSmart Recipients to support their regulatory compliance programs. WERCSmart Results are derived using both Public Data and Confidential Data submitted by a Direct Supplier (and its Third-Party Suppliers). WERCSmart Results also include the provision of product safety data sheets, whether authored by the Direct Supplier or by UL authoring services."});
-            table586.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "B",
                         @"Disclosure of Confidential Data. All data elements defined as Confidential Data above will be treated as such and will not be provided to a WERCSmart Recipient, unless a local, state or federal statute requires that a specific element be treated as non-confidential."});
 #line 193
 testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
-                    "ion:", ((string)(null)), table586, "And ");
+                    "ion:", ((string)(null)), table3, "And ");
 #line 197
 testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 198
@@ -582,48 +582,48 @@ testRunner.And("I click the \"Tier 2: Chemical Program Support\" tab in Data Tie
 testRunner.And("I confirm the Data Tier Details subheading reads: What does Chemical Program Supp" +
                     "ort mean?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table587 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section",
                         "Text"});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "A",
                         "Definition. \"Chemical Program Support\" includes providing the following types of " +
                             "information to Designated Recipient(s) only:"});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "A1",
                         @"Product Ingredient Lists. The Standard Chemical Names and Standard Chemical Numbers for each ingredient on a product’s Publicly Disclosed Ingredient List for each of a Supplier's products that a Designated Recipient sells. These data do not include any of the following Confidential Data elements:"});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "A1a",
                         "The chemical identity of any ingredient marked as not publicly disclosed or as a " +
                             "trade secret on the WERCSmart Product Formulation page;"});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "A1b",
                         "The chemical identity of the ingredients of any Third-Party Component in a produc" +
                             "t (unless those ingredients are marked as publicly disclosed on the WERCSmart Co" +
                             "mponent Formulation page by the Third-Party Supplier of the component); and"});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "A1c",
                         "The percent by weight of any ingredient in a product."});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "A1",
                         @"This information is used by a Designated Recipient to search its product portfolio for chemicals of interest. The Public Name of an ingredient is insufficient for this purpose, because a Public Name may be ambiguous and fail to resolve to a specific Unique Chemical. Standard Chemical Names and/or Standard Chemical Numbers are required because these chemical identifiers are used to define which ingredients are included in the various regulatory, scientific or trade association lists that Designated Recipients use to identify chemicals of interest. The Designated Recipient is not authorized to publicly disclose this additional chemical identity data."});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "A2",
                         @"Transparency Ratios for each of a Supplier's products that a Designated Recipient sells. The ""Transparency Ratio"" is the number of ingredients on a product's Publicly Disclosed Ingredient List divided by the number of ingredients on a product’s Full Formulation Ingredient List. The ratios are used by a Designated Recipient to evaluate the visibility it has into the chemical composition of its product portfolio. The Designated Recipient is not authorized to publicly disclose product Transparency Ratios."});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "A3",
                         @"Chemical Screen Results. Product Chemical Screen results, where a product’s Full Formulation Ingredient List is screened against a Designated Recipient's restricted substance list (a “Chemical Screen”). The Designated Recipient is provided with an indication of whether the product passes or fails the screen. The Standard Chemical Name or Standard Chemical Number of the specific ingredient(s) failing the Chemical Screen shall only be provided if that ingredient is listed on a product’s Publicly Disclosed Ingredient List. Confidential Data may be used to derive Chemical Screen results (e.g., screen against a Full Formulation Ingredient List, or use percent formulation to demonstrate compliance with a restriction limit), provided there is no disclosure of any Confidential Data to the Designated Recipient. The Designated Recipient is not authorized to publicly disclose product-level results from its Chemical Screens."});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "A4",
                         @"Aggregate Chemical Usage Reports. ""Aggregate Chemical Usage Reports"" are reports which summarize the prevalence or volume of chemicals in a Designated Recipient's product portfolio. These reports track and characterize usage of chemicals to inform chemical policy development at the Designated Recipient. Confidential Data may be used to derive Aggregate Chemical Usage Reports (e.g., calculate prevalence of all chemicals on the Full Formulation Ingredient Lists of products in an assortment, or use percent formulation to calculate mass-weighted chemical usage), provided there is no disclosure of any Confidential Data to the Designated Recipient. The Designated Recipient is authorized to publicly disclose summary information from Aggregate Chemical Usage Reports, provided that such disclosure does not identify specific products or suppliers. If the Designated Recipient is reporting on the volume of chemicals in its assortment, for example, such results must be presented at the product category level, without identifying amounts per specific supplier or product."});
-            table587.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "B",
                         "Third Party Suppliers. All Third-Party Suppliers of components in a product shall" +
                             " separately provide Tier 2 Data Use Consent to the use of their Confidential Dat" +
                             "a for providing Chemical Program Support."});
 #line 208
 testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
-                    "ion:", ((string)(null)), table587, "And ");
+                    "ion:", ((string)(null)), table4, "And ");
 #line 220
 testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 221
@@ -659,27 +659,27 @@ testRunner.And("I click the \"Tier 3: Supplemental Reports\" tab in Data Tier De
 testRunner.And("I confirm the Data Tier Details subheading reads: What does Supplemental Reports " +
                     "for Internal Business Use Only mean?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table588 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section",
                         "Text"});
-            table588.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "A",
                         "Definition. \"Supplemental Reports\" include providing data needed for sustainabili" +
                             "ty evaluations, product qualification and rating programs, assortment curation p" +
                             "rograms, and supplier qualification programs operated by a Designated Recipient." +
                             ""});
-            table588.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "A1",
                         @"Supplemental Reports will be derived using data submitted by a supplier as part of a supplier’s record, or as part of a product’s regulatory or supplemental record. Supplemental supplier and product records are populated from survey data, which may be collected from supplier via UL Supply Chain Network, WERCSmart, PurView, or as otherwise provided."});
-            table588.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "A2",
                         @"Confidential Data may be used to derive Supplemental Reports (e.g., as inputs for rules used to rate or qualify products), provided there is no disclosure of Confidential Data to the Designated Recipient. In limited cases, UL may designate specific data elements collected by a survey as confidential, and not disclose these elements to a Designated Recipient."});
-            table588.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "B",
                         @"Third-Party Suppliers. In the event that the Confidential Data required to derive a Supplemental Report is controlled by a Third-Party Supplier, that party shall separately provide Tier 3 consent to the use of its Confidential Data for deriving Supplemental Reports."});
 #line 231
 testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
-                    "ion:", ((string)(null)), table588, "And ");
+                    "ion:", ((string)(null)), table5, "And ");
 #line 237
 testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 238
@@ -715,28 +715,28 @@ testRunner.And("I click the \"Tier 4: Public Disclosure Options\" tab in Data Ti
 testRunner.And("I confirm the Data Tier Details subheading reads: What are my Public Disclosure O" +
                     "ptions?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table589 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section",
                         "Text"});
-            table589.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "A",
                         @"Definition of Public Disclosure Options: Suppliers may opt to authorize a Designated Recipient to publicly disclose one or more of the following types of data for its external business purposes, which may include consumer-facing marketing and product or supplier information programs:"});
-            table589.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "A1",
                         @"Derived Results from Supplemental Reports (Tier 4.1). Derived Results include any qualification decisions or ratings the Designated Recipient derives based on the data in a regulatory or supplemental product record or in a supplier record. Qualification decisions are determinations that a supplier or product satisfies a set of criteria (e.g., a supplier exhibits a set of sustainability attributes, or a product does not contain certain types of chemicals). Ratings are scores assigned to a product or supplier based on an evaluative framework defined by a Designated Recipient. A Designated Recipient may publicly disclose information from Supplemental Reports only in a form that does not reveal the Confidential Data of any supplier. For example, a Designated Recipient may publish the results of a product qualification decision (e.g., the product meets a set of criteria), but it is prohibited from disclosing that a product exhibits a specific attribute that is Confidential Data."});
-            table589.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "A2",
                         "Product Ingredient Lists (Tier 4.2). A Designated Recipient may utilize the Publi" +
                             "c Names on a product’s Publicly Disclosed Ingredient List to publish such list o" +
                             "n its website."});
-            table589.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "A3",
                         "Other Supplier-Provided Data (Tier 4.3). A Designated Recipient may publicly disc" +
                             "lose any supplier-provided, non-confidential data elements from a product or sup" +
                             "plier record. No Confidential Data elements may be publicly disclosed."});
 #line 249
 testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
-                    "ion:", ((string)(null)), table589, "And ");
+                    "ion:", ((string)(null)), table6, "And ");
 #line 255
 testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 256
@@ -808,18 +808,18 @@ testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFl
 testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
                     "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table590 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tab"});
-            table590.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Tier 1: Regulatory Compliance"});
-            table590.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Tier 2: Chemical Program Support"});
-            table590.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Tier Tier 3: Supplemental Reports"});
-            table590.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Tier 4: Publicly Disclose Options"});
 #line 280
-testRunner.And("The Data Tier Details popup shows the following tabs:", ((string)(null)), table590, "And ");
+testRunner.And("The Data Tier Details popup shows the following tabs:", ((string)(null)), table7, "And ");
 #line 286
 testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 287
@@ -900,14 +900,14 @@ testRunner.And("in the Add New Supplier Dialog I enter the following in the Supp
 #line 321
 testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table591 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Supplier ID",
                         "Company or Brand Name"});
-            table591.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "654327",
                         "Automated"});
 #line 322
-testRunner.Then("I confirm that in the Supplier IDS list the following row exists", ((string)(null)), table591, "Then ");
+testRunner.Then("I confirm that in the Supplier IDS list the following row exists", ((string)(null)), table8, "Then ");
 #line 325
 testRunner.And("I call Shared Step 57247 - Database check - find t_vendor records for specific Re" +
                     "tailer: Reilly and Supplier: Products Automation Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

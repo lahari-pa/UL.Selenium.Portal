@@ -18,8 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.NewP
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Account Canada Address(Yes) Package types (Yes) Stewardship (No) (Suite ID 85309)" +
-        "")]
+    [NUnit.Framework.DescriptionAttribute("Account Canada Address(Yes) Package types (Yes) Stewardship (FULL)")]
     [NUnit.Framework.CategoryAttribute("LandingPage")]
     [NUnit.Framework.CategoryAttribute("Login")]
     [NUnit.Framework.CategoryAttribute("Homepage")]
@@ -32,21 +31,20 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.NewP
     [NUnit.Framework.CategoryAttribute("RetailPartners")]
     [NUnit.Framework.CategoryAttribute("SHA")]
     [NUnit.Framework.CategoryAttribute("UPC")]
-    [NUnit.Framework.CategoryAttribute("run_AccountCanadaAddress(Yes)Packagetypes(Yes)Stewardship(No)")]
-    public partial class AccountCanadaAddressYesPackageTypesYesStewardshipNoSuiteID85309Feature
+    [NUnit.Framework.CategoryAttribute("run_AccountCanadaAddress(Yes)Packagetypes(Yes)Stewardship(FULL)")]
+    public partial class AccountCanadaAddressYesPackageTypesYesStewardshipFULLFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Account Canada Address(Yes) Package types (Yes) Stewardship (No) (Suite ID 85309).feature"
+#line 1 "Account Canada Address(Yes) Package types (Yes) Stewardship(FULL).feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Account Canada Address(Yes) Package types (Yes) Stewardship (No) (Suite ID 85309)" +
-                    "", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Account Canada Address(Yes) Package types (Yes) Stewardship (FULL)", null, ProgrammingLanguage.CSharp, new string[] {
                         "LandingPage",
                         "Login",
                         "Homepage",
@@ -59,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.NewP
                         "RetailPartners",
                         "SHA",
                         "UPC",
-                        "run_AccountCanadaAddress(Yes)Packagetypes(Yes)Stewardship(No)"});
+                        "run_AccountCanadaAddress(Yes)Packagetypes(Yes)Stewardship(FULL)"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -98,384 +96,356 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.NewP
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[85325] Account has all Canada data ALL stewardship SOLD = Canada Only PL = YES P" +
-            "ackaging type IS required")]
-        public virtual void _85325AccountHasAllCanadaDataALLStewardshipSOLDCanadaOnlyPLYESPackagingTypeISRequired()
+        [NUnit.Framework.DescriptionAttribute("[85329] Account has all Canada data - ALL stewardship, SOLD = US & Canada, PL = N" +
+            "O, Packaging type IS NOT required")]
+        public virtual void _85329AccountHasAllCanadaData_ALLStewardshipSOLDUSCanadaPLNOPackagingTypeISNOTRequired()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85325] Account has all Canada data ALL stewardship SOLD = Canada Only PL = YES P" +
-                    "ackaging type IS required", null, ((string[])(null)));
-#line 18
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85329] Account has all Canada data - ALL stewardship, SOLD = US & Canada, PL = N" +
+                    "O, Packaging type IS NOT required", null, ((string[])(null)));
+#line 19
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 19
-testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 20
+testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 21
+testRunner.Given("I generate a random UPC number and save as: UPC85329", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 22
 testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
+#line 23
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
-testRunner.Then("I save the product information as: TestCase85325", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 23
+#line 24
+testRunner.Then("I save the product information as: TestCase85742", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 25
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 24
-testRunner.And("I call Shared Step 85730 - Additional Product Information - Canada Only - Child (" +
-                    "NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
-testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydro" +
-                    "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 26
-testRunner.And("I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue -" +
-                    " Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 62678 (Additional Product Information - US & Canada, No Child," +
+                    " No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
-testRunner.And("In the \'Select Retailers\' window I select the retailer: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
-testRunner.And("For retailer: Canadian Tire I add additional requirements: Additional requirement" +
-                    "s: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PRO" +
+                    "P 65 - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
+                    "appy Path) and select the retailer: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 30
 testRunner.And("In the UPC page I should see Add new Packaging Type link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
-testRunner.Given("I generate a random UPC number and save as: UPC85325", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 33
+#line 31
 testRunner.And("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
-testRunner.And("I enter UPC Number: saved as UPC85325", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 35
+#line 32
+testRunner.And("I enter UPC Number: saved as UPC85329", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 33
 testRunner.And("I Select a container type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
+#line 34
 testRunner.And("I enter Size Value: 12", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
+#line 35
 testRunner.And("I Confirm the Package Type drop down list shows a Packaging type available for se" +
                     "lection - Do not select one", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 38
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
-testRunner.And("I Confirm This is a required field. error message is shown below the Package Type" +
-                    " field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
-testRunner.And("I Select a package type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 42
 testRunner.Given("in the Universal Product Code (UPC) page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 43
+#line 39
+testRunner.Then("The alert message is not displayed with text: STOP! When selecting authoring of a" +
+                    " Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Pl" +
+                    "ease go to the My Account area, and update this information in.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 40
 testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 44
-testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase85325", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85329", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[85740] Account has Canada address and packaging, SOLD US & Canada, PL = YES, pac" +
-            "kaging type is required")]
-        public virtual void _85740AccountHasCanadaAddressAndPackagingSOLDUSCanadaPLYESPackagingTypeIsRequired()
+        [NUnit.Framework.DescriptionAttribute("[85750] Account has all Canada data - ALL stewardship, SOLD = US & Canada, PL = Y" +
+            "ES, Packaging type IS required")]
+        public virtual void _85750AccountHasAllCanadaData_ALLStewardshipSOLDUSCanadaPLYESPackagingTypeISRequired()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85740] Account has Canada address and packaging, SOLD US & Canada, PL = YES, pac" +
-                    "kaging type is required", null, ((string[])(null)));
-#line 47
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85750] Account has all Canada data - ALL stewardship, SOLD = US & Canada, PL = Y" +
+                    "ES, Packaging type IS required", null, ((string[])(null)));
+#line 44
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 48
+#line 45
 testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 49
-testRunner.Given("I generate a random UPC number and save as: UPC85740", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 50
+#line 46
+testRunner.Given("I generate a random UPC number and save as: UPC85750", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 47
 testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
+#line 48
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
-testRunner.Then("I save the product information as: TestCase85740", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 53
+#line 49
+testRunner.Then("I save the product information as: TestCase85750", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 50
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
+#line 51
 testRunner.And("I call Shared Step 85284 - Additional Product Information - US & Canada, Child (N" +
                     "o), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 52
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 53
 testRunner.And("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PRO" +
                     "P 65 - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
+#line 54
 testRunner.And("I call Shared Step  (Select Retailers Canadian Tire and enter additional requirem" +
                     "ents field - Indicate full name of product, as sold via this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
+#line 55
 testRunner.And("In the UPC page I should see Add new Packaging Type link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 59
+#line 56
 testRunner.And("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
-testRunner.And("I enter UPC Number: saved as UPC85740", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 61
+#line 57
+testRunner.And("I enter UPC Number: saved as UPC85750", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
 testRunner.And("I Select a container type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 59
 testRunner.And("I enter Size Value: 12", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 60
 testRunner.And("I Confirm the Package Type drop down list shows a Packaging type available for se" +
                     "lection - Do not select one", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
+#line 61
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
+#line 62
 testRunner.And("I Confirm This is a required field. error message is shown below the Package Type" +
                     " field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
-testRunner.And("I Select a package type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
-testRunner.Given("in the Universal Product Code (UPC) page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 68
-testRunner.Then("The alert message is not displayed with text: STOP! When selecting authoring of a" +
-                    " Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Pl" +
-                    "ease go to the My Account area, and update this information in.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 69
-testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 70
+#line 63
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase85740", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "ct: TestCase85750", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[85742] Account has Canada address and packaging, SOLD Canada Only, PL = NO, pack" +
-            "aging type is required")]
-        public virtual void _85742AccountHasCanadaAddressAndPackagingSOLDCanadaOnlyPLNOPackagingTypeIsRequired()
+        [NUnit.Framework.DescriptionAttribute("[85751] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = N" +
+            "O, Packaging type IS NOT required")]
+        public virtual void _85751AccountHasAllCanadaData_ALLStewardshipSOLDCanadaOnlyPLNOPackagingTypeISNOTRequired()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85742] Account has Canada address and packaging, SOLD Canada Only, PL = NO, pack" +
-                    "aging type is required", null, ((string[])(null)));
-#line 73
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85751] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = N" +
+                    "O, Packaging type IS NOT required", null, ((string[])(null)));
+#line 67
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 74
+#line 68
 testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 75
-testRunner.Given("I generate a random UPC number and save as: UPC85742", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 76
+#line 69
+testRunner.Given("I generate a random UPC number and save as: UPC85750", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 70
 testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 77
+#line 71
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
-testRunner.Then("I save the product information as: TestCase85742", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 79
+#line 72
+testRunner.Then("I save the product information as: TestCase85750", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 73
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
-testRunner.And("I call Shared Step 85730 - Additional Product Information - Canada Only - Child (" +
-                    "NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
+#line 74
+testRunner.And("I call Shared Step 62678 (Additional Product Information - US & Canada, No Child," +
+                    " No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
-testRunner.And("I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue -" +
-                    " Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 76
+testRunner.And("I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PRO" +
+                    "P 65 - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
 testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
                     "appy Path) and select the retailer: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 84
+#line 78
 testRunner.And("In the UPC page I should see Add new Packaging Type link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 85
+#line 79
 testRunner.And("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 86
-testRunner.And("I enter UPC Number: saved as UPC85742", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 87
+#line 80
+testRunner.And("I enter UPC Number: saved as UPC85750", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 81
 testRunner.And("I Select a container type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 88
+#line 82
 testRunner.And("I enter Size Value: 12", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 89
+#line 83
 testRunner.And("I Confirm the Package Type drop down list shows a Packaging type available for se" +
                     "lection - Do not select one", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 90
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
-testRunner.And("I Confirm This is a required field. error message is shown below the Package Type" +
-                    " field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
-testRunner.And("I Select a package type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 93
+#line 86
 testRunner.Given("in the Universal Product Code (UPC) page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 94
+#line 87
 testRunner.Then("The alert message is not displayed with text: STOP! When selecting authoring of a" +
                     " Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Pl" +
                     "ease go to the My Account area, and update this information in.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 95
+#line 88
 testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 96
+#line 89
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase85742", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "ct: TestCase85750", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[85743] Account has Canada address and packaging, SOLD Canada Only, PL = YES, pac" +
-            "kaging type is required")]
-        public virtual void _85743AccountHasCanadaAddressAndPackagingSOLDCanadaOnlyPLYESPackagingTypeIsRequired()
+        [NUnit.Framework.DescriptionAttribute("[85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = Y" +
+            "ES, Packaging type IS required")]
+        [NUnit.Framework.CategoryAttribute("85752")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22074")]
+        public virtual void _85752AccountHasAllCanadaData_ALLStewardshipSOLDCanadaOnlyPLYESPackagingTypeISRequired()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85743] Account has Canada address and packaging, SOLD Canada Only, PL = YES, pac" +
-                    "kaging type is required", null, ((string[])(null)));
-#line 99
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85752] Account has all Canada data - ALL stewardship, SOLD = Canada Only, PL = Y" +
+                    "ES, Packaging type IS required", null, new string[] {
+                        "85752",
+                        "TReVorId:22074"});
+#line 97
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 100
+#line 99
 testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 101
-testRunner.Given("I generate a random UPC number and save as: UPC85743", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 102
+#line 100
 testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 103
+#line 102
 testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
                     " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
-testRunner.Then("I save the product information as: TestCase85743", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 105
+#line 103
 testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
                     " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 104
+testRunner.And("I call Shared Step 85730 - Additional Product Information - Canada Only - Child (" +
+                    "NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 105
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydro" +
+                    "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 106
-testRunner.Given("I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA" +
-                    "), No(DSV), Yes(PLP), No(GNFR))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 107
-testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 108
 testRunner.And("I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue -" +
                     " Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 107
+testRunner.And("In the \'Select Retailers\' window I select the retailer: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 108
+testRunner.And("For retailer: Canadian Tire I add additional requirements: Additional requirement" +
+                    "s: Canadian Tire", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 109
-testRunner.And("I call Shared Step  (Select Retailers Canadian Tire and enter additional requirem" +
-                    "ents field - Indicate full name of product, as sold via this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 110
-testRunner.And("In the UPC page I should see Add new Packaging Type link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 111
-testRunner.And("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In the UPC page I should see Add new Packaging Type link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 112
-testRunner.And("I enter UPC Number: saved as UPC85743", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I generate a random UPC number and save as: UPC85752", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 113
-testRunner.And("I Select a container type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 114
-testRunner.And("I enter Size Value: 12", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I enter UPC Number: saved as UPC85752", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 115
+testRunner.And("I Select a container type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 116
+testRunner.And("I enter Size Value: 12", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 117
 testRunner.And("I Confirm the Package Type drop down list shows a Packaging type available for se" +
                     "lection - Do not select one", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 116
+#line 118
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 117
+#line 119
 testRunner.And("I Confirm This is a required field. error message is shown below the Package Type" +
                     " field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 118
-testRunner.And("I Select a package type from the drop down list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 119
-testRunner.Given("in the Universal Product Code (UPC) page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 120
-testRunner.Then("The alert message is not displayed with text: STOP! When selecting authoring of a" +
-                    " Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Pl" +
-                    "ease go to the My Account area, and update this information in.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 121
-testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 122
-testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase85743", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85752", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[85744] Account has Canada address only - SOLD = US only, PL = YES, packaging typ" +
-            "e is NOT required")]
-        public virtual void _85744AccountHasCanadaAddressOnly_SOLDUSOnlyPLYESPackagingTypeIsNOTRequired()
+        [NUnit.Framework.DescriptionAttribute("[85753] Account has all Canada data - ALL stewardship, SOLD = US Only, PL = NO, P" +
+            "ackaging type IS NOT required")]
+        public virtual void _85753AccountHasAllCanadaData_ALLStewardshipSOLDUSOnlyPLNOPackagingTypeISNOTRequired()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85744] Account has Canada address only - SOLD = US only, PL = YES, packaging typ" +
-                    "e is NOT required", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85753] Account has all Canada data - ALL stewardship, SOLD = US Only, PL = NO, P" +
+                    "ackaging type IS NOT required", null, ((string[])(null)));
+#line 123
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 124
+testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 125
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
+testRunner.Given("I generate a random UPC number and save as: UPC85753", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 126
-testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 127
-testRunner.Given("I generate a random UPC number and save as: UPC85744", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 128
-testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I save the product information as: TestCase85753", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 129
-testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
-                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 130
-testRunner.Then("I save the product information as: TestCase85744", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 131
-testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
-                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 132
-testRunner.Given("I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA" +
-                    "), No(DSV), Yes(PLP), No(GNFR))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 133
-testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 134
-testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
-                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 135
-testRunner.And("I call Shared Step  (Select Retailers Costco and enter additional requirements fi" +
-                    "eld - Indicate full name of product, as sold via this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 136
-testRunner.And("I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown" +
-                    " - Add UPC data - Continue) for UPC: saved as UPC85744, container type: Plastic " +
-                    "Container and size: 12 click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 137
-testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 138
-testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase85744", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[85745] Account has Canada address and packaging, SOLD US Only, PL = NO, packagin" +
-            "g type is NOT required")]
-        public virtual void _85745AccountHasCanadaAddressAndPackagingSOLDUSOnlyPLNOPackagingTypeIsNOTRequired()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85745] Account has Canada address and packaging, SOLD US Only, PL = NO, packagin" +
-                    "g type is NOT required", null, ((string[])(null)));
-#line 141
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 142
-testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 143
-testRunner.Given("I generate a random UPC number and save as: UPC85745", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 144
-testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
-                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 145
-testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
-                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 146
-testRunner.Then("I save the product information as: TestCase85745", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 147
-testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
-                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 148
 testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 149
+#line 131
 testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 150
+#line 132
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 151
+#line 133
 testRunner.Given("I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - H" +
                     "appy Path) and select the retailer: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 152
+#line 134
 testRunner.And("I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown" +
-                    " - Add UPC data - Continue) for UPC: saved as UPC85745, container type: Plastic " +
+                    " - Add UPC data - Continue) for UPC: saved as UPC85753, container type: Plastic " +
                     "Container and size: 12 click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 153
+#line 135
 testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 154
+#line 136
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
-                    "ct: TestCase85745", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "ct: TestCase85753", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[85754] Account has all Canada data - ALL stewardship, SOLD = US Only, PL = YES, " +
+            "Packaging type IS NOT required")]
+        public virtual void _85754AccountHasAllCanadaData_ALLStewardshipSOLDUSOnlyPLYESPackagingTypeISNOTRequired()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[85754] Account has all Canada data - ALL stewardship, SOLD = US Only, PL = YES, " +
+                    "Packaging type IS NOT required", null, ((string[])(null)));
+#line 139
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 140
+testRunner.Given("I login into the WERCSmart Portal - Canada has all data account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 141
+testRunner.Given("I generate a random UPC number and save as: UPC85754", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 142
+testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
+                    ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 143
+testRunner.And("I call Shared Step 57500 (The Product- Enter name, select product type - Continue" +
+                    " - Happy Path): Bubble solution", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 144
+testRunner.Then("I save the product information as: TestCase85754", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 145
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 146
+testRunner.Given("I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA" +
+                    "), No(DSV), Yes(PLP), No(GNFR))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 147
+testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 148
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 149
+testRunner.And("I call Shared Step  (Select Retailers Costco and enter additional requirements fi" +
+                    "eld - Indicate full name of product, as sold via this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 150
+testRunner.And("I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown" +
+                    " - Add UPC data - Continue) for UPC: saved as UPC85754, container type: Plastic " +
+                    "Container and size: 12 click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 151
+testRunner.Given("in the Regulatory Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 152
+testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
+                    "ct: TestCase85754", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
