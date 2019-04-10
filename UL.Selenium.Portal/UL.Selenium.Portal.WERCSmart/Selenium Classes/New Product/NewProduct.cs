@@ -3119,7 +3119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"));
+				var errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"),2);
 				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
 			}
 			catch (Exception e)
@@ -4247,6 +4247,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string FormError()
 		{
 			return this.containerElement.FindElement(By.XPath(".//ul[@class='form-error']/li"), 2)?.Text;
+		}
+
+		public bool SelectPackageType(string packageType)
+		{
+			var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+			var pkgType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+			pkgType.Select(packageType);
+			return pkgType.GetValue() == packageType;
+		}
+
+		public List<string> GetPackageOptions()
+		{
+			var container = this.containerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+			var upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'UPC Number')]/..//input"), 2);
+
+			var pkgType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
+			return pkgType.FindElements(By.XPath(".//option")).Select(x => x.GetValue()).ToList();
 		}
 
 	}

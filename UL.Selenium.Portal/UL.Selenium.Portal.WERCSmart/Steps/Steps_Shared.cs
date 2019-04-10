@@ -7461,17 +7461,179 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.ClickContinue();
 		}
 
-		[StepDefinition(@"I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: (.*) and saved id as: (.*)")]
-		public void GivenICallSharedStep74654SHAManager_Suppliers_SearchByEmailAddress(string email)
+		[StepDefinition(@"I call Shared Step 74654 - SHA manager - Suppliers - Search by email address: (.*) and saved name as: (.*)")]
+		public void GivenICallSharedStep74654SHAManager_Suppliers_SearchByEmailAddress(string email, string savedAs)
 		{
-			//	Given I Click the "Suppliers" link on the top right of the screen
-			//	And I In the top "Input Field" - enter the email address of the user you are going to be using in WERCSmart for this test into the search area of the pop up
-			//		And I Select the "Email" Radio Button
-			//	And I Click on the 'SEARCH Button'
-			//	And I Select the"Entry"
-			//	And I Make a note of the Supplier ID - this will need to be exact in order for the searches within SHA manager to return the correct results(also case sensitive)
-			//	And I Close the Supplier Manager pop up
-			//
+			TestReport.UseSubSteps = true;
+			Steps_SHA thisStepsSha = new Steps_SHA();
+			TestReport.StartStep("Given I Click the Suppliers link on the top right of the screen");
+			thisStepsSha.IClickOnSuppliersLink();
+
+			TestReport.StartStep("Given I Click the Suppliers pop up should open");
+			thisStepsSha.TheSupplierManagerPopupAppears();
+
+			TestReport.StartStep("Given enter the email address of the user you are going to be using in WERCSmart");
+			thisStepsSha.InSupplierManagerPopupIEnterSearchTerm(email);
+
+			TestReport.StartStep("I Select the 'Email' Radio Button");
+			thisStepsSha.InSupplierManagerPopupISelectRadioButton("E-Mail");
+
+			TestReport.StartStep("I click on the search button");
+			thisStepsSha.InSupplierManagerPopupIClickOnTheSearchButton();
+
+			TestReport.StartStep("I Make a note of the Supplier Name");
+			thisStepsSha.InSupplierManagerPopupISaveFirstSupplierNameAs(savedAs);
+
+			TestReport.StartStep("I click on the close button");
+			thisStepsSha.InSupplierManagerPopupIClickOnTheCloseButton();
+
+		}
+
+
+		[StepDefinition(@"I call Shared Step 74655 SHA - Search by Supplier ID saved as (.*) for specific product status: (.*)")]
+		public void GivenICallSharedStepSHA74655SearchBySupplierIDSavedAsMyIDForSpecificProductStatusCompleted(string savedAs, string status)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("Beginning shared step: 74655");
+			Steps_SHA thisStepsSha = new Steps_SHA();
+			TestReport.StartStep("I set the status filter to All");
+			StudioSHAManager myStudioShaManager = new StudioSHAManager();
+			myStudioShaManager.WaitForProductList(60);
+			myStudioShaManager.SelectFromStatusFilter("All");
+			GeneralUtilities.StudioWaitForSpinner();
+			myStudioShaManager.WaitForProductList(60);
+			Report.Info("Getting saved product: " + savedAs);
+
+			if (!Context.Contains(savedAs))
+			{
+				Report.Error("Context does not contain: " + savedAs);
+			}
+			TestReport.StartStep("I click Srch in the bottom menu list");
+
+			myStudioShaManager.ClickBottomMenuOption("Search");
+
+
+			var supplierID = Context.GetFromContext(savedAs).ToString();
+			Report.Info("Looking for supplier id: " + supplierID.ToString());
+			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+				"SearchTerm",
+				"SearchValue"
+			});
+			table.AddRow(new string[] {
+				"Supplier",
+				supplierID
+			});
+			table.AddRow(new string[] {
+				"Status",
+				status
+			});
+
+
+			TestReport.StartStep("I click Srch in the bottom menu list");
+			myStudioShaManager.ClickBottomMenuOption("Search");
+			Steps_SHA myStepsSha = new Steps_SHA();
+			myStepsSha.GivenInSHAManagerPageIRunSearch(table);
+			Delay.Seconds(1);
+			Report.Info("Waiting for product list");
+			Report.IsTrue(myStudioShaManager.WaitForProductList(120), "Product list not found","Product list is showing");
+
+		}
+
+		[StepDefinition(@"I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration")]
+		public void GivenICallSharedStep75130BulkActions_SelectForwardProductRegistration()
+		{
+			StepsProductGrid thisStepsProductGrid = new StepsProductGrid();
+
+			thisStepsProductGrid.GivenIClickBulkActionsInTheProductsGrid();
+			thisStepsProductGrid.GivenIClickForwardProductRegistrationInTheBulkActionsWindow(
+				"Forward Product Registration");
+		}
+
+
+		[StepDefinition(@"I call Shared Step 48360 - Regulatory - Test TSCA and PROP65 - Continue")]
+		public void SharedStep48360_Regulatory_TestTscaAndProp65_Continue()
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I confirm that the Regulatory step is shown");
+			new StepsNewProduct().GivenIShouldSeeXPage("Regulatory Information 1");
+			TestReport.StartStep("Confirm that the TSCA and Prop 65 questions are displayed");
+			var sections = new Table("Section");
+			sections.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
+			sections.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
+			new StepsNewProduct().CheckDisplayedSections("see", sections);
+			TestReport.StartStep("I confirm the TSCA question shows 2 Radio Buttons 'COMPLIANT' and 'EXEMPT'");
+			var options = new Table("Option");
+			options.AddRow("Compliant");
+			options.AddRow("Exempt");
+			new StepsNewProduct().CheckOptionsInSection("should", "displayed exclusively", "U.S. Toxic Substances Control Act (TSCA) status", options);
+			TestReport.StartStep("Confirm the Prop 65 question displays a 'YES' and 'NO' Buttons");
+			options = new Table("Option");
+			options.AddRow("Yes");
+			options.AddRow("No");
+			new StepsNewProduct().CheckOptionsInSection("should", "displayed exclusively", "Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act", options);
+			TestReport.StartStep("I click continue");
+			new StepsNewProduct().ClickContinue();
+			TestReport.StartStep("Confirm that both questions in this screen display the 'This is a required field' error message");
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("U.S. Toxic Substances Control Act (TSCA) status", "should", "This is a required field.");
+			new StepsNewProduct().ErrorMessagesAreShowingForItem("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act", "should", "This is a required field.");
+			TestReport.StartStep("Select ONE Radio Button for the TSCA Question");
+			new StepsNewProduct().SelectFirstOptionInSection("U.S. Toxic Substances Control Act (TSCA) status");
+			TestReport.StartStep("Confirm the 'Required field error message' no longer shows for the TSCA Question");
+			new StepsNewProduct().ErrorMessagesShouldNotBeShowingForItem("U.S.Toxic Substances Control Act (TSCA) status");
+			TestReport.StartStep("I select the 'No' button for the Prop 65 question");
+			new StepsNewProduct().SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act", "No");
+			TestReport.StartStep("I confirm the 'Required field' error message is no longer displayed for the prop 65 question");
+			new StepsNewProduct().ErrorMessagesShouldNotBeShowingForItem("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act");
+			TestReport.StartStep("I select the 'Yes' button for the Prop 65 question");
+			new StepsNewProduct().SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act", "Yes");
+			TestReport.StartStep("Confirm the following questions are displayed:");
+			sections = new Table("Section");
+			sections.AddRow("Is the need to warn triggered by");
+			sections.AddRow("How is the exposure warning transmitted? For more information, see Notice of Adoption Article");
+			sections.AddRow("Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured");
+			sections.AddRow("If the product carries a safe-harbor short-form warning, indicate which of the following is provided:");
+			sections.AddRow("If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:");
+			sections.AddRow("If the product carries a custom warning, please provide the exact text that is being used:");
+			new StepsNewProduct().CheckDisplayedSections("see", sections);
+			TestReport.StartStep("Confirm 'Is need to warn triggered by' options are correct");
+			options = new Table("Option");
+			options.AddRow("A chemical or chemicals in the product, or chemicals formed during the use of the product.");
+			options.AddRow("A chemical or chemicals in the packaging.");
+			options.AddRow("A chemical or chemicals in both the product and packaging.");
+			new StepsNewProduct().CheckOptionsInSection("should", "displayed exclusively", "Is the need to warn triggered by", options);
+			TestReport.StartStep("Confirm 'How is the exposure warning transmitted?' options are correct");
+			options = new Table("Option");
+			options.AddRow("By affixing it to the product or its packaging");
+			options.AddRow("By providing warning materials (labels, shelf signage, online warning language) to a retailer’s authorized agent");
+			options.AddRow("Other (Please specify)");
+			new StepsNewProduct().CheckOptionsInSection("should", "displayed exclusively", "How is the exposure warning transmitted?", options);
+			TestReport.StartStep("Confirm 'Is your exposure warning compliant with Proposition 65' options are correct");
+			options = new Table("Option");
+			options.AddRow("Prior to August 30, 2018");
+			options.AddRow("On or After August 30, 2018");
+			options.AddRow("Both, because instances of this product manufactured before, on and after August 30, 2018 are on the market.");
+			new StepsNewProduct().CheckOptionsInSection("should", "displayed exclusively", "Is your exposure warning compliant with Proposition 65", options);
+			TestReport.StartStep("Confirm 'If the product carries a safe-harbor short-form warning' options are correct");
+			options = new Table("Option");
+			options.AddRow("WARNING: Cancer - www.P65Warnings.ca.gov");
+			options.AddRow("WARNING: Reproductive Harm - www.P65Warnings.ca.gov");
+			options.AddRow("WARNING: Cancer and Reproductive Harm - www.P65Warnings.ca.gov");
+			options.AddRow("Does not apply");
+			new StepsNewProduct().CheckOptionsInSection("should", "displayed exclusively", "If the product carries a safe-harbor short-form warning", options);
+			TestReport.StartStep("Confirm 'If the product carries a safe-harbor long-form warning' options are correct");
+			options = new Table("Option");
+			options.AddRow("This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer. For more information go to www.P65Warnings.ca.gov");
+			options.AddRow("This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause birth defects or other reproductive harm. For more information go to www.P65Warnings.ca.gov");
+			options.AddRow("This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer, and [name of one or more chemicals], which is [are] known to the State of California to cause birth defects or other reproductive harm. For more information go to www.P65Warnings.ca.gov");
+			options.AddRow("This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer and birth defects or other reproductive harm. For more information go to www.P65Warnings.ca.gov");
+			options.AddRow("Does not apply");
+			new StepsNewProduct().CheckOptionsInSection("should", "displayed exclusively", "If the product carries a safe-harbor long-form warning", options);
+			TestReport.StartStep("I select the 'No' button for the Prop 65 question");
+			new StepsNewProduct().SetTheSectionOptionTo("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act", "No");
+			TestReport.StartStep("Confirm the additional prop 65 questions are no longer shown");
+			new StepsNewProduct().CheckDisplayedSections("not see", sections);
+			TestReport.StartStep("I click continue");
+			new StepsNewProduct().ClickContinue();
 		}
 
 	}

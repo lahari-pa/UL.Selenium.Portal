@@ -105,10 +105,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public void Click_Forgotten_Password()
+		public bool Click_Forgotten_Password()
 		{
-			IList<IWebElement> listOfATags = this.containerElement.FindElements(By.XPath("//form[@class='login-form']//a"));
-			listOfATags.FirstOrDefault(x => x.Text == "Forgot your Password?").Click();
+			var listOfATags = this.containerElement.FindElements(By.XPath("//form[@class='login-form']//a"), 2);
+			return listOfATags.FirstOrDefault(x => x.Text == "Forgot Your Password?").TryClick();
 		}
 
 		public void Click_New_To_Wercsmart()

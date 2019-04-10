@@ -131,136 +131,136 @@ testRunner.Given("I call Shared Step 57727 (Transportation Details 1 - Yes optio
 testRunner.Given("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
                     "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table496 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Product granted Alternative Control Plan",
                         "Amount of VOC by CARB",
                         "Amount of VOC by OTC Model",
                         "VOC for states"});
-            table496.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "No",
                         "0",
                         "0",
                         "Yes"});
 #line 41
 testRunner.Given("I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CA" +
-                    "RB - Yes for state values)", ((string)(null)), table496, "Given ");
+                    "RB - Yes for state values)", ((string)(null)), table1, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table497 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
                         "Regulation",
                         "VOC Value",
                         "State VOC Threshold",
                         "Message"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Connecticut",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Washington D.C.",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Delaware",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Illinois",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Indiana",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Massachusetts",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Maryland",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Maine",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Michigan",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "New Hampshire",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "New Jersey",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "New York",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Ohio",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Pennsylvania",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Rhode Island",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Utah",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Virginia",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
-            table497.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Vermont",
                         "State Allowable Limit",
                         "0",
                         "45",
                         "Does not exceed the State Limits"});
 #line 45
-testRunner.And("I should see the following Voc percent for each state:", ((string)(null)), table497, "And ");
+testRunner.And("I should see the following Voc percent for each state:", ((string)(null)), table2, "And ");
 #line 66
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase74626", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -310,16 +310,16 @@ testRunner.Then("I confirm that I see the following VOC-OTC-CARB statement1: Pro
                     "ted an Alternative Control Plan, or is exempt as an Innovative Product or other " +
                     "variant under the applicable regulations.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table498 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table498.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Yes"});
-            table498.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "No"});
 #line 93
 testRunner.Then("The following options should be displayed for section: Product has been granted a" +
                     "n Alternative Control Plan, or is exempt as an Innovative Product or other varia" +
-                    "nt under the applicable regulations.", ((string)(null)), table498, "Then ");
+                    "nt under the applicable regulations.", ((string)(null)), table3, "Then ");
 #line 98
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 100
@@ -335,15 +335,15 @@ testRunner.Then("I confirm that I see the following VOC-OTC-CARB statement2: Pro
 testRunner.Then("I should see a total of 2 radio buttons for the section: Product does not contain" +
                     " more than 0.05 grams", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table499 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table499.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Agree"});
-            table499.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Disagree"});
 #line 108
 testRunner.Then("The following options should be displayed for section: Product does not contain m" +
-                    "ore than 0.05 grams", ((string)(null)), table499, "Then ");
+                    "ore than 0.05 grams", ((string)(null)), table4, "Then ");
 #line 113
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 115
@@ -363,14 +363,14 @@ testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US
 #line 131
 testRunner.Then("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table500 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table500.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Volatile Organic Compounds"});
-            table500.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Toxicity Characteristic Leaching Procedure (TCLP)"});
 #line 134
-testRunner.Then("I see the following sections", ((string)(null)), table500, "Then ");
+testRunner.Then("I see the following sections", ((string)(null)), table5, "Then ");
 #line 139
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 141
@@ -388,7 +388,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 151
 testRunner.Then("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table501 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -397,7 +397,7 @@ testRunner.Then("I should see the Safety Data Sheet Authoring - Additional Data 
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table501.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Goggles",
                         "500",
                         "45",
@@ -409,7 +409,7 @@ testRunner.Then("I should see the Safety Data Sheet Authoring - Additional Data 
 #line 153
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table501, "Given ");
+                    "g:", ((string)(null)), table6, "Given ");
 #line 157
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -463,12 +463,12 @@ testRunner.And("I should see the Product Characteristics Page", ((string)(null))
 #line 184
 testRunner.Then("I save the product information as: TestCase56477", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table502 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table502.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Liquid"});
 #line 185
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table502, "And ");
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table7, "And ");
 #line 189
 testRunner.And("I set the Secondary Physical State option to: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 190
@@ -504,20 +504,20 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 #line 208
 testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table503 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table503.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 209
-testRunner.Then("I add the following ingredients:", ((string)(null)), table503, "Then ");
+testRunner.Then("I add the following ingredients:", ((string)(null)), table8, "Then ");
 #line 212
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 215
@@ -586,23 +586,23 @@ testRunner.And("I should see the Volatile Organic Compound Summary Page", ((stri
 #line 247
 testRunner.And("I confirm that I see todays VOC Analysis Date", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table504 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Use",
                         "VOC Compliance Limit",
                         "Units",
                         "Regulation"});
-            table504.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Charcoal Lighter Material",
                         "0.02",
                         "lb / start",
                         "OTC Model rule limit"});
-            table504.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Charcoal Lighter Material",
                         "0.02",
                         "lb / start",
                         "CARB limit"});
 #line 248
-testRunner.And("I should see the following Voc Limits with units  present:", ((string)(null)), table504, "And ");
+testRunner.And("I should see the following Voc Limits with units  present:", ((string)(null)), table9, "And ");
 #line 252
 testRunner.And("I confirm statement: Based on the type of product shows the text: Based on the ty" +
                     "pe of product, this must comply with the most restrictive VOC limit.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -727,30 +727,30 @@ testRunner.Given("I call Shared Step 62536 (Transportation Details 2 > I do not 
 testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUE" +
                     "STION ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table505 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table505.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Amount of VOC content as weight percentage of the total formula, excluding exempt" +
                             " compounds as defined by the CARB"});
-            table505.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Amount of VOC content as weight percentage of the total formula, excluding exempt" +
                             " compounds as defined by the OTC Model Rule"});
-            table505.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Would you like to use the VOC percentages entered for all areas (e.g. country, st" +
                             "ate, local) for comparison?"});
 #line 327
-testRunner.Then("I see the following sections", ((string)(null)), table505, "Then ");
+testRunner.Then("I see the following sections", ((string)(null)), table10, "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table506 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table506.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Yes"});
-            table506.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "No, I would like to manually enter VOC value for each area."});
 #line 333
 testRunner.Then("The following options should be displayed for section: Would you like to use the " +
                     "VOC percentages entered for all areas (e.g. country, state, local) for compariso" +
-                    "n?", ((string)(null)), table506, "Then ");
+                    "n?", ((string)(null)), table11, "Then ");
 #line 338
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 340
@@ -821,12 +821,12 @@ testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US
 #line 386
 testRunner.Then("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table507 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
-            table507.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Volatile Organic Compounds"});
 #line 388
-testRunner.Then("I see the following sections", ((string)(null)), table507, "Then ");
+testRunner.Then("I see the following sections", ((string)(null)), table12, "Then ");
 #line 392
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 394
@@ -841,7 +841,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 402
 testRunner.Then("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table508 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -850,7 +850,7 @@ testRunner.Then("I should see the Safety Data Sheet Authoring - Additional Data 
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table508.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Gloves",
                         "100",
                         "250",
@@ -862,7 +862,7 @@ testRunner.Then("I should see the Safety Data Sheet Authoring - Additional Data 
 #line 404
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table508, "Given ");
+                    "g:", ((string)(null)), table13, "Given ");
 #line 408
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 74992. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
@@ -921,14 +921,14 @@ testRunner.And("I should see the Product Characteristics Page", ((string)(null))
 #line 440
 testRunner.Then("I save the product information as: TestCase56483", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table509 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table509.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Liquid"});
-            table509.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Solid"});
 #line 441
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table509, "And ");
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table14, "And ");
 #line 445
 testRunner.And("I set the Primary Physical State option to: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 446
@@ -958,20 +958,20 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 #line 461
 testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table510 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table510.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 462
-testRunner.Then("I add the following ingredients:", ((string)(null)), table510, "Then ");
+testRunner.Then("I add the following ingredients:", ((string)(null)), table15, "Then ");
 #line 465
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 468
@@ -986,12 +986,12 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 474
 testRunner.And("I should see the Regulatory Information 3 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table511 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table511.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "None of the Above"});
 #line 475
-testRunner.And("I set the below options for field: Refer to your Product Label", ((string)(null)), table511, "And ");
+testRunner.And("I set the below options for field: Refer to your Product Label", ((string)(null)), table16, "And ");
 #line 478
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 481
@@ -1028,20 +1028,20 @@ testRunner.And("I should see the Volatile Organic Compound Summary Page", ((stri
 #line 497
 testRunner.And("I confirm that I see todays VOC Analysis Date", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table512 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "Use",
                         "VOC Compliance Limit",
                         "Regulation"});
-            table512.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "Antiperspirants - Non-aerosol",
                         "0",
                         "HVOC CARB and OTC Model Rule limit"});
-            table512.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "Antiperspirants - Non-aerosol",
                         "0",
                         "MVOC CARB and OTC Model Rule limit"});
 #line 498
-testRunner.And("I should see the following Voc Limits present:", ((string)(null)), table512, "And ");
+testRunner.And("I should see the following Voc Limits present:", ((string)(null)), table17, "And ");
 #line 502
 testRunner.And("I confirm that I see the following HVOC value: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 503
@@ -1160,12 +1160,12 @@ testRunner.And("I should see the Product Characteristics Page", ((string)(null))
 #line 573
 testRunner.Then("I save the product information as: TestCase56484", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table513 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table513.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "Aerosol"});
 #line 574
-testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table513, "And ");
+testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table18, "And ");
 #line 577
 testRunner.And("I set the Secondary Physical State option to: Solid spray", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 578
@@ -1197,20 +1197,20 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 #line 593
 testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table514 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table514.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "Butane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 594
-testRunner.Then("I add the following ingredients:", ((string)(null)), table514, "Then ");
+testRunner.Then("I add the following ingredients:", ((string)(null)), table19, "Then ");
 #line 597
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 600
@@ -1227,17 +1227,17 @@ testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)
 #line 607
 testRunner.And("I set the Product is Regulated for Transport option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table515 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table515.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "DOT"});
-            table515.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "Shipping with limited quantity"});
-            table515.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "Shipping with consumer commodity"});
 #line 608
 testRunner.And("I set the below options for field: Select all modes of transport that you\'ve clas" +
-                    "sified the product for", ((string)(null)), table515, "And ");
+                    "sified the product for", ((string)(null)), table20, "And ");
 #line 613
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 616
@@ -1284,16 +1284,16 @@ testRunner.And("I confirm that I see todays VOC Analysis Date", ((string)(null))
 #line 637
 testRunner.And(@"I confirm that I see the following VOC-OTC-CARB statement4: Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table516 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "Use",
                         "VOC Compliance Limit",
                         "Regulation"});
-            table516.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "Clear Coating - Aerosol",
                         "0.85",
                         "Aerosol Coatings CARB limit"});
 #line 638
-testRunner.And("I should see the following Voc Limits present:", ((string)(null)), table516, "And ");
+testRunner.And("I should see the following Voc Limits present:", ((string)(null)), table21, "And ");
 #line 641
 testRunner.And("I confirm that I see the following VOC Grams Ozone value: 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 642

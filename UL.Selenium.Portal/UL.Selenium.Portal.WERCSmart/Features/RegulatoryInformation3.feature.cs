@@ -116,7 +116,7 @@ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and
 #line 22
 testRunner.Then("I save the product information as: TestCase88022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table579 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Primary Physical State",
                         "Secondary Physical State",
                         "Specific Gravity",
@@ -125,7 +125,7 @@ testRunner.Then("I save the product information as: TestCase88022", ((string)(nu
                         "Flash Point (in Celsius)",
                         "Flash Point Testing Method Used",
                         "Select the best Water Solubility description"});
-            table579.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Liquid",
                         "Liquid",
                         "2",
@@ -136,25 +136,25 @@ testRunner.Then("I save the product information as: TestCase88022", ((string)(nu
                         "Appreciable"});
 #line 23
 testRunner.Given("I call Shared Step 74760 (Product Characteristics - Select Liquid as primary phys" +
-                    "ical state and enter all required data)", ((string)(null)), table579, "Given ");
+                    "ical state and enter all required data)", ((string)(null)), table1, "Given ");
 #line 27
 testRunner.Given("I call Shared Step 60310 (Additional Product Information - Without Child question" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table580 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table580.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Propane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 28
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table580, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table2, "Given ");
 #line 31
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 32
@@ -163,22 +163,22 @@ testRunner.And("I should see the Regulatory Information 3 Page", ((string)(null)
 testRunner.And("I should see following statement: Refer to your Product Label. From the options, " +
                     "select those that appear on the Label.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table581 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Checkbox"});
-            table581.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Drug Facts Panel"});
-            table581.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Supplement Facts Panel"});
-            table581.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Nutrition Facts Panel"});
-            table581.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Active Ingredient Panel"});
-            table581.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "An Active Ingredient is listed on the Panel"});
-            table581.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "None of the Above"});
 #line 34
-testRunner.And("I should see the following checkbox:", ((string)(null)), table581, "And ");
+testRunner.And("I should see the following checkbox:", ((string)(null)), table3, "And ");
 #line 42
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase88022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -209,7 +209,7 @@ testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and
 #line 51
 testRunner.Then("I save the product information as: TestCase88644", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table582 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Primary Physical State",
                         "Secondary Physical State",
                         "Specific Gravity",
@@ -218,7 +218,7 @@ testRunner.Then("I save the product information as: TestCase88644", ((string)(nu
                         "Flash Point (in Celsius)",
                         "Flash Point Testing Method Used",
                         "Select the best Water Solubility description"});
-            table582.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Liquid",
                         "Liquid",
                         "2",
@@ -229,25 +229,25 @@ testRunner.Then("I save the product information as: TestCase88644", ((string)(nu
                         "Appreciable"});
 #line 52
 testRunner.Given("I call Shared Step 74760 (Product Characteristics - Select Liquid as primary phys" +
-                    "ical state and enter all required data)", ((string)(null)), table582, "Given ");
+                    "ical state and enter all required data)", ((string)(null)), table4, "Given ");
 #line 56
 testRunner.Given("I call Shared Step 60310 (Additional Product Information - Without Child question" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table583 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table583.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Propane",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 57
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table583, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table5, "Given ");
 #line 60
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 61

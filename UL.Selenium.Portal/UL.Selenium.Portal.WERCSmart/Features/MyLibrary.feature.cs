@@ -116,20 +116,20 @@ testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.
 #line 27
 testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table121 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tab"});
-            table121.AddRow(new string[] {
+            table38.AddRow(new string[] {
                         "My Packaging Types"});
-            table121.AddRow(new string[] {
+            table38.AddRow(new string[] {
                         "My Brands"});
-            table121.AddRow(new string[] {
+            table38.AddRow(new string[] {
                         "My Distributors"});
-            table121.AddRow(new string[] {
+            table38.AddRow(new string[] {
                         "My Ingredients"});
-            table121.AddRow(new string[] {
+            table38.AddRow(new string[] {
                         "Contact Information per SDS(s)"});
 #line 29
-testRunner.Then("I should see the following tabs in the My Library page", ((string)(null)), table121, "Then ");
+testRunner.Then("I should see the following tabs in the My Library page", ((string)(null)), table38, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -593,101 +593,101 @@ testRunner.Given("In the My Account page I navigate to the My Library page", ((s
 #line 390
 testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table122 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
                         "Chemical Name",
                         "CAS"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Sulfuric acid",
                         "7664-93-9"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Cobalt sulfate",
                         "10124-43-3"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Graphene",
                         "1034343-98-0"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Pyrrole-2-carboxylic acid",
                         "634-97-9"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Formaldehyde",
                         "50-00-0"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Polycarbonate",
                         "25037-45-0"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Nitric acid",
                         "7697-37-2"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Cumene",
                         "98-82-8"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Argon",
                         "7440-37-1"});
-            table122.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Mica",
                         "12001-26-2"});
 #line 392
 testRunner.Given("I add the following ingredients and save them to context as: My Library New Ingre" +
-                    "dients", ((string)(null)), table122, "Given ");
+                    "dients", ((string)(null)), table39, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table123 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
                         "Index",
                         "Click Publicly Disclosed",
                         "Click Trade Secret",
                         "Public Name Change"});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "1",
                         "Y",
                         "N",
                         "+"});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "2",
                         "N",
                         "Y",
                         "="});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "3",
                         "N",
                         "N",
                         "-"});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "4",
                         "N",
                         "Y",
                         "+"});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "5",
                         "Y",
                         "N",
                         "+"});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "6",
                         "Y",
                         "N",
                         "+"});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "7",
                         "N",
                         "Y",
                         "="});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "8",
                         "N",
                         "N",
                         "-"});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "9",
                         "N",
                         "Y",
                         "+"});
-            table123.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "10",
                         "Y",
                         "N",
                         "+"});
 #line 410
 testRunner.Given("I edit the ingredients: My Library New Ingredients and save the edited ingredient" +
-                    "s to context as: My Library Ingredients Edited", ((string)(null)), table123, "Given ");
+                    "s to context as: My Library Ingredients Edited", ((string)(null)), table40, "Given ");
 #line 423
 testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 425
@@ -704,64 +704,64 @@ testRunner.Given("I navigate to the My Ingredients tab in the My Library page", 
 testRunner.And("I confirm that all changes in edited ingredients: My Library Ingredients Edited w" +
                     "ere saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table124 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
                         "Index",
                         "Click Publicly Disclosed",
                         "Click Trade Secret",
                         "Public Name Change"});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "1",
                         "Y",
                         "N",
                         "+"});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "2",
                         "N",
                         "Y",
                         "-"});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "3",
                         "Y",
                         "N",
                         "-"});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "4",
                         "N",
                         "N",
                         "+"});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "5",
                         "N",
                         "N",
                         "="});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "6",
                         "Y",
                         "N",
                         "+"});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "7",
                         "N",
                         "Y",
                         "+"});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "8",
                         "Y",
                         "N",
                         "-"});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "9",
                         "N",
                         "Y",
                         "+"});
-            table124.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "10",
                         "Y",
                         "N",
                         "="});
 #line 439
 testRunner.Given("I edit the ingredients: My Library New Ingredients and save the edited ingredient" +
-                    "s to context as: My Library Ingredients Edited 2", ((string)(null)), table124, "Given ");
+                    "s to context as: My Library Ingredients Edited 2", ((string)(null)), table41, "Given ");
 #line 452
 testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 454
@@ -895,70 +895,72 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[70516] Add and Remove Packaging Type")]
         [NUnit.Framework.CategoryAttribute("tfs_design")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:20225")]
         public virtual void _70516AddAndRemovePackagingType()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[70516] Add and Remove Packaging Type", null, new string[] {
-                        "tfs_design"});
-#line 548
+                        "tfs_design",
+                        "TReVorId:20225"});
+#line 549
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 549
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 550
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 551
-testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 552
-testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 553
-testRunner.Then("I confirm the current active tab on the My Library page is: My Packaging Types", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 554
-testRunner.Given("I click \'Add New\' in the My Packaging Types section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I confirm the current active tab on the My Library page is: My Packaging Types", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 555
-testRunner.Then("I should see the Packaging Type Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click \'Add New\' in the My Packaging Types section of My Library", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 556
-testRunner.Given("I set the Package Type Name field to: Super Packaging Type (TM)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I should see the Packaging Type Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 557
-testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I set the Package Type Name field to: Super Packaging Type (TM)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 558
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 559
 testRunner.Then("I should see the Bill of Materials Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table125 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                         "Heading"});
-            table125.AddRow(new string[] {
+            table42.AddRow(new string[] {
                         "My Packing Materials"});
-            table125.AddRow(new string[] {
+            table42.AddRow(new string[] {
                         "My Packaging Weight (grams)"});
-            table125.AddRow(new string[] {
+            table42.AddRow(new string[] {
                         "Remove"});
-#line 559
-testRunner.And("I confirm that the following table headings are displayed:", ((string)(null)), table125, "And ");
-#line 564
-testRunner.And("I confirm that the \'Add Row\' button is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 560
+testRunner.And("I confirm that the following table headings are displayed:", ((string)(null)), table42, "And ");
 #line 565
-testRunner.And("I save the Packaging Type details as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that the \'Add Row\' button is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 566
+testRunner.And("I save the Packaging Type details as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 567
 testRunner.Given("I click Add Row in the Bill Of Materials grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 573
+#line 574
 testRunner.Given("I select the option: Clear Glass for the My Packaging Materials field in the tabl" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 574
-testRunner.Given("I select the option: 99 for the My Packaging Weight (grams) field in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 575
+testRunner.Given("I select the option: 99 for the My Packaging Weight (grams) field in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 576
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 592
-testRunner.Given("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 593
+testRunner.Given("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 594
 testRunner.Then("I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packa" +
                     "ging Types grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 594
-testRunner.Given("I delete Packaging Type saved as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 595
+testRunner.Given("I delete Packaging Type saved as: ThisPackaging", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 596
 testRunner.Then("I confirm the name and ID for Packaging Type saved as: ThisPackaging appear in th" +
                     "e Delete Product pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 596
-testRunner.Given("I click Delete in the Delete Product pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 597
+testRunner.Given("I click Delete in the Delete Product pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 598
 testRunner.And("I confirm that the Packaging Type saved as: ThisPackaging does not appear in the " +
                     "My Packaging Types grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

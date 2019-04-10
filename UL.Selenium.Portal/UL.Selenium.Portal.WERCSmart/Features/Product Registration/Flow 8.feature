@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -13,6 +13,7 @@
 
 Feature: Flow 8
 
+@TReVorId:11647
 Scenario: [57295] Absorbent solid - Automotive(RU000939) - 8-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -62,6 +63,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57295
 
 
+@TReVorId:11654
 Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -111,6 +113,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57332
 
 
+@TReVorId:11677
 Scenario: [58184] Craft kits containing clays or plasters(RU000299) - 8-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -160,6 +163,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58184
 
 
+@TReVorId:11682
 Scenario: [58187] Matches (RU000317) - 8-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -209,6 +213,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58187
 
 #check RU number and name
+@TReVorId:11696
 Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -258,6 +263,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58293
 
 
+@TReVorId:11699
 Scenario: [58297] Fireworks (RU000330) - 8-S
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -353,6 +359,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
 
 
+@TReVorId:11672
 Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -450,6 +457,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57344
 
 
+@TReVorId:11686
 Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -502,6 +510,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58210
 
 
+@TReVorId:11690
 Scenario: [58282] Dental Whitening Gel - 8-L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -552,6 +561,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58282
 
 
+@TReVorId:11693
 Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
@@ -599,6 +609,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58285
 
 
+@TReVorId:11702
 Scenario: [58390] Paint,Model - RU000333
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -645,6 +656,7 @@ Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: te
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Paint, Model
 
 
+@TReVorId:13898
 Scenario: [58401] Correction Fluid(RU000201) - 8L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -694,6 +706,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58401
 
 
+@TReVorId:13895
 Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -743,6 +756,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57339
 
 
+@TReVorId:16682
 Scenario: [58810] Helium Tank(RU000340) - 8G
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -792,6 +806,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58810
 
 
+@TReVorId:16685
 Scenario: [58815] Lighters(RU000000) - 8G
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -841,6 +856,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58815
 
 
+@TReVorId:16668
 Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -890,6 +906,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
 
 
+@TReVorId:18960
 Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 
 Given I generate a random UPC number and save as: UPC57709
@@ -941,6 +958,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57709
 
 
+@TReVorId:18963
 Scenario: [75840] Single Purpose Cleaner - Flow 8-AL (RU001123)
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

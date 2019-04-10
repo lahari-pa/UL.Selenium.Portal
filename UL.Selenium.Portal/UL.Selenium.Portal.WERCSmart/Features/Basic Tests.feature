@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @NewProduct
@@ -9,6 +9,7 @@
 
 Feature: Basic Tests
 
+@TReVorId:22126
 Scenario: Login - check navigation menu - check products grid
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
