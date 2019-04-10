@@ -518,6 +518,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Paulina Mata
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
+@TReVorId:21374
 Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Initiates Publicly Disclosed Indicator
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
