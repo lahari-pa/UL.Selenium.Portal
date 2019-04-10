@@ -17,7 +17,6 @@ Feature: Product Registration
 #Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 #Then The home screen should load
 
-
 @TReVorId:22077
 Scenario: Create a new product
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -28,7 +27,7 @@ And I should see the header New Product
 Given I click the Register New Product icon in the Navigation Pane
 When I click continue
 
-@tfs_design
+@TReVorId:22124
 Scenario: [63705] New Product - BCP
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
@@ -105,7 +104,7 @@ Then I close the Data Summary tab
 Given I navigate to the home page
 Then I delete the product: TestCase63705
 
-@tfs_design
+@TReVorId:22125
 Scenario: [63724] Add New product - Single Battery Product
 # UPC: 630509616084
 # DPCI: 087-06-680
@@ -251,11 +250,6 @@ Then In the list of UPCs I should not see UPC: saved as UPC65441
 Given I navigate to the home page
 Then I delete the product: TestCase65441
 
-
-
-
-
-
 @TReVorId:11378
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response
 Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
@@ -311,27 +305,6 @@ Then I should see an error message: This is a required field.
 Given I navigate to the home page
 Then I delete the product: TestCase65392
 
-@TReVorId:11377
-Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
-Then The home screen should load
-Then I click the Register New Product icon in the Navigation Pane
-And I Select the Create a New Registration radio button
-And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Soap63663 in the Product Name text field
-And In the Product Type tab of the New Product Page, I enter: Soap (Bar, Liquid) for Body in the Type of Product select field
-And in the New Product page I click Continue
-Then I save the product information as: TestCase63663
-And I set the Primary Physical State to be: Solid
-And I set the Secondary Physical State to be: Solid
-And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
-Given I navigate to the home page
-Then I delete the product: TestCase63663
-
-
 @tfs_design
 Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Available for Purchase screen
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -339,8 +312,8 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 # Checking that the test will run correctly by handling extra screens / removing existing products
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
-Given I generate a random UPC number and save as: UPC56484
-Given I delete all products with UPC Number: saved as UPC56484
+Given I generate a random UPC number and save as: UPC67661
+Given I delete all products with UPC Number: saved as UPC67661
 
 # New Product Page
 And I click the Register New Product icon in the Navigation Pane
@@ -432,7 +405,7 @@ And I should see the Universal Product Code (UPC) Page
 Given I click the 'Add UPC' button
 Then I add the following into the UPC Fields
 | Field         | Value             |
-| UPCNumber     | saved as UPC56484 |
+| UPCNumber     | saved as UPC67661 |
 | ContainerType | Glass Container   |
 | Size          | 20                |
 And in the New Product page I click Continue
