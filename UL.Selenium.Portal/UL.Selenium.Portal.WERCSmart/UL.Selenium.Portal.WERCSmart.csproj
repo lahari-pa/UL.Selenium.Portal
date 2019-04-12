@@ -150,40 +150,40 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Basic Tests.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Canadian Tire - Blue Box Program\Forwarding\AccountHasStewardship.feature.cs">
+    <Compile Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountHasStewardship.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Canadian Tire - Blue Box Program\New Product Registration\1 Account has no Canada Data.feature.cs">
+    <Compile Include="Features\Canadian Tire\New Product Registration\1 Account has no Canada Data.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>1 Account has no Canada Data.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package type%28No%29 Stewardship%28No%29.feature.cs">
+    <Compile Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdNo.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Account Canada Address%28Yes%29 Package type%28No%29 Stewardship%28No%29.feature</DependentUpon>
+      <DependentUpon>CANAddYes_PkgNo_StwdNo.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship %28No%29.feature.cs">
+    <Compile Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgYes_StwdNo.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship %28No%29.feature</DependentUpon>
+      <DependentUpon>CANAddYes_PkgYes_StwdNo.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship%28FULL%29.feature.cs">
+    <Compile Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgYes_StwdFull.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship%28FULL%29.feature</DependentUpon>
+      <DependentUpon>CANAddYes_PkgYes_StwdFull.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package types%28Yes%29 Stewardship%28Partial%29.feature.cs">
+    <Compile Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgYes_StwdPartial.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Account Canada Address%28Yes%29 Package types%28Yes%29 Stewardship%28Partial%29.feature</DependentUpon>
+      <DependentUpon>CANAddYes_PkgYes_StwdPartial.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Canadian Tire - Blue Box Program\New Product Registration\CanAdd%28Yes%29Pkg%28No%29Stwrdship%28Full%29.feature.cs">
+    <Compile Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdFull.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CanAdd%28Yes%29Pkg%28No%29Stwrdship%28Full%29.feature</DependentUpon>
+      <DependentUpon>CANAddYes_PkgNo_StwdFull.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Cart.feature.cs">
       <AutoGen>True</AutoGen>
@@ -676,33 +676,33 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Basic Tests.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Canadian Tire - Blue Box Program\Forwarding\AccountHasStewardship.feature">
+    <None Include="Features\Canadian Tire\Forwarding\AccountHasStewardship.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AccountHasStewardship.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Canadian Tire - Blue Box Program\New Product Registration\1 Account has no Canada Data.feature">
+    <None Include="Features\Canadian Tire\New Product Registration\1 Account has no Canada Data.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>1 Account has no Canada Data.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package type%28No%29 Stewardship%28No%29.feature">
+    <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdNo.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Account Canada Address%28Yes%29 Package type%28No%29 Stewardship%28No%29.feature.cs</LastGenOutput>
+      <LastGenOutput>CANAddYes_PkgNo_StwdNo.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship %28No%29.feature">
+    <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgYes_StwdNo.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship %28No%29.feature.cs</LastGenOutput>
+      <LastGenOutput>CANAddYes_PkgYes_StwdNo.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship%28FULL%29.feature">
+    <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgYes_StwdFull.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Account Canada Address%28Yes%29 Package types %28Yes%29 Stewardship%28FULL%29.feature.cs</LastGenOutput>
+      <LastGenOutput>CANAddYes_PkgYes_StwdFull.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Canadian Tire - Blue Box Program\New Product Registration\Account Canada Address%28Yes%29 Package types%28Yes%29 Stewardship%28Partial%29.feature">
+    <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgYes_StwdPartial.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Account Canada Address%28Yes%29 Package types%28Yes%29 Stewardship%28Partial%29.feature.cs</LastGenOutput>
+      <LastGenOutput>CANAddYes_PkgYes_StwdPartial.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Canadian Tire - Blue Box Program\New Product Registration\CanAdd%28Yes%29Pkg%28No%29Stwrdship%28Full%29.feature">
+    <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdFull.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>CanAdd%28Yes%29Pkg%28No%29Stwrdship%28Full%29.feature.cs</LastGenOutput>
+      <LastGenOutput>CANAddYes_PkgNo_StwdFull.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Cart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

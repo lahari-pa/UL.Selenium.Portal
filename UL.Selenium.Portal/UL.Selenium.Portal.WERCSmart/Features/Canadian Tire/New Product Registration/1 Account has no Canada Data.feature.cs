@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.NewProductRegistration
+namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire.NewProductRegistration
 {
     using TechTalk.SpecFlow;
     
@@ -18,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.NewP
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("1 Account has no Canada Data (Suite ID 85307)")]
+    [NUnit.Framework.DescriptionAttribute("Account has no Canada Data")]
     [NUnit.Framework.CategoryAttribute("LandingPage")]
     [NUnit.Framework.CategoryAttribute("Login")]
     [NUnit.Framework.CategoryAttribute("Homepage")]
@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.NewP
     [NUnit.Framework.CategoryAttribute("SHA")]
     [NUnit.Framework.CategoryAttribute("UPC")]
     [NUnit.Framework.CategoryAttribute("run_1AccountHasNoCanadaData")]
-    public partial class _1AccountHasNoCanadaDataSuiteID85307Feature
+    public partial class AccountHasNoCanadaDataFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -44,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.NewP
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "1 Account has no Canada Data (Suite ID 85307)", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Account has no Canada Data", null, ProgrammingLanguage.CSharp, new string[] {
                         "LandingPage",
                         "Login",
                         "Homepage",
