@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire_BlueBoxProgram.Forwarding
+namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire.Forwarding
 {
     using TechTalk.SpecFlow;
     
