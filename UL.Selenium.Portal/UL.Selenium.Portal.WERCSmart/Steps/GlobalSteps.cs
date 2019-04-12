@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Security;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Castle.Core.Internal;
+using Newtonsoft.Json;
+using NTTQA.Selenium.Cache;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
 using NTTQA_Reporting_Module;
@@ -121,17 +125,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		public void LoginToAccount(string accountSavedAs)
+		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
 		{
-			if (SeleniumUtilities.Context.Contains("CurrentLogin"))
-			{
-				accountSavedAs = SeleniumUtilities.Context.GetFromContext("CurrentLogin").ToString();
-				Report.Info("Already logged in as " + accountSavedAs + " so changing login to that");
-			}
-			else
-			{
-				SeleniumUtilities.Context.AddToContext("CurrentLogin", accountSavedAs);
-			}
+			//if (SeleniumUtilities.Context.Contains("CurrentLogin"))
+			//{
+			//	accountSavedAs = SeleniumUtilities.Context.GetFromContext("CurrentLogin").ToString();
+			//	Report.Info("Already logged in as " + accountSavedAs + " so changing login to that");
+			//}
+			//else
+			//{
+			//	SeleniumUtilities.Context.AddToContext("CurrentLogin", accountSavedAs);
+			//}
 			var user = TestUsers.GetUserSavedAs(accountSavedAs);
 
 			if (new TopMenuBar().LoggedIn())
@@ -160,6 +164,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (Report.IsTrue(user != null, "Failed to find user saved as: " + accountSavedAs, "Successfully found user saved as: " + accountSavedAs, true))
 			{
+				if (attemptOnce)
+				{
+					this.AttemptToLoginWithEmailAndPassword(user.Username, user.Password);
+					return;
+				}
 				this.GivenILogInWithEmailXAndPasswordY(user.Username, user.Password);
 			}
 		}
@@ -243,6 +252,70 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			Report.Failure("Failed to log in!");
+		}
+
+		// only do one attempt - used for reset passwords
+		[StepDefinition(@"I attempt to log in with email: (.*) and password: (.*)")]
+		public void AttemptToLoginWithEmailAndPassword(string email, string password)
+		{
+			Report.Info("Beginning I login with email and password");
+			var selLandingPage = new LandingPage();
+			if (!selLandingPage.Wait_for_load(5))
+			{
+				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'HTTP Error 503')]"), 2) != null)
+				{
+					throw new Exception("HTTP Server error 503 was thrown!");
+				}
+				throw new Exception("Landing page did not load!");
+			}
+			Report.Info("Clicking 'Log In' on the Landing Page");
+			selLandingPage.Click_Login();
+			var selTopMenuBar = new TopMenuBar();
+			var selHomepage = new Homepage();
+			var selLogin = new Login();
+			if (!Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
+			{
+				return;
+			}
+			Report.Info("Entering Email: '" + email + "'");
+			selLogin.EmailField = email;
+			Delay.Seconds(1);
+			Report.Info("Entering Password: '" + password + "'");
+			selLogin.PasswordField = password;
+			Report.Info("Clicking login");
+			selLogin.Click_Login();
+			Delay.Seconds(2);
+			GeneralUtilities.Wait_for_load_finish();
+			selLogin = new Login();
+			if (selLogin.Exists && !selLogin.Password_Validation().IsNullOrEmpty())
+			{
+				Report.Failure("Failed to log in - password error message was displayed");
+				Report.Screenshot();
+				return;
+			}
+			selHomepage = new Homepage();
+			if (selHomepage.Wait_for_load(60))
+			{
+				Report.Success("Successfully logged in!");
+				GeneralUtilities.Wait_for_load_finish();
+				return;
+			}
+			var modalDialog = new ModalDialog();
+			if (modalDialog.Wait_for_load(1))
+			{
+				modalDialog.Click_Closex();
+				Delay.Seconds(Delay.SpeedFactor * 1);
+
+				selHomepage = new Homepage();
+				if (selHomepage.Wait_for_load(10))
+				{
+					Report.Success("Successfully logged in!");
+					GeneralUtilities.Wait_for_load_finish();
+
+					return;
+				}
+			}
+			Report.Failure("Failed to log in");
 		}
 
 		[StepDefinition(@"I logout")]
@@ -990,7 +1063,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IUpdateThePasswordForAllTrevorTestUsersWithinCurrentBranch()
 		{
 			TestReport.UseSubSteps = true;
-			var allUsers = TestUsers.GetAllUsers();
+			var users = TestUsers.GetAllUsers();
+			var allUsers = users.Where(x=>x.SoftwareId==GlobalParameters.EditionDetails.SoftwareId && x.BranchName == GlobalParameters.Branch);
 			var usersSavedAs = allUsers.Select(x => x.SavedAs).ToList();
 			Report.Info("Updating password for the following users: " + string.Join(", ", usersSavedAs.Select(x => $"'{x}'")));
 			foreach (var savedAs in usersSavedAs)
@@ -1007,7 +1081,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					continue;
 				}
 				TestReport.StartStep($"I update the password for user: {savedAs}");
-				this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				//this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
+				this.LoginToAccount(savedAs, true);
 				var alert = new RetailPartners().WarningMessage();
 				if (alert != null && alert.Contains("The recipients listed below have additional Data Consent requests"))
 				{
@@ -1018,11 +1093,72 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				if (!new Homepage().Wait_for_load())
 				{
+					// if 90 day expiry attempt to reset it
+					var passwordExpired = new PasswordExpired();
+					if (passwordExpired.Wait_for_load())
+					{
+						var message = passwordExpired.TopMessage();
+						if (message != null && message.Contains("Your password has expired after 90 days for security reasons"))
+						{
+							Report.Info("The password expired after 90 days.");
+							Report.Info("Attempting to reset password");
+							var currentPassword = user.Password;
+							Report.Info("Entering original password: " + currentPassword);
+							passwordExpired.OriginalPassword = currentPassword;
+							var newPassword = "";
+							// If the current password ends in a character, append with a 1 for the new password
+							if (!char.IsDigit(currentPassword.Last()))
+							{
+								newPassword = currentPassword + "1";
+							}
+							else
+							{
+								var passwordChr = currentPassword.ToCharArray();
+								var result = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
+								newPassword = currentPassword.TrimEnd(result.ToCharArray()) + (Convert.ToInt32(result) + 1);
+							}
+							Report.Info("Entering New Password: " + newPassword);
+							passwordExpired.NewPassword = newPassword;
+							Report.Info("Entering Verify Password: " + newPassword);
+							passwordExpired.VerifyPassword = newPassword;
+							Report.Info("Clicking continue");
+							passwordExpired.ClickContinue();
+							GeneralUtilities.Wait_for_load_finish();
+							// Thank You page
+							if (passwordExpired.TopHeading().Contains("Thank You"))
+							{
+								Report.Info("Updating the password in TReVor Test Users");
+								TestUsers.UpdatePassword(savedAs, newPassword);
+								Report.Info("Navigating to the landing page");
+								SeleniumBrowser.WebBrowser.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
+								Report.Info("Checking I can log in with the new credentials");
+								TestUsers.RefreshTestUserCache();
+								this.ILogInWithTheAccountSavedInTrevorAs(savedAs);
+								Report.Info("Logging out");
+								this.GivenILogout();
+								SeleniumBrowser.WebBrowser.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
+								continue;
+							}
+							Report.Failure("Failed to update password in 90 day expiry page");
+							Report.Screenshot();
+							continue;
+						}
+						// then we're on the log in screen (incorrect password)
+						Report.Info("Navigating to the landing page");
+						SeleniumBrowser.WebBrowser.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
+						continue;
+					}
+					// The home page didn't load and it wasn't due to password expiry so dead end.
 					Report.Failure("Failed to log in with user: " + savedAs + ". Did not find the top menu bar!");
 					if (new TopMenuBar().Wait_for_load())
 					{
 						Report.Info("Logging out");
 						this.GivenILogout();
+					}
+					else
+					{
+						Report.Info("Unable to log out so navigating to the test url");
+						SeleniumBrowser.WebBrowser.Navigate().GoToUrl(TestVariables.GetVariableSavedAs("TestURL"));
 					}
 					continue;
 				}

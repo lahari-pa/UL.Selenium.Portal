@@ -573,6 +573,7 @@
     <Compile Include="Selenium Classes\New Product\SelectRetailers.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
     <Compile Include="Selenium Classes\PackagingType.cs" />
+    <Compile Include="Selenium Classes\PasswordExpired.cs" />
     <Compile Include="Selenium Classes\PaymentMethods.cs" />
     <Compile Include="Selenium Classes\ProductsGrid.cs" />
     <Compile Include="Selenium Classes\RetailPartners.cs" />
