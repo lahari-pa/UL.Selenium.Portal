@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.539
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UL.Selenium.Portal.WERCSmart", "UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj", "{0244AA85-2C15-420D-A151-2E72ED04A5DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UL.Selenium.Portal.ULSC", "UL.Selenium.Portal.ULSC\UL.Selenium.Portal.ULSC.csproj", "{67F4348A-046A-4C0E-A229-ABBC9045E5E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{98782E23-D8DB-4497-926F-E3ED576FF8D9}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.Config = NuGet.Config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
