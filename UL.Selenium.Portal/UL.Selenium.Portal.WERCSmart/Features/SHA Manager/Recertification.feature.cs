@@ -252,6 +252,39 @@ testRunner.And("In the Product Recertification History popup I should see the fo
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[78417] Recert by WERCSMart user")]
+        [NUnit.Framework.CategoryAttribute("78417")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21865")]
+        public virtual void _78417RecertByWERCSMartUser()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[78417] Recert by WERCSMart user", null, new string[] {
+                        "78417",
+                        "TReVorId:21865"});
+#line 92
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 93
+testRunner.Given("I create a product with name: 78417 and take to completed using Test Case 75335 a" +
+                    "nd save as: TestCase42273", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 94
+testRunner.Given("I take a product from completed to recertification using Test Case 75410 saved: T" +
+                    "estCase78417", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 95
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 96
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
+                    "s: TestCase78417)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 97
+testRunner.And("I call Shared Step 44240 - SHA - Recertification > process recertification to Ass" +
+                    "igned status for product saved as TestCase78417", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 98
+testRunner.And("I Use Test case 84518 to process the product from Assigned back to Completed stat" +
+                    "us saved as TestCase78417", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

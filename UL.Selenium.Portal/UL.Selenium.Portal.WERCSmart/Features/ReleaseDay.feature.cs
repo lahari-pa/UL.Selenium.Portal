@@ -112,460 +112,120 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[71051] Pesticide Details - EPA Registration number if edited is NOT refresh from" +
-            " Kelly when the Update WERCSmart data link is used")]
-        [NUnit.Framework.CategoryAttribute("71051")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20209")]
-        public virtual void _71051PesticideDetails_EPARegistrationNumberIfEditedIsNOTRefreshFromKellyWhenTheUpdateWERCSmartDataLinkIsUsed()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[71051] Pesticide Details - EPA Registration number if edited is NOT refresh from" +
-                    " Kelly when the Update WERCSmart data link is used", null, new string[] {
-                        "71051",
-                        "TReVorId:20209"});
-#line 27
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 29
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 33
-testRunner.Given("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 35
-testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-                    "duct): Pet Shampoo with Pest Control", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 37
-testRunner.Then("I save the product information as: TestCase71051", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 39
-testRunner.Given("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
-                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 41
-testRunner.Given("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
-                    "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 43
-testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydro" +
-                    "xide", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 45
-testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
-                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 47
-testRunner.Given("I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of th" +
-                    "e above - Continue - Happy Path", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 49
-testRunner.And("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
-testRunner.And("I set the Product has an Environmental Protection Agency (EPA) Registration Numbe" +
-                    "r option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 55
-testRunner.Given("I add the EPA registration number: 72315-6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 57
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 59
-testRunner.And("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 61
-testRunner.Given("I update each Registration Number with the appended text \'-edited\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 63
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 65
-testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
-testRunner.Then("in the New Product page I click section: Pesticide Details - State Registration D" +
-                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 69
-testRunner.And("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
-testRunner.Then("I check each State Pesticide Registration Number contains the edited suffix", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 73
-testRunner.Given("I click the Update Wercs Smart data with EPA data through Kelly Services link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 75
-testRunner.Then("I check each State Pesticide Registration Number contains the edited suffix", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 77
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 79
-testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
-                    "te) for product: TestCase71051", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[56909] Retailer Detail Page - Retailer does not require Supplier ID but does req" +
-            "uire Data Consent Tiers")]
-        [NUnit.Framework.CategoryAttribute("tfs_design")]
-        public virtual void _56909RetailerDetailPage_RetailerDoesNotRequireSupplierIDButDoesRequireDataConsentTiers()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56909] Retailer Detail Page - Retailer does not require Supplier ID but does req" +
-                    "uire Data Consent Tiers", null, new string[] {
-                        "tfs_design"});
-#line 82
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 83
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 84
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 87
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 88
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 89
-testRunner.And("I select the retailer: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
-testRunner.Then("I should see the retailer heading: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 93
-testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 94
-testRunner.And("Section: Your Supplier IDs should be showing text: This retailer does not support" +
-                    " Supplier ID management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
-testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 96
-testRunner.And("I should see the button: What are the Data Usage Tiers? in section: Data Consent " +
-                    "Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 97
-testRunner.And("I should see the button: Products in Scope in section: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 98
-testRunner.And("I confirm that there is a section labeled: Costco & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 99
-testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 100
-testRunner.And("The pie chart footer text should contain: % of your product portfolio is associat" +
-                    "ed with Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tie" +
-            "rs")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:20224")]
-        public virtual void _56914RetailerDetailPage_RetailerRequiresSupplierIDAndDataConsentTiers()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tie" +
-                    "rs", null, new string[] {
-                        "TReVorId:20224"});
-#line 104
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 105
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 106
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 109
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 110
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 111
-testRunner.And("I select the retailer: Wal-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 114
-testRunner.Then("I should see the retailer heading: Wal-Mart/SAM\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 115
-testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 116
-testRunner.And("The Supplier ID Table should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 117
-testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 118
-testRunner.And("I should see the button: What are the Data Usage Tiers? in section: Data Consent " +
-                    "Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 119
-testRunner.And("I should see the button: Products in Scope in section: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 120
-testRunner.And("I confirm that there is a section labeled: Wal-Mart/SAM\'S CLUB & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 121
-testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 122
-testRunner.And("The pie chart footer text should contain: % of your product portfolio is associat" +
-                    "ed with Wal-Mart/SAM\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[78417] Recert by WERCSMart user")]
-        [NUnit.Framework.CategoryAttribute("78417")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:21865")]
-        public virtual void _78417RecertByWERCSMartUser()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[78417] Recert by WERCSMart user", null, new string[] {
-                        "78417",
-                        "TReVorId:21865"});
-#line 126
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 127
-testRunner.Given("I create a product with name: 78417 and take to completed using Test Case 75335 a" +
-                    "nd save as: TestCase42273", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 128
-testRunner.Given("I take a product from completed to recertification using Test Case 75410 saved: T" +
-                    "estCase78417", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 129
-testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 130
-testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
-                    "s: TestCase78417)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 131
-testRunner.And("I call Shared Step 44240 - SHA - Recertification > process recertification to Ass" +
-                    "igned status for product saved as TestCase78417", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 132
-testRunner.And("I Use Test case 84518 to process the product from Assigned back to Completed stat" +
-                    "us saved as TestCase78417", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[75321] Forward Product - Completed Status (NO Recert)")]
-        [NUnit.Framework.CategoryAttribute("TReVorId:22087")]
         [NUnit.Framework.CategoryAttribute("ForwardProductRegistration")]
         [NUnit.Framework.CategoryAttribute("TReVorId:22087")]
         public virtual void _75321ForwardProduct_CompletedStatusNORecert()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[75321] Forward Product - Completed Status (NO Recert)", null, new string[] {
-                        "TReVorId:22087",
                         "ForwardProductRegistration",
                         "TReVorId:22087"});
-#line 137
+#line 27
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 138
+#line 28
 testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: TestC" +
                     "ase75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 139
+#line 29
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 140
+#line 30
 testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 141
+#line 31
 testRunner.And("I filter the products by: Accepted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 142
+#line 32
 testRunner.And("I Confirm the Products shown display the Green Colour Status - which is the Accep" +
                     "ted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 143
+#line 33
 testRunner.And("I filter for the product saved as: TestCase75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 144
+#line 34
 testRunner.And("I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 145
+#line 35
 testRunner.Then("I should see the header: Forward Product Registration on the Forward Product Regi" +
                     "stration window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 146
+#line 36
 testRunner.And("I enter the text: saved as TestCase75321 in the \'Search by WPS ID or Product Name" +
                     "\' field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 147
+#line 37
 testRunner.And("In the Foward Product Registration Screen I should see product: saved as TestCase" +
                     "75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 148
+#line 38
 testRunner.And("In the Foward Product Registration Screen I Select the product: saved as TestCase" +
                     "75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 149
+#line 39
 testRunner.And("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 151
+#line 41
 testRunner.And("In the Forward Product Registration Screen I select a retailer under Other Retail" +
                     "ers and save as TestCase75321Retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 152
+#line 42
 testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 153
+#line 43
 testRunner.And("[Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing d" +
                     "ata and select 1 UPC - Continue]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 154
+#line 44
 testRunner.And("I The \'Product Results Tab\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 155
+#line 45
 testRunner.And("I Confirm that the UPC Number displays the recently selected \"Retailer\"(Step 17)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 156
+#line 46
 testRunner.And("I Confirm that NO Errors display for the Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 157
+#line 47
 testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 158
+#line 48
 testRunner.And("I The \'Review and Submit\' step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 159
+#line 49
 testRunner.And("I Select the \"All of the above statements are true\" Radio Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 160
+#line 50
 testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 161
+#line 51
 testRunner.And(@"I Confirm the Purchase Summary page is shown with the success message shown"" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  """, ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 162
+#line 52
 testRunner.And("I Click on the \'HOME BUTTON\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 163
+#line 53
 testRunner.And("I In SHA Manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 164
+#line 54
 testRunner.And("I In the shared step below search for your product using the WPS ID you noted ear" +
                     "lier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 165
+#line 55
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
                     "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 166
+#line 56
 testRunner.And("I Confirm the Product shows a \"Completed Status\" for the Original Retailer(see Cl" +
                     "ients column)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 167
+#line 57
 testRunner.And("I Confirm the Productshows a \"Submitted Status\" for the recently selected Retaile" +
                     "r (see clients column)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 168
+#line 58
 testRunner.And("[Shared Step 75309 - SHA > Select Product > UPC List]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 169
+#line 59
 testRunner.And("I With the SHA Manager Product UPC window open - Click on the \'maximize\' icon to " +
                     "expand the view of the window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 170
+#line 60
 testRunner.And("I Confirm the recently added Retailer(s)is (are) shown against the UPC you select" +
                     "ed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 171
+#line 61
 testRunner.And("I Close the SHA Manager Product UPC window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 172
+#line 62
 testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
                     "uct data for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 173
+#line 63
 testRunner.And("I In the shared step below search for the Product you are working with", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 174
+#line 64
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
                     "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 175
+#line 65
 testRunner.And("I Confirm the Product shows the ORIGINAL RETAILER(s) with a \"Completed Status\" (s" +
                     "ee the Clients column)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 176
+#line 66
 testRunner.And("I Confirm the Product shows theNEW RETAILER(s) with an \"Accepted Status\" (see the" +
                     " Clients column)Note: if you selected a retailer that does not have a feed assoc" +
                     "iated to it you will see the product in Completed status for this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 177
+#line 67
 testRunner.And("I In the Shared Step below - Select the Product with the \"Accepted Status\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 178
+#line 68
 testRunner.And("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
                     " saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 179
+#line 69
 testRunner.And("I Confirm the Product now shows a \"Completed\" Status in Completed for ALL associa" +
                     "ted Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("[73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC Results Step" +
-            " Shows Alternative Control Plan")]
-        public virtual void _73503VOC_ACPPlanYesAndCARBValueAboveLimitForRU_VOCResultsStepShowsAlternativeControlPlan()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC Results Step" +
-                    " Shows Alternative Control Plan", null, ((string[])(null)));
-#line 187
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 188
-testRunner.Given("I generate a random UPC number and save as: UPC73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 189
-testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 190
-testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
-                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 191
-testRunner.And("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-                    "duct): Insecticide - Fogger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 192
-testRunner.Then("I save the product information as: TestCase73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 193
-testRunner.And("I call Shared Step 57532 (Product Characteristics - Aerosol & Gas available - Sel" +
-                    "ect Gas - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 194
-testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
-                    "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "ComponentName",
-                        "Percent",
-                        "PublicallyDisclosed",
-                        "TradeSecret",
-                        "PublicName"});
-            table1.AddRow(new string[] {
-                        "Sodium chloride",
-                        "100",
-                        "false",
-                        "false",
-                        ""});
-#line 195
-testRunner.And("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table1, "And ");
-#line 198
-testRunner.And("I call Shared Step 48360 - Regulatory - Test TSCA and PROP65 - Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 199
-testRunner.And("I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA numbe" +
-                    "r))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 200
-testRunner.And("I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Lim" +
-                    "ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 201
-testRunner.And("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
-                    "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 202
-testRunner.And("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (O" +
-                    "TC) and/or California Air Resources Board (CARB) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 203
-testRunner.And("I set the Product has been granted an Alternative Control Plan, or is exempt as a" +
-                    "n Innovative Product or other variant under the applicable regulations option to" +
-                    ": Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 204
-testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
-                    "ing exempt compounds as defined by the CARB option to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 205
-testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
-                    "ing exempt compounds as defined by the OTC Model Rule option to: 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 206
-testRunner.And("I set the Would you like to use the VOC percentages entered for all areas (e.g. c" +
-                    "ountry, state, local) for comparison? option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 207
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 208
-testRunner.And("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 209
-testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 210
-testRunner.And("I confirm statement: Based on the type of product shows the text: Based on the ty" +
-                    "pe of product, this must comply with the most restrictive VOC limit.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 211
-testRunner.And("I confirm that statement with text: \'Does not exceed the limits specified by the " +
-                    "California Consumer Products Regulation\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 212
-testRunner.And("I confirm that statement with text: \'Exceeds the limit specified by the Californi" +
-                    "a Consumer Products Regulation\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 213
-testRunner.And("The VOC Summary page contains the statement with the text: Alternative Control Pl" +
-                    "an", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 214
-testRunner.And("The VOC Summary page contains the statement with the text: Does not exceed the li" +
-                    "mits specified by the Ozone Transport Commission", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 215
-testRunner.And("in the New Product page I click section: Volatile Organic Compounds (VOC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 216
-testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
-                    "ing exempt compounds as defined by the CARB option to: 30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 217
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 218
-testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 219
-testRunner.And("I confirm that statement with text: \'Alternative Control Plan\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 220
-testRunner.And("The VOC Summary page contains the statement with the text: Does not exceed the li" +
-                    "mits specified in the California Consumer Products Regulation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 221
-testRunner.And("in the New Product page I click section: Volatile Organic Compounds (VOC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 222
-testRunner.And("I set the Product has been granted an Alternative Control Plan, or is exempt as a" +
-                    "n Innovative Product or other variant under the applicable regulations option to" +
-                    ": No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 223
-testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
-                    "ing exempt compounds as defined by the CARB option to: 55", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 224
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 225
-testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 226
-testRunner.And("I confirm that statement with text: \'Alternative Control Plan\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 227
-testRunner.And("The VOC Summary page contains the statement with the text: Exceeds the limits spe" +
-                    "cified in the California Consumer Products Regulation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 228
-testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 229
-testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
-                    "te) for product: TestCase73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

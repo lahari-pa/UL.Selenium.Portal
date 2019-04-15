@@ -1527,6 +1527,140 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC Results Step" +
+            " Shows Alternative Control Plan")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22165")]
+        public virtual void _73503VOC_ACPPlanYesAndCARBValueAboveLimitForRU_VOCResultsStepShowsAlternativeControlPlan()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC Results Step" +
+                    " Shows Alternative Control Plan", null, new string[] {
+                        "TReVorId:22165"});
+#line 742
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 743
+testRunner.Given("I generate a random UPC number and save as: UPC73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 744
+testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 745
+testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
+                    "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 746
+testRunner.And("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
+                    "duct): Insecticide - Fogger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 747
+testRunner.Then("I save the product information as: TestCase73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 748
+testRunner.And("I call Shared Step 57532 (Product Characteristics - Aerosol & Gas available - Sel" +
+                    "ect Gas - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 749
+testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
+                    "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ComponentName",
+                        "Percent",
+                        "PublicallyDisclosed",
+                        "TradeSecret",
+                        "PublicName"});
+            table26.AddRow(new string[] {
+                        "Sodium chloride",
+                        "100",
+                        "false",
+                        "false",
+                        ""});
+#line 750
+testRunner.And("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table26, "And ");
+#line 753
+testRunner.And("I call Shared Step 48360 - Regulatory - Test TSCA and PROP65 - Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 754
+testRunner.And("I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA numbe" +
+                    "r))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 755
+testRunner.And("I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Lim" +
+                    "ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 756
+testRunner.And("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
+                    "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 757
+testRunner.And("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (O" +
+                    "TC) and/or California Air Resources Board (CARB) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 758
+testRunner.And("I set the Product has been granted an Alternative Control Plan, or is exempt as a" +
+                    "n Innovative Product or other variant under the applicable regulations option to" +
+                    ": Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 759
+testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
+                    "ing exempt compounds as defined by the CARB option to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 760
+testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
+                    "ing exempt compounds as defined by the OTC Model Rule option to: 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 761
+testRunner.And("I set the Would you like to use the VOC percentages entered for all areas (e.g. c" +
+                    "ountry, state, local) for comparison? option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 762
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 763
+testRunner.And("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 764
+testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 765
+testRunner.And("I confirm statement: Based on the type of product shows the text: Based on the ty" +
+                    "pe of product, this must comply with the most restrictive VOC limit.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 766
+testRunner.And("I confirm that statement with text: \'Does not exceed the limits specified by the " +
+                    "California Consumer Products Regulation\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 767
+testRunner.And("I confirm that statement with text: \'Exceeds the limit specified by the Californi" +
+                    "a Consumer Products Regulation\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 768
+testRunner.And("The VOC Summary page contains the statement with the text: Alternative Control Pl" +
+                    "an", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 769
+testRunner.And("The VOC Summary page contains the statement with the text: Does not exceed the li" +
+                    "mits specified by the Ozone Transport Commission", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 770
+testRunner.And("in the New Product page I click section: Volatile Organic Compounds (VOC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 771
+testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
+                    "ing exempt compounds as defined by the CARB option to: 30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 772
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 773
+testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 774
+testRunner.And("I confirm that statement with text: \'Alternative Control Plan\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 775
+testRunner.And("The VOC Summary page contains the statement with the text: Does not exceed the li" +
+                    "mits specified in the California Consumer Products Regulation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 776
+testRunner.And("in the New Product page I click section: Volatile Organic Compounds (VOC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 777
+testRunner.And("I set the Product has been granted an Alternative Control Plan, or is exempt as a" +
+                    "n Innovative Product or other variant under the applicable regulations option to" +
+                    ": No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 778
+testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
+                    "ing exempt compounds as defined by the CARB option to: 55", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 779
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 780
+testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 781
+testRunner.And("I confirm that statement with text: \'Alternative Control Plan\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 782
+testRunner.And("The VOC Summary page contains the statement with the text: Exceeds the limits spe" +
+                    "cified in the California Consumer Products Regulation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 783
+testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 784
+testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
+                    "te) for product: TestCase73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
