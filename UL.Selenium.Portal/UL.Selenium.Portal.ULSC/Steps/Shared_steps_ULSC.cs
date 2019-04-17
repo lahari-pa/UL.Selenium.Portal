@@ -41,7 +41,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			GeneralUtilities.StudioWaitForSpinner(120);
 			StepsUlsc MyStepsULSC = new StepsUlsc();
 			MyStepsULSC.GivenTheULSCLoginPageShouldOpenInANewTab();
-			MyStepsULSC.GivenInTheULSCLoginPageIEnterUsernameAndPasswordForTheFollowingAccountTest("WercsUser");
+			MyStepsULSC.GivenInTheULSCLoginPageIEnterUsernameAndPasswordForTheFollowingAccountTest("ULSC_WercsUser");
 			MyStepsULSC.GivenITheULSCLoginPageIClickLogin();
 		}
 

@@ -87,3 +87,12 @@ And In the Product Recertification History popup I should see the following entr
 | saved as TestCase51296 | false  | 20. Completed Product-Full Update (N/C) | Within a day of today |
 #And I Confirm the entry you noted in step 37 not shows False in the Active column and contains a date/time under the date column
 
+@78417
+@TReVorId:21865
+Scenario: [78417] Recert by WERCSMart user
+Given I create a product with name: 78417 and take to completed using Test Case 75335 and save as: TestCase42273
+Given I take a product from completed to recertification using Test Case 75410 saved: TestCase78417
+And I call Shared Step 65080 (Login to Studio and Open SHA manager)
+And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase78417)
+And I call Shared Step 44240 - SHA - Recertification > process recertification to Assigned status for product saved as TestCase78417
+And I Use Test case 84518 to process the product from Assigned back to Completed status saved as TestCase78417
