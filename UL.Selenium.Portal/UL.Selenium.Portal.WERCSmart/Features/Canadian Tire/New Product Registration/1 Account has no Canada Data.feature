@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -15,6 +15,7 @@
 Feature: Account has no Canada Data
 
 
+@TReVorId:22170
 Scenario: [85312] No Canada data - SOLD = US and Canada, PL = No, Packaging Type is required
 
 Given I log in with the account saved in TReVor as: NoCanadaData
@@ -32,6 +33,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85312
 
 
+@TReVorId:22171
 Scenario: [85726] No Canada data - SOLD = US and Canada, PL = Yes, Packaging Type is required
 
 Given I log in with the account saved in TReVor as: NoCanadaData
@@ -58,6 +60,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85726
 
 
+@TReVorId:22172
 Scenario: [85727] No Canada data - SOLD = Canada only, PL = No, Packaging Type is required
 
 Given I log in with the account saved in TReVor as: NoCanadaData
@@ -84,6 +87,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85727
 
 
+@TReVorId:22173
 Scenario: [85728] No Canada data - SOLD = Canada only, PL = YES, Packaging Type is required
 
 Given I log in with the account saved in TReVor as: NoCanadaData
@@ -100,6 +104,7 @@ And I call Shared Step 87647 (UPC - Confirm Package type Link and field shown an
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85728
 
 
+@TReVorId:22174
 Scenario: [85733] No Canada data - SOLD = US Only, PL = No, Packaging Type is NOT required
 
 Given I log in with the account saved in TReVor as: NoCanadaData
@@ -117,6 +122,7 @@ Given in the Regulatory Documents to Provide page I click Continue
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85733
 
 
+@TReVorId:22175
 Scenario: [85734] No Canada data - SOLD = US Only, PL = YES, Packaging Type is NOT required
 
 Given I log in with the account saved in TReVor as: NoCanadaData
