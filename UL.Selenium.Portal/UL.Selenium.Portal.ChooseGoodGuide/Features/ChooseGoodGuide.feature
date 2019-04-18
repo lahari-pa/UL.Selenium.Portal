@@ -61,6 +61,7 @@ Then on the GoodGuide terms of use I check the Accept checkbox
 Then on the GoodGuide terms of use I click continue
 And the GoodGuide Company Details page should load
 
+
 @TReVorId:11396
 Scenario: [68913] Register New Product - No Marks of Distinction
 #Given I navigate to the URL: https://staging.thewercs.com/SHA.MVCWeb/Home/ssologin?sourceService=GoodGuide
