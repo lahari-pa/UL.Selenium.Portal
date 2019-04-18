@@ -200,11 +200,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Cart.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ChooseGoodGuide.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ChooseGoodGuide.feature</DependentUpon>
-    </Compile>
     <Compile Include="Features\ConflictMinerals.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -710,10 +705,6 @@
     <None Include="Features\Cart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Cart.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\ChooseGoodGuide.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ChooseGoodGuide.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ConflictMinerals.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
