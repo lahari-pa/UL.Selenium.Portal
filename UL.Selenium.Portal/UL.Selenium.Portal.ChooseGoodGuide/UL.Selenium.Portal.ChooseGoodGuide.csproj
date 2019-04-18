@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5430DB30-4599-46DB-B1DA-7EDE579C0D81}</ProjectGuid>
+    <ProjectGuid>{A083B043-DBD5-4B55-87B0-386892437650}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UL.Selenium.Portal.ShaManager</RootNamespace>
-    <AssemblyName>UL.Selenium.Portal.ShaManager</AssemblyName>
+    <RootNamespace>UL.Selenium.Portal.ChooseGoodGuide</RootNamespace>
+    <AssemblyName>UL.Selenium.Portal.ChooseGoodGuide</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -104,36 +104,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\SHA Manager\Home Page\Suspended.feature.cs">
-      <DependentUpon>Suspended.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Features\SHA Manager\LowerOptions.feature.cs">
-      <DependentUpon>LowerOptions.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Features\SHA Manager\Recertification.feature.cs">
-      <DependentUpon>Recertification.feature</DependentUpon>
+    <Compile Include="Features\ChooseGoodGuide.feature.cs">
+      <DependentUpon>ChooseGoodGuide.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Features\SHA Manager\Home Page\Suspended.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Suspended.feature.cs</LastGenOutput>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
     </None>
-    <None Include="Features\SHA Manager\LowerOptions.feature">
+    <None Include="Features\ChooseGoodGuide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>LowerOptions.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\SHA Manager\Recertification.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Recertification.feature.cs</LastGenOutput>
+      <LastGenOutput>ChooseGoodGuide.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -154,7 +138,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
-    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.0.400\build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.5.0.400\build\NTTQA.Selenium.TReVor.Modules.targets'))" />
+    <Error Condition="!Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.0.400\Build\NTTQA.Selenium.TReVor.Modules.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NTTQA.Selenium.TReVor.Modules.5.0.400\Build\NTTQA.Selenium.TReVor.Modules.targets'))" />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>rem ##### TReVor Post Build Events #####
@@ -165,5 +149,5 @@
 "$(SolutionDir)packages\NTTQA.Selenium.TReVor.Modules.5.0.400\tools\PostBuild\NTTQA.Selenium.TReVor.PostBuild.exe" pre-build
 </PreBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.0.400\build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.0.400\build\NTTQA.Selenium.TReVor.Modules.targets')" />
+  <Import Project="..\packages\NTTQA.Selenium.TReVor.Modules.5.0.400\Build\NTTQA.Selenium.TReVor.Modules.targets" Condition="Exists('..\packages\NTTQA.Selenium.TReVor.Modules.5.0.400\Build\NTTQA.Selenium.TReVor.Modules.targets')" />
 </Project>
