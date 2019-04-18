@@ -46,9 +46,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
 			var shaUser = TestUsers.GetUserSavedAs("SHAUser");
+			Report.Info("Entering username: " + shaUser.Username);
 			thisStudioLogin.Username = shaUser.Username;
+			Report.Info("Entering password: " + shaUser.Password);
 			thisStudioLogin.Password = shaUser.Password;
-			thisStudioLogin.ClickSignIn();
+			Report.Info("Clicking 'sign in'");
+			Report.IsTrue(thisStudioLogin.ClickSignIn(), "Failed to click 'Sign In", "Clicked 'Sign In'");
 			Delay.Seconds(3);
 			StudioDesktop thisStudioDesktop = new StudioDesktop();
 			Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
@@ -1122,45 +1125,60 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"In the Notification History Screen I confirm that one of the rows is as follows:")]
 		public void ThenInTheNotificationHistoryScreenIConfirmThatOneOfTheRowsIsAsFollows(Table table)
 		{
-			ProductNotificationHistory thisProductNotificationHistory = new ProductNotificationHistory();
-			List<Notification> ListOfNotifications = thisProductNotificationHistory.GetNotifications();
+			Report.TableRow(table.Rows[0]);
+			Report.Info("Getting displayed notifications");
+			var thisProductNotificationHistory = new ProductNotificationHistory();
+			var notifications = thisProductNotificationHistory.GetNotifications();
+			for (var i = 0; i < notifications.Count; i++)
+			{
+				var notification = notifications[i];
+				Report.Info("Notification" + i+1 + ". Type = '" + notification.Type + "'. Notification Date = '" + notification.NotificationDate + "'. Subject = '" +  notification.Subject + ".");
+			}
 			if (table.ContainsColumn("Type"))
 			{
-				ListOfNotifications = ListOfNotifications
-					.Where(x => x.Type.ToLower() == table.Rows[0]["Type"].ToLower()).ToList();
-				if (ListOfNotifications.Count == 0)
+				var type = table.Rows[0]["Type"];
+				Report.Info("Expected Type: " + type);
+				notifications = notifications.Where(x => x.Type.ToLower() == type.ToLower()).ToList();
+				if (!notifications.Any())
 				{
-					Report.Info("No notifications of type: " + table.Rows[0]["Type"].ToLower() + "have been found");
+					Report.Failure("No notifications of type: " + type + " were found");
+					Report.Screenshot();
+					return;
 				}
+				Report.Info("Found a notification with the expected Type");
 			}
-
 			if (table.ContainsColumn("Notification Date"))
 			{
-				string expectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+				var expectedDate = DateTime.Now.ToString("yyyy-MM-dd");
 				if (table.Rows[0]["Notification Date"].ToLower() != "today")
 				{
 					expectedDate = Convert.ToDateTime(table.Rows[0]["Notification Date"]).ToString("yyyy-MM-dd");
 				}
-
-				ListOfNotifications = ListOfNotifications
-					.Where(x => x.NotificationDate.ToString("yyyy-MM-dd") == expectedDate).ToList();
-				if (ListOfNotifications.Count == 0)
+				Report.Info("Expected Date: " + expectedDate);
+				notifications = notifications.Where(x => x.NotificationDate.ToString("yyyy-MM-dd") == expectedDate).ToList();
+				if (!notifications.Any())
 				{
-					Report.Info("No notifications of date: " + expectedDate + "have been found");
+					Report.Failure("No notifications of date: " + expectedDate + " were found");
+					Report.Screenshot();
+					return;
 				}
+				Report.Info("Found a notification with the expected Date");
 			}
-
 			if (table.ContainsColumn("Subject"))
 			{
-				ListOfNotifications = ListOfNotifications.Where(x => x.Subject == table.Rows[0]["Subject"]).ToList();
-				if (ListOfNotifications.Count == 0)
+				var subject = table.Rows[0]["Subject"];
+				Report.Info("Expected Subject: " + subject);
+				notifications = notifications.Where(x => x.Subject == subject).ToList();
+				if (!notifications.Any())
 				{
-					Report.Info("No notifications of subject: " + table.Rows[0]["Subject"]);
+					Report.Failure("No notifications of subject: " + subject + "were found");
+					Report.Screenshot();
+					return;
 				}
+				Report.Info("Found a notification with the expected Subject");
 			}
-
-			Report.IsTrue(ListOfNotifications.Count == 1, "Matching row was not found as expected",
-				"Row was found as expected");
+			Report.Success("The expected row was displayed");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"In the Notification History Screen I click on the most recent notification")]

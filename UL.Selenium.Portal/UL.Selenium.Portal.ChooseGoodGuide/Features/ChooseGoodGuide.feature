@@ -2,6 +2,7 @@
 @run_ChooseGoodGuide
 @ConflictMinerals
 @ProductGrid
+@Portal_ChooseGoodGuide
 @WERCSmart_ChooseGoodGuide
 
 Feature: ChooseGoodGuide.com Scenarios

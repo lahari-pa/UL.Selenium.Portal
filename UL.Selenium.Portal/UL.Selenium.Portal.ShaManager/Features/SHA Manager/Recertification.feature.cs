@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager
+namespace UL.Selenium.Portal.ShaManager.Features.SHAManager
 {
     using TechTalk.SpecFlow;
     
@@ -25,6 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager
     [NUnit.Framework.CategoryAttribute("ProductGrid")]
     [NUnit.Framework.CategoryAttribute("ProductSetUp")]
     [NUnit.Framework.CategoryAttribute("PaymentMethods")]
+    [NUnit.Framework.CategoryAttribute("Portal_ShaManager")]
     [NUnit.Framework.CategoryAttribute("run_Recertification")]
     public partial class Recertification_ProcessRecertificationFeature
     {
@@ -45,6 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager
                         "ProductGrid",
                         "ProductSetUp",
                         "PaymentMethods",
+                        "Portal_ShaManager",
                         "run_Recertification"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -90,52 +92,52 @@ namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[42273] Recertification > Process recertification > Process 1 product", null, new string[] {
                         "TReVorId:21864"});
-#line 12
+#line 14
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 17
+#line 19
 testRunner.Given("I create a product with name: 42273 and take to completed using Test Case 75335 a" +
                     "nd save as: TestCase42273", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 18
+#line 20
 testRunner.Given("I take a product from completed to recertification using Test Case 75410 saved: T" +
                     "estCase42273", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 19
+#line 21
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
+#line 22
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase42273)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
-testRunner.And("In SHA Manager I set the filter for status to : Recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
-testRunner.And("In SHA Manager I select the first product saved as: TestCase42273", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
-testRunner.And("I Click the Process Recertification button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In SHA Manager I set the filter for status to : Recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 24
-testRunner.And("I Confirm the Recertification pop up is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In SHA Manager I select the first product saved as: TestCase42273", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 25
-testRunner.And("I Uncheck the Auto Assign Regulatory Specialist to Product check box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Click the Process Recertification button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 26
+testRunner.And("I Confirm the Recertification pop up is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
+testRunner.And("I Uncheck the Auto Assign Regulatory Specialist to Product check box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
 testRunner.And("I Select Automated QASha from the drop down list for Select Regulatory Specialist" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
-testRunner.And("In the Recertification popup I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
-testRunner.And("In the Recertification popup the Continue button will no longer be shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
+testRunner.And("In the Recertification popup I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
+testRunner.And("In the Recertification popup the Continue button will no longer be shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
 testRunner.And("in the Recertification popup I wait for all processing to be completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "ProductID"});
             table1.AddRow(new string[] {
                         "saved as TestCase42273"});
-#line 30
+#line 32
 testRunner.And("in the Recertification popup I should see the following products as successfully " +
                     "assigned", ((string)(null)), table1, "And ");
-#line 33
-testRunner.And("In the Recertification popup I click Cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
-testRunner.And("I Confirm the Recertification pop up is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
+testRunner.And("In the Recertification popup I click Cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 36
+testRunner.And("I Confirm the Recertification pop up is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 37
 testRunner.And("In the SHA Manager Grid I run a search for product saved as: TestCase42273 and it" +
                     "s status is: Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -149,27 +151,27 @@ testRunner.And("In the SHA Manager Grid I run a search for product saved as: Tes
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[51296] Product in Assigned status - add to recertification", null, new string[] {
                         "TReVorId:21863"});
-#line 40
+#line 42
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 41
+#line 43
 testRunner.Given("I create a product with name: TestCase51296 and take to completed using Test Case" +
                     " 75651 and save as: TestCase51296", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
+#line 44
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 45
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for sa" +
                     "ved as: TestCase51296)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
+#line 46
 testRunner.And("I call Shared Step 51349 - SHA Manager > Assigned Product - Add Recert reason 20 " +
                     "for product saved as: TestCase51296", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 48
 testRunner.And("In the SHA Manager Grid I run a search for product saved as: TestCase51296 and it" +
                     "s status is: Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 49
 testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product: TestCase51296 a" +
                     "nd its font is red indicating a recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
+#line 50
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: TestCase51296", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -181,59 +183,59 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "saved as TestCase51296",
                         "true",
                         "20. Completed Product-Full Update (N/C)"});
-#line 50
+#line 52
 testRunner.And("In the Product Recertification History popup I should see the following entry", ((string)(null)), table2, "And ");
-#line 53
-testRunner.And("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 55
-testRunner.And("I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 56
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 57
+testRunner.And("I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
 testRunner.And("I call Shared Step 51352 - Products page - Filter for your product - Update Requi" +
                     "red link for product saved as: TestCase51296", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
+#line 62
 testRunner.And("In the New Product page I click tab: Review and Submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 61
+#line 63
 testRunner.And("in the New Product page I click section: Safety Data Sheet Authoring - Additional" +
                     " Data (Optional)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
-testRunner.And("I set the Appearance field to: Brown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
-testRunner.And("I set the Odor field to: Banana", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 64
-testRunner.And("I set the Odor Threshold field to: Not applicable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Appearance field to: Brown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 65
-testRunner.And("I set the Partition Coefficient field to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Odor field to: Banana", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 66
-testRunner.And("I click Save in The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Odor Threshold field to: Not applicable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 67
+testRunner.And("I set the Partition Coefficient field to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 68
-testRunner.And("in the New Product page I click section: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click Save in The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 70
+testRunner.And("in the New Product page I click section: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 72
 testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
+#line 73
 testRunner.And("In the Purchase Summary screen I confirm the Purchase Summary header is displayed" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
-testRunner.Given("If purchase details are showing click confirm order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 75
-testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 76
+testRunner.Given("If purchase details are showing click confirm order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 77
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase51296)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 77
+#line 79
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase51296 a" +
                     "nd its status is: Recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 80
+#line 82
 testRunner.And("I call Shared Step 44240 - SHA - Recertification > process recertification to Ass" +
                     "igned status for product saved as TestCase51296", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
+#line 83
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase51296)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
+#line 84
 testRunner.Given("In the SHA manager grid I see the WPS ID I have saved as product: TestCase51296 a" +
                     "nd its status is: Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 83
+#line 85
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: TestCase51296", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -247,7 +249,7 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "false",
                         "20. Completed Product-Full Update (N/C)",
                         "Within a day of today"});
-#line 85
+#line 87
 testRunner.And("In the Product Recertification History popup I should see the following entry", ((string)(null)), table3, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -262,24 +264,24 @@ testRunner.And("In the Product Recertification History popup I should see the fo
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[78417] Recert by WERCSMart user", null, new string[] {
                         "78417",
                         "TReVorId:21865"});
-#line 92
+#line 94
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 93
+#line 95
 testRunner.Given("I create a product with name: 78417 and take to completed using Test Case 75335 a" +
                     "nd save as: TestCase42273", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 94
+#line 96
 testRunner.Given("I take a product from completed to recertification using Test Case 75410 saved: T" +
                     "estCase78417", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 95
+#line 97
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 96
+#line 98
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase78417)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 97
+#line 99
 testRunner.And("I call Shared Step 44240 - SHA - Recertification > process recertification to Ass" +
                     "igned status for product saved as TestCase78417", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 98
+#line 100
 testRunner.And("I Use Test case 84518 to process the product from Assigned back to Completed stat" +
                     "us saved as TestCase78417", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
