@@ -4,6 +4,8 @@
 @ProductGrid
 @ProductSetUp
 @PaymentMethods
+@Portal_ShaManager
+
 @run_Recertification
 
 Feature: Recertification - Process Recertification

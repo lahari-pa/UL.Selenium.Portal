@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager
+namespace UL.Selenium.Portal.ShaManager.Features.SHAManager
 {
     using TechTalk.SpecFlow;
     
@@ -33,6 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager
     [NUnit.Framework.CategoryAttribute("Studio")]
     [NUnit.Framework.CategoryAttribute("MyAccount")]
     [NUnit.Framework.CategoryAttribute("PackagingTypes")]
+    [NUnit.Framework.CategoryAttribute("Portal_ShaManager")]
     [NUnit.Framework.CategoryAttribute("run_SHALowerOptions")]
     public partial class LowerOptionsSuiteID26834Feature
     {
@@ -61,6 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager
                         "Studio",
                         "MyAccount",
                         "PackagingTypes",
+                        "Portal_ShaManager",
                         "run_SHALowerOptions"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -101,17 +103,19 @@ namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[74948] Advance Search- pH range drop down filter")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21375")]
         public virtual void _74948AdvanceSearch_PHRangeDropDownFilter()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74948] Advance Search- pH range drop down filter", null, ((string[])(null)));
-#line 23
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74948] Advance Search- pH range drop down filter", null, new string[] {
+                        "TReVorId:21375"});
+#line 26
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 24
-testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 25
-testRunner.And("In SHA Manager I set the filter for status to : Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
+testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 28
+testRunner.And("In SHA Manager I set the filter for status to : Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -123,9 +127,9 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table1.AddRow(new string[] {
                         "PHRange",
                         "Select pH Range"});
-#line 28
+#line 31
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table1, "And ");
-#line 32
+#line 35
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -137,13 +141,13 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table2.AddRow(new string[] {
                         "PHRange",
                         "<= 2"});
-#line 33
+#line 36
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table2, "And ");
-#line 37
+#line 40
 testRunner.And("I confirm the top 10 products all have PH Range of: <= 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
+#line 41
 testRunner.And("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
+#line 42
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -155,13 +159,13 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table3.AddRow(new string[] {
                         "PHRange",
                         "2.1 - 3.9"});
-#line 40
+#line 43
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table3, "And ");
-#line 45
+#line 48
 testRunner.And("I confirm the top 10 products all have PH Range of: 2.1 - 3.9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 49
 testRunner.And("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 50
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -173,13 +177,13 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table4.AddRow(new string[] {
                         "PHRange",
                         "4 - 6.9"});
-#line 48
+#line 51
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table4, "And ");
-#line 52
-testRunner.And("I confirm the top 10 products all have PH Range of: 4 - 6.9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
-testRunner.And("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 55
+testRunner.And("I confirm the top 10 products all have PH Range of: 4 - 6.9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 57
+testRunner.And("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -191,13 +195,13 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table5.AddRow(new string[] {
                         "PHRange",
                         "7 (Neutral)"});
-#line 56
+#line 59
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table5, "And ");
-#line 60
+#line 63
 testRunner.And("I confirm the top 10 products all have PH Range of: 7 (Neutral)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 61
+#line 64
 testRunner.And("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 65
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -209,13 +213,13 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table6.AddRow(new string[] {
                         "PHRange",
                         "7.1 - 9.9"});
-#line 63
+#line 66
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table6, "And ");
-#line 67
+#line 70
 testRunner.And("I confirm the top 10 products all have PH Range of: 7.1 - 9.9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 71
 testRunner.And("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
+#line 72
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -227,13 +231,13 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table7.AddRow(new string[] {
                         "PHRange",
                         "10 - 12.4"});
-#line 70
+#line 73
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table7, "And ");
-#line 74
+#line 77
 testRunner.And("I confirm the top 10 products all have PH Range of: 10 - 12.4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
+#line 78
 testRunner.And("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
+#line 79
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -245,13 +249,13 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table8.AddRow(new string[] {
                         "PHRange",
                         ">= 12.5"});
-#line 77
+#line 80
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table8, "And ");
-#line 81
+#line 84
 testRunner.And("I confirm the top 10 products all have PH Range of: >= 12.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
+#line 85
 testRunner.And("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 86
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
@@ -263,7 +267,7 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table9.AddRow(new string[] {
                         "PHRange",
                         "Not tested/Unknown"});
-#line 84
+#line 87
 testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table9, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -271,19 +275,21 @@ testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[75034] Srch - Identifier for Packaging Types")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21905")]
         public virtual void _75034Srch_IdentifierForPackagingTypes()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[75034] Srch - Identifier for Packaging Types", null, ((string[])(null)));
-#line 95
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[75034] Srch - Identifier for Packaging Types", null, new string[] {
+                        "TReVorId:21905"});
+#line 99
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 96
+#line 100
 testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 97
+#line 101
 testRunner.And("I navigate to the MyAccount page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 98
+#line 102
 testRunner.And("In the My Account screen I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 99
+#line 103
 testRunner.And("I navigate to the My Packaging Types tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -304,12 +310,12 @@ testRunner.And("I navigate to the My Packaging Types tab in the My Library page"
                         "None of the above",
                         "2",
                         "test@test.com"});
-#line 100
+#line 104
 testRunner.And("Save the top packaging id as MPI75034 if there are no packacking types listed add" +
                     " a new packing type as follows", ((string)(null)), table10, "And ");
-#line 103
+#line 107
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
+#line 108
 testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -321,9 +327,9 @@ testRunner.And("In SHA Manager I click on bottom menu item: Search", ((string)(n
             table11.AddRow(new string[] {
                         "ProductID",
                         "savedas PackagingTypeID_MPI75034"});
-#line 105
-testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table11, "And ");
 #line 109
+testRunner.And("In SHA Manager ProductSearch page I run search:", ((string)(null)), table11, "And ");
+#line 113
 testRunner.And("In SHA Manager 1 record is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -338,7 +344,7 @@ testRunner.And("In SHA Manager 1 record is found", ((string)(null)), ((TechTalk.
             table12.AddRow(new string[] {
                         "Distributor",
                         "P"});
-#line 110
+#line 114
 testRunner.And("In SHA Manager for the top record the values are as follows", ((string)(null)), table12, "And ");
 #line hidden
             this.ScenarioCleanup();
