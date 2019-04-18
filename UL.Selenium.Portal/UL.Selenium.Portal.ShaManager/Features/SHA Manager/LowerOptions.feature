@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -12,7 +12,9 @@
 @Studio
 @MyAccount
 @PackagingTypes
+@Portal_ShaManager
 @run_SHALowerOptions
+
 
 Feature: Lower Options (Suite ID: 26834)
 
@@ -20,6 +22,7 @@ Feature: Lower Options (Suite ID: 26834)
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\SHA Manager\Lower Options
 
+@TReVorId:21375
 Scenario: [74948] Advance Search- pH range drop down filter
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And In SHA Manager I set the filter for status to : Assigned
@@ -92,6 +95,7 @@ And In SHA Manager ProductSearch page I run search:
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\SHA Manager\Lower Options
 
+@TReVorId:21905
 Scenario: [75034] Srch - Identifier for Packaging Types
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I navigate to the MyAccount page

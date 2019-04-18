@@ -119,12 +119,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Email_Validation()
 		{
-			return this.containerElement.FindElement(By.XPath("//p[@id='loginEmail_error']//span"), 2).Text;
+			return this.containerElement.FindElement(By.XPath("//p[@id='loginEmail_error']//span"), 2)?.Text;
 		}
 
 		public string Password_Validation()
 		{
-			return this.containerElement.FindElement(By.XPath("//p[@id='loginPassword_error']//span"), 2).Text;
+			return this.containerElement.FindElement(By.XPath("//p[@id='loginPassword_error']//span"), 2)?.Text;
 		}
 
 	}

@@ -31,6 +31,7 @@ namespace UL.Selenium.Portal.ULSC.Features
     [NUnit.Framework.CategoryAttribute("LandingPage")]
     [NUnit.Framework.CategoryAttribute("DocumentAcceptance")]
     [NUnit.Framework.CategoryAttribute("DeleteActiveProducts")]
+    [NUnit.Framework.CategoryAttribute("Portal_ULSC")]
     [NUnit.Framework.CategoryAttribute("ULSC")]
     [NUnit.Framework.CategoryAttribute("run_ULSC")]
     public partial class ULSCFeature
@@ -58,6 +59,7 @@ namespace UL.Selenium.Portal.ULSC.Features
                         "LandingPage",
                         "DocumentAcceptance",
                         "DeleteActiveProducts",
+                        "Portal_ULSC",
                         "ULSC",
                         "run_ULSC"});
             testRunner.OnFeatureStart(featureInfo);
@@ -99,36 +101,38 @@ namespace UL.Selenium.Portal.ULSC.Features
         
         public virtual void FeatureBackground()
         {
-#line 19
+#line 20
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[33001] Navigation links - ULSC - Data Management")]
         [NUnit.Framework.CategoryAttribute("33001")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22178")]
         public virtual void _33001NavigationLinks_ULSC_DataManagement()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[33001] Navigation links - ULSC - Data Management", null, new string[] {
-                        "33001"});
-#line 23
+                        "33001",
+                        "TReVorId:22178"});
+#line 25
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 19
+#line 20
 this.FeatureBackground();
-#line 24
-testRunner.Given("I navigate to WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 25
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 26
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I navigate to WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 27
-testRunner.And("I should see ULSC - Data Management in the navigation bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 28
-testRunner.Then("I click the ULSC - Data Management icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 29
+testRunner.And("I should see ULSC - Data Management in the navigation bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
+testRunner.Then("I click the ULSC - Data Management icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 31
 testRunner.And("I Confirm New window opens with the Studio Data Management window open (Welcome p" +
                     "age shows) and that NO script errors display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 34
 testRunner.And("I close the tab with the Data Management page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -137,26 +141,28 @@ testRunner.And("I close the tab with the Data Management page", ((string)(null))
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[32996] ULSC - Data Management - User does not have access to Studio")]
         [NUnit.Framework.CategoryAttribute("32996")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22177")]
         public virtual void _32996ULSC_DataManagement_UserDoesNotHaveAccessToStudio()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[32996] ULSC - Data Management - User does not have access to Studio", null, new string[] {
-                        "32996"});
-#line 35
+                        "32996",
+                        "TReVorId:22177"});
+#line 38
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 19
+#line 20
 this.FeatureBackground();
-#line 36
-testRunner.Given("I navigate to WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 37
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 38
-testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 39
-testRunner.And("I should see ULSC - Data Management in the navigation bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I navigate to WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 40
-testRunner.Then("I click the ULSC - Data Management icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 41
+testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 42
+testRunner.And("I should see ULSC - Data Management in the navigation bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 43
+testRunner.Then("I click the ULSC - Data Management icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 44
 testRunner.And("I Confirm New window opens with the error message: Your WERCSmart email address h" +
                     "as either not been configured or licensed to access ULSC. Please contact your UL" +
                     "SC representative to learn more.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -166,34 +172,36 @@ testRunner.And("I Confirm New window opens with the error message: Your WERCSmar
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[23327] WERCSLink - WERCSmart - My Products Page Shows OK")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22176")]
         public virtual void _23327WERCSLink_WERCSmart_MyProductsPageShowsOK()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[23327] WERCSLink - WERCSmart - My Products Page Shows OK", null, ((string[])(null)));
-#line 44
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[23327] WERCSLink - WERCSmart - My Products Page Shows OK", null, new string[] {
+                        "TReVorId:22176"});
+#line 48
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 19
+#line 20
 this.FeatureBackground();
-#line 45
-testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
-testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
-testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 49
-testRunner.And("I click the link: My Products below menu item: Services and sub item WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 50
-testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
-testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
-testRunner.Given("I navigate to tab with title: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I call Shared Step 53079 - WERCSLink go to Services - WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
-testRunner.And("In the WERCSLink page - Click the My Product link from the WERCSmart area of the " +
-                    "Services page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the link: My Products below menu item: Services and sub item WERCSmart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 54
 testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 55
+testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 56
+testRunner.Given("I navigate to tab with title: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
+testRunner.And("In the WERCSLink page - Click the My Product link from the WERCSmart area of the " +
+                    "Services page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+testRunner.And("I Confirm the WerCSMart Product Information page is shown in new window/tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
 testRunner.And("I close the tab with the Product Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

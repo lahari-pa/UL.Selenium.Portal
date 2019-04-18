@@ -1,4 +1,4 @@
-﻿@LandingPage
+@LandingPage
 @Login
 @Homepage
 @Signup
@@ -10,11 +10,13 @@
 @RetailPartners
 @SHA
 @Studio
+@Portal_ShaManager
 @run_Suspended
 
 Feature: Suspended (Suite ID: 69545)
 
 @SHA
+@TReVorId:21901
 Scenario: [69547] Suspend a Product - Formula - Other
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And In SHA Manager I select the first product
@@ -40,6 +42,7 @@ And In the Notification History Detail Screen I confirm that details are as foll
 | Formula – Other | The issue with the composition data is: _________ supplier message input | Today             |
 
 @SHA
+@TReVorId:21904
 Scenario: [69549] Suspend a Product - Formula - Document Issue
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And In SHA Manager I select the first product
@@ -64,6 +67,7 @@ And In the Notification History Detail Screen I confirm that details are as foll
 | Subject                  | Message                                                                                                                                                                                                      | Notification Date |
 | Formula – Document Issue | The composition data provided does not match information listed on the document. You may either provide a corrected document, or correct the composition data to resolve this issue. supplier message input | Today             |
 
+@TReVorId:21906
 Scenario: [86014] Suspend a Product - Product Name
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And In SHA Manager I set the filter for status to : Assigned
@@ -103,6 +107,7 @@ Then in the Add Product to Recertification screen only the following allow users
 | Checkbox                                          |
 | Allow user update Product NAME on Recertification |
 
+@TReVorId:21907
 Scenario: [69550] Suspend a Product - Delete Supplier Message
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And In SHA Manager I select the first product
@@ -125,6 +130,7 @@ And In the Notification History Detail Screen I confirm that details are as foll
 | Subject                  | Message                | Notification Date |
 | Formula – Document Issue | supplier message input | Today             |
 
+@TReVorId:21908
 Scenario: [69548] Suspend a Product - Transportation Classification
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 And In SHA Manager I set the filter for status to : Assigned

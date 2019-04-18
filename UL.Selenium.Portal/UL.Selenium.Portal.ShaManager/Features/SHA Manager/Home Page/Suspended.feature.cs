@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager.HomePage
+namespace UL.Selenium.Portal.ShaManager.Features.SHAManager.HomePage
 {
     using TechTalk.SpecFlow;
     
@@ -31,6 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager.HomePage
     [NUnit.Framework.CategoryAttribute("RetailPartners")]
     [NUnit.Framework.CategoryAttribute("SHA")]
     [NUnit.Framework.CategoryAttribute("Studio")]
+    [NUnit.Framework.CategoryAttribute("Portal_ShaManager")]
     [NUnit.Framework.CategoryAttribute("run_Suspended")]
     public partial class SuspendedSuiteID69545Feature
     {
@@ -57,6 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager.HomePage
                         "RetailPartners",
                         "SHA",
                         "Studio",
+                        "Portal_ShaManager",
                         "run_Suspended"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -98,49 +100,51 @@ namespace UL.Selenium.Portal.WERCSmart.Features.SHAManager.HomePage
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[69547] Suspend a Product - Formula - Other")]
         [NUnit.Framework.CategoryAttribute("SHA")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21901")]
         public virtual void _69547SuspendAProduct_Formula_Other()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69547] Suspend a Product - Formula - Other", null, new string[] {
-                        "SHA"});
-#line 18
+                        "SHA",
+                        "TReVorId:21901"});
+#line 20
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 19
-testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 20
-testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
-testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 22
-testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
+testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 24
+testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
 testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
                     "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 24
+#line 26
 testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Formula – Other" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
+#line 27
 testRunner.And("In the Suspended dialog in the Supplier Message field I should see: The issue wit" +
                     "h the composition data is: _________", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
+#line 28
 testRunner.And("In the Suspended dialog in the Supplier Message field I add the following text: s" +
                     "upplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
+#line 29
 testRunner.And("In the Suspended dialog in the Internal Product Note field I should see: The issu" +
                     "e with the composition data is: _________", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
+#line 30
 testRunner.And("In the Suspended dialog in the Internal Product Note field I add the following te" +
                     "xt: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
-testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
-testRunner.And("I close alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
+testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 32
+testRunner.And("I close alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 33
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
                     "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 32
+#line 34
 testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
+#line 35
 testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
                     ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -152,9 +156,9 @@ testRunner.And("In the SHA manager grid when the right click context menu is ope
                         "Suspended",
                         "Today",
                         "Formula – Other"});
-#line 34
+#line 36
 testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table1, "Then ");
-#line 37
+#line 39
 testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -165,7 +169,7 @@ testRunner.And("In the Notification History Screen I click on the most recent no
                         "Formula – Other",
                         "The issue with the composition data is: _________ supplier message input",
                         "Today"});
-#line 38
+#line 40
 testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table2, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -174,53 +178,55 @@ testRunner.And("In the Notification History Detail Screen I confirm that details
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[69549] Suspend a Product - Formula - Document Issue")]
         [NUnit.Framework.CategoryAttribute("SHA")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21904")]
         public virtual void _69549SuspendAProduct_Formula_DocumentIssue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69549] Suspend a Product - Formula - Document Issue", null, new string[] {
-                        "SHA"});
-#line 43
+                        "SHA",
+                        "TReVorId:21904"});
+#line 46
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 44
-testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 45
-testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
-testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 47
-testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 48
+testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 49
+testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
+testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
 testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
                     "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 52
 testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Formula – Docum" +
                     "ent Issue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
+#line 53
 testRunner.And("In the Suspended dialog in the Supplier Message field I should see: The compositi" +
                     "on data provided does not match information listed on the document. You may eith" +
                     "er provide a corrected document, or correct the composition data to resolve this" +
                     " issue.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
+#line 54
 testRunner.And("In the Suspended dialog in the Supplier Message field I add the following text: s" +
                     "upplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
+#line 55
 testRunner.And("In the Suspended dialog in the Internal Product Note field I should see: The comp" +
                     "osition data provided does not match information listed on the document. You may" +
                     " either provide a corrected document, or correct the composition data to resolve" +
                     " this issue.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 56
 testRunner.And("In the Suspended dialog in the Internal Product Note field I add the following te" +
                     "xt: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
+#line 57
 testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 58
 testRunner.And("I close alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 59
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
                     "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 57
+#line 60
 testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
+#line 61
 testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
                     ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -232,9 +238,9 @@ testRunner.And("In the SHA manager grid when the right click context menu is ope
                         "Suspended",
                         "Today",
                         "Formula – Document Issue"});
-#line 59
-testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table3, "Then ");
 #line 62
+testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table3, "Then ");
+#line 65
 testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -247,7 +253,7 @@ testRunner.And("In the Notification History Screen I click on the most recent no
                             "You may either provide a corrected document, or correct the composition data to " +
                             "resolve this issue. supplier message input",
                         "Today"});
-#line 63
+#line 66
 testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table4, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -255,50 +261,52 @@ testRunner.And("In the Notification History Detail Screen I confirm that details
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[86014] Suspend a Product - Product Name")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21906")]
         public virtual void _86014SuspendAProduct_ProductName()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[86014] Suspend a Product - Product Name", null, ((string[])(null)));
-#line 67
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[86014] Suspend a Product - Product Name", null, new string[] {
+                        "TReVorId:21906"});
+#line 71
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 68
-testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 69
-testRunner.And("In SHA Manager I set the filter for status to : Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
-testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
-testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 72
-testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 73
+testRunner.And("In SHA Manager I set the filter for status to : Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 74
+testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
+testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 76
+testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
 testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
                     "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
+#line 78
 testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Registration Su" +
                     "spension for Product Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
+#line 79
 testRunner.And(@"In the Suspended dialog in the Supplier Message field I should see: Your recent registration is suspended, awaiting your update and resubmission, so that you may update the Product Name on the registration. Retailers require the Product Name in the WERCSmart registration be specific enough so that an employee may find the product in their systems when no UPC or other identifier is available. It is possible that the packaging may be unavailable as well. Because of this, the Product Name in the WERCSmart system should closely match the product's registered UPCs with the Retailer's on-boarding system. As a Product Name, although you may include Model Numbers or other identifying information, the Product Name cannot solely be the product's model number, nor should it be overly generic in nature. Retailers have indicated that Product Names that are not appropriate are to be suspended and the vendor is to correct the information. Please log into your WERCSmart account and review your Suspended Items in the My Messages area so that you may update and resubmit the information. This will allow the Assessment process to proceed and minimize further delay in meeting your Retailer's requirements with regard to WERCSmart registration. If you have questions about this process you may refer to our Support Center, or contact a Support Representative (WERCSmartCustomer@UL.com). Thank you for your prompt attention to this matter. The WERCSmart Assessment Team", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
+#line 80
 testRunner.And("In the Suspended dialog in the Supplier Message field I add the following text: s" +
                     "upplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 77
+#line 81
 testRunner.And(@"In the Suspended dialog in the Internal Product Note field I should see: Your recent registration is suspended, awaiting your update and resubmission, so that you may update the Product Name on the registration. Retailers require the Product Name in the WERCSmart registration be specific enough so that an employee may find the product in their systems when no UPC or other identifier is available. It is possible that the packaging may be unavailable as well. Because of this, the Product Name in the WERCSmart system should closely match the product's registered UPCs with the Retailer's on-boarding system. As a Product Name, although you may include Model Numbers or other identifying information, the Product Name cannot solely be the product's model number, nor should it be overly generic in nature. Retailers have indicated that Product Names that are not appropriate are to be suspended and the vendor is to correct the information. Please log into your WERCSmart account and review your Suspended Items in the My Messages area so that you may update and resubmit the information. This will allow the Assessment process to proceed and minimize further delay in meeting your Retailer's requirements with regard to WERCSmart registration. If you have questions about this process you may refer to our Support Center, or contact a Support Representative (WERCSmartCustomer@UL.com). Thank you for your prompt attention to this matter. The WERCSmart Assessment Team", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
+#line 82
 testRunner.And("In the Suspended dialog in the Internal Product Note field I add the following te" +
                     "xt: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
+#line 83
 testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
+#line 84
 testRunner.And("I check alert text contains recertification and dismiss", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
+#line 85
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
                     "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 82
+#line 86
 testRunner.And("I verify the product saved as: ID displays in red with a red box around it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 87
 testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 88
 testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
                     ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -310,9 +318,9 @@ testRunner.And("In the SHA manager grid when the right click context menu is ope
                         "Suspended",
                         "Today",
                         "Registration Suspension for Product Name"});
-#line 85
+#line 89
 testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table5, "Then ");
-#line 88
+#line 92
 testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -323,11 +331,11 @@ testRunner.And("In the Notification History Screen I click on the most recent no
                         "Registration Suspension for Product Name",
                         @"Your recent registration is suspended, awaiting your update and resubmission, so that you may update the Product Name on the registration. Retailers require the Product Name in the WERCSmart registration be specific enough so that an employee may find the product in their systems when no UPC or other identifier is available. It is possible that the packaging may be unavailable as well. Because of this, the Product Name in the WERCSmart system should closely match the product's registered UPCs with the Retailer's on-boarding system. As a Product Name, although you may include Model Numbers or other identifying information, the Product Name cannot solely be the product's model number, nor should it be overly generic in nature. Retailers have indicated that Product Names that are not appropriate are to be suspended and the vendor is to correct the information. Please log into your WERCSmart account and review your Suspended Items in the My Messages area so that you may update and resubmit the information. This will allow the Assessment process to proceed and minimize further delay in meeting your Retailer's requirements with regard to WERCSmart registration. If you have questions about this process you may refer to our Support Center, or contact a Support Representative (WERCSmartCustomer@UL.com). Thank you for your prompt attention to this matter. The WERCSmart Assessment Team supplier message input",
                         "Today"});
-#line 89
-testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table6, "And ");
-#line 92
-testRunner.And("In the Notification History Detail Screen I click on: Close", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 93
+testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table6, "And ");
+#line 96
+testRunner.And("In the Notification History Detail Screen I click on: Close", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 97
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
                     "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -335,18 +343,18 @@ testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Sus
                         "ProductID"});
             table7.AddRow(new string[] {
                         "saved as ID"});
-#line 94
-testRunner.Given("In SHA Manager I select the following products:", ((string)(null)), table7, "Given ");
-#line 97
-testRunner.And("In SHA Manager grid I click the following top menu item: Add to Recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 98
+testRunner.Given("In SHA Manager I select the following products:", ((string)(null)), table7, "Given ");
+#line 101
+testRunner.And("In SHA Manager grid I click the following top menu item: Add to Recertification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
 testRunner.Then("The Add Product to Recertification screen should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Reason"});
             table8.AddRow(new string[] {
                         "20."});
-#line 99
+#line 103
 testRunner.Then("in the Add Product to Recertification screen only the following Reasons are selec" +
                     "ted:", ((string)(null)), table8, "Then ");
 #line hidden
@@ -354,7 +362,7 @@ testRunner.Then("in the Add Product to Recertification screen only the following
                         "Checkbox"});
             table9.AddRow(new string[] {
                         "Allow user update Product NAME on Recertification"});
-#line 102
+#line 106
 testRunner.Then("in the Add Product to Recertification screen only the following allow users check" +
                     "boxes are selected:", ((string)(null)), table9, "Then ");
 #line hidden
@@ -363,42 +371,44 @@ testRunner.Then("in the Add Product to Recertification screen only the following
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[69550] Suspend a Product - Delete Supplier Message")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21907")]
         public virtual void _69550SuspendAProduct_DeleteSupplierMessage()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69550] Suspend a Product - Delete Supplier Message", null, ((string[])(null)));
-#line 106
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69550] Suspend a Product - Delete Supplier Message", null, new string[] {
+                        "TReVorId:21907"});
+#line 111
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 107
+#line 112
 testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 108
+#line 113
 testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 109
+#line 114
 testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 110
+#line 115
 testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 111
+#line 116
 testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
                     "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 112
+#line 117
 testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Formula – Docum" +
                     "ent Issue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 113
+#line 118
 testRunner.And("In the Suspended dialog in the Supplier Message field I enter the following text:" +
                     " supplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 114
+#line 119
 testRunner.And("In the Suspended dialog in the Internal Product Note field I enter the following " +
                     "text: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 115
+#line 120
 testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 116
+#line 121
 testRunner.And("I close alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 117
+#line 122
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
                     "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 118
+#line 123
 testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 119
+#line 124
 testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
                     ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -410,9 +420,9 @@ testRunner.And("In the SHA manager grid when the right click context menu is ope
                         "Suspended",
                         "Today",
                         "Formula – Document Issue"});
-#line 120
+#line 125
 testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table10, "Then ");
-#line 123
+#line 128
 testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -423,7 +433,7 @@ testRunner.And("In the Notification History Screen I click on the most recent no
                         "Formula – Document Issue",
                         "supplier message input",
                         "Today"});
-#line 124
+#line 129
 testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table11, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -431,48 +441,50 @@ testRunner.And("In the Notification History Detail Screen I confirm that details
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[69548] Suspend a Product - Transportation Classification")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:21908")]
         public virtual void _69548SuspendAProduct_TransportationClassification()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69548] Suspend a Product - Transportation Classification", null, ((string[])(null)));
-#line 128
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[69548] Suspend a Product - Transportation Classification", null, new string[] {
+                        "TReVorId:21908"});
+#line 134
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 129
+#line 135
 testRunner.Given("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 130
+#line 136
 testRunner.And("In SHA Manager I set the filter for status to : Assigned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 131
+#line 137
 testRunner.And("In SHA Manager I select the first product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 132
+#line 138
 testRunner.And("I click the following option in the bottom menu: Suspended", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 133
+#line 139
 testRunner.And("In the Suspended dialog I Select the following clients: All", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 134
+#line 140
 testRunner.And("In the Suspended dialog in the Select Regulatory Specialist drop down I choose: A" +
                     "utomated QASha", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 135
+#line 141
 testRunner.And("In the Suspended dialog in the Select Subject drop down I choose: Transportation " +
                     "Classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 136
+#line 142
 testRunner.And(@"In the Suspended dialog in the Supplier Message field I should see: Please ensure the following is provided, even if exemption or exception applies; UN number, proper shipping name, technical name (if applicable), packing group and if Limited quantity or consumer commodity is being applied.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 137
+#line 143
 testRunner.And("In the Suspended dialog in the Supplier Message field I add the following text: s" +
                     "upplier message input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 138
+#line 144
 testRunner.And(@"In the Suspended dialog in the Internal Product Note field I should see: Please ensure the following is provided, even if exemption or exception applies; UN number, proper shipping name, technical name (if applicable), packing group and if Limited quantity or consumer commodity is being applied.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 139
+#line 145
 testRunner.And("In the Suspended dialog in the Internal Product Note field I add the following te" +
                     "xt: internal product note input", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 140
+#line 146
 testRunner.And("In the Suspended dialog I click Save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 141
+#line 147
 testRunner.And("I close alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 142
+#line 148
 testRunner.Given("I call Shared Step 49841 (SHA - Search for exact WPS ID in Suspended Status for s" +
                     "aved as: ID)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 143
+#line 149
 testRunner.And("In the SHA manager grid I right click against product saved as: ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 144
+#line 150
 testRunner.And("In the SHA manager grid when the right click context menu is open I select option" +
                     ": Notification History", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -484,9 +496,9 @@ testRunner.And("In the SHA manager grid when the right click context menu is ope
                         "Suspended",
                         "Today",
                         "Transportation Classification"});
-#line 145
+#line 151
 testRunner.Then("In the Notification History Screen I confirm that one of the rows is as follows:", ((string)(null)), table12, "Then ");
-#line 148
+#line 154
 testRunner.And("In the Notification History Screen I click on the most recent notification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -500,7 +512,7 @@ testRunner.And("In the Notification History Screen I click on the most recent no
                             "nd if Limited quantity or consumer commodity is being applied. supplier message " +
                             "input",
                         "Today"});
-#line 149
+#line 155
 testRunner.And("In the Notification History Detail Screen I confirm that details are as follows", ((string)(null)), table13, "And ");
 #line hidden
             this.ScenarioCleanup();

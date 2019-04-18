@@ -10,7 +10,6 @@
 
 Feature: MyAccount
 
-@tfs_design
 Scenario: [61796] Account User Name in Header
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -71,8 +70,7 @@ Given I click previous in the My Account user grid
 Then The My Account user grid is currently on page number: 1
 
 
-# Requires 9 pages of users (not 6 as the test case states)
-@tfs_design
+
 Scenario: [70511] Pagination (...) need an account with six pages of users
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
