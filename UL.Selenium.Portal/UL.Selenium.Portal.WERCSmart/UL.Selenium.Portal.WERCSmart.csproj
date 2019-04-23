@@ -160,10 +160,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>1 Account has no Canada Data.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgNo_StwdFull.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CANAddNo_PkgNo_StwdFull.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgNo_StwdPartial.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CANAddNo_PkgNo_StwdPartial.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgYes_StwdFull1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CANAddNo_PkgYes_StwdFull.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgYes_StwdNo.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CANAddNo_PkgYes_StwdNo.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgYes_StwdPartial.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CANAddNo_PkgYes_StwdPartial.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdNo.feature.cs">
       <AutoGen>True</AutoGen>
@@ -674,9 +694,25 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>1 Account has no Canada Data.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgNo_StwdFull.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CANAddNo_PkgNo_StwdFull.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgNo_StwdPartial.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CANAddNo_PkgNo_StwdPartial.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgYes_StwdFull.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CANAddNo_PkgYes_StwdFull1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgYes_StwdNo.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CANAddNo_PkgYes_StwdNo.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire\New Product Registration\CANAddNo_PkgYes_StwdPartial.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CANAddNo_PkgYes_StwdPartial.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdNo.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
