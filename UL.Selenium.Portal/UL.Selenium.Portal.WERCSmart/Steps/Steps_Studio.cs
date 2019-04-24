@@ -681,11 +681,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ProcessProducts thisProcessProducts = new ProcessProducts();
 			Report.IsTrue(thisProcessProducts.Wait_for_load(30), "Process products screen is not showing",
 				"Process products screen is showing");
-			foreach (TableRow thisRetailer in table.Rows)
+			foreach (TableRow tableRetailer in table.Rows)
 			{
-				Report.IsTrue(thisProcessProducts.SelectRetailer(thisRetailer["Retailer"]),
-					"Failed to select retailer: " + thisRetailer["Retailer"],
-					"Selected retailer: " + thisRetailer["Retailer"]);
+				string thisRetailer = tableRetailer["Retailer"];
+				if (thisRetailer.ToLower().Contains("saved as"))
+				{
+					thisRetailer = Context
+						.GetFromContext(thisRetailer.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+						.ToString();
+				}
+				Report.IsTrue(thisProcessProducts.SelectRetailer(thisRetailer),
+					"Failed to select retailer: " + thisRetailer,
+					"Selected retailer: " + thisRetailer);
 			}
 		}
 

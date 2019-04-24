@@ -10,6 +10,7 @@
 @PackagingTypes
 @Brands
 @MyIngredients
+@DataSummarySheet
 @ProductGrid
 @run_MyLibrary
 
@@ -65,7 +66,6 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 
 And I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down
 
-@tfs_design
 Scenario: [70536] Edit Brand - Deactivate
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -194,7 +194,6 @@ Given I click Delete in the Delete Product pop up
 Then I confirm that the Packaging Type saved as: ThisPackaging does not appear in the My Packaging Types grid
 
 
-@tfs_design
 Scenario: [70539] Add an Ingredient (Basic) and remove
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -251,7 +250,6 @@ Given I click: YES in the 'Remove Component from My Ingredients' pop up
 Then I confirm My Ingredient saved as: water70539 in My Library has been removed from the grid
 
 
-@tfs_design
 Scenario: [70556] Add an Ingredient (Trade secret) and remove
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -310,7 +308,6 @@ Given I click: YES in the 'Remove Component from My Ingredients' pop up
 Then I confirm My Ingredient saved as: water70556 in My Library has been removed from the grid
 
 
-@tfs_design
 Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -376,7 +373,6 @@ Given I click: YES in the 'Remove Component from My Ingredients' pop up
 Then I confirm My Ingredient saved as: formaldehyde70567 in My Library has been removed from the grid
 
 
-@tfs_design
 Scenario: [73329] Edit Ingredient
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -521,7 +517,6 @@ And I confirm the ingredients for page 3 saved as: My Library Ingredients Pagina
 And I navigate to the home page
 
 
-@tfs_design
 Scenario: [73326] Searching an Ingredient
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -544,7 +539,7 @@ Then I confirm that the smart search results contain a chemical with CAS: 50-00-
 
 And I navigate to the home page
 
-@tfs_design
+@TReVorId:20225
 Scenario: [70516] Add and Remove Packaging Type
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -553,44 +548,50 @@ Given In the My Account page I navigate to the My Library page
 Then I confirm the current active tab on the My Library page is: My Packaging Types
 Given I click 'Add New' in the My Packaging Types section of My Library
 Then I should see the Packaging Type Page
-Given I set the Package Type Name field to: Super Packaging Type (TM)
+Given I set the Package Type Name field to: Super Packaging Type 1 (TM)
 Given I click continue
 Then I should see the Bill of Materials Page
-And I confirm that the following table headings are displayed:
-| Heading                     |
-| My Packing Materials        |
-| My Packaging Weight (grams) |
-| Remove                      |
-And I confirm that the 'Add Row' button is displayed
 And I save the Packaging Type details as: ThisPackaging
 Given I click Add Row in the Bill Of Materials grid
-
-#Verify that under 'My Packaging Materials' - a 'Choose' drop-down becomes available
-#Verify that under 'My Packaging Weight' - an enter text field becomes available
-#Verify that under the 'Remove Column' - you see the 'X' Icon
-
-# select first option for My Packaging Materials
 Given I select the option: Clear Glass for the My Packaging Materials field in the table
 Given I select the option: 99 for the My Packaging Weight (grams) field in the table
 Given I click continue
-# Verify that it transitions to the 'CONEG' Screen
-# Confirm the following question displays:  "Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA)
-# Confirm the question above displays a "YES" and "NO" Buttons
-# Confirm the following question displays: "Do you have a CONEG Certificate for this package?"
-# Confirm the question above displays a "YES" and "NO" Buttons
-# Click 'YES' to the 'Do you have a CONEG Certificate for this package?'
-# Verify  text "UPLOAD the CONEG Certificate"
-# Verify text in  field under CONEG Certificate  says "Drop .pdf file here or click "Browse" max file size: 4 MB"
-# Navigate to a PDF File
-# Select the File you want to use
-# Verify the 'VIEW' and 'REMOVE' Buttons become active
-# Click the 'VIEW BUTTON'
-# Confirm the file opens for viewing in a new window
-# Close the window
-# Click 'CONTINUE'
+Then I should see the CONEG Page
+Given I set the Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA) field to: No
+Given I set the Do you have a CONEG Certificate for this package? field to: Yes
 
+#CLF - 26/3/2019 had to spell CONEG Certficate wrongly because otherwise it will not work.
+And I click the browse button for label: CONEG Certficate and upload PDF: C:\Dependencies\WERCSmart\testdoc.pdf
+
+#And I Verify the 'VIEW' and 'REMOVE' Buttons become active
+#And I Click the 'VIEW BUTTON'
+#And I Confirm the file opens for viewing in a new window
+#And I Close the window
+Given I click continue
+Then I should see the Data Acceptance Page
+#And I Confirm the following statement displays under 'Data Acceptance' - "In case of any problem with this product we will communicate to the following email address. Please update this email address if you want us to use a different email"
+#And I Confirm the email registered (user) is populated in the field under the Statement
+#And I Confirm the 'SUMMARY BUTTON' is available
+#And I Confirm the 'SUMMARY' Page opens in a NEW TAB
+Given I click the Summary button in the Data Acceptance window
+Given I switch to the Data Summary page
+Then Product Name should be showing value: Super Packaging Type 1 (TM)
+Given I close the Data Summary tab
+Then I should see the Data Acceptance Page
+
+#And I Verify the 'Summary Page' matched with the data/text entered for the '' you created
+#And I Click on the top-right 'PRINT BUTTON'
+#And I Verify the 'Summary Print Preview' contains the information you entered for the Packaging Type
+#And I Close the 'Print Preview Tab'
+#And I Click the 'ACCEPT BUTTON'
 Given In the Data Acceptance page I click on the Accept button
+#And I Verify your 'ID number and Packaging Type Name' appears under "ID / Packaging Type Name"
 Then I confirm that the Packaging Type saved as: ThisPackaging appears in the My Packaging Types grid
+#And I Verify the date appears under "Date Created"
+#And I Under the 'Actions Column' - Click on the [...]
+#And I Select the 'DELETE' Option
+#And I Verify popup Delete Product with message " Are you sure you want to remove this item?" and the name  and ID of your new packaging type
+#And I Click the 'DELETE Button'
 Given I delete Packaging Type saved as: ThisPackaging
 Then I confirm the name and ID for Packaging Type saved as: ThisPackaging appear in the Delete Product pop up
 Given I click Delete in the Delete Product pop up

@@ -99,7 +99,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		public void GivenILoginToStudioAsULSCUser()
 		{
 			StudioLogin thisStudioLogin = new StudioLogin();
-			var ulscUser = TestUsers.GetUserSavedAs("StudioUser");
+			var ulscUser = TestUsers.GetUserSavedAs("ULSC_StudioUser");
 			thisStudioLogin.Username = ulscUser.Username;
 			thisStudioLogin.Password = ulscUser.Password;
 			thisStudioLogin.ClickSignIn();
@@ -634,20 +634,29 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[Given(@"I navigate to WERCSmart")]
 		public void GivenINavigateToWERCSmart()
 		{
-			var Branch = GlobalParameters.Branch;
-			string regexPattern = @"^.*(?=(\/))";
-			Regex regex = new Regex(regexPattern);
-			Match match = regex.Match(Branch);
-			if (match.Success)
+			Report.Info("Getting test variable saved as 'WercSmart_TestUrl'");
+			var url = TestVariables.GetVariableSavedAs("WercSmart_TestUrl");
+			if (url == null)
 			{
-				var url = TestVariables.GetVariableSavedAs("TestURL", "3", match.Value);
-				SeleniumBrowser.WebBrowser.Url = url;
-				SeleniumBrowser.WebBrowser.WaitForPageLoad();
+				throw new Exception("WercSmart test url not found in trevor!");
 			}
-			else
-			{
-				throw new Exception("Wercsmart URL could not be found");
-			}
+			Report.Info("Navigating to: " + url);
+			SeleniumBrowser.WebBrowser.Url = url;
+			SeleniumBrowser.WebBrowser.WaitForPageLoad();
+			//var Branch = GlobalParameters.Branch;
+			//string regexPattern = @"^.*(?=(\/))";
+			//Regex regex = new Regex(regexPattern);
+			//Match match = regex.Match(Branch);
+			//if (match.Success)
+			//{
+			//	var url = TestVariables.GetVariableSavedAs("TestURL", "3", match.Value);
+			//	SeleniumBrowser.WebBrowser.Url = url;
+			//	SeleniumBrowser.WebBrowser.WaitForPageLoad();
+			//}
+			//else
+			//{
+			//	throw new Exception("Wercsmart URL could not be found");
+			//}
 		}
 
 		[Then(@"I Confirm New window opens with the error message: (.*)")]

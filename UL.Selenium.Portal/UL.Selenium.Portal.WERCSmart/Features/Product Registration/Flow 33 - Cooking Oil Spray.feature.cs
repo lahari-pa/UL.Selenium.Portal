@@ -140,19 +140,19 @@ testRunner.And("I call Shared Step 57727 (Transportation Details 1 - Yes option 
 testRunner.And("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
                     "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table209 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Product granted Alternative Control Plan",
                         "Amount of VOC by CARB",
                         "Amount of VOC by OTC Model",
                         "VOC for states"});
-            table209.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "No",
                         "2",
                         "2",
                         "Yes"});
 #line 32
 testRunner.And("I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CA" +
-                    "RB - Yes for state values)", ((string)(null)), table209, "And ");
+                    "RB - Yes for state values)", ((string)(null)), table1, "And ");
 #line 35
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36

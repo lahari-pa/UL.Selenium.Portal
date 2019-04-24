@@ -9,7 +9,6 @@ Background:
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then I click the Retail Partners icon in the Navigation Pane
 
-@tfs_design
 Scenario: [56942] Data Consent Tiers - Walmart
 Given I select the retailer: Wal-Mart
 Then I confirm that there is a section labeled: Data Consent Tiers

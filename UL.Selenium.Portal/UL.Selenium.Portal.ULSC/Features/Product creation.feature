@@ -1,4 +1,4 @@
-﻿@Login
+@Login
 @UlSolutionCenter
 @Homepage
 @ProductGrid
@@ -10,6 +10,8 @@
 @LandingPage
 @DocumentAcceptance
 @DeleteActiveProducts
+
+@Portal_ULSC
 @ULSC
 
 @run_ULSC_productcreation
@@ -22,6 +24,7 @@ Feature: ULSC Product creation
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\ULSC - UL Secure Connect\ULSC - Product processing in Portal for use in test cases
 
+@TReVorId:22179
 Scenario: [88606] ULSC Automation user - Create (in Portal) a new simple product (Chalk) and submit thru to Completed status (NGHS only)
 Given I call Shared Step 29665 - Login to WSW as ULSC user
 And I call Shared Step 29148 - Login to ULSC as an Administrator User

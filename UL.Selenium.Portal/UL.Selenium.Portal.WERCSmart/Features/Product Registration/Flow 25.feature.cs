@@ -127,18 +127,18 @@ testRunner.Then("I should see battery manufacturer message: Important: Prior to 
                     "attery-containing product, the battery manufacturer must first register the cont" +
                     "ained battery.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table201 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run"});
-            table201.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Alkaline",
                         "L1028F",
                         "6",
                         "6"});
 #line 38
-testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table201, "Given ");
+testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table1, "Given ");
 #line 42
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 44
@@ -200,18 +200,18 @@ testRunner.Given("I call Shared Step 70393 (Additional Product Information - Wit
 #line 79
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table202 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
                         "How many batteries required to run"});
-            table202.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Alkaline",
                         "Alkaline battery23A by Shenzhen AllKey Battery Co., Ltd.",
                         "6",
                         "6"});
 #line 81
-testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table202, "Given ");
+testRunner.Given("I call Shared Step 48367 (Product Includes Battery > any type)", ((string)(null)), table2, "Given ");
 #line 85
 testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 87

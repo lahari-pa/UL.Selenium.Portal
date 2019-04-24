@@ -117,13 +117,13 @@ testRunner.And("I set the Boiling Point (in Celsius) field to: 40", ((string)(nu
 #line 23
 testRunner.And("I set the Flash Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table17.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Closed cup method"});
 #line 24
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table17, "And ");
+                    "sting Method Used", ((string)(null)), table1, "And ");
 #line 27
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
@@ -141,15 +141,15 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 33
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table18.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Yes"});
-            table18.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 34
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table18, "And ");
+                    "ulated for Transport", ((string)(null)), table2, "And ");
 #line 38
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
@@ -189,7 +189,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 54
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -198,7 +198,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table19.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -210,7 +210,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 55
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table19, "And ");
+                    "g:", ((string)(null)), table3, "And ");
 #line 58
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -259,13 +259,13 @@ testRunner.And("I set the Boiling Point (in Celsius) field to: 38", ((string)(nu
 #line 75
 testRunner.And("I set the Flash Point (in Celsius) field to: 60", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table20.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Closed cup method"});
 #line 76
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table20, "And ");
+                    "sting Method Used", ((string)(null)), table4, "And ");
 #line 79
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 80
@@ -283,15 +283,15 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 85
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table21.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Yes"});
-            table21.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 86
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table21, "And ");
+                    "ulated for Transport", ((string)(null)), table5, "And ");
 #line 90
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 91
@@ -331,7 +331,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 106
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -340,7 +340,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table22.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -352,7 +352,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 107
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table22, "And ");
+                    "g:", ((string)(null)), table6, "And ");
 #line 110
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -401,13 +401,13 @@ testRunner.And("I set the Boiling Point (in Celsius) field to: 40", ((string)(nu
 #line 130
 testRunner.And("I set the Flash Point (in Celsius) field to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table23.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Closed cup method"});
 #line 131
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table23, "And ");
+                    "sting Method Used", ((string)(null)), table7, "And ");
 #line 134
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 135
@@ -425,15 +425,15 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 140
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table24.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Yes"});
-            table24.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 141
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table24, "And ");
+                    "ulated for Transport", ((string)(null)), table8, "And ");
 #line 145
 testRunner.And("I set the Product is Regulated for Transport field to: No, due to an exemption or" +
                     " exception", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -459,7 +459,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 156
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -468,7 +468,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table25.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Gloves",
                         "800",
                         "25",
@@ -480,7 +480,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 157
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table25, "And ");
+                    "g:", ((string)(null)), table9, "And ");
 #line 160
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -529,17 +529,17 @@ testRunner.Given("I set the Boiling Point (in Celsius) field to: 50", ((string)(
 #line 177
 testRunner.Given("I set the Flash Point (in Celsius) field to: 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table26.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Closed cup method"});
-            table26.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Open cup method"});
-            table26.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Not applicable/available"});
 #line 178
 testRunner.And("The following options should be displayed for section: Flash Point Testing Method" +
-                    " Used", ((string)(null)), table26, "And ");
+                    " Used", ((string)(null)), table10, "And ");
 #line 183
 testRunner.And("I set the Flash Point Testing Method Used field to: Open cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 184
@@ -556,15 +556,15 @@ testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with n
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table27.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Yes"});
-            table27.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 189
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table27, "And ");
+                    "ulated for Transport", ((string)(null)), table11, "And ");
 #line 193
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 194
@@ -604,7 +604,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 209
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -613,7 +613,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table28.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -625,7 +625,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 210
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table28, "And ");
+                    "g:", ((string)(null)), table12, "And ");
 #line 213
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74346", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -674,17 +674,17 @@ testRunner.Given("I set the Boiling Point (in Celsius) field to: 50", ((string)(
 #line 233
 testRunner.Given("I set the Flash Point (in Celsius) field to: 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table29.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Closed cup method"});
-            table29.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Open cup method"});
-            table29.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Not applicable/available"});
 #line 234
 testRunner.And("The following options should be displayed for section: Flash Point Testing Method" +
-                    " Used", ((string)(null)), table29, "And ");
+                    " Used", ((string)(null)), table13, "And ");
 #line 239
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 240
@@ -701,15 +701,15 @@ testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with n
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table30.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Yes"});
-            table30.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 245
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table30, "And ");
+                    "ulated for Transport", ((string)(null)), table14, "And ");
 #line 249
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 250
@@ -749,7 +749,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 265
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -758,7 +758,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table31.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -770,7 +770,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 266
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table31, "And ");
+                    "g:", ((string)(null)), table15, "And ");
 #line 269
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74346", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -819,17 +819,17 @@ testRunner.Given("I set the Boiling Point (in Celsius) field to: 50", ((string)(
 #line 286
 testRunner.Given("I set the Flash Point (in Celsius) field to: 80", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table32.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "Closed cup method"});
-            table32.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "Open cup method"});
-            table32.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "Not applicable/available"});
 #line 287
 testRunner.And("The following options should be displayed for section: Flash Point Testing Method" +
-                    " Used", ((string)(null)), table32, "And ");
+                    " Used", ((string)(null)), table16, "And ");
 #line 292
 testRunner.And("I set the Flash Point Testing Method Used field to: Not applicable/available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 293
@@ -846,17 +846,17 @@ testRunner.And("I call Shared Step 29181 (Ingredients - add any chemical) with n
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table33.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "Yes"});
-            table33.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-            table33.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "Not Regulated"});
 #line 298
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table33, "And ");
+                    "ulated for Transport", ((string)(null)), table17, "And ");
 #line 303
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 304
@@ -895,7 +895,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 319
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -904,7 +904,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table34.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "Gloves",
                         "500",
                         "9",
@@ -916,7 +916,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 320
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table34, "And ");
+                    "g:", ((string)(null)), table18, "And ");
 #line 323
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74346", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -965,13 +965,13 @@ testRunner.Given("I set the Boiling Point (in Celsius) field to: 45", ((string)(
 #line 343
 testRunner.Given("I set the Flash Point (in Celsius) field to: 60", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table35.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "Closed cup method"});
 #line 344
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table35, "And ");
+                    "sting Method Used", ((string)(null)), table19, "And ");
 #line 347
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 348
@@ -990,15 +990,15 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 353
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table36.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "Yes"});
-            table36.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 354
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table36, "And ");
+                    "ulated for Transport", ((string)(null)), table20, "And ");
 #line 358
 testRunner.And("I set the Product is Regulated for Transport field to: No, due to an exemption or" +
                     " exception", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1026,7 +1026,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 370
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1035,7 +1035,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table37.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "Gloves",
                         "800",
                         "25",
@@ -1047,7 +1047,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 371
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table37, "And ");
+                    "g:", ((string)(null)), table21, "And ");
 #line 374
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74366", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1098,13 +1098,13 @@ testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Po
 #line 395
 testRunner.And("I set the Flash Point (in Celsius) field to: <23C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table38.AddRow(new string[] {
+            table22.AddRow(new string[] {
                         "Closed cup method"});
 #line 396
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table38, "And ");
+                    "sting Method Used", ((string)(null)), table22, "And ");
 #line 399
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 400
@@ -1123,15 +1123,15 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 405
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table39.AddRow(new string[] {
+            table23.AddRow(new string[] {
                         "Yes"});
-            table39.AddRow(new string[] {
+            table23.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 406
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table39, "And ");
+                    "ulated for Transport", ((string)(null)), table23, "And ");
 #line 410
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 411
@@ -1171,7 +1171,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 426
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1180,7 +1180,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table40.AddRow(new string[] {
+            table24.AddRow(new string[] {
                         "Gloves",
                         "800",
                         "25",
@@ -1192,7 +1192,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 427
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table40, "And ");
+                    "g:", ((string)(null)), table24, "And ");
 #line 430
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74368", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1243,13 +1243,13 @@ testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Po
 #line 448
 testRunner.And("I set the Flash Point (in Celsius) field to: >=23C and <38C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table41.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "Closed cup method"});
 #line 449
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table41, "And ");
+                    "sting Method Used", ((string)(null)), table25, "And ");
 #line 452
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 453
@@ -1268,15 +1268,15 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 458
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table42.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Yes"});
-            table42.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 459
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table42, "And ");
+                    "ulated for Transport", ((string)(null)), table26, "And ");
 #line 463
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 464
@@ -1316,7 +1316,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 479
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1325,7 +1325,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table43.AddRow(new string[] {
+            table27.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1337,7 +1337,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 480
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table43, "And ");
+                    "g:", ((string)(null)), table27, "And ");
 #line 483
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74372", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1390,13 +1390,13 @@ testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Po
 #line 501
 testRunner.And("I set the Flash Point (in Celsius) field to: >=38C and <=60C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table44.AddRow(new string[] {
+            table28.AddRow(new string[] {
                         "Closed cup method"});
 #line 502
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table44, "And ");
+                    "sting Method Used", ((string)(null)), table28, "And ");
 #line 505
 testRunner.And("I set the Flash Point Testing Method Used field to: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 506
@@ -1415,15 +1415,15 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 511
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table45.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "Yes"});
-            table45.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "No, due to an exemption or exception"});
 #line 512
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table45, "And ");
+                    "ulated for Transport", ((string)(null)), table29, "And ");
 #line 516
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 517
@@ -1463,7 +1463,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 532
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1472,7 +1472,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table46.AddRow(new string[] {
+            table30.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1484,7 +1484,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 533
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table46, "And ");
+                    "g:", ((string)(null)), table30, "And ");
 #line 536
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74374", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1535,17 +1535,17 @@ testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Po
 #line 554
 testRunner.And("I set the Flash Point (in Celsius) field to: >60C and <93C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table47.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "Closed cup method"});
-            table47.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "Open cup method"});
-            table47.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "Not applicable/available"});
 #line 555
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table47, "And ");
+                    "sting Method Used", ((string)(null)), table31, "And ");
 #line 560
 testRunner.And("I set the Flash Point Testing Method Used field to: Open cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 561
@@ -1564,17 +1564,17 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 566
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table48.AddRow(new string[] {
+            table32.AddRow(new string[] {
                         "Yes"});
-            table48.AddRow(new string[] {
+            table32.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-            table48.AddRow(new string[] {
+            table32.AddRow(new string[] {
                         "Not Regulated"});
 #line 567
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table48, "And ");
+                    "ulated for Transport", ((string)(null)), table32, "And ");
 #line 572
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 573
@@ -1614,7 +1614,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 588
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1623,7 +1623,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table49.AddRow(new string[] {
+            table33.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1635,7 +1635,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 589
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table49, "And ");
+                    "g:", ((string)(null)), table33, "And ");
 #line 592
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74376", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1686,17 +1686,17 @@ testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Po
 #line 610
 testRunner.And("I set the Flash Point (in Celsius) field to: >=93C and <=815C", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table50.AddRow(new string[] {
+            table34.AddRow(new string[] {
                         "Closed cup method"});
-            table50.AddRow(new string[] {
+            table34.AddRow(new string[] {
                         "Open cup method"});
-            table50.AddRow(new string[] {
+            table34.AddRow(new string[] {
                         "Not applicable/available"});
 #line 611
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table50, "And ");
+                    "sting Method Used", ((string)(null)), table34, "And ");
 #line 616
 testRunner.And("I set the Flash Point Testing Method Used field to: Open cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 617
@@ -1715,17 +1715,17 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 622
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table51.AddRow(new string[] {
+            table35.AddRow(new string[] {
                         "Yes"});
-            table51.AddRow(new string[] {
+            table35.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-            table51.AddRow(new string[] {
+            table35.AddRow(new string[] {
                         "Not Regulated"});
 #line 623
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table51, "And ");
+                    "ulated for Transport", ((string)(null)), table35, "And ");
 #line 628
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 629
@@ -1765,7 +1765,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 644
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1774,7 +1774,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table52.AddRow(new string[] {
+            table36.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1786,7 +1786,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 645
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table52, "And ");
+                    "g:", ((string)(null)), table36, "And ");
 #line 648
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74379", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1839,13 +1839,13 @@ testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Po
 #line 666
 testRunner.And("I set the Flash Point (in Celsius) field to: Not Tested/Unknown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table53.AddRow(new string[] {
+            table37.AddRow(new string[] {
                         "Not applicable/available"});
 #line 667
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table53, "And ");
+                    "sting Method Used", ((string)(null)), table37, "And ");
 #line 670
 testRunner.And("I set the Flash Point Testing Method Used field to: Not applicable/available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 671
@@ -1864,17 +1864,17 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 676
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table54 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table54.AddRow(new string[] {
+            table38.AddRow(new string[] {
                         "Yes"});
-            table54.AddRow(new string[] {
+            table38.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-            table54.AddRow(new string[] {
+            table38.AddRow(new string[] {
                         "Not Regulated"});
 #line 677
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table54, "And ");
+                    "ulated for Transport", ((string)(null)), table38, "And ");
 #line 682
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 683
@@ -1913,7 +1913,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 698
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table55 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -1922,7 +1922,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table55.AddRow(new string[] {
+            table39.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -1934,7 +1934,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 699
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table55, "And ");
+                    "g:", ((string)(null)), table39, "And ");
 #line 702
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74380", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -1987,13 +1987,13 @@ testRunner.And("I check the \'I do not have exact\' checkbox for field: Flash Po
 #line 720
 testRunner.And("I set the Flash Point (in Celsius) field to: None, No Flash Point", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table56 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table56.AddRow(new string[] {
+            table40.AddRow(new string[] {
                         "Not applicable/available"});
 #line 721
 testRunner.And("The following options should be displayed exclusively for section: Flash Point Te" +
-                    "sting Method Used", ((string)(null)), table56, "And ");
+                    "sting Method Used", ((string)(null)), table40, "And ");
 #line 724
 testRunner.And("I set the Flash Point Testing Method Used field to: Not applicable/available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 725
@@ -2012,17 +2012,17 @@ testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random)
 #line 730
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table57 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table57.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "Yes"});
-            table57.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "No, due to an exemption or exception"});
-            table57.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "Not Regulated"});
 #line 731
 testRunner.And("The following options should be displayed exclusively for section: Product is Reg" +
-                    "ulated for Transport", ((string)(null)), table57, "And ");
+                    "ulated for Transport", ((string)(null)), table41, "And ");
 #line 736
 testRunner.And("I set the Product is Regulated for Transport field to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 737
@@ -2061,7 +2061,7 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
 #line 752
 testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table58 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                         "Personal Protection Equipment",
                         "Autoignition Temperature",
                         "Minimum Ignition Energy",
@@ -2070,7 +2070,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
                         "Odor",
                         "Odor Threshold",
                         "Partition Coefficient"});
-            table58.AddRow(new string[] {
+            table42.AddRow(new string[] {
                         "Gloves",
                         "950",
                         "35",
@@ -2082,7 +2082,7 @@ testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 #line 753
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
-                    "g:", ((string)(null)), table58, "And ");
+                    "g:", ((string)(null)), table42, "And ");
 #line 756
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comm" +
                     "ent 74382", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

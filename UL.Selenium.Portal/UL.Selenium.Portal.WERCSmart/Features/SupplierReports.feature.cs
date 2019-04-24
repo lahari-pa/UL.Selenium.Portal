@@ -102,30 +102,30 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Acc
 #line 19
 testRunner.Given("I click the Supplier Reports icon in the QuickLinks Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table652 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Reports"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Active UPCs for Products Report"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Battery-containing products report"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Formulated vs. Articles Report"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Kits that contain a specific product"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Pesticide Certificate Report"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Products and Recommended Use Report"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Products that are associated with a specific kit"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Products with VOCs"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "UPC Report for All Products with Retailer"});
-            table652.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "UPC Report for Specific Product with Retailer"});
 #line 20
-testRunner.Given("under the supplier Reports menu I should see the following options", ((string)(null)), table652, "Given ");
+testRunner.Given("under the supplier Reports menu I should see the following options", ((string)(null)), table1, "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -157,16 +157,16 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called Active UPCs for Products Report.x" +
                     "lsx and save as 68421", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table653 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table653.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "WPSID"});
-            table653.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Product Name"});
-            table653.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Active UPCs"});
 #line 42
-testRunner.Then("I confirm that the excel file saved as: 68421 contains the following columns:", ((string)(null)), table653, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 68421 contains the following columns:", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -200,20 +200,20 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called Batterycontaining products report" +
                     ".xlsx and save as 68422", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table654 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table654.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Supplier Name"});
-            table654.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "WPSID"});
-            table654.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Product Name"});
-            table654.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Battery Type"});
-            table654.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Battery Mfg"});
 #line 60
-testRunner.Then("I confirm that the excel file saved as: 68422 contains the following columns:", ((string)(null)), table654, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 68422 contains the following columns:", ((string)(null)), table3, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -245,24 +245,24 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called Formulated vs. Articles Report.xl" +
                     "sx and save as 68423", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table655 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table655.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "WPSID"});
-            table655.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Product Name"});
-            table655.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Formulated"});
-            table655.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Articles"});
-            table655.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Enhanced Articles"});
-            table655.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "3rd Party Formula"});
-            table655.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "ULGHS Document Only"});
 #line 79
-testRunner.Then("I confirm that the excel file saved as: 68423 contains the following columns:", ((string)(null)), table655, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 68423 contains the following columns:", ((string)(null)), table4, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -295,26 +295,26 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called UPC Report for All Products with " +
                     "Retailer.xlsx and save as 73082", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table656 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table656.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "WPSID"});
-            table656.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Product Name"});
-            table656.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "UPC"});
-            table656.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Retailer"});
-            table656.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Status"});
-            table656.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Package Size"});
-            table656.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Retailer Unique Product Identifier"});
-            table656.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Container Type"});
 #line 99
-testRunner.Then("I confirm that the excel file saved as: 73082 contains the following columns:", ((string)(null)), table656, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 73082 contains the following columns:", ((string)(null)), table5, "Then ");
 #line 109
 testRunner.Then("I confirm that the excel file saved as: 73082 in column: Container Type there are" +
                     " no numbers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -351,18 +351,18 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called Kits that contain a specific prod" +
                     "uct.xlsx and save as 73225", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table657 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table657.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Product in Kit"});
-            table657.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Product in Kit Name"});
-            table657.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Kit WPSID"});
-            table657.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Kit Name"});
 #line 122
-testRunner.Then("I confirm that the excel file saved as: 73225 contains the following columns:", ((string)(null)), table657, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 73225 contains the following columns:", ((string)(null)), table6, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -397,18 +397,18 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called Products that are associated with" +
                     " a specific kit.xlsx and save as 73228", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table658 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table658.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Product in Kit"});
-            table658.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Product in Kit Name"});
-            table658.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Kit WPSID"});
-            table658.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Kit Name"});
 #line 140
-testRunner.Then("I confirm that the excel file saved as: 73228 contains the following columns:", ((string)(null)), table658, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 73228 contains the following columns:", ((string)(null)), table7, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -442,27 +442,27 @@ testRunner.Given("In the Supplier Reports screen I click on the Download button"
 testRunner.Given("I confirm that a file is downloaded with file name: Pesticide Certificate Report." +
                     "xlsx then close the Report Download popup. I save the file as excel73226", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table659 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table659.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Supplier"});
-            table659.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "WPSID"});
-            table659.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Product Name"});
-            table659.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Pesticide Certificates Currently Expired Count"});
-            table659.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Pesticide Certificates Expire in 1-30 Days Count"});
-            table659.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Pesticide Certificates Expire in 31-60 Days Count"});
-            table659.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Pesticide Certificates Expire in 61-90 Days Count"});
-            table659.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "In Re-certification"});
 #line 170
 testRunner.Then("I confirm that the excel file saved as: excel73226 contains the following columns" +
-                    ":", ((string)(null)), table659, "Then ");
+                    ":", ((string)(null)), table8, "Then ");
 #line 181
 testRunner.And("I delete the excel file saved as excel73226", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -495,16 +495,16 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called Products with VOCs.xlsx and save " +
                     "as 73229", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table660 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table660.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Supplier"});
-            table660.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "WPSID"});
-            table660.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Product Name"});
 #line 193
-testRunner.Then("I confirm that the excel file saved as: 73229 contains the following columns:", ((string)(null)), table660, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 73229 contains the following columns:", ((string)(null)), table9, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -536,20 +536,20 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called Products and Recommended Use Repo" +
                     "rt.xlsx and save as 73227", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table661 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table661.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Supplier"});
-            table661.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "RU Description"});
-            table661.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "RU Category"});
-            table661.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "WPSID"});
-            table661.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Product Name"});
 #line 209
-testRunner.Then("I confirm that the excel file saved as: 73227 contains the following columns:", ((string)(null)), table661, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 73227 contains the following columns:", ((string)(null)), table10, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -585,20 +585,20 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called UPC Report for Specific Product w" +
                     "ith Retailer.xlsx and save as 73230", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table662 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table662.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "UPC"});
-            table662.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Retailer"});
-            table662.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Status"});
-            table662.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "WPSID"});
-            table662.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Product Name"});
 #line 228
-testRunner.Then("I confirm that the excel file saved as: 73230 contains the following columns:", ((string)(null)), table662, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 73230 contains the following columns:", ((string)(null)), table11, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -633,26 +633,26 @@ testRunner.Given("I click on close in the Report Download dialog", ((string)(nul
 testRunner.Given("I confirm that an excel file is produced called Sustainability Survey Eligibility" +
                     "–Health & Beauty.html and save as 75391", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table663 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table663.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "WERCSmart ID"});
-            table663.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Product Name"});
-            table663.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Quantity of Active UPCs"});
-            table663.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Transparency Indicator Ratio"});
-            table663.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "3rd Party Formula Use Indicator"});
-            table663.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Last Submission Date"});
-            table663.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Current Submission Level"});
-            table663.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Current Data Tier Consent for the Selected Retailer"});
 #line 249
-testRunner.Then("I confirm that the excel file saved as: 75391 contains the following columns:", ((string)(null)), table663, "Then ");
+testRunner.Then("I confirm that the excel file saved as: 75391 contains the following columns:", ((string)(null)), table12, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -686,25 +686,25 @@ testRunner.Given("I confirm that a file is downloaded with file name: California
                     "gistrations Prior to August 30 2018.xlsx then close the Report Download popup. I" +
                     " save the file as excel76551", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table664 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table664.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "WERCSmart ID"});
-            table664.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "WERCSmart Product Name"});
-            table664.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Contains Chemical on List"});
-            table664.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Prop 65 Warning Required"});
-            table664.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Prop 65 Warning on Label"});
-            table664.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Last Order Date"});
-            table664.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Last Revision Date"});
 #line 277
 testRunner.Then("I confirm that the excel file saved as: excel76551 contains the following columns" +
-                    ":", ((string)(null)), table664, "Then ");
+                    ":", ((string)(null)), table13, "Then ");
 #line 287
 testRunner.And("I delete the Supplier Report file saved as excel76551", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -741,21 +741,21 @@ testRunner.Given("I confirm that a file is downloaded with file name: Waste Clas
                     "Report.xlsx then close the Report Download popup. I save the file as SupplierRep" +
                     "ort76759", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table665 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column"});
-            table665.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "WERCSmart ID"});
-            table665.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Product Name"});
-            table665.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Federal Waste"});
-            table665.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "EPA Type"});
-            table665.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "EPA Code"});
 #line 309
 testRunner.Then("I confirm that the excel file saved as: excel76551 contains the following columns" +
-                    ":", ((string)(null)), table665, "Then ");
+                    ":", ((string)(null)), table14, "Then ");
 #line 319
 testRunner.And("I delete the Supplier Report file saved as SupplierReport76759", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

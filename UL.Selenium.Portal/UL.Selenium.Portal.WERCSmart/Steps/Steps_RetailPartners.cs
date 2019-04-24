@@ -1224,7 +1224,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		public bool MatchAbbreviatedRetailer(string abbreviation, string retailerToMatch)
+		{
+			List<string>abbreviationList = abbreviation.Split(',').Select(x => x.Trim()).ToList();
+			string capitalLetters = string.Concat(retailerToMatch.Where(c => c >= 'A' && c <= 'Z'));
 
+			foreach (string abbrv in abbreviationList)
+			{
+				if (capitalLetters.Length >= abbrv.Length)
+				{
+					if (capitalLetters.Substring(0, abbrv.Length) == abbrv)
+					{
+						Report.Info("Retailer to match has been abbreviated to: " +
+						            capitalLetters.Substring(0, abbrv.Length) + " and a match has been found");
+						return true;
+					}
+				}
+				Report.Info("No match was found between " + retailerToMatch + " and " + abbrv);
+			}
+			return false;
+		}
 
 	}
 }

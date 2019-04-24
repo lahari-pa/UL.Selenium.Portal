@@ -31,6 +31,7 @@ namespace UL.Selenium.Portal.ULSC.Features.Dashboard
     [NUnit.Framework.CategoryAttribute("LandingPage")]
     [NUnit.Framework.CategoryAttribute("DocumentAcceptance")]
     [NUnit.Framework.CategoryAttribute("DeleteActiveProducts")]
+    [NUnit.Framework.CategoryAttribute("Portal_ULSC")]
     [NUnit.Framework.CategoryAttribute("ULSC")]
     [NUnit.Framework.CategoryAttribute("run_ULCSDashboard")]
     public partial class DashboardFeature
@@ -58,6 +59,7 @@ namespace UL.Selenium.Portal.ULSC.Features.Dashboard
                         "LandingPage",
                         "DocumentAcceptance",
                         "DeleteActiveProducts",
+                        "Portal_ULSC",
                         "ULSC",
                         "run_ULCSDashboard"});
             testRunner.OnFeatureStart(featureInfo);
@@ -99,19 +101,21 @@ namespace UL.Selenium.Portal.ULSC.Features.Dashboard
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[52975] Layout")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22180")]
         public virtual void _52975Layout()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52975] Layout", null, ((string[])(null)));
-#line 22
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52975] Layout", null, new string[] {
+                        "TReVorId:22180"});
+#line 24
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 23
-testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 24
-testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 25
-testRunner.And("I should see the WERCSLink dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 26
+testRunner.And("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
+testRunner.And("I should see the WERCSLink dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
 testRunner.And("I Confirm the Layout shows a header, left hand navigation, Message center and KPI" +
                     " areas", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -120,51 +124,53 @@ testRunner.And("I Confirm the Layout shows a header, left hand navigation, Messa
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[52977] Header")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22181")]
         public virtual void _52977Header()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52977] Header", null, ((string[])(null)));
-#line 28
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52977] Header", null, new string[] {
+                        "TReVorId:22181"});
+#line 31
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 29
-testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
-testRunner.Given("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
-testRunner.Then("I confirm that the WERCSLink header appears at the top left", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 32
-testRunner.And("I confirm the WERCSLink sidebar menu icon is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 33
-testRunner.Given("I click the WERCSLink sidebar menu icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 34
-testRunner.Then("I confirm the left hand navigation list is collapsed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm that the WERCSLink header appears at the top left", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 35
-testRunner.Given("I click the WERCSLink sidebar menu icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I confirm the WERCSLink sidebar menu icon is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
-testRunner.Then("I confirm the left hand navigation list is expanded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click the WERCSLink sidebar menu icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 37
-testRunner.And("I confirm the user button in the header displays the logged in username", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I confirm the left hand navigation list is collapsed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 38
+testRunner.Given("I click the WERCSLink sidebar menu icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 39
+testRunner.Then("I confirm the left hand navigation list is expanded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 40
+testRunner.And("I confirm the user button in the header displays the logged in username", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
 testRunner.And("I confirm the Reset Dashboard icon is displayed next to the user button in the he" +
                     "ader", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
+#line 42
 testRunner.Given("I click the Reset Dashboard icon next to the user button in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 40
+#line 43
 testRunner.Then("I confirm the Reset Dashboard dropdown item is displayed underneath the header ic" +
                     "on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 41
-testRunner.Given("I click the user button in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
-testRunner.Then("I confirm the Sign Out dropdown item is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 43
-testRunner.Given("I click the user button in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 44
-testRunner.Then("I confirm the Sign Out dropdown item is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click the user button in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 45
-testRunner.And("I confirm the UL Logo is displayed next to the user button in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I confirm the Sign Out dropdown item is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 46
-testRunner.Given("I click the UL Logo next to the user button in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click the user button in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 47
+testRunner.Then("I confirm the Sign Out dropdown item is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 48
+testRunner.And("I confirm the UL Logo is displayed next to the user button in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 49
+testRunner.Given("I click the UL Logo next to the user button in the header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 50
 testRunner.Then("I confirm a new tab opens with url: https://psi.ul.com/en/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -172,17 +178,19 @@ testRunner.Then("I confirm a new tab opens with url: https://psi.ul.com/en/", ((
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[52987] Navigation pane")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22182")]
         public virtual void _52987NavigationPane()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52987] Navigation pane", null, ((string[])(null)));
-#line 53
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52987] Navigation pane", null, new string[] {
+                        "TReVorId:22182"});
+#line 57
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 54
+#line 58
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 55
+#line 59
 testRunner.Given("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 56
+#line 60
 testRunner.And("I should see the WERCSLink dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -197,29 +205,29 @@ testRunner.And("I should see the WERCSLink dashboard", ((string)(null)), ((TechT
                         "Product Lookup"});
             table1.AddRow(new string[] {
                         "Services"});
-#line 57
+#line 61
 testRunner.And("I confirm that the following WERCSLink menu items are showing", ((string)(null)), table1, "And ");
-#line 64
-testRunner.And("I click the side bar navigation link: Additional Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
-testRunner.And("I confirm the WERCSLink Additional Services page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
-testRunner.And("I click the side bar navigation link: Key Performance Indicators", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
-testRunner.And("I confirm the WERCSLink Key Performance Indicators page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 68
-testRunner.And("I click the side bar navigation link: Recent Activities", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the side bar navigation link: Additional Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 69
-testRunner.And("I confirm the WERCSLink Recent Activities page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink Additional Services page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 70
-testRunner.And("I click the side bar navigation link: Product Lookup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the side bar navigation link: Key Performance Indicators", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 71
-testRunner.And("I confirm the WERCSLink Product Lookup page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink Key Performance Indicators page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 72
-testRunner.And("I click the side bar navigation link: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the side bar navigation link: Recent Activities", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
-testRunner.And("I confirm the WERCSLink: Services page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the WERCSLink Recent Activities page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
+testRunner.And("I click the side bar navigation link: Product Lookup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
+testRunner.And("I confirm the WERCSLink Product Lookup page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 76
+testRunner.And("I click the side bar navigation link: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
+testRunner.And("I confirm the WERCSLink: Services page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
 testRunner.And("I click the side bar navigation link: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -232,10 +240,10 @@ testRunner.And("I click the side bar navigation link: Services", ((string)(null)
                         "Branded Materials"});
             table2.AddRow(new string[] {
                         "WERCS Studio"});
-#line 75
+#line 79
 testRunner.And("I confirm the following sub links are displayed below the WERCSLink menu item: Se" +
                     "rvices:", ((string)(null)), table2, "And ");
-#line 81
+#line 85
 testRunner.Given("I click the link: WERCSmart below the WERCSLink menu item: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -244,30 +252,30 @@ testRunner.Given("I click the link: WERCSmart below the WERCSLink menu item: Ser
                         "My Products"});
             table3.AddRow(new string[] {
                         "Register new product"});
-#line 82
+#line 86
 testRunner.And("I confirm the following links are displayed below menu item: Services and sub ite" +
                     "m WERCSmart", ((string)(null)), table3, "And ");
-#line 86
+#line 90
 testRunner.Given("I click the link: Self-Service Authoring below the WERCSLink menu item: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Link"});
             table4.AddRow(new string[] {
                         "Authoring"});
-#line 87
+#line 91
 testRunner.And("I confirm the following links are displayed below menu item: Services and sub ite" +
                     "m Self-Service Authoring", ((string)(null)), table4, "And ");
-#line 90
+#line 94
 testRunner.Given("I click the link: Branded Materials below the WERCSLink menu item: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Link"});
             table5.AddRow(new string[] {
                         "Branded Materials"});
-#line 91
+#line 95
 testRunner.And("I confirm the following links are displayed below menu item: Services and sub ite" +
                     "m Branded Materials", ((string)(null)), table5, "And ");
-#line 94
+#line 98
 testRunner.Given("I click the link: WERCS Studio below the WERCSLink menu item: Services", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -280,12 +288,12 @@ testRunner.Given("I click the link: WERCS Studio below the WERCSLink menu item: 
                         "Studio Home"});
             table6.AddRow(new string[] {
                         "Mappings"});
-#line 95
+#line 99
 testRunner.And("I confirm the following links are displayed below menu item: Services and sub ite" +
                     "m WERCS Studio", ((string)(null)), table6, "And ");
-#line 101
+#line 105
 testRunner.And("I click the side bar navigation link: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 102
+#line 106
 testRunner.And("I should see the WERCSLink dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -293,67 +301,69 @@ testRunner.And("I should see the WERCSLink dashboard", ((string)(null)), ((TechT
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[52993] Message Center - layout")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22183")]
         public virtual void _52993MessageCenter_Layout()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52993] Message Center - layout", null, ((string[])(null)));
-#line 110
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52993] Message Center - layout", null, new string[] {
+                        "TReVorId:22183"});
+#line 115
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 111
+#line 116
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 112
+#line 117
 testRunner.Given("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 113
+#line 118
 testRunner.And("I confirm the WERCSLink: Dashboard page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Widget"});
             table7.AddRow(new string[] {
                         "Message Center"});
-#line 114
+#line 119
 testRunner.And("I confirm the following widget panels are displayed on the Dashboard page:", ((string)(null)), table7, "And ");
-#line 117
+#line 122
 testRunner.And("I confirm that the drop down button with three dots is displayed for dashboard wi" +
                     "dget: Message Center", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 118
+#line 123
 testRunner.And("I click the drop down button with three dots for dashboard widget: Message Center" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 119
+#line 124
 testRunner.And("I confirm that the \'Remove\' drop down item is displayed for widget: Message Cente" +
                     "r", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 120
-testRunner.And("I click the drop down button with three dots for dashboard widget: Message Center" +
-                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 121
-testRunner.And("I confirm that the \'Remove\' drop down item is not displayed for widget: Message C" +
-                    "enter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 122
-testRunner.And("I Confirm the \'Enter WPS ID or Product Name\' filter input is displayed in the Mes" +
-                    "sage Center widget", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 125
 testRunner.And("I click the drop down button with three dots for dashboard widget: Message Center" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 126
+testRunner.And("I confirm that the \'Remove\' drop down item is not displayed for widget: Message C" +
+                    "enter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 127
+testRunner.And("I Confirm the \'Enter WPS ID or Product Name\' filter input is displayed in the Mes" +
+                    "sage Center widget", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 130
+testRunner.And("I click the drop down button with three dots for dashboard widget: Message Center" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 131
 testRunner.And("I click the \'Remove\' drop down item for widget: Message Center", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Widget"});
             table8.AddRow(new string[] {
                         "Message Center"});
-#line 127
-testRunner.And("I confirm the following widget panels are not displayed on the Dashboard page:", ((string)(null)), table8, "And ");
-#line 130
-testRunner.And("I click the side bar navigation link: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 131
-testRunner.And("I click the link: Reset Dashboard below the WERCSLink menu item: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 132
+testRunner.And("I confirm the following widget panels are not displayed on the Dashboard page:", ((string)(null)), table8, "And ");
+#line 135
+testRunner.And("I click the side bar navigation link: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 136
+testRunner.And("I click the link: Reset Dashboard below the WERCSLink menu item: Dashboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 137
 testRunner.And("I confirm the WERCSLink: Dashboard page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Widget"});
             table9.AddRow(new string[] {
                         "Message Center"});
-#line 133
+#line 138
 testRunner.And("I confirm the following widget panels are displayed on the Dashboard page:", ((string)(null)), table9, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -361,19 +371,21 @@ testRunner.And("I confirm the following widget panels are displayed on the Dashb
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[52995] KPIs - Defaults")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22184")]
         public virtual void _52995KPIs_Defaults()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52995] KPIs - Defaults", null, ((string[])(null)));
-#line 141
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[52995] KPIs - Defaults", null, new string[] {
+                        "TReVorId:22184"});
+#line 147
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 142
+#line 148
 testRunner.Given("I call Shared Step 29665 - Login to WSW as ULSC user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 143
+#line 149
 testRunner.Given("I call Shared Step 29148 - Login to ULSC as an Administrator User", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 144
+#line 150
 testRunner.And("I click the side bar navigation link: Key Performance Indicators", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 145
+#line 151
 testRunner.And("I confirm the WERCSLink: Key Performance Indicators page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -390,23 +402,23 @@ testRunner.And("I confirm the WERCSLink: Key Performance Indicators page has loa
                         "RUs by Category by Retailer"});
             table10.AddRow(new string[] {
                         "Subscription Status"});
-#line 146
+#line 152
 testRunner.And("I confirm the following widget panels are displayed on the Key Performance Indica" +
                     "tors page:", ((string)(null)), table10, "And ");
-#line 154
+#line 160
 testRunner.And("I confirm that the: Products by Retailer and Status dashboard widget contains a p" +
                     "ie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 155
+#line 161
 testRunner.And("I confirm that the: RUs by Category dashboard widget contains a pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 156
+#line 162
 testRunner.And("I confirm that the: Products by Recertification Reason dashboard widget contains " +
                     "a bar chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 157
+#line 163
 testRunner.And("I confirm that the: Products by RU dashboard widget contains a bar chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 158
+#line 164
 testRunner.And("I confirm that the: RUs by Category by Retailer dashboard widget contains a pie c" +
                     "hart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 159
+#line 165
 testRunner.And("I confirm that the Subscription Status widget displays centered heading with text" +
                     ": Coming Soon...", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

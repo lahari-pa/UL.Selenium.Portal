@@ -93,62 +93,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		//Valid Actions: Details, Desctivate, Reset Password
+		//Valid Actions: Details, Deactivate, Reset Password
 		public bool ForUserClickAction(string username, string action)
 		{
 			var userAccountsDiv = this.containerElement.FindElement(By.XPath(".//div[@id='user-accounts-grid']"));
-
 			var listOfUsersRows = userAccountsDiv.FindElements(By.XPath(".//tbody/tr"));
-
-			List<string> listOfUsers = listOfUsersRows.Select(x => x.FindElement(By.XPath(".//td[1]")).Text).ToList();
-
+			var listOfUsers = listOfUsersRows.Select(x => x.FindElement(By.XPath(".//td[1]/span")).Text).ToList();
 			if (!listOfUsers.Contains(username))
 			{
 				Report.Error("Username: " + username + " does not show in the list. The full list is: " +
 											  string.Join(",", listOfUsers));
 				return false;
 			}
-
-			IWebElement actionsButtonTd =
-				(IWebElement)userAccountsDiv.FindElement(By.XPath(".//tbody/tr/td[contains(text(),'" + username + "')]"));
-			IWebElement actionsButton = (IWebElement)actionsButtonTd.FindElement(By.XPath("..//td//button"));
-
-			//IWebElement UserRow = ((IWebElement)ListOfUsersRows.Select(x => x.FindElements(By.XPath(".//td[1]")).FirstOrDefault(y => y.Text==username)));
-
-			//IWebElement ActionsButton = UserRow.FindElement(By.XPath(".//td[contains(@class, 'actions')]/button"));
-
-
-
-			if (actionsButton != null)
+			var actionsButtonTd = userAccountsDiv.FindElement(By.XPath(".//tbody/tr/td[./span[contains(text(),'" + username + "')]]"), 2);
+			if (actionsButtonTd == null)
 			{
-				actionsButton.ClickWithScroll();
-				Delay.Seconds(2);
+				var actionTds = userAccountsDiv.FindElements(By.XPath(".//tbody/tr/td[./span]"), 2);
+				actionsButtonTd = actionTds.First(x => x.Text.Replace(" ", "") == username.Replace(" ", ""));
 			}
-			else
+			var actionsButton = actionsButtonTd?.FindElement(By.XPath("..//td//button"), 2);
+			if (!actionsButton.TryClick())
 			{
-				Report.Error("Actions elipsis is not found");
+				Report.Error("Failed to click actions button!");
 				return false;
 			}
-
+			Report.Info("Clicked actions button");
 			//Actions drop down menu should now open
-
-			var dropDownMenu =
-				SeleniumBrowser.WebBrowser.FindElement(
-					By.XPath("//button[@aria-expanded='true']/following-sibling::ul[@class='dropdown-menu']"));
-
-			IWebElement actionLink = (IWebElement)dropDownMenu.FindElements(By.XPath("./li")).FirstOrDefault(x => x.Text == action);
-
-			if (actionLink != null)
+			var dropDownMenu = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@aria-expanded='true']/following-sibling::ul[@class='dropdown-menu']"), 2);
+			var actionLink = (IWebElement)dropDownMenu?.FindElements(By.XPath("./li")).FirstOrDefault(x => x.Text == action);
+			if (!actionLink.TryClick())
 			{
-				actionLink.ClickWithScroll();
-				Delay.Seconds(2);
-			}
-			else
-			{
-				Report.Error("Actions link is not found");
+				Report.Error("Failed to click action: " + action);
 				return false;
 			}
-
+			Report.Info("Clicked action: " + action);
 			return true;
 		}
 

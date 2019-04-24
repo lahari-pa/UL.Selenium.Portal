@@ -120,20 +120,20 @@ testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than 
 testRunner.Given("I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA" +
                     "), No(DSV), Yes(PLP), No(GNFR))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table446 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table446.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Chlorine",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 35
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table446, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table1, "Given ");
 #line 39
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 41
@@ -146,25 +146,25 @@ testRunner.Given("I click the List view retailers option in the Select Retailers
 #line 47
 testRunner.Then("I confirm that retailers are displayed in list view with checkboxes next to each", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table447 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table447.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "CVS"});
-            table447.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Staples"});
 #line 49
-testRunner.Given("I select the following retailers in the Select Retailers popup list view:", ((string)(null)), table447, "Given ");
+testRunner.Given("I select the following retailers in the Select Retailers popup list view:", ((string)(null)), table2, "Given ");
 #line 54
 testRunner.Given("I click Done in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table448 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table448.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "CVS"});
-            table448.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Staples"});
 #line 56
-testRunner.Then("The selected retailers on the Retailer page should be:", ((string)(null)), table448, "Then ");
+testRunner.Then("The selected retailers on the Retailer page should be:", ((string)(null)), table3, "Then ");
 #line 61
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase78933", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -201,20 +201,20 @@ testRunner.Given("I call Shared Step 57501 (Product Characteristics - More than 
 testRunner.Given("I call Shared Step 63860 (Additional Product Information - US, No(child), No(OSHA" +
                     "), No(DSV), Yes(PLP), No(GNFR))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table449 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table449.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Chlorine",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 84
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table449, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table4, "Given ");
 #line 88
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 90
@@ -229,12 +229,12 @@ testRunner.Then("I confirm that retailers are displayed in tile view with checkb
 #line 98
 testRunner.Given("In the \'Select Retailers\' window I select the retailer: Petco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table450 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table450.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Petco"});
 #line 100
-testRunner.Then("The selected retailers on the Retailer page should be:", ((string)(null)), table450, "Then ");
+testRunner.Then("The selected retailers on the Retailer page should be:", ((string)(null)), table5, "Then ");
 #line 104
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase78936", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -271,20 +271,20 @@ testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only
 testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table451 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table451.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Chlorine",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 124
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table451, "Given ");
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table6, "Given ");
 #line 128
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 130

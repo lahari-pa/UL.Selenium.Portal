@@ -105,10 +105,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public void Click_Forgotten_Password()
+		public bool Click_Forgotten_Password()
 		{
-			IList<IWebElement> listOfATags = this.containerElement.FindElements(By.XPath("//form[@class='login-form']//a"));
-			listOfATags.FirstOrDefault(x => x.Text == "Forgot your Password?").Click();
+			var listOfATags = this.containerElement.FindElements(By.XPath("//form[@class='login-form']//a"), 2);
+			return listOfATags.FirstOrDefault(x => x.Text == "Forgot Your Password?").TryClick();
 		}
 
 		public void Click_New_To_Wercsmart()
@@ -119,12 +119,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Email_Validation()
 		{
-			return this.containerElement.FindElement(By.XPath("//p[@id='loginEmail_error']//span"), 2).Text;
+			return this.containerElement.FindElement(By.XPath("//p[@id='loginEmail_error']//span"), 2)?.Text;
 		}
 
 		public string Password_Validation()
 		{
-			return this.containerElement.FindElement(By.XPath("//p[@id='loginPassword_error']//span"), 2).Text;
+			return this.containerElement.FindElement(By.XPath("//p[@id='loginPassword_error']//span"), 2)?.Text;
 		}
 
 	}
