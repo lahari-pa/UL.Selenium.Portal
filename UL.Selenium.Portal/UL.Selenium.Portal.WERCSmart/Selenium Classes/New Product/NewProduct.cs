@@ -229,7 +229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
-		public bool ClickContinue()
+		public bool ClickContinue(bool waitForLoadingBtnSpinner = true)
 		{
 			try
 			{
@@ -240,7 +240,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 				if (el.TryClick())
 				{
-					GeneralUtilities.WaitForRefreshToDisappear(el);
+					if (waitForLoadingBtnSpinner)
+					{
+						GeneralUtilities.WaitForRefreshToDisappear(el);
+					}
 					GeneralUtilities.Wait_for_load_finish();
 					var attempt = 0;
 					var ajax = true;
@@ -256,7 +259,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 							Report.Error("Ajax error was displayed! Clicking Close.");
 							GeneralUtilities.CloseAjaxPopup();
 							el.TryClick();
-							GeneralUtilities.WaitForRefreshToDisappear(el);
+							if (waitForLoadingBtnSpinner)
+							{
+								GeneralUtilities.WaitForRefreshToDisappear(el);
+							}
 							GeneralUtilities.Wait_for_load_finish();
 							attempt++;
 							Delay.Seconds(2);
