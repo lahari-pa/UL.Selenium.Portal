@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NTTQA_Automation_Classes.Base_Classes;
+using NTTQA_Automation_Classes.Classes;
+using NTTQA_Automation_Classes.Extension_Methods;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+
+namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
+{
+	class PasswordExpired : BaseObject
+	{
+		public const string BasePath = "//body[@class='login-body']";
+		[FindsBy(How = How.XPath, Using = BasePath)]
+		protected override IWebElement containerElement { get; set; }
+
+
+		public string TopMessage()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[@class='item active']/p"), 2)?.Text;
+		}
+
+		public string TopHeading()
+		{
+			return this.containerElement.FindElement(By.XPath(".//div[@class='item active']/h4"), 2)?.Text;
+		}
+
+		public string OriginalPassword
+		{
+			get => this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2)?.Text;
+			set => this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).EnterText(value);
+		}
+
+		public string NewPassword
+		{
+			get => this.containerElement.FindElement(By.XPath("//input[@id='newPassword']"), 2)?.Text;
+			set => this.containerElement.FindElement(By.XPath("//input[@id='newPassword']"), 2).EnterText(value);
+		}
+
+		public string VerifyPassword {
+			get => this.containerElement.FindElement(By.XPath("//input[@id='verifyPassword']"), 2)?.Text;
+			set => this.containerElement.FindElement(By.XPath("//input[@id='verifyPassword']"), 2).EnterText(value);
+		}
+
+		public bool ClickContinue()
+		{
+			return this.containerElement.FindElement(By.XPath("//a[@type='button' and @id='carouselContinue']"), 2).TryClick();
+		}
+
+		public bool ClickLogin()
+		{
+			return this.containerElement.FindElement(By.XPath("//a[@type='button' and @id='corouselLogin']"), 2).TryClick();
+		}
+
+	}
+}

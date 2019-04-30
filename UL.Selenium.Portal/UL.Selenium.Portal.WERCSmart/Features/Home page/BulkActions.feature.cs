@@ -112,21 +112,21 @@ namespace UL.Selenium.Portal.WERCSmart.Features.HomePage
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56223] Bulk Actions - Forward Product Registration navigation", null, new string[] {
                         "TReVorId:18968"});
-#line 23
+#line 24
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 25
+#line 26
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 27
+#line 28
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 29
+#line 30
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
+#line 32
 testRunner.And("I click Forward Product Registration in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
+#line 34
 testRunner.Then("I should see the header: Forward Product Registration on the Forward Product Regi" +
                     "stration window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 35
+#line 36
 testRunner.And("I should see the subheading 3: Select Products & UPCs on the Forward Product Regi" +
                     "stration window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -140,23 +140,23 @@ testRunner.And("I should see the subheading 3: Select Products & UPCs on the For
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56224] Bulk Actions - Sync Products to WERCSLink navigation", null, new string[] {
                         "TReVorId:18970"});
-#line 39
+#line 40
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 41
+#line 42
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs ULSC Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 43
+#line 44
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 45
+#line 46
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 47
+#line 48
 testRunner.And("I click Sync Products in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 50
 testRunner.And("I should see the header: Sync Products to ULSC on the Sync Products to ULSC windo" +
                     "w", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
+#line 52
 testRunner.Then("I click on the cancel button on the ULSC Sync popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 53
+#line 54
 testRunner.And("I should see the Subheading Alerts in the main window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -169,18 +169,18 @@ testRunner.And("I should see the Subheading Alerts in the main window", ((string
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56225] Bulk Actions - Accept Documents navigation", null, new string[] {
                         "TReVorId:18972"});
-#line 56
+#line 57
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 58
+#line 59
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 60
+#line 61
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 62
+#line 63
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
+#line 65
 testRunner.And("I click Accept Documents in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
+#line 67
 testRunner.And("I should see the header: Document Acceptance on the Document Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -193,18 +193,18 @@ testRunner.And("I should see the header: Document Acceptance on the Document Acc
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56227] Bulk Actions  Delete Products navigation", null, new string[] {
                         "TReVorId:18973"});
-#line 69
+#line 70
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 71
+#line 72
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 73
+#line 74
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 75
+#line 76
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 77
+#line 78
 testRunner.And("I click Delete Products in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
+#line 80
 testRunner.And("I should see the header: Delete Active Products on the Delete Active Product wind" +
                     "ow", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -218,36 +218,36 @@ testRunner.And("I should see the header: Delete Active Products on the Delete Ac
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[74634] Forward Product Registration - Only can select product once", null, new string[] {
                         "TReVorId:18399"});
-#line 82
+#line 83
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 84
+#line 85
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 86
+#line 87
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 88
+#line 89
 testRunner.Given("I filter the products by: Sending to Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 90
+#line 91
 testRunner.Given("I save the list of Product IDs displayed on the page as: ProductInProgressList746" +
                     "34", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 92
+#line 93
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 94
+#line 95
 testRunner.Then("I should see a popup with header Bulk Actions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 96
+#line 97
 testRunner.Given("I click Forward Product Registration in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 98
+#line 99
 testRunner.Then("I should see the header: Forward Product Registration on the Forward Product Regi" +
                     "stration window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 100
+#line 101
 testRunner.And("I confirm the active Forward Product Registration tab is: Select Products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 102
+#line 103
 testRunner.Given("I select the product with ID saved as: ProductInProgressList74634 under the Selec" +
                     "t Products tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 122
+#line 123
 testRunner.And("I confirm I am unable to select the product with ID saved as: ProductInProgressLi" +
                     "st74634 under the Select Products tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 124
+#line 125
 testRunner.Given("I click the Home navigation icon and accept the alert popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -260,63 +260,63 @@ testRunner.Given("I click the Home navigation icon and accept the alert popup", 
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[76314] Forward Product - NR should Not Require UPC", null, new string[] {
                         "TReVorId:18974"});
-#line 127
+#line 128
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 129
+#line 130
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 131
+#line 132
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 133
+#line 134
 testRunner.Given("I filter the products by: Assessment in Progress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 135
+#line 136
 testRunner.Given("I save the list of Product IDs displayed on the page as: ProductInProgressList763" +
                     "14", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 137
+#line 138
 testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 139
+#line 140
 testRunner.Then("I should see a popup with header Bulk Actions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 141
+#line 142
 testRunner.Given("I click Forward Product Registration in the Bulk Actions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 143
+#line 144
 testRunner.Then("I should see the header: Forward Product Registration on the Forward Product Regi" +
                     "stration window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 145
+#line 146
 testRunner.And("I confirm the active Forward Product Registration tab is: Select Products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 147
+#line 148
 testRunner.Given("I select the product with ID saved as: ProductInProgressList76314 under the Selec" +
                     "t Products tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 149
+#line 150
 testRunner.Given("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 151
+#line 152
 testRunner.Then("I confirm the active Forward Product Registration tab is: Select Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 153
+#line 154
 testRunner.Given("in the Select Retailers tab under Forward Product Registration I select the retai" +
                     "ler: No Retailer/No UPC Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 155
+#line 156
 testRunner.Given("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 157
+#line 158
 testRunner.Then("I confirm the active Forward Product Registration tab is: Select UPCs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 159
+#line 160
 testRunner.Given("I select the first product under the Select UPCs tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 161
+#line 162
 testRunner.Given("I click the Add To No Retailer button under the Select UPCs tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 163
+#line 164
 testRunner.And("I select the UPC row: \'No UPC\'/ \'No Retailer\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 165
+#line 166
 testRunner.Given("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 167
+#line 168
 testRunner.Then("I confirm the active Forward Product Registration tab is: Product Results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 169
+#line 170
 testRunner.Given("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 171
+#line 172
 testRunner.Then("I confirm the active Forward Product Registration tab is: Review & Submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 173
+#line 174
 testRunner.Given("I select the true radio for the \'Are Statements True\' question under the Review a" +
                     "nd Submit tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 175
+#line 176
 testRunner.Given("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 179
+#line 180
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -324,11 +324,9 @@ testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.Spe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[76056] Bulk Actions- Include Subformat Column for Document List")]
-        [NUnit.Framework.CategoryAttribute("tfs_design")]
         public virtual void _76056BulkActions_IncludeSubformatColumnForDocumentList()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[76056] Bulk Actions- Include Subformat Column for Document List", null, new string[] {
-                        "tfs_design"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[76056] Bulk Actions- Include Subformat Column for Document List", null, ((string[])(null)));
 #line 182
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -367,6 +365,125 @@ testRunner.Given("I confirm the subformat type at the top of the document matche
 testRunner.Given("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 213
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[75321] Forward Product - Completed Status (NO Recert)")]
+        [NUnit.Framework.CategoryAttribute("ForwardProductRegistration")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22087")]
+        public virtual void _75321ForwardProduct_CompletedStatusNORecert()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[75321] Forward Product - Completed Status (NO Recert)", null, new string[] {
+                        "ForwardProductRegistration",
+                        "TReVorId:22087"});
+#line 217
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 218
+testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: TestC" +
+                    "ase75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 219
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 220
+testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 221
+testRunner.And("I filter the products by: Accepted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 222
+testRunner.And("I Confirm the Products shown display the Green Colour Status - which is the Accep" +
+                    "ted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 223
+testRunner.And("I filter for the product saved as: TestCase75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 224
+testRunner.And("I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 225
+testRunner.Then("I should see the header: Forward Product Registration on the Forward Product Regi" +
+                    "stration window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 226
+testRunner.And("I enter the text: saved as TestCase75321 in the \'Search by WPS ID or Product Name" +
+                    "\' field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 227
+testRunner.And("In the Foward Product Registration Screen I should see product: saved as TestCase" +
+                    "75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 228
+testRunner.And("In the Foward Product Registration Screen I Select the product: saved as TestCase" +
+                    "75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 229
+testRunner.And("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 231
+testRunner.And("In the Forward Product Registration Screen I select a retailer under Other Retail" +
+                    "ers and save as TestCase75321Retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 232
+testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 233
+testRunner.And("[Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any missing d" +
+                    "ata and select 1 UPC - Continue]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 234
+testRunner.And("I The \'Product Results Tab\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 235
+testRunner.And("I Confirm that the UPC Number displays the recently selected \"Retailer\"(Step 17)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 236
+testRunner.And("I Confirm that NO Errors display for the Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 237
+testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 238
+testRunner.And("I The \'Review and Submit\' step is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 239
+testRunner.And("I Select the \"All of the above statements are true\" Radio Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 240
+testRunner.And("I Click \'CONTINUE\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 241
+testRunner.And(@"I Confirm the Purchase Summary page is shown with the success message shown"" Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.  """, ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 242
+testRunner.And("I Click on the \'HOME BUTTON\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 243
+testRunner.And("I In SHA Manager", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 244
+testRunner.And("I In the shared step below search for your product using the WPS ID you noted ear" +
+                    "lier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 245
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
+                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 246
+testRunner.And("I Confirm the Product shows a \"Completed Status\" for the Original Retailer(see Cl" +
+                    "ients column)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 247
+testRunner.And("I Confirm the Productshows a \"Submitted Status\" for the recently selected Retaile" +
+                    "r (see clients column)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 248
+testRunner.And("[Shared Step 75309 - SHA > Select Product > UPC List]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 249
+testRunner.And("I With the SHA Manager Product UPC window open - Click on the \'maximize\' icon to " +
+                    "expand the view of the window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 250
+testRunner.And("I Confirm the recently added Retailer(s)is (are) shown against the UPC you select" +
+                    "ed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 251
+testRunner.And("I Close the SHA Manager Product UPC window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 252
+testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
+                    "uct data for product saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 253
+testRunner.And("I In the shared step below search for the Product you are working with", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 254
+testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in (.*) Status for saved " +
+                    "as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 255
+testRunner.And("I Confirm the Product shows the ORIGINAL RETAILER(s) with a \"Completed Status\" (s" +
+                    "ee the Clients column)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 256
+testRunner.And("I Confirm the Product shows theNEW RETAILER(s) with an \"Accepted Status\" (see the" +
+                    " Clients column)Note: if you selected a retailer that does not have a feed assoc" +
+                    "iated to it you will see the product in Completed status for this retailer)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 257
+testRunner.And("I In the Shared Step below - Select the Product with the \"Accepted Status\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 258
+testRunner.And("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
+                    " saved as: (.*))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 259
+testRunner.And("I Confirm the Product now shows a \"Completed\" Status in Completed for ALL associa" +
+                    "ted Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

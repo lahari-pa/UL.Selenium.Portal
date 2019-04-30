@@ -12,7 +12,7 @@
 
 Feature: Flow 29 - Beverage
 
-
+@tfs_design
 Scenario: [60694] Wine - RU001418
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -55,8 +55,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
 
-
-@tfs_design
+# no product characteristics step has been added to the test case!
 #Retailers section needs to be confirmed!
 Scenario: [60695] Juice and Juice Drinks - RU001413
 
