@@ -20,32 +20,42 @@ Feature: Subscription
 @TReVorId:19117
 Scenario: [63297] Add subscription to a new supplier through data entry
 Given I define the user: 63297 with the following parameters:
-| Field                | Value          |
-| Email                | User_<random>  |
-| Country              | UNITED STATES  |
-| FirstName            | Richard        |
-| LastName             | Smith          |
-| Password             | Pa4*ytuufnn    |
-| Address1             | Address 1      |
-| Address2             | Address 2      |
-| City                 | City Name      |
-| State                | Florida        |
-| Zip                  | 999            |
-| CompanyName          | Company 1      |
-| CompanyPhone         | 123-456-7889   |
-| EmergencyPhoneNumber | 123-456-7789   |
-| SupplierType         | Manufacturer   |
-| PhoneQuestion         | PhoneQuestion   |
-| PhoneHint             | PhoneHint       |
-| MentorQuestion          | MentorQuestion    |
-| MentorHint              | MentorHint        |
-| FriendQuestion       | FriendQuestion |
-| FriendHint           | FriendHint     |
-| AnimalQuestion          | AnimalQuestion    |
-| AnimalHint              | AnimalHint        |
-| CollegeQuestion       | CollegeQuestion |
-| CollegeHint           | CollegeHint     |
-| Pin                  | 1234           |
+| Field                | Value           |
+| Email                | User_<random>   |
+| Country              | UNITED STATES   |
+| FirstName            | Richard         |
+| LastName             | Smith           |
+| Password             | Pa4*ytuufnn     |
+| Address1             | Address 1       |
+| Address2             | Address 2       |
+| City                 | City Name       |
+| State                | Florida         |
+| Zip                  | 999             |
+| CompanyName          | Company 1       |
+| CompanyPhone         | 123-456-7889    |
+| EmergencyPhoneNumber | 123-456-7789    |
+| SupplierType         | Manufacturer    |
+| CityQuestion         | CityQuestion    |
+| CityHint             | CityHint        |
+| CarQuestion          | CarQuestion     |
+| CarHint              | CarHint         |
+| FriendQuestion       | FriendQuestion  |
+| FriendHint           | FriendHint      |
+| JobQuestion          | JobQuestion     |
+| JobHint              | JobHint         |
+| MascotQuestion       | MascotQuestion  |
+| MascotHint           | MascotHint      |
+| PhoneQuestion        | PhoneQuestion   |
+| PhoneHint            | PhoneHint       |
+| MentorQuestion       | MentorQuestion  |
+| MentorHint           | MentorHint      |
+| FriendQuestion       | FriendQuestion  |
+| FriendHint           | FriendHint      |
+| AnimalQuestion       | AnimalQuestion  |
+| AnimalHint           | AnimalHint      |
+| CollegeQuestion      | CollegeQuestion |
+| CollegeHint          | CollegeHint     |
+| Pin                  | 1234            |
 
 Given I save the current emails in the inbox for user saved as: 63297
 #Given I click on the New to WERCSmart Link
@@ -143,15 +153,15 @@ And In the Subscription Enrollment screen I confirm that under the Premium Plan 
 | Transportation Classification Regulatory Support | Avoid potential delays and pitfalls by relying on UL's regulatory experts to provide information and insights into your transportation classifications. You may be eligible for exemptions and exceptions that will save you money and get your products on the store shelves faster.                                                                                                                         |
 | Waste Classification Regulatory Support          | Many retailers are now passing the costs of hazardous waste disposal on to manufacturers like you! Understanding hazardous waste classification requirements and the basis for your products classifications is more important than ever. Rely on UL's regulatory experts to review and provide guidance to minimize your costs.                                                                              |
 | VOC Classification Regulatory Support            | Regulations around VOC are growing in size and complexity. Our regulatory experts will work with you to ensure your organizations products are compliant in the markets you serve.                                                                                                                                                                                                                            |
-| Draft OSHA-Compliant Safety Data Sheet           | Elect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved format for each of your active products.                                                                                                                                                                                                                                                                                          |
+| Draft OSHA-Compliant Safety Data Sheet           | Elect to have an OSHA-compliant GHS Safety Data Sheet(SDS) in a UL-approved format for each of your active products.                                                                                                                                                                                                                                                                                         |
 
 And In the Subscription Enrollment screen I confirm that under the Standard Plan I see the following items and further details
-| Item                      | Further details                                                                                                                                                                                                                                                                                                                              |
-| Bronze Agent Support Plan | In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform. |
+| Item                      | Further details                                                                                                                                                                                                                                                                                                                                           |
+| Bronze Agent Support Plan | Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services. |
 
 And In the Subscription Enrollment screen I confirm that under the Limited Plus Plan I see the following items and further details
-| Item                            | Further details                                                                                                                                                                                                                                                                                                                                           | Link text  | Link url                   |
-| PurView Sustainability Platform | Enjoy the benefits of having a dedicated account agent, with technical expertise, to assist with answering questions related to product registrations, holds, re-certifications and updates. On the next screen, you will be able to upgrade to Silver or Gold Agent Support Services for additional data entry, advanced reporting and liaison services. | Learn More | https://www.ulpurview.com/ |
+| Item                            | Further details                                                                                                                                                                                                                                                                                                                              | Link text  | Link url                  |
+| PurView Sustainability Platform | In addition to managing data for purposes of retailer regulatory compliance needs, retailer mandated sustainability reporting obligations are growing in number throughout the retail community. Avoid having to enter the same data in multiple places by electing to have your WERCSmart product data shared with the UL PurView platform. | Learn More | https://www.ulpurview.com |
 
 And In the Subscription Enrollment screen I confirm that under the Limited Plan I see the following items and further details
 | Item                         | Further details                                                                                                                                                                                                                                                                                              |
@@ -291,7 +301,6 @@ Then In the Payment Methods screen I enter Credit Card details
 | Visa      | 4111 1111 1111 1111 | 08               | 2028            | 1111 | test            |
 Then In the Payment Methods screen I click Continue
 #Purchase Summary
-Then the Purchase Summary should be loaded
 Then In the Purchase Summary screen I check the Subscription Billing header is correct
 Then In the Purchase Summary screen I confirm the Yearly Radio Option is selected
 Then In the Purchase Summary screen I confirm the column headings are correct: Plan Selected, Service Date, Amount

@@ -44,3 +44,23 @@ And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for sa
 And I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: ProductSetup64530
 And I confirm the list of UPCs saved as: TestCase73424UPCs is displayed in the SHA Manager Product UPC list
 And I close the window that opened
+
+@TReVorId:11377
+Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+Then The home screen should load
+Then I click the Register New Product icon in the Navigation Pane
+And I Select the Create a New Registration radio button
+And in the New Product page I click Continue
+And In the Product Type tab of the New Product Page, I enter: Soap63663 in the Product Name text field
+And In the Product Type tab of the New Product Page, I enter: Soap (Bar, Liquid) for Body in the Type of Product select field
+And in the New Product page I click Continue
+Then I save the product information as: TestCase63663
+And I set the Primary Physical State to be: Solid
+And I set the Secondary Physical State to be: Solid
+And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
+And I set the Select the best Water Solubility description to be: Very soluble
+And in the New Product page I click Continue
+Given I navigate to the home page
+Then I delete the product: TestCase63663

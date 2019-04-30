@@ -109,14 +109,16 @@ testRunner.Given("I update the password for the following TReVor test users:", (
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Reset password for TReVor test user accounts")]
         [NUnit.Framework.CategoryAttribute("TrevorUsers")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22135")]
         public virtual void ResetPasswordForTReVorTestUserAccounts()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Reset password for TReVor test user accounts", null, new string[] {
-                        "TrevorUsers"});
-#line 20
+                        "TrevorUsers",
+                        "TReVorId:22135"});
+#line 21
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 22
+#line 23
 testRunner.Given("I update the password for all TReVor Test Users within the current branch", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();

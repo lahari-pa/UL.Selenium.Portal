@@ -350,6 +350,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
+		// Use when expecting a pop up on click continue - we don't want to wait for the timeout on ClickContinue
+		[StepDefinition(@"I click continue in the new product page - don't wait for loading button spinner")]
+		public void NewProductPageIClickContinueNoSpinnerWait()
+		{
+			Report.Info("Clicking Continue");
+			Report.IsTrue(new NewProduct().ClickContinue(false), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
+		}
+
 		[StepDefinition(@"I save the product information as: (.*)")]
 		public void SaveProductInformation(string savedas)
 		{
