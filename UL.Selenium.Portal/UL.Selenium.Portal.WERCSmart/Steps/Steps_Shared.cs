@@ -1610,8 +1610,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Liquid Core Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57507 \(Transportation Details 1- Not Regulated - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57507 \(Transportation Details 1- Not Regulated - Continue - Happy Path\)")]
 		public void ICallSharedTransportationDetails1_NotRegulated()
 		{
 			TestReport.UseSubSteps = true;
@@ -1656,8 +1655,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product is Regulated for Transport");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57502 \(Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57502 \(Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path\)")]
 		public void ICallSharedAdditionalProductInformation_PesticideAndChildShown_USOnly_NoToEverythingElse()
 		{
 			TestReport.UseSubSteps = true;
@@ -1754,8 +1752,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue\)")]
+		[StepDefinition(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue\)")]
 		public void ICallSharedProductCharacteristics_MoreThanOneState_SelectSolid_StateAndSubcat_MixedAndWater_Random()
 		{
 			TestReport.UseSubSteps = true;
@@ -1857,8 +1854,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenIShouldSeeXPage("Regulatory Information 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57637 \(Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
 		{
 			TestReport.UseSubSteps = true;
@@ -1879,8 +1875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 29206 \(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 29206 \(Retailer - Select No Retailer - Click Done - Click Continue - Happy Path\)")]
 		public void ICallSharedRetailer_SelectNoRetailer_ClickDone()
 		{
 			TestReport.UseSubSteps = true;
@@ -1891,16 +1886,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I should see the Retailer Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Retailer");
 			TestReport.StartStep("In the Retailer page I click Continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Retailer");
-
+			MyStepsNewProduct.NewProductPageIClickContinueNoSpinnerWait();
 			/* --As per TFS70787 warning popup displays for NR  --- */
-			//Delay.Seconds(1);
 			TestReport.StartStep("In the UPCs Warning popup I click Ok");
-			WarningPopup.ClickOk();
+			new Steps_Retailer().IfISeeUpcWarningPopupClickOk();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 59042 \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
+		[StepDefinition(@"I call Shared Step 59042 \(Browse for File > select > click Open - Happy Path\) for document type: (.*) and file: (.*)")]
 		public void ICallSharedBrowseForFileSelectClickOpen(string type, string pdfFile)
 		{
 			TestReport.UseSubSteps = true;
@@ -1910,8 +1902,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60533 \(Additional Documents to Provide - Flash Point and Product Label only\) : (.*)")]
+		[StepDefinition(@"I call Shared Step 60533 \(Additional Documents to Provide - Flash Point and Product Label only\) : (.*)")]
 		public void ICallSharedAdditionalDocumentsToProvide_FlashPointAndProductLabelOnly(string docPath)
 		{
 			TestReport.UseSubSteps = true;
@@ -1926,8 +1917,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 62678 \(Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path\)")]
+		[StepDefinition(@"I call Shared Step 62678 \(Additional Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path\)")]
 		public void ICallSharedAdditionalProductInformationUSAndCanadaNoChildNoOSHANoDirectShipNoPLNoNGFR_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2017,8 +2007,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 58189 \(Answer Electronic Equipment questions - With Cathode Ray - No to all\)")]
+		[StepDefinition(@"I call Shared Step 58189 \(Answer Electronic Equipment questions - With Cathode Ray - No to all\)")]
 		public void SharedAnswerElectronicEquipmentQuestions_WithCathodeRay_NoToAll()
 		{
 			TestReport.UseSubSteps = true;
@@ -2094,8 +2083,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 65511 \(Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
+		[StepDefinition(@"I call Shared Step 65511 \(Additional Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path \(use in a BCP\)\)")]
 		public void ICallSharedAdditionalProductInformation_NoChildNoDirectShipNoPLClickContinue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2120,8 +2108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57503 \(Regulatory Information 1- TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57503 \(Regulatory Information 1- TSCA\(Random\) - Prop 65\(No\) - Continue - Happy Path\)")]
 		public void ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2147,8 +2134,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 59927 \(Primary Physical State > Solid only available – Without Water Solubility question\)")]
+		[StepDefinition(@"I call Shared Step 59927 \(Primary Physical State > Solid only available – Without Water Solubility question\)")]
 		public void SharedPrimaryPhysicalStateSolidOnlyAvailable_WithoutWaterSolubilityQuestion()
 		{
 			TestReport.UseSubSteps = true;
@@ -2166,8 +2152,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Physical Properties");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity \) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
+		[StepDefinition(@"I call Shared Step 60826 \(Enter Universal Product Code \(UPC\) - Battery - Confirm Quantity \) for UPC saved as: UPC(.*) with container type: (.*) size: (.*) and quantity: (.*)")]
 		public void SharedEnterUniversalProductCodeUPC_Battery_ConfirmQuantity(string upc, string containerType,
 			string size, string quantity)
 		{
@@ -2348,8 +2333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		// Duplicate of Shared step 60026
-		[StepDefinition(
-			@"I call Shared Step 65493 \(Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue\)")]
+		[StepDefinition(@"I call Shared Step 65493 \(Additional Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue\)")]
 		public void SharedAdditionalProductInformation_USOnly_BatteryIsPackedForRetailSales_NoElse()
 		{
 			TestReport.UseSubSteps = true;
@@ -2456,8 +2440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyNewProductSteps.SelectFirstOptionInSection("Secondary Physical State");
 			}
 
-			TestReport.StartStep(
-				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
@@ -2496,8 +2479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Pesticide Details");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57508 \(VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all States - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57508 \(VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all States - Continue - Happy Path\)")]
 		public void SharedVOCSCAQMDCanada_YesLowSolidYesApplyToAllStates_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2522,8 +2504,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("VOC SCAQMD/Canada");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57798 \(Additional Product Information- Pesticide, Canada Only - No to everything else, Continue\)")]
+		[StepDefinition(@"I call Shared Step 57798 \(Additional Product Information- Pesticide, Canada Only - No to everything else, Continue\)")]
 		public void SharedAdditionalProductInformation_Pesticide_CanadaOnly_NoToAll_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2598,8 +2579,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 2");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 60933 \(Additional Documents to Provide - Product Label and OSHA SDS only\)")]
+		[StepDefinition(@"I call Shared Step 60933 \(Additional Documents to Provide - Product Label and OSHA SDS only\)")]
 		public void SharedAdditionalDocumentsToProvide_ProductLabelAndOSHASDSOnly()
 		{
 			TestReport.UseSubSteps = true;
@@ -2657,8 +2637,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			WarningPopup.ClickOk();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 73629 \(Product Characteristics - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
+		[StepDefinition(@"I call Shared Step 73629 \(Product Characteristics - Liquid - select any options\(enter pH, boiling point, flash point\)\)")]
 		public void ICallSharedStepProductCharacteristicsWithBoilingPointPHFlashPoint(Table table)
 		{
 			TestReport.UseSubSteps = true;
@@ -2704,8 +2683,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 73748 \(Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
+		[StepDefinition(@"I call Shared Step 73748 \(Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer\)")]
 		public void GivenICallSharedStepAdditionalProductInformation_WithMarketedForUseByAChild_OSHA_PrivateLabel()
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -2754,8 +2732,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Additional Product Information");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 70675 \(Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue\)")]
+		[StepDefinition(@"I call Shared Step 70675 \(Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue\)")]
 		public void SharedProductCharacteristics_LiquidOnly_WithWaterSolubility_EnterAllData_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -2792,8 +2769,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			myStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 62536 \(Transportation Details 2 > I do not ship internationally > Continue - Happy Path\)")]
 		public void SharedTransportationDetails2_DoNotShipInternationally_Continue()
 		{
 			TestReport.UseSubSteps = true;

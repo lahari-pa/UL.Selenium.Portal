@@ -179,6 +179,7 @@ Given I click continue on the Forward Product Registration page
 
 Given I navigate to the home page
 
+@TReVorId:22232
 Scenario: [76056] Bulk Actions- Include Subformat Column for Document List
 
 Given I login as the administrator
