@@ -169,39 +169,41 @@ testRunner.And("I should see for the login button: Login", ((string)(null)), ((T
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[50830] Validation - Error Messages")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:6881")]
         public virtual void _50830Validation_ErrorMessages()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50830] Validation - Error Messages", null, ((string[])(null)));
-#line 46
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50830] Validation - Error Messages", null, new string[] {
+                        "TReVorId:6881"});
+#line 47
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 9
 this.FeatureBackground();
-#line 48
-testRunner.Then("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 49
-testRunner.And("I ensure that the password input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 50
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And("I ensure that the password input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
-testRunner.Then("I should see the following error message for email: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 52
-testRunner.Given("I populate the email input field with: SeleniumAdmin01@thewercs.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 54
-testRunner.Then("I should see the following error message for password: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 55
-testRunner.Given("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 56
-testRunner.And("I populate the password input field with: incorrectpassword", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 58
 testRunner.Then("I should see the following error message for email: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 53
+testRunner.Given("I populate the email input field with: SeleniumAdmin01@thewercs.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 55
+testRunner.Then("I should see the following error message for password: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 56
+testRunner.Given("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
+testRunner.And("I populate the password input field with: incorrectpassword", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 59
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I should see the following error message for email: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 60
+testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 61
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -209,33 +211,35 @@ testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTa
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[50831] Account Lockout")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:6685")]
         public virtual void _50831AccountLockout()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50831] Account Lockout", null, ((string[])(null)));
-#line 63
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50831] Account Lockout", null, new string[] {
+                        "TReVorId:6685"});
+#line 65
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 9
 this.FeatureBackground();
-#line 65
-testRunner.Given("I popupate the email input field with credientials for account: AccountLockOut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 66
-testRunner.And("I populate the password input field with: aaaaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 67
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("I popupate the email input field with credientials for account: AccountLockOut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 68
-testRunner.Given("I populate the password input field with: bbbbb", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I populate the password input field with: aaaaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 69
 testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 70
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("I populate the password input field with: bbbbb", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 71
-testRunner.Given("I populate the password input field with: ccccc", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 72
 testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 73
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("I populate the password input field with: ccccc", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 74
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 75
+testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 76
 testRunner.Then("I should see a server error with message: Your account is locked and will unlock " +
                     "after 30 minutes.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
