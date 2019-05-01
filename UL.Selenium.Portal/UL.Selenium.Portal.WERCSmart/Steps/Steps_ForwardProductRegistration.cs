@@ -535,13 +535,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				listOfRetailers.Remove(itemToRemove);
 			}
 
-			Random rnd = new Random();
-			int index = rnd.Next(0, listOfRetailers.Count-1);
+			bool bSelected = false;
+			string selectedRetailer = "";
+			int i = 0;
+			while (i<5 && !bSelected)
+			{
+				Random rnd = new Random();
+				int index = rnd.Next(0, listOfRetailers.Count - 1);
+				try
+				{
+					if(selForwardProdReg.SelectOtherRetailer(listOfRetailers[index]))
+					{
+						selectedRetailer = listOfRetailers[index];
+						Report.Success("Selected retailer: " + selectedRetailer);
+						bSelected = true;
+					}
+				}
+				catch (Exception e)
+				{
+					Report.Info(e.Message);
+				}
 
-			Report.IsTrue(selForwardProdReg.SelectOtherRetailer(listOfRetailers[index]),
-				"Failed to select retailer: " + listOfRetailers[index], "Selected retailer: " + listOfRetailers[index]);
+				i++;
+			}
 
-			Context.AddToContext(saveAs, listOfRetailers[index]);
+
+			if (bSelected)
+			{
+				Context.AddToContext(saveAs, selectedRetailer);
+			}
+			else
+			{
+				throw new Exception("Failed to select a retailer");
+			}
+
+
 
 		}
 

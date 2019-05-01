@@ -131,97 +131,96 @@ namespace UL.Selenium.Portal.WERCSmart.Features
 #line 31
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 32
-testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: TestC" +
-                    "ase75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 33
-testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I save to context name: TestCase75321 and value: 1557473", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 34
-testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 35
-testRunner.And("I filter the products by: Accepted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
+testRunner.And("I filter the products by: Accepted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 37
 testRunner.And("I Confirm the Products shown display the Green Colour Status - which is the Accep" +
                     "ted by Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
-testRunner.And("I filter for the product saved as: TestCase75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 38
-testRunner.And("I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I filter for the product saved as: TestCase75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
+testRunner.And("I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 40
 testRunner.Then("I should see the header: Forward Product Registration on the Forward Product Regi" +
                     "stration window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 40
+#line 41
 testRunner.And("I enter the text: saved as TestCase75321 in the \'Search by WPS ID or Product Name" +
                     "\' field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
+#line 42
 testRunner.And("In the Foward Product Registration Screen I should see product: saved as TestCase" +
                     "75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 42
+#line 43
 testRunner.And("In the Foward Product Registration Screen I Select the product: saved as TestCase" +
                     "75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 44
 testRunner.And("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 46
 testRunner.And("In the Forward Product Registration Screen I select a retailer under Other Retail" +
                     "ers and save as TestCase75321Retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
-testRunner.And("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 47
+testRunner.And("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 48
 testRunner.And("I call Shared Step 75140 - Forwarding - Select Products & UPCs step - Add Any mis" +
                     "sing data and select 1 UPC - Continue and save UPC as TestCase75321UPC", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
+#line 49
 testRunner.Then("I should see the header: Product Results on the Forward Product Registration wind" +
                     "ow", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 49
+#line 50
 testRunner.Then("I confirm that for UPC Number saved as TestCase75321UPC the retailer is displayed" +
                     " as saved as TestCase75321Retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 50
-testRunner.And("I confirm that NO Errors display for the Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
-testRunner.And("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that NO Errors display for the Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
+testRunner.And("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
 testRunner.Then("I should see the header: Review & Submit on the Forward Product Registration wind" +
                     "ow", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 53
+#line 54
 testRunner.Then("I select the true radio for the \'Are Statements True\' question under the Review a" +
                     "nd Submit tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 54
-testRunner.And("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 55
+testRunner.And("I click continue on the Forward Product Registration page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 56
 testRunner.And("In the Purchase Summary screen I confirm the Purchase Summary header is displayed" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 57
 testRunner.Then(@"In the Purchase Summary screen I confirm the folling statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 60
-testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
+testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 62
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase75321)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
-testRunner.And("I Confirm the Product shows status: Completed for retailer: saved as retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
+testRunner.And("I Confirm the Product shows status: Completed for retailer: saved as retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
 testRunner.And("I Confirm the Product shows status: Submitted for retailer: saved as TestCase7532" +
                     "1Retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
+#line 67
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase75321)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
+#line 68
 testRunner.And("I call Shared Step 75309 (SHA > Select Product > UPC List) for product saved as: " +
                     "TestCase75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 69
 testRunner.And("In the SHA Manager Product UPC window I confirm that for UPC: saved as UPC75335 r" +
                     "etailer: saved as TestCase75321Retailer is showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
-testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 70
+testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 71
 testRunner.And("I call Shared Step 40657 (SHA Manager - Submitted - Select product > process prod" +
                     "uct data for product saved as: TestCase75321)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
+#line 80
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase75321)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
+#line 82
 testRunner.And("I Confirm the Product shows status: Completed for retailer: saved as retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 85
 testRunner.And("I Confirm the Product shows status: Accepted for retailer: saved as TestCase75321" +
                     "Retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -229,15 +228,15 @@ testRunner.And("I Confirm the Product shows status: Accepted for retailer: saved
                         "Retailer"});
             table1.AddRow(new string[] {
                         "saved as TestCase75321Retailer"});
-#line 86
+#line 87
 testRunner.Given("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
                     " saved as: TestCase75321) for", ((string)(null)), table1, "Given ");
-#line 89
+#line 90
 testRunner.And("I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved a" +
                     "s: TestCase75321)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 90
-testRunner.And("I Confirm the Product shows status: Completed for retailer: saved as retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 91
+testRunner.And("I Confirm the Product shows status: Completed for retailer: saved as retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 92
 testRunner.And("I Confirm the Product shows status: Completed for retailer: saved as TestCase7532" +
                     "1Retailer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

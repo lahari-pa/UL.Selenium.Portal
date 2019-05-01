@@ -29,7 +29,8 @@ Feature: Release Day
 @75321
 @TReVorId:22087
 Scenario: [75321] Forward Product - Completed Status (NO Recert)
-Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
+#Given I create a product and take to completed using Test Case 75335 and save as: TestCase75321
+Given I save to context name: TestCase75321 and value: 1557473
 Given I navigate to the landing page
 And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I filter the products by: Accepted by Retailers

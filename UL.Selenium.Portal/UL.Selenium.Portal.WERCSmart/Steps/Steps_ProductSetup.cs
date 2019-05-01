@@ -305,8 +305,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisGlobalSteps = new GlobalSteps();
 			thisGlobalSteps.NavigateToLandingPage();
 			// Log in to administrator role
-			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
-			thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//thisGlobalSteps.LoginToWERCSmartAdmin("WERCs Premium Subscription Account");
 			// Generate UPC number and delete duplicates
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
