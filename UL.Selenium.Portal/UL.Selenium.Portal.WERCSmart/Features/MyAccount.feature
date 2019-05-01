@@ -10,6 +10,7 @@
 
 Feature: MyAccount
 
+@TReVorId:22223
 Scenario: [61796] Account User Name in Header
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
@@ -71,6 +72,7 @@ Then The My Account user grid is currently on page number: 1
 
 
 
+@TReVorId:22224
 Scenario: [70511] Pagination (...) need an account with six pages of users
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account

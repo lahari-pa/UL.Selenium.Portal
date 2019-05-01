@@ -224,6 +224,7 @@ Then A Summary page should open in a new browser tab
 Then I should not seen an Accept button
 Given I close the browser tab with the Summary page
 
+@TReVorId:22227
 Scenario: [56219] My Products grid Actions - Documents navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then the WERCSmart homepage should load
