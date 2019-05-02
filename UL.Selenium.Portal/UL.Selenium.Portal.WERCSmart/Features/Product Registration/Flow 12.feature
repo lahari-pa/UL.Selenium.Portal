@@ -19,7 +19,7 @@ Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mixture, Blend, Formula or Solution from 3rd Party
+Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 Then I save the product information as: TestCase58430
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -33,7 +33,7 @@ Given I call Shared Step 60933 (Additional Documents to Provide - Product Label 
 Given in the Product's Aliases page I click Continue
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User added Comments Text 58430. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 Given I call Shared Step 58610 (Confirm Restrict Use - Restrict)
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula or Solution from 3rd Party
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 
 @TReVorId:16690

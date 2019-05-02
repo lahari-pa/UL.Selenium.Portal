@@ -20,12 +20,12 @@ Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU00
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 # ====== Just checks that the correct page loads ====== #
-Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
+#Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
 
 # ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
 Given I generate a random UPC number and save as: UPC60737
-Given I delete all products with UPC Number: saved as UPC60737
+#Given I delete all products with UPC Number: saved as UPC60737
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 
@@ -52,11 +52,11 @@ Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Contain
 Given I call Shared Step 60567 (Upload Product Label only) : C:\Dependencies\WERCSmart\testdoc.pdf
 
 # Additional Documents to Provide Page
-And I should see the Additional Documents to Provide Page
+#And I should see the Additional Documents to Provide Page
 Then in the Additional Documents to Provide page I click Continue
 
 # Optional Reports and Documents Available for Purchase Page
-And I should see the Optional Reports and Documents Available for Purchase Page
+#And I should see the Optional Reports and Documents Available for Purchase Page
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Comment Text
