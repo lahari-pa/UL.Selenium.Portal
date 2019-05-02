@@ -86,7 +86,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Propane       | 100     | false               | false       |            |
 
-Given in the New Product page I click Continue
+#Given in the New Product page I click Continue
 
 Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 
