@@ -112,7 +112,7 @@ testRunner.Given("I call Shared Step 57753 (Create a New Registration via Regist
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 22
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
-                    "duct): Mixture, Blend, Formula or Solution from 3rd Party", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "duct): Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 23
 testRunner.Then("I save the product information as: TestCase58430", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -161,7 +161,7 @@ testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the
 testRunner.Given("I call Shared Step 58610 (Confirm Restrict Use - Restrict)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixtu" +
-                    "re, Blend, Formula or Solution from 3rd Party", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "re, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 37
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase58430", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");

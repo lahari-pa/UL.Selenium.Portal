@@ -471,7 +471,8 @@ Scenario: [59322] Upload document - VOC exemption letter & VOC product label
 And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 # And I In the Shared step below select "Personal Fragrance Product (more than 20 percent fragrance)" as your product type
-And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): more than 20% fragrance
+And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Personal Fragrance Product (more than 20% fragrance) - Liquid
+Then I save the product information as: TestCase59322
 And I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solubility - Enter all data - Continue)
 And I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
@@ -500,5 +501,5 @@ And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Opt
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
-And I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance)
+And I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
 And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59322
