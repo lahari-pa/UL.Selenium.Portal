@@ -311,52 +311,53 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58297
 
-Scenario: [57088] Engine (motor) oil for Auto or Boat
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
-Then The home screen should load
-
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine (motor) oil for Auto or Boat
-
-Then I save the product information as: TestCase57088
-
-Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
-| Secondary Physical State | Specific Gravity | pH      | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used     | Select the best Water Solubility description |
-| Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
-
-Given I call Shared Step 73748 (Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
-
-Then I add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Water  | 100     | false               | false       |            |
-Given in the New Product page I click Continue
-
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-
-Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-
-Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-
-Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-
-Given in the Additional Documents to Provide page I click Continue
-
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
-
-Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-
-Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
-
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine (motor) oil for Auto or Boat
-
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
+#duplicate-
+#Scenario: [57088] Engine (motor) oil for Auto or Boat
+#
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+#
+#Then The home screen should load
+#
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#
+#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine (motor) oil for Auto or Boat
+#
+#Then I save the product information as: TestCase57088
+#
+#Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+#| Secondary Physical State | Specific Gravity | pH      | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used     | Select the best Water Solubility description |
+#| Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
+#
+#Given I call Shared Step 73748 (Additional Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
+#
+#Then I add the following ingredients:
+#| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+#| Water  | 100     | false               | false       |            |
+#Given in the New Product page I click Continue
+#
+#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+#
+#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+#
+#Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+#
+#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#
+#Given in the Additional Documents to Provide page I click Continue
+#
+#Given in the Optional Reports and Documents Available for Purchase page I click Continue
+#
+#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+#| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+#| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+#
+#Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test data
+#
+#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine (motor) oil for Auto or Boat
+#
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
 
 
 @TReVorId:11672
