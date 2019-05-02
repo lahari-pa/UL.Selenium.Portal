@@ -350,8 +350,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		// Use when expecting a pop up on click continue - we don't want to wait for the timeout on ClickContinue
 		[StepDefinition(@"I click continue in the new product page - don't wait for loading button spinner")]
+		// Use when expecting a pop up on click continue - we don't need to wait for the timeout on WaitForLoad
 		public void NewProductPageIClickContinueNoSpinnerWait()
 		{
 			Report.Info("Clicking Continue");
@@ -384,12 +384,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.IsTrue(selNewProduct.WaitForSection(page),
 					page + " is not showing when it was expected to",
 					page + " is showing as expected");
-				Report.Screenshot();
+				return;
 			}
-			else
-			{
-				Report.Failure("New product page was not found");
-			}
+			Report.Failure("New product page was not found");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I should see the Additional Information Page")]
@@ -419,140 +417,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				throw;
 			}
 		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page I add the following batteries:")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIAddTheFollowingBatteries(TechTalk.SpecFlow.Table table)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page I add the following batteries:");
-			try
-			{
-				List<Battery> listOfBatteries = new List<Battery>();
-				//| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
-				foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
-				{
-					Battery thisBattery = new Battery() {
-						BatteryType = thisRow["Battery Type"],
-						Manufacturer = thisRow["Manufacturer"],
-						NumberPerPackage = Convert.ToInt16(thisRow["Number of batteries per package"].Trim()),
-						RequiredToRun = Convert.ToInt16(thisRow["How many batteries required to run"].Trim())
-					};
-					listOfBatteries.Add(thisBattery);
-				}
-				var selNewProduct = new NewProduct();
-
-				if (listOfBatteries.Count > 0)
-				{
-					selNewProduct.Batteries = listOfBatteries;
-					selNewProduct.DeleteEmptyBatteryRows();
-				}
-				else
-				{
-					throw new Exception("There are no batteries to set");
-				}
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for DOT I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDotiSelect(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.Dot = option;
-
-			Report.IsTrue(selNewProduct.Dot == option,
-				"Failed to set battery packaged option: " + option,
-				"Successfully set battery packaged option: " + option);
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for IMDG I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForImdgiSelect(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.Imdg = option;
-
-			Report.IsTrue(selNewProduct.Imdg == option,
-				"Failed to set battery packaged option: " + option,
-				"Successfully set battery packaged option: " + option);
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for IATA I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIataiSelect(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.Iata = option;
-
-			Report.IsTrue(selNewProduct.Iata == option,
-				"Failed to set battery packaged option: " + option,
-				"Successfully set battery packaged option: " + option);
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for TDG I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForTdgiSelect(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.Tdg = option;
-
-			Report.IsTrue(selNewProduct.Tdg == option,
-				"Failed to set battery packaged option: " + option,
-				"Successfully set battery packaged option: " + option);
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIndicateHowBatteryIsPackagedISelectX(string option)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: " + option);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
-
-				selNewProduct.IndicateHowBatteryIsPackaged = option;
-
-				Report.IsTrue(selNewProduct.IndicateHowBatteryIsPackaged == option,
-					"Failed to set battery packaged option: " + option,
-					"Successfully set battery packaged option: " + option);
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for U\.S\. Toxic Substances Control Act \(TSCA\) status I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForU_S_ToxicSubstancesControlActTSCAStatusISelectOption(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.TscaStatus = option;
-
-			Report.IsTrue(selNewProduct.TscaStatus == option,
-				"Failed to set TSCA status: " + option,
-				"Successfully set TSCA status: " + option);
-		}
-
+		
 		[StepDefinition(@"In the Additional Information Page for Product is solely for the Retailer's use I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsSolelyForTheRetailerSUseISelectNoOrYes(string noOrYes)
 		{
@@ -3004,7 +2869,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Failed to enter additional requirements: " + additionalRequirements + " for retailer: " + retailer,
 				"Added additional requirements for retailer: " + retailer);
 		}
-		
+
 		//Item Description
 		[StepDefinition(@"in the Purchase Summary Screen I should see the following:")]
 		public void GivenInThePurchaseSummaryScreenIShouldSeeTheFollowing(Table table)

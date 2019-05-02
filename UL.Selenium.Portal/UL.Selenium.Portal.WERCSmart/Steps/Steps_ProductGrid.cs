@@ -553,6 +553,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
+		[StepDefinition("I generate a unique UPC number and save as: (.*)")]
+		public void GenerateUniqueUpcNumber(string savedAs)
+		{
+			var grid = new ProductsGrid();
+			for (var i = 0; i < 6; i++)
+			{
+				Report.Info("Generating upc attempt " + (i+1));
+				var uPCNo = GeneralFunctions.GenerateUPCNumber();
+				Report.Info("Generated UPC No: " + uPCNo);
+				Report.Info("Searching for generated upc number");
+				grid.UpcNumber = uPCNo;
+				Report.Info("Clicking search");
+				if (grid.ClickUpcNumberSearchButton())
+				{
+					if (grid.ProductsPresent())
+					{
+						continue;
+					}
+					Report.Success("Successfully generated a unique UPC number");
+					Context.AddToContext(savedAs, uPCNo);
+					return;
+				}
+				Report.Failure("Failed to click 'search' for UPC field");
+			}
+			Report.Failure("Failed to generate a unique UPC number after 5 attempts!");
+		}
+
+		[StepDefinition(@"I generate a random UPC number and save as: (.*) and (keep|delete) duplicate UPC products")]
+		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs, string keepOrDelete)
+		{
+			var delete = keepOrDelete == "delete";
+			TestReport.UseSubSteps = delete;
+			TestReport.StartStep("I generate a random UPC number and save as: " + savedAs);
+			this.GivenIGenerateARandomUPCNumberAndSaveAs(savedAs);
+			if (delete)
+			{
+				TestReport.StartStep("I delete all products with UPC Number: saved as " + savedAs);
+				this.DeleteAllProductsMatchingCriteria("UPC Number", "saved as " + savedAs);
+			}
+		}
+
 		[Given(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
@@ -560,6 +601,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, uPCNo);
 			Report.Info("Generated UPC No: " + uPCNo);
 		}
+
 
 		[StepDefinition(@"I delete all products with (UPC Number): (.*)")]
 		public void DeleteAllProductsMatchingCriteria(string option, string value)
