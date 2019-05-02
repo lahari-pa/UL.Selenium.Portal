@@ -1019,6 +1019,9 @@
       <LastGenOutput>[57203] Data Consent Tiers - Retailer Specific Behaviour.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <Content Include="ReportFiles\UL.Selenium.Portal.WERCSmart.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
