@@ -650,7 +650,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 
 		// Checks the running total of publically disclosed ingredients (eg. "1 / 3")
-
 		public string TransparencyScoreNumerator()
 		{
 			Report.Info("Beginning get Transparency score numerator");
@@ -850,8 +849,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[@class='public_disclosure']"), 2).FirstOrDefault() != null;
 
 		}
-
-
+		
 
 		public class Ingredient
 		{

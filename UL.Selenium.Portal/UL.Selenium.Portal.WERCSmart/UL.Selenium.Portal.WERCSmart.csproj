@@ -594,6 +594,7 @@
     <Compile Include="Selenium Classes\New Product\NewProduct.cs" />
     <Compile Include="Selenium Classes\New Product\PesticideDetailsState.cs" />
     <Compile Include="Selenium Classes\New Product\PesticideDetailsUS.cs" />
+    <Compile Include="Selenium Classes\New Product\ProductCharacteristics.cs" />
     <Compile Include="Selenium Classes\New Product\Retailer.cs" />
     <Compile Include="Selenium Classes\New Product\SelectRetailers.cs" />
     <Compile Include="Selenium Classes\NewUser.cs" />
@@ -641,6 +642,7 @@
     <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
+    <Compile Include="Steps\New Product\Steps_ProductCharacteristics.cs" />
     <Compile Include="Steps\New Product\Steps_Retailer.cs" />
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
     <Compile Include="Steps\Steps_Brands.cs" />

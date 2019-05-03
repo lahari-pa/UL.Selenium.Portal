@@ -101,7 +101,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 And I navigate to the MyAccount page
 And In the My Account screen I navigate to the My Library page
 And I navigate to the My Packaging Types tab in the My Library page
-And Save the top packaging id as MPI75034 if there are no packacking types listed add a new packing type as follows
+And Save the top packaging id as MPI75034 if there are no packaging types listed add a new packing type as follows
 | Name | Materials   | Weight | Contact with food or drink | CONEG Certificate | CONEG contain     | Recyclable Number | Email         |
 | test | Clear Glass | 60     | No                         | No                | None of the above | 2                 | test@test.com |
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)

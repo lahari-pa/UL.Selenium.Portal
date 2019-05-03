@@ -203,8 +203,7 @@ testRunner.And("in the Product Characteristics tab of the New Product Page, for 
                         "4",
                         "4"});
 #line 55
-testRunner.And("in the Product Characteristics tab of the New Product Page I add the following ba" +
-                    "tteries:", ((string)(null)), table1, "And ");
+testRunner.And("I add the following batteries:", ((string)(null)), table1, "And ");
 #line 59
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 60
