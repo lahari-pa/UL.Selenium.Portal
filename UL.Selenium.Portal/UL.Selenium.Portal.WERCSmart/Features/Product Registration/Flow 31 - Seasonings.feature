@@ -24,8 +24,10 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 
 # ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
-Given I generate a random UPC number and save as: UPC60737
+#Given I generate a random UPC number and save as: UPC60737
 #Given I delete all products with UPC Number: saved as UPC60737
+
+Given I generate a unique UPC number and save as: UPC60737
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 

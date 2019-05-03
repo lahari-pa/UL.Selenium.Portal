@@ -109,6 +109,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2).TryClick();
 		}
 
+		public bool MoreFiltersExpanded()
+		{
+			var el = this.containerElement.FindElement(By.XPath(".//a[contains(@class, 'btn') and contains(text(),'More Filters')]"), 2);
+			var expandedAttr = el?.GetAttribute("aria-expanded");
+			bool.TryParse(expandedAttr, out bool result);
+			return expandedAttr != null && result;
+		}
+
 		public bool ProductIdNameFieldPresent()
 		{
 			return this.containerElement.FindElement(By.XPath(".//input[@id='inputGroup']"), 2) != null;

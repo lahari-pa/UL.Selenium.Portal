@@ -186,21 +186,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I clear the Search Criteria")]
 		public void ClearSearchCriteria()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clearing Previous Search");
-			try
+			var selProdGrid = new ProductsGrid();
+			var expanded = selProdGrid.MoreFiltersExpanded();
+			if (!expanded)
 			{
-				Report.Info("Clearing Search Criteria");
-				var selProdGrid = new ProductsGrid();
-				selProdGrid.ProductIdField = "";
-				GeneralUtilities.Wait_for_load_finish();
-				Report.Success("Cleared Search Criteria");
-				Report.Screenshot();
+				Report.Info("More Filters was collapsed so expanding it");
+				selProdGrid.ClickMoreFilters();
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Clicking Clear");
+			selProdGrid.ClickClear();
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Info("Collapsing More Filters");
+			selProdGrid.ClickMoreFilters();
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I confirm the Delete Dialog")]
@@ -567,12 +565,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Clicking search");
 				if (grid.ClickUpcNumberSearchButton())
 				{
+					GeneralUtilities.Wait_for_load_finish();
+					Report.Info("Clicked search");
 					if (grid.ProductsPresent())
 					{
+						Report.Info("There were products in the grid!");
 						continue;
 					}
 					Report.Success("Successfully generated a unique UPC number");
 					Context.AddToContext(savedAs, uPCNo);
+					this.ClearSearchCriteria();
 					return;
 				}
 				Report.Failure("Failed to click 'search' for UPC field");
