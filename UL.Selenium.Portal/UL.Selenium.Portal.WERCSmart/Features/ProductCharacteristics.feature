@@ -62,7 +62,7 @@ And I should see following statement: Specific Gravity
 And I should see following statement: pH
 And I should see following statement: Boiling Point (in Celsius)
 And I should see following statement: Flash Point (in Celsius)
-And I should see following statement: Flash Point Testing Method Used
+#And I should see following statement: Flash Point Testing Method Used
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31827
 
 
@@ -80,7 +80,7 @@ And Specific Gravity should be showing the error messages: This is a required fi
 And pH should be showing the error messages: This is a required field.
 And Boiling Point (in Celsius) should be showing the error messages: This is a required field.
 And Flash Point (in Celsius) should be showing the error messages: This is a required field.
-And Flash Point Testing Method Used should be showing the error messages: This is a required field.
+#And Flash Point Testing Method Used should be showing the error messages: This is a required field.
 And Select the best Water Solubility description should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31833
 
