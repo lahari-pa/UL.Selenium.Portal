@@ -298,7 +298,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					throw new Exception("Page failed to load!");
 				}
 
-				var infoShowing = selRetailDetails.DoesNotRequireDataConsentInfo();
+				var infoShowing = selRetailDetails.DoesNotRequireDataConsentInfo().Replace("\r\n", " ");
 				Report.IsTrue(infoShowing == info,
 					"Tier information was showing: '" + infoShowing + "', but was expected to show: '" + info + "'",
 					"Tier information was showing: '" + info + "', as expected!");

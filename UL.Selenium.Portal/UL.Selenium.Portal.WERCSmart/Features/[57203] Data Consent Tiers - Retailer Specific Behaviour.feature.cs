@@ -402,8 +402,7 @@ testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((str
 #line 138
 testRunner.When("I select the retailer: TopCo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 139
-testRunner.And("I confirm that: This recipient does not require additional data consent tiers at " +
-                    "this time. is showing under the Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(@"I confirm that: TopCo requires suppliers of products to grant Tier 1 at this time. What are the Data Usage Tiers? Data Consent Tiers Accepted Tier 1: Regulatory Support By agreeing to the Terms of Use upon creation of the WERCSmart account, you agree that all registrations will comply with Data Tier 1 for Regulatory Support to the retail recipient for your product registrations. This option cannot be changed in any way. The Terms of Use designate Tier 1 as: Mandatory Consent. Any registered WERCSmart supplier of a product (a ""Direct Supplier"") is deemed to consent to providing Tier 1 Data Use - Regulatory Support (""Tier 1 Consent"") to any entity that sells, transports, stores or disposes of such Direct Supplier's product (each, a ""WERCSmart Recipient""). The WERCSmart platform provides Direct Suppliers with a current list of all WERCSmart Recipients as well as product-level information about which specific Recipients are in receipt of Tier 1 data. Any registered supplier that provides components to a Direct Supplier (a ""Third-Party Supplier"") is also deemed to provide Tier 1 Consent to WERCSmart Recipients. Use of the term ""Supplier(s)"" shall mean both Direct Suppliers and Third-Party Suppliers. is showing under the Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
