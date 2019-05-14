@@ -445,68 +445,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				throw;
 			}
 		}
-
-		[StepDefinition(@"I set all the metal presence value to: (Yes|No)")]
-		public void GivenISetAllTheMetalPresenceValueTo(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I set all the metal presence values to: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForMetalSection(30), "Metal section has failed to load.",
-					"Metal section has loaded");
-				List<string> metals = selNewProduct.GetAllMetalNames();
-				List<MetalPresence> listOfMetalSettings = new List<MetalPresence>();
-				foreach (string thisMetal in metals)
-				{
-					listOfMetalSettings.Add(new MetalPresence(thisMetal, "No"));
-				}
-
-				selNewProduct.MetalPresence = listOfMetalSettings;
-
-				var checkOutcome = selNewProduct.MetalPresence;
-
-				foreach (MetalPresence thisMetalPresence in listOfMetalSettings)
-				{
-					if (checkOutcome.Select(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence).Count() == 0)
-					{
-						Report.Error("Failed to set metal: " + thisMetalPresence.Metal + " to: " + thisMetalPresence.Presence);
-					}
-				}
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP; Report is available I select: (No|Yes)")]
-		public void GivenInTheToxicityCharacteristicsLeachingProcedurePageForProductHasHadTclpReportIsAvailableISelect(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP; Report is available I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product Characteristics tab has not loaded",
-					"Product Characteristics tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-				selNewProduct.ProductHasTclp = expected;
-
-				Report.IsTrue(selNewProduct.ProductHasTclp == expected,
-					"Failed to set Product has had TCLP: " + noOrYes,
-					"Successfully set Product has had TCLP: " + noOrYes);
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
+		
 		[StepDefinition(@"In the Additional Information Page for Product is retailers private label or brand I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsRetailersPrivateLabelOrBrandISelectNoOrYes(string noOrYes)
 		{

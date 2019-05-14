@@ -14,33 +14,34 @@ Given I go to the WERCSmart Log in
 Scenario: [50820] Language Selector - Japanese
 
 When From the Language drop down I select Japanese
-Then I should see for the sign in: ログイン
-And I should see for the email label: 電子メールアドレス
-And I should see for the password label: パスワード
-And I should see for the forgotten password: パスワードを忘れた場合
-And I should see for the login button: ログイン
+Then The element: sign in should display text: ログイン
+Then The element: email label should display text: 電子メールアドレス
+Then The element: password label should display text: パスワード
+Then The element: forgotten password should display text: パスワードを忘れた場合
+Then The element: login button should display text: ログイン
 When From the Language drop down I select English
-Then I should see for the sign in: Login
-And I should see for the email label: Email
-And I should see for the password label: Password
-And I should see for the forgotten password: Forgot your Password?
-And I should see for the login button: Login
+Then The element: sign in should display text: Login
+Then The element: email label should display text: Email
+Then The element: password label should display text: Password
+Then The element: forgotten password should display text: Forgot your Password?
+Then The element: login button should display text: Login
+
 
 @tfs_design
 Scenario: [50828] Language Selector - Chinese
 
 When From the Language drop down I select Chinese
-Then I should see for the sign in: 注册
-And I should see for the email label: 电子邮件地址
-And I should see for the password label: 密码
-And I should see for the forgotten password: 忘记密码？
-And I should see for the login button: 登陆
+Then The element: sign in should display text: 注册
+Then The element: email label should display text: 电子邮件地址
+Then The element: password label should display text: 密码
+Then The element: forgotten password should display text: 忘记密码？
+Then The element: login button should display text: 登陆
 When From the Language drop down I select English
-Then I should see for the sign in: Login
-And I should see for the email label: Email
-And I should see for the password label: Password
-And I should see for the forgotten password: Forgot your Password?
-And I should see for the login button: Login
+Then The element: sign in should display text: Login
+Then The element: email label should display text: Email
+Then The element: password label should display text: Password
+Then The element: forgotten password should display text: Forgot your Password?
+Then The element: login button should display text: Login
 
 
 @TReVorId:6881
@@ -48,30 +49,28 @@ Scenario: [50830] Validation - Error Messages
 
 Then I ensure that the email input field is not populated
 And I ensure that the password input field is not populated
-When I select the Login button
+When I click the Login button
 Then I should see the following error message for email: This is a required field.
 Given I populate the email input field with: SeleniumAdmin01@thewercs.com
-When I select the Login button
+When I click the Login button
 Then I should see the following error message for password: This is a required field.
 Given I ensure that the email input field is not populated
 And I populate the password input field with: incorrectpassword
-When I select the Login button
+When I click the Login button
 Then I should see the following error message for email: This is a required field.
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given on the Login page I log in as test user: ProductAccount
 Then the WERCSmart homepage should load
 
 
 @TReVorId:6685
 Scenario: [50831] Account Lockout
 
-Given I popupate the email input field with credientials for account: AccountLockOut
+Given I popupate the email input field with credentials for account: AccountLockOut
 And I populate the password input field with: aaaaa
-When I select the Login button
+When I click the Login button
 Given I populate the password input field with: bbbbb
-When I select the Login button
-When I select the Login button
+When I click the Login button
 Given I populate the password input field with: ccccc
-When I select the Login button
-When I select the Login button
+When I click the Login button
 Then I should see a server error with message: Your account is locked and will unlock after 30 minutes.
 #TODO: need to find a better way to manage click when error is displayed
