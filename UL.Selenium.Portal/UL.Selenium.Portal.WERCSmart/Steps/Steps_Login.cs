@@ -19,7 +19,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[When(@"I click on the Forgot Your Password Link")]
 		[Then(@"I click on the Forgot Your Password Link")]
 		[StepDefinition(@"I click on the Forgot Your Password Link")]
-		// Login steps for WERCSmart website only
 		public void GivenIClickOnTheForgotYourPasswordLink()
 		{
 			Report.IsTrue(new Login().Click_Forgotten_Password(), "Failed to click 'Forgot Your Password?'", "Successfully clicked 'Forgot Your Password?'");
