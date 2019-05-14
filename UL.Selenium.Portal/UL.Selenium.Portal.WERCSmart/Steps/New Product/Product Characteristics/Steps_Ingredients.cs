@@ -707,7 +707,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Expected no error message but got: '" + actualErrorMessage + "'",
 				"As expected, no error is showing");
 		}
-		
+
 		[StepDefinition(@"I edit the (first|second) component to select: (.*) from the Public Name drop down and save choice as (.*)")]
 		public void ThenIEditTheFirstComponentToSelectFromThePublicNameDropDown(string firstOrSecond, string option, string saveAs)
 		{
