@@ -311,8 +311,8 @@ testRunner.And("I navigate to the My Packaging Types tab in the My Library page"
                         "2",
                         "test@test.com"});
 #line 104
-testRunner.And("Save the top packaging id as MPI75034 if there are no packacking types listed add" +
-                    " a new packing type as follows", ((string)(null)), table10, "And ");
+testRunner.And("Save the top packaging id as MPI75034 if there are no packaging types listed add " +
+                    "a new packing type as follows", ((string)(null)), table10, "And ");
 #line 107
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 108

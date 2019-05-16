@@ -173,8 +173,7 @@ testRunner.And("In the Additional Information Page for Product is solely for the
 #line 49
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 50
-testRunner.And("in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substa" +
-                    "nces Control Act (TSCA) status I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
 testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
                     "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -183,9 +182,8 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 #line 53
 testRunner.And("I should see the Product Includes Battery Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 54
-testRunner.And("in the Product Characteristics tab of the New Product Page, for Indicate how batt" +
-                    "ery is packaged I select: The battery is shipped with but not included in my pro" +
-                    "duct.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'Indicate how battery is packaged\' I select: The battery is shipped with but " +
+                    "not included in my product.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Battery Type",
@@ -203,15 +201,13 @@ testRunner.And("in the Product Characteristics tab of the New Product Page, for 
                         "4",
                         "4"});
 #line 55
-testRunner.And("in the Product Characteristics tab of the New Product Page I add the following ba" +
-                    "tteries:", ((string)(null)), table1, "And ");
+testRunner.And("I add the following batteries:", ((string)(null)), table1, "And ");
 #line 59
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 60
 testRunner.And("I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
-testRunner.And("In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP;" +
-                    " Report is available I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'Product has had TCLP; Report is available\' I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
 testRunner.And("I set all the metal presence value to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
@@ -229,19 +225,16 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 #line 71
 testRunner.And("I should see the Lithium Battery Transportation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 72
-testRunner.And("in the Product Characteristics tab of the New Product Page for DOT I select: Full" +
-                    "y-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipment" +
-                    ", 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'DOT, indicate the transportation classification\' I select: Fully-regulated d" +
+                    "angerous goods: UN3481, Lithium ion batteries packed with equipment, 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
-testRunner.And("in the Product Characteristics tab of the New Product Page for IMDG I select: Non" +
-                    "e of the above/Not intended for shipment under IMDG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'IMDG, indicate the transportation classification\' I select: None of the abov" +
+                    "e/Not intended for shipment under IMDG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
-testRunner.And("in the Product Characteristics tab of the New Product Page for IATA I select: Sec" +
-                    "tion II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'IATA, indicate the transportation classification\' I select: Section II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 75
-testRunner.And("in the Product Characteristics tab of the New Product Page for TDG I select: Meet" +
-                    "s the requirements of TDG special provision 34 to be transported as non-dangerou" +
-                    "s goods.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'TDG, indicate the transportation classification\' I select: Meets the require" +
+                    "ments of TDG special provision 34 to be transported as non-dangerous goods.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 76
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 81
@@ -402,8 +395,7 @@ testRunner.Then("I add the following ingredients:", ((string)(null)), table5, "T
 #line 142
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 143
-testRunner.And("in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substa" +
-                    "nces Control Act (TSCA) status I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 144
 testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
                     "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -577,8 +569,7 @@ testRunner.Then("I add the following ingredients:", ((string)(null)), table7, "T
 #line 215
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 217
-testRunner.And("in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substa" +
-                    "nces Control Act (TSCA) status I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 218
 testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
                     "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -730,8 +721,7 @@ testRunner.Then("I add the following ingredients:", ((string)(null)), table9, "T
 #line 286
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 287
-testRunner.And("in the Product Characteristics tab of the New Product Page, for U.S. Toxic Substa" +
-                    "nces Control Act (TSCA) status I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 288
 testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
                     "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

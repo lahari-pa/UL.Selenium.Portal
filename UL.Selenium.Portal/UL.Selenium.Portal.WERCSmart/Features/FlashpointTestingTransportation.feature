@@ -190,6 +190,7 @@ And The following options should be displayed exclusively for section: Product i
 | Option                               |
 | Yes                                  |
 | No, due to an exemption or exception |
+| Not Regulated                        |
 And I set the Product is Regulated for Transport field to: Yes
 And I set the Select all modes of transport that you've classified the product for field to: DOT
 And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
@@ -246,6 +247,7 @@ And The following options should be displayed exclusively for section: Product i
 | Option                               |
 | Yes                                  |
 | No, due to an exemption or exception |
+| Not Regulated                        |
 And I set the Product is Regulated for Transport field to: Yes
 And I set the Select all modes of transport that you've classified the product for field to: DOT
 And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
@@ -666,8 +668,8 @@ And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsiu
 And I set the Flash Point (in Celsius) field to: Not Tested/Unknown
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option                   |
-| Not applicable/available |
-And I set the Flash Point Testing Method Used field to: Not applicable/available
+| Not Tested/Unknown |
+#And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
 And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
@@ -720,8 +722,8 @@ And I check the 'I do not have exact' checkbox for field: Flash Point (in Celsiu
 And I set the Flash Point (in Celsius) field to: None, No Flash Point
 And The following options should be displayed exclusively for section: Flash Point Testing Method Used
 | Option                   |
-| Not applicable/available |
-And I set the Flash Point Testing Method Used field to: Not applicable/available
+| Not Tested/Unknown |
+#And I set the Flash Point Testing Method Used field to: Not applicable/available
 And I set the Select the best Water Solubility description field to: Insoluble
 And I click continue
 And I call Shared Step 74340 (Additional Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)

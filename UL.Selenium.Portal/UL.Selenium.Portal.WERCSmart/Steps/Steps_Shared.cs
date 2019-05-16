@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Castle.Core.Internal;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -13,6 +14,7 @@ using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -432,15 +434,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GivenICallShared61449ToxicityCharacteristicLeachingProcedureTCLP_SelectNoToAll_ClickContinue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var stepsNewProduct = new StepsNewProduct();
+			var stepsTclp = new Steps_ToxicityCharacteristicsLeachingProcedure();
 			TestReport.StartStep("Toxicity Characteristic Leaching Procedure (TCLP)");
-			MyStepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristic Leaching Procedure (TCLP)");
+			stepsNewProduct.GivenIShouldSeeXPage("Toxicity Characteristic Leaching Procedure (TCLP)");
 			TestReport.StartStep("I set the Product has had TCLP testing to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing", "No");
+			stepsNewProduct.SetTheSectionOptionTo("Product has had TCLP testing", "No");
 			TestReport.StartStep("I set all Metal presence values to No");
-			MyStepsNewProduct.GivenISetAllTheMetalPresenceValueTo("No");
+			stepsTclp.GivenISetAllTheMetalPresenceValueTo("No");
 			TestReport.StartStep("I click continue");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue(
+			stepsNewProduct.GivenInTheNewProductPageIClickContinue(
 				"Toxicity Characteristic Leaching Procedure (TCLP)");
 		}
 
@@ -483,6 +486,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I call Shared Step 48367 \(Product Includes Battery > any type\)")]
+		// Requires a table with heading: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
 		public void GivenICallSharedProductIncludesBatteryAnyType(Table table)
 		{
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
@@ -490,32 +494,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I set the Indicate how battery is packaged field to: Installed in the product");
 			MyStepsNewProduct.SetTheSectionOptionTo("Indicate how battery is packaged", "Installed in the product");
-			TestReport.StartStep(
-				"I complete a row in the Battery Table: | Battery Type | Manufacturer | Number of batteries per package | How many batteries are required to run |");
-			List<Battery> listOfBatteries = new List<Battery>();
-			//| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			TestReport.StartStep("I complete a row in the Battery Table: | Battery Type | Manufacturer | Number of batteries per package | How many batteries are required to run |");
+			try
 			{
-				Battery thisBattery = new Battery() {
-					BatteryType = thisRow["Battery Type"],
-					Manufacturer = thisRow["Manufacturer"],
-					NumberPerPackage = Convert.ToInt16(thisRow["Number of batteries per package"].Trim()),
-					RequiredToRun = Convert.ToInt16(thisRow["How many batteries required to run"].Trim())
-				};
-				listOfBatteries.Add(thisBattery);
+				var listOfBatteries = new List<Battery>();
+				foreach (var thisRow in table.Rows)
+				{
+					if (!int.TryParse(thisRow["Number of batteries per package"], out var batteriesPerPackage))
+					{
+						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
+						throw new Exception("'Number of batteries per package' column of the step table must be an integer value");
+					}
+					if (!int.TryParse(thisRow["How many batteries required to run"], out var batteriesRequired))
+					{
+						// we cannot enter a non int value to this input field. test should be fixed - throw exception and report failure
+						throw new Exception("'How many batteries required to run' column of the step table must be an integer value");
+					}
+					var thisBattery = new Battery {
+						BatteryType = thisRow["Battery Type"],
+						Manufacturer = thisRow["Manufacturer"],
+						NumberPerPackage = batteriesPerPackage,
+						RequiredToRun = batteriesRequired
+					};
+					listOfBatteries.Add(thisBattery);
+				}
+				var productIncludesBattery = new ProductIncludesBattery();
+				if (listOfBatteries.Any())
+				{
+					// setter adds a table row for each battery in the list and enters data into each column
+					productIncludesBattery.Batteries = listOfBatteries;
+					productIncludesBattery.DeleteEmptyBatteryRows();
+					return;
+				}
+				Report.Error("There were no batteries to add");
 			}
-
-			var selNewProduct = new NewProduct();
-			if (listOfBatteries.Count > 0)
+			catch (Exception ex)
 			{
-				selNewProduct.Batteries = listOfBatteries;
-				selNewProduct.DeleteEmptyBatteryRows();
+				Report.Failure(ex.Message);
+				throw;
 			}
-			else
-			{
-				throw new Exception("There are no batteries to set");
-			}
-
 			TestReport.StartStep("In the Product Includes Battery page I click continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Includes Battery");
 		}
