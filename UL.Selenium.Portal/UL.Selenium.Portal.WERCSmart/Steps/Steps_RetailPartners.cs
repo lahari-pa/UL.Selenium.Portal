@@ -1225,7 +1225,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-
+		[StepDefinition(@"I click download PDF for ""(.*)""")]
+		public void ClickDownloadPdf(string option)
+		{
+			Report.IsTrue(new DataTierDetails().ClickDownloadPdfWithHeading(option), $"Failed to click download pdf option for {option}!", $"Successfully clicked download pdf option for {option}");
+		}
 	}
 }
 
