@@ -445,6 +445,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Pesticides.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Product Registration\Product Documents\Product Documents.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product Documents.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Product Registration\Product Registration.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -929,6 +934,10 @@
     <None Include="Features\Product Registration\Pesticides\Pesticides.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Pesticides.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Product Registration\Product Documents\Product Documents.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Product Documents.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Product Registration\Product Registration.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

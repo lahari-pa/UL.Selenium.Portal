@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using NTTQA_Automation_Classes.Base_Classes;
 using NTTQA_Automation_Classes.Classes;
 using NTTQA_Automation_Classes.Extension_Methods;
@@ -549,6 +550,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).TryClick();
 		}
 
+		public bool ClickDownloadPdfWithHeading(string option)
+		{
+			return this.containerElement.FindElement(By.XPath($@".//div[@role='tabpanel'][h3[contains(text(),""{option}"")]]/a"), 2).TryClick();
+		}
 	}
 
 	public class Supplier

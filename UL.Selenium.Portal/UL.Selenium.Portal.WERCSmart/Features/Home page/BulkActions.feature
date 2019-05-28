@@ -204,7 +204,7 @@ Then I confirm the Subformat column appears as part of the Documents Information
 
 Given I click on View under Actions for the first document from the list saved as: DocumentAcceptanceDocuments
 
-Then I confirm a new window opens displaying the document
+Then I confirm a new window opens displaying the document url: ViewWercsDocument
 
 # This is currently blocked - downloading pdf through chrome viewer is not reliable so need to fetch the file directly from the API
 Given I confirm the subformat type at the top of the document matches the vaulue in the Documents table for the first document I viewed

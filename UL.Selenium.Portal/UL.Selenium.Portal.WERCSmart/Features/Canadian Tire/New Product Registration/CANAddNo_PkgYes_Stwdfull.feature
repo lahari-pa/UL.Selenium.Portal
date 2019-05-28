@@ -10,7 +10,7 @@
 @RetailPartners
 @SHA
 @UPC
-@run_CANAddYes_PkgNo_StwdFull
+@run_CANAddNo_PkgYes_StwdFull
 
 Feature: Account Canada Address(No) Package types(Yes) Stewardship(Full)
 
