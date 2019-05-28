@@ -14,15 +14,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_ToxicityCharacteristicsLeachingProcedure
 	{
-		public static TCLP Tclp;
+		private static TCLP _tclp = new TCLP();
+
 		[StepDefinition(@"For 'Product has had TCLP; Report is available' I select: (No|Yes)")]
 		public void ForProductHasHadTclpReportIsAvailableISelect(string noOrYes)
 		{
-			Report.IsTrue(Tclp.WaitForTab("Product Characteristics"), "Product Characteristics tab has not loaded",
+			Report.IsTrue(_tclp.WaitForTab("Product Characteristics"), "Product Characteristics tab has not loaded",
 				"Product Characteristics tab is loaded.");
 			var expected = noOrYes == "Yes";
-			Tclp.ProductHasTclp = expected;
-			Report.IsTrue(Tclp.ProductHasTclp == expected,
+			_tclp.ProductHasTclp = expected;
+			Report.IsTrue(_tclp.ProductHasTclp == expected,
 				"Failed to set Product has had TCLP: " + noOrYes,
 				"Successfully set Product has had TCLP: " + noOrYes);
 		}
@@ -30,16 +31,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I set all the metal presence value to: (Yes|No)")]
 		public void GivenISetAllTheMetalPresenceValueTo(string noOrYes)
 		{
-			Report.IsTrue(Tclp.WaitForMetalSection(30), "Metal section has failed to load.",
+			Report.IsTrue(_tclp.WaitForMetalSection(30), "Metal section has failed to load.",
 				"Metal section has loaded");
-			var metals = Tclp.GetAllMetalNames();
+			var metals = _tclp.GetAllMetalNames();
 			var listOfMetalSettings = new List<TCLP.MetalPresence>();
 			foreach (var thisMetal in metals)
 			{
 				listOfMetalSettings.Add(new TCLP.MetalPresence(thisMetal, "No"));
 			}
-			Tclp.Metals = listOfMetalSettings;
-			var checkOutcome = Tclp.Metals;
+			_tclp.Metals = listOfMetalSettings;
+			var checkOutcome = _tclp.Metals;
 			foreach (var thisMetalPresence in listOfMetalSettings)
 			{
 				if (!checkOutcome.Select(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence).Any())

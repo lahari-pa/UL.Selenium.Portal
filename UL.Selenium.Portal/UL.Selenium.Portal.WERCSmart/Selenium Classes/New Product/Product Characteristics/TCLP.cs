@@ -12,32 +12,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 {
 	class TCLP : NewProduct
 	{
-		private IWebElement MetalHeader => this.containerElement.FindElement(By.XPath(""));
+		private IWebElement MetalHeader => this.containerElement.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
 
 		public bool ProductHasTclp {
 			get
 			{
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("TCLP"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
-
-				if (selectOption != null)
-				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					Report.Info("Selected option is: " + selectedOption);
-					if (selectedOption.ToLower() == "yes")
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				}
-				else
+				var activeLabel = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'TCLP')]/../following-sibling::div//label[contains(@class,'active')]"), 2);
+				if (activeLabel == null)
 				{
 					throw new Exception("No Product is Retailer's Private Label or Brand value is selected");
 				}
+				var selectedOption = activeLabel.FindElement(By.XPath("./span"), 2)?.Text;
+				return selectedOption != null && selectedOption.ToLower().Trim() == "yes";
 			}
 			set
 			{
@@ -46,13 +32,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 				{
 					valueToSet = "No";
 				}
-
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("TCLP"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
-				selectOption.Click();
-
-
+				var matchingLabel = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'TCLP')]/../..//input[@type='radio' and ./following-sibling::span[text()='" + valueToSet + "']]/parent::label"), 2);
+				matchingLabel.TryClick();
 			}
 		}
 
@@ -72,15 +53,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			get
 			{
 				var listOfMetals = new List<MetalPresence>();
-				var header = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
-
-				var listOfMetalRows = header.FindElements(By.XPath("../../following-sibling::div"));
-				foreach (var metalRow in listOfMetalRows)
+				//var header = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
+				var header = this.MetalHeader;
+				var metalRows = header.FindElements(By.XPath("../../following-sibling::div"));
+				foreach (var metalRow in metalRows)
 				{
 					try
 					{
 						string metalName = "";
-						string presence = "";
 						metalRow.ScrollElementIntoView();
 						Delay.Seconds(1);
 						metalName = metalRow.FindElement(By.XPath(".//div[@class='radio']/../preceding-sibling::div/label")).Text;
@@ -90,7 +70,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 						if (presenceB != null)
 						{
-							presence = presenceB.FindElement(By.XPath("../span")).Text;
+							string presence = presenceB.FindElement(By.XPath("../span")).Text;
 							Report.Info("Adding metal: " + metalName + ": " + presence);
 							listOfMetals.Add(new MetalPresence(metalName, presence));
 						}
@@ -104,16 +84,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 					{
 						Report.Info(e.Message);
 					}
-
 				}
-
 				return listOfMetals;
 			}
 			set
 			{
-				Report.Info(value.Count.ToString() + " metals to set.");
-				var header = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
-
+				Report.Info(value.Count + " metals to set.");
+				//var header = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
+				var header = this.MetalHeader;
 				foreach (MetalPresence thisMetal in value)
 				{
 					var metalLabel = header.FindElements(By.XPath("../../following::div//label[@class='control-label']")).FirstOrDefault(x => x.GetValue().Trim() == thisMetal.Metal);
@@ -145,11 +123,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public List<string> GetAllMetalNames()
 		{
 			var listOfMetals = new List<string>();
-			var circuitDiv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
-			var listOfMetalRows = circuitDiv.FindElements(By.XPath("../../following-sibling::div"));
+			//var circuitDiv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
+			var circuit = this.MetalHeader;
+			var listOfMetalRows = circuit.FindElements(By.XPath("../../following-sibling::div[not(@style='display: none;')]"),2).ToList();
 			foreach (var metalRow in listOfMetalRows)
 			{
-				listOfMetals.Add(metalRow.FindElement(By.XPath(".//div[@class='radio']/../preceding-sibling::div/label"))?.Text);
+				listOfMetals.Add(metalRow.FindElement(By.XPath(".//div[@class='radio']/../preceding-sibling::div/label"),2)?.Text);
 			}
 			return listOfMetals;
 		}
