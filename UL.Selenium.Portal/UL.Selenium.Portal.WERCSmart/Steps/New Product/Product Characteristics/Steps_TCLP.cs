@@ -39,15 +39,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				listOfMetalSettings.Add(new TCLP.MetalPresence(thisMetal, "No"));
 			}
+			Report.Info("Setting the Metal Presence values");
 			_tclp.Metals = listOfMetalSettings;
+			Report.Info("Checking the Metal Presence values are correct");
 			var checkOutcome = _tclp.Metals;
+			var pass = true;
 			foreach (var thisMetalPresence in listOfMetalSettings)
 			{
-				if (!checkOutcome.Select(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence).Any())
+				if (checkOutcome.Any(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence))
 				{
-					Report.Error("Failed to set metal: " + thisMetalPresence.Metal + " to: " + thisMetalPresence.Presence);
+					continue;
 				}
+				pass = false;
+				Report.Info("Metal: " + thisMetalPresence.Metal + " was not set to: " + thisMetalPresence.Presence + " as was expected");
 			}
+			Report.IsTrue(pass, "Failed to set all metal presence values", "Successfully set all metal presence values");
 		}
 	}
 }

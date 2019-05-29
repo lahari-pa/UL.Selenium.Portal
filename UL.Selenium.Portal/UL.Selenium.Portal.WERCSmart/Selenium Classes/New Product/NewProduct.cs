@@ -346,11 +346,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			set { this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Name') or contains(text(),'Product name')]/../following-sibling::div/input"), 2).EnterText(value); }
 		}
 
+		/// <summary>
+		/// Returns the text for the selected input matching a label with text 'name'.
+		/// Returns null if there is no matching label or if no input below that label is selected
+		/// </summary>
 		public string SelectedOptionForLabel(string name)
 		{
-			var label = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains("DOT"));
-			var options = label?.FindElements(By.XPath("../..//input"));
-			return options?.First(x => x.Selected)?.Text;
+			var label = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains(name));
+			//var options = label?.FindElements(By.XPath("../..//input"));
+			var selectedOption = label?.FindElements(By.XPath("../..//input"),2)?.First(x=>x.Selected);
+			return selectedOption?.FindElement(By.XPath("../..//label/span"),2)?.Text;
+			//return options?.First(x => x.Selected)?.Text;
 		}
 
 		public List<string> ProductsMayBeSold {

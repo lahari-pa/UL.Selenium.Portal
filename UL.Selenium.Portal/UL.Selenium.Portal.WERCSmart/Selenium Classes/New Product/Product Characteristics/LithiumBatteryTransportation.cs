@@ -43,32 +43,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		}
 
 		public string Imdg {
-			get
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("IMDG"));
-
-				if (lbl != null)
-				{
-					var listOfItems = lbl.FindElements(By.XPath("../..//input"));
-					foreach (var item in listOfItems)
-					{
-						if (item.Selected)
-						{
-							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
-							Report.Info(selectedText + " is selected.");
-							return selectedText;
-						}
-					}
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-				return "";
-
-			}
+			get => this.SelectedOptionForLabel("IMDG");
 			set
 			{
 				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -98,32 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		}
 
 		public string Iata {
-			get
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("IATA"));
-
-				if (lbl != null)
-				{
-					var listOfItems = lbl.FindElements(By.XPath("../..//input"));
-					foreach (var item in listOfItems)
-					{
-						if (item.Selected)
-						{
-							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
-							Report.Info(selectedText + " is selected.");
-							return selectedText;
-						}
-					}
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-				return "";
-
-			}
+			get => this.SelectedOptionForLabel("IATA");
 			set
 			{
 				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -153,31 +103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		}
 
 		public string Tdg {
-			get
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("TDG"));
-
-				if (lbl != null)
-				{
-					var listOfItems = lbl.FindElements(By.XPath("../..//input"));
-					foreach (var item in listOfItems)
-					{
-						if (item.Selected)
-						{
-							var selectedText = item.FindElement(By.XPath("../..//label/span")).Text;
-							Report.Info(selectedText + " is selected.");
-							return selectedText;
-						}
-					}
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-				return "";
-
-			}
+			get => this.SelectedOptionForLabel("TDG");
 			set
 			{
 				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)

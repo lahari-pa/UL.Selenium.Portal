@@ -14,6 +14,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 	{
 		private IWebElement MetalHeader => this.containerElement.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
 
+		private List<IWebElement> MetalContainers => this.MetalHeader.FindElements(By.XPath("../../following-sibling::div[not(@style='display: none;')]"), 2).ToList();
+
 		public bool ProductHasTclp {
 			get
 			{
@@ -52,45 +54,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public List<MetalPresence> Metals {
 			get
 			{
+				Report.Info("Getting list of Metal Presence information");
 				var listOfMetals = new List<MetalPresence>();
-				//var header = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
-				var header = this.MetalHeader;
-				var metalRows = header.FindElements(By.XPath("../../following-sibling::div"));
-				foreach (var metalRow in metalRows)
+				var rows = this.MetalContainers;
+				Report.Info("There are " + rows.Count + " Metal Presence rows displayed");
+				foreach (var metalRow in this.MetalContainers)
 				{
-					try
+					var metalName = metalRow.FindElement(By.XPath(".//div[@class='radio']/../preceding-sibling::div/label"), 2)?.Text;
+					var selectedOption = metalRow.FindElements(By.XPath(".//div[@class='radio']//input"), 2)?.First(x => x.Selected);
+					var metalPresence = selectedOption?.FindElement(By.XPath("../span"), 2)?.Text;
+					if (metalName == null || selectedOption == null)
 					{
-						string metalName = "";
-						metalRow.ScrollElementIntoView();
-						Delay.Seconds(1);
-						metalName = metalRow.FindElement(By.XPath(".//div[@class='radio']/../preceding-sibling::div/label")).Text;
-						var presenceA = metalRow.FindElements(By.XPath(".//div[@class='radio']//input"));
-
-						var presenceB = presenceA.Where(x => x.Selected == true).ToList().FirstOrDefault();
-
-						if (presenceB != null)
-						{
-							string presence = presenceB.FindElement(By.XPath("../span")).Text;
-							Report.Info("Adding metal: " + metalName + ": " + presence);
-							listOfMetals.Add(new MetalPresence(metalName, presence));
-						}
-						else
-						{
-							listOfMetals.Add(new MetalPresence(metalName, "none"));
-						}
-
+						Report.Error("No metal presence information found for this row!");
+						continue;
 					}
-					catch (Exception e)
-					{
-						Report.Info(e.Message);
-					}
+					listOfMetals.Add(new MetalPresence(metalName, metalPresence));
 				}
 				return listOfMetals;
 			}
 			set
 			{
 				Report.Info(value.Count + " metals to set.");
-				//var header = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
 				var header = this.MetalHeader;
 				foreach (MetalPresence thisMetal in value)
 				{
@@ -123,10 +107,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public List<string> GetAllMetalNames()
 		{
 			var listOfMetals = new List<string>();
-			//var circuitDiv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='form-group']//div[contains(text(), 'Circuit')]"));
 			var circuit = this.MetalHeader;
-			var listOfMetalRows = circuit.FindElements(By.XPath("../../following-sibling::div[not(@style='display: none;')]"),2).ToList();
-			foreach (var metalRow in listOfMetalRows)
+			foreach (var metalRow in this.MetalContainers)
 			{
 				listOfMetals.Add(metalRow.FindElement(By.XPath(".//div[@class='radio']/../preceding-sibling::div/label"),2)?.Text);
 			}
