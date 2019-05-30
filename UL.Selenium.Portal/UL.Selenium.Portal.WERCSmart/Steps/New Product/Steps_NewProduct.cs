@@ -473,61 +473,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				throw;
 			}
 		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: (No|Yes)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForHasAlcdOrPlasmaDisplayISelectNoOrYes(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-
-				selNewProduct.HasLcdOrPlasmaDisplay = expected;
-
-				Report.IsTrue(selNewProduct.HasLcdOrPlasmaDisplay == expected,
-					"Failed to set Has a LCD or Plasma Display value to: " + noOrYes,
-					"Successfully set Has a LCD or Plasma Display value to: " + noOrYes);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: (No|Yes)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForContainsCircuitBoardISelectNoOrYes(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-
-				selNewProduct.ContainsCircuitBoard = expected;
-
-				Report.IsTrue(selNewProduct.ContainsCircuitBoard == expected,
-					"Failed to set Contains Circuit Board value to: " + noOrYes,
-					"Successfully set Contains Circuit Board value to: " + noOrYes);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
+		
 		[StepDefinition(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOSHACompliantSDSISelect(string selection)
 		{

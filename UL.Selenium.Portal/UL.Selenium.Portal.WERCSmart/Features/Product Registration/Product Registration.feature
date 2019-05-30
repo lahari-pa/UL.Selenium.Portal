@@ -62,8 +62,8 @@ And For 'Product has had TCLP; Report is available' I select: No
 And I set all the metal presence value to: No
 And in the New Product page I click Continue
 And I should see the Electronic Equipment Page
-And in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: No
-And in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: No
+And For 'Contains Circuit Board' I select: No
+And For 'Has a LCD or Plasma Display' I select: No
 And in the New Product page I click Continue
 
 #################### Coralie 11/4/2018: Adding in Lithium Battery Transportation section to test

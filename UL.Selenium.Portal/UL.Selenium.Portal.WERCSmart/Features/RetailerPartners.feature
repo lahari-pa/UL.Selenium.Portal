@@ -399,6 +399,7 @@ And The pie chart should be showing on the retailer details page
 And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
 
 
+@TReVorId:22257
 Scenario: [56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - Download PDF
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -409,6 +410,7 @@ And I click download PDF for "What does Regulatory Support mean?"
 Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
 
 
+@TReVorId:22258
 Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Support - Download PDF
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -419,6 +421,7 @@ And I click download PDF for "What does Chemical Program Support mean?"
 Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
 
 
+@TReVorId:22259
 Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (Internal Business Use Only) - Download PDF
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane
@@ -429,6 +432,7 @@ And I click download PDF for "What does Supplemental Reports for Internal Busine
 Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
 
 
+@TReVorId:22260
 Scenario: [56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Options - Download PDF
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I click the Retail Partners icon in the Navigation Pane

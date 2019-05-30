@@ -215,11 +215,9 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 #line 64
 testRunner.And("I should see the Electronic Equipment Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 65
-testRunner.And("in the Product Characteristics tab of the New Product Page for Contains Circuit B" +
-                    "oard I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'Contains Circuit Board\' I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 66
-testRunner.And("in the Product Characteristics tab of the New Product Page for Has a LCD or Plasm" +
-                    "a Display I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'Has a LCD or Plasma Display\' I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 67
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 71

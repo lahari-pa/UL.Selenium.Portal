@@ -13,14 +13,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class StepsProductIncludesBattery
 	{
-		public static ProductIncludesBattery ProductIncludesBattery;
+		private static ProductIncludesBattery _productIncludesBattery = new ProductIncludesBattery();
 
 		[StepDefinition(@"For 'Indicate how battery is packaged' I select: (.*)")]
 		public void ForIndicateHowBatteryIsPackagedISelect(string option)
 		{
-			Report.IsTrue(ProductIncludesBattery.WaitForTab("Product Characteristics"), "Product characteristics has not loaded","Product characteristics tab is loaded.");
-			ProductIncludesBattery.IndicateHowBatteryIsPackaged = option;
-			Report.IsTrue(ProductIncludesBattery.IndicateHowBatteryIsPackaged == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
+			Report.IsTrue(_productIncludesBattery.WaitForTab("Product Characteristics"), "Product characteristics has not loaded","Product characteristics tab is loaded.");
+			_productIncludesBattery.IndicateHowBatteryIsPackaged = option;
+			Report.IsTrue(_productIncludesBattery.IndicateHowBatteryIsPackaged == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
 		[StepDefinition(@"I add the following batteries:")]
@@ -53,8 +53,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				if (listOfBatteries.Any())
 				{
 					// setter adds a table row for each battery in the list and enters data into each column
-					ProductIncludesBattery.Batteries = listOfBatteries;
-					ProductIncludesBattery.DeleteEmptyBatteryRows();
+					_productIncludesBattery.Batteries = listOfBatteries;
+					_productIncludesBattery.DeleteEmptyBatteryRows();
 					return;
 				}
 				Report.Error("There were no batteries to add");

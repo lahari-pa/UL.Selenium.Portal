@@ -208,26 +208,28 @@ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[59320] Upload Document - IFRA certificate")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22261")]
         public virtual void _59320UploadDocument_IFRACertificate()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59320] Upload Document - IFRA certificate", null, ((string[])(null)));
-#line 62
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59320] Upload Document - IFRA certificate", null, new string[] {
+                        "TReVorId:22261"});
+#line 63
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 63
-testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 64
+testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 65
 testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
+#line 66
 testRunner.And("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Crayon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
-testRunner.Then("I save the product information as: TestCase59320", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 67
+testRunner.Then("I save the product information as: TestCase59320", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 68
 testRunner.And("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 69
 testRunner.And("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -239,37 +241,37 @@ testRunner.And("I call Shared Step 59680 (Additional Product Information - US on
                         "FRAGRANCE",
                         "Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2",
                         "100"});
-#line 69
+#line 70
 testRunner.And("I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclos" +
                     "ed = Yes,  Select Public Name) and save ingredient as: shared79436", ((string)(null)), table2, "And ");
-#line 72
-testRunner.Given("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 73
+testRunner.Given("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 74
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
+#line 75
 testRunner.And("I call Shared Step 63219 (Retailer Association - Select No Retailer - Click conti" +
                     "nue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
+#line 76
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 77
-testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 78
+testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 79
 testRunner.Then("International Fragrance Association (IFRA) should be showing the error messages: " +
                     "Document is required: IFRA Certificate (Perfumery Products)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 79
+#line 80
 testRunner.And("I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for" +
                     " document type: IFRA Certificate (Perfumery Products) and file: C:\\Dependencies\\" +
                     "WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
+#line 81
 testRunner.Given("I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for" +
                     " document type: Product Label and file: C:\\Dependencies\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 81
-testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 82
+testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 83
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -291,16 +293,16 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Odorless",
                         "No data available",
                         "10"});
-#line 83
+#line 84
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
                     "g:", ((string)(null)), table3, "And ");
-#line 86
-testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 87
+testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 88
 testRunner.And("I call Shared Step 73956 (Go to Summary and verify data) with product type: Crayo" +
                     "n", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 88
+#line 89
 testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase59320", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -309,26 +311,28 @@ testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("[59321] Upload Document - GRAS certificate")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22262")]
         public virtual void _59321UploadDocument_GRASCertificate()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59321] Upload Document - GRAS certificate", null, ((string[])(null)));
-#line 91
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[59321] Upload Document - GRAS certificate", null, new string[] {
+                        "TReVorId:22262"});
+#line 93
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 92
+#line 94
 testRunner.And("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 93
+#line 95
 testRunner.And("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 94
+#line 96
 testRunner.And("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Crayon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
+#line 97
 testRunner.Then("I save the product information as: TestCase59321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 96
+#line 98
 testRunner.And("I call Shared Step 26897 (Product Characteristics - Solid only available - contin" +
                     "ue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 97
+#line 99
 testRunner.And("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -340,34 +344,34 @@ testRunner.And("I call Shared Step 59680 (Additional Product Information - US on
                         "FLAVOR",
                         "FLAVOR",
                         "100"});
-#line 98
+#line 100
 testRunner.Given("I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed " +
                     "= Yes, Select Public Name) and save ingredients as: shared79431", ((string)(null)), table4, "Given ");
-#line 101
+#line 103
 testRunner.Given("in the Ingredients page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 102
+#line 104
 testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 103
+#line 105
 testRunner.And("I call Shared Step 63219 (Retailer Association - Select No Retailer - Click conti" +
                     "nue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
+#line 106
 testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 105
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 106
-testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 107
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 108
+testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 109
 testRunner.Then("Generally Recognized as Safe (GRAS) should be showing the error messages: Documen" +
                     "t is required: GRAS Certificate (Flavor Products)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 108
+#line 110
 testRunner.And("I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for" +
                     " document type: GRAS Certificate (Flavor Products) and file: C:\\Dependencies\\WER" +
                     "CSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 109
+#line 111
 testRunner.Then("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 110
+#line 112
 testRunner.Given("in the Optional Reports and Documents Available for Purchase page I click Continu" +
                     "e", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -389,16 +393,16 @@ testRunner.Given("in the Optional Reports and Documents Available for Purchase p
                         "Odorless",
                         "No data available",
                         "10"});
-#line 111
+#line 113
 testRunner.And("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
                     "g:", ((string)(null)), table5, "And ");
-#line 114
+#line 116
 testRunner.And("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 115
+#line 117
 testRunner.And("I call Shared Step 73956 (Go to Summary and verify data) with product type: Crayo" +
                     "n", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 116
+#line 118
 testRunner.And("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase59321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
