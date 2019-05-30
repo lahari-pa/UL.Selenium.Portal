@@ -348,15 +348,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		/// <summary>
 		/// Returns the text for the selected input matching a label with text 'name'.
-		/// Returns null if there is no matching label or if no input below that label is selected
+		/// Returns null if there is no matching label or if no input is selected
 		/// </summary>
 		public string SelectedOptionForLabel(string name)
 		{
 			var label = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains(name));
-			//var options = label?.FindElements(By.XPath("../..//input"));
 			var selectedOption = label?.FindElements(By.XPath("../..//input"),2)?.First(x=>x.Selected);
 			return selectedOption?.FindElement(By.XPath("../..//label/span"),2)?.Text;
-			//return options?.First(x => x.Selected)?.Text;
+		}
+
+		public string SelectedRadioForBtnLabel(string name)
+		{
+			var label = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains(name));
+			var selectedOption = label?.FindElements(By.XPath("../..//input"), 2)?.First(x => x.Checked());
+			return selectedOption?.FindElement(By.XPath("./parent::label/span"), 2)?.Text;
 		}
 
 		public List<string> ProductsMayBeSold {
@@ -481,91 +486,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				selectOption.Click();
 			}
 		}
-
-		public bool HasLcdOrPlasmaDisplay {
-			get
-			{
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Plasma Display"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
-
-				if (selectOption != null)
-				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					Report.Info("Selected option is: " + selectedOption);
-					if (selectedOption.ToLower() == "yes")
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				}
-				else
-				{
-					throw new Exception("No Has LD or Plasma Display option is selected");
-				}
-			}
-			set
-			{
-				string valueToSet = "Yes";
-				if (!value)
-				{
-					valueToSet = "No";
-				}
-
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Plasma Display"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
-				selectOption.Click();
-
-
-			}
-		}
-
-		public bool ContainsCircuitBoard {
-			get
-			{
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Contains Circuit Board"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
-
-				if (selectOption != null)
-				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					Report.Info("Selected option is: " + selectedOption);
-					if (selectedOption.ToLower() == "yes")
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				}
-				else
-				{
-					throw new Exception("No Contains Circuit Board option is selected");
-				}
-			}
-			set
-			{
-				string valueToSet = "Yes";
-				if (!value)
-				{
-					valueToSet = "No";
-				}
-
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Contains Circuit Board"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
-				selectOption.Click();
-
-
-			}
-		}
-
+		
 		public string OSHA {
 			get
 			{
@@ -672,22 +593,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			}
 		}
-
-		public bool WaitForMetalSection(int secondsToWait)
-		{
-			for (int i = 0; i < secondsToWait; i++)
-			{
-				var header = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div")).FirstOrDefault(x => x.Text.Contains("following metals"));
-				if (header != null)
-				{
-					return true;
-				}
-				Delay.Seconds(1);
-			}
-
-			return false;
-		}
-
+		
 		public bool SolelyForRetailersUse {
 			get
 			{
@@ -3199,7 +3105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectRadio(string section, string value)
 		{
-			var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[starts-with(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
+			var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
 			var el = this.containerElement.FindElement(By.XPath(xPath), 2);
 			if (el != null)
 			{

@@ -49,19 +49,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(_lithiumBatteryTransportation.Tdg == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
-		[StepDefinition(@"For 'U\.S\. Toxic Substances Control Act \(TSCA\) status' I select: (.*)")]
-		public void ForUSToxicSubstancesControlActTSCAStatusISelect(string option)
-		{
-			Report.IsTrue(_lithiumBatteryTransportation.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-			// set Tsca status
-			_lithiumBatteryTransportation.TscaStatus = option;
-			// get Tsca status
-			Report.IsTrue(_lithiumBatteryTransportation.TscaStatus == option,
-				"Failed to set TSCA status: " + option,
-				"Successfully set TSCA status: " + option);
-		}
-
 
 	}
 }

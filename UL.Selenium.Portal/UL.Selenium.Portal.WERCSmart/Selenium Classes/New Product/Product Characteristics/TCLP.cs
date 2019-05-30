@@ -114,5 +114,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			}
 			return listOfMetals;
 		}
+
+		public bool WaitForMetalSection(int secondsToWait)
+		{
+			for (int i = 0; i < secondsToWait; i++)
+			{
+				var header = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div")).FirstOrDefault(x => x.Text.Contains("following metals"));
+				if (header != null)
+				{
+					return true;
+				}
+				Delay.Seconds(1);
+			}
+
+			return false;
+		}
 	}
 }

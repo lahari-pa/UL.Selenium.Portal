@@ -132,31 +132,5 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			}
 		}
 
-		public string TscaStatus {
-			get
-			{
-				var listOfOptions = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("TSCA"))
-					.FindElements(By.XPath("../..//input"));
-				foreach (var item in listOfOptions)
-				{
-					if (item.Selected)
-					{
-						return item.FindElement(By.XPath("../..//label")).Text;
-					}
-				}
-				return "";
-			}
-			set
-			{
-				var thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("TSCA")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == value);
-				var optionInput = thisLabel.FindElement(By.XPath(".//../input"));
-				if (!optionInput.Selected)
-				{
-					optionInput.Click();
-				}
-			}
-		}
-
 	}
 }

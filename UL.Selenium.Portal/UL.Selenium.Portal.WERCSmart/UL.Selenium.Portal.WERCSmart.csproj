@@ -595,12 +595,14 @@
     <Compile Include="Selenium Classes\MyAccount.cs" />
     <Compile Include="Selenium Classes\MyIngredientsModal.cs" />
     <Compile Include="Selenium Classes\NavigationBar.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\ElectronicEquipment.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\Ingredients.cs" />
     <Compile Include="Selenium Classes\New Product\NewProduct.cs" />
     <Compile Include="Selenium Classes\New Product\PesticideDetailsState.cs" />
     <Compile Include="Selenium Classes\New Product\PesticideDetailsUS.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\LithiumBatteryTransportation.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\ProductIncludesBattery.cs" />
+    <Compile Include="Selenium Classes\New Product\Product Characteristics\RegulatoryInformation1.cs" />
     <Compile Include="Selenium Classes\New Product\Product Characteristics\TCLP.cs" />
     <Compile Include="Selenium Classes\New Product\Product Type\ProductCharacteristics.cs" />
     <Compile Include="Selenium Classes\New Product\Recipient and UPC Details\Retailer.cs" />
@@ -646,8 +648,10 @@
     <Compile Include="Selenium Classes\WERCSLinkDashboard.cs" />
     <Compile Include="Selenium Classes\YouTube.cs" />
     <Compile Include="Steps\GlobalSteps.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_ElectronicEquipment.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_Ingredients.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_LithiumBatteryTransportation.cs" />
+    <Compile Include="Steps\New Product\Product Characteristics\Steps_RegulatoryInformation1.cs" />
     <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
@@ -689,7 +693,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="app.manifest" />
     <None Include="Features\AdditionalProductInformation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
