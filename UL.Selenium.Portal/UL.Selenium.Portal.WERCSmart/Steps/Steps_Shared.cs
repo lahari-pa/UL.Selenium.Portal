@@ -686,9 +686,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.UseSubSteps = true;
 			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep(string.Format("I should see the '{0}' page",
-				"Volatile Organic Compounds (VOC) for South Coast Air Quality Management District (SCAQMD) and Canada"));
+				"Volatile Organic Compounds (VOC) for California Air District(s) and Canada"));
 			MyStepsNewProduct.GivenIShouldSeeXPage(
-				"Volatile Organic Compounds (VOC) for South Coast Air Quality Management District (SCAQMD) and Canada");
+				"Volatile Organic Compounds (VOC) for California Air District(s) and Canada");
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.",
 				"No"));
@@ -2517,8 +2517,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.SetTheSectionOptionTo(
 				"Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison?",
 				"Yes");
-			TestReport.StartStep("Clicking continue in the VOC SCAQMD/Canada page");
-			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("VOC SCAQMD/Canada");
+			TestReport.StartStep("Clicking continue in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada page");
+			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Volatile Organic Compounds (VOC) for California Air District(s) and Canada");
 		}
 
 		[StepDefinition(@"I call Shared Step 57798 \(Additional Product Information- Pesticide, Canada Only - No to everything else, Continue\)")]
@@ -7629,5 +7629,203 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 
+
+		[StepDefinition(@"I Confirm alias subsection option as:")]
+		public void ConfirmAliasSubsectionOptions(Table expected)
+		{
+			ProductAttributePage thisStepsStudio = new ProductAttributePage();
+			var data = thisStepsStudio.GetAliasSubsectionOptions();
+			foreach (var row in expected.Rows)
+			{
+				var option = row["Data"];
+				Report.Info("Checking that I see the option '" + option + "'");
+				Report.IsTrue(data.Contains(option.Trim()),
+					"Option was not showing as expected! Expected: '" + option + "', but found: '" + string.Join("', '", data) + "'!",
+					"Option was showing: '" + option + "', as expected!");
+			}
+		}
+
+
+		[StepDefinition(@"I call Shared Step 86015 - WPS PD\+ -  Product attributes - check all entries for Canada Stewardship data")]
+		public void ProductAttributes_CheckAllEntriesForCanadaStwdship()
+		{
+			Report.Info("Beginning Shared Step 86015- WPS PD+ - Product Attributes - check all entries for Canada Stewardship data");
+			Steps_Shared steps_Shared = new Steps_Shared();
+			steps_Shared.ProductAttributes_FilterFor("CBC");
+			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
+				"Data" 
+			});
+			table.AddRow(new string[] {
+				"CBCDS"
+			});
+			table.AddRow(new string[] {
+				"CBCSD"
+			});
+			table.AddRow(new string[] {
+				"CBCSN"
+			});
+			steps_Shared.ConfirmAliasSubsectionOptions(table);
+			TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table2.AddRow(new string[] {
+				"12/31/2020"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CBCDS", table2);
+			TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table3.AddRow(new string[] {
+				"1/1/2018"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CBCSD", table3);
+			TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table4.AddRow(new string[] {
+				"BC-1"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CBCSN", table4);
+			steps_Shared.ProductAttributes_FilterFor("CMB");
+			TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table5.AddRow(new string[] {
+				"CMBDS"
+			});
+			table5.AddRow(new string[] {
+				"CMBSD"
+			});
+			table5.AddRow(new string[] {
+				"CMBSN"
+			});
+			steps_Shared.ConfirmAliasSubsectionOptions(table5);
+			TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table6.AddRow(new string[] {
+				"12/31/2020"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CMBDS", table6);
+			TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table7.AddRow(new string[] {
+				"1/1/2018"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CMBSD", table7);
+			TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table8.AddRow(new string[] {
+				"MB-3"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CMBSN", table8);
+			steps_Shared.ProductAttributes_FilterFor("CON");
+			TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table9.AddRow(new string[] {
+				"CONDS"
+			});
+			table9.AddRow(new string[] {
+				"CONSD"
+			});
+			table9.AddRow(new string[] {
+				"CONSN"
+			});
+			steps_Shared.ConfirmAliasSubsectionOptions(table9);
+			TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table10.AddRow(new string[] {
+				"12/31/2020"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CONDS", table10);
+			TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table11.AddRow(new string[] {
+				"1/1/2018"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CONSD", table11);
+			TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table12.AddRow(new string[] {
+				"ON-4"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CONSN", table12);
+			steps_Shared.ProductAttributes_FilterFor("CQC");
+			TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table13.AddRow(new string[] {
+				"CQCDS"
+			});
+			table13.AddRow(new string[] {
+				"CQCSD"
+			});
+			table13.AddRow(new string[] {
+				"CQCSN"
+			});
+			steps_Shared.ConfirmAliasSubsectionOptions(table13);
+			TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table14.AddRow(new string[] {
+				"12/31/2020"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CQCDS", table14);
+			TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table15.AddRow(new string[] {
+				"1/1/2018"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CQCSD", table15);
+			TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table16.AddRow(new string[] {
+				"QA-5"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CQCSN", table16);
+			steps_Shared.ProductAttributes_FilterFor("CSK");
+			TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table17.AddRow(new string[] {
+				"CSKDS"
+			});
+			table17.AddRow(new string[] {
+				"CSKSD"
+			});
+			table17.AddRow(new string[] {
+				"CSKSN"
+			});
+			steps_Shared.ConfirmAliasSubsectionOptions(table17);
+			TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table18.AddRow(new string[] {
+				"12/31/2020"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKDS", table18);
+			TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table19.AddRow(new string[] {
+				"1/1/2018"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKSD", table19);
+			TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+				"Data"
+			});
+			table20.AddRow(new string[] {
+				"SK-2"
+			});
+			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKSN", table20);
+		}
 	}
 }
