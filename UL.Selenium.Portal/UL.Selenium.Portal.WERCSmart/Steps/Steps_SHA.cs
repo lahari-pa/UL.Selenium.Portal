@@ -948,7 +948,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIEditMyToolbarToAddTheFollowingOptions(Table table)
 		{
 			Steps_Studio thisStepsStudio = new Steps_Studio();
-			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("My Toolbar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");

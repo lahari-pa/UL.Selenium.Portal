@@ -215,6 +215,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CANAddYes_PkgNo_StwdFull.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Submission\Stewardship Data in WPS Studio\StwdInWpsStudiofeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StwdInWpsStudiofeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Cart.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -756,6 +761,10 @@
     <None Include="Features\Canadian Tire\New Product Registration\CANAddYes_PkgNo_StwdFull.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CANAddYes_PkgNo_StwdFull.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire\New Product Submission\Stewardship Data in WPS Studio\StwdInWpsStudiofeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>StwdInWpsStudiofeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Cart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
