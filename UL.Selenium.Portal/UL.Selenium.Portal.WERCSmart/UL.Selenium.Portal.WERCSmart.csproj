@@ -657,10 +657,10 @@
     <Compile Include="Steps\New Product\Product Characteristics\Steps_Ingredients.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_LithiumBatteryTransportation.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_RegulatoryInformation1.cs" />
+    <Compile Include="Steps\New Product\Product Type\Steps_ProductCharacteristics.cs" />
     <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />
-    <Compile Include="Steps\New Product\Steps_ProductCharacteristics.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_ProductIncludesBattery.cs" />
     <Compile Include="Steps\New Product\Steps_Retailer.cs" />
     <Compile Include="Steps\New Product\Steps_SelectRetailers.cs" />
@@ -1057,7 +1057,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Selenium Classes\New Product\Review and Submit\" />
-    <Folder Include="Steps\New Product\Product Type\" />
     <Folder Include="Steps\New Product\Recipient and UPC Details\" />
     <Folder Include="Steps\New Product\Review and Submit\" />
   </ItemGroup>

@@ -13,27 +13,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 	class RegulatoryInformation1 : NewProduct
 	{
 		public string TscaStatus {
+			get => this.SelectedInputForLabel("TSCA");
+			set => this.SelectRadio("TSCA", value);
+		}
+
+		public bool Prop65 {
 			get
 			{
-				var listOfOptions = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("TSCA"))
-					.FindElements(By.XPath("../..//input"));
-				foreach (var item in listOfOptions)
-				{
-					if (item.Selected)
-					{
-						return item.FindElement(By.XPath("../..//label")).Text;
-					}
-				}
-				return "";
+				var prop = this.CheckedInputForLabel("Prop 65") ?? this.CheckedInputForLabel("Proposition 65");
+				return prop == "Yes";
 			}
 			set
 			{
-				var thisLabel = this.containerElement.FindElements(By.XPath(".//label"), 2).FirstOrDefault(x => x.Text.Contains("TSCA")).FindElements(By.XPath("../..//input/../../label/span")).FirstOrDefault(y => y.Text == value);
-				var optionInput = thisLabel.FindElement(By.XPath(".//../input"));
-				if (!optionInput.Selected)
+				var valueToSet = value ? "Yes" : "No";
+				if (!this.SelectRadio("Prop 65", valueToSet))
 				{
-					optionInput.Click();
+					this.SelectRadio("Proposition 65", valueToSet);
 				}
 			}
 		}
