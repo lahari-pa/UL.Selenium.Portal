@@ -220,6 +220,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StwdInWpsStudiofeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has No Stwd Data\AccHasNoStwdData.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccHasNoStwdData.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Cart.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -765,6 +770,10 @@
     <None Include="Features\Canadian Tire\New Product Submission\Stewardship Data in WPS Studio\StwdInWpsStudiofeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>StwdInWpsStudiofeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has No Stwd Data\AccHasNoStwdData.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AccHasNoStwdData.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Cart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
