@@ -238,7 +238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				StudioUtilites.SwitchToWindow("Wercs Studio");
 				SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
 				IWebElement frame =
-					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceAuthorMode')]"));
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceDesignMode')]"));
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 				return base.Wait_for_load(30);
