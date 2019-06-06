@@ -1,7 +1,7 @@
-﻿using System;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using System;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
