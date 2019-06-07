@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Linq;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
+using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide

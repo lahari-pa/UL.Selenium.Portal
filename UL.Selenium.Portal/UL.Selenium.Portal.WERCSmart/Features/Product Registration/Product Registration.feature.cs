@@ -175,8 +175,7 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 #line 50
 testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
-testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
-                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
@@ -223,16 +222,15 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 #line 71
 testRunner.And("I should see the Lithium Battery Transportation Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 72
-testRunner.And("For \'DOT, indicate the transportation classification\' I select: Fully-regulated d" +
-                    "angerous goods: UN3481, Lithium ion batteries packed with equipment, 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'DOT\' to: Fully-regulated dangerous goods: UN3481, Lithium ion batteries pa" +
+                    "cked with equipment, 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
-testRunner.And("For \'IMDG, indicate the transportation classification\' I select: None of the abov" +
-                    "e/Not intended for shipment under IMDG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'IMDG\' to: None of the above/Not intended for shipment under IMDG", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
-testRunner.And("For \'IATA, indicate the transportation classification\' I select: Section II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'IATA\' to: Section II", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 75
-testRunner.And("For \'TDG, indicate the transportation classification\' I select: Meets the require" +
-                    "ments of TDG special provision 34 to be transported as non-dangerous goods.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'TDG\' to: Meets the requirements of TDG special provision 34 to be transpor" +
+                    "ted as non-dangerous goods.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 76
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 81
@@ -395,8 +393,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 143
 testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 144
-testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
-                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 145
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 146
@@ -569,8 +566,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 217
 testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 218
-testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
-                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 219
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 222
@@ -666,16 +662,13 @@ testRunner.And("I set the Primary Physical State to be: Liquid", ((string)(null)
 #line 267
 testRunner.And("I set the Secondary Physical State to be: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 268
-testRunner.And("In the Product Characteristics tab, I enter: 2 in the Specific Gravity text field" +
-                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Specific Gravity\' to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 269
-testRunner.And("In the product Characteristics tab, I enter: 2 in the pH text field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'pH\' to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 270
-testRunner.And("In the product Characteristics tab, I enter: 2 in the Boiling point (in Celsius) " +
-                    "text field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Boiling point (in Celsius)\' to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 271
-testRunner.And("In the product Characteristics tab, I enter: 2 in the Flash point (in Celsius) te" +
-                    "xt field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Flash point (in Celsius)\' to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 272
 testRunner.And("in the Product Characteristics tab, for Flash Point Testing Method Used status I " +
                     "select: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -721,8 +714,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 287
 testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 288
-testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
-                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 289
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 290

@@ -1,5 +1,5 @@
-﻿using System;
-using NTTQA_Automation_Classes.Base_Classes;
+using System;
+using NTTQA.Selenium.BaseClasses;
 using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes

@@ -1,21 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using NTTQA_TReVor_Module.Cache;
-using SeleniumUtilities;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.Cache;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -468,19 +470,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I call Shared Step 57571 \(Enter Regulatory Information - Not Prop 65\)")]
 		public void GivenICallSharedEnterRegulatoryInformation_NotProp()
 		{
+			var regulatoryInformation = new RegulatoryInformation1();
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			var selNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			TestReport.StartStep("I should see the Regulatory Information 1 Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
 			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
-			TestReport.StartStep(
-				"I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
-			selNewProduct.Prop65 = false;
-			Delay.Seconds(1);
-			Report.IsFalse(selNewProduct.Prop65, "The Prop 65 option was not successfully set to No",
-				"The Prop 65 question was successfully set to No");
+			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			TestReport.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -1065,50 +1064,40 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57454 \(Product Characteristics - Aerosol & Gas available - Select Aerosol - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57454 \(Product Characteristics - Aerosol & Gas available - Select Aerosol - Continue - Happy Path\)")]
 		public void ThenICallSharedStepProductCharacteristics_AerosolGasAvailable_SelectAerosol_Continue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
 			// Primary Physical State is Aerosol which is the only option available
 			TestReport.StartStep("I should only see the following options for Primary Physical State: Aerosol");
-			TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
+			var produtTable = new Table(new string[] {
 				"State"
 			});
-			produtTable.AddRow(new string[] {
-				"Aerosol"
-			});
-			produtTable.AddRow(new string[] {
-				"Gas"
-			});
-			MyNewProduct.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
+			produtTable.AddRow("Aerosol");
+			produtTable.AddRow("Gas");
+			stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
 			TestReport.StartStep("I set the Primary Physical State field to: Aerosol");
-			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Aerosol");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Aerosol");
 			TestReport.StartStep("I set the Secondary Physical State field to: Liquid spray");
-			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid spray");
+			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Liquid spray");
 			TestReport.StartStep("I set the pH field to: 10.4");
-			MyNewProduct.SetTheSectionOptionTo("pH", "10.4");
-			TestReport.StartStep(
-				"If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
-				"Insoluble");
-			TestReport.StartStep(
-				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			MyNewProduct.SelectFirstOptionInSection(
-				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			//TestReport.StartStep("I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then field to: The product is classified as a D003 Hazardous Waste under RCRA.");
-			//MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "The product is classified as a D003 Hazardous Waste under RCRA.");
+			stepsProductCharacteristics.SetPHTo("10.4");
+			TestReport.StartStep("If Section: Select the best Water Solubility description is visible, I select the first option");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
+			TestReport.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			TestReport.StartStep("In the Product Characteristics page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57528 \(Product Characteristics - Aerosol Only - add data - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57528 \(Product Characteristics - Aerosol Only - add data - Continue - Happy Path\)")]
 		public void ICallSharedProductCharacteristics_AerosolOnly_AddData_Continue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			var MyNewProduct = new StepsNewProduct();
+			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
 			// Primary Physical State is Aerosol which is the only option available
 			TestReport.StartStep("I should only see the following options for Primary Physical State: Aerosol");
 			TechTalk.SpecFlow.Table produtTable = new TechTalk.SpecFlow.Table(new string[] {
@@ -1117,29 +1106,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			produtTable.AddRow(new string[] {
 				"Aerosol"
 			});
-			MyNewProduct.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
+			stepsProductCharacteristics.PrimaryPhysicalOptionsShowingCorrectly(produtTable);
 			TestReport.StartStep("I set the Primary Physical State field to: Aerosol");
-			MyNewProduct.SetTheSectionOptionTo("Primary Physical State", "Aerosol");
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("Aerosol");
 			TestReport.StartStep("I set the Secondary Physical State field to: Liquid spray");
-			MyNewProduct.SetTheSectionOptionTo("Secondary Physical State", "Liquid spray");
+			stepsProductCharacteristics.ThenISetTheSecondaryPhysicalStateToBe("Liquid spray");
 			TestReport.StartStep("I set the pH field to: 10.4");
-			MyNewProduct.SetTheSectionOptionTo("pH", "10.4");
-			TestReport.StartStep(
-				"If Section: Select the best Water Solubility description is visible, I select the first option");
-			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description",
-				"Insoluble");
-			TestReport.StartStep(
-				"I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			MyNewProduct.SelectFirstOptionInSection(
-				"When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
-			//TestReport.StartStep("I set the When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then field to: The product is classified as a D003 Hazardous Waste under RCRA.");
-			//MyNewProduct.SetTheSectionOptionTo("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then", "The product is classified as a D003 Hazardous Waste under RCRA.");
+			stepsProductCharacteristics.SetPHTo("10.4");
+			TestReport.StartStep("If Section: Select the best Water Solubility description is visible, I select the first option");
+			MyNewProduct.IfSectionIsVisibleISelectTheOption("Select the best Water Solubility description", "Insoluble");
+			TestReport.StartStep("I select the first option for section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
+			MyNewProduct.SelectFirstOptionInSection("When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then");
 			TestReport.StartStep("In the Product Characteristics page I click Continue");
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57401 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57401 \(Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path\)")]
 		public void GivenICallSharedAdditionalProductInformation_USOnly_NoGHSNotDirectShipNotPLPNotGNFR_Continue()
 		{
 			TestReport.UseSubSteps = true;
@@ -1875,19 +1857,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICallSharedRegulatoryInformation1_TSCAAndCEPAShown_NoToProp65()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyNewProductSteps = new StepsNewProduct();
+			var MyNewProductSteps = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			TestReport.StartStep("I should see the Regulatory Information 1 Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Regulatory Information 1");
 			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Exempt");
-			MyNewProductSteps.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Exempt");
-			TestReport.StartStep(
-				"I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
-			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status",
-				"Compliant with Domestic Substances List (DSL)");
-			TestReport.StartStep(
-				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			new NewProduct().Prop65 = false;
-
+			stepsRegulatoryInformation.SetTSCATo("Exempt");
+			TestReport.StartStep("I set the Canadian Environmental Protection Act (CEPA) status option to: Compliant with Domestic Substances List (DSL)");
+			MyNewProductSteps.SetTheSectionOptionTo("Canadian Environmental Protection Act (CEPA) status", "Compliant with Domestic Substances List (DSL)");
+			TestReport.StartStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -2104,7 +2083,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICallSharedAdditionalProductInformation_NoChildNoDirectShipNoPLClickContinue()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyNewProduct = new StepsNewProduct();
+			var MyNewProduct = new StepsNewProduct();
 			TestReport.StartStep(
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2129,24 +2108,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
-			var selNewProduct = new NewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			TestReport.StartStep("I should see the Regulatory Information 1 Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
 			var table = new Table("Section");
 			table.AddRow("U.S. Toxic Substances Control Act (TSCA) status");
-			table.AddRow(
-				"Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
+			table.AddRow("Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?");
 			Report.Info("Checking that the only visible questions relate to: TSCA and Prop 65");
 			MyStepsNewProduct.CheckDisplayedSections("only see", table);
 			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
-			TestReport.StartStep(
-				"I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
-			selNewProduct.Prop65 = false;
-			Delay.Seconds(1);
-			Report.IsTrue(!selNewProduct.Prop65, "The Prop 65 option was not set to 'No'",
-				"The Prop 65 option was set to: 'No'");
+			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			TestReport.StartStep("I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -2384,12 +2358,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallShared56808RegulatoryInformation_Prop_No_Continue()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			TestReport.StartStep("I should see the Regulatory Information 1 Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
-			TestReport.StartStep(
-				"I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
-			new NewProduct().Prop65 = false;
+			TestReport.StartStep("I set the Product, including container and/or packaging, contains a chemical on California's Prop 65 list option to: No");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("No");
 			TestReport.StartStep("In the Regulatory Information 1 page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Regulatory Information 1");
 		}
@@ -2859,7 +2833,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Does your product contain a Prop 65 chemical?",
 				"Yes"));
-			new NewProduct().Prop65 = true;
+			new RegulatoryInformation1().Prop65 = true;
 			TestReport.StartStep(string.Format("I set the '{0}' option to: '{1}'",
 				"Percent of Alcohol in the Product (numeric entry only)",
 				"12.0"));
@@ -3459,49 +3433,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedEnterRegulatoryInformation_YesToProp()
 		{
 			TestReport.UseSubSteps = true;
-			StepsNewProduct MyStepsNewProduct = new StepsNewProduct();
+			var MyStepsNewProduct = new StepsNewProduct();
+			var stepsRegulatoryInformation = new Steps_RegulatoryInformation1();
 			var selNewProduct = new NewProduct();
 			TestReport.StartStep("I should see the Regulatory Information 1 Page");
 			MyStepsNewProduct.GivenIShouldSeeXPage("Regulatory Information 1");
 			TestReport.StartStep("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant");
-			MyStepsNewProduct.SetTheSectionOptionTo("U.S. Toxic Substances Control Act (TSCA) status", "Compliant");
-			TestReport.StartStep(
-				"Prop 65 warning is required: Yes");
-			selNewProduct.Prop65 = true;
-			Delay.Seconds(1);
-			Report.IsTrue(selNewProduct.Prop65,
-				"Failed to set Carries Prop 65 Warning to Yes",
-				"Successfully set Carries Prop 65 Warning to Yes");
-			TestReport.StartStep(
-				"I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
+			stepsRegulatoryInformation.SetTSCATo("Compliant");
+			TestReport.StartStep("Prop 65 warning is required: Yes");
+			stepsRegulatoryInformation.SetProp65ToNoOrYes("Yes");
+			TestReport.StartStep("I set the Is the need to warn triggered by field to: A chemical or chemicals in the product, or chemicals formed during the use of the product.");
 			MyStepsNewProduct.SetTheSectionOptionTo("Is the need to warn triggered by",
 				"A chemical or chemicals in the product, or chemicals formed during the use of the product.");
-			TestReport.StartStep(
-				"I set the How is the exposure warning transmitted? field to: By affixing it to the product or its packaging");
+			TestReport.StartStep("I set the How is the exposure warning transmitted? field to: By affixing it to the product or its packaging");
 			MyStepsNewProduct.SetTheSectionOptionTo("How is the exposure warning transmitted?",
 				"By affixing it to the product or its packaging");
-			TestReport.StartStep(
-				"I set the Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured field to: Both, because instances of this product manufactured before, on and after August 30, 2018 are on the market.");
+			TestReport.StartStep("I set the Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured field to: Both, because instances of this product manufactured before, on and after August 30, 2018 are on the market.");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured",
 				"Both, because instances of this product manufactured before, on and after August 30, 2018 are on the market.");
-			TestReport.StartStep(
-				"I set the If the product carries a safe-harbor short-form warning, indicate which of the following is provided: field to: WARNING: Cancer - ");
+			TestReport.StartStep("I set the If the product carries a safe-harbor short-form warning, indicate which of the following is provided: field to: WARNING: Cancer - ");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor short-form warning, indicate which of the following is provided:",
 				"WARNING: Cancer - ");
-			TestReport.StartStep(
-				"I set the If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: field to: This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer. For more information go to ");
+			TestReport.StartStep("I set the If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: field to: This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer. For more information go to ");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:",
 				"This product can expose you to chemicals including [name of one or more chemicals], which is [are] known to the State of California to cause cancer. For more information go to ");
-			TestReport.StartStep(
-				"I set the Enter the names of one or more listed carcinogens which are the subject of this warning field to: Arsenic");
+			TestReport.StartStep("I set the Enter the names of one or more listed carcinogens which are the subject of this warning field to: Arsenic");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Enter the names of one or more listed carcinogens which are the subject of this warning",
 				"Arsenic");
-			TestReport.StartStep(
-				"I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
+			TestReport.StartStep("I set the If the product carries a custom warning, please provide the exact text that is being used: field to: NA");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"If the product carries a custom warning, please provide the exact text that is being used:",
 				"NA");
@@ -3686,18 +3649,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().ClickContinue();
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP\)")]
+		[StepDefinition(@"I call Shared Step 57501 \(Product Characteristics - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP\)")]
 		public void
 			GivenICallSharedStep57501ProductCharacteristics_MoreThanOneState_SelectSolid_StateSubcat_MixedWater_Random_Continue_HP()
 		{
 			TestReport.UseSubSteps = true;
 			var MyNewProductSteps = new StepsNewProduct();
+			var stepsProductCharacteristics = new Steps_ProductCharacteristics();
 			TestReport.StartStep("I should see the Product Characteristics Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Characteristics");
 			MyNewProductSteps.RadioButtonCountInSection("at least", "2", "Primary Physical State");
-			MyNewProductSteps.ThenISetThePrimayPhysicalStateToBe("solid");
-			NewProduct thisNewProduct = new NewProduct();
+			stepsProductCharacteristics.SetThePrimayPhysicalStateTo("solid");
+			var thisNewProduct = new NewProduct();
 			if (thisNewProduct.OptionExists("Secondary Physical State"))
 			{
 				TestReport.StartStep("Selecting the first option for section: Secondary Physical State");
@@ -3707,26 +3670,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Secondary physical state is not showing");
 			}
-
-			TestReport.StartStep(
-				"I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
-			MyNewProductSteps.SetTheSectionOptionTo(
-				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
+			TestReport.StartStep("I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
 			if (new NewProduct().GetDisplayedSections().Contains("Select the best Water Solubility description"))
 			{
-				TestReport.StartStep(
-					"I set the Select the best Water Solubility description option to: Soluble in water");
-				MyNewProductSteps.SetTheSectionOptionTo("Select the best Water Solubility description",
-					"Soluble in water");
+				TestReport.StartStep("I set the Select the best Water Solubility description option to: Soluble in water");
+				stepsProductCharacteristics.GivenISetTheSelectTheBestWaterSolubilityDescriptionToBe("Soluble in water");
 			}
 
 			TestReport.StartStep("Clicking continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Product Characteristics");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 57911 \(Regulatory Information 1 - CEPA only shown - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 57911 \(Regulatory Information 1 - CEPA only shown - Continue - Happy Path\)")]
 		public void GivenICallSharedStepRegulatoryInformation_CEPAOnlyShown_Continue_HappyPath()
 		{
 			TestReport.UseSubSteps = true;
@@ -7653,7 +7610,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Steps_Shared steps_Shared = new Steps_Shared();
 			steps_Shared.ProductAttributes_FilterFor("CBC");
 			TechTalk.SpecFlow.Table table = new TechTalk.SpecFlow.Table(new string[] {
-				"Data" 
+				"Data"
 			});
 			table.AddRow(new string[] {
 				"CBCDS"

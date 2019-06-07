@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;

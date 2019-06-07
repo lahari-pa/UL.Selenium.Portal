@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Castle.Core.Internal;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
