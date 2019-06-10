@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
@@ -89,7 +87,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 							Report.Info("Attempting to set metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
 							metalInput.TryClick();
 						}
-						catch (Exception e)
+						catch (Exception)
 						{
 							Report.Error("Failed to click metal: " + thisMetal.Metal + " and value: " + thisMetal.Presence);
 							throw;

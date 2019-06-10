@@ -102,7 +102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) == null;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				if (button.IsElementStale())
 				{

@@ -710,7 +710,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					return true;
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1010,7 +1010,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 				return true;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1455,7 +1455,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				return MatchedEntry.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1516,7 +1516,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				return false;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1577,7 +1577,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				return false;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -2199,7 +2199,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						return null;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					return null;
 				}
@@ -2219,7 +2219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				var errors = this.containerElement.FindElements(By.XPath("//div[contains(@class, 'alert')]"),2);
 				return errors.Where(x => x.Displayed).ToList().Select(x => x.GetValue()).ToList();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return null;
 			}
@@ -2244,17 +2244,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						return null;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					return null;
 				}
-
 			}
-			else
-			{
-				throw new Exception("Label not found as expected.");
-			}
-
+			throw new Exception("Label not found as expected.");
 		}
 
 		/// <summary>
@@ -2314,7 +2309,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						return null;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					return null;
 				}
@@ -2731,7 +2726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				var el = this.containerElement.FindElement(By.XPath(xPath), 2);
 				return el != null && el.Displayed;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -2873,7 +2868,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				}
 
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 
 			}
@@ -3320,7 +3315,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				var xPath = @"(//label[starts-with(text(),""" + section + @""")]))";
 				SeleniumBrowser.WebBrowser.FindElement(By.XPath(xPath), 2).TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 
 			}

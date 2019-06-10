@@ -366,7 +366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				{
 					thisIngredient.TradeSecretEnabled = thisRow.FindElement(By.XPath(".//td[@class='trade-secret']//input")).Enabled;
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					thisIngredient.TradeSecretEnabled = false;
 				}
@@ -757,7 +757,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return this.IngredientRow(ingredient)
 					.FindElement(By.XPath(".//td[@class='inci-name']//p[@class='form-error']/span")).Text;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return "";
 			}

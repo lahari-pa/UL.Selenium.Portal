@@ -1573,7 +1573,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return this._btn_confirm.Displayed;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}

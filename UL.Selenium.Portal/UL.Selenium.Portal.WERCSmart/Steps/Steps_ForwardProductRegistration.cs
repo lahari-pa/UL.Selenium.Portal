@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;

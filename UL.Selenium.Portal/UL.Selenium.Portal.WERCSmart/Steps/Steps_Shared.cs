@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.SpecFlow;
@@ -5929,7 +5927,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string CASNo = "";
 			if (component.Rows.First()["CASNumber"].Contains("WPS"))
 			{
-				string casSavedAs = "";
 				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))
 				{
 					ProductInformation CASProd =
@@ -6043,7 +6040,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string CASNo = "";
 			if (component.Rows.First()["CASNumber"].Contains("WPS"))
 			{
-				string casSavedAs = "";
 				if (Context.Contains(component.Rows.First()["CASNumber"]?.Split(' ')[2].Trim()))
 				{
 					var CASProd = (ProductInformation)Context.GetFromContext(
@@ -7331,11 +7327,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
-
-			bool selectedID = false;
-
 			Report.IsTrue(myStudioShaManager.SelectProductByID(id), "Failed to select product with id: " + id, "Selected product with id: " + id);
-
 			TestReport.StartStep("Click document management");
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Document Management"),
 				"Failed to click document management", "Clicked document management");

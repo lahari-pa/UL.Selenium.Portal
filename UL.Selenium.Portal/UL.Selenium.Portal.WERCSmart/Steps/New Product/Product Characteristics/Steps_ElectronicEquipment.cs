@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using TechTalk.SpecFlow;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
@@ -16,8 +9,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 	{
 		ElectronicEquipment _electronicEquipment = new ElectronicEquipment();
 
-		[StepDefinition(@"For 'Has a LCD or Plasma Display' I select: (No|Yes)")]
-		public void ForHasAlcdOrPlasmaDisplayISelectNoOrYes(string noOrYes)
+		[StepDefinition(@"I set 'Has a LCD or Plasma Display' to: (No|Yes)")]
+		public void SetHasAlcdOrPlasmaDisplayToNoOrYes(string noOrYes)
 		{
 			Report.IsTrue(this._electronicEquipment.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 				"Product characteristics tab is loaded.");
@@ -28,8 +21,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				"Successfully set Has a LCD or Plasma Display value to: " + noOrYes);
 		}
 
-		[StepDefinition(@"For 'Contains Circuit Board' I select: (No|Yes)")]
-		public void ForContainsCircuitBoardISelectNoOrYes(string noOrYes)
+		[StepDefinition(@"I set 'Contains Circuit Board' to: (No|Yes)")]
+		public void SetContainsCircuitBoardToNoOrYes(string noOrYes)
 		{
 			Report.IsTrue(this._electronicEquipment.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
 				"Product characteristics tab is loaded.");

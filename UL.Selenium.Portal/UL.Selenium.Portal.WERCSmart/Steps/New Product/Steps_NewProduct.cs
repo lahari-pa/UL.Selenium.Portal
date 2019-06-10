@@ -6,7 +6,6 @@ using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
@@ -340,7 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 						}
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					//Do nothing
 				}

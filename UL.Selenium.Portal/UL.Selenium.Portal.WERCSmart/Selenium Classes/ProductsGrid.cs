@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using Castle.Core.Internal;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
@@ -418,7 +417,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
 				return (productRow != null);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 				throw;
