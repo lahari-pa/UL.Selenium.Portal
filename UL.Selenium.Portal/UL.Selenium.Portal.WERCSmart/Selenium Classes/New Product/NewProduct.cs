@@ -15,14 +15,9 @@ using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
-	public class NewProduct : BaseObject
+	public class NewProduct : SeleniumBaseObject
 	{
-		// Again a pretty poor/generic ID AND CLASHES WITH FORWARD PRODUCT REGISTRATION!!!
-		// but it's the best we have....
-		public const string BasePath = "//div[@id='dataentry']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
 
 		public string GetHeader()
 		{
@@ -72,19 +67,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string ErrorMessage()
 		{
-			this.RefreshContainer();
+			//this.RefreshContainer();
 			return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2)?.Text;
 		}
 
 		public List<string> AllErrorMessages()
 		{
-			this.RefreshContainer();
+			//this.RefreshContainer();
 			return this.containerElement.FindElements(By.XPath(".//p[@class='form-error']//span"), 2)?.Select(x => x.Text).ToList();
 		}
 
 		public string BatteyWarning()
 		{
-			this.RefreshContainer();
+			//this.RefreshContainer();
 			return this.containerElement.FindElement(By.XPath(".//div[@class='WARNING']"), 2).Text;
 		}
 
@@ -118,18 +113,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
-		public bool RefreshContainer()
-		{
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
-			return this.containerElement != null;
-		}
+		//public bool RefreshContainer()
+		//{
+		//	this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+		//	return this.containerElement != null;
+		//}
 
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
 			int counter = 0;
 			while (counter < secondsToWait)
 			{
-				this.RefreshContainer();
+				//this.RefreshContainer();
 				var addProductHeader = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3"))
 					.FirstOrDefault(x => x.Text.Contains(sectionHeader));
 				if (addProductHeader != null)
@@ -1310,7 +1305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			return this.containerElement.FindElements(By.XPath(".//label[text()='Primary Physical State']/..//following-sibling::div//label//span"), 2).Select(x => x.GetValue()).ToList();
 		}
-		
+
 		public bool SelectSecondaryPhysicalState(string item)
 		{
 			try
@@ -3323,20 +3318,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SectionLogoDisplayed(string logo, int secondsToWait = 30)
 		{
-			int counter = 0;
-			while (counter < secondsToWait)
-			{
-				this.RefreshContainer();
-				var headerLogo = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3/img"))
-					.FirstOrDefault(x => x.GetAttribute("src").ToLower().Contains(logo.ToLower()));
-				if (headerLogo != null)
-				{
-					return true;
-				}
-				Delay.Seconds(1);
-				counter++;
-			}
-			return false;
+			return this.containerElement.WaitUntilElementVisible(By.XPath(".//div[@class='panel-heading']//h3/img[contains(@src,'" + logo + "')]"), secondsToWait) != null;
 		}
 
 		public string ActivePanelHeading()

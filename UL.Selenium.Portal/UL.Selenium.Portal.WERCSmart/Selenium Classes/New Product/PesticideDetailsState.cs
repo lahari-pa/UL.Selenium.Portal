@@ -81,7 +81,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			var clicked = links.First().TryClick();
 			GeneralUtilities.Wait_for_load_finish();
-			this.RefreshContainer();
+			//this.RefreshContainer();
 			return clicked;
 		}
 

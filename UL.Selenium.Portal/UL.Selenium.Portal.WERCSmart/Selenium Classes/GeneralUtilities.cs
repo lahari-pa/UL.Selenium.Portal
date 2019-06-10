@@ -145,7 +145,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var document = web.Load(@"https://www.upcitemdb.com/info-cvs");
 			var nodes = document.DocumentNode.SelectNodes(@"//a[@name='upclist']//following-sibling::div//ul//li//div[@class='rImage']/a");
 			var upcValues = nodes.Select(x => x.InnerText).ToList();
-			return upcValues;
+			 return upcValues;
 		}
 
 		public static bool TrySelect(IWebElement el, string optionValue, bool ignoreWhitespace = false)
