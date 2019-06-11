@@ -19,35 +19,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
 
-		public string GetHeader()
+		private IWebElement Header => this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2);
+
+		public string HeaderText => this.Header?.Text;
+
+		public string ProductId
 		{
-			return this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2).Text;
+			get
+			{
+				var headText = this.HeaderText;
+				if (headText.IsNullOrEmpty())
+				{
+					return null;
+				}
+				var matches = Regex.Matches(headText, @"\(\d*\)");
+				if (matches.Count == 0)
+				{
+					return null;
+				}
+				var bracketedValue = matches[matches.Count - 1].Groups[0].Value;
+				return bracketedValue.Trim().Substring(1, bracketedValue.Length - 2);
+			}
 		}
 
-		public string GetProductId()
-		{
-			var headText = this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2)?.Text;
-			if (headText.IsNullOrEmpty())
-			{
-				throw new Exception("The product header was not displayed!");
-			}
-			var matches = Regex.Matches(headText, @"\(\d*\)");
-			if (matches.Count == 0)
-			{
-				return null;
-			}
-			var bracketedValue = matches[matches.Count - 1].Groups[0].Value;
-			return bracketedValue.Trim().Substring(1, bracketedValue.Length - 2);
-		}
-
-		public string GetProductName()
-		{
-			return this.GetHeader().Replace("(" + this.GetProductId() + ")", "").Trim();
-		}
+		private string ProductName => this.HeaderText.Replace("(" + this.ProductId + ")", "").Trim();
 
 		public ProductInformation GetCurrentProductInformation()
 		{
-			return new ProductInformation() { Id = this.GetProductId(), Name = this.GetProductName() };
+			return new ProductInformation() { Id = this.ProductId, Name = this.ProductName };
 		}
 
 		public string GetInitialStatement()
@@ -67,19 +66,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public string ErrorMessage()
 		{
-			//this.RefreshContainer();
 			return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2)?.Text;
 		}
 
 		public List<string> AllErrorMessages()
 		{
-			//this.RefreshContainer();
 			return this.containerElement.FindElements(By.XPath(".//p[@class='form-error']//span"), 2)?.Select(x => x.Text).ToList();
 		}
 
 		public string BatteyWarning()
 		{
-			//this.RefreshContainer();
 			return this.containerElement.FindElement(By.XPath(".//div[@class='WARNING']"), 2).Text;
 		}
 
@@ -121,27 +117,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
-			int counter = 0;
-			while (counter < secondsToWait)
-			{
-				//this.RefreshContainer();
-				var addProductHeader = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3"))
-					.FirstOrDefault(x => x.Text.Contains(sectionHeader));
-				if (addProductHeader != null)
-				{
-					return true;
-				}
-				Delay.Seconds(Delay.SpeedFactor * 1);
-				counter++;
-			}
+			return this.containerElement.WaitUntilElementVisible(By.XPath($".//div[@class='panel-heading']//h3[contains(text(), '{sectionHeader}')]"), secondsToWait) != null;
+			//int counter = 0;
+			//while (counter < secondsToWait)
+			//{
+			//	var addProductHeader = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3")).FirstOrDefault(x => x.Text.Contains(sectionHeader));
+			//	if (addProductHeader != null)
+			//	{
+			//		return true;
+			//	}
+			//	Delay.Seconds(Delay.SpeedFactor * 1);
+			//	counter++;
+			//}
 
-			return false;
+			//return false;
 		}
 
 		public bool CountryofOriginExists()
 		{
-			IWebElement myLabel =
-				this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Country of Origin')]"), 2);
+			IWebElement myLabel = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Country of Origin')]"), 2);
 
 			if (myLabel == null)
 			{
@@ -228,44 +222,43 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				var el = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'continue-button')]"), 2);
+				var el = this.containerElement.WaitUntilElementClickable(By.XPath(".//a[contains(@class,'continue-button')]"), 10);
 				if (el == null)
 				{
 					return false;
 				}
-				if (el.TryClick())
+				if (!el.TryClick())
 				{
-					if (waitForLoadingBtnSpinner)
-					{
-						GeneralUtilities.WaitForRefreshToDisappear(el);
-					}
-					GeneralUtilities.Wait_for_load_finish();
-					var attempt = 0;
-					var ajax = true;
-					while (attempt < 15 && ajax)
-					{
-						Report.Info("Attempt: " + attempt);
-						if (!GeneralUtilities.AjaxPopupExists())
-						{
-							ajax = false;
-						}
-						else
-						{
-							Report.Error("Ajax error was displayed! Clicking Close.");
-							GeneralUtilities.CloseAjaxPopup();
-							el.TryClick();
-							if (waitForLoadingBtnSpinner)
-							{
-								GeneralUtilities.WaitForRefreshToDisappear(el);
-							}
-							GeneralUtilities.Wait_for_load_finish();
-							attempt++;
-							Delay.Seconds(2);
-						}
-					}
-					return !ajax;
+					return false;
 				}
-				return false;
+				if (waitForLoadingBtnSpinner)
+				{
+					GeneralUtilities.WaitForRefreshToDisappear(el);
+				}
+				GeneralUtilities.Wait_for_load_finish();
+				var attempt = 0;
+				var ajax = true;
+				while (attempt < 10 && ajax)
+				{
+					Report.Info("Attempt: " + attempt);
+					if (!GeneralUtilities.AjaxPopupExists())
+					{
+						ajax = false;
+					}
+					else
+					{
+						Report.Error("Ajax error was displayed! Clicking Close.");
+						GeneralUtilities.CloseAjaxPopup();
+						el.TryClick();
+						if (waitForLoadingBtnSpinner)
+						{
+							GeneralUtilities.WaitForRefreshToDisappear(el);
+						}
+						GeneralUtilities.Wait_for_load_finish();
+						attempt++;
+					}
+				}
+				return !ajax;
 			}
 			catch (Exception)
 			{
@@ -334,11 +327,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Error("Page loaded too quickly to check error message.");
 				return true;
 			}
-		}
-
-		public string ProductName {
-			get { return this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Name') or contains(text(),'Product name')]/../following-sibling::div/input"), 2).Text.Trim(); }
-			set { this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Product Name') or contains(text(),'Product name')]/../following-sibling::div/input"), 2).EnterText(value); }
 		}
 
 		/// <summary>

@@ -43,7 +43,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 					Delay.Seconds(Delay.SpeedFactor * 1);
 				}
-
 				return false;
 			}
 			catch (Exception)
@@ -54,18 +53,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public static bool Wait_for_load_finish()
 		{
-			Delay.Seconds(2);
-			if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2) == null)
-			{
-				return true;
-			}
-
-			while (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]"), 2).GetAttribute("class").Contains("pace-running"))
-			{
-				Delay.Seconds(Delay.SpeedFactor * 1);
-			}
-
-			return true;
+			// wait up to 2 seconds for the loading bar to become visible
+			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//body[contains(@class,'pace-running')]"), 2);
+			// waits up to 30 seconds for the loading bar to then become invisible
+			return  SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 30);
 		}
 
 		public static bool Loading_Active()
@@ -87,46 +78,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				if (button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh')]"), 2) == null)
-				{
-					return true;
-				}
-
-				int i = 0;
-				while (button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh')]"), 2) != null && i < maxWaitTime)
-				{
-					Delay.Seconds(Delay.SpeedFactor * 1);
-					Report.Info("Waiting: " + i.ToString());
-					i++;
-				}
-
-				return button.FindElement(By.XPath(".//i[contains(@class,'fa-refresh']"), 2) == null;
+				return button.WaitUntilElementInvisible(By.XPath(".//i[contains(@class,'fa-refresh')]"), maxWaitTime);
 			}
 			catch (Exception)
 			{
-				if (button.IsElementStale())
-				{
-					Report.Info("Element is stale");
-				}
-				return true;
+				return false;
 			}
 		}
 
 		public static bool WaitForSpinnerToDisappear(IWebElement button, int waitMax = 60)
 		{
-			var spinner = button.FindElement(By.XPath(".//i[contains(@class,'fa fa-spinner')]"), 2);
-			if (spinner == null || !spinner.Displayed)
+			try
 			{
-				return true;
+				return button.WaitUntilElementInvisible(By.XPath(".//i[contains(@class,'fa fa-spinner')]"), waitMax);
 			}
-			int i = 0;
-			while ((spinner != null && spinner.Displayed) && i < waitMax)
+			catch (Exception)
 			{
-				spinner = button.FindElement(By.XPath(".//i[contains(@class,'fa fa-spinner')]"), 2);
-				Delay.Seconds(1);
-				i++;
+				return false;
 			}
-			return spinner == null || !spinner.Displayed;
 		}
 
 		public static bool CloseAjaxPopup()

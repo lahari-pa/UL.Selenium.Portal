@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
+using NTTQA.Selenium.TReVor;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.UniversalFunctions;
@@ -821,14 +822,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			StepsNewProduct stepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			var cvsUpc = GeneralUtilities.CvsUpcs();
-			for (int i = 0; i < cvsUpc.Count; i++)
+			for (int i = 0; i < 100; i++)
 			{
 				Report.Info("Entering UPC information. Attempt: " + (i + 1));
 				TestReport.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				TestReport.StartStep("I add the following into the UPC Fields");
-				var upc = cvsUpc[i];
+				var upc = Api.GetRandomUpcNumber("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -845,7 +845,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					return;
 				}
-
 				// delete upc that failed
 				stepsNewProduct.GivenIDeleteUPC(upc);
 				Report.Info("An error was showing! on click continue! Attempting a different UPC");

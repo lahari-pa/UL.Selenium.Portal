@@ -12,30 +12,21 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
 	[Binding, Scope(Tag = "NewProduct")]
 	class StepsNewProduct
 	{
+		private static NewProduct NewProduct => new NewProduct();
+
 		[StepDefinition(@"the Product Type page should be loaded")]
 		[StepDefinition(@"the Product Editor page should be loaded")]
 		public void ProductTypePageLoaded()
 		{
-
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Product Type page should be loaded");
-			try
-			{
-				Report.Info("Product Type page should be loaded");
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.Wait_for_load(10), "Product Type page did not load!", "Product Type page loaded successfully!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.Info("Product Type page should be loaded");
+			Report.IsTrue(NewProduct.WaitForContainerToBeVisible(), "Product Type page did not load!", "Product Type page loaded successfully!");
 		}
 
 		[StepDefinition(@"the product saved as: (.*) should be visible in editor")]
@@ -81,14 +72,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!");
 				Report.Info("Inputting Name: '" + name + "'");
-				selNewProduct.ProductName = name;
+				new TheProduct().ProductName = name;
 				Report.Info("Setting Product Type to be: 'Game System w/Battery'");
 				selNewProduct.ProductType = "Game System w/Battery";
 				Report.Screenshot();
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!");
 				Report.Info("Getting Product ID");
-				var fullProductName = selNewProduct.GetHeader();
+				var fullProductName = selNewProduct.HeaderText;
 				// Product Name made out of the name + the Id - so if we remove the Name from the product we should be left with an ID!
 				var productId = fullProductName.Replace(name, "").Replace("(", "").Replace(")", "").Trim();
 				Report.Info("ProductID was: '" + productId + "'");
@@ -109,18 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I click continue")]
 		public void ClickContinue()
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking continue");
-			try
-			{
-				Report.Info("Clicking continue");
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked continue successfully!");
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked continue successfully!");
 		}
 
 		[StepDefinition(@"I should see battery manufacturer message: (.*)")]
@@ -242,28 +222,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I should see the header (.*)")]
 		public void CorrectHeaderShouldBeShowing(string header)
 		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that the header is showing " + header);
-			try
+			if (!NewProduct.WaitForContainerToBeVisible())
 			{
-				Report.Info("Checking that the header is showing " + header);
-				var selNewProduct = new NewProduct();
-
-				if (!selNewProduct.Wait_for_load(10))
-				{
-					throw new Exception("Page failed to load!");
-				}
-
-				var headerShowing = selNewProduct.GetHeader();
-				Report.IsTrue(headerShowing.Trim() == header.Trim(),
-					"Header was not showing as expected! Expected: '" + header + "', but found: '" + headerShowing + "'!",
-					"Header was showing: '" + header + "', as expected!");
-				Report.Screenshot();
+				throw new Exception("Page failed to load!");
 			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
+			var displayedHeader = NewProduct.HeaderText;
+			Report.IsTrue(displayedHeader.Trim() == header.Trim(),
+				"Header was not showing as expected! Expected: '" + header + "', but found: '" + displayedHeader + "'!",
+				"Header was showing: '" + header + "', as expected!");
 		}
 
 		[StepDefinition(@"I should see the statement (.*)")]
@@ -307,44 +273,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"in the (.*) page I click Continue")]
 		public void GivenInTheNewProductPageIClickContinue(string page)
 		{
-			var selNewProduct = new NewProduct();
-			if (!selNewProduct.Wait_for_load(10))
+			if (!NewProduct.WaitForContainerToBeVisible())
 			{
 				Report.Failure("New Product page is not loaded");
 				return;
 			}
-			if (page.ToLower() != "new product" && !selNewProduct.WaitForSection(page))
+			if (page.ToLower() != "new product" && !NewProduct.WaitForSection(page))
 			{
 				Report.Error($@"The page title did not match expected! Expected ""{page}""");
 			}
-
-			string pageTitle = selNewProduct.GetHeader();
+			string pageTitle = NewProduct.HeaderText;
 			Report.Info("Clicking Continue");
-			Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
-			Delay.Seconds(0.2);
+			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
 			if (pageTitle == "The Product")
 			{
 				try
 				{
-					ModalDialog thisModalDialog = new ModalDialog();
-					if (thisModalDialog.Exists)
+					var thisModalDialog = new ModalDialog();
+					if (!thisModalDialog.Exists || thisModalDialog.GetTitle() != "Warning")
 					{
-						if (thisModalDialog.GetTitle() == "Warning")
-						{
-							if (thisModalDialog.GetText().Contains("You are registering a formula (Raw material)"))
-							{
-								thisModalDialog.Click_OK();
-								Delay.Seconds(0.1);
-							}
-						}
+						return;
+					}
+					if (thisModalDialog.GetText().Contains("You are registering a formula (Raw material)"))
+					{
+						Report.IsTrue(thisModalDialog.Click_OK(), "Failed to click OK in the modal", "Clicked OK in the modal");
 					}
 				}
 				catch (Exception)
 				{
-					//Do nothing
 				}
-
-
 			}
 
 		}
@@ -406,7 +363,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				var selNewProduct = new NewProduct();
 				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
 					"Product type tab is loaded.");
-				selNewProduct.ProductName = productName;
+				new TheProduct().ProductName = productName;
 				Delay.Seconds(1);
 
 			}
@@ -416,7 +373,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				throw;
 			}
 		}
-		
+
 		[StepDefinition(@"In the Additional Information Page for Product is solely for the Retailer's use I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsSolelyForTheRetailerSUseISelectNoOrYes(string noOrYes)
 		{
@@ -444,7 +401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				throw;
 			}
 		}
-		
+
 		[StepDefinition(@"In the Additional Information Page for Product is retailers private label or brand I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsRetailersPrivateLabelOrBrandISelectNoOrYes(string noOrYes)
 		{
@@ -472,7 +429,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				throw;
 			}
 		}
-		
+
 		[StepDefinition(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOSHACompliantSDSISelect(string selection)
 		{
@@ -714,7 +671,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				throw;
 			}
 		}
-		
+
 		/// <summary>
 		/// select product lable option for Refer to your Product Label. From the options, select those that appear on the Label.
 		/// </summary>
@@ -1028,7 +985,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//If Type of Product hasn't updated, try again ignoring case
 			//CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 		}
-		
+
 		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: (.*)")]
 		public void ThenInTheProductCharacteristicsTabOfTheNewProductPageForWhenTheProductHasAFlammablePropellantISelect(string option)
 		{
@@ -2445,7 +2402,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm the product name: ""(.*)"" is displayed in the header")]
 		public void ConfirmTheProductNameIsDisplayedInTheHeader(string name)
 		{
-			var header = new NewProduct().GetHeader();
+			var header = NewProduct.HeaderText;
 			var matches = Regex.Matches(header, @"\(\d*\)");
 			if (matches.Count == 0)
 			{
