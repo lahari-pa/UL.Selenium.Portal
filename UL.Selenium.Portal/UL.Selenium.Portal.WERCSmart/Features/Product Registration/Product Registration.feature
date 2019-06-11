@@ -37,7 +37,7 @@ And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Product Name text field
+And I set 'Product Name' to: Answering Machine, Battery Included
 And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Type of Product select field
 And in the New Product page I click Continue
 Then I save the product information as: TestCase63705
@@ -58,7 +58,7 @@ And I add the following batteries:
 | Lithium Ion  | 10400        | 4                               | 4                                  |
 And in the New Product page I click Continue
 And I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
-And For 'Product has had TCLP; Report is available' I select: No
+And I set 'Product has had TCLP; Report is available' to: No
 And I set all the metal presence value to: No
 And in the New Product page I click Continue
 And I should see the Electronic Equipment Page
@@ -116,7 +116,7 @@ And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Nickel Metal Hydride (NiMH) Battery in the Product Name text field
+And I set 'Product Name' to: Nickel Metal Hydride (NiMH) Battery
 And In the Product Type tab of the New Product Page, I enter: Nickel Metal Hydride (NiMH) Battery in the Type of Product select field
 And in the New Product page I click Continue
 Then I save the product information as: TestCase63724
@@ -191,7 +191,7 @@ And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: abrasive in the Product Name text field
+And I set 'Product Name' to: abrasive
 And In the Product Type tab of the New Product Page, I enter: Abrasive in the Type of Product select field
 And in the New Product page I click Continue
 Then I save the product information as: TestCase65441
@@ -259,7 +259,7 @@ And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Laundry, Detergent in the Product Name text field
+And I set 'Product Name' to: Laundry, Detergent
 And In the Product Type tab of the New Product Page, I enter: Laundry, Detergent in the Type of Product select field
 And in the New Product page I click Continue
 Then I save the product information as: TestCase65392

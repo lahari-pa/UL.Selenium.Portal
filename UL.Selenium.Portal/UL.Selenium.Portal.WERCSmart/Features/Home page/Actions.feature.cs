@@ -177,8 +177,7 @@ testRunner.And("I Select the Create a New Registration radio button", ((string)(
 #line 55
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 56
-testRunner.And("In the Product Type tab of the New Product Page, I enter: Soap63663 in the Produc" +
-                    "t Name text field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product Name\' to: Soap63663", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 57
 testRunner.And("In the Product Type tab of the New Product Page, I enter: Soap (Bar, Liquid) for " +
                     "Body in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

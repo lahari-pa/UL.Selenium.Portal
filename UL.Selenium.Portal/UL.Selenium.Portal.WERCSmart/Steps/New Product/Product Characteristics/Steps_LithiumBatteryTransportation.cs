@@ -1,5 +1,6 @@
 using NTTQA.Selenium.Reporting.Core;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
@@ -7,38 +8,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class StepsLithiumBatteryTransportation
 	{
-		private static LithiumBatteryTransportation _lithiumBatteryTransportation = new LithiumBatteryTransportation();
+		private LithiumBatteryTransportation LithiumBatteryTransportation => new LithiumBatteryTransportation();
 
 		[StepDefinition(@"I set 'DOT' to: (.*)")]
 		public void SetDotTo(string option)
 		{
-			Report.IsTrue(_lithiumBatteryTransportation.WaitForTab("Product Characteristics"), "Product characteristics has not loaded", "Product characteristics tab is loaded.");
-			_lithiumBatteryTransportation.Dot = option;
-			Report.IsTrue(_lithiumBatteryTransportation.Dot == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
+			Report.IsTrue(this.LithiumBatteryTransportation.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded", "Product characteristics tab is loaded.");
+			this.LithiumBatteryTransportation.Dot = option;
+			Report.IsTrue(this.LithiumBatteryTransportation.Dot == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
 		[StepDefinition(@"I set 'IMDG' to: (.*)")]
 		public void SetImdgTo(string option)
 		{
-			Report.IsTrue(_lithiumBatteryTransportation.WaitForTab("Product Characteristics"), "Product characteristics has not loaded", "Product characteristics tab is loaded.");
-			_lithiumBatteryTransportation.Imdg = option;
-			Report.IsTrue(_lithiumBatteryTransportation.Imdg == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
+			Report.IsTrue(this.LithiumBatteryTransportation.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded", "Product characteristics tab is loaded.");
+			this.LithiumBatteryTransportation.Imdg = option;
+			Report.IsTrue(this.LithiumBatteryTransportation.Imdg == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
 		[StepDefinition(@"I set 'IATA' to: (.*)")]
 		public void SetIataTo(string option)
 		{
-			Report.IsTrue(_lithiumBatteryTransportation.WaitForTab("Product Characteristics"), "Product characteristics has not loaded","Product characteristics tab is loaded.");
-			_lithiumBatteryTransportation.Iata = option;
-			Report.IsTrue(_lithiumBatteryTransportation.Iata == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
+			Report.IsTrue(this.LithiumBatteryTransportation.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded","Product characteristics tab is loaded.");
+			this.LithiumBatteryTransportation.Iata = option;
+			Report.IsTrue(this.LithiumBatteryTransportation.Iata == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
 		[StepDefinition(@"I set 'TDG' to: (.*)")]
 		public void SetTdgTo(string option)
 		{
-			Report.IsTrue(_lithiumBatteryTransportation.WaitForTab("Product Characteristics"), "Product characteristics has not loaded","Product characteristics tab is loaded.");
-			_lithiumBatteryTransportation.Tdg = option;
-			Report.IsTrue(_lithiumBatteryTransportation.Tdg == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
+			Report.IsTrue(this.LithiumBatteryTransportation.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded","Product characteristics tab is loaded.");
+			this.LithiumBatteryTransportation.Tdg = option;
+			Report.IsTrue(this.LithiumBatteryTransportation.Tdg == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
 

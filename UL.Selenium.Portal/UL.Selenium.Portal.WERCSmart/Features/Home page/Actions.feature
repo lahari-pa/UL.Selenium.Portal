@@ -53,7 +53,7 @@ Then The home screen should load
 Then I click the Register New Product icon in the Navigation Pane
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
-And In the Product Type tab of the New Product Page, I enter: Soap63663 in the Product Name text field
+And I set 'Product Name' to: Soap63663
 And In the Product Type tab of the New Product Page, I enter: Soap (Bar, Liquid) for Body in the Type of Product select field
 And in the New Product page I click Continue
 Then I save the product information as: TestCase63663

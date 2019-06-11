@@ -10,6 +10,7 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using TestStack.White.UIItems.TabItems;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
@@ -354,26 +355,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The additional product information page is showing as expected");
 		}
 
-		[StepDefinition(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Product Name text field")]
-		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheProductNameTextField(string productName)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Type tab of the New Product Page, I enter: " + productName + " in the Product Name text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				new TheProduct().ProductName = productName;
-				Delay.Seconds(1);
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
 		[StepDefinition(@"In the Additional Information Page for Product is solely for the Retailer's use I select: (No|Yes)")]
 		public void GivenInTheAdditionalInformationPageForProductIsSolelyForTheRetailerSUseISelectNoOrYes(string noOrYes)
 		{
@@ -381,7 +362,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			try
 			{
 				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 					"Product type tab is loaded.");
 
 				bool expected = (noOrYes == "Yes");
@@ -409,7 +390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			try
 			{
 				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 					"Product type tab is loaded.");
 
 				bool expected = (noOrYes == "Yes");
@@ -433,13 +414,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOSHACompliantSDSISelect(string selection)
 		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(NewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
-
-			selNewProduct.OSHA = selection;
-
-			Report.IsTrue(selNewProduct.OSHA.Contains(selection),
+			Report.Info("Setting OSHA to: " + selection);
+			NewProduct.OSHA = selection;
+			Report.IsTrue(NewProduct.OSHA.Contains(selection),
 				"Failed to set OSHA value to: " + selection,
 				"Successfully set OSHA value to: " + selection);
 		}
@@ -448,7 +427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.PersonalProtectionEquipmentRecommended = selection;
@@ -462,7 +441,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.AutoignitionTemperature = selection;
@@ -473,7 +452,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.MinimumIgnitionEnergy = selection;
@@ -484,7 +463,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.Viscosity = selection;
@@ -495,7 +474,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.Appearance = selection;
@@ -509,7 +488,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.Odor = selection;
@@ -523,7 +502,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.OdorThreshold = selection;
@@ -537,7 +516,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPartitionCoefficientISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.PartitionCoefficient = selection;
@@ -604,9 +583,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"In the New Product page I click tab: (.*)")]
 		public void GivenInTheNewProductPageIClickTab(string tab)
 		{
-			NewProduct selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.ClickTab(tab), "Failed to click tab: " + tab, "Successfully clicked tab: " + tab);
-			Delay.Seconds(1);
+			tab = tab.Replace(" ", "");
+			if (!Enum.TryParse(tab, out NewProduct.Tab thisTab))
+			{
+				return;
+			}
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.ClickTab(thisTab), "Failed to click tab: " + tab, "Successfully clicked tab: " + tab);
 		}
 
 		[StepDefinition(@"in the New Product page I click section: (.*)")]
@@ -660,7 +643,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			try
 			{
 				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 					"Product type tab is loaded.");
 				selNewProduct.SpecialPermitNumbers = permitNumber;
 
@@ -818,7 +801,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheVOC_OTC_CARBTabForProductHasBeenGrantedAnAlternativeControlPlanISelect(string noOrYes)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 				"Product type tab is loaded.");
 
 			bool expected = (noOrYes == "Yes");
@@ -835,7 +818,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded",
 				"Product characteristics tab is loaded.");
 
 
@@ -862,7 +845,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheVOC_OTC_CARBTabForProductLabelSpecifiesADilutionRatioISelectYes(string noOrYes)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 				"Product type tab is loaded.");
 
 			bool expected = (noOrYes == "Yes");
@@ -881,7 +864,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsSoldTextField(string contentAsSold)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 				"Product type tab is loaded.");
 			selNewProduct.ProductsVocContentAsSold = contentAsSold;
 		}
@@ -893,7 +876,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsUsedTextField(string contentAsUsed)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 				"Product type tab is loaded.");
 			selNewProduct.ProductsVocContentAsUsed = contentAsUsed;
 		}
@@ -905,7 +888,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			try
 			{
 				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 					"Product type tab is loaded.");
 
 				bool expected = (noOrYes == "Yes");
@@ -930,7 +913,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheAdditionalInformationPageForProductHasBeenClassifiedOSHAISelectNoOrYes(string noOrYes)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"),
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType),
 				"Product type has not loaded",
 				"Product type tab is loaded.");
 
@@ -950,7 +933,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			try
 			{
 				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 					"Product type tab is loaded.");
 				List<string> countries = new List<string>() { country };
 
@@ -980,7 +963,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(string typeOfProduct)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded", "Product type tab is loaded.");
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
 			selNewProduct.ProductType = typeOfProduct;
 			//If Type of Product hasn't updated, try again ignoring case
 			//CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");

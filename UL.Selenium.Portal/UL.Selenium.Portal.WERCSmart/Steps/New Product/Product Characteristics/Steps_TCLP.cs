@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NTTQA.Selenium.Reporting.Core;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
@@ -9,16 +10,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_ToxicityCharacteristicsLeachingProcedure
 	{
-		private static TCLP _tclp = new TCLP();
+		private TCLP Tclp => new TCLP();
 
-		[StepDefinition(@"For 'Product has had TCLP; Report is available' I select: (No|Yes)")]
-		public void ForProductHasHadTclpReportIsAvailableISelect(string noOrYes)
+		[StepDefinition(@"I set 'Product has had TCLP; Report is available' to (No|Yes)")]
+		public void SetTclpReportIsAvailableTo(string noOrYes)
 		{
-			Report.IsTrue(_tclp.WaitForTab("Product Characteristics"), "Product Characteristics tab has not loaded",
+			Report.IsTrue(this.Tclp.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product Characteristics tab has not loaded",
 				"Product Characteristics tab is loaded.");
 			var expected = noOrYes == "Yes";
-			_tclp.ProductHasTclp = expected;
-			Report.IsTrue(_tclp.ProductHasTclp == expected,
+			this.Tclp.ProductHasTclp = expected;
+			Report.IsTrue(this.Tclp.ProductHasTclp == expected,
 				"Failed to set Product has had TCLP: " + noOrYes,
 				"Successfully set Product has had TCLP: " + noOrYes);
 		}
@@ -26,18 +27,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I set all the metal presence value to: (Yes|No)")]
 		public void GivenISetAllTheMetalPresenceValueTo(string noOrYes)
 		{
-			Report.IsTrue(_tclp.WaitForMetalSection(30), "Metal section has failed to load.",
+			Report.IsTrue(this.Tclp.WaitForMetalSection(30), "Metal section has failed to load.",
 				"Metal section has loaded");
-			var metals = _tclp.GetAllMetalNames();
+			var metals = this.Tclp.GetAllMetalNames();
 			var listOfMetalSettings = new List<TCLP.MetalPresence>();
 			foreach (var thisMetal in metals)
 			{
 				listOfMetalSettings.Add(new TCLP.MetalPresence(thisMetal, "No"));
 			}
 			Report.Info("Setting the Metal Presence values");
-			_tclp.Metals = listOfMetalSettings;
+			this.Tclp.Metals = listOfMetalSettings;
 			Report.Info("Checking the Metal Presence values are correct");
-			var checkOutcome = _tclp.Metals;
+			var checkOutcome = this.Tclp.Metals;
 			var pass = true;
 			foreach (var thisMetalPresence in listOfMetalSettings)
 			{

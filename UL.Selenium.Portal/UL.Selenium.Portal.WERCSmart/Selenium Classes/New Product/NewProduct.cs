@@ -19,7 +19,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
 
-		private IWebElement Header => this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 2);
+		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit }
+
+		private static Dictionary<Tab,string> TabNames = new Dictionary<Tab, string> {
+			{ Tab.ProductType , "Product Type" },
+			{ Tab.ProductCharacteristics , "Product Characteristics" },
+			{ Tab.RecipientAndUpcDetails , "Recipient And UPC Details" },
+			{ Tab.ReviewAndSubmit , "Review And Submit" }
+		};
+
+		//private static string TabName(Tab tab)
+		//{
+		//	switch (tab)
+		//	{
+		//		case Tab.ProductCharacteristics:
+		//			return "Product Characteristics";
+		//		case Tab.ProductType:
+		//			return "Product Type";
+		//		case Tab.RecipientAndUpcDetails:
+		//			return "Recipient And UPC Details";
+		//		case Tab.ReviewAndSubmit:
+		//			return "Review And Submit";
+		//		default:
+		//			return null;
+		//	}
+		//}
+
+		private IWebElement Header => this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 5);
+
+		private IWebElement ProgressBar => this.containerElement.FindElement(By.XPath(".//div[@class='prog-wizard']"), 5);
 
 		public string HeaderText => this.Header?.Text;
 
@@ -118,19 +146,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool WaitForSection(string sectionHeader, int secondsToWait = 60)
 		{
 			return this.containerElement.WaitUntilElementVisible(By.XPath($".//div[@class='panel-heading']//h3[contains(text(), '{sectionHeader}')]"), secondsToWait) != null;
-			//int counter = 0;
-			//while (counter < secondsToWait)
-			//{
-			//	var addProductHeader = this.containerElement.FindElements(By.XPath(".//div[@class='panel-heading']//h3")).FirstOrDefault(x => x.Text.Contains(sectionHeader));
-			//	if (addProductHeader != null)
-			//	{
-			//		return true;
-			//	}
-			//	Delay.Seconds(Delay.SpeedFactor * 1);
-			//	counter++;
-			//}
-
-			//return false;
 		}
 
 		public bool CountryofOriginExists()
@@ -146,51 +161,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return true;
 		}
 
-		//Valid tab names: Product Type, Product Characteristics, Recipient and UPC Details, Review and Submit
-		public bool WaitForTab(string tabName, int secondsToWait = 30)
+		/// <summary>
+		/// Returns whether or not the Tab (enum: ProductType, ProductCharacteristics...) is active after the timeout
+		/// </summary>
+		/// <param name="tab"></param>
+		/// <param name="secondsToWait"></param>
+		/// <returns></returns>
+		public bool WaitForTab(Tab tab, int secondsToWait = 30)
 		{
-			Report.Info("Beginning wait for tab: " + tabName);
-			int counter = 0;
-			while (counter < secondsToWait)
-			{
-				var progWizard = this.containerElement.FindElement(By.XPath(".//div[@class='prog-wizard']"), 2);
-				if (progWizard != null)
-				{
-					var tab = this.containerElement.FindElements(By.XPath(".//div[contains(@class, 'progress')]//span[contains(@data-bind, 'description')]"), 2)
-						.FirstOrDefault(x => x.Text.Contains(tabName));
-					if (tab != null)
-					{
-						var containerDiv = tab.FindElement(By.XPath("./../../div"));
-						string backGroundColour = containerDiv.GetCssValue("background-color");
-						if (backGroundColour.Contains("255, 255, 255"))
-						{
-							return true;
-						}
-					}
-				}
-				Delay.Seconds(Delay.SpeedFactor * 1);
-				counter++;
-			}
-			return false;
+			var tabName = TabNames[tab];
+			return this.ProgressBar?.WaitUntilElementVisible(By.XPath(".//div[@class= 'prog-step in-progress active' and .//span[contains(text(),'" + tabName + "')]]"), secondsToWait) != null;
 		}
 
-		public bool ClickTab(string tabName)
+		/// <summary>
+		/// Clicks the Tab (enum: ProductType, ProductCharacteristics...) and returns whether the click was successful
+		/// </summary>
+		/// <param name="tabName"></param>
+		/// <returns></returns>
+		public bool ClickTab(Tab tab)
 		{
+			var tabName = TabNames[tab];
 			// if the tab is currently active, we don't need to click it
-			var active = this.containerElement.FindElement(By.XPath($".//div[@class='prog-wizard']//div[contains(@class, 'in-progress active') and ./span[text()='{tabName}']]"), 2);
+			var active = this.ProgressBar?.FindElement(By.XPath($".//div[contains(@class, 'in-progress active') and ./span[text()='{tabName}']]"), 2);
 			if (active != null)
 			{
 				Report.Info($"Tab: {tabName} was already active");
 				return true;
 			}
-			var tab = this.containerElement.FindElements(By.XPath(".//div[@class='prog-wizard']//div[contains(@class, 'prog-step')]//a/span"), 2)
-				.FirstOrDefault(x => x.Text.Contains(tabName));
-			if (tab != null)
+			var tabEl = this.ProgressBar?.FindElement(By.XPath($".//div[contains(@class, 'prog-step')]//a/span[contains(text(),'{tabName}')]"), 2);
+			if (tabEl == null)
 			{
-				Report.Info("Clicking tab: " + tabName);
-				return tab.FindElement(By.XPath("../../a")).TryClick();
+				return false;
 			}
-			return false;
+			Report.Info("Clicking tab: " + tabName);
+			return tabEl.FindElement(By.XPath("../../a"), 5).TryClick();
 		}
 
 		public bool ClickSection(string section)

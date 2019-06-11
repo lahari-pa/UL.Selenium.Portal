@@ -148,8 +148,7 @@ testRunner.And("I Select the Create a New Registration radio button", ((string)(
 #line 39
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 40
-testRunner.And("In the Product Type tab of the New Product Page, I enter: Answering Machine, Batt" +
-                    "ery Included in the Product Name text field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product Name\' to: Answering Machine, Battery Included", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 41
 testRunner.And("In the Product Type tab of the New Product Page, I enter: Answering Machine, Batt" +
                     "ery Included in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -206,7 +205,7 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 #line 60
 testRunner.And("I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
-testRunner.And("For \'Product has had TCLP; Report is available\' I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product has had TCLP; Report is available\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
 testRunner.And("I set all the metal presence value to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
@@ -333,8 +332,7 @@ testRunner.And("I Select the Create a New Registration radio button", ((string)(
 #line 118
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 119
-testRunner.And("In the Product Type tab of the New Product Page, I enter: Nickel Metal Hydride (N" +
-                    "iMH) Battery in the Product Name text field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product Name\' to: Nickel Metal Hydride (NiMH) Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 120
 testRunner.And("In the Product Type tab of the New Product Page, I enter: Nickel Metal Hydride (N" +
                     "iMH) Battery in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -509,8 +507,7 @@ testRunner.And("I Select the Create a New Registration radio button", ((string)(
 #line 193
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 194
-testRunner.And("In the Product Type tab of the New Product Page, I enter: abrasive in the Product" +
-                    " Name text field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product Name\' to: abrasive", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 195
 testRunner.And("In the Product Type tab of the New Product Page, I enter: Abrasive in the Type of" +
                     " Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -648,8 +645,7 @@ testRunner.And("I Select the Create a New Registration radio button", ((string)(
 #line 261
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 262
-testRunner.And("In the Product Type tab of the New Product Page, I enter: Laundry, Detergent in t" +
-                    "he Product Name text field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product Name\' to: Laundry, Detergent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 263
 testRunner.And("In the Product Type tab of the New Product Page, I enter: Laundry, Detergent in t" +
                     "he Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

@@ -664,6 +664,7 @@
     <Compile Include="Steps\New Product\Product Characteristics\Steps_LithiumBatteryTransportation.cs" />
     <Compile Include="Steps\New Product\Product Characteristics\Steps_RegulatoryInformation1.cs" />
     <Compile Include="Steps\New Product\Product Type\Steps_ProductCharacteristics.cs" />
+    <Compile Include="Steps\New Product\Product Type\Steps_TheProduct.cs" />
     <Compile Include="Steps\New Product\Steps_NewProduct.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsState.cs" />
     <Compile Include="Steps\New Product\Steps_PesticideDetailsUS.cs" />

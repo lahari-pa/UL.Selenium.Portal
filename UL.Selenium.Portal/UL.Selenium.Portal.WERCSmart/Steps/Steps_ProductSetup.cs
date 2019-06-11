@@ -1666,6 +1666,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+
+		[StepDefinition(@"I create a product and take it to the ingredients page and save as: (.*)")]
+		public void CreateProductAndTakeToTheIngredientsPage(string savedAs)
+		{
+			var sharedSteps = new Steps_Shared();
+			// 57408 (Create a New Registration via Register New Product icon)
+			sharedSteps.GivenICallSharedStepCreateANewRegistrationViaRegisterNewProductIcon();
+			// 57500 (The Product- Enter name, select product type - Continue - Happy Path)
+			sharedSteps.GivenICallSharedStepTheProduct_EnterNameSelectProductType_Continue_HappyPath("Chalk", "ingredient test");
+			// Save product to context
+			new StepsNewProduct().SaveProductInformation(savedAs);
+			// 26897 (Product Characteristics - Solid only available - continue)
+			sharedSteps.SharedProductCharacteristics_SolidOnlyAvailable_Continue();
+			// 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+			sharedSteps.ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR();
+		}
+
+
 	}
 
 }
