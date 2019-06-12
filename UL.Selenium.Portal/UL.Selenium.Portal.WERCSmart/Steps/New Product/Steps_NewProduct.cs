@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -715,35 +715,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				throw;
 			}
 		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Prop65 I select: (No|Yes)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForPropISelectNoOrYes(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Prop65 I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-
-
-				selNewProduct.Prop65 = expected;
-
-				Report.IsTrue(selNewProduct.Prop65 == expected,
-					"Failed to set Prop 65 value to: " + noOrYes,
-					"Successfully set Prop 65 value to: " + noOrYes);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
+		
 		/// <summary>
 		/// select product lable option for Refer to your Product Label. From the options, select those that appear on the Label.
 		/// </summary>
@@ -1057,172 +1029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//If Type of Product hasn't updated, try again ignoring case
 			//CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
 		}
-
-		[StepDefinition(@"I should only see the following options for Primary Physical State:")]
-		public void PrimaryPhysicalOptionsShowingCorrectly(Table table)
-		{
-			var expected = new List<string>();
-			table.Rows.ForEach(x => expected.Add(x["State"]));
-			var found = new NewProduct().ListOfPrimaryPhysicalStates();
-			Report.Info("Primary Physical States found: " + string.Join(", ", found));
-			foreach (var state in expected)
-			{
-				if (Report.IsTrue(found.Contains(state), "Failed to find state: " + state + " in the list!", state + " was successfully found!"))
-				{
-					found.Remove(state);
-				}
-			}
-			Report.IsTrue(found.Count == 0,
-				$@"There were physical states displayed which were not expected! Only expected: ""{string.Join(", ", expected.Select(x => $"'{x}'").ToList())}"". Also displaued were: ""{string.Join(", ", found.Select(x => $"'{x}'").ToList())}""" + string.Join(", ", found),
-				$@"Only the expected physical states: ""{string.Join(", ", expected.Select(x => $"'{x}'").ToList())}"" were displayed.");
-		}
-
-		[StepDefinition(@"I set the Primary Physical State to be: (.*)")]
-		public void ThenISetThePrimayPhysicalStateToBe(string state)
-		{
-			Report.IsTrue(new NewProduct().SelectPrimaryPhysicalState(state), "Failed to set the primary physical state to be: " + state, "Successfully set the Primary Physical State to be: " + state);
-		}
-
-		[StepDefinition(@"I set the Secondary Physical State to be: (.*)")]
-		public void ThenISetTheSecondaryPhysicalStateToBe(string state)
-		{
-			Report.IsTrue(new NewProduct().SelectSecondaryPhysicalState(state), "Failed to set the secondary physical state to be: " + state, "Successfully set the Secondary Physical State to be: " + state);
-		}
-
-		[StepDefinition(@"I set the water solubility description to: (.*)")]
-		public void ThenISetTheWaterSolubilityDescriptionTo(string description)
-		{
-			NewProduct thisNewProduct = new NewProduct();
-			new NewProduct().WaterSolubility = description;
-			Report.IsTrue(thisNewProduct.WaterSolubility == description, "Failed to set the water solubility description to be: " + description, "Successfully set the water solubility description to be: " + description);
-		}
-
-		/// <summary>
-		/// Enter data in Specific Gravity text field
-		/// </summary>
-		[StepDefinition(@"In the Product Characteristics tab, I enter: (.*) in the Specific Gravity text field")]
-		public void GivenInTheProductCharacteristicsTabIEnterInTheSpecificGravityTextField(string specificGravity)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + specificGravity + " in the Specific Gravity text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.SpecificGravity = specificGravity;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Enter data in pH text field
-		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the pH text field")]
-		public void GivenInTheProductCharacteristicsTabIEnterInThePHTextField(string pH)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + pH + " in the Specific Gravity text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.PH = pH;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Enter data in Boiling Point (in Celsius) text field
-		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the Boiling point \(in Celsius\) text field")]
-		public void GivenInTheProductCharacteristicsTabIEnterInTheBoilingPointInCelsiusTextField(string boilingPointInCelsius)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + boilingPointInCelsius + " in the Specific Gravity text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.BoilingPoint = boilingPointInCelsius;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Enter data in Flash point text field
-		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the Flash point \(in Celsius\) text field")]
-		public void GivenInTheProductCharacteristicsTabIEnterInTheFlashPointInCelsiusTextField(string flashPointInCelsius)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + flashPointInCelsius + " in the Specific Gravity text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.FlashPoint = flashPointInCelsius;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Select an option from Flash Point Testing Method Used
-		/// </summary>
-		[StepDefinition(@"in the Product Characteristics tab, for Flash Point Testing Method Used status I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabForFlashPointTestingMethodUsedStatusISelect(string option)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab, for Flash Point Testing Method Used status I select: " + option);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				//Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				//	"Product characteristics tab is loaded.");
-
-
-				selNewProduct.FlashPointTestingMethodUsed = option;
-
-				Report.IsTrue(selNewProduct.FlashPointTestingMethodUsed == option,
-					"Failed to set Flash point testing method used status: " + option,
-					"Successfully set Flash point testing method used status: " + option);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Select an option for the best Water Solubility description dropdown
-		/// </summary>
-		[StepDefinition(@"I set the Select the best Water Solubility description to be: (.*)")]
-		public void GivenISetTheSelectTheBestWaterSolubilityDescriptionToBe(string option)
-		{
-			Report.IsTrue(new NewProduct().SelectBestWaterSolubilityDescription(option), "Failed to set the best Water Solubility description to be: " + option, "Successfully set the best Water Solubility description to be: " + option);
-		}
-
+		
 		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: (.*)")]
 		public void ThenInTheProductCharacteristicsTabOfTheNewProductPageForWhenTheProductHasAFlammablePropellantISelect(string option)
 		{

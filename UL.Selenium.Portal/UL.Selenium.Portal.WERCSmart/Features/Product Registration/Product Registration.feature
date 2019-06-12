@@ -48,7 +48,7 @@ And In the Additional Information Page for Product is retailers private label or
 And In the Additional Information Page for Product is solely for the Retailer's use I select: No
 And in the New Product page I click Continue
 And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And I set 'Prop65' to: No
 And in the New Product page I click Continue
 And I should see the Product Includes Battery Page
 And For 'Indicate how battery is packaged' I select: The battery is shipped with but not included in my product.
@@ -69,10 +69,10 @@ And in the New Product page I click Continue
 #################### Coralie 11/4/2018: Adding in Lithium Battery Transportation section to test
 ##Assume this screen is appearing because of selecting a Lithium type battery
 And I should see the Lithium Battery Transportation Page
-And For 'DOT, indicate the transportation classification' I select: Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipment, 9
-And For 'IMDG, indicate the transportation classification' I select: None of the above/Not intended for shipment under IMDG
-And For 'IATA, indicate the transportation classification' I select: Section II
-And For 'TDG, indicate the transportation classification' I select: Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods.
+And I set 'DOT' to: Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipment, 9
+And I set 'IMDG' to: None of the above/Not intended for shipment under IMDG
+And I set 'IATA' to: Section II
+And I set 'TDG' to: Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods.
 And in the New Product page I click Continue
 
 
@@ -141,7 +141,7 @@ Then I add the following ingredients:
 | Formaldehyde  | 100     | false               | false       |            |
 Given in the New Product page I click Continue
 And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And I set 'Prop65' to: No
 And in the New Product page I click Continue
 Given the 'Select Retailers' window appears
 Then In the 'Select Retailers' window I select the retailer: Target
@@ -215,7 +215,7 @@ Then I add the following ingredients:
 Given in the New Product page I click Continue
 #Enter regulatory information - not prop 65
 And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And I set 'Prop65' to: No
 And in the New Product page I click Continue
 
 #Transportation details 1 - not regulated - continue - happy path
@@ -265,10 +265,10 @@ And in the New Product page I click Continue
 Then I save the product information as: TestCase65392
 And I set the Primary Physical State to be: Liquid
 And I set the Secondary Physical State to be: Liquid
-And In the Product Characteristics tab, I enter: 2 in the Specific Gravity text field
-And In the product Characteristics tab, I enter: 2 in the pH text field
-And In the product Characteristics tab, I enter: 2 in the Boiling point (in Celsius) text field
-And In the product Characteristics tab, I enter: 2 in the Flash point (in Celsius) text field
+And I set 'Specific Gravity' to: 2
+And I set 'pH' to: 2
+And I set 'Boiling point (in Celsius)' to: 2
+And I set 'Flash point (in Celsius)' to: 2
 And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Closed cup method
 And I set the Select the best Water Solubility description to be: Very soluble
 And in the New Product page I click Continue
@@ -285,7 +285,7 @@ Then I add the following ingredients:
 | Formaldehyde  | 100     | false               | false       |            |
 Given in the New Product page I click Continue
 And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
-And in the Product Characteristics tab of the New Product Page for Prop65 I select: No
+And I set 'Prop65' to: No
 And in the New Product page I click Continue
 And I should see the Transportation Details 1 Page
 And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: No, due to an exemption or exception

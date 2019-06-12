@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Components.DictionaryAdapter;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using SeleniumUtilities;
+using NTTQA.Selenium.SpecFlow;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -347,21 +347,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 
 		/// <summary>
-		/// Returns the text for the selected input matching a label with text 'name'.
+		/// Returns the text for the selected input parallel to a label matching on text with 'name'.
 		/// Returns null if there is no matching label or if no input is selected
 		/// </summary>
-		public string SelectedOptionForLabel(string name)
+		public string SelectedInputForLabel(string lblText)
 		{
-			var label = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains(name));
+			var label = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains(lblText));
 			var selectedOption = label?.FindElements(By.XPath("../..//input"),2)?.First(x=>x.Selected);
 			return selectedOption?.FindElement(By.XPath("../..//label/span"),2)?.Text;
 		}
 
-		public string SelectedRadioForBtnLabel(string name)
+		public string CheckedInputForLabel(string lblText)
 		{
-			var label = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains(name));
+			var label = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains(lblText));
 			var selectedOption = label?.FindElements(By.XPath("../..//input"), 2)?.First(x => x.Checked());
 			return selectedOption?.FindElement(By.XPath("./parent::label/span"), 2)?.Text;
+		}
+
+		public string TextInputValueForLabel(string lblText)
+		{
+			var label = this.containerElement.FindElements(By.XPath(".//label"), 2)?.FirstOrDefault(x => x.Text.Contains(lblText));
+			return label.FindElement(By.XPath("../following-sibling::div/input[@type ='text']"), 2)?.Text;
 		}
 
 		public List<string> ProductsMayBeSold {
@@ -486,7 +492,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				selectOption.Click();
 			}
 		}
-		
+
 		public string OSHA {
 			get
 			{
@@ -507,50 +513,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 
 		}
-
-
-		public bool Prop65 {
-			get
-			{
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Prop 65") || x.Text.Contains("Proposition 65"))
-					.FindElements(By.XPath("../following-sibling::div//label")).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
-
-				if (selectOption != null)
-				{
-					string selectedOption = selectOption.FindElement(By.XPath(".//span")).Text.Trim();
-					Report.Info("Selected option is: " + selectedOption);
-					if (selectedOption.ToLower() == "yes")
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				}
-				else
-				{
-					throw new Exception("No Prop65 option is selected");
-				}
-			}
-			set
-			{
-				string valueToSet = "Yes";
-				if (!value)
-				{
-					valueToSet = "No";
-				}
-
-				var selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Prop 65") || x.Text.Contains("Proposition 65"))
-					.FindElements(By.XPath("../..//label")).FirstOrDefault(x => x.Text == valueToSet);
-				selectOption.Click();
-				Report.Screenshot();
-
-			}
-		}
-
 
 		public bool RetailersPrivateLabelOrBrand {
 			get
@@ -593,7 +555,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			}
 		}
-		
+
 		public bool SolelyForRetailersUse {
 			get
 			{
@@ -1348,28 +1310,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			return this.containerElement.FindElements(By.XPath(".//label[text()='Primary Physical State']/..//following-sibling::div//label//span"), 2).Select(x => x.GetValue()).ToList();
 		}
-
-		public bool SelectPrimaryPhysicalState(string item)
-		{
-			try
-			{
-				var el = this.containerElement
-					.FindElements(By.XPath(".//label[text()='Primary Physical State']/../following-sibling::div//span"), 2)
-					.FirstOrDefault(x => x.Text.ToLower() == item.ToLower()).FindElement(By.XPath("../input"));
-				if (el != null)
-				{
-					el.TryClick();
-					return true;
-				}
-
-				return false;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
+		
 		public bool SelectSecondaryPhysicalState(string item)
 		{
 			try
@@ -1421,9 +1362,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
-		/// <summary>
-		/// Select the best Water Solubility description dropdown
-		/// </summary>
 		public bool SelectBestWaterSolubilityDescription(string item)
 		{
 			try
@@ -1775,158 +1713,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				var lbl = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//label"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Ignition"));
-
-				if (lbl != null)
-				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
-					input.EnterText(value);
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-		}
-
-		/// <summary>
-		/// Specific Gravity text box
-		/// </summary>
-		public string SpecificGravity {
-			get
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Specific Gravity"));
-
-				if (lbl != null)
-				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
-					return input.Text;
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-			set
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Specific Gravity"));
-
-				if (lbl != null)
-				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
-					input.EnterText(value);
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-		}
-
-		/// <summary>
-		/// pH text box
-		/// </summary>
-		public string PH {
-			get
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("pH"));
-
-				if (lbl != null)
-				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
-					return input.Text;
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-			set
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("pH"));
-
-				if (lbl != null)
-				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
-					input.EnterText(value);
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-		}
-
-		/// <summary>
-		/// Boiling Point (in Celsius) text box
-		/// </summary>
-		public string BoilingPoint {
-			get
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Boiling Point (in Celsius)"));
-
-				if (lbl != null)
-				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
-					return input.Text;
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-			set
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Boiling Point (in Celsius)"));
-
-				if (lbl != null)
-				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
-					input.EnterText(value);
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-		}
-
-		/// <summary>
-		/// Flash Point (in Celsius) text box
-		/// </summary>
-		public string FlashPoint {
-			get
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Flash Point (in Celsius)"));
-
-				if (lbl != null)
-				{
-					var input = lbl.FindElement(By.XPath("../..//input"));
-					return input.Text;
-				}
-				else
-				{
-					throw new Exception("Label not found as expected.");
-				}
-
-			}
-			set
-			{
-				var lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Flash Point (in Celsius)"));
 
 				if (lbl != null)
 				{
@@ -3105,14 +2891,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectRadio(string section, string value)
 		{
-			var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
-			var el = this.containerElement.FindElement(By.XPath(xPath), 2);
-			if (el != null)
+			try
 			{
-				return el.TryClick();
+				var xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),'" + value + "') and (./preceding-sibling::input[@type='radio'])]";
+				var el = this.containerElement.FindElement(By.XPath(xPath), 2);
+				if (el != null)
+				{
+					return el.TryClick();
+				}
+
+				Report.Error("Could not find the correct input in section: " + section);
+				return false;
 			}
-			Report.Error("Could not find the correct input in section: " + section);
-			return false;
+			catch (Exception)
+			{
+				return false;
+			}
 		}
 
 		// NB only works fr select/option

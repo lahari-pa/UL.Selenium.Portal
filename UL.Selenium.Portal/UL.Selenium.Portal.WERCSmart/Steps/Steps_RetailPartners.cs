@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using NTTQA_TReVor_Module.Classes;
-using SeleniumUtilities;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -449,7 +449,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var File = Context.GetFromContext(savedAs);
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
-				var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				Report.Info("Found: " + ExcelUtils.Excel_GetNoRows() + " rows in the spreadsheet");
 				var FirstRow = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Header row contained: '" + string.Join("', '", FirstRow) + "'");
@@ -876,7 +876,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 
@@ -934,7 +934,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			bool AllPassed = true;
 			if (Report.IsTrue(File != null, "No matching file was found for name: " + savedAs + "!", "File was found: " + File.ToString()))
 			{
-				var ExcelUtils = new Excel_Utilities(File.ToString(), "Table");
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Table");
 				//get the index of column
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));

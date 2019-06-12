@@ -1,5 +1,5 @@
-﻿using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;

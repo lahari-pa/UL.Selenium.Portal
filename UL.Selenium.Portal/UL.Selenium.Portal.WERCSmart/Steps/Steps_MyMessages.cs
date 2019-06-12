@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Reporting_Module.Reporting.Core;
-using NTTQA_TReVor_Module.Classes;
-using SeleniumUtilities;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -98,7 +98,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var file = Context.GetFromContext(savedAs);
 			if (Report.IsTrue(file != null, "No matching file was found saved as: " + savedAs, "Found file saved as: " + savedAs))
 			{
-				var ExcelUtils = new Excel_Utilities(file.ToString(), "Messages");
+				var ExcelUtils = new ExcelUtilities(file.ToString(), "Messages");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 				var columnIndex = ColumnTitles.FindIndex(x => x == column);
@@ -139,7 +139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var myMessages = (List<MessageCenter.Message>)Context.GetFromContext(messagesSavedAs);
 				if (Report.IsTrue(myMessages != null, "No matching messages saved as: " + messagesSavedAs, "Found message saved as: " + messagesSavedAs, false, false))
 				{
-					var excelUtils = new Excel_Utilities(file.ToString(), "Messages");
+					var excelUtils = new ExcelUtilities(file.ToString(), "Messages");
 					var fileRowCount = excelUtils.Excel_GetNoRows() - 1;
 					var messageCount = myMessages.Count;
 					Report.IsTrue(fileRowCount == messageCount,
@@ -155,7 +155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var File = Context.GetFromContext(savedAs)?.ToString() ?? "";
 			if (Report.IsTrue(!File.IsNullOrEmpty(), "No matching file was found for name: " + savedAs + "!", "File was found: " + File))
 			{
-				var ExcelUtils = new Excel_Utilities(File.ToString(), "Messages");
+				var ExcelUtils = new ExcelUtilities(File.ToString(), "Messages");
 				List<string> ColumnTitles = ExcelUtils.Excel_GetRow(0);
 				Report.Info("Column titles: " + string.Join(",", ColumnTitles));
 				foreach (TableRow thisRow in table.Rows)

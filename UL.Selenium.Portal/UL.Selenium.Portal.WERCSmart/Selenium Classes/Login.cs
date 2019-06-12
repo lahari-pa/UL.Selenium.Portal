@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TextTemplating;
-using NTTQA.Selenium.Base_Classes;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
