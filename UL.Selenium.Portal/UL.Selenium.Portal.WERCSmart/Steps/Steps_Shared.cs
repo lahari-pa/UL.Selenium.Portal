@@ -3975,23 +3975,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\) for")]
 		public void
 			GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(
-				TechTalk.SpecFlow.Table Retailers)
+				TechTalk.SpecFlow.Table retailers)
 		{
 			TestReport.UseSubSteps = true;
 			var selStepsNewProduct = new StepsNewProduct();
-			foreach (TechTalk.SpecFlow.TableRow thisRetailer in Retailers.Rows)
+			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
 			{
 				TestReport.StartStep("In the Select Retailers popup I select the retailer: " +
 									 thisRetailer["Retailer"]);
 				new StepsSelectRetailers().SelectTheRetailer(thisRetailer["Retailer"]);
 			}
-
 			TestReport.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
-			if (new NewProduct().ErrorMessage() == "This is a required field.")
+			if (new NewProduct().ErrorMessageText == "This is a required field.")
 			{
-				Report.Failure(
-					"Required field error was showing on continue. Attempting to enter Private Label field (not specified by Shared Step)");
+				Report.Failure("Required field error was showing on continue. Attempting to enter Private Label field (not specified by Shared Step)");
 				TestReport.StartStep("I enter private label as 'This Private Label'");
 				new Steps_Retailer().IEnterPrivateLabelName("This Private Label");
 				TestReport.StartStep("I click continue");
@@ -5495,31 +5493,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue")]
-		public void ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(
-			TechTalk.SpecFlow.Table retailers)
+		public void ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(Table retailers)
 		{
 			TestReport.UseSubSteps = true;
 			var selStepsNewProduct = new StepsNewProduct();
-
-			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
+			foreach (var thisRetailer in retailers.Rows)
 			{
 
 				TestReport.StartStep("In the Select Retailers popup I select the retailer: " +
 									 thisRetailer["Retailer"]);
 				new StepsSelectRetailers().SelectTheRetailer(thisRetailer["Retailer"]);
 			}
-
-			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
+			foreach (var thisRetailer in retailers.Rows)
 			{
 				TestReport.StartStep("In the Select Retailers popup I add PL information");
 				selStepsNewProduct.ThenIAddAdditionaRequirmentsInfoForRetailer(thisRetailer["Retailer"],
 					"Additional requirements: " + thisRetailer["Retailer"]);
 			}
-
-
 			TestReport.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
-			if (new NewProduct().ErrorMessage() == "This is a required field.")
+			if (new NewProduct().ErrorMessageText == "This is a required field.")
 			{
 				Report.Failure(
 					"Required field error was showing on continue. Attempting to enter Private Label field (not specified by Shared Step)");

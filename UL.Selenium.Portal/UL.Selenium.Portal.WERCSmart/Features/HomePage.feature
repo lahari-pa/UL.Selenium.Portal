@@ -164,7 +164,7 @@ When I filter the products by: Not Yet Submitted
 Given I save the ProductID and Name of the first Product in the grid as: FirstProduct
 When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Edit
-Then the Product Type page should be loaded
+Then the Product Editor page should be loaded
 And the product saved as: FirstProduct should be visible in editor
 
 @TReVorId:22069

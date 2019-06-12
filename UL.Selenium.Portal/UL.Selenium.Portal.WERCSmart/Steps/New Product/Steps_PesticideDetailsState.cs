@@ -13,22 +13,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_PesticideDetailsState
 	{
-		[StepDefinition(@"in page Pesticide Details - State Registration page I should see error: (.*)")]
-		public void IShouldSeeError(string error)
-		{
-			var thisNewProduct = new NewProduct();
-			var erros = thisNewProduct.AllErrorMessages();
-			Report.IsTrue(erros.Contains(error), "Expected error: " + error + " but got: " + string.Join(", ", erros), "As expected, error is showing as: " + error);
-		}
+		private StepsNewProduct StepsNewProduct => new StepsNewProduct();
+		//[StepDefinition(@"in page Pesticide Details - State Registration page I should see error: (.*)")]
+		//public void IShouldSeeError(string error)
+		//{
+		//	var thisNewProduct = new NewProduct();
+		//	var errors = thisNewProduct.ErrorMessagesText;
+		//	Report.IsTrue(errors.Contains(error), "Expected error: " + error + " but got: " + string.Join(", ", errors), "As expected, error is showing as: " + error);
+		//}
 
-		[StepDefinition(@"in page Pesticide Details - State Registration Details I should see no errors")]
-		public void IShouldSeeNoError()
-		{
-			var thisNewProduct = new NewProduct();
-			var erros = thisNewProduct.AllErrorMessages();
-			Report.IsTrue(!erros.Any(), "Expected no errors but there were errors!",
-				"There were no errors as expected");
-		}
+		//[StepDefinition(@"in page Pesticide Details - State Registration Details I should see no errors")]
+		//public void IShouldSeeNoError()
+		//{
+		//	var thisNewProduct = new NewProduct();
+		//	var errors = thisNewProduct.ErrorMessagesText;
+		//	Report.IsTrue(!errors.Any(), "Expected no errors but there were errors!",
+		//		"There were no errors as expected");
+		//}
 
 		[StepDefinition(@"I should see the appropriate response depending on today's date for state: (.*)")]
 		public void ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(string state)
@@ -38,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var Oct1stthisYear = new DateTime(year, 10, 1);
 			if (DateTime.Now < Oct1stthisYear)
 			{
-				this.IShouldSeeError("State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
+				this.StepsNewProduct.ErrorMessageSpecific("State " + state + ": Valid dates are December 31 of current calendar year until October 1, at which time December 31 of either the current or the following calendar year would be acceptable.");
 			}
 			else
 			{
@@ -293,12 +294,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			if (DateTime.Now < comparisonDate)
 			{
 				Report.Info("Date is prior to " + month + "/" + day + " so I expect to see the state error");
-				this.IShouldSeeError(error);
+				this.StepsNewProduct.ErrorMessageSpecific(error);
 			}
 			else
 			{
 				Report.Info("Date is after " + month + "/" + day + " so I expect no state error");
-				this.IShouldSeeNoError();
+				this.StepsNewProduct.NoErrorMessages();
 			}
 		}
 
@@ -321,13 +322,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 
 				Report.Info("Current date is prior to the expiration date. I expect no state error");
-				this.IShouldSeeNoError();
+				this.StepsNewProduct.NoErrorMessages();
 				new StepsNewProduct().GivenIShouldSeeXPage(page);
 			}
 			else
 			{
 				Report.Info("Current date has passed expiration date. I expect to see the state error");
-				this.IShouldSeeError("The expiration date must be a valid future date");
+				this.StepsNewProduct.ErrorMessageSpecific("The expiration date must be a valid future date");
 
 			}
 		}
@@ -503,12 +504,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				if (error.ToLower() == "none" || error.ToLower() == "n/a")
 				{
 					Report.Info("I don't expect any state error");
-					this.IShouldSeeNoError();
+					this.StepsNewProduct.NoErrorMessages();
 				}
 				else
 				{
 					Report.Info("I expect to see the state error");
-					this.IShouldSeeError(error);
+					this.StepsNewProduct.ErrorMessageSpecific(error);
 				}
 			}
 			else
@@ -527,7 +528,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var year = DateTime.Now.Year;
 			if ((evenOdd == "even") == (year % 2 == 0))
 			{
-				this.IShouldSeeNoError();
+				this.StepsNewProduct.NoErrorMessages();
 				new StepsNewProduct().GivenIShouldSeeXPage(page);
 			}
 			else

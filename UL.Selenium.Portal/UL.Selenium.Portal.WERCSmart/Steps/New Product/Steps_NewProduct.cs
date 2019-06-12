@@ -10,7 +10,6 @@ using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using TestStack.White.UIItems.TabItems;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
@@ -22,14 +21,122 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private static NewProduct NewProduct => new NewProduct();
 
-		[StepDefinition(@"the Product Type page should be loaded")]
-		[StepDefinition(@"the Product Editor page should be loaded")]
-		public void ProductTypePageLoaded()
+		#region  General New Product steps
+
+		// 'Tab' is defined as the major steps on the progress wizard (eg. Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)
+		// 'Section' is defined as the minor steps under the major tab - also referred in manual tests as 'Page' (eg. Additional Product Information, Ingredients, Retailers..)
+
+		[StepDefinition(@"In the New Product page I click tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
+		public void GivenInTheNewProductPageIClickTab(string tabName)
 		{
-			Report.Info("Product Type page should be loaded");
-			Report.IsTrue(NewProduct.WaitForContainerToBeVisible(), "Product Type page did not load!", "Product Type page loaded successfully!");
+			try
+			{
+				var tab = NewProduct.MapTabs.FirstOrDefault(x => x.Value == tabName).Key;
+				Report.IsTrue(NewProduct.ClickTab(tab), "Failed to click tab: " + tab, "Successfully clicked tab: " + tab);
+			}
+			catch (NullReferenceException)
+			{
+				Report.Failure("The parameter 'tab' did not match a valid tab title");
+				throw;
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+
 		}
 
+		[StepDefinition(@"in the New Product page I click section: (.*)")]
+		public void GivenInTheNewProductPageIClickSection(string section)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click section header " + section);
+			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
+			GeneralUtilities.Wait_for_load_finish();
+			TestReport.StartStep("I should see page has loaded: " + section);
+			this.GivenIShouldSeeXPage(section);
+		}
+
+		[StepDefinition(@"the Product Editor page should be loaded")]
+		public void ProductEditorShouldBeLoaded()
+		{
+			Report.IsTrue(NewProduct.WaitForContainerToBeVisible(), "The Product Registration page did not load!", "The Product Registration page loaded successfully!");
+		}
+
+		[StepDefinition(@"I click continue")]
+		public void ClickContinue()
+		{
+			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
+		}
+
+		[StepDefinition(@"I should see the (.*) Page")]
+		public void GivenIShouldSeeXPage(string page)
+		{
+			if (NewProduct.WaitForContainerToBeVisible())
+			{
+				Report.IsTrue(NewProduct.WaitForSection(page),page + " is not showing when it was expected to",page + " is showing as expected");
+				return;
+			}
+			Report.Failure("New product page was not visible");
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I should see an error message: (.*)")]
+		public void ErrorMessageSpecific(string message)
+		{
+			Report.Info("Checking error message");
+			var errors = NewProduct.ErrorMessagesText;
+			if (!errors.Any())
+			{
+				Report.Failure("No errors were found but expected error: " + message);
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(errors.Contains(message),
+				$"Error message was not as expected! Expected: '{message}', but found: '{string.Join(", ", errors)}'!",
+				$"Error message was showing: '{message}', as expected");
+		}
+
+		[StepDefinition(@"in page (.*) I should see error: (.*)")]
+		public void InPageIShouldSeeError(string page, string error)
+		{
+			Report.Info("Checking error on page: " + page);
+			this.ErrorMessageSpecific(error);
+		}
+
+		[StepDefinition(@"I should not see an error message: (.*)")]
+		public void NotErrorMessageSpecific(string message)
+		{
+			var errors = NewProduct.ErrorMessagesText;
+			Report.IsTrue(!errors.Contains(message),
+				"Error message was showing when it wasn't expected to! Error: " + message,
+				"As expected, the error message was not showing. Error: " + message);
+		}
+
+		[StepDefinition(@"in page (.*) I should see no errors")]
+		public void InPageIShouldSeeNoErrors(string page)
+		{
+			this.NoErrorMessages();
+		}
+
+		[StepDefinition(@"I should not see any error messages")]
+		public void NoErrorMessages()
+		{
+			var errors = NewProduct.ErrorMessagesText;
+			if (!errors.Any())
+			{
+				Report.Success("As expected, the error message was not showing.");
+				Report.Screenshot();
+				return;
+			}
+			Report.Failure("Error message was showing when it wasn't expected to! Error(s): " + string.Join(", ", errors));
+			Report.Screenshot();
+		}
+
+		#endregion
+
+		#region Unsorted steps
 		[StepDefinition(@"the product saved as: (.*) should be visible in editor")]
 		public void CorrectProductVisibleInEditor(string savedAs)
 		{
@@ -98,12 +205,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click continue")]
-		public void ClickContinue()
-		{
-			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked continue successfully!");
-		}
-
 		[StepDefinition(@"I should see battery manufacturer message: (.*)")]
 		public void ThenIShouldSeeBatteryManufacturerMessage(string message)
 		{
@@ -114,42 +215,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(found.Trim() == message.Trim(),
 				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
 				"Warning message was showing: " + message + ", as expected!");
-		}
-
-		[StepDefinition(@"I should see an error message: (.*)")]
-		public void ErrorMessageSpecific(string message)
-		{
-			Report.Info("Checking error message");
-			var selNewProduct = new NewProduct();
-			var found = selNewProduct.ErrorMessage();
-
-			Report.IsTrue(found.Trim() == message.Trim(),
-				"Error message was not as expected! Expected: " + message + ", but found: " + found + "!",
-				"Error message was showing: " + message + ", as expected!");
-		}
-
-		[StepDefinition(@"I should not see an error message: (.*)")]
-		public void NotErrorMessageSpecific(string message)
-		{
-			Report.Info("Checking error message: " + message + " is not appearing");
-			var selNewProduct = new NewProduct();
-			var found = selNewProduct.ErrorMessage();
-
-			Report.IsTrue(found == null || found.Trim() != message.Trim(),
-				"Error message was showing when it wasn't expected to! Error: " + message,
-				"As expected, the error message was not showing. Error: " + message);
-		}
-
-		[StepDefinition(@"I should not see any error messages")]
-		public void NoErrorMessages()
-		{
-			Report.Info("Check no error messages are appearing");
-			var selNewProduct = new NewProduct();
-			var found = selNewProduct.ErrorMessage();
-
-			Report.IsTrue(found == null,
-				"Error message was showing when it wasn't expected to! Error: " + found,
-				"As expected, the error message was not showing.");
 		}
 
 		[StepDefinition(@"I click Continue and should not see an error message")]
@@ -330,21 +395,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var prodDetails = new ProductInformation() { Id = id, Name = name };
 			Context.AddToContext(savedas, prodDetails);
 			Report.Success("Product Information saved!");
-		}
-
-		[StepDefinition(@"I should see the (.*) Page")]
-		public void GivenIShouldSeeXPage(string page)
-		{
-			var selNewProduct = new NewProduct();
-			if (selNewProduct.Wait_for_load())
-			{
-				Report.IsTrue(selNewProduct.WaitForSection(page),
-					page + " is not showing when it was expected to",
-					page + " is showing as expected");
-				return;
-			}
-			Report.Failure("New product page was not found");
-			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I should see the Additional Information Page")]
@@ -578,30 +628,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			selNewProduct.InternationalShippingDOTExemption = selection;
 			Report.IsTrue(selNewProduct.InternationalShippingDOTExemption == selection, "Failed to select: " + selection,
 				"Successfully selected: " + selection);
-		}
-
-		[StepDefinition(@"In the New Product page I click tab: (.*)")]
-		public void GivenInTheNewProductPageIClickTab(string tab)
-		{
-			tab = tab.Replace(" ", "");
-			if (!Enum.TryParse(tab, out NewProduct.Tab thisTab))
-			{
-				return;
-			}
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.ClickTab(thisTab), "Failed to click tab: " + tab, "Successfully clicked tab: " + tab);
-		}
-
-		[StepDefinition(@"in the New Product page I click section: (.*)")]
-		public void GivenInTheNewProductPageIClickSection(string section)
-		{
-			TestReport.UseSubSteps = true;
-			NewProduct selNewProduct = new NewProduct();
-			TestReport.StartStep("I click section header " + section);
-			Report.IsTrue(selNewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
-			GeneralUtilities.Wait_for_load_finish();
-			TestReport.StartStep("I should see page has loaded: " + section);
-			this.GivenIShouldSeeXPage(section);
 		}
 
 		[StepDefinition(@"I delete UPC: (.*)")]
@@ -1124,13 +1150,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenTheDataAcceptancePageShouldApprear()
 		{
 			Report.IsTrue(new NewProduct().DataAcceptanceScreenAppears(), "Data Acceptance page did not appear!", "As expected, Data Acceptance page loaded successfully!");
-		}
-
-		[StepDefinition(@"I confirm an error message is displayed with text: (.*)")]
-		public void ThenIConfirmErrorMessageMatches(string errorMsg)
-		{
-			var erros = new NewProduct().AllErrorMessages();
-			Report.IsTrue(erros.Contains(errorMsg), $"The error message {errorMsg} was not displayed!", $"The error message {errorMsg} was displayed as expected");
 		}
 
 		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
@@ -1675,48 +1694,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		// Replace with 'ISeeXPage' if there is a problem with a required field missing from the test step
-		[StepDefinition("I check the new page has loaded with no required field error. Navigating from: (.*) to: (.*)")]
-		public void NewPageLoadedNoRequiredFieldError(string oldPage, string newPage)
-		{
-			var myNewProduct = new NewProduct();
-			int wait = 0;
-			while (wait < 5)
-			{
-				// If the new page has loaded we are happy to return
-				if (myNewProduct.WaitForSection(newPage, 1))
-				{
-					Report.Success("The page: '" + newPage + "' has loaded");
-					Report.Screenshot();
-					return;
-				}
-				if (myNewProduct.ErrorMessage() == "This is a required field." && myNewProduct.WaitForSection(oldPage, 1))
-				{
-					var section = myNewProduct.SectionWithRequiredFieldError();
-					Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
-					var options = myNewProduct.GetAllOptionsForSection(section);
-					if (options.Contains("Yes") && options.Contains("No"))
-					{
-						myNewProduct.SetOptionInSection(section, "No");
-					}
-					else
-					{
-						this.SelectFirstOptionInSection(section);
-					}
-					Report.Info("Clicking continue");
-					this.ClickContinue();
-					if (myNewProduct.WaitForSection(newPage))
-					{
-						Report.Info("The new page has loaded");
-						Report.Screenshot();
-						return;
-					}
-				}
-				wait++;
-			}
-			Report.Failure("Did not see the Required field error message, but the new page was not loaded");
-			Report.Screenshot();
-		}
 
 		//Checks a new page has loaded on Continue click. If not, look for 'this is a required field' error. If yes, throw excpt. The test is now out of sync, so further steps will only report junk.
 		[StepDefinition(@"I continue to the next screen in the product registration")]
@@ -1748,7 +1725,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Delay.Seconds(1);
 			}
 			Report.Info("New page did not load. Checking for 'required field' error message.");
-			if (selNewProduct.ErrorMessage() == "This is a required field.")
+			if (selNewProduct.ErrorMessageText == "This is a required field.")
 			{
 				var section = selNewProduct.SectionWithRequiredFieldError();
 				Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
@@ -2586,5 +2563,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("input values must be either 'should' or 'should not'");
 			}
 		}
+
+		#endregion
 	}
 }

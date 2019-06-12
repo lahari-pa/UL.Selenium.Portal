@@ -21,33 +21,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public enum Tab { ProductType, ProductCharacteristics, RecipientAndUpcDetails, ReviewAndSubmit }
 
-		private static Dictionary<Tab,string> TabNames = new Dictionary<Tab, string> {
+		public static Dictionary<Tab,string> MapTabs = new Dictionary<Tab, string> {
 			{ Tab.ProductType , "Product Type" },
 			{ Tab.ProductCharacteristics , "Product Characteristics" },
-			{ Tab.RecipientAndUpcDetails , "Recipient And UPC Details" },
-			{ Tab.ReviewAndSubmit , "Review And Submit" }
+			{ Tab.RecipientAndUpcDetails , "Recipient and UPC Details" },
+			{ Tab.ReviewAndSubmit , "Review and Submit" }
 		};
-
-		//private static string TabName(Tab tab)
-		//{
-		//	switch (tab)
-		//	{
-		//		case Tab.ProductCharacteristics:
-		//			return "Product Characteristics";
-		//		case Tab.ProductType:
-		//			return "Product Type";
-		//		case Tab.RecipientAndUpcDetails:
-		//			return "Recipient And UPC Details";
-		//		case Tab.ReviewAndSubmit:
-		//			return "Review And Submit";
-		//		default:
-		//			return null;
-		//	}
-		//}
 
 		private IWebElement Header => this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 5);
 
 		private IWebElement ProgressBar => this.containerElement.FindElement(By.XPath(".//div[@class='prog-wizard']"), 5);
+
+		private IWebElement ErrorMessage => this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 1);
+
+		private IEnumerable<IWebElement> ErrorMessages => this.containerElement.FindElements(By.XPath(".//p[@class='form-error']//span"), 1);
+
+		private IWebElement ContinueButton => this.containerElement.WaitUntilElementClickable(By.XPath(".//a[contains(@class,'continue-button')]"), 5);
 
 		public string HeaderText => this.Header?.Text;
 
@@ -72,6 +61,86 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		private string ProductName => this.HeaderText.Replace("(" + this.ProductId + ")", "").Trim();
 
+		public List<string> ErrorMessagesText => this.ErrorMessages.Select(x => x.Text).ToList();
+
+		public string ErrorMessageText => this.ErrorMessage?.Text;
+
+		public bool ClickContinueNoError()
+		{
+			try
+			{
+				if (this.ContinueButton == null)
+				{
+					return false;
+				}
+				if (!this.ContinueButton.TryClick())
+				{
+					return false;
+				}
+				if (!GeneralUtilities.WaitForRefreshToDisappear(this.ContinueButton) && this.ErrorMessage != null)
+				{
+					return false;
+				}
+				GeneralUtilities.Wait_for_load_finish();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool ClickContinue(bool waitForLoadingBtnSpinner = true)
+		{
+			try
+			{
+				if (this.ContinueButton == null)
+				{
+					return false;
+				}
+				if (!this.ContinueButton.TryClick())
+				{
+					return false;
+				}
+				if (waitForLoadingBtnSpinner)
+				{
+					GeneralUtilities.WaitForRefreshToDisappear(this.ContinueButton);
+				}
+				return GeneralUtilities.Wait_for_load_finish() && this.DismissAjaxIfDisplayed();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		private bool DismissAjaxIfDisplayed()
+		{
+			var attempt = 0;
+			var ajax = true;
+			while (attempt < 10 && ajax)
+			{
+				Report.Info("Attempt: " + attempt);
+				if (!GeneralUtilities.AjaxPopupExists())
+				{
+					ajax = false;
+				}
+				else
+				{
+					Report.Error("Ajax error was displayed! Clicking Close.");
+					if (!GeneralUtilities.CloseAjaxPopup())
+					{
+						return false;
+					}
+					this.ContinueButton.TryClick();
+					GeneralUtilities.WaitForRefreshToDisappear(this.ContinueButton);
+					GeneralUtilities.Wait_for_load_finish();
+					attempt++;
+				}
+			}
+			return !ajax;
+		}
+
 		public ProductInformation GetCurrentProductInformation()
 		{
 			return new ProductInformation() { Id = this.ProductId, Name = this.ProductName };
@@ -92,15 +161,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return this.containerElement.FindElements(By.XPath(".//form//input[@type='checkbox']/../span"), 2).Select(x => x.Text.Trim()).ToList();
 		}
 
-		public string ErrorMessage()
-		{
-			return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2)?.Text;
-		}
+		//public string ErrorMessage()
+		//{
+		//	return this.containerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 2)?.Text;
+		//}
 
-		public List<string> AllErrorMessages()
-		{
-			return this.containerElement.FindElements(By.XPath(".//p[@class='form-error']//span"), 2)?.Select(x => x.Text).ToList();
-		}
+		//public List<string> AllErrorMessages()
+		//{
+		//	return this.containerElement.FindElements(By.XPath(".//p[@class='form-error']//span"), 2)?.Select(x => x.Text).ToList();
+		//}
 
 		public string BatteyWarning()
 		{
@@ -169,7 +238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		/// <returns></returns>
 		public bool WaitForTab(Tab tab, int secondsToWait = 30)
 		{
-			var tabName = TabNames[tab];
+			var tabName = MapTabs[tab];
 			return this.ProgressBar?.WaitUntilElementVisible(By.XPath(".//div[@class= 'prog-step in-progress active' and .//span[contains(text(),'" + tabName + "')]]"), secondsToWait) != null;
 		}
 
@@ -180,7 +249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		/// <returns></returns>
 		public bool ClickTab(Tab tab)
 		{
-			var tabName = TabNames[tab];
+			var tabName = MapTabs[tab];
 			// if the tab is currently active, we don't need to click it
 			var active = this.ProgressBar?.FindElement(By.XPath($".//div[contains(@class, 'in-progress active') and ./span[text()='{tabName}']]"), 2);
 			if (active != null)
@@ -222,54 +291,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return false;
 		}
 
-		public bool ClickContinue(bool waitForLoadingBtnSpinner = true)
-		{
-			try
-			{
-				var el = this.containerElement.WaitUntilElementClickable(By.XPath(".//a[contains(@class,'continue-button')]"), 10);
-				if (el == null)
-				{
-					return false;
-				}
-				if (!el.TryClick())
-				{
-					return false;
-				}
-				if (waitForLoadingBtnSpinner)
-				{
-					GeneralUtilities.WaitForRefreshToDisappear(el);
-				}
-				GeneralUtilities.Wait_for_load_finish();
-				var attempt = 0;
-				var ajax = true;
-				while (attempt < 10 && ajax)
-				{
-					Report.Info("Attempt: " + attempt);
-					if (!GeneralUtilities.AjaxPopupExists())
-					{
-						ajax = false;
-					}
-					else
-					{
-						Report.Error("Ajax error was displayed! Clicking Close.");
-						GeneralUtilities.CloseAjaxPopup();
-						el.TryClick();
-						if (waitForLoadingBtnSpinner)
-						{
-							GeneralUtilities.WaitForRefreshToDisappear(el);
-						}
-						GeneralUtilities.Wait_for_load_finish();
-						attempt++;
-					}
-				}
-				return !ajax;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
 		public bool ClickCancelButton()
 		{
 			try
@@ -303,33 +324,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			catch (Exception)
 			{
 				return false;
-			}
-		}
-
-		public bool ClickContinueNoError()
-		{
-			try
-			{
-				var el = this.containerElement.FindElement(By.XPath(".//a[contains(@class,'continue-button')]"), 2);
-				if (el == null)
-				{
-					return false;
-				}
-
-				el.TryClick();
-				if (!GeneralUtilities.WaitForRefreshToDisappear(el) && this.ErrorMessage() != null)
-				{
-					Report.Screenshot();
-					return false;
-				}
-
-				GeneralUtilities.Wait_for_load_finish();
-				return true;
-			}
-			catch (Exception)
-			{
-				Report.Error("Page loaded too quickly to check error message.");
-				return true;
 			}
 		}
 
