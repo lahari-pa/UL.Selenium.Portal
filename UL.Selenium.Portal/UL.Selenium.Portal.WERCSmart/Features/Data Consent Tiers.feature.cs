@@ -81,8 +81,12 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         {
 #line 8
 #line 9
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I create an email AllRetailersProductsCompany and save it as ProductAccount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
+testRunner.Given("I save the current emails in the inbox for address saved as: ProductAccount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 11
+testRunner.Given("I log in with the account saved in TReVor as: ProductAccount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 12
 testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
         }
@@ -94,14 +98,14 @@ testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((str
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56942] Data Consent Tiers - Walmart", null, new string[] {
                         "TReVorId:22221"});
-#line 13
+#line 15
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 8
 this.FeatureBackground();
-#line 14
+#line 16
 testRunner.Given("I select the retailer: Wal-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 15
+#line 17
 testRunner.Then("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -116,104 +120,79 @@ testRunner.Then("I confirm that there is a section labeled: Data Consent Tiers",
             table1.AddRow(new string[] {
                         "4.2",
                         "Off"});
-#line 16
+#line 18
 testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table1, "Given ");
-#line 21
-testRunner.Then("I should not be able to edit Tier 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 22
-testRunner.And("I should be able to edit Tier 2.1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
-testRunner.And("I should be able to edit Tier 2.2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should not be able to edit Tier 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 24
-testRunner.And("I should be able to edit Tier 4.2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I toggle the data consent tier: Tier 2.1 to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 25
-testRunner.And("the save changes button is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I toggle the data consent tier: Tier 2.2 to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 26
+testRunner.Given("I toggle the data consent tier: Tier 4.2 to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tier",
                         "State"});
             table2.AddRow(new string[] {
                         "2.1",
-                        "On"});
-#line 27
+                        "Off"});
+#line 28
 testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table2, "Given ");
 #line 31
 testRunner.Then("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 32
-testRunner.And("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
-testRunner.And(@"the following warning message should be showing: NOTE: Your selection does not meet this retailer's request. Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. Wal-Mart/SAM'S CLUB will be notified of your Data Tier selections", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
-testRunner.And("the save changes button is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Tier",
-                        "State"});
+                        "Message"});
             table3.AddRow(new string[] {
-                        "2.1",
-                        "Off"});
-            table3.AddRow(new string[] {
-                        "2.2",
-                        "On"});
+                        @"NOTE: Your selection does not meet this retailer's request. Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. Wal-Mart/SAM'S CLUB will be notified of your Data Tier selections"});
+#line 33
+testRunner.Then("the warning message in the Retail Partners details page should contain the follow" +
+                    "ing:", ((string)(null)), table3, "Then ");
+#line 37
+testRunner.Then("there should be a new email for email Address saved as: ProductAccount from: <Sit" +
+                    "eNotification> with the title: WERCSmart Data Use Tier Consents Changed for Wal-" +
+                    "Mart/SAM\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 38
-testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table3, "Given ");
-#line 43
-testRunner.Then("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 44
-testRunner.And("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
-testRunner.And(@"the following warning message should be showing: NOTE: Your selection does not meet this retailer's request. Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. Wal-Mart/SAM'S CLUB will be notified of your Data Tier selections", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
-testRunner.And("the save changes button is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(@"the body of the email should show: Hello WERCS Automated Products, Recently an administrator has changed the Data Usage permissions for Wal-Mart/SAM'S CLUB to include: Tier 1: Regulatory Support: ActiveTier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports: DisabledTier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency: ActiveTier 4.2: Publicly Disclose Product Ingredient Lists: Active For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tier",
                         "State"});
             table4.AddRow(new string[] {
-                        "4.1",
+                        "2.1",
                         "On"});
-#line 50
+#line 39
 testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table4, "Given ");
-#line 54
+#line 42
 testRunner.Then("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 55
-testRunner.And("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
-testRunner.And(@"the following warning message should be showing: NOTE: Your selection does not meet this retailer's request. Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys. Wal-Mart/SAM'S CLUB will be notified of your Data Tier selections", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
-testRunner.And("the save changes button is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 43
+testRunner.Given("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 44
+testRunner.And("I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 46
+testRunner.Then("there should be a new email for email Address saved as: ProductAccount from: <Sit" +
+                    "eNotification> with the title: WERCSmart Data Use Tier Consents Changed for Wal-" +
+                    "Mart/SAM\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 47
+testRunner.And(@"the body of the email should show: Hello WERCS Automated Products, Recently an administrator has changed the Data Usage permissions for Wal-Mart/SAM'S CLUB to include: Tier 1: Regulatory Support: ActiveTier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports: ActiveTier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency: ActiveTier 4.2: Publicly Disclose Product Ingredient Lists: Active For questions please contact the WERCSmart Customer Support. Thank you, Your WERCSmart Team Important Notice: This e-mail may contain privileged or confidential information. If you are not the intended recipient (1) you may not disclose, use, distribute, copy or rely upon this message or attachment(s); and (2) please notify UL PSi at WERCSmartCustomer@ul.com and then delete this message and its attachment(s). UL PSi and its affiliates disclaim all liability for any errors, omissions, corruption or virus in this message or any attachment(s).", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tier",
                         "State"});
             table5.AddRow(new string[] {
                         "2.1",
-                        "On"});
-#line 61
-testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table5, "Given ");
-#line 65
-testRunner.Then("I click the Save Changes button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 66
-testRunner.And("I click close on the Save Changes popup dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
-testRunner.And("I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
-testRunner.And("the save changes button is not shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Tier",
-                        "State"});
-            table6.AddRow(new string[] {
-                        "2.1",
                         "Off"});
-            table6.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "2.2",
                         "Off"});
-            table6.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "4.2",
                         "Off"});
-#line 73
-testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table6, "Given ");
+#line 48
+testRunner.Given("I ensure the Data Consent Tier Sliders are set as follows:", ((string)(null)), table5, "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
