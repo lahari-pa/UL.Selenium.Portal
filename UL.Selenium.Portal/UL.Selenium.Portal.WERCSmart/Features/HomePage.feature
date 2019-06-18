@@ -180,10 +180,11 @@ And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 And I call Shared Step 49818 (Beverage Regulatory Details)
 And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 And I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
-And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
-And I click continue
-And I click continue
-And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test Comment
+#And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+Given in the Additional Documents to Provide page I click Continue
+#Given in the Optional Reports and Documents Available for Purchase page I click Continue
+Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test
 And I navigate to the home page
 And I filter the products by: Not Yet Submitted
 And I search for the product saved as: TestCase56214
