@@ -7,7 +7,9 @@ using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -152,7 +154,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Brand Product " + testCaseId);
 			TestReport.StartStep(
 				"In the Product Type tab of the New Product Page, I enter: Bleach in the Type of Product select field");
-			newProductSteps.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField("Bleach");
+			//newProductSteps.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField("Bleach");
+			new Steps_TheProduct().SetProductNameTo("Bleach");
 			TestReport.StartStep(
 				"I select the first option in the 'Product Line or Brand' drop down and save as: Brand" + testCaseId);
 			newProductSteps.SelectFirstOptionInBrandDropDown();
@@ -216,11 +219,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//#And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 			newProductSteps.GivenIShouldSeeXPage("The Product");
 			//newProductSteps.GivenInTheNewProductPageIClickTab("Product Characteristics");
-			newProductSteps.GivenInTheNewProductPageIClickSection("Product Characteristics");
+			newProductSteps.ClickPageHeading("Product Characteristics");
 			newProductSteps.GivenIChangeTheSecondaryPhysicalStateDropDownFromItsCurrentSelectionToANewSelection();
 			newProductSteps.ThenIClickSaveOrCancelInTheProductPage("Save");
 			newProductSteps.GivenInTheNewProductPageIClickTab("Review and Submit");
-			newProductSteps.GivenInTheNewProductPageIClickSection("Data Acceptance");
+			newProductSteps.ClickPageHeading("Data Acceptance");
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 			newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 			thisStepsHomePage.ThenINavigateToTheHomePage();
@@ -692,7 +695,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the New Product page I click tab: Product Characteristics
 			newProductSteps.GivenInTheNewProductPageIClickTab("Product Characteristics");
 			//And in the New Product page I click section: Toxicity Characteristic Leaching Procedure(TCLP)
-			newProductSteps.GivenInTheNewProductPageIClickSection("Toxicity Characteristic Leaching Procedure (TCLP)");
+			newProductSteps.ClickPageHeading("Toxicity Characteristic Leaching Procedure (TCLP)");
 			//And I set the Lead option to: Yes
 			newProductSteps.SetTheSectionOptionTo("Lead", "Yes");
 			//And I set the Mercury option to: Yes
@@ -704,7 +707,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//And In the New Product page I click tab: Review and Submit
 			newProductSteps.GivenInTheNewProductPageIClickTab("Review and Submit");
 			//And in the New Product page I click section: Data Acceptance
-			newProductSteps.GivenInTheNewProductPageIClickSection("Data Acceptance");
+			newProductSteps.ClickPageHeading("Data Acceptance");
 			//And In the Data Acceptance page I click on the Accept button
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 			//Given If purchase details are showing click confirm order

@@ -948,7 +948,7 @@ testRunner.And("I click on the Row Action: Edit", ((string)(null)), ((TechTalk.S
 #line 401
 testRunner.Given("In the New Product page I click tab: Product Type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 403
-testRunner.And("in the New Product page I click section: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 406
 testRunner.Then("Product Line or Brand (optional) should be showing the value: ~saved as BrandName" +
                     "68388", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -2021,3 +2021,4 @@ testRunner.And("I should see the Subheading Announcements expanded in the main w
 }
 #pragma warning restore
 #endregion
+

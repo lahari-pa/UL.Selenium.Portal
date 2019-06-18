@@ -14,6 +14,7 @@ using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
@@ -37,7 +38,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I set the Select the type of product to create option to: Create a New Registration");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select the type of product to create",
 				"Create a New Registration");
-			TestReport.StartStep("In the New Product page I click Continue");
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -76,13 +76,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
-
-			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", name);
-			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
-								 " in the Type of Product select field");
-			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
-			Delay.Seconds(1);
-			Report.Screenshot();
+			new Steps_TheProduct().SetProductNameTo(name);
+			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			new Steps_TheProduct().SetTypeOfProductTo(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			var prodDetails = new NewProduct().GetCurrentProductInformation();
@@ -1777,8 +1773,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 59680 \(Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 59680 \(Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
 		public void ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
 		{
 			TestReport.UseSubSteps = true;
@@ -5083,7 +5078,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selStepsNewProduct = new StepsNewProduct();
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I click the 'U.S. Department of Transportation (DOT) Classification' tab");
-			selStepsNewProduct.GivenInTheNewProductPageIClickSection(
+			selStepsNewProduct.ClickPageHeading(
 				"U. S. Department of Transportation (DOT) Classification");
 			TestReport.StartStep("I enter the Un Number 'UN1966'");
 			selStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN1966");

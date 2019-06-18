@@ -233,7 +233,7 @@ testRunner.Given("I confirm the Expiration Date Provided By Kelly field for stat
 #line 105
 testRunner.Given("in the Pesticide Details - State Registration Details page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 107
-testRunner.Given("in the New Product page I click section: Pesticide Details - U.S.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click the page heading: Pesticide Details - U.S.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 109
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 111
@@ -388,7 +388,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 208
 testRunner.Then("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 210
-testRunner.Given("in the New Product page I click section: Pesticide Details - U.S.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click the page heading: Pesticide Details - U.S.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 212
 testRunner.Then("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 214
@@ -1378,8 +1378,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 731
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 733
-testRunner.Then("in the New Product page I click section: Pesticide Details - State Registration D" +
-                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the page heading: Pesticide Details - State Registration Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 735
 testRunner.Then("I confirm the \'Is Kelly Data\' field for State: AZ is not checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 737
@@ -1470,8 +1469,7 @@ testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table
 #line 794
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 796
-testRunner.Then("in the New Product page I click section: Pesticide Details - State Registration D" +
-                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the page heading: Pesticide Details - State Registration Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 798
 testRunner.Then("I confirm that the EPA table row for state: AL is highlighted with the color: pea" +
                     "ch", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -1706,8 +1704,7 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
 #line 911
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 913
-testRunner.Then("in the New Product page I click section: Pesticide Details - State Registration D" +
-                    "etails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the page heading: Pesticide Details - State Registration Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 915
 testRunner.And("I should see the Pesticide Details - State Registration Details Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 917
@@ -1789,7 +1786,7 @@ testRunner.Then("I edit the Expiration Date to: 2019-12-31 for the State: AZ on 
 #line 949
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 950
-testRunner.Then("in the New Product page I click section: Pesticide Details - U.S.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the page heading: Pesticide Details - U.S.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 951
 testRunner.And("I should see the Pesticide Details - U.S. Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 952
@@ -1817,3 +1814,4 @@ testRunner.Given("I call Shared Step 43758 (Product Grid- Filter for Product- Se
 }
 #pragma warning restore
 #endregion
+

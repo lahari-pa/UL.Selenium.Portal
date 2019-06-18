@@ -14,22 +14,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	class Steps_PesticideDetailsState
 	{
 		private StepsNewProduct StepsNewProduct => new StepsNewProduct();
-		//[StepDefinition(@"in page Pesticide Details - State Registration page I should see error: (.*)")]
-		//public void IShouldSeeError(string error)
-		//{
-		//	var thisNewProduct = new NewProduct();
-		//	var errors = thisNewProduct.ErrorMessagesText;
-		//	Report.IsTrue(errors.Contains(error), "Expected error: " + error + " but got: " + string.Join(", ", errors), "As expected, error is showing as: " + error);
-		//}
-
-		//[StepDefinition(@"in page Pesticide Details - State Registration Details I should see no errors")]
-		//public void IShouldSeeNoError()
-		//{
-		//	var thisNewProduct = new NewProduct();
-		//	var errors = thisNewProduct.ErrorMessagesText;
-		//	Report.IsTrue(!errors.Any(), "Expected no errors but there were errors!",
-		//		"There were no errors as expected");
-		//}
 
 		[StepDefinition(@"I should see the appropriate response depending on today's date for state: (.*)")]
 		public void ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(string state)
@@ -45,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				//If the current date is > Oct 1st confirm the Transportation Details 1 step is shown and Click the Pesticide Details -State Registration Details heading
 				stepsNewProduct.GivenIShouldSeeXPage("Transportation Details 1");
-				stepsNewProduct.GivenInTheNewProductPageIClickSection("Pesticide Details - State Registration Details");
+				stepsNewProduct.ClickPageHeading("Pesticide Details - State Registration Details");
 			}
 		}
 

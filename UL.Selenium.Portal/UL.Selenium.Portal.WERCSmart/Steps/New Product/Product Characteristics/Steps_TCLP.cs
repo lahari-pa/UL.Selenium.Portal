@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private TCLP Tclp => new TCLP();
 
-		[StepDefinition(@"I set 'Product has had TCLP; Report is available' to (No|Yes)")]
+		[StepDefinition(@"I set 'Product has had TCLP; Report is available' to: (No|Yes)")]
 		public void SetTclpReportIsAvailableTo(string noOrYes)
 		{
 			Report.IsTrue(this.Tclp.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product Characteristics tab has not loaded",

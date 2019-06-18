@@ -186,7 +186,7 @@ testRunner.Then("In the Forgotten Password window I should see the following err
 #line 46
 testRunner.And("I click the cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 47
-testRunner.Then("I should see for the forgotten password: Forgot your Password?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should remain on the Forgotten Password dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -374,7 +374,7 @@ testRunner.Then("I answer the security questions for Account: ForgotPW_SecQs", (
 #line 111
 testRunner.Then("I enter a new password: 123Password! and verify: 123Password!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 112
-testRunner.Then("I click the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the Login button on Forgotten Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 113
 testRunner.Then("I log in as user: ForgotPW_SecQs with password: 123Password!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 114
@@ -386,3 +386,4 @@ testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTa
 }
 #pragma warning restore
 #endregion
+

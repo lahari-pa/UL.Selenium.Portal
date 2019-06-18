@@ -35,7 +35,8 @@ And in the New Product page I click Continue
 # ====== Following the steps from 'Shared Step' 57561 ====== #
 And I should see the The Product Page
 And I set the Product Name as it a appears on the Package Label field to: Food Item Dispensed by Compressed Gas - Dairy Topping
-And In the Product Type tab of the New Product Page, I enter: Food Item Dispensed by Compressed Gas - Dairy Topping in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Food Item Dispensed by Compressed Gas - Dairy Topping in the Type of Product select field
+And I set 'Type of Product' to: Food Item Dispensed by Compressed Gas - Dairy Topping
 And in the The Product page I click Continue
 Then I save the product information as: TestCase60774
 

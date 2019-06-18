@@ -38,14 +38,16 @@ And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
 And I set 'Product Name' to: Answering Machine, Battery Included
-And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Answering Machine, Battery Included in the Type of Product select field
+And I set 'Type of Product' to: Answering Machine, Battery Included
 And in the New Product page I click Continue
 Then I save the product information as: TestCase63705
+# Shared step 63704
 And I should see the Additional Product Information Page
 And In the Additional Information Page the check box for: United States should be: checked
-And In the Additional Information Page for Product is shipped directly I select: No
-And In the Additional Information Page for Product is retailers private label or brand I select: No
-And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+And I set 'Product is shipped directly' to: No
+And I set 'Product is a Retailers Private Label or Brand' to: No
+And I set 'Product is solely for the Retailer's use' to: No
 And in the New Product page I click Continue
 And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
 And I set 'Prop65' to: No
@@ -117,7 +119,8 @@ And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
 And I set 'Product Name' to: Nickel Metal Hydride (NiMH) Battery
-And In the Product Type tab of the New Product Page, I enter: Nickel Metal Hydride (NiMH) Battery in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Nickel Metal Hydride (NiMH) Battery in the Type of Product select field
+And I set 'Type of Product' to: Nickel Metal Hydride (NiMH) Battery
 And in the New Product page I click Continue
 Then I save the product information as: TestCase63724
 # Setting Product Characteristics
@@ -130,10 +133,10 @@ Given in the New Product page I click Continue
 # Setting Additional Product Information
 And I should see the Additional Product Information Page
 And In the Additional Information Page the check box for: United States should be: checked
-And In the Additional Information Page for Product has been classified using OSHA I select: No
-And In the Additional Information Page for Product is shipped directly I select: No
-And In the Additional Information Page for Product is retailers private label or brand I select: No
-And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+And I set 'Product has been classified using OSHA' to: No
+And I set 'Product is shipped directly' to: No
+And I set 'Product is a Retailers Private Label or Brand' to: No
+And I set 'Product is solely for the Retailer's use' to: No
 Given in the New Product page I click Continue
 # Setting Ingredient Information
 Then I add the following ingredients:
@@ -192,7 +195,8 @@ And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
 And I set 'Product Name' to: abrasive
-And In the Product Type tab of the New Product Page, I enter: Abrasive in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Abrasive in the Type of Product select field
+And I set 'Type of Product' to: Abrasive
 And in the New Product page I click Continue
 Then I save the product information as: TestCase65441
 And I set the Primary Physical State to be: Solid
@@ -203,10 +207,10 @@ Given in the New Product page I click Continue
 # Setting Additional Product Information
 And I should see the Additional Product Information Page
 And In the Additional Information Page the check box for: United States should be: checked
-And In the Additional Information Page for Product has been classified using OSHA I select: No
-And In the Additional Information Page for Product is shipped directly I select: No
-And In the Additional Information Page for Product is retailers private label or brand I select: No
-And In the Additional Information Page for Product is solely for the Retailer's use I select: No
+And I set 'Product has been classified using OSHA' to: No
+And I set 'Product is shipped directly' to: No
+And I set 'Product is a Retailers Private Label or Brand' to: No
+And I set 'Product is solely for the Retailer's use' to: No
 Given in the New Product page I click Continue
 #Enter ingredients
 Then I add the following ingredients:
@@ -242,7 +246,7 @@ And in the New Product page I click Continue
 
 #Navigate back to UPC screen by click the reipient and upc details tab in the header
 Given In the New Product page I click tab: Recipient and UPC Details
-Given in the New Product page I click section: Universal Product Code (UPC)
+Given I click the page heading: Universal Product Code (UPC)
 And I should see the Universal Product Code Page
 And I delete UPC: saved as UPC65441
 Then In the list of UPCs I should not see UPC: saved as UPC65441
@@ -260,7 +264,8 @@ And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
 And I set 'Product Name' to: Laundry, Detergent
-And In the Product Type tab of the New Product Page, I enter: Laundry, Detergent in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Laundry, Detergent in the Type of Product select field
+And I set 'Type of Product' to: Laundry, Detergent
 And in the New Product page I click Continue
 Then I save the product information as: TestCase65392
 And I set the Primary Physical State to be: Liquid
@@ -272,14 +277,7 @@ And I set 'Flash point (in Celsius)' to: 2
 And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Closed cup method
 And I set the Select the best Water Solubility description to be: Very soluble
 And in the New Product page I click Continue
-And I should see the Additional Product Information Page
-And In the Additional Information Page the check box for: United States should be: checked
-And In the Additional Information Page for Product has been classified using OSHA I select: No
-And In the Additional Information Page for Product is shipped directly I select: No
-And In the Additional Information Page for Product is retailers private label or brand I select: No
-And In the Additional Information Page for Product is solely for the Retailer's use I select: No
-And in the New Product page I click Continue
-# Setting Ingredient Information
+Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Formaldehyde  | 100     | false               | false       |            |
@@ -324,9 +322,9 @@ And in the New Product page I click Continue
 # The Product Page
 And I should see the The Product Page
 And I set the Product Name option to: Deodorant - Non-aerosol
-And In the Product Type tab of the New Product Page, I enter: Deodorant - Non-aerosol in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Deodorant - Non-aerosol in the Type of Product select field
+And I set 'Type of Product' to: Deodorant - Non-aerosol
 And in the New Product page I click Continue
-
 # Product Characteristics Page
 And I should see the Product Characteristics Page
 Then I save the product information as: TestCase67661
@@ -450,7 +448,7 @@ And I set the Partition Coefficient field to: 20
 Then in the New Product page I click Continue
 
 # Optional Reports and Documents Available for Purchase Page
-Then in the New Product page I click section: Optional Reports and Documents Available for Purchase
+Then I click the page heading: Optional Reports and Documents Available for Purchase
 And the following additional documents should be showing as selected:
 | Document Name  | Language      |
 | Canada GHS SDS | English (U.S) |

@@ -223,7 +223,7 @@ Then in the VOC Limits table, the VOC Compliance Limit column should contain the
 
 Then in the VOC Limits table, the Regulation column should contain the value: (g/L) including water & exempts
 
-Then in the New Product page I click section: Volatile Organic Compounds (VOC) for California Air District(s) and Canada
+Then I click the page heading: Volatile Organic Compounds (VOC) for California Air District(s) and Canada
 
 And I should see the Volatile Organic Compounds (VOC) for California Air District(s) and Canada Page
 

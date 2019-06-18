@@ -54,7 +54,8 @@ Then I click the Register New Product icon in the Navigation Pane
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
 And I set 'Product Name' to: Soap63663
-And In the Product Type tab of the New Product Page, I enter: Soap (Bar, Liquid) for Body in the Type of Product select field
+#And In the Product Type tab of the New Product Page, I enter: Soap (Bar, Liquid) for Body in the Type of Product select field
+And I set 'Type of Product' to: Soap (Bar, Liquid) for Body
 And in the New Product page I click Continue
 Then I save the product information as: TestCase63663
 And I set the Primary Physical State to be: Solid

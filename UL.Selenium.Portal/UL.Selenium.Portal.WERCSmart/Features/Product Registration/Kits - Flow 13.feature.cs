@@ -715,7 +715,7 @@ testRunner.And("I click Save in The Product Page", ((string)(null)), ((TechTalk.
 #line 290
 testRunner.And("In the New Product page I click tab: Review and Submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 291
-testRunner.And("in the New Product page I click section: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 292
 testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 293
@@ -820,7 +820,7 @@ testRunner.And("I click Save in The Product Page", ((string)(null)), ((TechTalk.
 #line 346
 testRunner.And("In the New Product page I click tab: Review and Submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 347
-testRunner.And("in the New Product page I click section: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: Data Acceptance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 348
 testRunner.And("In the Data Acceptance page I click on the Accept button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 349
@@ -1067,3 +1067,4 @@ testRunner.And("I Click Cancel on the Document List window pop up", ((string)(nu
 }
 #pragma warning restore
 #endregion
+

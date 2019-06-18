@@ -295,6 +295,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
 		/// <summary>
 		/// click the login button that shows on the forget password page
 		/// </summary>
@@ -397,7 +398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the Login button")]
+		[StepDefinition(@"I click the Login button on Forgotten Password")]
 		public void ThenIClickTheLoginButton()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the Login button");

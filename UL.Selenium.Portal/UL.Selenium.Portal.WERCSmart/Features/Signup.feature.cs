@@ -522,3 +522,4 @@ testRunner.Then("I should see username for user saved as: SignupUser2 in the rig
 }
 #pragma warning restore
 #endregion
+

@@ -44,7 +44,7 @@ Given I enter a email address: abc123.tt@j
 And I click the continue button
 Then In the Forgotten Password window I should see the following error messages: Email is not valid.
 And I click the cancel button
-Then I should see for the forgotten password: Forgot your Password?
+Then I should remain on the Forgotten Password dialog
 
 @TReVorId:10151
 Scenario: [53048] Forgot Password - Reset Password
@@ -109,6 +109,6 @@ And the email should contain a link to reset a WERCSmart Account Password
 When I click the link in the email I get directed to security questions
 Then I answer the security questions for Account: ForgotPW_SecQs
 Then I enter a new password: 123Password! and verify: 123Password!
-Then I click the Login button
+Then I click the Login button on Forgotten Password
 Then I log in as user: ForgotPW_SecQs with password: 123Password!
 Then the WERCSmart homepage should load
