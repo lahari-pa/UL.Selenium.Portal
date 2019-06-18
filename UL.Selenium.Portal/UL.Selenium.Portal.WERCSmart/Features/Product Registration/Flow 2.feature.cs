@@ -1301,8 +1301,8 @@ testRunner.And("I call Shared Step 57881 (Regulatory Documents to Provide - US o
 testRunner.Then("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 555
 testRunner.Given("I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for" +
-                    " document type: Full Product Label and file: C:\\Dependencies\\WERCSmart\\testdoc.p" +
-                    "df", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    " document type: Provide Full Product Label (required) and file: C:\\Dependencies\\" +
+                    "WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 556
 testRunner.Given("in the Additional Documents to Provide page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 557
