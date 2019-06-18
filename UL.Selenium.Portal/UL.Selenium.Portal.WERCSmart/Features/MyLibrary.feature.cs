@@ -118,20 +118,20 @@ testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.
 #line 28
 testRunner.Given("In the My Account page I navigate to the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tab"});
-            table29.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "My Packaging Types"});
-            table29.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "My Brands"});
-            table29.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "My Distributors"});
-            table29.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "My Ingredients"});
-            table29.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Contact Information per SDS(s)"});
 #line 30
-testRunner.Then("I should see the following tabs in the My Library page", ((string)(null)), table29, "Then ");
+testRunner.Then("I should see the following tabs in the My Library page", ((string)(null)), table1, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -595,101 +595,101 @@ testRunner.Given("In the My Account page I navigate to the My Library page", ((s
 #line 391
 testRunner.Given("I navigate to the My Ingredients tab in the My Library page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Chemical Name",
                         "CAS"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Sulfuric acid",
                         "7664-93-9"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Cobalt sulfate",
                         "10124-43-3"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Graphene",
                         "1034343-98-0"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Pyrrole-2-carboxylic acid",
                         "634-97-9"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Formaldehyde",
                         "50-00-0"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Polycarbonate",
                         "25037-45-0"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Nitric acid",
                         "7697-37-2"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Cumene",
                         "98-82-8"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Argon",
                         "7440-37-1"});
-            table30.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Mica",
                         "12001-26-2"});
 #line 393
 testRunner.Given("I add the following ingredients and save them to context as: My Library New Ingre" +
-                    "dients", ((string)(null)), table30, "Given ");
+                    "dients", ((string)(null)), table2, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Index",
                         "Click Publicly Disclosed",
                         "Click Trade Secret",
                         "Public Name Change"});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "1",
                         "Y",
                         "N",
                         "+"});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "2",
                         "N",
                         "Y",
                         "="});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "3",
                         "N",
                         "N",
                         "-"});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "4",
                         "N",
                         "Y",
                         "+"});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "5",
                         "Y",
                         "N",
                         "+"});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "6",
                         "Y",
                         "N",
                         "+"});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "7",
                         "N",
                         "Y",
                         "="});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "8",
                         "N",
                         "N",
                         "-"});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "9",
                         "N",
                         "Y",
                         "+"});
-            table31.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "10",
                         "Y",
                         "N",
                         "+"});
 #line 411
 testRunner.Given("I edit the ingredients: My Library New Ingredients and save the edited ingredient" +
-                    "s to context as: My Library Ingredients Edited", ((string)(null)), table31, "Given ");
+                    "s to context as: My Library Ingredients Edited", ((string)(null)), table3, "Given ");
 #line 424
 testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 426
@@ -706,64 +706,64 @@ testRunner.Given("I navigate to the My Ingredients tab in the My Library page", 
 testRunner.And("I confirm that all changes in edited ingredients: My Library Ingredients Edited w" +
                     "ere saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Index",
                         "Click Publicly Disclosed",
                         "Click Trade Secret",
                         "Public Name Change"});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "1",
                         "Y",
                         "N",
                         "+"});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "2",
                         "N",
                         "Y",
                         "-"});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "3",
                         "Y",
                         "N",
                         "-"});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "4",
                         "N",
                         "N",
                         "+"});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "5",
                         "N",
                         "N",
                         "="});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "6",
                         "Y",
                         "N",
                         "+"});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "7",
                         "N",
                         "Y",
                         "+"});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "8",
                         "Y",
                         "N",
                         "-"});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "9",
                         "N",
                         "Y",
                         "+"});
-            table32.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "10",
                         "Y",
                         "N",
                         "="});
 #line 440
 testRunner.Given("I edit the ingredients: My Library New Ingredients and save the edited ingredient" +
-                    "s to context as: My Library Ingredients Edited 2", ((string)(null)), table32, "Given ");
+                    "s to context as: My Library Ingredients Edited 2", ((string)(null)), table4, "Given ");
 #line 453
 testRunner.And("I click Save in the My Ingredients tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 455

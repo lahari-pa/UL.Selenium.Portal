@@ -13,84 +13,49 @@
 Feature: Flow 24 - Deodorant
 @TReVorId:11424
 Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
-
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
 Then The home screen should load
-
 Given I generate a random UPC number and save as: UPC60617
-
 Given I delete all products with UPC Number: saved as UPC60617
-
 Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
-
 Then I save the product information as: TestCase60617
-
 And I call Shared Step 57441 (Product Characteristics - Primary Physical Property - Liquid)
-
 Given I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Triclosan        | 24.94   | false               | false       |            |
 | Hydrogen         | 30.2    | false               | false       |            |
 | Propylene Glycol | 19.8    | false               | false       |            |
 | Butane           | 25.06   | false               | false       |            |
-
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-
 Then I confirm the Label Information section on the Regulatory Information 3 page contains a link for: Nutritional and Supplement Labels
-
 Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-
 And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-
 Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-
 Given I see the following sections
 | Section                                                                                          |
 | HVOC (high volatile organic compound) content as weight percent of the total formulation         |
 | MVOC (microbial volatile organic compound) content as weight percentage of the total formulation |
-
 Given in the New Product page I click Continue
-
 Then HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error messages: This is a required field.
-
 Then MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should be showing the error messages: This is a required field.
-
 Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
-
 Then HVOC (high volatile organic compound) content as weight percent of the total formulation should not be showing the error messages: This is a required field.
-
 Then MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should not be showing the error messages: This is a required field.
-
 Then I should see the Volatile Organic Compound Summary Page
-
 And in the New Product page I click Continue
-
 Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
-
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60617, container type: Aerosol Can and size: 14
-
 Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-
 Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
-
 And in the Optional Reports and Documents Available for Purchase page I click Continue
-
 Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance               | Odor  | Odor Threshold    | Partition Coefficient |
 | Goggles                       | 66                       | 51.5                    | 10.92     | Clear to hazy, colorless | Berry | No data available | 2                     |
-
 Given I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
-
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-
 And I call Shared Step 54796 (Purchase Summary)
-
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60617
 
 
 @tfs_design

@@ -520,15 +520,94 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			var listOfRetailers = selForwardProdReg.GetListOfOtherRetailers();
-			Random rnd = new Random();
-			int index = rnd.Next(0, listOfRetailers.Count-1);
 
-			Report.IsTrue(selForwardProdReg.SelectRetailer(listOfRetailers[index]),
-				"Failed to select retailer: " + listOfRetailers[index], "Selected retailer: " + listOfRetailers[index]);
+			string alreadySelectedRetailer = "CVS";
 
-			Context.AddToContext(saveAs, listOfRetailers[index]);
+			if (Context.Contains("retailer"))
+			{
+				alreadySelectedRetailer = Context.GetFromContext("retailer").ToString();
+			}
+
+
+			var itemToRemove = listOfRetailers.SingleOrDefault(r => r == alreadySelectedRetailer);
+			if (itemToRemove != null)
+			{
+				listOfRetailers.Remove(itemToRemove);
+			}
+
+			bool bSelected = false;
+			string selectedRetailer = "";
+			int i = 0;
+			while (i<5 && !bSelected)
+			{
+				Random rnd = new Random();
+				int index = rnd.Next(0, listOfRetailers.Count - 1);
+				try
+				{
+					if(selForwardProdReg.SelectOtherRetailer(listOfRetailers[index]))
+					{
+						selectedRetailer = listOfRetailers[index];
+						Report.Success("Selected retailer: " + selectedRetailer);
+						bSelected = true;
+					}
+				}
+				catch (Exception e)
+				{
+					Report.Info(e.Message);
+				}
+
+				i++;
+			}
+
+
+			if (bSelected)
+			{
+				Context.AddToContext(saveAs, selectedRetailer);
+			}
+			else
+			{
+				throw new Exception("Failed to select a retailer");
+			}
+
+
 
 		}
+
+		[Then(@"I confirm that for UPC Number (.*) the retailer is displayed as (.*)")]
+		public void ThenIConfirmThatForUPCNumberSavedAsTestCaseUPCTheRetailerIsDisplayedAsSavedAsTestCaseRetailer(string UPCNumber, string Retailer)
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			if (UPCNumber.ToLower().Contains("saved as"))
+			{
+				UPCNumber = Context
+					.GetFromContext(UPCNumber.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase)
+						.Trim()).ToString();
+			}
+
+			if (Retailer.ToLower().Contains("saved as"))
+			{
+				Retailer = Context
+					.GetFromContext(Retailer.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase)
+						.Trim()).ToString();
+			}
+
+			var listProductResults = selForwardProdReg.GetProductResults();
+
+			var matchingListItem = listProductResults.FirstOrDefault(x =>
+				x.UPCs.FirstOrDefault(y => y.UPCNumber == UPCNumber).DestinationRetailers.Contains(Retailer));
+
+			Report.IsTrue(matchingListItem != null,
+				"Failed to find matching item for UPCNumber: " + UPCNumber + " and retailer: " + Retailer,
+				"Found matching item for UPCNumber: " + UPCNumber + " and retailer: " + Retailer);
+		}
+
+		[StepDefinition(@"I confirm that NO Errors display for the Product")]
+		public void ThenIConfirmThatNOErrorsDisplayForTheProduct()
+		{
+			var selForwardProdReg = new ForwardProductRegistration();
+			Report.IsTrue(!selForwardProdReg.ErrorsExist(), "Errors are showing", "Errors are not showing");
+		}
+
 
 	}
 }
