@@ -174,42 +174,11 @@ testRunner.Then("The element: login button should display text: Login", ((string
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50830] Validation - Error Messages", null, new string[] {
                         "TReVorId:6881"});
-<<<<<<< HEAD
-#line 47
-=======
 #line 48
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 9
 this.FeatureBackground();
-<<<<<<< HEAD
-#line 49
-testRunner.Then("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 50
-testRunner.And("I ensure that the password input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 52
-testRunner.Then("I should see the following error message for email: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 53
-testRunner.Given("I populate the email input field with: SeleniumAdmin01@thewercs.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 54
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 55
-testRunner.Then("I should see the following error message for password: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 56
-testRunner.Given("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 57
-testRunner.And("I populate the password input field with: incorrectpassword", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 59
-testRunner.Then("I should see the following error message for email: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 60
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
-=======
 #line 50
 testRunner.Then("I ensure that the email input field is not populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 51
@@ -235,7 +204,6 @@ testRunner.Then("I should see the following error message for email: This is a r
 #line 61
 testRunner.Given("on the Login page I log in as test user: ProductAccount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 62
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -248,50 +216,26 @@ testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTa
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[50831] Account Lockout", null, new string[] {
                         "TReVorId:6685"});
-<<<<<<< HEAD
-#line 65
-=======
 #line 66
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 9
 this.FeatureBackground();
-<<<<<<< HEAD
-#line 67
-testRunner.Given("I popupate the email input field with credientials for account: AccountLockOut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 68
-testRunner.And("I populate the password input field with: aaaaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-=======
 #line 68
 testRunner.Given("I popupate the email input field with credentials for account: AccountLockOut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 69
 testRunner.And("I populate the password input field with: aaaaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 70
-<<<<<<< HEAD
-testRunner.Given("I populate the password input field with: bbbbb", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 71
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-=======
 testRunner.When("I click the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 71
 testRunner.Given("I populate the password input field with: bbbbb", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 72
 testRunner.When("I click the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 73
 testRunner.Given("I populate the password input field with: ccccc", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 74
-<<<<<<< HEAD
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 75
-testRunner.When("I select the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 76
-=======
 testRunner.When("I click the Login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 75
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 testRunner.Then("I should see a server error with message: Your account is locked and will unlock " +
                     "after 30 minutes.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

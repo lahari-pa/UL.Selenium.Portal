@@ -1190,7 +1190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I add to context name: (.*) and value: (.*)")]
 		public void GivenIAddToContextNameAndValue(string name, string value)
 		{
-			SeleniumUtilities.Context.AddToContext(name, value);
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, value);
 		}
 
 		[Given(@"I check alert text contains (.*) and dismiss")]

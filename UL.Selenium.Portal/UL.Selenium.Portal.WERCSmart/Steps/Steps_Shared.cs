@@ -7682,9 +7682,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I click continue");
 			new StepsNewProduct().ClickContinue();
 		}
-<<<<<<< HEAD
-=======
-
 
 		[StepDefinition(@"I Confirm alias subsection option as:")]
 		public void ConfirmAliasSubsectionOptions(Table expected)
@@ -7883,6 +7880,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			steps_Shared.ClickAliasSubsectionAndConfirmData("CSKSN", table20);
 		}
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
+
 	}
 }

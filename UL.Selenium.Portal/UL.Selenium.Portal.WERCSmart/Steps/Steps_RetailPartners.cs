@@ -1229,7 +1229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string>abbreviationList = abbreviation.Split(',').Select(x => x.Trim()).ToList();
 			string capitalLetters = string.Concat(retailerToMatch.Where(c => c >= 'A' && c <= 'Z'));
 
-<<<<<<< HEAD
+
 			foreach (string abbrv in abbreviationList)
 			{
 				if (capitalLetters.Length >= abbrv.Length)
@@ -1246,13 +1246,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return false;
 		}
 
-=======
+
 		[StepDefinition(@"I click download PDF for ""(.*)""")]
 		public void ClickDownloadPdf(string option)
 		{
 			Report.IsTrue(new DataTierDetails().ClickDownloadPdfWithHeading(option), $"Failed to click download pdf option for {option}!", $"Successfully clicked download pdf option for {option}");
 		}
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
+
 	}
 }
 

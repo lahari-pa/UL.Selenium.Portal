@@ -1,9 +1,6 @@
-<<<<<<< HEAD
+﻿
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-=======
-using System.Collections.Generic;
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 using System.Linq;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;

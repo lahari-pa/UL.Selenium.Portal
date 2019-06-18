@@ -142,26 +142,26 @@ testRunner.And("the Announcements dialog should be visible", ((string)(null)), (
 #line 41
 testRunner.And("I should see a Pie Chart and Legend under Product Information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
                         "Colour"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Not Yet Submitted",
                         "Grey"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Assessment in Progress",
                         "Yellow"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Sending to Retailers",
                         "Blue"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Accepted by Retailers",
                         "Green"});
-            table7.AddRow(new string[] {
+            table1.AddRow(new string[] {
                         "Needs Your Attention",
                         "Red"});
 #line 42
-testRunner.And("I should see the following states in the Legend:", ((string)(null)), table7, "And ");
+testRunner.And("I should see the following states in the Legend:", ((string)(null)), table1, "And ");
 #line 50
 testRunner.Given("I see notifications in the Announcement Panel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -183,32 +183,32 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Acco
 #line 56
 testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Options",
                         "Colour"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "All",
                         "Light Purple"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Not Yet Submitted",
                         "Dark Grey"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Assessment in Progress",
                         "Yellow"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Sending to Retailers",
                         "Blue"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Accepted by Retailers",
                         "Green"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Needs Your Attention",
                         "Red"});
-            table8.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Canceled",
                         ""});
 #line 57
-testRunner.Given("I should see the following filter options below My Products", ((string)(null)), table8, "Given ");
+testRunner.Given("I should see the following filter options below My Products", ((string)(null)), table2, "Given ");
 #line 67
 testRunner.And("I should see an option for More Filters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 68
@@ -216,18 +216,18 @@ testRunner.And("I should see an option for Product ID/Name", ((string)(null)), (
 #line 69
 testRunner.And("I should see an option for Bulk Actions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Header"});
-            table9.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "ID / Product Name"});
-            table9.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Date Created"});
-            table9.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Retailers"});
-            table9.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Actions"});
 #line 71
-testRunner.And("the Product Grid should have the following headers:", ((string)(null)), table9, "And ");
+testRunner.And("the Product Grid should have the following headers:", ((string)(null)), table3, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -251,16 +251,16 @@ testRunner.Given("I click Bulk Actions in the Products Grid", ((string)(null)), 
 #line 84
 testRunner.Then("I should see a popup with header Bulk Actions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Options"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Forward Product Registration"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Accept Documents"});
-            table10.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Delete Products"});
 #line 85
-testRunner.And("I should see the following options available in the Bulk Actions window", ((string)(null)), table10, "And ");
+testRunner.And("I should see the following options available in the Bulk Actions window", ((string)(null)), table4, "And ");
 #line 90
 testRunner.And("I click on the close button on Bulk Actions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 91
@@ -342,22 +342,22 @@ testRunner.Then("I click the UL Solution Center icon in the Navigation Pane", ((
 #line 120
 testRunner.Then("I confirm that the UL Solution Center page is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sections"});
-            table11.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "ECOLOGO"});
-            table11.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Prospector"});
-            table11.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "GoodGuide for Consumers"});
-            table11.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "GoodGuide for Suppliers"});
-            table11.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "UL Secure Connect (ULSC)"});
-            table11.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "ULGHS"});
 #line 121
-testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table11, "Then ");
+testRunner.Then("I confirm the following sections are displayed in the UL Solution Center page:", ((string)(null)), table5, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -727,30 +727,26 @@ testRunner.Then("I expand the Navigation Menu", ((string)(null)), ((TechTalk.Spe
 #line 271
 testRunner.And("the Navigation Menu should be expanded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Item"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Home"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Register New Product"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "My Messages"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Retail Partners"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Supplier Reports"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "UL Solution Center"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Shopping Cart"});
-            table12.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Support"});
 #line 272
-<<<<<<< HEAD
-testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table12, "And ");
-=======
 testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table6, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 282
 testRunner.And("I click on Sign Out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 285
@@ -794,30 +790,26 @@ testRunner.When("I click on the triangle next to Product Information to expand t
 #line 303
 testRunner.And("I should see a Pie Chart and Legend under Product Information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "State",
                         "Colour"});
-            table13.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Not Yet Submitted",
                         "Grey"});
-            table13.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Assessment in Progress",
                         "Yellow"});
-            table13.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Sending to Retailers",
                         "Blue"});
-            table13.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Accepted by Retailers",
                         "Green"});
-            table13.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "Needs Your Attention",
                         "Red"});
 #line 304
-<<<<<<< HEAD
-testRunner.And("I should see the following states in the Legend:", ((string)(null)), table13, "And ");
-=======
 testRunner.And("I should see the following states in the Legend:", ((string)(null)), table7, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 311
 testRunner.And("I should see the Subheading Alerts in the main window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 313
@@ -1023,47 +1015,39 @@ testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Acco
 #line 444
 testRunner.And("I should see a Pie Chart and Legend under Product Information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
-            table14.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Not Yet Submitted"});
-            table14.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Assessment in Progress"});
-            table14.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Sending to Retailers"});
-            table14.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Accepted by Retailers"});
-            table14.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Needs Your Attention"});
 #line 445
-<<<<<<< HEAD
-testRunner.And("I should see the following states in the following order in the Legend:", ((string)(null)), table14, "And ");
-=======
 testRunner.And("I should see the following states in the following order in the Legend:", ((string)(null)), table8, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Filter"});
-            table15.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "All"});
-            table15.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Not Yet Submitted"});
-            table15.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Assessment in Progress"});
-            table15.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Sending to Retailers"});
-            table15.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Accepted by Retailers"});
-            table15.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Needs Your Attention"});
-            table15.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Canceled"});
 #line 452
-<<<<<<< HEAD
-testRunner.And("I should see the following filters in the following order under My products:", ((string)(null)), table15, "And ");
-=======
 testRunner.And("I should see the following filters in the following order under My products:", ((string)(null)), table9, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1088,24 +1072,20 @@ testRunner.Given("I call Shared Step 59066 (Go to SHA Manager)", ((string)(null)
 #line 467
 testRunner.Given("I call Shared Step 59728 (Go to Manage Global Messages)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Message",
                         "Type",
                         "Active",
                         "Level"});
-            table16.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "My title",
                         "generated",
                         "GlobalMessage",
                         "true",
                         "Warning"});
 #line 468
-<<<<<<< HEAD
-testRunner.Given("In the the Manage Global Messages dialog I add and save the following messages:", ((string)(null)), table16, "Given ");
-=======
 testRunner.Given("In the the Manage Global Messages dialog I add and save the following messages:", ((string)(null)), table10, "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 471
 testRunner.Given("I close the Manage Global Messages dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 472
@@ -1170,47 +1150,43 @@ testRunner.Given("I click More Filters in the products grid", ((string)(null)), 
 testRunner.Given("I confirm the product exists with Product ID: 1501253 and Name: More Filters Test" +
                     " Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Filter",
                         "Match"});
-            table17.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "UPC",
                         "0601215310023"});
-            table17.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Brand",
                         "More Filters Test Brand"});
-            table17.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Retailer",
                         "CVS"});
-            table17.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Additional Programs",
                         "Kit Registrations"});
 #line 501
 testRunner.Given("I enter combinations of More Filters and should see the product ID: 1501253 only " +
-                    "for the correct combinations", ((string)(null)), table17, "Given ");
+                    "for the correct combinations", ((string)(null)), table11, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Filter",
                         "Match"});
-            table18.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Status",
                         "Assessment in Progress"});
-            table18.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Brand",
                         "More Filters Test Brand"});
-            table18.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Retailer",
                         "CVS"});
-            table18.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Additional Programs",
                         "Kit Registrations"});
 #line 508
 testRunner.Given("I enter combinations of Status and More Filters and should see the product ID: 15" +
-<<<<<<< HEAD
-                    "01253 only for the correct combinations", ((string)(null)), table18, "Given ");
-=======
                     "01253 only for the correct combinations", ((string)(null)), table12, "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 515
 testRunner.Given("I click More Filters in the products grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 517
@@ -1248,57 +1224,49 @@ testRunner.Given("I expand the Navigation Menu", ((string)(null)), ((TechTalk.Sp
 #line 540
 testRunner.Then("the Navigation Menu should be expanded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Item"});
-            table19.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Home"});
-            table19.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Register New Product"});
-            table19.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "My Messages"});
-            table19.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Retail Partners"});
-            table19.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Supplier Reports"});
-            table19.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "UL Solution Center"});
-            table19.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Shopping Cart"});
-            table19.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Support"});
 #line 542
-<<<<<<< HEAD
-testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table19, "And ");
-=======
 testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table13, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 553
 testRunner.Given("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Item"});
-            table20.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Home"});
-            table20.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Register New Product"});
-            table20.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "My Messages"});
-            table20.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Retail Partners"});
-            table20.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Supplier Reports"});
-            table20.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "UL Solution Center"});
-            table20.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Shopping Cart"});
-            table20.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "Support"});
 #line 555
-<<<<<<< HEAD
-testRunner.Then("the following icons should be found in the navigation bar", ((string)(null)), table20, "Then ");
-=======
 testRunner.Then("the following icons should be found in the navigation bar", ((string)(null)), table14, "Then ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 566
 testRunner.And("the navigation labels should be hidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1328,39 +1296,35 @@ testRunner.Given("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.
 #line 581
 testRunner.Then("the Navigation Menu should be collapsed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Icon",
                         "Text"});
-            table21.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Home",
                         "Home"});
-            table21.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Flask",
                         "Register New Product"});
-            table21.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Envelope",
                         "My Messages"});
-            table21.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Handshake",
                         "Retail Partners"});
-            table21.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Cloud",
                         "Supplier Reports"});
-            table21.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Bulb",
                         "UL Solution Center"});
-            table21.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Cart",
                         "Shopping Cart"});
-            table21.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Life-Saver",
                         "Support"});
 #line 583
-<<<<<<< HEAD
-testRunner.Given("the hover over text is as expected for the following navigation icons", ((string)(null)), table21, "Given ");
-=======
 testRunner.Given("the hover over text is as expected for the following navigation icons", ((string)(null)), table15, "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1433,20 +1397,16 @@ testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: ProductSetup64528", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Product ID",
                         "Recertification Reason",
                         "Active"});
-            table22.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "saved as ProductSetup64528",
                         "2.0 UPC Update",
                         "true"});
 #line 695
-<<<<<<< HEAD
-testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table22, "Given ");
-=======
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table16, "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 699
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 701
@@ -1499,20 +1459,16 @@ testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: ProductSetup64529", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "Product ID",
                         "Recertification Reason",
                         "Active"});
-            table23.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "saved as ProductSetup64529",
                         "2.0 UPC Update",
                         "true"});
 #line 735
-<<<<<<< HEAD
-testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table23, "Given ");
-=======
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table17, "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 739
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 741
@@ -1524,26 +1480,22 @@ testRunner.And("I search for the product saved as: ProductSetup64529", ((string)
 #line 747
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table24.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "Discontinue"});
-            table24.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "View"});
-            table24.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "View UPCs"});
-            table24.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "Process UPC Update"});
-            table24.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "Remove UPC Update"});
-            table24.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "Monitor Progress"});
 #line 749
-<<<<<<< HEAD
-testRunner.And("I should see the following Actions options", ((string)(null)), table24, "And ");
-=======
 testRunner.And("I should see the following Actions options", ((string)(null)), table18, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1618,13 +1570,13 @@ testRunner.And("I close the window that opened", ((string)(null)), ((TechTalk.Sp
 testRunner.And("I call Shared Step 55637 (SHA - Process UPC Update for Specific product) saved as" +
                     ": ProductSetup64530", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
-            table25.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "CVS"});
 #line 817
 testRunner.And("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for" +
-                    " saved as: ProductSetup64530) for", ((string)(null)), table25, "And ");
+                    " saved as: ProductSetup64530) for", ((string)(null)), table19, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1671,20 +1623,16 @@ testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: ProductSetup64531", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "Product ID",
                         "Recertification Reason",
                         "Active"});
-            table26.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "saved as ProductSetup64531",
                         "2.0 UPC Update",
                         "true"});
 #line 860
-<<<<<<< HEAD
-testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table26, "Given ");
-=======
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table20, "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 864
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 866
@@ -1710,26 +1658,22 @@ testRunner.And("I confirm the Remove UPC Update popup has closed", ((string)(nul
 #line 884
 testRunner.And("I click Row Actions for the first product returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table27.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "Discontinue"});
-            table27.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "View"});
-            table27.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "View UPCs"});
-            table27.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "Process UPC Update"});
-            table27.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "Remove UPC Update"});
-            table27.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "Monitor Progress"});
 #line 886
-<<<<<<< HEAD
-testRunner.And("I should see the following Actions options", ((string)(null)), table27, "And ");
-=======
 testRunner.And("I should see the following Actions options", ((string)(null)), table21, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1776,20 +1720,16 @@ testRunner.And("In the SHA manager grid I see the WPS ID I have saved as product
 testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertification History) fo" +
                     "r product saved as: ProductSetup64532", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         "Product ID",
                         "Recertification Reason",
                         "Active"});
-            table28.AddRow(new string[] {
+            table22.AddRow(new string[] {
                         "saved as ProductSetup64532",
                         "2.0 UPC Update",
                         "true"});
 #line 925
-<<<<<<< HEAD
-testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table28, "Given ");
-=======
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table22, "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 929
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 931
@@ -1807,18 +1747,14 @@ testRunner.And("in the modal dialog I click the \"REMOVE\" button", ((string)(nu
 #line 943
 testRunner.And("I confirm the Remove UPC Update popup has closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
-            table29.AddRow(new string[] {
+            table23.AddRow(new string[] {
                         "Process UPC Update"});
-            table29.AddRow(new string[] {
+            table23.AddRow(new string[] {
                         "Remove UPC Update"});
 #line 945
-<<<<<<< HEAD
-testRunner.And("I should not see the following Actions options", ((string)(null)), table29, "And ");
-=======
 testRunner.And("I should not see the following Actions options", ((string)(null)), table23, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 950
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 952
@@ -1868,24 +1804,20 @@ testRunner.Given("I call Shared Step 26897 (Product Characteristics - Solid only
 testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         "ComponentName",
                         "Percent",
                         "PublicallyDisclosed",
                         "TradeSecret",
                         "PublicName"});
-            table30.AddRow(new string[] {
+            table24.AddRow(new string[] {
                         "Chlorine",
                         "100",
                         "false",
                         "false",
                         ""});
 #line 982
-<<<<<<< HEAD
-testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table30, "Given ");
-=======
 testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table24, "Given ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 986
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 988
@@ -2019,57 +1951,49 @@ testRunner.Then("I should see the Navigation Menu Icon in the navigation bar", (
 #line 1060
 testRunner.Then("I expand the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         "Item"});
-            table31.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "Home"});
-            table31.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "Register New Product"});
-            table31.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "My Messages"});
-            table31.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "Retail Partners"});
-            table31.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "Supplier Reports"});
-            table31.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "UL Solution Center"});
-            table31.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "Shopping Cart"});
-            table31.AddRow(new string[] {
+            table25.AddRow(new string[] {
                         "Support"});
 #line 1061
-<<<<<<< HEAD
-testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table31, "And ");
-=======
 testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table25, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 1073
 testRunner.Then("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                         "Item"});
-            table32.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Home"});
-            table32.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Register New Product"});
-            table32.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "My Messages"});
-            table32.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Retail Partners"});
-            table32.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Supplier Reports"});
-            table32.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "UL Solution Center"});
-            table32.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Shopping Cart"});
-            table32.AddRow(new string[] {
+            table26.AddRow(new string[] {
                         "Support"});
 #line 1074
-<<<<<<< HEAD
-testRunner.And("the following icons should be found in the navigation bar", ((string)(null)), table32, "And ");
-=======
 testRunner.And("the following icons should be found in the navigation bar", ((string)(null)), table26, "And ");
->>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 1086
 testRunner.Then("I click on the triangle next to Product Information to collapse the section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1087
