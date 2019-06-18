@@ -378,3 +378,4 @@ testRunner.Then("I check that the current URL contains: https://www.ulghs.com/",
 }
 #pragma warning restore
 #endregion
+
