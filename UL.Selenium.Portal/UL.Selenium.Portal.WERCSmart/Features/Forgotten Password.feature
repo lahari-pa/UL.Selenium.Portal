@@ -69,32 +69,32 @@ Then In the Forgotten Password window I should see the following error messages:
 @TReVorId:11278
 Scenario: [64860] Forgot Password (security questions answered)
 Given If not already created, I create a user: ForgotPW_SecQs with the following parameters:
-| Field                | Value          |
-| Email                | User_<random>  |
-| Country              | UNITED STATES  |
-| FirstName            | Richard        |
-| LastName             | Smith          |
-| Password             | Pa4*ytuufnn    |
-| Address1             | Address 1      |
-| Address2             | Address 2      |
-| City                 | City Name      |
-| State                | Florida        |
-| Zip                  | 999            |
-| CompanyName          | Company 1      |
-| CompanyPhone         | 123-456-7889   |
-| EmergencyPhoneNumber | 123-456-7789   |
-| SupplierType         | Manufacturer   |
-| PhoneQuestion         | PhoneQuestion   |
-| PhoneHint             | PhoneHint       |
-| MentorQuestion          | MentorQuestion    |
-| MentorHint              | MentorHint        |
-| FriendQuestion       | FriendQuestion |
-| FriendHint           | FriendHint     |
-| AnimalQuestion          | AnimalQuestion    |
-| AnimalHint              | AnimalHint        |
-| CollegeQuestion       | CollegeQuestion |
-| CollegeHint           | CollegeHint     |
-| Pin                  | 1234           |
+| Field                | Value           |
+| Email                | User_<random>   |
+| Country              | UNITED STATES   |
+| FirstName            | Richard         |
+| LastName             | Smith           |
+| Password             | Pa4*ytuufnn     |
+| Address1             | Address 1       |
+| Address2             | Address 2       |
+| City                 | City Name       |
+| State                | Florida         |
+| Zip                  | 999             |
+| CompanyName          | Company 1       |
+| CompanyPhone         | 123-456-7889    |
+| EmergencyPhoneNumber | 123-456-7789    |
+| SupplierType         | Manufacturer    |
+| PhoneQuestion        | PhoneQuestion   |
+| PhoneHint            | PhoneHint       |
+| MentorQuestion       | MentorQuestion  |
+| MentorHint           | MentorHint      |
+| FriendQuestion       | FriendQuestion  |
+| FriendHint           | FriendHint      |
+| AnimalQuestion       | AnimalQuestion  |
+| AnimalHint           | AnimalHint      |
+| CollegeQuestion      | CollegeQuestion |
+| CollegeHint          | CollegeHint     |
+| Pin                  | 1234            |
 Then I click the User Icon
 And I click on Sign Out
 And the landing page should load

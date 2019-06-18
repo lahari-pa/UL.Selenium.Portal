@@ -131,8 +131,9 @@ namespace UL.Selenium.Portal.WERCSmart.Features
 #line 31
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 33
-testRunner.Given("I save to context name: TestCase75321 and value: 1557473", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 32
+testRunner.Given("I create a product and take to completed using Test Case 75335 and save as: TestC" +
+                    "ase75321", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 34
 testRunner.Given("I navigate to the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 35

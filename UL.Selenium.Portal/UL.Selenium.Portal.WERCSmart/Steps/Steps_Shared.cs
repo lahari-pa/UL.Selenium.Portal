@@ -5660,7 +5660,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("Select the Authorize Formula and Attributes for publishing check box ");
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
 			GeneralUtilities.StudioWaitForSpinner();
-			//	And I If an error is shown you will need to add data to the data codes that are shown before you can continue-close the pop up - add all data and re-open the current document pop up
+			//	If an error is shown you will need to add data to the data codes that are shown before you can continue-
+			// close the pop up - add all data and re-open the current document pop up
 			//	And I Select the Apply to all subformats check box
 			TestReport.StartStep("Select the Apply to all subformats check box ");
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("apply");
