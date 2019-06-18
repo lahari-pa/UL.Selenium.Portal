@@ -33,7 +33,7 @@ Then I should see the Product Includes Battery Page
 
 Given I set the Indicate how battery is packaged option to: Installed in the product
 
-Given in the Product Characteristics tab of the New Product Page I add the following batteries:
+Given I add the following batteries:
 | Battery Type | Manufacturer                  | Number of batteries per package | How many batteries required to run |
 | Lithium Ion  | L12N2P01 by Lenovo            | 4                               | 4                                  |
 
@@ -132,7 +132,7 @@ Then I should see the Product Includes Battery Page
 
 Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 
-Given in the Product Characteristics tab of the New Product Page I add the following batteries:
+Given I add the following batteries:
 | Battery Type | Manufacturer                  | Number of batteries per package | How many batteries required to run |
 | Lithium Ion  | L12N2P01 by Lenovo            | 4                               | 4                                  |
 
@@ -231,7 +231,7 @@ Then I should see the Product Includes Battery Page
 
 Given I set the Indicate how battery is packaged option to: Installed in the product
 
-Given in the Product Characteristics tab of the New Product Page I add the following batteries:
+Given I add the following batteries:
 | Battery Type | Manufacturer                  | Number of batteries per package | How many batteries required to run |
 | Lithium Ion  | L12N2P01 by Lenovo            | 4                               | 4                                  |
 
@@ -331,7 +331,7 @@ Then I should see the Product Includes Battery Page
 
 Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 
-Given in the Product Characteristics tab of the New Product Page I add the following batteries:
+Given I add the following batteries:
 | Battery Type | Manufacturer                  | Number of batteries per package | How many batteries required to run |
 | Lithium Ion  | L12N2P01 by Lenovo            | 4                               | 4                                  |
 

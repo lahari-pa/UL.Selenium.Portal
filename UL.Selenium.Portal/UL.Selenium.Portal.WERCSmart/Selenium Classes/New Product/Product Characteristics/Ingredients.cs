@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
@@ -39,24 +39,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					// If no elements match this, then we will simply take the first element in the list
 					var results =
 						this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
-					if (!results.Any())
+					if (!results.Any() || results.Any(x=>x.GetValue()== "No results found"))
 					{
 						Report.Info("No results were returned on search");
 						return false;
 					}
-
-					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) == null)
+					i = 0;
+					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) == null && i<10)
 					{
 						Delay.Seconds(1);
-						results = this.containerElement.FindElements(
-							By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+						results = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+						i++;
 					}
-
-					if (results.Count == 0)
+					if (!results.Any())
 					{
 						return false;
 					}
-
 					// Find every result row returned which match the CAS we are looking for, exluding the 'loading' row which appears at the bottom
 					var matchingCasResults = results.Where(x =>
 						!x.Text.ToLower().Contains("loading") &&
@@ -650,7 +648,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 
 		// Checks the running total of publically disclosed ingredients (eg. "1 / 3")
-
 		public string TransparencyScoreNumerator()
 		{
 			Report.Info("Beginning get Transparency score numerator");
@@ -850,8 +847,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return this.containerElement.FindElements(By.XPath(".//div[contains(@class,'col-md-12 formulation-grid')]//table//tbody//input[@class='public_disclosure']"), 2).FirstOrDefault() != null;
 
 		}
-
-
+		
 
 		public class Ingredient
 		{

@@ -746,7 +746,11 @@ testRunner.And("the Navigation Menu should be expanded", ((string)(null)), ((Tec
             table12.AddRow(new string[] {
                         "Support"});
 #line 272
+<<<<<<< HEAD
 testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table12, "And ");
+=======
+testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table6, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 282
 testRunner.And("I click on Sign Out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 285
@@ -809,7 +813,11 @@ testRunner.And("I should see a Pie Chart and Legend under Product Information", 
                         "Needs Your Attention",
                         "Red"});
 #line 304
+<<<<<<< HEAD
 testRunner.And("I should see the following states in the Legend:", ((string)(null)), table13, "And ");
+=======
+testRunner.And("I should see the following states in the Legend:", ((string)(null)), table7, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 311
 testRunner.And("I should see the Subheading Alerts in the main window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 313
@@ -1028,7 +1036,11 @@ testRunner.And("I should see a Pie Chart and Legend under Product Information", 
             table14.AddRow(new string[] {
                         "Needs Your Attention"});
 #line 445
+<<<<<<< HEAD
 testRunner.And("I should see the following states in the following order in the Legend:", ((string)(null)), table14, "And ");
+=======
+testRunner.And("I should see the following states in the following order in the Legend:", ((string)(null)), table8, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Filter"});
@@ -1047,7 +1059,11 @@ testRunner.And("I should see the following states in the following order in the 
             table15.AddRow(new string[] {
                         "Canceled"});
 #line 452
+<<<<<<< HEAD
 testRunner.And("I should see the following filters in the following order under My products:", ((string)(null)), table15, "And ");
+=======
+testRunner.And("I should see the following filters in the following order under My products:", ((string)(null)), table9, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1085,7 +1101,11 @@ testRunner.Given("I call Shared Step 59728 (Go to Manage Global Messages)", ((st
                         "true",
                         "Warning"});
 #line 468
+<<<<<<< HEAD
 testRunner.Given("In the the Manage Global Messages dialog I add and save the following messages:", ((string)(null)), table16, "Given ");
+=======
+testRunner.Given("In the the Manage Global Messages dialog I add and save the following messages:", ((string)(null)), table10, "Given ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 471
 testRunner.Given("I close the Manage Global Messages dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 472
@@ -1186,7 +1206,11 @@ testRunner.Given("I enter combinations of More Filters and should see the produc
                         "Kit Registrations"});
 #line 508
 testRunner.Given("I enter combinations of Status and More Filters and should see the product ID: 15" +
+<<<<<<< HEAD
                     "01253 only for the correct combinations", ((string)(null)), table18, "Given ");
+=======
+                    "01253 only for the correct combinations", ((string)(null)), table12, "Given ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 515
 testRunner.Given("I click More Filters in the products grid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 517
@@ -1243,7 +1267,11 @@ testRunner.Then("the Navigation Menu should be expanded", ((string)(null)), ((Te
             table19.AddRow(new string[] {
                         "Support"});
 #line 542
+<<<<<<< HEAD
 testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table19, "And ");
+=======
+testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table13, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 553
 testRunner.Given("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1266,7 +1294,11 @@ testRunner.Given("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.
             table20.AddRow(new string[] {
                         "Support"});
 #line 555
+<<<<<<< HEAD
 testRunner.Then("the following icons should be found in the navigation bar", ((string)(null)), table20, "Then ");
+=======
+testRunner.Then("the following icons should be found in the navigation bar", ((string)(null)), table14, "Then ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 566
 testRunner.And("the navigation labels should be hidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1324,7 +1356,11 @@ testRunner.Then("the Navigation Menu should be collapsed", ((string)(null)), ((T
                         "Life-Saver",
                         "Support"});
 #line 583
+<<<<<<< HEAD
 testRunner.Given("the hover over text is as expected for the following navigation icons", ((string)(null)), table21, "Given ");
+=======
+testRunner.Given("the hover over text is as expected for the following navigation icons", ((string)(null)), table15, "Given ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1406,7 +1442,11 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "2.0 UPC Update",
                         "true"});
 #line 695
+<<<<<<< HEAD
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table22, "Given ");
+=======
+testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table16, "Given ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 699
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 701
@@ -1468,7 +1508,11 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "2.0 UPC Update",
                         "true"});
 #line 735
+<<<<<<< HEAD
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table23, "Given ");
+=======
+testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table17, "Given ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 739
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 741
@@ -1495,7 +1539,11 @@ testRunner.And("I click Row Actions for the first product returned", ((string)(n
             table24.AddRow(new string[] {
                         "Monitor Progress"});
 #line 749
+<<<<<<< HEAD
 testRunner.And("I should see the following Actions options", ((string)(null)), table24, "And ");
+=======
+testRunner.And("I should see the following Actions options", ((string)(null)), table18, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1632,7 +1680,11 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "2.0 UPC Update",
                         "true"});
 #line 860
+<<<<<<< HEAD
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table26, "Given ");
+=======
+testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table20, "Given ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 864
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 866
@@ -1673,7 +1725,11 @@ testRunner.And("I click Row Actions for the first product returned", ((string)(n
             table27.AddRow(new string[] {
                         "Monitor Progress"});
 #line 886
+<<<<<<< HEAD
 testRunner.And("I should see the following Actions options", ((string)(null)), table27, "And ");
+=======
+testRunner.And("I should see the following Actions options", ((string)(null)), table21, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1729,7 +1785,11 @@ testRunner.And("I call Shared Step 51351 (SHA > Select Product > View Recertific
                         "2.0 UPC Update",
                         "true"});
 #line 925
+<<<<<<< HEAD
 testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table28, "Given ");
+=======
+testRunner.Given("In the Product Recertification History popup I should see the following entry", ((string)(null)), table22, "Given ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 929
 testRunner.Given("I Close the Product Recertification History pop up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 931
@@ -1754,7 +1814,11 @@ testRunner.And("I confirm the Remove UPC Update popup has closed", ((string)(nul
             table29.AddRow(new string[] {
                         "Remove UPC Update"});
 #line 945
+<<<<<<< HEAD
 testRunner.And("I should not see the following Actions options", ((string)(null)), table29, "And ");
+=======
+testRunner.And("I should not see the following Actions options", ((string)(null)), table23, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 950
 testRunner.And("I call Shared Step 65080 (Login to Studio and Open SHA manager)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 952
@@ -1817,7 +1881,11 @@ testRunner.Given("I call Shared Step 59680 (Additional Product Information - US 
                         "false",
                         ""});
 #line 982
+<<<<<<< HEAD
 testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table30, "Given ");
+=======
+testRunner.Given("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table24, "Given ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 986
 testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 988
@@ -1970,7 +2038,11 @@ testRunner.Then("I expand the Navigation Menu", ((string)(null)), ((TechTalk.Spe
             table31.AddRow(new string[] {
                         "Support"});
 #line 1061
+<<<<<<< HEAD
 testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table31, "And ");
+=======
+testRunner.And("the following icons and labels should be found in the navigation bar", ((string)(null)), table25, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 1073
 testRunner.Then("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -1993,7 +2065,11 @@ testRunner.Then("I collapse the Navigation Menu", ((string)(null)), ((TechTalk.S
             table32.AddRow(new string[] {
                         "Support"});
 #line 1074
+<<<<<<< HEAD
 testRunner.And("the following icons should be found in the navigation bar", ((string)(null)), table32, "And ");
+=======
+testRunner.And("the following icons should be found in the navigation bar", ((string)(null)), table26, "And ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 1086
 testRunner.Then("I click on the triangle next to Product Information to collapse the section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 1087

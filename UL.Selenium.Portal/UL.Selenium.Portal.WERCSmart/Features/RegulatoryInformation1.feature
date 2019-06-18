@@ -31,7 +31,6 @@ And I should see following statement: Does the product carry an exposure warning
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85492
 
 
-
 @TReVorId:21310
 Scenario: [85693] Regulatory Information 1 - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

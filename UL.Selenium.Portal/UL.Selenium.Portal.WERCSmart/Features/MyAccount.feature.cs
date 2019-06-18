@@ -158,7 +158,11 @@ testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.
 #line 39
 testRunner.Then("I create a new email address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+<<<<<<< HEAD
             TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+=======
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
                         "User Name",
                         "Title",
                         "Role",
@@ -167,7 +171,11 @@ testRunner.Then("I create a new email address", ((string)(null)), ((TechTalk.Spe
                         "Confirm Email",
                         "Country Code",
                         "Country"});
+<<<<<<< HEAD
             table33.AddRow(new string[] {
+=======
+            table27.AddRow(new string[] {
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
                         "User",
                         "Mr",
                         "User",
@@ -177,7 +185,11 @@ testRunner.Then("I create a new email address", ((string)(null)), ((TechTalk.Spe
                         "empty",
                         "United Kingdom"});
 #line 40
+<<<<<<< HEAD
 testRunner.Then("I add a new user with the following information", ((string)(null)), table33, "Then ");
+=======
+testRunner.Then("I add a new user with the following information", ((string)(null)), table27, "Then ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 43
 testRunner.Then("I confirm the new user is Active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -294,7 +306,11 @@ testRunner.Given("I click on My Account", ((string)(null)), ((TechTalk.SpecFlow.
 #line 105
 testRunner.Given("In the My Account page I navigate to the Company Information page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+<<<<<<< HEAD
             TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+=======
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
                         "Company Name",
                         "Admin Name",
                         "Email Address",
@@ -306,7 +322,11 @@ testRunner.Given("In the My Account page I navigate to the Company Information p
                         "Zip Code",
                         "Country Code",
                         "Phone"});
+<<<<<<< HEAD
             table34.AddRow(new string[] {
+=======
+            table28.AddRow(new string[] {
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
                         "Visual",
                         "Automated, Visual Company",
                         "<VisualAccount>",
@@ -319,7 +339,11 @@ testRunner.Given("In the My Account page I navigate to the Company Information p
                         "1",
                         "555-555-5555"});
 #line 107
+<<<<<<< HEAD
 testRunner.Then("In the Company Information page I confirm the Company Information is correct", ((string)(null)), table34, "Then ");
+=======
+testRunner.Then("In the Company Information page I confirm the Company Information is correct", ((string)(null)), table28, "Then ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line hidden
             this.ScenarioCleanup();
         }

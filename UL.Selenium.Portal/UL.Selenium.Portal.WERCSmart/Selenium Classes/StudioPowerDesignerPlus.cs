@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
@@ -238,7 +238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				StudioUtilites.SwitchToWindow("Wercs Studio");
 				SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
 				IWebElement frame =
-					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'workspaceDesignMode')]"));
+					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceDesignMode')]"));
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 				return base.Wait_for_load(30);
@@ -406,7 +406,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning click tool bar item: " + item);
 			var aLinks = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//div[@id='divBtmToolbars']//a[not(contains(@style, 'none'))]"));
-
 			if (aLinks.Count == 0)
 			{
 				Report.Info("No toolbar items found.");
@@ -1903,6 +1902,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			return matchingSection.TryClick();
+		}
+
+		public List<string> GetAliasSubsectionOptions()
+		{
+			return SeleniumBrowser.WebBrowser
+				.FindElements(By.XPath("//div[@id='AttributesGrid_divSRData']//table//tr//td[1]"), 2).ToList()
+				.Select(x => x.GetValue()).ToList();
 		}
 	}
 

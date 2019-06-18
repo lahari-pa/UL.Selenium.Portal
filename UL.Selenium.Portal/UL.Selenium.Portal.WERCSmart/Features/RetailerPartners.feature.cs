@@ -25,6 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features
     [NUnit.Framework.CategoryAttribute("Signup")]
     [NUnit.Framework.CategoryAttribute("RetailPartners")]
     [NUnit.Framework.CategoryAttribute("wercsmart")]
+    [NUnit.Framework.CategoryAttribute("DocumentAcceptance")]
     [NUnit.Framework.CategoryAttribute("run_RetailerPartners")]
     public partial class RetailerPartnersFeature
     {
@@ -45,6 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features
                         "Signup",
                         "RetailPartners",
                         "wercsmart",
+                        "DocumentAcceptance",
                         "run_RetailerPartners"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -90,31 +92,31 @@ namespace UL.Selenium.Portal.WERCSmart.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56881] Retailer Partners - Main Page layout (existing supplier)", null, new string[] {
                         "tfs_design"});
-#line 12
+#line 13
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 14
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 15
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 16
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 17
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
-testRunner.And("I should see the following subheading Most Recent Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 19
-testRunner.And("I should see Retailer tiles under the Most Recent Retailers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the following subheading Most Recent Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
-testRunner.And("I should see the following subheading All Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see Retailer tiles under the Most Recent Retailers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
-testRunner.And("I should see Retailer tiles under the All Retailers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the following subheading All Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
+testRunner.And("I should see Retailer tiles under the All Retailers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
 testRunner.And("I confirm that the retailers shown under the Most Recent Retailers heading are no" +
                     "t repeated under the All Retailers heading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 23
-testRunner.And("I confirm that none of the available Retailer Tiles are blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 24
+testRunner.And("I confirm that none of the available Retailer Tiles are blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
 testRunner.And("I confirm that if the Retailer logo is not shown, then the Retailer name is shown" +
                     " in the Retailer tile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -128,181 +130,181 @@ testRunner.And("I confirm that if the Retailer logo is not shown, then the Retai
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56895] Retailer Partners - Main Page layout (New supplier)", null, new string[] {
                         "TReVorId:11651"});
-#line 30
+#line 31
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 31
+#line 32
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Visual Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 34
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
-testRunner.And("I should see the following subheading All Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 37
+testRunner.And("I should see the following subheading All Retailers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 38
 testRunner.Then("I confirm that none of the available Retailer Tiles are blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer",
                         "Code"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Ahold",
                         "AH"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Albertsons Companies",
                         "SW"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Amazon",
                         "AM"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Autozone",
                         "AZ"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Bed Bath and Beyond",
                         "BB"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Canadian Tire",
                         "CT"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Costco",
                         "CO"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "CVS",
                         "CV"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Delhaize",
                         "DA"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Dick\'s Sporting Goods",
                         "DI"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Dollar General",
                         "DG"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Dollar Tree",
                         "DT"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Essendant",
                         "US"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Family Dollar",
                         "FD"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Genuine Parts",
                         "GP"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Harbor Freight Tools",
                         "HF"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "HD Supply",
                         "HS"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "HyVee",
                         "HV"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Kroger",
                         "KG"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Lowes",
                         "LW"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "McLane",
                         "ML"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Meijer",
                         "MJ"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Northgate Market",
                         "NM"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Office Depot",
                         "OD"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "O\'Reilly Auto Parts",
                         "OR"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Petco",
                         "PC"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Price Chopper",
                         "PR"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Rite Aid",
                         "RA"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Save Mart Supermarkets",
                         "SM"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Schnucks",
                         "SC"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Sears K Mart",
                         "SE"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Smart & Final",
                         "SF"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Staples",
                         "SP"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "SuperValue",
                         "SV"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Target",
                         "TG"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "The Home Depot",
                         "HD"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Topco",
                         "TP"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Tractor Value Supply",
                         "TS"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Ultra Standard",
                         "ST"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Unified",
                         "UF"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Wakefren",
                         "WF"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Walgreens",
                         "WG"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "BONBONS",
                         "WM-BO"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Walmart.com",
                         "WM-CO"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Hayneedle",
                         "WM-HN"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Jet",
                         "WM-JE"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "MODCLOTH",
                         "WM-MC"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Moosejaw",
                         "WM-MJ"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Shoes.com",
                         "WM-SC"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Walmart",
                         "WM"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Winco Foods",
                         "WC"});
-            table1.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "NewEgg",
                         "NE"});
-#line 43
-testRunner.And("I check that the following retailers are showing:", ((string)(null)), table1, "And ");
+#line 44
+testRunner.And("I check that the following retailers are showing:", ((string)(null)), table9, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -316,29 +318,29 @@ testRunner.And("I check that the following retailers are showing:", ((string)(nu
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56903] Retailer Detail Page - Retailer does not require Supplier ID or Data Cons" +
                     "ent Tiers", null, new string[] {
                         "TReVorId:13888"});
-#line 99
+#line 100
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 100
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 101
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 102
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 103
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 104
-testRunner.When("I select the retailer: Lowe\'s", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 105
-testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("I select the retailer: Lowe\'s", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 106
+testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 107
 testRunner.Then("I should see the retailer heading: Lowe\'s", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 109
+#line 110
 testRunner.And("Section: Your Supplier IDs should be showing text: This retailer does not support" +
                     " Supplier ID management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 110
-testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 111
+testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 112
 testRunner.And("Section: Data Consent Tiers should be showing text: This recipient does not requi" +
                     "re additional data consent tiers at this time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -354,46 +356,46 @@ testRunner.And("Section: Data Consent Tiers should be showing text: This recipie
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56907] Retailer Detail Page - Retailer does require Supplier ID but does not req" +
                     "uire Data Consent Tiers", null, new string[] {
                         "TReVorId:13889"});
-#line 114
+#line 115
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 115
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 116
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 117
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 118
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 119
-testRunner.When("I select the retailer: Sears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 120
-testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("I select the retailer: Sears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 121
+testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 122
 testRunner.Then("I should see the retailer heading: Sears/K-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Column name"});
-            table2.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Supplier ID"});
-            table2.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Company or Brand Name"});
-            table2.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Is Active"});
-            table2.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Is Default"});
-            table2.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Actions"});
-#line 122
-testRunner.Then("I check that in the Supplier ID table the following columns are showing:", ((string)(null)), table2, "Then ");
-#line 130
-testRunner.Given("I call Shared Step 56968 (Confirm - Data Consent Tiers not required )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 123
+testRunner.Then("I check that in the Supplier ID table the following columns are showing:", ((string)(null)), table10, "Then ");
 #line 131
-testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 56968 (Confirm - Data Consent Tiers not required )", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 132
+testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 133
 testRunner.And("Section: Data Consent Tiers should be showing text: This recipient does not requi" +
                     "re additional data consent tiers at this time.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 133
+#line 134
 testRunner.Given("I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) " +
                     "for retailer: Sears/K-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -407,26 +409,26 @@ testRunner.Given("I call Shared Step 56967 (Confirm Retailer & You information i
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56981] Retailer & You - layout", null, new string[] {
                         "TReVorId:13893"});
-#line 136
+#line 137
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 137
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 138
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 139
-testRunner.Given("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 140
-testRunner.And("I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 141
-testRunner.And("I confirm that there is a section labeled: Walgreens & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 142
-testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that there is a section labeled: Walgreens & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 143
-testRunner.Given("I see a percentage number in the middle of the pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 144
-testRunner.Given("I confirm that the color of the pie chart for the Retailer selected is Green", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I see a percentage number in the middle of the pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 145
+testRunner.Given("I confirm that the color of the pie chart for the Retailer selected is Green", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 146
 testRunner.And("The pie chart footer text should contain: % of your product portfolio is associat" +
                     "ed with Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -440,25 +442,25 @@ testRunner.And("The pie chart footer text should contain: % of your product port
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56982] Retailer & You - validation of information shown", null, new string[] {
                         "TReVorId:13894"});
-#line 149
+#line 150
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 150
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 151
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 152
-testRunner.Given("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 153
-testRunner.And("I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 154
+testRunner.And("I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 155
 testRunner.And("I confirm that there is a section labeled: Walgreens & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 157
+#line 158
 testRunner.Given("I confirm the percentage in the pie chart legend statement matches the percentage" +
                     " shown in the middle of the pie chart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 161
-testRunner.Given("I click the back arrow on the Retail Partners Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 162
+testRunner.Given("I click the back arrow on the Retail Partners Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 163
 testRunner.Then("I should see the Retail Partners page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -471,41 +473,41 @@ testRunner.Then("I should see the Retail Partners page", ((string)(null)), ((Tec
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID - Cancel", null, new string[] {
                         "TReVorId:13890"});
-#line 165
+#line 166
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 166
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 167
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 168
-testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 169
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 170
-testRunner.When("I select the retailer: Sears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 171
-testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("I select the retailer: Sears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 172
-testRunner.Given("I click on the Add new Supplier ID link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I should see the Retailer Detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 173
-testRunner.Then("I confirm the pop up shows the heading: Add New Supplier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I click on the Add new Supplier ID link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 174
-testRunner.Then("I confirm the pop up shows the Supplier ID heading and data entry field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm the pop up shows the heading: Add New Supplier", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 175
+testRunner.Then("I confirm the pop up shows the Supplier ID heading and data entry field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 176
 testRunner.Then("I confirm the pop up shows the Company or Brand Name heading and data entry field" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 176
-testRunner.Then("I confirm the pop up shows the Is Default Heading and check box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 177
-testRunner.Then("I confirm the pop up shows a Save button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm the pop up shows the Is Default Heading and check box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 178
-testRunner.Then("I confirm the pop up shows a Cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I confirm the pop up shows a Save button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 179
-testRunner.Given("in the modal dialog I click cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I confirm the pop up shows a Cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 180
-testRunner.Given("I confirm in the browser popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the modal dialog I click cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 181
+testRunner.Given("I confirm in the browser popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 182
 testRunner.Then("I confirm the Add New Supplier ID pop up closes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -520,36 +522,36 @@ testRunner.Then("I confirm the Add New Supplier ID pop up closes", ((string)(nul
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56927] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - wording " +
                     "check", null, new string[] {
                         "TReVorId:20214"});
-#line 187
+#line 188
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 188
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 189
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 190
-testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 191
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 192
 testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
                     "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 192
+#line 193
 testRunner.And("I click the \"Tier 1: Regulatory Compliance\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section",
                         "Text"});
-            table3.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "A",
                         @"Definition. ""Regulatory Support"" is any evaluation of Supplier's data that is required to assist any WERCSmart Recipient in complying with any statute or regulation applicable in the United States or other countries (including international laws and regulations), governing the sale, handling, transportation, storage or disposal of products containing chemicals. These evaluations are included in the “WERCSmart Results” which are provided to WERCSmart Recipients to support their regulatory compliance programs. WERCSmart Results are derived using both Public Data and Confidential Data submitted by a Direct Supplier (and its Third-Party Suppliers). WERCSmart Results also include the provision of product safety data sheets, whether authored by the Direct Supplier or by UL authoring services."});
-            table3.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "B",
                         @"Disclosure of Confidential Data. All data elements defined as Confidential Data above will be treated as such and will not be provided to a WERCSmart Recipient, unless a local, state or federal statute requires that a specific element be treated as non-confidential."});
-#line 193
+#line 194
 testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
-                    "ion:", ((string)(null)), table3, "And ");
-#line 197
-testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "ion:", ((string)(null)), table11, "And ");
 #line 198
+testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 199
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -564,69 +566,69 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56929] What are the Data Usage Tiers? - Tier 2: Chemical Program Support - wordi" +
                     "ng check", null, new string[] {
                         "TReVorId:20253"});
-#line 201
+#line 202
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 202
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 203
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 204
-testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 205
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 206
 testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
                     "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 206
-testRunner.And("I click the \"Tier 2: Chemical Program Support\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 207
+testRunner.And("I click the \"Tier 2: Chemical Program Support\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 208
 testRunner.And("I confirm the Data Tier Details subheading reads: What does Chemical Program Supp" +
                     "ort mean?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section",
                         "Text"});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "A",
                         "Definition. \"Chemical Program Support\" includes providing the following types of " +
                             "information to Designated Recipient(s) only:"});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "A1",
                         @"Product Ingredient Lists. The Standard Chemical Names and Standard Chemical Numbers for each ingredient on a product’s Publicly Disclosed Ingredient List for each of a Supplier's products that a Designated Recipient sells. These data do not include any of the following Confidential Data elements:"});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "A1a",
                         "The chemical identity of any ingredient marked as not publicly disclosed or as a " +
                             "trade secret on the WERCSmart Product Formulation page;"});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "A1b",
                         "The chemical identity of the ingredients of any Third-Party Component in a produc" +
                             "t (unless those ingredients are marked as publicly disclosed on the WERCSmart Co" +
                             "mponent Formulation page by the Third-Party Supplier of the component); and"});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "A1c",
                         "The percent by weight of any ingredient in a product."});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "A1",
                         @"This information is used by a Designated Recipient to search its product portfolio for chemicals of interest. The Public Name of an ingredient is insufficient for this purpose, because a Public Name may be ambiguous and fail to resolve to a specific Unique Chemical. Standard Chemical Names and/or Standard Chemical Numbers are required because these chemical identifiers are used to define which ingredients are included in the various regulatory, scientific or trade association lists that Designated Recipients use to identify chemicals of interest. The Designated Recipient is not authorized to publicly disclose this additional chemical identity data."});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "A2",
                         @"Transparency Ratios for each of a Supplier's products that a Designated Recipient sells. The ""Transparency Ratio"" is the number of ingredients on a product's Publicly Disclosed Ingredient List divided by the number of ingredients on a product’s Full Formulation Ingredient List. The ratios are used by a Designated Recipient to evaluate the visibility it has into the chemical composition of its product portfolio. The Designated Recipient is not authorized to publicly disclose product Transparency Ratios."});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "A3",
                         @"Chemical Screen Results. Product Chemical Screen results, where a product’s Full Formulation Ingredient List is screened against a Designated Recipient's restricted substance list (a “Chemical Screen”). The Designated Recipient is provided with an indication of whether the product passes or fails the screen. The Standard Chemical Name or Standard Chemical Number of the specific ingredient(s) failing the Chemical Screen shall only be provided if that ingredient is listed on a product’s Publicly Disclosed Ingredient List. Confidential Data may be used to derive Chemical Screen results (e.g., screen against a Full Formulation Ingredient List, or use percent formulation to demonstrate compliance with a restriction limit), provided there is no disclosure of any Confidential Data to the Designated Recipient. The Designated Recipient is not authorized to publicly disclose product-level results from its Chemical Screens."});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "A4",
                         @"Aggregate Chemical Usage Reports. ""Aggregate Chemical Usage Reports"" are reports which summarize the prevalence or volume of chemicals in a Designated Recipient's product portfolio. These reports track and characterize usage of chemicals to inform chemical policy development at the Designated Recipient. Confidential Data may be used to derive Aggregate Chemical Usage Reports (e.g., calculate prevalence of all chemicals on the Full Formulation Ingredient Lists of products in an assortment, or use percent formulation to calculate mass-weighted chemical usage), provided there is no disclosure of any Confidential Data to the Designated Recipient. The Designated Recipient is authorized to publicly disclose summary information from Aggregate Chemical Usage Reports, provided that such disclosure does not identify specific products or suppliers. If the Designated Recipient is reporting on the volume of chemicals in its assortment, for example, such results must be presented at the product category level, without identifying amounts per specific supplier or product."});
-            table4.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "B",
                         "Third Party Suppliers. All Third-Party Suppliers of components in a product shall" +
                             " separately provide Tier 2 Data Use Consent to the use of their Confidential Dat" +
                             "a for providing Chemical Program Support."});
-#line 208
+#line 209
 testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
-                    "ion:", ((string)(null)), table4, "And ");
-#line 220
-testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "ion:", ((string)(null)), table12, "And ");
 #line 221
+testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 222
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -641,48 +643,48 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56931] What are the Data Usage Tiers? - Tier 3: Supplemental Reports - wording c" +
                     "heck", null, new string[] {
                         "TReVorId:20255"});
-#line 224
+#line 225
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 225
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 226
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 227
-testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 228
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 229
 testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
                     "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 229
-testRunner.And("I click the \"Tier 3: Supplemental Reports\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 230
+testRunner.And("I click the \"Tier 3: Supplemental Reports\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 231
 testRunner.And("I confirm the Data Tier Details subheading reads: What does Supplemental Reports " +
                     "for Internal Business Use Only mean?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section",
                         "Text"});
-            table5.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "A",
                         "Definition. \"Supplemental Reports\" include providing data needed for sustainabili" +
                             "ty evaluations, product qualification and rating programs, assortment curation p" +
                             "rograms, and supplier qualification programs operated by a Designated Recipient." +
                             ""});
-            table5.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "A1",
                         @"Supplemental Reports will be derived using data submitted by a supplier as part of a supplier’s record, or as part of a product’s regulatory or supplemental record. Supplemental supplier and product records are populated from survey data, which may be collected from supplier via UL Supply Chain Network, WERCSmart, PurView, or as otherwise provided."});
-            table5.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "A2",
                         @"Confidential Data may be used to derive Supplemental Reports (e.g., as inputs for rules used to rate or qualify products), provided there is no disclosure of Confidential Data to the Designated Recipient. In limited cases, UL may designate specific data elements collected by a survey as confidential, and not disclose these elements to a Designated Recipient."});
-            table5.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "B",
                         @"Third-Party Suppliers. In the event that the Confidential Data required to derive a Supplemental Report is controlled by a Third-Party Supplier, that party shall separately provide Tier 3 consent to the use of its Confidential Data for deriving Supplemental Reports."});
-#line 231
+#line 232
 testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
-                    "ion:", ((string)(null)), table5, "And ");
-#line 237
-testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "ion:", ((string)(null)), table13, "And ");
 #line 238
+testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 239
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -697,49 +699,49 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56933] What are the Data Usage Tiers? - Tier 4: Public Disclosure Options - word" +
                     "ing check", null, new string[] {
                         "TReVorId:20256"});
-#line 242
+#line 243
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 243
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 244
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 245
-testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 246
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 247
 testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
                     "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 247
-testRunner.And("I click the \"Tier 4: Public Disclosure Options\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 248
+testRunner.And("I click the \"Tier 4: Public Disclosure Options\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 249
 testRunner.And("I confirm the Data Tier Details subheading reads: What are my Public Disclosure O" +
                     "ptions?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section",
                         "Text"});
-            table6.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "A",
                         @"Definition of Public Disclosure Options: Suppliers may opt to authorize a Designated Recipient to publicly disclose one or more of the following types of data for its external business purposes, which may include consumer-facing marketing and product or supplier information programs:"});
-            table6.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "A1",
                         @"Derived Results from Supplemental Reports (Tier 4.1). Derived Results include any qualification decisions or ratings the Designated Recipient derives based on the data in a regulatory or supplemental product record or in a supplier record. Qualification decisions are determinations that a supplier or product satisfies a set of criteria (e.g., a supplier exhibits a set of sustainability attributes, or a product does not contain certain types of chemicals). Ratings are scores assigned to a product or supplier based on an evaluative framework defined by a Designated Recipient. A Designated Recipient may publicly disclose information from Supplemental Reports only in a form that does not reveal the Confidential Data of any supplier. For example, a Designated Recipient may publish the results of a product qualification decision (e.g., the product meets a set of criteria), but it is prohibited from disclosing that a product exhibits a specific attribute that is Confidential Data."});
-            table6.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "A2",
                         "Product Ingredient Lists (Tier 4.2). A Designated Recipient may utilize the Publi" +
                             "c Names on a product’s Publicly Disclosed Ingredient List to publish such list o" +
                             "n its website."});
-            table6.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "A3",
                         "Other Supplier-Provided Data (Tier 4.3). A Designated Recipient may publicly disc" +
                             "lose any supplier-provided, non-confidential data elements from a product or sup" +
                             "plier record. No Confidential Data elements may be publicly disclosed."});
-#line 249
+#line 250
 testRunner.And("I confirm the text displayed in the Data Tier Details popup matches for each sect" +
-                    "ion:", ((string)(null)), table6, "And ");
-#line 255
-testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "ion:", ((string)(null)), table14, "And ");
 #line 256
+testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 257
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -752,37 +754,37 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56925] My Data & Recipients - General layout checks", null, new string[] {
                         "TReVorId:20259"});
-#line 259
+#line 260
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 260
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 261
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 262
-testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 263
-testRunner.And("I confirm the Retailer Details Page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 264
-testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the Retailer Details Page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 265
-testRunner.And("I confirm the Data Consent Tiers table is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 266
-testRunner.And("I should see the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the Data Consent Tiers table is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 267
+testRunner.And("I should see the More Information hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 268
 testRunner.And("I confirm the \"What are the Data Usage Tiers?\" information button is displayed on" +
                     " the Retail Partners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 268
+#line 269
 testRunner.And("I confirm the \"Products in Scope\" information button is displayed on the Retail P" +
                     "artners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 269
+#line 270
 testRunner.And("I confirm that row: 1 of the Data Consent Tiers table displays: \"Tier 1: Regulato" +
                     "ry Support\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 270
-testRunner.And("the Data Consent Tier: Tier 1 should be set to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 271
-testRunner.And("I should not be able to edit Tier Tier 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("the Data Consent Tier: Tier 1 should be set to: on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 272
+testRunner.And("I should not be able to edit Tier Tier 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 273
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -795,34 +797,34 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56926] My Data & Recipients - What are the Data Usage Tiers - tab/headings", null, new string[] {
                         "TReVorId:20260"});
-#line 275
+#line 276
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 276
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 277
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 278
-testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 279
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 280
 testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
                     "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Tab"});
-            table7.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Tier 1: Regulatory Compliance"});
-            table7.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Tier 2: Chemical Program Support"});
-            table7.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Tier Tier 3: Supplemental Reports"});
-            table7.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "Tier 4: Publicly Disclose Options"});
-#line 280
-testRunner.And("The Data Tier Details popup shows the following tabs:", ((string)(null)), table7, "And ");
-#line 286
-testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 281
+testRunner.And("The Data Tier Details popup shows the following tabs:", ((string)(null)), table15, "And ");
 #line 287
+testRunner.And("I close the Data Tier Details popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 288
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -839,82 +841,82 @@ testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecF
                     "- Save  - DB validation is only for local", null, new string[] {
                         "TFS_design",
                         "TReVorId:22080"});
-#line 298
+#line 299
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 299
-testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 300
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 301
-testRunner.And("I select the retailer: O\'Reilly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 302
-testRunner.And("I confirm the Retailer Details Page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I select the retailer: O\'Reilly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 303
-testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm the Retailer Details Page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 304
-testRunner.And("The Supplier ID Table should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 305
-testRunner.Given("I click on the Add new Supplier ID link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("The Supplier ID Table should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 306
-testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click on the Add new Supplier ID link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 307
+testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 308
 testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID que" +
                     "stion: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 308
+#line 309
 testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Na" +
                     "me question: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 309
+#line 310
 testRunner.And("in the Add New Supplier Dialog I enter the following in the Supplier ID input: ab" +
                     "c", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 310
-testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 311
+testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 312
 testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID que" +
                     "stion: You must enter valid O\'Reilly Vendor id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 312
+#line 313
 testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Na" +
                     "me question: This is a required field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 313
+#line 314
 testRunner.And("in the Add New Supplier Dialog I enter the following in the Company or Brand Name" +
                     " input: Automated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 314
-testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 315
+testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 316
 testRunner.And("in the Add New Supplier Dialog I Confirm that no error shows below Company or Bra" +
                     "nd Name question", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 316
+#line 317
 testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID que" +
                     "stion: You must enter valid O\'Reilly Vendor id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 317
+#line 318
 testRunner.And("in the Add New Supplier Dialog I enter the following in the Supplier ID input: 12" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 318
-testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 319
+testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 320
 testRunner.And("in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID que" +
                     "stion: You must enter valid O\'Reilly Vendor id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 320
+#line 321
 testRunner.And("in the Add New Supplier Dialog I enter the following in the Supplier ID input: 65" +
                     "4327", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 321
+#line 322
 testRunner.And("in the Add New Supplier Dialog I click save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Supplier ID",
                         "Company or Brand Name"});
-            table8.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "654327",
                         "Automated"});
-#line 322
-testRunner.Then("I confirm that in the Supplier IDS list the following row exists", ((string)(null)), table8, "Then ");
-#line 325
+#line 323
+testRunner.Then("I confirm that in the Supplier IDS list the following row exists", ((string)(null)), table16, "Then ");
+#line 326
 testRunner.And("I call Shared Step 57247 - Database check - find t_vendor records for specific Re" +
                     "tailer: Reilly and Supplier: Products Automation Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 326
+#line 327
 testRunner.And("I Confirm the Supplier ID you added is shown in the result for the query on the t" +
                     "_vendor table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 327
+#line 328
 testRunner.And("[Shared Step 58828 - Delete Supplier ID]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -927,27 +929,27 @@ testRunner.And("[Shared Step 58828 - Delete Supplier ID]", ((string)(null)), ((T
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56920] Your Supplier IDs - Actions - Deactivate", null, new string[] {
                         "TReVorId:21834"});
-#line 339
+#line 340
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 340
-testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 341
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 342
-testRunner.And("I select the retailer: O\'Reilly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 343
+testRunner.And("I select the retailer: O\'Reilly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 344
 testRunner.And("I confirm the Retailer Details Page has loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 345
+#line 346
 testRunner.And("I find the Supplier ID for O\'Reilly in the SupplierID table and save as supplierI" +
                     "D56920", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 346
+#line 347
 testRunner.And("I Confirm the Is Active column for SupplierID saved as supplierID56920 shows a gr" +
                     "een check mark", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 347
+#line 348
 testRunner.And("I call Shared Step 57621 - Supplier ID table > Select Deactivate - Confirm Suppli" +
                     "er ID Is set to Inactive for supplierID saved as supplierID56920", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 352
+#line 353
 testRunner.And("I call Shared Step 57565 - Supplier ID table > Select Activate - Confirm Supplier" +
                     " ID Is set to Active for supplierID saved as supplierID56920", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -963,38 +965,38 @@ testRunner.And("I call Shared Step 57565 - Supplier ID table > Select Activate -
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56909] Retailer Detail Page - Retailer does not require Supplier ID but does req" +
                     "uire Data Consent Tiers", null, new string[] {
                         "TReVorId:22079"});
-#line 359
+#line 360
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 360
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 361
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 362
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 364
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 365
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 366
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 367
 testRunner.And("I select the retailer: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 369
-testRunner.Then("I should see the retailer heading: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 370
-testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see the retailer heading: Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 371
+testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 372
 testRunner.And("Section: Your Supplier IDs should be showing text: This retailer does not support" +
                     " Supplier ID management", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 372
-testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 373
+testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 374
 testRunner.And("I should see the button: What are the Data Usage Tiers? in section: Data Consent " +
                     "Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 374
-testRunner.And("I should see the button: Products in Scope in section: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 375
-testRunner.And("I confirm that there is a section labeled: Costco & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the button: Products in Scope in section: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 376
-testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that there is a section labeled: Costco & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 377
+testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 378
 testRunner.And("The pie chart footer text should contain: % of your product portfolio is associat" +
                     "ed with Costco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1010,39 +1012,168 @@ testRunner.And("The pie chart footer text should contain: % of your product port
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tie" +
                     "rs", null, new string[] {
                         "TReVorId:11657"});
-#line 380
+#line 381
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 381
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 382
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 383
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 385
-testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 386
-testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 387
+testRunner.Then("I should see the following heading Retail Partners", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 388
 testRunner.And("I select the retailer: Wal-Mart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 390
-testRunner.Then("I should see the retailer heading: Wal-Mart/SAM\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 391
-testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see the retailer heading: Wal-Mart/SAM\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 392
-testRunner.And("The Supplier ID Table should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that there is a section labeled: Your Supplier IDs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 393
-testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("The Supplier ID Table should be showing", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 394
+testRunner.And("I confirm that there is a section labeled: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 395
 testRunner.And("I should see the button: What are the Data Usage Tiers? in section: Data Consent " +
                     "Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 395
-testRunner.And("I should see the button: Products in Scope in section: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 396
-testRunner.And("I confirm that there is a section labeled: Wal-Mart/SAM\'S CLUB & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the button: Products in Scope in section: Data Consent Tiers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 397
-testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that there is a section labeled: Wal-Mart/SAM\'S CLUB & You", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 398
+testRunner.And("The pie chart should be showing on the retailer details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 399
 testRunner.And("The pie chart footer text should contain: % of your product portfolio is associat" +
                     "ed with Wal-Mart/SAM\'S CLUB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - Download" +
+            " PDF")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22257")]
+        public virtual void _56928WhatAreTheDataUsageTiers_Tier1RegulatoryCompliance_DownloadPDF()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - Download" +
+                    " PDF", null, new string[] {
+                        "TReVorId:22257"});
+#line 403
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 404
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 405
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 406
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 407
+testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
+                    "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 408
+testRunner.And("I click the \"Tier 1: Regulatory Compliance\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 409
+testRunner.And("I click download PDF for \"What does Regulatory Support mean?\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 410
+testRunner.Then("I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12" +
+                    "_01_2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[56930] What are the Data Usage Tiers - Tier 2: Chemical Program Support - Downlo" +
+            "ad PDF")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22258")]
+        public virtual void _56930WhatAreTheDataUsageTiers_Tier2ChemicalProgramSupport_DownloadPDF()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56930] What are the Data Usage Tiers - Tier 2: Chemical Program Support - Downlo" +
+                    "ad PDF", null, new string[] {
+                        "TReVorId:22258"});
+#line 414
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 415
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 416
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 417
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 418
+testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
+                    "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 419
+testRunner.And("I click the \"Tier 2: Chemical Program Support\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 420
+testRunner.And("I click download PDF for \"What does Chemical Program Support mean?\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 421
+testRunner.Then("I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12" +
+                    "_01_2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (Internal Bu" +
+            "siness Use Only) - Download PDF")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22259")]
+        public virtual void _56932WhatAreTheDataUsageTiers_Tier3SupplementalReportsInternalBusinessUseOnly_DownloadPDF()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (Internal Bu" +
+                    "siness Use Only) - Download PDF", null, new string[] {
+                        "TReVorId:22259"});
+#line 425
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 426
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 427
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 428
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 429
+testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
+                    "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 430
+testRunner.And("I click the \"Tier 3: Supplemental Reports\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 431
+testRunner.And("I click download PDF for \"What does Supplemental Reports for Internal Business Us" +
+                    "e Only mean?\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 432
+testRunner.Then("I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12" +
+                    "_01_2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("[56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Options - Downl" +
+            "oad PDF")]
+        [NUnit.Framework.CategoryAttribute("TReVorId:22260")]
+        public virtual void _56934WhatAreTheDataUsageTiers_Tier4PublicDisclosureOptions_DownloadPDF()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Options - Downl" +
+                    "oad PDF", null, new string[] {
+                        "TReVorId:22260"});
+#line 436
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 437
+testRunner.Given("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 438
+testRunner.And("I click the Retail Partners icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 439
+testRunner.And("I select the retailer: CVS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 440
+testRunner.And("I click the \"What are the Data Usage Tiers?\" information button in the Retail Par" +
+                    "tners Details screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 441
+testRunner.And("I click the \"Tier 4: Public Disclosure Options\" tab in Data Tier Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 442
+testRunner.And("I click download PDF for \"What are my Public Disclosure Options?\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 443
+testRunner.Then("I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12" +
+                    "_01_2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

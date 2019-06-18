@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Linq;
-using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes

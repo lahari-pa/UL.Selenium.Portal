@@ -359,7 +359,11 @@ testRunner.Then("I confirm the Subformat column appears as part of the Documents
 testRunner.Given("I click on View under Actions for the first document from the list saved as: Docu" +
                     "mentAcceptanceDocuments", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 207
+<<<<<<< HEAD
 testRunner.Then("I confirm a new window opens displaying the document", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+=======
+testRunner.Then("I confirm a new window opens displaying the document url: ViewWercsDocument", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+>>>>>>> dfd8376fd98e253ae9e13e59f42c8af33c163dd5
 #line 210
 testRunner.Given("I confirm the subformat type at the top of the document matches the vaulue in the" +
                     " Documents table for the first document I viewed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
