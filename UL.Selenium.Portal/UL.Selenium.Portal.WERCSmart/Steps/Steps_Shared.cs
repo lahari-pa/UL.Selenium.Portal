@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Castle.Core.Internal;
+using NTTQA.Selenium.TReVor;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.SpecFlow;
@@ -15,6 +14,7 @@ using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
@@ -38,7 +38,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.StartStep("I set the Select the type of product to create option to: Create a New Registration");
 			MyStepsNewProduct.SetTheSectionOptionTo("Select the type of product to create",
 				"Create a New Registration");
-			TestReport.StartStep("In the New Product page I click Continue");
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
@@ -77,13 +76,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var forbiddenChars = @"()@#\[]~;^?<>&|{}+%'""/".ToCharArray();
 				name = new string(type.Where(c => !forbiddenChars.Contains(c)).ToArray());
 			}
-
-			MyStepsNewProduct.SetTheSectionOptionTo("Product Name as it a appears on the Package Label", name);
-			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type +
-			                     " in the Type of Product select field");
-			MyStepsNewProduct.GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(type);
-			Delay.Seconds(1);
-			Report.Screenshot();
+			new Steps_TheProduct().SetProductNameTo(name);
+			TestReport.StartStep("In the Product Type tab of the New Product Page, I enter: " + type + " in the Type of Product select field");
+			new Steps_TheProduct().SetTypeOfProductTo(type);
 			TestReport.StartStep("In the New Product page I click Continue");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 			var prodDetails = new NewProduct().GetCurrentProductInformation();
@@ -823,14 +818,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			StepsNewProduct stepsNewProduct = new StepsNewProduct();
 			TestReport.StartStep("I should see the Universal Product Code (UPC) Page");
 			stepsNewProduct.GivenIShouldSeeXPage("Universal Product Code (UPC)");
-			var cvsUpc = GeneralUtilities.CvsUpcs();
-			for (int i = 0; i < cvsUpc.Count; i++)
+			for (int i = 0; i < 100; i++)
 			{
 				Report.Info("Entering UPC information. Attempt: " + (i + 1));
 				TestReport.StartStep("I click the 'Add UPC' button");
 				stepsNewProduct.ThenIClickTheAddUpcButton();
 				TestReport.StartStep("I add the following into the UPC Fields");
-				var upc = cvsUpc[i];
+				var upc = Api.GetRandomUpcNumber("CVS");
 				Report.Info("UPC number: " + upc);
 				var upcInfo = new UpcInformation {
 					ContainerType = containerType,
@@ -847,7 +841,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					return;
 				}
-
 				// delete upc that failed
 				stepsNewProduct.GivenIDeleteUPC(upc);
 				Report.Info("An error was showing! on click continue! Attempting a different UPC");
@@ -1780,8 +1773,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
-		[StepDefinition(
-			@"I call Shared Step 59680 \(Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
+		[StepDefinition(@"I call Shared Step 59680 \(Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path\)")]
 		public void ICallSharedAdditionalProductInformationUSOnlyNoChildNoGHSNoDirectShipNoPLPNoGNFR()
 		{
 			TestReport.UseSubSteps = true;
@@ -3989,23 +3981,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			@"I call Shared Step 75146 \(Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue\) for")]
 		public void
 			GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(
-				TechTalk.SpecFlow.Table Retailers)
+				TechTalk.SpecFlow.Table retailers)
 		{
 			TestReport.UseSubSteps = true;
 			var selStepsNewProduct = new StepsNewProduct();
-			foreach (TechTalk.SpecFlow.TableRow thisRetailer in Retailers.Rows)
+			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
 			{
 				TestReport.StartStep("In the Select Retailers popup I select the retailer: " +
 				                     thisRetailer["Retailer"]);
 				new StepsSelectRetailers().SelectTheRetailer(thisRetailer["Retailer"]);
 			}
-
 			TestReport.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
-			if (new NewProduct().ErrorMessage() == "This is a required field.")
+			if (new NewProduct().ErrorMessageText == "This is a required field.")
 			{
-				Report.Failure(
-					"Required field error was showing on continue. Attempting to enter Private Label field (not specified by Shared Step)");
+				Report.Failure("Required field error was showing on continue. Attempting to enter Private Label field (not specified by Shared Step)");
 				TestReport.StartStep("I enter private label as 'This Private Label'");
 				new Steps_Retailer().IEnterPrivateLabelName("This Private Label");
 				TestReport.StartStep("I click continue");
@@ -5101,7 +5091,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selStepsNewProduct = new StepsNewProduct();
 			TestReport.UseSubSteps = true;
 			TestReport.StartStep("I click the 'U.S. Department of Transportation (DOT) Classification' tab");
-			selStepsNewProduct.GivenInTheNewProductPageIClickSection(
+			selStepsNewProduct.ClickPageHeading(
 				"U. S. Department of Transportation (DOT) Classification");
 			TestReport.StartStep("I enter the Un Number 'UN1966'");
 			selStepsNewProduct.SetTheSectionOptionTo("UN Number", "UN1966");
@@ -5511,31 +5501,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		[StepDefinition(
 			@"I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue")]
-		public void ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(
-			TechTalk.SpecFlow.Table retailers)
+		public void ThenICallSharedStep_Retailers_PLP_SelectOneOrMoreRetailerAndAddPLInformation_Continue(Table retailers)
 		{
 			TestReport.UseSubSteps = true;
 			var selStepsNewProduct = new StepsNewProduct();
-
-			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
+			foreach (var thisRetailer in retailers.Rows)
 			{
 
 				TestReport.StartStep("In the Select Retailers popup I select the retailer: " +
 				                     thisRetailer["Retailer"]);
 				new StepsSelectRetailers().SelectTheRetailer(thisRetailer["Retailer"]);
 			}
-
-			foreach (TechTalk.SpecFlow.TableRow thisRetailer in retailers.Rows)
+			foreach (var thisRetailer in retailers.Rows)
 			{
 				TestReport.StartStep("In the Select Retailers popup I add PL information");
 				selStepsNewProduct.ThenIAddAdditionaRequirmentsInfoForRetailer(thisRetailer["Retailer"],
 					"Additional requirements: " + thisRetailer["Retailer"]);
 			}
-
-
 			TestReport.StartStep("I click continue");
 			selStepsNewProduct.ClickContinue();
-			if (new NewProduct().ErrorMessage() == "This is a required field.")
+			if (new NewProduct().ErrorMessageText == "This is a required field.")
 			{
 				Report.Failure(
 					"Required field error was showing on continue. Attempting to enter Private Label field (not specified by Shared Step)");
@@ -5943,7 +5928,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string CASNo = "";
 			if (component.Rows.First()["CASNumber"].Contains("WPS"))
 			{
-				string casSavedAs = "";
 				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))
 				{
 					ProductInformation CASProd =
@@ -6057,7 +6041,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string CASNo = "";
 			if (component.Rows.First()["CASNumber"].Contains("WPS"))
 			{
-				string casSavedAs = "";
 				if (Context.Contains(component.Rows.First()["CASNumber"]?.Split(' ')[2].Trim()))
 				{
 					var CASProd = (ProductInformation)Context.GetFromContext(
@@ -7373,12 +7356,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			var id = productDetails.Id;
-
-			bool selectedID = false;
-
 			Report.IsTrue(myStudioShaManager.SelectProductByID(id), "Failed to select product with id: " + id,
 				"Selected product with id: " + id);
-
 			TestReport.StartStep("Click document management");
 			Report.IsTrue(new StudioSHAManager().ClickActionsMenuOption("Document Management"),
 				"Failed to click document management", "Clicked document management");

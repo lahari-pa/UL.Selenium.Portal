@@ -288,7 +288,7 @@ And I should see the The Product Page
 #And I Select the No button for the "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." question
 And I click Save in The Product Page
 And In the New Product page I click tab: Review and Submit
-And in the New Product page I click section: Data Acceptance
+And I click the page heading: Data Acceptance
 And In the Data Acceptance page I click on the Accept button
 And If purchase details are showing click confirm order
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -344,7 +344,7 @@ And I click Save in The Product Page
 #And I Select the No button for the "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns." question
 And I click Save in The Product Page
 And In the New Product page I click tab: Review and Submit
-And in the New Product page I click section: Data Acceptance
+And I click the page heading: Data Acceptance
 And In the Data Acceptance page I click on the Accept button
 And If purchase details are showing click confirm order
 And I call Shared Step 65080 (Login to Studio and Open SHA manager)

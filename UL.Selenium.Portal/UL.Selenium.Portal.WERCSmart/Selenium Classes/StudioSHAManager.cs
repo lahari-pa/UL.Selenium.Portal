@@ -143,7 +143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					.Replace("bold", "", StringComparison.InvariantCultureIgnoreCase).Trim();
 
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return null;
 			}
@@ -454,7 +454,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return true;
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return true;
 			}
@@ -542,7 +542,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							.ToList();
 						gotRow = true;
 					}
-					catch (Exception e)
+					catch (Exception)
 					{
 						Report.Info("Try " + counter + "Failed to get row values for row " + j);
 					}
@@ -735,7 +735,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkProcess']"));
 				return button.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("process product data button was not found");
 				return false;
@@ -848,12 +848,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement menuOption = ListOfTopMenuOptions.FirstOrDefault(x => x.Text.ToLower() == option.ToLower());
 				return menuOption.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
-
-			return false;
 		}
 
 		public bool ClickSuppliersButton()
@@ -938,7 +936,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Info("Did not find status select");
 				return false;
@@ -1031,7 +1029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var button = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@id='lnkRecertification']"));
 				return button.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("process recertification button was not found");
 				return false;
@@ -1072,7 +1070,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					{
 						return thisIDTD.GetValue().Trim();
 					}
-						
+
 				}
 			}
 
@@ -1097,12 +1095,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
-
-			return false;
 		}
 
 		public bool SelectFromStatusFilter(string option)
@@ -1114,7 +1110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1128,7 +1124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1142,7 +1138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1157,7 +1153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1172,7 +1168,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1300,7 +1296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				recUseSelect.Select(option);
 				return recUseSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1315,7 +1311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				flashPtSelect.Select(option);
 				return flashPtSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1330,7 +1326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				phSelect.Select(option);
 				return phSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1434,7 +1430,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusDD.Select(status);
 				return statusDD.SelectedOption() == status;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1448,7 +1444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var updateStatusButton = this.containerElement.FindElement(By.XPath(".//select[@id='statusupdate']/following-sibling::a"));
 				return updateStatusButton.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1462,7 +1458,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var refeedToClient = this.containerElement.FindElement(By.XPath(".//fieldset[@id='fldFeedClient']/a"));
 				return refeedToClient.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1522,7 +1518,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					//do nothing
 				}
@@ -1669,7 +1665,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Report.Info("Exception");
 				}
@@ -1729,7 +1725,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return closeCorner.TryClick();
 				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				Report.Info("Failed to close dialog by clicking on close button");
 				SeleniumBrowser.WebBrowser.Close();
@@ -1756,12 +1752,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
-
-			return false;
 		}
 
 		public bool SelectSubject(string option)
@@ -1772,7 +1766,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				statusSelect.Select(option);
 				return statusSelect.SelectedOption() == option;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}

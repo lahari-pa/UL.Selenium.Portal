@@ -243,7 +243,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 				return base.Wait_for_load(30);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -263,7 +263,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return false;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -371,7 +371,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return editButton.TryClick();
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Delay.Seconds(1);
 				}
@@ -392,7 +392,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return button.TryClick();
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Delay.Seconds(1);
 				}
@@ -641,14 +641,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				Report.Error("Image was not found: " + code);
 				return false;
-
 			}
-			else
-			{
-				Report.Error("Button was not found: " + code);
-				return false;
-			}
-
+			Report.Error("Button was not found: " + code);
 			return false;
 		}
 
@@ -661,12 +655,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					return true;
 				}
-
 				Delay.Seconds(1);
 			}
-
 			return false;
-
 		}
 
 
@@ -1148,7 +1139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return this.containerElement.FindElement(By.XPath(".//input[@id='btnCancel']")).TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -1484,7 +1475,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Report.Info("List of buttons not found");
 				}
@@ -1653,7 +1644,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				matchingSelect.Select(value);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("Found select box but unable to select option: " + value);
 				return false;
@@ -1865,7 +1856,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					string itemCount = spanCount.GetValue();
 					return Convert.ToInt16(itemCount.Substring(0, itemCount.IndexOf(" ")));
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Report.Info("Failed to extract a number from: " + spanCount.GetValue());
 					return -1;
@@ -1958,7 +1949,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				matchingSelect.Select(value);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("Found select box but unable to select option: " + value);
 				return false;
@@ -2199,7 +2190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						By.XPath(".//table[@id='DocumentQueue_grdSR']//tr[contains(@class, 'ColHeader')]"));
 				return headerRow.FindElements(By.XPath(".//td//a")).Select(x => x.GetValue()).ToList();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("No header row was found");
 				return new List<string>();
@@ -2403,7 +2394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				matchingSelect.Select(value);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Report.Error("Found select box but unable to select option: " + value);
 				return false;
@@ -2519,7 +2510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								return (dtDateFrom.Date == dtExpectedDateFrom.Date &&
 										dtDateTo.Date == dtExpectedDateTo.Date);
 							}
-							catch (Exception e)
+							catch (Exception)
 							{
 								return false;
 							}
@@ -2787,7 +2778,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return matchingDay.TryClick();
 
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -2860,7 +2851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return matchingDay.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -3077,7 +3068,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				matchingButton.Click();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 
 			}

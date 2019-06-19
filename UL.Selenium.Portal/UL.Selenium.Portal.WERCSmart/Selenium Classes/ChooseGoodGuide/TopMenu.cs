@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 						return select.TryClick();
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 				}
 			}
@@ -51,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}

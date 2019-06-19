@@ -5,7 +5,6 @@ using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.UniversalFunctions;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.Cache;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -128,7 +127,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 				case "Scent":
 					Report.IsTrue(thisGgNewProduct.UPCGridScent(item), "Failed to select item", "Correctly selected item");
-					break;
 					break;
 				default:
 					throw new Exception("Must provide valid drop down");

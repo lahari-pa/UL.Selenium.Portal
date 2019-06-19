@@ -22,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var SupplierID = this.containerElement.FindElement(By.XPath("//input[@id='supplierID' and ./preceding-sibling::label[text()='Supplier ID']]"), 2);
 				return (SupplierID.Enabled && SupplierID.Displayed);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -35,7 +35,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']"), 2);
 				return (SupplierError.Enabled && SupplierError.Displayed);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -48,7 +48,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='vendorID_error']/span"), 2);
 				return SupplierError.GetValue();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return null;
 			}
@@ -61,7 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']"), 2);
 				return (SupplierError.Enabled && SupplierError.Displayed);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -74,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var SupplierError = this.containerElement.FindElement(By.XPath("//p[@id='description_error']/span"), 2);
 				return SupplierError.GetValue();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return null;
 			}
@@ -98,7 +98,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				return companyInput.Enabled && companyInput.Displayed;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -119,7 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var IsDefault = this.containerElement.FindElement(By.XPath("//input[@type='checkbox']"), 2);
 				return (IsDefault.Enabled && IsDefault.Displayed);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -141,7 +141,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					.FirstOrDefault(x => x.Text == "SAVE");
 				return (SaveButton.Enabled && SaveButton.Displayed);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}

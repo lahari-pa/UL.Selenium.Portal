@@ -5,7 +5,6 @@ using System.Linq;
 using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;

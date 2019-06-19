@@ -164,7 +164,7 @@ When I filter the products by: Not Yet Submitted
 Given I save the ProductID and Name of the first Product in the grid as: FirstProduct
 When I click Row Actions for the most recent product returned
 Then I click on the Row Action: Edit
-Then the Product Type page should be loaded
+Then the Product Editor page should be loaded
 And the product saved as: FirstProduct should be visible in editor
 
 @TReVorId:22069
@@ -401,7 +401,7 @@ And I click on the Row Action: Edit
 
 Given In the New Product page I click tab: Product Type
 
-And in the New Product page I click section: The Product
+And I click the page heading: The Product
 
 # step accepts '~saved as...' and will fetch the value from context
 Then Product Line or Brand (optional) should be showing the value: ~saved as BrandName68388

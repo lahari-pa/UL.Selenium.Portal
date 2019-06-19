@@ -6,7 +6,6 @@ using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Classes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using NTTQA.Selenium.SpecFlow;
@@ -1306,7 +1305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var rowIndex = allRows.IndexOf(row);
 			Context.AddToContext("Saved brand name", rowName?.GetAttribute("value"));
 			Context.AddToContext("Saved brand row index", rowIndex);
-			return row.FindElement(By.XPath(".//a[@data-bind='click: save']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return row.FindElement(By.XPath(".//a[@data-bind='click: save']"), 2).TryClick();
 		}
 		public bool ClickCancel()
 		{
@@ -1437,7 +1436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickSave()
 		{
-			return this.containerElement.FindElement(By.XPath(".//a[@data-bind= 'click: saveIngredients']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.containerElement.FindElements(By.XPath(".//a[text()='Save']"), 2).First(x=>x.Displayed).TryClick();
 		}
 		public bool ClickDeleteChecked()
 		{
@@ -1453,9 +1452,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			switch (navOption.ToLower())
 			{
 				case "next":
-					return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link next']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+					return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link next']")).TryClick();
 				case "previous":
-					return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link prev']")).TryClick() && GeneralUtilities.Wait_for_load_finish();
+					return this.containerElement.FindElement(By.XPath(".//div[@id='settings']//a[@class='page-link prev']")).TryClick();
 			}
 			Report.Failure("Unable to apply navigation option: " + navOption);
 			return false;

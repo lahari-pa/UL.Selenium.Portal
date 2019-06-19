@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return this.GetName() == name;
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}

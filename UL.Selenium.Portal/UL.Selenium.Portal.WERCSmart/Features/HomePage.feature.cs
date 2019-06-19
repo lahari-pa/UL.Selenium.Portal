@@ -457,7 +457,7 @@ testRunner.When("I click Row Actions for the most recent product returned", ((st
 #line 166
 testRunner.Then("I click on the Row Action: Edit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 167
-testRunner.Then("the Product Type page should be loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the Product Editor page should be loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 168
 testRunner.And("the product saved as: FirstProduct should be visible in editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -945,7 +945,7 @@ testRunner.And("I click on the Row Action: Edit", ((string)(null)), ((TechTalk.S
 #line 402
 testRunner.Given("In the New Product page I click tab: Product Type", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 404
-testRunner.And("in the New Product page I click section: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the page heading: The Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 407
 testRunner.Then("Product Line or Brand (optional) should be showing the value: ~saved as BrandName" +
                     "68388", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -2018,3 +2018,4 @@ testRunner.And("I should see the Subheading Announcements expanded in the main w
 }
 #pragma warning restore
 #endregion
+

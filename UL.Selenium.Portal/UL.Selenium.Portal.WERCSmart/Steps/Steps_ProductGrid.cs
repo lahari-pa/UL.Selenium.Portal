@@ -4,7 +4,6 @@ using System.Linq;
 using Castle.Core.Internal;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
@@ -138,7 +137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var productToSearch = (ProductGridItem)Context.GetFromContext(savedAs);
 					id = productToSearch.ProductId;
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					//do nothing
 				}
@@ -151,7 +150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 						id = productDetails.Id;
 					}
-					catch (Exception e)
+					catch (Exception)
 					{
 						//do nothing
 					}
@@ -164,7 +163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						id = Context.GetFromContext(savedAs).ToString();
 					}
-					catch (Exception e)
+					catch (Exception)
 					{
 
 					}

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;

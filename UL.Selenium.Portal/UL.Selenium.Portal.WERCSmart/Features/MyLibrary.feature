@@ -12,6 +12,7 @@
 @MyIngredients
 @DataSummarySheet
 @ProductGrid
+@ProductSetUp
 @run_MyLibrary
 
 Feature: MyLibrary
@@ -223,11 +224,14 @@ Given I click the WERCSmart logo
 Then The home screen should load
 
 #This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
-Given I edit the product with ID: 1470688
+# this is not reliable.. replace with step - I take a product to the Ingredients screen (product set up steps)
+#Given I edit the product with ID: 1470688
 
-Given In the New Product page I click tab: Product Characteristics
+Given I create a product and take it to the ingredients page and save as: TestCase70539
 
-And in the New Product page I click section: Ingredients
+#Given In the New Product page I click tab: Product Characteristics
+#
+#And in the New Product page I click section: Ingredients
 
 Given I click the 'Use My Ingredients' button
 
@@ -250,6 +254,10 @@ Then I confirm the component name in the delete product popup matches the ingred
 Given I click: YES in the 'Remove Component from My Ingredients' pop up
 
 Then I confirm My Ingredient saved as: water70539 in My Library has been removed from the grid
+
+# delete TestCase70539
+
+Then I delete the product: TestCase70539
 
 
 @TReVorId:22228
@@ -282,11 +290,13 @@ Given I click the WERCSmart logo
 Then The home screen should load
 
 #This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
-Given I edit the product with ID: 1470688
+#Given I edit the product with ID: 1470688
+#
+#Given In the New Product page I click tab: Product Characteristics
+#
+#And in the New Product page I click section: Ingredients
 
-Given In the New Product page I click tab: Product Characteristics
-
-And in the New Product page I click section: Ingredients
+Given I create a product and take it to the ingredients page and save as: TestCase70556
 
 Given I click the 'Use My Ingredients' button
 
@@ -309,6 +319,8 @@ Then I confirm the component name in the delete product popup matches the ingred
 Given I click: YES in the 'Remove Component from My Ingredients' pop up
 
 Then I confirm My Ingredient saved as: water70556 in My Library has been removed from the grid
+
+Then I delete the product: TestCase70556
 
 
 @TReVorId:22229
@@ -348,11 +360,13 @@ Given I click the WERCSmart logo
 Then The home screen should load
 
 #This is a pre-set up product which we know has the Ingredients option in the Product Characteristics tab
-Given I edit the product with ID: 1470688
+#Given I edit the product with ID: 1470688
+#
+#Given In the New Product page I click tab: Product Characteristics
+#
+#And in the New Product page I click section: Ingredients
 
-Given In the New Product page I click tab: Product Characteristics
-
-And in the New Product page I click section: Ingredients
+Given I create a product and take it to the ingredients page and save as: TestCase70567
 
 Given I click the 'Use My Ingredients' button
 
@@ -376,6 +390,7 @@ Given I click: YES in the 'Remove Component from My Ingredients' pop up
 
 Then I confirm My Ingredient saved as: formaldehyde70567 in My Library has been removed from the grid
 
+Then I delete the product: TestCase70567
 
 @TReVorId:22231
 Scenario: [73329] Edit Ingredient

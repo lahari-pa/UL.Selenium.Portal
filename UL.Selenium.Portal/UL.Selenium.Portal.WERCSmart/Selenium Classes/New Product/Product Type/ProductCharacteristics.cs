@@ -1,13 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.ExtensionMethods;
-using NTTQA.Selenium.Reporting.Core;
-using OpenQA.Selenium;
-
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	class ProductCharacteristics : NewProduct
@@ -47,49 +37,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string PrimaryPhysicalState {
 			get => this.SelectedInputForLabel("Primary Physical State");
 			set => this.SelectRadio("Primary Physical State", value);
-
-			//try
-			//{
-			//	var el = this.containerElement
-			//		.FindElements(By.XPath(".//label[text()='Primary Physical State']/../following-sibling::div//span"), 2)
-			//		.FirstOrDefault(x => x.Text.ToLower() == item.ToLower()).FindElement(By.XPath("../input"));
-			//	if (el != null)
-			//	{
-			//		el.TryClick();
-			//		return true;
-			//	}
-
-			//	return false;
-			//}
-			//catch (Exception)
-			//{
-			//	return false;
-			//}
 		}
 
-		/// <summary>
-		/// Select the best Water Solubility description dropdown
-		/// </summary>
-		//public bool SelectBestWaterSolubilityDescription(string item)
-		//{
-		//	try
-		//	{
-		//		var el = this.containerElement.FindElement(By.XPath(".//label[text()='Select the best Water Solubility description']/..//following-sibling::div//select"), 2);
-		//		el.Select(item);
-		//		return true;
-		//	}
-		//	catch (Exception)
-		//	{
-		//		return false;
-		//	}
-		//}
-
 		public string BestWaterSolubilityDescription {
-			get { return null; }
-			set
-			{
+			get => this.SelectedInputForLabel("Best Water Solubility");
+			set => this.SetOptionInSection("Best Water Solubility", value);
 
-			}
 		}
 	}
 }

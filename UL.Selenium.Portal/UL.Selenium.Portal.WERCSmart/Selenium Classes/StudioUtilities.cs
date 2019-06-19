@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					SeleniumBrowser.WebBrowser.SwitchTo().Window(Context.GetFromContext("BaseWindow").ToString());
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					var handlesTemp = SeleniumBrowser.WebBrowser.WindowHandles;
 					var currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;

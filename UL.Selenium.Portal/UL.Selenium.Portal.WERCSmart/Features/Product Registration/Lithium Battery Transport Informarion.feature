@@ -17,6 +17,7 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
+
 Then The home screen should load
 
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -34,8 +35,8 @@ Then I should see the Product Includes Battery Page
 Given I set the Indicate how battery is packaged option to: Installed in the product
 
 Given I add the following batteries:
-| Battery Type | Manufacturer                  | Number of batteries per package | How many batteries required to run |
-| Lithium Ion  | L12N2P01 by Lenovo            | 4                               | 4                                  |
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
+| Lithium Ion  | <any>          | 4                               | 4                                  | lithiumbattery |
 
 Given I continue to the next screen in the product registration
 
@@ -133,8 +134,8 @@ Then I should see the Product Includes Battery Page
 Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 
 Given I add the following batteries:
-| Battery Type | Manufacturer                  | Number of batteries per package | How many batteries required to run |
-| Lithium Ion  | L12N2P01 by Lenovo            | 4                               | 4                                  |
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As       |
+| Lithium Ion  | <any>          | 4                               | 4                                  | lithiumbattery |
 
 Given I continue to the next screen in the product registration
 
@@ -210,7 +211,6 @@ Then The home screen should load
 
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65516
 
-@tfs_design
 Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium Battery Transportation step - question wording and validation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -232,8 +232,8 @@ Then I should see the Product Includes Battery Page
 Given I set the Indicate how battery is packaged option to: Installed in the product
 
 Given I add the following batteries:
-| Battery Type | Manufacturer                  | Number of batteries per package | How many batteries required to run |
-| Lithium Ion  | L12N2P01 by Lenovo            | 4                               | 4                                  |
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
+| Lithium Ion  | <any>          | 4                               | 4                                  | lithium  |
 
 Given I continue to the next screen in the product registration
 
@@ -310,7 +310,6 @@ Then The home screen should load
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65520
 
 
-@tfs_design
 Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lithium Battery Transportation step - question wording and validation
 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -332,8 +331,8 @@ Then I should see the Product Includes Battery Page
 Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 
 Given I add the following batteries:
-| Battery Type | Manufacturer                  | Number of batteries per package | How many batteries required to run |
-| Lithium Ion  | L12N2P01 by Lenovo            | 4                               | 4                                  |
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
+| Lithium Ion  | <any>          | 4                               | 4                                  | lithium  |
 
 Given I continue to the next screen in the product registration
 
