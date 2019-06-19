@@ -142,13 +142,16 @@ Given I call Shared Step 57561 (The Product - Enter Product Name and select Type
 
 Then I save the product information as: TestCase57439
 
-Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
+#CLF 18/6/2019 removing this step because it appears to have been replaced by 73629
+#Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
 
-#Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
-#| Secondary Physical State | Specific Gravity | pH      | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used     | Select the best Water Solubility description |
-#| Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
+Given I call Shared Step 73629 (Product Characteristics - Liquid - select any options(enter pH, boiling point, flash point))
+| Secondary Physical State | Specific Gravity | pH      | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used     | Select the best Water Solubility description |
+| Liquid                   | 2                | 2       | 2                          | 66                       | Closed cup method                   | Appreciable                                  |
 
-Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+#CLF 18/6/2019 removing this step because it appears to have been replaced by 57502
+#Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -549,7 +552,7 @@ And I call Shared Step 57881 (Regulatory Documents to Provide - US only - reques
 # JS 13/03 Additonal Documents To Provide steps were added to tfs test case
 Then I should see the Additional Documents to Provide Page
 # TFS test case change - added shared step
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Full Product Label and file: C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Provide Full Product Label (required) and file: C:\Dependencies\WERCSmart\testdoc.pdf
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))

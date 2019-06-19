@@ -225,6 +225,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AccHasNoStwdData.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Partial Sewardship Data\AccHasPartialStwd.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccHasPartialStwd.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Cart.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -778,6 +783,10 @@
     <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has No Stwd Data\AccHasNoStwdData.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AccHasNoStwdData.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Canadian Tire\New Product Submission\Submit and Process to Completed\Account has Partial Sewardship Data\AccHasPartialStwd.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AccHasPartialStwd.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Cart.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

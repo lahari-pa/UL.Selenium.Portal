@@ -1958,6 +1958,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
+		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
+		{
+			if (retailer.ToLower().Contains("saved as"))
+			{
+				if (Context.Contains(retailer.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim()))
+				{
+					retailer = Context
+						.GetFromContext(retailer.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+						.ToString();
+				}
+				else
+				{
+					throw new Exception("There is no saved retailer found");
+				}
+
+			}
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			List<Product> RetailerStatuses = thisStudioSHAManager.GetTopXProducts(2);
+
+			StepsRetailPartners thisStepsRetailPartners = new StepsRetailPartners();
+
+			List<Product> matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
+			var matchingClients = matchingStatusRows.Select(x=>x.Clients).Where(o=>thisStepsRetailPartners.MatchAbbreviatedRetailer(o, retailer)).ToList();
+
+			Report.IsTrue(matchingClients.Count != 0,
+				"No matching row was found for status: " + status + " and retailer: " + retailer,
+				"Matching row was found for status: " + status + " and retailer: " + retailer);
+
+		}
+
+		[StepDefinition(@"In the SHA Manager Product UPC window I confirm that for UPC: (.*) retailer: (.*) is showing")]
+		public void GivenInTheSHAManagerProductUPCWindowIConfirmThatForUPCRetailerIsShowing(string UPC, string retailer)
+		{
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			Report.IsTrue(new StudioSHAManagerProductUPC().Wait_for_load(30),
+				"SHA Manager Product UPC window is not open", "SHA Manager Product UPC window is open");
+
+			List<SHAManagerProdcutUPC> ListOfUPCS = thisStudioSHAManager.GetUPCs();
+
+			if (UPC.ToLower().Contains("saved as"))
+			{
+				UPC = Context.GetFromContext(UPC.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString();
+			}
+
+			if (retailer.ToLower().Contains("saved as"))
+			{
+				retailer = Context.GetFromContext(retailer.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString();
+			}
+
+			var matchingUPCRow = ListOfUPCS.FirstOrDefault(x => x.UPCNumber == UPC && x.Retailers.Contains(retailer));
+
+			Report.IsTrue(matchingUPCRow != null,
+				"No matching UPC row has been found for UPC: " + UPC + " and retailer: " + retailer,
+				"Matching UPC has been found for UPC: " + UPC + " and retailer: " + retailer);
+		}
 
 	}
 }

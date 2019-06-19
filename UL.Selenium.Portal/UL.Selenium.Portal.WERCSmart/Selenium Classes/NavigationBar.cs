@@ -114,7 +114,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Icons found: " + string.Join(",", allIcons.ToList().Select(x => x.GetAttribute("title").Trim())));
 				return false;
 			}
-			return icon.FindElement(By.XPath(".."), 2).TryClick();
+			Report.Info("Icon has been found for: " + destination);
+			var button = icon.FindElement(By.XPath(".."), 2);
+			if (button == null)
+			{
+				Report.Info("Could not find button for: " + destination);
+			}
+			Report.Info("Button has been found for: " + destination);
+			return button.TryClick();
 		}
 
 		public bool Click_ExpandedMenuLink(string destination)

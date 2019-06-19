@@ -747,7 +747,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
 				var emailBody = EmailFunctions.getEmailBody(email);
-				Report.Info("Body of the Email was: " + emailBody);
+				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				var bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
 				Report.Info("Body of the Email was: " + emailBody);
@@ -1179,6 +1179,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductInformation.Id = value;
 			newProductInformation.Name = value;
 			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, newProductInformation);
+		}
+
+		[StepDefinition(@"I add to context name: (.*) and value: (.*)")]
+		public void GivenIAddToContextNameAndValue(string name, string value)
+		{
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, value);
 		}
 
 		[Given(@"I check alert text contains (.*) and dismiss")]
