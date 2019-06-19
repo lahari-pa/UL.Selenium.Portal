@@ -1,21 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Security;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Castle.Core.Internal;
-using Newtonsoft.Json;
 using NTTQA.Selenium.Cache;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using NTTQA_TReVor_Module.Cache;
-using NTTQA_TReVor_Module.Classes;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -127,26 +121,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
 		{
-			//if (SeleniumUtilities.Context.Contains("CurrentLogin"))
-			//{
-			//	accountSavedAs = SeleniumUtilities.Context.GetFromContext("CurrentLogin").ToString();
-			//	Report.Info("Already logged in as " + accountSavedAs + " so changing login to that");
-			//}
-			//else
-			//{
-			//	SeleniumUtilities.Context.AddToContext("CurrentLogin", accountSavedAs);
-			//}
 			var user = TestUsers.GetUserSavedAs(accountSavedAs);
-
 			if (new TopMenuBar().LoggedIn())
 			{
 				Report.Info("Logged in, logging out");
-				Report.Screenshot();
-				new TopMenuBar().ClickSignOut();
-				Delay.Seconds(3);
-				Report.Screenshot();
+				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
 			}
-
 			if (user == null)
 			{
 				var Branch = GlobalParameters.Branch;
@@ -174,6 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I log in with email: (.*) and password: (.*)")]
+		// requires the user to be on the landing page
 		public void GivenILogInWithEmailXAndPasswordY(string username, string password)
 		{
 			Report.Info("Beginning I login with email and password");
@@ -191,23 +172,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
-			while ((!selHomepage.Wait_for_load(1) || !selTopMenuBar.Wait_for_load(1)) && i < 5)
+			while ((!selHomepage.Wait_for_load(1) || !selTopMenuBar.Wait_for_load(1)) && i < 4)
 			{
 				Report.Info("========== Login Attempt: " + i + " ==========");
 				var selLogin = new Login();
-				if (!Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
+				if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))
 				{
 					break;
 				}
 				Report.Info("Entering Email: '" + username + "'");
 				selLogin.EmailField = username;
-				Delay.Seconds(1);
 				Report.Info("Entering Password: '" + password + "'");
 				selLogin.PasswordField = password;
 				Report.Info("Clicking login");
-				selLogin.Click_Login();
+				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
 				selHomepage = new Homepage();
-				if (selHomepage.Wait_for_load(60))
+				if (selHomepage.Wait_for_load())
 				{
 					Report.Success("Successfully logged in!");
 					GeneralUtilities.Wait_for_load_finish();
@@ -229,33 +209,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 				i++;
-				Delay.Seconds(1);
 			}
-			var selLogin2 = new Login();
-			if (!Report.IsTrue(selLogin2.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
-			{
-				Report.Failure("Failed to log in!");
-				return;
-			}
-			Report.Info("Entering Email: '" + username + "'");
-			selLogin2.EmailField = username;
+			// JS - we already attempted in a loop 3 times- why are we repeating the code here?
 
-			Report.Info("Entering Password: '" + password + "'");
-			selLogin2.PasswordField = password;
-			Report.Info("Clicking login");
-			selLogin2.Click_Login();
-			selHomepage = new Homepage();
-			if (selHomepage.Wait_for_load(30))
-			{
-				Report.Success("Successfully logged in!");
-				GeneralUtilities.Wait_for_load_finish();
-				return;
-			}
-			Report.Failure("Failed to log in!");
+			//var selLogin2 = new Login();
+			//if (!Report.IsTrue(selLogin2.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
+			//{
+			//	Report.Failure("Failed to log in!");
+			//	return;
+			//}
+			//Report.Info("Entering Email: '" + username + "'");
+			//selLogin2.EmailField = username;
+
+			//Report.Info("Entering Password: '" + password + "'");
+			//selLogin2.PasswordField = password;
+			//Report.Info("Clicking login");
+			//selLogin2.Click_Login();
+			//selHomepage = new Homepage();
+			//if (selHomepage.Wait_for_load(30))
+			//{
+			//	Report.Success("Successfully logged in!");
+			//	GeneralUtilities.Wait_for_load_finish();
+			//	return;
+			//}
+			//Report.Failure("Failed to log in!");
 		}
 
-		// only do one attempt - used for reset passwords
 		[StepDefinition(@"I attempt to log in with email: (.*) and password: (.*)")]
+		// only do one attempt - used for reset passwords
 		public void AttemptToLoginWithEmailAndPassword(string email, string password)
 		{
 			Report.Info("Beginning I login with email and password");
@@ -270,52 +251,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Info("Clicking 'Log In' on the Landing Page");
 			selLandingPage.Click_Login();
-			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			var selLogin = new Login();
-			if (!Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
+			if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))
 			{
 				return;
 			}
 			Report.Info("Entering Email: '" + email + "'");
 			selLogin.EmailField = email;
-			Delay.Seconds(1);
 			Report.Info("Entering Password: '" + password + "'");
 			selLogin.PasswordField = password;
 			Report.Info("Clicking login");
-			selLogin.Click_Login();
-			Delay.Seconds(2);
-			GeneralUtilities.Wait_for_load_finish();
+			Report.IsTrue(selLogin.Click_Login(), "Failed to click the log in button");
 			selLogin = new Login();
-			if (selLogin.Exists && !selLogin.Password_Validation().IsNullOrEmpty())
+			// check we have redirected from the log in page
+			if (!selLogin.WaitForContainerToBeInvisible())
 			{
-				Report.Failure("Failed to log in - password error message was displayed");
+				if (!selLogin.Password_Error_Text().IsNullOrEmpty())
+				{
+					Report.Failure("Failed to log in - password error message was displayed");
+					Report.Screenshot();
+					return;
+				}
+				Report.Failure("Failed to log in");
 				Report.Screenshot();
 				return;
 			}
 			selHomepage = new Homepage();
-			if (selHomepage.Wait_for_load(60))
+			// check for home page
+			if (selHomepage.Wait_for_load())
 			{
 				Report.Success("Successfully logged in!");
 				GeneralUtilities.Wait_for_load_finish();
+				Report.Screenshot();
 				return;
 			}
+			// dismiss modal dialog if it exists
 			var modalDialog = new ModalDialog();
 			if (modalDialog.Wait_for_load(1))
 			{
+				Report.Info("Closing modal dialog");
 				modalDialog.Click_Closex();
-				Delay.Seconds(Delay.SpeedFactor * 1);
-
 				selHomepage = new Homepage();
-				if (selHomepage.Wait_for_load(10))
+				if (selHomepage.Wait_for_load())
 				{
 					Report.Success("Successfully logged in!");
 					GeneralUtilities.Wait_for_load_finish();
-
 					return;
 				}
 			}
 			Report.Failure("Failed to log in");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I logout")]
@@ -331,7 +317,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
 			string myEmail = EmailFunctions.CreateEmail(myDate);
-			SeleniumUtilities.Context.AddToContext(saveAs, myEmail);
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(saveAs, myEmail);
 			Report.Info("Saved email: " + myEmail);
 		}
 
@@ -354,7 +340,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var account = parameters.CreateInstance<WERCSmartUser>();
 					account.Email = EmailFunctions.CreateEmail(account.Email);
 					account.Identifier = savedAs;
-					SeleniumUtilities.Context.AddToContext(savedAs, account, true);
+					NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, account, true);
 					Report.Success("Account details saved!");
 
 					var mySignUp = new StepsSignup();
@@ -564,7 +550,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Closing current window");
 			try
 			{
-				var mainWindowHandle = SeleniumUtilities.Context.GetFromContext("MainWindowHandle");
+				var mainWindowHandle = NTTQA.Selenium.SpecFlow.Context.GetFromContext("MainWindowHandle");
 				if (mainWindowHandle == null)
 				{
 					throw new Exception("No Main Window Handle found in context!");
@@ -613,7 +599,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- I save the current emails in this inbox so I can locate the new one when it arrives");
 			try
 			{
-				var emailAddress = SeleniumUtilities.Context.GetFromContext(savedas).ToString();
+				var emailAddress = NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedas).ToString();
 				Report.Info("Storing inbox for address: " + emailAddress);
 				EmailFunctions.StoreCurrentInbox(emailAddress);
 				Report.Success("Inbox stored successfully!");
@@ -637,7 +623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				var email = EmailFunctions.CreateEmail(createdEmail);
-				SeleniumUtilities.Context.AddToContext(savedAs, email);
+				NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, email);
 				Report.Info("Email address created: " + email);
 			}
 			catch (Exception ex)
@@ -692,12 +678,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var email = string.Empty;
 				if (savedAs == "ForgotPW_SecQs")
 				{
-					var user = (WERCSmartUser)SeleniumUtilities.Context.GetFromContext(savedAs);
+					var user = (WERCSmartUser)NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedAs);
 					email = user.Email;
 				}
 				else
 				{
-					email = SeleniumUtilities.Context.GetFromContext(savedAs).ToString();
+					email = NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedAs).ToString();
 				}
 
 				if (EmailFunctions.WaitForInboxDifferences(email))
@@ -727,7 +713,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 					}
 
-					SeleniumUtilities.Context.AddToContext("Matching", matchingEmail);
+					NTTQA.Selenium.SpecFlow.Context.AddToContext("Matching", matchingEmail);
 				}
 				else
 				{
@@ -759,9 +745,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)SeleniumUtilities.Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
 				var emailBody = EmailFunctions.getEmailBody(email);
-				Report.Info("Body of the Email was: " + emailBody);
+				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				var bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
 				Report.Info("Body of the Email was: " + emailBody);
@@ -786,7 +772,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			TestReport.BeginTestModule(GlobalParameters.StepCount + "- Checking body text of email");
 			try
 			{
-				var email = (Mailosaur.Email)SeleniumUtilities.Context.GetFromContext("Matching");
+				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
 				var emailBody = EmailFunctions.getEmailBody(email);
 				// html codes are coming through from mailosaur eg. for '+' character
 				var bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
@@ -832,7 +818,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Switch to Tab: " + url);
 				var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-				SeleniumUtilities.Context.AddToContext("MainWindowHandle", currentHandle);
+				NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
 				var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 				foreach (var handle in allHandles)
 				{
@@ -859,13 +845,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveTheCurrentWindowAs(string savedAs)
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			SeleniumUtilities.Context.AddToContext(savedAs, currentHandle);
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(savedAs, currentHandle);
 		}
 
 		[StepDefinition(@"I close the window saved as: (.*)")]
 		public void SwitchBackToMainWindow(string savedAs)
 		{
-			var handleToClose = SeleniumUtilities.Context.GetFromContext(savedAs)?.ToString();
+			var handleToClose = NTTQA.Selenium.SpecFlow.Context.GetFromContext(savedAs)?.ToString();
 			if (handleToClose == null)
 			{
 				Report.Failure("Unable to find window saved as: " + savedAs + " in context to close!");
@@ -890,7 +876,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SwitchToDataSumaryTab()
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			SeleniumUtilities.Context.AddToContext("MainWindowHandle", currentHandle);
+			NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in allHandles)
 			{
@@ -911,7 +897,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenISwitchToDataAcceptancePage()
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			SeleniumUtilities.Context.AddToContext("MainWindowHandle", currentHandle);
+			NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in allHandles)
 			{
@@ -929,7 +915,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void CloseDataSummaryTab()
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			var mainHandle = SeleniumUtilities.Context.GetFromContext("MainWindowHandle").ToString();
+			var mainHandle = NTTQA.Selenium.SpecFlow.Context.GetFromContext("MainWindowHandle").ToString();
 			SeleniumBrowser.WebBrowser.Close();
 			SeleniumBrowser.WebBrowser.SwitchTo().Window(mainHandle);
 		}
@@ -976,7 +962,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SwitchToTermsOfUseTab()
 		{
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			SeleniumUtilities.Context.AddToContext("MainWindowHandle", currentHandle);
+			NTTQA.Selenium.SpecFlow.Context.AddToContext("MainWindowHandle", currentHandle);
 			var allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in allHandles)
 			{
@@ -1013,9 +999,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void DeleteProductWithUPCNumberIfOneHasBeenGenerated()
 		{
 			var testCaseId = GlobalParameters.TestCaseId;
-			if (testCaseId != null && SeleniumUtilities.Context.GetFromContext($"UPC{testCaseId}") != null)
+			if (testCaseId != null && NTTQA.Selenium.SpecFlow.Context.GetFromContext($"UPC{testCaseId}") != null)
 			{
-				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", SeleniumUtilities.Context.GetFromContext($"UPC{testCaseId}").ToString());
+				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", NTTQA.Selenium.SpecFlow.Context.GetFromContext($"UPC{testCaseId}").ToString());
 			}
 		}
 
@@ -1028,7 +1014,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Failed to find a user stored in TReVor: " + savedAs);
 				return;
 			}
-			SeleniumUtilities.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
+			NTTQA.Selenium.SpecFlow.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
 		}
 
 		[StepDefinition(@"I update the password for the following TReVor test users:")]
@@ -1192,7 +1178,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ProductInformation newProductInformation = new ProductInformation();
 			newProductInformation.Id = value;
 			newProductInformation.Name = value;
-			SeleniumUtilities.Context.AddToContext(name, newProductInformation);
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, newProductInformation);
+		}
+
+		[StepDefinition(@"I add to context name: (.*) and value: (.*)")]
+		public void GivenIAddToContextNameAndValue(string name, string value)
+		{
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, value);
 		}
 
 		[Given(@"I check alert text contains (.*) and dismiss")]
@@ -1217,7 +1209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[Given(@"I save to context name: (.*) and string value: (.*)")]
 		public void GivenISaveToContextNameAndStringValue(string name, string value)
 		{
-			SeleniumUtilities.Context.AddToContext(name, value);
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, value);
 		}
 
 		[StepDefinition(@"I move the mouse pointer by an offset of (.*) in x and (.*) in y")]

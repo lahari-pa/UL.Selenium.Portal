@@ -1155,7 +1155,7 @@ testRunner.And("I switch to tab: WERCSmart Version 2.0", ((string)(null)), ((Tec
 #line 482
 testRunner.Given("In the New Product page I click tab: Recipient and UPC Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 483
-testRunner.Given("in the New Product page I click section: Universal Product Code (UPC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click the page heading: Universal Product Code (UPC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 484
 testRunner.And("I delete UPC: saved as UPC87676", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 485

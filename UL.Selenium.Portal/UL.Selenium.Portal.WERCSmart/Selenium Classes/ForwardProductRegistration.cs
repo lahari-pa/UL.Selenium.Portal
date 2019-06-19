@@ -1,9 +1,11 @@
+﻿
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -15,6 +17,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public const string BasePath = "//div[@id='dataentry']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
+
+		public bool ErrorsExist()
+		{
+			var errors = containerElement.FindElements(By.XPath(".//i[contains(@class, 'exclamation')]"));
+			return errors.Count > 0;
+		}
 
 		public List<string> ListOfRetailers()
 		{
@@ -192,6 +200,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
+		public bool SelectOtherRetailer(string retailer)
+		{
+			var retailerInput = this.containerElement.FindElement(By.XPath(".//h4[text()='Other Retailers']/following-sibling::div[contains(@class, 'retailers-list')]/div//span[contains(text(),'" + retailer + "')]/../input"),2);
+
+			if (retailerInput == null)
+			{
+				Report.Info("Retailer input could not be found");
+				return false;
+			}
+			return retailerInput.TryCheck();
+		}
+
 		public bool SelectRetailer(string retailer)
 		{
 			var retailers = this.containerElement.FindElements(By.XPath(@".//div[@class='col-sm-3 retailer-select' and .//span[contains(text(),""" + retailer + @""")]]"), 2).ToList();
@@ -247,6 +267,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("Selecting UPC: " + upcs.First().UPCInfo.UPCNumber);
 			return upcs.First().SelectUPC();
+		}
+
+		public bool SelectUPCByNumber(string UPCNumber)
+		{
+			SelectUPCs thisSelectUPCs = new SelectUPCs();
+			thisSelectUPCs.UPCInfo = new UPC() {UPCNumber = UPCNumber};
+			return thisSelectUPCs.SelectUPC();
+		}
+
+		public bool ClickActionByUPCNumber(string UPCNumber, string Action)
+		{
+			UPC thisUPC= new UPC() { UPCNumber = UPCNumber };
+			return thisUPC.ClickAction(Action);
 		}
 
 		public bool SelectFirstProduct_SelectUPCs()
@@ -377,6 +410,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var row = this.containerElement.FindElement(By.XPath(".//tr[@id='" + this.InternalID + "']"), 2);
 				return row.TryClick() && row.GetAttribute("class") == "active";
 			}
+
+
 		}
 
 		public class SelectUPCs : ForwardProductRegistration
@@ -388,6 +423,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return this.containerElement.FindElement(By.XPath(".//tr[.//span[contains(@data-bind,'upcNumber') and text()='" + this.UPCInfo.UPCNumber + "']]/td/input")).TryClick();
 			}
+
 		}
 
 		public class ProductResults : ForwardProductRegistration
@@ -415,5 +451,163 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+
+		public class EditUPC : BaseObject
+		{
+			public const string BasePath =
+				"//div[contains(@class, 'modal-dialog')]//h4[contains(text(), 'Edit UPC')]/../..";
+
+			[FindsBy(How = How.XPath, Using = BasePath)]
+			protected override IWebElement containerElement { get; set; }
+
+			public string UPCNumber {
+				get
+				{
+					var input = this.containerElement.FindElement(
+						By.XPath(".//input[@type='text' and @placeholder='UPC Number']"), 2);
+					if (input == null)
+					{
+						Report.Info("The UPC Number input could not be found!");
+						return null;
+					}
+
+					return input.GetValue();
+				}
+				set
+				{
+					var input = this.containerElement.FindElement(
+						By.XPath(".//input[@type='text' and @placeholder='UPC Number']"), 2);
+					if (input == null)
+					{
+						Report.Error("The UPC Number input could not be found!");
+					}
+
+					if (!input.TryEnterText(value))
+					{
+						Report.Error("Failed to enter text: " + value + " into UPC Number input");
+					}
+				}
+			}
+
+			public string Size {
+				get
+				{
+					var input = this.containerElement.FindElement(
+						By.XPath(".//input[@type='text' and @placeholder='Size (Ounces)']"), 2);
+					if (input == null)
+					{
+						Report.Info("The Size input could not be found!");
+						return null;
+					}
+
+					return input.GetValue();
+				}
+				set
+				{
+					var input = this.containerElement.FindElement(
+						By.XPath(".//input[@type='text' and @placeholder='Size (Ounces)']"), 2);
+					if (input == null)
+					{
+						Report.Error("The Size input could not be found!");
+					}
+
+					if (!input.TryEnterText(value))
+					{
+						Report.Error("Failed to enter text: " + value + " into Size input");
+					}
+				}
+			}
+
+			public string Type {
+				get
+				{
+					var input = this.containerElement.FindElement(By.XPath(".//select"), 2);
+					if (input == null)
+					{
+						Report.Info("The Type select box could not be found!");
+						return null;
+					}
+
+					return input.SelectedOption();
+				}
+				set
+				{
+					var input = this.containerElement.FindElement(By.XPath(".//select"), 2);
+					if (input == null)
+					{
+						Report.Error("The Type select box could not be found!");
+					}
+
+					input.Select(value);
+
+					if (input.SelectedOption() != value)
+					{
+						Report.Error("Failed to select: " + value + " for Type");
+					}
+				}
+			}
+
+			public List<string> Retailer {
+				get
+				{
+					var inputs = this.containerElement.FindElements(By.XPath(
+						".//input[@type='checkbox' and @id='chkAllRetailers']/..|.//input[@type='checkbox']/../span"));
+					if (inputs.Count == 0)
+					{
+						Report.Info("No retailer checkboxes could not be found!");
+						return null;
+					}
+
+					return inputs.Select(x => x.GetValue()).ToList();
+				}
+				set
+				{
+					var inputs = this.containerElement.FindElements(By.XPath(
+						".//input[@type='checkbox' and @id='chkAllRetailers']/..|.//input[@type='checkbox']/../span"));
+					if (inputs.Count == 0)
+					{
+						Report.Info("No retailer checkboxes could not be found!");
+					}
+
+					foreach (string thisRetailer in value)
+					{
+						var matchingRetailerInput = inputs.FirstOrDefault(x => x.GetValue() == thisRetailer);
+						if (matchingRetailerInput == null)
+						{
+							Report.Error("Failed to find matching checkbox : " + thisRetailer);
+						}
+						else
+						{
+							if (!matchingRetailerInput.TryCheck())
+							{
+								Report.Error("Failed to select: " + thisRetailer);
+							}
+						}
+					}
+				}
+			}
+
+			public bool ClickButton(string button)
+			{
+				var buttons = this.containerElement.FindElements(By.XPath(".//button"), 2);
+				if (buttons.Count==0)
+				{
+					Report.Info("No buttons were found");
+					return false;
+				}
+
+				var matchingButton = buttons.FirstOrDefault(x => x.GetValue().ToLower() == button.ToLower());
+
+				if (matchingButton == null)
+				{
+					Report.Info("Buttons were found but not one that matched: " + button);
+					return false;
+				}
+
+				return matchingButton.TryClick();
+
+			}
+		}
+
 	}
 }

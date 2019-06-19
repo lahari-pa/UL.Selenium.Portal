@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -74,11 +74,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked 'view' for document: " + documents.First().FileName);
 		}
 
-		[StepDefinition(@"I confirm a new window opens displaying the document")]
-		public void ConfirmANewWindowOpensDisplayingTheDocument()
+		[StepDefinition(@"I confirm a new window opens displaying the document url: (.*)")]
+		public void ConfirmANewWindowOpensDisplayingTheDocument(string option)
 		{
 			var selDocumentAcceptance = new DocumentAcceptance();
-			Report.IsTrue(selDocumentAcceptance.DocumentWindowOpen(),
+			Report.IsTrue(selDocumentAcceptance.DocumentWindowOpen(option),
 				"A window contianing the document did not open!",
 				"A window containing the document opened as expected");
 		}

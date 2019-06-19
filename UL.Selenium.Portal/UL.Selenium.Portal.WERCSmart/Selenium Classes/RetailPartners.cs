@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -253,7 +253,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					.FindElements(By.XPath(".//div[contains(@class,'data-consent')]//table//tbody//tr/td"), 2).Select(x => x.Text)
 					.ToList().Where(x => x.Length > 0).ToList();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return new List<string>();
 			}
@@ -440,12 +440,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickClose()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.containerElement.FindElement(By.XPath(".//button[text()='Close']"), 2).TryClick();
 		}
 
 		public bool ClickOK()
 		{
-			return this.containerElement.FindElement(By.XPath(".//button[text()='Ok']"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return this.containerElement.FindElement(By.XPath(".//button[text()='Ok']"), 2).TryClick();
 		}
 
 
@@ -549,6 +549,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//button[@class='close']"), 2).TryClick();
 		}
 
+		public bool ClickDownloadPdfWithHeading(string option)
+		{
+			return this.containerElement.FindElement(By.XPath($@".//div[@role='tabpanel'][h3[contains(text(),""{option}"")]]/a"), 2).TryClick();
+		}
 	}
 
 	public class Supplier

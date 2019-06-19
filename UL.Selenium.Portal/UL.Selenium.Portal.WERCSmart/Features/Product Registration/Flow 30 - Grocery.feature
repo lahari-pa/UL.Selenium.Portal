@@ -225,9 +225,11 @@ Given I call Shared Step 60726 (Additional Product Information - Country and Pri
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
 Then In the 'Select retailers' window I should see the following retailers:
-| Retailer             |
-| Walgreens            |
-| Harbor Freight Tools |
+| Retailer                              |
+| No Retailer/No UPC Product            |
+| Optoro                                |
+| Publix                                |
+| Walgreens                             |
 
 Given I click Done in the Select Retailers popup
 

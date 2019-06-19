@@ -213,7 +213,7 @@ Given I set the VOC content of product in g/L, including water and exempt compou
 
 Given I set the Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison? option to: Yes
 
-Given in the VOC SCAQMD/Canada page I click Continue
+Given in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada page I click Continue
 
 Given I should see the Volatile Organic Compound Summary Page
 
@@ -223,15 +223,15 @@ Then in the VOC Limits table, the VOC Compliance Limit column should contain the
 
 Then in the VOC Limits table, the Regulation column should contain the value: (g/L) including water & exempts
 
-Then in the New Product page I click section: Volatile Organic Compounds (VOC) for South Coast Air Quality Management District (SCAQMD) and Canada
+Then I click the page heading: Volatile Organic Compounds (VOC) for California Air District(s) and Canada
 
-And I should see the Volatile Organic Compounds (VOC) for South Coast Air Quality Management District (SCAQMD) and Canada Page
+And I should see the Volatile Organic Compounds (VOC) for California Air District(s) and Canada Page
 
 Given I set the Product is a Low Solid option to: No
 
 Given I set the VOC content in g/L contained in this product option to: 2.00
 
-Given in the VOC SCAQMD/Canada page I click Continue
+Given in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada page I click Continue
 
 Then in the VOC Limits table, the VOC Compliance Limit column should contain the value: 65
 

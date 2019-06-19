@@ -1,36 +1,48 @@
-﻿using System;
+using Castle.Core.Internal;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.SpecFlow;
+using NTTQA.Selenium.UniversalFunctions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using SeleniumUtilities;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
 	[Binding, Scope(Tag = "NewProduct")]
 	class StepsNewProduct
 	{
-		[StepDefinition(@"the Product Type page should be loaded")]
-		[StepDefinition(@"the Product Editor page should be loaded")]
-		public void ProductTypePageLoaded()
-		{
+		private static NewProduct NewProduct => new NewProduct();
 
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Product Type page should be loaded");
+		#region  General New Product steps
+
+		// Definitions, for consistency
+		// * 'Tab' is the major step on the progress wizard [html: 'prog-step']
+		//		eg. Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit
+		// * 'Page' is the minor step within a Tab [html: 'step-panel']
+		//		eg. The Product, Additional Product Information, Ingredients, Retailers...
+		// * 'Section' is the individual input/ question within a Page [html: 'form-group']
+		//		eg. 'Product name', 'Type of product', pH...
+
+		[StepDefinition(@"In the New Product page I click tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
+		public void GivenInTheNewProductPageIClickTab(string tabName)
+		{
 			try
 			{
-				Report.Info("Product Type page should be loaded");
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.Wait_for_load(10), "Product Type page did not load!", "Product Type page loaded successfully!");
-				Report.Screenshot();
+				var tab = NewProduct.MapTabs.FirstOrDefault(x => x.Value == tabName).Key;
+				Report.IsTrue(NewProduct.ClickTab(tab), "Failed to click tab: " + tab, "Successfully clicked tab: " + tab);
+			}
+			catch (NullReferenceException)
+			{
+				Report.Failure("The parameter 'tab' did not match a valid tab title");
+				throw;
 			}
 			catch (Exception ex)
 			{
@@ -39,6 +51,138 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
+		[StepDefinition(@"I click the page heading: (.*)")]
+		public void ClickPageHeading(string section)
+		{
+			TestReport.UseSubSteps = true;
+			TestReport.StartStep("I click section header " + section);
+			Report.IsTrue(NewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
+			GeneralUtilities.Wait_for_load_finish();
+			TestReport.StartStep("I should see page has loaded: " + section);
+			this.GivenIShouldSeeXPage(section);
+		}
+
+		[StepDefinition(@"the Product Editor page should be loaded")]
+		public void ProductEditorShouldBeLoaded()
+		{
+			Report.IsTrue(NewProduct.WaitForContainerToBeVisible(), "The Product Registration page did not load!", "The Product Registration page loaded successfully!");
+		}
+
+		[StepDefinition(@"I click continue")]
+		public void ClickContinue()
+		{
+			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
+		}
+
+		[StepDefinition(@"in the (.*) page I click Continue")]
+		public void GivenInTheNewProductPageIClickContinue(string page)
+		{
+			if (!NewProduct.WaitForContainerToBeVisible())
+			{
+				Report.Failure("New Product page is not loaded");
+				return;
+			}
+			if (page.ToLower() != "new product" && !NewProduct.WaitForSection(page))
+			{
+				Report.Error($@"The page title did not match expected! Expected ""{page}""");
+			}
+			string pageTitle = NewProduct.HeaderText;
+			Report.Info("Clicking Continue");
+			Report.IsTrue(NewProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
+			if (pageTitle == "The Product")
+			{
+				var thisModalDialog = new ModalDialog();
+				if (!thisModalDialog.Exists || thisModalDialog.GetTitle() != "Warning")
+				{
+					return;
+				}
+				if (thisModalDialog.GetText().Contains("You are registering a formula (Raw material)"))
+				{
+					Report.IsTrue(thisModalDialog.Click_OK(), "Failed to click OK in the modal", "Clicked OK in the modal");
+				}
+			}
+		}
+
+		[StepDefinition(@"I should see the (.*) Page")]
+		public void GivenIShouldSeeXPage(string page)
+		{
+			if (NewProduct.WaitForContainerToBeVisible())
+			{
+				Report.IsTrue(NewProduct.WaitForSection(page),page + " is not showing when it was expected to",page + " is showing as expected");
+				return;
+			}
+			Report.Failure("New product page was not visible");
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I should see an error message: (.*)")]
+		public void ErrorMessageSpecific(string message)
+		{
+			Report.Info("Checking error message");
+			var errors = NewProduct.ErrorMessagesText;
+			if (!errors.Any())
+			{
+				Report.Failure("No errors were found but expected error: " + message);
+				Report.Screenshot();
+				return;
+			}
+			Report.IsTrue(errors.Contains(message),
+				$"Error message was not as expected! Expected: '{message}', but found: '{string.Join(", ", errors)}'!",
+				$"Error message was showing: '{message}', as expected");
+		}
+
+		[StepDefinition(@"in page (.*) I should see error: (.*)")]
+		public void InPageIShouldSeeError(string page, string error)
+		{
+			Report.Info("Checking error on page: " + page);
+			this.ErrorMessageSpecific(error);
+		}
+
+		[StepDefinition(@"I should not see an error message: (.*)")]
+		public void NotErrorMessageSpecific(string message)
+		{
+			var errors = NewProduct.ErrorMessagesText;
+			Report.IsTrue(!errors.Contains(message),
+				"Error message was showing when it wasn't expected to! Error: " + message,
+				"As expected, the error message was not showing. Error: " + message);
+		}
+
+		[StepDefinition(@"in page (.*) I should see no errors")]
+		public void InPageIShouldSeeNoErrors(string page)
+		{
+			this.NoErrorMessages();
+		}
+
+		[StepDefinition(@"I should not see any error messages")]
+		public void NoErrorMessages()
+		{
+			var errors = NewProduct.ErrorMessagesText;
+			if (!errors.Any())
+			{
+				Report.Success("As expected, the error message was not showing.");
+				Report.Screenshot();
+				return;
+			}
+			Report.Failure("Error message was showing when it wasn't expected to! Error(s): " + string.Join(", ", errors));
+			Report.Screenshot();
+		}
+
+		[StepDefinition(@"I should see the header (.*)")]
+		public void CorrectHeaderShouldBeShowing(string header)
+		{
+			if (!NewProduct.WaitForContainerToBeVisible())
+			{
+				throw new Exception("Page failed to load!");
+			}
+			var displayedHeader = NewProduct.HeaderText;
+			Report.IsTrue(displayedHeader.Trim() == header.Trim(),
+				"Header was not showing as expected! Expected: '" + header + "', but found: '" + displayedHeader + "'!",
+				"Header was showing: '" + header + "', as expected!");
+		}
+
+		#endregion
+
+		#region Unsorted steps
 		[StepDefinition(@"the product saved as: (.*) should be visible in editor")]
 		public void CorrectProductVisibleInEditor(string savedAs)
 		{
@@ -82,14 +226,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!");
 				Report.Info("Inputting Name: '" + name + "'");
-				selNewProduct.ProductName = name;
+				new TheProduct().ProductName = name;
 				Report.Info("Setting Product Type to be: 'Game System w/Battery'");
-				selNewProduct.ProductType = "Game System w/Battery";
+				new TheProduct().ProductType = "Game System w/Battery";
 				Report.Screenshot();
 				Report.Info("Clicking continue");
 				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!");
 				Report.Info("Getting Product ID");
-				var fullProductName = selNewProduct.GetHeader();
+				var fullProductName = selNewProduct.HeaderText;
 				// Product Name made out of the name + the Id - so if we remove the Name from the product we should be left with an ID!
 				var productId = fullProductName.Replace(name, "").Replace("(", "").Replace(")", "").Trim();
 				Report.Info("ProductID was: '" + productId + "'");
@@ -99,23 +243,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Context.AddToContext(savedAs, productEntry);
 				Report.Success("Product created successfully!");
 				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"I click continue")]
-		public void ClickContinue()
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Clicking continue");
-			try
-			{
-				Report.Info("Clicking continue");
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked continue successfully!");
 			}
 			catch (Exception ex)
 			{
@@ -134,42 +261,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(found.Trim() == message.Trim(),
 				"Warning message was not as expected! Expected: " + message + ", but found: " + found + "!",
 				"Warning message was showing: " + message + ", as expected!");
-		}
-
-		[StepDefinition(@"I should see an error message: (.*)")]
-		public void ErrorMessageSpecific(string message)
-		{
-			Report.Info("Checking error message");
-			var selNewProduct = new NewProduct();
-			var found = selNewProduct.ErrorMessage();
-
-			Report.IsTrue(found.Trim() == message.Trim(),
-				"Error message was not as expected! Expected: " + message + ", but found: " + found + "!",
-				"Error message was showing: " + message + ", as expected!");
-		}
-
-		[StepDefinition(@"I should not see an error message: (.*)")]
-		public void NotErrorMessageSpecific(string message)
-		{
-			Report.Info("Checking error message: " + message + " is not appearing");
-			var selNewProduct = new NewProduct();
-			var found = selNewProduct.ErrorMessage();
-
-			Report.IsTrue(found == null || found.Trim() != message.Trim(),
-				"Error message was showing when it wasn't expected to! Error: " + message,
-				"As expected, the error message was not showing. Error: " + message);
-		}
-
-		[StepDefinition(@"I should not see any error messages")]
-		public void NoErrorMessages()
-		{
-			Report.Info("Check no error messages are appearing");
-			var selNewProduct = new NewProduct();
-			var found = selNewProduct.ErrorMessage();
-
-			Report.IsTrue(found == null,
-				"Error message was showing when it wasn't expected to! Error: " + found,
-				"As expected, the error message was not showing.");
 		}
 
 		[StepDefinition(@"I click Continue and should not see an error message")]
@@ -240,33 +331,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see the header (.*)")]
-		public void CorrectHeaderShouldBeShowing(string header)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - Checking that the header is showing " + header);
-			try
-			{
-				Report.Info("Checking that the header is showing " + header);
-				var selNewProduct = new NewProduct();
-
-				if (!selNewProduct.Wait_for_load(10))
-				{
-					throw new Exception("Page failed to load!");
-				}
-
-				var headerShowing = selNewProduct.GetHeader();
-				Report.IsTrue(headerShowing.Trim() == header.Trim(),
-					"Header was not showing as expected! Expected: '" + header + "', but found: '" + headerShowing + "'!",
-					"Header was showing: '" + header + "', as expected!");
-				Report.Screenshot();
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
 		[StepDefinition(@"I should see the statement (.*)")]
 		public void CorrectInitialStatementShouldAppear(string statement)
 		{
@@ -275,7 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Info("Checking that I see the statement '" + statement + "'");
 				var selNewProduct = new NewProduct();
-				var statementShowing = selNewProduct.GetInitialStatement();
+				var statementShowing = selNewProduct.TopSectionLabel();
 				Report.IsTrue(statementShowing.Trim() == statement.Trim(),
 					"Statement was not showing as expected! Expected: '" + statement + "', but found: '" + statementShowing + "'!",
 					"Statement was showing: '" + statement + "', as expected!");
@@ -305,53 +369,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"in the (.*) page I click Continue")]
-		public void GivenInTheNewProductPageIClickContinue(string page)
-		{
-			var selNewProduct = new NewProduct();
-			if (!selNewProduct.Wait_for_load(10))
-			{
-				Report.Failure("New Product page is not loaded");
-				return;
-			}
-			if (page.ToLower() != "new product" && !selNewProduct.WaitForSection(page))
-			{
-				Report.Error($@"The page title did not match expected! Expected ""{page}""");
-			}
-
-			string pageTitle = selNewProduct.GetHeader();
-			Report.Info("Clicking Continue");
-			Report.IsTrue(selNewProduct.ClickContinue(), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
-			Delay.Seconds(0.2);
-			if (pageTitle == "The Product")
-			{
-				try
-				{
-					ModalDialog thisModalDialog = new ModalDialog();
-					if (thisModalDialog.Exists)
-					{
-						if (thisModalDialog.GetTitle() == "Warning")
-						{
-							if (thisModalDialog.GetText().Contains("You are registering a formula (Raw material)"))
-							{
-								thisModalDialog.Click_OK();
-								Delay.Seconds(0.1);
-							}
-						}
-					}
-				}
-				catch (Exception e)
-				{
-					//Do nothing
-				}
-
-
-			}
-
-		}
-
-		// Use when expecting a pop up on click continue - we don't want to wait for the timeout on ClickContinue
 		[StepDefinition(@"I click continue in the new product page - don't wait for loading button spinner")]
+		// Use when expecting a pop up on click continue - we don't need to wait for the timeout on WaitForLoad
 		public void NewProductPageIClickContinueNoSpinnerWait()
 		{
 			Report.Info("Clicking Continue");
@@ -374,366 +393,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext(savedas, prodDetails);
 			Report.Success("Product Information saved!");
 		}
-
-		[StepDefinition(@"I should see the (.*) Page")]
-		public void GivenIShouldSeeXPage(string page)
-		{
-			var selNewProduct = new NewProduct();
-			if (selNewProduct.Wait_for_load())
-			{
-				Report.IsTrue(selNewProduct.WaitForSection(page),
-					page + " is not showing when it was expected to",
-					page + " is showing as expected");
-				Report.Screenshot();
-			}
-			else
-			{
-				Report.Failure("New product page was not found");
-			}
-		}
-
-		[StepDefinition(@"I should see the Additional Information Page")]
-		public void GivenIShouldSeeTheAdditionalInformationPage()
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForSection("Additional Product Information"), "Additional product information is not showing",
-				"The additional product information page is showing as expected");
-		}
-
-		[StepDefinition(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Product Name text field")]
-		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheProductNameTextField(string productName)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Type tab of the New Product Page, I enter: " + productName + " in the Product Name text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.ProductName = productName;
-				Delay.Seconds(1);
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page I add the following batteries:")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIAddTheFollowingBatteries(TechTalk.SpecFlow.Table table)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page I add the following batteries:");
-			try
-			{
-				List<Battery> listOfBatteries = new List<Battery>();
-				//| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
-				foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
-				{
-					Battery thisBattery = new Battery() {
-						BatteryType = thisRow["Battery Type"],
-						Manufacturer = thisRow["Manufacturer"],
-						NumberPerPackage = Convert.ToInt16(thisRow["Number of batteries per package"].Trim()),
-						RequiredToRun = Convert.ToInt16(thisRow["How many batteries required to run"].Trim())
-					};
-					listOfBatteries.Add(thisBattery);
-				}
-				var selNewProduct = new NewProduct();
-
-				if (listOfBatteries.Count > 0)
-				{
-					selNewProduct.Batteries = listOfBatteries;
-					selNewProduct.DeleteEmptyBatteryRows();
-				}
-				else
-				{
-					throw new Exception("There are no batteries to set");
-				}
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for DOT I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDotiSelect(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.Dot = option;
-
-			Report.IsTrue(selNewProduct.Dot == option,
-				"Failed to set battery packaged option: " + option,
-				"Successfully set battery packaged option: " + option);
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for IMDG I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForImdgiSelect(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.Imdg = option;
-
-			Report.IsTrue(selNewProduct.Imdg == option,
-				"Failed to set battery packaged option: " + option,
-				"Successfully set battery packaged option: " + option);
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for IATA I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIataiSelect(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.Iata = option;
-
-			Report.IsTrue(selNewProduct.Iata == option,
-				"Failed to set battery packaged option: " + option,
-				"Successfully set battery packaged option: " + option);
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for TDG I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForTdgiSelect(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.Tdg = option;
-
-			Report.IsTrue(selNewProduct.Tdg == option,
-				"Failed to set battery packaged option: " + option,
-				"Successfully set battery packaged option: " + option);
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForIndicateHowBatteryIsPackagedISelectX(string option)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page, for Indicate how battery is packaged I select: " + option);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
-
-				selNewProduct.IndicateHowBatteryIsPackaged = option;
-
-				Report.IsTrue(selNewProduct.IndicateHowBatteryIsPackaged == option,
-					"Failed to set battery packaged option: " + option,
-					"Successfully set battery packaged option: " + option);
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for U\.S\. Toxic Substances Control Act \(TSCA\) status I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForU_S_ToxicSubstancesControlActTSCAStatusISelectOption(string option)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				"Product characteristics tab is loaded.");
-
-			selNewProduct.TscaStatus = option;
-
-			Report.IsTrue(selNewProduct.TscaStatus == option,
-				"Failed to set TSCA status: " + option,
-				"Successfully set TSCA status: " + option);
-		}
-
-		[StepDefinition(@"In the Additional Information Page for Product is solely for the Retailer's use I select: (No|Yes)")]
-		public void GivenInTheAdditionalInformationPageForProductIsSolelyForTheRetailerSUseISelectNoOrYes(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page for Product is solely for the Retailer's use I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-
-
-				selNewProduct.SolelyForRetailersUse = expected;
-
-				Report.IsTrue(selNewProduct.SolelyForRetailersUse == expected,
-					"Failed to set Product is solely for the Retailer's use: " + noOrYes,
-					"Successfully set Product is solely for the Retailer's use: " + noOrYes);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"I set all the metal presence value to: (Yes|No)")]
-		public void GivenISetAllTheMetalPresenceValueTo(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I set all the metal presence values to: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForMetalSection(30), "Metal section has failed to load.",
-					"Metal section has loaded");
-				List<string> metals = selNewProduct.GetAllMetalNames();
-				List<MetalPresence> listOfMetalSettings = new List<MetalPresence>();
-				foreach (string thisMetal in metals)
-				{
-					listOfMetalSettings.Add(new MetalPresence(thisMetal, "No"));
-				}
-
-				selNewProduct.MetalPresence = listOfMetalSettings;
-
-				var checkOutcome = selNewProduct.MetalPresence;
-
-				foreach (MetalPresence thisMetalPresence in listOfMetalSettings)
-				{
-					if (checkOutcome.Select(x => x.Metal == thisMetalPresence.Metal && x.Presence == thisMetalPresence.Presence).Count() == 0)
-					{
-						Report.Error("Failed to set metal: " + thisMetalPresence.Metal + " to: " + thisMetalPresence.Presence);
-					}
-				}
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP; Report is available I select: (No|Yes)")]
-		public void GivenInTheToxicityCharacteristicsLeachingProcedurePageForProductHasHadTclpReportIsAvailableISelect(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Toxicity Characteristics Leaching Procedure page for Product has had TCLP; Report is available I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product Characteristics tab has not loaded",
-					"Product Characteristics tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-				selNewProduct.ProductHasTclp = expected;
-
-				Report.IsTrue(selNewProduct.ProductHasTclp == expected,
-					"Failed to set Product has had TCLP: " + noOrYes,
-					"Successfully set Product has had TCLP: " + noOrYes);
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"In the Additional Information Page for Product is retailers private label or brand I select: (No|Yes)")]
-		public void GivenInTheAdditionalInformationPageForProductIsRetailersPrivateLabelOrBrandISelectNoOrYes(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page for Product is retailers private label or brand I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-
-
-				selNewProduct.RetailersPrivateLabelOrBrand = expected;
-
-				Report.IsTrue(selNewProduct.RetailersPrivateLabelOrBrand == expected,
-					"Failed to set Product is retailers private label or brand: " + noOrYes,
-					"Successfully set Product is retailers private label or brand: " + noOrYes);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: (No|Yes)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForHasAlcdOrPlasmaDisplayISelectNoOrYes(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Has a LCD or Plasma Display I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-
-				selNewProduct.HasLcdOrPlasmaDisplay = expected;
-
-				Report.IsTrue(selNewProduct.HasLcdOrPlasmaDisplay == expected,
-					"Failed to set Has a LCD or Plasma Display value to: " + noOrYes,
-					"Successfully set Has a LCD or Plasma Display value to: " + noOrYes);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: (No|Yes)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForContainsCircuitBoardISelectNoOrYes(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Contains Circuit Board I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-
-				selNewProduct.ContainsCircuitBoard = expected;
-
-				Report.IsTrue(selNewProduct.ContainsCircuitBoard == expected,
-					"Failed to set Contains Circuit Board value to: " + noOrYes,
-					"Successfully set Contains Circuit Board value to: " + noOrYes);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
+        
 		[StepDefinition(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOSHACompliantSDSISelect(string selection)
 		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(NewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
-
-			selNewProduct.OSHA = selection;
-
-			Report.IsTrue(selNewProduct.OSHA.Contains(selection),
+			Report.Info("Setting OSHA to: " + selection);
+			NewProduct.OSHA = selection;
+			Report.IsTrue(NewProduct.OSHA.Contains(selection),
 				"Failed to set OSHA value to: " + selection,
 				"Successfully set OSHA value to: " + selection);
 		}
@@ -742,7 +410,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.PersonalProtectionEquipmentRecommended = selection;
@@ -756,7 +424,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.AutoignitionTemperature = selection;
@@ -767,7 +435,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.MinimumIgnitionEnergy = selection;
@@ -778,7 +446,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.Viscosity = selection;
@@ -789,7 +457,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.Appearance = selection;
@@ -803,7 +471,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.Odor = selection;
@@ -817,7 +485,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.OdorThreshold = selection;
@@ -831,7 +499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPartitionCoefficientISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Review and Submit"), "Review and submit has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
 				"Review and submit tab is loaded.");
 
 			selNewProduct.PartitionCoefficient = selection;
@@ -895,26 +563,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully selected: " + selection);
 		}
 
-		[StepDefinition(@"In the New Product page I click tab: (.*)")]
-		public void GivenInTheNewProductPageIClickTab(string tab)
-		{
-			NewProduct selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.ClickTab(tab), "Failed to click tab: " + tab, "Successfully clicked tab: " + tab);
-			Delay.Seconds(1);
-		}
-
-		[StepDefinition(@"in the New Product page I click section: (.*)")]
-		public void GivenInTheNewProductPageIClickSection(string section)
-		{
-			TestReport.UseSubSteps = true;
-			NewProduct selNewProduct = new NewProduct();
-			TestReport.StartStep("I click section header " + section);
-			Report.IsTrue(selNewProduct.ClickSection(section), "Failed to click section: " + section, "Successfully clicked section: " + section);
-			GeneralUtilities.Wait_for_load_finish();
-			TestReport.StartStep("I should see page has loaded: " + section);
-			this.GivenIShouldSeeXPage(section);
-		}
-
 		[StepDefinition(@"I delete UPC: (.*)")]
 		public void GivenIDeleteUPC(string upc)
 		{
@@ -954,37 +602,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			try
 			{
 				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+				Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 					"Product type tab is loaded.");
 				selNewProduct.SpecialPermitNumbers = permitNumber;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page for Prop65 I select: (No|Yes)")]
-		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForPropISelectNoOrYes(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab of the New Product Page for Prop65 I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-					"Product characteristics tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-
-
-				selNewProduct.Prop65 = expected;
-
-				Report.IsTrue(selNewProduct.Prop65 == expected,
-					"Failed to set Prop 65 value to: " + noOrYes,
-					"Successfully set Prop 65 value to: " + noOrYes);
-
 
 			}
 			catch (Exception ex)
@@ -1140,7 +760,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheVOC_OTC_CARBTabForProductHasBeenGrantedAnAlternativeControlPlanISelect(string noOrYes)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 				"Product type tab is loaded.");
 
 			bool expected = (noOrYes == "Yes");
@@ -1157,7 +777,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded",
 				"Product characteristics tab is loaded.");
 
 
@@ -1184,14 +804,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheVOC_OTC_CARBTabForProductLabelSpecifiesADilutionRatioISelectYes(string noOrYes)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 				"Product type tab is loaded.");
 
 			bool expected = (noOrYes == "Yes");
 
 			selNewProduct.ProductLabelDilutionRatio = expected;
 
-			Report.IsTrue(selNewProduct.ProductShippedDirectly == expected,
+			Report.IsTrue(selNewProduct.ProductLabelDilutionRatio == expected,
 				"Failed to set Product label specifies a dilution ratio to: " + noOrYes,
 				"Successfully set Product label specifies a dilution ratio to: " + noOrYes);
 		}
@@ -1203,7 +823,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsSoldTextField(string contentAsSold)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 				"Product type tab is loaded.");
 			selNewProduct.ProductsVocContentAsSold = contentAsSold;
 		}
@@ -1215,262 +835,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenInTheVOC_OTC_CARBTabIEnterInTheProductSVOCContentAsUsedTextField(string contentAsUsed)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
+			Report.IsTrue(selNewProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded",
 				"Product type tab is loaded.");
 			selNewProduct.ProductsVocContentAsUsed = contentAsUsed;
-		}
-
-		[StepDefinition(@"In the Additional Information Page for Product is shipped directly I select: (No|Yes)")]
-		public void GivenInTheAdditionalInformationPageForProductIsShippedDirectlyISelectNoOrYes(string noOrYes)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page for Product is shipped directly I select: " + noOrYes);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-
-				bool expected = (noOrYes == "Yes");
-
-
-				selNewProduct.ProductShippedDirectly = expected;
-
-				Report.IsTrue(selNewProduct.ProductShippedDirectly == expected,
-					"Failed to set product shipped directly value to: " + noOrYes,
-					"Successfully set product shipped directly value to: " + noOrYes);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"In the Additional Information Page for Product has been classified using OSHA I select: (No|Yes)")]
-		public void GivenInTheAdditionalInformationPageForProductHasBeenClassifiedOSHAISelectNoOrYes(string noOrYes)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"),
-				"Product type has not loaded",
-				"Product type tab is loaded.");
-
-			bool expected = (noOrYes == "Yes");
-
-			selNewProduct.ProductClassifiedUnderOSHA = expected;
-
-			Report.IsTrue(selNewProduct.ProductClassifiedUnderOSHA == expected,
-				"Failed to set product has been classified using OSHA value to: " + noOrYes,
-				"Successfully set product has been classified using OSHA value to: " + noOrYes);
-		}
-
-		[StepDefinition(@"In the Additional Information Page the check box for: (.*) should be: (checked|unchecked)")]
-		public void GivenInTheAdditionalInformationPageTheCheckBoxXShouldBeCheckedOrUnchecked(string country, string checkedOrUnchecked)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Additional Information Page the check box for: " + country + " should be: " + checkedOrUnchecked);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				List<string> countries = new List<string>() { country };
-
-				bool expected = (checkedOrUnchecked == "checked");
-
-				if (expected)
-				{
-					Report.IsTrue(selNewProduct.ProductsMayBeSold.Contains(country),
-						"Products may be sold is not set up as expected", "Products may be sold is set up as expected.");
-				}
-				else
-				{
-					Report.IsTrue(!selNewProduct.ProductsMayBeSold.Contains(country),
-						"Products may be sold is not set up as expected", "Products may be sold is set up as expected.");
-				}
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		[StepDefinition(@"In the Product Type tab of the New Product Page, I enter: (.*) in the Type of Product select field")]
-		public void GivenInTheProductTypeTabOfTheNewProductPageIEnterXInTheTypeOfProductSelectField(string typeOfProduct)
-		{
-			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded", "Product type tab is loaded.");
-			selNewProduct.ProductType = typeOfProduct;
-			//If Type of Product hasn't updated, try again ignoring case
-			//CheckingFieldInputIsCorrect("Primary Physical State", "Liquid");
-		}
-
-		[StepDefinition(@"I should only see the following options for Primary Physical State:")]
-		public void PrimaryPhysicalOptionsShowingCorrectly(Table table)
-		{
-			var expected = new List<string>();
-			table.Rows.ForEach(x => expected.Add(x["State"]));
-			var found = new NewProduct().ListOfPrimaryPhysicalStates();
-			Report.Info("Primary Physical States found: " + string.Join(", ", found));
-			foreach (var state in expected)
-			{
-				if (Report.IsTrue(found.Contains(state), "Failed to find state: " + state + " in the list!", state + " was successfully found!"))
-				{
-					found.Remove(state);
-				}
-			}
-			Report.IsTrue(found.Count == 0,
-				$@"There were physical states displayed which were not expected! Only expected: ""{string.Join(", ", expected.Select(x => $"'{x}'").ToList())}"". Also displaued were: ""{string.Join(", ", found.Select(x => $"'{x}'").ToList())}""" + string.Join(", ", found),
-				$@"Only the expected physical states: ""{string.Join(", ", expected.Select(x => $"'{x}'").ToList())}"" were displayed.");
-		}
-
-		[StepDefinition(@"I set the Primary Physical State to be: (.*)")]
-		public void ThenISetThePrimayPhysicalStateToBe(string state)
-		{
-			Report.IsTrue(new NewProduct().SelectPrimaryPhysicalState(state), "Failed to set the primary physical state to be: " + state, "Successfully set the Primary Physical State to be: " + state);
-		}
-
-		[StepDefinition(@"I set the Secondary Physical State to be: (.*)")]
-		public void ThenISetTheSecondaryPhysicalStateToBe(string state)
-		{
-			Report.IsTrue(new NewProduct().SelectSecondaryPhysicalState(state), "Failed to set the secondary physical state to be: " + state, "Successfully set the Secondary Physical State to be: " + state);
-		}
-
-		[StepDefinition(@"I set the water solubility description to: (.*)")]
-		public void ThenISetTheWaterSolubilityDescriptionTo(string description)
-		{
-			NewProduct thisNewProduct = new NewProduct();
-			new NewProduct().WaterSolubility = description;
-			Report.IsTrue(thisNewProduct.WaterSolubility == description, "Failed to set the water solubility description to be: " + description, "Successfully set the water solubility description to be: " + description);
-		}
-
-		/// <summary>
-		/// Enter data in Specific Gravity text field
-		/// </summary>
-		[StepDefinition(@"In the Product Characteristics tab, I enter: (.*) in the Specific Gravity text field")]
-		public void GivenInTheProductCharacteristicsTabIEnterInTheSpecificGravityTextField(string specificGravity)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + specificGravity + " in the Specific Gravity text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.SpecificGravity = specificGravity;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Enter data in pH text field
-		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the pH text field")]
-		public void GivenInTheProductCharacteristicsTabIEnterInThePHTextField(string pH)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + pH + " in the Specific Gravity text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.PH = pH;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Enter data in Boiling Point (in Celsius) text field
-		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the Boiling point \(in Celsius\) text field")]
-		public void GivenInTheProductCharacteristicsTabIEnterInTheBoilingPointInCelsiusTextField(string boilingPointInCelsius)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + boilingPointInCelsius + " in the Specific Gravity text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.BoilingPoint = boilingPointInCelsius;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Enter data in Flash point text field
-		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the Flash point \(in Celsius\) text field")]
-		public void GivenInTheProductCharacteristicsTabIEnterInTheFlashPointInCelsiusTextField(string flashPointInCelsius)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - In the Product Characteristics tab, I enter: " + flashPointInCelsius + " in the Specific Gravity text field");
-			try
-			{
-				var selNewProduct = new NewProduct();
-				Report.IsTrue(selNewProduct.WaitForTab("Product Type"), "Product type has not loaded",
-					"Product type tab is loaded.");
-				selNewProduct.FlashPoint = flashPointInCelsius;
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Select an option from Flash Point Testing Method Used
-		/// </summary>
-		[StepDefinition(@"in the Product Characteristics tab, for Flash Point Testing Method Used status I select: (.*)")]
-		public void GivenInTheProductCharacteristicsTabForFlashPointTestingMethodUsedStatusISelect(string option)
-		{
-			TestReport.BeginTestModule(GlobalParameters.StepCount + " - in the Product Characteristics tab, for Flash Point Testing Method Used status I select: " + option);
-			try
-			{
-				var selNewProduct = new NewProduct();
-				//Report.IsTrue(selNewProduct.WaitForTab("Product Characteristics"), "Product characteristics has not loaded",
-				//	"Product characteristics tab is loaded.");
-
-
-				selNewProduct.FlashPointTestingMethodUsed = option;
-
-				Report.IsTrue(selNewProduct.FlashPointTestingMethodUsed == option,
-					"Failed to set Flash point testing method used status: " + option,
-					"Successfully set Flash point testing method used status: " + option);
-
-
-			}
-			catch (Exception ex)
-			{
-				Report.Failure(ex.Message);
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Select an option for the best Water Solubility description dropdown
-		/// </summary>
-		[StepDefinition(@"I set the Select the best Water Solubility description to be: (.*)")]
-		public void GivenISetTheSelectTheBestWaterSolubilityDescriptionToBe(string option)
-		{
-			Report.IsTrue(new NewProduct().SelectBestWaterSolubilityDescription(option), "Failed to set the best Water Solubility description to be: " + option, "Successfully set the best Water Solubility description to be: " + option);
 		}
 
 		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: (.*)")]
@@ -1628,13 +995,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenTheDataAcceptancePageShouldApprear()
 		{
 			Report.IsTrue(new NewProduct().DataAcceptanceScreenAppears(), "Data Acceptance page did not appear!", "As expected, Data Acceptance page loaded successfully!");
-		}
-
-		[StepDefinition(@"I confirm an error message is displayed with text: (.*)")]
-		public void ThenIConfirmErrorMessageMatches(string errorMsg)
-		{
-			var erros = new NewProduct().AllErrorMessages();
-			Report.IsTrue(erros.Contains(errorMsg), $"The error message {errorMsg} was not displayed!", $"The error message {errorMsg} was displayed as expected");
 		}
 
 		[StepDefinition(@"In the Data Acceptance page I select Yes, Agreed")]
@@ -2179,48 +1539,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		// Replace with 'ISeeXPage' if there is a problem with a required field missing from the test step
-		[StepDefinition("I check the new page has loaded with no required field error. Navigating from: (.*) to: (.*)")]
-		public void NewPageLoadedNoRequiredFieldError(string oldPage, string newPage)
-		{
-			var myNewProduct = new NewProduct();
-			int wait = 0;
-			while (wait < 5)
-			{
-				// If the new page has loaded we are happy to return
-				if (myNewProduct.WaitForSection(newPage, 1))
-				{
-					Report.Success("The page: '" + newPage + "' has loaded");
-					Report.Screenshot();
-					return;
-				}
-				if (myNewProduct.ErrorMessage() == "This is a required field." && myNewProduct.WaitForSection(oldPage, 1))
-				{
-					var section = myNewProduct.SectionWithRequiredFieldError();
-					Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
-					var options = myNewProduct.GetAllOptionsForSection(section);
-					if (options.Contains("Yes") && options.Contains("No"))
-					{
-						myNewProduct.SetOptionInSection(section, "No");
-					}
-					else
-					{
-						this.SelectFirstOptionInSection(section);
-					}
-					Report.Info("Clicking continue");
-					this.ClickContinue();
-					if (myNewProduct.WaitForSection(newPage))
-					{
-						Report.Info("The new page has loaded");
-						Report.Screenshot();
-						return;
-					}
-				}
-				wait++;
-			}
-			Report.Failure("Did not see the Required field error message, but the new page was not loaded");
-			Report.Screenshot();
-		}
 
 		//Checks a new page has loaded on Continue click. If not, look for 'this is a required field' error. If yes, throw excpt. The test is now out of sync, so further steps will only report junk.
 		[StepDefinition(@"I continue to the next screen in the product registration")]
@@ -2231,7 +1549,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(selNewProduct.Wait_for_load(10),
 				"The New Product page is not currently loaded",
 				"The New Product page is loaded");
-			var currentPage = selNewProduct.ActivePanelHeading();
+			var currentPage = selNewProduct.ActivePanelHeadingText();
 			Report.Info("Current expanded section is: " + currentPage);
 			Report.Info("Clicking continue");
 			Report.IsTrue(selNewProduct.ClickContinue(),
@@ -2241,18 +1559,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			int wait = 0;
 			while (wait < 30)
 			{
-				if (selNewProduct.ActivePanelHeading() != currentPage)
+				if (selNewProduct.ActivePanelHeadingText() != currentPage)
 				{
 					Report.Success("New page was loaded");
 					Report.Screenshot();
-					Report.Info("Current page is: " + selNewProduct.ActivePanelHeading());
+					Report.Info("Current page is: " + selNewProduct.ActivePanelHeadingText());
 					return;
 				}
 				wait++;
 				Delay.Seconds(1);
 			}
 			Report.Info("New page did not load. Checking for 'required field' error message.");
-			if (selNewProduct.ErrorMessage() == "This is a required field.")
+			if (selNewProduct.ErrorMessageText == "This is a required field.")
 			{
 				var section = selNewProduct.SectionWithRequiredFieldError();
 				Report.Failure("The 'Required Field' error was showing for question: " + section + ". Selecting the first option. Check the test case is complete and correct.");
@@ -2889,7 +2207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I confirm the product name: ""(.*)"" is displayed in the header")]
 		public void ConfirmTheProductNameIsDisplayedInTheHeader(string name)
 		{
-			var header = new NewProduct().GetHeader();
+			var header = NewProduct.HeaderText;
 			var matches = Regex.Matches(header, @"\(\d*\)");
 			if (matches.Count == 0)
 			{
@@ -3005,196 +2323,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Added additional requirements for retailer: " + retailer);
 		}
 
-		[StepDefinition(@"I confirm that you cannot add a new component to the formulation")]
-		public void ThenIConfirmThatYouCannotAddANewComponentToTheFormulation()
-		{
-			NewProduct thisNewProduct = new NewProduct();
-			TechTalk.SpecFlow.Table component = new TechTalk.SpecFlow.Table(new string[] {
-				"CASNumber",
-				"ComponentName",
-				"Percentage",
-				"Publicly Disclosed",
-				"Public Name"});
-			component.AddRow(new string[] {
-				"RR-38669-6",
-				"FLAVORS",
-				"35",
-				"Yes",
-				"Undisclosed Ingredient"});
-			var newProductIngredients = new Ingredients();
-
-			string CASNo = "";
-			if (component.Rows.First()["CASNumber"].Contains("WPS"))
-			{
-				string casSavedAs = "";
-				if (Context.Contains(component.Rows.First()["CASNumber"].Split(' ')[2].Trim()))
-				{
-					ProductInformation CASProd =
-						(ProductInformation)Context.GetFromContext(component.Rows.First()["CASNumber"].Split(' ')[2]
-							.Trim());
-					CASNo = "WPS" + CASProd.Id;
-				}
-			}
-			else
-			{
-				CASNo = component.Rows.First()["CASNumber"];
-			}
-			var ingredient = new Ingredients.Ingredient();
-			if (CASNo.Length > 0)
-			{
-				ingredient.CASNumber = CASNo;
-			}
-			if (component.ContainsColumn("ComponentName"))
-			{
-				ingredient.ComponentName = component.Rows.First()["ComponentName"];
-			}
-			if (component.ContainsColumn("Percentage"))
-			{
-				ingredient.Percent = component.Rows.First()["Percentage"];
-			}
-			if (component.ContainsColumn("Publicly Disclosed"))
-			{
-				ingredient.PublicallyDisclosed = component.Rows.First()["Publicly Disclosed"].ToLower() == "yes";
-			}
-			if (component.ContainsColumn("Public Name"))
-			{
-				ingredient.PublicName = component.Rows.First()["Public Name"];
-			}
-			Report.IsTrue(!newProductIngredients.AddIngredient(ingredient),
-				"Successfully added ingredient",
-				"As expected could not add ingredient");
-		}
-
-		[StepDefinition(@"I confirm that you cannot edit the Percentage value for any component shown")]
-		public void ThenIConfirmThatYouCannotEditThePercentageValueForAnyComponentShown()
-		{
-			Report.IsTrue(!(new Ingredients().ConcentrationsAreEditable()),
-				"Concentrations should not be editable but are", "As expected, concentrations are not editable");
-		}
-
-		[StepDefinition(@"I confirm that you cannot edit the Is this a trade secret entry for any component shown")]
-		public void ThenIVonfirmThatYouCannotEditTheIsThisATradeSecretEntryForAnyComponentShown()
-		{
-			Report.IsTrue(!(new Ingredients().TradeSecretsAreEditable()),
-				"Is this a Trade secret should not be editable but is", "As expected, is this a trade secret is not editable");
-		}
-
-		[StepDefinition(@"I confirm that you can edit the Publicly Disclosed entry for any component shown")]
-		public void ThenIConfirmThatYouCanEditThePubliclyDisclosedEntryForAnyComponentShown()
-		{
-			Report.IsTrue(new Ingredients().PubliclyDisclosedAreEditable(),
-				"Publicly disclosed should be editable but is not", "As expected, publicly disclosed is editable");
-		}
-
-		[StepDefinition(@"I edit the (first|second) component to show (.*) for Publicly disclosed")]
-		public void ThenIEditTheComponentToShowYesForPubliclyDisclosed(string firstOrSecond, string yesOrNo)
-		{
-			var newProductIngredients = new Ingredients();
-
-			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
-
-			if (ListOfIngredients.Count == 0)
-			{
-				Report.Failure("No ingredients have been found to edit");
-			}
-			string firstIngredientName = ListOfIngredients[0].ComponentName;
-			if (firstOrSecond.ToLower() == "second")
-			{
-				firstIngredientName = ListOfIngredients[1].ComponentName;
-			}
-
-
-			newProductIngredients.SetIngredientPubliclyDisclosed(firstIngredientName, (yesOrNo.ToLower() == "yes"));
-			Report.Screenshot();
-		}
-
-		[StepDefinition(@"I confirm that for the first component an error is shown below the Public Name drop down which reads: (.*)")]
-		public void ThenIConfirmThatForTheFirstComponentAnErrorIsShownBelowThePublicNameDropDownWhichReads(string expectedError)
-		{
-			var newProductIngredients = new Ingredients();
-
-			if (!newProductIngredients.Exists)
-			{
-				Report.Failure("Ingredients page is not showing as expected. Navigating to it....");
-				this.GivenInTheNewProductPageIClickSection("Ingredients");
-			}
-			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
-
-			if (ListOfIngredients.Count == 0)
-			{
-				Report.Failure("No ingredients have been found to edit");
-			}
-
-			string firstIngredientName = ListOfIngredients[0].ComponentName;
-			string actualErrorMessage = newProductIngredients.GetPublicNameErrorMessage(firstIngredientName);
-			Report.IsTrue(actualErrorMessage == expectedError,
-				"Expected error message: " + expectedError + " but got: '" + actualErrorMessage + "'",
-				"Error is showing as expected" + expectedError);
-		}
-
-		[StepDefinition(@"I confirm that for the first component shows no error below the Public Name drop down")]
-		public void ThenIConfirmThatForTheFirstComponentShowsNoErrorBelowThePublicNameDropDown()
-		{
-			var newProductIngredients = new Ingredients();
-
-			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
-
-			if (ListOfIngredients.Count == 0)
-			{
-				Report.Failure("No ingredients have been found to edit");
-			}
-
-			string firstIngredientName = ListOfIngredients[0].ComponentName;
-			string actualErrorMessage = newProductIngredients.GetPublicNameErrorMessage(firstIngredientName);
-			Report.IsTrue(actualErrorMessage == "",
-				"Expected no error message but got: '" + actualErrorMessage + "'",
-				"As expected, no error is showing");
-		}
-
-
-		[StepDefinition(@"I edit the (first|second) component to select: (.*) from the Public Name drop down and save choice as (.*)")]
-		public void ThenIEditTheFirstComponentToSelectFromThePublicNameDropDown(string firstOrSecond, string option, string saveAs)
-		{
-			Report.Info("Beginning I edit the " + firstOrSecond + " component to select: " + option +
-						" from the Public Name drop down and save choice as " + saveAs);
-			var newProductIngredients = new Ingredients();
-
-			List<Ingredients.Ingredient> ListOfIngredients = newProductIngredients.GetIngredients();
-			Report.Info("Found " + ListOfIngredients.Count + " ingredients");
-
-			if (ListOfIngredients.Count == 0)
-			{
-				Report.Failure("No ingredients have been found to edit");
-			}
-
-			string firstIngredientName = ListOfIngredients[0].ComponentName;
-			if (firstOrSecond.ToLower() == "second")
-			{
-				firstIngredientName = ListOfIngredients[1].ComponentName;
-			}
-
-			if (option.ToLower() == "<random>")
-			{
-				List<string> availableOptions = newProductIngredients.GetIngredientPublicNameOptions(firstIngredientName);
-				List<string> filtered = availableOptions.Where(i => i != "Choose..." && i != "Undisclosed Ingredient").ToList();
-				if (filtered.Count() == 0)
-				{
-					option = "Undisclosed Ingredient";
-				}
-				else
-				{
-					Random rnd = new Random();
-					option = filtered[rnd.Next(0, filtered.Count() - 1)];
-				}
-
-			}
-			Report.Info("Beginning select ingredient: " + firstIngredientName + " with option: " + option);
-			newProductIngredients.SelectIngredientPublicName(firstIngredientName, option);
-			Context.AddToContext(saveAs, option);
-			Report.Info("Added to context name: " + saveAs + " value: " + option);
-			Report.Screenshot();
-		}
-
 		//Item Description
 		[StepDefinition(@"in the Purchase Summary Screen I should see the following:")]
 		public void GivenInThePurchaseSummaryScreenIShouldSeeTheFollowing(Table table)
@@ -3217,7 +2345,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[StepDefinition(@"I Confirm (.*) error message is shown below the (.*) field")]
 		public void GivenIConfirmErrorMessageIsShownBelowField(string errorMessage, string field)
 		{
-			Delay.Seconds(1);
 			var errorsList = new NewProduct().GetAllErrors();
 			Report.IsTrue(errorsList.FirstOrDefault(x => x.inputName == field) != null,
 				"An error is not showing on field: " + field, "An error is showing on field: " + field);
@@ -3280,5 +2407,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.Failure("input values must be either 'should' or 'should not'");
 			}
 		}
+
+		#endregion
 	}
 }

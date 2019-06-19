@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Internal;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -12,9 +12,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	class SelectRetailers : NewProduct
 	{
-		public const string BasePath = "//div[@id='select-retailers-dialog']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		//public const string BasePath = "//div[@id='select-retailers-dialog']";
+		//[FindsBy(How = How.XPath, Using = BasePath)]
+		//protected override IWebElement containerElement { get; set; }
+
+		protected override By ContainerElementLocator => By.XPath("//div[@id='select-retailers-dialog']");
 
 		public bool SelectRetailer(string retailer)
 		{

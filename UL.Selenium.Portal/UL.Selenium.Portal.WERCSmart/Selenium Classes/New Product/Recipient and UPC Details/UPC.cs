@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module.Reporting.Core;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
 using OpenQA.Selenium;
-using SeleniumUtilities;
+using NTTQA.Selenium.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -26,13 +26,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string LithiumBatteyWarning()
 		{
-			this.RefreshContainer();
+			//this.RefreshContainer();
 			return this.containerElement.FindElement(By.XPath("//div[contains(text(), 'Lithium battery registrations')]"), 2).Text;
 		}
 
 		public string MaximumLimitUpcWarning()
 		{
-			this.RefreshContainer();
+			//this.RefreshContainer();
 			return this.containerElement.FindElement(By.XPath("//p[@class='marBot-0' and contains(text(), 'maximum limit' )]"), 2).Text;
 		}
 

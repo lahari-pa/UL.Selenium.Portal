@@ -1,16 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
-using NTTQA_Automation_Classes.Universal_Functions;
-using NTTQA_Reporting_Module;
-using NTTQA_Reporting_Module.Reporting.Core;
-using NTTQA_TReVor_Module.Cache;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
+using NTTQA.Selenium.UniversalFunctions;
+using NTTQA.Selenium.Reporting.Core;
+using NTTQA.Selenium.Cache;
 using OpenQA.Selenium;
-using SeleniumUtilities;
+using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -948,7 +947,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenIEditMyToolbarToAddTheFollowingOptions(Table table)
 		{
 			Steps_Studio thisStepsStudio = new Steps_Studio();
-			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("my toolbar");
+			thisStepsStudio.GivenInPowerDesignerPlusPageIClickOnTab("My Toolbar");
 			thisStepsStudio.GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton();
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
@@ -1959,6 +1958,64 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
+		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
+		{
+			if (retailer.ToLower().Contains("saved as"))
+			{
+				if (Context.Contains(retailer.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim()))
+				{
+					retailer = Context
+						.GetFromContext(retailer.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+						.ToString();
+				}
+				else
+				{
+					throw new Exception("There is no saved retailer found");
+				}
+
+			}
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			List<Product> RetailerStatuses = thisStudioSHAManager.GetTopXProducts(2);
+
+			StepsRetailPartners thisStepsRetailPartners = new StepsRetailPartners();
+
+			List<Product> matchingStatusRows = RetailerStatuses.Where(x => x.Status.ToLower() == status.ToLower()).ToList();
+			var matchingClients = matchingStatusRows.Select(x=>x.Clients).Where(o=>thisStepsRetailPartners.MatchAbbreviatedRetailer(o, retailer)).ToList();
+
+			Report.IsTrue(matchingClients.Count != 0,
+				"No matching row was found for status: " + status + " and retailer: " + retailer,
+				"Matching row was found for status: " + status + " and retailer: " + retailer);
+
+		}
+
+		[StepDefinition(@"In the SHA Manager Product UPC window I confirm that for UPC: (.*) retailer: (.*) is showing")]
+		public void GivenInTheSHAManagerProductUPCWindowIConfirmThatForUPCRetailerIsShowing(string UPC, string retailer)
+		{
+			StudioSHAManager thisStudioSHAManager = new StudioSHAManager();
+			Report.IsTrue(new StudioSHAManagerProductUPC().Wait_for_load(30),
+				"SHA Manager Product UPC window is not open", "SHA Manager Product UPC window is open");
+
+			List<SHAManagerProdcutUPC> ListOfUPCS = thisStudioSHAManager.GetUPCs();
+
+			if (UPC.ToLower().Contains("saved as"))
+			{
+				UPC = Context.GetFromContext(UPC.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString();
+			}
+
+			if (retailer.ToLower().Contains("saved as"))
+			{
+				retailer = Context.GetFromContext(retailer.Replace("saved as", "", StringComparison.OrdinalIgnoreCase).Trim())
+					.ToString();
+			}
+
+			var matchingUPCRow = ListOfUPCS.FirstOrDefault(x => x.UPCNumber == UPC && x.Retailers.Contains(retailer));
+
+			Report.IsTrue(matchingUPCRow != null,
+				"No matching UPC row has been found for UPC: " + UPC + " and retailer: " + retailer,
+				"Matching UPC has been found for UPC: " + UPC + " and retailer: " + retailer);
+		}
 
 	}
 }

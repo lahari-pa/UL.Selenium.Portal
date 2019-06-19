@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Linq;
-using NTTQA_Automation_Classes.Base_Classes;
-using NTTQA_Automation_Classes.Classes;
-using NTTQA_Automation_Classes.Extension_Methods;
+using NTTQA.Selenium.BaseClasses;
+using NTTQA.Selenium.Classes;
+using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -51,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return true;
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 
 			}
@@ -342,7 +342,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 				}
 
@@ -365,7 +365,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 				}
 
@@ -388,7 +388,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 
 				}

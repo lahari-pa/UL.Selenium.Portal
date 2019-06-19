@@ -440,13 +440,13 @@ And I click on the Row Action: Update Required
 #And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 And I should see the The Product Page
 And In the New Product page I click tab: Product Characteristics
-And in the New Product page I click section: Toxicity Characteristic Leaching Procedure (TCLP)
+And I click the page heading: Toxicity Characteristic Leaching Procedure (TCLP)
 And I set the Lead option to: Yes
 And I set the Mercury option to: Yes
 And I set the Silver option to: Yes
 Then I click Save in The Product Page
 And In the New Product page I click tab: Review and Submit
-And in the New Product page I click section: Data Acceptance
+And I click the page heading: Data Acceptance
 And In the Data Acceptance page I click on the Accept button
 Given If purchase details are showing click confirm order
 And I navigate to the home page
@@ -504,11 +504,11 @@ And I click Row Actions for the first product returned
 And I click on the Row Action: Update Required
 #And I If you are using a supplier registered for ULSC you will see the ULSC Service Data-Re-Import step, select the No, continue editing data radio button and click Save
 And I should see the The Product Page
-And in the New Product page I click section: Product Characteristics
+And I click the page heading: Product Characteristics
 And I Change the Secondary Physical State drop down from its current selection to a new selection
 Then I click Save in The Product Page
 And In the New Product page I click tab: Review and Submit
-And in the New Product page I click section: Data Acceptance
+And I click the page heading: Data Acceptance
 And In the Data Acceptance page I click on the Accept button
 Given If purchase details are showing click confirm order
 And I navigate to the home page
@@ -597,7 +597,7 @@ Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (O
 | Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: Test comment
 And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-#Depending on your subscription you will either see the Purchase summary success message or you will see the Purchase summary with you product details shown.  If the product details are shown click Confirm order
+#Depending on your subscription you will either see the Purchase summary success message or you will see the Purchase summary with you product details save to contextshown.  If the product details are shown click Confirm order
 Given If purchase details are showing click confirm order
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase85965)

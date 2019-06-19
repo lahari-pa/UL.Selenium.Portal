@@ -404,16 +404,20 @@ testRunner.Given("I call Shared Step 57571 (Enter Regulatory Information - Not P
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Retailer"});
             table1.AddRow(new string[] {
-                        "Walgreens"});
+                        "No Retailer/No UPC Product"});
             table1.AddRow(new string[] {
-                        "Harbor Freight Tools"});
+                        "Optoro"});
+            table1.AddRow(new string[] {
+                        "Publix"});
+            table1.AddRow(new string[] {
+                        "Walgreens"});
 #line 227
 testRunner.Then("In the \'Select retailers\' window I should see the following retailers:", ((string)(null)), table1, "Then ");
-#line 232
-testRunner.Given("I click Done in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 234
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I click Done in the Select Retailers popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 236
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 238
 testRunner.Then("I delete the product: TestCase73041", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
