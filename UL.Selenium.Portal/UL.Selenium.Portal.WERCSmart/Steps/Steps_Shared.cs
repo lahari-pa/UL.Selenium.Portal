@@ -1665,10 +1665,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"I set the Which one best describes your product field to: Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
 			MyNewProduct.SetTheSectionOptionTo("Which one best describes your product",
 				"Prevents, Destroys Repels Pests (Pests are Mold, Mildew, Fungus, Rodents, Insects, and/or Spiders)");
-			TestReport.StartStep(
-				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
-			MyNewProduct.SetTheSectionOptionTo(
-				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
+			//TestReport.StartStep(
+			//	"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) field to: No");
+			//MyNewProduct.SetTheSectionOptionTo(
+			//	"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
 			TestReport.StartStep(
 				"I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
