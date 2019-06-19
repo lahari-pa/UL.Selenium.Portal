@@ -44,7 +44,8 @@ Given I enter a email address: abc123.tt@j
 And I click the continue button
 Then In the Forgotten Password window I should see the following error messages: Email is not valid.
 And I click the cancel button
-Then I should see for the forgotten password: Forgot your Password?
+#Then I should see for the forgotten password: Forgot your Password?
+Then I should remain on the Forgotten Password dialog
 
 @TReVorId:10151
 Scenario: [53048] Forgot Password - Reset Password
@@ -69,32 +70,32 @@ Then In the Forgotten Password window I should see the following error messages:
 @TReVorId:11278
 Scenario: [64860] Forgot Password (security questions answered)
 Given If not already created, I create a user: ForgotPW_SecQs with the following parameters:
-| Field                | Value          |
-| Email                | User_<random>  |
-| Country              | UNITED STATES  |
-| FirstName            | Richard        |
-| LastName             | Smith          |
-| Password             | Pa4*ytuufnn    |
-| Address1             | Address 1      |
-| Address2             | Address 2      |
-| City                 | City Name      |
-| State                | Florida        |
-| Zip                  | 999            |
-| CompanyName          | Company 1      |
-| CompanyPhone         | 123-456-7889   |
-| EmergencyPhoneNumber | 123-456-7789   |
-| SupplierType         | Manufacturer   |
-| PhoneQuestion         | PhoneQuestion   |
-| PhoneHint             | PhoneHint       |
-| MentorQuestion          | MentorQuestion    |
-| MentorHint              | MentorHint        |
-| FriendQuestion       | FriendQuestion |
-| FriendHint           | FriendHint     |
-| AnimalQuestion          | AnimalQuestion    |
-| AnimalHint              | AnimalHint        |
-| CollegeQuestion       | CollegeQuestion |
-| CollegeHint           | CollegeHint     |
-| Pin                  | 1234           |
+| Field                | Value           |
+| Email                | User_<random>   |
+| Country              | UNITED STATES   |
+| FirstName            | Richard         |
+| LastName             | Smith           |
+| Password             | Pa4*ytuufnn     |
+| Address1             | Address 1       |
+| Address2             | Address 2       |
+| City                 | City Name       |
+| State                | Florida         |
+| Zip                  | 999             |
+| CompanyName          | Company 1       |
+| CompanyPhone         | 123-456-7889    |
+| EmergencyPhoneNumber | 123-456-7789    |
+| SupplierType         | Manufacturer    |
+| PhoneQuestion        | PhoneQuestion   |
+| PhoneHint            | PhoneHint       |
+| MentorQuestion       | MentorQuestion  |
+| MentorHint           | MentorHint      |
+| FriendQuestion       | FriendQuestion  |
+| FriendHint           | FriendHint      |
+| AnimalQuestion       | AnimalQuestion  |
+| AnimalHint           | AnimalHint      |
+| CollegeQuestion      | CollegeQuestion |
+| CollegeHint          | CollegeHint     |
+| Pin                  | 1234            |
 Then I click the User Icon
 And I click on Sign Out
 And the landing page should load
@@ -109,6 +110,6 @@ And the email should contain a link to reset a WERCSmart Account Password
 When I click the link in the email I get directed to security questions
 Then I answer the security questions for Account: ForgotPW_SecQs
 Then I enter a new password: 123Password! and verify: 123Password!
-Then I click the Login button
+Then I go to the WERCSmart Log in
 Then I log in as user: ForgotPW_SecQs with password: 123Password!
 Then the WERCSmart homepage should load

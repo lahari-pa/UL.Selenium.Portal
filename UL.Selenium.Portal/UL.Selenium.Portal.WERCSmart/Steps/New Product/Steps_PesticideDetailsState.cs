@@ -105,19 +105,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			Report.Success("Successfully added text '-edited' to each Registration Number in the State Registration Details table");
 			Report.Screenshot();
-			//var pesticideDetailsState = new PesticideDetailsState();
-			//var rowCount = pesticideDetailsState.StateRowsCount();
-			//var notEdited = new List<string>();
-			//for (var i = 0; i < rowCount; i++)
-			//{
-			//	if (!pesticideDetailsState.AddEditedTextToRegistrationNumber(i))
-			//	{
-			//		notEdited.Add((i + 1).ToString());
-			//	}
-			//}
-			//Report.IsTrue(notEdited.Count == 0,
-			//	"The State Pesticide Registration Number for the following rows was not successfully edited: " + string.Join(", ", notEdited),
-			//	"Every State Pesticide Registrtaion Number in the table was successfully edited");
 		}
 
 		[StepDefinition(@"I check each State Pesticide Registration Number contains the edited suffix")]
@@ -168,25 +155,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				var statesWithData = pesticideStateData.Where(x => !x.ExpirationDate.IsNullOrEmpty()).Select(x => x.State).ToList();
 				Context.AddToContext("Expiration Date States", statesWithData);
 			}
-			//var pesticideDetailsState = new PesticideDetailsState();
-			//var rowCount = pesticideDetailsState.StateRowsCount();
-			//var expirationDateIndexes = new List<int>();
-			//Report.Screenshot();
-			//for (var i = 0; i < rowCount; i++)
-			//{
-			//	if (!pesticideDetailsState.StateRowHasExpirationDate(i))
-			//	{
-			//		continue;
-			//	}
-			//	var rowNumber = i + 1;
-			//	Report.Info("State at row number: " + rowNumber + " contained an Expiration Date");
-			//	expirationDateIndexes.Add(i);
-			//}
-			//Report.IsTrue(expirationDateIndexes.Count > 0,
-			//	"No States were found to contain data for Expiration Date on the Pesticide State Registration Details page",
-			//	"Some States contained data in Expiration Date column as expected");
-			//// We add the indexes as a list to the scenario context to allow checking the 'Is Kelly Data Data' field in another step
-			//Context.AddToContext("Expiration Date Indexes", expirationDateIndexes);
 		}
 
 		[StepDefinition(@"I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'")]
@@ -203,27 +171,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.IsTrue(stateRegistrationData.First(x => x.State == state).IsKellyData, "The state: " + state + " did not contain a tick under 'Is Kelly Data' as expected!", "State: " + state + " contained a tick under 'Is Kelly Data' as expected");
 			}
-			//var pesticideDetailsState = new PesticideDetailsState();
-			//var rowsToCheck = new List<int>();
-			//if (ScenarioContext.Current.ContainsKey("Expiration Date States"))
-			//{
-			//	rowsToCheck = (List<int>)Context.GetFromContext("Expiration Date Indexes");
-			//	foreach (var index in rowsToCheck)
-			//	{
-			//		if (!pesticideDetailsState.KellyDataIsTicked(index))
-			//		{
-			//			Report.Failure("The State at row index: " + index + " did not contain a check mark under the Is Kelly Data column as expected");
-			//			return;
-			//		}
-			//	}
-			//	Report.Success("All States with an Expiration Date also had a check mark under the 'Is Kelly Data' column as expceted");
-			//	Report.Screenshot();
-			//}
-			//else
-			//{
-			//	Report.Failure("There were no States to check the Kelly Data field (rows containing an Expiration Date)");
-			//	Report.Screenshot();
-			//}
 		}
 
 		[StepDefinition(@"I confirm the Expiration Date Provided By Kelly field for state: (.*) is blank")]

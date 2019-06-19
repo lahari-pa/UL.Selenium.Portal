@@ -160,7 +160,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return rList;
 		}
 
-		public bool DocumentWindowOpen()
+		public bool DocumentWindowOpen(string option)
 		{
 			Report.Info("Switch to Wercs Document window");
 			var currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
@@ -168,7 +168,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var handles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (var handle in handles)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("ViewWercsDocument"))
+				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains(option))
 				{
 					return true;
 				}

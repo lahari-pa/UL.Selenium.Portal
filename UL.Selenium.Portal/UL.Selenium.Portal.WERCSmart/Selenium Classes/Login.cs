@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TextTemplating;
+using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
@@ -10,11 +12,29 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class Login : BaseObject
+	class Login : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@class='login-wrapper']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(@"//div[@class='login-wrapper']");
+
+		private IWebElement LoginButton => this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 5);
+
+		private IWebElement EmailInput => this.containerElement.FindElement(By.XPath("//input[@name='loginEmail']"), 5);
+
+		private IWebElement PasswordInput => this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 5);
+
+		private IWebElement ForgotPasswordLink => this.containerElement.FindElement(By.XPath("//a[@id='btnForgotPassword']"), 5);
+
+		private IWebElement SignUpLink => this.containerElement.FindElement(By.XPath("//a[@id='btnSignUp']"), 5);
+
+		private IWebElement EmailError => this.containerElement.FindElement(By.XPath("//p[@id='loginEmail_error']"), 5);
+
+		private IWebElement PasswordError => this.containerElement.FindElement(By.XPath("//p[@id='loginPassword_error']"), 5);
+
+		private IWebElement FormHeader => this.containerElement.FindElement(By.XPath("//div[@id='loginModal']//div[@class='panel-body']/h3"), 5);
+
+		private IWebElement EmailHeader => this.containerElement.FindElement(By.XPath("//label[@for='loginEmail']"), 5);
+
+		private IWebElement PasswordHeader => this.containerElement.FindElement(By.XPath("//label[@for='loginPassword']"), 5);
 
 		public void ClickOutside()
 		{
@@ -50,81 +70,76 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string Form_Header_Text()
 		{
-			return this.containerElement.FindElement(By.XPath("//div[@id='loginModal']//div[@class='panel-body']/h3"), 2).Text;
+			return this.FormHeader?.Text;
 		}
 
 		public string Email_Header_Text()
 		{
-			return this.containerElement.FindElement(By.XPath("//label[@for='loginEmail']"), 2).Text;
+			return this.EmailHeader?.Text;
 		}
 
 		public string Password_Header_Text()
 		{
-			return this.containerElement.FindElement(By.XPath("//label[@for='loginPassword']"), 2).Text;
+			return this.PasswordHeader?.Text;
 		}
 
 		public string Forgotten_Password_Text()
 		{
-			return this.containerElement.FindElement(By.XPath("//a[@id='btnForgotPassword']"), 2).Text;
+			return this.ForgotPasswordLink?.Text;
+		}
+
+		public string SignUp_Text()
+		{
+			return this.SignUpLink?.Text;
 		}
 
 		public string Login_Button_Text()
 		{
-			return this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 2).Text;
+			return this.LoginButton?.Text;
 		}
 
 		public string EmailField {
-			get { return this.containerElement.FindElement(By.XPath("//input[@name='loginEmail']"), 2).Text; }
-			set { this.containerElement.FindElement(By.XPath("//input[@name='loginEmail']"), 2).EnterText(value); }
-		}
-
-		public string PasswordField {
-			get { return this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2).Text; }
+			get => this.EmailInput?.Text;
 			set
 			{
-				IWebElement pw = this.containerElement.FindElement(By.XPath("//input[@name='loginPassword']"), 2);
-				pw.EnterText(value);
-				pw.SendKeys(Keys.Tab);
-
+				this.EmailInput.EnterText(value);
+				this.EmailInput.SendKeys(Keys.Tab);
 			}
 		}
 
-		public void Click_Login()
+		public string PasswordField
 		{
-			IWebElement loginButton =
-				this.containerElement.FindElement(By.XPath("//form[@class='login-form']//button"), 2);
-
-			if (loginButton != null)
+			get => this.PasswordInput?.Text;
+			set
 			{
-				loginButton.ClickWithScroll();
+				this.PasswordInput.TryEnterText(value);
+				this.PasswordInput.SendKeys(Keys.Tab);
 			}
-			else
-			{
-				throw new Exception("Login button was not found");
-			}
+		}
 
+		public bool Click_Login()
+		{
+			return this.LoginButton.TryClick();
 		}
 
 		public bool Click_Forgotten_Password()
 		{
-			var listOfATags = this.containerElement.FindElements(By.XPath("//form[@class='login-form']//a"), 2);
-			return listOfATags.FirstOrDefault(x => x.Text == "Forgot Your Password?").TryClick();
+			return this.ForgotPasswordLink.TryClick();
 		}
 
-		public void Click_New_To_Wercsmart()
+		public bool Click_New_To_WercSmart()
 		{
-			IList<IWebElement> listOfATags = this.containerElement.FindElements(By.XPath("//form[@class='login-form']//a"));
-			listOfATags.FirstOrDefault(x => x.Text == "New to WERCSmart? Sign Up").Click();
+			return this.SignUp_Text() == "New to WERCSmart? Sign Up" && this.SignUpLink.TryClick();
 		}
 
-		public string Email_Validation()
+		public string Email_Error_Text()
 		{
-			return this.containerElement.FindElement(By.XPath("//p[@id='loginEmail_error']//span"), 2)?.Text;
+			return this.EmailError?.FindElement(By.XPath("//span"), 2)?.Text;
 		}
 
-		public string Password_Validation()
+		public string Password_Error_Text()
 		{
-			return this.containerElement.FindElement(By.XPath("//p[@id='loginPassword_error']//span"), 2)?.Text;
+			return this.PasswordError?.FindElement(By.XPath("///span"), 2)?.Text;
 		}
 
 	}

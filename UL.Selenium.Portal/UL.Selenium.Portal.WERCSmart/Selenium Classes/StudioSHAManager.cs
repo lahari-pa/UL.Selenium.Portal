@@ -987,6 +987,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Type')]"))) + 1;
 			var pkgSizePosition =
 				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Pkg Size')]"))) + 1;
+			var retailersStartPosition =
+				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'Transport')]"))) + 2;
+			var retailersEndPosition =
+				headers.IndexOf(headerRow.FindElement(By.XPath("./td[contains(text(),'DPCI')]")))
+				;
 			// IndexOf() returns -1 if el not found in the row. position()= 0 will fail to get the correct td
 			if (upcPosition == 0 || pkgTypePosition == 0 || pkgSizePosition == 0)
 			{
@@ -1001,6 +1006,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					PackagingType = row.FindElement(By.XPath($"./td[position()= {pkgTypePosition}]"), 2)?.Text,
 					PackagingSize = row.FindElement(By.XPath($"./td[position()= {pkgSizePosition}]"), 2)?.Text
 				};
+				List<string> retailers = new List<string>();
+				for (int i = retailersStartPosition; i < retailersEndPosition + 1; i++)
+				{
+					if (row.FindElement(By.XPath($"./td[position()= {i}]"), 2)?.Text.Length > 0)
+					{
+						retailers.Add(headerRow.FindElement(By.XPath($"./td[position()= {i}]"), 2)?.Text);
+					}
+				}
+
+				thisUpc.Retailers = retailers;
 				rList.Add(thisUpc);
 			}
 
@@ -1909,6 +1924,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		
 	}
 
 
@@ -1948,6 +1964,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string UPCNumber { get; set; }
 		public string PackagingType { get; set; }
 		public string PackagingSize { get; set; }
+		public List<string> Retailers { get; set; }
 	}
 
 	class ProcessUIDialog : BaseObject

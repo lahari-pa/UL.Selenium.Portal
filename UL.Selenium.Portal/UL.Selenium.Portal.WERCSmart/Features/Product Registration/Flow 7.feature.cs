@@ -370,7 +370,8 @@ testRunner.Given("I set the VOC content of product in g/L, including water and e
 testRunner.Given("I set the Would you like to use the VOC data provided to be copied for all areas " +
                     "(e.g. country, state, local) for comparison? option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 216
-testRunner.Given("in the VOC SCAQMD/Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada" +
+                    " page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 218
 testRunner.Given("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 220
@@ -382,17 +383,18 @@ testRunner.Then("in the VOC Limits table, the VOC Compliance Limit column should
 testRunner.Then("in the VOC Limits table, the Regulation column should contain the value: (g/L) in" +
                     "cluding water & exempts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 226
-testRunner.Then("in the New Product page I click section: Volatile Organic Compounds (VOC) for Sou" +
-                    "th Coast Air Quality Management District (SCAQMD) and Canada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("in the New Product page I click section: Volatile Organic Compounds (VOC) for Cal" +
+                    "ifornia Air District(s) and Canada", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 228
-testRunner.And("I should see the Volatile Organic Compounds (VOC) for South Coast Air Quality Man" +
-                    "agement District (SCAQMD) and Canada Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Volatile Organic Compounds (VOC) for California Air District(s) " +
+                    "and Canada Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 230
 testRunner.Given("I set the Product is a Low Solid option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 232
 testRunner.Given("I set the VOC content in g/L contained in this product option to: 2.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 234
-testRunner.Given("in the VOC SCAQMD/Canada page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada" +
+                    " page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 236
 testRunner.Then("in the VOC Limits table, the VOC Compliance Limit column should contain the value" +
                     ": 65", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

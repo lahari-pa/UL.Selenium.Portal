@@ -525,8 +525,7 @@ testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)
 #line 216
 testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 217
-testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
-                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 218
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 221
@@ -979,8 +978,7 @@ testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)
 #line 469
 testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 470
-testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
-                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 471
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 474
@@ -1218,8 +1216,7 @@ testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)
 #line 601
 testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 602
-testRunner.And("in the Product Characteristics tab of the New Product Page for Prop65 I select: N" +
-                    "o", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 603
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 606

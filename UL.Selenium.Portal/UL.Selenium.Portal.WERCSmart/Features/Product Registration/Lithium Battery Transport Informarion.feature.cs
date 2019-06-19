@@ -137,8 +137,7 @@ testRunner.Given("I set the Indicate how battery is packaged option to: Installe
                         "4",
                         "4"});
 #line 36
-testRunner.Given("in the Product Characteristics tab of the New Product Page I add the following ba" +
-                    "tteries:", ((string)(null)), table1, "Given ");
+testRunner.Given("I add the following batteries:", ((string)(null)), table1, "Given ");
 #line 40
 testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 42
@@ -321,8 +320,7 @@ testRunner.Given("I set the Indicate how battery is packaged option to: The batt
                         "4",
                         "4"});
 #line 135
-testRunner.Given("in the Product Characteristics tab of the New Product Page I add the following ba" +
-                    "tteries:", ((string)(null)), table10, "Given ");
+testRunner.Given("I add the following batteries:", ((string)(null)), table10, "Given ");
 #line 139
 testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 141
@@ -504,8 +502,7 @@ testRunner.Given("I set the Indicate how battery is packaged option to: Installe
                         "4",
                         "4"});
 #line 234
-testRunner.Given("in the Product Characteristics tab of the New Product Page I add the following ba" +
-                    "tteries:", ((string)(null)), table19, "Given ");
+testRunner.Given("I add the following batteries:", ((string)(null)), table19, "Given ");
 #line 238
 testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 240
@@ -688,8 +685,7 @@ testRunner.Given("I set the Indicate how battery is packaged option to: The batt
                         "4",
                         "4"});
 #line 334
-testRunner.Given("in the Product Characteristics tab of the New Product Page I add the following ba" +
-                    "tteries:", ((string)(null)), table28, "Given ");
+testRunner.Given("I add the following batteries:", ((string)(null)), table28, "Given ");
 #line 338
 testRunner.Given("I continue to the next screen in the product registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 340

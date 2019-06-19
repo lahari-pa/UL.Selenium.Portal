@@ -127,26 +127,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void LoginToAccount(string accountSavedAs, bool attemptOnce = false)
 		{
-			//if (NTTQA.Selenium.SpecFlow.Context.Contains("CurrentLogin"))
-			//{
-			//	accountSavedAs = NTTQA.Selenium.SpecFlow.Context.GetFromContext("CurrentLogin").ToString();
-			//	Report.Info("Already logged in as " + accountSavedAs + " so changing login to that");
-			//}
-			//else
-			//{
-			//	NTTQA.Selenium.SpecFlow.Context.AddToContext("CurrentLogin", accountSavedAs);
-			//}
 			var user = TestUsers.GetUserSavedAs(accountSavedAs);
-
 			if (new TopMenuBar().LoggedIn())
 			{
 				Report.Info("Logged in, logging out");
-				Report.Screenshot();
-				new TopMenuBar().ClickSignOut();
-				Delay.Seconds(3);
-				Report.Screenshot();
+				Report.IsTrue(new TopMenuBar().ClickSignOut(), "Failed to click Sign Out");
 			}
-
 			if (user == null)
 			{
 				var Branch = GlobalParameters.Branch;
@@ -174,6 +160,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"I log in with email: (.*) and password: (.*)")]
+		// requires the user to be on the landing page
 		public void GivenILogInWithEmailXAndPasswordY(string username, string password)
 		{
 			Report.Info("Beginning I login with email and password");
@@ -191,23 +178,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			int i = 0;
-			while ((!selHomepage.Wait_for_load(1) || !selTopMenuBar.Wait_for_load(1)) && i < 5)
+			while ((!selHomepage.Wait_for_load(1) || !selTopMenuBar.Wait_for_load(1)) && i < 4)
 			{
 				Report.Info("========== Login Attempt: " + i + " ==========");
 				var selLogin = new Login();
-				if (!Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
+				if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))
 				{
 					break;
 				}
 				Report.Info("Entering Email: '" + username + "'");
 				selLogin.EmailField = username;
-				Delay.Seconds(1);
 				Report.Info("Entering Password: '" + password + "'");
 				selLogin.PasswordField = password;
 				Report.Info("Clicking login");
-				selLogin.Click_Login();
+				Report.IsTrue(selLogin.Click_Login(), "Failed to click log in button");
 				selHomepage = new Homepage();
-				if (selHomepage.Wait_for_load(60))
+				if (selHomepage.Wait_for_load())
 				{
 					Report.Success("Successfully logged in!");
 					GeneralUtilities.Wait_for_load_finish();
@@ -229,33 +215,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 				}
 				i++;
-				Delay.Seconds(1);
 			}
-			var selLogin2 = new Login();
-			if (!Report.IsTrue(selLogin2.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
-			{
-				Report.Failure("Failed to log in!");
-				return;
-			}
-			Report.Info("Entering Email: '" + username + "'");
-			selLogin2.EmailField = username;
+			// JS - we already attempted in a loop 3 times- why are we repeating the code here?
 
-			Report.Info("Entering Password: '" + password + "'");
-			selLogin2.PasswordField = password;
-			Report.Info("Clicking login");
-			selLogin2.Click_Login();
-			selHomepage = new Homepage();
-			if (selHomepage.Wait_for_load(30))
-			{
-				Report.Success("Successfully logged in!");
-				GeneralUtilities.Wait_for_load_finish();
-				return;
-			}
-			Report.Failure("Failed to log in!");
+			//var selLogin2 = new Login();
+			//if (!Report.IsTrue(selLogin2.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
+			//{
+			//	Report.Failure("Failed to log in!");
+			//	return;
+			//}
+			//Report.Info("Entering Email: '" + username + "'");
+			//selLogin2.EmailField = username;
+
+			//Report.Info("Entering Password: '" + password + "'");
+			//selLogin2.PasswordField = password;
+			//Report.Info("Clicking login");
+			//selLogin2.Click_Login();
+			//selHomepage = new Homepage();
+			//if (selHomepage.Wait_for_load(30))
+			//{
+			//	Report.Success("Successfully logged in!");
+			//	GeneralUtilities.Wait_for_load_finish();
+			//	return;
+			//}
+			//Report.Failure("Failed to log in!");
 		}
 
-		// only do one attempt - used for reset passwords
 		[StepDefinition(@"I attempt to log in with email: (.*) and password: (.*)")]
+		// only do one attempt - used for reset passwords
 		public void AttemptToLoginWithEmailAndPassword(string email, string password)
 		{
 			Report.Info("Beginning I login with email and password");
@@ -270,52 +257,57 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Info("Clicking 'Log In' on the Landing Page");
 			selLandingPage.Click_Login();
-			var selTopMenuBar = new TopMenuBar();
 			var selHomepage = new Homepage();
 			var selLogin = new Login();
-			if (!Report.IsTrue(selLogin.Wait_for_load(), "Login page did not load!", "Login page loaded successfully!"))
+			if (!Report.IsTrue(selLogin.WaitForContainerToBeVisible(), "Login page did not load!", "Login page loaded successfully!"))
 			{
 				return;
 			}
 			Report.Info("Entering Email: '" + email + "'");
 			selLogin.EmailField = email;
-			Delay.Seconds(1);
 			Report.Info("Entering Password: '" + password + "'");
 			selLogin.PasswordField = password;
 			Report.Info("Clicking login");
-			selLogin.Click_Login();
-			Delay.Seconds(2);
-			GeneralUtilities.Wait_for_load_finish();
+			Report.IsTrue(selLogin.Click_Login(), "Failed to click the log in button");
 			selLogin = new Login();
-			if (selLogin.Exists && !selLogin.Password_Validation().IsNullOrEmpty())
+			// check we have redirected from the log in page
+			if (!selLogin.WaitForContainerToBeInvisible())
 			{
-				Report.Failure("Failed to log in - password error message was displayed");
+				if (!selLogin.Password_Error_Text().IsNullOrEmpty())
+				{
+					Report.Failure("Failed to log in - password error message was displayed");
+					Report.Screenshot();
+					return;
+				}
+				Report.Failure("Failed to log in");
 				Report.Screenshot();
 				return;
 			}
 			selHomepage = new Homepage();
-			if (selHomepage.Wait_for_load(60))
+			// check for home page
+			if (selHomepage.Wait_for_load())
 			{
 				Report.Success("Successfully logged in!");
 				GeneralUtilities.Wait_for_load_finish();
+				Report.Screenshot();
 				return;
 			}
+			// dismiss modal dialog if it exists
 			var modalDialog = new ModalDialog();
 			if (modalDialog.Wait_for_load(1))
 			{
+				Report.Info("Closing modal dialog");
 				modalDialog.Click_Closex();
-				Delay.Seconds(Delay.SpeedFactor * 1);
-
 				selHomepage = new Homepage();
-				if (selHomepage.Wait_for_load(10))
+				if (selHomepage.Wait_for_load())
 				{
 					Report.Success("Successfully logged in!");
 					GeneralUtilities.Wait_for_load_finish();
-
 					return;
 				}
 			}
 			Report.Failure("Failed to log in");
+			Report.Screenshot();
 		}
 
 		[StepDefinition(@"I logout")]
@@ -761,7 +753,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				var email = (Mailosaur.Email)NTTQA.Selenium.SpecFlow.Context.GetFromContext("Matching");
 				var emailBody = EmailFunctions.getEmailBody(email);
-				Report.Info("Body of the Email was: " + emailBody);
+				//Report.Info("Body of the Email was: " + emailBody);
 				// html codes are coming through from mailosaur eg. for '+' character
 				var bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
 				Report.Info("Body of the Email was: " + emailBody);
@@ -1193,6 +1185,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductInformation.Id = value;
 			newProductInformation.Name = value;
 			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, newProductInformation);
+		}
+
+		[StepDefinition(@"I add to context name: (.*) and value: (.*)")]
+		public void GivenIAddToContextNameAndValue(string name, string value)
+		{
+			NTTQA.Selenium.SpecFlow.Context.AddToContext(name, value);
 		}
 
 		[Given(@"I check alert text contains (.*) and dismiss")]

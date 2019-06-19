@@ -74,11 +74,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked 'view' for document: " + documents.First().FileName);
 		}
 
-		[StepDefinition(@"I confirm a new window opens displaying the document")]
-		public void ConfirmANewWindowOpensDisplayingTheDocument()
+		[StepDefinition(@"I confirm a new window opens displaying the document url: (.*)")]
+		public void ConfirmANewWindowOpensDisplayingTheDocument(string option)
 		{
 			var selDocumentAcceptance = new DocumentAcceptance();
-			Report.IsTrue(selDocumentAcceptance.DocumentWindowOpen(),
+			Report.IsTrue(selDocumentAcceptance.DocumentWindowOpen(option),
 				"A window contianing the document did not open!",
 				"A window containing the document opened as expected");
 		}

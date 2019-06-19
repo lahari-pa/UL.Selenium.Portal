@@ -298,7 +298,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					throw new Exception("Page failed to load!");
 				}
 
-				var infoShowing = selRetailDetails.DoesNotRequireDataConsentInfo();
+				var infoShowing = selRetailDetails.DoesNotRequireDataConsentInfo().Replace("\r\n", " ");
 				Report.IsTrue(infoShowing == info,
 					"Tier information was showing: '" + infoShowing + "', but was expected to show: '" + info + "'",
 					"Tier information was showing: '" + info + "', as expected!");
@@ -1224,7 +1224,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
+		public bool MatchAbbreviatedRetailer(string abbreviation, string retailerToMatch)
+		{
+			List<string>abbreviationList = abbreviation.Split(',').Select(x => x.Trim()).ToList();
+			string capitalLetters = string.Concat(retailerToMatch.Where(c => c >= 'A' && c <= 'Z'));
 
+
+			foreach (string abbrv in abbreviationList)
+			{
+				if (capitalLetters.Length >= abbrv.Length)
+				{
+					if (capitalLetters.Substring(0, abbrv.Length) == abbrv)
+					{
+						Report.Info("Retailer to match has been abbreviated to: " +
+						            capitalLetters.Substring(0, abbrv.Length) + " and a match has been found");
+						return true;
+					}
+				}
+				Report.Info("No match was found between " + retailerToMatch + " and " + abbrv);
+			}
+			return false;
+		}
+
+
+		[StepDefinition(@"I click download PDF for ""(.*)""")]
+		public void ClickDownloadPdf(string option)
+		{
+			Report.IsTrue(new DataTierDetails().ClickDownloadPdfWithHeading(option), $"Failed to click download pdf option for {option}!", $"Successfully clicked download pdf option for {option}");
+		}
 
 	}
 }

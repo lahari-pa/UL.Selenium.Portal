@@ -31,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire.NewProductRegistrat
     [NUnit.Framework.CategoryAttribute("RetailPartners")]
     [NUnit.Framework.CategoryAttribute("SHA")]
     [NUnit.Framework.CategoryAttribute("UPC")]
-    [NUnit.Framework.CategoryAttribute("run_CANAddYes_PkgNo_StwdFull")]
+    [NUnit.Framework.CategoryAttribute("run_CANAddNo_PkgYes_StwdFull")]
     public partial class AccountCanadaAddressNoPackageTypesYesStewardshipFullFeature
     {
         
@@ -57,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Features.CanadianTire.NewProductRegistrat
                         "RetailPartners",
                         "SHA",
                         "UPC",
-                        "run_CANAddYes_PkgNo_StwdFull"});
+                        "run_CANAddNo_PkgYes_StwdFull"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
