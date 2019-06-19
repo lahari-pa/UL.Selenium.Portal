@@ -22,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 
 		public string ProductName
 		{
-			get => this.ProductNameInput?.Text.Trim();
+			get => this.ProductNameInput?.GetValue();
 			set => this.ProductNameInput?.EnterText(value);
 		}
 

@@ -14,6 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "DataSummarySheet")]
 	class StepsDataSummarySheet
 	{
+		// 'battery_manufacturer: (.*)' set in row["Manufacturer] will fetch value from context
 		[StepDefinition(@"I should see the following batteries present:")]
 		public void ThenIShouldSeeTheFollowingBatteriesPresent(Table information)
 		{
@@ -22,25 +23,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var displayed = dataSummarySheet.GetDisplayedBatteries();
 			foreach (var expectedBattery in expected)
 			{
-				Report.Info("Checking battery with type: " + expectedBattery.BatteryType + " and Manufacturer: " + expectedBattery.Manufacturer);
-				var matchingType = displayed.Where(x => x.BatteryType == expectedBattery.BatteryType);
-				if (matchingType.Count() == 0)
+				Report.Info("Checking battery saved as: " + expectedBattery.SavedAs);
+				if (expectedBattery.Manufacturer.ToLower().StartsWith("saved as"))
 				{
-					Report.Failure("No batteries of type: " + expectedBattery.BatteryType + " were displayed!");
-					continue;
+					expectedBattery.Manufacturer = Context.GetFromContext("battery_manufacturer: " + expectedBattery.SavedAs)?.ToString();
 				}
-
-				bool passed = false;
-				foreach (var matched in matchingType)
+				if (expectedBattery.Manufacturer == null)
 				{
-					if (matched.Manufacturer.Contains(expectedBattery.Manufacturer) && matched.NumberPerPackage == expectedBattery.NumberPerPackage && matched.RequiredToRun == expectedBattery.RequiredToRun)
-					{
-						passed = true;
-						break;
-					}
+					throw new Exception("Failed to get manufacturer from context!");
 				}
-
-				Report.IsTrue(passed, "Battery was not found on the data summary screen!", "Battery was successfully found on the data summary screen!");
+				Report.Info("Expected Type: " + expectedBattery.BatteryType);
+				Report.Info("Expected Manufacturer: " + expectedBattery.Manufacturer);
+				Report.Info("Expected Number per package: " + expectedBattery.NumberPerPackage);
+				Report.IsTrue(displayed.Any(x => x.BatteryType == expectedBattery.BatteryType &&
+				                                 x.Manufacturer == expectedBattery.Manufacturer &&
+				                                 x.NumberPerPackage == expectedBattery.NumberPerPackage &&
+				                                 x.RequiredToRun == expectedBattery.RequiredToRun),
+					"Battery saved as " + expectedBattery.SavedAs + " was not found on the summary page!",
+					"Battery saved as " + expectedBattery.SavedAs + " was found on the summary page");
 			}
 		}
 

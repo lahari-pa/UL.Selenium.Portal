@@ -138,7 +138,7 @@ testRunner.Given("If I see the retail partners page I set all data consent tiers
 #line 34
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 35
-testRunner.Given("I delete all products with UPC Number: 012345678905", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I delete all products with UPC Number: 630509667031", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
 testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 37
@@ -184,17 +184,20 @@ testRunner.And("For \'Indicate how battery is packaged\' I select: The battery i
                         "Battery Type",
                         "Manufacturer",
                         "Number of batteries per package",
-                        "How many batteries required to run"});
-            table1.AddRow(new string[] {
-                        "Alkaline",
-                        "L1028F",
-                        "6",
-                        "6"});
+                        "How many batteries required to run",
+                        "Saved As"});
             table1.AddRow(new string[] {
                         "Lithium Ion",
-                        "10400",
+                        "<any>",
                         "4",
-                        "4"});
+                        "4",
+                        "battery1"});
+            table1.AddRow(new string[] {
+                        "Alkaline",
+                        "<any>",
+                        "6",
+                        "6",
+                        "battery2"});
 #line 57
 testRunner.And("I add the following batteries:", ((string)(null)), table1, "And ");
 #line 61
@@ -260,42 +263,44 @@ testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.
 testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table2, "Then ");
 #line 94
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 95
-testRunner.Then("the comments field should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 96
-testRunner.And("I enter the following into the comments field: Comments Field Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("the comments field should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 97
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I enter the following into the comments field: Comments Field Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 98
-testRunner.Then("The Data Acceptance page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 99
-testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The Data Acceptance page should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 100
+testRunner.Given("I click the Summary button in the Data Acceptance window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 101
 testRunner.Then("I switch to the Data Summary page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "BatteryType",
                         "Manufacturer",
                         "NumberPerPackage",
-                        "RequiredToRun"});
+                        "RequiredToRun",
+                        "Saved As"});
             table3.AddRow(new string[] {
                         "Lithium Ion",
-                        "TL-PB10400 by TP-LINK USA Corporation",
+                        "saved as",
                         "4",
-                        "4"});
+                        "4",
+                        "battery1"});
             table3.AddRow(new string[] {
                         "Alkaline",
-                        "Alkaline Manganese Button Cell Mercury Free Battery L1028F\\L828F\\L1325F\\L1345F\\L1" +
-                            "335F\\L1315F\\L10 by Chung Pak Battery Works Ltd.",
+                        "saved as",
                         "6",
-                        "6"});
-#line 101
+                        "6",
+                        "battery2"});
+#line 102
 testRunner.And("I should see the following batteries present:", ((string)(null)), table3, "And ");
-#line 105
-testRunner.Then("I close the Data Summary tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 106
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("I close the Data Summary tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 107
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 108
 testRunner.Then("I delete the product: TestCase63705", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -308,61 +313,61 @@ testRunner.Then("I delete the product: TestCase63705", ((string)(null)), ((TechT
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[63724] Add New product - Single Battery Product", null, new string[] {
                         "TReVorId:22125"});
-#line 110
+#line 111
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 113
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 114
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 115
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 115
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 116
-testRunner.Given("I delete all products with UPC Number: 012345678905", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 117
-testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I delete all products with UPC Number: 012345678905", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 118
-testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 119
-testRunner.And("I Select the Create a New Registration radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 120
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Select the Create a New Registration radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 121
-testRunner.And("I set \'Product Name\' to: Nickel Metal Hydride (NiMH) Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 123
-testRunner.And("I set \'Type of Product\' to: Nickel Metal Hydride (NiMH) Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 124
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 122
+testRunner.And("I set \'Product Name\' to: Nickel Metal Hydride (NiMH) Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 124
+testRunner.And("I set \'Type of Product\' to: Nickel Metal Hydride (NiMH) Battery", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 125
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 126
 testRunner.Then("I save the product information as: TestCase63724", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
             table4.AddRow(new string[] {
                         "Solid"});
-#line 127
+#line 128
 testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table4, "And ");
-#line 130
-testRunner.And("I set the Secondary Physical State to be: Granular", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 131
-testRunner.And("I set the water mixture question to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State to be: Granular", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 132
+testRunner.And("I set the water mixture question to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 133
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 134
-testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 135
+testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 136
 testRunner.And("In the Additional Information Page the check box for: United States should be: ch" +
                     "ecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 136
-testRunner.And("I set \'Product has been classified using OSHA\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 137
-testRunner.And("I set \'Product is shipped directly\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product has been classified using OSHA\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 138
-testRunner.And("I set \'Product is a Retailers Private Label or Brand\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product is shipped directly\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 139
-testRunner.And("I set \'Product is solely for the Retailer\'s use\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product is a Retailers Private Label or Brand\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 140
+testRunner.And("I set \'Product is solely for the Retailer\'s use\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 141
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -377,23 +382,23 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
                         "false",
                         "false",
                         ""});
-#line 142
+#line 143
 testRunner.Then("I add the following ingredients:", ((string)(null)), table5, "Then ");
-#line 145
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 146
-testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 147
-testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 148
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 149
-testRunner.Given("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 150
-testRunner.Then("In the \'Select Retailers\' window I select the retailer: Target", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 151
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 150
+testRunner.Given("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 151
+testRunner.Then("In the \'Select Retailers\' window I select the retailer: Target", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 152
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 153
 testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -414,57 +419,57 @@ testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.
             table6.AddRow(new string[] {
                         "Quantity",
                         "12"});
-#line 153
+#line 154
 testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table6, "Then ");
-#line 161
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 162
-testRunner.And("I should see the Regulatory Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 163
+testRunner.And("I should see the Regulatory Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 164
 testRunner.And("in the Review and Submit tab of the New Product Page for OSHA compliant SDS I sel" +
                     "ect: Request to author", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 165
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 166
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 167
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 170
-testRunner.And("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 168
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 171
+testRunner.And("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 172
 testRunner.And("in the Review and Submit tab of the New Product Page for Personal Protection Equi" +
                     "pment Recommended I select: Gloves", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 172
+#line 173
 testRunner.And("in the Review and Submit tab of the New Product Page for Autoignition I enter: 55" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 173
+#line 174
 testRunner.And("in the Review and Submit tab of the New Product Page for Minimum Ignition Energy " +
                     "I enter: 55", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 174
-testRunner.And("in the Review and Submit tab of the New Product Page for Viscosity I enter: 4.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 175
+testRunner.And("in the Review and Submit tab of the New Product Page for Viscosity I enter: 4.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 176
 testRunner.And("in the Review and Submit tab of the New Product Page for Appearance I select: Buf" +
                     "f", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 176
+#line 177
 testRunner.And("in the Review and Submit tab of the New Product Page for Odor I select: Roasted s" +
                     "oy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 177
+#line 178
 testRunner.And("in the Review and Submit tab of the New Product Page for Odor Threshold I select:" +
                     " No data available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 178
+#line 179
 testRunner.And("in the Review and Submit tab of the New Product Page for Partition Coefficient I " +
                     "enter: 5.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 179
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 180
-testRunner.Then("the comments field should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 181
-testRunner.And("I enter the following into the comments field: Comments Field Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 182
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 181
+testRunner.Then("the comments field should appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 182
+testRunner.And("I enter the following into the comments field: Comments Field Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 183
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 184
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 185
 testRunner.Then("I delete the product: TestCase63724", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -477,60 +482,60 @@ testRunner.Then("I delete the product: TestCase63724", ((string)(null)), ((TechT
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65441] Delete a UPC from the UPC Grid", null, new string[] {
                         "TReVorId:11276"});
-#line 187
+#line 188
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 188
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 189
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 190
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 190
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 191
-testRunner.Given("I generate a random UPC number and save as: UPC65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 192
-testRunner.Given("I delete all products with UPC Number: saved as UPC65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I generate a random UPC number and save as: UPC65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 193
-testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I delete all products with UPC Number: saved as UPC65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 194
-testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 195
-testRunner.And("I Select the Create a New Registration radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 196
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Select the Create a New Registration radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 197
-testRunner.And("I set \'Product Name\' to: abrasive", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 199
-testRunner.And("I set \'Type of Product\' to: Abrasive", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 200
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 198
+testRunner.And("I set \'Product Name\' to: abrasive", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 200
+testRunner.And("I set \'Type of Product\' to: Abrasive", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 201
-testRunner.Then("I save the product information as: TestCase65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 202
-testRunner.And("I set the Primary Physical State to be: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I save the product information as: TestCase65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 203
-testRunner.And("I set the Secondary Physical State to be: Granular", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Primary Physical State to be: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 204
-testRunner.And("I set the water mixture question to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State to be: Granular", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 205
-testRunner.And("I set the water solubility description to: Completely soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the water mixture question to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 206
+testRunner.And("I set the water solubility description to: Completely soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 207
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 208
-testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 209
+testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 210
 testRunner.And("In the Additional Information Page the check box for: United States should be: ch" +
                     "ecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 210
-testRunner.And("I set \'Product has been classified using OSHA\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 211
-testRunner.And("I set \'Product is shipped directly\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product has been classified using OSHA\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 212
-testRunner.And("I set \'Product is a Retailers Private Label or Brand\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product is shipped directly\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 213
-testRunner.And("I set \'Product is solely for the Retailer\'s use\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Product is a Retailers Private Label or Brand\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 214
+testRunner.And("I set \'Product is solely for the Retailer\'s use\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 215
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -545,30 +550,30 @@ testRunner.Given("in the New Product page I click Continue", ((string)(null)), (
                         "false",
                         "false",
                         ""});
-#line 216
+#line 217
 testRunner.Then("I add the following ingredients:", ((string)(null)), table7, "Then ");
-#line 219
+#line 220
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 221
-testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 222
-testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 223
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 224
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 226
-testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 227
+testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 228
 testRunner.And("in the Product Characteristics tab of the New Product Page, for Product is Regula" +
                     "ted for Transport I select: Not Regulated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 230
+#line 231
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 233
-testRunner.Given("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 234
-testRunner.Then("In the \'Select Retailers\' window I select the retailer: Target", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("the \'Select Retailers\' window appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 235
+testRunner.Then("In the \'Select Retailers\' window I select the retailer: Target", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 236
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 238
+#line 239
 testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -586,23 +591,23 @@ testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.
             table8.AddRow(new string[] {
                         "DPCI",
                         "087-16-0238"});
-#line 239
+#line 240
 testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table8, "Then ");
-#line 245
+#line 246
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 248
-testRunner.Given("In the New Product page I click tab: Recipient and UPC Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 249
-testRunner.Given("I click the page heading: Universal Product Code (UPC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("In the New Product page I click tab: Recipient and UPC Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 250
-testRunner.And("I should see the Universal Product Code Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click the page heading: Universal Product Code (UPC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 251
-testRunner.And("I delete UPC: saved as UPC65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Universal Product Code Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 252
+testRunner.And("I delete UPC: saved as UPC65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 253
 testRunner.Then("In the list of UPCs I should not see UPC: saved as UPC65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 254
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 255
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 256
 testRunner.Then("I delete the product: TestCase65441", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -615,52 +620,36 @@ testRunner.Then("I delete the product: TestCase65441", ((string)(null)), ((TechT
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[65392] Ecologo Readiness - Question wording and validation of response", null, new string[] {
                         "TReVorId:11378"});
-#line 258
+#line 259
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 259
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 260
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 261
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 261
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 262
-testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 263
-testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 264
-testRunner.And("I Select the Create a New Registration radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the header New Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 265
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I Select the Create a New Registration radio button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 266
-testRunner.And("I set \'Product Name\' to: Laundry, Detergent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 267
+testRunner.And("I set \'Product Name\' to: Floor wax stripper", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 268
-testRunner.And("I set \'Type of Product\' to: Laundry, Detergent", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Type of Product\' to: Floor wax stripper (Light or Medium Build-up)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 269
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 270
 testRunner.Then("I save the product information as: TestCase65392", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 271
-testRunner.And("I set the Primary Physical State to be: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 272
-testRunner.And("I set the Secondary Physical State to be: Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 273
-testRunner.And("I set \'Specific Gravity\' to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 274
-testRunner.And("I set \'pH\' to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 275
-testRunner.And("I set \'Boiling point (in Celsius)\' to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 276
-testRunner.And("I set \'Flash point (in Celsius)\' to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 277
-testRunner.And("in the Product Characteristics tab, for Flash Point Testing Method Used status I " +
-                    "select: Closed cup method", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 278
-testRunner.And("I set the Select the best Water Solubility description to be: Very soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 279
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 280
+testRunner.And("I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter" +
+                    " all data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 281
 testRunner.Given("I call Shared Step 59680 (Additional Product Information - US only, No Child, No " +
                     "GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -676,37 +665,29 @@ testRunner.Given("I call Shared Step 59680 (Additional Product Information - US 
                         "false",
                         "false",
                         ""});
-#line 281
+#line 282
 testRunner.Then("I add the following ingredients:", ((string)(null)), table9, "Then ");
-#line 284
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 285
-testRunner.And("For \'U.S. Toxic Substances Control Act (TSCA) status\' I select: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 286
-testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 287
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 288
-testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 289
-testRunner.And("in the Product Characteristics tab of the New Product Page, for Product is Regula" +
-                    "ted for Transport I select: No, due to an exemption or exception", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 290
-testRunner.And("in the Product Characteristics tab of the New Product Page, for DOT Exceptions I " +
-                    "select: 173.120(b)(3): Combustible liquid that does not sustain combustion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 291
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 286
+testRunner.And("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
+                    "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 290
+testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUE" +
+                    "STION ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 291
+testRunner.Given("I set the Does the product label specify a dilution ratio option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 292
-testRunner.And("I should see the Transportation Details 2 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I set the Enter the product\'s VOC content as sold option to: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 293
-testRunner.And("In the Product Characteristics tab of the New Product Page, for International Shi" +
-                    "pping when DOT Exemption taken I select: I do not ship internationally and I do " +
-                    "not know the classification", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I set the Enter the \"as used\" VOC content option to: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 294
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 295
+testRunner.Given("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 304
 testRunner.And("I should see the ECOLOGO Readiness Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 296
+#line 305
 testRunner.And(@"I confirm that I see the following Ecologo statement: Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment. This report will indicate if the product is eligible to be awarded an ECOLOGO Certification, an established symbol of reduced environmental impact. Would you like to receive this assessment?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -715,15 +696,15 @@ testRunner.And(@"I confirm that I see the following Ecologo statement: Take adva
                         "Yes"});
             table10.AddRow(new string[] {
                         "Not at this time"});
-#line 297
+#line 306
 testRunner.And("I should see the following radio buttons:", ((string)(null)), table10, "And ");
-#line 301
+#line 310
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 302
+#line 311
 testRunner.Then("I should see an error message: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 303
+#line 319
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 304
+#line 320
 testRunner.Then("I delete the product: TestCase65392", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -738,71 +719,71 @@ testRunner.Then("I delete the product: TestCase65392", ((string)(null)), ((TechT
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[67661] Verify Canada SDS on the Optional Reports and Documents Available for Pur" +
                     "chase screen", null, new string[] {
                         "tfs_design"});
-#line 307
+#line 323
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 308
+#line 324
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 311
+#line 327
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 312
+#line 328
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 313
+#line 329
 testRunner.Given("I generate a random UPC number and save as: UPC67661", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 314
+#line 330
 testRunner.Given("I delete all products with UPC Number: saved as UPC67661", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 317
+#line 333
 testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 318
+#line 334
 testRunner.And("I should see the New Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 319
+#line 335
 testRunner.And("I set the Select the type of product to create option to: Create a New Registrati" +
                     "on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 320
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 323
-testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 324
-testRunner.And("I set the Product Name option to: Deodorant - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 326
-testRunner.And("I set \'Type of Product\' to: Deodorant - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 327
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 329
-testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 330
-testRunner.Then("I save the product information as: TestCase67661", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 331
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 332
-testRunner.And("Primary Physical State should be showing the error messages: This is a required f" +
-                    "ield.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 333
-testRunner.And("I set the Primary Physical State option to: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 334
-testRunner.And("I set the Secondary Physical State option to: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 335
-testRunner.And("I set the When mixed with an equal amount of water option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 336
-testRunner.And("I set the Select the best Water Solubility description option to: Very soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 337
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 339
+testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 340
-testRunner.And("In the Additional Information Page the check box for: United States should be: ch" +
-                    "ecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 341
-testRunner.And("I set the Product has been classified using OSHA (US) option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Product Name option to: Deodorant - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 342
-testRunner.And("I set the Product is shipped directly by supplier to the consumer option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Type of Product\' to: Deodorant - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 343
-testRunner.And("I set the Product is a Retailer\'s Private Label or Brand option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 344
-testRunner.And("I set the Product is sold to the Retailer solely for the Retailer\'s use option to" +
-                    ": No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 345
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 346
+testRunner.Then("I save the product information as: TestCase67661", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 347
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 348
+testRunner.And("Primary Physical State should be showing the error messages: This is a required f" +
+                    "ield.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 349
+testRunner.And("I set the Primary Physical State option to: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 350
+testRunner.And("I set the Secondary Physical State option to: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 351
+testRunner.And("I set the When mixed with an equal amount of water option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 352
+testRunner.And("I set the Select the best Water Solubility description option to: Very soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 353
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 356
+testRunner.And("In the Additional Information Page the check box for: United States should be: ch" +
+                    "ecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 357
+testRunner.And("I set the Product has been classified using OSHA (US) option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 358
+testRunner.And("I set the Product is shipped directly by supplier to the consumer option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 359
+testRunner.And("I set the Product is a Retailer\'s Private Label or Brand option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 360
+testRunner.And("I set the Product is sold to the Retailer solely for the Retailer\'s use option to" +
+                    ": No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 361
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 364
 testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -817,33 +798,33 @@ testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk
                         "false",
                         "false",
                         ""});
-#line 349
+#line 365
 testRunner.Then("I add the following ingredients:", ((string)(null)), table11, "Then ");
-#line 352
+#line 368
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 355
+#line 371
 testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 356
+#line 372
 testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 357
+#line 373
 testRunner.And("I set the Product, including container and/or packaging, contains a chemical on C" +
                     "alifornia\'s Prop 65 list option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 358
+#line 374
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 361
+#line 377
 testRunner.And("I should see the Regulatory Information 3 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
             table12.AddRow(new string[] {
                         "None of the Above"});
-#line 362
+#line 378
 testRunner.And("I set the below options for field: Refer to your Product Label", ((string)(null)), table12, "And ");
-#line 365
+#line 381
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 368
+#line 384
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 369
+#line 385
 testRunner.And("I set the Product is Regulated for Transport option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -852,49 +833,49 @@ testRunner.And("I set the Product is Regulated for Transport option to: Yes", ((
                         "DOT"});
             table13.AddRow(new string[] {
                         "Shipping with limited quantity"});
-#line 370
+#line 386
 testRunner.And("I set the below options for field: Select all modes of transport that you\'ve clas" +
                     "sified the product for", ((string)(null)), table13, "And ");
-#line 374
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 377
-testRunner.Then("I should see the U. S. Department of Transportation (DOT) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 378
-testRunner.And("I set the UN Number field to: UN1944", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 379
-testRunner.And("I set the Proper Shipping Name field to: Matches, safety", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 380
-testRunner.And("I set the Technical Name (if applicable) field to: My Safe Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 381
-testRunner.And("I set the Hazard Class (select) field to: 4.1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 382
-testRunner.And("I set the Packing Group (select) field to: III", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 383
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 386
-testRunner.Then("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (O" +
-                    "TC) and/or California Air Resources Board (CARB) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 387
-testRunner.And("I set the Product has been granted an Alternative Control Plan option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 388
-testRunner.And("I set the HVOC (high volatile organic compound) content field to: 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 389
-testRunner.And("I set the MVOC (microbial volatile organic compound) content field to: 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 390
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 393
-testRunner.Then("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see the U. S. Department of Transportation (DOT) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 394
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I set the UN Number field to: UN1944", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 395
+testRunner.And("I set the Proper Shipping Name field to: Matches, safety", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 396
+testRunner.And("I set the Technical Name (if applicable) field to: My Safe Product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 397
-testRunner.Then("In the \'Select Retailers\' window I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I set the Hazard Class (select) field to: 4.1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 398
-testRunner.And("I should see the Retailer Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Packing Group (select) field to: III", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 399
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 402
-testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (O" +
+                    "TC) and/or California Air Resources Board (CARB) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 403
+testRunner.And("I set the Product has been granted an Alternative Control Plan option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 404
+testRunner.And("I set the HVOC (high volatile organic compound) content field to: 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 405
+testRunner.And("I set the MVOC (microbial volatile organic compound) content field to: 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 406
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 409
+testRunner.Then("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 410
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 413
+testRunner.Then("In the \'Select Retailers\' window I select the retailer: Walgreens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 414
+testRunner.And("I should see the Retailer Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 415
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 418
+testRunner.And("I should see the Universal Product Code (UPC) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 419
 testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
@@ -909,24 +890,24 @@ testRunner.Given("I click the \'Add UPC\' button", ((string)(null)), ((TechTalk.
             table14.AddRow(new string[] {
                         "Size",
                         "20"});
-#line 404
+#line 420
 testRunner.Then("I add the following into the UPC Fields", ((string)(null)), table14, "Then ");
-#line 409
+#line 425
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 412
+#line 428
 testRunner.And("I should see the Regulatory Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 413
+#line 429
 testRunner.And("I set the OSHA-compliant Safety Data Sheet, English field to: Request to author", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 414
+#line 430
 testRunner.Then("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 417
+#line 433
 testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 418
+#line 434
 testRunner.And("I click the browse button for label: Product Label and upload PDF: C:\\Dependencie" +
                     "s\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 419
+#line 435
 testRunner.Then("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 422
+#line 438
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -935,48 +916,48 @@ testRunner.And("I should see the Optional Reports and Documents Available for Pu
             table15.AddRow(new string[] {
                         "Canada GHS SDS",
                         "English (U.S)"});
-#line 423
+#line 439
 testRunner.And("I purchase the following additional documents:", ((string)(null)), table15, "And ");
-#line 426
+#line 442
 testRunner.Then("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 429
+#line 445
 testRunner.And("I should see the Additional Documents -> Contact Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 430
+#line 446
 testRunner.And("I set the Manufacturer Name field to: Manufacturer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 431
+#line 447
 testRunner.And("I set the Address field to: Address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 432
+#line 448
 testRunner.And("I set the Phone field to: Phone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 433
+#line 449
 testRunner.And("I set the Emergency Phone field to: EmergencyPhone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 434
+#line 450
 testRunner.Then("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 437
+#line 453
 testRunner.And("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
             table16.AddRow(new string[] {
                         "Mask"});
-#line 438
+#line 454
 testRunner.And("I set the below options for field: Personal Protection Equipment Recommended", ((string)(null)), table16, "And ");
-#line 441
+#line 457
 testRunner.And("I set the Autoignition Temperature (°C) field to: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 442
+#line 458
 testRunner.And("I set the Minimum Ignition Energy (mJ) field to: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 443
+#line 459
 testRunner.And("I set the Viscosity field to: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 444
+#line 460
 testRunner.And("I set the Appearance field to: Brown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 445
+#line 461
 testRunner.And("I set the Odor field to: Banana", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 446
+#line 462
 testRunner.And("I set the Odor Threshold field to: Not applicable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 447
+#line 463
 testRunner.And("I set the Partition Coefficient field to: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 448
+#line 464
 testRunner.Then("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 451
+#line 467
 testRunner.Then("I click the page heading: Optional Reports and Documents Available for Purchase", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
@@ -985,11 +966,11 @@ testRunner.Then("I click the page heading: Optional Reports and Documents Availa
             table17.AddRow(new string[] {
                         "Canada GHS SDS",
                         "English (U.S)"});
-#line 452
+#line 468
 testRunner.And("the following additional documents should be showing as selected:", ((string)(null)), table17, "And ");
-#line 457
+#line 473
 testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 458
+#line 474
 testRunner.Then("I delete the product: TestCase67661", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

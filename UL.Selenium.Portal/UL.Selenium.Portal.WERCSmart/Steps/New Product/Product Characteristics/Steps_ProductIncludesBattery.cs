@@ -21,8 +21,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(this.ProductIncludesBattery.IndicateHowBatteryIsPackaged == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
+		/// <summary>
+		/// Adds batteries to the Contains Battery page by constructing a List Battery objects using the table data
+		/// Accepts parameter Manufacturer = any to select any returned manufacturer by looping through 'a', 'b', 'c', 'd' search inputs
+		/// It saves the manufacturer to context as battery_manufacturer1, battery_manufacturer2 according to the order they were added (table row number)
+		/// </summary>
+		/// <param name="table"></param>
 		[StepDefinition(@"I add the following batteries:")]
-		// Requires a table with the headings: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
+		// Requires a table with the headings: | Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
 		public void AddTheFollowingBatteries(Table table)
 		{
 			try
@@ -44,7 +50,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 						BatteryType = thisRow["Battery Type"],
 						Manufacturer = thisRow["Manufacturer"],
 						NumberPerPackage = batteriesPerPackage,
-						RequiredToRun = batteriesRequired
+						RequiredToRun = batteriesRequired,
+						SavedAs = thisRow["Saved As"]
 					};
 					listOfBatteries.Add(thisBattery);
 				}

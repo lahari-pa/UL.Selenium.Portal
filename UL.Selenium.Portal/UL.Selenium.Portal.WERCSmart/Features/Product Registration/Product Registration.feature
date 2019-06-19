@@ -32,7 +32,7 @@ Scenario: [63705] New Product - BCP
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
-Given I delete all products with UPC Number: 012345678905
+Given I delete all products with UPC Number: 630509667031
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
@@ -55,9 +55,9 @@ And in the New Product page I click Continue
 And I should see the Product Includes Battery Page
 And For 'Indicate how battery is packaged' I select: The battery is shipped with but not included in my product.
 And I add the following batteries:
-| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run |
-| Alkaline     | L1028F       | 6                               | 6                                  |
-| Lithium Ion  | 10400        | 4                               | 4                                  |
+| Battery Type | Manufacturer | Number of batteries per package | How many batteries required to run | Saved As |
+| Lithium Ion  | <any>          | 4                               | 4                                  | battery1 |
+| Alkaline     | <any>          | 6                               | 6                                  | battery2 |
 And in the New Product page I click Continue
 And I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
 And I set 'Product has had TCLP; Report is available' to: No
@@ -92,6 +92,7 @@ Then I add the following into the UPC Fields
 | DPCI          | 087-16-0238  |
 | Quantity      |              |
 Given in the New Product page I click Continue
+
 Then the comments field should appear
 And I enter the following into the comments field: Comments Field Text
 Given in the New Product page I click Continue
@@ -99,9 +100,9 @@ Then The Data Acceptance page should appear
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I should see the following batteries present:
-| BatteryType | Manufacturer                                                                                                                     | NumberPerPackage | RequiredToRun |
-| Lithium Ion | TL-PB10400 by TP-LINK USA Corporation                                                                                            | 4                | 4             |
-| Alkaline    | Alkaline Manganese Button Cell Mercury Free Battery L1028F\L828F\L1325F\L1345F\L1335F\L1315F\L10 by Chung Pak Battery Works Ltd. | 6                | 6             |
+| BatteryType | Manufacturer | NumberPerPackage | RequiredToRun | Saved As |
+| Lithium Ion | saved as     | 4                | 4             | battery1 |
+| Alkaline    | saved as     | 6                | 6             | battery2 |
 Then I close the Data Summary tab
 Given I navigate to the home page
 Then I delete the product: TestCase63705
@@ -256,42 +257,50 @@ Then I delete the product: TestCase65441
 
 @TReVorId:11378
 Scenario: [65392] Ecologo Readiness - Question wording and validation of response
-Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
+Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 Then The home screen should load
 And I click the Register New Product icon in the Navigation Pane
 And I should see the header New Product
 And I Select the Create a New Registration radio button
 And in the New Product page I click Continue
-And I set 'Product Name' to: Laundry, Detergent
-#And In the Product Type tab of the New Product Page, I enter: Laundry, Detergent in the Type of Product select field
-And I set 'Type of Product' to: Laundry, Detergent
+And I set 'Product Name' to: Floor wax stripper
+And I set 'Type of Product' to: Floor wax stripper (Light or Medium Build-up)
 And in the New Product page I click Continue
 Then I save the product information as: TestCase65392
-And I set the Primary Physical State to be: Liquid
-And I set the Secondary Physical State to be: Liquid
-And I set 'Specific Gravity' to: 2
-And I set 'pH' to: 2
-And I set 'Boiling point (in Celsius)' to: 2
-And I set 'Flash point (in Celsius)' to: 2
-And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Closed cup method
-And I set the Select the best Water Solubility description to be: Very soluble
-And in the New Product page I click Continue
+And I call Shared Step 57514 (Product Characteristics - Liquid Only available - Enter all data - Continue - Happy Path)
+#And I set the Primary Physical State to be: Liquid
+#And I set the Secondary Physical State to be: Liquid
+#And I set 'Specific Gravity' to: 2
+#And I set 'pH' to: 2
+#And I set 'Boiling point (in Celsius)' to: 2
+#And I set 'Flash point (in Celsius)' to: 2
+#And in the Product Characteristics tab, for Flash Point Testing Method Used status I select: Closed cup method
+#And I set the Select the best Water Solubility description to be: Very soluble
+#And in the New Product page I click Continue
 Given I call Shared Step 59680 (Additional Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Then I add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Formaldehyde  | 100     | false               | false       |            |
 Given in the New Product page I click Continue
-And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
-And I set 'Prop65' to: No
-And in the New Product page I click Continue
-And I should see the Transportation Details 1 Page
-And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: No, due to an exemption or exception
-And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(b)(3): Combustible liquid that does not sustain combustion
-Given in the New Product page I click Continue
-And I should see the Transportation Details 2 Page
-And In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: I do not ship internationally and I do not know the classification
-And in the New Product page I click Continue
+And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+#And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
+#And I set 'Prop65' to: No
+#And in the New Product page I click Continue
+Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+Given I set the Does the product label specify a dilution ratio option to: Yes
+Given I set the Enter the product's VOC content as sold option to: 1
+Given I set the Enter the "as used" VOC content option to: 1
+Given I click continue
+Given I click continue
+#And I should see the Transportation Details 1 Page
+#And in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: No, due to an exemption or exception
+#And in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: 173.120(b)(3): Combustible liquid that does not sustain combustion
+#Given in the New Product page I click Continue
+#And I should see the Transportation Details 2 Page
+#And In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: I do not ship internationally and I do not know the classification
+#And in the New Product page I click Continue
+
 And I should see the ECOLOGO Readiness Page
 And I confirm that I see the following Ecologo statement: Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment. This report will indicate if the product is eligible to be awarded an ECOLOGO Certification, an established symbol of reduced environmental impact. Would you like to receive this assessment?
 And I should see the following radio buttons:
@@ -300,6 +309,13 @@ And I should see the following radio buttons:
 | Not at this time |
 And in the New Product page I click Continue
 Then I should see an error message: This is a required field.
+
+# select Yes
+#click continue
+#no error
+
+# retailer page 29206
+
 Given I navigate to the home page
 Then I delete the product: TestCase65392
 

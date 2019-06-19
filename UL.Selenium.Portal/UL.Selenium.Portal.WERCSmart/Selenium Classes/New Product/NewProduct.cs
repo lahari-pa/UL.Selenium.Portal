@@ -278,7 +278,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public string TextInputValueForLabel(string lblText)
 		{
 			var label = this.SectionControlLabels?.FirstOrDefault(x => x.Text.Contains(lblText));
-			return label.FindElement(By.XPath("../following-sibling::div/input[@type ='text']"), 2)?.Text;
+			return label.FindElement(By.XPath("../following-sibling::div//input[@type ='text']"), 2)?.GetValue();
 		}
 
 		#endregion
@@ -3097,6 +3097,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public int NumberPerPackage { get; set; }
 		public int RequiredToRun { get; set; }
+
+		public string SavedAs { get; set; }
 	}
 
 	public class UpcInformation
