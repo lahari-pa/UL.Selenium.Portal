@@ -18,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	public class NewProduct : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
-		
+
 		#region web elements
 		private IWebElement Header => this.containerElement.FindElement(By.XPath(".//div[@class='product-header']/h2"), 5);
 
@@ -224,12 +224,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			return new ProductInformation { Id = this.ProductId, Name = this.ProductName };
 		}
-		
+
 		public string TopSectionLabel()
 		{
 			return this.SectionControlLabels.FirstOrDefault()?.Text;
 		}
-		
+
 		public bool SectionLogoDisplayed(string logo, int secondsToWait = 30)
 		{
 			return this.containerElement.WaitUntilElementVisible(By.XPath($".//div[@class='panel-heading']//h3/img[contains(@src,'{logo}')]"), secondsToWait) != null;
@@ -382,7 +382,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
-		
+
 		public List<KeyValuePair<int, string>> TableHeaders(IWebElement table)
 		{
 			List<KeyValuePair<int, string>> th = new EditableList<KeyValuePair<int, string>>();
@@ -393,7 +393,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return th;
 		}
-		
+
 		public bool ClickAddUpcButton()
 		{
 			var el = this.containerElement.FindElement(By.XPath(".//button[contains(@data-bind,'addNewRow')]"), 2);
@@ -842,7 +842,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ClickSummaruButtonInDataAcceptance()
 		{
-			var el = this.containerElement.FindElement(By.XPath(".//a[text()='Summary']"), 2);
+			var el = this.containerElement.FindElement(By.XPath(".//a[text()='Summary']"), 30);
 			if (el == null)
 			{
 				return false;
