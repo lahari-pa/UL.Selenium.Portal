@@ -1342,10 +1342,6 @@ testRunner.Then("In the Data Acceptance page I select Yes, Agreed", ((string)(nu
 #line 564
 testRunner.And("I should not see any error messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 565
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 566
-testRunner.And("I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 567
 testRunner.Then("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase71274", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

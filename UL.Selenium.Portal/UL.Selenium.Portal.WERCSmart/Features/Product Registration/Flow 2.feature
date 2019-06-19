@@ -562,6 +562,4 @@ And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test
 And I should see the Data Acceptance Page
 Then In the Data Acceptance page I select Yes, Agreed
 And I should not see any error messages
-Given I navigate to the home page
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71274
