@@ -36,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return allButtons.FirstOrDefault(x => x.Text.ToLower().Trim() == action.ToLower()).TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}

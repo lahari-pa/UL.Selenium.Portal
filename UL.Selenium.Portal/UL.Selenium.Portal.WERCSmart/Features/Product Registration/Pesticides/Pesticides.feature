@@ -104,7 +104,7 @@ Given I confirm the Expiration Date Provided By Kelly field for state: NY is bla
 
 Given in the Pesticide Details - State Registration Details page I click Continue
 
-Given in the New Product page I click section: Pesticide Details - U.S.
+Given I click the page heading: Pesticide Details - U.S.
 
 Then I should see the Pesticide Details - U.S. Page
 
@@ -207,7 +207,7 @@ Given in the New Product page I click Continue
 
 Then I should see the Pesticide Details - State Registration Details Page
 
-Given in the New Product page I click section: Pesticide Details - U.S.
+Given I click the page heading: Pesticide Details - U.S.
 
 Then I should see the Pesticide Details - U.S. Page
 
@@ -730,7 +730,7 @@ Given in the New Product page I click Continue
 
 And I should see the Transportation Details 1 Page
 
-Then in the New Product page I click section: Pesticide Details - State Registration Details
+Then I click the page heading: Pesticide Details - State Registration Details
 
 Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
 
@@ -793,7 +793,7 @@ Given I click continue
 
 And I should see the Transportation Details 1 Page
 
-Then in the New Product page I click section: Pesticide Details - State Registration Details
+Then I click the page heading: Pesticide Details - State Registration Details
 
 Then I confirm that the EPA table row for state: AL is highlighted with the color: peach
 
@@ -910,7 +910,7 @@ Given in the New Product page I click Continue
 
 And I should see the Transportation Details 1 Page
 
-Then in the New Product page I click section: Pesticide Details - State Registration Details
+Then I click the page heading: Pesticide Details - State Registration Details
 
 And I should see the Pesticide Details - State Registration Details Page
 
@@ -947,7 +947,7 @@ Given I confirm that there is data populated in the Expiration Date Column for s
 And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
 Then I edit the Expiration Date to: 2019-12-31 for the State: AZ on the Pesticide State Registration Details page
 Given in the New Product page I click Continue
-Then in the New Product page I click section: Pesticide Details - U.S.
+Then I click the page heading: Pesticide Details - U.S.
 And I should see the Pesticide Details - U.S. Page
 Given in the New Product page I click Continue
 And I should see the Pesticide Details - State Registration Details Page

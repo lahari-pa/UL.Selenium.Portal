@@ -26,13 +26,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string LithiumBatteyWarning()
 		{
-			this.RefreshContainer();
+			//this.RefreshContainer();
 			return this.containerElement.FindElement(By.XPath("//div[contains(text(), 'Lithium battery registrations')]"), 2).Text;
 		}
 
 		public string MaximumLimitUpcWarning()
 		{
-			this.RefreshContainer();
+			//this.RefreshContainer();
 			return this.containerElement.FindElement(By.XPath("//p[@class='marBot-0' and contains(text(), 'maximum limit' )]"), 2).Text;
 		}
 

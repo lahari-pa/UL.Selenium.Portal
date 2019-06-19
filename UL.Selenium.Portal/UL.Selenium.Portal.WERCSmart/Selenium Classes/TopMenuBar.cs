@@ -136,12 +136,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					return false;
 				}
-				else
-				{
-					return true;
-				}
+				return true;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}

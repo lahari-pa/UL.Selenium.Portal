@@ -37,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					Report.Info(iframeId.ToString() + " is not the right one.");
 				}
@@ -106,7 +106,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				return matchingOption.TryClick();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}

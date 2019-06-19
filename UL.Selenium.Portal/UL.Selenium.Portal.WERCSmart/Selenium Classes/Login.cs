@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TextTemplating;
-using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.BaseClasses;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.ExtensionMethods;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

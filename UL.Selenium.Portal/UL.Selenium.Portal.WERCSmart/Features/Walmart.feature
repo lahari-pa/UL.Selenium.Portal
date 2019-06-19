@@ -95,9 +95,9 @@ Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCL
 
 And I should see the Electronic Equipment Page
 
-And For 'Contains Circuit Board' I select: Yes
+And I set 'Contains Circuit Board' to: Yes
 
-And For 'Has a LCD or Plasma Display' I select: No
+And I set 'Has a LCD or Plasma Display' to: No
 
 And in the New Product page I click Continue
 

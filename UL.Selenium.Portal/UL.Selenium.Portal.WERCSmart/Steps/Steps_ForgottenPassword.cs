@@ -2,9 +2,7 @@ using System;
 using System.Linq;
 using Mailosaur;
 using NTTQA.Selenium.Classes;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
-using NTTQA.Selenium.Classes;
 using NUnit.Framework;
 using NTTQA.Selenium.SpecFlow;
 using TechTalk.SpecFlow;
@@ -297,6 +295,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+
 		/// <summary>
 		/// click the login button that shows on the forget password page
 		/// </summary>
@@ -399,7 +398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the Login button")]
+		[StepDefinition(@"I click the Login button on Forgotten Password")]
 		public void ThenIClickTheLoginButton()
 		{
 			TestReport.BeginTestModule(GlobalParameters.StepCount + " - I click the Login button");

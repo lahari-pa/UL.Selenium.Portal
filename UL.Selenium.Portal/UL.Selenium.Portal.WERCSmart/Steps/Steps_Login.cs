@@ -2,7 +2,6 @@ using System;
 using System.Reflection;
 using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.UniversalFunctions;
-using NTTQA.Selenium.Classes;
 using NTTQA.Selenium.Reporting.Core;
 using NTTQA.Selenium.Cache;
 using NTTQA.Selenium.SpecFlow;

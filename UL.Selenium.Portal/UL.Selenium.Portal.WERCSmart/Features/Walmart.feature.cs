@@ -241,9 +241,9 @@ testRunner.Given("I call Shared Step 48369 (Toxicity Characteristics Leaching Pr
 #line 96
 testRunner.And("I should see the Electronic Equipment Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 98
-testRunner.And("For \'Contains Circuit Board\' I select: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Contains Circuit Board\' to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 100
-testRunner.And("For \'Has a LCD or Plasma Display\' I select: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set \'Has a LCD or Plasma Display\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 102
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 104
@@ -610,3 +610,4 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
 }
 #pragma warning restore
 #endregion
+

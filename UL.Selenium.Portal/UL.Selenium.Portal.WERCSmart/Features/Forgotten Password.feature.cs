@@ -372,7 +372,7 @@ testRunner.When("I click the link in the email I get directed to security questi
 #line 111
 testRunner.Then("I answer the security questions for Account: ForgotPW_SecQs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 112
-testRunner.Then("I enter a new password: 123Password! and verify: 123Password!", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the Login button on Forgotten Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 113
 testRunner.Then("I go to the WERCSmart Log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 114
@@ -386,3 +386,4 @@ testRunner.Then("the WERCSmart homepage should load", ((string)(null)), ((TechTa
 }
 #pragma warning restore
 #endregion
+

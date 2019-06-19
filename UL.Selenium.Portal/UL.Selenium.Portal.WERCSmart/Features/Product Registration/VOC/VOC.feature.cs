@@ -453,10 +453,9 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 178
 testRunner.And("I set the Product Name option to: Charcoal Lighter Material", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 179
-testRunner.And("In the Product Type tab of the New Product Page, I enter: Charcoal Lighter Materi" +
-                    "al in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 180
+testRunner.And("I set \'Type of Product\' to: Charcoal Lighter Material", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 181
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 183
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -612,8 +611,8 @@ testRunner.And("I confirm statement: limits specified by CARB shows the text: Ex
 testRunner.And("I confirm statement: limits specified by OTC shows the text: Exceeds the limits s" +
                     "pecified by OTC Model Rule", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 257
-testRunner.Then("in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone" +
-                    " Transport Commission (OTC) and/or California Air Resources Board (CARB)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Comm" +
+                    "ission (OTC) and/or California Air Resources Board (CARB)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 258
 testRunner.And("I set the Verify VOC content is below the threshold of 0.02lb/start of CARB optio" +
                     "n to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -910,14 +909,13 @@ testRunner.And("in the New Product page I click Continue", ((string)(null)), ((T
 testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 434
 testRunner.And("I set the Product Name option to: Antiperspirants - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 435
-testRunner.And("In the Product Type tab of the New Product Page, I enter: Antiperspirants - Non-a" +
-                    "erosol in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 436
+testRunner.And("I set \'Type of Product\' to: Antiperspirants - Non-aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 437
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 439
-testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 440
+testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 441
 testRunner.Then("I save the product information as: TestCase56483", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
@@ -926,35 +924,35 @@ testRunner.Then("I save the product information as: TestCase56483", ((string)(nu
                         "Liquid"});
             table14.AddRow(new string[] {
                         "Solid"});
-#line 441
+#line 442
 testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table14, "And ");
-#line 445
-testRunner.And("I set the Primary Physical State option to: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 446
-testRunner.And("I set the Secondary Physical State option to: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Primary Physical State option to: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 447
-testRunner.And("I set the When mixed with an equal amount of water option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State option to: Solid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 448
-testRunner.And("I set the Select the best Water Solubility description option to: Very soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the When mixed with an equal amount of water option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 449
+testRunner.And("I set the Select the best Water Solubility description option to: Very soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 450
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 452
-testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 453
+testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 454
 testRunner.And("In the Additional Information Page the check box for: United States should be: ch" +
                     "ecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 454
-testRunner.And("I set the Product has been classified using OSHA (US) option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 455
-testRunner.And("I set the Product is shipped directly by supplier to the consumer option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Product has been classified using OSHA (US) option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 456
-testRunner.And("I set the Product is a Retailer\'s Private Label or Brand option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Product is shipped directly by supplier to the consumer option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 457
+testRunner.And("I set the Product is a Retailer\'s Private Label or Brand option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 458
 testRunner.And("I set the Product is sold to the Retailer solely for the Retailer\'s use option to" +
                     ": No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 458
+#line 459
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 461
+#line 462
 testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -969,61 +967,61 @@ testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk
                         "false",
                         "false",
                         ""});
-#line 462
+#line 463
 testRunner.Then("I add the following ingredients:", ((string)(null)), table15, "Then ");
-#line 465
+#line 466
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 468
-testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 469
-testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 470
-testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 471
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 472
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 474
+#line 475
 testRunner.And("I should see the Regulatory Information 3 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Option"});
             table16.AddRow(new string[] {
                         "None of the Above"});
-#line 475
+#line 476
 testRunner.And("I set the below options for field: Refer to your Product Label", ((string)(null)), table16, "And ");
-#line 478
+#line 479
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 481
-testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 482
-testRunner.And("I set the Product is Regulated for Transport option to: Not Regulated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 483
+testRunner.And("I set the Product is Regulated for Transport option to: Not Regulated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 484
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 486
+#line 487
 testRunner.And("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (O" +
                     "TC) and/or California Air Resources Board (CARB) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 487
+#line 488
 testRunner.And("I set the Product has been granted an Alternative Control Plan, or is exempt as a" +
                     "n Innovative Product or other variant under the applicable regulations. option t" +
                     "o: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 488
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 489
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 490
 testRunner.Then("HVOC (high volatile organic compound) content as weight percent of the total form" +
                     "ulation should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 490
+#line 491
 testRunner.Then("MVOC (microbial volatile organic compound) content as weight percentage of the to" +
                     "tal formulation should be showing the error messages: This is a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 491
+#line 492
 testRunner.And("I set the HVOC (high volatile organic compound) content as weight percent of the " +
                     "total formulation field to: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 492
+#line 493
 testRunner.And("I set the MVOC (microbial volatile organic compound) content as weight percentage" +
                     " of the total formulation field to: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 493
+#line 494
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 496
-testRunner.And("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 497
+testRunner.And("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 498
 testRunner.And("I confirm that I see todays VOC Analysis Date", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1038,81 +1036,81 @@ testRunner.And("I confirm that I see todays VOC Analysis Date", ((string)(null))
                         "Antiperspirants - Non-aerosol",
                         "0",
                         "MVOC CARB and OTC Model Rule limit"});
-#line 498
+#line 499
 testRunner.And("I should see the following Voc Limits present:", ((string)(null)), table17, "And ");
-#line 502
-testRunner.And("I confirm that I see the following HVOC value: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 503
-testRunner.And("I confirm that I see the following MVOC value: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I confirm that I see the following HVOC value: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 504
+testRunner.And("I confirm that I see the following MVOC value: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 505
 testRunner.And("I confirm statement: Based on the type of product shows the text: Based on the ty" +
                     "pe of product, this must comply with the most restrictive VOC limit.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 505
+#line 506
 testRunner.And("I confirm statement: limits specified shows the text: Exceeds the limits specifie" +
                     "d by CARB and OTC Model Rule", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 508
-testRunner.Then("in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone" +
-                    " Transport Commission (OTC) and/or California Air Resources Board (CARB)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 509
+testRunner.Then("I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Comm" +
+                    "ission (OTC) and/or California Air Resources Board (CARB)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 510
 testRunner.And("I set the HVOC (high volatile organic compound) content as weight percent of the " +
                     "total formulation field to: 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 510
+#line 511
 testRunner.And("I set the MVOC (microbial volatile organic compound) content as weight percentage" +
                     " of the total formulation field to: 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 511
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 512
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 513
 testRunner.And("I confirm statement: limits specified shows the text: Does not exceed the limits " +
                     "specified by CARB and OTC Model Rule", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 514
+#line 515
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 516
+#line 517
 testRunner.Given("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 519
-testRunner.And("I should see the Regulatory Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 520
+testRunner.And("I should see the Regulatory Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 521
 testRunner.And("in the Review and Submit tab of the New Product Page for OSHA compliant SDS I sel" +
                     "ect: Request to author", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 521
+#line 522
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 524
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 525
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 526
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 527
 testRunner.Then("Volatile Organic Compounds should be showing the error messages: Document is requ" +
                     "ired: Product Label", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 527
+#line 528
 testRunner.And("I click the browse button for label: Product Label and upload PDF: C:\\Dependencie" +
                     "s\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 528
+#line 529
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 531
-testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 532
+testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 533
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 535
-testRunner.And("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 536
-testRunner.And("I set the Appearance field to: Brown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 537
-testRunner.And("I set the Odor field to: Banana", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Appearance field to: Brown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 538
-testRunner.And("I set the Odor Threshold field to: Not applicable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Odor field to: Banana", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 539
-testRunner.And("I set the Partition Coefficient field to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Odor Threshold field to: Not applicable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 540
+testRunner.And("I set the Partition Coefficient field to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 541
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 543
-testRunner.And("I should see the Comments Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 544
+testRunner.And("I should see the Comments Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 545
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 547
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 548
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 549
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 550
 testRunner.Then("I delete the product: TestCase56483", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -1125,74 +1123,73 @@ testRunner.Then("I delete the product: TestCase56483", ((string)(null)), ((TechT
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56484] VOC - Aero checks", null, new string[] {
                         "TReVorId:16759"});
-#line 552
+#line 553
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 553
+#line 554
 testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 556
+#line 557
 testRunner.Given("If I see the retail partners page I set all data consent tiers to true for all re" +
                     "tailers in the top section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 557
+#line 558
 testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 560
-testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 561
-testRunner.And("I should see the New Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click the Register New Product icon in the Navigation Pane", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 562
+testRunner.And("I should see the New Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 563
 testRunner.And("I set the Select the type of product to create option to: Create a New Registrati" +
                     "on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 563
+#line 564
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 566
-testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 567
-testRunner.And("I set the Product Name option to: Clear Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the The Product Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 568
-testRunner.And("In the Product Type tab of the New Product Page, I enter: Clear Coating - Aerosol" +
-                    " in the Type of Product select field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 569
+testRunner.And("I set the Product Name option to: Clear Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 570
+testRunner.And("I set \'Type of Product\' to: Clear Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 571
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 572
+#line 574
 testRunner.And("I should see the Product Characteristics Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 573
+#line 575
 testRunner.Then("I save the product information as: TestCase56484", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "State"});
             table18.AddRow(new string[] {
                         "Aerosol"});
-#line 574
+#line 576
 testRunner.And("I should only see the following options for Primary Physical State:", ((string)(null)), table18, "And ");
-#line 577
-testRunner.And("I set the Secondary Physical State option to: Solid spray", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 578
-testRunner.And("I set the pH option to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 579
-testRunner.And("I set the Select the best Water Solubility description option to: Very soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Secondary Physical State option to: Solid spray", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 580
+testRunner.And("I set the pH option to: 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 581
+testRunner.And("I set the Select the best Water Solubility description option to: Very soluble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 582
 testRunner.And("I set the When the product has a flammable propellant, or contains ingredients wi" +
                     "th a flash point below 60⁰C then option to: This product is not classified as D0" +
                     "01 or D003 Hazardous Waste under RCRA", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 581
+#line 583
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 584
+#line 586
 testRunner.And("I should see the Additional Product Information Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 585
+#line 587
 testRunner.And("In the Additional Information Page the check box for: United States should be: ch" +
                     "ecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 586
-testRunner.And("I set the Product has been classified using OSHA (US) option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 587
-testRunner.And("I set the Product is shipped directly by supplier to the consumer option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 588
-testRunner.And("I set the Product is a Retailer\'s Private Label or Brand option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Product has been classified using OSHA (US) option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 589
+testRunner.And("I set the Product is shipped directly by supplier to the consumer option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 590
+testRunner.And("I set the Product is a Retailer\'s Private Label or Brand option to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 591
 testRunner.And("I set the Product is sold to the Retailer solely for the Retailer\'s use option to" +
                     ": No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 590
+#line 592
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 593
+#line 595
 testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1207,21 +1204,21 @@ testRunner.And("I should see the Ingredients Page", ((string)(null)), ((TechTalk
                         "false",
                         "false",
                         ""});
-#line 594
+#line 596
 testRunner.Then("I add the following ingredients:", ((string)(null)), table19, "Then ");
-#line 597
+#line 599
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 600
-testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 601
-testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 602
-testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Regulatory Information 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 603
+testRunner.And("I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 604
+testRunner.And("I set \'Prop65\' to: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 605
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 606
+#line 608
 testRunner.And("I should see the Transportation Details 1 Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 607
+#line 609
 testRunner.And("I set the Product is Regulated for Transport option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1232,53 +1229,53 @@ testRunner.And("I set the Product is Regulated for Transport option to: Yes", ((
                         "Shipping with limited quantity"});
             table20.AddRow(new string[] {
                         "Shipping with consumer commodity"});
-#line 608
+#line 610
 testRunner.And("I set the below options for field: Select all modes of transport that you\'ve clas" +
                     "sified the product for", ((string)(null)), table20, "And ");
-#line 613
+#line 615
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 616
-testRunner.Then("I should see the U. S. Department of Transportation (DOT) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 617
-testRunner.And("I set the UN Number field to: UN1950", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 618
-testRunner.And("I set the Proper Shipping Name field to: Aerosols", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see the U. S. Department of Transportation (DOT) Classification Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 619
-testRunner.And("I set the Technical Name (if applicable) field to: Clear Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the UN Number field to: UN1950", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 620
-testRunner.And("I set the Hazard Class (select) field to: 2.1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Proper Shipping Name field to: Aerosols", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 621
-testRunner.And("I set the Packing Group (select) field to: None", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Technical Name (if applicable) field to: Clear Coating - Aerosol", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 622
+testRunner.And("I set the Hazard Class (select) field to: 2.1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 623
+testRunner.And("I set the Packing Group (select) field to: None", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 624
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 625
+#line 627
 testRunner.And("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (O" +
                     "TC) and/or California Air Resources Board (CARB) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 626
+#line 628
 testRunner.And("I confirm that I see the following VOC-OTC-CARB statement1: Product has been gran" +
                     "ted an Alternative Control Plan, or is exempt as an Innovative Product or other " +
                     "variant under the applicable regulations.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 627
+#line 629
 testRunner.And("I confirm that I see the following VOC-OTC-CARB statement3: VOC content in grams " +
                     "ozone per gram", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 628
+#line 630
 testRunner.And("I set the Product has been granted an Alternative Control Plan, or is exempt as a" +
                     "n Innovative Product or other variant under the applicable regulations. option t" +
                     "o: No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 629
+#line 631
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 630
+#line 632
 testRunner.Then("VOC content in grams ozone per gram should be showing the error messages: This is" +
                     " a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 631
+#line 633
 testRunner.And("I set the VOC content in grams ozone per gram field to: 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 632
+#line 634
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 635
-testRunner.And("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 636
-testRunner.And("I confirm that I see todays VOC Analysis Date", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 637
+testRunner.And("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 638
+testRunner.And("I confirm that I see todays VOC Analysis Date", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 639
 testRunner.And(@"I confirm that I see the following VOC-OTC-CARB statement4: Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1289,77 +1286,77 @@ testRunner.And(@"I confirm that I see the following VOC-OTC-CARB statement4: Bas
                         "Clear Coating - Aerosol",
                         "0.85",
                         "Aerosol Coatings CARB limit"});
-#line 638
+#line 640
 testRunner.And("I should see the following Voc Limits present:", ((string)(null)), table21, "And ");
-#line 641
+#line 643
 testRunner.And("I confirm that I see the following VOC Grams Ozone value: 0.5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 642
+#line 644
 testRunner.And("I confirm statement: limits specified shows the text: Does not exceed the limits " +
                     "specified in the Aerosol Coatings by the CARB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 643
+#line 645
 testRunner.And("I confirm statement: Based on the type of product shows the text: Based on the ty" +
                     "pe of product, this must comply with the most restrictive VOC limit.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 646
-testRunner.Then("in the New Product page I click section: Volatile Organic Compounds (VOC) - Ozone" +
-                    " Transport Commission (OTC) and/or California Air Resources Board (CARB)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 647
-testRunner.And("I set the VOC content in grams ozone per gram field to: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 648
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Comm" +
+                    "ission (OTC) and/or California Air Resources Board (CARB)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 649
-testRunner.And("I confirm statement: limits specified shows the text: Exceeds the limits specifie" +
-                    "d in the Aerosol Coatings by the CARB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the VOC content in grams ozone per gram field to: 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 650
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 651
+testRunner.And("I confirm statement: limits specified shows the text: Exceeds the limits specifie" +
+                    "d in the Aerosol Coatings by the CARB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 652
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 654
 testRunner.Given("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 655
+#line 657
 testRunner.And("I should see the Regulatory Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 656
+#line 658
 testRunner.And("in the Review and Submit tab of the New Product Page for OSHA compliant SDS I sel" +
                     "ect: Request to author", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 657
-testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 660
-testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 661
+#line 659
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 662
+testRunner.And("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 663
+testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 664
 testRunner.Then("Volatile Organic Compounds should be showing the error messages: Document is requ" +
                     "ired: Product Label", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 663
+#line 665
 testRunner.And("I click the browse button for label: Product Label and upload PDF: C:\\Dependencie" +
                     "s\\WERCSmart\\testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 664
+#line 666
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 667
+#line 669
 testRunner.And("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 668
+#line 670
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 671
-testRunner.And("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 672
-testRunner.And("I set the Appearance field to: Brown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 673
-testRunner.And("I set the Odor field to: Banana", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 674
-testRunner.And("I set the Odor Threshold field to: Not applicable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I set the Appearance field to: Brown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 675
+testRunner.And("I set the Odor field to: Banana", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 676
+testRunner.And("I set the Odor Threshold field to: Not applicable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 677
 testRunner.And("I set the Partition Coefficient field to: 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 678
+#line 680
 testRunner.And("I set the Product\'s Dispensing Method field to: Pump", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 679
+#line 681
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 682
+#line 684
 testRunner.And("I should see the Comments Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 683
+#line 685
 testRunner.And("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 686
-testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 687
-testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 688
+testRunner.And("I should see the Data Acceptance Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 689
+testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 690
 testRunner.Then("I delete the product: TestCase56484", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -1372,39 +1369,39 @@ testRunner.Then("I delete the product: TestCase56484", ((string)(null)), ((TechT
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[56476] VOC checks for Personal Fragrance product", null, new string[] {
                         "TReVorId:16749"});
-#line 691
+#line 693
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 692
-testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 693
-testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 694
+testRunner.Given("I Login into WERCSmart Portal - Admin Role - WERCs Product Account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 695
+testRunner.Then("The home screen should load", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 696
 testRunner.Given("I call Shared Step 57408 (Create a New Registration via Register New Product icon" +
                     ")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 695
+#line 697
 testRunner.Given("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Personal Fragrance Product (more than 20% fragrance) - Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 696
+#line 698
 testRunner.Then("I save the product information as: TestCase56476", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 697
+#line 699
 testRunner.Given("I call Shared Step 70675 (Product Characteristics - Liquid Only - With Water Solu" +
                     "bility - Enter all data - Continue)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 698
+#line 700
 testRunner.Given("I call Shared Step 57401 (Additional Product Information - US only - No GHS, Not " +
                     "Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 699
+#line 701
 testRunner.Given("I call Shared Step 29181 (Ingredients - add any chemical) with name: Acetone", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 700
+#line 702
 testRunner.Given("I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - " +
                     "Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 701
+#line 703
 testRunner.Given("I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) " +
                     "- Exemption(Random) - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 702
+#line 704
 testRunner.Given("I call Shared Step 62536 (Transportation Details 2 > I do not ship internationall" +
                     "y > Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 703
+#line 705
 testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUE" +
                     "STION ONLY - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1413,7 +1410,7 @@ testRunner.Given("I call Shared Step 62710 (Confirm VOC OTC/CARB heading and sel
             table22.AddRow(new string[] {
                         "Amount of VOC content as weight percentage of the total formula, excluding exempt" +
                             " compounds as defined by the CARB"});
-#line 704
+#line 706
 testRunner.Then("I see the following sections", ((string)(null)), table22, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1422,71 +1419,71 @@ testRunner.Then("I see the following sections", ((string)(null)), table22, "Then
                         "Amount of VOC content (as a weight percentage (%) of the total formulation) conta" +
                             "ined in this product, excluding exempt compounds, as defined by the OTC Model Ru" +
                             "le."});
-#line 707
+#line 709
 testRunner.Then("I do not see the following sections", ((string)(null)), table23, "Then ");
-#line 710
+#line 712
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 711
+#line 713
 testRunner.Then("Amount of VOC content as weight percentage of the total formula, excluding exempt" +
                     " compounds as defined by the CARB should be showing the error messages: This is " +
                     "a required field.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 712
+#line 714
 testRunner.Given("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
                     "ing exempt compounds as defined by the CARB option to: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 713
+#line 715
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 714
+#line 716
 testRunner.Given("I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis da" +
                     "te is shown - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 715
+#line 717
 testRunner.Then("I confirm that I see the following VOC-OTC-CARB statement4: Based on your selecti" +
                     "on, you have verified your product contains VOC with intended uses as follows. T" +
                     "he CARB VOC compliance limit(s) for the intended use you identified is/are:", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 716
+#line 718
 testRunner.Given("I call Shared Step 57819 (VOC Results - Confirm VOC Limits table shows correct va" +
                     "lues (CARB only) - Happy Path): Personal Fragrance Product (more than 20% fragra" +
                     "nce) - Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 717
+#line 719
 testRunner.And("I confirm that I see the following VOC content as weight percentage for each stat" +
                     "e statement: VOC content as weight percentage of total formula, minus exempt com" +
                     "pounds, for each of the following states.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 718
+#line 720
 testRunner.Then("I confirm that I see the following CARB value: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 719
+#line 721
 testRunner.Then("I confirm statement: Based on the type of product shows the text: Based on the ty" +
                     "pe of product, this must comply with the most restrictive VOC limit.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 720
+#line 722
 testRunner.And("I confirm the Exceeds/Does not exceed statement is shown and is correct based on " +
                     "inputted CARB value: 20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 721
+#line 723
 testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 722
+#line 724
 testRunner.Given("I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Cont" +
                     "inue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 723
+#line 725
 testRunner.Given("I call Shared Step 57881 (Regulatory Documents to Provide - US only - request aut" +
                     "horing - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 724
+#line 726
 testRunner.Then("I should see the Additional Documents to Provide Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         "Section"});
             table24.AddRow(new string[] {
                         "Volatile Organic Compounds"});
-#line 725
+#line 727
 testRunner.Then("I see the following sections", ((string)(null)), table24, "Then ");
-#line 728
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 729
-testRunner.Then("I should see an error message: Document is required: Product Label", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 730
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 731
+testRunner.Then("I should see an error message: Document is required: Product Label", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 732
 testRunner.Given("I call Shared Step 60567 (Upload Product Label only) : C:\\Dependencies\\WERCSmart\\" +
                     "testdoc.pdf", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 731
-testRunner.Then("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 732
-testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 733
+testRunner.Then("I should see the Optional Reports and Documents Available for Purchase Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 734
+testRunner.Given("in the New Product page I click Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 735
 testRunner.Then("I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1507,18 +1504,18 @@ testRunner.Then("I should see the Safety Data Sheet Authoring - Additional Data 
                         "Odorless",
                         "No data available",
                         "5"});
-#line 734
+#line 736
 testRunner.Given("I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional" +
                     ") step - add any random data for all fields - Happy path) and enter the followin" +
                     "g:", ((string)(null)), table25, "Given ");
-#line 737
+#line 739
 testRunner.Given("I call Shared Step 57883 (Comments - Happy Path) and enter the comment: User adde" +
                     "d Comments Text 74992. !\"£$%^&*() 1234567890 (Provide any additional comments or" +
                     " information about the product that you want the Assessment Team to know.)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 738
+#line 740
 testRunner.Given("I call Shared Step 73956 (Go to Summary and verify data) with product type: Perso" +
                     "nal Fragrance Product (more than 20% fragrance) - Liquid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 739
+#line 741
 testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product grid) to delete produ" +
                     "ct: TestCase56476", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
@@ -1534,25 +1531,25 @@ testRunner.Given("I call Shared Step 42214 (Delete a Product from the Product gr
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("[73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC Results Step" +
                     " Shows Alternative Control Plan", null, new string[] {
                         "TReVorId:22165"});
-#line 742
+#line 744
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 743
-testRunner.Given("I generate a random UPC number and save as: UPC73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 744
-testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 745
+testRunner.Given("I generate a random UPC number and save as: UPC73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 746
+testRunner.And("I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 747
 testRunner.And("I call Shared Step 57753 (Create a New Registration via Register New Product (exp" +
                     "anded menu))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 746
+#line 748
 testRunner.And("I call Shared Step 57561 (The Product - Enter Product Name and select Type of Pro" +
                     "duct): Insecticide - Fogger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 747
+#line 749
 testRunner.Then("I save the product information as: TestCase73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 748
+#line 750
 testRunner.And("I call Shared Step 57532 (Product Characteristics - Aerosol & Gas available - Sel" +
                     "ect Gas - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 749
+#line 751
 testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesticide shown, US on" +
                     "ly, select No for everything else - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1568,91 +1565,91 @@ testRunner.And("I call Shared Step 57865 (Additional Product Information - Pesti
                         "false",
                         "false",
                         ""});
-#line 750
+#line 752
 testRunner.And("I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:", ((string)(null)), table26, "And ");
-#line 753
+#line 755
 testRunner.And("I call Shared Step 48360 - Regulatory - Test TSCA and PROP65 - Continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 754
+#line 756
 testRunner.And("I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA numbe" +
                     "r))", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 755
+#line 757
 testRunner.And("I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Lim" +
                     "ited Quantity - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 756
+#line 758
 testRunner.And("I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification " +
                     "- Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 757
+#line 759
 testRunner.And("I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (O" +
                     "TC) and/or California Air Resources Board (CARB) Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 758
+#line 760
 testRunner.And("I set the Product has been granted an Alternative Control Plan, or is exempt as a" +
                     "n Innovative Product or other variant under the applicable regulations option to" +
                     ": Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 759
+#line 761
 testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
                     "ing exempt compounds as defined by the CARB option to: 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 760
+#line 762
 testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
                     "ing exempt compounds as defined by the OTC Model Rule option to: 40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 761
+#line 763
 testRunner.And("I set the Would you like to use the VOC percentages entered for all areas (e.g. c" +
                     "ountry, state, local) for comparison? option to: Yes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 762
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 763
-testRunner.And("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 764
-testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 765
+testRunner.And("I should see the Volatile Organic Compound Summary Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 766
+testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 767
 testRunner.And("I confirm statement: Based on the type of product shows the text: Based on the ty" +
                     "pe of product, this must comply with the most restrictive VOC limit.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 766
+#line 768
 testRunner.And("I confirm that statement with text: \'Does not exceed the limits specified by the " +
                     "California Consumer Products Regulation\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 767
+#line 769
 testRunner.And("I confirm that statement with text: \'Exceeds the limit specified by the Californi" +
                     "a Consumer Products Regulation\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 768
+#line 770
 testRunner.And("The VOC Summary page contains the statement with the text: Alternative Control Pl" +
                     "an", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 769
+#line 771
 testRunner.And("The VOC Summary page contains the statement with the text: Does not exceed the li" +
                     "mits specified by the Ozone Transport Commission", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 770
-testRunner.And("in the New Product page I click section: Volatile Organic Compounds (VOC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 771
+#line 772
+testRunner.And("I click the page heading: Volatile Organic Compounds (VOC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 773
 testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
                     "ing exempt compounds as defined by the CARB option to: 30", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 772
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 773
-testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 774
-testRunner.And("I confirm that statement with text: \'Alternative Control Plan\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 775
+testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 776
+testRunner.And("I confirm that statement with text: \'Alternative Control Plan\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 777
 testRunner.And("The VOC Summary page contains the statement with the text: Does not exceed the li" +
                     "mits specified in the California Consumer Products Regulation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 776
-testRunner.And("in the New Product page I click section: Volatile Organic Compounds (VOC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 777
+#line 778
+testRunner.And("I click the page heading: Volatile Organic Compounds (VOC)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 779
 testRunner.And("I set the Product has been granted an Alternative Control Plan, or is exempt as a" +
                     "n Innovative Product or other variant under the applicable regulations option to" +
                     ": No", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 778
+#line 780
 testRunner.And("I set the Amount of VOC content as weight percentage of the total formula, exclud" +
                     "ing exempt compounds as defined by the CARB option to: 55", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 779
-testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 780
-testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 781
-testRunner.And("I confirm that statement with text: \'Alternative Control Plan\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click continue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 782
+testRunner.Given("I scroll to the bottom of the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 783
+testRunner.And("I confirm that statement with text: \'Alternative Control Plan\' is not displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 784
 testRunner.And("The VOC Summary page contains the statement with the text: Exceeds the limits spe" +
                     "cified in the California Consumer Products Regulation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 783
+#line 785
 testRunner.And("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 784
+#line 786
 testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Dele" +
                     "te) for product: TestCase73503", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1662,3 +1659,4 @@ testRunner.And("I call Shared Step 43758 (Product Grid- Filter for Product- Sele
 }
 #pragma warning restore
 #endregion
+

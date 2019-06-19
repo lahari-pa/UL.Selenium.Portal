@@ -53,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					.FirstOrDefault(x => x.Text == "CANCEL");
 				return (CancelButton.Enabled && CancelButton.Displayed);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
