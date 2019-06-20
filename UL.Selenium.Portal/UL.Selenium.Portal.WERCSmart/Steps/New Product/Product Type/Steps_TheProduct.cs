@@ -1,4 +1,5 @@
-﻿using NTTQA.Selenium.Reporting.Core;
+﻿using System;
+using NTTQA.Selenium.Reporting.Core;
 using TechTalk.SpecFlow;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
@@ -25,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		{
 			Report.IsTrue(this.TheProduct.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
 			this.TheProduct.ProductType = typeOfProduct;
-			Report.IsTrue(this.TheProduct.ProductType == typeOfProduct, "Failed to set Type of Product to: " + typeOfProduct, "Successfully set Type of Product to: " + typeOfProduct);
+			Report.IsTrue(string.Equals(this.TheProduct.ProductType, typeOfProduct, StringComparison.CurrentCultureIgnoreCase), "Failed to set Type of Product to: " + typeOfProduct, "Successfully set Type of Product to: " + typeOfProduct);
 
 		}
 	}

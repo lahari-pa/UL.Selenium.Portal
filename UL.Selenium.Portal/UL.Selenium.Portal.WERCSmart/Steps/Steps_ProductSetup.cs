@@ -28,8 +28,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProduct = new NewProduct();
 			var shaSteps = new Steps_SHA();
 			// Log in to administrator role
-			//sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
-			sharedSteps.Shared68210_LoginToWercSmart_PremiumAccount();
+			sharedSteps.GivenICallSharedStep67823LoginToWERCSmart_ProductsAutomationAccount();
+			//sharedSteps.Shared68210_LoginToWercSmart_PremiumAccount();
 			// Generate UPC number and delete duplicates
 			productsGridSteps.GivenIGenerateARandomUPCNumberAndSaveAs("UPC75335");
 			productsGridSteps.DeleteAllProductsMatchingCriteria("UPC Number", "saved as UPC75335");
