@@ -151,7 +151,9 @@ Given I call Shared Step 73629 (Product Characteristics - Liquid - select any op
 
 #CLF 18/6/2019 removing this step because it appears to have been replaced by 57502
 #Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
+#Given I call Shared Step 57502 (Additional Product Information - Pesticide & Child shown, US only, No to everything else - Continue - Happy Path)
+
+Given I call Shared Step 57865 (Additional Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -528,6 +530,7 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 And I call Shared Step 57561a (The Product - Enter Product Name: Pest repellant for Use on Animals - liquid and select Type of Product): repellant for Use on Animals - liquid
+Then I save the product information as: TestCase71274
 Given I call Shared Step 74760 (Product Characteristics - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Specific Gravity | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 |  Liquid                | Liquid                   | 2                 | 8   | 100                           | 80                         |  Not applicable/available         | Appreciable                                  |
@@ -552,16 +555,12 @@ And I call Shared Step 57881 (Regulatory Documents to Provide - US only - reques
 # JS 13/03 Additonal Documents To Provide steps were added to tfs test case
 Then I should see the Additional Documents to Provide Page
 # TFS test case change - added shared step
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Provide Full Product Label (required) and file: C:\Dependencies\WERCSmart\testdoc.pdf
+Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: C:\Dependencies\WERCSmart\testdoc.pdf
 Given in the Additional Documents to Provide page I click Continue
 Given in the Optional Reports and Documents Available for Purchase page I click Continue
 Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 | Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 And I call Shared Step 57883 (Comments - Happy Path) and enter the comment: test comment
-And I should see the Data Acceptance Page
-Then In the Data Acceptance page I select Yes, Agreed
-And I should not see any error messages
-Given I navigate to the home page
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
 Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71274
